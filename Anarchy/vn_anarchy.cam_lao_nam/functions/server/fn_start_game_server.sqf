@@ -18,14 +18,10 @@ if (isNil "vn_an_gamestarting") then
 	0 call vn_an_fnc_scheduler_start;
 	0 spawn vn_an_fnc_scheduler_monitor;
 
-	// start the event dispatcher, so anything relying on events can fire.
-	call vn_an_fnc_event_subsystem_init;
-
-	
 
 
-	// load objects while retaining state and variables
-	call vn_an_fnc_spawn_objects;
+
+
 
 
 	//Example unit types. Should be made more dynamic as the gamemode progresses.
@@ -80,12 +76,10 @@ if (isNil "vn_an_gamestarting") then
 	// start patrol subsystem
 	[] call vn_an_fnc_patrol_subsystem_init;
 
-	// start cleanup subsystem
-	[] call vn_an_fnc_cleanup_subsystem_init;
+	
 
 	// flag server as ready
 	missionNamespace setVariable ["vn_an_server_ready", true, true];
-
 };
 
 "VN: Server Init finished" call BIS_fnc_log;

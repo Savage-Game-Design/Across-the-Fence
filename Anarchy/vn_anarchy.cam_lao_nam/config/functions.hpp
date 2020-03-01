@@ -21,10 +21,10 @@ class cfgfunctions
 			class init_key_up {};
 			class enable_debug_monitor {};
 			class change_key_bind {};
-			class enable_task_roster {};
-			class enable_build_mode {};
-			class enable_build_cycle1 {};
-			class enable_build_cycle2 {};
+			//class enable_task_roster {};
+			//class enable_build_mode {};
+			//class enable_build_cycle1 {};
+			//class enable_build_cycle2 {};
 			class enable_keydown_shift {};
 			class enable_keydown_ctrl {};
 			class enable_keydown_alt {};
@@ -45,6 +45,7 @@ class cfgfunctions
 			class parse_pos_config {};
 			class units_on_team {};
 			class vehicle_will_collide_at_pos {};
+			class player_within_radius {};
 		};
 		class rehandler
 		{
@@ -82,20 +83,16 @@ class cfgfunctions
 			class progress_to_color_config {};
 			class player_respawn_loc {};
 
+
+
+
+
+
+
+
 			// server
-			class place_object {};
-
-
-
-			class player_on_team {};
-			class player_rank {};
-			class player_health_stats {};
-			class player_within_radius {};
-			class swap_building {};
-
 			class save_time_elapsed {};
-
-			// stats
+			class player_health_stats {};
 			class change_player_stat {};
 
 			//Scheduler
@@ -103,15 +100,7 @@ class cfgfunctions
 			class scheduler_remove_job {};
 			class scheduler_start {};
 			class scheduler_monitor {};
-
-			//Tasks
-			class task_init {};
-			class task_complete {};
-			class task_create {};
-			class task_refresh_task_list {};
-			class task_refresh_tasks_client {};
-			class task_subtask_complete {};
-			class task_subtask_create {};
+			class scheduler_init {};
 		};
 		class db
 		{
@@ -138,7 +127,7 @@ class cfgfunctions
 			class create_unit {};
 			class create_vehicle {};
 			class create_vehicle_safely {};
-			class spawn_objects {};
+
 			class spawn_object {};
 			class spawn_enemy_units {};
 			class spawn_civilian {};
@@ -146,23 +135,6 @@ class cfgfunctions
 
 		//Subsystem functions
 
-		class Cleanup
-		{
-			file = "functions\Game\Subsystems\Cleanup";
-			class cleanup_addItems {};
-			class cleanup_job {};
-			class cleanup_subsystem_init {};
-		};
-
-		class Events
-		{
-			file = "functions\Game\Subsystems\Events";
-			class event_add_handler {};
-			class event_remove_handler {};
-			class event_dispatch {};
-			class event_dispatcher_job {};
-			class event_subsystem_init {};
-		}
 
 		class Patrol
 		{

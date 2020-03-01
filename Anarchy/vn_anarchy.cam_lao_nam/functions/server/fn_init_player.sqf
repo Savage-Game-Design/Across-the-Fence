@@ -54,22 +54,6 @@ if !(_object_data isEqualTo []) then
 private _token = random 99999;
 _player setVariable ["vn_an_token",_token,[2,owner _player]];
 
-// last group
-private _group_ID = _player getVariable ["vn_an_player_group","MikeForce"];
-// join player to last known group
-private _selected_group = missionNamespace getVariable [_group_ID,grpNull];
-// check that group is found and is proper type
-
-if (!isNull _selected_group && {_selected_group isEqualType grpNull}) then
-{
-	// join group
-	[_player] joinSilent _selected_group;
-} else
-{
-	diag_log "DEBUG: ERROR - group does not exist!!!"
-};
-
-
 // load last loadout
 (["GET", (_uid + "_loadout"), []] call vn_an_fnc_hive) params ["","_loadout"];
 if !(_loadout isEqualTo []) then
@@ -77,13 +61,6 @@ if !(_loadout isEqualTo []) then
 	_player setUnitLoadout [_loadout, false];
 };
 
-// restore players rank
-([_player] call vn_an_fnc_unit_to_rank) params ["", "_rank", ""];
-_rank = toUpper _rank;
-if !(rank _player isEqualTo _rank) then
-{
-	_player setUnitRank _rank;
-};
 
 // start player at correct camp for team
 _player setPos ([_player,_player] call vn_an_fnc_player_respawn_loc);
@@ -94,16 +71,4 @@ _player addMPEventHandler ["MPRespawn",{call vn_an_fnc_player_respawn_loc}];
 // execute stage 2 of login
 [] remoteExec ["vn_an_fnc_start_game_stage2",_player];
 
-diag_log format["vn_an_fnc_init_player %1 _object_data %2", _this,_object_data];
-
-[_player] call vn_an_fnc_task_refresh_task_list;
-
-// start gamemode 5 seconds after first player joins
-if (isNil "vn_an_gamestarted") then
-{
-	vn_an_gamestarted = true;
-	0 spawn {
-		sleep 5;
-		call vn_an_fnc_task_init;
-	}
-};
+["vn_an_fnc_init_player %1 _object_data %2", _this,_object_data] call BIS_fnc_logFormat;

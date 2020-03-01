@@ -59,7 +59,7 @@ if (_is_unit_player) then
 				// if enemy record as - kill
 				_kill_type = "kills";
 				[_killer,_kill_type] call vn_an_fnc_change_player_stat;
-				[_killer,1] call vn_an_fnc_player_rank;
+				// [_killer,1] call vn_an_fnc_player_rank;
 			};
 
 		}

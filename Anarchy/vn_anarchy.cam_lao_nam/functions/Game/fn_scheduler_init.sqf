@@ -2,18 +2,16 @@
   Author: Aaron Clark
 
   Description:
-	initialize task system, Adds progress markers, and sets up inital task
+	initialize scheduler events
 
   Example Usage:
-	call vn_an_fnc_task_init;
+	call vn_an_fnc_scheduler_init;
 
   Returns:
 	NOTHING
 
   Parameter(s):
 */
-
-private _inital_task = getText(missionConfigFile >> "gamemode" >> "tasks" >> "initial_task");
 
 // broadcast total time elapsed - initial
 missionNamespace setVariable ["vn_an_totalgametime",["GET", "game_time", 0] call vn_an_fnc_hive,true];
@@ -35,6 +33,3 @@ _health_config =
 	getArray(_stats_cfg >> "attributes" >> "thirst")
 ];
 ["player_health_stats",compile (str _health_config + " call vn_an_fnc_player_health_stats"), [], 10] call vn_an_fnc_scheduler_add_job;
-
-// building state tracking
-["building_state_tracker", {call vn_an_fnc_building_state_tracker}, [], 60] call vn_an_fnc_scheduler_add_job;

@@ -14,7 +14,7 @@ if (isNil "vn_an_buildMode") then
 
 		[format["<t font='VeteranTypewriter' color='#ff0000' size = '.8'>%1</t>",localize getText(_class >> "name")],0,0,1,0,0,789] spawn BIS_fnc_dynamicText;
 
-		[configName _class] spawn vn_an_fnc_place_object;
+		// [configName _class] spawn vn_an_fnc_place_object;
 	};
 } else {
 	vn_an_buildMode = nil;

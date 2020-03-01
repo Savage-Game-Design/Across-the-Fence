@@ -7,10 +7,7 @@ class events
 {
 	condition = "alive player";
 	file = "functions\masterloop";
-	class bulding_target
-	{
-		delay = 0.5;
-	};
+
 	class player_target
 	{
 		delay = 0.5;
