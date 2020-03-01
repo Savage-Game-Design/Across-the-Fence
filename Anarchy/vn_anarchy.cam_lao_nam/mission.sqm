@@ -253,7 +253,7 @@ class Mission
 			dataType="Marker";
 			position[]={16325.724,74.529999,8122.1411};
 			name="respawn_west_mikeforce";
-			text="STR_vn_mf_respawn_mike_force";
+			text="STR_vn_an_respawn_mike_force";
 			type="Empty";
 			id=4;
 		};

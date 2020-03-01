@@ -27,21 +27,21 @@ if !(isNull _target) then
 	_target_uid = getPlayerUID _target;
 	if !(_target_uid isEqualTo "") then
 	{
-		_friends = _player getVariable ["vn_mf_friends", []];
+		_friends = _player getVariable ["vn_an_friends", []];
 		if !(_target_uid in _friends) then
 		{
 			// add player to
 			_friends pushBackUnique _target_uid;
-			_player setVariable ["vn_mf_friends", _friends,true];
+			_player setVariable ["vn_an_friends", _friends,true];
 
 			// check if both sides are friends
-			if (getPlayerUID _player in (_target getVariable ["vn_mf_friends",[]])) then
+			if (getPlayerUID _player in (_target getVariable ["vn_an_friends",[]])) then
 			{
-				{["TaskSucceeded",[localize "STR_vn_mf_friendsmade"]] call BIS_fnc_showNotification} remoteExecCall ["call",[_player,_target]];
+				{["TaskSucceeded",[localize "STR_vn_an_friendsmade"]] call BIS_fnc_showNotification} remoteExecCall ["call",[_player,_target]];
 			}
 			else
 			{
-				{["TaskSucceeded",[localize "STR_vn_mf_invitereceived"]] call BIS_fnc_showNotification} remoteExecCall ["call",_target];
+				{["TaskSucceeded",[localize "STR_vn_an_invitereceived"]] call BIS_fnc_showNotification} remoteExecCall ["call",_target];
 			};
 		};
 	};

@@ -9,7 +9,7 @@
  *    Array of unit classes
  * Example Usage:
  *    Creates a patrol composition with 3 units
- *    [3] call vn_mf_fnc_squad_patrol
+ *    [3] call vn_an_fnc_squad_patrol
  */
 
 params ["_unitsInSquad"];

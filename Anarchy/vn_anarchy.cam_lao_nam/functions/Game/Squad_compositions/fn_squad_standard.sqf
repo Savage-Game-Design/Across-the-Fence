@@ -9,7 +9,7 @@
  *    Array of unit classes
  * Example Usage:
  *    Creates a standard infantry squad with 3 units
- *    [3] call vn_mf_fnc_squad_standard
+ *    [3] call vn_an_fnc_squad_standard
  */
 
 params ["_unitsInSquad"];

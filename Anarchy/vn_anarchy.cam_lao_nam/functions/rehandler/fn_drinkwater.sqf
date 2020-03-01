@@ -16,12 +16,12 @@
 */
 params ["_ammount","_source"];
 
-[_player,"thirst",_ammount] call vn_mf_fnc_change_player_stat;
+[_player,"thirst",_ammount] call vn_an_fnc_change_player_stat;
 
 // Example: add random chance to get a diuretic attribute, todo make alcohol,caffine drinks 100% chance and lower random chance
 if (random 1 < 0.1) then
 {
-	private _attributes = _player getVariable ["vn_mf_attributes",[]];
+	private _attributes = _player getVariable ["vn_an_attributes",[]];
 	_attributes pushBackUnique "diuretic";
-	_player setVariable ["vn_mf_attributes",_attributes,[2,owner _player]];
+	_player setVariable ["vn_an_attributes",_attributes,[2,owner _player]];
 };

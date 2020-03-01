@@ -9,7 +9,7 @@
  *    Array of unit classes
  * Example Usage:
  *    Creates a spiketeam with 3 units
- *    [3] call vn_mf_fnc_squad_west_spiketeam
+ *    [3] call vn_an_fnc_squad_west_spiketeam
  */
 
 params ["_unitsInSquad"];

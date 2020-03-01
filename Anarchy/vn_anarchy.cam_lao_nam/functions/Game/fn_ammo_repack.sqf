@@ -5,7 +5,7 @@
 	 Simple Ammo repack
 
   Example Usage:
-	call vn_mf_fnc_ammo_repack;
+	call vn_an_fnc_ammo_repack;
 
   Returns:
 	NOTHING
@@ -16,7 +16,7 @@
 private ["_interactedItem","_item","_magazineSize","_magazineSizeMax","_magazinesAmmoFull"];
 
 _item = "";
-_interactedItem = uiNamespace getVariable ["vn_mf_interactedItem",[]];
+_interactedItem = uiNamespace getVariable ["vn_an_interactedItem",[]];
 if !(_interactedItem isEqualTo []) then {
 	_item = _interactedItem select 1;
 };

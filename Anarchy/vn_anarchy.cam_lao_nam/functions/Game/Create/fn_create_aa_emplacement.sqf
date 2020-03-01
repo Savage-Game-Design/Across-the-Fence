@@ -8,7 +8,7 @@
  * Returns:
  *   [[Vehicles created, units created, groups created], [AA Guns created]]
  * Example Usage:
- *   [[0,0,0], 10] call vn_mf_fnc_create_aa_emplacement
+ *   [[0,0,0], 10] call vn_an_fnc_create_aa_emplacement
  */
 
 params ["_position", "_unitCount"];
@@ -23,7 +23,7 @@ private _patrolSize = 2;
 private _groupCount = floor (_unitCount / _patrolSize);
 
 for "_i" from 1 to _groupCount do {
-	_groups pushBack ([_position, 35, _patrolSize, east] call vn_mf_fnc_patrol_create);
+	_groups pushBack ([_position, 35, _patrolSize, east] call vn_an_fnc_patrol_create);
 };
 
 private _units = [];

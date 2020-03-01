@@ -5,7 +5,7 @@
 	Creates an entity which variables can be stored in.
 
   Example Usage:
-	true call vn_mf_fnc_create_namespace;
+	true call vn_an_fnc_create_namespace;
 
   Returns:
 	A namespace (either a Location if local, or a simpleObject if global)

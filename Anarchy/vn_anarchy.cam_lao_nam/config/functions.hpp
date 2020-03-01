@@ -1,6 +1,6 @@
 class cfgfunctions
 {
-	class vn_mf
+	class vn_an
 	{
 		class init
 		{
@@ -48,16 +48,10 @@ class cfgfunctions
 		};
 		class rehandler
 		{
-			class supporttaskcreate {};
 			class changeteam {};
 			class drinkwater {};
 			class eatfood {};
-			class placedbuilding {};
-			class refreshtasklist {};
 			class teleport {};
-			class supplyrequest {};
-			class swapbuilding {};
-			class resupplybuilding {};
 			class inviteplayer {};
 		};
 		class game
@@ -90,15 +84,15 @@ class cfgfunctions
 
 			// server
 			class place_object {};
-			class group_init {};
-			class building_state_tracker {};
+
+
 
 			class player_on_team {};
 			class player_rank {};
 			class player_health_stats {};
 			class player_within_radius {};
 			class swap_building {};
-			class delete_building {};
+
 			class save_time_elapsed {};
 
 			// stats
@@ -118,13 +112,6 @@ class cfgfunctions
 			class task_refresh_tasks_client {};
 			class task_subtask_complete {};
 			class task_subtask_create {};
-
-			//Zones
-			class zone_complete;
-			class zone_init {};
-			class zone_make_active;
-			class zone_active_job;
-
 		};
 		class db
 		{
@@ -135,28 +122,9 @@ class cfgfunctions
 			class rehandler {};
 			class init_player {};
 			class start_game_server {};
-			class end_mission {};
 		};
 
-		class tasks
-		{
-			class simple_task_system { file = "functions\tasks\fn_simple_task_system.sqf"; };
-			class state_machine_task_system { file = "functions\tasks\fn_state_machine_task_system.sqf"; };
-			class task_pri_9 { file = "functions\tasks\primary\fn_task_pri_9.sqf"; };
-			class task_sec_clear_minefield { file = "functions\tasks\secondary\fn_task_sec_clear_minefield.sqf";};
-			class task_sec_combat_air_patrol { file = "functions\tasks\secondary\fn_task_sec_combat_air_patrol.sqf"; };
-			class task_sec_destroy_camp { file = "functions\tasks\secondary\fn_task_sec_destroy_camp.sqf";};
-			class task_sec_destroy_emplacement { file = "functions\tasks\secondary\fn_task_sec_destroy_emplacement.sqf";};
-			class task_sec_kill_officer { file = "functions\tasks\secondary\fn_task_sec_kill_officer.sqf";};
-			class task_sec_reinforce { file = "functions\tasks\secondary\fn_task_sec_reinforce.sqf";};
-			class task_sec_transport_supplies { file = "functions\tasks\secondary\fn_task_sec_transport_supplies.sqf"; };
-			class task_sup_brightlight { file = "functions\tasks\support\fn_task_sup_brightlight.sqf"; };
-			class task_sup_cas { file = "functions\tasks\support\fn_task_sup_cas.sqf"; };
-			class task_sup_destroy_target { file = "functions\tasks\support\fn_task_sup_destroy_target.sqf"; };
-			class task_sup_transport { file = "functions\tasks\support\fn_task_sup_transport.sqf"; };
-			class task_sup_resupply { file = "functions\tasks\support\fn_task_sup_resupply.sqf";};
-			class task_zone_connector { file = "functions\tasks\fn_zone_connector.sqf";};
-		};
+
 
 		class Create
 		{

@@ -5,7 +5,7 @@
 	Adds action to teleport
 
   Example Usage:
-	call vn_mf_fnc_action_teleport
+	call vn_an_fnc_action_teleport
 
   Returns:
 	NOTHING
@@ -22,7 +22,7 @@ private _fnc_add_action_teleport =
 	];
 	[
 		_agent,									// Object the action is attached to
-		format[localize "STR_vn_mf_goto",_str_loc call BIS_fnc_localize],		// Title of the action
+		format[localize "STR_vn_an_goto",_str_loc call BIS_fnc_localize],		// Title of the action
 		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa",		// Idle icon shown on screen
 		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa",		// Progress icon shown on screen
 		"_this distance _target < 6", 						// Condition for the action to be shown
@@ -32,7 +32,7 @@ private _fnc_add_action_teleport =
 		{
 			params ['_target', '_caller', '_action_id', '_arguments'];
 			_arguments params ['_location','_agent'];
-			[player,'teleport',[_location,_agent],player getVariable 'vn_mf_token'] remoteExecCall ['vn_mf_fnc_rehandler',2];
+			[player,'teleport',[_location,_agent],player getVariable 'vn_an_token'] remoteExecCall ['vn_an_fnc_rehandler',2];
 		},									// Code executed on completion
 		{},									// Code executed on interrupted
 		[_location,_agent],							// Arguments passed to the scripts as _this select 3
@@ -61,4 +61,4 @@ private _respawn_locations = [];
             		[_agent,markerText _x,_marker_pos] call _fnc_add_action_teleport;
             	};
 	} forEach _respawn_locations;
-} forEach vn_mf_duty_officers;
+} forEach vn_an_duty_officers;

@@ -2,104 +2,104 @@
 <Project name="VN_MF_GAMEMODE">
 	<Package name="MF">
 
-		<Key ID="STR_vn_mf_levelup">
+		<Key ID="STR_vn_an_levelup">
 			<Original>LEVEL UP!</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rankpoint_short">
+		<Key ID="STR_vn_an_rankpoint_short">
 			<Original>RP</Original>
 		</Key>
-		<Key ID="STR_vn_mf_needdutyofficer">
+		<Key ID="STR_vn_an_needdutyofficer">
 			<Original>Cannot change teams without a duty officer present.</Original>
 		</Key>
-		<Key ID="STR_vn_mf_dropincomming">
+		<Key ID="STR_vn_an_dropincomming">
 			<Original>%1 drop incomming.</Original>
 		</Key>
-		<Key ID="STR_vn_mf_requestdrop">
+		<Key ID="STR_vn_an_requestdrop">
 			<Original>Request %1</Original>
 		</Key>
-		<Key ID="STR_vn_mf_goto">
+		<Key ID="STR_vn_an_goto">
 			<Original>Goto %1</Original>
 		</Key>
-		<Key ID="STR_vn_mf_resupply">
+		<Key ID="STR_vn_an_resupply">
 			<Original>Resupply - Build State: %1%2</Original>
 		</Key>
 
-		<Key ID="STR_vn_mf_nosupplydropnearby">
+		<Key ID="STR_vn_an_nosupplydropnearby">
 			<Original>No supplies nearby!</Original>
 		</Key>
-		<Key ID="STR_vn_mf_invite">
+		<Key ID="STR_vn_an_invite">
 			<Original>Invite %1</Original>
 		</Key>
-		<Key ID="STR_vn_mf_friendsmade">
+		<Key ID="STR_vn_an_friendsmade">
 			<Original>Acquaintance made</Original>
 		</Key>
-		<Key ID="STR_vn_mf_invitereceived">
+		<Key ID="STR_vn_an_invitereceived">
 			<Original>Invite Received</Original>
 		</Key>
 
 
-		<Key ID="STR_vn_mf_supplydroponstandby">
+		<Key ID="STR_vn_an_supplydroponstandby">
 			<Original>Supply drops on standby, make sure no other supplies are near drop zone.</Original>
 		</Key>
-		<Key ID="STR_vn_mf_checkpoint">
+		<Key ID="STR_vn_an_checkpoint">
 			<Original>Checkpoint</Original>
 		</Key>
-		<Key ID="STR_vn_mf_aid_post">
+		<Key ID="STR_vn_an_aid_post">
 			<Original>Aid Post</Original>
 		</Key>
-		<Key ID="STR_vn_mf_fire_support_base">
+		<Key ID="STR_vn_an_fire_support_base">
 			<Original>Fire Support Base</Original>
 		</Key>
-		<Key ID="STR_vn_mf_school">
+		<Key ID="STR_vn_an_school">
 			<Original>School</Original>
 		</Key>
-		<Key ID="STR_vn_mf_supplies">
+		<Key ID="STR_vn_an_supplies">
 			<Original>Supplies</Original>
 		</Key>
-		<Key ID="STR_vn_mf_building_supplies">
+		<Key ID="STR_vn_an_building_supplies">
 			<Original>Building Supplies</Original>
 		</Key>
-		<Key ID="STR_vn_mf_food_supplies">
+		<Key ID="STR_vn_an_food_supplies">
 			<Original>Food Supplies</Original>
 		</Key>
-		<Key ID="STR_vn_mf_medical_supplies">
+		<Key ID="STR_vn_an_medical_supplies">
 			<Original>Medical Supplies</Original>
 		</Key>
-		<Key ID="STR_vn_mf_ammo_supplies">
+		<Key ID="STR_vn_an_ammo_supplies">
 			<Original>Ammo Supplies</Original>
 		</Key>
-		<Key ID="STR_vn_mf_drink_water">
+		<Key ID="STR_vn_an_drink_water">
 			<Original>Drink Water</Original>
 		</Key>
-		<Key ID="STR_vn_mf_eat_food">
+		<Key ID="STR_vn_an_eat_food">
 			<Original>Eat Food</Original>
 		</Key>
-		<Key ID="STR_vn_mf_repack">
+		<Key ID="STR_vn_an_repack">
 			<Original>Repack</Original>
 		</Key>
-		<Key ID="STR_vn_mf_drink">
+		<Key ID="STR_vn_an_drink">
 			<Original>Drink</Original>
 		</Key>
-		<Key ID="STR_vn_mf_eat">
+		<Key ID="STR_vn_an_eat">
 			<Original>Eat</Original>
 		</Key>
-		<Key ID="STR_vn_mf_check_pulse">
+		<Key ID="STR_vn_an_check_pulse">
 			<Original>Check Pulse</Original>
 		</Key>
-		<Key ID="STR_vn_mf_build">
+		<Key ID="STR_vn_an_build">
 			<Original>Build</Original>
 		</Key>
 
-		<Key ID="STR_vn_mf_respawn_mike_force">
+		<Key ID="STR_vn_an_respawn_mike_force">
 			<Original>PLEI MEI SF CAMP - MIKE FORCE</Original>
 		</Key>
-		<Key ID="STR_vn_mf_respawn_green_hornets">
+		<Key ID="STR_vn_an_respawn_green_hornets">
 			<Original>PLEIKU - GREEN HORNETS</Original>
 		</Key>
-		<Key ID="STR_vn_mf_respawn_spike_team">
+		<Key ID="STR_vn_an_respawn_spike_team">
 			<Original>FOB2 KONTUM - SPIKE TEAM</Original>
 		</Key>
-		<Key ID="STR_vn_mf_respawn_acav">
+		<Key ID="STR_vn_an_respawn_acav">
 			<Original>FOB 5 BAN ME THUOT - ACAV</Original>
 		</Key>
 
@@ -107,141 +107,141 @@
 
 
 
-		<Key ID="STR_vn_mf_loading1">
+		<Key ID="STR_vn_an_loading1">
 			<Original>writing diary entry...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading2">
+		<Key ID="STR_vn_an_loading2">
 			<Original>checking pockets...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading3">
+		<Key ID="STR_vn_an_loading3">
 			<Original>cleaning glasses...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading4">
+		<Key ID="STR_vn_an_loading4">
 			<Original>putting boots on...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading5">
+		<Key ID="STR_vn_an_loading5">
 			<Original>washing canteen...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading6">
+		<Key ID="STR_vn_an_loading6">
 			<Original>polishing spork...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading7">
+		<Key ID="STR_vn_an_loading7">
 			<Original>putting on shades...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading8">
+		<Key ID="STR_vn_an_loading8">
 			<Original>dusting off shoulders...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading9">
+		<Key ID="STR_vn_an_loading9">
 			<Original>shining boots...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_loading10">
+		<Key ID="STR_vn_an_loading10">
 			<Original>ready for action...</Original>
 		</Key>
-		<Key ID="STR_vn_mf_howtobuild">
+		<Key ID="STR_vn_an_howtobuild">
 			<Original>How to Build</Original>
 		</Key>
-		<Key ID="STR_vn_mf_howtobuild_long">
+		<Key ID="STR_vn_an_howtobuild_long">
 			<Original>Press 'N' to enable/disable building&lt;br&gt;&lt;/br&gt;PgUp, PgDn to cycle buildings.&lt;br&gt;&lt;/br&gt;Scroll mouse wheel to rotate.&lt;br&gt;&lt;/br&gt;Press and hold 'Space' to finalize Build.</Original>
 		</Key>
 
 
-		<Key ID="STR_vn_mf_purple_heart">
+		<Key ID="STR_vn_an_purple_heart">
 			<Original>Purple Heart</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rvn_wound_medal">
+		<Key ID="STR_vn_an_rvn_wound_medal">
 			<Original>RVN Wound Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_distinguished_service_cross">
+		<Key ID="STR_vn_an_distinguished_service_cross">
 			<Original>Distinguished Service Cross</Original>
 		</Key>
-		<Key ID="STR_vn_mf_vietnam_gallantry_cross">
+		<Key ID="STR_vn_an_vietnam_gallantry_cross">
 			<Original>Vietnam Gallantry Cross</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rvn_defense_medal">
+		<Key ID="STR_vn_an_rvn_defense_medal">
 			<Original>RVN Defense Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_combat_infantryman_badge">
+		<Key ID="STR_vn_an_combat_infantryman_badge">
 			<Original>Combat Infantryman Badge</Original>
 		</Key>
-		<Key ID="STR_vn_mf_bronze_star">
+		<Key ID="STR_vn_an_bronze_star">
 			<Original>Bronze Star</Original>
 		</Key>
-		<Key ID="STR_vn_mf_silver_star">
+		<Key ID="STR_vn_an_silver_star">
 			<Original>Silver Star</Original>
 		</Key>
-		<Key ID="STR_vn_mf_air_medal">
+		<Key ID="STR_vn_an_air_medal">
 			<Original>Air Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_distinguished_service_order">
+		<Key ID="STR_vn_an_distinguished_service_order">
 			<Original>Distinguished Service Order</Original>
 		</Key>
-		<Key ID="STR_vn_mf_congressional_medalofhonor">
+		<Key ID="STR_vn_an_congressional_medalofhonor">
 			<Original>Congressional Medal of Honor</Original>
 		</Key>
-		<Key ID="STR_vn_mf_air_cross_of_gallantry">
+		<Key ID="STR_vn_an_air_cross_of_gallantry">
 			<Original>RVN Air Cross of Gallantry</Original>
 		</Key>
-		<Key ID="STR_vn_mf_vietnam_tet_campaign_commemorative_medal">
+		<Key ID="STR_vn_an_vietnam_tet_campaign_commemorative_medal">
 			<Original>Vietnam Tet Campaign Commemorative Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rvn_special_service_medal">
+		<Key ID="STR_vn_an_rvn_special_service_medal">
 			<Original>RVN Special Service Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_national_defense_service_medal">
+		<Key ID="STR_vn_an_national_defense_service_medal">
 			<Original>National Defense Service Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_distinguished_flying_cross">
+		<Key ID="STR_vn_an_distinguished_flying_cross">
 			<Original>Distinguished Flying Cross</Original>
 		</Key>
-		<Key ID="STR_vn_mf_army_commendation_medal">
+		<Key ID="STR_vn_an_army_commendation_medal">
 			<Original>Army Commendation Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_air_force_good_conduct_medal">
+		<Key ID="STR_vn_an_air_force_good_conduct_medal">
 			<Original>Air Force Good Conduct Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_air_force_cross">
+		<Key ID="STR_vn_an_air_force_cross">
 			<Original>Air Force Cross</Original>
 		</Key>
-		<Key ID="STR_vn_mf_special_operations_medal">
+		<Key ID="STR_vn_an_special_operations_medal">
 			<Original>Special Operations Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_army_presidential_unit_citation">
+		<Key ID="STR_vn_an_army_presidential_unit_citation">
 			<Original>Army Presidential Unit Citation</Original>
 		</Key>
-		<Key ID="STR_vn_mf_usaf_outstanding_unit_award">
+		<Key ID="STR_vn_an_usaf_outstanding_unit_award">
 			<Original>USAF Outstanding Unit Award</Original>
 		</Key>
-		<Key ID="STR_vn_mf_meritorious_unit_citation">
+		<Key ID="STR_vn_an_meritorious_unit_citation">
 			<Original>Meritorious Unit Citation</Original>
 		</Key>
-		<Key ID="STR_vn_mf_meritorious_service_medal">
+		<Key ID="STR_vn_an_meritorious_service_medal">
 			<Original>Meritorious Service Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_joint_service_commendation_medal">
+		<Key ID="STR_vn_an_joint_service_commendation_medal">
 			<Original>Joint Service Commendation Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_legion_of_merit">
+		<Key ID="STR_vn_an_legion_of_merit">
 			<Original>Legion of Merit</Original>
 		</Key>
-		<Key ID="STR_vn_mf_vietnam_service_medal">
+		<Key ID="STR_vn_an_vietnam_service_medal">
 			<Original>Vietnam Service Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_republic_of_vietnam_campaign_medal">
+		<Key ID="STR_vn_an_republic_of_vietnam_campaign_medal">
 			<Original>Republic of Vietnam Campaign Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_gulf_of_tonkin_vietnam_commemorative_medal">
+		<Key ID="STR_vn_an_gulf_of_tonkin_vietnam_commemorative_medal">
 			<Original>Gulf of Tonkin Vietnam Commemorative Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_navy_cross">
+		<Key ID="STR_vn_an_navy_cross">
 			<Original>Navy Cross</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rvn_training_service_medal">
+		<Key ID="STR_vn_an_rvn_training_service_medal">
 			<Original>RVN Training Service Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rvn_technical_service_medal">
+		<Key ID="STR_vn_an_rvn_technical_service_medal">
 			<Original>RVN Technical Service Medal</Original>
 		</Key>
-		<Key ID="STR_vn_mf_rvn_military_merit_first_republic_medal">
+		<Key ID="STR_vn_an_rvn_military_merit_first_republic_medal">
 			<Original>RVN Military Merit First Republic Medal</Original>
 		</Key>
 

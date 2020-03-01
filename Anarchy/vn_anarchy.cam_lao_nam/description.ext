@@ -1,6 +1,6 @@
 class Header
 {
-	gameType = SC;
+	gameType = Survive;
 	minPlayers = 1;
 	maxPlayers = 64;
 };
@@ -10,12 +10,12 @@ respawnDialog = 0;
 respawnButton = 0;
 respawnOnStart = -1;
 onPauseScript = "";
-onLoadMission= "MF";
-OnLoadIntro = "Welcome to Mike Force";
+onLoadMission= "Anarchy";
+OnLoadIntro = "Welcome to Anarchy";
 loadScreen = "";
 OnLoadIntroTime = 0;
 OnLoadMissionTime = 0;
-onLoadName = "Mike Force";
+onLoadName = "Anarchy";
 disabledAI = 1;
 scriptedPlayer = 0;
 disableChannels[]=  // allow text only on side chat
@@ -74,5 +74,5 @@ class Params
 };
 
 
-// VN HAM init
+// VN Anarchy init
 #include "config\init.hpp"

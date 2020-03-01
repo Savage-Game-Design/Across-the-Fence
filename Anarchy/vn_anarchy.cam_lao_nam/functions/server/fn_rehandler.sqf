@@ -5,9 +5,9 @@
 	Remote execution handler
 
   Example Usage:
-	_token = player getVariable ["vn_mf_token",""];
+	_token = player getVariable ["vn_an_token",""];
 	_payload = [_task,_player];
-	[player,"supporttaskcreate",_payload,_token] remoteExec ["vn_mf_fnc_rehandler",2];
+	[player,"supporttaskcreate",_payload,_token] remoteExec ["vn_an_fnc_rehandler",2];
 
   Returns:
 	OBJECT
@@ -28,7 +28,7 @@ if (_owner isEqualTo 0 || _reowner isEqualTo 0) exitWith {};
 if !(_owner isEqualTo _reowner) exitWith {};
 
 // sanity token check
-private _serverToken = _player getVariable ["vn_mf_token","FAIL"];
+private _serverToken = _player getVariable ["vn_an_token","FAIL"];
 if (_token isEqualTo "FAIL" || _serverToken isEqualTo "FAIL") exitWith {};
 if !(_token isEqualTo _serverToken) exitWith {};
 
@@ -38,7 +38,7 @@ private _allowed_functions = getArray(_gamemode_config >> "rehandler" >> "allowe
 if (_method in _allowed_functions) then
 {
 	// get function by var name
-	private _fnc = missionNamespace getVariable [format["vn_mf_fnc_%1", _method],""];
+	private _fnc = missionNamespace getVariable [format["vn_an_fnc_%1", _method],""];
 	// make sure that we found code
 	if (_fnc isEqualType {}) then
 	{

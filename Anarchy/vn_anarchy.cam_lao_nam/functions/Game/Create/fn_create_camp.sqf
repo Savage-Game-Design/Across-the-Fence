@@ -20,12 +20,12 @@ private _groupCount = round (_unitQuantity / _patrolSize);
 
 private _patrols = [];
 for "_i" from 1 to _groupCount do {
-	_patrols pushBack ([_position, 50, _patrolSize] call vn_mf_fnc_patrol_create);
+	_patrols pushBack ([_position, 50, _patrolSize] call vn_an_fnc_patrol_create);
 };
 
-private _guards = [east] call vn_mf_fnc_create_group;
+private _guards = [east] call vn_an_fnc_create_group;
 for "_i" from 1 to 5 do {
-	[_guards, selectRandom units_vc_basic, _position, [], 10, "NONE"] call vn_mf_fnc_create_unit;
+	[_guards, selectRandom units_vc_basic, _position, [], 10, "NONE"] call vn_an_fnc_create_unit;
 };
 
 [_guards, _position] call BIS_fnc_taskDefend;

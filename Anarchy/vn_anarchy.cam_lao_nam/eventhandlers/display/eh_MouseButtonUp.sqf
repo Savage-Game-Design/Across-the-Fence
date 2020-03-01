@@ -5,7 +5,7 @@
 	Mouse button released handler
 
   Example Usage:
-	call vn_mf_fnc_mousebuttonup;
+	call vn_an_fnc_mousebuttonup;
 
   Parameter(s):
 */

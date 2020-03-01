@@ -1,8 +1,8 @@
 tracking[] =
 {
-	{"hunger","vn_mf_fnc_ui_update"},
-	{"thirst","vn_mf_fnc_ui_update"},
-	{"rank","vn_mf_fnc_player_rank_up"}
+	{"hunger","vn_an_fnc_ui_update"},
+	{"thirst","vn_an_fnc_ui_update"},
+	{"rank","vn_an_fnc_player_rank_up"}
 };
 
 class rank

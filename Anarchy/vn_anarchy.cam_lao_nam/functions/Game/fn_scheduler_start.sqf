@@ -17,17 +17,17 @@
 
 
   Example Usage:
-	0 call vn_mf_fnc_scheduler_start;
+	0 call vn_an_fnc_scheduler_start;
 
   Returns:
 	NOTHING
 
 */
 
-vn_mf_schedulerHandle = [] spawn {
-	vn_mf_runScheduler = true;
+vn_an_schedulerHandle = [] spawn {
+	vn_an_runScheduler = true;
 
-	while {vn_mf_runScheduler} do
+	while {vn_an_runScheduler} do
 	{
 		private _tickTime = diag_tickTime;
 		private _toBeRemoved = [];
@@ -58,15 +58,15 @@ vn_mf_schedulerHandle = [] spawn {
 					_toBeRemoved pushBack _foreachindex;
 				};
 			};
-		} forEach vn_mf_schedulerJobs;
+		} forEach vn_an_schedulerJobs;
 		// reverse array and remove from last to first
 		reverse _toBeRemoved;
 		{
 			//Delete the namespace used by the job, so we don't get a bunch lingering around as the mission runs.
-			private _job = vn_mf_schedulerJobs select _x select 1;
-			_job call vn_mf_fnc_delete_namespace;
+			private _job = vn_an_schedulerJobs select _x select 1;
+			_job call vn_an_fnc_delete_namespace;
 			//Now just remove the job entry from the scheduler.
-			vn_mf_schedulerJobs deleteAt _x;
+			vn_an_schedulerJobs deleteAt _x;
 		} forEach _toBeRemoved;
 		uiSleep 0.1;
 	};

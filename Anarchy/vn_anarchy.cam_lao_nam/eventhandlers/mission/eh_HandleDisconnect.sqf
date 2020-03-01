@@ -12,7 +12,7 @@ params [
 	"_uid",
 	"_name"
 ];
-private _prefix = "vn_mf_";
+private _prefix = "vn_an_";
 
 private _config = (missionConfigFile >> "gamemode" >> "vars" >> "players");
 private _blacklisted = getArray(_config >> "blacklisted");
@@ -28,10 +28,10 @@ if !(isNull _unit) then
 	} forEach (_all_player_vars select {_x find _prefix == 0});
 
 	// save data
-	["SET", (_uid + "_data"), _vardata] call vn_mf_fnc_hive;
+	["SET", (_uid + "_data"), _vardata] call vn_an_fnc_hive;
 
 	// save players loadout
-	["SET", (_uid + "_loadout"), getUnitLoadout _unit] call vn_mf_fnc_hive;
+	["SET", (_uid + "_loadout"), getUnitLoadout _unit] call vn_an_fnc_hive;
 
 	// delete unit
 	deleteVehicle _unit;

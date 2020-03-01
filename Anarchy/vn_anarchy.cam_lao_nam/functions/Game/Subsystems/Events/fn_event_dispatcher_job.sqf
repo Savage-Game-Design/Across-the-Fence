@@ -8,7 +8,7 @@
  * Returns:
  *    None
  * Example Usage:
- * 	 ["eventLoop", vn_mf_fnc_event_dispatcher_job, [], 5] call vn_mf_fnc_scheduler_add_job
+ * 	 ["eventLoop", vn_an_fnc_event_dispatcher_job, [], 5] call vn_an_fnc_scheduler_add_job
  */
 
 //Event format
@@ -21,6 +21,6 @@
 	{
 		_eventParameters call _x;
 	} forEach _handlers;
-} forEach vn_mf_eventQueue;
+} forEach vn_an_eventQueue;
 
-vn_mf_eventQueue = [];
+vn_an_eventQueue = [];

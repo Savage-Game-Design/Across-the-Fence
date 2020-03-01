@@ -21,7 +21,7 @@ private _is_killer_player = isPlayer _killer;
 if (_is_unit_player) then
 {
 	// record player death
-	[_unit,_kill_type] call vn_mf_fnc_change_player_stat;
+	[_unit,_kill_type] call vn_an_fnc_change_player_stat;
 
 	if (_is_killer_player) then
 	{
@@ -29,13 +29,13 @@ if (_is_unit_player) then
 		if (_unit isEqualTo _killer) then
 		{
 			_kill_type = "suicides";
-			[_killer,_kill_type] call vn_mf_fnc_change_player_stat;
+			[_killer,_kill_type] call vn_an_fnc_change_player_stat;
 		}
 		else
 		{
 			// _unit is another player report as - friendlyfire
 			_kill_type = "friendlyfire";
-			[_killer,_kill_type] call vn_mf_fnc_change_player_stat;
+			[_killer,_kill_type] call vn_an_fnc_change_player_stat;
 		};
 	};
 
@@ -52,14 +52,14 @@ if (_is_unit_player) then
 			{
 				// if civ record as - murder
 				_kill_type = "murders";
-				[_killer,_kill_type] call vn_mf_fnc_change_player_stat;
+				[_killer,_kill_type] call vn_an_fnc_change_player_stat;
 			}
 			else
 			{
 				// if enemy record as - kill
 				_kill_type = "kills";
-				[_killer,_kill_type] call vn_mf_fnc_change_player_stat;
-				[_killer,1] call vn_mf_fnc_player_rank;
+				[_killer,_kill_type] call vn_an_fnc_change_player_stat;
+				[_killer,1] call vn_an_fnc_player_rank;
 			};
 
 		}
@@ -67,7 +67,7 @@ if (_is_unit_player) then
 		{
 			// if vehicle record as - vehiclekill
 			_kill_type = "vehiclekills";
-			[_killer,_kill_type] call vn_mf_fnc_change_player_stat;
+			[_killer,_kill_type] call vn_an_fnc_change_player_stat;
 
 			// TODO boat
 

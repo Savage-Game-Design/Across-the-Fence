@@ -5,7 +5,7 @@
 	Mouse button down handler
 
   Example Usage:
-	call vn_mf_fnc_mousebuttondown;
+	call vn_an_fnc_mousebuttondown;
 
   Parameter(s):
 */

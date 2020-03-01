@@ -32,16 +32,9 @@ class gamemode
 	{
 		allowedfunctions[] =
 		{
-			"supporttaskcreate",
-			"changeteam",
 			"drinkwater",
 			"eatfood",
-			"placedbuilding",
-			"refreshtasklist",
 			"teleport",
-			"supplyrequest",
-			"swapbuilding",
-			"resupplybuilding",
 			"inviteplayer"
 		};
 	};
@@ -60,159 +53,6 @@ class gamemode
 		#include "keys\keys.hpp"
 	};
 
-	class objects
-	{
-		/*
-		class vn_mf_obj_deliver_1
-		{
-			classname = "Land_Barracks_01_dilapidated_F";
-			posWorld[]={16892.1,6878.72,38.88}; // getPosWorld
-			dir[]={0.636993,-0.770869,0}; // vectorDir
-			up[]={0,0,1}; // vectorUp
-			swapclass = "Land_Barracks_01_grey_F";
-		};
-		*/
-	};
-
-	class buildables
-	{
-		class Land_vn_guardhouse_01
-		{
-			name = "STR_vn_mf_checkpoint";
-			type = "checkpoints";
-			rank = 0;
-
-			agents[] =  {"vn_b_men_sf_02"}; // todo remove for build state use
-
-			class build_states
-			{
-				class initial_state
-				{
-					object_class = "Land_vn_paperbox_closed_f";
-					supplies = 0;
-				};
-				class middle_state
-				{
-					object_class = "Land_vn_woodencrate_01_f";
-					supplies = 50;
-				};
-				class final_state
-				{
-					object_class = "Land_vn_guardhouse_01";
-					agents[] =  {"vn_b_men_sf_02"};
-					supplies = 100;
-				};
-			};
-		};
-		class Land_vn_tent_mash_01
-		{
-			name = "STR_vn_mf_aid_post";
-			type = "aid";
-			rank = 0;
-			class build_states
-			{
-				class initial_state
-				{
-					object_class = "Land_vn_paperbox_closed_f";
-					supplies = 0;
-				};
-				class middle_state
-				{
-					object_class = "Land_vn_woodencrate_01_f";
-					supplies = 50;
-				};
-				class final_state
-				{
-					object_class = "Land_vn_tent_mash_01";
-					supplies = 100;
-				};
-			};
-		};
-		class Land_vn_b_tower_01
-		{
-			name = "STR_vn_mf_fire_support_base";
-			type = "fsb";
-			rank = 0;
-			class build_states
-			{
-				class initial_state
-				{
-					object_class = "Land_vn_paperbox_closed_f";
-					supplies = 0;
-				};
-				class middle_state
-				{
-					object_class = "Land_vn_woodencrate_01_f";
-					supplies = 50;
-				};
-				class final_state
-				{
-					object_class = "Land_vn_b_tower_01";
-					agents[] =  {"vn_b_men_sf_02"};
-					supplies = 100;
-				};
-			};
-		};
-		class Land_vn_hootch_01
-		{
-			name = "STR_vn_mf_school";
-			type = "schools";
-			rank = 0;
-			class build_states
-			{
-				class initial_state
-				{
-					object_class = "Land_vn_paperbox_closed_f";
-					supplies = 0;
-				};
-				class middle_state
-				{
-					object_class = "Land_vn_woodencrate_01_f";
-					supplies = 50;
-				};
-				class final_state
-				{
-					object_class = "Land_vn_hootch_01";
-					supplies = 100;
-				};
-			};
-		};
-	};
-
-	class supplydrops
-	{
-		BuildingSupplies[] =
-		{
-			"STR_vn_mf_building_supplies",
-			{"I_supplyCrate_F"}
-		};
-		FoodSupplies[] =
-		{
-			"STR_vn_mf_food_supplies",
-			{"vn_b_ammobox_supply_02"}
-		};
-		MedicalSupplies[] =
-		{
-			"STR_vn_mf_medical_supplies",
-			{"vn_b_ammobox_supply_03"}
-		};
-		AmmoSupplies[] =
-		{
-			"STR_vn_mf_ammo_supplies",
-			{"vn_b_ammobox_supply_01"}
-		};
-	};
-
-	class crates
-	{
-		class RESUPPLY
-		{
-			weapons[] = {};
-			magazines[] = {};
-			items[] = {{"FirstAidKit", 20}};
-			backpacks[] = {};
-		};
-	};
 
 	class rank
 	{
@@ -246,10 +86,6 @@ class gamemode
 	{
 		#include "stats\stats.hpp"
 	};
-	class awards
-	{
-		#include "awards.hpp"
-	};
 
 	class health
 	{
@@ -262,23 +98,6 @@ class gamemode
 
 	class settings
 	{
-		groups[] =
-		{
-			{"MikeForce","uns_men_RAR_65_COM"},
-			{"SpikeTeam","uns_men_RAR_65_COM"},
-			{"ACAV","uns_men_RAR_65_COM"},
-			{"GreenHornets","uns_men_RAR_65_COM"}
-		};
-
-		class teams
-		{
-		    //["Regular Name", "path to Icon", "Shortname"]
-		    ACAV[] = {"Armored Cavalry", "\vn\ui_f_vietnam\ui\taskroster\img\logos\Logo_ACAV_HL.paa", "ACAV"};
-		    GreenHornets[] = {"Air Cavalry / Fast Air support", "\vn\ui_f_vietnam\ui\taskroster\img\logos\Logo_Hornets_HL.paa", "Air Cav. (Green Hornets)"};
-		    MikeForce[] = {"Mobile Strike Force Infantry", "\vn\ui_f_vietnam\ui\taskroster\img\logos\Logo_MikeForce_HL.paa", "Mike Force"};
-		    SpikeTeam[] = {"Special Forces", "\vn\ui_f_vietnam\ui\taskroster\img\logos\Logo_SpikeTeam_HL.paa", "Spike Team"};
-		    FAILED[] = {"NO TEAM","\vn\ui_f_vietnam\ui\taskroster\img\missionTarget_prev.paa", "FAILED"};
-		};
 
 	};
 
@@ -336,11 +155,6 @@ class gamemode
 		class Take {};			// Take EH
 		class HandleRating {};
 		class Respawn {};
-	};
-	class tasks {
-		initial_task = "primary_1_ba_ria";
-		//Include all task configs
-		#include "tasks\tasks.hpp"
 	};
 
 	class loadingScreens

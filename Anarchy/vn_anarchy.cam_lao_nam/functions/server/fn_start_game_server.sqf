@@ -1,17 +1,10 @@
-diag_log "VN: Server Init started";
+"VN: Server Init started" call BIS_fnc_log;
 
-// restart every time
-// ["CLEAR"] call vn_mf_fnc_hive;
-
-if (isNil "vn_mf_gamestarting") then
+if (isNil "vn_an_gamestarting") then
 {
-	vn_mf_buildings = []; // todo restore from db init for now
-
-	vn_mf_gamestarting = true;
+	vn_an_gamestarting = true;
 
 	private _gamemode_config = (missionConfigFile >> "gamemode");
-
-	param_ai_quantity = ["ai_quantity", 1] call BIS_fnc_getParamValue;
 
 	// setup game optimizations server side
 	setviewdistance (getNumber(_gamemode_config >> "performance" >> "setviewdistance"));
@@ -21,117 +14,19 @@ if (isNil "vn_mf_gamestarting") then
 	enableenvironment [[false,true] select _ambientlife,[false,true] select _ambientsound];
 
 	// start scheduler
-	vn_mf_schedulerJobs = [];
-	0 call vn_mf_fnc_scheduler_start;
-	0 spawn vn_mf_fnc_scheduler_monitor;
+	vn_an_schedulerJobs = [];
+	0 call vn_an_fnc_scheduler_start;
+	0 spawn vn_an_fnc_scheduler_monitor;
 
 	// start the event dispatcher, so anything relying on events can fire.
-	call vn_mf_fnc_event_subsystem_init;
+	call vn_an_fnc_event_subsystem_init;
 
-	// creates and initialize groups and duty officers
-	call vn_mf_fnc_group_init;
-	//Initialise task list
-	vn_mf_tasks = [];
-	vn_mf_taskCompletionLog = [];
-	//Counts the number of tasks that have been created, to let us have unique IDs.
-	vn_mf_taskCounter = 0;
+	
 
-	//Build the lists of secondary tasks, so we can create them later.
-	//Tasks without a marker aren't valid secondary tasks.
-	vn_mf_secondaryTaskConfigs = "getText (_x >> 'taskCategory') == 'SEC' && getText (_x >> 'taskname') != ''" configClasses (missionConfigFile >> "gamemode" >> "tasks");
-
-	//Create a lookup for tasks by zone and team
-	vn_mf_secondaryTasksBySide = false call vn_mf_fnc_create_namespace;
-	vn_mf_secondaryTasksBySide setVariable ["MikeForce", []];
-	vn_mf_secondaryTasksBySide setVariable ["SpikeTeam", []];
-	vn_mf_secondaryTasksBySide setVariable ["GreenHornets", []];
-	vn_mf_secondaryTasksBySide setVariable ["ACAV", []];
-
-	{
-		private _taskConfig = _x;
-		//Add the task to appropriate team arrays for the zone
-		{
-			vn_mf_secondaryTasksBySide getVariable _x pushBack configName _taskConfig;
-		} forEach (getArray (_taskConfig >> 'taskGroups'));
-	} forEach (vn_mf_secondaryTaskConfigs);
 
 	// load objects while retaining state and variables
-	call vn_mf_fnc_spawn_objects;
+	call vn_an_fnc_spawn_objects;
 
-	// load zone progress
-	call vn_mf_fnc_zone_init;
-
-	// init buildables type arrays
-	private _buildables_config = (_gamemode_config >> "buildables");
-	private _classes = "isClass _x" configClasses (_buildables_config);
-	private _types = [];
-	{
-		private _buildable_type = getText(_x >> "type");
-		if !(_buildable_type in _types) then
-		{
-			_types pushBack _buildable_type;
-			missionNamespace setVariable [format["vn_mf_%1",_buildable_type],[]];
-		};
-	} forEach _classes;
-
-	private _vars_config = (_gamemode_config >> "vars" >> "buildables");
-	private _public_vars = getArray(_vars_config >> "publicvars");
-
-	// spawn buildables
-	(["GET", "buildables", []] call vn_mf_fnc_hive) params ["",["_buildables",[]]];
-	{
-		_x params ["_class","_pos","_vectors","_vars","_type"];
-		// create building at saved position and angle
-		_object = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
-		_object setVectorDirAndUp _vectors;
-		_object setPosWorld _pos;
-
-		// restore vars
-		if !(_vars isEqualTo []) then
-		{
-			{
-				_x params ["_varname","_vardata"];
-				if (_varname in _public_vars) then
-				{
-					_object setVariable [_varname,_vardata,true];
-				}
-				else
-				{
-					_object setVariable [_varname,_vardata];
-				};
-
-			} forEach _vars;
-		};
-
-		// restore any agents
-		_agents = [];
-		private _object_class = getText(_buildables_config >> _class >> "final_state" >> "object_class");
-		if (_object_class isEqualTo _class) then
-		{
-			private _agents_cfg = getArray(_buildables_config >> _class >> "agents");
-			{
-				_pos = _object buildingPos (_foreachindex + 1);
-				if !(_pos isEqualTo [0,0,0]) then
-				{
-					private _agent = createAgent [_x, _pos, [], 0, "NONE"];
-					_agent enableSimulationGlobal false;
-					_agent disableAI "ALL";
-					_agent allowDamage false;
-					_agents pushBack _agent;
-				};
-			} forEach _agents_cfg;
-			_object setVariable ["vn_mf_agents", _agents];
-		};
-
-		// add to types array for finding buildables of a type
-		private _typename = format["vn_mf_%1",_type];
-		private _objects = missionNamespace getVariable [_typename, []];
-		_objects pushBack _object;
-		missionNamespace setVariable [_typename, _objects];
-
-		// add to array for tracking
-		vn_mf_buildings pushBack _object;
-	} forEach _buildables;
 
 	//Example unit types. Should be made more dynamic as the gamemode progresses.
 	unit_civilian = "uns_civilian1";
@@ -183,15 +78,14 @@ if (isNil "vn_mf_gamestarting") then
 	];
 
 	// start patrol subsystem
-	[] call vn_mf_fnc_patrol_subsystem_init;
+	[] call vn_an_fnc_patrol_subsystem_init;
 
 	// start cleanup subsystem
-	[] call vn_mf_fnc_cleanup_subsystem_init;
+	[] call vn_an_fnc_cleanup_subsystem_init;
 
 	// flag server as ready
-	missionNamespace setVariable ["vn_mf_server_ready", true, true];
+	missionNamespace setVariable ["vn_an_server_ready", true, true];
 
 };
 
-
-diag_log "VN: Server Init finished";
+"VN: Server Init finished" call BIS_fnc_log;

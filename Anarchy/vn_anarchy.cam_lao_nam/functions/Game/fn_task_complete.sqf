@@ -6,7 +6,7 @@
 	This is *only* for top-level tasks. *Not* subtasks.
 
   Example Usage:
-    [vn_mf_tasks # 0 # 1, "SUCCEEDED"] call vn_mf_fnc_task_complete
+    [vn_an_tasks # 0 # 1, "SUCCEEDED"] call vn_an_fnc_task_complete
 
   Parameters:
 	_taskDataStore - DataStore from the task being completed.
@@ -21,7 +21,7 @@
 params ["_taskDataStore", "_completionType"];
 
 private _taskClass = _taskDataStore getVariable "taskClass";
-private _taskArrayPos = vn_mf_tasks findIf {_x select 1 isEqualTo _taskDataStore};
+private _taskArrayPos = vn_an_tasks findIf {_x select 1 isEqualTo _taskDataStore};
 
 //Invalid task! Abort! Abort!
 if (_taskArrayPos < 0) exitWith {
@@ -33,10 +33,10 @@ if !(_completionType in ['CANCELED', 'FAILED', 'SUCCEEDED']) exitWith {
 	false
 };
 
-private _task = vn_mf_tasks select _taskArrayPos;
+private _task = vn_an_tasks select _taskArrayPos;
 
 //Remove the task from the tasks array, to avoid us thinking it's an active task later.
-vn_mf_tasks deleteAt _taskArrayPos;
+vn_an_tasks deleteAt _taskArrayPos;
 
 //Firstly - we set a flag in the taskDataStore, to inform the task we're done with it.
 //This gives the task a chance to handle its own exit, and do its own cleanup. Then we don't have to worry about it.
@@ -46,13 +46,13 @@ _taskDataStore setVariable ["task_completed", true];
 
 //Now we tell the scheduler we don't need to run the task anymore - it's done!
 //We use the task's Task Framework id for this.
-[_task select 0] call vn_mf_fnc_scheduler_remove_job;
+[_task select 0] call vn_an_fnc_scheduler_remove_job;
 
 //Tell Bohemia's Task Framework we won! (Or lost)
 [_task select 0, _completionType, true] call BIS_fnc_taskSetState;
 
 //Add the completion to our finish log, with the time it finished.
-vn_mf_taskCompletionLog pushBack [diag_tickTime, _taskClass, _taskDataStore getVariable "taskMarker"]; 
+vn_an_taskCompletionLog pushBack [diag_tickTime, _taskClass, _taskDataStore getVariable "taskMarker"]; 
 
 //Essentials are all done now. Now we focus on updating the gamemode state.
 
@@ -77,7 +77,7 @@ if (_completionType isEqualTo "SUCCEEDED") then
 			private _grp = _x;
 			if !(_grp isEqualTo grpNull) then
 			{
-				[_grp, _rankPointsReward] call vn_mf_fnc_player_rank;
+				[_grp, _rankPointsReward] call vn_an_fnc_player_rank;
 			};
 		} forEach _taskGroups;
 	};
@@ -92,7 +92,7 @@ if (_completionType isEqualTo "SUCCEEDED") then
 		private _newProgress = _currentZoneProgress + _addedZoneProgress min 100;
 
 		//Calculate our new marker colour based on progress.
-		private _newZoneColorStr = [_newProgress] call vn_mf_fnc_progress_to_color_config;
+		private _newZoneColorStr = [_newProgress] call vn_an_fnc_progress_to_color_config;
 		[_zoneMarker, _newZoneColorStr] spawn BIS_fnc_colorMarker;
 		//Update zone marker text
 		_zoneProgressKey setMarkerText format["%1%2", _newProgress toFixed 0,"%"];
@@ -103,15 +103,15 @@ if (_completionType isEqualTo "SUCCEEDED") then
 
 		//Save new zone progress.
 		missionNamespace setVariable [_zoneProgressKey, _newProgress];
-		["SET", _zoneProgressKey, _newProgress] call vn_mf_fnc_hive;
+		["SET", _zoneProgressKey, _newProgress] call vn_an_fnc_hive;
 	};
 
 	// Force a save to profileNamespace (force save to write to disk, basically)
-	["SAVE"] call vn_mf_fnc_hive;
+	["SAVE"] call vn_an_fnc_hive;
 };
 
 //Finally, confident everything else is done, we can call the onComplete handler for the task.
 [_completionType, _taskDataStore] call compile getText ((_taskDataStore getVariable "taskConfig") >> "onCompletion");
-["taskCompleted", _taskDataStore] call vn_mf_fnc_event_dispatch;
+["taskCompleted", _taskDataStore] call vn_an_fnc_event_dispatch;
 
 //TODO Delete the task data store in here.

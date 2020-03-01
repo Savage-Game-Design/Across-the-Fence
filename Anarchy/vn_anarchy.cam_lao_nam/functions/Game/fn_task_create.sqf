@@ -5,9 +5,9 @@
 	Creates a task that's defined by the gamemode config.
 
   Example Usage:
-	['task_1'] call vn_mf_fnc_task_create;
-	['task_1'] call vn_mf_fnc_task_create;
-	['task_1', 'zone_ba_ria', ['pos', [0,0,0]]] call vn_mf_fnc_task_create;
+	['task_1'] call vn_an_fnc_task_create;
+	['task_1'] call vn_an_fnc_task_create;
+	['task_1', 'zone_ba_ria', ['pos', [0,0,0]]] call vn_an_fnc_task_create;
 
   Returns:
 	[taskClass, taskDataStore, scriptHandle] if task created
@@ -68,10 +68,10 @@ if (isClass _taskConfig) then
 	if (_isAllowed) exitWith
 	{
 		//Use the counter to make sure our task ID is unique.
-		vn_mf_taskCounter = vn_mf_taskCounter + 1;
-		private _taskFrameworkId = format ["%1:%2", vn_mf_taskCounter, _taskClass];
+		vn_an_taskCounter = vn_an_taskCounter + 1;
+		private _taskFrameworkId = format ["%1:%2", vn_an_taskCounter, _taskClass];
 		//Copy task details into the datastore.
-		private _taskDataStore = false call vn_mf_fnc_create_namespace;
+		private _taskDataStore = false call vn_an_fnc_create_namespace;
 		_taskDataStore setVariable ["taskId", _taskFrameworkId];
 		_taskDataStore setVariable ["taskClass", _taskClass];
 		_taskDataStore setVariable ["taskRequestedBy", _taskGroupId];
@@ -106,16 +106,16 @@ if (isClass _taskConfig) then
 		[_targetGroups, _taskFrameworkId, [_formattedTaskDesc,_formattedTaskName,_taskmarker], objNull,"AUTOASSIGNED" , 1, true, _tasktype, true] call BIS_fnc_taskCreate;
 
 		// save last created task of each type
-		["SET", ("last_" + _taskCategory), _taskClass] call vn_mf_fnc_hive;
+		["SET", ("last_" + _taskCategory), _taskClass] call vn_an_fnc_hive;
 
 		private _taskEntry = [_taskFrameworkId, _taskDataStore];
 
 		//Arrays are a terrible way to store data. They're brittle, and difficult to change.
 		//That's why anything that isn't these should go in the taskDataStore.
 		//So I repeat - DO NOT ADD THINGS TO THIS ARRAY. Add them to the data store instead.
-		vn_mf_tasks pushBack _taskEntry;
-		[_taskFrameworkId, _taskScript, [_taskDataStore], 5] call vn_mf_fnc_scheduler_add_job;
-		["taskCreated", _taskDataStore] call vn_mf_fnc_event_dispatch;
+		vn_an_tasks pushBack _taskEntry;
+		[_taskFrameworkId, _taskScript, [_taskDataStore], 5] call vn_an_fnc_scheduler_add_job;
+		["taskCreated", _taskDataStore] call vn_an_fnc_event_dispatch;
 		_taskEntry
 	};
 	[]

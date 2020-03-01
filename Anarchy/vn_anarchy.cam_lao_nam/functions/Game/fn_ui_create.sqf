@@ -5,7 +5,7 @@
 	initialize player stats progress bars using stance indicator as hook
 
   Example Usage:
-	0 spawn vn_mf_fnc_ui_create;
+	0 spawn vn_an_fnc_ui_create;
 
 */
 disableSerialization;
@@ -34,13 +34,13 @@ if !(_gui isEqualTo []) then
 		_x params ["_name", "_color"];
 		private _control = _display ctrlCreate ["RscStatProgress", -1];
 
-		uiNamespace setVariable [format["vn_mf_%1_ctrl",_name], _control];
+		uiNamespace setVariable [format["vn_an_%1_ctrl",_name], _control];
 
 		_control ctrlSetPosition _stance_ctrl_pos;
 		_control ctrlSetBackgroundColor [0,0,0,0.5];
 		_control ctrlSetTextColor _color;
 		_control ctrlCommit 0;
-		_control progressSetPosition (player getVariable [format["vn_mf_%1",_name], 1]);
+		_control progressSetPosition (player getVariable [format["vn_an_%1",_name], 1]);
 
 		_stance_ctrl_pos set [0,(_stance_ctrl_pos select 0) + _width];
 

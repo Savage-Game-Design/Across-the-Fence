@@ -8,7 +8,7 @@
  * Returns:
  *    None
  * Example usage goes here
- * 	 ["jobId", vn_mf_fnc_patrol_job, [], 5] call vn_mf_fnc_scheduler_add_job
+ * 	 ["jobId", vn_an_fnc_patrol_job, [], 5] call vn_an_fnc_scheduler_add_job
  */
 
 {
@@ -18,4 +18,4 @@
 	if (currentWaypoint _patrolGroup == count waypoints _patrolGroup) then {
 		[_patrolGroup, _patrolGroup getVariable "patrolCenter", _patrolGroup getVariable "patrolRadius"] call BIS_fnc_taskPatrol;	
 	};
-} forEach vn_mf_patrols;
+} forEach vn_an_patrols;

@@ -1,1 +1,1 @@
-["refresh"] call vn_mf_fnc_armor_calc;
+["refresh"] call vn_an_fnc_armor_calc;

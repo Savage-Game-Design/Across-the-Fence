@@ -5,7 +5,7 @@
 	 Gear armor calculation functions
 
   Example Usage:
-	_vestArmor = ["gear",(vest player)] call vn_mf_fnc_armor_calc;
+	_vestArmor = ["gear",(vest player)] call vn_an_fnc_armor_calc;
 
   Returns:
 	NUMBER
@@ -87,7 +87,7 @@ switch _type do
 				_maxArmorHeadgear = _curArmor;
 			};
 		} forEach (("isclass _x && getnumber (_x >> 'scope') == 2 && getnumber (_x >> 'itemInfo' >> 'type') in [605]") configclasses (configfile >> "cfgweapons"));
-		missionNamespace setVariable ["vn_mf_MAX_ARMOR",[_maxArmorUniform,_maxArmorVest,_maxArmorHeadgear,(_maxArmorUniform + _maxArmorVest + _maxArmorHeadgear)]];
+		missionNamespace setVariable ["vn_an_MAX_ARMOR",[_maxArmorUniform,_maxArmorVest,_maxArmorHeadgear,(_maxArmorUniform + _maxArmorVest + _maxArmorHeadgear)]];
 
 	};
 	case "selectItem":
@@ -108,25 +108,25 @@ switch _type do
 		{
 				case 633: { uniformContainer player };
 				case 638: { vestContainer player };
-				case 632: { vn_mf_targetContainer };
-				case 640: { vn_mf_secondaryContainer };
+				case 632: { vn_an_targetContainer };
+				case 640: { vn_an_secondaryContainer };
 				default { backpackContainer player };
 			};
 			_weaponsAndItems = ((getWeaponCargo  _container) select 0);
 			_weaponsAndItems append ((getItemCargo _container) select 0);
 			_data = _weaponsAndItems param [_val,""];
 		};
-		uiNamespace setVariable ["vn_mf_interactedItem",[_text,_data,_pic,_val]];
+		uiNamespace setVariable ["vn_an_interactedItem",[_text,_data,_pic,_val]];
 	};
 	case "init":
 	{
 		_item params ["_unit","_targetContainer","_secondaryContainer"];
-		vn_mf_targetContainer = _targetContainer;
-		vn_mf_secondaryContainer = objNull;
+		vn_an_targetContainer = _targetContainer;
+		vn_an_secondaryContainer = objNull;
 		if !(isNull _secondaryContainer) then
 	{
-			vn_mf_targetContainer = _secondaryContainer;
-			vn_mf_secondaryContainer = _targetContainer;
+			vn_an_targetContainer = _secondaryContainer;
+			vn_an_secondaryContainer = _targetContainer;
 		};
 
 		waitUntil {(!isNull findDisplay 602)};
@@ -138,13 +138,13 @@ switch _type do
 			// init custom sub menu handler
 			{
 				_container = _display displayCtrl _x;
-				_container ctrlAddEventHandler ["LBDblClick",format["[_this,%1] call vn_mf_fnc_ui_sub_menu;",_x]];
+				_container ctrlAddEventHandler ["LBDblClick",format["[_this,%1] call vn_an_fnc_ui_sub_menu;",_x]];
 			} forEach [619,633,638];
 			// armor stats init
 			{
 				_remoteContainer = _display displayCtrl _x;
-				_remoteContainer ctrlAddEventHandler ["LBDrag",format["['selectItem',_this,%1] call vn_mf_fnc_armor_calc;['refresh'] call vn_mf_fnc_armor_calc;",_x]];
-				_remoteContainer ctrlAddEventHandler ["LBSelChanged",format["['selectItem',_this,%1] call vn_mf_fnc_armor_calc;['refresh'] call vn_mf_fnc_armor_calc;",_x]];
+				_remoteContainer ctrlAddEventHandler ["LBDrag",format["['selectItem',_this,%1] call vn_an_fnc_armor_calc;['refresh'] call vn_an_fnc_armor_calc;",_x]];
+				_remoteContainer ctrlAddEventHandler ["LBSelChanged",format["['selectItem',_this,%1] call vn_an_fnc_armor_calc;['refresh'] call vn_an_fnc_armor_calc;",_x]];
 			} forEach [632,640];
 
 			_color = [0.6,0.6,0.6,1];
@@ -212,7 +212,7 @@ switch _type do
 
 			uiNameSpace setVariable ["RscCustomProgressTotal", [_bar,_bar_compare]];
 
-			["refresh"] call vn_mf_fnc_armor_calc;
+			["refresh"] call vn_an_fnc_armor_calc;
 		};
 	};
 	case "refresh":
@@ -222,53 +222,53 @@ switch _type do
 		if (!isNull findDisplay 602) then
 	{
 		  _selectedClass = "";
-		  _interactedItem = uiNamespace getVariable ["vn_mf_interactedItem",[]];
+		  _interactedItem = uiNamespace getVariable ["vn_an_interactedItem",[]];
 		  if !(_interactedItem isEqualTo []) then
 	  {
 			  _selectedClass = _interactedItem select 1;
 		  };
-		  if (isNil "vn_mf_MAX_ARMOR") then
+		  if (isNil "vn_an_MAX_ARMOR") then
 	  {
-			  ["maxArmorInit"] call vn_mf_fnc_armor_calc;
+			  ["maxArmorInit"] call vn_an_fnc_armor_calc;
 		  };
 		  _totalArmor = 0;
-		  _totalArmorMax = vn_mf_MAX_ARMOR select 3;
+		  _totalArmorMax = vn_an_MAX_ARMOR select 3;
 		  _newArmor = 0;
 		  _selectedItem =  getnumber (configFile >> "CfgWeapons" >> _selectedClass >> "ItemInfo" >> "type");
 		  _bar = uiNameSpace getVariable "RscCustomProgressUniform";
-		  _uniformArmor = ["uniform",(uniform player)] call vn_mf_fnc_armor_calc;
+		  _uniformArmor = ["uniform",(uniform player)] call vn_an_fnc_armor_calc;
 		  _totalArmor = _totalArmor + _uniformArmor;
-		  _finalArmor = linearConversion [0,vn_mf_MAX_ARMOR select 0,_uniformArmor,0.01,1,true];
+		  _finalArmor = linearConversion [0,vn_an_MAX_ARMOR select 0,_uniformArmor,0.01,1,true];
 		  _bar progressSetPosition _finalArmor;
 		  if (_selectedItem == 801) then
 	  {
-			  _newArmor = _newArmor + (["uniform",_selectedClass] call vn_mf_fnc_armor_calc);
+			  _newArmor = _newArmor + (["uniform",_selectedClass] call vn_an_fnc_armor_calc);
 		  }
 	  else
 	  {
 			  _newArmor = _newArmor + _uniformArmor;
 		  };
 		  _bar = uiNameSpace getVariable "RscCustomProgressVest";
-		  _vestArmor = ["gear",(vest player)] call vn_mf_fnc_armor_calc;
+		  _vestArmor = ["gear",(vest player)] call vn_an_fnc_armor_calc;
 		  _totalArmor = _totalArmor + _vestArmor;
-		  _finalArmor = linearConversion [0,vn_mf_MAX_ARMOR select 1,_vestArmor,0.01,1,true];
+		  _finalArmor = linearConversion [0,vn_an_MAX_ARMOR select 1,_vestArmor,0.01,1,true];
 		  _bar progressSetPosition _finalArmor;
 		  if (_selectedItem == 701) then
 	  {
-			  _newArmor = _newArmor + (["gear",_selectedClass] call vn_mf_fnc_armor_calc);
+			  _newArmor = _newArmor + (["gear",_selectedClass] call vn_an_fnc_armor_calc);
 		  }
 	  else
 	  {
 			  _newArmor = _newArmor + _vestArmor;
 		  };
 		  _bar = uiNameSpace getVariable "RscCustomProgressHeadgear";
-		  _headgearArmor = ["gear",(headgear player)] call vn_mf_fnc_armor_calc;
+		  _headgearArmor = ["gear",(headgear player)] call vn_an_fnc_armor_calc;
 		  _totalArmor = _totalArmor + _headgearArmor;
-		  _finalArmor = linearConversion [0,vn_mf_MAX_ARMOR select 2,_headgearArmor,0.01,1,true];
+		  _finalArmor = linearConversion [0,vn_an_MAX_ARMOR select 2,_headgearArmor,0.01,1,true];
 		  _bar progressSetPosition _finalArmor;
 		  if (_selectedItem == 605) then
 	  {
-			  _newArmor = _newArmor + (["gear",_selectedClass] call vn_mf_fnc_armor_calc);
+			  _newArmor = _newArmor + (["gear",_selectedClass] call vn_an_fnc_armor_calc);
 		  }
 	  else
 	  {

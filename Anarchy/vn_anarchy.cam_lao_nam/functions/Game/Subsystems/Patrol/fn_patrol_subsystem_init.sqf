@@ -8,9 +8,9 @@
  * Returns:
  *    None
  * Example Usage:
- *    call vn_mf_fnc_patrol_init
+ *    call vn_an_fnc_patrol_init
  */
 
-vn_mf_patrols = [];
+vn_an_patrols = [];
 
-["patrol_manager", vn_mf_fnc_patrol_job, [], 5] call vn_mf_fnc_scheduler_add_job;
+["patrol_manager", vn_an_fnc_patrol_job, [], 5] call vn_an_fnc_scheduler_add_job;

@@ -13,7 +13,7 @@
  * Returns:
  *    None
  * Example Usage:
- *	  player call vn_mf_fnc_task_refresh_task_list
+ *	  player call vn_an_fnc_task_refresh_task_list
  */
 
 params ["_targets"];
@@ -28,6 +28,6 @@ private _taskDataStore = objNull;
 
 	_taskIds pushBack _taskId;
 	_taskIds append (_taskDataStore getVariable ["taskSubtasks", []])
-} forEach vn_mf_tasks;
+} forEach vn_an_tasks;
 
-[_taskIds] remoteExecCall ["vn_mf_fnc_task_refresh_tasks_client", _targets];
+[_taskIds] remoteExecCall ["vn_an_fnc_task_refresh_tasks_client", _targets];

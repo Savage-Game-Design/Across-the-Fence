@@ -5,7 +5,7 @@
 	Adds progress markers, and sets up inital task
 
   Example Usage:
-	[33] call vn_mf_fnc_progress_to_color_config;
+	[33] call vn_an_fnc_progress_to_color_config;
 
   Returns:
 	STRING - Color Config String

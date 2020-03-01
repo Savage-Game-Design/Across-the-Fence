@@ -9,7 +9,7 @@
  * Returns:
  *    Group created
  * Example Usage:
- *    [east, false] call vn_mf_fnc_create_group
+ *    [east, false] call vn_an_fnc_create_group
  */
 
 params ["_side", ["_deleteWhenEmpty", true]];

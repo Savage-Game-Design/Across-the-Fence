@@ -5,7 +5,7 @@
 	returns value for specified key based on gamemode config.
 
   Example Usage:
-	["difficulty", "aiskill", 0.1] call vn_mf_fnc_get_gamemode_value;
+	["difficulty", "aiskill", 0.1] call vn_an_fnc_get_gamemode_value;
 
   Returns:
 	NUMBER, STRING, ARRAY, BOOL

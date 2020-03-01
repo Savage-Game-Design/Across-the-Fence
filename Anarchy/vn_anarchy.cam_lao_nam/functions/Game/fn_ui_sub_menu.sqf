@@ -6,7 +6,7 @@
     Github:
     https://github.com/EpochModTeam/Enhanced-Arma3-Inventory
     Example:
-    _this call vn_mf_fnc_ui_sub_menu;
+    _this call vn_an_fnc_ui_sub_menu;
     Parameter(s):
 		_this select 0: STRING - switch
         _this select 1: STRING - payload
@@ -21,7 +21,7 @@ _magCount = 1;
 _thisItemType = 0;
 
 // remove any previous array
-_activeControl = uiNamespace getVariable ["vn_mf_active_button_control", controlNull];
+_activeControl = uiNamespace getVariable ["vn_an_active_button_control", controlNull];
 if (!isNull _activeControl) then
 {
     _activeControl ctrlShow false;
@@ -31,9 +31,9 @@ if (!isNull _activeControl) then
 params ["_main_control","_idc"];
 
 // find selected item
-['selectItem',_main_control,_idc] call vn_mf_fnc_armor_calc;
+['selectItem',_main_control,_idc] call vn_an_fnc_armor_calc;
 
-_interactedItem = uiNamespace getVariable ["vn_mf_interactedItem",[]];
+_interactedItem = uiNamespace getVariable ["vn_an_interactedItem",[]];
 if !(_interactedItem isEqualTo []) then
 {
     _thisItem = _interactedItem select 1;
@@ -94,7 +94,7 @@ if !(_interactedItem isEqualTo []) then
         _pos = getMousePosition;
 
         _control = _display ctrlCreate ["RscControlsGroupNoScrollbars", 5678910];
-        uiNamespace setVariable ["vn_mf_active_button_control", _control];
+        uiNamespace setVariable ["vn_an_active_button_control", _control];
 
         _control ctrlSetPosition [(_pos select 0)-0.03,(_pos select 1)-0.03,1,1];
         _control ctrlCommit 0;
@@ -104,7 +104,7 @@ if !(_interactedItem isEqualTo []) then
         _bg ctrlCommit 0;
         _bg ctrlAddEventHandler ["MouseEnter",
 	{
-            _activeControl = uiNamespace getVariable ["vn_mf_active_button_control", controlNull];
+            _activeControl = uiNamespace getVariable ["vn_an_active_button_control", controlNull];
             if !(isNull _activeControl) then {
                 _activeControl ctrlShow false;
             };
@@ -114,7 +114,7 @@ if !(_interactedItem isEqualTo []) then
         _buffer ctrlSetPosition [0.02,0.02,0.25,0.0625 + (0.0625 * (count _interactActions))];
         _buffer ctrlAddEventHandler ["ButtonClick",
 	{
-            _activeControl = uiNamespace getVariable ["vn_mf_active_button_control", controlNull];
+            _activeControl = uiNamespace getVariable ["vn_an_active_button_control", controlNull];
             if !(isNull _activeControl) then {
                 _activeControl ctrlShow false;
             };
@@ -145,7 +145,7 @@ if !(_interactedItem isEqualTo []) then
                     } else {
                         _button_gen ctrlAddEventHandler ["ButtonClick",format["_thisItem = '%1'; _thisItemType = %2;",_thisItem,_thisItemType] + _btn_code];
                     };
-                    _button_gen ctrlAddEventHandler ["ButtonClick","(uiNamespace getVariable ['vn_mf_active_button_control', controlNull]) ctrlShow false;"];
+                    _button_gen ctrlAddEventHandler ["ButtonClick","(uiNamespace getVariable ['vn_an_active_button_control', controlNull]) ctrlShow false;"];
                     _y2d = _y2d + 0.0625;
                     _btn_arr pushBack _button_gen;
                 };
@@ -159,7 +159,7 @@ if !(_interactedItem isEqualTo []) then
 				_button_gen ctrlSetText localize _btn_text;
 				_button_gen ctrlCommit 0;
 				_button_gen ctrlAddEventHandler ["ButtonClick",format["_thisItem = '%1'; _thisItemType = %2;",_thisItem,_thisItemType] + _btn_code];
-				_button_gen ctrlAddEventHandler ["ButtonClick","(uiNamespace getVariable ['vn_mf_active_button_control', controlNull]) ctrlShow false;"];
+				_button_gen ctrlAddEventHandler ["ButtonClick","(uiNamespace getVariable ['vn_an_active_button_control', controlNull]) ctrlShow false;"];
 				_y2d = _y2d + 0.0625;
 				_btn_arr pushBack _button_gen;
 			};
@@ -168,7 +168,7 @@ if !(_interactedItem isEqualTo []) then
         } forEach _interactActions;
 
         reverse _btn_arr;
-        uiNamespace setVariable ["vn_mf_active_controls", ([_control,_bg,_buffer] + _btn_arr) ];
-        {ctrlSetFocus _x} forEach (uiNamespace getVariable ["vn_mf_active_controls", []]);
+        uiNamespace setVariable ["vn_an_active_controls", ([_control,_bg,_buffer] + _btn_arr) ];
+        {ctrlSetFocus _x} forEach (uiNamespace getVariable ["vn_an_active_controls", []]);
     };
 };

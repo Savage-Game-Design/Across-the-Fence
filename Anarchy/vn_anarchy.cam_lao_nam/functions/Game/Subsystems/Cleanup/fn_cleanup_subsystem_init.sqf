@@ -8,11 +8,11 @@
  * Returns:
  *    None
  * Example Usage:
- *    call vn_mf_fnc_cleanup_subsystem_init
+ *    call vn_an_fnc_cleanup_subsystem_init
  */
 
-vn_mf_cleanup_minPlayerDistance = 1000;
+vn_an_cleanup_minPlayerDistance = 1000;
 
-vn_mf_cleanup_items = [];
+vn_an_cleanup_items = [];
 
-["cleanup", vn_mf_fnc_cleanup_job, [], 60] call vn_mf_fnc_scheduler_add_job;
+["cleanup", vn_an_fnc_cleanup_job, [], 60] call vn_an_fnc_scheduler_add_job;

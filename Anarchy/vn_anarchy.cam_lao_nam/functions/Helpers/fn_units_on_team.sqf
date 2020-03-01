@@ -8,7 +8,7 @@
  * Returns:
  *    Array of units on a team
  * Example Usage:
- *    "SpikeTeam" call vn_mf_fnc_units_on_team
+ *    "SpikeTeam" call vn_an_fnc_units_on_team
  */
 
  units (missionNamespace getVariable [_this, grpNull])

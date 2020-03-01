@@ -13,7 +13,7 @@
  * Returns:
  *    True if the vehicle would collide.
  * Example Usage:
- *    [_myCar, [1,1,1]] call vn_mf_fnc_vehicle_will_collide_at_pos
+ *    [_myCar, [1,1,1]] call vn_an_fnc_vehicle_will_collide_at_pos
  */
 
 params ["_vehicle", "_targetPos"];

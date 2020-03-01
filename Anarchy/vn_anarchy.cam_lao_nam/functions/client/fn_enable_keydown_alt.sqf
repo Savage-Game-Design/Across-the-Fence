@@ -1,1 +1,1 @@
-vn_mf_keydown_alt = true;
+vn_an_keydown_alt = true;

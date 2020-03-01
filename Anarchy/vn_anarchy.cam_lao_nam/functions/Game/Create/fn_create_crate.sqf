@@ -8,12 +8,12 @@
  * Returns:
  *    The crate object created.
  * Example Usage:
- *    ["RESUPPLY"] call vn_mf_fnc_create_crate;
+ *    ["RESUPPLY"] call vn_an_fnc_create_crate;
  */
 
 params ["_crateType"];
 
-private _crate = ["B_CargoNet_01_ammo_F",  [0,0,0]] call vn_mf_fnc_create_vehicle;
+private _crate = ["B_CargoNet_01_ammo_F",  [0,0,0]] call vn_an_fnc_create_vehicle;
 
 //Empty all items from the crate.
 clearMagazineCargoGlobal _crate;

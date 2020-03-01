@@ -16,16 +16,16 @@ private _nextCleanupItems = [];
 
 {
 	private _item = _x;
-	if (playableUnits findIf {_x distance2d _item < vn_mf_cleanup_minPlayerDistance} == -1) then {
+	if (playableUnits findIf {_x distance2d _item < vn_an_cleanup_minPlayerDistance} == -1) then {
 		_entitiesToClean pushBack _item;
 	} else {
 		if !(isNull _item) then {
 			_nextCleanupItems pushBack _item;
 		};
 	}
-} forEach vn_mf_cleanup_items;
+} forEach vn_an_cleanup_items;
 
-vn_mf_cleanup_items = _nextCleanupItems;
+vn_an_cleanup_items = _nextCleanupItems;
 
 _entitiesToClean spawn {
 	{

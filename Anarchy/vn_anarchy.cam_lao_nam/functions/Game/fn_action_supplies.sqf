@@ -5,7 +5,7 @@
 	Adds action to request supplies
 
   Example Usage:
-	call vn_mf_fnc_action_supplies;
+	call vn_an_fnc_action_supplies;
 
   Returns:
 	NOTHING
@@ -23,7 +23,7 @@ private _fnc_add_holdAction =
 	];
 	[
 		_agent,									// Object the action is attached to
-		format[localize "STR_vn_mf_requestdrop",localize _str_drop],		// Title of the action
+		format[localize "STR_vn_an_requestdrop",localize _str_drop],		// Title of the action
 		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa",		// Idle icon shown on screen
 		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa",		// Progress icon shown on screen
 		"_this distance _target < 6", 						// Condition for the action to be shown
@@ -33,7 +33,7 @@ private _fnc_add_holdAction =
 		{
 			params ['_target', '_caller', '_action_id', '_arguments'];
 			_arguments params ['_request','_agent'];
-			[player,'supplyrequest',[_request,_agent],player getVariable 'vn_mf_token'] remoteExecCall ['vn_mf_fnc_rehandler',2];
+			[player,'supplyrequest',[_request,_agent],player getVariable 'vn_an_token'] remoteExecCall ['vn_an_fnc_rehandler',2];
 		},									// Code executed on completion
 		{},									// Code executed on interrupted
 		[_request,_agent],							// Arguments passed to the scripts as _this select 3

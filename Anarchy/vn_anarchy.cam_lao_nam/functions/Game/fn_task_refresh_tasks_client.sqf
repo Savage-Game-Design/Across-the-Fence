@@ -10,9 +10,9 @@
  *    None
  * Example Usage:
  *    On Server:
- *        [["id_1", "id_2"]] remoteExecCall ["vn_mf_fnc_task_refresh_tasks_client", 0];
+ *        [["id_1", "id_2"]] remoteExecCall ["vn_an_fnc_task_refresh_tasks_client", 0];
  *    On Client:
- *        (call vn_mf_fnc_task_refresh_tasks_client);
+ *        (call vn_an_fnc_task_refresh_tasks_client);
   Valid On:
  *    Client only
  */
@@ -22,7 +22,7 @@ params ["_taskIds"];
 
 //If we have no taskIds to update, then request the taskids from the server.
 if (isNil "_taskIds") exitWith {
-	[player, "refreshtasklist", [], player getVariable "vn_mf_token"] remoteExec ["vn_mf_fnc_rehandler",2];
+	[player, "refreshtasklist", [], player getVariable "vn_an_token"] remoteExec ["vn_an_fnc_rehandler",2];
 };
 
 {

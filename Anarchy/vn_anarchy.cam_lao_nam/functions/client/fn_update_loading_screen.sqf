@@ -5,9 +5,9 @@
 	update loading screen text
 
   Example Usage:
-	"" call vn_mf_fnc_update_loading_screen;
+	"" call vn_an_fnc_update_loading_screen;
 	or
-	["vn/objects_f_vietnam/civ/signs/data/billboards/vn_ui_billboard_01_ca.paa",5040] call vn_mf_fnc_update_loading_screen;
+	["vn/objects_f_vietnam/civ/signs/data/billboards/vn_ui_billboard_01_ca.paa",5040] call vn_an_fnc_update_loading_screen;
 
   Parameter(s):
 */
@@ -16,7 +16,7 @@ params [
 	["_idc",5050]
 ];
 disableSerialization;
-private _display = uiNameSpace getVariable ["vn_mf_loadingScreen",displayNull];
+private _display = uiNameSpace getVariable ["vn_an_loadingScreen",displayNull];
 if (!isNull _display) then
 {
 	if (_text isEqualType parseText "") then

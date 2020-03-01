@@ -4,7 +4,7 @@ class CfgItemInteractions
 	{
 		interactActions[] =
 		{
-			{"STR_vn_mf_repack", "call vn_mf_fnc_ammo_repack;" } // To disable set this to an empty array here or in description.ext. interactActions[] = {};
+			{"STR_vn_an_repack", "call vn_an_fnc_ammo_repack;" } // To disable set this to an empty array here or in description.ext. interactActions[] = {};
 		};
 	};
 	class vn_prop_drink_01 // canteen 0.75l
@@ -13,8 +13,8 @@ class CfgItemInteractions
 		interactActions[] =
 		{
 			{
-				"STR_vn_mf_drink",
-				"[player,'drinkwater',[1],player getVariable 'vn_mf_token'] remoteExecCall ['vn_mf_fnc_rehandler',2];"
+				"STR_vn_an_drink",
+				"[player,'drinkwater',[1],player getVariable 'vn_an_token'] remoteExecCall ['vn_an_fnc_rehandler',2];"
 			}
 		};
 	};
@@ -29,8 +29,8 @@ class CfgItemInteractions
 		interactActions[] =
 		{
 			{
-				"STR_vn_mf_eat",
-				"[player,'eatfood',[1],player getVariable 'vn_mf_token'] remoteExecCall ['vn_mf_fnc_rehandler',2];"
+				"STR_vn_an_eat",
+				"[player,'eatfood',[1],player getVariable 'vn_an_token'] remoteExecCall ['vn_an_fnc_rehandler',2];"
 			}
 		};
 	};
@@ -39,8 +39,8 @@ class CfgItemInteractions
 		interactActions[] =
 		{
 			{
-				"STR_vn_mf_eat",
-				"[player,'eatfood',[0.1],player getVariable 'vn_mf_token'] remoteExecCall ['vn_mf_fnc_rehandler',2];"
+				"STR_vn_an_eat",
+				"[player,'eatfood',[0.1],player getVariable 'vn_an_token'] remoteExecCall ['vn_an_fnc_rehandler',2];"
 			}
 		};
 	};
@@ -53,7 +53,7 @@ class CfgItemInteractions
 		interactActions[] =
 		{
 			// Test actions - requires the player to have a watch equipped for "Check Pulse" action to show on double click of the First Aid Kit.
-			{"STR_vn_mf_check_pulse", "private _target = player; if (cursorTarget isKindof 'Man') then {_target = cursorTarget}; if ((damage _target) > 0.1) then { hintSilent format['%1 Needs Medical Attention!',name _target];} else {hintSilent format['%1, Does Not Need Medical Attention.',name _target];};", "!('ItemWatch' in (assignedItems player))", 1 , "hintSilent 'Watch Needed';" }
+			{"STR_vn_an_check_pulse", "private _target = player; if (cursorTarget isKindof 'Man') then {_target = cursorTarget}; if ((damage _target) > 0.1) then { hintSilent format['%1 Needs Medical Attention!',name _target];} else {hintSilent format['%1, Does Not Need Medical Attention.',name _target];};", "!('ItemWatch' in (assignedItems player))", 1 , "hintSilent 'Watch Needed';" }
 			// {"Debug 1", "hintSilent str[_thisItem,_thisItemType];" },
 		};
 	};

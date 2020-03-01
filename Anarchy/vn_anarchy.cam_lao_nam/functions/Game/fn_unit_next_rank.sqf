@@ -5,7 +5,7 @@
 	converts rank to icon
 
   Example Usage:
-		[player] call vn_mf_fnc_unit_next_rank
+		[player] call vn_an_fnc_unit_next_rank
 
   Returns:
 	0 : ARRAY -	0 : STRING - path to rank icon
@@ -23,7 +23,7 @@ private _data = [];
 	//code
 	_x params [["_rank_data",["","",0]]];
 	_rank_data params ["", "", "_pointsneeded"];
-	if (_unit getVariable ["vn_mf_rank",0] < _pointsneeded) exitWith
+	if (_unit getVariable ["vn_an_rank",0] < _pointsneeded) exitWith
 	{
 		_data = _rank_data;
 	};

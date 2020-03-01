@@ -8,9 +8,9 @@
  * Returns:
  *    None
  * Example Usage:
- *    call vn_mf_fnc_event_subsystem_init
+ *    call vn_an_fnc_event_subsystem_init
  */
 
-vn_mf_eventQueue = [];
+vn_an_eventQueue = [];
 
-["event_dispatcher", vn_mf_fnc_event_dispatcher_job, [], 1] call vn_mf_fnc_scheduler_add_job
+["event_dispatcher", vn_an_fnc_event_dispatcher_job, [], 1] call vn_an_fnc_scheduler_add_job

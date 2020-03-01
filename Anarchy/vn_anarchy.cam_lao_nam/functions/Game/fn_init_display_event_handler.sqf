@@ -5,7 +5,7 @@
 	sets up displayEventHandler event handlers from gamemode displayEventHandler config
 
   Example Usage:
-	call vn_mf_fnc_init_display_event_handler;
+	call vn_an_fnc_init_display_event_handler;
 
 */
 private _display = findDisplay 46;
@@ -27,9 +27,9 @@ if !(isNull _display) then
 		};
 	} forEach (configProperties [missionConfigFile >> "gamemode" >> "displayEventHandler"]);
 } else {
-	diag_log "ERROR: vn_mf_fnc_init_display_event_handler was called before display is ready!";
+	diag_log "ERROR: vn_an_fnc_init_display_event_handler was called before display is ready!";
 };
 
 // init key binds
-call vn_mf_fnc_init_key_down;
-call vn_mf_fnc_init_key_up;
+call vn_an_fnc_init_key_down;
+call vn_an_fnc_init_key_up;

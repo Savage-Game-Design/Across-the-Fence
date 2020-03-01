@@ -18,13 +18,13 @@ params ["_position", "_radius", ["_unitCount", 2], ["_side", east]];
 private _startPos = [[[_position, _radius]]] call BIS_fnc_randomPos;
 
 private _result = [
-		_unitCount call vn_mf_fnc_squad_patrol, 
+		_unitCount call vn_an_fnc_squad_patrol, 
 		_side,
 		_startPos
-	] call vn_mf_fnc_create_squad;
+	] call vn_an_fnc_create_squad;
 
 private _group = _result select 1;
 
-[_group, _position, _radius] call vn_mf_fnc_patrol_assign_group;
+[_group, _position, _radius] call vn_an_fnc_patrol_assign_group;
 
 _group;

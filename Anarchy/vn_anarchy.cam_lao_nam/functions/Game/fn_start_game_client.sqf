@@ -1,6 +1,6 @@
 // init vars
-vn_mf_buildindex = 0;
-vn_mf_buildDirection = 0;
+vn_an_buildindex = 0;
+vn_an_buildDirection = 0;
 
 0 spawn {
 	diag_log "VN: Client Init started";
@@ -10,7 +10,7 @@ vn_mf_buildDirection = 0;
 	// start loading screen
 	startLoadingScreen ["Welcome to Mike Force!", "MikeForce_loadingScreen"];
 
-	[selectRandom (getArray(missionConfigFile >> "gamemode" >> "loadingScreens" >> "images")),5002] call vn_mf_fnc_update_loading_screen;
+	[selectRandom (getArray(missionConfigFile >> "gamemode" >> "loadingScreens" >> "images")),5002] call vn_an_fnc_update_loading_screen;
 
     	player disableConversation true;
 
@@ -20,10 +20,10 @@ vn_mf_buildDirection = 0;
 	waitUntil {!isNull findDisplay 46};
 
 	// make sure server is finished with setup
-	waitUntil {missionNamespace getVariable ["vn_mf_server_ready",false]};
+	waitUntil {missionNamespace getVariable ["vn_an_server_ready",false]};
 
 	// do player init
-	[player] remoteExecCall ["vn_mf_fnc_init_player",2];
+	[player] remoteExecCall ["vn_an_fnc_init_player",2];
 
 	progressLoadingScreen 0.1;
 

@@ -15,4 +15,4 @@
   Parameter(s):
 */
 params ["_ammount","_source"];
-[_player,"hunger",_ammount] call vn_mf_fnc_change_player_stat;
+[_player,"hunger",_ammount] call vn_an_fnc_change_player_stat;

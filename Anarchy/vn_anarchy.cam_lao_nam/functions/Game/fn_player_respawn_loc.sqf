@@ -5,7 +5,7 @@
 	returns correct location based on players group, works both server and client side
 
   Example Usage:
-  	_player addMPEventHandler ["MPRespawn",{call vn_mf_fnc_player_respawn_loc}];
+  	_player addMPEventHandler ["MPRespawn",{call vn_an_fnc_player_respawn_loc}];
 
   Returns:
 	OBJECT - unit
@@ -15,17 +15,17 @@
 */
 params ["_unit","_corpse"];
 
-private _group_ID = _unit getVariable ["vn_mf_player_group","MikeForce"];
+private _group_ID = _unit getVariable ["vn_an_player_group","MikeForce"];
 private _respawn_loc = getMarkerPos "respawn_west_mikeforce";
 
 // check for any friends to spawn on
 private _uid = getPlayerUID _unit;
-private _friends = _unit getVariable ["vn_mf_friends",[]];
+private _friends = _unit getVariable ["vn_an_friends",[]];
 private _all_players = allPlayers;
 _respawn_loc_player = [];
 if !(_friends isEqualTo []) then
 {
-	private _index = _all_players findIf {(getPlayerUID _x) in _friends && {_uid in (_x getVariable ["vn_mf_friends",[]])}};
+	private _index = _all_players findIf {(getPlayerUID _x) in _friends && {_uid in (_x getVariable ["vn_an_friends",[]])}};
 	if (_friend_found > -1) then
 	{
 		_friendly_player = _all_players select _index;

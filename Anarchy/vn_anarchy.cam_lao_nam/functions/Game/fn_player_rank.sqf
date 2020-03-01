@@ -5,7 +5,7 @@
 	Changes groups rank points
 
   Example Usage:
-	[_player,10] call vn_mf_fnc_player_rank;
+	[_player,10] call vn_an_fnc_player_rank;
 
 */
 params [
@@ -21,7 +21,7 @@ if !(isNull _target) then
 	{
 		// set rank for every player in the group
 		{
-			[_x,"rank",_change] call vn_mf_fnc_change_player_stat;
+			[_x,"rank",_change] call vn_an_fnc_change_player_stat;
 		} forEach ((units _target) select {isPlayer _x});
 	}
 	else
@@ -30,7 +30,7 @@ if !(isNull _target) then
 		if (_target isEqualType objNull && {isPlayer _target}) then
 		{
 			// set rank for just the targeted player
-			[_target,"rank",_change] call vn_mf_fnc_change_player_stat;
+			[_target,"rank",_change] call vn_an_fnc_change_player_stat;
 		};
 	};
 };

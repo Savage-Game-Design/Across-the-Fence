@@ -14,7 +14,7 @@
  * Returns:
  *    Vehicle created, or objNull if not possible.
  * Example usage goes here:
- * 	["myVehicleClass", [1,1,1]] call vn_mf_fnc_create_vehicle_safely
+ * 	["myVehicleClass", [1,1,1]] call vn_an_fnc_create_vehicle_safely
  */
 
 
@@ -37,7 +37,7 @@ for "_i" from 1 to _attempts do {
 	_spawnPosition = (_pos vectorAdd _randomOffset) findEmptyPosition [0, (_radius / 2), _vehicleType];
 	
 	if !(_spawnPosition isEqualTo []) then {
-		_willCollide = [_vehicle, _spawnPosition] call vn_mf_fnc_vehicle_will_collide_at_pos;
+		_willCollide = [_vehicle, _spawnPosition] call vn_an_fnc_vehicle_will_collide_at_pos;
 		_finished = !_willCollide;
 	};
 	

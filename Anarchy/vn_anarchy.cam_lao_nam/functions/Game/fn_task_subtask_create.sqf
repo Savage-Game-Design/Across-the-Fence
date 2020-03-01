@@ -6,7 +6,7 @@
 	This is *only* for top-level tasks. *Not* subtasks.
 
   Example Usage:
-    [parentTaskDataStore, subtaskId] call vn_mf_fnc_task_subtask_create
+    [parentTaskDataStore, subtaskId] call vn_an_fnc_task_subtask_create
 
   Parameters:
 	_parentDataStore - Data store of the parent task.

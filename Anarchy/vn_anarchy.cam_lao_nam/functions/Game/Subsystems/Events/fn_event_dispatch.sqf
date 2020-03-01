@@ -10,9 +10,9 @@
  * Returns:
  *    None
  * Example Usage:
- *    ["onTaskComplete", [_taskDataStore]] call vn_mf_fnc_event_dispatch;
+ *    ["onTaskComplete", [_taskDataStore]] call vn_an_fnc_event_dispatch;
  */
 
 params ["_eventName", ["_params", []]];
 
-vn_mf_eventQueue pushBack [_eventName, _params];
+vn_an_eventQueue pushBack [_eventName, _params];

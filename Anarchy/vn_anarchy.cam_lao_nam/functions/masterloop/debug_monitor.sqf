@@ -1,4 +1,4 @@
-if !(isNil "vn_mf_enable_debug_monitor") then
+if !(isNil "vn_an_enable_debug_monitor") then
 {
-	call vn_mf_fnc_debug_monitor;
+	call vn_an_fnc_debug_monitor;
 };

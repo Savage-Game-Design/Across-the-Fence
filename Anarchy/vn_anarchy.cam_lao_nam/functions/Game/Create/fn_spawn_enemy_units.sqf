@@ -5,7 +5,7 @@
 	Spawns enemy at a markers location and scales number of enemy to number of players in marker
 
   Example Usage:
-	['enemy_1'] call vn_mf_fnc_spawn_enemy_units;
+	['enemy_1'] call vn_an_fnc_spawn_enemy_units;
 
   Returns:
 	GROUP
@@ -30,7 +30,7 @@ _classes_to_spawn = [_class];
 
 
 // difficulty
-_skill = ["difficulty", "aiskill", 0.1] call vn_mf_fnc_get_gamemode_value;
+_skill = ["difficulty", "aiskill", 0.1] call vn_an_fnc_get_gamemode_value;
 diag_log format ["_skill: %1",_skill];
 
 for "_i" from 1 to _num_players_in_zone do

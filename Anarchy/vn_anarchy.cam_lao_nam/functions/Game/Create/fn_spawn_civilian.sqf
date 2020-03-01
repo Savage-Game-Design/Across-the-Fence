@@ -5,7 +5,7 @@
 	Spawns Civilian and sets holdAction
 
   Example Usage:
-	[(getMarkerPos 'civ_2'),'vn_mf_task_civ_2'] call vn_mf_fnc_spawn_civilian;
+	[(getMarkerPos 'civ_2'),'vn_an_task_civ_2'] call vn_an_fnc_spawn_civilian;
 
   Returns:
 	OBJECT

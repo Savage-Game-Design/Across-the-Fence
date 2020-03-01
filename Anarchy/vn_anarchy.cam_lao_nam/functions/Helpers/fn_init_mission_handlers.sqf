@@ -5,7 +5,7 @@
 	adds mission event handlers by target scope
 
   Example Usage:
-	_target_scope call vn_mf_fnc_init_mission_handlers;
+	_target_scope call vn_an_fnc_init_mission_handlers;
 
   Returns:
 	NOTHING

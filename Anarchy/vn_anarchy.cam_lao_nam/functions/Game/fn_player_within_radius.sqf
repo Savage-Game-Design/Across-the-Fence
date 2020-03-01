@@ -9,7 +9,7 @@
  * Returns:
  *    Boolean - True if a player is within the given radius
  * Example Usage:
- *    [[0,0,0], 100] call vn_mf_fnc_player_within_radius
+ *    [[0,0,0], 100] call vn_an_fnc_player_within_radius
  */
 
 params ["_pos", "_radius"];

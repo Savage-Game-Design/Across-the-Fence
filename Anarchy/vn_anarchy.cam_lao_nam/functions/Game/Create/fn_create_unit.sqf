@@ -8,7 +8,7 @@
  * Returns:
  *    Unit created
  * Example Usage:
- *    [createGroup east, myClass", [0,0,0], [], 10, "NONE"] call vn_mf_fnc_create_unit;
+ *    [createGroup east, myClass", [0,0,0], [], 10, "NONE"] call vn_an_fnc_create_unit;
  */
 
 params ["_group", "_class", "_position", "_markers", "_placement", "_special"];

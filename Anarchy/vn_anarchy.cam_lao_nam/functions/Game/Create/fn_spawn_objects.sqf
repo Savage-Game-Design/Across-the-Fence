@@ -5,7 +5,7 @@
 	Spawns object and loads related data
 
   Example Usage:
-	call vn_mf_fnc_spawn_objects;
+	call vn_an_fnc_spawn_objects;
 
   Parameter(s):
 	NA
@@ -18,13 +18,13 @@
 	//code
 	_configname = configName _x;
 
-	(["GET", (_configname + "_data"), []] call vn_mf_fnc_hive) params ["","_object_data"];
+	(["GET", (_configname + "_data"), []] call vn_an_fnc_hive) params ["","_object_data"];
 	_class = getText (_x >> "classname");
 	_removed = false;
 
 	{
 		_x params ["_varname","_vardata"];
-		if (_varname isEqualTo "vn_mf_buildclass") then
+		if (_varname isEqualTo "vn_an_buildclass") then
 		{
 			_class = _vardata
 		};

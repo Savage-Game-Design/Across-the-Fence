@@ -10,7 +10,7 @@
  * Returns:
  *    [[units], group]
  * Example Usage:
- *    ["vn_test", west] call vn_mf_fnc_create_squad
+ *    ["vn_test", west] call vn_an_fnc_create_squad
  */
 
 params [["_units", []], "_groupTarget", "_position"];
@@ -18,9 +18,9 @@ params [["_units", []], "_groupTarget", "_position"];
 private _group = _groupTarget;
 
 if (typeName _groupTarget == "SIDE") then {
-	_group = [_groupTarget, true] call vn_mf_fnc_create_group;
+	_group = [_groupTarget, true] call vn_an_fnc_create_group;
 };
 
-private _spawnedUnits = _units apply {[_group, _x, _position, [], 5, "NONE"] call vn_mf_fnc_create_unit};
+private _spawnedUnits = _units apply {[_group, _x, _position, [], 5, "NONE"] call vn_an_fnc_create_unit};
 
 [_spawnedUnits, _group]

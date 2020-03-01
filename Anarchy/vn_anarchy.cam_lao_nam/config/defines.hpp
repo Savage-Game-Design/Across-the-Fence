@@ -10,9 +10,6 @@
 #define HEADED_CLIENT_HOST 768
 #define DEDICATED_SERVER 384
 
-#define IDC_HUD 7736
-#define IDC_MINIMAP 7734
-
 // GUI
 #define CT_MAP_MAIN 101
 #define ST_PICTURE 48

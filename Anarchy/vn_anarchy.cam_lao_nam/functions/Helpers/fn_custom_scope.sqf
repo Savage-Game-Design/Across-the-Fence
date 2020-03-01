@@ -5,7 +5,7 @@
 	determine type of client or server
 
   Example Usage:
-	_target_scope = call vn_mf_fnc_custom_scope;
+	_target_scope = call vn_an_fnc_custom_scope;
 
   Returns:
 	0 : NUMBER - 0 HC , 512 client , 768 player host , 384 dedicated server

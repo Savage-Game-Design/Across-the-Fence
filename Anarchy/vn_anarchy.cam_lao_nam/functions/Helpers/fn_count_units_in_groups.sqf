@@ -8,7 +8,7 @@
  * Returns:
  *    Number of units in all of the groups added together
  * Example Usage:
- *    [grpNull, group1] call vn_mf_fnc_count_units_in_groups
+ *    [grpNull, group1] call vn_an_fnc_count_units_in_groups
  */
 
 private _total = 0;

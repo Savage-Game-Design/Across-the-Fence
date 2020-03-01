@@ -5,7 +5,7 @@
 	changes stats vars and updates both server and client
 
   Example Usage:
-	[_player,_varname,1] call vn_mf_fnc_change_player_stat;
+	[_player,_varname,1] call vn_an_fnc_change_player_stat;
 
   Returns:
 	NOTHING
@@ -25,7 +25,7 @@ if (isClass _config) then
 
 	private _min = getNumber(_config >> "min");
 	private _max = getNumber(_config >> "max");
-	private _key = format["vn_mf_%1",_name];
+	private _key = format["vn_an_%1",_name];
 	private _val = _player getVariable [_key,0];
 	_player setVariable [_key,((_val + _change) min _max) max _min,[2,owner _player]];
 
@@ -34,7 +34,7 @@ if (isClass _config) then
 	// change rank
 	if (_name isEqualTo "rank") then
 	{
-		([_player] call vn_mf_fnc_player_to_rank) params ["", "_rank", "_pointsneeded"];
+		([_player] call vn_an_fnc_player_to_rank) params ["", "_rank", "_pointsneeded"];
 		_rank = toUpper _rank;
 		if !(rank _player isEqualTo _rank) then {
 			_player setUnitRank _rank;
@@ -78,7 +78,7 @@ if (isClass _config) then
 					{
 						// todo Store
 						diag_log "store award: " + _award_name;
-						private _awards_var = _player getVariable ["vn_mf_awards",[]];
+						private _awards_var = _player getVariable ["vn_an_awards",[]];
 
 						private _award_given = false;
 
@@ -100,7 +100,7 @@ if (isClass _config) then
 
 						if (_award_given) then
 						{
-							_player setVariable ["vn_mf_awards",_awards_var,[2,owner _player]];
+							_player setVariable ["vn_an_awards",_awards_var,[2,owner _player]];
 							// send notification to player
 							// todo display award to player
 
@@ -110,7 +110,7 @@ if (isClass _config) then
 									_a_image
 								],
 								{
-									titleText [format["<t color='#ff0000' size='2'>%1</t><br/><img size='5' image='%2'/>",localize format["STR_vn_mf_%1",(_this select 0)],(_this select 1)], "PLAIN", -1, true, true];
+									titleText [format["<t color='#ff0000' size='2'>%1</t><br/><img size='5' image='%2'/>",localize format["STR_vn_an_%1",(_this select 0)],(_this select 1)], "PLAIN", -1, true, true];
 								}
 							] remoteExecCall ["call",_player];
 

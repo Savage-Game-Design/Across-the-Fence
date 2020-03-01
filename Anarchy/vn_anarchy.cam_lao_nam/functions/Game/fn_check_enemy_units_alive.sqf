@@ -5,7 +5,7 @@
 	Checks if enemy are alive within area
 
   Example Usage:
-	['marker_7'] call vn_mf_fnc_check_enemy_units_alive;
+	['marker_7'] call vn_an_fnc_check_enemy_units_alive;
 
   Returns:
 	BOOL - (True) if no enemy left alive in area

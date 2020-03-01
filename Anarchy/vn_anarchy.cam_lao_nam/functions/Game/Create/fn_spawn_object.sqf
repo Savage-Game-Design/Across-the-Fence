@@ -5,7 +5,7 @@
 	Spawns object and loads related data
 
   Example Usage:
-	[_class, [["zone_ba_ria"], ["water"]] ,_configname] call vn_mf_fnc_spawn_object;
+	[_class, [["zone_ba_ria"], ["water"]] ,_configname] call vn_an_fnc_spawn_object;
 
   Parameter(s):
 	NA

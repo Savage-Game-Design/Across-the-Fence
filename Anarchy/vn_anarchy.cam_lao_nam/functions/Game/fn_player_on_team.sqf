@@ -9,7 +9,7 @@
  * Returns:
  *    True if player on the given team, false otherwise.
  * Example Usage:
- *    [player, "MikeForce"] call vn_mf_fnc_playerInTeam
+ *    [player, "MikeForce"] call vn_an_fnc_playerInTeam
  */
 
 params ["_player", "_team"];

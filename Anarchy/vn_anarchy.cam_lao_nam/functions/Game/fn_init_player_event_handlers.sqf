@@ -5,7 +5,7 @@
 	sets up player event handlers
 
   Example Usage:
-	call vn_mf_fnc_init_player_event_handlers;
+	call vn_an_fnc_init_player_event_handlers;
 
 */
 {

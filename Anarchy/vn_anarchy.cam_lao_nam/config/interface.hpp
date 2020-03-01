@@ -246,8 +246,8 @@ class RscProgressNotFreeze
 class MikeForce_loadingScreen
 {
 	idd = -1;
-	onLoad = "uiNamespace setVariable ['vn_mf_loadingScreen',_this select 0]";
-	onUnload = "uiNamespace setVariable ['vn_mf_loadingScreen',displayNull]";
+	onLoad = "uiNamespace setVariable ['vn_an_loadingScreen',_this select 0]";
+	onUnload = "uiNamespace setVariable ['vn_an_loadingScreen',displayNull]";
 	duration = 10e10;
 	fadein = 0;
 	fadeout = 0;

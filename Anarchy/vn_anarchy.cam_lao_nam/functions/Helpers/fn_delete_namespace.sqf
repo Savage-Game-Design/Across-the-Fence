@@ -11,7 +11,7 @@
 	None
 
   Example Usage:
-	locationNull call vn_mf_fnc_delete_namespace
+	locationNull call vn_an_fnc_delete_namespace
 */
 
 params ["_namespace"];

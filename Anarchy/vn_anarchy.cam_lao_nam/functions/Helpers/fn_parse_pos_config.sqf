@@ -11,7 +11,7 @@
     A position that depends on the config.
 
   Example Usage:
-	["marker", "marker_1"] call vn_mf_fnc_parse_pos_config
+	["marker", "marker_1"] call vn_an_fnc_parse_pos_config
 */
 
 params ["_type","_data"];
