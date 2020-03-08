@@ -74,43 +74,7 @@ class atoakills
 	min = 0;
 	max = 999999;
 };
-class hqdestroyed
-{
-	min = 0;
-	max = 999999;
-};
-
 class revives
-{
-	min = 0;
-	max = 999999;
-};
-class zonesentered
-{
-	min = 0;
-	max = 999999;
-};
-class zonescaptured
-{
-	min = 0;
-	max = 999999;
-};
-class taskscomplete // primary
-{
-	min = 0;
-	max = 999999;
-};
-class teamtaskscomplete // seconary
-{
-	min = 0;
-	max = 999999;
-};
-class supplytaskscomplete // support - alt
-{
-	min = 0;
-	max = 999999;
-};
-class supporttaskscomplete // support
 {
 	min = 0;
 	max = 999999;
