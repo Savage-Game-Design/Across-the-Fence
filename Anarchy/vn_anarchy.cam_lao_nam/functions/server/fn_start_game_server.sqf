@@ -15,12 +15,9 @@ if (isNil "vn_an_gamestarting") then
 
 	// start scheduler
 	vn_an_schedulerJobs = [];
-	0 call vn_an_fnc_scheduler_start;
+	call vn_an_fnc_scheduler_start;
 	0 spawn vn_an_fnc_scheduler_monitor;
-
-
-
-
+	call vn_an_fnc_scheduler_init;
 
 
 
@@ -76,7 +73,7 @@ if (isNil "vn_an_gamestarting") then
 	// start patrol subsystem
 	[] call vn_an_fnc_patrol_subsystem_init;
 
-	
+
 
 	// flag server as ready
 	missionNamespace setVariable ["vn_an_server_ready", true, true];
