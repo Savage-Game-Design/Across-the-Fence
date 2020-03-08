@@ -49,13 +49,13 @@ progressLoadingScreen 0.8;
 uiSleep 0.4;
 progressLoadingScreen 0.9;
 // add supply officer actions
-call vn_an_fnc_action_supplies;
+// call vn_an_fnc_action_supplies;
 [parseText format["<t font='VeteranTypewriter' color='#F5F2D0'>%1</t>",localize "STR_vn_an_loading9"]] call vn_an_fnc_update_loading_screen;
 
 uiSleep 0.4;
 progressLoadingScreen 1.0;
 // add duty officer teleport actions
-call vn_an_fnc_action_teleport;
+// call vn_an_fnc_action_teleport;
 [parseText format["<t font='VeteranTypewriter' color='#F5F2D0'>%1</t>",localize "STR_vn_an_loading10"]] call vn_an_fnc_update_loading_screen;
 
 // allow player to use medic and engineer

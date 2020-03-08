@@ -49,7 +49,6 @@ class cfgfunctions
 		};
 		class rehandler
 		{
-			class changeteam {};
 			class drinkwater {};
 			class eatfood {};
 			class teleport {};
