@@ -1,10 +1,24 @@
-"VN: Server Init started" call BIS_fnc_log;
+diag_log "VN: Server Init started";
+
+// restart every time
+// ["CLEAR"] call vn_an_fnc_hive;
 
 if (isNil "vn_an_gamestarting") then
 {
 	vn_an_gamestarting = true;
-
 	private _gamemode_config = (missionConfigFile >> "gamemode");
+	// Set desired number of simultaneously active zones.
+	vn_an_targetNumberOfActiveZones = 2;
+	//Initialise task list
+	vn_an_tasks = [];
+	vn_an_taskCompletionLog = [];
+	//Counts the number of tasks that have been created, to let us have unique IDs.
+	vn_an_taskCounter = 0;
+
+
+	vn_an_param_ai_quantity = ["ai_quantity", 1] call BIS_fnc_getParamValue;
+
+	vn_an_allowed_functions = ("isClass _x" configClasses (missionConfigFile >> "cfgfunctions" >> "vn_an" >> "rehandler") apply {configName _x});
 
 	// setup game optimizations server side
 	setviewdistance (getNumber(_gamemode_config >> "performance" >> "setviewdistance"));
@@ -14,12 +28,27 @@ if (isNil "vn_an_gamestarting") then
 	enableenvironment [[false,true] select _ambientlife,[false,true] select _ambientsound];
 
 	// start scheduler
-	vn_an_schedulerJobs = [];
 	call vn_an_fnc_scheduler_start;
 	0 spawn vn_an_fnc_scheduler_monitor;
+
+	// start the event dispatcher, so anything relying on events can fire.
+	// call vn_an_fnc_event_subsystem_init;
+
+	// creates and initialize groups and duty officers
+	// call vn_an_fnc_group_init;
+
+
+	// load objects while retaining state and variables
+	// call vn_an_fnc_spawn_objects;
+
+	// load zone progress
+	// call vn_an_fnc_zone_init;
+
+	// spawn buildables and init vars
+	// call vn_an_fnc_spawn_buildables;
+
+	// start generic scheduler functions
 	call vn_an_fnc_scheduler_init;
-
-
 
 	//Example unit types. Should be made more dynamic as the gamemode progresses.
 	unit_civilian = "uns_civilian1";
@@ -70,13 +99,17 @@ if (isNil "vn_an_gamestarting") then
 	    "uns_mine_xm54"
 	];
 
+	[] call vn_an_fnc_stats_init;
+
 	// start patrol subsystem
-	[] call vn_an_fnc_patrol_subsystem_init;
+	// [] call vn_an_fnc_patrol_subsystem_init;
 
-
+	// start cleanup subsystem
+	// [] call vn_an_fnc_cleanup_subsystem_init;
 
 	// flag server as ready
 	missionNamespace setVariable ["vn_an_server_ready", true, true];
 };
 
-"VN: Server Init finished" call BIS_fnc_log;
+
+diag_log "VN: Server Init finished";

@@ -25,6 +25,7 @@ class cfgfunctions
 			//class enable_build_mode {};
 			//class enable_build_cycle1 {};
 			//class enable_build_cycle2 {};
+			class health_effects {};
 			class enable_keydown_shift {};
 			class enable_keydown_ctrl {};
 			class enable_keydown_alt {};
@@ -82,17 +83,13 @@ class cfgfunctions
 			class progress_to_color_config {};
 			class player_respawn_loc {};
 
-
-
-
-
-
-
-
 			// server
 			class save_time_elapsed {};
 			class player_health_stats {};
+
+			// stats
 			class change_player_stat {};
+			class stats_init {};
 
 			//Scheduler
 			class scheduler_add_job {};

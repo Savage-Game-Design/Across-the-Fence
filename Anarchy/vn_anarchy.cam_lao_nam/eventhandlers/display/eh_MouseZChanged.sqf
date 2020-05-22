@@ -11,8 +11,3 @@
 */
 params ["_displayorcontrol", "_scroll"];
 
-// allow rotation change if build mode enabled
-if !(isNil "vn_an_buildMode") then
-{
-	vn_an_buildDirection = vn_an_buildDirection + _scroll;
-};

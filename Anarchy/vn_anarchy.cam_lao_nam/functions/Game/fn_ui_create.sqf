@@ -10,7 +10,7 @@
 */
 disableSerialization;
 
-waitUntil{!isNull (findDisplay 46)};
+waitUntil{uiSleep 0.1; !isNull (findDisplay 46)};
 
 // hunger / thirst
 private _gui = (uiNamespace getVariable ["IGUI_displays",""]) select {(ctrlIdd _x) isEqualTo 303};
@@ -48,5 +48,5 @@ if !(_gui isEqualTo []) then
 	} forEach _stats;
 
 } else {
-	diag_log "Error: no display found.";
+	"Error: no display found." call BIS_fnc_log;
 };

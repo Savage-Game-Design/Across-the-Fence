@@ -13,7 +13,7 @@
   Parameter(s):
 */
 
-private _fnc_add_holdAction =
+private _fnc_add_action =
 {
 	params
 	[
@@ -21,27 +21,9 @@ private _fnc_add_holdAction =
 		"_str_drop", 				// 1: STRING - localized string
 		["_request","BuildingSupplies"]		// 2: STRING - requested supplies
 	];
-	[
-		_agent,									// Object the action is attached to
-		format[localize "STR_vn_an_requestdrop",localize _str_drop],		// Title of the action
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa",		// Idle icon shown on screen
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa",		// Progress icon shown on screen
-		"_this distance _target < 6", 						// Condition for the action to be shown
-		"_caller distance _target < 6",						// Condition for the action to progress
-		{},									// Code executed when action starts
-		{},									// Code executed on every progress tick
-		{
-			params ['_target', '_caller', '_action_id', '_arguments'];
-			_arguments params ['_request','_agent'];
-			[player,'supplyrequest',[_request,_agent],player getVariable 'vn_an_token'] remoteExecCall ['vn_an_fnc_rehandler',2];
-		},									// Code executed on completion
-		{},									// Code executed on interrupted
-		[_request,_agent],							// Arguments passed to the scripts as _this select 3
-		2,									// Action duration [s]
-		100,									// Priority
-		false,									// Remove on completion
-		false									// Show in unconscious state
-	] call BIS_fnc_holdActionAdd;
+	_actions = _agent getVariable ["vn_dyn_mf_actions",[]];
+	_actions pushBack ["vn\ui_f_vietnam\ui\wheelmenu\img\handsignals\ui_wm_selector_hand_002_ca.paa", "",    [ [[_request,_agent], format[localize "STR_vn_an_requestdrop",localize _str_drop]],"vn_an_fnc_client_request_supplies"] ];
+	_agent setVariable ["vn_dyn_mf_actions", _actions];
 };
 
 private _gamemode_config = (missionConfigFile >> "gamemode");
@@ -55,7 +37,7 @@ private _supplydrops = configProperties [_gamemode_config >> "supplydrops"];
     {
     	private _agent = missionNamespace getVariable [format["supply_officer_%1",_i],objNull];
     	if (isNull _agent) exitWith {};
-    	[_agent,_request_name,_request] call _fnc_add_holdAction;
+    	[_agent,_request_name,_request] call _fnc_add_action;
     };
 
 } forEach _supplydrops;

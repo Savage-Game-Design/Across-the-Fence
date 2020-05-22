@@ -82,7 +82,7 @@ class AddonsMetaData
 randomSeed=7860927;
 class ScenarioData
 {
-	author="SGD";
+	author="Savage Game Design";
 	briefing=0;
 	debriefing=0;
 	saving=0;

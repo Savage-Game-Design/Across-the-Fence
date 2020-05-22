@@ -63,14 +63,7 @@ showHUD[] =
 
 class Params
 {
-	#include "\vn\missions_f_vietnam\campaign\missions\basicParameters.inc"
-	class ai_quantity
-	{
-		title = "AI Quantity";
-		values[] = {0, 1};
-		texts[] = {"Debug", "Normal"};
-		default = 1;
-	};
+	#include "config\params.hpp"
 };
 
 

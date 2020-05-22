@@ -22,7 +22,8 @@ private _config = (missionConfigFile >> "gamemode" >> _cfg);
 
 if (!isClass _config) exitWith
 {
-	diag_log "DEBUG: Class not found in gamemode config";
+	"DEBUG: Class not found in gamemode config" call BIS_fnc_log;
+	_default
 };
 
 // get value for selected difficulty
@@ -31,6 +32,8 @@ if (_cfg isEqualTo "difficulty") then
 	_config = _config >> getText(_config >> "setting");
 };
 
+// select key name
+_config = (_config >> _key);
 
 private _data = switch (typeName _default) do {
 	case "SCALAR":

@@ -13,15 +13,12 @@
 
  vn_an_monitorScheduler = true;
 
-private _lastTick = 0;
-private _checkFrequency	= 10;
-
  while {vn_an_monitorScheduler} do {
-	if (_lastTick + _checkFrequency > diag_tickTime) exitWith {};
-
 	 if (!isNil "vn_an_schedulerHandle") then {
+
 		 if (scriptDone vn_an_schedulerHandle) then {
 			 [] call vn_an_fnc_scheduler_start;
 		 };
 	 };
+	uiSleep 1;
  };

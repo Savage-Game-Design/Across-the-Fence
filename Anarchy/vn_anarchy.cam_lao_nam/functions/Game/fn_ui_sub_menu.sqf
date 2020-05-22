@@ -85,7 +85,7 @@ if !(_interactedItem isEqualTo []) then
 	    };
     };
 
-    diag_log format["DEBUG: _interactActions %1",_interactActions];
+    ["DEBUG: _interactActions %1",_interactActions] call BIS_fnc_logFormat;
 
     // build menu
     if !(_interactActions isEqualTo []) then

@@ -26,10 +26,8 @@ private _config = (missionConfigFile >> "gamemode" >> "vars" >> "players");
 private _blacklisted = getArray(_config >> "blacklisted");
 
 {
-	private _unit = _x;
-	private _hunger = _unit getVariable ["vn_an_hunger",1];
-	private _thirst = _unit getVariable ["vn_an_thirst",1];
-	private _attributes = _unit getVariable ["vn_an_attributes",[]];
+	private _player = _x;
+	private _attributes = _player getVariable ["vn_an_attributes",[]];
 	// example of now to handle _attributes: if afflicted with a diuretic increase thirst loss 100%
 	{
 		if (_x in _attributes) then
@@ -44,33 +42,33 @@ private _blacklisted = getArray(_config >> "blacklisted");
 		};
 	} forEach (_hunger_attributes_config select 0);
 
-	[_unit,"hunger",-(_hunger_loss_rate * _hunger_loss_factor)] call vn_an_fnc_change_player_stat;
-	[_unit,"thirst",-(_thirst_loss_rate * _thirst_loss_factor)] call vn_an_fnc_change_player_stat;
+	[[_player],"hunger",-(_hunger_loss_rate * _hunger_loss_factor)] call vn_an_fnc_change_player_stat;
+	[[_player],"thirst",-(_thirst_loss_rate * _thirst_loss_factor)] call vn_an_fnc_change_player_stat;
 
 	// force all players to save every 60 seconds to prevent roll back if server crashes
 	_ticktime = diag_tickTime;
-	_savetime = _unit getVariable ["vn_an_savetime",0];
+	_savetime = _player getVariable ["vn_an_savetime",0];
 	if (_ticktime > _savetime) then
 	{
-		_unit setVariable ["vn_an_savetime",_ticktime + 60];
-		_uid = getPlayerUID _unit;
+		_player setVariable ["vn_an_savetime",_ticktime + 60];
+		_uid = getPlayerUID _player;
 		private _vardata = [];
-		if !(isNull _unit) then
+		if !(isNull _player) then
 		{
 			// remove blacklisted vars
-			private _all_player_vars = (allVariables _unit) - _blacklisted;
+			private _all_player_vars = (allVariables _player) - _blacklisted;
 			// filter for proper prefix and populate array to be saved
 			{
-				_vardata pushBack [_x,(_unit getVariable _x)];
+				_vardata pushBack [_x,(_player getVariable _x)];
 			} forEach (_all_player_vars select {_x find _prefix == 0});
 
 			// save data
 			["SET", (_uid + "_data"), _vardata] call vn_an_fnc_hive;
 
 			// save players loadout
-			["SET", (_uid + "_loadout"), getUnitLoadout _unit] call vn_an_fnc_hive;
+			["SET", (_uid + "_loadout"), getUnitLoadout _player] call vn_an_fnc_hive;
 
-			[_unit,_uid,_vardata] call BIS_fnc_log;
+			[_player,_uid,_vardata] call BIS_fnc_log;
 		};
 	};
 

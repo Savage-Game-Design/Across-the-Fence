@@ -61,6 +61,13 @@ if !(_loadout isEqualTo []) then
 	_player setUnitLoadout [_loadout, false];
 };
 
+// restore players rank
+([_player] call vn_an_fnc_unit_to_rank) params ["", "_rank", ""];
+_rank = toUpper _rank;
+if !(rank _player isEqualTo _rank) then
+{
+	_player setUnitRank _rank;
+};
 
 // start player at correct camp for team
 _player setPos ([_player,_player] call vn_an_fnc_player_respawn_loc);

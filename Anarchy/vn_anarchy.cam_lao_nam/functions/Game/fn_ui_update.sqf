@@ -22,3 +22,6 @@ if !(isNull _ctrl) then
 {
 	_ctrl progressSetPosition (player getVariable [_name, 1]);
 };
+
+// apply health effects
+call vn_an_fnc_health_effects;

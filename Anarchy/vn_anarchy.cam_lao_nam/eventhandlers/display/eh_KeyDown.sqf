@@ -25,6 +25,7 @@ if !(_fnc_name isEqualTo "") then
 {
 	private _fnc = missionNamespace getVariable [_fnc_name,{}];
 	// call function for key pressed
-	if !(_fnc isEqualTo {}) then _fnc;
+	// systemChat format["down %1 = %2",_fnc_name,_fnc];
+	_return = if !(_fnc isEqualTo {}) then _fnc;
 };
 _return

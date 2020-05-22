@@ -14,4 +14,4 @@ params [
 	"_owner"
 ];
 
-diag_log format["PlayerConnected mEH: %1", _this];
+["PlayerConnected mEH: %1", _this] call BIS_fnc_logFormat;

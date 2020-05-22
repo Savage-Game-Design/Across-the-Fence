@@ -17,23 +17,25 @@ params ["_unit","_corpse"];
 
 private _group_ID = _unit getVariable ["vn_an_player_group","MikeForce"];
 private _respawn_loc = getMarkerPos "respawn_west_mikeforce";
+private _respawn_loc_default = _respawn_loc;
 
 // check for any friends to spawn on
 private _uid = getPlayerUID _unit;
 private _friends = _unit getVariable ["vn_an_friends",[]];
-private _all_players = allPlayers;
-_respawn_loc_player = [];
+
+// check for online friends
 if !(_friends isEqualTo []) then
 {
-	private _index = _all_players findIf {(getPlayerUID _x) in _friends && {_uid in (_x getVariable ["vn_an_friends",[]])}};
-	if (_friend_found > -1) then
 	{
-		_friendly_player = _all_players select _index;
-		_respawn_loc_player = getPos _friendly_player;
+		private _friend = _x call BIS_fnc_getUnitByUid;
+		if (!isNull _friend && {_uid in (_friend getVariable ["vn_an_friends",[]])}) exitWith
+		{
+			_respawn_loc = getPos _friend;
 	};
+	} forEach _friends;
 };
 // if no players found use respawn markers
-if (_respawn_loc_player isEqualTo []) then
+if (_respawn_loc_default isEqualTo _respawn_loc) then
 {
 	if !(_group_ID isEqualTo "MikeForce") then
 	{
@@ -43,10 +45,6 @@ if (_respawn_loc_player isEqualTo []) then
 			_respawn_loc = _respawn_loc_team;
 		};
 	};
-}
-else
-{
-	_respawn_loc = _respawn_loc_player;
 };
 
 
@@ -57,5 +55,5 @@ if !(_new_location isEqualTo []) then
 	_respawn_loc = _new_location;
 };
 
-diag_log format["DEBUG:_respawn_loc %1 _group_ID %2", _respawn_loc, _group_ID];
+["DEBUG:_respawn_loc %1 _group_ID %2", _respawn_loc, _group_ID] call BIS_fnc_logFormat;
 _respawn_loc

@@ -25,6 +25,4 @@ if (!isNull _display) then
 	} else {
 		(_display displayCtrl _idc) ctrlSetText _text;
 	};
-
-	diag_log format["loading text %1", _text];
 };

@@ -17,14 +17,14 @@
 
 params ["_jobId"];
 
-private _jobPos = vn_an_schedulerJobs findIf {_x select 0 == _jobId};
+private _job = [_jobId] call vn_an_fnc_scheduler_get_job; 
 
-if (_jobPos < 0) exitWith {
+if (isNull _job) exitWith {
 	false
 };
 
-private _job = (vn_an_schedulerJobs select _jobPos) select 1;
 
 //This should be enough to make the scheduler remove it after the next run.
 //Also gives the job a chance to clean itself up on the next run.
 _job setVariable ["removeFromScheduler", true];
+true

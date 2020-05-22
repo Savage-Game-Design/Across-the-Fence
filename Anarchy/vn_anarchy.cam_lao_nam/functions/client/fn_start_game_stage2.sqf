@@ -1,4 +1,5 @@
 // add notes about current build settings
+0 fadeSound 0;
 player createDiaryRecord ["Diary", [localize "STR_vn_an_howtobuild", localize "STR_vn_an_howtobuild_long"], taskNull, "", false];
 
 // display initial loading text
@@ -57,17 +58,23 @@ progressLoadingScreen 1.0;
 // add duty officer teleport actions
 // call vn_an_fnc_action_teleport;
 [parseText format["<t font='VeteranTypewriter' color='#F5F2D0'>%1</t>",localize "STR_vn_an_loading10"]] call vn_an_fnc_update_loading_screen;
+// apply health effects
+call vn_an_fnc_health_effects;
 
-// allow player to use medic and engineer
-player setUnitTrait ["engineer",true];
-player setUnitTrait ["medic",true];
-player setUnitTrait ["explosiveSpecialist",true];
+// starting rank
+vn_an_starting_rank = player getVariable ["vn_an_rank",0];
 
+// init awards array
+vn_an_default_awards = [];
+{
+    vn_an_default_awards pushBack [configName _x, -1];
+} forEach ("isClass(_x)" configClasses (missionConfigFile >> "gamemode" >> "awards_config"));
 
 // end loading screen
 uiSleep 0.4;
 endLoadingScreen;
 
+4 fadeSound 1;
 
 // display location after a little delay
 sleep 4;

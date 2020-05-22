@@ -23,8 +23,11 @@
 	NOTHING
 
 */
-
+vn_an_schedulerJobs = [];
 vn_an_schedulerHandle = [] spawn {
+	//Fixes the wrong name showing up in the arma 3 profiler.
+	//Without this, this code block ends up named after the first script in the scheduler to run.
+	scriptName "Main Scheduler Loop";
 	vn_an_runScheduler = true;
 
 	while {vn_an_runScheduler} do
@@ -41,19 +44,35 @@ vn_an_schedulerHandle = [] spawn {
 			private _tickDelay = _schedulerCurrentJob getVariable ["tickDelay", 5];
 			private _startTime = _schedulerCurrentJob getVariable ["startTime", 0];
 			private _lastTickTime = _schedulerCurrentJob getVariable ["lastTickTime", 0];
+			private _remainingIterations = _schedulerCurrentJob getVariable ["remainingIterations", -1];
 
-			if ((_tickTime - _lastTickTime) > _tickDelay) then
+			if ((_tickTime - _lastTickTime) > _tickDelay && {_remainingIterations != 0}) then
 			{
 				//If debug scheduler is enabled, dump the jobs to the log file.
 				if (!isNil "debugScheduler") then {
-					diag_log format ["SCHEDULER: Job running - %1", _jobId];
+					["SCHEDULER: Job running - %1", _jobId] call BIS_fnc_logFormat;
 				};
 
+				//So, this'll work for infinite iterations too - we'll keep decrementing -1. Not sure I see a need to change it.
+				_remainingIterations =	_remainingIterations - 1;
+				_schedulerCurrentJob setVariable ["remainingIterations", _remainingIterations];
 				_schedulerCurrentJob setVariable ["lastTickTime", _tickTime];
 
+				//This weird little line gives us the name of the currently running script in the Arma 3 profiler.
+				//Performance impact is minimal - 0.0077 seconds ish.
+				call compile format ["isNil {'%1'}", _jobId];
 				_parameters call _code;
 
-				if (_schedulerCurrentJob getVariable ["removeFromScheduler", false]) then
+				if (!isNil "debugScheduler") then {
+					diag_log format ["SCHEDULER: Time taken for %1: %2", _jobId, _duration];
+				};
+
+				//Reload the iterations, in case the code has modified it.
+				_remainingIterations = _schedulerCurrentJob getVariable ["remainingIterations", _remainingIterations];
+
+				//We remove only when exactly 0 iterations remain, or we've explicitly said we'd like to exit.
+				//Negative iterations are infinite - deliberately so.
+				if ( _schedulerCurrentJob getVariable ["removeFromScheduler", false] ||	_remainingIterations == 0) then
 				{
 					_toBeRemoved pushBack _foreachindex;
 				};

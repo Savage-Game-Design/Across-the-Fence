@@ -13,7 +13,7 @@
   Parameter(s):
 */
 params ["_name","_rank","_object"];
-private _last_rank = missionNamespace getVariable ["vn_an_last_rank",0];
+private _last_rank = missionNamespace getVariable ["vn_an_last_rank",vn_an_starting_rank]; // TODO var already changes so it does not work
 private _last_rank_text = missionNamespace getVariable ["vn_an_last_rank_text","Private"];
 private _diff = (_rank-_last_rank);
 
@@ -30,3 +30,5 @@ if (_last_rank_text isEqualTo _rank_text) then
 	// store last rank
 	missionNamespace setVariable ["vn_an_last_rank_text",_rank_text];
 };
+
+missionNamespace setVariable ["vn_an_last_rank",_rank];

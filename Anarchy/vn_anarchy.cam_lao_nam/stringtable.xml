@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project name="VN_MF_GAMEMODE">
+<Project name="VN_AN_GAMEMODE">
 	<Package name="MF">
 
 		<Key ID="STR_vn_an_levelup">
@@ -20,6 +20,21 @@
 		<Key ID="STR_vn_an_goto">
 			<Original>Goto %1</Original>
 		</Key>
+		<Key ID="STR_vn_an_training">
+			<Original>%1 Training</Original>
+		</Key>
+		<Key ID="STR_vn_an_needtobeengineer">
+			<Original>You must be an %1 to build, please see a Duty Officer.</Original>
+		</Key>
+		<Key ID="STR_vn_an_medic">
+			<Original>Medic</Original>
+		</Key>
+		<Key ID="STR_vn_an_engineer">
+			<Original>Engineer</Original>
+		</Key>
+		<Key ID="STR_vn_an_explosive_specialist">
+			<Original>Explosive Specialist</Original>
+		</Key>
 		<Key ID="STR_vn_an_resupply">
 			<Original>Resupply - Build State: %1%2</Original>
 		</Key>
@@ -33,11 +48,17 @@
 		<Key ID="STR_vn_an_friendsmade">
 			<Original>Acquaintance made</Original>
 		</Key>
+		<Key ID="STR_vn_an_trainingcomplete">
+			<Original>Training Complete</Original>
+		</Key>
 		<Key ID="STR_vn_an_invitereceived">
 			<Original>Invite Received</Original>
 		</Key>
 
 
+		<Key ID="STR_vn_an_traitdisallowed">
+			<Original>Training disallowed at this time.</Original>
+		</Key>
 		<Key ID="STR_vn_an_supplydroponstandby">
 			<Original>Supply drops on standby, make sure no other supplies are near drop zone.</Original>
 		</Key>
@@ -141,7 +162,16 @@
 			<Original>How to Build</Original>
 		</Key>
 		<Key ID="STR_vn_an_howtobuild_long">
-			<Original>Press 'N' to enable/disable building&lt;br&gt;&lt;/br&gt;PgUp, PgDn to cycle buildings.&lt;br&gt;&lt;/br&gt;Scroll mouse wheel to rotate.&lt;br&gt;&lt;/br&gt;Press and hold 'Space' to finalize Build.</Original>
+			<Original>Note: Engineer training required!&lt;br&gt;&lt;/br&gt;Press 'N' to enable/disable building.&lt;br&gt;&lt;/br&gt;PgUp, PgDn to cycle buildings.&lt;br&gt;&lt;/br&gt;Press and hold 'Space' to finalize Build.</Original>
+		</Key>
+		<Key ID="STR_vn_an_other_keys">
+			<Original>Other Key Binds</Original>
+		</Key>
+		<Key ID="STR_vn_an_other_keys_long">
+			<Original>Press 'Y' to use gesture menu ('Z' on QWERTZ keyboards).&lt;br&gt;&lt;/br&gt;Press 'H' to open task roster.&lt;br&gt;&lt;/br&gt;Press '6' to activate wheel menu.&lt;br&gt;&lt;/br&gt;</Original>
+		</Key>
+		<Key ID="STR_vn_an_restrictedzone">
+			<Original>Cannot build in Restricted Zone!</Original>
 		</Key>
 
 
