@@ -14,7 +14,8 @@
 
 vn_an_fnc_mpos = compile preprocessFileLineNumbers "fnc\mpos.sqf";
 vn_an_fnc_list_move = compile preprocessFileLineNumbers "fnc\fn_list_move.sqf";
-
+vn_an_fnc_ui_inv_get_GridPos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_get_GridPos.sqf";
+vn_an_fnc_ui_inv_check_posInGrid = compile preprocessFileLineNumbers "fnc\fn_ui_inv_check_posInGrid.sqf";
 
 _disp = _this#0;
 

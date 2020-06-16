@@ -1,48 +1,34 @@
 
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
-params ["_disp", "_btn", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
+params ["_disp", "_btn", "_mPos_x", "_mPos_y", "_shift", "_ctrl", "_alt"];
 
 if!(_btn in [0,1])exitWith{};
 if(isNil "vn_an_inv_move_doRotate")then{vn_an_inv_move_doRotate = false};
 systemchat str (["Left Mouse Button", "Right Mouse Button"]#_btn);
 if(_btn == 1)exitWith{vn_an_inv_move_doRotate = !vn_an_inv_move_doRotate; systemchat str ["place Horizontal?",vn_an_inv_move_doRotate]};
 
-// _ctrl_bg = _disp displayCtrl 123456;
-// (ctrlPosition _ctrl_bg) params["_bg_x","_bg_y","_bg_w","_bg_h"];
-_ctrlGrp = _disp displayCtrl 1000;
-(ctrlPosition _ctrlGrp) params["_bg_x","_bg_y","_bg_w","_bg_h"];
 
 
-_grid_w = _bg_x + _bg_w;
-_grid_h = _bg_y + _bg_h;
+_gridSize_x = 6;	//0-X (so -1 of the actual ColCount) - FIXED NUMBER - ALWAYS 6!
+_gridSize_y = 11;	//0-X (so -1 of the actual RowCount)
 
-_tiles_x = 6;	//0-X (so -1 of the actual ColCount) - FIXED NUMBER - ALWAYS 6!
-_tiles_y = 11;	//0-X (so -1 of the actual RowCount)
 
-_mPos_x = _xPos - _bg_x;
-_tile_w_size = _bg_w / _tiles_x;
-
-_mPos_y = _yPos - _bg_y;
-_tile_h_size = _bg_h / _tiles_y;
-
-_tile_x = floor(_mPos_x / _tile_w_size);
-_tile_y = floor(_mPos_y / _tile_h_size);
-
+_ctrlGrp = _disp displayCtrl 1000;	//ToDo: get active Grid ctrl dynamicaly
+//Check if given pos is valid in the Grid. If so -> Return [x,y] pos in Grid
+([_ctrlGrp,_mPos_x,_gridSize_x,_mPos_y,_gridSize_y] call vn_an_fnc_ui_inv_get_GridPos) params["_tile_x","_tile_y"];
 systemchat str [_tile_x, _tile_y];
-if	(
-		_tile_x < 0 ||
-		_tile_x > (_tiles_x-1) ||
-		_tile_y < 0 ||
-		_tile_y > (_tiles_y-1)
-	)exitWith{systemchat "Out of Bounds";};		//Out of Bounds
+if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
 
+
+//////////////////////////////////////////////
+//ToDo: DEV: Get size of grid from Var, depending on given Gear
 _grid = [];
-for "_i" from 0 to _tiles_y-1 do
+for "_i" from 0 to _gridSize_y-1 do
 {
 	_curRow = [];
 	_row = _i;
-	for "_i" from 0 to _tiles_x-1 do
+	for "_i" from 0 to _gridSize_x-1 do
 	{
 		_IDC = parseNumber format["%2%1",_i,_row];
 		_curRow pushback [_row,_i,_IDC];
@@ -50,7 +36,6 @@ for "_i" from 0 to _tiles_y-1 do
 	_grid pushback _curRow;
 };
 
-// if(true)exitWith{};
 if(vn_an_tiles_usage isEqualto [])then
 {
 	_ctrlGrp = _disp displayCtrl 1000;
@@ -72,6 +57,7 @@ if(vn_an_tiles_usage isEqualto [])then
 					,100,101,102,103,104,105
 				];
 };
+//////////////////////////////////////////////
 
 _offset_tmp =	[
 						  [0,1],[0,2],[0,3],[0,4],[0,5],
@@ -89,6 +75,7 @@ _offset = [[_tile_x,_tile_y]];
 	};
 }forEach _offset_tmp;
 
+
 // vn_an_tiles_usage = [];
 if(isNil "vn_an_tiles_usage")then{ vn_an_tiles_usage = []; };
 _canAdd = true;
@@ -96,13 +83,13 @@ _tile_list = [];
 {
 	_x params ["_px","_py"];
 	_coords = [_px,_py];
-	// systemchat str [_px > (_tiles_x-1),_py > (_tiles_y-1),_coords in vn_an_tiles_usage];
+	// systemchat str [_px > (_gridSize_x-1),_py > (_gridSize_y-1),_coords in vn_an_tiles_usage];
 	// systemchat str [_coords,vn_an_tiles_usage];
 	
 	if	(
-				_px > (_tiles_x-1)					//if exceeds grind limit
+				_px > (_gridSize_x-1)					//if exceeds grind limit
 			||	_px < 0								//if exceeds grind limit
-			||	_py > (_tiles_y-1)					//if exceeds grind limit
+			||	_py > (_gridSize_y-1)					//if exceeds grind limit
 			||	_py < 0								//if exceeds grind limit
 			||	_coords in vn_an_tiles_usage		//if something is already placed there
 		)exitWith{_canAdd = false;};
@@ -111,7 +98,7 @@ _tile_list = [];
 	_tile_list pushback [_tile_idc,_coords];
 }forEach _offset;
 
-systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,vn_an_tiles_usage];
+// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,vn_an_tiles_usage];
 if(_canAdd)then
 {
 	_ctrlGrp = _disp displayCtrl 1000;
