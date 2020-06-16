@@ -16,7 +16,18 @@ vn_an_fnc_mpos = compile preprocessFileLineNumbers "fnc\mpos.sqf";
 vn_an_fnc_list_move = compile preprocessFileLineNumbers "fnc\fn_list_move.sqf";
 vn_an_fnc_ui_inv_get_GridPos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_get_GridPos.sqf";
 vn_an_fnc_ui_inv_check_posInGrid = compile preprocessFileLineNumbers "fnc\fn_ui_inv_check_posInGrid.sqf";
+vn_an_fnc_ui_inv_grid_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_create.sqf";
+vn_an_fnc_ui_inv_grid_getSize = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_getSize.sqf";
 
 _disp = _this#0;
+_ctrlGrp = _disp displayCtrl 1000;
+
+vn_an_inv_size_x = 6;	//0-X (so -1 of the actual ColCount) - FIXED SIZE - ALWAYS 6!
+vn_an_inv_size_y = call vn_an_fnc_ui_inv_grid_getSize;
+
+//create grid array
+[_ctrlGrp,vn_an_inv_size_x, vn_an_inv_size_y] call vn_an_fnc_ui_inv_grid_create;
+
+
 
 systemchat str [_disp];

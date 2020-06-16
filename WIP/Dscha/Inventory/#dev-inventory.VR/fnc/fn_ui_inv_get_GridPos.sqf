@@ -1,13 +1,13 @@
 /*
 	get grid Position ([0,0]/[10,5]/etc) from the mousePos of the given gridCtrl
-	!! DEV - WARNING - DEV !!
-	Can return (currently) negative or "out of bounds" values!!
-	counterchecking with "vn_an_fnc_ui_inv_check_posInGrid" is needed!
+	!! WARNING !!
+	Can return negative or "out of bounds" values!!
+	Needs counterchecking the result for a "[-1,-1]" return (out of bounds), after executing this function!
 */
 
 params["_ctrl","_mPos_x","_grid_x","_mPos_y","_grid_y"];
-(ctrlPosition _ctrl) params["_x","_y","_w","_h"];
 
+(ctrlPosition _ctrl) params["_x","_y","_w","_h"];
 private _mP_x = _mPos_x - _x;	//get mousePos X, relative to X of ctrl
 private _t_w = _w / _grid_x;	//get tileSize Width
 private _mP_y = _mPos_y - _y;	//get mousePos Y, relative to Y of ctrl
