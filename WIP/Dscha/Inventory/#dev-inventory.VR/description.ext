@@ -1,0 +1,96 @@
+class Header
+{
+	gameType = DEV;
+	minPlayers = 1;
+	maxPlayers = 1;
+};
+
+author = "Dscha";
+OnLoadName = "dev-inventory";
+OnLoadMission = "dev-inventory";
+loadScreen = "";
+
+OnLoadIntroTime = 0;
+OnLoadMissionTime = 0;
+
+// Debug Console only available for logged in Admins
+enableDebugConsole = 2;	//0 = noone | 1 = Logged in | 2 = Everyone
+briefing = 0;
+debriefing = 0;
+disabledAI=1;
+allowFunctionsRecompile = 1;
+
+saving=0;
+disableRandomization[] = {};
+showGroupIndicator = 0;
+showSquadRadar = 1;
+showUAVFeed = 0;
+showGPS = 1;
+
+respawn = BASE;
+respawnDelay = 1;
+respawnDialog = 0;
+respawnButton = 1;
+respawnOnStart = -1;
+
+skipLobby = 1;
+joinUnassigned = 0;
+disableChannels[]={ {0,0,1}, {2,1,0}, {6,1,0} };
+
+
+forceRotorLibSimulation = 0; //Optional
+
+corpseManagerMode = 1;
+corpseLimit = 20;
+corpseRemovalMinTime = 300;
+corpseRemovalMaxTime = 600;
+
+wreckManagerMode = 0;
+wreckLimit = 6;
+wreckRemovalMinTime = 120;
+wreckRemovalMaxTime = 240;
+
+scriptedPlayer = 1;
+enableItemsDropping = 0;
+
+showHUD[] =
+{
+	1,	// Scripted HUD (same as showHUD command)
+	1,	// Vehicle + soldier info
+	0,	// Vehicle radar 								[HIDDEN]
+	0,	// Vehicle compass 								[HIDDEN]
+	1,	// Tank direction indicator
+	0,	// Commanding menu 								[HIDDEN]
+	0,	// Group Bar 									[HIDDEN]
+	1	// HUD Weapon Cursors
+};
+
+
+//////////////////////////
+// class CfgFunctions
+// {
+	// class DEV
+	// {
+		// class UI
+		// {
+			// file = "fnc";
+		// };
+	// };
+// };
+
+
+
+#include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
+//DEV
+#include "config\vn_baseDefines.hpp"
+
+#include "config\inventory.hpp"
+
+
+
+
+
+
+
+
+
