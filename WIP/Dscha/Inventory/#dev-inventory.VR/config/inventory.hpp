@@ -1,5 +1,5 @@
 #define TILES_X 6	//fixed width of 6
-#define TILES_Y 8
+#define TILES_Y 11
 #define WIDTH 8		//width of complete inventory slots
 #define HEIGHT ((WIDTH / 6) * TILES_Y)
 #define TILE_W (WIDTH/TILES_X)
@@ -8,9 +8,9 @@
 
 		// class tile_##POSX##_##POSY## tile_base
 #define tile(POSX,POSY)\
-		class tile_##POSX##_##POSY##: tile_base \
+		class tile_##POSY##_##POSX##: tile_base \
 		{ \
-			idc = POSX##POSY; \
+			idc = POSY##POSX; \
 			x = UIW((TILE_W*POSX)); \
 			y = UIH((TILE_H*POSY)); \
 		};
@@ -51,7 +51,7 @@ class vn_an_inventory
 	onLoad = "[""onLoad"",_this,""vn_an_inventory"",''] call 	(uinamespace getvariable 'BIS_fnc_initDisplay'); vn_an_fnc_inventory_init = compile preprocessFileLineNumbers ""fnc\inventory.sqf""; _this call vn_an_fnc_inventory_init;";
 	onUnload = "[""onUnload"",_this,""vn_an_inventory"",''] call 	(uinamespace getvariable 'BIS_fnc_initDisplay');";
 	
-	onMouseZChanged		= "_this call vn_an_fnc_list_move;";
+	// onMouseZChanged		= "_this call vn_an_fnc_list_move;";
 	onMouseButtonDown	= "_this call vn_an_fnc_mpos;";
 	onMouseButtonUp		= "";
 	
@@ -71,6 +71,9 @@ class vn_an_inventory
 			y = UIY_TD(5.0);
 			w = UIW(4);
 			h = UIH(4);
+			
+			onMouseEnter = "systemChat str ['mouse Entered: ', _this];"
+			onMouseExit = "systemChat str ['mouse Exited: ', _this];"
 			
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {1,1,1,1};
@@ -92,11 +95,30 @@ class vn_an_inventory
 			y = UIY_TD(10);
 			w = UIW(WIDTH);
 			h = UIH(HEIGHT);
-			onLoad = "uiNamespace setVariable ['#VN_InteractionOverlay_Main', (_this#0)];";
+			// onLoad = "uiNamespace setVariable ['grid_personal', (_this#0)];";
 			
+			
+			onMouseZChanged = "_this call vn_an_fnc_list_move;";
+			// onMouseMoving = "systemchat str [_this];";
+	
 			class controls
 			{
-				class bg: vn_RscText
+				
+				//Icon Rows
+				addRow(0)
+				addRow(1)
+				addRow(2)
+				addRow(3)
+				addRow(4)
+				addRow(5)
+				addRow(6)
+				addRow(7)
+				addRow(8)
+				addRow(9)
+				addRow(10)
+				
+				// class bg: vn_RscText
+				class bg: vn_RscStructuredText
 				{
 					idc = -1;
 					
@@ -109,17 +131,10 @@ class vn_an_inventory
 					colorBackground[] = {0,0,0.5,0.4};
 					text = "";
 					sizeEx = TXT_M;
+					
+					// onMouseEnter = "systemChat str [diag_tickTime, ""mouse Entered: "", _this];"
+					// onMouseExit = "systemChat str [diag_tickTime, ""mouse Exited: "", _this];"
 				};
-				
-				//Icon Rows
-				addRow(0)
-				addRow(1)
-				addRow(2)
-				addRow(3)
-				addRow(4)
-				addRow(5)
-				addRow(6)
-				addRow(7)
 				
 			};
 		};

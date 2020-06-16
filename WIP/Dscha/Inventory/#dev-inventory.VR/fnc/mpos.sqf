@@ -18,7 +18,7 @@ _grid_w = _bg_x + _bg_w;
 _grid_h = _bg_y + _bg_h;
 
 _tiles_x = 6;	//0-X (so -1 of the actual ColCount) - FIXED NUMBER - ALWAYS 6!
-_tiles_y = 8;	//0-X (so -1 of the actual RowCount)
+_tiles_y = 11;	//0-X (so -1 of the actual RowCount)
 
 _mPos_x = _xPos - _bg_x;
 _tile_w_size = _bg_w / _tiles_x;
@@ -44,20 +44,11 @@ for "_i" from 0 to _tiles_y-1 do
 	_row = _i;
 	for "_i" from 0 to _tiles_x-1 do
 	{
-		_IDC = parseNumber format["%1%2",_i,_row];
+		_IDC = parseNumber format["%2%1",_i,_row];
 		_curRow pushback [_row,_i,_IDC];
 	};
 	_grid pushback _curRow;
 };
-
-/*
-[]spawn 
-{ 
-	sleep 1; 
-	vn_an_tiles_usage = [];
-	(findDisplay 46) createDisplay "vn_an_inventory"; 
-};
-*/
 
 // if(true)exitWith{};
 if(vn_an_tiles_usage isEqualto [])then
@@ -68,12 +59,17 @@ if(vn_an_tiles_usage isEqualto [])then
 		_ctrl ctrlSetTextColor [0,0,0,0.3];
 		_ctrl ctrlCommit 0;
 	}forEach	[  //YX | 0 = 00 | 1 = 01
-					 0,10,20,30,40,50
-					,1,11,21,31,41,51
-					,2,12,22,32,42,52
-					,3,13,23,33,43,53
-					,4,14,24,34,44,54
-					,5,15,25,35,45,55
+					 0,1,2,3,4,5
+					,10,11,12,13,14,15
+					,20,21,22,23,24,25
+					,30,31,32,33,34,35
+					,40,41,42,43,44,45
+					,50,51,52,53,54,55
+					,60,61,62,63,64,65
+					,70,71,72,73,74,75
+					,80,81,82,83,84,85
+					,90,91,92,93,94,95
+					,100,101,102,103,104,105
 				];
 };
 
@@ -115,7 +111,7 @@ _tile_list = [];
 	_tile_list pushback [_tile_idc,_coords];
 }forEach _offset;
 
-// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,vn_an_tiles_usage];
+systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,vn_an_tiles_usage];
 if(_canAdd)then
 {
 	_ctrlGrp = _disp displayCtrl 1000;
