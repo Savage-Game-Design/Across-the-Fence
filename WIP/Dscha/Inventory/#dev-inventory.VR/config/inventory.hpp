@@ -1,5 +1,5 @@
 #define TILES_X 6	//fixed width of 6
-#define TILES_Y 4
+#define TILES_Y 16
 #define WIDTH 8		//width of complete inventory slots
 #define HEIGHT ((WIDTH / 6) * TILES_Y)
 #define TILE_W (WIDTH/TILES_X)
@@ -22,8 +22,60 @@ class tile_base: RscPicture
 	sizeEx = TXT_M;
 	font = USEDFONT;
 	
-	text = "vn\ui_f_vietnam\ui\taskroster\img\box_unchecked.paa";
+	text = "data\box.paa";
 };
+
+class inv_icon: vn_RscControlsGroupNoScrollbarHV
+{
+	idc = 1000;
+	
+	x = 0;
+	y = 0;
+	w = UIW((WIDTH*6));
+	h = UIH((HEIGHT*3));
+	
+	onMouseZChanged = "_this call vn_an_fnc_list_move;";
+
+	class controls
+	{
+		class bg: vn_RscText
+		{
+			idc = 100;
+			
+			x = 0;
+			y = 0;
+			w = UIW(WIDTH);
+			h = UIH(HEIGHT);
+			
+			colorText[] = {0.1,0.1,0.1,0.9};
+			colorBackground[] = {0,0,0.5,0.4};
+			text = "";
+			sizeEx = TXT_M;
+		};
+		class icon: RscPicture
+		{
+			idc = 200;
+			type = 0;
+			// style = "0x30";	//normal Picture (stretching)
+			style = "0x30 + 0x800";	//keepAspectRatio
+			
+			x = 0;
+			y = 0;
+			w = UIW((WIDTH*6));
+			h = UIH((HEIGHT*3));
+			
+			// text = "A3\Ui_f\data\GUI\Rsc\RscDisplayGear\ui_gear_primary_gs.paa";
+			text = "a3\weapons_f\Rifles\MX\data\UI\gear_mx_rifle_T_CA.paa";
+			
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,1,1,1};
+			
+			sizeEx = TXT_M;
+			font = USEDFONT;
+		};
+	};
+};
+
 
 class vn_an_inventory
 {
@@ -37,33 +89,13 @@ class vn_an_inventory
 	onMouseButtonDown	= "_this call vn_an_fnc_mpos;";
 	onMouseButtonUp		= "";
 	
+	
 	class controlsBackground
 	{
 	};
 	
 	class Controls
 	{
-		class test: RscPicture	//prep for Icons
-		{
-			idc = 100;
-			type = 0;
-			style = 0x30;
-			
-			x = UIX_RL(10.0);
-			y = UIY_TD(5.0);
-			w = UIW(4);
-			h = UIH(4);
-			
-			onMouseEnter = "systemChat str ['mouse Entered: ', _this];"
-			onMouseExit = "systemChat str ['mouse Exited: ', _this];"
-			
-			colorText[] = {1,1,1,1};
-			colorBackground[] = {1,1,1,1};
-			text = "vn\ui_f_vietnam\ui\taskroster\img\missionTarget_prev.paa";
-			sizeEx = TXT_M;
-			font = USEDFONT;
-		};
-		
 		class grid_personal: vn_RscControlsGroupNoScrollbarHV
 		{
 			idc = 1000;

@@ -10,8 +10,8 @@ if(_btn == 1)exitWith{vn_an_inv_move_doRotate = !vn_an_inv_move_doRotate; system
 
 
 
-private _gridSize_x = vn_an_inv_size_x;	//fixed
-private _gridSize_y = vn_an_inv_size_y;	//variable size
+private _gridSize_x = vn_an_inv_size_x;	//INT - fixed amout of slots
+private _gridSize_y = vn_an_inv_size_y;	//INT - variable amout of slots
 
 
 private _ctrlGrp = _disp displayCtrl 1000;	//ToDo: get active Grid ctrl dynamicaly
@@ -49,9 +49,10 @@ if(vn_an_tiles_usage isEqualto [])then
 };
 //////////////////////////////////////////////
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
-private _offset_tmp =	[
-						  [0,1],[0,2],[0,3],[0,4],[0,5],
-					[1,0],[1,1],[1,2],[1,3],[1,4],[1,5]
+private _offset_data =	[
+						   [0,1],[0,2],[0,3],[0,4],[0,5]		//Row: 0 ([0,0] is init Pos, so doesn't need to be added)
+					,[1,0],[1,1],[1,2],[1,3],[1,4],[1,5]		//Row: 1
+					,[2,0],[2,1],[2,2],[2,3],[2,4],[2,5]		//Row: 2
 				];
 private _offset = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offset will determined from this position)
 {
@@ -62,7 +63,7 @@ private _offset = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offs
 	}else{
 		_offset pushback [ (_tile_x + _px), (_tile_y + _py) ];
 	};
-}forEach _offset_tmp;
+}forEach _offset_data;
 
 
 // vn_an_tiles_usage = [];
@@ -77,9 +78,9 @@ private _tile_list = [];
 	// systemchat str [_gridPos,vn_an_tiles_usage];
 	
 	if	(
-				_px > (_gridSize_x-1)					//if exceeds grind limit
+				_px > (_gridSize_x-1)				//if exceeds grind limit
 			||	_px < 0								//if exceeds grind limit
-			||	_py > (_gridSize_y-1)					//if exceeds grind limit
+			||	_py > (_gridSize_y-1)				//if exceeds grind limit
 			||	_py < 0								//if exceeds grind limit
 			||	_gridPos in vn_an_tiles_usage		//if something is already placed there
 		)exitWith{_canAdd = false;};
@@ -89,6 +90,7 @@ private _tile_list = [];
 }forEach _offset;
 
 // systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,vn_an_tiles_usage];
+systemchat str [[_tile_x, _tile_y], _canAdd];
 if(_canAdd)then
 {
 	private _ctrlGrp = _disp displayCtrl 1000;
@@ -98,4 +100,12 @@ if(_canAdd)then
 		_tile ctrlSetTextColor [1,0,0,0.3];
 	vn_an_tiles_usage pushbackUnique _gridPos;
 	}forEach _tile_list;
+	
+	//Add icon to this position
+	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
+	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
+	[_ctrlGrp,_px,_py,"a3\weapons_f\Rifles\MX\data\UI\gear_mx_rifle_T_CA.paa",[],[_offset]] call vn_an_fnc_ui_inv_item_create;
 };
+
+
+

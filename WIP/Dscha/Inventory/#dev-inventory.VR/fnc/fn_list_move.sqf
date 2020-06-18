@@ -14,7 +14,9 @@ _disp = uinamespace getvariable ["vn_an_inventory", DisplayNull];
 
 _ctrlGrp = _disp displayCtrl 1000;
 _p = ctrlPosition _ctrlGrp;
+// systemchat str [diag_tickTime,"width:",_p#2,"height: ",_p#3];
 _y_new = ((_p#1) + _mode);
 _ctrlGrp ctrlSetPositionY _y_new;
-_ctrlGrp ctrlCommit 0.05;
+if !(ctrlCommitted _ctrlGrp)exitWith{};
+_ctrlGrp ctrlCommit 0.1;
 if(_y_new > 0)exitWith{};

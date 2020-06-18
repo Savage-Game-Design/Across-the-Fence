@@ -3,7 +3,7 @@
 
 */
 
-params["_ctrlGrp","_size_x", "_size_y"];
+params["_disp","_ctrlGrp","_size_x", "_size_y"];
 
 private _grid_w = (ctrlPosition _ctrlGrp)#2;
 private _grid_h = (_grid_w / 6) * _size_y;
