@@ -32,3 +32,13 @@ vn_an_inv_size_y = call vn_an_fnc_ui_inv_grid_getSize;
 
 
 systemchat str [_disp];
+
+_disp displayAddEventhandler ["KeyDown",
+{
+	params ["_disp", "_key", "_shift", "_ctrl", "_alt"];
+	if(isNil "vn_an_inv_move_placeHorizontal")then{DEV_ITEMTOPLACE = 0};
+	if(_key isEqualTo 2)then{DEV_ITEMTOPLACE = 0;};
+	if(_key isEqualTo 3)then{DEV_ITEMTOPLACE = 1;};
+	if(_key isEqualTo 4)then{DEV_ITEMTOPLACE = 2;};
+	systemchat str ["DEV_ITEMTOPLACE: ", DEV_ITEMTOPLACE];
+}];

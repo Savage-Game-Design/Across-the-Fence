@@ -14,8 +14,8 @@
 
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
-params["_ctrl_invGrid","_pos_x","_pos_y","_item",["_vars",[],[[]]],"_usedSlots"];
-//_item == placeholder
+params["_ctrl_invGrid","_pos_x","_pos_y","_item","_item_size","_canFlip","_usedSlots"];
+//_item == placeholder (just a string)
 
 private _disp = uinamespace getvariable ["vn_an_inventory", DisplayNull];
 //create the Icon
@@ -28,9 +28,11 @@ private _ctrlGrp_icon = _disp ctrlCreate ["inv_icon",987654,_ctrl_invGrid];
 _tile_W = _grid_w / vn_an_inv_size_x;
 _tile_H = _grid_h / vn_an_inv_size_y;
 
+systemchat str [!_canFlip, !vn_an_inv_move_placeHorizontal];
+if(!_canFlip && !vn_an_inv_move_placeHorizontal)then{vn_an_inv_move_placeHorizontal = true};
 //get width and height of selected icon
-_ctrlGrp_icon_w = if(vn_an_inv_move_placeHorizontal)then{_tile_W*6}else{_tile_H*3};
-_ctrlGrp_icon_h = if(vn_an_inv_move_placeHorizontal)then{_tile_H*3}else{_tile_W*6};
+_ctrlGrp_icon_w = if(vn_an_inv_move_placeHorizontal)then{_tile_W*(_item_size#1)}else{_tile_H*(_item_size#0)};
+_ctrlGrp_icon_h = if(vn_an_inv_move_placeHorizontal)then{_tile_H*(_item_size#0)}else{_tile_W*(_item_size#1)};
 
 //if needed -> "rotate" the main ctrlGroup and adjust the values to 4/3 (Arma Base Resolution)
 if(vn_an_inv_move_placeHorizontal)then

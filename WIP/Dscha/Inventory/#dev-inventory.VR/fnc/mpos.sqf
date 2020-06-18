@@ -3,11 +3,11 @@
 
 params ["_disp", "_btn", "_mPos_x", "_mPos_y", "_shift", "_ctrl", "_alt"];
 
+
 if!(_btn in [0,1])exitWith{};
 if(isNil "vn_an_inv_move_placeHorizontal")then{vn_an_inv_move_placeHorizontal = true};
 systemchat str (["Left Mouse Button", "Right Mouse Button"]#_btn);
 if(_btn == 1)exitWith{vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal; systemchat str ["place Horizontal?", vn_an_inv_move_placeHorizontal]};
-
 
 
 private _gridSize_x = vn_an_inv_size_x;	//INT - fixed amout of slots
@@ -49,9 +49,12 @@ if(vn_an_tiles_usage isEqualto [])then
 };
 //////////////////////////////////////////////
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
-_item_data_size = [3,6];
-// _item_data_name = "data\gun.paa";
-_item_data_name = "data\gun.paa";
+
+
+if(isNil "vn_an_inv_move_placeHorizontal")then{DEV_ITEMTOPLACE = 0};
+_item_data_size = [[3,6],[1,1],[3,3]]#DEV_ITEMTOPLACE;
+_item_data_name = ["data\gun.paa","data\magazine.paa","data\backpack.paa"]#DEV_ITEMTOPLACE;
+_item_data_canFlip = [true,false,false]#DEV_ITEMTOPLACE;
 _offset_data = [];
 for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
 {
@@ -112,7 +115,7 @@ if(_canAdd)then
 	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
 	
-	[_ctrlGrp,_px,_py,_item_data_name,[],[_offset]] call vn_an_fnc_ui_inv_item_create;
+	[_ctrlGrp,_px,_py,_item_data_name,_item_data_size,_item_data_canFlip,[_offset]] call vn_an_fnc_ui_inv_item_create;
 };
 
 
