@@ -3,10 +3,12 @@
 
 */
 
+#include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
+
 params["_disp","_ctrlGrp","_size_x", "_size_y"];
 
 private _grid_w = (ctrlPosition _ctrlGrp)#2;
-private _grid_h = (_grid_w / 6) * _size_y;
+private _grid_h = ((_grid_w / 0.75) / 6) * _size_y;	//adjust to 4/3 alue
 // systemchat str[_grid_w,_grid_h];
 private _tile_W = _grid_w/_size_x;
 private _tile_H = _grid_h/_size_y;
@@ -33,7 +35,6 @@ for "_p_y" from 0 to (_size_y-1)do
 		_curRow pushback [_row,_p_x,_idc];
 		_ctrl = _disp ctrlCreate ["tile_base",_idc,_ctrlGrp];
 		
-		// diag_log str[_tile_W,_p_x,(_tile_W*_p_x),UIW((_tile_W*_p_x))];
 		_ctrl ctrlSetposition [(_tile_W*_p_x),(_tile_H*_p_y),_tile_W,_tile_H];
 		_ctrl ctrlCommit 0;
 	};
