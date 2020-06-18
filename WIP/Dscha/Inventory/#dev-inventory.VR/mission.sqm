@@ -76,16 +76,59 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4095.5134,5.0014391,4102.8169};
+						position[]={4095.5129,5.0014391,4102.8169};
 					};
 					side="West";
 					flags=7;
 					class Attributes
 					{
+						init="this addAction [""showInventory"", {vn_an_tiles_usage = []; (findDisplay 46) createDisplay ""vn_an_inventory""; }];";
 						isPlayer=1;
 					};
 					id=1;
 					type="B_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male04ENG";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1.01;
+								};
+							};
+						};
+						nAttributes=2;
+					};
 				};
 			};
 			class Attributes

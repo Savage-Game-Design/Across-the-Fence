@@ -10,7 +10,10 @@ class tile_base: RscPicture
 {
 	idc = -1;
 	type = 0;
-	style = 0x30;
+
+	style = 48;	//normal Picture (stretching)
+	// style = 48 + 2048;	//keepAspectRatio	-	NOT USED! Big wobble wobble
+	
 	x = 0;
 	y = 0;
 	w = UIW(TILE_W);
@@ -38,37 +41,37 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 
 	class controls
 	{
-		class bg: vn_RscText
+		class bg: vn_RscText	//ToDo: Exchange with Picture + frame + color frame depending on rarity
 		{
 			idc = 100;
 			
 			x = 0;
 			y = 0;
-			w = UIW(WIDTH);
-			h = UIH(HEIGHT);
+			w = 0;	//Will be defined in function
+			h = 0;	//Will be defined in function
 			
 			colorText[] = {0.1,0.1,0.1,0.9};
-			colorBackground[] = {0,0,0.5,0.4};
+			colorBackground[] = {0,0,0.5,0.2};
 			text = "";
 			sizeEx = TXT_M;
 		};
-		class icon: RscPicture
+		
+ 		class icon: RscPicture
 		{
 			idc = 200;
 			type = 0;
-			// style = "0x30";	//normal Picture (stretching)
-			style = "0x30 + 0x800";	//keepAspectRatio
+			style = 48;	//normal Picture (stretching)
 			
 			x = 0;
 			y = 0;
-			w = UIW((WIDTH*6));
-			h = UIH((HEIGHT*3));
+			w = 0;	//Will be defined in function
+			h = 0;	//Will be defined in function
 			
-			// text = "A3\Ui_f\data\GUI\Rsc\RscDisplayGear\ui_gear_primary_gs.paa";
-			text = "a3\weapons_f\Rifles\MX\data\UI\gear_mx_rifle_T_CA.paa";
+			text = "data\gun.paa";
+			// text = "data\box_ratio_2x1.paa";
 			
 			colorText[] = {1,1,1,1};
-			colorBackground[] = {1,1,1,1};
+			colorBackground[] = {1,1,1,0};
 			
 			sizeEx = TXT_M;
 			font = USEDFONT;

@@ -4,9 +4,9 @@
 params ["_disp", "_btn", "_mPos_x", "_mPos_y", "_shift", "_ctrl", "_alt"];
 
 if!(_btn in [0,1])exitWith{};
-if(isNil "vn_an_inv_move_doRotate")then{vn_an_inv_move_doRotate = false};
+if(isNil "vn_an_inv_move_placeHorizontal")then{vn_an_inv_move_placeHorizontal = true};
 systemchat str (["Left Mouse Button", "Right Mouse Button"]#_btn);
-if(_btn == 1)exitWith{vn_an_inv_move_doRotate = !vn_an_inv_move_doRotate; systemchat str ["place Horizontal?",vn_an_inv_move_doRotate]};
+if(_btn == 1)exitWith{vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal; systemchat str ["place Horizontal?", vn_an_inv_move_placeHorizontal]};
 
 
 
@@ -49,15 +49,22 @@ if(vn_an_tiles_usage isEqualto [])then
 };
 //////////////////////////////////////////////
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
-private _offset_data =	[
-						   [0,1],[0,2],[0,3],[0,4],[0,5]		//Row: 0 ([0,0] is init Pos, so doesn't need to be added)
-					,[1,0],[1,1],[1,2],[1,3],[1,4],[1,5]		//Row: 1
-					,[2,0],[2,1],[2,2],[2,3],[2,4],[2,5]		//Row: 2
-				];
+_item_data_size = [3,6];
+// _item_data_name = "data\gun.paa";
+_item_data_name = "data\gun.paa";
+_offset_data = [];
+for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
+{
+	for "_col" from 0 to ((_item_data_size#1)-1) do	//Index start 0 == -1 = correct Index Pos
+	{
+		_offset_data pushback [_row,_col];
+	};
+};
+
 private _offset = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offset will determined from this position)
 {
 	_x params["_px","_py"];
-	if(vn_an_inv_move_doRotate)then
+	if(vn_an_inv_move_placeHorizontal)then
 	{
 		_offset pushback [ (_tile_x - (_py*-1)), (_tile_y + _px) ];
 	}else{
@@ -104,7 +111,8 @@ if(_canAdd)then
 	//Add icon to this position
 	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
-	[_ctrlGrp,_px,_py,"a3\weapons_f\Rifles\MX\data\UI\gear_mx_rifle_T_CA.paa",[],[_offset]] call vn_an_fnc_ui_inv_item_create;
+	
+	[_ctrlGrp,_px,_py,_item_data_name,[],[_offset]] call vn_an_fnc_ui_inv_item_create;
 };
 
 
