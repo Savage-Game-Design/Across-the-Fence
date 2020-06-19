@@ -1,12 +1,10 @@
 
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
-params ["_disp", "_btn", "_mPos_x", "_mPos_y", "_shift", "_ctrl", "_alt"];
-
+params ["_ctrlGrp", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 
 if!(_btn in [0,1])exitWith{};
 if(isNil "vn_an_inv_move_placeHorizontal")then{vn_an_inv_move_placeHorizontal = true};
-systemchat str (["Left Mouse Button", "Right Mouse Button"]#_btn);
 if(_btn == 1)exitWith{vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal; systemchat str ["place Horizontal?", vn_an_inv_move_placeHorizontal]};
 
 
@@ -14,11 +12,15 @@ private _gridSize_x = vn_an_inv_size_x;	//INT - fixed amout of slots
 private _gridSize_y = vn_an_inv_size_y;	//INT - variable amout of slots
 
 
-private _ctrlGrp = _disp displayCtrl 1000;	//ToDo: get active Grid ctrl dynamicaly
+// if(isNil "vn_an_grid_active")then{vn_an_grid_active = _ctrlGrp};
+// _ctrlGrp = uinameSpace getVariable ["vn_an_grid_active",controlNull];
+// if(isNull _ctrlGrp)exitWith{systemchat "isNull _ctrlGrp"};
+
 //Check if given pos is valid in the Grid. If so -> Return [x,y] pos in Grid
 ([_ctrlGrp,_mPos_x,_gridSize_x,_mPos_y,_gridSize_y] call vn_an_fnc_ui_inv_get_GridPos) params["_tile_x","_tile_y"];
-systemchat str [_tile_x, _tile_y];
+// systemchat str [_tile_x, _tile_y];
 if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
+
 
 //get grid Data from currently active "Grid ctrl"
 private _grid = missionNameSpace getVariable [format["vn_an_inv_grid_%1",(ctrlIDC _ctrlGrp)],[]];
@@ -28,7 +30,6 @@ private _grid = missionNameSpace getVariable [format["vn_an_inv_grid_%1",(ctrlID
 //DEV: Reset whole grid to standard Colors
 if(vn_an_tiles_usage isEqualto [])then
 {
-	private _ctrlGrp = _disp displayCtrl 1000;
 	{
 		_ctrl = _ctrlGrp controlsGroupCtrl _x;
 		_ctrl ctrlSetTextColor [0,0,0,0.3];
@@ -51,7 +52,7 @@ if(vn_an_tiles_usage isEqualto [])then
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
 
 
-if(isNil "vn_an_inv_move_placeHorizontal")then{DEV_ITEMTOPLACE = 0};
+if(isNil "DEV_ITEMTOPLACE")then{DEV_ITEMTOPLACE = 0};
 _item_data_size = [[3,6],[1,1],[3,3]]#DEV_ITEMTOPLACE;
 _item_data_name = ["data\gun.paa","data\magazine.paa","data\backpack.paa"]#DEV_ITEMTOPLACE;
 _item_data_canFlip = [true,false,false]#DEV_ITEMTOPLACE;
@@ -103,7 +104,6 @@ private _tile_list = [];
 systemchat str [[_tile_x, _tile_y], _canAdd];
 if(_canAdd)then
 {
-	private _ctrlGrp = _disp displayCtrl 1000;
 	{
 		_x params ["_idc","_gridPos"];
 		private _tile = _ctrlGrp controlsGroupCtrl _idc;

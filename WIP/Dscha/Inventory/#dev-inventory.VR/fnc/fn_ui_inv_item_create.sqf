@@ -3,7 +3,7 @@
 	
 	vn_an_fnc_ui_inv_item_create
 	[
-		CTRL	ctrlGrp to add to
+		CTRL	ctrlGrp to add to	//grid_personal ("vn_an_inv_player")
 		FLOAT	pos inside ctrlGrp
 		FLOAT	y pos inside ctrlGrp
 		ARRAY	item name (Classname) //DEV: Currently STRING path to icon!!
