@@ -82,7 +82,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						init="this addAction [""showInventory"", {vn_an_tiles_usage = []; (findDisplay 46) createDisplay ""vn_an_inventory""; }];";
+						init="this addAction [""showInventory"", {vn_an_tiles_usage = []; createDialog ""vn_an_inventory""; }];";
 						isPlayer=1;
 					};
 					id=1;

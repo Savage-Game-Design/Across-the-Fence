@@ -81,6 +81,7 @@ class vn_an_inventory
 {
 	idd = 1074;
 	name = "vn_an_inventory";
+	
 	movingEnable = 0;
 	enableSimulation = 1;
 	
