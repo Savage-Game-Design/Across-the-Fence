@@ -3,32 +3,26 @@
 
 params ["_ctrlGrp", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 
-if!(_btn in [0,1])exitWith{};
-if(isNil "vn_an_inv_move_placeHorizontal")then{vn_an_inv_move_placeHorizontal = true};
-if(_btn == 1)exitWith{vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal; systemchat str ["place Horizontal?", vn_an_inv_move_placeHorizontal]};
+if!(_btn in [0])exitWith{};
 
+(missionNameSpace getVariable [format["vn_an_inv_grid_size_%1",(ctrlIDC _ctrlGrp)],[-1,-1]]) params["_inv_size_x","_inv_size_y"];
+if(_inv_size_x < 0 || _inv_size_y < 0)exitWith{systemchat str ["ITEM_CREATE: GRID NOT SET!",[_inv_size_x,_inv_size_y]];};
+private _gridSize_x = _inv_size_x;	//INT - fixed amout of slots
+private _gridSize_y = _inv_size_y;	//INT - variable amout of slots
 
-private _gridSize_x = vn_an_inv_size_x;	//INT - fixed amout of slots
-private _gridSize_y = vn_an_inv_size_y;	//INT - variable amout of slots
-
-
-// if(isNil "vn_an_grid_active")then{vn_an_grid_active = _ctrlGrp};
-// _ctrlGrp = uinameSpace getVariable ["vn_an_grid_active",controlNull];
-// if(isNull _ctrlGrp)exitWith{systemchat "isNull _ctrlGrp"};
 
 //Check if given pos is valid in the Grid. If so -> Return [x,y] pos in Grid
+// systemchat str [ _ctrlGrp ,_mPos_x ,_gridSize_x ,_mPos_y ,_gridSize_y ];
 ([_ctrlGrp,_mPos_x,_gridSize_x,_mPos_y,_gridSize_y] call vn_an_fnc_ui_inv_get_GridPos) params["_tile_x","_tile_y"];
-// systemchat str [_tile_x, _tile_y];
 if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
 
 
-//get grid Data from currently active "Grid ctrl"
-private _grid = missionNameSpace getVariable [format["vn_an_inv_grid_%1",(ctrlIDC _ctrlGrp)],[]];
-
+_varName_activeCtrl = format["vn_an_inv_tileUsage_%1",(ctrlIDC _ctrlGrp)];
+_tiles_usage = missionNameSpace getVariable [_varName_activeCtrl,[]];
 
 //////////////////////////////////////////////
 //DEV: Reset whole grid to standard Colors
-if(vn_an_tiles_usage isEqualto [])then
+if(_tiles_usage isEqualto [])then
 {
 	{
 		_ctrl = _ctrlGrp controlsGroupCtrl _x;
@@ -77,40 +71,38 @@ private _offset = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offs
 }forEach _offset_data;
 
 
-// vn_an_tiles_usage = [];
+
+//get grid Data from currently active "Grid ctrl"
+private _grid = missionNameSpace getVariable [format["vn_an_inv_grid_%1",(ctrlIDC _ctrlGrp)],[]];
+
 //ToDo: Reload previous tiles_usage
-if(isNil "vn_an_tiles_usage")then{ vn_an_tiles_usage = []; };
 private _canAdd = true;
 private _tile_list = [];
 {
 	_x params ["_px","_py"];
 	private _gridPos = [_px,_py];
-	// systemchat str [_px > (_gridSize_x-1),_py > (_gridSize_y-1),_gridPos in vn_an_tiles_usage];
-	// systemchat str [_gridPos,vn_an_tiles_usage];
-	
 	if	(
 				_px > (_gridSize_x-1)				//if exceeds grind limit
 			||	_px < 0								//if exceeds grind limit
 			||	_py > (_gridSize_y-1)				//if exceeds grind limit
 			||	_py < 0								//if exceeds grind limit
-			||	_gridPos in vn_an_tiles_usage		//if something is already placed there
+			||	_gridPos in _tiles_usage		//if something is already placed there
 		)exitWith{_canAdd = false;};
 	
 	private _tile_idc = _grid#_py#_px#2;
 	_tile_list pushback [_tile_idc,_gridPos];
 }forEach _offset;
 
-// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,vn_an_tiles_usage];
-systemchat str [[_tile_x, _tile_y], _canAdd];
+// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,_tiles_usage];
 if(_canAdd)then
 {
 	{
 		_x params ["_idc","_gridPos"];
 		private _tile = _ctrlGrp controlsGroupCtrl _idc;
 		_tile ctrlSetTextColor [1,0,0,0.3];
-	vn_an_tiles_usage pushbackUnique _gridPos;
+	_tiles_usage pushbackUnique _gridPos;
 	}forEach _tile_list;
-	
+	missionNameSpace setVariable [_varName_activeCtrl,_tiles_usage];
 	//Add icon to this position
 	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];

@@ -41,4 +41,5 @@ for "_p_y" from 0 to (_size_y-1)do
 	_grid pushback _curRow;
 };
 
+missionNameSpace setVariable [format["vn_an_inv_grid_size_%1",(ctrlIDC _ctrlGrp)],[_size_x,_size_y]];
 missionNameSpace setVariable [format["vn_an_inv_grid_%1",(ctrlIDC _ctrlGrp)],_grid];

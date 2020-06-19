@@ -132,8 +132,75 @@ class vn_an_inventory
 					onMouseButtonDown	= "";	//RESERVED: "grab" Item
 					
 					
-					// onMouseButtonUp	= "";	//NO MB-UP! Triggered by display MB-Up EH!
-					// onMouseMoving = "";		//not needed
+					
+					
+					// onMouseButtonUp	= "_this call vn_an_FNC_TEST";	//NO MB-UP! Triggered by display MB-Up EH!
+					// onMouseMoving = "systemchat str [""movement"",_this]";		//not needed
+					
+					
+					// onMouseZChanged = "";	//not needed
+					
+					class controls
+					{
+						
+						class bg: vn_RscText
+						{
+							idc = 99999;
+							
+							x = 0;
+							y = 0;
+							w = UIW(WIDTH);
+							h = UIH(HEIGHT);
+							
+							colorText[] = {0.1,0.1,0.1,0.9};
+							colorBackground[] = {0,0,0.5,0.4};
+							text = "";
+							sizeEx = TXT_M;
+						};
+					};
+				};
+			};
+		};
+		
+		class grid_area_b: vn_RscControlsGroupNoScrollbarH
+		{
+			idc = 1101;
+			
+			x = UIX_LR(20);
+			y = UIY_TD(10);
+			w = UIW(8.5);
+			h = UIH(20);
+			
+			
+			onLoad = "uinamespace setvariable [""vn_an_inv_player_b_area"", (_this#0)];";
+			onUnload = "uinamespace setvariable [""vn_an_inv_player_b_area"", controlNull];";
+			// onMouseMoving = "";
+			// onMouseZChanged = "";
+			
+			class controls
+			{
+				//not "scrollable"
+				class grid_personal: vn_RscControlsGroupNoScrollbarHV
+				{
+					idc = 1001;
+					
+					x = UIW(0);
+					y = UIH(0);
+					w = UIW(WIDTH);
+					h = UIH(HEIGHT);
+					
+					onLoad = "uinamespace setvariable [""vn_an_inv_player_b"", (_this#0)];";
+					onUnload = "uinamespace setvariable [""vn_an_inv_player_b"", controlNull];";
+					
+					onMouseButtonDown	= "";	//RESERVED: "grab" Item
+					
+					
+					
+					
+					// onMouseButtonUp	= "_this call vn_an_FNC_TEST";	//NO MB-UP! Triggered by display MB-Up EH!
+					// onMouseMoving = "systemchat str [""movement"",_this]";		//not needed
+					
+					
 					// onMouseZChanged = "";	//not needed
 					
 					class controls

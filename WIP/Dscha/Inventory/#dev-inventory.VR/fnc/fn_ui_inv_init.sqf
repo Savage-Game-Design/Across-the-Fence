@@ -12,6 +12,11 @@
 	///////////////////////////////////////////////////
 */
 
+//DEV: reset inv usage Var
+{
+	missionNameSpace setVariable [(format["vn_an_inv_tileUsage_%1",_x]),[]];
+}forEach [1000,1001];
+
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
 //creation
@@ -27,19 +32,27 @@ vn_an_fnc_ui_inv_item_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_
 
 
 private _disp = _this#0;
-// _ctrlGrp = _disp displayCtrl 1000;
-private _ctrlGrp = uinamespace getvariable ["vn_an_inv_player", controlNull];
 
 vn_an_inv_size_x = 6;	//0-X (so -1 of the actual ColCount) - FIXED SIZE - ALWAYS 6!
 vn_an_inv_size_y = call vn_an_fnc_ui_inv_grid_getSize;
 
-//create player Inv grid array
+
+////// Create Inventory for Player and Ground
+//create Player Inventory grid array
+private _ctrlGrp = uinamespace getvariable ["vn_an_inv_player", controlNull];
 [_disp,_ctrlGrp,vn_an_inv_size_x, vn_an_inv_size_y] call vn_an_fnc_ui_inv_grid_create;
 
+//create "Ground Inventory" grid array
+private _ctrlGrp = uinamespace getvariable ["vn_an_inv_player_b", controlNull];
+[_disp,_ctrlGrp,vn_an_inv_size_x, 9] call vn_an_fnc_ui_inv_grid_create;
 
-//DEV:
-systemchat str [_disp];
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+///////DEV
 _disp displayAddEventhandler ["KeyDown",
 {
 	params ["_disp", "_key", "_shift", "_ctrl", "_alt"];
@@ -55,5 +68,8 @@ _disp displayAddEventhandler ["KeyDown",
 
 vn_an_FNC_TEST =
 {
-	
+	// params ["_ctrl", "_xPos", "_yPos", "_mouseOver"];
+	params ["_ctrl", "_button", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+	// _xPos,_yPos = pos relative to GridPos
+	systemchat str ["FNC_TEST: ", _ctrl,_xPos,_yPos];
 };

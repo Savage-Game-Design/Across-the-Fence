@@ -21,14 +21,17 @@ private _disp = uinamespace getvariable ["vn_an_inventory", DisplayNull];
 //create the Icon
 private _ctrlGrp_icon = _disp ctrlCreate ["inv_icon",987654,_ctrl_invGrid];
 
-
 (ctrlPosition _ctrl_invGrid)params["_grid_x","_grid_y","_grid_w","_grid_h"];
-// vn_an_inv_size_x	-	INT - ixed amout of slots
-// vn_an_inv_size_y	-	INT - variable amout of slots
-_tile_W = _grid_w / vn_an_inv_size_x;
-_tile_H = _grid_h / vn_an_inv_size_y;
 
-systemchat str [!_canFlip, !vn_an_inv_move_placeHorizontal];
+
+(missionNameSpace getVariable [format["vn_an_inv_grid_size_%1",(ctrlIDC _ctrl_invGrid)],[-1,-1]]) params["_inv_size_x","_inv_size_y"];
+// _inv_size_x	-	INT - ixed amout of slots
+// _inv_size_y	-	INT - variable amout of slots
+if(_inv_size_x < 0 || _inv_size_y < 0)exitWith{systemchat str ["ITEM_CREATE: GRID NOT SET!",[_inv_size_x,_inv_size_y]];};
+_tile_W = _grid_w / _inv_size_x;
+_tile_H = _grid_h / _inv_size_y;
+
+// systemchat str [!_canFlip, !vn_an_inv_move_placeHorizontal];
 if(!_canFlip && !vn_an_inv_move_placeHorizontal)then{vn_an_inv_move_placeHorizontal = true};
 //get width and height of selected icon
 _ctrlGrp_icon_w = if(vn_an_inv_move_placeHorizontal)then{_tile_W*(_item_size#1)}else{_tile_H*(_item_size#0)};

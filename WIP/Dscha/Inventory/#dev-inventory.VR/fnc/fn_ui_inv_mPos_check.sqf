@@ -2,7 +2,13 @@
 
 params ["_ctrl", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 
+
+//if RMB -> set Var to request rotate by 90°
+if(isNil "vn_an_inv_move_placeHorizontal")then{vn_an_inv_move_placeHorizontal = true};
+if(_btn == 1)exitWith{vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal; systemchat str ["place Horizontal?", vn_an_inv_move_placeHorizontal]};
+//Only allow LMB
 if!(_btn in [0])exitWith{};
+
 uinameSpace setVariable ["vn_an_grid_active",controlNull];
 private _mPos = [_mPos_x,_mPos_y];
 {
@@ -17,6 +23,7 @@ private _mPos = [_mPos_x,_mPos_y];
 		_y_center = _p_y + _h_halved;
 		
 		_check = _mPos inArea [[_x_center,_y_center], _w_halved, _h_halved, 0, true];
+		// systemchat str ["_check: ",_check];
 		if(_check)exitWith
 		{
 			_ctrl_toPass = uinameSpace getVariable [_var_toPass,controlNull];
@@ -24,5 +31,6 @@ private _mPos = [_mPos_x,_mPos_y];
 		};
 	};
 }forEach[
-			["vn_an_inv_player_area","vn_an_inv_player"]
+			 ["vn_an_inv_player_area","vn_an_inv_player"]
+			,["vn_an_inv_player_b_area","vn_an_inv_player_b"]
 		];
