@@ -3,9 +3,7 @@
 params ["_ctrl", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 
 
-//if RMB -> set Var to request rotate by 90°
-if(isNil "vn_an_inv_move_placeHorizontal")then{vn_an_inv_move_placeHorizontal = true};
-if(_btn == 1)exitWith{vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal; systemchat str ["place Horizontal?", vn_an_inv_move_placeHorizontal]};
+if(_btn == 1)exitWith{};	//DEV: For now
 //Only allow LMB
 if!(_btn in [0])exitWith{};
 

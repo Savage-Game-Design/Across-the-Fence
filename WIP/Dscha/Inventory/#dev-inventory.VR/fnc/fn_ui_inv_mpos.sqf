@@ -18,11 +18,11 @@ if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - o
 
 
 _varName_activeCtrl = format["vn_an_inv_tileUsage_%1",(ctrlIDC _ctrlGrp)];
-_tiles_usage = missionNameSpace getVariable [_varName_activeCtrl,[]];
+_usedSlots = missionNameSpace getVariable [_varName_activeCtrl,[]];
 
 //////////////////////////////////////////////
 //DEV: Reset whole grid to standard Colors
-if(_tiles_usage isEqualto [])then
+if(_usedSlots isEqualto [])then
 {
 	{
 		_ctrl = _ctrlGrp controlsGroupCtrl _x;
@@ -46,7 +46,6 @@ if(_tiles_usage isEqualto [])then
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
 
 
-if(isNil "DEV_ITEMTOPLACE")then{DEV_ITEMTOPLACE = 0};
 _item_data_size = [[3,6],[1,1],[3,3]]#DEV_ITEMTOPLACE;
 _item_data_name = ["data\gun.paa","data\magazine.paa","data\backpack.paa"]#DEV_ITEMTOPLACE;
 _item_data_canFlip = [true,false,false]#DEV_ITEMTOPLACE;
@@ -59,14 +58,14 @@ for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct 
 	};
 };
 
-private _offset = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offset will determined from this position)
+private _offset_pos = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offset will determined from this position)
 {
 	_x params["_px","_py"];
 	if(vn_an_inv_move_placeHorizontal)then
 	{
-		_offset pushback [ (_tile_x - (_py*-1)), (_tile_y + _px) ];
+		_offset_pos pushbackUnique [ (_tile_x - (_py*-1)), (_tile_y + _px) ];
 	}else{
-		_offset pushback [ (_tile_x + _px), (_tile_y + _py) ];
+		_offset_pos pushbackUnique [ (_tile_x + _px), (_tile_y + _py) ];
 	};
 }forEach _offset_data;
 
@@ -86,28 +85,29 @@ private _tile_list = [];
 			||	_px < 0								//if exceeds grind limit
 			||	_py > (_gridSize_y-1)				//if exceeds grind limit
 			||	_py < 0								//if exceeds grind limit
-			||	_gridPos in _tiles_usage		//if something is already placed there
+			||	_gridPos in _usedSlots		//if something is already placed there
 		)exitWith{_canAdd = false;};
 	
 	private _tile_idc = _grid#_py#_px#2;
 	_tile_list pushback [_tile_idc,_gridPos];
-}forEach _offset;
+}forEach _offset_pos;
 
-// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,_tiles_usage];
+// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,_usedSlots];
 if(_canAdd)then
 {
 	{
 		_x params ["_idc","_gridPos"];
 		private _tile = _ctrlGrp controlsGroupCtrl _idc;
 		_tile ctrlSetTextColor [1,0,0,0.3];
-	_tiles_usage pushbackUnique _gridPos;
+		_usedSlots pushbackUnique _gridPos;
 	}forEach _tile_list;
-	missionNameSpace setVariable [_varName_activeCtrl,_tiles_usage];
+	
+	missionNameSpace setVariable [_varName_activeCtrl,_usedSlots];
 	//Add icon to this position
 	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
 	
-	[_ctrlGrp,_px,_py,_item_data_name,_item_data_size,_item_data_canFlip,[_offset]] call vn_an_fnc_ui_inv_item_create;
+	[_ctrlGrp,_px,_py,_item_data_name,_item_data_size,_item_data_canFlip,_offset_pos] call vn_an_fnc_ui_inv_item_create;
 };
 
 

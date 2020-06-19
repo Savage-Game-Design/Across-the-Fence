@@ -19,7 +19,7 @@
 
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
-//creation
+//Grid
 vn_an_fnc_ui_inv_grid_getSize = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_getSize.sqf";
 vn_an_fnc_ui_inv_grid_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_create.sqf";
 
@@ -29,7 +29,7 @@ vn_an_fnc_ui_inv_mpos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_mpos.sq
 vn_an_fnc_ui_inv_get_GridPos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_get_GridPos.sqf";
 vn_an_fnc_ui_inv_check_posInGrid = compile preprocessFileLineNumbers "fnc\fn_ui_inv_check_posInGrid.sqf";
 vn_an_fnc_ui_inv_item_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_create.sqf";
-
+vn_an_fnc_ui_inv_item_remove_DEV = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_remove_DEV.sqf";
 
 private _disp = _this#0;
 
@@ -48,28 +48,33 @@ private _ctrlGrp = uinamespace getvariable ["vn_an_inv_player_b", controlNull];
 
 
 
-
-
+DEV_ITEMTOPLACE = 0;
+vn_an_inv_move_placeHorizontal = true;
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ///////DEV
 _disp displayAddEventhandler ["KeyDown",
 {
 	params ["_disp", "_key", "_shift", "_ctrl", "_alt"];
-	if(isNil "vn_an_inv_move_placeHorizontal")then{DEV_ITEMTOPLACE = 0};
-	if(_key isEqualTo 2)then{DEV_ITEMTOPLACE = 0;};
-	if(_key isEqualTo 3)then{DEV_ITEMTOPLACE = 1;};
-	if(_key isEqualTo 4)then{DEV_ITEMTOPLACE = 2;};
+	_buttonDisabled = false;
+	_BD = {_buttonDisabled = true};
+	if(_key isEqualTo 2)then{DEV_ITEMTOPLACE = 0; call _BD;};
+	if(_key isEqualTo 3)then{DEV_ITEMTOPLACE = 1; call _BD;};
+	if(_key isEqualTo 4)then{DEV_ITEMTOPLACE = 2; call _BD;};
 	// if(_key isEqualTo 5)then{DEV_ITEMTOPLACE = 3;};
-	systemchat str ["DEV_ITEMTOPLACE: ", DEV_ITEMTOPLACE];
+	if(_key isEqualTo 6)then
+	{
+		//if RMB -> set Var to request rotate by 90°
+		vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal;
+		 call _BD;
+	};
+	systemchat str ["DEV_ITEMTOPLACE: ", DEV_ITEMTOPLACE, " - Place Horizontal?", vn_an_inv_move_placeHorizontal];
+	_buttonDisabled
 }];
 
 
 
 vn_an_FNC_TEST =
 {
-	// params ["_ctrl", "_xPos", "_yPos", "_mouseOver"];
-	params ["_ctrl", "_button", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
-	// _xPos,_yPos = pos relative to GridPos
-	systemchat str ["FNC_TEST: ", _ctrl,_xPos,_yPos];
+
 };

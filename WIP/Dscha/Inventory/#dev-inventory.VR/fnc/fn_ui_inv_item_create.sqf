@@ -19,7 +19,9 @@ params["_ctrl_invGrid","_pos_x","_pos_y","_item","_item_size","_canFlip","_usedS
 
 private _disp = uinamespace getvariable ["vn_an_inventory", DisplayNull];
 //create the Icon
-private _ctrlGrp_icon = _disp ctrlCreate ["inv_icon",987654,_ctrl_invGrid];
+_item_IDC = missionNameSpace getVariable ["vn_an_Item_IDC_count",107441];
+private _ctrlGrp_icon = _disp ctrlCreate ["inv_icon",_item_IDC,_ctrl_invGrid];
+missionNameSpace setVariable ["vn_an_Item_IDC_count",(_item_IDC + 1)];
 
 (ctrlPosition _ctrl_invGrid)params["_grid_x","_grid_y","_grid_w","_grid_h"];
 
@@ -75,4 +77,5 @@ _ctrlGrp_icon ctrlCommit 0;
 		occupied slots
 	]
 */
+
 _ctrlGrp_icon setVariable ["item_data",[[_pos_x,_pos_y,_ctrlGrp_icon_w,_ctrlGrp_icon_h],_usedSlots]];

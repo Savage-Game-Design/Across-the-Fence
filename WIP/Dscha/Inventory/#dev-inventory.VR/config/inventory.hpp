@@ -37,6 +37,8 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 	w = UIW((WIDTH*6));
 	h = UIH((HEIGHT*3));
 	
+	onMouseButtonUp	= "_this call vn_an_fnc_ui_inv_item_remove_DEV";
+	
 	class controls
 	{
 		class bg: vn_RscText	//ToDo: Exchange with Picture + frame + color frame depending on rarity
@@ -69,6 +71,7 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 			
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {1,1,1,0};
+			
 			
 			sizeEx = TXT_M;
 			font = USEDFONT;
@@ -136,7 +139,7 @@ class vn_an_inventory
 					
 					
 					// onMouseButtonUp	= "_this call vn_an_FNC_TEST";	//NO MB-UP! Triggered by display MB-Up EH!
-					// onMouseMoving = "systemchat str [""movement"",_this]";		//not needed
+					// onMouseMoving = "systemchat str [""movement"",(_this#0)]";		//not needed
 					
 					
 					// onMouseZChanged = "";	//not needed
@@ -199,7 +202,7 @@ class vn_an_inventory
 					
 					
 					// onMouseButtonUp	= "_this call vn_an_FNC_TEST";	//NO MB-UP! Triggered by display MB-Up EH!
-					// onMouseMoving = "systemchat str [""movement"",_this]";		//not needed
+					// onMouseMoving = "systemchat str [""movement"",(_this#0)]";		//not needed
 					
 					
 					// onMouseZChanged = "";	//not needed
