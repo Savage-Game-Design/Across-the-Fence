@@ -1,4 +1,7 @@
+/*
+	Used for Drag&Drop Events! (EH MB Down/UP don't work/trigger propery while MB is keeping pressed)
 
+*/
 
 params ["_ctrl", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 

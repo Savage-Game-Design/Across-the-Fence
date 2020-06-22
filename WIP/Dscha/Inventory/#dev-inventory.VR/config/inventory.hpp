@@ -91,7 +91,6 @@ class vn_an_inventory
 	onLoad = "[""onLoad"",_this,""vn_an_inventory"",''] call 	(uinamespace getvariable 'BIS_fnc_initDisplay'); vn_an_fnc_ui_inv_init = compile preprocessFileLineNumbers ""fnc\fn_ui_inv_init.sqf""; _this call vn_an_fnc_ui_inv_init;";
 	onUnload = "[""onUnload"",_this,""vn_an_inventory"",''] call 	(uinamespace getvariable 'BIS_fnc_initDisplay');";
 	
-	onMouseButtonUp		= "_this call vn_an_fnc_ui_inv_mPos_check;";	//Usage: placing Items
 
 /*	
 	// onMouseButtonDown = "";	//Down probably not needed, checked by grid MB-Down EH
@@ -112,9 +111,10 @@ class vn_an_inventory
 			w = UIW(8.5);
 			h = UIH(20);
 			
-			
 			onLoad = "uinamespace setvariable [""vn_an_inv_player_area"", (_this#0)];";
 			onUnload = "uinamespace setvariable [""vn_an_inv_player_area"", controlNull];";
+			
+	
 			// onMouseMoving = "";
 			// onMouseZChanged = "";
 	
@@ -134,11 +134,9 @@ class vn_an_inventory
 					onUnload = "uinamespace setvariable [""vn_an_inv_player"", controlNull];";
 					
 					onMouseButtonDown	= "";	//RESERVED: "grab" Item
+					onMouseButtonUp		= "_this call vn_an_fnc_ui_inv_mPos;";	//Usage: placing Items
 					
 					
-					
-					
-					// onMouseButtonUp	= "_this call vn_an_FNC_TEST";	//NO MB-UP! Triggered by display MB-Up EH!
 					// onMouseMoving = "systemchat str [""movement"",(_this#0)]";		//not needed
 					
 					
@@ -197,6 +195,7 @@ class vn_an_inventory
 					onUnload = "uinamespace setvariable [""vn_an_inv_player_b"", controlNull];";
 					
 					onMouseButtonDown	= "";	//RESERVED: "grab" Item
+					onMouseButtonUp		= "_this call vn_an_fnc_ui_inv_mPos;";	//Usage: placing Items
 					
 					
 					
