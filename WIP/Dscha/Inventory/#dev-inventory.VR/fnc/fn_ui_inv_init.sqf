@@ -48,20 +48,23 @@ private _ctrlGrp = uinamespace getvariable ["vn_an_inv_player_b", controlNull];
 
 
 
-DEV_ITEMTOPLACE = 0;
+DEV_ITEMTOPLACE = [];
 vn_an_inv_move_placeHorizontal = true;
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ///////DEV
+
 _disp displayAddEventhandler ["KeyDown",
 {
 	params ["_disp", "_key", "_shift", "_ctrl", "_alt"];
 	_buttonDisabled = false;
 	_BD = {_buttonDisabled = true};
-	if(_key isEqualTo 2)then{DEV_ITEMTOPLACE = 0; call _BD;};
-	if(_key isEqualTo 3)then{DEV_ITEMTOPLACE = 1; call _BD;};
-	if(_key isEqualTo 4)then{DEV_ITEMTOPLACE = 2; call _BD;};
+	if(_key isEqualTo 2)then{DEV_ITEMTOPLACE = [[3,6],"data\gun.paa",true]; call _BD;};
+	if(_key isEqualTo 3)then{DEV_ITEMTOPLACE = [[1,1],"data\magazine.paa",false]; call _BD;};
+	if(_key isEqualTo 4)then{DEV_ITEMTOPLACE = [[3,3],"data\backpack.paa",false]; call _BD;};
 	// if(_key isEqualTo 5)then{DEV_ITEMTOPLACE = 3;};
+	
+	missionNameSpace setVariable ["vn_an_inv_itemActive",DEV_ITEMTOPLACE];
 	if(_key isEqualTo 6)then
 	{
 		//if RMB -> set Var to request rotate by 90°

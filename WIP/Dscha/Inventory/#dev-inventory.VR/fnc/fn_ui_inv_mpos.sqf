@@ -34,13 +34,17 @@ if(_usedSlots isEqualto [])then
 		};
 	};
 };
+
+
+
+
 //////////////////////////////////////////////
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
 
+_item_data = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
+if(_item_data isEqualto [])exitWith{systemchat "INV_MPOS: NO ITEM FOUND"};
+_item_data params["_item_data_size","_item_data_name","_item_data_canFlip"];
 
-_item_data_size = [[3,6],[1,1],[3,3]]#DEV_ITEMTOPLACE;
-_item_data_name = ["data\gun.paa","data\magazine.paa","data\backpack.paa"]#DEV_ITEMTOPLACE;
-_item_data_canFlip = [true,false,false]#DEV_ITEMTOPLACE;
 _offset_data = [];
 for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
 {
