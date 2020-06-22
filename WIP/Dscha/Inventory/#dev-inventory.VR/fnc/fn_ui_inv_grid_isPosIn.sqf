@@ -3,7 +3,12 @@
 	called by "fn_ui_inv_get_GridPos.sqf"
 	
 	Input:
-		[curX, maxX, curY, maxY]
+		[
+			 curX	// FLOAT - x Pos to check
+			,maxX	// FLOAT - x max of Grid
+			,curY	// FLOAT - Y Pos to check
+			,maxY	// FLOAT - Y max of Grid
+		]
 */
 
 params["_t_x","_g_x","_t_y","_g_y"];

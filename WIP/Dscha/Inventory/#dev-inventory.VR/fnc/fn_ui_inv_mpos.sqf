@@ -13,7 +13,7 @@ private _gridSize_y = _inv_size_y;	//INT - variable amout of slots
 
 //Check if given pos is valid in the Grid. If so -> Return [x,y] pos in Grid
 // systemchat str [ _ctrlGrp ,_mPos_x ,_gridSize_x ,_mPos_y ,_gridSize_y ];
-([_ctrlGrp,_mPos_x,_gridSize_x,_mPos_y,_gridSize_y] call vn_an_fnc_ui_inv_get_GridPos) params["_tile_x","_tile_y"];
+([_ctrlGrp,_mPos_x,_gridSize_x,_mPos_y,_gridSize_y] call vn_an_fnc_ui_inv_grid_getPos) params["_tile_x","_tile_y"];
 if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
 
 
@@ -24,23 +24,15 @@ _usedSlots = missionNameSpace getVariable [_varName_activeCtrl,[]];
 //DEV: Reset whole grid to standard Colors
 if(_usedSlots isEqualto [])then
 {
+	for "_idc_mod" from 0 to ((_gridSize_y-1)*10) step 10 do
 	{
-		_ctrl = _ctrlGrp controlsGroupCtrl _x;
-		_ctrl ctrlSetTextColor [0,0,0,0.3];
-		_ctrl ctrlCommit 0;
-	}forEach	[  //YX | 0 = 00 | 1 = 01
-					 0,1,2,3,4,5
-					,10,11,12,13,14,15
-					,20,21,22,23,24,25
-					,30,31,32,33,34,35
-					,40,41,42,43,44,45
-					,50,51,52,53,54,55
-					,60,61,62,63,64,65
-					,70,71,72,73,74,75
-					,80,81,82,83,84,85
-					,90,91,92,93,94,95
-					,100,101,102,103,104,105
-				];
+		for "_idc" from 0 to (_inv_size_x-1) do
+		{
+			_ctrl = _ctrlGrp controlsGroupCtrl (_idc_mod + _idc);
+			_ctrl ctrlSetTextColor [0,0,0,0.3];
+			_ctrl ctrlCommit 0;
+		};
+	};
 };
 //////////////////////////////////////////////
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...

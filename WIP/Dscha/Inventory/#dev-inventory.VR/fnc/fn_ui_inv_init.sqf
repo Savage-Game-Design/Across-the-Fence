@@ -22,12 +22,12 @@
 //Grid
 vn_an_fnc_ui_inv_grid_getSize = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_getSize.sqf";
 vn_an_fnc_ui_inv_grid_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_create.sqf";
+vn_an_fnc_ui_inv_grid_isPosIn = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_isPosIn.sqf";
+vn_an_fnc_ui_inv_grid_getPos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_getPos.sqf";
 
 //handling
 vn_an_fnc_ui_inv_mPos_check = compile preprocessFileLineNumbers "fnc\fn_ui_inv_mPos_check.sqf";
 vn_an_fnc_ui_inv_mpos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_mpos.sqf";
-vn_an_fnc_ui_inv_get_GridPos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_get_GridPos.sqf";
-vn_an_fnc_ui_inv_check_posInGrid = compile preprocessFileLineNumbers "fnc\fn_ui_inv_check_posInGrid.sqf";
 vn_an_fnc_ui_inv_item_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_create.sqf";
 vn_an_fnc_ui_inv_item_remove_DEV = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_remove_DEV.sqf";
 
