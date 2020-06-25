@@ -20,6 +20,6 @@ private _t_y = floor(_mP_y / _t_h);		//[..,Y]
 //Check if within existing/given grid
 private _inGrid = [_t_x,_grid_x,_t_y,_grid_y] call vn_an_fnc_ui_inv_grid_isPosIn;
 private _ret = [-1,-1];
-systemchat str [_t_x,_t_y];
+// systemchat str [_t_x,_t_y];
 if(_inGrid)then{_ret = [_t_x,_t_y]};
 _ret

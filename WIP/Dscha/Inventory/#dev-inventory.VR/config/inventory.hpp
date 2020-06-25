@@ -37,7 +37,10 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 	w = UIW((WIDTH*6));
 	h = UIH((HEIGHT*3));
 	
-	onMouseButtonUp	= "_this call vn_an_fnc_ui_inv_item_remove_DEV";
+	// onMouseButtonDown	= "";
+	onMouseButtonUp		= "_this call vn_an_fnc_ui_inv_item_grab;";
+	// onMouseButtonClick = "";	//Delay, not rly usable - Triggers while holding MB
+	// onMouseButtonDblClick	= "";	//triggers immediately after 2nd MB-Down (before UP)
 	
 	class controls
 	{
@@ -47,8 +50,8 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 			
 			x = 0;
 			y = 0;
-			w = 0;	//Will be defined in function
-			h = 0;	//Will be defined in function
+			w = UIW(TILE_W);	//final size will be defined in function
+			h = UIH(TILE_H);	//final size will be defined in function
 			
 			colorText[] = {0.1,0.1,0.1,0.9};
 			colorBackground[] = {0,0,0.5,0.2};
@@ -64,8 +67,8 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 			
 			x = 0;
 			y = 0;
-			w = 0;	//Will be defined in function
-			h = 0;	//Will be defined in function
+			w = UIW(TILE_W);	//final size will be defined in function
+			h = UIH(TILE_H);	//final size will be defined in function
 			
 			text = "";	//Will be defined in function
 			
@@ -91,13 +94,28 @@ class vn_an_inventory
 	onLoad = "[""onLoad"",_this,""vn_an_inventory"",''] call 	(uinamespace getvariable 'BIS_fnc_initDisplay'); vn_an_fnc_ui_inv_init = compile preprocessFileLineNumbers ""fnc\fn_ui_inv_init.sqf""; _this call vn_an_fnc_ui_inv_init;";
 	onUnload = "[""onUnload"",_this,""vn_an_inventory"",''] call 	(uinamespace getvariable 'BIS_fnc_initDisplay');";
 	
-
-/*	
-	// onMouseButtonDown = "";	//Down probably not needed, checked by grid MB-Down EH
+	onMouseButtonDown	= "";
+	onMouseButtonUp		= "";
 	// onMouseMoving = "";		//"USELESS" ON A DISPLAY! Doesn't return X and Y Pos, just "distance from xy to xy during specific time/FPS (??)"
-*/
+	// onMouseZChanged = "";
 	
-	class controlsBackground {};
+	class controlsBackground
+	{
+		class bg: vn_RscText	//ToDo: Exchange with Picture + frame + color frame depending on rarity
+		{
+			idc = -1;
+			
+			x = safezoneX;
+			y = safezoneY;
+			w = safeZoneW;
+			h = safeZoneH;
+			
+			colorText[] = {0.0,0.0,0.0,0.0};
+			colorBackground[] = {0,0,0,0.1};
+			text = "";
+			sizeEx = TXT_M;
+		};
+	};
 	
 	class Controls
 	{
@@ -114,10 +132,12 @@ class vn_an_inventory
 			onLoad = "uinamespace setvariable [""vn_an_inv_player_area"", (_this#0)];";
 			onUnload = "uinamespace setvariable [""vn_an_inv_player_area"", controlNull];";
 			
-	
+			
+			onMouseButtonDown	= "";
+			onMouseButtonUp		= "";
 			// onMouseMoving = "";
 			// onMouseZChanged = "";
-	
+			
 			class controls
 			{
 				//not "scrollable"
@@ -133,13 +153,9 @@ class vn_an_inventory
 					onLoad = "uinamespace setvariable [""vn_an_inv_player"", (_this#0)];";
 					onUnload = "uinamespace setvariable [""vn_an_inv_player"", controlNull];";
 					
-					onMouseButtonDown	= "";	//RESERVED: "grab" Item
-					onMouseButtonUp		= "_this call vn_an_fnc_ui_inv_mPos;";	//Usage: placing Items
-					
-					
-					// onMouseMoving = "systemchat str [""movement"",(_this#0)]";		//not needed
-					
-					
+					onMouseButtonDown	= "";
+					onMouseButtonUp		= "";
+					// onMouseMoving = "systemchat str [""movement"",diag_tickTime, ctrlPosition (_this#0)]";		//BUGGED!
 					// onMouseZChanged = "";	//not needed
 					
 					class controls
@@ -176,6 +192,10 @@ class vn_an_inventory
 			
 			onLoad = "uinamespace setvariable [""vn_an_inv_player_b_area"", (_this#0)];";
 			onUnload = "uinamespace setvariable [""vn_an_inv_player_b_area"", controlNull];";
+			
+			
+			onMouseButtonDown	= "";
+			onMouseButtonUp		= "";
 			// onMouseMoving = "";
 			// onMouseZChanged = "";
 			
@@ -194,16 +214,10 @@ class vn_an_inventory
 					onLoad = "uinamespace setvariable [""vn_an_inv_player_b"", (_this#0)];";
 					onUnload = "uinamespace setvariable [""vn_an_inv_player_b"", controlNull];";
 					
-					onMouseButtonDown	= "";	//RESERVED: "grab" Item
-					onMouseButtonUp		= "_this call vn_an_fnc_ui_inv_mPos;";	//Usage: placing Items
+					// onMouseButtonDown	= "_this call vn_an_fnc_ui_inv_mPos;";	//RESERVED: "grab" Item
+					// onMouseButtonUp		= "";
 					
-					
-					
-					
-					// onMouseButtonUp	= "_this call vn_an_FNC_TEST";	//NO MB-UP! Triggered by display MB-Up EH!
-					// onMouseMoving = "systemchat str [""movement"",(_this#0)]";		//not needed
-					
-					
+					// onMouseMoving = "systemchat str [""movement"",diag_tickTime, ctrlPosition (_this#0)]";		//BUGGED!
 					// onMouseZChanged = "";	//not needed
 					
 					class controls

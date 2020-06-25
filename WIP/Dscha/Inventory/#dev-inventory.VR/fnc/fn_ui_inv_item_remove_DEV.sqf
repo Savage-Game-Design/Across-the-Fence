@@ -6,7 +6,7 @@
 
 disableSerialization;
 
-params ["_ctrl", "_btn", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+params ["_ctrl", ["_btn",1,[0]]];//, "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 // _xPos,_yPos = pos relative to GridPos
 if(_btn != 1)exitWith{};
 

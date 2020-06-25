@@ -2,6 +2,10 @@
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
 params ["_ctrlGrp", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+// diag_log _this;
+// _test_grid_player = uinamespace getvariable ["vn_an_inv_player", controlNull];
+// systemchat str [ctrlPosition _test_grid_player];
+
 
 if!(_btn in [0])exitWith{};
 
@@ -42,6 +46,7 @@ if(_usedSlots isEqualto [])then
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
 
 _item_data = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
+// systemchat str [_item_data];
 if(_item_data isEqualto [])exitWith{systemchat "INV_MPOS: NO ITEM FOUND"};
 _item_data params["_item_data_size","_item_data_name","_item_data_canFlip"];
 
@@ -103,7 +108,7 @@ if(_canAdd)then
 	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
 	
-	[_ctrlGrp,_px,_py,_item_data_name,_item_data_size,_item_data_canFlip,_offset_pos] call vn_an_fnc_ui_inv_item_create;
+	[_ctrlGrp,_px,_py,_item_data,_offset_pos] call vn_an_fnc_ui_inv_item_create;
 };
 
 
