@@ -1,7 +1,7 @@
-#define TILES_X 6	//fixed width of 6
+#define TILES_X 8	//fixed width of 8
 #define TILES_Y 16
 #define WIDTH 8		//width of complete inventory slots
-#define HEIGHT ((WIDTH / 6) * TILES_Y)
+#define HEIGHT ((WIDTH / 8) * TILES_Y)
 #define TILE_W (WIDTH/TILES_X)
 #define TILE_H (HEIGHT/TILES_Y)
 
@@ -34,7 +34,7 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 	
 	x = 0;
 	y = 0;
-	w = UIW((WIDTH*6));
+	w = UIW((WIDTH*8));
 	h = UIH((HEIGHT*3));
 	
 	// onMouseButtonDown	= "";
@@ -126,7 +126,7 @@ class vn_an_inventory
 			
 			x = UIX_RL(30);
 			y = UIY_TD(10);
-			w = UIW(8.5);
+			w = UIW(8.65);
 			h = UIH(20);
 			
 			onLoad = "uinamespace setvariable [""vn_an_inv_player_area"", (_this#0)];";
@@ -186,7 +186,7 @@ class vn_an_inventory
 			
 			x = UIX_LR(20);
 			y = UIY_TD(10);
-			w = UIW(8.5);
+			w = UIW(8.65);
 			h = UIH(20);
 			
 			

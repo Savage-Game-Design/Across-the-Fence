@@ -35,7 +35,7 @@ vn_an_fnc_ui_inv_item_grab = compile preprocessFileLineNumbers "fnc\fn_ui_inv_it
 
 private _disp = _this#0;
 
-vn_an_inv_size_x = 6;	//0-X (so -1 of the actual ColCount) - FIXED SIZE - ALWAYS 6!
+vn_an_inv_size_x = 8;	//0-X (so -1 of the actual ColCount) - FIXED SIZE - ALWAYS 8!
 vn_an_inv_size_y = call vn_an_fnc_ui_inv_grid_getSize;
 
 vn_an_inv_move_placeHorizontal = true;
@@ -51,7 +51,7 @@ private _ctrlGrp_pers = uinamespace getvariable ["vn_an_inv_player", controlNull
 	[_ctrlGrp_pers,0,(_x#1),(_x#2),false,false,false] call vn_an_fnc_ui_inv_mPos;
 }forEach
 [
-	 [[[3,6],"data\gun.paa",true]	,0.0160714,0.0146826]
+	 [[[4,8],"data\gun.paa",true]	,0.0160714,0.0146826]
 	,[[[1,1],"data\magazine.paa",false]	,0.0160714,0.0146826]
 	,[[[1,1],"data\magazine.paa",false]	,0.0190476,0.0285715]
 	,[[[1,1],"data\magazine.paa",false]	,0.0205356,0.189286]
@@ -60,7 +60,7 @@ private _ctrlGrp_pers = uinamespace getvariable ["vn_an_inv_player", controlNull
 	,[[[1,1],"data\magazine.paa",false]	,0.142559,0.193254]
 	,[[[1,1],"data\magazine.paa",false]	,0.0160713,0.244841]
 	,[[[1,1],"data\magazine.paa",false]	,0.0681546,0.24881]
-	,[[[3,3],"data\backpack.paa",false]	,0.0130952,0.298413]
+	,[[[4,4],"data\backpack.paa",false]	,0.0130952,0.298413]
 ];
 
 
@@ -74,9 +74,9 @@ private _ctrlGrp_cont = uinamespace getvariable ["vn_an_inv_player_b", controlNu
 
 DEV_ITEMTOPLACE_LIST =
 [
-	 [[3,6],"data\gun.paa",true]
+	 [[4,8],"data\gun.paa",true]
 	,[[1,1],"data\magazine.paa",false]
-	,[[3,3],"data\backpack.paa",false]
+	,[[4,4],"data\backpack.paa",false]
 ];
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
