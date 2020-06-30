@@ -1,9 +1,9 @@
 disableSerialization;
 	
-	params ["_ctrl", "_button", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+	params ["_ctrl", "_btn", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 	(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_usedSlots_item","_item_data"];
 	(ctrlPosition _ctrl) params["_p_x","_p_y","_p_w","_p_h"];
-	missionNameSpace setVariable ["vn_an_inv_itemActive",_item_data];
+	missionNameSpace setVariable ["vn_an_inv_itemActive",(_item_data#0)];
 	
 	getMousePosition params["_mPos_x","_mPos_y"];
 	private _disp = uinamespace getvariable ["vn_an_inventory", DisplayNull];

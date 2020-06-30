@@ -51,19 +51,19 @@ private _ctrlGrp_pers = uinamespace getvariable ["vn_an_inv_player", controlNull
 	[_ctrlGrp_pers,0,(_x#1),(_x#2),false,false,false] call vn_an_fnc_ui_inv_mPos;
 }forEach
 [
-	 [[[4,8],"data\gun.paa",true]	,0.0160714,0.0146826]
-	,[[[1,1],"data\magazine.paa",false]	,0.0160714,0.0146826]
-	,[[[1,1],"data\magazine.paa",false]	,0.0190476,0.0285715]
-	,[[[1,1],"data\magazine.paa",false]	,0.0205356,0.189286]
-	,[[[1,1],"data\magazine.paa",false]	,0.0607142,0.185317]
-	,[[[1,1],"data\magazine.paa",false]	,0.0979165,0.185317]
-	,[[[1,1],"data\magazine.paa",false]	,0.142559,0.193254]
-	,[[[1,1],"data\magazine.paa",false]	,0.0160713,0.244841]
-	,[[[1,1],"data\magazine.paa",false]	,0.0681546,0.24881]
-	,[[[4,4],"data\backpack.paa",false]	,0.0130952,0.298413]
+	 ["arifle_MX_F"	,0.0160714,0.0146826]
+	,["magazine"	,0.0160714,0.0146826]
+	,["magazine"	,0.0190476,0.0285715]
+	,["magazine"	,0.0205356,0.189286]
+	,["magazine"	,0.0607142,0.185317]
+	,["magazine"	,0.0979165,0.185317]
+	,["magazine"	,0.142559,0.193254]
+	,["magazine"	,0.0160713,0.244841]
+	,["magazine"	,0.0681546,0.24881]
+	,["B_AssaultPack_blk"	,0.0130952,0.298413]
 ];
 
-
+diag_log "-----------------------------------------------";
 //create "Ground Inventory" grid array
 private _ctrlGrp_cont = uinamespace getvariable ["vn_an_inv_player_b", controlNull];
 [_disp,_ctrlGrp_cont,vn_an_inv_size_x, 9] call vn_an_fnc_ui_inv_grid_create;
@@ -88,19 +88,20 @@ _disp displayAddEventhandler ["KeyDown",
 	_buttonDisabled = false;
 	_BD = {_buttonDisabled = true};
 	private _item_sel = [];
-	if(_key isEqualTo 2)then{DEV_ITEMTOPLACE = DEV_ITEMTOPLACE_LIST#0; call _BD;};
-	if(_key isEqualTo 3)then{DEV_ITEMTOPLACE = DEV_ITEMTOPLACE_LIST#1; call _BD;};
-	if(_key isEqualTo 4)then{DEV_ITEMTOPLACE = DEV_ITEMTOPLACE_LIST#2; call _BD;};
-	// if(_key isEqualTo 5)then{DEV_ITEMTOPLACE = 3;};
-	
-	missionNameSpace setVariable ["vn_an_inv_itemActive",DEV_ITEMTOPLACE];
-	if(_key isEqualTo 6)then
+	if(_key in [2,3,4,5,6])then
 	{
-		//if RMB -> set Var to request rotate by 90°
-		vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal;
-		 call _BD;
+		if(_key isEqualTo 2)exitWith{missionNameSpace setVariable ["vn_an_inv_itemActive",DEV_ITEMTOPLACE_LIST#0]; call _BD;};
+		if(_key isEqualTo 3)exitWith{missionNameSpace setVariable ["vn_an_inv_itemActive",DEV_ITEMTOPLACE_LIST#1]; call _BD;};
+		if(_key isEqualTo 4)exitWith{missionNameSpace setVariable ["vn_an_inv_itemActive",DEV_ITEMTOPLACE_LIST#2]; call _BD;};
+		// if(_key isEqualTo 5)then{DEV_ITEMTOPLACE = 3;};
+		if(_key isEqualTo 6)then
+		{
+			//if RMB -> set Var to request rotate by 90°
+			vn_an_inv_move_placeHorizontal = !vn_an_inv_move_placeHorizontal;
+			 call _BD;
+		};
+		systemchat str [" DEV_ITEMTOPLACE : ", missionNameSpace getVariable ["vn_an_inv_itemActive",[]], " - Place Horizontal?", vn_an_inv_move_placeHorizontal];
 	};
-	systemchat str [" DEV_ITEMTOPLACE : ", DEV_ITEMTOPLACE, " - Place Horizontal?", vn_an_inv_move_placeHorizontal];
 	_buttonDisabled
 }];
 
@@ -112,10 +113,10 @@ vn_an_DEV_MouseEH =
 	// systemchat str ["Btn:",_btn];
 	
 	//TODO: Reset to old Pos, instead of deleting
-	if(_btn == 1)exitWith
-	{
-		ctrlDelete _ctrl;
-	};
+	// if(_btn == 1)exitWith
+	// {
+		// ctrlDelete _ctrl;
+	// };
 	
 	if(_btn == 0)exitWith
 	{

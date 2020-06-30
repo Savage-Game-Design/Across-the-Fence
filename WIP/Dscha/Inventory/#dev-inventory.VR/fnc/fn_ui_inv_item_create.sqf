@@ -18,12 +18,14 @@
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
 params["_ctrl_invGrid","_pos_x","_pos_y","_item_data","_usedSlots"];
-// diag_log _this;
+
 _item_data params
 [
-	 ["_item_size",[-1,-1],[]]
-	,["_item","",[""]]
-	,["_canFlip",false,[false]]
+	 ["_item_class","",[""]]
+	,["_item_size",[-1,-1],[]]
+	,["_canFlip",0,[0]]
+	,["_cfgBase","",[""]]
+	,["_class_base","",[""]]
 ];
 
 if(_item_size isEqualTo [-1,-1])exitWith{};
@@ -47,10 +49,11 @@ _tile_W = _grid_w / _inv_size_x;
 _tile_H = _grid_h / _inv_size_y;
 
 // systemchat str [!_canFlip, !vn_an_inv_move_placeHorizontal];
-if(!_canFlip && !vn_an_inv_move_placeHorizontal)then{vn_an_inv_move_placeHorizontal = true};
+if((_canFlip == 0) && !vn_an_inv_move_placeHorizontal)then{vn_an_inv_move_placeHorizontal = true};
 //get width and height of selected icon
 _ctrlGrp_item_w = if(vn_an_inv_move_placeHorizontal)then{_tile_W*(_item_size#1)}else{_tile_H*(_item_size#0)};
 _ctrlGrp_item_h = if(vn_an_inv_move_placeHorizontal)then{_tile_H*(_item_size#0)}else{_tile_W*(_item_size#1)};
+
 
 //if needed -> "rotate" the main ctrlGroup and adjust the values to 4/3 (Arma Base Resolution)
 if(vn_an_inv_move_placeHorizontal)then
@@ -68,7 +71,8 @@ _ctrlGrp_item ctrlCommit 0;
 	_ctrl ctrlCommit 0;
 	if(_x == 200)then
 	{
-		_ctrl ctrlSetText _item;
+		_item_img = getText(configFile >> _cfgBase >> _class_base >> "picture");
+		_ctrl ctrlSetText _item_img;
 	};
 	//if flipped/roated by 90° -> do other stuff
 	if !(vn_an_inv_move_placeHorizontal)then

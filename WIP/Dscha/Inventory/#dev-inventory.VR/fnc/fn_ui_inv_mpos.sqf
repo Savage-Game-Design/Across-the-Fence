@@ -2,10 +2,6 @@
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
 params ["_ctrlGrp", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
-// diag_log _this;
-// _test_grid_player = uinamespace getvariable ["vn_an_inv_player", controlNull];
-// systemchat str [ctrlPosition _test_grid_player];
-
 
 if!(_btn in [0])exitWith{};
 
@@ -45,10 +41,22 @@ if(_usedSlots isEqualto [])then
 //////////////////////////////////////////////
 //ToDo: a shitload of stuff... get Type, get offset, icon... omg...
 
-_item_data = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
+_item_class = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
+private _cfg_Path = missionConfigFile >> "cfgAn_items";
+
+private _item_data_size = getArray(_cfg_Path >> _item_class >> "size");
+private _item_data_canFlip = getNumber(_cfg_Path >> _item_class >> "canFlip");
+private _item_data_cfgBase = getText(_cfg_Path >> _item_class >> "configBase");
+private _item_data_class_base = getText(_cfg_Path >> _item_class >> "classname");
+
+private _item_data = [_item_class,_item_data_size,_item_data_canFlip,_item_data_cfgBase,_item_data_class_base];
+
+
+
+
 // systemchat str [_item_data];
-if(_item_data isEqualto [])exitWith{systemchat "INV_MPOS: NO ITEM FOUND"};
-_item_data params["_item_data_size","_item_data_name","_item_data_canFlip"];
+// if(_item_data isEqualto [])exitWith{systemchat "INV_MPOS: NO ITEM FOUND"};
+// _item_data params["_item_data_size","_item_data_name","_item_data_canFlip"];
 
 _offset_data = [];
 for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
