@@ -29,7 +29,7 @@ if(_usedSlots isEqualto [])then
 		for "_idc" from 0 to (_inv_size_x-1) do
 		{
 			_ctrl = _ctrlGrp controlsGroupCtrl (_idc_mod + _idc);
-			_ctrl ctrlSetTextColor [0,0,0,0.3];
+			_ctrl ctrlSetTextColor [0,0,0,1];
 			_ctrl ctrlCommit 0;
 		};
 	};
@@ -107,7 +107,7 @@ if(_canAdd)then
 	{
 		_x params ["_idc","_gridPos"];
 		private _tile = _ctrlGrp controlsGroupCtrl _idc;
-		_tile ctrlSetTextColor [1,0,0,0.3];
+		_tile ctrlSetTextColor [0.2,0.2,0.2,0.5];
 		_usedSlots pushbackUnique _gridPos;
 	}forEach _tile_list;
 	

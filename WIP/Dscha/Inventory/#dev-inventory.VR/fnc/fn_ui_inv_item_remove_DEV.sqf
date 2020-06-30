@@ -30,7 +30,7 @@ while{!(_usedSlots_item isEqualTo [])}do
 	
 	_idc = _grid#_p_y#_p_x#2;
 	private _ctrl_grid = _ctrl_grid controlsGroupCtrl _idc;
-	_ctrl_grid ctrlSetTextColor [0,0,0,0.3];
+	_ctrl_grid ctrlSetTextColor [0,0,0,1];
 	_ctrl_grid ctrlCommit 0;
 	
 	_index = _grid_usedSlots findIf {_x isEqualTo [_p_x,_p_y]};

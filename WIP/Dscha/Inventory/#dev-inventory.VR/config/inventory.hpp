@@ -19,7 +19,7 @@ class tile_base: RscPicture
 	w = UIW(TILE_W);
 	h = UIH(TILE_H);
 	
-	colorText[] = {0,0,0,0.3};
+	colorText[] = {0,0,0,0.8};
 	colorBackground[] = {1,1,1,1};
 	
 	sizeEx = TXT_M;
@@ -54,7 +54,7 @@ class inv_icon: vn_RscControlsGroupNoScrollbarHV
 			h = UIH(TILE_H);	//final size will be defined in function
 			
 			colorText[] = {0.1,0.1,0.1,0.9};
-			colorBackground[] = {0,0,0.5,0.2};
+			colorBackground[] = {0,0,0.0,0.2};
 			text = "";
 			sizeEx = TXT_M;
 		};
@@ -111,7 +111,7 @@ class vn_an_inventory
 			h = safeZoneH;
 			
 			colorText[] = {0.0,0.0,0.0,0.0};
-			colorBackground[] = {0,0,0,0.1};
+			colorBackground[] = {0.2,0.2,0.2,0.4};
 			text = "";
 			sizeEx = TXT_M;
 		};
@@ -170,8 +170,8 @@ class vn_an_inventory
 							w = UIW(WIDTH);
 							h = UIH(HEIGHT);
 							
-							colorText[] = {0.1,0.1,0.1,0.9};
-							colorBackground[] = {0,0,0.5,0.4};
+							colorText[] = {0.3,0.3,0.3,0.95};
+							colorBackground[] = {0.3,0.3,0.3,0.95};
 							text = "";
 							sizeEx = TXT_M;
 						};
@@ -232,8 +232,8 @@ class vn_an_inventory
 							w = UIW(WIDTH);
 							h = UIH(HEIGHT);
 							
-							colorText[] = {0.1,0.1,0.1,0.9};
-							colorBackground[] = {0,0,0.5,0.4};
+							colorText[] = {0.3,0.3,0.3,0.95};
+							colorBackground[] = {0.3,0.3,0.3,0.95};
 							text = "";
 							sizeEx = TXT_M;
 						};
