@@ -40,6 +40,7 @@ vn_an_inv_size_x = 8;	//0-X (so -1 of the actual ColCount) - FIXED SIZE - ALWAYS
 vn_an_inv_size_y = call vn_an_fnc_ui_inv_grid_getSize;
 
 vn_an_inv_move_placeHorizontal = true;
+vn_an_ui_inv_grabActive = false;
 
 ////// Create Inventory for Player and Ground
 //create Player Inventory grid array
@@ -112,19 +113,27 @@ _disp displayAddEventhandler ["KeyDown",
 
 vn_an_DEV_MouseEH =
 {
+	//executed from grabbed Item ctrl
+	disableSerialization;
 	params ["_ctrl", "_btn", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 	// systemchat str ["Btn:",_btn];
 	
-	//TODO: Reset to old Pos, instead of deleting
-	// if(_btn == 1)exitWith
-	// {
-		// ctrlDelete _ctrl;
-	// };
-	
-	if(_btn == 0)exitWith
+	//RMB - Reset to old Pos
+	if(_btn == 1 && vn_an_ui_inv_grabActive)then
+	{
+		private _data_prev = _ctrl getVariable ["item_data_prev",[]];
+		_data_prev spawn vn_an_fnc_ui_inv_item_create;
+		vn_an_ui_inv_grabActive = false;	//triggers the deletion of the temp Item
+	};
+	//LMB - Place Item
+	if(_btn == 0)then
 	{
 		// ctrlDelete _ctrl;
 		_this call vn_an_fnc_ui_inv_mPos_check;
 		ctrlDelete _ctrl;
+		vn_an_ui_inv_grabActive = false;
 	};
+	
+	//NEEDED!
+	true
 };

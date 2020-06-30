@@ -11,7 +11,7 @@ params ["_ctrl", ["_btn",1,[0]]];//, "_xPos", "_yPos", "_btn_shift", "_btn_ctrl"
 if(_btn != 1)exitWith{};
 
 //get the used slots from that Item
-(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_usedSlots_item"];
+(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_usedSlots_item","_item_class"];
 _ctrl_grid = ctrlParentControlsGroup _ctrl;
 _ctrl_grid_idc = ctrlIDC _ctrl_grid;
 // systemchat str ["FNC_TEST: ", _ctrl_grid," - _usedSlots = ",_usedSlots];
@@ -42,9 +42,12 @@ while{!(_usedSlots_item isEqualTo [])}do
 };
 
 missionNameSpace setVariable [_varName_activeCtrl,_grid_usedSlots];
+
 //////////// WARNING:
 //NOT SPAWNING the ctrlDelete (executing in the same frame(?)) -> !! ARMA CRASH !!
 _ctrl spawn {ctrlDelete _this;};
+//////////// WARNING:
+
 
 // systemchat str ["_usedSlots_item: ",_usedSlots_item];
 // systemchat str ["_grid_usedSlots: ",_grid_usedSlots];

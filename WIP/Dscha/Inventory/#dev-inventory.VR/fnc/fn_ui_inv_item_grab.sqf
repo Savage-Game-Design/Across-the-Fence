@@ -1,7 +1,10 @@
 disableSerialization;
 	
+	if(vn_an_ui_inv_grabActive)exitWith{systemchat "vn_an_ui_inv_grabActive already active";};
+	vn_an_ui_inv_grabActive = true;
 	params ["_ctrl", "_btn", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
-	(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_usedSlots_item","_item_class"];
+	(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_item_usedSlots","_item_class"];
+	// systemchat str [(_ctrl getVariable ["item_data",[]])];
 	(ctrlPosition _ctrl) params["_p_x","_p_y","_p_w","_p_h"];
 	missionNameSpace setVariable ["vn_an_inv_itemActive",_item_class];
 	
@@ -27,6 +30,11 @@ disableSerialization;
 		};
 	}forEach[100,200];
 	
+	
+	_ctrlGrp_item setVariable ["item_data_prev",[(ctrlParentControlsGroup _ctrl),_p_x,_p_y,_item_class,_item_usedSlots]];
+	
+	
+	
 	//hide old one
 	[_ctrl] call vn_an_fnc_ui_inv_item_remove_DEV;
 	
@@ -36,8 +44,7 @@ disableSerialization;
 	{
 		params["_ctrl","_offset_x","_offset_y"];
 		
-		
-		while{!isNull _ctrl}do
+		while{vn_an_ui_inv_grabActive}do
 		{
 			getMousePosition params["_mPos_x","_mPos_y"];
 			_ctrl ctrlSetPositionX (_mPos_x-0.001); //(_mPos_x+_offset_x);

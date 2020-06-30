@@ -17,8 +17,8 @@ private _gridSize_y = _inv_size_y;	//INT - variable amout of slots
 if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
 
 
-_varName_activeCtrl = format["vn_an_inv_tileUsage_%1",(ctrlIDC _ctrlGrp)];
-_usedSlots = missionNameSpace getVariable [_varName_activeCtrl,[]];
+private _varName_activeCtrl = format["vn_an_inv_tileUsage_%1",(ctrlIDC _ctrlGrp)];
+private _usedSlots = missionNameSpace getVariable [_varName_activeCtrl,[]];
 
 //////////////////////////////////////////////
 //DEV: Reset whole grid to standard Colors
@@ -28,7 +28,7 @@ if(_usedSlots isEqualto [])then
 	{
 		for "_idc" from 0 to (_inv_size_x-1) do
 		{
-			_ctrl = _ctrlGrp controlsGroupCtrl (_idc_mod + _idc);
+			private _ctrl = _ctrlGrp controlsGroupCtrl (_idc_mod + _idc);
 			_ctrl ctrlSetTextColor [0,0,0,1];
 			_ctrl ctrlCommit 0;
 		};
@@ -39,8 +39,8 @@ if(_usedSlots isEqualto [])then
 
 
 //////////////////////////////////////////////
-_item_class = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
-_item_data = _item_class call vn_an_fnc_ui_inv_item_getData;
+private _item_class = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
+private _item_data = _item_class call vn_an_fnc_ui_inv_item_getData;
 _item_data params
 [
 	 "_item_data_size"
@@ -49,7 +49,7 @@ _item_data params
 	,"_item_data_class_base"
 ];
 
-_offset_data = [];
+private _offset_data = [];
 for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
 {
 	for "_col" from 0 to ((_item_data_size#1)-1) do	//Index start 0 == -1 = correct Index Pos
@@ -58,6 +58,7 @@ for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct 
 	};
 };
 
+//_usedSlots == taken positions in Grid, needed to free up the needed Slots later
 private _offset_pos = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offset will determined from this position)
 {
 	_x params["_px","_py"];
@@ -103,10 +104,12 @@ if(_canAdd)then
 	}forEach _tile_list;
 	
 	missionNameSpace setVariable [_varName_activeCtrl,_usedSlots];
-	//Add icon to this position
-	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
+	
+	//get position of TopLeft grid slot (will always be used)
+	private _ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
 	
+	//Add icon to this position
 	[_ctrlGrp,_px,_py,_item_class,_offset_pos] call vn_an_fnc_ui_inv_item_create;
 };
 

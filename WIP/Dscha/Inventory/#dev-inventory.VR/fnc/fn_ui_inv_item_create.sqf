@@ -82,14 +82,5 @@ _ctrlGrp_item ctrlCommit 0;
 	};
 }forEach[100,200];
 
-
-/*
-	Store data if this Item:
-	[
-		curent pos in Grid
-		occupied slots
-	]
-*/
-
 // systemchat str ["ctrlCreate: _item_data: ", _item_data];
 _ctrlGrp_item setVariable ["item_data",[[_pos_x,_pos_y,_ctrlGrp_item_w,_ctrlGrp_item_h],_usedSlots,_item_class]];
