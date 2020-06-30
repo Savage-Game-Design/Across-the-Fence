@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=513;
 	class ItemIDProvider
 	{
 		nextID=5;
@@ -105,7 +105,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={4095.5129,5.0014391,4102.8169};
+						position[]={4095.7705,5.0014391,4102.5698};
 					};
 					side="West";
 					flags=7;

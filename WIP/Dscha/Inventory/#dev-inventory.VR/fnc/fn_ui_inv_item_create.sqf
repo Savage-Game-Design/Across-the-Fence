@@ -17,20 +17,16 @@
 
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
-params["_ctrl_invGrid","_pos_x","_pos_y","_item_data","_usedSlots"];
+params["_ctrl_invGrid","_pos_x","_pos_y","_item_class","_usedSlots"];
 
-_item_data params
+//get Item data from config
+(_item_class call vn_an_fnc_ui_inv_item_getData) params
 [
-	 ["_item_class","",[""]]
-	,["_item_size",[-1,-1],[]]
-	,["_canFlip",0,[0]]
-	,["_cfgBase","",[""]]
-	,["_class_base","",[""]]
+	 "_item_size"
+	,"_canFlip"
+	,"_cfgBase"
+	,"_class_base"
 ];
-
-if(_item_size isEqualTo [-1,-1])exitWith{};
-
-//_item == placeholder (just a string)
 
 private _disp = uinamespace getvariable ["vn_an_inventory", DisplayNull];
 //create the Icon
@@ -96,4 +92,4 @@ _ctrlGrp_item ctrlCommit 0;
 */
 
 // systemchat str ["ctrlCreate: _item_data: ", _item_data];
-_ctrlGrp_item setVariable ["item_data",[[_pos_x,_pos_y,_ctrlGrp_item_w,_ctrlGrp_item_h],_usedSlots,_item_data]];
+_ctrlGrp_item setVariable ["item_data",[[_pos_x,_pos_y,_ctrlGrp_item_w,_ctrlGrp_item_h],_usedSlots,_item_class]];

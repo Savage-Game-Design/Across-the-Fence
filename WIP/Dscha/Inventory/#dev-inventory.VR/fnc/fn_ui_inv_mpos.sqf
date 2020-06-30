@@ -39,24 +39,15 @@ if(_usedSlots isEqualto [])then
 
 
 //////////////////////////////////////////////
-//ToDo: a shitload of stuff... get Type, get offset, icon... omg...
-
 _item_class = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
-private _cfg_Path = missionConfigFile >> "cfgAn_items";
-
-private _item_data_size = getArray(_cfg_Path >> _item_class >> "size");
-private _item_data_canFlip = getNumber(_cfg_Path >> _item_class >> "canFlip");
-private _item_data_cfgBase = getText(_cfg_Path >> _item_class >> "configBase");
-private _item_data_class_base = getText(_cfg_Path >> _item_class >> "classname");
-
-private _item_data = [_item_class,_item_data_size,_item_data_canFlip,_item_data_cfgBase,_item_data_class_base];
-
-
-
-
-// systemchat str [_item_data];
-// if(_item_data isEqualto [])exitWith{systemchat "INV_MPOS: NO ITEM FOUND"};
-// _item_data params["_item_data_size","_item_data_name","_item_data_canFlip"];
+_item_data = _item_class call vn_an_fnc_ui_inv_item_getData;
+_item_data params
+[
+	 "_item_data_size"
+	,"_item_data_canFlip"
+	,"_item_data_cfgBase"
+	,"_item_data_class_base"
+];
 
 _offset_data = [];
 for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
@@ -116,7 +107,7 @@ if(_canAdd)then
 	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
 	
-	[_ctrlGrp,_px,_py,_item_data,_offset_pos] call vn_an_fnc_ui_inv_item_create;
+	[_ctrlGrp,_px,_py,_item_class,_offset_pos] call vn_an_fnc_ui_inv_item_create;
 };
 
 

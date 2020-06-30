@@ -30,6 +30,7 @@ vn_an_fnc_ui_inv_mPos_check = compile preprocessFileLineNumbers "fnc\fn_ui_inv_m
 vn_an_fnc_ui_inv_mpos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_mpos.sqf";
 vn_an_fnc_ui_inv_item_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_create.sqf";
 vn_an_fnc_ui_inv_item_remove_DEV = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_remove_DEV.sqf";
+vn_an_fnc_ui_inv_item_getData = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_getData.sqf";
 vn_an_fnc_ui_inv_item_grab = compile preprocessFileLineNumbers "fnc\fn_ui_inv_item_grab.sqf";
 
 
@@ -46,27 +47,29 @@ private _ctrlGrp_pers = uinamespace getvariable ["vn_an_inv_player", controlNull
 [_disp,_ctrlGrp_pers,vn_an_inv_size_x, vn_an_inv_size_y] call vn_an_fnc_ui_inv_grid_create;
 
 //DEV: Create an Item in the Container Grid
+//TODO: Use gridPos, instead of mousePosition!
 {
 	missionNameSpace setVariable ["vn_an_inv_itemActive",(_x#0)];
 	[_ctrlGrp_pers,0,(_x#1),(_x#2),false,false,false] call vn_an_fnc_ui_inv_mPos;
 }forEach
 [
-	 ["arifle_MX_F"	,0.0160714,0.0146826]
-	,["magazine"	,0.0160714,0.0146826]
-	,["magazine"	,0.0190476,0.0285715]
-	,["magazine"	,0.0205356,0.189286]
-	,["magazine"	,0.0607142,0.185317]
-	,["magazine"	,0.0979165,0.185317]
-	,["magazine"	,0.142559,0.193254]
-	,["magazine"	,0.0160713,0.244841]
-	,["magazine"	,0.0681546,0.24881]
-	,["B_AssaultPack_blk"	,0.0130952,0.298413]
+	 ["arifle_MX_F"			,0.0160714,0.0146826]
+	,["magazine"			,0.0116071,0.173413]
+	,["magazine"			,0.105357,0.177381]
+	,["magazine"			,0.190179,0.175397]
+	,["magazine"			,0.041369,0.256746]
+	,["magazine"			,0.135119,0.250794]
+	,["magazine"			,0.190179,0.252778]
+	,["magazine"			,0.18869,0.379762]
+	,["magazine"			,0.191667,0.455159]
+	,["magazine"			,0.185714,0.570238]
+	,["B_AssaultPack_blk"	,0.0130952,0.340079]
 ];
 
 diag_log "-----------------------------------------------";
 //create "Ground Inventory" grid array
 private _ctrlGrp_cont = uinamespace getvariable ["vn_an_inv_player_b", controlNull];
-[_disp,_ctrlGrp_cont,vn_an_inv_size_x, 9] call vn_an_fnc_ui_inv_grid_create;
+[_disp,_ctrlGrp_cont,vn_an_inv_size_x, 10] call vn_an_fnc_ui_inv_grid_create;
 
 
 

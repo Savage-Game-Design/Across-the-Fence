@@ -66,4 +66,6 @@ class magazine :items_base
 {
 	classname = "20Rnd_762x51_Mag";
 	name = "7.62 mm 20Rnd Mag";
+	
+	size[] = {2,2};
 };
