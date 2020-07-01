@@ -47,7 +47,7 @@ vn_an_ui_inv_grabActive = false;
 private _ctrlGrp_pers = uinamespace getvariable ["vn_an_inv_player", controlNull];
 [_disp,_ctrlGrp_pers,vn_an_inv_size_x, vn_an_inv_size_y] call vn_an_fnc_ui_inv_grid_create;
 
-//DEV: Create an Item in the Container Grid
+//DEV: Create Items in a Grid
 //TODO: Use gridPos, instead of mousePosition!
 {
 	missionNameSpace setVariable ["vn_an_inv_itemActive",(_x#0)];

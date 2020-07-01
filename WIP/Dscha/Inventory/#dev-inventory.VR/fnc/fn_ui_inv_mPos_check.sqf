@@ -29,7 +29,7 @@ private _mPos = [_mPos_x,_mPos_y];
 		{
 			_ctrl_toPass = uinameSpace getVariable [_var_toPass,controlNull];
 			[_ctrl_toPass,_btn,(_mPos_x - _p_x),(_mPos_y - _p_y),_btn_shift,_btn_ctrl,_btn_alt] call vn_an_fnc_ui_inv_mpos;
-			diag_log [(_mPos_x - _p_x),(_mPos_y - _p_y)];
+			// diag_log [(_mPos_x - _p_x),(_mPos_y - _p_y)];
 		};
 	};
 }forEach[
