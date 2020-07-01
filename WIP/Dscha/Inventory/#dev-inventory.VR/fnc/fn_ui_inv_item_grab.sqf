@@ -52,8 +52,8 @@ disableSerialization;
 		while{vn_an_ui_inv_grabActive}do
 		{
 			getMousePosition params["_mPos_x","_mPos_y"];
-			_ctrl ctrlSetPositionX (_mPos_x-0.001); //(_mPos_x+_offset_x);
-			_ctrl ctrlSetPositionY (_mPos_y-0.001); //(_mPos_y+_offset_y);
+			_ctrl ctrlSetPositionX (_mPos_x-0.003); //(_mPos_x+_offset_x);
+			_ctrl ctrlSetPositionY (_mPos_y-0.004); //(_mPos_y+_offset_y);
 			_ctrl ctrlCommit 0;
 		};
 		ctrlDelete _ctrl;

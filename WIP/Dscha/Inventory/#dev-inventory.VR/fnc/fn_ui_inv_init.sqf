@@ -24,6 +24,11 @@ vn_an_fnc_ui_inv_grid_getSize = compile preprocessFileLineNumbers "fnc\fn_ui_inv
 vn_an_fnc_ui_inv_grid_create = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_create.sqf";
 vn_an_fnc_ui_inv_grid_isPosIn = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_isPosIn.sqf";
 vn_an_fnc_ui_inv_grid_getPos = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_getPos.sqf";
+vn_an_fnc_ui_inv_grid_check_freeTiles = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_check_freeTiles.sqf";
+vn_an_fnc_ui_inv_grid_updateTiles = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_updateTiles.sqf";
+
+// DEBUG function:
+vn_an_fnc_ui_inv_grid_resetColor = compile preprocessFileLineNumbers "fnc\fn_ui_inv_grid_resetColor.sqf";
 
 //handling
 vn_an_fnc_ui_inv_mPos_check = compile preprocessFileLineNumbers "fnc\fn_ui_inv_mPos_check.sqf";
@@ -128,10 +133,7 @@ vn_an_DEV_MouseEH =
 	//LMB - Place Item
 	if(_btn == 0)then
 	{
-		// ctrlDelete _ctrl;
 		_this call vn_an_fnc_ui_inv_mPos_check;
-		ctrlDelete _ctrl;
-		vn_an_ui_inv_grabActive = false;
 	};
 	
 	//NEEDED!

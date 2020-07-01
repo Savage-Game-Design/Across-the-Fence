@@ -19,7 +19,7 @@ class tile_base: RscPicture
 	w = UIW(TILE_W);
 	h = UIH(TILE_H);
 	
-	colorText[] = {0,0,0,0.8};
+	colorText[] = {0,0,0,1};
 	colorBackground[] = {1,1,1,1};
 	
 	sizeEx = TXT_M;
