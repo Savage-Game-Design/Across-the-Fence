@@ -12,19 +12,21 @@ vn_an_arrows = [];
 
 vn_an_fnc_debug_loot_bubble =
 {
+	_ticktime = diag_tickTime;
 	_seed = 9283;
 	_chance = 0.99;
 	_grid_size = 1;
 	_grid_x = 0;
 	_grid_y = 0;
-	_grid_rows = 50;
+	_grid_rows = 10;
+	_total_rows = _grid_rows*_grid_rows;
 	_row_counter = 0;
 	_offset = -((_grid_rows*_grid_size)/2);
 	_playerpos = getPosASL player;
 	_startpos = [floor(_playerpos#0),floor(_playerpos#1),floor(_playerpos#2)] vectorAdd [_offset,_offset,0];
 	_color = "#(rgb,8,8,3)color(1,0,0,1)";
 
-	for "_i" from 0 to (_grid_rows*_grid_rows) do
+	for "_i" from 0 to _total_rows do
 	{
 		_grid_x = _grid_x + _grid_size;
 		if (_row_counter >= _grid_rows) then
@@ -54,7 +56,7 @@ vn_an_fnc_debug_loot_bubble =
 					true,
 					1,
 					"GEOM",
-					"NONE"
+					"VIEW"
 				];
 
 				if !(_ins isEqualTo []) then
@@ -76,6 +78,7 @@ vn_an_fnc_debug_loot_bubble =
 			};
 		};
 	};
+	hintSilent str (diag_tickTime - _ticktime);
 };
 
 0 spawn {

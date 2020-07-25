@@ -1,3 +1,23 @@
+
+/*
+	inventory schema WIP - basic concept is that a player only has one single inventory and can access ground,vehicle,crate inventory.
+	Notes:	- each item has a unique name
+		- attempt to use setUnitLoadout to apply changes to apperance and weapons,etc for actual use.
+
+	// 	classname 	, rarity , durability	, storage		, status (0=not equipped/attached, 1=equipped, 2=attached)
+	[
+		"GunItem1"   	, 0	 , 100		, ["Ammo1","Silencer1"]	, 1
+		"Ammo1"   	, 0	 , 100		, []			, 2
+		"Silencer1"   	, 0	 , 100		, []			, 2
+		"GunItem2"   	, 0	 , 100		, []			, 0
+	]
+
+	// todo equpped items array for use with tracking durability when used/damaged
+
+	// only fire inventory update if changes detected locally or timeout based.
+
+*/
+
 mf_an_fnc_getConfig =
 {
 	_weapon = configFile >> "CfgWeapons" >> _x;
@@ -13,9 +33,16 @@ mf_an_fnc_getConfig =
 };
 
 mf_an_rarity = [
-	["Rare", [0,1,1]],
-	["Junk", [0,0,0]]
+	["Junk", [0.5,0.5,0.5,0.5]],	 // 0
+	["Normal", [1,1,1,0.5]],
+	["Medical", [0,0,1,0.5]],
+	["Consumable", [0,1,0,0.5]],
+	["Rare", [0.85,0.85,0,0.5]],
+	["Legendary ", [0.85,0.4,0,0.5]]
 ];
+
+
+
 
 [] spawn
 {
@@ -30,7 +57,7 @@ mf_an_rarity = [
 
 	_menu = _display ctrlCreate ["RscControlsGroupNoHScrollbars", 5641];
 	_menu ctrlSetPosition [0, 0, 0, 0];
-	_menu ctrlSetBackgroundColor [0,0,0,1];
+	_menu ctrlSetBackgroundColor [1,1,1,1];
 	_menu ctrlCommit 0;
 
 	_grid_size = 0.125;
@@ -42,7 +69,10 @@ mf_an_rarity = [
 	{
 		_ctrlButton = _display ctrlCreate ["RscStructuredText", -1, _menu];
 		_ctrlButton ctrlSetPosition [_grid_x, _grid_y, _grid_size, _grid_size];
-		_ctrlButton ctrlSetBackgroundColor [0,1,1,0.5];
+
+		_bg_color = selectRandom  mf_an_rarity;
+
+		_ctrlButton ctrlSetBackgroundColor (_bg_color select 1);
 		_ctrlButton ctrlCommit 0;
 		_text = text getText(_x call mf_an_fnc_getConfig >> "displayName");
 		_text setAttributes ["align","center", "font","VeteranTypewriter", "size","0.5"];
