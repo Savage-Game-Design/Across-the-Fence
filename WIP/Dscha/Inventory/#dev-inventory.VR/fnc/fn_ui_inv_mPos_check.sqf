@@ -3,7 +3,7 @@
 
 */
 
-params ["_ctrl", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+params ["_ctrl_item", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 
 
 if(_btn == 1)exitWith{};	//DEV: For now
@@ -14,10 +14,10 @@ uinameSpace setVariable ["vn_an_grid_active",controlNull];
 private _mPos = [_mPos_x,_mPos_y];
 {
 	_x params["_var_toCheck","_var_toPass"];
-	private _ctrl = uinamespace getvariable [_var_toCheck,controlNull];
-	if(!isNull _ctrl)then
+	private _ctrl_grid = uinamespace getvariable [_var_toCheck,controlNull];
+	if(!isNull _ctrl_grid)then
 	{
-		(ctrlPosition _ctrl) params["_p_x","_p_y","_p_w","_p_h"];
+		(ctrlPosition _ctrl_grid) params["_p_x","_p_y","_p_w","_p_h"];
 		_w_halved = _p_w / 2;
 		_h_halved = _p_h / 2;
 		_x_center = _p_x + _w_halved;

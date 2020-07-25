@@ -6,12 +6,12 @@
 
 disableSerialization;
 
-params ["_ctrl", "_btn", "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+params ["_ctrl", ["_btn",1,[0]]];//, "_xPos", "_yPos", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 // _xPos,_yPos = pos relative to GridPos
 if(_btn != 1)exitWith{};
 
 //get the used slots from that Item
-(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_usedSlots_item"];
+(_ctrl getVariable ["item_data",[]]) params ["_pos_data","_usedSlots_item","_item_class"];
 _ctrl_grid = ctrlParentControlsGroup _ctrl;
 _ctrl_grid_idc = ctrlIDC _ctrl_grid;
 // systemchat str ["FNC_TEST: ", _ctrl_grid," - _usedSlots = ",_usedSlots];
@@ -30,7 +30,7 @@ while{!(_usedSlots_item isEqualTo [])}do
 	
 	_idc = _grid#_p_y#_p_x#2;
 	private _ctrl_grid = _ctrl_grid controlsGroupCtrl _idc;
-	_ctrl_grid ctrlSetTextColor [0,0,0,0.3];
+	_ctrl_grid ctrlSetTextColor [0,0,0,1];
 	_ctrl_grid ctrlCommit 0;
 	
 	_index = _grid_usedSlots findIf {_x isEqualTo [_p_x,_p_y]};
@@ -42,9 +42,12 @@ while{!(_usedSlots_item isEqualTo [])}do
 };
 
 missionNameSpace setVariable [_varName_activeCtrl,_grid_usedSlots];
+
 //////////// WARNING:
 //NOT SPAWNING the ctrlDelete (executing in the same frame(?)) -> !! ARMA CRASH !!
 _ctrl spawn {ctrlDelete _this;};
+//////////// WARNING:
+
 
 // systemchat str ["_usedSlots_item: ",_usedSlots_item];
 // systemchat str ["_grid_usedSlots: ",_grid_usedSlots];

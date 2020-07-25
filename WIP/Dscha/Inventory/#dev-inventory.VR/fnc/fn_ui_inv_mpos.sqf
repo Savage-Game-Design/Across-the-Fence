@@ -1,47 +1,36 @@
 
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 
-params ["_ctrlGrp", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
+params ["_ctrl_grid", "_btn", "_mPos_x", "_mPos_y", "_btn_shift", "_btn_ctrl", "_btn_alt"];
 
 if!(_btn in [0])exitWith{};
 
-(missionNameSpace getVariable [format["vn_an_inv_grid_size_%1",(ctrlIDC _ctrlGrp)],[-1,-1]]) params["_inv_size_x","_inv_size_y"];
-if(_inv_size_x < 0 || _inv_size_y < 0)exitWith{systemchat str ["ITEM_CREATE: GRID NOT SET!",[_inv_size_x,_inv_size_y]];};
-private _gridSize_x = _inv_size_x;	//INT - fixed amout of slots
-private _gridSize_y = _inv_size_y;	//INT - variable amout of slots
+(missionNameSpace getVariable [format["vn_an_inv_grid_size_%1",(ctrlIDC _ctrl_grid)],[-1,-1]]) params["_grid_size_x","_grid_size_y"];
+if(_grid_size_x < 0 || _grid_size_y < 0)exitWith{systemchat str ["ITEM_CREATE: GRID NOT SET!",[_grid_size_x,_grid_size_y]];};
 
 
 //Check if given pos is valid in the Grid. If so -> Return [x,y] pos in Grid
-// systemchat str [ _ctrlGrp ,_mPos_x ,_gridSize_x ,_mPos_y ,_gridSize_y ];
-([_ctrlGrp,_mPos_x,_gridSize_x,_mPos_y,_gridSize_y] call vn_an_fnc_ui_inv_grid_getPos) params["_tile_x","_tile_y"];
-if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{};//systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
+// systemchat str [ _ctrl_grid ,_mPos_x ,_grid_size_x ,_mPos_y ,_grid_size_y ];
+([_ctrl_grid,_mPos_x,_grid_size_x,_mPos_y,_grid_size_y] call vn_an_fnc_ui_inv_grid_getPos) params["_tile_x","_tile_y"];
+if([_tile_x, _tile_y] isEqualto [-1,-1])exitWith{/* DEV */ systemchat str["gridPos - out of Bounds",[_tile_x, _tile_y]];};
 
 
-_varName_activeCtrl = format["vn_an_inv_tileUsage_%1",(ctrlIDC _ctrlGrp)];
-_usedSlots = missionNameSpace getVariable [_varName_activeCtrl,[]];
+//Check if DragAndDrop is active. If so -> a suitable pos was found, so we can delete the temp Item, "attached" to the Mouse
+if(vn_an_ui_inv_grabActive)then{ vn_an_ui_inv_grabActive = false; };
+
 
 //////////////////////////////////////////////
-//DEV: Reset whole grid to standard Colors
-if(_usedSlots isEqualto [])then
-{
-	for "_idc_mod" from 0 to ((_gridSize_y-1)*10) step 10 do
-	{
-		for "_idc" from 0 to (_inv_size_x-1) do
-		{
-			_ctrl = _ctrlGrp controlsGroupCtrl (_idc_mod + _idc);
-			_ctrl ctrlSetTextColor [0,0,0,0.3];
-			_ctrl ctrlCommit 0;
-		};
-	};
-};
-//////////////////////////////////////////////
-//ToDo: a shitload of stuff... get Type, get offset, icon... omg...
+private _item_class = missionNameSpace getVariable ["vn_an_inv_itemActive",[]];
+private _item_data = _item_class call vn_an_fnc_ui_inv_item_getData;
+_item_data params
+[
+	 "_item_data_size"
+	,"_item_data_canFlip"
+	,"_item_data_cfgBase"
+	,"_item_data_class_base"
+];
 
-
-_item_data_size = [[3,6],[1,1],[3,3]]#DEV_ITEMTOPLACE;
-_item_data_name = ["data\gun.paa","data\magazine.paa","data\backpack.paa"]#DEV_ITEMTOPLACE;
-_item_data_canFlip = [true,false,false]#DEV_ITEMTOPLACE;
-_offset_data = [];
+private _offset_data = [];
 for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct Index Pos
 {
 	for "_col" from 0 to ((_item_data_size#1)-1) do	//Index start 0 == -1 = correct Index Pos
@@ -50,6 +39,7 @@ for "_row" from 0 to ((_item_data_size#0)-1) do	//Index start 0 == -1 = correct 
 	};
 };
 
+//_tiles_used == taken positions in Grid, needed to free up the needed Slots later
 private _offset_pos = [[_tile_x,_tile_y]];	//store first Pos (needed, since the offset will determined from this position)
 {
 	_x params["_px","_py"];
@@ -63,43 +53,35 @@ private _offset_pos = [[_tile_x,_tile_y]];	//store first Pos (needed, since the 
 
 
 
-//get grid Data from currently active "Grid ctrl"
-private _grid = missionNameSpace getVariable [format["vn_an_inv_grid_%1",(ctrlIDC _ctrlGrp)],[]];
+//Check of all tiles are free
+private _varName_activeCtrl = format["vn_an_inv_tileUsage_%1",(ctrlIDC _ctrl_grid)];
+private _grid_tiles_used = missionNameSpace getVariable [_varName_activeCtrl,[]];
+private _item_tile_usage = [_ctrl_grid,_grid_size_x,_grid_size_y,_offset_pos,_grid_tiles_used] call vn_an_fnc_ui_inv_grid_check_freeTiles;
 
-//ToDo: Reload previous tiles_usage
-private _canAdd = true;
-private _tile_list = [];
-{
-	_x params ["_px","_py"];
-	private _gridPos = [_px,_py];
-	if	(
-				_px > (_gridSize_x-1)				//if exceeds grind limit
-			||	_px < 0								//if exceeds grind limit
-			||	_py > (_gridSize_y-1)				//if exceeds grind limit
-			||	_py < 0								//if exceeds grind limit
-			||	_gridPos in _usedSlots		//if something is already placed there
-		)exitWith{_canAdd = false;};
-	
-	private _tile_idc = _grid#_py#_px#2;
-	_tile_list pushback [_tile_idc,_gridPos];
-}forEach _offset_pos;
 
-// systemchat str [[_tile_x, _tile_y], _canAdd, _tile_list,_usedSlots];
-if(_canAdd)then
+//////////////////////////////////////////////
+//DEV: Reset whole grid to standard Colors (COLORS ONLY!)
+if(_grid_tiles_used isEqualto [])then{  [_grid_size_x, _grid_size_y] call vn_an_fnc_ui_inv_grid_resetColor;  };
+//////////////////////////////////////////////
+
+if!(_item_tile_usage isEqualto [])then
 {
-	{
-		_x params ["_idc","_gridPos"];
-		private _tile = _ctrlGrp controlsGroupCtrl _idc;
-		_tile ctrlSetTextColor [1,0,0,0.3];
-		_usedSlots pushbackUnique _gridPos;
-	}forEach _tile_list;
+	//add all tiles to the "blocked tiles"-array and store it in the Grid-ctrl itself
+	[_ctrl_grid,_grid_tiles_used,_item_tile_usage] call vn_an_fnc_ui_inv_grid_updateTiles;
 	
-	missionNameSpace setVariable [_varName_activeCtrl,_usedSlots];
-	//Add icon to this position
-	_ctrl_topLeft = _ctrlGrp controlsGroupCtrl (_tile_list#0#0);	//get position of TopLeft grid slot (will always be used)
+	//get position of TopLeft grid slot (will always be used)
+	private _ctrl_topLeft = _ctrl_grid controlsGroupCtrl (_item_tile_usage#0#0);
 	(ctrlPosition _ctrl_topLeft) params["_px","_py","_pw","_ph"];
 	
-	[_ctrlGrp,_px,_py,_item_data_name,_item_data_size,_item_data_canFlip,_offset_pos] call vn_an_fnc_ui_inv_item_create;
+	//Add icon to this position
+	[_ctrl_grid,_px,_py,_item_class,_offset_pos] call vn_an_fnc_ui_inv_item_create;
+	
+}else{
+	private _ctrl = uinamespace getVariable ["vn_an_ctrl_active",controlNull];
+	if(isNull _ctrl)exitWith{};
+	private _data_prev = _ctrl getVariable ["item_data_prev",[]];
+	if(_data_prev isEqualto [])exitWith{};
+	_data_prev call vn_an_fnc_ui_inv_item_create;
 };
 
 

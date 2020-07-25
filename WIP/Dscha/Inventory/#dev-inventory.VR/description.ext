@@ -79,11 +79,15 @@ showHUD[] =
 // };
 
 
+//Item definitions
+#include "config\items_baseCfg.hpp"
 
+//UI Defines
 #include "\vn\ui_f_vietnam_c\ui\vn_uiDefines.inc"
 //DEV
 #include "config\vn_baseDefines.hpp"
 
+//Inventory
 #include "config\inventory.hpp"
 
 
