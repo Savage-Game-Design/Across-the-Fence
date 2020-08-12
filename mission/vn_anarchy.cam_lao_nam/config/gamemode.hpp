@@ -64,9 +64,6 @@ class gamemode
 	{
 		#include "subconfigs\playerEventHandler.hpp"
 	};
-	class tasks {
-		#include "subconfigs\tasks\tasks.hpp"
-	};
 	class loadingScreens
 	{
 		#include "subconfigs\loadingScreens.hpp"
@@ -95,7 +92,8 @@ class gamemode
 	{
 		#include "subconfigs\respawns.hpp"
 	};
-	class interaction_overlay {
+	class interaction_overlay
+	{
 		#include "subconfigs\interaction_overlay.hpp"
 	};
 };

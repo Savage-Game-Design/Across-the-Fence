@@ -2,9 +2,7 @@
 #include "defines.hpp"
 // Functions
 #include "functions.hpp"
-// Paradigm's configs
-#include "..\paradigm\client\config.hpp"
-#include "..\paradigm\server\config.hpp"
+
 // Gamemode
 #include "gamemode.hpp"
 // UI
