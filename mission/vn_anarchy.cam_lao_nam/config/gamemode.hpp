@@ -4,10 +4,6 @@ class gamemode
 	{
 		#include "subconfigs\difficulty.hpp"
 	};
-	class rehandler
-	{
-		#include "subconfigs\rehandler.hpp"
-	};
 	class performance
 	{
 		#include "subconfigs\performance.hpp"
@@ -16,6 +12,22 @@ class gamemode
 	{
 		#include "subconfigs\keys.hpp"
 	};
+	class buildables
+	{
+		#include "subconfigs\buildables.hpp"
+	};
+	class supplydrops
+	{
+		#include "subconfigs\supplydrops.hpp"
+	};
+	class traits
+	{
+		#include "subconfigs\traits.hpp"
+	};
+	class crates
+	{
+		#include "subconfigs\crates.hpp"
+	};
 	class rank
 	{
 		#include "subconfigs\rank.hpp"
@@ -23,6 +35,14 @@ class gamemode
 	class stats
 	{
 		#include "subconfigs\stats.hpp"
+	};
+	class awards_config
+	{
+		#include "subconfigs\awards_config.hpp"
+	};
+	class awards
+	{
+		#include "subconfigs\awards.hpp"
 	};
 	class health
 	{
@@ -34,19 +54,22 @@ class gamemode
 	};
 	class missionEventHandler
 	{
-		#include "subconfigs\missioneventhandler.hpp"
+		#include "subconfigs\missionEventHandler.hpp"
 	};
 	class displayEventHandler
 	{
-		#include "subconfigs\displayeventhandler.hpp"
+		#include "subconfigs\displayEventHandler.hpp"
 	};
 	class playerEventHandler
 	{
-		#include "subconfigs\playereventhandler.hpp"
+		#include "subconfigs\playerEventHandler.hpp"
+	};
+	class tasks {
+		#include "subconfigs\tasks\tasks.hpp"
 	};
 	class loadingScreens
 	{
-		#include "subconfigs\loadingscreens.hpp"
+		#include "subconfigs\loadingScreens.hpp"
 	};
 	class masterloop
 	{
@@ -55,5 +78,24 @@ class gamemode
 	class vars
 	{
 		#include "subconfigs\vars.hpp"
+	};
+	class rehandler
+	{
+		#include "subconfigs\rehandler.hpp"
+	};
+	class vehicle_respawn_info
+	{
+		#include "subconfigs\vehicle_respawn_info.hpp"
+	};
+	class zone_connections
+	{
+		#include "subconfigs\zone_connections.hpp"
+	};
+	class respawns
+	{
+		#include "subconfigs\respawns.hpp"
+	};
+	class interaction_overlay {
+		#include "subconfigs\interaction_overlay.hpp"
 	};
 };

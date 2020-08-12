@@ -4,15 +4,15 @@
     Date: 2020-01-29
     Last Update: 2020-06-12
     Public: No
-    
+
     Description:
 		Initialize player.
-    
+
     Parameter(s):
 		_player - Player [Object, defaults to objNull]
-    
+
     Returns: nothing
-    
+
     Example(s):
 		[player] remoteExec ["vn_mf_fnc_init_player",2];
 */
@@ -119,10 +119,10 @@ _player addMPEventHandler ["MPRespawn",{call vn_mf_fnc_player_respawn_loc}];
 [_player] call para_s_fnc_harass_add_player_event_handlers;
 
 // send all variables to player
-[_local_vars] remoteExecCall ["vn_mf_fnc_set_local_var",_player];
+[_local_vars] remoteExecCall ["para_c_fnc_set_local_var",_player];
 
 // execute stage 2 of login
-[] remoteExec ["vn_mf_fnc_start_game_stage2",_player];
+[] remoteExec ["vn_an_fnc_start_game_stage2",_player];
 
 _player setVariable ["vn_mf_dyn_issetup", true];
 

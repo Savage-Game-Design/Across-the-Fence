@@ -1,21 +1,91 @@
-key_down_actions[] =
+//--- Key down actions:
+class vn_mf_keydown_escape_action
 {
-	{"vn_an_debug_monitor_action",41,"vn_an_fnc_enable_debug_monitor"},
-	//{"vn_an_task_roster_action",35,"vn_an_fnc_enable_task_roster"},
-
-
-	{"vn_an_keydown_shift_action",42,"vn_an_fnc_enable_keydown_shift"},
-	{"vn_an_keydown_ctrl_action",29,"vn_an_fnc_enable_keydown_ctrl"},
-	{"vn_an_keydown_alt_action",56,"vn_an_fnc_enable_keydown_alt"},
-
-	//{"vn_an_build_cycle1_action",201,"vn_an_fnc_enable_build_cycle1"},
-	//{"vn_an_build_cycle2_action",209,"vn_an_fnc_enable_build_cycle2"}
+	defaultKey = 1;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "para_c_fnc_abort_building";
+	down = 1;
+	displayName = "";
+	access = 0;
 };
-key_up_actions[] =
+class vn_mf_keydown_enable_selector
 {
-	{"vn_an_keydown_shift_action_up",42,"vn_an_fnc_enable_keyup_shift"},
-	{"vn_an_keydown_ctrl_action_up",29,"vn_an_fnc_enable_keyup_ctrl"},
-	{"vn_an_keydown_alt_action_up",56,"vn_an_fnc_enable_keyup_alt"},
+	defaultKey = 7;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "vn_mf_fnc_enable_selector";
+	down = 1;
+	displayName = $STR_vn_mf_keybindings_selector;
+	access = 1;
+};
+class para_vote_1
+{
+	defaultKey = 59;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "para_c_fnc_vote_1";
+	down = 1;
+	displayName = "Vote for Option #1";
+	access = 1;
+};
+class para_vote_2
+{
+	defaultKey = 60;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "para_c_fnc_vote_2";
+	down = 1;
+	displayName = "Vote for Option #2";
+	access = 1;
+};
+class para_vote_3
+{
+	defaultKey = 61;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "para_c_fnc_openVoteMenu";
+	down = 1;
+	displayName = "Open Voting Menu";
+	access = 1;
+};
 
-	//{"vn_an_build_mode_action_up",49,"vn_an_fnc_enable_build_mode"}
+//--- Key up actions:
+class vn_mf_debug_monitor_action
+{
+	defaultKey = 41;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "vn_mf_fnc_enable_debug_monitor";
+	down = 0;
+	displayName = $STR_vn_mf_keybindings_debug_monitor;
+	access = 1;
+};
+class vn_mf_task_roster_action
+{
+	defaultKey = 35;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "vn_mf_fnc_enable_task_roster";
+	down = 0;
+	displayName = $STR_vn_mf_keybindings_task_roster;
+	access = 1;
+};
+class vn_mf_build_mode_action_up
+{
+	defaultKey = 49;
+	shift = "false";
+	ctrl = "false";
+	alt = "false";
+	function = "para_c_fnc_toggle_buildmode";
+	down = 0;
+	displayName = $STR_vn_mf_keybindings_build_mode;
+	access = 1;
 };

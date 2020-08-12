@@ -1,6 +1,6 @@
 class MouseButtonUp			// mouse up (LMB RMB MMB) handler
 {
-	// optional: - files[] = {"eventHandlers\display\eh_KeyDown.sqf"};
+	// optional: - files[] = {"eventhandlers\display\eh_KeyDown.sqf"};
 };
 class MouseButtonDown {};		// mouse down (LMB RMB MMB) handler
 class MouseZChanged {};			// mouse scroll EH

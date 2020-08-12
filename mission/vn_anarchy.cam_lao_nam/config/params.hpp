@@ -10,12 +10,75 @@
 
 class ai_quantity
 {
-	title = "AI Quantity";
+	title = $STR_vn_mf_ai_quantity;
 	values[] = {0, 1};
 	texts[] = {"Debug", "Normal"};
 	default = 1;
 };
 
+class buildables_require_vehicles
+{
+    title = $STR_vn_mf_buildables_require_vehicles;
+    values[] = {0, 1};
+    texts[] = {"False", "True"};
+    default = 0;
+};
+
+class dawn_length
+{
+    title = $STR_vn_mf_dawn_length;
+    values[] = {600, 1200, 1800, 2400, 3600, 5400, 7200, 9000, 10800};
+    texts[] = {"10 minutes", "20 minutes", "30 minutes", "40 minutes", "1 hour", "1.5 hours", "2 hours", "2.5 hours", "3 hours"};
+    default = 1200;
+};
+
+class day_length
+{
+    title = $STR_vn_mf_day_length;
+    values[] = {3600, 5400, 7200, 9000, 10800, 21600, 43200, 86400, 172800};
+    texts[] = {"1 hour", "1.5 hours", "2 hours", "2.5 hours", "3 hours", "6 hours", "12 hours", "24 hours", "48 hours"};
+    default = 7200;
+};
+
+class dusk_length
+{
+    title = $STR_vn_mf_dusk_length;
+    values[] = {600, 1200, 1800, 2400, 3600, 5400, 7200, 9000, 10800};
+    texts[] = {"10 minutes", "20 minutes", "30 minutes", "40 minutes", "1 hour", "1.5 hours", "2 hours", "2.5 hours", "3 hours"};
+    default = 1200;
+};
+
+class night_length
+{
+    title = $STR_vn_mf_night_length;
+    values[] = {600, 1200, 1800, 2400, 3600, 5400, 7200, 9000, 10800, 21600, 43200, 86400, 172800};
+    texts[] = {"10 minutes", "20 minutes", "30 minutes", "40 minutes", "1 hour", "1.5 hours", "2 hours", "2.5 hours", "3 hours", "6 hours", "12 hours", "24 hours", "48 hours"};
+    default = 1200;
+};
+
+class always_allow_withstand
+{
+    title = $STR_vn_mf_always_allow_withstand;
+    values[] = {0, 1};
+    texts[] = {"False", "True"};
+    default = 1;
+};
+
+class building_supply_crate_value
+{
+    title = $STR_vn_mf_building_supply_crate_value;
+    values[] = {500};
+    texts[] = {"Default (500)"};
+    default = 500;
+};
+
+class building_sandbag_value
+{
+    title = $STR_vn_mf_building_sandbag_value;
+    values[] = {10};
+    texts[] = {"Default (10)"};
+    default = 10;
+};
 // gamemode specific stop
 
 
@@ -284,7 +347,7 @@ class vn_whitelisted_arsenal_params_enable
     title = $STR_VN_PARAMS_ARSENAL_TOGGLE;
     values[] = {0, 1};
     texts[] = {$STR_VN_MISSIONS_DISABLED, $STR_VN_MISSIONS_ENABLED};
-    default = 1; // TODO change to 0 in release
+    default = 0; // TODO change to 0 in release
 };
 class vn_whitelisted_arsenal_params_scope
 {

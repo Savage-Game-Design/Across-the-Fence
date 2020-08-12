@@ -26,4 +26,4 @@ params
 
 
 // restart master loop
-0 spawn vn_mf_fnc_master_loop_init;
+0 spawn para_c_fnc_compiled_loop_init;

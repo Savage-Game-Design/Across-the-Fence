@@ -1,10 +1,3 @@
-tracking[] =
-{
-	{"hunger","vn_an_fnc_ui_update"},
-	{"thirst","vn_an_fnc_ui_update"},
-	{"rank","vn_an_fnc_player_rank_up"}
-};
-
 class rank
 {
 	min = 0;
@@ -15,12 +8,14 @@ class hunger
 	loss_rate = 0.005;
 	min = 0;
 	max = 1;
+	default = 1;
 };
 class thirst
 {
 	loss_rate = 0.01;
 	min = 0;
 	max = 1;
+	default = 1;
 };
 class attributes
 {
@@ -32,7 +27,6 @@ class attributes
 		{"diuretic"},
 		{2.0}
 	};
-
 };
 class deaths
 {
@@ -74,7 +68,43 @@ class atoakills
 	min = 0;
 	max = 999999;
 };
+class hqdestroyed
+{
+	min = 0;
+	max = 999999;
+};
+
 class revives
+{
+	min = 0;
+	max = 999999;
+};
+class zonesentered
+{
+	min = 0;
+	max = 999999;
+};
+class zonescaptured
+{
+	min = 0;
+	max = 999999;
+};
+class taskscomplete // primary
+{
+	min = 0;
+	max = 999999;
+};
+class teamtaskscomplete // seconary
+{
+	min = 0;
+	max = 999999;
+};
+class supplytaskscomplete // support - alt
+{
+	min = 0;
+	max = 999999;
+};
+class supporttaskscomplete // support
 {
 	min = 0;
 	max = 999999;

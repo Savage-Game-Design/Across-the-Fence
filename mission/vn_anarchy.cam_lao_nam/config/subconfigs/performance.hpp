@@ -1,5 +1,5 @@
 // setup game optimizations
-setviewdistance = 2500;
-setobjectviewdistance[] = {2000,800};
+setviewdistance = 1000;
+setobjectviewdistance[] = {800,100};
 setterraingrid = 10;
 enableenvironment[] = {1, 1};
