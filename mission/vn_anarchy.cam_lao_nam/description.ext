@@ -7,15 +7,17 @@ class Header
 respawn = "BASE";
 respawnDelay = 20;
 respawnDialog = 0;
-respawnButton = 0;
+respawnButton = 1;
 respawnOnStart = -1;
 onPauseScript = "";
-onLoadMission= "Anarchy";
+onLoadMission= "Mike Force";
 OnLoadIntro = "Welcome to Anarchy";
-loadScreen = "";
+loadScreen = "img\vn_an_loadscreen.jpg";
 OnLoadIntroTime = 0;
 OnLoadMissionTime = 0;
 onLoadName = "Anarchy";
+overviewPicture = "img\vn_an_loadscreen.jpg";
+
 disabledAI = 1;
 scriptedPlayer = 0;
 disableChannels[]=  // allow text only on side chat
@@ -31,6 +33,7 @@ debriefing = 0;
 enableDebugConsole = 2;
 
 allowFunctionsLog = 1;
+allowFunctionsRecompile = 1;
 joinUnassigned = 0;
 forceRotorLibSimulation = 0;
 saving = 0;
@@ -41,7 +44,7 @@ corpseLimit = 10;
 corpseRemovalMinTime = 1200;
 corpseRemovalMaxTime = 3600;
 
-wreckManagerMode = 1;
+wreckManagerMode = 0;
 wreckLimit = 2;
 wreckRemovalMinTime = 60;
 wreckRemovalMaxTime = 360;
@@ -55,8 +58,8 @@ showHUD[] =
 	true,	// Vehicle radar
 	true,	// Vehicle compass
 	true,	// Tank direction indicator
-	false,	// Commanding menu
-	false,	// Group Bar
+	true,	// Commanding menu
+	true,	// Group Bar
 	true,	// HUD Weapon Cursors
 	true	// Vehicle display panels
 };
@@ -64,6 +67,19 @@ showHUD[] =
 class Params
 {
 	#include "config\params.hpp"
+};
+
+class CfgDebriefing
+{
+	class TimedOut
+	{
+		title = "ERROR";
+		subtitle = "Server Timeout";
+		description = "If you see this message please reconnect";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0.0,0.3,0.6,1};
+	};
 };
 
 
