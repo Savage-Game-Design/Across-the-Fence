@@ -1,24 +1,29 @@
-diag_log "VN: Server Init started";
+/*
+    File: fn_start_game_server.sqf
+    Author: Aaron Clark <vbawol>
+    Date: 2020-01-29
+    Last Update: 2020-06-12
+    Public: No
+
+    Description:
+		Initializes the server.
+
+    Parameter(s): none
+
+    Returns: nothing
+
+    Example(s): none
+*/
+
+diag_log "VN Anarchy: Server Init started";
 
 // restart every time
-// ["CLEAR"] call vn_an_fnc_hive;
+// ["CLEAR"] call para_s_fnc_profile_db;
 
 if (isNil "vn_an_gamestarting") then
 {
 	vn_an_gamestarting = true;
 	private _gamemode_config = (missionConfigFile >> "gamemode");
-	// Set desired number of simultaneously active zones.
-	vn_an_targetNumberOfActiveZones = 2;
-	//Initialise task list
-	vn_an_tasks = [];
-	vn_an_taskCompletionLog = [];
-	//Counts the number of tasks that have been created, to let us have unique IDs.
-	vn_an_taskCounter = 0;
-
-
-	vn_an_param_ai_quantity = ["ai_quantity", 1] call BIS_fnc_getParamValue;
-
-	vn_an_allowed_functions = ("isClass _x" configClasses (missionConfigFile >> "cfgfunctions" >> "vn_an" >> "rehandler") apply {configName _x});
 
 	// setup game optimizations server side
 	setviewdistance (getNumber(_gamemode_config >> "performance" >> "setviewdistance"));
@@ -28,86 +33,82 @@ if (isNil "vn_an_gamestarting") then
 	enableenvironment [[false,true] select _ambientlife,[false,true] select _ambientsound];
 
 	// start scheduler
-	call vn_an_fnc_scheduler_start;
-	0 spawn vn_an_fnc_scheduler_monitor;
+	diag_log "VN Anarchy: Starting scheduler";
+	call para_g_fnc_scheduler_start;
+	0 spawn para_g_fnc_scheduler_monitor;
 
 	// start the event dispatcher, so anything relying on events can fire.
-	// call vn_an_fnc_event_subsystem_init;
+	call para_g_fnc_event_subsystem_init;
 
 	// creates and initialize groups and duty officers
-	// call vn_an_fnc_group_init;
 
+	//call vn_mf_fnc_group_init;
 
-	// load objects while retaining state and variables
-	// call vn_an_fnc_spawn_objects;
-
-	// load zone progress
-	// call vn_an_fnc_zone_init;
-
-	// spawn buildables and init vars
-	// call vn_an_fnc_spawn_buildables;
 
 	// start generic scheduler functions
-	call vn_an_fnc_scheduler_init;
+	diag_log "VN Anarchy: Starting game time monitor";
+	// broadcast total time elapsed - initial
+	//missionNamespace setVariable ["para_g_totalgametime",["GET", "game_time", 0] call para_s_fnc_profile_db select 1,true];
+	//diag_log format ["VN Anarchy: Total Game Time - %1", para_g_totalgametime];
+	//["save_time_elapsed", {call vn_mf_fnc_save_time_elapsed}, [], 5] call para_g_fnc_scheduler_add_job;
 
-	//Example unit types. Should be made more dynamic as the gamemode progresses.
-	unit_civilian = "uns_civilian1";
-	units_vc_basic = ["vn_o_men_vc_local_03","vn_o_men_vc_local_03","vn_o_men_vc_local_12"];
-	units_vc_officer = ["vn_o_men_vc_local_01"];
-	units_vc_smg = ["vn_o_men_vc_local_06","vn_o_men_vc_local_05","vn_o_men_vc_local_04"];
-	units_vc_marksman = ["vn_o_men_vc_local_10"];
-	units_vc_medic = ["vn_o_men_vc_local_08"];
-	units_vc_grenadier = ["vn_o_men_vc_local_07"];
-	units_vc_at = ["vn_o_men_vc_local_14"];
-	units_vc_mg = ["vn_o_men_vc_local_11"];
+	// spawn buildables and init vars
+	diag_log "VN Anarchy: Loading buildables";
+	call para_s_fnc_spawn_buildables;
 
-	units_sog_teamleader = ["vn_b_men_sog_01", "vn_b_men_sog_13"];
-	units_sog_rto = ["vn_b_men_sog_02", "vn_b_men_sog_14"];
-	units_sog_medic = ["vn_b_men_sog_03", "vn_b_men_sog_15"];
-	units_sog_scout = ["vn_b_men_sog_09", "vn_b_men_sog_19"];
-	units_sog_grenadier = ["vn_b_men_sog_07", "vn_b_men_sog_11"];
-	units_sog_machinegunner = ["vn_b_men_sog_06", "vn_b_men_sog_16", "vn_b_men_sog_18"];
 
-	vehicles_nva_helis = ["uns_Mi8T_VPAF"];
-	vehicles_nva_planes = ["uns_an2_cas"];
+	diag_log "VN Anarchy: Starting building state tracker";
+	// building state tracking
+	["building_state_tracker", {call para_s_fnc_building_state_tracker}, [], 60] call para_g_fnc_scheduler_add_job;
 
-	jungleTraps = [
-	    "uns_tripwire_punj1",
-	    "uns_tripwire_punj2",
-	    "uns_tripwire_punj3",
-	    "uns_tripwire_punj4"
-	];
+	diag_log "VN Anarchy: Starting player list tracker";
+	// do slow allplayers list updates
+	["player_list_tracker", {call para_s_fnc_player_list_tracker}, [], 15] call para_g_fnc_scheduler_add_job;
 
-	enemyAPMines = [
-	    "uns_mine_md82"
-	];
 
-	enemyATMines = [
-	    "uns_mine_tm57"
-	];
+	//Set date here - it's as good a place as any. Day is just before a full moon, for good night ops.
+	// [vn_mf_dawnLength, vn_mf_dayLength, vn_mf_duskLength, vn_mf_nightLength] call para_s_fnc_day_night_subsystem_init;
 
-	friendlyAPMines = [
-	    "uns_mine_m14",
-	    "uns_mine_m16"
-	];
+	//Initialise the AI loadbalancer.
+	[] call para_s_fnc_loadbal_subsystem_init;
+	para_s_fnc_harass_blocked_areas = {
+		vn_mf_markers_blocked_areas + vn_mf_markers_no_harass
+	};
 
-	friendlyATMines = [
-	    "uns_mine_t59"
-	];
+	// start ai subsystem. Depends on the load balancer subsystem.
+	[] call para_s_fnc_ai_obj_subsystem_init;
 
-	incendiaryMines = [
-	    "uns_mine_xm54"
-	];
+	// Start harassment subsystem. Depends on the AI subsystem.
+	[] call para_s_fnc_harass_subsystem_init;
 
-	[] call vn_an_fnc_stats_init;
-
-	// start patrol subsystem
-	// [] call vn_an_fnc_patrol_subsystem_init;
+	// start vehicle asset management subsystem
+	// [] call vn_mf_fnc_veh_asset_subsystem_init;
 
 	// start cleanup subsystem
-	// [] call vn_an_fnc_cleanup_subsystem_init;
+	[] call para_s_fnc_cleanup_subsystem_init;
+
+	// start vehicle creation detection subsystem
+	// [] call vn_mf_fnc_veh_create_detection_subsystem_init;
+
+	// start the behaviour subsystem
+	[] call para_g_fnc_ai_behaviour_subsystem_init;
+
+	//Set up slingloaded item locality on helicopters.
+	["vehicleCreated", [
+		{
+			params ["_args", "_vehicle"];
+			//Call it on every vehicle - it'll abort if it's not a helicopter.
+			[_vehicle] call para_g_fnc_localize_slingloaded_objects;
+		},
+		[]
+	]] call para_g_fnc_event_add_handler;
+
+	// load zone progress
+	// diag_log "VN Anarchy: Loading zone progress";
+	// call vn_mf_fnc_zone_init;
 
 	// flag server as ready
+	diag_log "VN Anarchy: Marking server ready";
 	missionNamespace setVariable ["vn_an_server_ready", true, true];
 };
 
