@@ -1,16 +1,28 @@
-// init vars
-vn_an_buildindex = 0;
-vn_an_buildDirection = 0;
+/*
+	File: fn_start_game_client.sqf
+	Author: Aaron Clark <vbawol>
+	Date: 2020-05-23
+	Last Update: 2020-07-04
+	Public: No
 
+	Description:
+		Intializes the game.
+
+	Parameter(s): none
+
+	Returns: nothing
+
+	Example(s): none
+*/
 0 spawn {
 	diag_log "VN: Client Init started";
 
 	waitUntil {uiSleep 0.1; !(call BIS_fnc_isLoading)};
 
 	// start loading screen
-	startLoadingScreen ["Welcome to Mike Force!", "MikeForce_loadingScreen"];
+	startLoadingScreen ["Welcome to Anarchy!", "Anarchy_loadingScreen"];
 
-	[selectRandom (getArray(missionConfigFile >> "gamemode" >> "loadingScreens" >> "images")),5002] call vn_an_fnc_update_loading_screen;
+	// [selectRandom (getArray(missionConfigFile >> "gamemode" >> "loadingScreens" >> "images")),5002] call vn_an_fnc_update_loading_screen;
 
     	player disableConversation true;
 
@@ -40,13 +52,11 @@ vn_an_buildDirection = 0;
 	}
 	else
 	{
-	// do player init
+		// do player init
 		[player] remoteExecCall ["vn_an_fnc_init_player",2];
 
-	progressLoadingScreen 0.1;
+		progressLoadingScreen 0.1;
 
-	diag_log "VN: Client Init finished";
+		diag_log "VN: Client Init finished";
 	};
-
-
 };
