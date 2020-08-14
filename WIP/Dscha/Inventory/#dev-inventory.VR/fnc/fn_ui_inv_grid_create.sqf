@@ -8,7 +8,7 @@
 params["_disp","_ctrlGrp","_size_x", "_size_y"];
 
 private _grid_w = (ctrlPosition _ctrlGrp)#2;
-private _grid_h = ((_grid_w / 0.75) / 8) * _size_y;	//adjust to 4/3 alue - 8 == fixed grid Width
+private _grid_h = ((_grid_w / 0.75) / 8) * _size_y;	//adjust to 4/3 Value - 8 == fixed grid Width
 // systemchat str[_grid_w,_grid_h];
 private _tile_W = _grid_w/_size_x;
 private _tile_H = _grid_h/_size_y;
