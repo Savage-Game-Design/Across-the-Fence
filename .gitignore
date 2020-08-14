@@ -1,1 +1,4 @@
 p_drive/pDrive_symlink.bat
+__pycache__/
+packed/asc_files/venv/
+packed/asc_files/.idea/

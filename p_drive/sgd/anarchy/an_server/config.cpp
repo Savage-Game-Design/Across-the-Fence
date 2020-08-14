@@ -8,7 +8,7 @@ class CfgPatches
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"sgd_anarchy_client"};
+		requiredAddons[] = {"sgd_anarchy_client", "arma_server_companion"};
 	};
 };
 
