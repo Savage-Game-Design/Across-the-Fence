@@ -2,3 +2,5 @@ __pycache__/
 packed/asc_files/venv/
 packed/asc_files/.idea/
 build_logs
+packed/@anarchy_client/addons/an_client_c.pbo
+packed/@anarchy_server/addons/an_server_c.pbo

@@ -1,0 +1,14 @@
+name = "Anarchy - Server";
+picture = "";
+actionName = "Website";
+action = "";
+description = "";
+logo = "";
+logoOver = "";
+tooltip = "";
+tooltipOwned = "";
+overview = "";
+author = "Savage Game Design";
+overviewPicture = "";
+overviewText = "";
+overviewFootnote = "";
