@@ -1,0 +1,14 @@
+name = "Anarchy - Client";
+picture = "";
+actionName = "Website";
+action = "";
+description = "";
+logo = "";
+logoOver = "";
+tooltip = "";
+tooltipOwned = "";
+overview = "";
+author = "Savage Game Design";
+overviewPicture = "";
+overviewText = "";
+overviewFootnote = "";
