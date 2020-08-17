@@ -1,7 +1,6 @@
 #include "..\fnc_makros_g.h"
 
-#define FOLDER asc
 
-G_FNC(FOLDER,data_get)
-G_FNC(FOLDER,msg_send)
-G_FNC(FOLDER,tags_set)
+G_FNC(asc,data_get)
+G_FNC(asc,msg_send)
+G_FNC(asc,tags_set)
