@@ -8,7 +8,7 @@ class CfgPatches
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.1;
-		requiredAddons[] = {"arma_server_companion"};
+		requiredAddons[] = {};
 	};
 };
 
