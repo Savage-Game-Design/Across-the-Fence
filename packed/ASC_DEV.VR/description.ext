@@ -1,0 +1,72 @@
+class Header
+{
+	gameType = SC;
+	minPlayers = 1;
+	maxPlayers = 6;
+};
+respawn = "BASE";
+respawnDelay = 1;
+respawnDialog = 0;
+respawnButton = 0;
+respawnOnStart = -1;
+onPauseScript = "";
+onLoadMission= "ASC Example Mission";
+OnLoadIntro = "ASC Example Mission";
+loadScreen = "";
+OnLoadIntroTime = 0;
+OnLoadMissionTime = 0;
+onLoadName = "ASC Example Mission";
+disabledAI = 1;
+scriptedPlayer = 0;
+disableChannels[]=
+{
+	{0,true,true},
+	{1,true,true},
+	{2,true,true},
+	{6,true,true}
+};
+enableItemsDropping = 0;
+briefing = 0;
+debriefing = 0;
+enableDebugConsole = 2;
+joinUnassigned = 0;
+forceRotorLibSimulation = 0;
+saving = 0;
+skipLobby = 1;
+
+corpseManagerMode = 1;
+corpseLimit = 10;
+corpseRemovalMinTime = 1200;
+corpseRemovalMaxTime = 3600;
+
+wreckManagerMode = 1;
+wreckLimit = 2;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 360;
+
+disableRandomization[] = {"All"};
+
+showHUD[] =
+{
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	true,	// Vehicle radar
+	true,	// Vehicle compass
+	true,	// Tank direction indicator
+	false,	// Commanding menu
+	false,	// Group Bar
+	true,	// HUD Weapon Cursors
+	true	// Vehicle display panels
+};
+
+class CfgFunctions
+{
+	class ASC
+	{
+		class EXAMPLE
+		{
+			// EXAMPLE: REQUEST SOMETHING FROM THE BACKEND
+			class example {file = "example\example.sqf";};
+		};
+	};
+};
