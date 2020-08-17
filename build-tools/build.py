@@ -91,7 +91,7 @@ def build(mod_names, overwrite=False):
 
             log_file_path = log_directory / f"makepbo_{addon_name}.txt"
             with open(log_file_path, "w") as log_file:
-                command = base_command + [str(addon_input_path), str(addon_output_path)]
+                command = base_command + [str(addon_source_path), str(addon_output_path)]
                 result = subprocess.run(command, stdout=log_file, stderr=subprocess.STDOUT)
                 if result.returncode != 0:
                     print(f"    FAILED: {addon_name} build - see ({log_file_path}) for more information")
