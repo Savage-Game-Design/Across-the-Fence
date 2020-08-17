@@ -12,12 +12,18 @@ class CfgPatches
 	};
 };
 
-// #define PARA_PATH \paradigm
 
 class CfgFunctions
 {
-	// DEV: Disabled until paradigm is set up properly
-	// #include "..\paradigm\an_client\functions.hpp"
-
-
+	class AN_C
+	{
+		// DEV: Disabled until paradigm is set up properly
+		// #include "..\paradigm\an_server\functions.hpp"
+		#include "client\functions\functions_c.h"
+	};
+	
+	class AN_G
+	{
+		#include "global\functions\functions_g.h"
+	};
 };

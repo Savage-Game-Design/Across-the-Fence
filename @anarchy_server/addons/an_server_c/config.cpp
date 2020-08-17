@@ -16,8 +16,11 @@ class CfgPatches
 
 class CfgFunctions
 {
-	// DEV: Disabled until paradigm is set up properly
-	// #include "..\paradigm\an_server\functions.hpp"
-
-
+	class AN_S
+	{
+		
+		// DEV: Disabled until paradigm is set up properly
+		// #include "..\paradigm\an_server\functions.hpp"
+		#include "functions\functions_s.h"
+	};
 };
