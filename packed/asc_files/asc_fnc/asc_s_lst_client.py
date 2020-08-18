@@ -44,30 +44,37 @@ def client_await_add(sData, *args):
 
 def client_active_rem(sData, *args):
 	"""
-	Remove user from user_active list on disconnect
+	Remove user from user_active or user_awaiting on disconnect
 
 	:param sData:   Main Server-class
 	:param puid:     PlayerUID (Arma 3)
 	:return:
 	"""
-	puid = args
+	puid = args[0]
+	print(f"DEBUG: PlayerID: {puid} - disconnected. Removing from active/await list")
 	# close client socket Connection
 	try:
-		_clientDict = sData.user_active[puid]
-		client_con = _clientDict["con"]
+		try:
+			del sData.user_active[puid]
+		except KeyError:
+			raise KeyError
+
+		clientDict = sData.user_active[puid]
+		client_con = clientDict["con"]
 		client_con.shutdown(socket.SHUT_RDWR)
 		client_con.close()
-		del sData.user_active[puid]
-		print('DEBUG: Player removed from "user_active"')
-	# except Exception as e:
-	#     print(e)
-	except KeyError:
+		print(f'DEBUG: PlayerID: {puid} disconnected and was removed from "user_active"')
+
+	except (KeyError, WindowsError):
 		# the disconnected Client didn't connect properly, so remove it from "self.user_awaiting"
 		for tKey in sData.user_awaiting:
 			print("CHECKING: ", sData.user_awaiting[tKey], " - ", puid)
 			if sData.user_awaiting[tKey] == puid:
 				del sData.user_awaiting[tKey]
+				print(f'DEBUG: Player: {puid} disconnected and was removed from "user_awaiting"')
 				break
+	except Exception as e:
+		print(f"ERROR: client_active_rem: UNKNOWN ERROR: {e}")
 
 
 def blacklist_add(sData, raddr):
