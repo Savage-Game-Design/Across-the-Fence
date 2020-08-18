@@ -2,15 +2,18 @@
 // systemchat str ["ASC - INIT LOADED - CLIENT"];
 diag_log str ["ASC - INIT LOADED - CLIENT"];
 
-// set the Callback Eventhandler
-addMissionEventHandler ["ExtensionCallback", AN_C_fnc_ext_CE_callback_client];
+// set the Callback Eventhandler - Don't let a Dedicated Server load it
+if(!isDedicated)then
+{
+	addMissionEventHandler ["ExtensionCallback", AN_C_fnc_ext_CE_callback_client];
+};
 
 
 //////////////// DEV STUFF ////////////////
 if hasInterface then
 {
-	player addAction ["ASC: itemAdd [0,0]",				{["itemAdd", 		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player, 0, [0,0]]] call AN_G_fnc_msg_send;}];
-	player addAction ["ASC: itemAdd [1,1]",				{["itemAdd", 		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player, 0, [1,1]]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: itemAdd [0,0]",				{["itemAdd", 		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player, 0, [0,0]]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: itemAdd [1,1]",				{["itemAdd", 		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player, 0, [1,1]]] call AN_G_fnc_msg_send;}];
 	player addAction ["ASC: getGrid",					{["inv_get_grid",	[(cursorObject getVariable ["crateID","-1"])]] call AN_G_fnc_msg_send;}];
 	player addAction ["ASC: getItems",					{["inv_get_items",	[(cursorObject getVariable ["crateID","-1"])]] call AN_G_fnc_msg_send;}];
 	player addAction ["ASC: toInv [0,1] Flipped: 0",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", (cursorObject getVariable ["crateID","-1"]),	getPlayerUID player,	0,		[0,1]	]] call AN_G_fnc_msg_send;}];
