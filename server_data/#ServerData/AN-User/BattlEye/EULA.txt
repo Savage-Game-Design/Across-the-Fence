@@ -1,0 +1,27 @@
+****** End-User License Agreement ******
+
+
+This License Agreement ("Agreement") is made between you (the "Licensee") and BattlEye Innovations / Bastian Suter (the "Licensor"). The terms of this Agreement apply to all current and future versions and updates of BattlEye.
+
+
+By installing, enabling or using BattlEye, Licensee agrees with all the terms of this Agreement. Licensor reserves all rights not specifically granted and transferred to Licensee.
+
+
+Licensee understands and agrees with the following:
+
+- Licensor grants Licensee a non-exclusive and non-transferable license to use BattlEye for non-commercial purposes only. Licensee therefore does not own BattlEye, Licensor remains the owner of BattlEye.
+
+- Licensor provides BattlEye on an "as is" basis without warranty of any kind. Licensor neither guarantees the correct, error-free functioning of BattlEye nor is he responsible for any damage caused by the use of BattlEye.
+
+- Licensee may not decompile, disassemble, reverse-engineer, modify or redistribute BattlEye in any way.
+
+- BattlEye will automatically, without notice to Licensee, download and install updates from time to time.
+
+- BattlEye may scan the entire memory, and any game-related and system-related files and folders on harddisk and report results to the connected game server for the sole purpose of detecting cheats.
+
+- BattlEye will never report any of Licensee's private data (documents, passwords, etc.) to other connected computers or to Licensor. BattlEye will not violate Licensee's privacy.
+
+- Licensor is allowed to terminate the license at any time for any reason and without notice to Licensee.
+
+
+This License Agreement constitutes the entire agreement between Licensor and Licensee and supersedes any prior statements.
