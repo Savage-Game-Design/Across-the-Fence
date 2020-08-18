@@ -62,3 +62,9 @@ diag_log format["CLD_INIT: Skills FULL	: %1", an_cData_skills];
 	diag_log format["CLD_INIT: Entry		: %1", _x];
 }forEach an_cData_skills;
 diag_log "------------------";
+
+
+
+
+
+////////////////////////////////////// DEV:
