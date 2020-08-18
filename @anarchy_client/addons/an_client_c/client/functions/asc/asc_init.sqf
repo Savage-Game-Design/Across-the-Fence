@@ -22,6 +22,7 @@ if hasInterface then
 	player addAction ["ASC: toCrate [0,0] Flipped: 0",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player,	(cursorObject getVariable ["crateID","-1"]),	0,		[0,0]	]] call AN_G_fnc_msg_send;}];
 	player addAction ["ASC: toCrate [0,0] Flipped: 1",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player,	(cursorObject getVariable ["crateID","-1"]),	1,		[0,0]	]] call AN_G_fnc_msg_send;}];
 	//																 		[ ITEM ID									   OLD INVENTORY ID,	NEW  INVENTORY ID,							flipped		NewInvPos]	
+	player addAction ["ASC: Create Crate",				{["IG_supplyCrate_F",(getPos player),(getDir player),[6,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
 };
 
 
