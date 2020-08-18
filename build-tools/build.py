@@ -9,6 +9,11 @@ import sys
 
 root_directory = Path(path.realpath(__file__)).parent.parent
 addon_prefix = "\\sgd\\anarchy"
+output_directory = root_directory / 'packed'
+log_directory = root_directory / 'build_logs' / (datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+prefix_directory = Path('P:\\') / addon_prefix
+missions_directory = root_directory / "missions"
+arma_mod_folder_name = "anarchy"
 
 def create_folder_if_not_exists(folder_path, verbose=True):
     if folder_path.exists():
@@ -33,9 +38,6 @@ def create_symlink(link_path,dest_path,is_directory=False):
             print("Raw error: ", e)
 
 def build(mod_names, overwrite=False):
-    output_directory = root_directory / 'packed'
-    log_directory = root_directory / 'build_logs' / (datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
-    prefix_directory = Path('P:\\') / addon_prefix
 
     if not prefix_directory.exists():
         print(f"ERROR: P-Drive is not set up for Anarchy. The P-Drive must be set up before building. ({prefix_directory} does not exist)")
@@ -127,6 +129,11 @@ def pdrive(disable=False):
 
 def filepatching(raw_path, disable=False):
     path = Path(raw_path)
+
+    if not path.exists():
+        print(f"ERROR: {path} does not exist")
+        return False
+
     is_server = len(list(path.glob('arma3server*.exe'))) > 0
     is_client = len(list(path.glob('arma3*.exe'))) > 0
     if not (is_server or is_client):
@@ -154,6 +161,42 @@ def filepatching(raw_path, disable=False):
             link_path.unlink()
         else:
             print(f"SGD Filepatching is not set up at {path}")
+
+def arma_setup(raw_path,mod_names,link_missions=True,disable=False):
+    arma_path = Path(raw_path)
+
+    if not arma_path.exists():
+        print(f"ERROR: {arma_path} does not exist")
+        return False
+
+    is_server = len(list(arma_path.glob('arma3server*.exe'))) > 0
+    is_client = len(list(arma_path.glob('arma3*.exe'))) > 0
+    if not (is_server or is_client):
+        print(f"ERROR: {arma_path} is not an Arma root directory")
+        return False
+
+    arma_mod_folder_path = arma_path / arma_mod_folder_name
+    create_folder_if_not_exists(arma_mod_folder_path)
+    
+    print(f"==== Linking packed mods to Arma 3: {mod_names} ====")
+    for mod_name in mod_names:
+        try:
+            mod_path = output_directory / mod_name
+            link_path = arma_mod_folder_path / mod_name
+            create_symlink(link_path, mod_path, is_directory = True)
+        except FileNotFoundError as e:
+            print(f"WARNING: Mod {mod_name} cannot be linked - path does not exist {e.filename}")
+
+    if link_missions:
+        print(f"==== Linking missions to Arma 3 ====")
+        try:
+            for mission in missions_directory.iterdir():
+                if not mission.is_dir():
+                    continue
+                link_path = arma_path / "mpmissions" / mission.name
+                create_symlink(link_path, mission, is_directory = True)
+        except FileNotFoundError as e:
+            print(f"WARNING: Cannot link missions, {e.filename} does not exist")
     
 def subcommand_build(args):
     print("======================")
@@ -177,6 +220,11 @@ def subcommand_filepatching(args):
     action = "Disabling" if args.disable else "Enabling"
     print(f"{action} filepatching")
     filepatching(args.path, args.disable)
+
+def subcommand_arma_setup(args):
+    print(f"Setting up Arma for Anarchy development - linking mods and missions")
+    mods = ["@anarchy_server", "@anarchy_client", "@ASC"]
+    arma_setup(args.path,mods,link_missions=True)
 
 if __name__ == "__main__":
     raw_args = sys.argv[1:]
@@ -203,6 +251,10 @@ if __name__ == "__main__":
     filepatching_parser.add_argument("path", help="Path to Arma Client or Server root")
     filepatching_parser.add_argument('-d', '--disable', help="Disables previously set up filepatching", action="store_const", const=True, default=False)
     filepatching_parser.set_defaults(func=subcommand_filepatching)
+
+    arma_setup_parser = subparsers.add_parser('arma-setup', help="Installs links to all necessary mods and missions in Arma")
+    arma_setup_parser.add_argument("path", help="Path to Arma Client or Server root")
+    arma_setup_parser.set_defaults(func=subcommand_arma_setup)
 
     help_parser = subparsers.add_parser('help', help='Prints help')
     help_parser.set_defaults(func=lambda *args: parser.print_help())
