@@ -1,6 +1,6 @@
-#define S_FNC(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME);};
-#define S_FNC_INIT(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); init=1;};
-#define S_FNC_PREINIT(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); preInit=1;};
-#define S_FNC_POSTINIT(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); postInit=1;};
-#define S_FNC_PRESTART(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); postInit=1;};
+#define S_FNC(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); recompile = 1;};
+#define S_FNC_INIT(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); init=1; recompile = 1;};
+#define S_FNC_PREINIT(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); preInit=1; recompile = 1;};
+#define S_FNC_POSTINIT(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); postInit=1; recompile = 1;};
+#define S_FNC_PRESTART(SUBFOLDER,FNAME) class FNAME {file = S_PATH(SUBFOLDER,FNAME); postInit=1; recompile = 1;};
 #define S_PATH(SUBFOLDER,FILENAME) \sgd\anarchy\an_server_c\functions\##SUBFOLDER##\##FILENAME##.sqf
