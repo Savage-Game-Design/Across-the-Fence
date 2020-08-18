@@ -1,4 +1,6 @@
-
+from . import id_handler
+from asc_fnc.asc_db.database import asc_db
+from asc_fnc import asc_g_msg
 
 DEVMODE = True
 # inventory = []
@@ -8,6 +10,54 @@ def invGrid_create(grid_x, grid_y):
         _line = [0] * grid_x
         ret.append(_line)
     return ret
+
+
+# called by Server only!
+def crate_add(sData, tmpKey: str = "", model: str = "", pos: list = None, invGridSize: list = None):
+    """
+    :param tmpKey:      key as identifier for the A3-Server to assign new ID (WIP - will most likely be removed after Looting-integration)
+    :param sData:       ServerData (auto-passed)
+    :param model:       string - A3 Classname
+    :param pos:         list - [[x,y,z],dir]
+    :param invGridSize: list - Inventory grid
+    :return:
+    """
+
+    if model == "":
+        model = "IG_supplyCrate_F"
+    if pos is None:
+        pos = [[0, 0, 0], 0]
+    if invGridSize is None:
+        invGridSize = [4, 8]
+
+    grid_y, grid_x = invGridSize
+    crateID = id_handler.create_id()    # ToDo: TEMP! IDs will be created by the loot mechanic later
+    inv_data = {
+        "model": model,
+        "pos": pos,
+        "inv_grid": invGrid_create(grid_x, grid_y),
+        "itemData": {}
+        }
+
+    print(f"CRATE ADD:\n"
+          f"crateID     : {crateID}\n"
+          f"Model       : {model}\n"
+          f"Pos         : {pos}\n"
+          f"InvGridSize : {invGridSize}\n"
+          f"inv_data    : {inv_data}")
+
+    sData.database.crates[crateID] = inv_data
+    retdata = {"tmpKey": tmpKey, "newID": crateID}
+    asc_g_msg.sendMsg("crate_assignID", retdata, sData.con_gameServer)
+    asc_db.db_save(sData.database)
+
+
+# called by Server only!
+def crate_rem(sData, createID, pos):
+    crate = sData.database.crates[createID]
+    # kind of security check
+    if crate["pos"] == pos:
+        del crate
 
 
 def item_move(client=None, args=()):

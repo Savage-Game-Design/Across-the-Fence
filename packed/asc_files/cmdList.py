@@ -8,15 +8,23 @@ from anarchy_main.inventory import *
 
 cmdList = {
 		'server': {
+				# Add users to the await list (player has connected and waits for the Backend connection)
 				"user_add": asc_s_lst_client.client_await_add,
-				"user_rem": asc_s_lst_client.client_active_rem
+				# Player disconnected
+				"user_rem": asc_s_lst_client.client_active_rem,
+
+				# add crates to the database
+				"crate_add": inv_handler.crate_add,
+				# remove crates from the database
+				"crate_rem": inv_handler.crate_rem
 			},
 		'arma_server': {
 				# "functionTag in Arma": "Function to execute"
 				# NOTE: Make sure, that the Tag is compatible with the Arma 3 Variable logic
 				"s_example_return": "ASC_fnc_example",
 				"s_test":           "ASC_fnc_example",
-				"s_abc":            "ASC_fnc_example"
+				"s_abc":            "ASC_fnc_example",
+				"crate_assignID": "AN_S_fnc_crate_add"
 			},
 		'client': {
 				# ""Tag" send from Arma" : Function in the backend
