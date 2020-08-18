@@ -13,8 +13,9 @@ def invGrid_create(grid_x, grid_y):
 
 
 # called by Server only!
-def crate_add(sData, tmpKey: str = "", model: str = "", pos: list = None, invGridSize: list = None):
+def crate_add(sData, persistent=False, tmpKey: str = "", model: str = "", pos: list = None, invGridSize: list = None):
     """
+    :param persistent:  Save to Database or not
     :param tmpKey:      key as identifier for the A3-Server to assign new ID (WIP - will most likely be removed after Looting-integration)
     :param sData:       ServerData (auto-passed)
     :param model:       string - A3 Classname
@@ -46,10 +47,13 @@ def crate_add(sData, tmpKey: str = "", model: str = "", pos: list = None, invGri
           f"InvGridSize : {invGridSize}\n"
           f"inv_data    : {inv_data}")
 
-    sData.database.crates[crateID] = inv_data
+    if persistent:
+        sData.database.crates[crateID] = inv_data
+        asc_db.db_save(sData.database)
+    else:
+        sData.database.sessionCrates[crateID] = inv_data
     retdata = {"tmpKey": tmpKey, "newID": crateID}
     asc_g_msg.sendMsg("crate_assignID", retdata, sData.con_gameServer)
-    asc_db.db_save(sData.database)
 
 
 # called by Server only!
@@ -137,10 +141,20 @@ def item_move(client=None, args=()):
 
 def inv_getData(client, invID):
     try:
+        # check if player Inventory
         if invID == client.puid:
             return client.cData
         else:
-            return client.sData.database.crates[invID]
+            # Check if temporary/Session Crates
+            try:
+                return client.sData.database.sessionCrates[invID]
+            # Last try: Check the persistent Inventories
+            except KeyError:
+                try:
+                    return client.sData.database.crates[invID]
+                except KeyError:
+                    print('ERROR: INV_HANDLER: ITEM_MOVE: inv_getData NOT FOUND')
+                    return
     except KeyError:
         print('ERROR: INV_HANDLER: ITEM_MOVE: inv_getData NOT FOUND')
         return

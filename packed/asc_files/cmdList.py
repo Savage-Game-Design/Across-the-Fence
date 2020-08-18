@@ -24,7 +24,7 @@ cmdList = {
 				"s_example_return": "ASC_fnc_example",
 				"s_test":           "ASC_fnc_example",
 				"s_abc":            "ASC_fnc_example",
-				"crate_assignID": "AN_S_fnc_crate_add"
+				"crate_assignID":   "AN_S_fnc_crate_add"
 			},
 		'client': {
 				# ""Tag" send from Arma" : Function in the backend

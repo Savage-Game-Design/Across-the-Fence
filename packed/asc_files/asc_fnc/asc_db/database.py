@@ -11,8 +11,11 @@ class asc_db:
 		self.players = {}
 		self.guilds = {}
 		self.zones = {}
+		# persistent storage
 		self.crates = {}
 		self.bases = {}
+		# Temporary storage like Loot crates will be stored in here. Entries will NOT be saved to the Database!
+		self.sessionCrates = {}
 
 		print("\n########################################################\n#### ASC: LOADING DATABASE\n")
 		try:
