@@ -16,6 +16,14 @@ prefix_directory = Path('P:\\') / addon_prefix
 missions_directory = root_directory / "missions"
 arma_mod_folder_name = "anarchy"
 
+#All mods that are to be built/linked
+all_mods = ["@anarchy_client", "@anarchy_server"]
+#Additional symlinks that should be created as part of the `arma-setup` command.
+#Destination is relative to the arma root directory
+extra_setup_links = [
+   {"source": "packed\\asc_files", "dest": "asc_files", "is_dir": True}
+]
+
 def find_steam_library_paths():
     steam_path = Path(os.environ["ProgramFiles(x86)"]) / "Steam"
     if not steam_path.exists():
@@ -105,7 +113,8 @@ def create_symlink(link_path,dest_path,is_directory=False):
 def remove_if_symlink_to_here(link_path):
     if link_path.is_symlink():
         #if our link path begins with the path to our root directory, we consider it a link to inside this repo.
-        if root_directory.resolve().as_posix() in link_path.resolve().as_posix():
+        #Alternatively, it it's a symlink to a non-existant file/folder
+        if root_directory.resolve().as_posix() in link_path.resolve().as_posix() or not link_path.exists():
             print(f"Unlinking {link_path}")
             link_path.unlink()
 
@@ -121,7 +130,7 @@ def build(mod_names, overwrite=False):
 
     #Create mod folders
     for mod_name in mod_names:
-        print(f"\n\n==BUILDING MOD {mod_name}==")
+        print(f"\n\n==== BUILDING MOD {mod_name} ====")
         mod_input_path = root_directory / mod_name
         mod_output_path = output_directory / mod_name
         if mod_output_path.exists():
@@ -148,7 +157,7 @@ def build(mod_names, overwrite=False):
                 print(f"Copying file {child} to {dest_path}")
                 shutil.copyfile(child, dest_path, follow_symlinks=True)
 
-        print(f"\n=BUILDING {mod_name} ADDONS=")
+        print(f"\n==== BUILDING {mod_name} ADDONS ====")
         #Build addons with makepbo
         exclude_files = ",".join(["thumbs.db","*.txt","*.h","*.dep","*.cpp","*.bak","*.png","*.log","*.pew","*.hpp","source","*.tga"])
         base_command = ["MakePbo", "-PsFW", f"-X={exclude_files}"]
@@ -173,7 +182,7 @@ def build(mod_names, overwrite=False):
                 else:
                     print(f"    SUCCEEDED: {addon_name} build - see ({log_file_path}) for MakePBO output")
 
-def pdrive(disable=False):
+def pdrive(mods,disable=False):
     drive = Path("P:\\")
     drive_addon_root = drive / addon_prefix
 
@@ -181,7 +190,6 @@ def pdrive(disable=False):
         create_folder_if_not_exists(drive_addon_root)
 
         print("Linking files to addon root")
-        mods = ["@anarchy_client", "@anarchy_server"]
         for mod in mods:
             addons_path = root_directory / mod / "addons"
             for addon_path in addons_path.iterdir():
@@ -206,8 +214,8 @@ def filepatching(raw_path, disable=False):
         print(f"ERROR: {path} does not exist")
         return False
 
-    is_server = len(list(path.glob('arma3server*.exe'))) > 0
-    is_client = len(list(path.glob('arma3*.exe'))) > 0
+    is_server = is_arma_server_dir(path)
+    is_client = is_arma_client_dir(path)
     if not (is_server or is_client):
         print(f"ERROR: {path} is not an Arma root directory")
         return False
@@ -234,7 +242,7 @@ def filepatching(raw_path, disable=False):
         else:
             print(f"SGD Filepatching is not set up at {path}")
 
-def arma_setup(raw_path,mod_names,link_missions=True,disable=False):
+def arma_setup(raw_path,link_missions=True,disable=False):
     arma_path = Path(raw_path)
 
     if not arma_path.exists():
@@ -248,6 +256,7 @@ def arma_setup(raw_path,mod_names,link_missions=True,disable=False):
         return False
 
     arma_link_folder_path = arma_path / arma_mod_folder_name
+    mod_names = all_mods
 
     if not disable:
         create_folder_if_not_exists(arma_link_folder_path)
@@ -271,6 +280,15 @@ def arma_setup(raw_path,mod_names,link_missions=True,disable=False):
                     create_symlink(link_path, mission, is_directory = True)
             except FileNotFoundError as e:
                 print(f"WARNING: Cannot link missions, {e.filename} does not exist")
+
+        print(f"==== Linking additional folders to Arma 3 ====")
+        for extra_link in extra_setup_links:
+            source = root_directory / extra_link["source"]
+            dest = arma_path / extra_link["dest"]
+            if not source.exists():
+                print(f"WARNING: Cannot link extra folder, ({source}) does not exist")
+                continue
+            create_symlink(dest, source, is_directory=extra_link["is_dir"])
     else:
         print(f"==== Unlinking mods from Arma 3: {mod_names} ====")
         for child_path in arma_link_folder_path.iterdir():
@@ -278,6 +296,9 @@ def arma_setup(raw_path,mod_names,link_missions=True,disable=False):
         print(f"==== Unlinking missions from Arma 3 ====")
         for child_path in (arma_path / "mpmissions").iterdir():
             remove_if_symlink_to_here(child_path)
+        print(f"==== Unlinking additional links from Arma 3 ====")
+        for extra_link in extra_setup_links:
+            remove_if_symlink_to_here(arma_path / extra_link["dest"])
 
 def select(options):
     print(f"Select an option below by typing its number. Press 'a' to choose all options, or 'q' for none:")
@@ -309,28 +330,32 @@ def choose_arma_paths(permit_dedicated=True):
     return select(usable_paths)
     
 def subcommand_build(args):
-    print("======================")
-    print("=  BUILDING ANARCHY  =")
-    print("======================")
+    print("====  BUILDING ANARCHY ====")
 
-    mods = []
-    if not args.no_client:
-        mods.append("@anarchy_client")
-    if not args.no_server:
-        mods.append("@anarchy_server")
+    for mod in args.mod:
+        if not mod in all_mods:
+            print(f"ERROR: Invalid mod specified ({mod}), aborting build")
+            return
+
+    #Deduplicate the mods list
+    mods = list(set(args.mod))
+
+    if len(args.mod) == 0:
+        mods = all_mods
+
     print(f"Building: {mods}")
     build(mods,overwrite=args.force)
 
 def subcommand_pdrive(args):
     action = "Disabling" if args.disable else "Enabling"
-    print(f"{action} P-Drive setup for Anarchy")
-    pdrive(disable=args.disable)
+    print(f"==== {action} P-Drive setup for Anarchy ====")
+    pdrive(all_mods,disable=args.disable)
 
 def subcommand_filepatching(args):
     action = "Disabling" if args.disable else "Enabling"
     print(f"==== {action} filepatching ====")
     paths = args.paths
-    if args.autodetect:
+    if args.autodetect or len(paths) == 0:
         print("Autodetecting Arma installations...")
         paths = choose_arma_paths(permit_dedicated=True)
 
@@ -342,15 +367,13 @@ def subcommand_arma_setup(args):
     action = "unlinking" if args.disable else "linking"
     print(f"==== Setting up Arma for Anarchy development - {action} mods and missions ====")
     paths = args.paths
-    if args.autodetect:
+    if args.autodetect or len(paths) == 0:
         print("Autodetecting Arma installations...")
         paths = choose_arma_paths(permit_dedicated=True)
 
-    mods = ["@anarchy_server", "@anarchy_client", "@ASC"]
-
     for path in paths:
         print(f"\nSetting up Arma instance at path: {path}")
-        arma_setup(path,mods,link_missions=True,disable=args.disable)
+        arma_setup(path,link_missions=True,disable=args.disable)
 
 if __name__ == "__main__":
     raw_args = sys.argv[1:]
@@ -364,8 +387,7 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers()
 
     build_parser = subparsers.add_parser('build', help='Build Anarchy addons')
-    build_parser.add_argument('--no-server', help="Stops the Anarchy server mod being built", action="store_const", const=True, default=False)
-    build_parser.add_argument('--no-client', help="Stops the Anarchy client mod being built", action="store_const", const=True, default=False)
+    build_parser.add_argument('-m', '--mod', help=f"Builds only the named mod. May be specified more than once. Valid options are: {all_mods}", nargs="*", default=[])
     build_parser.add_argument('-f', '--force', help="Erases all content in the packed mod folder if it exists", action="store_const", const=True, default=False)
     build_parser.set_defaults(func=subcommand_build)
 
