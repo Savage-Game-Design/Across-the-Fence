@@ -1,4 +1,4 @@
-#include "..\fnc_makros_g.h"
+#include "..\fnc_macros_g.h"
 
 
 G_FNC(asc,data_get)

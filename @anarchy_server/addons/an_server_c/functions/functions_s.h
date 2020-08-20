@@ -1,5 +1,5 @@
-class asc
+class local_server
 {
-	#include "asc\_functions_asc.h"
-	#include "asc_inventory\_functions_asc_inventory.h"
+	#include "asc\_asc.h"
+	#include "asc_inventory\_asc_inventory.h"
 };

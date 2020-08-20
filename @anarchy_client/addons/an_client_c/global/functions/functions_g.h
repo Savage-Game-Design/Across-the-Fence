@@ -1,4 +1,4 @@
-class asc
+class global
 {
-	#include "asc\_functions_asc.h"
+	#include "asc\_asc.h"
 };

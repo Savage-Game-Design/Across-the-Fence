@@ -1,4 +1,4 @@
-#include "..\fnc_makros_s.h"
+#include "..\fnc_macros_s.h"
 
 
 S_FNC_POSTINIT(asc,asc_init)
