@@ -14,7 +14,7 @@ cmdList = {
 				"user_rem": asc_s_lst_client.client_active_rem,
 
 				# add crates to the database
-				"crate_add": inv_handler.crate_add,
+				"crate_data_get": inv_handler.crate_data_get,
 				# remove crates from the database
 				"crate_rem": inv_handler.crate_rem
 			},
@@ -24,7 +24,8 @@ cmdList = {
 				"s_example_return": "ASC_fnc_example",
 				"s_test":           "ASC_fnc_example",
 				"s_abc":            "ASC_fnc_example",
-				"crate_assignID":   "AN_S_fnc_crate_add"
+				# DEV
+				"crate_add":   "AN_S_fnc_crate_add"
 			},
 		'client': {
 				# ""Tag" send from Arma" : Function in the backend
@@ -37,8 +38,9 @@ cmdList = {
 		'arma_client': {
 				# "functionTag in Arma": "Function to execute"
 				# NOTE: Make sure, that the Tag is compatible with the Arma 3 Variable logic
-				"INIT_CLIENTDATA":      "ASC_fnc_clientData_init",
+				"INIT_CLIENTDATA":      "AN_c_fnc_clientData_init",
 				"ret_inv_get_grid":     "DEV_an_fnc_hintGrid",
-				"ret_inv_get_items":    "DEV_an_fnc_hintItemData"
+				"ret_inv_get_items":    "DEV_an_fnc_hintItemData",
+				"ret_inv_crateData":    "AN_c_fnc_loot_inv_get"
 			}
 		}

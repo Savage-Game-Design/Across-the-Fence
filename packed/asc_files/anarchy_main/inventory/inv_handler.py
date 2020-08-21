@@ -12,31 +12,68 @@ def invGrid_create(grid_x, grid_y):
     return ret
 
 
+def crate_data_get(sData, clientID: str = None, pos: list = None, persistent=False, invGridSize: list = None):
+
+    # ToDo: TEMP! IDs will be created by the loot mechanic later
+    # crateID = id_handler.create_id()
+    crateID = f"{pos[0]}{pos[1]}{pos[2]}".replace('.', '')
+
+    try:
+        if persistent:
+            retdata = sData.database.crates[crateID]
+        else:
+            retdata = sData.database.sessionCrates[crateID]
+
+        # ToDo: Add an "in use"-check
+        # send Inventory data back to the requesting client
+        conClient = sData.user_active[clientID]["con"]
+        print(f"DEBUG: INV_HANDLER: crate_data_get: Crate found, sending Data to Client.")
+        asc_g_msg.sendMsg("ret_inv_crateData", retdata, conClient)
+        return
+
+    except KeyError:
+        print(f"DEBUG: INV_HANDLER: crate_data_get: Creating new Crate")
+        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, persistent=persistent, invGridSize=invGridSize)
+    except Exception:
+        print(f"ERROR: INV_HANDLER: crate_data_get: HUGE WOBBLE WOBBLE! Data:\ncrateID: {crateID}\nclientID: {clientID}\npos: {pos}\npersistent: {persistent}\ninvGridSize {invGridSize}\n---------")
+
 # called by Server only!
-def crate_add(sData, persistent=False, tmpKey: str = "", model: str = "", pos: list = None, invGridSize: list = None):
+def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", persistent=False, model: str = "IG_supplyCrate_F", invGridSize: list = None):
     """
-    :param persistent:  Save to Database or not
-    :param tmpKey:      key as identifier for the A3-Server to assign new ID (WIP - will most likely be removed after Looting-integration)
     :param sData:       ServerData (auto-passed)
-    :param model:       string - A3 Classname
+    :param clientID:    A3 playerUID
     :param pos:         list - [[x,y,z],dir]
+    :param crateID:
+    :param persistent:  Save to Database or not
+    :param model:       A3 typeOf Class
     :param invGridSize: list - Inventory grid
     :return:
     """
 
-    if model == "":
-        model = "IG_supplyCrate_F"
-    if pos is None:
-        pos = [[0, 0, 0], 0]
+    if None in [clientID, pos]:
+        print(f"ERROR: INV_HANDLER: create_add: clientID or Pos not transmitted: {clientID}")
+        return
     if invGridSize is None:
         invGridSize = [4, 8]
 
+    if persistent:
+        # only persistent Crates store the model
+        model = model
+    else:
+        model = "TEMP"
+
     grid_y, grid_x = invGridSize
-    crateID = id_handler.create_id()    # ToDo: TEMP! IDs will be created by the loot mechanic later
+
+    # Todo: Determine if created crate was from a loot request
+    # ToDo: If loot request: Fill crate with Items
+    # ToDo: If loot request: adjust invGridSize, according to used space
+    # ToDo: write fill-mechanic (hmpf... how many todos has this one...)
+
     inv_data = {
         "model": model,
         "pos": pos,
         "inv_grid": invGrid_create(grid_x, grid_y),
+        "inv_gridSize": invGridSize,    # [y, x] / [rows, columns]
         "itemData": {}
         }
 
@@ -52,9 +89,11 @@ def crate_add(sData, persistent=False, tmpKey: str = "", model: str = "", pos: l
         asc_db.db_save(sData.database)
     else:
         sData.database.sessionCrates[crateID] = inv_data
-    retdata = {"tmpKey": tmpKey, "newID": crateID}
-    asc_g_msg.sendMsg("crate_assignID", retdata, sData.con_gameServer)
 
+    # send Inventory data back to the requesting client
+    conClient = sData.user_active[clientID]["con"]
+    # asc_g_msg.sendMsg("ret_inv_crateData", retdata, conClient)
+    asc_g_msg.sendMsg("ret_inv_crateData", inv_data, conClient)
 
 # called by Server only!
 def crate_rem(sData, createID, pos):
