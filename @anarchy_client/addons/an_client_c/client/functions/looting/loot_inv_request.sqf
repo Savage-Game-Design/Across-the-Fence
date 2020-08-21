@@ -1,5 +1,6 @@
 /*
-	"fill" lootcrates localy on the Client
+	send request to the Server to get loot for targeted object.
+	WIP! Needs wayyyy more counter-checks (e.g. if the crate is a legit loot container)
 */
 #include "\sgd\anarchy\an_client_c\global\asc_macros.inc"
 
