@@ -24,7 +24,7 @@ if hasInterface then
 	//																 		[ ITEM ID									   OLD INVENTORY ID,	NEW  INVENTORY ID,							flipped		NewInvPos]	
 	// player addAction ["ASC: Create Crate (Temporary)",	{["Land_Suitcase_F",		false, (getPos player), (getDir player), [9,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
 	// player addAction ["ASC: Create Crate (Persistent)",	{["Land_WoodenCrate_01_F",	true , (getPos player), (getDir player), [5,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
-	player addAction["ASC: get crateData", {[] call AN_C_fnc_loot_inv_request;}];
+	player addAction["ASC: get crateData", {[] call AN_C_fnc_loot_inv_request;}, nil, 1.5, true, true, "", "cursorObject in vn_an_crates", 5, false];
 };
 
 
