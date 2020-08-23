@@ -51,21 +51,21 @@ def client_active_rem(sData, *args):
 	:return:
 	"""
 	puid = args[0]
-	print(f"DEBUG: PlayerID: {puid} - disconnected. Removing from active/await list")
+	print(f"DEBUG: client_active_rem: PlayerID: {puid} - disconnected. Removing from active/await list")
 	# close client socket Connection
 	try:
 		try:
+			clientDict = sData.user_active[puid]
+			client_con = clientDict["con"]
+			client_con.shutdown(socket.SHUT_RDWR)
+			client_con.close()
 			del sData.user_active[puid]
 		except KeyError:
 			raise KeyError
+		print(f'DEBUG: client_active_rem: PlayerID: {puid} disconnected and was removed from "user_active"')
 
-		clientDict = sData.user_active[puid]
-		client_con = clientDict["con"]
-		client_con.shutdown(socket.SHUT_RDWR)
-		client_con.close()
-		print(f'DEBUG: PlayerID: {puid} disconnected and was removed from "user_active"')
-
-	except (KeyError, WindowsError):
+	except (KeyError, WindowsError) as e:
+		print(f'DEBUG: client_active_rem: PlayerID: {puid} - (KeyError, WindowsError):\n{e}\n-------------------------')
 		# the disconnected Client didn't connect properly, so remove it from "self.user_awaiting"
 		for tKey in sData.user_awaiting:
 			print("CHECKING: ", sData.user_awaiting[tKey], " - ", puid)
