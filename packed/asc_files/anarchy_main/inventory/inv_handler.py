@@ -12,11 +12,7 @@ def invGrid_create(grid_x, grid_y):
     return ret
 
 
-def crate_data_get(sData, clientID: str = None, pos: list = None, persistent=False, invGridSize: list = None):
-
-    # ToDo: TEMP! IDs will be created by the loot mechanic later
-    # crateID = id_handler.create_id()
-    crateID = f"{pos[0]}{pos[1]}{pos[2]}".replace('.', '')
+def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str = None, lootType: str = None, persistent=False, invGridSize: list = None):
 
     try:
         if persistent:
@@ -31,27 +27,30 @@ def crate_data_get(sData, clientID: str = None, pos: list = None, persistent=Fal
         asc_g_msg.sendMsg("ret_inv_crateData", retdata, conClient)
         return
 
+    # No "Error", the crate was just not in the List. So let's create a new crate entry
     except KeyError:
         print(f"DEBUG: INV_HANDLER: crate_data_get: Creating new Crate")
-        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, persistent=persistent, invGridSize=invGridSize)
+        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, lootType=lootType, persistent=persistent, invGridSize=invGridSize)
     except Exception:
-        print(f"ERROR: INV_HANDLER: crate_data_get: HUGE WOBBLE WOBBLE! Data:\ncrateID: {crateID}\nclientID: {clientID}\npos: {pos}\npersistent: {persistent}\ninvGridSize {invGridSize}\n---------")
+        print(f"ERROR: INV_HANDLER: crate_data_get: HUGE WOBBLE WOBBLE! Data:\nclientID: {clientID}\npos: {pos}\ncrateID: {crateID}\nlootType: {lootType}\npersistent {persistent}\ninvGridSize {invGridSize}\n---------")
 
 # called by Server only!
-def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", persistent=False, model: str = "IG_supplyCrate_F", invGridSize: list = None):
+def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", lootType: str = None, persistent=False, model: str = "IG_supplyCrate_F", invGridSize: list = None):
     """
     :param sData:       ServerData (auto-passed)
     :param clientID:    A3 playerUID
     :param pos:         list - [[x,y,z],dir]
     :param crateID:
+    :param lootType:    String - type of loot, passed by the gameserver
     :param persistent:  Save to Database or not
+    The following arguments are ONLY for creating persistent crates:
     :param model:       A3 typeOf Class
     :param invGridSize: list - Inventory grid
     :return:
     """
 
     if None in [clientID, pos]:
-        print(f"ERROR: INV_HANDLER: create_add: clientID or Pos not transmitted: {clientID}")
+        print(f"ERROR: INV_HANDLER: create_add: clientID or Pos not transmitted: clientID: {clientID} | pos: {pos}")
         return
     if invGridSize is None:
         invGridSize = [4, 8]
@@ -72,6 +71,7 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
     inv_data = {
         "model": model,
         "pos": pos,
+        "type": lootType,
         "inv_grid": invGrid_create(grid_x, grid_y),
         "inv_gridSize": invGridSize,    # [y, x] / [rows, columns]
         "itemData": {}
@@ -81,8 +81,9 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
           f"crateID     : {crateID}\n"
           f"Model       : {model}\n"
           f"Pos         : {pos}\n"
+          f"type        : {type}\n"
           f"InvGridSize : {invGridSize}\n"
-          f"inv_data    : {inv_data}")
+          f"inv_data    : {inv_data}\n")
 
     if persistent:
         sData.database.crates[crateID] = inv_data
@@ -90,10 +91,12 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
     else:
         sData.database.sessionCrates[crateID] = inv_data
 
-    # send Inventory data back to the requesting client
-    conClient = sData.user_active[clientID]["con"]
-    # asc_g_msg.sendMsg("ret_inv_crateData", retdata, conClient)
-    asc_g_msg.sendMsg("ret_inv_crateData", inv_data, conClient)
+    try:
+        # send Inventory data back to the requesting client
+        conClient = sData.user_active[clientID]["con"]
+        asc_g_msg.sendMsg("ret_inv_crateData", inv_data, conClient)
+    except KeyError:
+        print(f"ERROR: INV_HANDLER: create_add: clientID NOT FOUND in user_active: {clientID}")
 
 # called by Server only!
 def crate_rem(sData, createID, pos):
