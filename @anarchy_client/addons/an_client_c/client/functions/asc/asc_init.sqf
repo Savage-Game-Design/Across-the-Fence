@@ -14,16 +14,17 @@ if hasInterface then
 {
 	// player addAction ["ASC: itemAdd [0,0]",				{["itemAdd", 		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player, 0, [0,0]]] call AN_G_fnc_msg_send;}];
 	// player addAction ["ASC: itemAdd [1,1]",				{["itemAdd", 		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player, 0, [1,1]]] call AN_G_fnc_msg_send;}];
-	player addAction ["ASC: getGrid",					{["inv_get_grid",	[(cursorObject getVariable ["crateID","-1"])]] call AN_G_fnc_msg_send;}];
-	player addAction ["ASC: getItems",					{["inv_get_items",	[(cursorObject getVariable ["crateID","-1"])]] call AN_G_fnc_msg_send;}];
-	player addAction ["ASC: toInv [0,1] Flipped: 0",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", (cursorObject getVariable ["crateID","-1"]),	getPlayerUID player,	0,		[0,1]	]] call AN_G_fnc_msg_send;}];
-	player addAction ["ASC: toInv [0,1] Flipped: 1",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", (cursorObject getVariable ["crateID","-1"]),	getPlayerUID player,	1,		[0,1]	]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: getGrid",					{["inv_get_grid",	[(cursorObject getVariable ["crateID","-1"])]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: getItems",					{["inv_get_items",	[(cursorObject getVariable ["crateID","-1"])]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: toInv [0,1] Flipped: 0",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", (cursorObject getVariable ["crateID","-1"]),	getPlayerUID player,	0,		[0,1]	]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: toInv [0,1] Flipped: 1",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", (cursorObject getVariable ["crateID","-1"]),	getPlayerUID player,	1,		[0,1]	]] call AN_G_fnc_msg_send;}];
 	//																 		[ ITEM ID									   OLD INVENTORY ID,							NEW  INVENTORY ID,	flipped		NewInvPos]	
-	player addAction ["ASC: toCrate [0,0] Flipped: 0",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player,	(cursorObject getVariable ["crateID","-1"]),	0,		[0,0]	]] call AN_G_fnc_msg_send;}];
-	player addAction ["ASC: toCrate [0,0] Flipped: 1",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player,	(cursorObject getVariable ["crateID","-1"]),	1,		[0,0]	]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: toCrate [0,0] Flipped: 0",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player,	(cursorObject getVariable ["crateID","-1"]),	0,		[0,0]	]] call AN_G_fnc_msg_send;}];
+	// player addAction ["ASC: toCrate [0,0] Flipped: 1",	{["itemMove",		["MjAyMC0wOC0xMFQyMDoxNTozMS45NTk5NTEtMQ==", getPlayerUID player,	(cursorObject getVariable ["crateID","-1"]),	1,		[0,0]	]] call AN_G_fnc_msg_send;}];
 	//																 		[ ITEM ID									   OLD INVENTORY ID,	NEW  INVENTORY ID,							flipped		NewInvPos]	
-	player addAction ["ASC: Create Crate (Temporary)",	{["Land_Suitcase_F",		false, (getPos player), (getDir player), [9,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
-	player addAction ["ASC: Create Crate (Persistent)",	{["Land_WoodenCrate_01_F",	true , (getPos player), (getDir player), [5,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
+	// player addAction ["ASC: Create Crate (Temporary)",	{["Land_Suitcase_F",		false, (getPos player), (getDir player), [9,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
+	// player addAction ["ASC: Create Crate (Persistent)",	{["Land_WoodenCrate_01_F",	true , (getPos player), (getDir player), [5,8]] remoteExecCall ["AN_S_fnc_crate_create", 2];}];
+	player addAction["ASC: get crateData", {[] call AN_C_fnc_loot_inv_request;}];
 };
 
 
