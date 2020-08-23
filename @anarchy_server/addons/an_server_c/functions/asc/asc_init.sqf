@@ -52,7 +52,7 @@ diag_log str ["AN_ASC - Setting up Server connection... request send..."];
 
 /////////////////////////////////////////
 
-// Set the seed and the crates array
+// Set the seed and make it a finalized MNS-Var
 
 // Silly Arma...
 vn_an_seed_tmp = compileFinal "9283";

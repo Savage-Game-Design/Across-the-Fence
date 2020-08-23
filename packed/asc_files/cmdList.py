@@ -16,7 +16,8 @@ cmdList = {
 				# add crates to the database
 				"crate_data_get": inv_handler.crate_data_get,
 				# remove crates from the database
-				"crate_rem": inv_handler.crate_rem
+				"crate_rem": inv_handler.crate_rem,
+				"TESTINGER": item_handler.item_add_list
 			},
 		'arma_server': {
 				# "functionTag in Arma": "Function to execute"
@@ -30,7 +31,6 @@ cmdList = {
 		'client': {
 				# ""Tag" send from Arma" : Function in the backend
 				# NOTE: Make sure, that you imported the related plugin/method/folder/however it's called (and added the files to the "__init.py__" )
-				"itemAdd":          test_itemAdd.test_itemAdd,
 				"itemMove":         inv_handler.item_move,
 				"inv_get_grid":     inv_handler.inv_grid_get,
 				"inv_get_items":    inv_handler.inv_items_get

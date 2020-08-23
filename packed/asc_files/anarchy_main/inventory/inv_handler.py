@@ -2,6 +2,7 @@ from . import id_handler
 from asc_fnc.asc_db.database import asc_db
 from asc_fnc import asc_g_msg
 
+
 DEVMODE = True
 # inventory = []
 def invGrid_create(grid_x, grid_y):
@@ -182,6 +183,7 @@ def item_move(client=None, args=()):
 
 
 def inv_getData(client, invID):
+
     try:
         # check if player Inventory
         if invID == client.puid:
@@ -205,6 +207,7 @@ def inv_getData(client, invID):
         return
 
 
+# usedSlots = slots occupied by the given Item Size INSIDE the invGrid!
 def inv_usedSlots_get(slotsStart=None, sizeItem=None, invGrid=None, isFlipped=0, isAdd=True):
     if None in [slotsStart, sizeItem, invGrid]:
         return []

@@ -7,6 +7,7 @@ from asc_fnc.message_handler import message_handler_c
 from cmdList import cmdList
 import json
 
+
 def client_checkKey(sData, con_server, con_client, raddr):
     """
 
@@ -76,6 +77,7 @@ class data_client:
         self.ip = raddr
         self.puid = puid
         self.cData = {}
+
 
     #####################################################
     def client_listener(self):
