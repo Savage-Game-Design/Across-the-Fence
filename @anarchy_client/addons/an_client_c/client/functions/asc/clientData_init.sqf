@@ -4,6 +4,9 @@
 
 	WIP (in case it isn't obvious)
 
+	usage:
+	Set up the player data and start all the loops from here.
+
 */
 
 params["_data"];
@@ -64,7 +67,15 @@ diag_log format["CLD_INIT: Skills FULL	: %1", an_cData_skills];
 diag_log "------------------";
 
 
-
-
-
-////////////////////////////////////// DEV:
+// Spawn and start the Loot-bubble-thingy-function-stuff
+vn_an_crates = [];
+[] spawn
+{
+	systemChat "DEBUG: Starting loot bubble check";
+	// make loot spawn
+	while {true} do
+	{
+		call AN_C_fnc_loot_bubble;
+		uiSleep 0.02;
+	};
+};

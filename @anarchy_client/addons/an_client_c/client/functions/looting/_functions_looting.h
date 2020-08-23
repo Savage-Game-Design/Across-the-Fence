@@ -3,3 +3,4 @@
 
 C_FNC(looting,loot_inv_get)
 C_FNC(looting,loot_inv_request)
+C_FNC(looting,loot_bubble)
