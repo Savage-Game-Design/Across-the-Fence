@@ -51,3 +51,14 @@ diag_log str ["AN_ASC - Setting up Server connection..."];
 diag_log str ["AN_ASC - Setting up Server connection... request send..."];
 
 /////////////////////////////////////////
+
+// Set the seed and the crates array
+
+// Silly Arma...
+vn_an_seed_tmp = compileFinal "9283";
+
+// Seed is now locked/finalized and a number again
+vn_an_seed = call vn_an_seed_tmp;
+
+// make the seed public
+missionNamespace setVariable ["vn_an_seed", vn_an_seed, true];

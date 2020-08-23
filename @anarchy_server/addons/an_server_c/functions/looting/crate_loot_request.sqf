@@ -1,27 +1,37 @@
 
+params ["_pos", "_building"];
 
-params
-[
-	  ["_pos_crate",[0,0,0],[]]	// getPosWorld coords
-];
-
-// diag_log ["_pos_crate: ", _pos_crate];
-private _sender = remoteExecutedOwner;
+// Get the player obj from remoteExecutedOwner
 private _allPlayers = allPlayers - entities "HeadlessClient_F";
-// diag_log ["_allPlayers:", _allPlayers];
-private _owner_index = _allPlayers findIf { (owner _x) isEqualTo _sender};
-// diag_log ["_owner_index: ", _owner_index];
-if(_owner_index >= 0)then
-{
-	private _owner_obj = _allPlayers#_owner_index;
-	private _owner_ID = getPlayerUID _owner_obj;
-	private _dist = _pos_crate distance (getPosWorld _owner_obj);
-	if(_dist > 3)exitWith{diag_log [":::: CRATE_LOOT_REQUEST: TOO FAR AWAY: ", _pos_crate, (getPosWorld _owner_obj), " = ", _dist];};
-	diag_log [_owner_obj, _owner_ID, _dist];
-	// ToDo: set crate_ID properly
+private _owner_index = _allPlayers findIf { (owner _x) isEqualTo remoteExecutedOwner};
+if(_owner_index < 0)exitWith{diag_log "ERROR: crate_loot_request: Player not found in allPlayers!"};
 
-	diag_log [":::: CRATE_LOOT_REQUEST: DATA:", ["call_function", ["crate_data_get",[_owner_ID, _pos_crate] ] ]];
-	["crate_data_get", [_owner_ID, _pos_crate]] call AN_G_fnc_msg_send;
-}else{
-	diag_log ["!! SENDER NOT FOUND !!"];
+private _player = _allPlayers#_owner_index;
+private _player_ID = getPlayerUID _player;
+private _chance = 0.99;
+private _max_dist = 20;
+private _building_type = typeOf _building;
+if !(isNull _building) then
+{
+	if (_pos distance2D _building < _max_dist) then
+	{
+		if (_player distance2D _pos < _max_dist) then
+		{
+			// check if loot pos is real
+			_seed = (vn_an_seed + (_pos#2));
+			if (_seed random [(_pos#0),(_pos#1)] > _chance) then
+			{
+				// todo do loot type lookup based on building class _building_type
+				_crate_type = "type_military";
+				_crate_seed = (str vn_an_seed) + (_pos joinString "");
+				// todo do call to ASC to make crate and spawn loot.
+				diag_log [":::: CRATE_LOOT_REQUEST: DATA:", ["call_function", ["crate_data_get",[_player_ID, _pos, _crate_seed, _crate_type] ] ]];
+				["crate_data_get", [_player_ID, _pos, _crate_seed, _crate_type]] call AN_G_fnc_msg_send;
+			};
+		} else {
+			diag_log ("player too far way! crate pos:" + str _pos + " ppos: " +  str getPosASL player + " dist: " + str (_player distance2D _pos));
+		};
+	} else {
+		diag_log ("building too far way! crate pos:" + str _pos + " ppos: " +  str getPosASL player + " dist: " + str (_player distance2D _pos));
+	};
 };
