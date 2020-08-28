@@ -1,0 +1,7 @@
+{
+   "prefix":"\\sgd\\anarchy\\{addon_name}",
+   "makepbo_arguments":[
+      "-PsFW",
+      "-X=thumbs.db,*.txt,*.h,*.dep,*.cpp,*.bak,*.png,*.log,*.pew,*.hpp,source,*.tga"
+   ]
+}

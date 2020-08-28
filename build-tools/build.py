@@ -1,5 +1,6 @@
 import argparse
 import datetime
+import json
 import os
 import os.path as path
 from pathlib import Path, PurePath
@@ -8,11 +9,12 @@ import subprocess
 import sys
 import vdf
 
+p_drive = Path('P:\\')
 root_directory = Path(path.realpath(__file__)).parent.parent
 addon_prefix = "\\sgd\\anarchy"
 output_directory = root_directory / 'packed'
 log_directory = root_directory / 'build_logs' / (datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
-prefix_directory = Path('P:\\') / addon_prefix
+prefix_directory = p_drive / addon_prefix
 missions_directory = root_directory / "missions"
 arma_mod_folder_name = "anarchy"
 
@@ -110,6 +112,26 @@ def create_symlink(link_path,dest_path,is_directory=False):
             print("Error while creating symlinks. Possible fix: This script needs to be run as an administrator.")
             print("Raw error: ", e)
 
+def create_symlink_and_parents(link_path,source_path,is_directory=False):
+    create_folder_if_not_exists(link_path.parent)
+    create_symlink(link_path, source_path, is_directory)
+
+def remove_file_and_empty_parent_folders(path):
+    deleted = []
+    if path.exists():
+        deleted.append(path)
+        path.unlink()
+    for parent in path.parents:
+        if not parent.exists():
+            break
+        if len(list(parent.iterdir())) == 0:
+            deleted.append(parent)
+            parent.rmdir()
+            continue
+        break
+    
+    return deleted
+
 def remove_if_symlink_to_here(link_path):
     if link_path.is_symlink():
         #if our link path begins with the path to our root directory, we consider it a link to inside this repo.
@@ -117,6 +139,30 @@ def remove_if_symlink_to_here(link_path):
         if root_directory.resolve().as_posix() in link_path.resolve().as_posix() or not link_path.exists():
             print(f"Unlinking {link_path}")
             link_path.unlink()
+
+def load_addon_info(folder_path):
+    build_file_path = folder_path / "build.json"
+    
+    if not build_file_path.exists():
+        return None
+
+    try:
+        with build_file_path.open("r") as build_file:
+            data = json.load(build_file)
+            data["name"] = folder_path.name
+            data["pbo_name"] =  data["name"] + ".pbo"
+            data["prefix"] = data.get("prefix", "sgd\\{addon_name}").format(addon_name = data["name"])
+            #We need to create a path here that has no root, so we can safely join it onto other paths
+            #This does it cross-platform, without errors, even if it has no root.
+            prefix_path = PurePath(data["prefix"])
+            data["prefix_path"] = prefix_path.relative_to(prefix_path.root)
+            return data
+    except OSError:
+        print(f"Error: Unable to open build file: {build_file_path}")
+        return None
+    except json.JSONDecodeError:
+        print(f"Build file not a valid JSON document: {build_file_path}")
+        return None
 
 def build(mod_names, overwrite=False):
 
@@ -160,21 +206,34 @@ def build(mod_names, overwrite=False):
         print(f"\n==== BUILDING {mod_name} ADDONS ====")
         #Build addons with makepbo
         exclude_files = ",".join(["thumbs.db","*.txt","*.h","*.dep","*.cpp","*.bak","*.png","*.log","*.pew","*.hpp","source","*.tga"])
-        base_command = ["MakePbo", "-PsFW", f"-X={exclude_files}"]
+        default_args = ["-PsFW", f"-X={exclude_files}"]
+        base_command = ["MakePbo"]
+
         for addon_input_path in (mod_input_path / "addons").iterdir():
-            addon_name = addon_input_path.name
-            addon_output_path = mod_output_path / "addons" / (addon_name + ".pbo")
-            print(f"Building Addon '{addon_name}' to {addon_output_path}")
+            addon_info = load_addon_info(addon_input_path)
+
+            if not addon_info:
+                print(f"Skipping {addon_input_path} - No build info")
+                continue
+
+            addon_name = addon_info["name"]
+            addon_source_path = p_drive / addon_info["prefix_path"];
+            addon_output_path = mod_output_path / "addons" / (addon_info["pbo_name"])
+
+            print(f"Building Addon '{addon_name}'")
+            print("    Prefix: {}".format(addon_info["prefix"]))
+            print("    Source Path: {}".format(addon_source_path))
+            print("    Output Path: {}".format(addon_output_path))
 
             #Check the source exists on the P-Drive
-            addon_source_path = prefix_directory / addon_name;
             if not addon_source_path.exists():
                 print(f"    FAILED: {addon_name} cannot be built - the source path does not exist ({addon_source_path})")
                 continue
 
+            command = base_command + addon_info.get("makepbo_arguments", default_args) + [str(addon_source_path), str(addon_output_path)]
+
             log_file_path = log_directory / f"makepbo_{addon_name}.txt"
             with open(log_file_path, "w") as log_file:
-                command = base_command + [str(addon_source_path), str(addon_output_path)]
                 result = subprocess.run(command, stdout=log_file, stderr=subprocess.STDOUT)
                 if result.returncode != 0:
                     print(f"    FAILED: {addon_name} build - see ({log_file_path}) for more information")
@@ -183,31 +242,35 @@ def build(mod_names, overwrite=False):
                     print(f"    SUCCEEDED: {addon_name} build - see ({log_file_path}) for MakePBO output")
 
 def pdrive(mods,disable=False):
-    drive = Path("P:\\")
-    drive_addon_root = drive / addon_prefix
+    symlinks = []
 
+    for mod in mods:
+        addons_path = root_directory / mod / "addons"
+        for addon_path in addons_path.iterdir():
+            addon_info = load_addon_info(addon_path)
+            if addon_info:
+                symlinks.append({
+                    "addon_info": addon_info,
+                    "addon_path": addon_path,
+                    "link_path": p_drive / addon_info["prefix_path"], 
+                    "source_path": addon_path
+                })
+ 
     if not disable:
-        create_folder_if_not_exists(drive_addon_root)
-
         print("Linking files to addon root")
-        for mod in mods:
-            addons_path = root_directory / mod / "addons"
-            for addon_path in addons_path.iterdir():
-                link_path = drive_addon_root / (addon_path.name)
-                create_symlink(link_path, addon_path, is_directory=True)
+        for link in symlinks:
+            create_folder_if_not_exists(link["link_path"].parent)
+            create_symlink(link["link_path"], link["source_path"], is_directory=True)
     else:
-        if drive_addon_root.exists():
-            print(f"Deleting {drive_addon_root}")
+        for link in symlinks:
             try:
-                shutil.rmtree(drive_addon_root)
-                print(f"Deleted {drive_addon_root}")
+                for deleted_path in remove_file_and_empty_parent_folders(link["link_path"]):
+                    print(f"Deleted: {deleted_path}")
             except OSError as e:
-                print(f"Error removing {drive_addon_root}")
+                print(f"Error removing {link_path}")
                 print("Raw error: ", e)
-        else:
-            print(f"P-Drive is not configured ({drive_addon_root} does not exist.)")
 
-def filepatching(raw_path, disable=False):
+def filepatching(raw_path,mods,disable=False):
     path = Path(raw_path)
 
     if not path.exists():
@@ -220,27 +283,41 @@ def filepatching(raw_path, disable=False):
         print(f"ERROR: {path} is not an Arma root directory")
         return False
 
-    prefix_path = PurePath(addon_prefix)
-    prefix_base = prefix_path.parents[0].name
-    link_path = path.joinpath(prefix_base)
+    symlinks = []
+
+    for mod in mods:
+        addons_path = root_directory / mod / "addons"
+        for addon_path in addons_path.iterdir():
+            addon_info = load_addon_info(addon_path)
+            if addon_info:
+                symlinks.append({
+                    "addon_info": addon_info,
+                    "addon_path": addon_path,
+                    "link_path": path / addon_info["prefix_path"], 
+                    "source_path": addon_path
+                })
     
     if not disable:
         print(f"Setting up SGD filepatching at {path}")
 
-        pdrive_addon_path = Path('P:\\') / prefix_path
-        if not pdrive_addon_path.exists():
-            print(f"ERROR: P-Drive is not set up for Anarchy. The P-Drive must be set up before enabling filepatching. ({pdrive_addon_path} does not exist)")
-            print("You can set this feature up using the 'pdrive' command")
-            return
+        for link in symlinks:
+            addon_name = link["addon_info"]["name"]
+            print(f"Setting up filepatching for {addon_name}")
 
-        dest_path = Path('P:\\') / prefix_base
-        create_symlink(link_path, dest_path, is_directory=True) 
+            if not link["source_path"].exists():
+                print("ERROR: {} does not exist".format(link["source_path"]))
+                continue
+
+            create_folder_if_not_exists(link["link_path"].parent)
+            create_symlink(link["link_path"], link["source_path"], is_directory=True) 
     else:
-        if link_path.exists():
-            print(f"Removing SGD filepatching directory {link_path}")
-            link_path.unlink()
-        else:
-            print(f"SGD Filepatching is not set up at {path}")
+        for link in symlinks:
+            try:
+                for deleted_path in remove_file_and_empty_parent_folders(link["link_path"]):
+                    print(f"Deleted: {deleted_path}")
+            except OSError as e:
+                print(f"Error removing {link_path}")
+                print("Raw error: ", e)
 
 def arma_setup(raw_path,link_missions=True,disable=False):
     arma_path = Path(raw_path)
@@ -249,8 +326,9 @@ def arma_setup(raw_path,link_missions=True,disable=False):
         print(f"ERROR: {arma_path} does not exist")
         return False
 
-    is_server = len(list(arma_path.glob('arma3server*.exe'))) > 0
-    is_client = len(list(arma_path.glob('arma3*.exe'))) > 0
+
+    is_server = is_arma_server_dir(arma_path)
+    is_client = is_arma_client_dir(arma_path)
     if not (is_server or is_client):
         print(f"ERROR: {arma_path} is not an Arma root directory")
         return False
@@ -361,7 +439,7 @@ def subcommand_filepatching(args):
 
     for path in paths:
         print (f"Configuring filepatching for {path}")
-        filepatching(path, args.disable)
+        filepatching(path,all_mods,args.disable)
 
 def subcommand_arma_setup(args):
     action = "unlinking" if args.disable else "linking"
