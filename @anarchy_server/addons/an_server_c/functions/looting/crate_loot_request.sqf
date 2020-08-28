@@ -26,7 +26,10 @@ if !(isNull _building) then
 				_crate_seed = (str vn_an_seed) + (_pos joinString "");
 				// todo do call to ASC to make crate and spawn loot.
 				diag_log [":::: CRATE_LOOT_REQUEST: DATA:", ["call_function", ["crate_data_get",[_player_ID, _pos, _crate_seed, _crate_type] ] ]];
-				["crate_data_get", [_player_ID, _pos, _crate_seed, _crate_type]] call AN_G_fnc_msg_send;
+				// Last Entry is the Indicator, for the Backend, if it is a Loot-crate or not (1 = fill with loot | 0 = add nothing)
+				["crate_data_get", [_player_ID, _pos, _crate_seed, _crate_type, 1]] call AN_G_fnc_msg_send;
+			}else{
+				diag_log "ERROR: FUNCTION: crate_loot_request: (_seed random [(_pos#0),(_pos#1)] > _chance)";
 			};
 		} else {
 			diag_log ("player too far way! crate pos:" + str _pos + " ppos: " +  str getPosASL player + " dist: " + str (_player distance2D _pos));
@@ -34,4 +37,6 @@ if !(isNull _building) then
 	} else {
 		diag_log ("building too far way! crate pos:" + str _pos + " ppos: " +  str getPosASL player + " dist: " + str (_player distance2D _pos));
 	};
+}else{
+	diag_log "ERROR: FUNCTION: crate_loot_request: !(isNull _building)";
 };
