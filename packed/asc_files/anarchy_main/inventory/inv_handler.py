@@ -2,6 +2,7 @@ from . import id_handler
 from asc_fnc.asc_db.database import asc_db
 from asc_fnc import asc_g_msg
 
+from . import item_handler
 
 DEVMODE = True
 # inventory = []
@@ -13,8 +14,15 @@ def invGrid_create(grid_x, grid_y):
     return ret
 
 
-def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str = None, lootType: str = None, persistent=False, invGridSize: list = None):
-
+# try to get the Crate data. If not found -> Create a new one. We simply assume the Data, coming from the Game-server, is correct/valid.
+def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str = None, lootType: str = None, isLootcrate: int = 0, persistent=False, invGridSize: list = None):
+    print(f"clientID: {clientID}\n"
+          f"pos: {pos}\n"
+          f"crateID: {crateID}\n"
+          f"lootType: {lootType}\n"
+          f"isLootcrate: {isLootcrate}\n"
+          f"persistent: {persistent}\n"
+          f"invGridSize: {invGridSize}\n")
     try:
         if persistent:
             retdata = sData.database.crates[crateID]
@@ -31,18 +39,19 @@ def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str =
     # No "Error", the crate was just not in the List. So let's create a new crate entry
     except KeyError:
         print(f"DEBUG: INV_HANDLER: crate_data_get: Creating new Crate")
-        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, lootType=lootType, persistent=persistent, invGridSize=invGridSize)
+        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, lootType=lootType, isLootcrate=isLootcrate, persistent=persistent, invGridSize=invGridSize)
     except Exception:
         print(f"ERROR: INV_HANDLER: crate_data_get: HUGE WOBBLE WOBBLE! Data:\nclientID: {clientID}\npos: {pos}\ncrateID: {crateID}\nlootType: {lootType}\npersistent {persistent}\ninvGridSize {invGridSize}\n---------")
 
 # called by Server only!
-def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", lootType: str = None, persistent=False, model: str = "IG_supplyCrate_F", invGridSize: list = None):
+def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", lootType: str = None, isLootcrate: int = 0, persistent=False, model: str = "IG_supplyCrate_F", invGridSize: list = None):
     """
     :param sData:       ServerData (auto-passed)
     :param clientID:    A3 playerUID
     :param pos:         list - [[x,y,z],dir]
     :param crateID:
     :param lootType:    String - type of loot, passed by the gameserver
+    :param isLootcrate: is the crate a newly created Loot-crate or not
     :param persistent:  Save to Database or not
     The following arguments are ONLY for creating persistent crates:
     :param model:       A3 typeOf Class
@@ -68,6 +77,11 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
     # ToDo: If loot request: Fill crate with Items
     # ToDo: If loot request: adjust invGridSize, according to used space
     # ToDo: write fill-mechanic (hmpf... how many todos has this one...)
+    # fill the lootcrate, if needed
+    if isLootcrate == 1:
+        print(f"INV_HANDLER: create_add: isLootcrate: {isLootcrate}")
+        print(item_handler.return_loot_list(sData=sData, crate_id=crateID, loot_count=5, loot_type="type_military"))
+        pass
 
     inv_data = {
         "model": model,
@@ -82,7 +96,7 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
           f"crateID     : {crateID}\n"
           f"Model       : {model}\n"
           f"Pos         : {pos}\n"
-          f"type        : {type}\n"
+          f"type        : {lootType}\n"
           f"InvGridSize : {invGridSize}\n"
           f"inv_data    : {inv_data}\n")
 
@@ -281,3 +295,4 @@ def inv_items_get(client=None, args=()):
 
     con = client.con_client
     asc_g_msg.sendMsg("ret_inv_get_items", data, con)
+

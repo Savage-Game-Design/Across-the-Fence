@@ -1,3 +1,4 @@
+import random
 from . import inv_handler, id_handler
 
 # standard Values for Items
@@ -220,3 +221,30 @@ def item_add_list(sData, invID: str = "", itemList: list = None):
     # print(client.cData["itemData"])
     # # ToDo: TEMP! Saving will be done by an extra Thread from the Server! e.g. every 10 "pushes" OR every 10s -> save data to file
     # client.sData.database.db_save()
+
+
+def loot_generate(sData, x_dict, initial_seed):
+    # select random item
+    selected_type = random.choices(list(x_dict.keys()), weights=list(x_dict.values()), k=1)[0]
+    print(f"DEBUG: selected_type: {selected_type}")
+    # check if selected_type exists other wise return class
+    if selected_type in sData.lootData["tables"].keys():
+        initial_seed += selected_type
+        # print(f"DEBUG: initial_seed LG: {initial_seed}")
+        return loot_generate(sData, sData.lootData["tables"][selected_type], initial_seed)
+    else:
+        return selected_type
+
+
+def return_loot_list(sData, crate_id, loot_type, loot_count):
+    initial_seed = f"{sData.lootData['globalseed']}{crate_id}{loot_type}"
+    print(f"initial_seed: {initial_seed}")
+    loot_list = []
+    # check if loot_type exists
+    if loot_type in sData.lootData["tables"].keys():
+        for x in range(loot_count):
+            loot_list.append(loot_generate(sData, sData.lootData["tables"][loot_type], f"{initial_seed}{x}"))
+    return loot_list
+
+    # ############################# NOTE:
+    # print(return_loot_list("98372491", "type_military", 3))
