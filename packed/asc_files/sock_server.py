@@ -1,4 +1,6 @@
+import random
 import socket
+import string
 from _thread import *
 from threading import Thread
 import asc_server
@@ -48,7 +50,32 @@ def server_start():
     server_key = params["server_key"]
     server_ip = params["server_ip"]
     print(f'#### Server key:\n#### - "{server_key}"')
+
+    # ############# Loot data thingy stuff burp
+    # ####### set the main lootseed ...
+    if params["lootseed"] is None:
+        sData.lootData["globalseed"] = "".join(random.choices(string.ascii_letters, k=8))
+    else:
+        sData.lootData["globalseed"] = params["lootseed"]
+    print(f'#### Lootseed:\n#### - "{sData.lootData["globalseed"]}"')
+
+    # ... and load data from the json loot tables
+    print(f'#### Loading loot-tables...')
+    path_tables = f"{rel_dir}\\loottables\\"
+    json_files = [pos_json for pos_json in os.listdir(path_tables) if pos_json.endswith('.json')]
+    for filename in json_files:
+        # print(f"DEBUG: filename: {filename}")
+        with open(f"{path_tables}{filename}", "r") as read_file:
+            # add the .json data to the sData dict
+            sData.lootData["tables"][os.path.splitext(filename)[0]] = json.load(read_file)
+    # # Debug
+    # for key in sData.lootData["tables"]:
+    #     print(f"DEBUG: key: {key}")
+    # ############# Loot stuff... done
+    print(f'#### Loading loot-tables... done')
+
     print("########################################################\n")
+
     try:
         sock_server.bind(ip)
     except socket.error as e:
