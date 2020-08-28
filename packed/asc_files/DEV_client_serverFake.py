@@ -5,8 +5,8 @@ from _thread import *
 import random
 from asc_fnc import *
 
-ip = ("89.163.145.36", 5555)
-# ip = ("127.0.0.1", 5555)
+# ip = ("89.163.145.36", 5555)
+ip = ("127.0.0.1", 5555)
 MESSAGEBUFFER = 512
 
 

@@ -13,7 +13,7 @@ cmdList = {
 				# Player disconnected
 				"user_rem": asc_s_lst_client.client_active_rem,
 
-				# add crates to the database
+				# Try to get data from crates/Inventories.
 				"crate_data_get": inv_handler.crate_data_get,
 				# remove crates from the database
 				"crate_rem": inv_handler.crate_rem,
