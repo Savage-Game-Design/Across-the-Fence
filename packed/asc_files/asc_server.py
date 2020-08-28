@@ -4,9 +4,8 @@ from asc_fnc import *
 from cmdList import cmdList
 from asc_fnc.asc_db import database
 from asc_fnc.message_handler import message_handler_s
+
 # set up the ServerData Class
-
-
 class data_server:
     def __init__(self, blacklist=None, threads_max=150, msgBuffer=2000):
         if blacklist is None:
@@ -22,8 +21,9 @@ class data_server:
         self.con_gameServer = None
         self.mainConnection = None
         self.database = None
+        self.lootData = {"globalseed": "", "tables": {}}
 
-    ###################################################################################################
+    # ##################################################################################################
 
     def gameserver_listen(self, dbPath: str = "", dbName: str = ""):
         """
