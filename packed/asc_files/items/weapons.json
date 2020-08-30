@@ -1,0 +1,90 @@
+
+{
+    "rifles":
+    {
+        "arifle_MXC_F":
+        {
+            "size": [4, 8],
+            "slot": 1,
+            "class_cfg": "CfgWeapons",
+            "class_name": "arifle_MXC_F",
+            "image": "\\a3\\weapons_f\\Rifles\\MX\\data\\UI\\gear_mx_cqc_X_CA.paa",
+            "addInvSpace": 0,
+            "hp_max": 100,
+            "fnc": "",
+            "params": [],
+            "fnc_type": 0
+        },
+        "arifle_Mk20_F":
+        {
+            "size": [3, 7],
+            "slot": 1,
+            "class_cfg": "CfgWeapons",
+            "class_name": "arifle_Mk20_F",
+            "image": "\\a3\\weapons_f\\Rifles\\MK20\\data\\UI\\gear_mk20_camo_CA.paa",
+            "addInvSpace": 0,
+            "hp_max": 100,
+            "fnc": "",
+            "params": [],
+            "fnc_type": 0
+        }
+    },
+    "pistols":
+    {
+        "hgun_ACPC2_F":
+        {
+            "size": [2, 4],
+            "slot": 2,
+            "class_cfg": "CfgWeapons",
+            "class_name": "hgun_ACPC2_F",
+            "image": "\\A3\\Weapons_F_Beta\\Pistols\\ACPC2\\Data\\UI\\gear_Acpc2_X_CA.paa",
+            "addInvSpace": 0,
+            "hp_max": 100,
+            "fnc": "",
+            "params": [],
+            "fnc_type": 0
+        },
+        "hgun_P07_F":
+        {
+            "size": [2, 4],
+            "slot": 2,
+            "class_cfg": "CfgWeapons",
+            "class_name": "hgun_P07_F",
+            "image": "\\A3\\weapons_F\\Pistols\\P07\\data\\UI\\gear_p07_x_ca.paa",
+            "addInvSpace": 0,
+            "hp_max": 100,
+            "fnc": "",
+            "params": [],
+            "fnc_type": 0
+        }
+    },
+    "launcher":
+    {
+        "launch_RPG32_F":
+        {
+            "size": [4, 8],
+            "slot": 3,
+            "class_cfg": "CfgWeapons",
+            "class_name": "launch_RPG32_F",
+            "image": "\\A3\\Weapons_F\\launchers\\RPG32\\data\\UI\\gear_RPG32_X_CA.paa",
+            "addInvSpace": 0,
+            "hp_max": 100,
+            "fnc": "",
+            "params": [],
+            "fnc_type": 0
+        },
+        "launch_NLAW_F":
+        {
+            "size": [4, 8],
+            "slot": 3,
+            "class_cfg": "CfgWeapons",
+            "class_name": "launch_NLAW_F",
+            "image": "\\A3\\weapons_f\\launchers\\nlaw\\data\\UI\\gear_nlaw_ca.paa",
+            "addInvSpace": 0,
+            "hp_max": 100,
+            "fnc": "",
+            "params": [],
+            "fnc_type": 0
+        }
+    }
+}
