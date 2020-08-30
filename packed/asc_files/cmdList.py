@@ -39,6 +39,7 @@ cmdList = {
 				# "functionTag in Arma": "Function to execute"
 				# NOTE: Make sure, that the Tag is compatible with the Arma 3 Variable logic
 				"INIT_CLIENTDATA":      "AN_c_fnc_clientData_init",
+				"INIT_ITEMDATA":        "AN_c_fnc_items_setData",
 				"ret_inv_get_grid":     "DEV_an_fnc_hintGrid",
 				"ret_inv_get_items":    "DEV_an_fnc_hintItemData",
 				"ret_inv_crateData":    "AN_c_fnc_loot_inv_get"
