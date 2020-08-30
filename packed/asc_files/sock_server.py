@@ -51,7 +51,7 @@ def server_start():
     server_ip = params["server_ip"]
     print(f'#### Server key:\n#### - "{server_key}"')
 
-    # ############# Loot data thingy stuff burp
+    # ############# Loot/Item data thingy stuff burp
     # ####### set the main lootseed ...
     if params["lootseed"] is None:
         sData.lootData["globalseed"] = "".join(random.choices(string.ascii_letters, k=8))
@@ -59,18 +59,30 @@ def server_start():
         sData.lootData["globalseed"] = params["lootseed"]
     print(f'#### Lootseed:\n#### - "{sData.lootData["globalseed"]}"')
 
-    # ... and load data from the json loot tables
+    # ####### load all the Items
+    print(f'#### Loading items...')
+    path_items = f"{rel_dir}\\items\\"
+    json_files = [pos_json for pos_json in os.listdir(path_items) if pos_json.endswith('.json')]
+    for filename in json_files:
+        print(f"DEBUG: filename Items: {filename}")
+        with open(f"{path_items}{filename}", "r") as file:
+            # add the .json data to the sData dict
+            sData.itemData[os.path.splitext(filename)[0]] = json.load(file)
+    print(f'#### Loading items... done')
+
+    # ####### load the loot tables
     print(f'#### Loading loot-tables...')
     path_tables = f"{rel_dir}\\loottables\\"
     json_files = [pos_json for pos_json in os.listdir(path_tables) if pos_json.endswith('.json')]
     for filename in json_files:
-        # print(f"DEBUG: filename: {filename}")
-        with open(f"{path_tables}{filename}", "r") as read_file:
+        print(f"DEBUG: filename LootTables: {filename}")
+        with open(f"{path_tables}{filename}", "r") as file:
             # add the .json data to the sData dict
-            sData.lootData["tables"][os.path.splitext(filename)[0]] = json.load(read_file)
+            sData.lootData["tables"][os.path.splitext(filename)[0]] = json.load(file)
     # # Debug
     # for key in sData.lootData["tables"]:
     #     print(f"DEBUG: key: {key}")
+
     # ############# Loot stuff... done
     print(f'#### Loading loot-tables... done')
 

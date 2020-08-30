@@ -22,6 +22,7 @@ class data_server:
         self.mainConnection = None
         self.database = None
         self.lootData = {"globalseed": "", "tables": {}}
+        self.itemData = {}
 
     # ##################################################################################################
 
