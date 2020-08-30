@@ -58,7 +58,6 @@ class data_server:
                         pass
                     break
                 else:
-                    # Todo: MERGE WITH ASC_CLIENT
                     # check if multiple messages received at once and handle them separately
                     if b"}{" in msg:
                         for i in range(msg.count(b"}{") + 1):
@@ -98,7 +97,6 @@ class data_server:
             except ConnectionResetError:
                 print(f"GAME SERVER: CRE - Connection closed - Disconnecting all Clients...")
                 for key in self.user_active:
-                    # Todo: send disconnect message to all Clients
                     con = self.user_active[key]["con"]
                     try:
                         con.shutdown(socket.SHUT_RDWR)
@@ -112,16 +110,15 @@ class data_server:
             except socket.timeout:
                 print("GAME SERVER: Socket timeout - Disconnecting all Clients...")
                 for key in self.user_active:
-                    # Todo: send disconnect message to all Clients
                     con = self.user_active[key]["con"]
-                    con.shutdown(socket.SHUT_RDWR)
-                    con.close()
+                    try:
+                        con.shutdown(socket.SHUT_RDWR)
+                        con.close()
+                    except OSError:
+                        # already closed
+                        pass
                 print("GAME SERVER: Socket timeout - Disconnecting all Clients... done")
                 break
-
-        ###################################################
-        # Todo: Save everything to file
-        ###################################################
 
         try:
             print(f"GAME SERVER: Connection closed - closing Socket...")

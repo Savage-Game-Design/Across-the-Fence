@@ -54,18 +54,24 @@ def item_create(**kwargs):
         "id":          id_handler.create_id(),   # Item ID - Will ALWAYS be generated!
 
         # ----------------------------------------------------------- #
-        "type":        0,               # Baseclass in Arma
-        # translates in Arma to a Config Baseclass, like: CfgVehicles/CfgMagazines/etc.
-        # At the same time, it's an indicator, in which the Item can put it in!
+        "slot":        0,           # Baseclass in Arma
+        # Used in Arma to determine the slot, in which the Item can put it in!
+        # Description:
+        # ToDo: Add Description and slot-ID defines somewhere and link it here
         # ----------------------------------------------------------- #
-
-        "class_name":  "",              # Arma Cfg-name
-        "rarity":      0,               # Rarity
-        "hp_cur":      100,             # Current HP
-        "hp_max":      100,             # Max HP
+        "class_cfg":  "",           # Main-baseclass, like: CfgVehicles/CfgMagazines/etc.
+        "class_name": "",           # Arma Cfg-name
+        "rarity":      0,           # Rarity
+        "hp_cur":      100,         # Current HP
+        "hp_max":      100,         # Max HP
+        "curInv":      "-1",        # ID of Inventory, that the Item is in
+        "addInvSpace": 0,           # does Item add Inventory space?
+        "fnc":         "",          # Function to be called, when right-clicking it in the Inventory. If empty -> do nothing
+        "params":      [],          # parameters send over to the function call. Will only be used, when the "fnc" entry has a value.
+        "fnc_type":     0,          # Is the function being called (0) or spawned (1)
 
         # ----------------------------------------------------------- #
-        "size":        [4, 4],          # Size in Inventory
+        "size":        [4, 4],      # Size in Inventory
         # Format: [ Size Rows, Size Columns ]
         # Example: [2, 4] == 2 Rows/Y/height, 4 Cols/X/width
         # Visualization:
@@ -74,8 +80,7 @@ def item_create(**kwargs):
         # ----------------------------------------------------------- #
 
         # ----------------------------------------------------------- #
-        # ToDo: if newly spawned: Calculate possible position in Inventory (self.curInv)
-        "invPos":      [0, 0],  # TopLeft Position of the Item in the InventoryGrid
+        "invPos":      [0, 0],      # TopLeft Position of the Item in the InventoryGrid
         # Format: [ Row Pos, Col Pos]
         # Example: [0,1] == First Row, 2nd "Column"/Index (since we start from 0)
         # Visualization:
@@ -83,7 +88,7 @@ def item_create(**kwargs):
         # ----------------------------------------------------------- #
 
         # ----------------------------------------------------------- #
-        "isFlipped":   0,               # 0/1 - Check if Item was flipped
+        "isFlipped":   0,           # 0/1 - Check if Item was flipped
         # Argument is needed to check if the Item was flipped, while placing/moving it into the new Inventory
         # (cleaning up an InvGrid).
         # State: 0 == No changes during moving. Item will stay (example) at: [2 (row), 4 (col)]
@@ -98,16 +103,13 @@ def item_create(**kwargs):
         # [1,1,0,0,0]
         # [1,1,0,0,0]
         # ----------------------------------------------------------- #
-
         "attachments": {
-            "scope": "",                # TODO: determine what makes more sense: ItemID or full itemData?
-            "magazine": "",             # TODO: determine what makes more sense: ItemID or full itemData?
-            "muzzle": "",               # TODO: determine what makes more sense: ItemID or full itemData?
-            "barrel": "",               # TODO: determine what makes more sense: ItemID or full itemData?
-            "support": "",              # TODO: determine what makes more sense: ItemID or full itemData?
+            "scope": "",            # TODO: determine what makes more sense: ItemID or full itemData?
+            "magazine": "",         # TODO: determine what makes more sense: ItemID or full itemData?
+            "muzzle": "",           # TODO: determine what makes more sense: ItemID or full itemData?
+            "barrel": "",           # TODO: determine what makes more sense: ItemID or full itemData?
+            "support": "",          # TODO: determine what makes more sense: ItemID or full itemData?
             },
-        "curInv": "-1",                 # ID of Inventory, that the Item is in
-        "addInvSpace": 0,               # does Item add Inventory space?
         }
 
     item.update(kwargs)

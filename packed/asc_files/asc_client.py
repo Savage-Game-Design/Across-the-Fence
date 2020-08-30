@@ -78,8 +78,7 @@ class data_client:
         self.puid = puid
         self.cData = {}
 
-
-    #####################################################
+    # ####################################################
     def client_listener(self):
         """
         Listening Thread for each connected Client on the Gameserver
@@ -102,7 +101,6 @@ class data_client:
                     # print(f"ASC_CLIENT: None - Connection closed: {raddr[0]} : {raddr[1]}")
                     break
                 try:
-                    # Todo: MERGE WITH ASC_SERVER
                     # check if multiple messages received at once and handle them separately
                     if b"}{" in msg:
                         print("ASC_CLIENT: GET MESSAGE: MULTI MESSAGE RECEIVED")
@@ -155,7 +153,6 @@ class data_client:
         # reduce Connected Client Count
         asc_s_lst_client.clientCnt_rem(self.sData)
 
-        # Todo: Check if even needed
         try:
             con.shutdown(socket.SHUT_RDWR)
             con.close()
