@@ -94,4 +94,26 @@ DEV_an_fnc_hintItemData =
 	_text = format["%1<br/><br/><t size='6.0'><img image='%2'/></t><br/>", _className, _imgPath];
 	hintsilent parseText _text;
 };
+
+
+an_fnc_bandage_use = {systemChat str["FUNCTION CALLED: an_fnc_bandage_use"];};
+an_fnc_FAK_use = {systemChat str["FUNCTION CALLED: an_fnc_FAK_use"];};
+an_fnc_MediKit_use = {systemChat str["FUNCTION CALLED: an_fnc_MediKit_use"];};
+
+
+AN_c_fnc_items_setData =
+{
+	{
+		_x params["_main_name","_main_data"];
+		diag_log ["ITEM DATA RECEIVED: Class: Main:", _main_name];
+		{
+			_x params["_sub_name","_sub_data"];
+			diag_log ["ITEM DATA RECEIVED: Class: Sub :", _sub_name];
+			{
+				diag_log ["ITEM DATA RECEIVED: Item Data  :", _x];
+			}forEach _sub_data;
+		}forEach _main_data;
+	}forEach (_this#0);
+};
+
 //////////////// DEV STUFF ////////////////
