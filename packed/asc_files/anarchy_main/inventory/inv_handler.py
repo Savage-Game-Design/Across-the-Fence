@@ -73,16 +73,6 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
 
     grid_y, grid_x = invGridSize
 
-    # Todo: Determine if created crate was from a loot request
-    # ToDo: If loot request: Fill crate with Items
-    # ToDo: If loot request: adjust invGridSize, according to used space
-    # ToDo: write fill-mechanic (hmpf... how many todos has this one...)
-    # fill the lootcrate, if needed
-    if isLootcrate == 1:
-        print(f"INV_HANDLER: create_add: isLootcrate: {isLootcrate}")
-        print(item_handler.return_loot_list(sData=sData, crate_id=crateID, loot_count=5, loot_type="type_military"))
-        pass
-
     inv_data = {
         "model": model,
         "pos": pos,
@@ -99,6 +89,12 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
           f"type        : {lootType}\n"
           f"InvGridSize : {invGridSize}\n"
           f"inv_data    : {inv_data}\n")
+
+    # fill the lootcrate, if needed
+    if isLootcrate == 1:
+        print(f"INV_HANDLER: create_add: isLootcrate: {isLootcrate}")
+        print(item_handler.return_loot_list(sData=sData, crate_id=crateID, loot_count=5, loot_type="type_military"))
+        pass
 
     if persistent:
         sData.database.crates[crateID] = inv_data

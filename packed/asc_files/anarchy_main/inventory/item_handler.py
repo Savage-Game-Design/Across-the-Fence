@@ -225,17 +225,21 @@ def item_add_list(sData, invID: str = "", itemList: list = None):
     # client.sData.database.db_save()
 
 
-def loot_generate(sData, x_dict, initial_seed):
+def loot_generate(sData, x_dict, initial_seed, itemInfo=None):
+    if itemInfo is None:
+        itemInfo = []
+
     # select random item
     selected_type = random.choices(list(x_dict.keys()), weights=list(x_dict.values()), k=1)[0]
     print(f"DEBUG: selected_type: {selected_type}")
+    itemInfo.append(selected_type)
     # check if selected_type exists other wise return class
     if selected_type in sData.lootData["tables"].keys():
         initial_seed += selected_type
         # print(f"DEBUG: initial_seed LG: {initial_seed}")
-        return loot_generate(sData, sData.lootData["tables"][selected_type], initial_seed)
+        return loot_generate(sData, sData.lootData["tables"][selected_type], initial_seed, itemInfo)
     else:
-        return selected_type
+        return itemInfo
 
 
 def return_loot_list(sData, crate_id, loot_type, loot_count):
