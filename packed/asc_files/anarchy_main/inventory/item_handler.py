@@ -53,22 +53,23 @@ def item_create(**kwargs):
     item = {
         "id":          id_handler.create_id(),   # Item ID - Will ALWAYS be generated!
 
+        "parentData": "",  # Base Item Data, the A3 UI can refer to (stored ItemData)
         # ----------------------------------------------------------- #
         "slot":        0,           # Baseclass in Arma
         # Used in Arma to determine the slot, in which the Item can put it in!
         # Description:
         # ToDo: Add Description and slot-ID defines somewhere and link it here
         # ----------------------------------------------------------- #
-        "class_cfg":  "",           # Main-baseclass, like: CfgVehicles/CfgMagazines/etc.
         "class_name": "",           # Arma Cfg-name
         "rarity":      0,           # Rarity
         "hp_cur":      100,         # Current HP
         "hp_max":      100,         # Max HP
         "curInv":      "-1",        # ID of Inventory, that the Item is in
         "addInvSpace": 0,           # does Item add Inventory space?
-        "fnc":         "",          # Function to be called, when right-clicking it in the Inventory. If empty -> do nothing
-        "params":      [],          # parameters send over to the function call. Will only be used, when the "fnc" entry has a value.
-        "fnc_type":     0,          # Is the function being called (0) or spawned (1)
+        "actions": {
+            # [stringtable, functionName, fncType (called (0) or spawned (1)), additional params]
+            "a1": ["", "", 0, []],
+            },
 
         # ----------------------------------------------------------- #
         "size":        [4, 4],      # Size in Inventory
