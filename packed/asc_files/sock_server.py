@@ -1,5 +1,4 @@
 import random
-import socket
 import string
 from _thread import *
 from threading import Thread
@@ -8,6 +7,8 @@ from asc_client import *
 import time
 import sys
 import os
+from anarchy_main.inventory.itemData import itemData
+from anarchy_main.inventory.loot_tables import loot_tables
 
 
 def server_start():
@@ -60,31 +61,10 @@ def server_start():
     print(f'#### Lootseed:\n#### - "{sData.lootData["globalseed"]}"')
 
     # ####### load all the Items
-    print(f'#### Loading items...')
-    path_items = f"{rel_dir}\\items\\"
-    json_files = [pos_json for pos_json in os.listdir(path_items) if pos_json.endswith('.json')]
-    for filename in json_files:
-        print(f"DEBUG: filename Items: {filename}")
-        with open(f"{path_items}{filename}", "r") as file:
-            # add the .json data to the sData dict
-            sData.itemData[os.path.splitext(filename)[0]] = json.load(file)
-    print(f'#### Loading items... done')
+    itemData.load_files(sData=sData)
 
     # ####### load the loot tables
-    print(f'#### Loading loot-tables...')
-    path_tables = f"{rel_dir}\\loottables\\"
-    json_files = [pos_json for pos_json in os.listdir(path_tables) if pos_json.endswith('.json')]
-    for filename in json_files:
-        print(f"DEBUG: filename LootTables: {filename}")
-        with open(f"{path_tables}{filename}", "r") as file:
-            # add the .json data to the sData dict
-            sData.lootData["tables"][os.path.splitext(filename)[0]] = json.load(file)
-    # # Debug
-    # for key in sData.lootData["tables"]:
-    #     print(f"DEBUG: key: {key}")
-
-    # ############# Loot stuff... done
-    print(f'#### Loading loot-tables... done')
+    loot_tables.load_files(sData=sData)
 
     print("########################################################\n")
 

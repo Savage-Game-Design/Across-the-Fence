@@ -1,0 +1,27 @@
+
+{
+	"hgun_ACPC2_F":
+	{
+		"size": [2, 4],
+		"slot": 2,
+		"class_name": "hgun_ACPC2_F",
+		"image": "\\A3\\Weapons_F_Beta\\Pistols\\ACPC2\\Data\\UI\\gear_Acpc2_X_CA.paa",
+		"addInvSpace": 0,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"hgun_P07_F":
+	{
+		"size": [2, 4],
+		"slot": 2,
+		"class_name": "hgun_P07_F",
+		"image": "\\A3\\weapons_F\\Pistols\\P07\\data\\UI\\gear_p07_x_ca.paa",
+		"addInvSpace": 0,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	}
+}

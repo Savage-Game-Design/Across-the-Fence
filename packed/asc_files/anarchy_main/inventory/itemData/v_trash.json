@@ -1,0 +1,15 @@
+
+{
+	"TrashItem":
+	{
+		"size":        [3, 3],
+		"slot":        0,
+		"class_name":  "",
+		"image":       "\\A3\\Weapons_F\\Items\\data\\UI\\gear_Toolkit_CA.paa",
+		"addInvSpace": 0,
+		"hp_max":      100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	}
+}

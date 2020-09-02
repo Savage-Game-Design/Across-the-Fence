@@ -1,0 +1,15 @@
+
+{
+	"vn_b_vest_usarmy_10":
+	{
+		"size": [6, 4],
+		"slot": 11,
+		"class_name": "vn_b_vest_usarmy_10",
+		"image": "\\vn\\characters_f_vietnam\\ui\\icon_vn_b_vest_usarmy_10_ca.paa",
+		"addInvSpace": 6,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	}
+}

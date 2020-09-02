@@ -1,0 +1,15 @@
+
+{
+	"U_B_CombatUniform_mcam":
+	{
+		"size": [6, 4],
+		"slot": 10,
+		"class_name": "U_B_CombatUniform_mcam",
+		"image": "\\A3\\characters_f\\data\\ui\\icon_U_B_CombatUniform_mcam_ca.paa",
+		"addInvSpace": 6,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	}
+}

@@ -1,0 +1,27 @@
+
+{
+	"launch_RPG32_F":
+	{
+		"size": [4, 8],
+		"slot": 3,
+		"class_name": "launch_RPG32_F",
+		"image": "\\A3\\Weapons_F\\launchers\\RPG32\\data\\UI\\gear_RPG32_X_CA.paa",
+		"addInvSpace": 0,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"launch_NLAW_F":
+	{
+		"size": [4, 8],
+		"slot": 3,
+		"class_name": "launch_NLAW_F",
+		"image": "\\A3\\weapons_f\\launchers\\nlaw\\data\\UI\\gear_nlaw_ca.paa",
+		"addInvSpace": 0,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	}
+}
