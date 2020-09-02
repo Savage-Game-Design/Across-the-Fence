@@ -104,15 +104,10 @@ an_fnc_MediKit_use = {systemChat str["FUNCTION CALLED: an_fnc_MediKit_use"];};
 AN_c_fnc_items_setData =
 {
 	{
-		_x params["_main_name","_main_data"];
-		diag_log ["ITEM DATA RECEIVED: Class: Main:", _main_name];
-		{
-			_x params["_sub_name","_sub_data"];
-			diag_log ["ITEM DATA RECEIVED: Class: Sub :", _sub_name];
-			{
-				diag_log ["ITEM DATA RECEIVED: Item Data  :", _x];
-			}forEach _sub_data;
-		}forEach _main_data;
+		diag_log ["ITEM DATA RECEIVED: Item Data  :", _x];
+		_x params ["_item_name","_item_data"];
+		//DEV
+		missionNamespace setVariable [format["AN_ITEM_%1",_item_name], _item_data];
 	}forEach (_this#0);
 };
 
