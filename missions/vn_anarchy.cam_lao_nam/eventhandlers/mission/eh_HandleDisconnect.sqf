@@ -31,4 +31,12 @@ params
 
 ["HandleDisconnect mEH: %1",_this] call BIS_fnc_logFormat;
 
+if !(isNull _unit) then
+{
+	// todo do save on disconnect
+
+	// delete unit
+	deleteVehicle _unit;
+};
+
 false
