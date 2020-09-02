@@ -16,7 +16,6 @@ class cfgfunctions
 		class client
 		{
 			class debug_monitor {};
-			class loot_test {};
 			class start_game_client {};
 			class start_game_headless {};
 			class start_game_stage2 {};
