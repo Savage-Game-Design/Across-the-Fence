@@ -163,7 +163,6 @@ def item_add_list(sData, invID: str = "", itemList: list = None):
         print(f"DEBUG: item_add_list: itemList NOT found.\ninvID: {invID}\nitemList: {itemList}\n-------------")
         return
 
-    # ToDo: Get inventory, related to given ID
     isTempInv, invData = inv_data_get(sData=sData, invID=invID)
     # if len(invData.keys) == 0:
     #     print(f"DEBUG: item_add_list: invData NOT found.\ninvID: {invID}\nitemList: {itemList}\n-------------")
@@ -226,31 +225,34 @@ def item_add_list(sData, invID: str = "", itemList: list = None):
     # client.sData.database.db_save()
 
 
-def loot_generate(sData, x_dict, initial_seed, itemInfo=None):
+def loot_generate(sData, x_dict, itemInfo=None):
     if itemInfo is None:
         itemInfo = []
 
     # select random item
     selected_type = random.choices(list(x_dict.keys()), weights=list(x_dict.values()), k=1)[0]
-    print(f"DEBUG: selected_type: {selected_type}")
+    # print(f"DEBUG: loot_generate: selected_type: {selected_type}")
     itemInfo.append(selected_type)
     # check if selected_type exists other wise return class
-    if selected_type in sData.lootData["tables"].keys():
-        initial_seed += selected_type
+    if selected_type in sData.lootData["tables"]:
         # print(f"DEBUG: initial_seed LG: {initial_seed}")
-        return loot_generate(sData, sData.lootData["tables"][selected_type], initial_seed, itemInfo)
+        return loot_generate(sData, sData.lootData["tables"][selected_type], itemInfo)
     else:
-        return itemInfo
+        # return itemInfo
+        print(f"DEBUG: loot_generate: selected_type: {selected_type}")
+        return selected_type
 
 
 def return_loot_list(sData, crate_id, loot_type, loot_count):
-    initial_seed = f"{sData.lootData['globalseed']}{crate_id}{loot_type}"
+    initial_seed = f"{sData.lootData['globalseed']} - {crate_id} - {loot_type}"
     print(f"initial_seed: {initial_seed}")
     loot_list = []
     # check if loot_type exists
-    if loot_type in sData.lootData["tables"].keys():
+    if loot_type in sData.lootData["tables"]:
         for x in range(loot_count):
-            loot_list.append(loot_generate(sData, sData.lootData["tables"][loot_type], f"{initial_seed}{x}"))
+            loot_list.append(loot_generate(sData, sData.lootData["tables"][loot_type]))
+    # list of item names
+    # ToDo: get all the Data from sData.itemData[ItemName]
     return loot_list
 
     # ############################# NOTE:
