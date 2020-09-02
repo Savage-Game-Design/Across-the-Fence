@@ -19,8 +19,10 @@
 
 	waitUntil {uiSleep 0.1; !(call BIS_fnc_isLoading)};
 
+	cutText ["", "BLACK IN", 1];
+
 	// start loading screen
-	startLoadingScreen ["Welcome to Anarchy!", "Anarchy_loadingScreen"];
+	startLoadingScreen ["Welcome to Anarchy!", "para_loadingScreen"];
 
 	// [selectRandom (getArray(missionConfigFile >> "gamemode" >> "loadingScreens" >> "images")),5002] call vn_an_fnc_update_loading_screen;
 

@@ -24,7 +24,7 @@ params [
 	["_idc",5050]
 ];
 disableSerialization;
-private _display = uiNameSpace getVariable ["vn_an_loadingScreen",displayNull];
+private _display = uiNameSpace getVariable ["para_loadingScreen",displayNull];
 if (!isNull _display) then
 {
 	if (_text isEqualType parseText "") then

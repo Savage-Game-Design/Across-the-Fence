@@ -1,4 +1,3 @@
-// #include "ui\ui_main.hpp"
 
 class RscTitles {
 	// Overlays
