@@ -2,12 +2,13 @@
 {
 	"bandage":
 	{
-		"size":        [1, 1],
-		"slot":        0,
-		"class_name":  "",
-		"image":       "\\A3\\Weapons_F\\Items\\data\\UI\\gear_gps_CA.paa",
+		"size": [1, 1],
+		"slot": 0,
+		"class_name": "",
+		"name": "STR_Bandage",
+		"image": "\\A3\\Weapons_F\\Items\\data\\UI\\gear_gps_CA.paa",
 		"addInvSpace": 0,
-		"hp_max":      100,
+		"hp_max": 100,
 		"actions": {
 			"action1": ["use Bandage", "an_fnc_bandage_use", 0, []],
 			"actionSomething": ["ShowScriptError", "an_fnc_iDontExist", 0, []]
@@ -15,24 +16,26 @@
 	},
 	"FirstAidKit":
 	{
-		"size":        [2, 2],
-		"slot":        0,
-		"class_name":  "",
-		"image":       "\\A3\\Weapons_F\\Items\\data\\UI\\gear_FirstAidKit_CA.paa",
+		"size": [2, 2],
+		"slot": 0,
+		"class_name": "",
+		"name": "STR_FirstAidKit",
+		"image": "\\A3\\Weapons_F\\Items\\data\\UI\\gear_FirstAidKit_CA.paa",
 		"addInvSpace": 0,
-		"hp_max":      100,
+		"hp_max": 100,
 		"actions": {
 			"action1": ["use FAK", "an_fnc_FAK_use", 0, []]
 		}
 	},
 	"Medikit":
 	{
-		"size":        [4, 4],
-		"slot":        0,
-		"class_name":  "",
-		"image":       "\\A3\\Weapons_F\\Items\\data\\UI\\gear_Medikit_CA.paa",
+		"size": [4, 4],
+		"slot": 0,
+		"class_name": "",
+		"name": "STR_MediKit",
+		"image": "\\A3\\Weapons_F\\Items\\data\\UI\\gear_Medikit_CA.paa",
 		"addInvSpace": 0,
-		"hp_max":      100,
+		"hp_max": 100,
 		"actions": {
 			"action1": ["use MediKit", "an_fnc_MediKit_use", 0, []]
 		}

@@ -1,11 +1,51 @@
 
 {
-	"B_Carryall_ocamo":
+	"vn_b_pack_01":
 	{
 		"size": [8, 8],
 		"slot": 12,
-		"class_name": "B_Carryall_ocamo",
-		"image": "\\A3\\Weapons_F\\Ammoboxes\\Bags\\data\\UI\\icon_B_C_Tortila_hex.paa",
+		"class_name": "vn_b_pack_01",
+		"name": "",
+		"image": "",
+		"addInvSpace": 10,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_b_pack_02":
+	{
+		"size": [8, 8],
+		"slot": 12,
+		"class_name": "vn_b_pack_02",
+		"name": "",
+		"image": "",
+		"addInvSpace": 10,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_o_pack_01":
+	{
+		"size": [8, 8],
+		"slot": 12,
+		"class_name": "vn_o_pack_01",
+		"name": "",
+		"image": "",
+		"addInvSpace": 10,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_o_pack_02":
+	{
+		"size": [8, 8],
+		"slot": 12,
+		"class_name": "vn_o_pack_02",
+		"name": "",
+		"image": "",
 		"addInvSpace": 10,
 		"hp_max": 100,
 		"actions": {

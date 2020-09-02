@@ -1,23 +1,47 @@
 
 {
-	"arifle_MXC_F":
+	"vn_m14":
 	{
 		"size": [4, 8],
 		"slot": 1,
-		"class_name": "arifle_MXC_F",
-		"image": "\\a3\\weapons_f\\Rifles\\MX\\data\\UI\\gear_mx_cqc_X_CA.paa",
+		"class_name": "vn_m14",
+		"image": "",
 		"addInvSpace": 0,
 		"hp_max": 100,
 		"actions": {
 			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
 		}
 	},
-	"arifle_Mk20_F":
+	"vn_m16":
 	{
 		"size": [3, 7],
 		"slot": 1,
-		"class_name": "arifle_Mk20_F",
-		"image": "\\a3\\weapons_f\\Rifles\\MK20\\data\\UI\\gear_mk20_camo_CA.paa",
+		"class_name": "vn_m16",
+		"image": "",
+		"addInvSpace": 0,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_m38":
+	{
+		"size": [3, 7],
+		"slot": 1,
+		"class_name": "vn_m38",
+		"image": "",
+		"addInvSpace": 0,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_m4956":
+	{
+		"size": [3, 7],
+		"slot": 1,
+		"class_name": "vn_m4956",
+		"image": "",
 		"addInvSpace": 0,
 		"hp_max": 100,
 		"actions": {

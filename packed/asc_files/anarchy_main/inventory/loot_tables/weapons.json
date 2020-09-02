@@ -1,1 +1,7 @@
-{"pistols": 3, "rifles": 3, "shotguns": 3}
+
+{
+	"pistols": 5,
+	"rifles": 4,
+	"shotguns": 3,
+	"lmg": 2
+}

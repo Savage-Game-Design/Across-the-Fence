@@ -1,1 +1,5 @@
-{"FirstAid": 3, "FirstAid2": 3, "FirstAid3": 3}
+{
+	"bandage": 3,
+	"FirstAidKit": 3,
+	"Medikit": 3
+}

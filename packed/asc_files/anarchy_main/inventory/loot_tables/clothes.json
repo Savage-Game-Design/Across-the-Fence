@@ -1,5 +1,7 @@
+
 {
-	"vests" : 10,
-	"helmets" : 1,
-	"uniforms" : 1
+	"vests" : 2,
+	"helmets" : 3,
+	"uniforms" : 5,
+	"backpacks" : 2
 }

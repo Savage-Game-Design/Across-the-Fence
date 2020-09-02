@@ -1,10 +1,10 @@
 
 {
-	"vn_b_vest_sog_01":
+	"vn_o_helmet_nva_01":
 	{
 		"size": [6, 4],
-		"slot": 11,
-		"class_name": "vn_b_vest_sog_01",
+		"slot": 10,
+		"class_name": "vn_o_helmet_nva_01",
 		"name": "",
 		"image": "",
 		"addInvSpace": 6,
@@ -13,11 +13,11 @@
 			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
 		}
 	},
-	"vn_b_vest_usarmy_01":
+	"vn_o_helmet_vc_01":
 	{
 		"size": [6, 4],
-		"slot": 11,
-		"class_name": "vn_b_vest_usarmy_01",
+		"slot": 10,
+		"class_name": "vn_o_helmet_vc_01",
 		"name": "",
 		"image": "",
 		"addInvSpace": 6,
@@ -26,11 +26,11 @@
 			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
 		}
 	},
-	"vn_b_vest_aircrew_01":
+	"vn_b_helmet_aph6_01_01":
 	{
 		"size": [6, 4],
-		"slot": 11,
-		"class_name": "vn_b_vest_aircrew_01",
+		"slot": 10,
+		"class_name": "vn_b_helmet_aph6_01_01",
 		"name": "",
 		"image": "",
 		"addInvSpace": 6,
@@ -39,11 +39,11 @@
 			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
 		}
 	},
-	"vn_o_vest_04":
+	"vn_b_helmet_m1_01_01":
 	{
 		"size": [6, 4],
-		"slot": 11,
-		"class_name": "vn_o_vest_04",
+		"slot": 10,
+		"class_name": "vn_b_helmet_m1_01_01",
 		"name": "",
 		"image": "",
 		"addInvSpace": 6,
@@ -52,11 +52,11 @@
 			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
 		}
 	},
-	"vn_o_vest_vc_01":
+	"vn_b_helmet_t56_01_01":
 	{
 		"size": [6, 4],
-		"slot": 11,
-		"class_name": "vn_o_vest_vc_01",
+		"slot": 10,
+		"class_name": "vn_b_helmet_t56_01_01",
 		"name": "",
 		"image": "",
 		"addInvSpace": 6,

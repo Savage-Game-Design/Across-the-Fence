@@ -1,11 +1,64 @@
 
 {
-	"U_B_CombatUniform_mcam":
+	"vn_b_uniform_macv_01_01":
 	{
 		"size": [6, 4],
 		"slot": 10,
-		"class_name": "U_B_CombatUniform_mcam",
-		"image": "\\A3\\characters_f\\data\\ui\\icon_U_B_CombatUniform_mcam_ca.paa",
+		"class_name": "vn_b_uniform_macv_01_01",
+		"name": "",
+		"image": "",
+		"addInvSpace": 6,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_b_uniform_sog_01_01":
+	{
+		"size": [6, 4],
+		"slot": 10,
+		"class_name": "vn_b_uniform_sog_01_01",
+		"name": "",
+		"image": "",
+		"addInvSpace": 6,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_b_uniform_sog_02_04":
+	{
+		"size": [6, 4],
+		"slot": 10,
+		"class_name": "vn_b_uniform_sog_02_04",
+		"name": "",
+		"image": "",
+		"addInvSpace": 6,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_o_uniform_vc_03_02":
+	{
+		"size": [6, 4],
+		"slot": 10,
+		"class_name": "vn_o_uniform_vc_03_02",
+		"name": "",
+		"image": "",
+		"addInvSpace": 6,
+		"hp_max": 100,
+		"actions": {
+			"placeholder": ["STR_PLACEHOLDER", "AN_C_FNC_PLACEHOLDER", 0, []]
+		}
+	},
+	"vn_o_uniform_vc_mf_01_07":
+	{
+		"size": [6, 4],
+		"slot": 10,
+		"class_name": "vn_o_uniform_vc_mf_01_07",
+		"name": "",
+		"image": "",
 		"addInvSpace": 6,
 		"hp_max": 100,
 		"actions": {

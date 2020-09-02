@@ -1,1 +1,7 @@
-{"weapons" : 4, "medical" : 1, "trash" : 1,  "clothes" : 1 }
+
+{
+	"weapons" : 4,
+	"medical" : 1,
+	"trash" : 1,
+	"clothes" : 1
+}
