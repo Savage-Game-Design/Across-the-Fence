@@ -6,3 +6,4 @@ packed/@anarchy_client/addons/*.pbo
 packed/@anarchy_server/addons/*.pbo
 packed/asc_files/anarchy_main/loot_gen/loot_config.ini
 @anarchy_client/addons/paradigm/
+packed/asc_files/database/main/server0.asc

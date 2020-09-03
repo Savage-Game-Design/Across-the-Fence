@@ -6,12 +6,9 @@ from anarchy_main.inventory import *
 def client_add(**kwargs):
 	# Default Values for new Clients
 	cData = {
-		'puid': "1234567890",
+		'puid': "-1",
 		'skills': {
-				'skill_a': 0,
-				'skill_b': 0,
-				'skill_c': 0,
-				'skill_d': 0
+				'scavenging': 0
 			},
 		'health':   [
 				["hitface", "hitneck", "hithead", "hitpelvis", "hitabdomen", "hitdiaphragm", "hitchest", "hitbody", "hitarms", "hithands", "hitlegs", "incapacitated"],
