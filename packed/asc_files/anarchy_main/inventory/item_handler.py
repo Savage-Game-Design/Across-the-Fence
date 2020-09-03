@@ -243,16 +243,25 @@ def loot_generate(sData, x_dict, itemInfo=None):
         return selected_type
 
 
-def return_loot_list(sData, crate_id, loot_type, loot_count):
+def return_loot_list(sData, skill_scavenging, crate_id, loot_type, loot_count):
     initial_seed = f"{sData.lootData['globalseed']} - {crate_id} - {loot_type}"
-    print(f"initial_seed: {initial_seed}")
+    print(f"DEBUG: return_loot_list: initial_seed: {initial_seed}")
+    # list of item names
     loot_list = []
     # check if loot_type exists
     if loot_type in sData.lootData["tables"]:
         for x in range(loot_count):
             loot_list.append(loot_generate(sData, sData.lootData["tables"][loot_type]))
-    # list of item names
-    # ToDo: get all the Data from sData.itemData[ItemName]
+
+    # get the base Data for each Item
+    # ToDo: Calculate the rarity, depending on the player Skill
+    itemList = []
+    for item in loot_list:
+        try:
+            print(sData.itemData[item])
+        except KeyError:
+            print(f"DEBUG: return_loot_list: KeyError: item: {item}")
+
     return loot_list
 
     # ############################# NOTE:

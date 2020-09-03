@@ -92,8 +92,10 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
 
     # fill the lootcrate, if needed
     if isLootcrate == 1:
-        print(f"INV_HANDLER: create_add: isLootcrate: {isLootcrate}")
-        print(item_handler.return_loot_list(sData=sData, crate_id=crateID, loot_count=5, loot_type="type_military"))
+        skill_scavenging = sData.database.players[clientID]["skills"]["scavenging"]
+        print(f"DEBUG: INV_HANDLER: crate_add: isLootcrate: {isLootcrate}")
+        print(f"DEBUG: INV_HANDLER: crate_add: skill_scavenging: {skill_scavenging}")
+        print(item_handler.return_loot_list(sData=sData, skill_scavenging=skill_scavenging, crate_id=crateID, loot_count=5, loot_type="type_military"))
         pass
 
     if persistent:
