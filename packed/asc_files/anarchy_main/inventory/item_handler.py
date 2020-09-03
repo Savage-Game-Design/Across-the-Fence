@@ -163,6 +163,7 @@ def item_add_list(sData, invID: str = "", itemList: list = None):
         print(f"DEBUG: item_add_list: itemList NOT found.\ninvID: {invID}\nitemList: {itemList}\n-------------")
         return
 
+    # get Data from the database
     isTempInv, invData = inv_data_get(sData=sData, invID=invID)
     # if len(invData.keys) == 0:
     #     print(f"DEBUG: item_add_list: invData NOT found.\ninvID: {invID}\nitemList: {itemList}\n-------------")
@@ -197,6 +198,7 @@ def item_add_list(sData, invID: str = "", itemList: list = None):
             else:
                 break
 
+        # ToDo: Calculate the rarity, depending on the player Skill
         if len(slot_usage) != 0:
             newItem = item_create(
                     class_name=x_ItemData[0],
@@ -254,10 +256,10 @@ def return_loot_list(sData, skill_scavenging, crate_id, loot_type, loot_count):
             loot_list.append(loot_generate(sData, sData.lootData["tables"][loot_type]))
 
     # get the base Data for each Item
-    # ToDo: Calculate the rarity, depending on the player Skill
     itemList = []
     for item in loot_list:
         try:
+            # ToDo: Create Items and add to crate with the given crate_ID
             print(sData.itemData[item])
         except KeyError:
             print(f"DEBUG: return_loot_list: KeyError: item: {item}")
