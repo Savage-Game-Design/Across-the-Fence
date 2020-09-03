@@ -26,7 +26,14 @@ if !(isNull _building) then
 				_crate_seed = (str vn_an_seed) + (_pos joinString "");
 				// todo do call to ASC to make crate and spawn loot.
 				diag_log [":::: CRATE_LOOT_REQUEST: DATA:", ["call_function", ["crate_data_get",[_player_ID, _pos, _crate_seed, _crate_type] ] ]];
-				// Last Entry is the Indicator, for the Backend, if it is a Loot-crate or not (1 = fill with loot | 0 = add nothing)
+				/*
+					0 - STR - playerID 
+					1 - ARRAY - pos of crate
+					2 - STR - global seed
+					3 - STR - Type of loot to spawn
+					4 - INT - Indicator (for the Backend) if it is a Loot-crate or not (1 = fill with loot | 0 = add nothing) - "1" also overrides a given gridSize!
+					5 - INT - Optional Argument: set this, to override the standard value of min. "2" items bein created (Result can still be higher, depending on the Players "scavenging"-skill)
+				*/
 				["crate_data_get", [_player_ID, _pos, _crate_seed, _crate_type, 1]] call AN_G_fnc_msg_send;
 			}else{
 				diag_log "ERROR: FUNCTION: crate_loot_request: (_seed random [(_pos#0),(_pos#1)] > _chance)";
