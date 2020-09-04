@@ -1,10 +1,15 @@
+import random
+
 from . import id_handler
 from asc_fnc.asc_db.database import asc_db
 from asc_fnc import asc_g_msg
 
 from . import item_handler
 
-DEVMODE = True
+# Default Variables: (DEV/WIP? Put it somewhere else, idk yet)
+DEFAULT_loot_count = 2
+DEFAULT_loot_skill_multiplier = 2
+
 # inventory = []
 def invGrid_create(grid_x, grid_y):
     ret = []
@@ -15,16 +20,18 @@ def invGrid_create(grid_x, grid_y):
 
 
 # try to get the Crate data. If not found -> Create a new one. We simply assume the Data, coming from the Game-server, is correct/valid.
-def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str = None, lootType: str = None, isLootcrate: int = 0, persistent=False, invGridSize: list = None):
+def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str = None, lootType: str = None, isLootcrate: int = 0, loot_count: int = DEFAULT_loot_count, invGridSize: list = None, persistent: int = 0, model: str = "IG_supplyCrate_F"):
     print(f"clientID: {clientID}\n"
           f"pos: {pos}\n"
           f"crateID: {crateID}\n"
           f"lootType: {lootType}\n"
           f"isLootcrate: {isLootcrate}\n"
+          f"loot_count: {loot_count}\n"
+          f"invGridSize: {invGridSize}\n"
           f"persistent: {persistent}\n"
-          f"invGridSize: {invGridSize}\n")
+          f"model: {model}\n")
     try:
-        if persistent:
+        if persistent > 0:
             retdata = sData.database.crates[crateID]
         else:
             retdata = sData.database.sessionCrates[crateID]
@@ -39,12 +46,12 @@ def crate_data_get(sData, clientID: str = None, pos: list = None, crateID: str =
     # No "Error", the crate was just not in the List. So let's create a new crate entry
     except KeyError:
         print(f"DEBUG: INV_HANDLER: crate_data_get: Creating new Crate")
-        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, lootType=lootType, isLootcrate=isLootcrate, persistent=persistent, invGridSize=invGridSize)
+        crate_add(sData=sData, clientID=clientID, pos=pos, crateID=crateID, lootType=lootType, isLootcrate=isLootcrate, loot_count=loot_count, invGridSize=invGridSize, persistent=persistent)
     except Exception:
         print(f"ERROR: INV_HANDLER: crate_data_get: HUGE WOBBLE WOBBLE! Data:\nclientID: {clientID}\npos: {pos}\ncrateID: {crateID}\nlootType: {lootType}\npersistent {persistent}\ninvGridSize {invGridSize}\n---------")
 
 # called by Server only!
-def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", lootType: str = None, isLootcrate: int = 0, persistent=False, model: str = "IG_supplyCrate_F", invGridSize: list = None):
+def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", lootType: str = None, isLootcrate: int = 0, loot_count: int = DEFAULT_loot_count, invGridSize: list = None, persistent: int = 0, model: str = "IG_supplyCrate_F"):
     """
     :param sData:       ServerData (auto-passed)
     :param clientID:    A3 playerUID
@@ -52,10 +59,11 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
     :param crateID:
     :param lootType:    String - type of loot, passed by the gameserver
     :param isLootcrate: is the crate a newly created Loot-crate or not
-    :param persistent:  Save to Database or not
-    The following arguments are ONLY for creating persistent crates:
-    :param model:       A3 typeOf Class
+    :param loot_count:  Int - amount of Items to add (can be altered by Loot-skill of the player)
     :param invGridSize: list - Inventory grid
+    The following arguments are ONLY for creating persistent crates:
+    :param persistent:  Save to Database or not (persistent crates only)
+    :param model:       A3 typeOf Class (persistent crates only)
     :return:
     """
 
@@ -65,15 +73,15 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
     if invGridSize is None:
         invGridSize = [4, 8]
 
-    if persistent:
+    if persistent > 0:
         # only persistent Crates store the model
         model = model
     else:
-        model = "TEMP"
+        model = ""
 
     grid_y, grid_x = invGridSize
 
-    inv_data = {
+    invData = {
         "model": model,
         "pos": pos,
         "type": lootType,
@@ -88,26 +96,48 @@ def crate_add(sData, clientID: str = None, pos: list = None, crateID: str = "", 
           f"Pos         : {pos}\n"
           f"type        : {lootType}\n"
           f"InvGridSize : {invGridSize}\n"
-          f"inv_data    : {inv_data}\n")
+          f"invData    : {invData}\n")
 
-    # fill the lootcrate, if needed
-    if isLootcrate == 1:
-        skill_scavenging = sData.database.players[clientID]["skills"]["scavenging"]
-        print(f"DEBUG: INV_HANDLER: crate_add: isLootcrate: {isLootcrate}")
-        print(f"DEBUG: INV_HANDLER: crate_add: skill_scavenging: {skill_scavenging}")
-        print(item_handler.return_loot_list(sData=sData, skill_scavenging=skill_scavenging, crate_id=crateID, loot_count=5, loot_type="type_military"))
-        pass
-
-    if persistent:
-        sData.database.crates[crateID] = inv_data
+    # create the Inventory
+    if persistent > 0:
+        sData.database.crates[crateID] = invData
         asc_db.db_save(sData.database)
     else:
-        sData.database.sessionCrates[crateID] = inv_data
+        # fill the lootcrate (if crate/Inventory is a lootcrate)
+        if isLootcrate == 1:
+            print(f"DEBUG: INV_HANDLER: crate_add: isLootcrate: {isLootcrate}")
+
+            skill_scavenging = sData.database.players[clientID]["skills"]["scavenging"]
+            print(f"DEBUG: INV_HANDLER: crate_add: skill_scavenging: {skill_scavenging}")
+
+            # ToDo: recalculate the loot_count properly, based on the scavenging skill!
+            loot_count = random.randrange(loot_count, int(loot_count+(skill_scavenging * DEFAULT_loot_skill_multiplier)))
+            print(f"DEBUG: INV_HANDLER: crate_add: loot_count: {loot_count}")
+
+            # get the list of Item names
+            items_parent_list = item_handler.loot_item_list_create(sData=sData, crate_id=crateID, loot_count=loot_count, loot_type=lootType)
+            print(f"DEBUG: INV_HANDLER: crate_add: items_list_raw: {items_parent_list}")
+
+            for parent in items_parent_list:
+                # create the Item Data structure
+                item = item_handler.item_create(parent=parent)
+                print(f"DEBUG: INV_HANDLER: crate_add: item_new: {item}")
+                # ToDo: Calculate and update the values, depending on the players scavenging Skill
+                #
+                #
+
+                # Add item to Inventory and update the invData
+                invData, item = item_handler.item_add_to_inv(sData=sData, invData=invData, isLootcrate=isLootcrate, item=item)
+            print(f"DEBUG: INV_HANDLER: crate_add: invData: {invData}")
+
+        # store in database, under temporary crates
+        sData.database.sessionCrates[crateID] = invData
+        # done
 
     try:
         # send Inventory data back to the requesting client
         conClient = sData.user_active[clientID]["con"]
-        asc_g_msg.sendMsg("ret_inv_crateData", inv_data, conClient)
+        asc_g_msg.sendMsg("ret_inv_crateData", invData, conClient)
     except KeyError:
         print(f"ERROR: INV_HANDLER: create_add: clientID NOT FOUND in user_active: {clientID}")
 
@@ -145,7 +175,7 @@ def inv_getData(client, invID):
 
 
 # usedSlots = slots occupied by the given Item Size INSIDE the invGrid!
-def inv_usedSlots_get(slotsStart=None, sizeItem=None, invGrid=None, isFlipped=0, isAdd=True):
+def inv_slots_used_get(slotsStart=None, sizeItem=None, invGrid=None, isFlipped=0, isAdd=True):
     if None in [slotsStart, sizeItem, invGrid]:
         return []
 
@@ -175,15 +205,15 @@ def inv_usedSlots_get(slotsStart=None, sizeItem=None, invGrid=None, isFlipped=0,
                     print("Parts of the Item are outside the Inventory ")
                     return []
     except Exception as e:
-        print(f'ERROR: INV_HANDLER: ITEM_MOVE: inv_usedSlots_get - ERROR:\n{e}')
+        print(f'ERROR: INV_HANDLER: ITEM_MOVE: inv_slots_used_get - ERROR:\n{e}')
         return []
 
     return slots_used
 
 
-def inv_usedSlots_set(slots_used=None, invGrid=None, isAdd=True):
+def inv_slots_used_set(slots_used=None, invGrid=None, isAdd=True):
     if None in [slots_used, invGrid]:
-        print(f'ERROR: INV_HANDLER: ITEM_MOVE: inv_usedSlots_set - ERROR: slots_used: {slots_used} - invGrid: {invGrid}')
+        print(f'ERROR: INV_HANDLER: ITEM_MOVE: inv_slots_used_set - ERROR: slots_used: {slots_used} - invGrid: {invGrid}')
         return False
 
     usageType = 1
@@ -196,6 +226,33 @@ def inv_usedSlots_set(slots_used=None, invGrid=None, isAdd=True):
             x, y = slots_used[index]
             invGrid[x][y] = usageType
     return True
+
+
+def inv_slots_free_get(invGrid, item_size):
+    # ToDo: Probably needs a full rework anyway (don't rly like it... but meh... works for now - maybe adding some kind of blacklist ala "this row is full, no need to check again)
+    # ToDo: make a check if Item can be flipped and try to find space again (later)
+    grid_rows = len(invGrid)
+    grid_cols = len(invGrid[0])
+
+    grid_rows_maxCheck = grid_rows - item_size[0]   # no need to check the x-axis further, if the height would be outside of bounds
+    grid_cols_maxCheck = grid_cols - item_size[1]  # no need to check the y-axis further, if the width would be outside of bounds
+    slots = []
+    for x in range(0, grid_rows):
+        if x > grid_rows_maxCheck:
+            # max reached, return empty Array (triggers addRow (tempInventory) OR shows Error Message
+            return []
+        for y in range(0, grid_cols):
+            if y > grid_cols_maxCheck:
+                break
+            slots = inv_slots_used_get(slotsStart=[x, y], sizeItem=item_size, invGrid=invGrid, isFlipped=0, isAdd=True)
+            # if slots were found, exit the search/loop
+            if len(slots) != 0:
+                return slots
+        # if slots were found, exit the search/loop
+        if len(slots) != 0:
+            return slots
+    # Normally, this one should never trigger... but who knows /shrug
+    return []
 
 
 def inv_grid_get(client=None, args=()):

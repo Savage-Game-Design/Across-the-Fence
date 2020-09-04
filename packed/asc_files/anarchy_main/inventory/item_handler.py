@@ -106,7 +106,7 @@ def item_move(client=None, args=()):
 
     # check if enough space in new Inventory
     # ToDo: Check if it is just moving within the same Inventory and if it is blocked by itself :thonk:
-    slots_used_new = inv_handler.inv_usedSlots_get(slotsStart=invPos, invGrid=newInv_invGrid, isFlipped=isFlipped, sizeItem=item["size"], isAdd=True)
+    slots_used_new = inv_handler.inv_slots_used_get(slotsStart=invPos, invGrid=newInv_invGrid, isFlipped=isFlipped, sizeItem=item["size"], isAdd=True)
     print(f"::::: slots_used: {slots_used_new}")
     if len(slots_used_new) == 0:
         # ToDo: Send both Inventories back to the player, to update his UI (later)
@@ -115,14 +115,14 @@ def item_move(client=None, args=()):
     else:
         # get pos in old invGrid and check if everything is correct there
         isFlipped_cur = item["isFlipped"]
-        slots_used_old = inv_handler.inv_usedSlots_get(slotsStart=item["invPos"], invGrid=oldInv_invGrid, isFlipped=isFlipped_cur, sizeItem=item["size"], isAdd=False)
+        slots_used_old = inv_handler.inv_slots_used_get(slotsStart=item["invPos"], invGrid=oldInv_invGrid, isFlipped=isFlipped_cur, sizeItem=item["size"], isAdd=False)
         if len(slots_used_old) == 0:
             # ToDo: Send both Inventories back to the player, to update his UI (later)
             print("INVENTORY: Something was wrong with the old Item State - no blocked tiles found")
             return
 
         # and remove it from the old Inventory Grid
-        inv_handler.inv_usedSlots_set(slots_used=slots_used_old, invGrid=oldInv_invGrid, isAdd=False)
+        inv_handler.inv_slots_used_set(slots_used=slots_used_old, invGrid=oldInv_invGrid, isAdd=False)
         # also delete from "itemData" dict
         del oldInv["itemData"][itemID]
 
@@ -132,7 +132,7 @@ def item_move(client=None, args=()):
         item["isFlipped"] = isFlipped
 
         # set the used slots in the new Inventory Grid
-        inv_handler.inv_usedSlots_set(slots_used=slots_used_new, invGrid=newInv_invGrid, isAdd=True)
+        inv_handler.inv_slots_used_set(slots_used=slots_used_new, invGrid=newInv_invGrid, isAdd=True)
 
         # and add it to the new Inventory itemData
         newInv["itemData"][item["id"]] = item
@@ -141,154 +141,129 @@ def item_move(client=None, args=()):
     # ToDo: TEMP! Saving will be done by an extra Thread from the Server!
     client.sData.database.db_save()
 
-def item_add_list(sData, invID: str = "", itemList: list = None):
-    """
-    Add new Item(s) to an existing Inventory
+def item_add_to_inv(sData, invData=None, isLootcrate: int = 0, item=None):
+    try:
+        if None in [item, invData]:
+            print(f"ERROR: item_add_list: item NOT found.\ninvID: {invData}\nitem: {item}------")
+            return
 
-    :param sData:
-    :param invID:       Inventory ID (either crates (persistent/temporary) or playerUID)
-    :param itemList:    [
-                            [
-                                "class_name",
-                                type,
-                                rarity,
-                                hp_cur,
-                                hp_max,
-                                size,
-                                addInvSpace     # adds Inventory space - e.g: Uniform, Backpack, Pouch
-                            ]
-                        ]
-    :return:
-    """
-    if itemList is None:
-        print(f"DEBUG: item_add_list: itemList NOT found.\ninvID: {invID}\nitemList: {itemList}\n-------------")
-        return
+        invGrid = invData["inv_grid"]
+        invGridSize = invData["inv_gridSize"]
+        inv_itemData = invData["itemData"]
 
-    # get Data from the database
-    isTempInv, invData = inv_data_get(sData=sData, invID=invID)
-    # if len(invData.keys) == 0:
-    #     print(f"DEBUG: item_add_list: invData NOT found.\ninvID: {invID}\nitemList: {itemList}\n-------------")
-    #     return
+        #########################################################
+        # check if the Size is correct (e.g.: values > 0)
+        item_parent_data = item_get_parentData(sData=sData, itemName=item["parent"])
+        if len(item_parent_data) == 0:
+            print(f"ERROR: item_handler: item_add_to_inv: item_parent_data NOT FOUND - item['parent']: {item['parent']}")
+            return invData
 
-    invGrid = invData["inv_grid"]
-    inv_itemData = invData["itemData"]
+        x_size = check_size(item_parent_data["size"])
 
-    for x_ItemData in itemList:
-        # check if the Size is correct (e.g.: non-0-values)
-        x_size = check_size(x_ItemData[5])
-
-        # set the invGrid vars
-        grid_rows = len(invGrid)
-        grid_cols = len(invGrid[0])
+        # get the invGrid start vars
+        grid_rows, grid_cols = invGridSize
+        # keep count of how many rows will be added in the end (IF isLootcrate == 1)
+        grid_rows_final = len(invGrid)
 
         # find free slots for the Item (if (AND ONLY IF) it is a temp Inventory -> Add more rows, if needed!)
         while True:
-            slot_usage = item_getFreeSlots(grid_rows=grid_rows, grid_cols=grid_cols, item_size=x_size, invGrid=invGrid)
+            slot_usage = inv_handler.inv_slots_free_get(invGrid=invGrid, item_size=x_size)
             if len(slot_usage) == 0:
-                if isTempInv:
+                print(f"DEBUG: item_handler: item_add_to_inv: No free slots found.")
+                if isLootcrate > 0:
+                    print(f"DEBUG: item_handler: item_add_to_inv: It's a lootcrate -> Adding new row. Count: {grid_rows_final}\n-------------")
                     # add a new row to the tempInventory
                     newRow = [0] * grid_cols
                     invGrid.append(newRow)
-                    grid_rows = len(invGrid)
-                    grid_cols = len(invGrid[0])
-                    if grid_rows > 75:  # seems like, that something went pretty wrong there
+                    grid_rows_final = len(invGrid)
+                    # grid_cols = len(invGrid[0])
+
+                    if grid_rows_final > 75:
+                        # seems like, that something went pretty wrong there
+                        grid_rows_final = grid_rows
                         break
-                    print(f"DEBUG: item_add_list: No free slots found. Adding new row. Count: {grid_rows}\n-------------")
                 else:
                     break
             else:
+                print(f"DEBUG: item_handler: item_add_to_inv: slot_usage: {slot_usage}")
                 break
 
-        # ToDo: Calculate the rarity, depending on the player Skill
-        if len(slot_usage) != 0:
-            newItem = item_create(
-                    class_name=x_ItemData[0],
-                    type=x_ItemData[1],
-                    rarity=x_ItemData[2],
-                    hp_cur=x_ItemData[3],
-                    hp_max=x_ItemData[4],
-                    size=x_size,
-                    isFlipped=0,
-                    invPos=slot_usage,
-                    curInv=invID,
-                    addInvSpace=x_ItemData[6],
-                    )
-            print(newItem)
-
-            # update the Inventory Grid and the itemData for it
-            inv_handler.inv_usedSlots_set(slots_used=slot_usage, invGrid=invGrid, isAdd=True)
+        # check if there were slots found
+        if len(slot_usage) > 0:
+            # update the Inventory Grid, its gridSize ...
+            inv_handler.inv_slots_used_set(slots_used=slot_usage, invGrid=invGrid, isAdd=True)
             invData["inv_grid"] = invGrid
-            inv_itemData[newItem["id"]] = newItem
+            invData["inv_gridSize"] = [grid_rows_final, grid_cols]
+            invData["itemData"] = inv_itemData
+
+            # ... and add the item to its itemData
+            inv_itemData[item["id"]] = item
+
+            # also update the items InventoryPosition. Set the first entry (top left corner) as inventoryPos
+            item["invPos"] = slot_usage[0]
         else:
-            print(f"ERROR: item_add_list: No free slots found for x_ItemData:\n{x_ItemData}\n RowCount: {grid_rows}\n-------------")
+            print(f"ERROR: item_add_list: No free slots found for x_ItemData:\n{item}\n RowCount: {grid_rows}\n-------------")
+        #########################################################
 
-    # client.cData["itemData"][newItem["id"]] = newItem
-    # print(client.cData["itemData"])
-    # # ToDo: TEMP! Saving will be done by an extra Thread from the Server! e.g. every 10 "pushes" OR every 10s -> save data to file
-    # client.sData.database.db_save()
+        # return the updated invData!
+        print(f"invData:\n{invData}")
+        return [invData, item]
 
-
-def item_getFreeSlots(grid_rows, grid_cols, item_size, invGrid):
-    # ToDo: make a check if Item can be flipped and try to find space again (later)
-    grid_rows_maxCheck = grid_rows - item_size[0]   # no need to check the x-axis further, if the height would be outside of bounds
-    grid_cols_maxCheck = grid_cols - item_size[1]  # no need to check the y-axis further, if the width would be outside of bounds
-    slots = []
-    for x in range(0, grid_rows):
-        if x > grid_rows_maxCheck:
-            # max reached, return empty Array (triggers addRow (tempInventory) OR shows Error Message
-            return []
-        for y in range(0, grid_cols):
-            if y > grid_cols_maxCheck:
-                break
-            slots = inv_handler.inv_usedSlots_get(slotsStart=[x, y], sizeItem=item_size, invGrid=invGrid, isFlipped=0, isAdd=True)
-            # if slots were found, exit the search/loop
-            if len(slots) != 0:
-                return slots
-        # if slots were found, exit the search/loop
-        if len(slots) != 0:
-            return slots
-    # Normally, this one should never trigger... but who knows /shrug
-    return []
+        # client.cData["itemData"][newItem["id"]] = newItem
+        # print(client.cData["itemData"])
+        # # ToDo: TEMP! Saving will be done by an extra Thread from the Server! e.g. every 10 "pushes" OR every 10s -> save data to file
+        # client.sData.database.db_save()
+    except Exception as e:
+        print(f"-------------\nERROR: item_add_list: EXCEPTION:\n{e}\n-------------")
 
 
-def loot_generate(sData, x_dict, itemInfo=None):
+def loot_item_generate(sData, x_dict, itemInfo=None):
     if itemInfo is None:
         itemInfo = []
 
     # select random item
     selected_type = random.choices(list(x_dict.keys()), weights=list(x_dict.values()), k=1)[0]
-    # print(f"DEBUG: loot_generate: selected_type: {selected_type}")
+    # print(f"DEBUG: loot_item_generate: selected_type: {selected_type}")
     itemInfo.append(selected_type)
     # check if selected_type exists other wise return class
     if selected_type in sData.lootData["tables"]:
         # print(f"DEBUG: initial_seed LG: {initial_seed}")
-        return loot_generate(sData, sData.lootData["tables"][selected_type], itemInfo)
+        return loot_item_generate(sData, sData.lootData["tables"][selected_type], itemInfo)
     else:
         # return itemInfo
-        print(f"DEBUG: loot_generate: selected_type: {selected_type}")
+        print(f"DEBUG: loot_item_generate: selected_type: {selected_type}")
         return selected_type
 
 
-def return_loot_list(sData, skill_scavenging, crate_id, loot_type, loot_count):
+def loot_item_list_create(sData, crate_id, loot_type, loot_count):
+    """
+    :param sData:       OBJ - Main serverData
+    :param crate_id:    STR - ID of given Crate
+    :param loot_type:   STR - Which loot-table should be loaded
+    :param loot_count:  INT - Amount of Items to be created
+    :return:            Array with itemNames. Example: ["item1", "item2"]
+    """
     initial_seed = f"{sData.lootData['globalseed']} - {crate_id} - {loot_type}"
-    print(f"DEBUG: return_loot_list: initial_seed: {initial_seed}")
+    print(f"DEBUG: loot_item_list_create: initial_seed: {initial_seed}")
     # list of item names
     loot_list = []
     # check if loot_type exists
     if loot_type in sData.lootData["tables"]:
         for x in range(loot_count):
-            loot_list.append(loot_generate(sData, sData.lootData["tables"][loot_type]))
+            loot_list.append(loot_item_generate(sData, sData.lootData["tables"][loot_type]))
 
-    # get the base Data for each Item
-    itemList = []
-    for item in loot_list:
-        try:
-            # ToDo: Create Items and add to crate with the given crate_ID
-            print(sData.itemData[item])
-        except KeyError:
-            print(f"DEBUG: return_loot_list: KeyError: item: {item}")
-
+    # return the loot_list array with the their item-names
     return loot_list
-
     # ############################# NOTE:
-    # print(return_loot_list("98372491", "type_military", 3))
+    # print(loot_item_list_create("98372491", "type_military", 3))
+
+
+def item_get_parentData(sData, itemName: str = None):
+    if itemName is None:
+        print(f"ERROR: item_get_parentData: NO itemName given!")
+        return {}
+    # get the parent-itemData
+    try:
+        return sData.itemData[itemName]
+    except KeyError:
+        print(f"ERROR: item_get_parentData: KeyError: itemName: {itemName}")
