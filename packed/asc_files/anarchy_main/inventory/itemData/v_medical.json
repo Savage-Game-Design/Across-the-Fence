@@ -29,7 +29,7 @@
 	},
 	"Medikit":
 	{
-		"size": [4, 4],
+		"size": [3, 3],
 		"slot": 0,
 		"class_name": "",
 		"name": "STR_MediKit",
