@@ -16,8 +16,7 @@ cmdList = {
 				# Try to get data from crates/Inventories.
 				"crate_data_get": inv_handler.crate_data_get,
 				# remove crates from the database
-				"crate_rem": inv_handler.crate_rem,
-				"TESTINGER": item_handler.item_add_list
+				"crate_rem": inv_handler.crate_rem
 			},
 		'arma_server': {
 				# "functionTag in Arma": "Function to execute"
@@ -26,7 +25,7 @@ cmdList = {
 				"s_test":           "ASC_fnc_example",
 				"s_abc":            "ASC_fnc_example",
 				# DEV
-				"crate_add":   "AN_S_fnc_crate_add"
+				"crate_add":        "AN_S_fnc_crate_add"
 			},
 		'client': {
 				# ""Tag" send from Arma" : Function in the backend
