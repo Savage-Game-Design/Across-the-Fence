@@ -20,7 +20,7 @@
 
 private _ticktime = diag_tickTime;
 
-private _debug_show_markers = false;
+private _debug_show_markers = true;
 private _debug_show_info = false;
 private _chance = 0.99;
 private _grid_size = 1;
