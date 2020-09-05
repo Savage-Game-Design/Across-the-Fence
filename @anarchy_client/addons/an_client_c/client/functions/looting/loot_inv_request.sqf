@@ -12,5 +12,6 @@ if(player distance _tgt > 5)exitWith{systemChat "DEBUG MSG: LOOT_INV_REQUEST: To
 
 private _building = _tgt getVariable ["linked_building",objNull];
 private _pos = _tgt getVariable ["linked_pos",[0,0,0]];
+
 // "send re to server to loot object with ref to crate object and crate pos and building item is spawned in"
-[_pos,_building] remoteExecCall ["AN_S_fnc_crate_loot_request", 2];
+[player,'crate_loot_request',[_pos,_building],player getVariable 'para_player_token'] remoteExecCall ['para_s_fnc_rehandler',2];

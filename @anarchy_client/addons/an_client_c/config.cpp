@@ -1,4 +1,4 @@
-class CfgPatches 
+class CfgPatches
 {
 	class sgd_anarchy_client
 	{
@@ -21,7 +21,7 @@ class CfgFunctions
 		// #include "..\paradigm\an_server\functions.hpp"
 		#include "client\functions\functions_c.h"
 	};
-	
+
 	class AN_G
 	{
 		#include "global\functions\functions_g.h"

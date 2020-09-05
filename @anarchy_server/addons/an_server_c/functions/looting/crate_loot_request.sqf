@@ -1,12 +1,24 @@
+/*
+	File: fn_crate_loot_request.sqf
+	Author: Aaron Clark <vbawol>
+	Date: 2020-07-20
+	Last Update: 2020-09-02
+	Public: No
 
+	Description:
+		Code to do loot container request RE from client
+
+	Parameter(s):
+		None
+
+	Returns:
+		Nothing
+
+	Example(s):
+		call AN_C_fnc_crate_loot_request;
+*/
 params ["_pos", "_building"];
 
-// Get the player obj from remoteExecutedOwner
-private _allPlayers = allPlayers - entities "HeadlessClient_F";
-private _owner_index = _allPlayers findIf { (owner _x) isEqualTo remoteExecutedOwner};
-if(_owner_index < 0)exitWith{diag_log "ERROR: crate_loot_request: Player not found in allPlayers!"};
-
-private _player = _allPlayers#_owner_index;
 private _player_ID = getPlayerUID _player;
 private _chance = 0.99;
 private _max_dist = 20;
