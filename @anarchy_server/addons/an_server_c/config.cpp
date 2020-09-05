@@ -1,6 +1,6 @@
-class CfgPatches 
+class CfgPatches
 {
-	class sgd_anarchy_server 
+	class sgd_anarchy_server
 	{
 		author = "Savage Game Design";
 		name = "Anarchy Server";
@@ -18,9 +18,14 @@ class CfgFunctions
 {
 	class AN_S
 	{
-		
+
 		// DEV: Disabled until paradigm is set up properly
 		// #include "..\paradigm\an_server\functions.hpp"
 		#include "functions\functions_s.h"
 	};
+};
+
+class looting
+{
+	#include "config\buildings.hpp"
 };
