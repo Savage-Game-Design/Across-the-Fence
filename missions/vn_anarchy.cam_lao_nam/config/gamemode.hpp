@@ -96,4 +96,9 @@ class gamemode
 	{
 		#include "subconfigs\interaction_overlay.hpp"
 	};
+
+	class looting
+	{
+		#include "subconfigs\buildings.hpp"
+	};
 };

@@ -24,8 +24,3 @@ class CfgFunctions
 		#include "functions\functions_s.h"
 	};
 };
-
-class looting
-{
-	#include "config\buildings.hpp"
-};
