@@ -8,7 +8,7 @@
  * @License: TBA
  */
 
-classd buildings
+class buildings
 {
 	class default
 	{

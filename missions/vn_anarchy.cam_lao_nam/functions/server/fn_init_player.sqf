@@ -36,6 +36,7 @@ private _uid = getPlayerUID _player;
 
 // broadcast new token to only this player
 private _token = random 99999;
+_local_vars = [];
 _local_vars pushBack ["para_player_token",_token];
 _player setVariable ["para_player_token",_token];
 
