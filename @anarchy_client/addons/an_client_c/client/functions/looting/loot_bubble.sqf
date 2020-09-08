@@ -79,8 +79,8 @@ for "_i" from 0 to _total_rows do
 
 				if !(isNull _building) then
 				{
-					_count_per_crate = getNumber (_looting_config >> typeOf _building >> "count");
-					if (_count_per_crate > 0) then {
+					_is_allowed = getNumber (_looting_config >> typeOf _building >> "count");
+					if (_is_allowed > 0) then {
 
 						_crate_class = selectRandom getArray (_looting_config >> typeOf _building >> "containers");
 
