@@ -37,6 +37,8 @@ private _pos = _startpos;
 
 private _check_counter = 0;
 
+private _looting_config = (missionConfigFile >> "gamemode" >> "looting" >> "buildings");
+
 for "_i" from 0 to _total_rows do
 {
 	_grid_x = _grid_x + _grid_size;
@@ -59,7 +61,7 @@ for "_i" from 0 to _total_rows do
 		if ((vn_an_seed + floor(_pos#2)) random [floor(_pos#0),floor(_pos#1)] > _chance) then
 		{
 			private _pos_dn = (_pos vectorAdd [0,0,-1]);
-			private _pos_up = _pos_dn vectorAdd [0,0,3];
+			private _pos_up = _pos_dn vectorAdd [0,0,4];
 			private _intersect = lineIntersectsSurfaces [
 				_pos_up,
 				_pos_dn,
@@ -77,18 +79,24 @@ for "_i" from 0 to _total_rows do
 
 				if !(isNull _building) then
 				{
-					_crate_spawned = true;
-					_crate = createSimpleObject ["Land_vn_object_trashcan_01", _crate_pos, true];
+					_count_per_crate = getNumber (_looting_config >> typeOf _building >> "count");
+					if (_count_per_crate > 0) then {
 
-					if (_debug_show_markers) then
-					{
-						_marker1 = createMarker [_loot_pos_key, _crate_pos];
-						_marker1 setMarkerType "hd_dot";
+						_crate_class = selectRandom getArray (_looting_config >> typeOf _building >> "containers");
+
+						_crate_spawned = true;
+						_crate = createSimpleObject [_crate_class, _crate_pos, true];
+
+						if (_debug_show_markers) then
+						{
+							_marker1 = createMarker [_loot_pos_key, _crate_pos];
+							_marker1 setMarkerType "hd_dot";
+						};
+						_crate setVariable ["linked_building", _building];
+						_crate setVariable ["linked_pos",[floor(_pos#0),floor(_pos#1),floor(_pos#2)]];
+						_crate setVariable ["linked_vec",_crate_vec];
+						vn_an_crates pushBack _crate;
 					};
-					_crate setVariable ["linked_building", _building];
-					_crate setVariable ["linked_pos",[floor(_pos#0),floor(_pos#1),floor(_pos#2)]];
-					_crate setVariable ["linked_vec",_crate_vec];
-					vn_an_crates pushBack _crate;
 				};
 			};
 		};
