@@ -31,8 +31,8 @@ private _grid_rows = 20;
 private _total_rows = _grid_rows*_grid_rows;
 private _row_counter = 0;
 private _offset = -((_grid_rows*_grid_size)/2);
-private _playerpos = getPosASL player;
-private _startpos =  [floor(_playerpos#0),floor(_playerpos#1),floor(_playerpos#2)] vectorAdd [_offset,_offset,0];
+private _playerpos = (getPosASL player) apply {floor _x};
+private _startpos =  [_playerpos#0,_playerpos#1,_playerpos#2] vectorAdd [_offset,_offset,0];
 private _pos = _startpos;
 
 private _check_counter = 0;
@@ -50,17 +50,15 @@ for "_i" from 0 to _total_rows do
 	};
 	_row_counter = _row_counter + 1;
 
-
-
-	_loot_pos_key = format["vn_%1",[floor(_pos#0),floor(_pos#1),floor(_pos#2)]];
-	_loot_pos = missionNamespace getVariable _loot_pos_key;
-	_crate_spawned = false;
+	private _normalized_pos = _pos apply {floor _x};
+	private _loot_pos_key = format["vn_%1",[_normalized_pos#0,_normalized_pos#1,_normalized_pos#2]];
+	private _crate_spawned = false;
 
 	if (isNil _loot_pos_key) then
 	{
-		if ((vn_an_seed + floor(_pos#2)) random [floor(_pos#0),floor(_pos#1)] > _chance) then
+		if ((vn_an_seed + _normalized_pos#2) random [_normalized_pos#0,_normalized_pos#1] > _chance) then
 		{
-			private _pos_dn = (_pos vectorAdd [0,0,-1]);
+			private _pos_dn = (_normalized_pos vectorAdd [0,0,-1]);
 			private _pos_up = _pos_dn vectorAdd [0,0,4];
 			private _intersect = lineIntersectsSurfaces [
 				_pos_up,
@@ -93,7 +91,7 @@ for "_i" from 0 to _total_rows do
 							_marker1 setMarkerType "hd_dot";
 						};
 						_crate setVariable ["linked_building", _building];
-						_crate setVariable ["linked_pos",[floor(_pos#0),floor(_pos#1),floor(_pos#2)]];
+						_crate setVariable ["linked_pos",_normalized_pos];
 						_crate setVariable ["linked_vec",_crate_vec];
 						vn_an_crates pushBack _crate;
 					};
