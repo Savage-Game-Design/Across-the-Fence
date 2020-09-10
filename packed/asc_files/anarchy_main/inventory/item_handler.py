@@ -226,6 +226,14 @@ def loot_item_generate(sData, x_dict, itemInfo=None):
     # print(f"DEBUG: loot_item_generate: selected_type: {selected_type}")
     itemInfo.append(selected_type)
     # check if selected_type exists other wise return class
+
+	#example of loading data per level
+    if selected_type + "_data" in sData.lootData["tables"]:
+        hp_min = sData.lootData["tables"][selected_type + "_data"]["hp_min"]
+        hp_max = sData.lootData["tables"][selected_type + "_data"]["hp_max"]
+        parent = sData.lootData["tables"][selected_type + "_data"]["parent"]
+        attachements = sData.lootData["tables"][selected_type + "_data"]["attachements"]
+
     if selected_type in sData.lootData["tables"]:
         # print(f"DEBUG: initial_seed LG: {initial_seed}")
         return loot_item_generate(sData, sData.lootData["tables"][selected_type], itemInfo)

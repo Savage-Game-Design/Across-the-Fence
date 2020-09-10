@@ -1,0 +1,6 @@
+{
+	"hp_min" : 50,
+	"hp_max" : 100,
+	"parent" : "vn_m14"
+	"attachements": {"scope": ""}
+}
