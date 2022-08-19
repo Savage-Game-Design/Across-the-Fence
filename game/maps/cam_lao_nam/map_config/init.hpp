@@ -1,0 +1,3 @@
+class map_config {
+
+};

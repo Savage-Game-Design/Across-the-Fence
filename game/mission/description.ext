@@ -1,0 +1,149 @@
+#include "version.hpp"
+
+//Allow calling verson number from mission functions
+version = VGM_VERSION;
+
+class Header
+{
+	gameType = "secret";
+	minPlayers = 1;
+	maxPlayers = 24;
+};
+
+respawn = "BASE";
+respawnDelay = 20;
+respawnDialog = 0;
+respawnButton = 1;
+respawnOnStart = -1;
+respawnTemplates[] = { "MenuPosition" };
+onPauseScript = "";
+onLoadMission = QUOTE(ANARCHY (VGM_VERSION));
+OnLoadIntro = "Welcome to Vietnam [Placeholder]";
+loadScreen = "";
+OnLoadIntroTime = 0;
+OnLoadMissionTime = 0;
+briefingName = QUOTE(ANARCHY (VGM_VERSION));
+onLoadName = QUOTE(ANARCHY (VGM_VERSION));
+overviewPicture = "";
+
+disabledAI = 1;
+scriptedPlayer = 0;
+disableChannels[]=  // allow text only on side chat
+{
+	{0,true,true},
+	{1,false,true},
+	{2,true,true},
+	{6,true,true}
+};
+enableItemsDropping = 0;
+briefing = 0;
+debriefing = 0;
+enableDebugConsole[] = {
+	//Spoffy
+	"76561198011383725",
+	//Eggbeast
+	"76561197974575839",
+	//Aceb
+	"76561198022706949",
+};
+
+allowFunctionsLog = 1;
+allowFunctionsRecompile = 1;
+joinUnassigned = 0;
+forceRotorLibSimulation = 0;
+saving = 0;
+skipLobby = 0;
+
+corpseManagerMode = 1;
+corpseLimit = 10;
+corpseRemovalMinTime = 1200;
+corpseRemovalMaxTime = 3600;
+
+wreckManagerMode = 0;
+wreckLimit = 2;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 360;
+
+disableRandomization[] = {"All"};
+
+showHUD[] =
+{
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	true,	// Vehicle radar
+	true,	// Vehicle compass
+	true,	// Tank direction indicator
+	true,	// Commanding menu
+	true,	// Group Bar
+	true,	// HUD Weapon Cursors
+	true	// Vehicle display panels
+};
+
+// Enable CBA settings loading
+cba_settings_hasSettingsFile = 1;
+
+// No params - settings should be hardcoded.
+class Params {};
+
+class CfgDebriefing
+{
+	class TimedOut
+	{
+		title = "ERROR";
+		subtitle = "Server Timeout";
+		description = "If you see this message please reconnect";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0.0,0.3,0.6,1};
+	};
+};
+
+//Show melee weapons in the arsenal
+vn_arsenalShowMelee = 1;
+
+
+//-----------------------------------------------------------------
+//  MAP SPECIFIC CONFIG
+//-----------------------------------------------------------------
+
+// Defined per-map, copied here during the build.
+#include "description_map.inc"
+#include "map_config/init.hpp"
+
+
+//-----------------------------------------------------------------
+//  PARADIGM CONFIG
+//-----------------------------------------------------------------
+
+// Set paradigm path
+#define PARA_PATH paradigm
+
+// Tell paradigm to run in mission mode
+#include "paradigm\missionConfig.hpp"
+
+//Tell paradigm to handle mission initialisation.
+use_paradigm_init = 1;
+
+//Declare functions needed by paradigm.
+class ParadigmInteropFunctions 
+{
+	get_squad_composition = "";
+	harass_filter_target_players = "";
+	harass_get_enemy_side =	"";
+	valid_attack_angles = "";
+};
+
+//-----------------------------------------------------------------
+// OTHER CONFIG
+//-----------------------------------------------------------------
+
+class CfgFunctions {
+	#include "paradigm\client\functions.hpp"
+	#include "paradigm\server\functions.hpp"
+
+	// Functions config built during build process
+	#include "built_functions.hpp"
+};
+
+// Extra config built during the build process
+#include "built_config.hpp"
