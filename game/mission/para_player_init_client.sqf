@@ -48,39 +48,26 @@ progressLoadingScreen 0.2;
 
 uiSleep 0.4;
 progressLoadingScreen 0.3;
-// add display event handlers
-call para_c_fnc_init_display_event_handler;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading3"]] call vn_mf_fnc_update_loading_screen;
 
 uiSleep 0.4;
 progressLoadingScreen 0.4;
-// add player event handlers
-call para_c_fnc_init_player_event_handlers;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading4"]] call vn_mf_fnc_update_loading_screen;
 
 uiSleep 0.4;
 progressLoadingScreen 0.5;
-// add self actions
-call vn_mf_fnc_action_drink_water;
-call vn_mf_fnc_action_eat_food;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading5"]] call vn_mf_fnc_update_loading_screen;
 
 uiSleep 0.4;
 progressLoadingScreen 0.6;
-// Set up arsenal clean up trash cans.
-call vn_mf_fnc_arsenal_trash_cleanup_init;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading6"]] call vn_mf_fnc_update_loading_screen;
 
 uiSleep 0.4;
 progressLoadingScreen 0.7;
-// create UI
-0 spawn vn_mf_fnc_ui_create;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading7"]] call vn_mf_fnc_update_loading_screen;
 
 uiSleep 0.4;
 progressLoadingScreen 0.8;
-// master loop
-0 spawn para_c_fnc_compiled_loop_init;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading8"]] call vn_mf_fnc_update_loading_screen;
 
 uiSleep 0.4;
@@ -89,28 +76,10 @@ progressLoadingScreen 0.9;
 
 uiSleep 0.4;
 progressLoadingScreen 1.0;
-//Setup teleporters
-call vn_mf_fnc_action_teleport;
-
-call vn_mf_fnc_apply_unit_traits;
-
-call vn_mf_fnc_action_trait;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading10"]] call vn_mf_fnc_update_loading_screen;
-
-// apply health effects
-call vn_mf_fnc_health_effects;
 
 private _respawnDelay = ["respawn_delay", 20] call BIS_fnc_getParamValue;
 setplayerrespawntime _respawnDelay;
-
-// Start player marker subsystem
-private _useMarkers = (["allow_map_markers", 1] call BIS_fnc_getParamValue) > 0;
-if (_useMarkers) then {
-	call vn_mf_fnc_player_markers_subsystem_init;
-};
-
-// Initalize marker info UI
-[] call para_c_fnc_zone_marker_init;
 
 // Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
 if (!isServer) then {
@@ -120,22 +89,8 @@ if (!isServer) then {
 // Set up automatic view distance scaling for performance
 [] call para_c_fnc_perf_enable_dynamic_view_distance;
 
-// starting rank
-vn_mf_starting_rank = player getVariable ["vn_mf_db_rank",0];
-
-// init awards array
-vn_mf_default_awards = [];
-{
-    vn_mf_default_awards pushBack [configName _x, -1];
-} forEach ("isClass(_x)" configClasses (missionConfigFile >> "gamemode" >> "awards_config"));
-
 // initialize tools controller
 call para_c_fnc_tool_controller_init;
-
-call vn_mf_fnc_admin_arsenal;
-
-// This is used for showing values of food and water in the arsenal
-call vn_mf_fnc_enable_arsenal_food_drink_overlay;
 
 //LOADING COMPLETE
 //Start tidying up ready for play.
@@ -155,25 +110,6 @@ cutText ["", "BLACK IN", 4];
 if (typeOf player != "VirtualCurator_F") then {
 	player enableSimulation true;
 };
-
-//enabling and setting stamina
-if(vn_mf_param_enable_stamina == false) then{
-    player enableStamina false;
-}
-else{
-    player enableStamina true;
-	switch (vn_mf_param_set_stamina) do
-	{
-		case 0: {setStaminaScheme "Normal"};
-		case 1: {setStaminaScheme "Default"};
-		case 2: {setStaminaScheme "FastDrain"};
-		case 3: {setStaminaScheme "Exhausted"};
-	};
-};
-
-// display location after a little delay
-sleep 4;
-call vn_mf_fnc_display_location_time;
 
 [] spawn
 {
@@ -203,11 +139,6 @@ call vn_mf_fnc_display_location_time;
 	};
 };
 
-// Marker Discovery
-[] call vn_mf_fnc_sites_subsystem_client_init;
-// Tutorial System
-[] call vn_mf_fnc_tutorial_subsystem_client_init;
-
 //DEV (ToDo): Until client Scheduler is added:
 []spawn
 {
@@ -219,5 +150,3 @@ call vn_mf_fnc_display_location_time;
 		[] call para_c_fnc_infopanel_handler;
 	};
 };
-
-["InitializePlayer", [player]] call para_c_fnc_dynamicGroups;

@@ -27,5 +27,3 @@
 */
 
 params ["_player", "_didJIP"];
-
-diag_log format ["Mike Force: Player postinit server - %1", _player];

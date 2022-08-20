@@ -1,7 +1,11 @@
+#include "common_includes.hpp"
 #include "version.hpp"
 
 //Allow calling verson number from mission functions
 version = VGM_VERSION;
+
+// Used to find certain paths
+#define VGM_PATH
 
 class Header
 {
@@ -108,7 +112,7 @@ vn_arsenalShowMelee = 1;
 
 // Defined per-map, copied here during the build.
 #include "description_map.inc"
-#include "map_config/init.hpp"
+#include "map_config\init.hpp"
 
 
 //-----------------------------------------------------------------
@@ -142,8 +146,8 @@ class CfgFunctions {
 	#include "paradigm\server\functions.hpp"
 
 	// Functions config built during build process
-	#include "built_functions.hpp"
+	#include "configs\built_functions.hpp"
 };
 
 // Extra config built during the build process
-#include "built_config.hpp"
+#include "configs\built_config.hpp"

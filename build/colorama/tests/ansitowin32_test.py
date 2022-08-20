@@ -1,5 +1,5 @@
 # Copyright Jonathan Hartley 2013. BSD 3-Clause license, see LICENSE file.
-from io import StringIO
+from io import StringIO, TextIOWrapper
 from unittest import TestCase, main
 
 try:
@@ -40,6 +40,17 @@ class StreamWrapperTest(TestCase):
             with StreamWrapper(mockStream, mockConverter) as wrapper:
                 wrapper.write('hello')
 
+    def test_closed_shouldnt_raise_on_closed_stream(self):
+        stream = StringIO()
+        stream.close()
+        wrapper = StreamWrapper(stream, None)
+        self.assertEqual(wrapper.closed, True)
+
+    def test_closed_shouldnt_raise_on_detached_stream(self):
+        stream = TextIOWrapper(StringIO())
+        stream.detach()
+        wrapper = StreamWrapper(stream, None)
+        self.assertEqual(wrapper.closed, True)
 
 class AnsiToWin32Test(TestCase):
 
@@ -170,13 +181,19 @@ class AnsiToWin32Test(TestCase):
     def test_wrap_shouldnt_raise_on_closed_orig_stdout(self):
         stream = StringIO()
         stream.close()
-        converter = AnsiToWin32(stream)
-        self.assertFalse(converter.strip)
+        with \
+            patch("colorama.ansitowin32.os.name", "nt"), \
+            patch("colorama.ansitowin32.winapi_test", lambda: True):
+                converter = AnsiToWin32(stream)
+        self.assertTrue(converter.strip)
         self.assertFalse(converter.convert)
 
     def test_wrap_shouldnt_raise_on_missing_closed_attr(self):
-        converter = AnsiToWin32(object())
-        self.assertFalse(converter.strip)
+        with \
+            patch("colorama.ansitowin32.os.name", "nt"), \
+            patch("colorama.ansitowin32.winapi_test", lambda: True):
+                converter = AnsiToWin32(object())
+        self.assertTrue(converter.strip)
         self.assertFalse(converter.convert)
 
     def testExtractParams(self):
