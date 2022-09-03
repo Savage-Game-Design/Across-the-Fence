@@ -52,3 +52,4 @@ player enableSimulation false;
 
 // Start loading screen, so we wait while server init completes.
 startLoadingScreen ["Welcome to Mike Force!"/*, "MikeForce_loadingScreen"*/];
+//TODO: Probably change this to 'Tour of Duty'. Maybe this should pull from a string table for localization /shrug

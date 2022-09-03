@@ -35,10 +35,12 @@ player createDiaryRecord ["Diary", [localize "STR_vn_mf_howtobuild", localize "S
 player createDiaryRecord ["Diary", [localize "STR_vn_mf_other_keys", localize "STR_vn_mf_other_keys_long"], taskNull, "", false];
 
 // Instantiate the main scheduler
-[] call para_g_fnc_scheduler_subsystem_init;
+[] call para_g_fnc_scheduler_subsystem_init; //TODO: sus
 
-call para_g_fnc_event_subsystem_init;
+call para_g_fnc_event_subsystem_init; //TODO: sus
 
+
+//TODO: sus
 // display initial loading text
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading1"]] call vn_mf_fnc_update_loading_screen;
 
@@ -77,20 +79,22 @@ progressLoadingScreen 0.9;
 uiSleep 0.4;
 progressLoadingScreen 1.0;
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading10"]] call vn_mf_fnc_update_loading_screen;
+//TODO: End sus
+
 
 private _respawnDelay = ["respawn_delay", 20] call BIS_fnc_getParamValue;
-setplayerrespawntime _respawnDelay;
+setplayerrespawntime _respawnDelay; //TODO: sus
 
 // Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
 if (!isServer) then {
-	call para_g_fnc_ai_create_behaviour_execution_loop;
+	call para_g_fnc_ai_create_behaviour_execution_loop; //TODO: sus
 };
 
 // Set up automatic view distance scaling for performance
-[] call para_c_fnc_perf_enable_dynamic_view_distance;
+[] call para_c_fnc_perf_enable_dynamic_view_distance; //TODO: sus
 
 // initialize tools controller
-call para_c_fnc_tool_controller_init;
+call para_c_fnc_tool_controller_init; //TODO: sus
 
 //LOADING COMPLETE
 //Start tidying up ready for play.
@@ -111,34 +115,37 @@ if (typeOf player != "VirtualCurator_F") then {
 	player enableSimulation true;
 };
 
+//TODO: #2tfampk factor this out into a function script somewhere
 [] spawn
 {
 	while {true} do
 	{
 		uiSleep 0.5;
-		[] call para_c_fnc_set_aperture_based_on_light_level;
+		[] call para_c_fnc_set_aperture_based_on_light_level; //TODO: sus
 	};
 };
 
+//TODO: #2tfampk factor this out into a function script somewhere
 [] spawn
 {
 	uiSleep 2;
 	private _version = getText(missionConfigFile >> "version");
-	private _lastVersion = (["GET", "last_version", ""] call para_s_fnc_profile_db) select 1;
+	private _lastVersion = (["GET", "last_version", ""] call para_s_fnc_profile_db) select 1; //TODO: sus
 	//Open welcome screen for new players
-	private _welcomeScreenEnabled = ["para_enableWelcomeScreen"] call para_c_fnc_optionsMenu_getValue;
+	private _welcomeScreenEnabled = ["para_enableWelcomeScreen"] call para_c_fnc_optionsMenu_getValue; //TODO: sus
 	private _versionHasChanged = _lastVersion == "" || _lastVersion != _version;
 
 	if (_versionHasChanged) exitWith {
-		createDialog "para_ChangelogScreen";
-		["SET", "last_version", _version] call para_s_fnc_profile_db;
+		createDialog "para_ChangelogScreen"; //TODO: sus
+		["SET", "last_version", _version] call para_s_fnc_profile_db; //TODO: sus
 	};
 
 	if (_welcomeScreenEnabled) exitWith {
-		createDialog "para_WelcomeScreen";
+		createDialog "para_WelcomeScreen"; //TODO: sus
 	};
 };
 
+//TODO: #2tfampk factor this out into a function script somewhere
 //DEV (ToDo): Until client Scheduler is added:
 []spawn
 {
