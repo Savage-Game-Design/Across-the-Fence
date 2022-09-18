@@ -19,6 +19,12 @@
 
 private _gamemode_config = (missionConfigFile >> "gamemode");
 
+// Spoffy TODO: gus, added a building system init here, trying to see if it will kill 
+// the effor in para_l_buildings = para_l_buildings - [objNull] error in fn_building_state_tracker
+// Gotta ask Spoffy if Anarchy is even gonna have building systems.
+// diag_log "VN Anarchy: Initialising building system";
+// call para_s_fnc_building_system_init;
+
 //Set whether the building system needs vehicles (fuel/repair/rearm, etc) nearby to build certain structures.
 para_l_buildables_require_vehicles = [false, true] select (["buildables_require_vehicles", 1] call BIS_fnc_getParamValue);
 publicVariable "para_l_buildables_require_vehicles";
@@ -40,10 +46,16 @@ para_g_enemiesPerPlayer = 2;
 publicVariable "para_g_enemiesPerPlayer";
 
 // setup game optimizations server side
-setviewdistance (getNumber(_gamemode_config >> "performance" >> "setviewdistance"));
-setobjectviewdistance (getArray(_gamemode_config >> "performance" >> "setobjectviewdistance")); // this also controls ai target range
-setterraingrid (getNumber(_gamemode_config >> "performance" >> "setterraingrid"));
-(getArray(_gamemode_config >> "performance" >> "enableenvironment")) params ["_ambientlife","_ambientsound"];
+// Spoffy TODO: GUS This stuff is supposed to read from a config, but anarchy is setup different and I don't get it.
+// TODO: Just hardcoding in the values we used in MF until I figure out how to work with the config
+//setviewdistance (getNumber(_gamemode_config >> "performance" >> "setviewdistance"));
+setviewdistance(2000);
+//setobjectviewdistance (getArray(_gamemode_config >> "performance" >> "setobjectviewdistance")); // this also controls ai target range
+setobjectviewdistance ([1700, 100]); // this also controls ai target range
+//setterraingrid (getNumber(_gamemode_config >> "performance" >> "setterraingrid"));
+setterraingrid (10);
+//(getArray(_gamemode_config >> "performance" >> "enableenvironment")) params ["_ambientlife","_ambientsound"];
+([1,1]) params ["_ambientlife","_ambientsound"];
 enableenvironment [[false,true] select _ambientlife,[false,true] select _ambientsound];
 
 // start scheduler
@@ -66,17 +78,17 @@ diag_log "VGM: Initialising Cleanup Routine";
     ]
 ] call para_s_fnc_cleanup_subsystem_init;
 
-{
-    private _taskConfig = _x;
-    //Add the task to appropriate team arrays for the zone
-    {
-        vn_mf_secondaryTasksBySide getVariable _x pushBack configName _taskConfig;
-    } forEach (getArray (_taskConfig >> 'taskGroups'));
-} forEach (vn_mf_secondaryTaskConfigs);
-
-diag_log "VGM: Starting building state tracker";
-// building state tracking
-["building_state_tracker", {call para_s_fnc_building_state_tracker}, [], 60] call para_g_fnc_scheduler_add_job;
+// { SPOFFY TODO: GUS Commented out because broken.
+//     private _taskConfig = _x;
+//     //Add the task to appropriate team arrays for the zone
+//     {
+//         vn_mf_secondaryTasksBySide getVariable _x pushBack configName _taskConfig;
+//     } forEach (getArray (_taskConfig >> 'taskGroups'));
+// } forEach (vn_mf_secondaryTaskConfigs);
+//
+// diag_log "VGM: Starting building state tracker";
+// // building state tracking
+// ["building_state_tracker", {call para_s_fnc_building_state_tracker}, [], 60] call para_g_fnc_scheduler_add_job;
 
 diag_log "VGM: Starting player list tracker";
 // do slow allplayers list updates

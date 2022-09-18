@@ -132,7 +132,7 @@ use_paradigm_init = 1;
 class ParadigmInteropFunctions 
 {
 	get_squad_composition = "";
-	harass_filter_target_players = "";
+	harass_filter_target_players = "vgm_s_fnc_harass_filter_target_players";
 	harass_get_enemy_side =	"";
 	valid_attack_angles = "";
 };

@@ -35,66 +35,27 @@ player createDiaryRecord ["Diary", [localize "STR_vn_mf_howtobuild", localize "S
 player createDiaryRecord ["Diary", [localize "STR_vn_mf_other_keys", localize "STR_vn_mf_other_keys_long"], taskNull, "", false];
 
 // Instantiate the main scheduler
-[] call para_g_fnc_scheduler_subsystem_init; //TODO: sus
+[] call para_g_fnc_scheduler_subsystem_init;
 
-call para_g_fnc_event_subsystem_init; //TODO: sus
+call para_g_fnc_event_subsystem_init;
 
-
-//TODO: sus
 // display initial loading text
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading1"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.2;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading2"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.3;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading3"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.4;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading4"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.5;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading5"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.6;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading6"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.7;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading7"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.8;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading8"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.9;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading9"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 1.0;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading10"]] call vn_mf_fnc_update_loading_screen;
-//TODO: End sus
+call vgm_c_fnc_init_loading_text;
 
 
 private _respawnDelay = ["respawn_delay", 20] call BIS_fnc_getParamValue;
-setplayerrespawntime _respawnDelay; //TODO: sus
+setplayerrespawntime _respawnDelay;
 
 // Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
 if (!isServer) then {
-	call para_g_fnc_ai_create_behaviour_execution_loop; //TODO: sus
+	call para_g_fnc_ai_create_behaviour_execution_loop;
 };
 
 // Set up automatic view distance scaling for performance
-[] call para_c_fnc_perf_enable_dynamic_view_distance; //TODO: sus
+[] call para_c_fnc_perf_enable_dynamic_view_distance;
 
 // initialize tools controller
-call para_c_fnc_tool_controller_init; //TODO: sus
+call para_c_fnc_tool_controller_init;
 
 //LOADING COMPLETE
 //Start tidying up ready for play.
@@ -115,45 +76,8 @@ if (typeOf player != "VirtualCurator_F") then {
 	player enableSimulation true;
 };
 
-//TODO: #2tfampk factor this out into a function script somewhere
-[] spawn
-{
-	while {true} do
-	{
-		uiSleep 0.5;
-		[] call para_c_fnc_set_aperture_based_on_light_level; //TODO: sus
-	};
-};
+call vgm_c_fnc_handle_light_level_loop;
 
-//TODO: #2tfampk factor this out into a function script somewhere
-[] spawn
-{
-	uiSleep 2;
-	private _version = getText(missionConfigFile >> "version");
-	private _lastVersion = (["GET", "last_version", ""] call para_s_fnc_profile_db) select 1; //TODO: sus
-	//Open welcome screen for new players
-	private _welcomeScreenEnabled = ["para_enableWelcomeScreen"] call para_c_fnc_optionsMenu_getValue; //TODO: sus
-	private _versionHasChanged = _lastVersion == "" || _lastVersion != _version;
+call vgm_c_fnc_handle_welcome_screen;
 
-	if (_versionHasChanged) exitWith {
-		createDialog "para_ChangelogScreen"; //TODO: sus
-		["SET", "last_version", _version] call para_s_fnc_profile_db; //TODO: sus
-	};
-
-	if (_welcomeScreenEnabled) exitWith {
-		createDialog "para_WelcomeScreen"; //TODO: sus
-	};
-};
-
-//TODO: #2tfampk factor this out into a function script somewhere
-//DEV (ToDo): Until client Scheduler is added:
-[]spawn
-{
-	systemchat "starting infopanel handler loop";
-	"para_infopanel" cutRsc ["para_infopanel", "PLAIN", -1, true];
-	while{true}do
-	{
-		uisleep 0.5;
-		[] call para_c_fnc_infopanel_handler;
-	};
-};
+call vgm_c_fnc_init_info_panel_handler_loop;

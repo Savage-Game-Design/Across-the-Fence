@@ -31,14 +31,15 @@ params [["_player", objNull, [objNull]], ["_didJIP", true, [true]]];
 
 diag_log format ["Mike Force: Player init server - %1", _player];
 
-private _initialised = _player getVariable "para_s_player_initialised"; //TODO: sus
+private _initialised = _player getVariable "para_s_player_initialised"; 
 // prevent repeated execution of init
 if !(isNil "_initialised") exitWith {};
 
 // add cleanup handlers for dropped gear to the player
-[_player] call para_s_fnc_cleanup_register_player; //TODO: Sus
+[_player] call para_s_fnc_cleanup_register_player; 
 
 // send all variables to player
-[_local_vars] remoteExecCall ["para_c_fnc_set_local_var",_player]; //TODO: sus
+_local_vars = [];
+[_local_vars] remoteExecCall ["para_c_fnc_set_local_var",_player]; 
 
 _player setVariable ["para_s_player_initialised", true];
