@@ -8,4 +8,10 @@ class vgm_s
 	{
 		VGM_SERVER_PATH(\);
 	};
+
+	class paradigm_interop
+	{
+		VGM_SERVER_PATH(\paradigm_interop\server);
+		class harass_filter_target_players {};
+	};
 };

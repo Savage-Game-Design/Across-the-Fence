@@ -40,43 +40,8 @@ player createDiaryRecord ["Diary", [localize "STR_vn_mf_other_keys", localize "S
 call para_g_fnc_event_subsystem_init;
 
 // display initial loading text
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading1"]] call vn_mf_fnc_update_loading_screen;
+call vgm_c_fnc_init_loading_text;
 
-uiSleep 0.4;
-progressLoadingScreen 0.2;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading2"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.3;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading3"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.4;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading4"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.5;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading5"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.6;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading6"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.7;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading7"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.8;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading8"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 0.9;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading9"]] call vn_mf_fnc_update_loading_screen;
-
-uiSleep 0.4;
-progressLoadingScreen 1.0;
-[parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>",localize "STR_vn_mf_loading10"]] call vn_mf_fnc_update_loading_screen;
 
 private _respawnDelay = ["respawn_delay", 20] call BIS_fnc_getParamValue;
 setplayerrespawntime _respawnDelay;
@@ -111,42 +76,8 @@ if (typeOf player != "VirtualCurator_F") then {
 	player enableSimulation true;
 };
 
-[] spawn
-{
-	while {true} do
-	{
-		uiSleep 0.5;
-		[] call para_c_fnc_set_aperture_based_on_light_level;
-	};
-};
+call vgm_c_fnc_handle_light_level_loop;
 
-[] spawn
-{
-	uiSleep 2;
-	private _version = getText(missionConfigFile >> "version");
-	private _lastVersion = (["GET", "last_version", ""] call para_s_fnc_profile_db) select 1;
-	//Open welcome screen for new players
-	private _welcomeScreenEnabled = ["para_enableWelcomeScreen"] call para_c_fnc_optionsMenu_getValue;
-	private _versionHasChanged = _lastVersion == "" || _lastVersion != _version;
+call vgm_c_fnc_handle_welcome_screen;
 
-	if (_versionHasChanged) exitWith {
-		createDialog "para_ChangelogScreen";
-		["SET", "last_version", _version] call para_s_fnc_profile_db;
-	};
-
-	if (_welcomeScreenEnabled) exitWith {
-		createDialog "para_WelcomeScreen";
-	};
-};
-
-//DEV (ToDo): Until client Scheduler is added:
-[]spawn
-{
-	systemchat "starting infopanel handler loop";
-	"para_infopanel" cutRsc ["para_infopanel", "PLAIN", -1, true];
-	while{true}do
-	{
-		uisleep 0.5;
-		[] call para_c_fnc_infopanel_handler;
-	};
-};
+call vgm_c_fnc_init_info_panel_handler_loop;
