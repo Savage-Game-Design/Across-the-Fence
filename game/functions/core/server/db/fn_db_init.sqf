@@ -20,31 +20,51 @@
 		
 */
 
+// DB Macros
+#define CONST(var1,var2) var1 = compileFinal (if (var2 isEqualType "") then {var2} else {str(var2)})
+#define CONSTVAR(var) var = compileFinal (if (var isEqualType "") then {var} else {str(var)})
+#define FETCH_CONST(var) (call var)
+#define EXTDB "extDB3" callExtension
+
 // Check if EXTDB3 is loaded
 if (isClass (configFile >> "CfgFunctions" >> "extDB3")) then {
 	// EXTDB3 is loaded
+
+	private _currentSQLID = uiNamespace getVariable "vgm_s_db_sql_id";
+
+	if (!(isNil _currentSQLID)) exitWith {
+		// EXTDB3 is already connected to a database
+		
+		vgm_s_db_sql_id = _currentSQLID;
+		CONSTVAR(vgm_s_db_sql_id);
+		uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
+		diag_log "VGM: Already connected to the database.";
+	};
+
 	// Try to connect to the database
 	try
 	{
 		private _result = "";
 		vgm_s_db_sql_id = round(random 9999);
+		CONSTVAR(vgm_s_db_sql_id);
 		uiNamespace setVariable ["vgm_s_db_sql_id", vgm_s_db_sql_id];
 
 		// Add database to extDB3
-		_result = "extDB3" callExtension format ["9:ADD_DATABASE:%1", vgm_s_db_database_name];
-		if (_result != "[1]") then {
+		_result = EXTDB format ["9:ADD_DATABASE:%1", "tour"];
+
+		if (!(_result isEqualTo "[1]")) then {
 			// Failed to connect to database
-			throw "VGM: Failed to connect to database please ensure the database is running and exists.";
+			throw "VGM: Failed to connect to database please ensure the database is running and exists. 1";
 		};
 
 		// Add database protocol to extDB3
-		_result = "extDB3" callExtension format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", vgm_s_db_sql_id, vgm_s_db_database_name];
-		if (_result != "[1]") then {
+		_result = EXTDB format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", FETCH_CONST(vgm_s_db_sql_id), "tour"];
+		if (!(_result isEqualTo "[1]")) then {
 			// Failed to connect to database
-			throw "VGM: Failed to connect to database please ensure the database is running and exists.";
+			throw "VGM: Failed to connect to database please ensure the database is running and exists. 2";
 		};
 
-		"extDB3" callExtension "9:LOCK";
+		EXTDB "9:LOCK";
     	diag_log "VGM: Successfully connected to the database!";
 		uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
 	} 

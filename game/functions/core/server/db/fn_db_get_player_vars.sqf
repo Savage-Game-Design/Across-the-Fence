@@ -22,14 +22,14 @@
 		
 */
 
-params ["_playerVars"];
+params ["_vars"];
 
 // Check if playerVars is null, empty, or isn't an array.
-if (isNull _playerVars || {_playerVars isEqualTo []} || {!(_playerVars isEqualType [])}) then
+if (isNull _vars || {_vars isEqualTo []} || {!(_vars isEqualType [])}) then
 {
 	// create empty array for playerVars
-	_playerVars = [];
-} 
+	_vars = [];
+};
 
 // Get player's UID
 private _playerUID = getPlayerUID player;
@@ -50,14 +50,14 @@ if (_databaseType isEqualTo "extDB3") then {
 	private _playerVariableHashMap = createHashMapFromArray _playerQuery;
 
 	// Loop through the requested player variables
-	if (count _playerVars > 0) then {
+	if (count _vars > 0) then {
 		{
 			// Check if the player variable exists in the database
 			if (_playerVariableHashMap find _x != -1) then {
 				// Add the player variable to the return HashMap
 				_returnHashMap set [_x, _playerVariableHashMap get _x];
 			};
-		} forEach _playerVars;
+		} forEach _vars;
 	} else {
 		// Add all player variables to the return HashMap
 		_returnHashMap = _playerVariableHashMap;
@@ -66,25 +66,23 @@ if (_databaseType isEqualTo "extDB3") then {
 else // Fallback on profileNamespace
 {
 	// Get the player variables from the namespace
-	private _playerVariables = profileNamespace getVariable [_playerUID, []];
+	private _playerVariables = profileNamespace getVariable [_playerUID, createHashMap];
 	
-	// Create HashMap from playerVariables
-	private _playerVariableHashMap = createHashMapFromArray _playerVariables;
-
-	if (count _playerVars > 0) then
+	// Loop through the requested player variables
+	if (count _vars > 0) then
 	{
 		{
 			// Check if the player variable exists in the database
-			if (_playerVariableHashMap find _x != -1) then {
+			if (_playerVariables find _x != -1) then {
 				// Add the player variable to the return HashMap
-				_returnHashMap set [_x, _playerVariableHashMap get _x];
+				_returnHashMap set [_x, _playerVariables get _x];
 			};
-		} forEach _playerVars;
+		} forEach _vars;
 	} 
 	else
 	{
 		// Add all player variables to the return HashMap
-		_returnHashMap = _playerVariableHashMap;
+		_returnHashMap = _playerVariables;
 	};
 };
 

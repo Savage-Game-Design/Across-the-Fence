@@ -17,6 +17,9 @@
         use_paradigm_init = 1;
 */
 
+// Initialize the database
+call vgm_s_fnc_db_init;
+
 private _gamemode_config = (missionConfigFile >> "gamemode");
 
 //Set whether the building system needs vehicles (fuel/repair/rearm, etc) nearby to build certain structures.

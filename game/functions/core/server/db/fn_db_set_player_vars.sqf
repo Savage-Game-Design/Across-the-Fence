@@ -31,31 +31,25 @@ private _dbType = call vgm_s_fnc_db_get_type;
 private _uid = getPlayerUID _player;
 
 // Create HashMap from vars
-private _varsHashMap = createHashMap _vars;
+private _varsHashMap = createHashMapFromArray _vars;
 
 if (_dbType isEqualTo "extDB3") then
 {
 	// Get current player variables
 	private _currentVars = [_player] call vgm_s_fnc_db_get_player_vars;
 
-	// Create HashMap from current vars
-	private _currentVarsHashMap = createHashMap _currentVars;
-
 	// Loop through vars and set them in currentVarsHashMap
 	{
-		_currentVarsHashMap set [_x select 0, _x select 1];
+		_currentVars set [_x select 0, _x select 1];
 	} forEach _vars;
 
 	// Update player query
-	private _updateQuery = format ["UPDATE players SET data = '%1' WHERE uid = '%2'", _currentVarsHashMap, _uid];
+	private _updateQuery = format ["UPDATE players SET data = '%1' WHERE uid = '%2'", _currentVars, _uid];
 }
 else
 {
 	// Get player profile
-	private _profile = profileNamespace getVariable [_uid, []];
-	
-	// Create HashMap from profile
-	private _profileHashMap = createHashMap _profile;
+	private _profile = profileNamespace getVariable [_uid, createHashMap];
 
 	// Set profileHashMap variables to vars
 	{
@@ -64,4 +58,4 @@ else
 	
 	// Save profile
 	profileNamespace setVariable [_uid, _profileHashMap];
-}
+};

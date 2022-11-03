@@ -17,10 +17,12 @@ class vgm_s
 
 	class db
 	{
-		VGM_SERVER_PATH(\db);
+		VGM_SERVER_PATH(\core\server\db);
 
 		class db_init {};
 		class db_set_player_vars {};
 		class db_get_player_vars {};
+		class db_query {};
+		class db_get_type {};
 	};
 };
