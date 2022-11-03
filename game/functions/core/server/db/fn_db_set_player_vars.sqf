@@ -41,16 +41,9 @@ if (_dbType isEqualTo "extDB3") then
 	// Create HashMap from current vars
 	private _currentVarsHashMap = createHashMap _currentVars;
 
-	// Loop through vars and set them in currentVarsHashMap if the variable exists
+	// Loop through vars and set them in currentVarsHashMap
 	{
-		private _var = _x;
-		private _varName = _var select 0;
-		private _varValue = _var select 1;
-
-		if (_currentVarsHashMap find _varName != -1) then
-		{
-			_currentVarsHashMap set [_varName, _varValue];
-		};
+		_currentVarsHashMap set [_x select 0, _x select 1];
 	} forEach _vars;
 
 	// Update player query
@@ -60,18 +53,15 @@ else
 {
 	// Get player profile
 	private _profile = profileNamespace getVariable [_uid, []];
+	
+	// Create HashMap from profile
+	private _profileHashMap = createHashMap _profile;
 
-	// Set profile to new vars
+	// Set profileHashMap variables to vars
 	{
-		private _var = _x;
-		private _value = _varsHashMap getVariable _var;
-
-		if (_value isEqualType "") then
-		{
-			_profile setVariable [_var, _value];
-		};
-	} forEach _varsHashMap;
-
+		_profileHashMap set [_x select 0, _x select 1];
+	} forEach _vars;
+	
 	// Save profile
-	profileNamespace setVariable [_uid, _profile];
+	profileNamespace setVariable [_uid, _profileHashMap];
 }
