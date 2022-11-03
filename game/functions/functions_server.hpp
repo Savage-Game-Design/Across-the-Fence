@@ -14,4 +14,13 @@ class vgm_s
 		VGM_SERVER_PATH(\paradigm_interop\server);
 		class harass_filter_target_players {};
 	};
+
+	class db
+	{
+		VGM_SERVER_PATH(\db);
+
+		class db_init {};
+		class db_set_player_vars {};
+		class db_get_player_vars {};
+	};
 };
