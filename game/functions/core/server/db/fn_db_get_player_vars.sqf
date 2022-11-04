@@ -73,7 +73,7 @@ if (_databaseType isEqualTo "extDB3") exitWith {
 private _playerVariables = profileNamespace getVariable [_playerUID, createHashMap];
 
 // Loop through the requested player variables
-if (count _vars > 0) then
+if (count _vars > 0) exitWith
 {
 	{
 		// Check if the player variable exists in the database
@@ -82,12 +82,12 @@ if (count _vars > 0) then
 			_returnHashMap set [_x, _playerVariables get _x];
 		};
 	} forEach _vars;
+
+	_returnHashMap
 } 
-else
-{
-	// Add all player variables to the return HashMap
-	_returnHashMap = _playerVariables;
-};
+
+// Add all player variables to the return HashMap
+_returnHashMap = _playerVariables;
 
 // Return the HashMap
 _returnHashMap
