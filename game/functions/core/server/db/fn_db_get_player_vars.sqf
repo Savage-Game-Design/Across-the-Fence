@@ -83,7 +83,7 @@ if (count _vars > 0) exitWith
     } forEach _vars;
 
     _returnHashMap
-} 
+};
 
 // Add all player variables to the return HashMap
 _playerVariables;

@@ -48,7 +48,7 @@ if (_dbType isEqualTo "extDB3") exitWith
 
     // Execute query
     _updateQuery call vgm_s_fnc_db_query;
-}
+};
 
 // Fallback on profile
 // Get player profile
