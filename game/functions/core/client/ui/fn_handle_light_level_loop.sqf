@@ -6,23 +6,23 @@
     Public: /shrug
 
     Description:
-		used to set camera aperature based on light level
+        used to set camera aperature based on light level
 
     Parameter(s):
-		N/A
+        N/A
 
     Returns: nothing
 
     Example(s):
-		call vgm_c_fnc_handle_light_level_loop;
-		
+        call vgm_c_fnc_handle_light_level_loop;
+        
 */
 
 [] spawn
 {
-	while {true} do
-	{
-		uiSleep 0.5;
-		[] call para_c_fnc_set_aperture_based_on_light_level;
-	};
+    while {true} do
+    {
+        uiSleep 0.5;
+        [] call para_c_fnc_set_aperture_based_on_light_level;
+    };
 };

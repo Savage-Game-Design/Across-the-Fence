@@ -7,16 +7,16 @@
     
     Description:
         Paradigm interop function - Called from paradigm. 
-		Filters the given list of players, to only the ones that the harass system should target.
+        Filters the given list of players, to only the ones that the harass system should target.
     
     Parameter(s):
-		_players - List of players that are possible targets [ARRAY]
+        _players - List of players that are possible targets [ARRAY]
     
     Returns:
-		List of players that the harass system can target [ARRAY]
+        List of players that the harass system can target [ARRAY]
     
     Example(s):
-		[allPlayers] call para_interop_fnc_harass_filter_target_players;
+        [allPlayers] call para_interop_fnc_harass_filter_target_players;
 */
 
 params ["_players"];
@@ -28,6 +28,6 @@ _players; // Spoffy TODO: Returns all players for now. Will need to figure out i
 // //Player isn't in a blocked area.
 // _players select 
 // {
-// 	private _player = _x;
-// 	(_blockedAreas findIf {_player inArea _x}) == -1
+//     private _player = _x;
+//     (_blockedAreas findIf {_player inArea _x}) == -1
 // };
