@@ -65,7 +65,7 @@ if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
 		};
 
 		EXTDB "9:LOCK";
-    	diag_log "VGM: Successfully connected to the database!";
+		diag_log "VGM: Successfully connected to the database!";
 		uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
 	} 
 	catch 
