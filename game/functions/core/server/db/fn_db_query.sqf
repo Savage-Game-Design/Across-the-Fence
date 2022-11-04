@@ -12,7 +12,7 @@
         _statement  - Statement to be executed. [STRING]
 
     Returns:
-        ARRAY
+        ARRAY or BOOLEAN
     
     Example(s):
         _query call vgm_s_fnc_db_query;
@@ -21,9 +21,8 @@
 
 params ["_statement"];
 
-private _key = "extDB3" callExtension format ["%1:%2:%3", _mode, call mf_sql_id, _statement];
-private _mode = if (_statement select [0, 6] isEqualTo "DELETE" || {_statement select [0, 6] isEqualTo "SELECT"}) then {1} else {2};
-if (_mode isEqualTo 1) exitWith {true};
+private _key = "extDB3" callExtension format ["%1:%2:%3", _mode, call vgm_s_db_sql_id, _statement];
+if (_statement select [0, 6] isEqualTo "DELETE" || {_statement select [0, 6] isEqualTo "SELECT"}) exitWith {true};
 
 _key = call compile format ["%1",_key];
 _key = (_key select 1);
