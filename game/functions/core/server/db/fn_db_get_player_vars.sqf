@@ -65,7 +65,8 @@ if (_databaseType isEqualTo "extDB3") exitWith {
     // If no variables add them all
     // Add all player variables to the return HashMap
     _returnHashMap
-}
+};
+
 // Fallback on profileNamespace
 // Get the player variables from the namespace
 private _playerDataReference = format ["vgm_player_data_%1", _playerUID];
