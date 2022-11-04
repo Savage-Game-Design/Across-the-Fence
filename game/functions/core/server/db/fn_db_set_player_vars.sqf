@@ -45,6 +45,9 @@ if (_dbType isEqualTo "extDB3") exitWith
 
 	// Update player query
 	private _updateQuery = format ["UPDATE players SET data = '%1' WHERE uid = '%2'", _currentVars, _uid];
+
+	// Execute query
+	_updateQuery call vgm_s_fnc_db_query;
 }
 
 // Fallback on profile
