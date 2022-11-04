@@ -4,14 +4,14 @@
 
 class vgm_s
 {
-	class default
-	{
-		VGM_SERVER_PATH(\);
-	};
+    class default
+    {
+        VGM_SERVER_PATH(\);
+    };
 
-	class paradigm_interop
-	{
-		VGM_SERVER_PATH(\paradigm_interop\server);
-		class harass_filter_target_players {};
-	};
+    class paradigm_interop
+    {
+        VGM_SERVER_PATH(\paradigm_interop\server);
+        class harass_filter_target_players {};
+    };
 };
