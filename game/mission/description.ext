@@ -9,9 +9,9 @@ version = VGM_VERSION;
 
 class Header
 {
-	gameType = "secret";
-	minPlayers = 1;
-	maxPlayers = 24;
+    gameType = "secret";
+    minPlayers = 1;
+    maxPlayers = 24;
 };
 
 respawn = "BASE";
@@ -34,21 +34,21 @@ disabledAI = 1;
 scriptedPlayer = 0;
 disableChannels[]=  // allow text only on side chat
 {
-	{0,true,true},
-	{1,false,true},
-	{2,true,true},
-	{6,true,true}
+    {0,true,true},
+    {1,false,true},
+    {2,true,true},
+    {6,true,true}
 };
 enableItemsDropping = 0;
 briefing = 0;
 debriefing = 0;
 enableDebugConsole[] = {
-	//Spoffy
-	"76561198011383725",
-	//Eggbeast
-	"76561197974575839",
-	//Aceb
-	"76561198022706949",
+    //Spoffy
+    "76561198011383725",
+    //Eggbeast
+    "76561197974575839",
+    //Aceb
+    "76561198022706949",
 };
 
 allowFunctionsLog = 1;
@@ -72,15 +72,15 @@ disableRandomization[] = {"All"};
 
 showHUD[] =
 {
-	true,	// Scripted HUD (same as showHUD command)
-	true,	// Vehicle + soldier info
-	true,	// Vehicle radar
-	true,	// Vehicle compass
-	true,	// Tank direction indicator
-	true,	// Commanding menu
-	true,	// Group Bar
-	true,	// HUD Weapon Cursors
-	true	// Vehicle display panels
+    true,    // Scripted HUD (same as showHUD command)
+    true,    // Vehicle + soldier info
+    true,    // Vehicle radar
+    true,    // Vehicle compass
+    true,    // Tank direction indicator
+    true,    // Commanding menu
+    true,    // Group Bar
+    true,    // HUD Weapon Cursors
+    true    // Vehicle display panels
 };
 
 // Enable CBA settings loading
@@ -91,15 +91,15 @@ class Params {};
 
 class CfgDebriefing
 {
-	class TimedOut
-	{
-		title = "ERROR";
-		subtitle = "Server Timeout";
-		description = "If you see this message please reconnect";
-		pictureBackground = "";
-		picture = "";
-		pictureColor[] = {0.0,0.3,0.6,1};
-	};
+    class TimedOut
+    {
+        title = "ERROR";
+        subtitle = "Server Timeout";
+        description = "If you see this message please reconnect";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0.0,0.3,0.6,1};
+    };
 };
 
 //Show melee weapons in the arsenal
@@ -131,10 +131,10 @@ use_paradigm_init = 1;
 //Declare functions needed by paradigm.
 class ParadigmInteropFunctions 
 {
-	get_squad_composition = "";
-	harass_filter_target_players = "vgm_s_fnc_harass_filter_target_players";
-	harass_get_enemy_side =	"";
-	valid_attack_angles = "";
+    get_squad_composition = "";
+    harass_filter_target_players = "vgm_s_fnc_harass_filter_target_players";
+    harass_get_enemy_side =    "";
+    valid_attack_angles = "";
 };
 
 //-----------------------------------------------------------------
@@ -142,11 +142,11 @@ class ParadigmInteropFunctions
 //-----------------------------------------------------------------
 
 class CfgFunctions {
-	#include "paradigm\client\functions.hpp"
-	#include "paradigm\server\functions.hpp"
+    #include "paradigm\client\functions.hpp"
+    #include "paradigm\server\functions.hpp"
 
-	// Functions config built during build process
-	#include "configs\built_functions.hpp"
+    // Functions config built during build process
+    #include "configs\built_functions.hpp"
 };
 
 // Extra config built during the build process

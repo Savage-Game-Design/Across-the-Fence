@@ -5,27 +5,27 @@
 
 class vgm_c
 {
-	class default
-	{
-		VGM_CLIENT_PATH(\);
-	};
+    class default
+    {
+        VGM_CLIENT_PATH(\);
+    };
 
-	class ui
-	{
-		VGM_CLIENT_PATH(\core\client\ui);
-		class update_loading_screen {};
-		class init_loading_text {};
-		class handle_light_level_loop {};
-		class handle_welcome_screen {};
-		class init_info_panel_handler_loop {};
-	}
+    class ui
+    {
+        VGM_CLIENT_PATH(\core\client\ui);
+        class update_loading_screen {};
+        class init_loading_text {};
+        class handle_light_level_loop {};
+        class handle_welcome_screen {};
+        class init_info_panel_handler_loop {};
+    }
 };
 
 class vgm_g
 {
-	class default
-	{
-		VGM_GLOBAL_PATH(\);
-	};
+    class default
+    {
+        VGM_GLOBAL_PATH(\);
+    };
 };
 

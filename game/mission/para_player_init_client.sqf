@@ -1,31 +1,31 @@
 /*
-	File: para_player_init_client.sqf
-	Author: Savage Game Design
-	Public: Yes
+    File: para_player_init_client.sqf
+    Author: Savage Game Design
+    Public: Yes
 
-	Description:
-		Called on the client after player_init_server has finished.
-		Serverside player initialisation is done at this point.
-		It is safe to access the player object in this function.
-		Used for setting up UI elements, local event handlers, etc.
+    Description:
+        Called on the client after player_init_server has finished.
+        Serverside player initialisation is done at this point.
+        It is safe to access the player object in this function.
+        Used for setting up UI elements, local event handlers, etc.
 
-		Load order:
-			- para_player_preload_client.sqf - Called as soon as possible on the client.
-			- para_player_loaded_client.sqf - Called on client as soon as the player is ready
-			- para_player_init_server.sqf - Serverside player initialisation.
-			- para_player_init_client.sqf - Clientside player initialisation.
-			- para_player_postinit_server.sqf - Called on server once all player initialisation is done.
+        Load order:
+            - para_player_preload_client.sqf - Called as soon as possible on the client.
+            - para_player_loaded_client.sqf - Called on client as soon as the player is ready
+            - para_player_init_server.sqf - Serverside player initialisation.
+            - para_player_init_client.sqf - Clientside player initialisation.
+            - para_player_postinit_server.sqf - Called on server once all player initialisation is done.
 
-	Parameter(s):
-		_player - Player to initialise [OBJECT]
-		_didJIP - Whether the player joined in progress [BOOLEAN]
+    Parameter(s):
+        _player - Player to initialise [OBJECT]
+        _didJIP - Whether the player joined in progress [BOOLEAN]
 
-	Returns:
-		None
+    Returns:
+        None
 
-	Example(s):
-		//description.ext
-		use_paradigm_init = 1;
+    Example(s):
+        //description.ext
+        use_paradigm_init = 1;
 */
 
 params ["_player", "_didJIP"];
@@ -48,7 +48,7 @@ setplayerrespawntime _respawnDelay;
 
 // Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
 if (!isServer) then {
-	call para_g_fnc_ai_create_behaviour_execution_loop;
+    call para_g_fnc_ai_create_behaviour_execution_loop;
 };
 
 // Set up automatic view distance scaling for performance
@@ -73,7 +73,7 @@ cutText ["", "BLACK IN", 4];
 [] spawn {sleep 8; playMusic ""; 2 fadeMusic 1};
 // Re-enable simulation
 if (typeOf player != "VirtualCurator_F") then {
-	player enableSimulation true;
+    player enableSimulation true;
 };
 
 call vgm_c_fnc_handle_light_level_loop;

@@ -6,16 +6,16 @@
     Public: /shrug
 
     Description:
-		call text loading screen stuff.
+        call text loading screen stuff.
 
     Parameter(s):
-		N/A
+        N/A
 
     Returns: nothing
 
     Example(s):
-		call vgm_c_fnc_init_loading_text;
-		
+        call vgm_c_fnc_init_loading_text;
+        
 */
 
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>","writing diary entry..."]] call vgm_c_fnc_update_loading_screen;
