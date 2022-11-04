@@ -52,4 +52,4 @@ player enableSimulation false;
 
 // Start loading screen, so we wait while server init completes.
 startLoadingScreen ["Welcome to VGM!"/*, "MikeForce_loadingScreen"*/];
-//Spoffy TODO: Probably change this to 'VGM'. Maybe this should pull from a string table for localization /shrug
+//Spoffy TODO: Maybe this should pull from a string table for localization /shrug
