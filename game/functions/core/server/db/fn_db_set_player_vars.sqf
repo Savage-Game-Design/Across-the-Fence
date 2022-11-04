@@ -52,12 +52,13 @@ if (_dbType isEqualTo "extDB3") exitWith
 
 // Fallback on profile
 // Get player profile
-private _profile = profileNamespace getVariable [_uid, createHashMap];
+private _playerDataReference = format ["vgm_player_data_%1", _playerUID];
+private _profile = profileNamespace getVariable [_playerDataReference, createHashMap];
 
 // Set profileHashMap variables to vars
 {
-    _profileHashMap set [_x select 0, _x select 1];
+    _profile set [_x select 0, _x select 1];
 } forEach _vars;
 
 // Save profile
-profileNamespace setVariable [_uid, _profileHashMap];
+profileNamespace setVariable [_playerDataReference, _profile];
