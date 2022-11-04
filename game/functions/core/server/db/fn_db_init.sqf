@@ -50,7 +50,7 @@ if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
         uiNamespace setVariable ["vgm_s_db_sql_id", vgm_s_db_sql_id];
 
         // Add database to extDB3
-        _result = EXTDB format ["9:ADD_DATABASE:%1", "anarchy"];
+        _result = EXTDB format ["9:ADD_DATABASE:%1", "vgm"];
 
         if (!(_result isEqualTo "[1]")) then {
             // Failed to connect to database
@@ -58,7 +58,7 @@ if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
         };
 
         // Add database protocol to extDB3
-        _result = EXTDB format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", FETCH_CONST(vgm_s_db_sql_id), "anarchy"];
+        _result = EXTDB format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", FETCH_CONST(vgm_s_db_sql_id), "vgm"];
         if (!(_result isEqualTo "[1]")) then {
             // Failed to connect to database
             throw "VGM: Failed to connect to database please ensure the database is running and exists. 2";

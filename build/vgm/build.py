@@ -9,7 +9,7 @@ class OutputFolderExistsError(Exception):
 		super().__init__(f"Output folder already exists: {path}")
 		self.path = path
 
-def build_anarchy_as_mission(source_path, paradigm_path, output_paths_by_pbo=Dict[PBO,Path], overwrite=False):
+def build_vgm_as_mission(source_path, paradigm_path, output_paths_by_pbo=Dict[PBO,Path], overwrite=False):
 	file_trees = map_pbo_file_trees(source_path, paradigm_path)
 	for pbo in PBO:
 		target_path = output_paths_by_pbo.get(pbo, None)

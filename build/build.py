@@ -17,7 +17,7 @@ def cli():
 @click.option('--overwrite', default=False, is_flag=True)
 def build(overwrite):
 	try:
-		vgm.build.build_anarchy_as_mission(game_root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite)
+		vgm.build.build_vgm_as_mission(game_root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite)
 	except OutputFolderExistsError as e:
 		print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
 

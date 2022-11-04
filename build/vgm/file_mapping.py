@@ -26,7 +26,7 @@ def function_folders(source_root: Path):
 	return (folder_path for folder_path in (source_root / "functions").iterdir() if folder_path.is_dir())
 
 def map_pbo_file_trees(source_root: Path, paradigm_path: Path) -> PBOFileTrees:
-	# Maps the Anarchy source folder into virtual file trees for each output PBO
+	# Maps the VGM source folder into virtual file trees for each output PBO
 	pbo_file_trees = defaultdict(lambda: FileTreeRoot())
 
 	mission_pbo = pbo_file_trees[PBO.MISSION]
