@@ -1,5 +1,5 @@
 from typing import Protocol
 
 class Explainable(Protocol):
-	def explain(self) -> str:
-		pass
+    def explain(self) -> str:
+        pass

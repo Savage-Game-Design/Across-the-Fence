@@ -6,26 +6,26 @@
     Public: /shrug
 
     Description:
-		setup the info panel handler
+        setup the info panel handler
 
     Parameter(s):
-		N/A
+        N/A
 
     Returns: nothing
 
     Example(s):
-		call vgm_c_fnc_info_panel_handler_loop;
-		
+        call vgm_c_fnc_info_panel_handler_loop;
+        
 */
 
 //DEV (ToDo): Until client Scheduler is added:
 []spawn
 {
-	systemchat "starting infopanel handler loop";
-	"para_infopanel" cutRsc ["para_infopanel", "PLAIN", -1, true];
-	while{true}do
-	{
-		uisleep 0.5;
-		[] call para_c_fnc_infopanel_handler;
-	};
+    systemchat "starting infopanel handler loop";
+    "para_infopanel" cutRsc ["para_infopanel", "PLAIN", -1, true];
+    while{true}do
+    {
+        uisleep 0.5;
+        [] call para_c_fnc_infopanel_handler;
+    };
 };
