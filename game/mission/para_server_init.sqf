@@ -88,21 +88,21 @@ if !(_chopped_trees isEqualType "") then {
 //Set date here - it's as good a place as any. Day is just before a full moon, for good night ops.
 [vn_mf_dawnLength, vn_mf_dayLength, vn_mf_duskLength, vn_mf_nightLength] call para_s_fnc_day_night_subsystem_init;
 
-diag_log "VN MikeForce: Initialising Loadbalancer";
+diag_log "VGM: Initialising Loadbalancer";
 //Initialise the AI loadbalancer.
 [] call para_s_fnc_loadbal_subsystem_init;
 
-diag_log "VN MikeForce: Initialising AI Objectives";
+diag_log "VGM: Initialising AI Objectives";
 // start ai subsystem. Depends on the load balancer subsystem.
 [
     ["hardAiLimit", ["hard_ai_limit", 80] call BIS_fnc_getParamValue]
 ] call para_s_fnc_ai_obj_subsystem_init;
 
-diag_log "VN MikeForce: Initialising Harass";
+diag_log "VGM: Initialising Harass";
 // Start harassment subsystem. Depends on the AI subsystem.
 [] call para_s_fnc_harass_subsystem_init;
 
-diag_log "VN MikeForce: Initialising AI Behaviour";
+diag_log "VGM: Initialising AI Behaviour";
 // start the behaviour subsystem
 [] call para_g_fnc_ai_behaviour_subsystem_init;
 
@@ -117,9 +117,9 @@ diag_log "VN MikeForce: Initialising AI Behaviour";
 ]] call para_g_fnc_event_add_handler;
 
 /*
-diag_log "VN MikeForce: Initialising Performance Logging";
+diag_log "VGM: Initialising Performance Logging";
 [] call vn_mf_fnc_init_performance_logging;
 */
 
-diag_log "VN MikeForce: Initialising Dynamic Groups";
+diag_log "VGM: Initialising Dynamic Groups";
 ["Initialize"] call para_c_fnc_dynamicGroups;
