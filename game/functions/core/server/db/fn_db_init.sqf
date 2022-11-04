@@ -30,12 +30,11 @@
 if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
     // EXTDB3 is loaded
 
-    private _currentSQLID = uiNamespace getVariable "vgm_s_db_sql_id";
-
-    if (!(isNil _currentSQLID)) exitWith {
+    if (!(isNil {uiNamespace getVariable "vgm_s_db_sql_id"})) exitWith {
         // EXTDB3 is already connected to a database
-        
-        vgm_s_db_sql_id = _currentSQLID;
+        // Do nothing
+
+        vgm_s_db_sql_id = uiNamespace getVariable "vgm_s_db_sql_id";
         CONSTVAR(vgm_s_db_sql_id);
         uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
         diag_log "VGM: Already connected to the database.";

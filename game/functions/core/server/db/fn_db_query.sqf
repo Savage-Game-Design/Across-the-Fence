@@ -11,6 +11,10 @@
     Parameter(s):
         _statement  - Statement to be executed. [STRING]
 
+    _mode - [INTEGER]
+        1: UPDATE, INSERT
+        2: DELETE, SELECT
+              
     Returns:
         ARRAY or BOOLEAN
     
@@ -19,10 +23,10 @@
 */
 
 
-params ["_statement"];
+params ["_statement", "_mode"];
 
 private _key = "extDB3" callExtension format ["%1:%2:%3", _mode, call vgm_s_db_sql_id, _statement];
-if (_statement select [0, 6] isEqualTo "DELETE" || {_statement select [0, 6] isEqualTo "SELECT"}) exitWith {true};
+if (_mode isEqualTo 1) exitWith {true};
 
 _key = call compile format ["%1",_key];
 _key = (_key select 1);
@@ -60,4 +64,4 @@ if ((_result select 0) isEqualTo 0) exitWith {
     []
 };
 
-_return;
+_result;
