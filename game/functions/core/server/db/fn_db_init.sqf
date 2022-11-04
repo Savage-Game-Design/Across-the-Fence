@@ -27,7 +27,7 @@
 #define EXTDB "extDB3" callExtension
 
 // Check if EXTDB3 is loaded
-if (isClass (configFile >> "CfgFunctions" >> "extDB3")) then {
+if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
 	// EXTDB3 is loaded
 
 	private _currentSQLID = uiNamespace getVariable "vgm_s_db_sql_id";
@@ -75,8 +75,8 @@ if (isClass (configFile >> "CfgFunctions" >> "extDB3")) then {
 		uiNamespace setVariable ["vgm_s_db_type", "profile"];
 		diag_log _exception;
 	};
-} else {
-	// EXTDB3 is not loaded
-	// Fallback to profile namespace
-	uiNamespace setVariable ["vgm_s_db_type", "profile"];
 };
+
+// EXTDB3 is not loaded
+// Fallback to profile namespace
+uiNamespace setVariable ["vgm_s_db_type", "profile"];

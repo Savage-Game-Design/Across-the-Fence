@@ -41,7 +41,7 @@ private _databaseType = uiNamespace getVariable ["vgm_s_database_type", "profile
 private _returnHashMap = createHashMap;
 
 // Check if database type is extDB3
-if (_databaseType isEqualTo "extDB3") then {
+if (_databaseType isEqualTo "extDB3") exitWith {
 	// Get player's variables from the database
 
 	private _playerStatement = format ["SELECT data FROM players WHERE uid = '%1'", _playerUID];
@@ -62,28 +62,28 @@ if (_databaseType isEqualTo "extDB3") then {
 		// Add all player variables to the return HashMap
 		_returnHashMap = _playerVariableHashMap;
 	};
-} 
-else // Fallback on profileNamespace
+
+	_returnHashMap
+}
+// Fallback on profileNamespace
+// Get the player variables from the namespace
+private _playerVariables = profileNamespace getVariable [_playerUID, createHashMap];
+
+// Loop through the requested player variables
+if (count _vars > 0) then
 {
-	// Get the player variables from the namespace
-	private _playerVariables = profileNamespace getVariable [_playerUID, createHashMap];
-	
-	// Loop through the requested player variables
-	if (count _vars > 0) then
 	{
-		{
-			// Check if the player variable exists in the database
-			if (_playerVariables find _x != -1) then {
-				// Add the player variable to the return HashMap
-				_returnHashMap set [_x, _playerVariables get _x];
-			};
-		} forEach _vars;
-	} 
-	else
-	{
-		// Add all player variables to the return HashMap
-		_returnHashMap = _playerVariables;
-	};
+		// Check if the player variable exists in the database
+		if (_playerVariables find _x != -1) then {
+			// Add the player variable to the return HashMap
+			_returnHashMap set [_x, _playerVariables get _x];
+		};
+	} forEach _vars;
+} 
+else
+{
+	// Add all player variables to the return HashMap
+	_returnHashMap = _playerVariables;
 };
 
 // Return the HashMap
