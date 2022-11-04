@@ -6,20 +6,20 @@
     Public: No
 
     Description:
-		Sets the player variables for the given player.
+        Sets the player variables for the given player.
 
     Parameter(s):
-		0: Player - Player to get the variables from. (Default: player)	
-			Example - player
+        0: Player - Player to get the variables from. (Default: player)    
+            Example - player
 
-		1: HashMap - HashMap of variables to set.
-			Example - [["var1", 1], ["var2", 2]]
+        1: HashMap - HashMap of variables to set.
+            Example - [["var1", 1], ["var2", 2]]
 
     Returns: nothing
 
     Example(s):
-		[player, [["var1", 1], ["var2", 2]]] call vgm_s_fnc_db_set_player_vars;
-		
+        [player, [["var1", 1], ["var2", 2]]] call vgm_s_fnc_db_set_player_vars;
+        
 */
 
 params ["_player", "_vars"];
@@ -35,19 +35,19 @@ private _varsHashMap = createHashMapFromArray _vars;
 
 if (_dbType isEqualTo "extDB3") exitWith
 {
-	// Get current player variables
-	private _currentVars = [_player] call vgm_s_fnc_db_get_player_vars;
+    // Get current player variables
+    private _currentVars = [_player] call vgm_s_fnc_db_get_player_vars;
 
-	// Loop through vars and set them in currentVarsHashMap
-	{
-		_currentVars set [_x select 0, _x select 1];
-	} forEach _vars;
+    // Loop through vars and set them in currentVarsHashMap
+    {
+        _currentVars set [_x select 0, _x select 1];
+    } forEach _vars;
 
-	// Update player query
-	private _updateQuery = format ["UPDATE players SET data = '%1' WHERE uid = '%2'", _currentVars, _uid];
+    // Update player query
+    private _updateQuery = format ["UPDATE players SET data = '%1' WHERE uid = '%2'", _currentVars, _uid];
 
-	// Execute query
-	_updateQuery call vgm_s_fnc_db_query;
+    // Execute query
+    _updateQuery call vgm_s_fnc_db_query;
 }
 
 // Fallback on profile
@@ -56,7 +56,7 @@ private _profile = profileNamespace getVariable [_uid, createHashMap];
 
 // Set profileHashMap variables to vars
 {
-	_profileHashMap set [_x select 0, _x select 1];
+    _profileHashMap set [_x select 0, _x select 1];
 } forEach _vars;
 
 // Save profile

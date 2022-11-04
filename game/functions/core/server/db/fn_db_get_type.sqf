@@ -6,16 +6,16 @@
     Public: No
 
     Description:
-		Get the database type.
+        Get the database type.
 
     Parameter(s):
-		None
+        None
 
     Returns:
-		STRING - Database type
+        STRING - Database type
     
     Example(s):
-		call vgm_s_fnc_db_get_type;
+        call vgm_s_fnc_db_get_type;
 */
 
 uiNamespace getVariable ["vgm_s_db_type", "profile"];

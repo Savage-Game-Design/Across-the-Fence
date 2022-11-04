@@ -6,18 +6,18 @@
     Public: No
 
     Description:
-		Tries to find EXTDB3
-		If found it will try to connect to the database
-		Otherwise it will fallback to the profile namespace
+        Tries to find EXTDB3
+        If found it will try to connect to the database
+        Otherwise it will fallback to the profile namespace
 
     Parameter(s):
-		N/A
+        N/A
 
     Returns: nothing
 
     Example(s):
-		call vgm_s_fnc_db_init;
-		
+        call vgm_s_fnc_db_init;
+        
 */
 
 // DB Macros
@@ -28,53 +28,53 @@
 
 // Check if EXTDB3 is loaded
 if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
-	// EXTDB3 is loaded
+    // EXTDB3 is loaded
 
-	private _currentSQLID = uiNamespace getVariable "vgm_s_db_sql_id";
+    private _currentSQLID = uiNamespace getVariable "vgm_s_db_sql_id";
 
-	if (!(isNil _currentSQLID)) exitWith {
-		// EXTDB3 is already connected to a database
-		
-		vgm_s_db_sql_id = _currentSQLID;
-		CONSTVAR(vgm_s_db_sql_id);
-		uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
-		diag_log "VGM: Already connected to the database.";
-	};
+    if (!(isNil _currentSQLID)) exitWith {
+        // EXTDB3 is already connected to a database
+        
+        vgm_s_db_sql_id = _currentSQLID;
+        CONSTVAR(vgm_s_db_sql_id);
+        uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
+        diag_log "VGM: Already connected to the database.";
+    };
 
-	// Try to connect to the database
-	try
-	{
-		private _result = "";
-		vgm_s_db_sql_id = round(random 9999);
-		CONSTVAR(vgm_s_db_sql_id);
-		uiNamespace setVariable ["vgm_s_db_sql_id", vgm_s_db_sql_id];
+    // Try to connect to the database
+    try
+    {
+        private _result = "";
+        vgm_s_db_sql_id = round(random 9999);
+        CONSTVAR(vgm_s_db_sql_id);
+        uiNamespace setVariable ["vgm_s_db_sql_id", vgm_s_db_sql_id];
 
-		// Add database to extDB3
-		_result = EXTDB format ["9:ADD_DATABASE:%1", "tour"];
+        // Add database to extDB3
+        _result = EXTDB format ["9:ADD_DATABASE:%1", "tour"];
 
-		if (!(_result isEqualTo "[1]")) then {
-			// Failed to connect to database
-			throw "VGM: Failed to connect to database please ensure the database is running and exists. 1";
-		};
+        if (!(_result isEqualTo "[1]")) then {
+            // Failed to connect to database
+            throw "VGM: Failed to connect to database please ensure the database is running and exists. 1";
+        };
 
-		// Add database protocol to extDB3
-		_result = EXTDB format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", FETCH_CONST(vgm_s_db_sql_id), "tour"];
-		if (!(_result isEqualTo "[1]")) then {
-			// Failed to connect to database
-			throw "VGM: Failed to connect to database please ensure the database is running and exists. 2";
-		};
+        // Add database protocol to extDB3
+        _result = EXTDB format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", FETCH_CONST(vgm_s_db_sql_id), "tour"];
+        if (!(_result isEqualTo "[1]")) then {
+            // Failed to connect to database
+            throw "VGM: Failed to connect to database please ensure the database is running and exists. 2";
+        };
 
-		EXTDB "9:LOCK";
-		diag_log "VGM: Successfully connected to the database!";
-		uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
-	} 
-	catch 
-	{
-		// Connection failed
-		// Fallback to profile namespace
-		uiNamespace setVariable ["vgm_s_db_type", "profile"];
-		diag_log _exception;
-	};
+        EXTDB "9:LOCK";
+        diag_log "VGM: Successfully connected to the database!";
+        uiNamespace setVariable ["vgm_s_db_type", "extDB3"];
+    } 
+    catch 
+    {
+        // Connection failed
+        // Fallback to profile namespace
+        uiNamespace setVariable ["vgm_s_db_type", "profile"];
+        diag_log _exception;
+    };
 };
 
 // EXTDB3 is not loaded

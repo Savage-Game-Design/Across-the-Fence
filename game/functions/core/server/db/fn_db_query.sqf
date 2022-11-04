@@ -6,16 +6,16 @@
     Public: No
 
     Description:
-		This function is used to query the database for information.
+        This function is used to query the database for information.
 
     Parameter(s):
-		_statement  - Statement to be executed. [STRING]
+        _statement  - Statement to be executed. [STRING]
 
     Returns:
-		ARRAY
+        ARRAY
     
     Example(s):
-		_query call vgm_s_fnc_db_query;
+        _query call vgm_s_fnc_db_query;
 */
 
 
