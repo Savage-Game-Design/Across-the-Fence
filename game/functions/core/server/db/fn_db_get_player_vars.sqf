@@ -64,7 +64,7 @@ if (_databaseType isEqualTo "extDB3") exitWith {
 
     // If no variables add them all
     // Add all player variables to the return HashMap
-    _returnHashMap
+    _playerVariableHashMap
 };
 
 // Fallback on profileNamespace
