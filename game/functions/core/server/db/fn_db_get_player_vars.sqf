@@ -60,7 +60,7 @@ if (_databaseType isEqualTo "extDB3") exitWith {
         } forEach _vars;
 
         _returnHashMap
-    } 
+    };
 
     // If no variables add them all
     // Add all player variables to the return HashMap
