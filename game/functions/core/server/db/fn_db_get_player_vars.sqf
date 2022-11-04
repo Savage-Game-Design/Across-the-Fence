@@ -50,7 +50,7 @@ if (_databaseType isEqualTo "extDB3") exitWith {
 	private _playerVariableHashMap = createHashMapFromArray _playerQuery;
 
 	// Loop through the requested player variables
-	if (count _vars > 0) then {
+	if (count _vars > 0) exitWith {
 		{
 			// Check if the player variable exists in the database
 			if (_playerVariableHashMap find _x != -1) then {
@@ -58,10 +58,13 @@ if (_databaseType isEqualTo "extDB3") exitWith {
 				_returnHashMap set [_x, _playerVariableHashMap get _x];
 			};
 		} forEach _vars;
-	} else {
-		// Add all player variables to the return HashMap
-		_returnHashMap = _playerVariableHashMap;
-	};
+
+		_returnHashMap
+	} 
+
+	// If no variables add them all
+	// Add all player variables to the return HashMap
+	_returnHashMap = _playerVariableHashMap;
 
 	_returnHashMap
 }
