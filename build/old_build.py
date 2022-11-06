@@ -43,7 +43,7 @@ extra_setup_links = [
 asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
 def load_addon_info(folder_path):
     build_file_path = folder_path / "build.json"
-    
+
     if not build_file_path.exists():
         return None
 
@@ -120,11 +120,11 @@ class AddonBuildJob:
                 self.set_state("FAILED", result)
                 return self
             command = result
-        
+
         if not self.source_path.exists():
             self.set_state("FAILED", "Source path {} does not exist".format(self.source_path))
             return self
-        
+
         self.logger.verbose("Beginning build")
         self.logger.verbose("Source Path: {}".format(self.source_path))
         self.logger.verbose("Path: {}".format(self.output_folder_path))
@@ -143,7 +143,7 @@ class AddonBuildJob:
                     #Rename the file
                     #os.rename(output_pbo_path, output_folder_path / addon_info["pbo_name"])
                     self.set_state("SUCCEEDED", f"Successful build - see ({stdout_path}) for addon build output")
-        
+
         return self
 
 async def build(mod_names, overwrite=False, use_addon_builder=False):
@@ -176,7 +176,7 @@ async def build(mod_names, overwrite=False, use_addon_builder=False):
         #Copy over relevant folders
         for child in mod_input_path.iterdir():
             #Skip the addons folder - we build this with MakePBO
-            if child.name == "addons": 
+            if child.name == "addons":
                 continue
             dest_path = mod_output_path / child.name
             if child.is_dir():
@@ -208,10 +208,10 @@ def pdrive(mods,disable=False):
                 symlinks.append({
                     "addon_info": addon_info,
                     "addon_path": addon_path,
-                    "link_path": p_drive / addon_info["prefix_path"], 
+                    "link_path": p_drive / addon_info["prefix_path"],
                     "source_path": addon_path
                 })
- 
+
     if not disable:
         logger.info("Linking files to addon root")
         for link in symlinks:
@@ -249,10 +249,10 @@ def filepatching(raw_path,mods,disable=False):
                 symlinks.append({
                     "addon_info": addon_info,
                     "addon_path": addon_path,
-                    "link_path": path / addon_info["prefix_path"], 
+                    "link_path": path / addon_info["prefix_path"],
                     "source_path": addon_path
                 })
-    
+
     if not disable:
         logger.info(f"Setting up SGD filepatching at {path}")
 
@@ -265,7 +265,7 @@ def filepatching(raw_path,mods,disable=False):
                 continue
 
             create_folder_if_not_exists(link["link_path"].parent)
-            create_symlink(link["link_path"], link["source_path"], is_directory=True) 
+            create_symlink(link["link_path"], link["source_path"], is_directory=True)
     else:
         for link in symlinks:
             try:
@@ -294,7 +294,7 @@ def arma_setup(raw_path,link_missions=True,disable=False):
 
     if not disable:
         create_folder_if_not_exists(arma_link_folder_path)
-        
+
         logger.info(f"==== Linking packed mods to Arma 3: {mod_names} ====")
         for mod_name in mod_names:
             try:
@@ -338,7 +338,7 @@ def select(options):
     print(f"Select an option below by typing its number. Press 'a' to choose all options, or 'q' for none:")
     for index, option in enumerate(options):
         print(f"    {index}: {option}")
-    
+
     while True:
         choice = input()
         if choice.lower() == "a":
@@ -362,7 +362,7 @@ def choose_arma_paths(permit_dedicated=True):
     if len(usable_paths) == 0:
         return []
     return select(usable_paths)
-    
+
 def subcommand_build(args):
     logger.info("====  BUILDING ANARCHY ====")
 
@@ -411,7 +411,7 @@ def subcommand_arma_setup(args):
 
 if __name__ == "__main__":
     raw_args = sys.argv[1:]
-    
+
     if len(raw_args) == 0:
         default_args = ["build", "--force"]
         logger.warning("No arguments given, using defaults: [{}]".format(" ".join(default_args)))

@@ -28,7 +28,7 @@ class FileTreeEntry(Explainable, Protocol):
             path_entries.append(next.name)
             next = next.parent
         return Path(*reversed(path_entries))
-    
+
     def remove(self):
         self.parent.children.remove(self)
         self.parent = None
@@ -76,7 +76,7 @@ class Folder(FileTreeEntry):
             self.add(new_folder)
             return new_folder
 
-        if not isinstance(existing_entry, type(self)): 
+        if not isinstance(existing_entry, type(self)):
             raise FileConflictError(f"Subfolder '{name}' in {self.explain()}", existing_entry.explain())
 
         return existing_entry

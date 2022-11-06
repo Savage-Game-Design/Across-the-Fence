@@ -2,7 +2,7 @@
     File: fn_init_info_panel_handler_loop.sqf
     Author: Gus Schultz
     Date: 2022-09-18
-    Last Update: 
+    Last Update:
     Public: /shrug
 
     Description:
@@ -15,7 +15,7 @@
 
     Example(s):
         call vgm_c_fnc_info_panel_handler_loop;
-        
+
 */
 
 //DEV (ToDo): Until client Scheduler is added:

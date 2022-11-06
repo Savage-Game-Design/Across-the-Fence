@@ -2,7 +2,7 @@
     File: fn_init_loading_text.sqf
     Author: Gus Schultz
     Date: 2022-09-18
-    Last Update: 
+    Last Update:
     Public: /shrug
 
     Description:
@@ -15,7 +15,7 @@
 
     Example(s):
         call vgm_c_fnc_init_loading_text;
-        
+
 */
 
 [parseText format["<t font='tt2020base_vn' color='#F5F2D0'>%1</t>","writing diary entry..."]] call vgm_c_fnc_update_loading_screen;
