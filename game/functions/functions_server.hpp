@@ -20,10 +20,8 @@ class vgm_s
     {
         VGM_SERVER_PATH(\core\server\db);
 
-        class db_init {};
-        class db_set_player_vars {};
-        class db_get_player_vars {};
-        class db_query {};
-        class db_get_type {};
+        class db_clear {};
+        class db_get {};
+        class db_set {};
     };
 };
