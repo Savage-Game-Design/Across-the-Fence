@@ -1,3 +1,3 @@
 {
-	missionNamespace setVariable [_x, nil];
-} forEach missionNamespace;
+	missionProfileNamespace setVariable [_x, nil];
+} forEach allVariables missionProfileNamespace;
