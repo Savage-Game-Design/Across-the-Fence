@@ -1,0 +1,6 @@
+{
+    "sqflint.ignoredVariables": [
+        "missionProfileNamespace",
+        "saveMissionProfileNamespace",
+    ],
+}
