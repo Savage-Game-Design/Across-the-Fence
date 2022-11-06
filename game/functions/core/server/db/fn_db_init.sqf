@@ -58,6 +58,7 @@ if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
 
         // Add database protocol to extDB3
         _result = EXTDB format ["9:ADD_DATABASE_PROTOCOL:%2:SQL:%1:TEXT2", FETCH_CONST(vgm_s_db_sql_id), "vgm"];
+
         if (!(_result isEqualTo "[1]")) then {
             // Failed to connect to database
             throw "VGM: Failed to connect to database please ensure the database is running and exists. 2";
