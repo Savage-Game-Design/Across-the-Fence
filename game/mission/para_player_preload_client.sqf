@@ -2,7 +2,7 @@
     File: para_player_preload_client.sqf
     Author: Savage Game Design
     Public: Yes
-    
+
     Description:
         Called on the client once the player has joined the game.
         Called *before* the player is ready to be initialised.
@@ -18,13 +18,13 @@
             - para_player_init_server.sqf - Serverside player initialisation.
             - para_player_init_client.sqf - Clientside player initialisation.
             - para_player_postinit_server.sqf - Called on server once all player initialisation is done.
-    
+
     Parameter(s):
         None
-    
+
     Returns:
         None
-    
+
     Example(s):
         //In description.ext
         use_paradigm_init = 1;
