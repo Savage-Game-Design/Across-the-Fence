@@ -20,4 +20,3 @@ def build_anarchy_as_mission(source_path, paradigm_path, output_paths_by_pbo=Dic
                 raise OutputFolderExistsError(target_path)
             print(f"Building {pbo} at '{target_path}'")
             file_tree.create_tree_at(target_path)
-

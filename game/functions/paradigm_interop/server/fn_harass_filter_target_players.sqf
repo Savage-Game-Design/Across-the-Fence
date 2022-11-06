@@ -21,7 +21,7 @@
 
 params ["_players"];
 
-_players; // Spoffy TODO: Returns all players for now. Will need to figure out if/how this makes sense in VGM
+_players; // Spoffy TODO: Returns all players for now. Will need to figure out if/how this makes sense in Anarchy
 
 // private _blockedAreas = vn_mf_markers_blocked_areas + vn_mf_markers_no_harass;
 

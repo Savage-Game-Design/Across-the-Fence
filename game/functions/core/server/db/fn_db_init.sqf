@@ -49,7 +49,7 @@ if (isClass (configFile >> "CfgFunctions" >> "extDB3")) exitWith {
         uiNamespace setVariable ["vgm_s_db_sql_id", vgm_s_db_sql_id];
 
         // Add database to extDB3
-        _result = EXTDB format ["9:ADD_DATABASE:%1", "vgm"];
+        _result = EXTDB format ["9:ADD_DATABASE:%1", "anarchy"];
 
         if (!(_result isEqualTo "[1]")) then {
             // Failed to connect to database

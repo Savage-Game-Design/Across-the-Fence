@@ -20,17 +20,17 @@ colorama.init()
 
 p_drive = Path('P:\\')
 root_directory = Path(path.realpath(__file__)).parent.parent
-addon_prefix = "\\sgd\\vgm"
+addon_prefix = "\\sgd\\anarchy"
 output_directory = root_directory / 'packed'
 # Old: Saving each buildlog into seperate folder
 # log_directory = root_directory / 'build_logs' / (datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 # Put logs into the mainFolder
 prefix_directory = p_drive / addon_prefix
 missions_directory = root_directory / "missions"
-arma_mod_folder_name = "vgm"
+arma_mod_folder_name = "anarchy"
 
 #All mods that are to be built/linked
-all_mods = ["@vgm_client", "@vgm_server"]
+all_mods = ["@anarchy_client", "@anarchy_server"]
 #Additional symlinks that should be created as part of the `arma-setup` command.
 #Destination is relative to the arma root directory
 extra_setup_links = [
@@ -148,7 +148,7 @@ class AddonBuildJob:
 
 async def build(mod_names, overwrite=False, use_addon_builder=False):
     if not prefix_directory.exists():
-        logger.error(f"P-Drive is not set up for VGM. The P-Drive must be set up before building. ({prefix_directory} does not exist)")
+        logger.error(f"P-Drive is not set up for Anarchy. The P-Drive must be set up before building. ({prefix_directory} does not exist)")
         logger.error("You can set this feature up using the 'pdrive' command")
         return
 
@@ -382,7 +382,7 @@ def subcommand_build(args):
 
 def subcommand_pdrive(args):
     action = "Disabling" if args.disable else "Enabling"
-    logger.info(f"==== {action} P-Drive setup for VGM ====")
+    logger.info(f"==== {action} P-Drive setup for Anarchy ====")
     pdrive(all_mods,disable=args.disable)
 
 def subcommand_filepatching(args):
@@ -399,7 +399,7 @@ def subcommand_filepatching(args):
 
 def subcommand_arma_setup(args):
     action = "unlinking" if args.disable else "linking"
-    logger.info(f"==== Setting up Arma for VGM development - {action} mods and missions ====")
+    logger.info(f"==== Setting up Arma for Anarchy development - {action} mods and missions ====")
     paths = args.paths
     if args.autodetect or len(paths) == 0:
         logger.info("Autodetecting Arma installations...")
@@ -417,17 +417,17 @@ if __name__ == "__main__":
         logger.warning("No arguments given, using defaults: [{}]".format(" ".join(default_args)))
         raw_args = default_args
 
-    parser = argparse.ArgumentParser(description="Tool for building VGM server and client mods")
+    parser = argparse.ArgumentParser(description="Tool for building Anarchy server and client mods")
     subparsers = parser.add_subparsers()
 
-    build_parser = subparsers.add_parser('build', help='Build VGM addons')
+    build_parser = subparsers.add_parser('build', help='Build Anarchy addons')
     build_parser.add_argument('-m', '--mod', help=f"Builds only the named mod. May be specified more than once. Valid options are: {all_mods}", nargs="*", default=[])
     build_parser.add_argument('-f', '--force', help="Erases all content in the packed mod folder if it exists", action="store_const", const=True, default=False)
     build_parser.add_argument('-a', '--addonbuilder', help="Uses AddonBuilder instead of MakePBO, if AddonBuilder is installed (Arma 3 Tools)", action="store_const", const=True, default=False)
     build_parser.set_defaults(func=subcommand_build)
 
-    pdrive_parser = subparsers.add_parser('pdrive', help="Sets up VGM on the P-Drive")
-    pdrive_parser.add_argument('-d', '--disable', help="Removes VGM setup from P-Drive", action="store_const", const=True, default=False)
+    pdrive_parser = subparsers.add_parser('pdrive', help="Sets up Anarchy on the P-Drive")
+    pdrive_parser.add_argument('-d', '--disable', help="Removes Anarchy setup from P-Drive", action="store_const", const=True, default=False)
     pdrive_parser.set_defaults(func=subcommand_pdrive)
 
     filepatching_parser = subparsers.add_parser('filepatching', help="Set up filepatching")

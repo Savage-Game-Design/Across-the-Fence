@@ -29,7 +29,7 @@
 
 params [["_player", objNull, [objNull]], ["_didJIP", true, [true]]];
 
-diag_log format ["VGM: Player init server - %1", _player];
+diag_log format ["Mike Force: Player init server - %1", _player];
 
 private _initialised = _player getVariable "para_s_player_initialised"; 
 // prevent repeated execution of init

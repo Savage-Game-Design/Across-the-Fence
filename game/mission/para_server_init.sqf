@@ -43,7 +43,7 @@ para_g_enemiesPerPlayer = 2;
 publicVariable "para_g_enemiesPerPlayer";
 
 // setup game optimizations server side
-// Spoffy TODO: GUS This stuff is supposed to read from a config, but vgm is setup different and I don't get it.
+// Spoffy TODO: GUS This stuff is supposed to read from a config, but anarchy is setup different and I don't get it.
 // TODO: Just hardcoding in the values we used in MF until I figure out how to work with the config
 //setviewdistance (getNumber(_gamemode_config >> "performance" >> "setviewdistance"));
 setviewdistance(2000);
