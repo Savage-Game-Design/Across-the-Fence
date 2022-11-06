@@ -3,4 +3,50 @@
         "missionProfileNamespace",
         "saveMissionProfileNamespace",
     ],
+    //---- START Automatic file headers
+    "psi-header.changes-tracking": {
+        "isActive": true,
+        "include": ["sqf"],
+        "modDate": "Last Update:",
+        "modDateFormat": "YYYY-MM-DD",
+        "autoHeader": "manualSave"
+    },
+    "psi-header.lang-config": [
+        {
+            "license": "Custom",
+            "language": "sqf",
+            "rootDirFileName": "common_includes.hpp",
+            "beforeHeader": [],
+            "begin": "/*",
+            "prefix": "    ",
+            "end": " */",
+            "blankLinesAfter": 1,
+            "forceToTop": true
+        }
+    ],
+    "psi-header.templates": [
+        {
+            "language": "sqf",
+            "template": [
+                "File: <<filename>>",
+                "Author: ",
+                "Date: <<filecreated('YYYY-MM-DD')>>",
+                "Last Update:",
+                "Public: No",
+                "",
+                "Description:",
+                "    No description added yet.",
+                "",
+                "Parameter(s):",
+                "    N/A",
+                "",
+                "Returns:",
+                "    Something [BOOL]",
+                "",
+                "Example(s):",
+                "    [parameter] call vgm_X_fnc_component_myFunction"
+            ]
+        }
+    ],
+    //---- END Automatic file headers
 }
