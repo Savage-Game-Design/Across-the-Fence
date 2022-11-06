@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="VGM">
+    <Package name="General">
+        <Key ID="STR_VGM_MISSION_NAME_VERSION">
+            <Original>GAMEMODE_NAME (#VERSION#)</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_NAME">
+            <Original>GAMEMODE_NAME</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_VERSION">
+            <Original>#VERSION#</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_INTRO">
+            <Original>Welcome to Vietnam [Placeholder]</Original>
+        </Key>
+    </Package>
+</Project>
