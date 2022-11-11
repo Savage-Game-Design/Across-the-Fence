@@ -45,7 +45,7 @@ def map_pbo_file_trees(source_root: Path, paradigm_path: Path) -> PBOFileTrees:
         source_root / "functions" / "functions_client.hpp",
         source_root / "functions" / "functions_server.hpp"
     ]))
-    
+
 
     # Maps the map-specific config and mission.sqm to the mission PBO
     copy(mission_pbo, source_root / "maps" / "cam_lao_nam", "")

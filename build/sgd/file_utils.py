@@ -49,7 +49,7 @@ def remove_file_and_empty_parent_folders(path):
             parent.rmdir()
             continue
         break
-    
+
     return deleted
 
 def remove_if_symlink_inside_location(link_path, location):

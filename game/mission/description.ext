@@ -1,8 +1,7 @@
 #include "common_includes.hpp"
-#include "version.hpp"
 
 //Allow calling verson number from mission functions
-version = VGM_VERSION;
+version = "$STR_VGM_MISSION_VERSION";
 
 // Used to find certain paths
 #define VGM_PATH
@@ -20,14 +19,18 @@ respawnDialog = 0;
 respawnButton = 1;
 respawnOnStart = -1;
 respawnTemplates[] = { "MenuPosition" };
+
 onPauseScript = "";
-onLoadMission = QUOTE(ANARCHY (VGM_VERSION));
-OnLoadIntro = "Welcome to Vietnam [Placeholder]";
+
+onLoadName = "$STR_VGM_MISSION_NAME";
+onLoadMission = "$STR_VGM_MISSION_VERSION";
+onLoadIntro = "$STR_VGM_MISSION_INTRO";
+briefingName = "$STR_VGM_MISSION_NAME_VERSION";
+
 loadScreen = "";
 OnLoadIntroTime = 0;
 OnLoadMissionTime = 0;
-briefingName = QUOTE(ANARCHY (VGM_VERSION));
-onLoadName = QUOTE(ANARCHY (VGM_VERSION));
+
 overviewPicture = "";
 
 disabledAI = 1;
@@ -129,7 +132,7 @@ vn_arsenalShowMelee = 1;
 use_paradigm_init = 1;
 
 //Declare functions needed by paradigm.
-class ParadigmInteropFunctions 
+class ParadigmInteropFunctions
 {
     get_squad_composition = "";
     harass_filter_target_players = "vgm_s_fnc_harass_filter_target_players";
