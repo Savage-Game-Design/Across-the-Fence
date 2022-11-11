@@ -9,7 +9,7 @@
         Creates or updates a database entry from a key.
 
     Parameter(s):
-        0: ID   - ID of the entry IE: getPlayerUID [STRING]
+        0: ID   - ID of the entry IE: player_76563326239693 [STRING]
         1: Data - Data for the entry [HASHMAP]
 
     Returns: nothing
@@ -21,7 +21,8 @@
 
         _playerSkills set ["driving", 1];
 
-        [_playerUID, _playerProfile] call vgm_s_fnc_db_save;
+        private _vgmUID = format ["%1_%2", "player", _playerUID];
+        [_vgmUID, _playerProfile] call vgm_s_fnc_db_save;
 */
 
 params ["_id", "_data"];
@@ -30,10 +31,4 @@ if !(_data isEqualType createHashMap) exitWith {
     ["ERROR", format ["VGM: Failure to save %1. Data is not a hashmap: %2", _id, _data]] call para_g_fnc_log;
 };
 
-if (_data find "key" == -1) exitWith {
-    ["ERROR", format ["VGM: Failure to save %1. Data does not contain a key.", _id]] call para_g_fnc_log;
-};
-
-private _key = _data get "key";
-
-missionProfileNamespace setVariable [format ["vgm_%1_%2", _key, _id], _data];
+missionProfileNamespace setVariable [format ["vgm_%1", _id], _data];

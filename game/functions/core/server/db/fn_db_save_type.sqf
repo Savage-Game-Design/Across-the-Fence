@@ -33,10 +33,11 @@ if !(_data isEqualType createHashMap) exitWith {
 };
 
 // don't overwrite existing key
-if (_data find "key" == -1) then {
+if !("key" in _data) then {
     _data set ["key", _key];
 };
 
 _data set ["version", getText(missionConfigFile >> "version")];
 
-missionProfileNamespace setVariable [format ["vgm_%1_%2", _key, _id], _data];
+private _formattedID = format ["%1_%2", _key, _id];
+[_formattedID, _data] call vgm_s_fnc_db_save;
