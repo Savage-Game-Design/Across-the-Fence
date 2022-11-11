@@ -21,4 +21,9 @@
 
 params ["_key", "_id"];
 
-missionProfileNamespace getVariable [format ["vgm_%1_%2", _key, _id], createHashMap] // return
+private _variable = format ["vgm_%1_%2", _key, _id];
+private _value = missionProfileNamespace getVariable [_variable, []];
+
+private _result = createHashMapFromArray _value;
+
+_result // return
