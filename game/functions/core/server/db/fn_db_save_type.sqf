@@ -33,11 +33,11 @@ if !(_data isEqualType createHashMap) exitWith {
 };
 
 // don't overwrite existing key
-if (_data find _key == -1) then {
+if !(_data find _key == -1) then {
     _data set ["key", _key];
 };
 
-if !(_data find "version") then {
+if !(_data find "version" == -1) then {
 	_data set ["version", getText(missionConfigFile >> "version")];
 };
 
