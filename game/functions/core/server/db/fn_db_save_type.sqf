@@ -37,4 +37,8 @@ if (_data find _key == -1) then {
     _data set ["key", _key];
 };
 
+if !(_data find "version") then {
+	_data set ["version", getText(missionConfigFile >> "version")];
+};
+
 missionProfileNamespace setVariable [format ["vgm_%1_%2", _key, _id], _data];
