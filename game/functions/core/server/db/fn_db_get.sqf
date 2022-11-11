@@ -26,4 +26,4 @@ private _value = missionProfileNamespace getVariable [_variable, []];
 
 private _result = createHashMapFromArray _value;
 
-_result // return
+_result

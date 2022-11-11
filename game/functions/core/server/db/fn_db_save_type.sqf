@@ -33,12 +33,10 @@ if !(_data isEqualType createHashMap) exitWith {
 };
 
 // don't overwrite existing key
-if !(_data find "key" == -1) then {
+if (_data find "key" == -1) then {
     _data set ["key", _key];
 };
 
-if !(_data find "version" == -1) then {
-	_data set ["version", getText(missionConfigFile >> "version")];
-};
+_data set ["version", getText(missionConfigFile >> "version")];
 
 missionProfileNamespace setVariable [format ["vgm_%1_%2", _key, _id], _data];
