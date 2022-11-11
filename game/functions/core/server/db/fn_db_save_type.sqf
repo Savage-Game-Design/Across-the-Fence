@@ -33,7 +33,7 @@ if !(_data isEqualType createHashMap) exitWith {
 };
 
 // don't overwrite existing key
-if !(_data find _key == -1) then {
+if !(_data find "key" == -1) then {
     _data set ["key", _key];
 };
 
