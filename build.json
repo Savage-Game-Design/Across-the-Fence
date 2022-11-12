@@ -1,0 +1,8 @@
+{
+   "prefix":"\\sgd\\{addon_name}",
+   "makepbo_arguments":[
+      "-P",
+      "-X=thumbs.db,*.txt,*.h,*.dep,*.cpp,*.bak,*.png,*.log,*.pew,*.hpp,source,*.tga"
+   ],
+   "use_addon_builder": false
+}
