@@ -32,3 +32,5 @@ if !(_data isEqualType createHashMap) exitWith {
 };
 
 missionProfileNamespace setVariable [format ["vgm_%1", _id], _data];
+
+["SUCCESS", format ["VGM: Saved %1 with data: %2", _id, _data]] call para_g_fnc_log;

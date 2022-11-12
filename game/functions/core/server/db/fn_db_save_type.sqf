@@ -37,6 +37,13 @@ if !("key" in _data) then {
     _data set ["key", _key];
 };
 
+// add id to data if it doesn't exist
+if !("id" in _data) then {
+    private _vgmID = format ["vgm_%1_%2", _key, _id];
+
+    _data set ["id", _vgmID];
+};
+
 _data set ["version", getText(missionConfigFile >> "version")];
 
 private _formattedID = format ["%1_%2", _key, _id];

@@ -36,7 +36,6 @@ switch (typeName _value) do {
     };
     default
     {
-        // invalid type
         ["ERROR", format ["VGM: Failure to gather data. ID probably overlaps with something that isn't an array or hashmap.", _id, _data]] call para_g_fnc_log;
     };
 };
