@@ -1,6 +1,6 @@
 /*
     File: fn_preInit.sqf
-    Author: Savage Games Design
+    Author: Savage Game Design
     Date: 2022-11-13
     Last Update: 2022-11-13
     Public: No
