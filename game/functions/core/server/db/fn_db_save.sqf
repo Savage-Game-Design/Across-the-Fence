@@ -12,7 +12,8 @@
         0: ID   - ID of the entry IE: player_76563326239693 [STRING]
         1: Data - Data for the entry [HASHMAP]
 
-    Returns: nothing
+    Returns:
+        Nothing
 
     Example:
         private _playerUID = getPlayerUID player;
