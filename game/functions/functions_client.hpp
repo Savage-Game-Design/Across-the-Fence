@@ -27,5 +27,15 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\);
     };
+
+    class core
+    {
+        VGM_GLOBAL_PATH(\core\global);
+
+        class preInit
+        {
+            preInit = 1;
+        };
+    };
 };
 
