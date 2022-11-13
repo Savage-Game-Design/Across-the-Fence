@@ -6,7 +6,7 @@
     Public: No
 
     Description:
-        Core component preInit script.
+        Core component global preInit script.
  */
 
 vgm_version = localize "STR_VGM_MISSION_VERSION";
