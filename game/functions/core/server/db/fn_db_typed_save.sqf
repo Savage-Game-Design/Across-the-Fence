@@ -1,8 +1,8 @@
 /*
-    File: fn_db_save_type.sqf
+    File: fn_db_typed_save.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2022-11-11
+    Last Update: 2022-11-13
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 
         _playerSkills set ["driving", 1];
 
-        ["player", _playerUID, _playerProfile] call vgm_s_fnc_db_save_type;
+        ["player", _playerUID, _playerProfile] call vgm_s_fnc_db_typed_save;
 */
 
 params ["_key", "_id", "_data"];
