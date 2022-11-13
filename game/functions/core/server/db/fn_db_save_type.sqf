@@ -38,7 +38,7 @@ private _vgmID = format ["vgm_%1_%2", _key, _id];
 _data set ["key", _key, true];
 _data set ["id", _vgmID, true];
 
-_data set ["version", getText(missionConfigFile >> "version")];
+_data set ["version", vgm_version];
 
 private _formattedID = format ["%1_%2", _key, _id];
 [_formattedID, _data] call vgm_s_fnc_db_save;
