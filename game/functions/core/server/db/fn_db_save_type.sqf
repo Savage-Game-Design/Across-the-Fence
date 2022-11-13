@@ -33,16 +33,10 @@ if !(_data isEqualType createHashMap) exitWith {
 };
 
 // don't overwrite existing key
-if !("key" in _data) then {
-    _data set ["key", _key];
-};
-
-// add id to data if it doesn't exist
-if !("id" in _data) then {
-    private _vgmID = format ["vgm_%1_%2", _key, _id];
-
-    _data set ["id", _vgmID];
-};
+private _vgmID = format ["vgm_%1_%2", _key, _id];
+// set key and id only if not present in data already
+_data set ["key", _key, true];
+_data set ["id", _vgmID, true];
 
 _data set ["version", getText(missionConfigFile >> "version")];
 
