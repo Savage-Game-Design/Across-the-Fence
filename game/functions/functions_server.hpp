@@ -23,6 +23,6 @@ class vgm_s
         class db_clear {};
         class db_get {};
         class db_save {};
-        class db_save_player {};
+        class db_typed_save {};
     };
 };
