@@ -2,7 +2,7 @@
     File: fn_db_get.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2022-11-11
+    Last Update: 2022-11-13
     Public: No
 
     Description:
@@ -22,22 +22,5 @@
 params ["_key", "_id"];
 
 private _variable = format ["vgm_%1_%2", _key, _id];
-private _value = missionProfileNamespace getVariable [_variable, []];
 
-// ensure variable is an array or hashmap
-
-private _result = [];
-switch (typeName _value) do {
-    case "ARRAY": {
-        _result = createHashMapFromArray _value;
-    };
-    case "HASHMAP": {
-        _result = _value;
-    };
-    default
-    {
-        ["ERROR", format ["VGM: Failure to gather data. ID probably overlaps with something that isn't an array or hashmap.", _id, _data]] call para_g_fnc_log;
-    };
-};
-
-_result
+missionProfileNamespace getVariable [_variable, createHashMap]
