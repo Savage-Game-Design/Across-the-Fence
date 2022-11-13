@@ -2,7 +2,7 @@
     File: fn_db_clear.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2022-11-11
+    Last Update: 2022-11-13
     Public: No
 
     Description:
@@ -16,7 +16,7 @@
 
     Example(s):
         call vgm_s_fnc_db_clear;
-        
+
 */
 
 {
