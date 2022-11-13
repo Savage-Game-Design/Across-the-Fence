@@ -2,7 +2,7 @@
     File: fn_handle_welcome_screen.sqf
     Author: Gus Schultz
     Date: 2022-09-18
-    Last Update:
+    Last Update: 2022-11-13
     Public: /shrug
 
     Description:
@@ -21,15 +21,14 @@
 [] spawn
 {
     uiSleep 2;
-    private _version = getText(missionConfigFile >> "version");
     private _lastVersion = (["GET", "last_version", ""] call para_s_fnc_profile_db) select 1;
     //Open welcome screen for new players
     private _welcomeScreenEnabled = ["para_enableWelcomeScreen"] call para_c_fnc_optionsMenu_getValue;
-    private _versionHasChanged = _lastVersion == "" || _lastVersion != _version;
+    private _versionHasChanged = _lastVersion == "" || _lastVersion != vgm_version;
 
     if (_versionHasChanged) exitWith {
         createDialog "para_ChangelogScreen";
-        ["SET", "last_version", _version] call para_s_fnc_profile_db;
+        ["SET", "last_version", vgm_version] call para_s_fnc_profile_db;
     };
 
     if (_welcomeScreenEnabled == 1) exitWith {
