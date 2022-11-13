@@ -11,7 +11,8 @@
     Parameter(s):
         N/A
 
-    Returns: nothing
+    Returns:
+        Nothing
 
     Example(s):
         call vgm_s_fnc_db_clear;
