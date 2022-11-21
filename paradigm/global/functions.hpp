@@ -127,10 +127,23 @@ class para_g
 		class serialize_struct {};
 	};
 
-	class events
+    class events
+    {
+        PARA_GLOBAL_PATH(\events);
+        class event_attachHandler {};
+        class event_callHandlersById {};
+        class event_callRegisteredHandlers {};
+        class event_subscribe {};
+        class event_subscribeLocal {};
+        class event_system_init {};
+        class event_trigger {};
+        class event_unsubscribe {};
+    };
+
+	class events_local_legacy
 	{
-		PARA_GLOBAL_PATH(\events);
-		class event_add_handler {};
+		PARA_GLOBAL_PATH(\events_local_legacy);
+        class event_add_handler {};
 		class event_dispatch_immediate {};
 		class event_dispatch {};
 		class event_dispatcher_job {};
