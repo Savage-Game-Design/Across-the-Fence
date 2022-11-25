@@ -157,6 +157,13 @@ class para_s
 		class profile_db {};
 	};
 
+    class event
+    {
+        PARA_SERVER_PATH(\event);
+        class event_forward {};
+        class event_startForwardingMatchingEvents {};
+    };
+
 	class harass
 	{
 		PARA_SERVER_PATH(\harass);

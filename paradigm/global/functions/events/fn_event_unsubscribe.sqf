@@ -2,7 +2,7 @@
     File: fnc_event_unsubscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-11-24
+    Last Update: 2022-11-25
     Public: Yes
 
     Description:
@@ -34,3 +34,5 @@ private _registeredPaths = _handlerRegistrationPaths getOrDefault [_handlerId, [
 } forEach _registeredPaths;
 
 _allHandlers deleteAt _handlerId;
+
+// TODO - Tell the server to stop forwarding requests

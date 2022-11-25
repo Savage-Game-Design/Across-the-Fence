@@ -2,7 +2,7 @@
     File: fn_event_attachHandler.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-11-24
+    Last Update: 2022-11-25
     Public: No
 
     Description:
@@ -31,6 +31,7 @@ if (_hasNegative) then {
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
 private _handlerRegistrationPaths = localNamespace getVariable "para_event_handlerRegistrationPaths";
 
+// TODO - Convert me to using hashvalue for event, with another hashmap for ids
 {
     private _eventListenersByEventName = _eventListenersByOrigin getOrDefault [_x, createHashMap, true];
     private _eventListenersByTopic = _eventListenersByEventName getOrDefault [_eventName, createHashMap, true];

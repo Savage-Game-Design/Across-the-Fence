@@ -2,7 +2,7 @@
     File: fnc_event_trigger.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-11-24
+    Last Update: 2022-11-27
     Public: Yes
 
     Description:
@@ -24,8 +24,13 @@ if !(_event isEqualType []) then {
     _event = [_event, ""];
 };
 
-// Send to server if server has asked for this event and topic
-// TODO
+private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
+
+// Forward event to server only if the client has been asked for it
+if (_eventsToForward get hashValue _event) then {
+    [_event, _data] remoteExec ["para_s_fnc_event_forward", 2];
+};
+
 
 // Call any local handlers
 [clientOwner, _event, _data] call para_g_fnc_event_callRegisteredHandlers;

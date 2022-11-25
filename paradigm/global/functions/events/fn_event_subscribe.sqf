@@ -81,7 +81,7 @@ if (_shouldListenLocally) then {
 };
 
 if (_shouldListenRemotely) then {
-    // TODO - Make it do that remote listen thing
+    [_clients, _event, _handlerId] remoteExec ["para_s_fnc_event_requestForwarding", 2];
 };
 
 _handlerId
