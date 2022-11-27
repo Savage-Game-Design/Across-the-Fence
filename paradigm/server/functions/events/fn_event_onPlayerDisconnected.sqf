@@ -21,17 +21,14 @@
 params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
-private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
+private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
 
-_specificMachineListeners deleteAt _owner;
+// Removes all listeners for this specific machine.
+_forwardingForOriginMachineId deleteAt _owner;
 
 // Removes all forwarding requests from this client, as it's a reference.
 _machineIdReferences get _owner resize [0];
 
 // Disconnect:
-// Null out machineId reference
-// Remove index reservation
-// Move the -X listeners to 0?
-// Delete the machine specific handlers hashmap entry for the machine id
 // Tell all clients to stop listening to events from that client
 // Tell all clients to stop forwarding any events needed specifically for that client?

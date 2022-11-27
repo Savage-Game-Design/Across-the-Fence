@@ -43,7 +43,7 @@ if (isServer) then {
 
     // Contains forwarding entries for specific clients.
     // Indexed by client id, then event hash - gives an array of client references.
-    localNamespace setVariable ["para_event_specificMachineListeners", createHashMap];
+    localNamespace setVariable ["para_event_forwardingForOriginMachineId", createHashMap];
 
     addMissionEventHandler ["PlayerConnected", para_s_fnc_event_onPlayerConnected];
     addMissionEventHandler ["PlayerDisconnected", para_s_fnc_event_onPlayerDisconnected];

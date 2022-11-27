@@ -33,31 +33,31 @@ if (isNil "_clients" || isNil "_eventName" || isNil "_topic" || isNil "_handlerI
     ["WARNING", format ["Bad event forwarding request from %1", remoteExecutedOwner]] call para_g_fnc_log;
 };
 
-private _clientMachineIds = _clients apply {
+private _originMachineIdsToListenTo = _clients apply {
     if (_x isEqualType objNull) then { owner _x } else { _x }
 };
 
 // In case they're self-targeting, we don't want to tell them forward requests.
-_clientMachineIds = _clientMachineIds - [remoteExecutedOwner];
+_originMachineIdsToListenTo = _originMachineIdsToListenTo - [remoteExecutedOwner];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
-private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
+private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
 
 private _eventHash = hashValue _event;
 private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwner;
 
 // Register the client sending the request as wanting events forwarded from _clients
 {
-    private _listeningMachineIds = _specificMachineListeners
+    private _listeningMachineIds = _forwardingForOriginMachineId
         getOrDefault [_x, createHashMap, true]
         getOrDefault [_eventHash, [], true];
     // Duplication shouldn't matter, remoteExec handles it more efficiently than our code can
     _listeningMachineIds pushBack _listenerMachineIdReference;
-} forEach _clientMachineIds;
+} forEach _originMachineIdsToListenTo;
 
 // Server tells the requesting client to attach the event handlers.
 // Can't be done on the client, as the server needs to resolve the machine ids as `owner` doesn't work on clients.
-[_clientMachineIds, _event, _handlerId] remoteExec ["para_g_fnc_event_attachHandler", remoteExecutedOwner];
+[_originMachineIdsToListenTo, _event, _handlerId] remoteExec ["para_g_fnc_event_attachHandler", remoteExecutedOwner];
 
 // Server tells the other clients; to forward events on.
-[_event] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _clientMachineIds];
+[_event] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _originMachineIdsToListenTo];
