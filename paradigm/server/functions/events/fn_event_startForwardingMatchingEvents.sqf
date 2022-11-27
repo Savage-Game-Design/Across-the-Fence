@@ -44,17 +44,16 @@ private _machineIdReferences = localNamespace getVariable "para_event_machineIdR
 private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
 
 private _eventHash = hashValue _event;
-private _specificMachineIds = _clientMachineIds select { _x >= 1 };
 private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwner;
 
-// Handle specific machine ids (2, 3, 46, etc)
+// Register the client sending the request as wanting events forwarded from _clients
 {
     private _listeningMachineIds = _specificMachineListeners
         getOrDefault [_x, createHashMap, true]
         getOrDefault [_eventHash, [], true];
     // Duplication shouldn't matter, remoteExec handles it more efficiently than our code can
     _listeningMachineIds pushBack _listenerMachineIdReference;
-} forEach _specificMachineIds;
+} forEach _clientMachineIds;
 
 // Server tells the requesting client to attach the event handlers.
 // Can't be done on the client, as the server needs to resolve the machine ids as `owner` doesn't work on clients.
@@ -62,8 +61,3 @@ private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwn
 
 // Server tells the other clients; to forward events on.
 [_event] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _clientMachineIds];
-
-
-
-
-

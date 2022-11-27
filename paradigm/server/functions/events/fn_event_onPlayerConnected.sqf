@@ -20,6 +20,7 @@
 
 params ["_id", "_uid", "_name", "_jip", "_owner"];
 
+// This can potentially be done via getOrDefault if it's simpler to remove this function.
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
 
 _machineIdReferences set [_owner, [_owner]];
