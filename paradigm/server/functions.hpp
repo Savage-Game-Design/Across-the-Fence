@@ -161,6 +161,8 @@ class para_s
     {
         PARA_SERVER_PATH(\event);
         class event_forward {};
+        class event_onPlayerConnected {};
+        class event_onPlayerDisconnected {};
         class event_startForwardingMatchingEvents {};
     };
 

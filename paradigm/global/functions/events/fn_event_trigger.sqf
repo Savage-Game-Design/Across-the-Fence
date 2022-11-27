@@ -31,7 +31,6 @@ if (_eventsToForward get hashValue _event) then {
     [_event, _data] remoteExec ["para_s_fnc_event_forward", 2];
 };
 
-
 // Call any local handlers
 [clientOwner, _event, _data] call para_g_fnc_event_callRegisteredHandlers;
 

@@ -2,7 +2,7 @@
     File: fn_event_callRegisteredHandlers.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-11-24
+    Last Update: 2022-11-27
     Public: No
 
     Description:
@@ -35,7 +35,7 @@ private _machineSpecificEventListenersByTopic = _eventListenersByOrigin
     getOrDefault [_eventName, createHashMap];
 
 private _machineSpecificGeneralHandlerIds = _machineSpecificEventListenersByTopic getOrDefault ["", []];
-private _machineSpecificTopicHandlerIds = _machineSpecificEventListenersByTopic getOrDefault [_topic, []];
+private _machineSpecificTopicHandlerIds = _machineSpecificEventListenersByTopic getOrDefault [hashValue _topic, []];
 
 _handlerIdsToCall = _handlerIdsToCall + _machineSpecificGeneralHandlerIds + _machineSpecificTopicHandlerIds;
 
@@ -71,6 +71,7 @@ if (_originMachineId != clientOwner) then {
     private _exclusionHandlerIds = _exclusionGeneralHandlerIds + _exclusionTopicHandlerIds;
 
     // This is slow, try to avoid using exclusive machine ids like `-2` or `-5` or `-clientOwner`.
+    // Can be optimised using an array if needed.
     if (count _exclusionHandlerIds > 0) then {
         _globalHandlerIds = _globalHandlerIds - _exclusionHandlerIds;
     };
@@ -78,4 +79,4 @@ if (_originMachineId != clientOwner) then {
     _handlerIdsToCall = _handlerIdsToCall + _globalHandlerIds;
 };
 
-[_handlerIdsToCall, _originMachineId, _event, _data] spawn para_g_fnc_event_callHandlersByid;
+[_handlerIdsToCall, _originMachineId, _event, _data] spawn para_g_fnc_event_callHandlersById;

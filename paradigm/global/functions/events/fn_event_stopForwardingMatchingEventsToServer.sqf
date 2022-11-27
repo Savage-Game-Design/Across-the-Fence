@@ -23,5 +23,4 @@ params ["_event"];
 private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
 private _eventHash = hashValue _event;
 
-// Valid as the forwarding map will only ever have the server as an entry.
 _eventsToForward deleteAt _eventHash;
