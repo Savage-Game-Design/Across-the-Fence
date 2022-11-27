@@ -29,6 +29,6 @@ _forwardingForOriginMachineId deleteAt _owner;
 // Removes all forwarding requests from this client, as it's a reference.
 _machineIdReferences get _owner resize [0];
 
-// Disconnect:
-// Tell all clients to stop listening to events from that client
-// Tell all clients to stop forwarding any events needed specifically for that client?
+// TODO - Write this func
+[_owner] remoteExec ["para_g_fnc_event_handlePlayerDisconnected", /* TODO: Track all players listening */];
+// TODO: Tell all clients to stop forwarding any events needed specifically for that client?
