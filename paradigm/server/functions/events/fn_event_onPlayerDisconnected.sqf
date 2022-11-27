@@ -22,7 +22,6 @@ params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
 private _machineIdReservedIndexes = localNamespace getVariable "para_event_machineIdToReservedClientArrayIndex";
-private _multiMachineListeners = localNamespace getVariable "para_event_multiMachineListeners";
 private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
 
 _specificMachineListeners deleteAt _owner;

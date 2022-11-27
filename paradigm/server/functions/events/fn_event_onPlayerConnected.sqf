@@ -18,7 +18,7 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+params ["_id", "_uid", "_name", "_jip", "_owner"];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
 private _machineIdReservedIndexes = localNamespace getVariable "para_event_machineIdToReservedClientArrayIndex";

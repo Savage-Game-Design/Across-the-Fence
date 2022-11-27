@@ -46,11 +46,6 @@ if (isServer) then {
     // As we need a fixed size array, and machine ids grow indefinitely
     localNamespace setVariable ["para_event_machineIdToReservedClientArrayIndex", createHashMap];
 
-    // Contains client references for clients listening to multi-machine ids (0 or negative numbers)
-    // The reserved index for the abs value of the multi-machine id contains all listeners for that address
-    // E.g fetch the index for `abs -2`, that index contains all listeners to -2 for that event.
-    // This approach allows for very fast event forwarding via shallow array copy + modification
-    localNamespace setVariable ["para_event_multiMachineListeners", createHashMap];
     // Contains forwarding entries for specific clients.
     // Indexed by client id, then event hash - gives an array of client references.
     localNamespace setVariable ["para_event_specificMachineListeners", createHashMap];

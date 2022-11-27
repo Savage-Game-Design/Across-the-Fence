@@ -42,24 +42,11 @@ _clientMachineIds = _clientMachineIds - [remoteExecutedOwner];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
 private _machineIdReservedIndexes = localNamespace getVariable "para_event_machineIdToReservedClientArrayIndex";
-private _multiMachineListeners = localNamespace getVariable "para_event_multiMachineListeners";
 private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
 
 private _eventHash = hashValue _event;
-private _multiMachineIds = _clientMachineIds select {_x < 1};
 private _specificMachineIds = _clientMachineIds select { _x >= 1 };
 private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwner;
-
-// Handle multi-machine ids (0, -2, -5, etc)
-// Puts a reference to the listening machine id in the slot for that broadcast event,
-{
-    // Fetch the multi machine client array this inside the loop instead of lifting it out.
-    // More performant in non-multi-machine use case, and typical multi-machine use is a single id anyway
-    private _multiMachineClientArray = _multiMachineListeners getOrDefault [_eventHash, +para_event_client_array_template, true];
-    private _reservedIndex = _machineIdReservedIndexes get abs _x;
-    // Duplication shouldn't matter, remoteExec handles it more efficiently than our code can
-    _multiMachineClientArray select _reservedIndex pushBack _listenerMachineIdReference;
-} forEach _multiMachineIds;
 
 // Handle specific machine ids (2, 3, 46, etc)
 {
@@ -77,12 +64,7 @@ private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwn
 // Server tells the other clients; to forward events on.
 [_event] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _clientMachineIds];
 
-// Disconnect:
-// Null out machineId reference
-// Remove index reservation
-// Move the -X listeners to 0?
-// Delete the machine specific handlers hashmap entry for the machine id
-// Tell all clients to stop forwarding any events needed specifically for that client?
+
 
 
 
