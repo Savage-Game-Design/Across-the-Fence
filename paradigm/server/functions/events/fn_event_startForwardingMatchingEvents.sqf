@@ -41,7 +41,6 @@ private _clientMachineIds = _clients apply {
 _clientMachineIds = _clientMachineIds - [remoteExecutedOwner];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
-private _machineIdReservedIndexes = localNamespace getVariable "para_event_machineIdToReservedClientArrayIndex";
 private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
 
 private _eventHash = hashValue _event;

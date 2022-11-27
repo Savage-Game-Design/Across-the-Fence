@@ -41,11 +41,6 @@ if (isServer) then {
     // This means we can use machine id by reference, and easily remove the entry when the client disconnects.
     localNamespace setVariable ["para_event_machineIdReferences", createHashMap];
 
-	// Position in *every* client array used for data for that specific machine id
-    // Since network machine ids aren't reused, we can't just use that as index
-    // As we need a fixed size array, and machine ids grow indefinitely
-    localNamespace setVariable ["para_event_machineIdToReservedClientArrayIndex", createHashMap];
-
     // Contains forwarding entries for specific clients.
     // Indexed by client id, then event hash - gives an array of client references.
     localNamespace setVariable ["para_event_specificMachineListeners", createHashMap];

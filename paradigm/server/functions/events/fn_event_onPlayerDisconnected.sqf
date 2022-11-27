@@ -21,16 +21,12 @@
 params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
-private _machineIdReservedIndexes = localNamespace getVariable "para_event_machineIdToReservedClientArrayIndex";
 private _specificMachineListeners = localNamespace getVariable "para_event_specificMachineListeners";
 
 _specificMachineListeners deleteAt _owner;
 
 // Removes all forwarding requests from this client, as it's a reference.
 _machineIdReferences get _owner resize [0];
-
-// Frees up the index for use by another client.
-_machineIdReservedIndexes deleteAt _owner;
 
 // Disconnect:
 // Null out machineId reference
