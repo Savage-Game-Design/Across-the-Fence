@@ -11,6 +11,15 @@
             "group": {
                 "kind": "build"
             }
+        },
+        {
+            "label": "Launch arma",
+            "type": "shell",
+            "command": "python3 '${workspaceFolder}\\build\\run.py'",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
         }
     ]
 }
