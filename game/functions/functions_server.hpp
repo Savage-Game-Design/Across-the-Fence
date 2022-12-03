@@ -9,9 +9,20 @@ class vgm_s
         VGM_SERVER_PATH(\);
     };
 
+
     class paradigm_interop
     {
         VGM_SERVER_PATH(\paradigm_interop\server);
         class harass_filter_target_players {};
+    };
+
+    class db
+    {
+        VGM_SERVER_PATH(\core\server\db);
+
+        class db_clear {};
+        class db_get {};
+        class db_save {};
+        class db_typed_save {};
     };
 };
