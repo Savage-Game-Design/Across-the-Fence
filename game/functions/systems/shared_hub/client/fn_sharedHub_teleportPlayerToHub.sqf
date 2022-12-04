@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        [] call vgm_c_fnc_shared_hub_teleportPlayerToHub
+        [] call vgm_c_fnc_sharedHub_teleportPlayerToHub
  */
 
 hint "You've wandered too far...";

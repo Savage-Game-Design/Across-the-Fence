@@ -24,9 +24,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\shared_hub\client);
 
-        class areaLimiterDisable {};
-        class areaLimiterEnable {};
-        class teleportPlayerToHub {};
+        class sharedHub_areaLimiterDisable {};
+        class sharedHub_areaLimiterEnable {};
+        class sharedHub_teleportPlayerToHub {};
     };
 };
 

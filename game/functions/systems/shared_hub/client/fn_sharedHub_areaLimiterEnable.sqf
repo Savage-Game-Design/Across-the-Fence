@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        [] call vgm_c_fnc_shared_hub_areaLimiterEnable
+        [] call vgm_c_fnc_sharedHub_areaLimiterEnable
  */
 
 #define STATE_IN_AREA "in_hub"
@@ -23,10 +23,10 @@
 #define TELEPORT_DELAY 5
 #define PLAYER_IN_HUB (player inArea "vgm_shared_hub")
 
-if (!isNull (missionNamespace getVariable ["vgm_shared_hub_areaLimiterScript", scriptNull])) exitWith {};
+if (!isNull (missionNamespace getVariable ["vgm_sharedHub_areaLimiterScript", scriptNull])) exitWith {};
 
-vgm_shared_hub_areaLimiterScript = [] spawn {
-    scopeName "vgm_shared_hub_areaLimiterScript";
+vgm_sharedHub_areaLimiterScript = [] spawn {
+    scopeName "vgm_sharedHub_areaLimiterScript";
 
     private _state = STATE_IN_AREA;
     private _leftHubTime = -1;
@@ -45,7 +45,7 @@ vgm_shared_hub_areaLimiterScript = [] spawn {
                 };
 
                 if (time > (_leftHubTime + TELEPORT_DELAY)) exitWith {
-                    [] call vgm_c_fnc_teleportPlayerToHub;
+                    [] call vgm_c_fnc_sharedHub_teleportPlayerToHub;
                     _state = STATE_IN_AREA;
                     _leftHubTime = -1;
                 };
