@@ -6,7 +6,7 @@
         {
             "label": "Build",
             "type": "shell",
-            "command": "python3 '${workspaceFolder}\\build\\build.py' build --overwrite",
+            "command": "py '${workspaceFolder}\\build\\build.py' build --overwrite",
             "problemMatcher": [],
             "group": {
                 "kind": "build"
@@ -15,7 +15,7 @@
         {
             "label": "Launch arma",
             "type": "shell",
-            "command": "python3 '${workspaceFolder}\\build\\run.py'",
+            "command": "py '${workspaceFolder}\\build\\run.py'",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
