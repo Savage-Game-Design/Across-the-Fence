@@ -18,5 +18,5 @@
         [] call vgm_c_fnc_sharedHub_teleportPlayerToHub
  */
 
-hint localize "STR_VGM_SHARED_HUB_TELEPORT_NOTIFICATION";
+hint localize "STR_VGM_SHARED_HUB_TELEPORT_NOTIFICATION"; // TODO some generic notification function?
 player setVehiclePosition [markerPos "vgm_shared_hub", [], 10];
