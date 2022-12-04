@@ -5,7 +5,7 @@ from vgm.pbo import PBO
 username = os.getlogin()
 arma_profile = r"dev_vgm"
 
-paradigm_path = os.path.join(os.path.dirname(__file__), "../paradigm")
+paradigm_path = Path(__file__).parent /  "paradigm"
 mission_output_path = rf"C:\Users\{username}\Documents\Arma 3 - Other Profiles\{arma_profile}\mpmissions\vgm.cam_lao_nam"
 
 output_paths = {
