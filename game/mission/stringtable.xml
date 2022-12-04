@@ -14,4 +14,9 @@
             <Original>Welcome to Vietnam [Placeholder]</Original>
         </Key>
     </Package>
+    <Package name="Shared Hub">
+        <Key ID="STR_VGM_SHARED_HUB_TELEPORT_NOTIFICATION">
+            <Original>You've wandered too far...</Original>
+        </Key>
+    </Package>
 </Project>
