@@ -2,7 +2,7 @@
     File: fn_event_forward.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-11-27
+    Last Update: 2022-12-04
     Public: No
 
     Description:
@@ -19,6 +19,8 @@
  */
 
 params ["_event", "_data"];
+
+["DEBUG", format ["Forwarding event %1 from %2", _event, remoteExecutedOwner]] call para_g_fnc_log;
 
 private _originMachineId = remoteExecutedOwner;
 private _eventHash = hashValue _event;

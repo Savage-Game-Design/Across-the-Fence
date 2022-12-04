@@ -2,7 +2,7 @@
     File: fn_event_startForwardingMatchingEvents.sqf
     Author:
     Date: 2022-11-24
-    Last Update: 2022-11-27
+    Last Update: 2022-12-04
     Public: No
 
     Description:
@@ -23,6 +23,8 @@ params [
     ["_event", [], [[]], [2]],
     ["_handlerId", nil, [""]]
 ];
+
+["DEBUG", format ["Starting to forward event %1 from %2 to %3", _event, _clients, remoteExecutedOwner]] call para_g_fnc_log;
 
 _event params [
     ["_eventName", nil, [""]],

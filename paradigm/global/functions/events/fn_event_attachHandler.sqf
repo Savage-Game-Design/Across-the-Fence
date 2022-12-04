@@ -2,7 +2,7 @@
     File: fn_event_attachHandler.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-11-27
+    Last Update: 2022-12-04
     Public: No
 
     Description:
@@ -31,14 +31,13 @@ if (_hasNegative) then {
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
 private _handlerRegistrationPaths = localNamespace getVariable "para_event_handlerRegistrationPaths";
 
-private _topicHash = hashValue _topic;
 {
     private _eventListenersByEventName = _eventListenersByOrigin getOrDefault [_x, createHashMap, true];
     private _eventListenersByTopic = _eventListenersByEventName getOrDefault [_eventName, createHashMap, true];
-    private _eventListeners = _eventListenersByTopic getOrDefault [_topicHash, [], true];
+    private _eventListeners = _eventListenersByTopic getOrDefault [_topic, [], true];
 
     _eventListeners pushBackUnique _handlerId;
 
     // Register the handler path so we can remove it later without needing machineId/eventName/topic
-    _handlerRegistrationPaths getOrDefault [_handlerId, [], true] pushBack [_x, _eventName, _topicHash];
+    _handlerRegistrationPaths getOrDefault [_handlerId, [], true] pushBack [_x, _eventName, _topic];
 } forEach _machineIds;

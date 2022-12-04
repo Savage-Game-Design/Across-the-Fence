@@ -2,7 +2,7 @@
     File: fn_event_callRegisteredHandlers.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-11-27
+    Last Update: 2022-12-04
     Public: No
 
     Description:
@@ -20,11 +20,15 @@
 
 params ["_originMachineId", "_event", "_data"];
 
+["DEBUG", format ["Calling handlers for %1 from %2", _event, _originMachineId]] call para_g_fnc_log;
+
 _event params ["_eventName", "_topic"];
 
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
 
 private _handlerIdsToCall = [];
+
+private _globalTopic = hashValue "";
 
 // ====================
 // Find all event handlers tied to this specific client origin.
@@ -34,8 +38,8 @@ private _machineSpecificEventListenersByTopic = _eventListenersByOrigin
     getOrDefault [_originMachineId, createHashMap]
     getOrDefault [_eventName, createHashMap];
 
-private _machineSpecificGeneralHandlerIds = _machineSpecificEventListenersByTopic getOrDefault ["", []];
-private _machineSpecificTopicHandlerIds = _machineSpecificEventListenersByTopic getOrDefault [hashValue _topic, []];
+private _machineSpecificGeneralHandlerIds = _machineSpecificEventListenersByTopic getOrDefault [_globalTopic, []];
+private _machineSpecificTopicHandlerIds = _machineSpecificEventListenersByTopic getOrDefault [_topic, []];
 
 _handlerIdsToCall = _handlerIdsToCall + _machineSpecificGeneralHandlerIds + _machineSpecificTopicHandlerIds;
 
@@ -50,7 +54,7 @@ if (_originMachineId != clientOwner) then {
         getOrDefault [_originMachineId, createHashMap]
         getOrDefault [_eventName, createHashMap];
 
-    private _globalGeneralHandlerIds = _globalEventListenersByTopic getOrDefault ["", []];
+    private _globalGeneralHandlerIds = _globalEventListenersByTopic getOrDefault [_globalTopic, []];
     private _globalTopicHandlerIds = _globalEventListenersByTopic getOrDefault [_topic, []];
 
     private _globalHandlerIds = _globalGeneralHandlerIds + _globalTopicHandlerIds;
@@ -66,7 +70,7 @@ if (_originMachineId != clientOwner) then {
         getOrDefault [-_originMachineId, createHashMap]
         getOrDefault [_eventName, createHashMap];
 
-    private _exclusionGeneralHandlerIds = _exclusionEventListenersByTopic getOrDefault ["", []];
+    private _exclusionGeneralHandlerIds = _exclusionEventListenersByTopic getOrDefault [_globalTopic, []];
     private _exclusionTopicHandlerIds = _exclusionEventListenersByTopic getOrDefault [_topic, []];
     private _exclusionHandlerIds = _exclusionGeneralHandlerIds + _exclusionTopicHandlerIds;
 

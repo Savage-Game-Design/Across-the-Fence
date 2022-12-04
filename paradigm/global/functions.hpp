@@ -133,8 +133,12 @@ class para_g
         class event_attachHandler {};
         class event_callHandlersById {};
         class event_callRegisteredHandlers {};
+        class event_healthCheck {};
+        class event_startForwardingMatchingEventsToServer {};
+        class event_stopForwardingMatchingEventsToServer {};
         class event_subscribe {};
         class event_subscribeLocal {};
+        class event_subscribeServer {};
         class event_system_init {};
         class event_trigger {};
         class event_unsubscribe {};

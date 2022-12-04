@@ -2,7 +2,7 @@
     File: fnc_event_subscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-11-24
+    Last Update: 2022-12-04
     Public: Yes
 
     Description:
@@ -21,7 +21,9 @@
 params [["_clients", [clientOwner]], "_event", "_handler"];
 
 if !(_event isEqualType []) then {
-    _event = [_event, ""];
+    _event = [_event, hashValue ""];
+} else {
+    _event = [_event # 0, hashValue (_event # 1)]
 };
 
 _event params ["_eventName", "_topic"];
@@ -81,7 +83,7 @@ if (_shouldListenLocally) then {
 };
 
 if (_shouldListenRemotely) then {
-    [_clients, _event, _handlerId] remoteExec ["para_s_fnc_event_requestForwarding", 2];
+    [_clients, _event, _handlerId] remoteExec ["para_s_fnc_event_startForwardingMatchingEvents", 2];
 };
 
 _handlerId
