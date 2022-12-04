@@ -45,7 +45,7 @@ vgm_shared_hub_areaLimiterScript = [] spawn {
                 };
 
                 if (time > (_leftHubTime + TELEPORT_DELAY)) exitWith {
-                    [] call vgm_c_fnc_shared_hub_teleportPlayerToHub;
+                    [] call vgm_c_fnc_teleportPlayerToHub;
                     _state = STATE_IN_AREA;
                     _leftHubTime = -1;
                 };
