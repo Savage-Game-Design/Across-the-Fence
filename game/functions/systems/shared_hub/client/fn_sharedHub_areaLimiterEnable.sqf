@@ -26,7 +26,7 @@
 if (!isNull (missionNamespace getVariable ["vgm_sharedHub_areaLimiterScript", scriptNull])) exitWith {};
 
 vgm_sharedHub_areaLimiterScript = [] spawn {
-    scopeName "vgm_sharedHub_areaLimiterScript";
+    scriptName "vgm_sharedHub_areaLimiterScript";
 
     private _state = STATE_IN_AREA;
     private _leftHubTime = -1;
