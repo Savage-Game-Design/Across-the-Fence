@@ -8,22 +8,22 @@ class EditorData
 	toggles=521;
 	class ItemIDProvider
 	{
-		nextID=1325;
+		nextID=1328;
 	};
 	class MarkerIDProvider
 	{
-		nextID=40;
+		nextID=42;
 	};
 	class LayerIndexProvider
 	{
-		nextID=653;
+		nextID=656;
 	};
 	class Camera
 	{
-		pos[]={16415.654,205.4752,8020.2642};
-		dir[]={-0.29379079,-0.72370148,0.62446821};
-		up[]={-0.30808493,0.69010907,0.65485179};
-		aside[]={0.90486878,-2.370216e-007,0.42570943};
+		pos[]={16398.797,224.19725,8047.7925};
+		dir[]={-0.37648901,-0.89070797,0.25475773};
+		up[]={-0.73769099,0.45457533,0.49917194};
+		aside[]={0.56042272,1.4354009e-007,0.8282094};
 	};
 };
 binarizationWanted=0;
@@ -35,13 +35,14 @@ addons[]=
 	"weapons_f_vietnam_c",
 	"sounds_f_vietnam_c",
 	"modules_f_vietnam",
-	"A3_Modules_F_Curator_Curator"
+	"A3_Modules_F_Curator_Curator",
+	"A3_Ui_F"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=6;
+		items=7;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -81,6 +82,13 @@ class AddonsMetaData
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item6
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -130,14 +138,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -181,14 +189,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -238,7 +246,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			dataType="Logic";
@@ -7261,6 +7269,33 @@ class Mission
 			};
 			id=1323;
 			atlOffset=1.6450043;
+		};
+		class Item5
+		{
+			dataType="Layer";
+			name="Shared Hub";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={16330.562,73.573997,8114.624};
+					name="vgm_shared_hub";
+					text="Shared Hub";
+					markerType="ELLIPSE";
+					type="";
+					fillName="Border";
+					a=116.409;
+					b=132.65601;
+					angle=195.55998;
+					drawBorder=1;
+					id=1327;
+					atlOffset=-0.93600464;
+				};
+			};
+			id=1325;
+			atlOffset=-0.93600464;
 		};
 	};
 };
