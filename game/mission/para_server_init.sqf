@@ -95,23 +95,9 @@ diag_log "VN MikeForce: Initialising AI Objectives";
     ["hardAiLimit", ["hard_ai_limit", 80] call BIS_fnc_getParamValue]
 ] call para_s_fnc_ai_obj_subsystem_init;
 
-diag_log "VN MikeForce: Initialising Harass";
-// Start harassment subsystem. Depends on the AI subsystem.
-[] call para_s_fnc_harass_subsystem_init;
-
 diag_log "VN MikeForce: Initialising AI Behaviour";
 // start the behaviour subsystem
 [] call para_g_fnc_ai_behaviour_subsystem_init;
-
-//Set up slingloaded item locality on helicopters.
-["vehicleCreated", [
-    {
-        params ["_args", "_vehicle"];
-        //Call it on every vehicle - it'll abort if it's not a helicopter.
-        [_vehicle] call para_g_fnc_localize_slingloaded_objects;
-    },
-    []
-]] call para_g_fnc_event_add_handler;
 
 /*
 diag_log "VN MikeForce: Initialising Performance Logging";
