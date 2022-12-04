@@ -19,4 +19,4 @@
  */
 
 hint "You've wandered too far...";
-player setPos markerPos "vgm_shared_hub"
+player setVehiclePosition [markerPos "vgm_shared_hub", [], 10];
