@@ -2,7 +2,7 @@
     File: fn_event_onPlayerDisconnect.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-12-04
+    Last Update: 2022-12-05
     Public: No
 
     Description:
@@ -30,7 +30,7 @@ _forwardingForOriginMachineId deleteAt _owner;
 _machineIdReferences get _owner resize [0];
 _machineIdReferences deleteAt _owner;
 
-// Clients will still forward to the server, which will tell them to stop forwarding if no listeners left.
+// Clients may still forward to the server, which will tell them to stop forwarding if no listeners left.
 
 // Tell all clients to remove any listeners for that machine specifically.
-[_owner] remoteExec ["para_g_fnc_event_handlePlayerDisconnected", /* TODO: Track all players listening */];
+[_owner] remoteExec ["para_g_fnc_event_handlePlayerDisconnected", 0];

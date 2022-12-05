@@ -2,7 +2,7 @@
     File: fn_event_forward.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-12-04
+    Last Update: 2022-12-05
     Public: No
 
     Description:
@@ -37,6 +37,9 @@ private _machinesListeningToThisOrigin = _forwardingForOriginMachineId
 
 private _allListeningMachines = flatten (_machinesListeningToAllOrigins + _machinesListeningToThisOrigin);
 
+// Stop forwarding if nobody is listening. Can happen when a player disconnects.
+// Doing this here is likely cheaper, than looping through all the events the disconnecting client was being forwarded.
+// But we can fall back on that approach if we need more performance from the forwarding.
 if (_allListeningMachines isEqualTo []) then {
     [_event] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _originMachineId];
 } else {

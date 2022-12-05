@@ -2,7 +2,7 @@
     File: fn_event_attachHandler.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-12-04
+    Last Update: 2022-12-05
     Public: No
 
     Description:
@@ -30,6 +30,21 @@ if (_hasNegative) then {
 
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
 private _handlerRegistrations = localNamespace getVariable "para_event_handlerRegistrations";
+private _handlerCache = localNamespace getVariable "para_event_handlerCache";
+private _handlersByOrigin = localNamespace getVariable "para_event_handlersByOrigin";
+
+private _handler = _handlerCache get _handlerId;
+if (isNil _handler) exitWith {
+    // Handles the situation where an event has been unsubscribed
+    // before the server has told the client to attach the handler.
+};
+
+// Cache is a temporary staging area - it shouldn't build up over time.
+_handlerCache deleteAt _handlerId;
+
+{
+    _handlersByOrigin getOrDefault [abs _x, createHashMap, true] set [_handlerId, _handler];
+} forEach _machineIds;
 
 {
     private _eventListenersByEventName = _eventListenersByOrigin getOrDefault [_x, createHashMap, true];

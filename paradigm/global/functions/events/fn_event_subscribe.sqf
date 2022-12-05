@@ -2,7 +2,7 @@
     File: fnc_event_subscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-04
+    Last Update: 2022-12-05
     Public: Yes
 
     Description:
@@ -42,8 +42,10 @@ if (para_event_handlerCount > para_event_max_integer) then {
     ["WARNING", format ["Possible bug: more than %1 event handlers allocated", para_event_max_integer]] call para_g_fnc_log;
 };
 
-private _allHandlers = localNamespace getVariable "para_event_handlers";
-_allHandlers set [_handlerId, _handler, true];
+// Stages the handler, ready to be attached to an event.
+// Allows the server to tell us to attach to the event, with the correct machine ids.
+private _handlerCache = localNamespace getVariable "para_event_handlerCache";
+_handlerCache set [_handlerId, _handler, true];
 
 private _isTargetingLocalClient = {
        _x isEqualType objNull &&

@@ -166,6 +166,7 @@ class para_s
         class event_onPlayerDisconnected {};
         class event_reportClientHealth {};
         class event_startForwardingMatchingEvents {};
+        class event_stopForwardingMatchingEvents {};
     };
 
 	class harass

@@ -2,7 +2,7 @@
     File: fn_event_system_init.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-04
+    Last Update: 2022-12-05
     Public: Yes
 
     Description:
@@ -32,8 +32,14 @@ para_event_client_array_template resize [para_event_max_supported_players, []];
 
 localNamespace setVariable ["para_event_eventsToForward", createHashMap];
 
-localNamespace setVariable ["para_event_handlers", createHashMap];
+// Temporary area for handlers to be saved, before being attached to an event locally.
+localNamespace setVariable ["para_event_handlerCache", createHashMap];
+// Nested hashmap, machine id -> handlerId -> handler.
+// Stored per-machine-id, so we can easily drop when a player disconnects.
+localNamespace setVariable ["para_event_handlersByOrigin", createHashMap];
+// Listeners, stored by machine id for fast handling when we receive a networked event.
 localNamespace setVariable ["para_event_listenersByEventOrigin", createHashMap];
+// Paths we've registered a single handler at, for fast unsubscribing.
 localNamespace setVariable ["para_event_handlerRegistrations", createHashMap];
 
 if (isServer) then {
