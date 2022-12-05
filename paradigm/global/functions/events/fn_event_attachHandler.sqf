@@ -29,7 +29,7 @@ if (_hasNegative) then {
 };
 
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
-private _handlerRegistrationPaths = localNamespace getVariable "para_event_handlerRegistrationPaths";
+private _handlerRegistrations = localNamespace getVariable "para_event_handlerRegistrations";
 
 {
     private _eventListenersByEventName = _eventListenersByOrigin getOrDefault [_x, createHashMap, true];
@@ -39,5 +39,5 @@ private _handlerRegistrationPaths = localNamespace getVariable "para_event_handl
     _eventListeners pushBackUnique _handlerId;
 
     // Register the handler path so we can remove it later without needing machineId/eventName/topic
-    _handlerRegistrationPaths getOrDefault [_handlerId, [], true] pushBack [_x, _eventName, _topic];
+    _handlerRegistrations getOrDefault [_handlerId, [_event, []], true] select 1 pushBack _x;
 } forEach _machineIds;

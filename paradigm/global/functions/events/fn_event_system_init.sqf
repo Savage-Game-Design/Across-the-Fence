@@ -2,7 +2,7 @@
     File: fn_event_system_init.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-11-27
+    Last Update: 2022-12-04
     Public: Yes
 
     Description:
@@ -34,7 +34,7 @@ localNamespace setVariable ["para_event_eventsToForward", createHashMap];
 
 localNamespace setVariable ["para_event_handlers", createHashMap];
 localNamespace setVariable ["para_event_listenersByEventOrigin", createHashMap];
-localNamespace setVariable ["para_event_handlerRegistrationPaths", createHashMap];
+localNamespace setVariable ["para_event_handlerRegistrations", createHashMap];
 
 if (isServer) then {
     // Maps machine id to an array storing the machine id. (E.g 46 -> [46])

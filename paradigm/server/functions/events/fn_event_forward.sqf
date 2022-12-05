@@ -35,4 +35,11 @@ private _machinesListeningToThisOrigin = _forwardingForOriginMachineId
     getOrDefault [_originMachineId, createHashMap]
     getOrDefault [_eventHash, []];
 
-[_originMachineId, _event, _data] remoteExec ["para_g_fnc_event_callRegisteredHandlers", flatten (_machinesListeningToAllOrigins + _machinesListeningToThisOrigin)];
+private _allListeningMachines = flatten (_machinesListeningToAllOrigins + _machinesListeningToThisOrigin);
+
+if (_allListeningMachines isEqualTo []) then {
+    [_event] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _originMachineId];
+} else {
+    [_originMachineId, _event, _data] remoteExec ["para_g_fnc_event_callRegisteredHandlers", _allListeningMachines];
+};
+
