@@ -2,7 +2,7 @@
     File: fn_areaLimiterEnable.sqf
     Author: veteran29
     Date: 2022-12-03
-    Last Update: 2022-12-04
+    Last Update: 2022-12-06
     Public: Yes
 
     Description:
@@ -32,7 +32,7 @@ vgm_sharedHub_areaLimiterScript = [] spawn {
     private _leftHubTime = -1;
     while {true} do {
         call {
-            if (_state == STATE_IN_AREA) exitWith {;
+            if (_state == STATE_IN_AREA) exitWith {
                 if (!PLAYER_IN_HUB) then {
                     _state = STATE_OUTSIDE_AREA;
                     _leftHubTime = time;
@@ -42,6 +42,7 @@ vgm_sharedHub_areaLimiterScript = [] spawn {
             if (_state == STATE_OUTSIDE_AREA) exitWith {
                 if (PLAYER_IN_HUB) exitWith {
                     _state = STATE_IN_AREA;
+                    _leftHubTime = -1;
                 };
 
                 if (time > (_leftHubTime + TELEPORT_DELAY)) exitWith {
