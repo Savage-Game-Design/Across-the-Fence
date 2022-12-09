@@ -2,7 +2,7 @@
     File: fnc_event_subscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-05
+    Last Update: 2022-12-09
     Public: Yes
 
     Description:
@@ -82,7 +82,9 @@ private _shouldListenRemotely = _clients findIf _isTargetingRemoteClient > -1;
 
 // Registering locally-relevant events as machine-specific events like this allows us to speed up local event triggering later
 if (_shouldListenLocally) then {
-    [[clientOwner], _event, _handlerId] call para_g_fnc_event_attachHandler;
+    // Keep in cache if events need forwarding, so that the server can also add the handler later.
+    private _keepHandlerInCache = _shouldListenRemotely;
+    [[clientOwner], _event, _handlerId, _keepHandlerInCache] call para_g_fnc_event_attachHandler;
 };
 
 if (_shouldListenRemotely) then {

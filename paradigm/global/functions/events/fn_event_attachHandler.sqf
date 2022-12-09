@@ -2,7 +2,7 @@
     File: fn_event_attachHandler.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-12-05
+    Last Update: 2022-12-09
     Public: No
 
     Description:
@@ -18,7 +18,7 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params [["_machineIds", [clientOwner]], "_event", "_handlerId"];
+params [["_machineIds", [clientOwner]], "_event", "_handlerId", ["_keepHandlerInCache", false]];
 
 _event params ["_eventName", "_topic"];
 
@@ -34,13 +34,17 @@ private _handlerCache = localNamespace getVariable "para_event_handlerCache";
 private _handlersByOrigin = localNamespace getVariable "para_event_handlersByOrigin";
 
 private _handler = _handlerCache get _handlerId;
-if (isNil _handler) exitWith {
+if (isNil "_handler") exitWith {
     // Handles the situation where an event has been unsubscribed
     // before the server has told the client to attach the handler.
+    ["INFO", format ["Unable to attach handler %1 for event %2 listening to %3, not found in cache", _handlerId, _event, _machineIds]] call para_g_fnc_log;
 };
 
 // Cache is a temporary staging area - it shouldn't build up over time.
-_handlerCache deleteAt _handlerId;
+// In some circumstances need to avoid removing handler, so it can be attached by something else later as well.
+if (!_keepHandlerInCache) then {
+    _handlerCache deleteAt _handlerId;
+};
 
 {
     _handlersByOrigin getOrDefault [abs _x, createHashMap, true] set [_handlerId, _handler];

@@ -2,7 +2,7 @@
     File: fn_event_system_init.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-05
+    Last Update: 2022-12-09
     Public: Yes
 
     Description:
@@ -54,6 +54,10 @@ if (isServer) then {
     addMissionEventHandler ["PlayerConnected", para_s_fnc_event_onPlayerConnected];
     addMissionEventHandler ["PlayerDisconnected", para_s_fnc_event_onPlayerDisconnected];
 
-    // QUESTION - Do we need to run PlayerConnected for players already connected?
+    // Need to initialise any already connected players
+    {
+        _x params ["_playerID", "_ownerId", "_playerUID", "_profileName", "_displayName", "_steamName", "_clientState", "_isHC", "_adminState", "_networkInfo", "_unit"];
+        [_playerId, _playerUID, _profileName, false, _ownerId] call para_s_fnc_event_onPlayerConnected;
+    } forEach (allUsers apply {getUserInfo _x});
 };
 

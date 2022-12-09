@@ -2,7 +2,7 @@
     File: fnc_event_unsubscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-05
+    Last Update: 2022-12-09
     Public: Yes
 
     Description:
@@ -24,12 +24,16 @@ params ["_handlerId"];
 private _handlerRegistrations = localNamespace getVariable "para_event_handlerRegistrations";
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
 private _handlersByOrigin = localNamespace getVariable "para_event_handlersByOrigin";
+private _handlerCache = localNamespace getVariable "para_event_handlerCache";
 
 private _registration = _handlerRegistrations getOrDefault [_handlerId, []];
 _registration params ["_event", "_originMachineIds"];
 _event params ["_eventName", "_topic"];
 
 private _machineIdsToStopForwarding = [];
+
+// Prevents any forwarding requests that may already be in flight re-attaching the handler.
+_handlerCache deleteAt _handlerId;
 
 {
     private _machineId = _x;

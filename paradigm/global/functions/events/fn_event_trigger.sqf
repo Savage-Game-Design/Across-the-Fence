@@ -2,7 +2,7 @@
     File: fnc_event_trigger.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-11-27
+    Last Update: 2022-12-05
     Public: Yes
 
     Description:
@@ -20,8 +20,11 @@
 
 params ["_event", "_data"];
 
+// Standardise event format, and hash topic to make sure it's a string.
 if !(_event isEqualType []) then {
-    _event = [_event, ""];
+    _event = [_event, hashValue ""];
+} else {
+    _event = [_event # 0, hashValue (_event # 1)]
 };
 
 private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
