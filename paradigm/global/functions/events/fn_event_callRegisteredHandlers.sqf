@@ -2,7 +2,7 @@
     File: fn_event_callRegisteredHandlers.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-12-04
+    Last Update: 2022-12-10
     Public: No
 
     Description:
@@ -51,7 +51,7 @@ if (_originMachineId != clientOwner) then {
     // This is where the machine id is `0` or negative, e.g `-2`
     // ====================
     private _globalEventListenersByTopic = _eventListenersByOrigin
-        getOrDefault [_originMachineId, createHashMap]
+        getOrDefault [0, createHashMap]
         getOrDefault [_eventName, createHashMap];
 
     private _globalGeneralHandlerIds = _globalEventListenersByTopic getOrDefault [_globalTopic, []];
