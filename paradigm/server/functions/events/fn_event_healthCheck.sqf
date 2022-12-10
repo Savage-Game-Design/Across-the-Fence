@@ -2,7 +2,7 @@
     File: fn_event_healthCheck.sqf
     Author:
     Date: 2022-12-01
-    Last Update: 2022-12-04
+    Last Update: 2022-12-10
     Public: Yes
 
     Description:
@@ -68,10 +68,10 @@ private _results = createHashMap;
             private _listenersByTopic = _y;
 
             {
-                private _eventHash = _x;
+                private _topicHash = _x;
                 private _handlers = _y;
 
-                private _eventForwarding = flatten (_forwardingForThisOrigin getOrDefault [_eventHash, []]);
+                private _eventForwarding = flatten (_forwardingForThisOrigin getOrDefault [hashValue [_eventName, _topicHash], []]);
 
                 if (_origin isEqualTo _clientMachineId) then {
                     continue
@@ -126,5 +126,7 @@ private _results = createHashMap;
         };
     } forEach _eventMap;
 } forEach _forwardingForOriginMachineId;
+
+// TODO - Check for handler existence
 
 _results
