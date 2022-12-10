@@ -2,7 +2,7 @@
     File: fn_event_system_init.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-09
+    Last Update: 2022-12-10
     Public: Yes
 
     Description:
@@ -53,6 +53,11 @@ if (isServer) then {
 
     addMissionEventHandler ["PlayerConnected", para_s_fnc_event_onPlayerConnected];
     addMissionEventHandler ["PlayerDisconnected", para_s_fnc_event_onPlayerDisconnected];
+
+    // Initialise server as part of the event system.
+    if (isServer && !hasInterface) then {
+        [getPlayerID objNull, getPlayerUID objNull, "Server", false, 2] call para_s_fnc_event_onPlayerConnected;
+    };
 
     // Need to initialise any already connected players
     {
