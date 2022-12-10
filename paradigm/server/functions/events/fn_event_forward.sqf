@@ -2,7 +2,7 @@
     File: fn_event_forward.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-12-05
+    Last Update: 2022-12-10
     Public: No
 
     Description:
@@ -21,6 +21,8 @@
 params ["_event", "_data"];
 
 ["DEBUG", format ["Forwarding event %1 from %2", _event, remoteExecutedOwner]] call para_g_fnc_log;
+
+// TODO - Fix catch all topics not being forwarded - either here, or from clients.
 
 private _originMachineId = remoteExecutedOwner;
 private _eventHash = hashValue _event;
@@ -43,6 +45,6 @@ private _allListeningMachines = flatten (_machinesListeningToAllOrigins + _machi
 if (_allListeningMachines isEqualTo []) then {
     [_event] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _originMachineId];
 } else {
-    [_originMachineId, _event, _data] remoteExec ["para_g_fnc_event_callRegisteredHandlers", _allListeningMachines];
+    [_originMachineId, _event, _data] remoteExec ["para_g_fnc_event_callRegisteredHandlers", _allListeningMachines - [_originMachineId]];
 };
 
