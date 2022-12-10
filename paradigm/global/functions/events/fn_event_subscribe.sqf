@@ -2,7 +2,7 @@
     File: fnc_event_subscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-09
+    Last Update: 2022-12-10
     Public: Yes
 
     Description:
@@ -22,19 +22,23 @@ params [["_clients", [clientOwner]], "_event", "_handler"];
 
 // Standardise event format, and hash topic to make sure it's a string.
 if !(_event isEqualType []) then {
-    _event = [_event, hashValue ""];
-} else {
-    _event = [_event # 0, hashValue (_event # 1)]
+    _event = [_event, ""];
 };
 
-_event params ["_eventName", "_topic"];
+private _topic = _event # 1;
+_event = [_event # 0, hashValue (_event # 1)];
+
+_event params ["_eventName", "_topicHash"];
 
 // Standardise event handler format to [params, code]
 if (_handler isEqualType {}) then {
     _handler = [[], _handler];
 };
 
-private _handlerId = format ["%1_%2_%3", _eventName, _topic, para_event_handlerCount];
+// Lets us pass the handler the original topic, rather than a hash
+_handler pushBack _topic;
+
+private _handlerId = format ["%1_%2_%3", _eventName, _topicHash, para_event_handlerCount];
 para_event_handlerCount = para_event_handlerCount + 1;
 
 // Log a warning if the event system is about to break, due to something bugging out and adding too many handlers
@@ -78,7 +82,7 @@ private _isTargetingRemoteClient = {
 private _shouldListenLocally = _clients findIf _isTargetingLocalClient > -1;
 private _shouldListenRemotely = _clients findIf _isTargetingRemoteClient > -1;
 
-["DEBUG", format ["New subscription to %1 on %2, with topic %3. Local: %4. Remote: %5", _eventName, _clients, _topic, _shouldListenLocally, _shouldListenRemotely]] call para_g_fnc_log;
+["DEBUG", format ["New subscription to %1 on %2, with topic %3 (%4). Local: %5. Remote: %6", _eventName, _clients, _topic, _topicHash, _shouldListenLocally, _shouldListenRemotely]] call para_g_fnc_log;
 
 // Registering locally-relevant events as machine-specific events like this allows us to speed up local event triggering later
 if (_shouldListenLocally) then {
