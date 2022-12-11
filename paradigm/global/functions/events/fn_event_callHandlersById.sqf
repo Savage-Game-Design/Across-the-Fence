@@ -2,7 +2,7 @@
     File: fn_event_callHandlersById.sqf
     Author:
     Date: 2022-11-24
-    Last Update: 2022-12-10
+    Last Update: 2022-12-11
     Public: No
 
     Description:
@@ -22,11 +22,21 @@ params ["_handlerIds", "_originMachineId", "_event", "_data"];
 
 _event params ["_eventName", "_topicHash"];
 
+["DEBUG", format ["Calling handlers for %1 from %2, ids: %3", _event, _originMachineId, _handlerIds]] call para_g_fnc_log;
+
 private _handlersByOrigin = localNamespace getVariable "para_event_handlersByOrigin";
 private _handlersForThisOrigin = _handlersByOrigin getOrDefault [_originMachineId, createHashMap];
+private _handlersForGlobalOrigin = _handlersByOrigin getOrDefault [_originMachineId, createHashMap];
 
 {
-    private _handler = _handlersForThisOrigin getOrDefault [_x, [[], {}, ""]];
+    private _handler =
+        _handlersForThisOrigin getOrDefault [
+            _x,
+            _handlersForGlobalOrigin getOrDefault [
+                _x,
+                [[], {}, ""]
+            ]
+        ];
     _handler params ["_savedParameters", "_code", "_topic"];
     [_data, _savedParameters, _eventName, _topic, _originMachineId] call _code;
 } forEach _handlerIds;

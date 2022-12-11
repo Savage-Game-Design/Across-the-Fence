@@ -2,7 +2,7 @@
     File: fn_event_testSystem.sqf
     Author:
     Date: 2022-12-09
-    Last Update: 2022-12-10
+    Last Update: 2022-12-11
     Public: No
 
     Description:
@@ -80,8 +80,8 @@ uiSleep 5;
 ["onTestGlobal", "Global test server data"] call para_g_fnc_event_trigger;
 ["onTestServer", "Server test server data"] call para_g_fnc_event_trigger;
 ["onTestLocal", "Local test server data"] call para_g_fnc_event_trigger;
-[["onTestTopic", "Fish"], "Fish topic test server data"] call para_g_fnc_event_trigger;
-[["onTestTopic", "Goose"], "Goose topic test server data"] call para_g_fnc_event_trigger;
+[["onTestTopic", "fish"], "Fish topic test server data"] call para_g_fnc_event_trigger;
+[["onTestTopic", "goose"], "Goose topic test server data"] call para_g_fnc_event_trigger;
 
 // Fire test events from client
 
@@ -192,6 +192,14 @@ private _fnc_expect = {
         _clientTestData getOrDefault ["test topicless listen", []],
         "onTestTopic",
         "fish",
+        2,
+        1
+    ] call _fnc_matchEvent
+    &&
+    [
+        _clientTestData getOrDefault ["test topicless listen", []],
+        "onTestTopic",
+        "goose",
         2,
         1
     ] call _fnc_matchEvent
