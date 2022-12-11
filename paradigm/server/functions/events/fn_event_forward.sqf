@@ -22,20 +22,23 @@ params ["_event", "_data"];
 
 ["DEBUG", format ["Forwarding event %1 from %2", _event, remoteExecutedOwner]] call para_g_fnc_log;
 
-// TODO - Fix catch all topics not being forwarded - either here, or from clients.
-
 private _originMachineId = remoteExecutedOwner;
-private _eventHash = hashValue _event;
+private _topicEventHash = hashValue _event;
+private _generalEventHash = hashValue [_event, hashValue ""];
 
 private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
 
-private _machinesListeningToAllOrigins = _forwardingForOriginMachineId
-    getOrDefault [0, createHashMap]
-    getOrDefault [_eventHash, []];
+private _globalEvents = _forwardingForOriginMachineId getOrDefault [0, createHashMap];
+private _machinesListeningToAllOrigins =
+    (_globalEvents getOrDefault [_topicEventHash, []])
+    +
+    (_globalEvents getOrDefault [_generalEventHash, []]);
 
-private _machinesListeningToThisOrigin = _forwardingForOriginMachineId
-    getOrDefault [_originMachineId, createHashMap]
-    getOrDefault [_eventHash, []];
+private _originSpecificEvents =  _forwardingForOriginMachineId getOrDefault [_originMachineId, createHashMap];
+private _machinesListeningToThisOrigin =
+    (_originSpecificEvents getOrDefault [_topicEventHash, []])
+    +
+    (_originSpecificEvents getOrDefault [_generalEventHash, []]);
 
 private _allListeningMachines = flatten (_machinesListeningToAllOrigins + _machinesListeningToThisOrigin);
 

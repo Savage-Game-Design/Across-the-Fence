@@ -27,10 +27,12 @@ if !(_event isEqualType []) then {
     _event = [_event # 0, hashValue (_event # 1)]
 };
 
+private _generalEvent = [_event # 0, hashValue ""];
+
 private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
 
 // Forward event to server only if the client has been asked for it
-if (_eventsToForward get hashValue _event) then {
+if (_eventsToForward getOrDefault [hashValue _event, false] || _eventsToForward getOrDefault [hashValue _generalEvent, false]) then {
     [_event, _data] remoteExec ["para_s_fnc_event_forward", 2];
 };
 

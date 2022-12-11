@@ -26,7 +26,7 @@ private _handlersByOrigin = localNamespace getVariable "para_event_handlersByOri
 private _handlersForThisOrigin = _handlersByOrigin getOrDefault [_originMachineId, createHashMap];
 
 {
-    private _handler = _handlersForThisOrigin getOrDefault [_x, [[], {}]];
+    private _handler = _handlersForThisOrigin getOrDefault [_x, [[], {}, ""]];
     _handler params ["_savedParameters", "_code", "_topic"];
     [_data, _savedParameters, _eventName, _topic, _originMachineId] call _code;
 } forEach _handlerIds;
