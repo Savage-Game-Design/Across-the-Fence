@@ -73,8 +73,8 @@ private _isTargetingRemoteClient = {
     || _x isEqualType 0 &&
         {
                _x isEqualTo 0
-            || !(_x isEqualTo clientOwner)
-            || isServer && !(_x isEqualTo 2)
+            || (_x isNotEqualTo clientOwner)
+            || isServer && (_x isNotEqualTo 2)
             || _x < 0
         }
 };
