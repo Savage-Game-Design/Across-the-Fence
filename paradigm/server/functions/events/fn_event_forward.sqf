@@ -2,7 +2,7 @@
     File: fn_event_forward.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-12-10
+    Last Update: 2022-12-11
     Public: No
 
     Description:
@@ -24,7 +24,7 @@ params ["_event", "_data"];
 
 private _originMachineId = remoteExecutedOwner;
 private _topicEventHash = hashValue _event;
-private _generalEventHash = hashValue [_event, hashValue ""];
+private _generalEventHash = hashValue [_event # 0, hashValue ""];
 
 private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
 
