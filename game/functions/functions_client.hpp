@@ -18,7 +18,18 @@ class vgm_c
         class handle_light_level_loop {};
         class handle_welcome_screen {};
         class init_info_panel_handler_loop {};
-    }
+    };
+
+    class skills
+    {
+        VGM_CLIENT_PATH(\systems\skills\client);
+
+        class skills_openSkillTree {};
+        class skills_preInit
+        {
+            preInit = 1;
+        };
+    };
 };
 
 class vgm_g

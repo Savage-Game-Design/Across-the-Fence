@@ -15,6 +15,7 @@ class vgm_skillTemplate {
 
 class vgm_skillTrees {
     class combatTree {
+        displayName = "Combat";
         // rifleman skills
         class skills {
             class tier_1 {
@@ -46,6 +47,7 @@ class vgm_skillTrees {
         // specializations
         class subtrees {
             class medicTree {
+                displayName = "Medic";
                 class skills {
                     class tier_1 {
                         class medicTrait: vgm_skillTemplate {
@@ -62,6 +64,7 @@ class vgm_skillTrees {
                 // expertise
                 class subtrees {
                     class surgeonTree {
+                        displayName = "Surgeon";
                         class skills {
                             class tier_1 {
                                 class skill_1: vgm_skillTemplate {};
@@ -74,6 +77,10 @@ class vgm_skillTrees {
         };
     };
 
-    class utility {};
-    class social {};
+    class utility {
+        displayName = "Utility";
+    };
+    class social {
+        displayName = "Social";
+    };
 };
