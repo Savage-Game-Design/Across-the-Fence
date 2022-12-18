@@ -3,7 +3,7 @@
 class vgm_skillTemplate {
     displayName = "SKILL NAME";
     description = "SKILL DESCRIPTION";
-    icon = "";
+    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_a_ca.paa";
 
     isActive = 0;
     applyOnRespawn = 0;
@@ -20,10 +20,14 @@ class vgm_skillTrees {
         class skills {
             class tier_1 {
                 class moreStamina: vgm_skillTemplate {
+                    displayName = "More Stamina";
+                    description = "Increases amount of available stamina.";
                     codeApply = "_this setUnitTrait ['loadCoef', 2]";
                 };
 
                 class steadyAim: vgm_skillTemplate {
+                    displayName = "Steady Aim";
+                    description = "Decreases weapon sway.";
                     codeApply = "_this setCustomAimCoef 0.5";
                 };
             };
@@ -51,6 +55,8 @@ class vgm_skillTrees {
                 class skills {
                     class tier_1 {
                         class medicTrait: vgm_skillTemplate {
+                            displayName = "Medic Trait";
+                            description = "Allows to use MediKits.";
                             codeApply = "_this setUnitTrait ['Medic', true]";
                         };
                     };
@@ -77,10 +83,10 @@ class vgm_skillTrees {
         };
     };
 
-    class utility {
+    class utilityTree {
         displayName = "Utility";
     };
-    class social {
+    class socialTree {
         displayName = "Social";
     };
 };
