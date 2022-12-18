@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2022-12-17
+    Last Update: 2022-12-18
     Public: No
 
     Description:
@@ -31,7 +31,20 @@ private _fnc_parseSkillTree = {
         private _cfgTier = _cfgSkills >> _x;
         if (isNull _cfgTier) exitWith {};
 
-        _skillTree get "skills" pushBack ("true" configClasses _cfgTier);
+        private _skills = "true" configClasses _cfgTier apply {
+            createHashMapFromArray [
+                ["displayName", getText (_x >> "displayName")],
+                ["description", getText (_x >> "description")],
+                ["icon", getText (_x >> "icon")],
+                ["isActive", getNumber (_x >> "isActive") > 0],
+                ["applyOnRespawn", getNumber (_x >> "applyOnRespawn") > 0],
+                ["conditionUnlock", compileFinal getText (_x >> "conditionUnlock")],
+                ["codeApply", compileFinal getText (_x >> "codeApply")],
+                ["codeActivate", compileFinal getText (_x >> "codeActivate")]
+            ];
+        };
+
+        _skillTree get "skills" pushBack _skills;
     } forEach SKILL_TIERS;
 
     // recurse on subtrees
