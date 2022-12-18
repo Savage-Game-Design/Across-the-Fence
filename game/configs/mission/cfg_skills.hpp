@@ -80,6 +80,11 @@ class vgm_skillTrees {
                     };
                 };
             };
+
+            class engineerTree {
+                displayName = "Engineer";
+                class skills {};
+            };
         };
     };
 
