@@ -43,6 +43,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\core\global);
 
+        class execNextFrame {};
         class preInit
         {
             preInit = 1;
