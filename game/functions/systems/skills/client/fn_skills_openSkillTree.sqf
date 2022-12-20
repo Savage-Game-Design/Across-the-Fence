@@ -96,7 +96,7 @@ private _fnc_drawSkillTree = {
             private _ctrlGrp = ctrlParentControlsGroup _ctrlBtn;
 
             private _prevTree = _prevTrees#0;
-            [_ctrlGrp, _prevTree, _prevTrees - [_prevTree]] spawn vgm_fnc_drawSkillTree;
+            [vgm_fnc_drawSkillTree, [_ctrlGrp, _prevTree, _prevTrees - [_prevTree]]] call vgm_g_fnc_execNextFrame;
         }];
     };
 
@@ -170,7 +170,7 @@ private _fnc_drawSkillTree = {
             (_ctrlBtn getVariable "vgm_params") params ["_skillTree", "_prevTrees"];
             private _ctrlGrp = ctrlParentControlsGroup _ctrlBtn;
 
-            [_ctrlGrp, _skillTree, _prevTrees] spawn vgm_fnc_drawSkillTree;
+            [vgm_fnc_drawSkillTree, [_ctrlGrp, _skillTree, _prevTrees]] call vgm_g_fnc_execNextFrame;
         }];
     } forEach (_skillTree get "subtrees");
 };
