@@ -70,10 +70,10 @@ private _results = createHashMap;
             private _listenersByTopic = _y;
 
             {
-                private _topicHash = _x;
+                private _topicString = _x;
                 private _handlers = _y;
 
-                private _eventForwarding = flatten (_forwardingForThisOrigin getOrDefault [hashValue [_eventName, _topicHash], []]);
+                private _eventForwarding = flatten (_forwardingForThisOrigin getOrDefault [[_eventName, _topicString], []]);
 
                 if (_origin isEqualTo _clientMachineId) then {
                     continue
@@ -84,8 +84,8 @@ private _results = createHashMap;
                         _results,
                         'ERROR',
                         format [
-                            "No event forwarding to client %1, from %2, for event %3 with hash %4",
-                            _clientMachineId, _origin, _eventName, str _eventHash
+                            "No event forwarding to client %1, from %2, for event %3 with stringified topic %4",
+                            _clientMachineId, _origin, _eventName, _topicString
                         ]
                     ] call _fnc_reportIssue;
                 };
@@ -103,18 +103,18 @@ private _results = createHashMap;
     private _originForwarding = para_s_event_clientHealthInfo getOrDefault [_origin, createHashMap] get ["eventsToForward", createHashMap];
 
     {
-        private _eventHash = _x;
+        private _hashableEvent = _x;
         private _destinations = _y;
 
         private _isEventWantedByClients = !(flatten _destinations isEqualTo []);
 
-        if (_originForwarding getOrDefault [_eventHash, false]) then {
+        if (_originForwarding getOrDefault [_hashableEvent, false]) then {
             // If no clients wants the event any more, make sure no clients are forwarding it.
             if (!_isEventWantedByClients) then {
                 [
                     _results,
                     'WARNING',
-                    format ['Client %1 is forwarding event %2 unnecessarily', _origin, _eventHash]
+                    format ['Client %1 is forwarding event %2 unnecessarily', _origin, _hashableEvent]
                 ] call _fnc_reportIssue;
             };
         } else {
@@ -122,7 +122,7 @@ private _results = createHashMap;
                 [
                     _results,
                     'ERROR',
-                    format ['Client %1 is not forwarding event %2, wanted by %3', _origin, _eventHash, flatten _destinations]
+                    format ['Client %1 is not forwarding event %2, wanted by %3', _origin, _hashableEvent, flatten _destinations]
                 ] call _fnc_reportIssue;
             };
         };
