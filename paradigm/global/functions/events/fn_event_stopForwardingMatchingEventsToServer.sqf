@@ -1,8 +1,8 @@
 /*
-    File: fn_event_startForwardingMatchingEventsToServer.sqf
+    File: fn_event_stopForwardingMatchingEventsToServer.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-11-27
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -18,9 +18,8 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_event"];
+params ["_hashableEvent"];
 
 private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
-private _eventHash = hashValue _event;
 
-_eventsToForward deleteAt _eventHash;
+_eventsToForward deleteAt _hashableEvent;

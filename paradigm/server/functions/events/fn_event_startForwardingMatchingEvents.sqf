@@ -2,7 +2,7 @@
     File: fn_event_startForwardingMatchingEvents.sqf
     Author:
     Date: 2022-11-24
-    Last Update: 2022-12-04
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -45,14 +45,14 @@ _originMachineIdsToListenTo = _originMachineIdsToListenTo - [remoteExecutedOwner
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
 private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
 
-private _eventHash = hashValue _event;
+private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
 private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwner;
 
 // Register the client sending the request as wanting events forwarded from _clients
 {
     private _listeningMachineIds = _forwardingForOriginMachineId
         getOrDefault [_x, createHashMap, true]
-        getOrDefault [_eventHash, [], true];
+        getOrDefault [_hashableEvent, [], true];
     // Duplication shouldn't matter, remoteExec handles it more efficiently than our code can
     _listeningMachineIds pushBack _listenerMachineIdReference;
 } forEach _originMachineIdsToListenTo;
@@ -62,4 +62,4 @@ private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwn
 [_originMachineIdsToListenTo, _event, _handlerId] remoteExec ["para_g_fnc_event_attachHandler", remoteExecutedOwner];
 
 // Server tells the other clients; to forward events on.
-[_event] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _originMachineIdsToListenTo];
+[_hashableEvent] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _originMachineIdsToListenTo];

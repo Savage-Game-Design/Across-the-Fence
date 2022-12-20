@@ -2,7 +2,7 @@
     File: fn_event_stopForwardingMatchingEvents.sqf
     Author:
     Date: 2022-12-04
-    Last Update: 2022-12-04
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -22,18 +22,18 @@ params [["_originMachineIds"], "_event"];
 
 ["DEBUG", format ["Stopping forwarding event %1 from %2 to %3", _event, _originMachineIds, remoteExecutedOwner]] call para_g_fnc_log;
 
-private _eventHash = hashValue _event;
+private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
 private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
 private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
 private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwner;
 
-private _globalForwarding = _forwardingForOriginMachineId getOrDefault [0, createHashMap] getOrDefault [_eventHash, []];
+private _globalForwarding = _forwardingForOriginMachineId getOrDefault [0, createHashMap] getOrDefault [_hashableEvent, []];
 
 private _clientsToStopForwardingEvent = [];
 
 {
     private _originMachineId = _x;
-    private _originMachineForwarding = _forwardingForOriginMachineId getOrDefault [_originMachineId, createHashMap] getOrDefault [_eventHash, []];
+    private _originMachineForwarding = _forwardingForOriginMachineId getOrDefault [_originMachineId, createHashMap] getOrDefault [_hashableEvent, []];
     private _originMachineIndex = _originMachineForwarding find _listenerMachineIdReference;
 
     private _totalStartingEventListeners = count _globalForwarding + count _originMachineForwarding;
@@ -51,6 +51,5 @@ private _clientsToStopForwardingEvent = [];
 } forEach _originMachineIds;
 
 if !(_clientsToStopForwardingEvent isEqualTo []) then {
-    [_event] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _clientsToStopForwardingEvent];
+    [_hashableEvent] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _clientsToStopForwardingEvent];
 };
-

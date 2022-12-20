@@ -2,7 +2,7 @@
     File: fnc_event_unsubscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-09
+    Last Update: 2022-12-20
     Public: Yes
 
     Description:
@@ -28,7 +28,8 @@ private _handlerCache = localNamespace getVariable "para_event_handlerCache";
 
 private _registration = _handlerRegistrations getOrDefault [_handlerId, []];
 _registration params ["_event", "_originMachineIds"];
-_event params ["_eventName", "_topic"];
+private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
+_hashableEvent params ["_eventName", "_topicString"];
 
 private _machineIdsToStopForwarding = [];
 
@@ -40,7 +41,7 @@ _handlerCache deleteAt _handlerId;
     // Machine may already have been disconnected, so don't need to do anything.
     if !(_machineId in _eventListenersByOrigin) then { continue };
     // This should be guaranteed by attachHandler to always be a valid path
-    private _listeners = _eventListenersByOrigin get _machineId get _eventName get _topic;
+    private _listeners = _eventListenersByOrigin get _machineId get _eventName get _topicString;
     _listeners deleteAt (_listeners find _handlerId);
     // If client is not listening to this event from this machine now, tell server to stop forwarding it.
     if (_listeners isEqualTo []) then {

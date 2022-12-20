@@ -2,7 +2,7 @@
     File: fn_event_attachHandler.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-12-09
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -18,9 +18,9 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params [["_machineIds", [clientOwner]], "_event", "_handlerId", ["_keepHandlerInCache", false]];
+params [["_machineIds", [clientOwner]], "_hashableEvent", "_originalEvent", "_handlerId", ["_keepHandlerInCache", false]];
 
-_event params ["_eventName", "_topic"];
+_hashableEvent params ["_eventName", "_topicString"];
 
 // Negative machine ids need to be registered to 0 (global) as well, as we treat negatives as "do not call" list.
 private _hasNegative = _machineIds findIf {_x < 0} > -1;
@@ -53,10 +53,10 @@ if (!_keepHandlerInCache) then {
 {
     private _eventListenersByEventName = _eventListenersByOrigin getOrDefault [_x, createHashMap, true];
     private _eventListenersByTopic = _eventListenersByEventName getOrDefault [_eventName, createHashMap, true];
-    private _eventListeners = _eventListenersByTopic getOrDefault [_topic, [], true];
+    private _eventListeners = _eventListenersByTopic getOrDefault [_topicString, [], true];
 
     _eventListeners pushBackUnique _handlerId;
 
     // Register the handler path so we can remove it later without needing machineId/eventName/topic
-    _handlerRegistrations getOrDefault [_handlerId, [_event, []], true] select 1 pushBack _x;
+    _handlerRegistrations getOrDefault [_handlerId, [_originalEvent, []], true] select 1 pushBack _x;
 } forEach _machineIds;

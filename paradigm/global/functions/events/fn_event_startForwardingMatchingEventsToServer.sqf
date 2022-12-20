@@ -2,7 +2,7 @@
     File: fn_event_startForwardingMatchingEventsToServer.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-11-27
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -18,6 +18,6 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_event"];
+params ["_hashableEvent"];
 
-localNamespace getVariable "para_event_eventsToForward" set [hashValue _event, true];
+localNamespace getVariable "para_event_eventsToForward" set [_hashableEvent, true];

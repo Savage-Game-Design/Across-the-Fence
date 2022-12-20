@@ -2,7 +2,7 @@
     File: fn_event_healthCheck.sqf
     Author:
     Date: 2022-12-01
-    Last Update: 2022-12-10
+    Last Update: 2022-12-20
     Public: Yes
 
     Description:
@@ -18,6 +18,8 @@
     Example(s):
         [parameter] call vgm_X_fnc_component_myFunction
  */
+
+// TODO Fix hashing
 
 para_s_event_clientHealthInfo = createHashMap;
 private _requestTime = serverTime;

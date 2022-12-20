@@ -2,7 +2,7 @@
     File: fn_event_callRegisteredHandlers.sqf
     Author:
     Date: 2022-11-21
-    Last Update: 2022-12-11
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -18,17 +18,17 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_originMachineId", "_event", "_data"];
+params ["_originMachineId", "_hashableEvent", "_originalEvent", "_data"];
 
-["DEBUG", format ["Calling handlers for %1 from %2", _event, _originMachineId]] call para_g_fnc_log;
+["DEBUG", format ["Calling handlers for %1 from %2", _originalEvent, _originMachineId]] call para_g_fnc_log;
 
-_event params ["_eventName", "_topicHash"];
+_hashableEvent params ["_eventName", "_topicString"];
 
 private _eventListenersByOrigin = localNamespace getVariable "para_event_listenersByEventOrigin";
 
 private _handlerIdsToCall = [];
 
-private _globalTopic = hashValue "";
+private _globalTopic = "";
 
 // ====================
 // Find all event handlers tied to this specific client origin.
@@ -40,8 +40,8 @@ private _machineSpecificEventListenersByTopic = _eventListenersByOrigin
 
 _handlerIdsToCall = _handlerIdsToCall + (_machineSpecificEventListenersByTopic getOrDefault [_globalTopic, []]);
 
-if (_topicHash isNotEqualTo _globalTopic) then {
-    _handlerIdsToCall = _handlerIdsToCall + (_machineSpecificEventListenersByTopic getOrDefault [_topicHash, []]);
+if (_topicString isNotEqualTo _globalTopic) then {
+    _handlerIdsToCall = _handlerIdsToCall + (_machineSpecificEventListenersByTopic getOrDefault [_topicString, []]);
 };
 
 // Locally relevant events are always registered as machine-specific
@@ -57,9 +57,9 @@ if (_originMachineId != clientOwner) then {
 
     _handlerIdsToCall = _handlerIdsToCall + (_globalEventListenersByTopic getOrDefault [_globalTopic, []]);
 
-    if (_topicHash isNotEqualTo _globalTopic) then {
-       _handlerIdsToCall = _handlerIdsToCall + (_globalEventListenersByTopic getOrDefault [_topicHash, []]);
+    if (_topicString isNotEqualTo _globalTopic) then {
+       _handlerIdsToCall = _handlerIdsToCall + (_globalEventListenersByTopic getOrDefault [_topicString, []]);
     };
 };
 
-[_handlerIdsToCall, _originMachineId, _event, _data] spawn para_g_fnc_event_callHandlersById;
+[_handlerIdsToCall, _originMachineId, _originalEvent, _data] spawn para_g_fnc_event_callHandlersById;

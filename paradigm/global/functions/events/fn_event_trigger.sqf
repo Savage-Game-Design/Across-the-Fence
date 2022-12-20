@@ -2,7 +2,7 @@
     File: fnc_event_trigger.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-10
+    Last Update: 2022-12-20
     Public: Yes
 
     Description:
@@ -20,22 +20,21 @@
 
 params ["_event", "_data"];
 
-// Standardise event format, and hash topic to make sure it's a string.
+// Standardise event format
 if !(_event isEqualType []) then {
-    _event = [_event, hashValue ""]
-} else {
-    _event = [_event # 0, hashValue (_event # 1)]
+    _event = [_event, ""]
 };
 
-private _generalEvent = [_event # 0, hashValue ""];
+private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
+private _generalEvent = [_event # 0, ""];
 
 private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
 
 // Forward event to server only if the client has been asked for it
-if (_eventsToForward getOrDefault [hashValue _event, false] || _eventsToForward getOrDefault [hashValue _generalEvent, false]) then {
+if (_eventsToForward getOrDefault [_hashableEvent, false] || _eventsToForward getOrDefault [_generalEvent, false]) then {
     [_event, _data] remoteExec ["para_s_fnc_event_forward", 2];
 };
 
 // Call any local handlers
-[clientOwner, _event, _data] call para_g_fnc_event_callRegisteredHandlers;
+[clientOwner, _hashableEvent, _event, _data] call para_g_fnc_event_callRegisteredHandlers;
 

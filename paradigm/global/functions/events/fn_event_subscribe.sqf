@@ -2,7 +2,7 @@
     File: fnc_event_subscribe.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-10
+    Last Update: 2022-12-20
     Public: Yes
 
     Description:
@@ -25,20 +25,17 @@ if !(_event isEqualType []) then {
     _event = [_event, ""];
 };
 
-private _topic = _event # 1;
-_event = [_event # 0, hashValue (_event # 1)];
-
-_event params ["_eventName", "_topicHash"];
-
 // Standardise event handler format to [params, code]
 if (_handler isEqualType {}) then {
     _handler = [[], _handler];
 };
 
-// Lets us pass the handler the original topic, rather than a hash
-_handler pushBack _topic;
+private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
 
-private _handlerId = format ["%1_%2_%3", _eventName, _topicHash, para_event_handlerCount];
+_event params ["_eventName", "_topic"];
+private _topicString = _hashableEvent # 1;
+
+private _handlerId = format ["%1_%2_%3", _eventName, _topicString, para_event_handlerCount];
 para_event_handlerCount = para_event_handlerCount + 1;
 
 // Log a warning if the event system is about to break, due to something bugging out and adding too many handlers
@@ -82,13 +79,13 @@ private _isTargetingRemoteClient = {
 private _shouldListenLocally = _clients findIf _isTargetingLocalClient > -1;
 private _shouldListenRemotely = _clients findIf _isTargetingRemoteClient > -1;
 
-["DEBUG", format ["New subscription to %1 on %2, with topic %3 (%4). Local: %5. Remote: %6", _eventName, _clients, _topic, _topicHash, _shouldListenLocally, _shouldListenRemotely]] call para_g_fnc_log;
+["DEBUG", format ["New subscription to %1 on %2, with topic %3 (%4). Local: %5. Remote: %6", _eventName, _clients, _topic, _topicString, _shouldListenLocally, _shouldListenRemotely]] call para_g_fnc_log;
 
 // Registering locally-relevant events as machine-specific events like this allows us to speed up local event triggering later
 if (_shouldListenLocally) then {
     // Keep in cache if events need forwarding, so that the server can also add the handler later.
     private _keepHandlerInCache = _shouldListenRemotely;
-    [[clientOwner], _event, _handlerId, _keepHandlerInCache] call para_g_fnc_event_attachHandler;
+    [[clientOwner], _hashableEvent, _event, _handlerId, _keepHandlerInCache] call para_g_fnc_event_attachHandler;
 };
 
 if (_shouldListenRemotely) then {

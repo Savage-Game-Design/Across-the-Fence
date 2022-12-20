@@ -133,6 +133,7 @@ class para_g
         class event_attachHandler {};
         class event_callHandlersById {};
         class event_callRegisteredHandlers {};
+        class event_convertEventToHashableEvent {};
         class event_handlePlayerDisconnected {};
         class event_healthCheck {};
         class event_startForwardingMatchingEventsToServer {};
