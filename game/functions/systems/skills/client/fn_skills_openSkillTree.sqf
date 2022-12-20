@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author:
     Date: 2022-12-16
-    Last Update: 2022-12-18
+    Last Update: 2022-12-20
     Public: No
 
     Description:
@@ -73,8 +73,32 @@ private _fnc_draw = {
 };
 
 private _fnc_drawSkillTree = {
-    params ["_ctrlGrp", "_skillTree", ["_prevTree", nil]];
+    params ["_ctrlGrp", "_skillTree", ["_prevTrees", []]];
     private _display = ctrlParent _ctrlGrp;
+
+    {
+        ctrlDelete _x;
+    } forEach allControls _ctrlGrp;
+
+    if (count _prevTrees > 0) then {
+        private _ctrlPrevTreeBtn = _display ctrlCreate ["RscButton", -1, _ctrlGrp];
+        _ctrlPrevTreeBtn ctrlSetText (_prevTrees#0 get "displayName");
+        _ctrlPrevTreeBtn ctrlSetPosition [
+            (GUI_GRID_W_FULL - GUI_GRID_W * 4) / 2, GUI_GRID_H * 1,
+            GUI_GRID_W * 4, GUI_GRID_H * 2
+        ];
+        _ctrlPrevTreeBtn ctrlCommit 0;
+
+        _ctrlPrevTreeBtn setVariable ["vgm_params", [_prevTrees]];
+        _ctrlPrevTreeBtn ctrlAddEventHandler ["ButtonClick", {
+            params ["_ctrlBtn"];
+            (_ctrlBtn getVariable "vgm_params") params ["_prevTrees"];
+            private _ctrlGrp = ctrlParentControlsGroup _ctrlBtn;
+
+            private _prevTree = _prevTrees#0;
+            [_ctrlGrp, _prevTree, _prevTrees - [_prevTree]] spawn vgm_fnc_drawSkillTree;
+        }];
+    };
 
     private _lastCtrlSkillGrp = controlNull;
     {
@@ -95,7 +119,7 @@ private _fnc_drawSkillTree = {
             private _ctrlSkillGrp = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1, _ctrlGrp];
             _ctrlSkillGrp ctrlSetPosition [
                 (GUI_GRID_W_FULL - SKILL_TREE_W) / 2 + SKILL_TREE_COL_W * (_colIdx mod 2),
-                (GUI_GRID_H * 2) + (SKILL_TREE_ROW_H * _rowIdx),
+                (GUI_GRID_H * 3) + (SKILL_TREE_ROW_H * _rowIdx),
                 SKILL_TREE_COL_W, SKILL_TREE_ROW_H
             ];
             _ctrlSkillGrp ctrlCommit 0;
@@ -140,17 +164,13 @@ private _fnc_drawSkillTree = {
         ];
         _ctrlSubtreeBtn ctrlCommit 0;
 
-        _ctrlSubtreeBtn setVariable ["vgm_tree", _y];
-        // TODO handle parent tree
+        _ctrlSubtreeBtn setVariable ["vgm_params", [_y, [_skillTree] + _prevTrees]];
         _ctrlSubtreeBtn ctrlAddEventHandler ["ButtonClick", {
             params ["_ctrlBtn"];
+            (_ctrlBtn getVariable "vgm_params") params ["_skillTree", "_prevTrees"];
             private _ctrlGrp = ctrlParentControlsGroup _ctrlBtn;
 
-            [_ctrlGrp, _ctrlBtn getVariable "vgm_tree"] spawn vgm_fnc_drawSkillTree;
-
-            {
-                ctrlDelete _x;
-            } forEach allControls _ctrlGrp;
+            [_ctrlGrp, _skillTree, _prevTrees] spawn vgm_fnc_drawSkillTree;
         }];
     } forEach (_skillTree get "subtrees");
 };
