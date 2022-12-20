@@ -32,7 +32,7 @@ if (_handler isEqualType {}) then {
 
 private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
 
-_event params ["_eventName", "_topic"];
+_event params [["_eventName", nil, [""]], "_topic"];
 private _topicString = _hashableEvent # 1;
 
 private _handlerId = format ["%1_%2_%3", _eventName, _topicString, para_event_handlerCount];
