@@ -20,7 +20,8 @@ if (!hasInterface) exitWith {};
 #define SKILL_TIERS ["tier_1", "tier_2", "tier_3", "tier_4"]
 
 private _fnc_parseSkillTree = {
-    params ["_cfgSkillTree"];
+    params ["_cfgSkillTree", ["_path", []]];
+    _path pushBack configName _cfgSkillTree;
 
     private _skillTree = createHashMapFromArray [
         ["displayName", getText (_cfgSkillTree >> "displayName")],
@@ -33,6 +34,7 @@ private _fnc_parseSkillTree = {
 
         private _skills = "true" configClasses _cfgTier apply {
             createHashMapFromArray [
+                ["path", _path + [configName _x]],
                 ["displayName", getText (_x >> "displayName")],
                 ["description", getText (_x >> "description")],
                 ["icon", getText (_x >> "icon")],
@@ -54,7 +56,7 @@ private _fnc_parseSkillTree = {
         _skillTree set ["subtrees", _subtrees];
 
         {
-            _subtrees set [configName _x, _x call _fnc_parseSkillTree];
+            _subtrees set [configName _x, [_x, _path] call _fnc_parseSkillTree];
         } forEach ("true" configClasses _cfgSubtrees);
     };
 
