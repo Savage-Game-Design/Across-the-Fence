@@ -32,9 +32,12 @@ private _fnc_parseSkillTree = {
         private _cfgTier = _cfgSkills >> _x;
         if (isNull _cfgTier) exitWith {};
 
+        private _tier = _forEachIndex;
         private _skills = "true" configClasses _cfgTier apply {
             createHashMapFromArray [
                 ["path", _path + [configName _x]],
+                ["tier", _tier],
+                ["cost", 1],
                 ["displayName", getText (_x >> "displayName")],
                 ["description", getText (_x >> "description")],
                 ["icon", getText (_x >> "icon")],
