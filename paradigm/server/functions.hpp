@@ -162,12 +162,12 @@ class para_s
         PARA_SERVER_PATH(\events);
         class event_forward {};
         class event_healthCheck {};
-        class event_onPlayerConnected {};
-        class event_onPlayerDisconnected {};
+        class event_registerClient {};
         class event_reportClientHealth {};
         class event_startForwardingMatchingEvents {};
         class event_stopForwardingMatchingEvents {};
         class event_testSystem {};
+        class event_unregisterClient {};
     };
 
 	class harass

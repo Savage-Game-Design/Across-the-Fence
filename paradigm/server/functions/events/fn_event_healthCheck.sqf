@@ -2,7 +2,7 @@
     File: fn_event_healthCheck.sqf
     Author:
     Date: 2022-12-01
-    Last Update: 2022-12-20
+    Last Update: 2022-12-23
     Public: Yes
 
     Description:
@@ -100,7 +100,7 @@ private _results = createHashMap;
     private _origin = _x;
     private _eventMap = _y;
 
-    private _originForwarding = para_s_event_clientHealthInfo getOrDefault [_origin, createHashMap] get ["eventsToForward", createHashMap];
+    private _originForwarding = para_s_event_clientHealthInfo getOrDefault [_origin, createHashMap] getOrDefault ["eventsToForward", createHashMap];
 
     {
         private _hashableEvent = _x;

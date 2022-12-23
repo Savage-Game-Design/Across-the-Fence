@@ -2,7 +2,7 @@
     File: fn_event_testSystem.sqf
     Author:
     Date: 2022-12-09
-    Last Update: 2022-12-11
+    Last Update: 2022-12-23
     Public: No
 
     Description:
@@ -18,6 +18,7 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
+para_s_event_testRunning = true;
 para_s_event_clientHealthInfo = createHashMap;
 
 private _testClient = getUserInfo selectRandom allUsers;
@@ -82,6 +83,7 @@ uiSleep 5;
 ["onTestLocal", "Local test server data"] call para_g_fnc_event_trigger;
 [["onTestTopic", "fish"], "Fish topic test server data"] call para_g_fnc_event_trigger;
 [["onTestTopic", "goose"], "Goose topic test server data"] call para_g_fnc_event_trigger;
+[["onTestTopic", 3], "Goose topic test server data"] call para_g_fnc_event_trigger;
 
 // Fire test events from client
 
@@ -149,7 +151,15 @@ private _fnc_expect = {
         "onTestGlobal",
         nil,
         2,
-        2
+        1
+    ] call _fnc_matchEvent
+    &&
+    [
+        _clientTestData getOrDefault ["test global listen", []],
+        "onTestGlobal",
+        nil,
+        _clientOwner,
+        1
     ] call _fnc_matchEvent
 ] call _fnc_expect;
 
@@ -160,7 +170,7 @@ private _fnc_expect = {
         "onTestServer",
         nil,
         2,
-        1
+        [1, 2] select (_clientOwner isEqualto 2)
     ] call _fnc_matchEvent
 ] call _fnc_expect;
 
@@ -171,7 +181,7 @@ private _fnc_expect = {
         "onTestLocal",
         nil,
         _clientOwner,
-        1
+        [1, 2] select (_clientOwner isEqualto 2)
     ] call _fnc_matchEvent
 ] call _fnc_expect;
 
@@ -203,6 +213,14 @@ private _fnc_expect = {
         2,
         1
     ] call _fnc_matchEvent
+    &&
+    [
+        _clientTestData getOrDefault ["test topicless listen", []],
+        "onTestTopic",
+        3,
+        2,
+        1
+    ] call _fnc_matchEvent
 ] call _fnc_expect;
 
 [
@@ -212,9 +230,18 @@ private _fnc_expect = {
         "onTestGlobal",
         nil,
         2,
-        2
+        1
+    ] call _fnc_matchEvent
+    &&
+    [
+        _serverTestData getOrDefault ["test global listen on server", []],
+        "onTestGlobal",
+        nil,
+        _clientOwner,
+        1
     ] call _fnc_matchEvent
 ] call _fnc_expect;
 
 para_l_event_testResults = _testResults;
 ["Event system test completed"] remoteExec ["hint", 0];
+para_s_event_testRunning = false;

@@ -59,7 +59,7 @@ private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwn
 
 // Server tells the requesting client to attach the event handlers.
 // Can't be done on the client, as the server needs to resolve the machine ids as `owner` doesn't work on clients.
-[_originMachineIdsToListenTo, _event, _handlerId] remoteExec ["para_g_fnc_event_attachHandler", remoteExecutedOwner];
+[_originMachineIdsToListenTo, _hashableEvent, _event, _handlerId] remoteExec ["para_g_fnc_event_attachHandler", remoteExecutedOwner];
 
 // Server tells the other clients; to forward events on.
 [_hashableEvent] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _originMachineIdsToListenTo];
