@@ -2,7 +2,7 @@
     File: fn_event_forward.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-12-20
+    Last Update: 2022-12-24
     Public: No
 
     Description:
@@ -47,7 +47,7 @@ private _allListeningMachines = flatten (_machinesListeningToAllOrigins + _machi
 // Doing this here is likely cheaper, than looping through all the events the disconnecting client was being forwarded.
 // But we can fall back on that approach if we need more performance from the forwarding.
 if (_allListeningMachines isEqualTo []) then {
-    [_hashableEventWithTopic] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _originMachineId];
+    [[_hashableEventWithTopic]] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _originMachineId];
 } else {
     [_originMachineId, _hashableEventWithTopic, _event, _data] remoteExec ["para_g_fnc_event_callRegisteredHandlers", _allListeningMachines - [_originMachineId]];
 };

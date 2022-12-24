@@ -2,7 +2,7 @@
     File: fn_event_startForwardingMatchingEvents.sqf
     Author:
     Date: 2022-11-24
-    Last Update: 2022-12-20
+    Last Update: 2022-12-24
     Public: No
 
     Description:
@@ -35,15 +35,24 @@ if (isNil "_clients" || isNil "_eventName" || isNil "_topic" || isNil "_handlerI
     ["WARNING", format ["Bad event forwarding request from %1", remoteExecutedOwner]] call para_g_fnc_log;
 };
 
+private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
+private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
+
 private _originMachineIdsToListenTo = _clients apply {
     if (_x isEqualType objNull) then { owner _x } else { _x }
 };
 
-// In case they're self-targeting, we don't want to tell them forward requests.
-_originMachineIdsToListenTo = _originMachineIdsToListenTo - [remoteExecutedOwner];
-
-private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
-private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
+_originMachineIdsToListenTo = _originMachineIdsToListenTo select {
+    // In case they're self-targeting, we don't want to tell them forward requests.
+    if (_x isEqualTo remoteExecutedOwner) then {continueWith false};
+    if (_x isEqualTo 0) then {continueWith true};
+    // Listening to a client that doesn't exist is bad behaviour.
+    if !(_x in _machineIdReferences) then {
+        ["WARNING", format ["Event system - machine %1 attempted to listen to non-existent machine %2, with event %3", remoteExecutedOwner, _x, _event]] call para_g_fnc_log;
+        continueWith false
+    };
+    true
+};
 
 private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
 private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwner;
@@ -62,4 +71,4 @@ private _listenerMachineIdReference = _machineIdReferences get remoteExecutedOwn
 [_originMachineIdsToListenTo, _hashableEvent, _event, _handlerId] remoteExec ["para_g_fnc_event_attachHandler", remoteExecutedOwner];
 
 // Server tells the other clients; to forward events on.
-[_hashableEvent] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _originMachineIdsToListenTo];
+[[_hashableEvent]] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", _originMachineIdsToListenTo];

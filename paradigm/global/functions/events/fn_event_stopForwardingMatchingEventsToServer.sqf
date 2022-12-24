@@ -2,7 +2,7 @@
     File: fn_event_stopForwardingMatchingEventsToServer.sqf
     Author:
     Date: 2022-11-27
-    Last Update: 2022-12-20
+    Last Update: 2022-12-24
     Public: No
 
     Description:
@@ -18,8 +18,17 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_hashableEvent"];
+params ["_hashableEvents"];
 
-private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
+private _eventsToForward = localNamespace getVariable "para_event_eventsToForward";
 
-_eventsToForward deleteAt _hashableEvent;
+// Allows forwarding table to be maintained even if event system hasn't been initialised yet.
+if (isNil "_eventsToForward") then {
+    _eventsToForward = createHashMap;
+    localNamespace setVariable ["para_event_eventsToForward", _eventsToForward];
+};
+
+{
+    private _hashableEvent = _x;
+    _eventsToForward deleteAt _hashableEvent;
+} forEach _hashableEvents;

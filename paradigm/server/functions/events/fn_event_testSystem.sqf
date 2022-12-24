@@ -2,7 +2,7 @@
     File: fn_event_testSystem.sqf
     Author:
     Date: 2022-12-09
-    Last Update: 2022-12-23
+    Last Update: 2022-12-24
     Public: No
 
     Description:
@@ -21,6 +21,7 @@
 para_s_event_testRunning = true;
 para_s_event_clientHealthInfo = createHashMap;
 
+para_l_event_testResults = createHashMapFromArray [["PASSED", []], ["FAILED", []]];
 private _testClient = getUserInfo selectRandom allUsers;
 private _clientOwner = _testClient # 1;
 
@@ -65,6 +66,12 @@ private _fnc_saveTestResult = {
             "onTestTopic",
             ["test topicless listen", _fnc_saveTestResult]
         ] call para_g_fnc_event_subscribe;
+        // Test unsubscribing
+        para_c_event_testUnsubscribeHandler = [
+            [0],
+            "onTestUnsubscribe",
+            ["test unsubscribe from global event", _fnc_saveTestResult]
+        ] call para_g_fnc_event_subscribe;
     }
 ] remoteExec ["call", _clientOwner];
 
@@ -84,6 +91,7 @@ uiSleep 5;
 [["onTestTopic", "fish"], "Fish topic test server data"] call para_g_fnc_event_trigger;
 [["onTestTopic", "goose"], "Goose topic test server data"] call para_g_fnc_event_trigger;
 [["onTestTopic", 3], "Goose topic test server data"] call para_g_fnc_event_trigger;
+["onTestUnsubscribe", "Unsubscribe test server data pre unsubscribe"] call para_g_fnc_event_trigger;
 
 // Fire test events from client
 
@@ -99,6 +107,28 @@ uiSleep 5;
 // Wait for all events to fire and settle down.
 uiSleep 5;
 
+[
+    [],
+    {
+        [para_c_event_testUnsubscribeHandler] call para_g_fnc_event_unsubscribe;
+    }
+] remoteExec ["call", _clientOwner];
+
+// Wait for client to be unsubscribed
+uiSleep 2;
+
+[
+    [],
+    {
+        ["onTestUnsubscribe", "Unsubscribe test client data post unsubscribe"] call para_g_fnc_event_trigger;
+    }
+] remoteExec ["call", _clientOwner];
+
+["onTestUnsubscribe", "Unsubscribe test server data post unsubscribe"] call para_g_fnc_event_trigger;
+
+// Wait for everything to resolve
+uiSleep 5;
+
 // Send test results from client to server
 [
     [],
@@ -112,7 +142,6 @@ uiSleep 5;
 uiSleep 3;
 
 // Validate test results
-private _testResults = createHashMapFromArray [["PASSED", []], ["FAILED", []]];
 private _clientTestData = para_s_event_clientHealthInfo get _clientOwner;
 private _serverTestData = para_l_event_test_data;
 
@@ -138,10 +167,10 @@ private _fnc_expect = {
     params ["_testName", "_pass"];
 
     if (_pass) exitWith {
-        _testResults get "PASSED" pushBack _testName;
+        para_l_event_testResults get "PASSED" pushBack _testName;
     };
 
-    _testResults get "FAILED" pushBack _testName;
+    para_l_event_testResults get "FAILED" pushBack _testName;
 };
 
 [
@@ -151,7 +180,7 @@ private _fnc_expect = {
         "onTestGlobal",
         nil,
         2,
-        1
+        [1, 2] select (_clientOwner isEqualto 2)
     ] call _fnc_matchEvent
     &&
     [
@@ -159,7 +188,7 @@ private _fnc_expect = {
         "onTestGlobal",
         nil,
         _clientOwner,
-        1
+        [1, 2] select (_clientOwner isEqualto 2)
     ] call _fnc_matchEvent
 ] call _fnc_expect;
 
@@ -230,7 +259,7 @@ private _fnc_expect = {
         "onTestGlobal",
         nil,
         2,
-        1
+        [1, 2] select (_clientOwner isEqualto 2)
     ] call _fnc_matchEvent
     &&
     [
@@ -238,10 +267,21 @@ private _fnc_expect = {
         "onTestGlobal",
         nil,
         _clientOwner,
+        [1, 2] select (_clientOwner isEqualto 2)
+    ] call _fnc_matchEvent
+] call _fnc_expect;
+
+[
+    "events can be unsubscribed successfully",
+    [
+        _clientTestData getOrDefault ["test unsubscribe from global event", []],
+        "onTestUnsubscribe",
+        nil,
+        2,
+        // Should be 3 calls if the unsubscribe fails
         1
     ] call _fnc_matchEvent
 ] call _fnc_expect;
 
-para_l_event_testResults = _testResults;
 ["Event system test completed"] remoteExec ["hint", 0];
 para_s_event_testRunning = false;

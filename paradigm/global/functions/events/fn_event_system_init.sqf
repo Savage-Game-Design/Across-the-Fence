@@ -2,21 +2,28 @@
     File: fn_event_system_init.sqf
     Author:
     Date: 2022-11-20
-    Last Update: 2022-12-10
+    Last Update: 2022-12-24
     Public: Yes
 
     Description:
-        No description added yet.
+        Initialises the event system for use.
+        If called on a client in a multiplayer environment, the server *must* have the event system started on it first.
 
     Parameter(s):
-        N/A
+        _forceReinitialise - Runs the initialisation again, even if the system is already initialised [BOOLEAN]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call para_g_fnc_event_system_init
  */
+
+params [["_forceReinitialise", false]];
+
+if (!isNil "para_event_initialised" && !_forceReinitialise) exitWith {};
+
+para_event_initialised = true;
 
 // Incremented for each event handler, allowing IDs that are unique on this client to be easily created
 para_event_handlerCount = 0;
@@ -30,7 +37,11 @@ para_event_max_supported_players = 60;
 para_event_client_array_template = [];
 para_event_client_array_template resize [para_event_max_supported_players, []];
 
-localNamespace setVariable ["para_event_eventsToForward", createHashMap];
+// Prevents being re-initialised if client has already received forwarding requests.
+if (isNil {localNamespace getVariable "para_event_eventsToForward"}) then {
+    // Events to forward to the server
+    localNamespace setVariable ["para_event_eventsToForward", createHashMap];
+};
 
 // Temporary area for handlers to be saved, before being attached to an event locally.
 localNamespace setVariable ["para_event_handlerCache", createHashMap];
@@ -51,18 +62,16 @@ if (isServer) then {
     // Indexed by client id, then event hash - gives an array of client references.
     localNamespace setVariable ["para_event_forwardingForOriginMachineId", createHashMap];
 
-    addMissionEventHandler ["PlayerConnected", para_s_fnc_event_onPlayerConnected];
-    addMissionEventHandler ["PlayerDisconnected", para_s_fnc_event_onPlayerDisconnected];
+    addMissionEventHandler ["PlayerConnected", {
+        params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+        [_owner] call para_s_fnc_event_registerClient;
+    }];
 
-    // Initialise server as part of the event system.
-    if (isServer && !hasInterface) then {
-        [getPlayerID objNull, getPlayerUID objNull, "Server", false, 2] call para_s_fnc_event_onPlayerConnected;
-    };
-
-    // Need to initialise any already connected players
-    {
-        _x params ["_playerID", "_ownerId", "_playerUID", "_profileName", "_displayName", "_steamName", "_clientState", "_isHC", "_adminState", "_networkInfo", "_unit"];
-        [_playerId, _playerUID, _profileName, false, _ownerId] call para_s_fnc_event_onPlayerConnected;
-    } forEach (allUsers apply {getUserInfo _x});
+    addMissionEventHandler ["PlayerDisconnected", {
+        params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
+        [_owner] call para_s_fnc_event_unregisterClient;
+    }];
 };
 
+// Assumes the server has been set up with the event system already. This should be guaranteed by the mission.
+[] remoteExec ["para_s_fnc_event_registerClient", 2];

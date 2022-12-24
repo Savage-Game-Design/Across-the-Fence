@@ -2,7 +2,7 @@
     File: fn_event_stopForwardingMatchingEvents.sqf
     Author:
     Date: 2022-12-04
-    Last Update: 2022-12-20
+    Last Update: 2022-12-24
     Public: No
 
     Description:
@@ -18,7 +18,7 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params [["_originMachineIds"], "_event"];
+params ["_originMachineIds", "_event"];
 
 ["DEBUG", format ["Stopping forwarding event %1 from %2 to %3", _event, _originMachineIds, remoteExecutedOwner]] call para_g_fnc_log;
 
@@ -33,7 +33,8 @@ private _clientsToStopForwardingEvent = [];
 
 {
     private _originMachineId = _x;
-    private _originMachineForwarding = _forwardingForOriginMachineId getOrDefault [_originMachineId, createHashMap] getOrDefault [_hashableEvent, []];
+    private _originMachineForwardingForAllEvents = _forwardingForOriginMachineId getOrDefault [_originMachineId, createHashMap];
+    private _originMachineForwarding = _originMachineForwardingForAllEvents getOrDefault [_hashableEvent, []];
     private _originMachineIndex = _originMachineForwarding find _listenerMachineIdReference;
 
     private _totalStartingEventListeners = count _globalForwarding + count _originMachineForwarding;
@@ -47,9 +48,11 @@ private _clientsToStopForwardingEvent = [];
     // Stop forwarding events if we've removed a client, and now no clients are listening
     if (_totalRemainingEventListeners isEqualTo 0 && _totalStartingEventListeners > 0) then {
         _clientsToStopForwardingEvent pushBack _originMachineId;
+        // Remove the event, so that (keys _originMachineForwardForAllEvents) gives all events that need forwarding.
+        _originMachineForwardingForAllEvents deleteAt _hashableEvent;
     };
 } forEach _originMachineIds;
 
 if !(_clientsToStopForwardingEvent isEqualTo []) then {
-    [_hashableEvent] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _clientsToStopForwardingEvent];
+    [[_hashableEvent]] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", _clientsToStopForwardingEvent];
 };
