@@ -25,4 +25,12 @@ class vgm_s
         class db_save {};
         class db_typed_save {};
     };
+
+    class player
+    {
+        VGM_SERVER_PATH(\core\server\player);
+
+        class player_get_profile {};
+        class player_save {};
+    }
 };
