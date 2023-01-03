@@ -38,8 +38,12 @@ if !(isNil "_initialised") exitWith {};
 // add cleanup handlers for dropped gear to the player
 [_player] call para_s_fnc_cleanup_register_player;
 
+// Ensure player has a profile.
+[_player] call vgm_s_fnc_player_get_profile;
+
 // send all variables to player
 _local_vars = [];
 [_local_vars] remoteExecCall ["para_c_fnc_set_local_var",_player];
 
 _player setVariable ["para_s_player_initialised", true];
+
