@@ -50,6 +50,9 @@ player addEventHandler ["Respawn", _fnc_disableChatter];
 //This way they can still exit if they want.
 player enableSimulation false;
 
+// Ensure player has a profile.
+[player] call vgm_s_fnc_player_get_profile;
+
 // Start loading screen, so we wait while server init completes.
 startLoadingScreen ["Welcome to Mike Force!"/*, "MikeForce_loadingScreen"*/];
 //Spoffy TODO: Probably change this to 'Tour of Duty'. Maybe this should pull from a string table for localization /shrug
