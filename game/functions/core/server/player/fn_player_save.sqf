@@ -28,7 +28,7 @@
 params ["_playerProfile"];
 
 // Ensure that _playerProfile is a hashmap and it has a uid
-if (typeName _playerProfile != "HASHMAP" || !(_playerProfile get "uid")) exitWith {
+if (typeName _playerProfile != "HASHMAP" || isNil _playerProfile get "uid") exitWith {
     ["ERROR", format ["Invalid player profile: %1", _playerProfile]] call para_g_fnc_log;
     false
 };
