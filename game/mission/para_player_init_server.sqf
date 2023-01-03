@@ -46,4 +46,3 @@ _local_vars = [];
 [_local_vars] remoteExecCall ["para_c_fnc_set_local_var",_player];
 
 _player setVariable ["para_s_player_initialised", true];
-
