@@ -2,7 +2,7 @@
     File: fn_db_save.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2023-01-04
+    Last Update: 2023-01-05
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
         1: Data - Data for the entry [HASHMAP]
 
     Returns:
-        Nothing
+        0: Data saved to the database [HASHMAP]
 
     Example:
         private _playerUID = getPlayerUID player;
@@ -36,4 +36,4 @@ missionProfileNamespace setVariable [format ["vgm_%1", _id], _data];
 
 ["SUCCESS", format ["VGM: Saved %1 with data: %2", _id, _data]] call para_g_fnc_log;
 
-_data
++_data // result

@@ -2,7 +2,7 @@
     File: fn_player_get_fetch.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-04
+    Last Update: 2023-01-05
     Public: No
 
     Description:
@@ -30,12 +30,10 @@ private _profile = ["player", getPlayerUID _player] call vgm_s_fnc_db_get;
 
 // Check if hashmap is empty
 if ("uid" in _profile == false) then {
-    _profile = ["player", getPlayerUID _player, createHashMap] call vgm_s_fnc_db_typed_save;
-
     _profile set ["name", name _player];
     _profile set ["uid", getPlayerUID _player];
 
     [_player] call vgm_s_fnc_player_save;
 };
 
-_profile
+_profile //result
