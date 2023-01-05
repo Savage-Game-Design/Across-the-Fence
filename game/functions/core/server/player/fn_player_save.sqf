@@ -2,35 +2,33 @@
     File: fn_player_set_var.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-03
+    Last Update: 2023-01-04
     Public: No
 
     Description:
-        This function will force a save of the player's profile to the database.
+        This function will force a save of the player's information to the database.
 
-        This shouldn't be required since the profile is a reference to
+        This shouldn't be required since the information is a reference to
             the missionNamespace object, but it's here just in case.
 
     Parameter(s):
-        _playerProfile - The player's profile [HASHMAP]
+        _player - The player object to save
 
     Returns:
         Nothing
 
     Example(s):
-        private _profile = [player] call vgm_s_fnc_player_get_profile;
+        private _profile = [_player] call vgm_s_fnc_player_fetch;
 
         _profile set ["name", "Waldo"];
 
-        [_profile] call vgm_s_fnc_player_save;
+        [_player] call vgm_s_fnc_player_save;
  */
 
-params ["_playerProfile"];
+params ["_player"];
 
-// Ensure that _playerProfile is a hashmap and it has a uid
-if (typeName _playerProfile != "HASHMAP" || isNil _playerProfile get "uid") exitWith {
-    ["ERROR", format ["Invalid player profile: %1", _playerProfile]] call para_g_fnc_log;
-    false
-};
+if (!isPlayer _player) exitWith { ["ERROR", format ["Object is not a player: %1", _player]] call para_g_fnc_log; };
 
-["player", getPlayerUID player, _playerProfile] call vgm_s_fnc_db_typed_save;
+private _playerProfile = [_player] call vgm_s_fnc_player_fetch;
+["player", getPlayerUID _player, _playerProfile] call vgm_s_fnc_db_typed_save;
+saveMissionProfileNamespace;

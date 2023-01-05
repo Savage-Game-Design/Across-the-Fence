@@ -30,7 +30,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\core\server\player);
 
-        class player_get_profile {};
+        class player_fetch {};
         class player_save {};
     }
 };
