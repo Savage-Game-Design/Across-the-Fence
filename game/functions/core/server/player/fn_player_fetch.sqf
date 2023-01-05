@@ -34,6 +34,8 @@ if ("uid" in _profile == false) then {
 
     _profile set ["name", name _player];
     _profile set ["uid", getPlayerUID _player];
+
+    [_player] call vgm_s_fnc_player_save;
 };
 
 _profile
