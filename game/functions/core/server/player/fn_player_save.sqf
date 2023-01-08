@@ -2,7 +2,7 @@
     File: fn_player_set_var.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-05
+    Last Update: 2023-01-08
     Public: No
 
     Description:
@@ -29,8 +29,13 @@ params ["_player"];
 
 if (!isPlayer _player) exitWith { ["ERROR", format ["Object is not a player: %1", _player]] call para_g_fnc_log; };
 
-private _playerProfile = [_player] call vgm_s_fnc_player_fetch;
-private _savedData = ["player", getPlayerUID _player, _playerProfile] call vgm_s_fnc_db_typed_save;
+private _profile = createHashMap;
+
+// Get the player's information from mission
+_profile set ["name", name _player];
+_profile set ["uid", getPlayerUID _player];
+
+private _savedData = ["player", getPlayerUID _player, _player] call vgm_s_fnc_db_typed_save;
 saveMissionProfileNamespace;
 
 _savedData //result
