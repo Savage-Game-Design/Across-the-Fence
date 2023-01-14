@@ -17,7 +17,7 @@ allowedVoteCmds[] = {};
 armaUnitsTimeout = 1;
 allowedFilePatching = 2;
 battlEye = 0;
-persistent = 0;
+persistent = 1;
 verifySignatures = 0;
 
 class Missions {
