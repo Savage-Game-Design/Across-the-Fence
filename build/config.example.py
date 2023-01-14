@@ -33,4 +33,4 @@ arma_args = [
     rf"{mission_output_path}\mission.sqm", # open mission in editor
 ]
 
-arma_server_config_path = Path(__file__).parent /  "arma_server.hpp"
+arma_server_config_path = config_dir / "arma_server.hpp"
