@@ -21,7 +21,7 @@ def arma_server_launch():
     mpmissions_dir = Path(config.arma_exe_path).parent / "mpmissions" / "vgm"
     mission_output_dir = mpmissions_dir / mission_name
 
-    try_create_arma_server_mission_dir(mpmissions_dir, mission_output_dir)
+    try_symlink_arma_server_mission_dir(mpmissions_dir, mission_output_dir)
     try_update_arma_server_config(mission_name)
 
     args = [
@@ -33,7 +33,7 @@ def arma_server_launch():
     # start arma server
     subprocess.Popen([config.arma_exe_path] + args)
 
-def try_create_arma_server_mission_dir(mpmissions_dir, mission_output_dir):
+def try_symlink_arma_server_mission_dir(mpmissions_dir, mission_output_dir):
     try:
         # ensure subfolder in mpmissions exists
         if not os.path.exists(mpmissions_dir):
