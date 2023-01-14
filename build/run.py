@@ -42,7 +42,8 @@ def try_create_arma_server_mission_dir(mpmissions_dir, mission_output_dir):
         if not os.path.exists(mission_output_dir):
             Path(mission_output_dir).symlink_to(config.mission_output_path)
     except OSError:
-        return print(f"Failed to create symlink from '{mpmissions_dir / mission_output_dir}' to '{config.mission_output_path}'")
+        print(f"Failed to create symlink from '{mpmissions_dir / mission_output_dir}' to '{config.mission_output_path}'")
+        raise
 
 def try_update_arma_server_config(mission_name):
     with open(config.arma_server_config_path, "r") as f:
