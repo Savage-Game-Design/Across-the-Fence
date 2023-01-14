@@ -8,11 +8,11 @@ class EditorData
 	toggles=521;
 	class ItemIDProvider
 	{
-		nextID=1325;
+		nextID=1328;
 	};
 	class MarkerIDProvider
 	{
-		nextID=40;
+		nextID=42;
 	};
 	class LayerIndexProvider
 	{
@@ -35,13 +35,14 @@ addons[]=
 	"weapons_f_vietnam_c",
 	"sounds_f_vietnam_c",
 	"modules_f_vietnam",
-	"A3_Modules_F_Curator_Curator"
+	"A3_Modules_F_Curator_Curator",
+	"A3_Ui_F"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=6;
+		items=7;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -81,6 +82,13 @@ class AddonsMetaData
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item6
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -238,7 +246,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			dataType="Logic";
@@ -6822,6 +6830,33 @@ class Mission
 			};
 			id=1323;
 			atlOffset=1.6450043;
+		};
+		class Item5
+		{
+			dataType="Layer";
+			name="Shared Hub";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={16330.562,73.573997,8114.624};
+					name="vgm_shared_hub";
+					text="Shared Hub";
+					markerType="ELLIPSE";
+					type="";
+					fillName="Border";
+					a=116.409;
+					b=132.65601;
+					angle=195.55998;
+					drawBorder=1;
+					id=1327;
+					atlOffset=-0.93600464;
+				};
+			};
+			id=1325;
+			atlOffset=-0.93600464;
 		};
 	};
 };

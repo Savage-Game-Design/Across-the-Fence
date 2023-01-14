@@ -18,7 +18,16 @@ class vgm_c
         class handle_light_level_loop {};
         class handle_welcome_screen {};
         class init_info_panel_handler_loop {};
-    }
+    };
+
+    class shared_hub
+    {
+        VGM_CLIENT_PATH(\systems\shared_hub\client);
+
+        class sharedHub_areaLimiterDisable {};
+        class sharedHub_areaLimiterEnable {};
+        class sharedHub_teleportPlayerToHub {};
+    };
 };
 
 class vgm_g
