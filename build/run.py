@@ -22,12 +22,12 @@ def arma_server_launch():
     mission_output_dir = mpmissions_dir / mission_name
 
     try_symlink_arma_server_mission_dir(mpmissions_dir, mission_output_dir)
-    try_update_arma_server_config(mission_name)
+    server_config_path = setup_temporary_arma_server_config(mission_name)
 
     args = [
         "-mod=" + ";".join(config.arma_arg_mods),
         "-server",
-        f"-config={config.arma_server_config_path.with_suffix('.tmp')}",
+        f"-config={server_config_path}",
     ] + config.arma_args
 
     # start arma server
@@ -45,13 +45,16 @@ def try_symlink_arma_server_mission_dir(mpmissions_dir, mission_output_dir):
         print(f"Failed to create symlink from '{mpmissions_dir / mission_output_dir}' to '{config.mission_output_path}'")
         raise
 
-def try_update_arma_server_config(mission_name):
+def setup_temporary_arma_server_config(mission_name):
     with open(config.arma_server_config_path, "r") as f:
         server_config = f.read()
         server_config = server_config.replace("MISSION_NAME", mission_name)
 
-    with open(config.arma_server_config_path.with_suffix('.tmp'), "w") as f:
+    tmp_server_config_path = config.arma_server_config_path.with_suffix('.tmp')
+    with open(tmp_server_config_path, "w") as f:
         f.write(server_config)
+
+    return tmp_server_config_path
 
 @click.group
 def cli():
