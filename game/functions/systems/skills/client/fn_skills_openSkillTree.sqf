@@ -142,6 +142,10 @@ private _fnc_drawSkillTree = {
                 _ctrlDebug ctrlSetPosition [0, 0, SKILL_TREE_COL_W, SKILL_TREE_ROW_H];
                 _ctrlDebug ctrlCommit 0;
             #endif
+
+            // event handlers
+            _ctrlSkillIcon ctrlAddEventHandler ["ButtonClick", vgm_c_fnc_skills_ui_skill_onButtonClick];
+
         } forEach _skillTier;
     } forEach (_skillTree get "skills");
 
@@ -174,7 +178,27 @@ private _fnc_drawSkillTree = {
         }];
     } forEach (_skillTree get "subtrees");
 };
-vgm_fnc_drawSkillTree = _fnc_drawSkillTree;
+
+vgm_c_fnc_skills_ui_skill_onButtonClick = {
+    params ["_ctrlSkillIcon"];
+    (ctrlParentControlsGroup _ctrlSkillIcon getVariable "vgm_params") params ["_skill"];
+    private _display = ctrlParent _ctrlSkillIcon;
+
+    [_display, _skill] spawn {
+        params ["_display", "_skill"];
+        private _learn = [parseText ([
+            "Do you want to learn: <t color='#ff0000'>", _skill get "displayName", "</t><br/>",
+            format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", vgm_skills_points, _skill get "cost"]
+        ] joinString ""), "Confirm", true, true, _display] call BIS_fnc_guiMessage;
+        if (!_learn) exitWith {};
+
+        if (_skill call vgm_c_fnc_skills_learn) then {
+            hint "Skill leart";
+        } else {
+            hint "Failed to learn the skill";
+        };
+    };
+};
 
 // ensure that we display tabs in config order, hashmaps are unordered
 private _skillTreeClasses = "true" configClasses (missionConfigFile >> "vgm_skillTrees") apply {configName _x};
