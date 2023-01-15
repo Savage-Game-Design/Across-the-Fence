@@ -24,6 +24,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skills\client);
 
+        class skills_canLearn {};
+        class skills_getSkillTreeFromSkill {};
+        class skills_learn {};
         class skills_openSkillTree {};
         class skills_preInit
         {
@@ -45,6 +48,17 @@ class vgm_g
 
         class execNextFrame {};
         class preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class skills
+    {
+        VGM_GLOBAL_PATH(\systems\skills\global);
+
+        class skills_parseTreeCfg {};
+        class skills_preInit
         {
             preInit = 1;
         };
