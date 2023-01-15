@@ -2,7 +2,7 @@
     File: fn_skills_learn.sqf
     Author:
     Date: 2022-12-20
-    Last Update: 2022-12-22
+    Last Update: 2023-01-15
     Public: No
 
     Description:
@@ -35,6 +35,7 @@ if (_path in vgm_skills_knownSkills) exitWith {
     false // return
 };
 
+vgm_skills_points = vgm_skills_points - (_skill get "cost");
 vgm_skills_knownSkills set [_path, _skill];
 
 true // return
