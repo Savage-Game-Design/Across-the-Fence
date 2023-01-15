@@ -187,6 +187,7 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
     (ctrlParentControlsGroup _ctrlSkillIcon getVariable "vgm_params") params ["_skill"];
     private _display = ctrlParent _ctrlSkillIcon;
 
+    // confirm skill selection
     [_display, _skill] spawn {
         params ["_display", "_skill"];
         private _learn = [parseText ([
@@ -196,7 +197,7 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
         if (!_learn) exitWith {};
 
         if (_skill call vgm_c_fnc_skills_learn) then {
-            hint "Skill leart";
+            hint "Skill learnt";
         } else {
             hint "Failed to learn the skill";
         };

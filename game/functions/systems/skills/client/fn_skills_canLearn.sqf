@@ -28,6 +28,6 @@ params ["_skill"];
 
     private _tiersArray = (_skill call vgm_c_fnc_skills_getSkillTreeFromSkill) get "skills";
     _previousTierSkills = _tiersArray select (_tier - 1);
-    _previousTierSkills findIf {(_x get "path") in vgm_skills_knownSkills} > -1 // return
+    _previousTierSkills findIf {_x call vgm_c_fnc_skills_isKnown} > -1 // return
 }
 && {player call (_skill get "conditionUnlock")} // return

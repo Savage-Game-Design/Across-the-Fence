@@ -3,7 +3,7 @@
     Author:
     Date: 2023-01-15
     Last Update: 2023-01-15
-    Public: No
+    Public: Yes
 
     Description:
         Parse skill tree config into a HashMap.

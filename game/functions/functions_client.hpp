@@ -26,6 +26,7 @@ class vgm_c
 
         class skills_canLearn {};
         class skills_getSkillTreeFromSkill {};
+        class skills_isKnown {};
         class skills_learn {};
         class skills_openSkillTree {};
         class skills_preInit

@@ -23,19 +23,17 @@ params [
     ["_checkRequirements", true]
 ];
 
-private _path = _skill get "path";
-
 if (_checkRequirements && {!(_skill call vgm_c_fnc_skills_canLearn)}) exitWith {
     // WARNING_1("Requirements not fullfilled",_skill get "path");
     false // return
 };
 
-if (_path in vgm_skills_knownSkills) exitWith {
+if (_skill call vgm_c_fnc_skills_isKnown) exitWith {
     // ERROR_1("Skill already known",_skill get "path");
     false // return
 };
 
 vgm_skills_points = vgm_skills_points - (_skill get "cost");
-vgm_skills_knownSkills set [_path, _skill];
+vgm_skills_knownSkills set [_skill get "path", _skill];
 
 true // return
