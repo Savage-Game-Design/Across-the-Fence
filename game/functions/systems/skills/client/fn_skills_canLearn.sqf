@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author:
     Date: 2022-12-22
-    Last Update: 2022-12-22
+    Last Update: 2023-01-15
     Public: No
 
     Description:
@@ -27,6 +27,7 @@ params ["_skill"];
     if (_tier < 1) exitWith {true};
 
     private _tiersArray = (_skill call vgm_c_fnc_skills_getSkillTreeFromSkill) get "skills";
-    _tiersArray select (_tier - 1) findIf {_y in vgm_skills_knownSkills} > -1 // return
+    _previousTierSkills = _tiersArray select (_tier - 1);
+    _previousTierSkills findIf {(_x get "path") in vgm_skills_knownSkills} > -1 // return
 }
 && {player call (_skill get "conditionUnlock")} // return
