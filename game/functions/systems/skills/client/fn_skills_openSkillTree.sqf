@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author:
     Date: 2022-12-16
-    Last Update: 2022-12-20
+    Last Update: 2023-01-15
     Public: No
 
     Description:
@@ -37,7 +37,7 @@ private _ctrlGrpMain = _display ctrlCreate ["RscControlsGroup", -1];
 _ctrlGrpMain ctrlSetPosition SIZE_DIALOG;
 _ctrlGrpMain ctrlCommit 0;
 
-vgm_skills_ui_currentTabGrp = controlNull;
+uiNamespace setVariable ["vgm_skills_ui_currentTabGrp", controlNull];
 
 private _fnc_draw = {
     params ["_display", "_skillTree","_index"];
@@ -56,23 +56,23 @@ private _fnc_draw = {
     _ctrlTab ctrlAddEventHandler ["ButtonClick", {
         params ["_ctrlButton"];
         // hide currently shown tab content
-        vgm_skills_ui_currentTabGrp ctrlShow false;
+        (uiNamespace getVariable "vgm_skills_ui_currentTabGrp") ctrlShow false;
 
         // show clicked tab content
         private _ctrlGrpTree = _ctrlButton getVariable "vgm_ctrlGrpTree";
-        vgm_skills_ui_currentTabGrp = _ctrlGrpTree;
+        uiNamespace setVariable ["vgm_skills_ui_currentTabGrp", _ctrlGrpTree];
         _ctrlGrpTree ctrlShow true;
     }];
 
     if (_index == 0) then {
-        vgm_skills_ui_currentTabGrp = _ctrlGrpTree;
+        uiNamespace setVariable ["vgm_skills_ui_currentTabGrp", _ctrlGrpTree];
         _ctrlGrpTree ctrlShow true;
     };
 
-    [_ctrlGrpTree, _skillTree] call _fnc_drawSkillTree;
+    [_ctrlGrpTree, _skillTree] call vgm_c_fnc_skills_ui_drawTree;
 };
 
-private _fnc_drawSkillTree = {
+vgm_c_fnc_skills_ui_drawTree = {
     params ["_ctrlGrp", "_skillTree", ["_prevTrees", []]];
     private _display = ctrlParent _ctrlGrp;
 
@@ -96,7 +96,7 @@ private _fnc_drawSkillTree = {
             private _ctrlGrp = ctrlParentControlsGroup _ctrlBtn;
 
             private _prevTree = _prevTrees#0;
-            [vgm_fnc_drawSkillTree, [_ctrlGrp, _prevTree, _prevTrees - [_prevTree]]] call vgm_g_fnc_execNextFrame;
+            [vgm_c_fnc_skills_ui_drawTree, [_ctrlGrp, _prevTree, _prevTrees - [_prevTree]]] call vgm_g_fnc_execNextFrame;
         }];
     };
 
@@ -116,7 +116,9 @@ private _fnc_drawSkillTree = {
             private _skill = _x;
             private _colIdx = _forEachIndex;
 
+            // paint skill group
             private _ctrlSkillGrp = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1, _ctrlGrp];
+            _ctrlSkillGrp setVariable ["vgm_params", [_skill]];
             _ctrlSkillGrp ctrlSetPosition [
                 (GUI_GRID_W_FULL - SKILL_TREE_W) / 2 + SKILL_TREE_COL_W * (_colIdx mod 2),
                 (GUI_GRID_H * 3) + (SKILL_TREE_ROW_H * _rowIdx),
@@ -153,6 +155,7 @@ private _fnc_drawSkillTree = {
     ctrlPosition _lastCtrlSkillGrp params ["", "_y", "", "_h"];
     private _btnBaseY = _y + _h;
 
+    // paint buttons to traverse the tree "downwards"
     {
         private _colIdx = _forEachIndex;
 
@@ -174,7 +177,7 @@ private _fnc_drawSkillTree = {
             (_ctrlBtn getVariable "vgm_params") params ["_skillTree", "_prevTrees"];
             private _ctrlGrp = ctrlParentControlsGroup _ctrlBtn;
 
-            [vgm_fnc_drawSkillTree, [_ctrlGrp, _skillTree, _prevTrees]] call vgm_g_fnc_execNextFrame;
+            [vgm_c_fnc_skills_ui_drawTree, [_ctrlGrp, _skillTree, _prevTrees]] call vgm_g_fnc_execNextFrame;
         }];
     } forEach (_skillTree get "subtrees");
 };
@@ -203,6 +206,7 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
 // ensure that we display tabs in config order, hashmaps are unordered
 private _skillTreeClasses = "true" configClasses (missionConfigFile >> "vgm_skillTrees") apply {configName _x};
 
+private _skillTreesHash = missionNamespace getVariable "vgm_skills_treesHash";
 {
-    [_display, vgm_skills_treesHash get _x, _forEachIndex] call _fnc_draw;
+    [_display, _skillTreesHash get _x, _forEachIndex] call _fnc_draw;
 } forEach _skillTreeClasses;
