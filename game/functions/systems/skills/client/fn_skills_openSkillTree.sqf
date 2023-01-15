@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author:
     Date: 2022-12-16
-    Last Update: 2023-01-15
+    Last Update: 2023-01-16
     Public: No
 
     Description:
@@ -118,7 +118,7 @@ vgm_c_fnc_skills_ui_drawTree = {
 
             // paint skill group
             private _ctrlSkillGrp = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1, _ctrlGrp];
-            _ctrlSkillGrp setVariable ["vgm_params", [_skill]];
+            _ctrlSkillGrp setVariable ["vgm_params", [_skill, _this]];
             _ctrlSkillGrp ctrlSetPosition [
                 (GUI_GRID_W_FULL - SKILL_TREE_W) / 2 + SKILL_TREE_COL_W * (_colIdx mod 2),
                 (GUI_GRID_H * 3) + (SKILL_TREE_ROW_H * _rowIdx),
@@ -126,6 +126,13 @@ vgm_c_fnc_skills_ui_drawTree = {
             ];
             _ctrlSkillGrp ctrlCommit 0;
             _lastCtrlSkillGrp = _ctrlSkillGrp;
+
+            if (_skill call vgm_c_fnc_skills_isKnown) then {
+                private _ctrlSkillIconBg = _display ctrlCreate ["RscText", -1, _ctrlSkillGrp];
+                _ctrlSkillIconBg ctrlSetBackgroundColor [0, 1, 0, 0.4];
+                _ctrlSkillIconBg ctrlSetPosition [(SKILL_TREE_COL_W - SKILL_ICON_W) / 2, 0, SKILL_ICON_W, SKILL_ICON_H];
+                _ctrlSkillIconBg ctrlCommit 0;
+            };
 
             private _ctrlSkillIcon = _display ctrlCreate ["RscActivePictureKeepAspect", -1, _ctrlSkillGrp];
             _ctrlSkillIcon ctrlSetText (_skill get "icon");
@@ -184,16 +191,18 @@ vgm_c_fnc_skills_ui_drawTree = {
 
 vgm_c_fnc_skills_ui_skill_onButtonClick = {
     params ["_ctrlSkillIcon"];
-    (ctrlParentControlsGroup _ctrlSkillIcon getVariable "vgm_params") params ["_skill"];
+    (ctrlParentControlsGroup _ctrlSkillIcon getVariable "vgm_params") params ["_skill", "_drawArgs"];
     private _display = ctrlParent _ctrlSkillIcon;
 
+    if (_skill call vgm_c_fnc_skills_isKnown) exitWith {};
+
     // confirm skill selection
-    [_display, _skill] spawn {
-        params ["_display", "_skill"];
+    [_display, _skill, _drawArgs] spawn {
+        params ["_display", "_skill", "_drawArgs"];
         private _learn = [parseText ([
             "Do you want to learn: <t color='#ff0000'>", _skill get "displayName", "</t><br/>",
             format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", vgm_skills_points, _skill get "cost"]
-        ] joinString ""), "Confirm", true, true, _display] call BIS_fnc_guiMessage;
+        ] joinString ""), "Confirm", _skill call vgm_c_fnc_skills_canLearn, true, _display] call BIS_fnc_guiMessage;
         if (!_learn) exitWith {};
 
         if (_skill call vgm_c_fnc_skills_learn) then {
@@ -201,6 +210,9 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
         } else {
             hint "Failed to learn the skill";
         };
+
+        // todo handle via local events, eg. "onSkillLearnt"
+        _drawArgs call vgm_c_fnc_skills_ui_drawTree;
     };
 };
 
