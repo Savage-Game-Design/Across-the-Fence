@@ -36,4 +36,6 @@ if (_skill call vgm_c_fnc_skills_isKnown) exitWith {
 vgm_skills_points = vgm_skills_points - (_skill get "cost");
 vgm_skills_knownSkills set [_skill get "path", _skill];
 
+player call (_skill get "codeApply");
+
 true // return
