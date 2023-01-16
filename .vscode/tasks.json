@@ -13,9 +13,27 @@
             }
         },
         {
-            "label": "Launch arma",
+            "label": "Launch arma client",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py'",
+            "command": "py '${workspaceFolder}\\build\\run.py' client",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
+            "label": "Launch arma server",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' server",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
+            "label": "Launch arma client and connect to local server",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' client --connect=127.0.0.1",
             "problemMatcher": [],
             "group": {
                 "kind": "none"

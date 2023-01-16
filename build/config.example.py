@@ -2,10 +2,12 @@ import os
 from pathlib import Path
 from vgm.pbo import PBO
 
+config_dir = Path(__file__).parent
+
 username = os.getlogin()
 arma_profile = r"dev_vgm"
 
-paradigm_path = Path(__file__).parent /  "paradigm"
+paradigm_path = config_dir.parent /  "paradigm"
 mission_output_path = rf"C:\Users\{username}\Documents\Arma 3 - Other Profiles\{arma_profile}\mpmissions\vgm.cam_lao_nam"
 
 output_paths = {
@@ -30,3 +32,5 @@ arma_args = [
     "-debug",
     rf"{mission_output_path}\mission.sqm", # open mission in editor
 ]
+
+arma_server_config_path = config_dir / "arma_server.hpp"
