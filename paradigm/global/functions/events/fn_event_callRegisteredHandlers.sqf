@@ -38,7 +38,7 @@ private _machineSpecificEventListenersByTopic = _eventListenersByOrigin
     getOrDefault [_originMachineId, createHashMap]
     getOrDefault [_eventName, createHashMap];
 
-_handlerIdsToCall = _handlerIdsToCall + (_machineSpecificEventListenersByTopic getOrDefault [_globalTopic, []]);
+private _handlerIdsToCall = _machineSpecificEventListenersByTopic getOrDefault [_globalTopic, []];
 
 if (_topicString isNotEqualTo _globalTopic) then {
     _handlerIdsToCall = _handlerIdsToCall + (_machineSpecificEventListenersByTopic getOrDefault [_topicString, []]);
