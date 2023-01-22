@@ -29,6 +29,5 @@ if (isNil "_eventsToForward") then {
 };
 
 {
-    private _hashableEvent = _x;
-    _eventsToForward set [_hashableEvent, true];
+    _eventsToForward set [_x, true];
 } forEach _hashableEvents;
