@@ -29,6 +29,5 @@ if (isNil "_eventsToForward") then {
 };
 
 {
-    private _hashableEvent = _x;
-    _eventsToForward deleteAt _hashableEvent;
+    _eventsToForward deleteAt _x;
 } forEach _hashableEvents;
