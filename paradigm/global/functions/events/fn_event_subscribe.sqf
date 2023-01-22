@@ -20,7 +20,7 @@
 
 params [["_clients", [clientOwner]], "_event", "_handler"];
 
-// Standardise event format, and hash topic to make sure it's a string.
+// Standardise event format
 if !(_event isEqualType []) then {
     _event = [_event, ""];
 };
@@ -93,7 +93,3 @@ if (_shouldListenRemotely) then {
 };
 
 _handlerId
-
-
-
-
