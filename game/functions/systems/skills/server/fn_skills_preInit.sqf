@@ -34,7 +34,7 @@ vgm_s_fnc_skills_handleLearnRequest = {
     ["DEBUG", format ["VGM: Handling learn request for %1 (%2)", name _player, getPlayeRUID _player]] call para_g_fnc_log;
 
     private _playerSkills = _player call vgm_s_fnc_skills_dbGet;
-    _playerSkills get "skillPaths" pushBack _skillPath;
+    _playerSkills get "skillPaths" pushBackUnique _skillPath;
 
     [_player, _playerSkills] call vgm_s_fnc_skills_dbSave;
     // let the client know that server ackowledged the learning
