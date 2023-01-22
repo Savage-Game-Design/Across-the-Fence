@@ -2,7 +2,7 @@
     File: fn_skills_getSkillTreeFromSkill.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2022-12-22
+    Last Update: 2023-01-22
     Public: No
 
     Description:
@@ -28,5 +28,5 @@ while {true} do {
         _item // return
     };
 
-    _item = _item get "subtrees" get (_path deleteAt 0);
+    _item = _item get "subtreesHash" get (_path deleteAt 0);
 };

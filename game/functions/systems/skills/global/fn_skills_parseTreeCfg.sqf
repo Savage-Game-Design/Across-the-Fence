@@ -61,7 +61,7 @@ private _fnc_parseSkillTree = {
     private _cfgSubtrees = _cfgSkillTree >> "subtrees";
     if (!isNull _cfgSubtrees) then {
         private _subtrees = createHashMap;
-        _skillTree set ["subtrees", _subtrees];
+        _skillTree set ["subtreesHash", _subtrees];
 
         {
             _subtrees set [configName _x, [_x, _path] call _fnc_parseSkillTree];

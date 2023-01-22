@@ -186,7 +186,7 @@ vgm_c_fnc_skills_ui_drawTree = {
 
             [vgm_c_fnc_skills_ui_drawTree, [_ctrlGrp, _skillTree, _prevTrees]] call vgm_g_fnc_execNextFrame;
         }];
-    } forEach (_skillTree get "subtrees");
+    } forEach (_skillTree get "subtreesHash");
 };
 
 vgm_c_fnc_skills_ui_skill_onButtonClick = {
