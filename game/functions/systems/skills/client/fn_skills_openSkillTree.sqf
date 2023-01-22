@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author:
     Date: 2022-12-16
-    Last Update: 2023-01-16
+    Last Update: 2023-01-22
     Public: No
 
     Description:
@@ -205,13 +205,9 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
         ] joinString ""), "Confirm", _skill call vgm_c_fnc_skills_canLearn, true, _display] call BIS_fnc_guiMessage;
         if (!_learn) exitWith {};
 
-        if (_skill call vgm_c_fnc_skills_learn) then {
-            hint "Skill learnt";
-        } else {
-            hint "Failed to learn the skill";
-        };
+        [_skill, _display] call vgm_c_fnc_skills_learnRequest;
 
-        // todo handle via local events, eg. "onSkillLearnt"
+        // TODO handle via local events, eg. "onSkillLearnt"
         _drawArgs call vgm_c_fnc_skills_ui_drawTree;
     };
 };

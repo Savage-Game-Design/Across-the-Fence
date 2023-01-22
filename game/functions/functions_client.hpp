@@ -27,8 +27,14 @@ class vgm_c
         class skills_canLearn {};
         class skills_getSkillTreeFromSkill {};
         class skills_isKnown {};
+        class skills_learnRequest {};
         class skills_learn {};
+        class skills_loadSkillsData {};
         class skills_openSkillTree {};
+        class skills_postInit
+        {
+            postInit = 1;
+        };
         class skills_preInit
         {
             preInit = 1;

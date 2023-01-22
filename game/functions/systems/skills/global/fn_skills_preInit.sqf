@@ -2,7 +2,7 @@
     File: fn_skills_preInit.sqf
     Author: veteran29
     Date: 2023-01-15
-    Last Update: 2023-01-15
+    Last Update: 2023-01-21
     Public: No
 
     Description:

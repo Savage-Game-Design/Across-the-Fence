@@ -25,4 +25,14 @@ class vgm_s
         class db_save {};
         class db_typed_save {};
     };
+
+    class skills
+    {
+        VGM_SERVER_PATH(\systems\skills\server);
+
+        class skills_preInit
+        {
+            preInit = 1;
+        };
+    };
 };
