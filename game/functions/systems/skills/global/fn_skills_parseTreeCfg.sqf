@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-01-15
+    Last Update: 2023-01-22
     Public: Yes
 
     Description:
@@ -29,6 +29,7 @@ private _fnc_parseSkillTree = {
     _path pushBack configName _cfgSkillTree;
 
     private _skillTree = createHashMapFromArray [
+        ["path", _path],
         ["displayName", getText (_cfgSkillTree >> "displayName")],
         ["skills", []]
     ];

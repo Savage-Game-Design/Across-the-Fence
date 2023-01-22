@@ -69,6 +69,7 @@ class vgm_g
         {
             preInit = 1;
         };
+        class skills_treesHashToPathsHash;
     };
 };
 
