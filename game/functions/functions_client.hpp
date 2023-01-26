@@ -10,6 +10,12 @@ class vgm_c
         VGM_CLIENT_PATH(\);
     };
 
+    class displays
+    {
+        VGM_CLIENT_PATH(\core\client\displays);
+        class displaySkills;
+    };
+
     class ui
     {
         VGM_CLIENT_PATH(\core\client\ui);
