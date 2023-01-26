@@ -2,7 +2,7 @@
     File: fn_skills_learn.sqf
     Author:
     Date: 2022-12-20
-    Last Update: 2023-01-22
+    Last Update: 2023-01-26
     Public: No
 
     Description:
@@ -44,5 +44,7 @@ vgm_skills_points = vgm_skills_points - (_skill get "cost");
 vgm_skills_knownSkills set [_skill get "path", _skill];
 
 player call (_skill get "codeApply");
+
+["vgm_skills_learnt", _skill] call para_g_fnc_event_trigger;
 
 true // return

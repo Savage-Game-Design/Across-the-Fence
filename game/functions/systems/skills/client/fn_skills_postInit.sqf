@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-01-22
+    Last Update: 2023-01-26
     Public: No
 
     Description:
@@ -19,7 +19,7 @@ if (!hasInterface) exitWith {};
 
 // TODO, placeholder until event system is available
 // request skill data from server
-[player] remoteExecCall ["vgm_s_fnc_skills_loadPlayerSkills", 2];
+["vgm_skills_requestData", player] call para_g_fnc_event_trigger;
 
 
 // dev action, uses path instead of function so there's no need for recompiling

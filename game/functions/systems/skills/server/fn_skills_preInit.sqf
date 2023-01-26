@@ -2,7 +2,7 @@
     File: fn_skills_preInit.sqf
     Author: veteran29
     Date: 2023-01-15
-    Last Update: 2023-01-22
+    Last Update: 2023-01-26
     Public: No
 
     Description:
@@ -17,19 +17,19 @@
 
 if (!isServer) exitWith {};
 
-// TODO, placeholder until event system is in place
-vgm_s_fnc_skills_loadPlayerSkills = {
+[[0], "vgm_skills_requestData", {
     params ["_player"];
+    ["DEBUG", format ["VGM: Received player skills load request %1 (%2)", name _player, getPlayeRUID _player]] call para_g_fnc_log;
 
-    ["DEBUG", format ["VGM: Loading skills data for %1 (%2)", name _player, getPlayeRUID _player]] call para_g_fnc_log;
-
-    [_player call vgm_s_fnc_skills_dbGet] remoteExecCall ["vgm_c_fnc_skills_loadSkillsData", _player];
-};
+    private _skills = _player call vgm_s_fnc_skills_dbGet;
+    [["vgm_skills_loadData", _player], _skills] call para_g_fnc_event_trigger;
+}] call para_g_fnc_event_subscribe;
 
 vgm_s_fnc_skills_handleLearnRequest = {
     params ["_player", "_skillPath"];
 
-    // TODO server side validation? event based?
+    // TODO server side validation?
+    private _result = true;
 
     ["DEBUG", format ["VGM: Handling learn request for %1 (%2)", name _player, getPlayeRUID _player]] call para_g_fnc_log;
 
@@ -38,7 +38,8 @@ vgm_s_fnc_skills_handleLearnRequest = {
 
     [_player, _playerSkills] call vgm_s_fnc_skills_dbSave;
     // let the client know that server ackowledged the learning
-    player setVariable ["vgm_c_skills_learnRequestResult", true, owner _player];
+
+    [["vgm_skills_learnResponse", _player], _result] call para_g_fnc_event_trigger;
 };
 
 vgm_s_fnc_skills_dbGet = {

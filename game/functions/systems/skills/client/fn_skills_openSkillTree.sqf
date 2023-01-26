@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author:
     Date: 2022-12-16
-    Last Update: 2023-01-22
+    Last Update: 2023-01-26
     Public: No
 
     Description:
@@ -38,6 +38,20 @@ _ctrlGrpMain ctrlSetPosition SIZE_DIALOG;
 _ctrlGrpMain ctrlCommit 0;
 
 uiNamespace setVariable ["vgm_skills_ui_currentTabGrp", controlNull];
+
+// redraw current skill tree after skill was learned
+private _drawHandlerId = ["vgm_skills_learnt", {
+    private _ctrlGrpTree = uiNamespace getVariable "vgm_skills_ui_currentTabGrp";
+    private _drawArgs = _ctrlGrpTree getVariable "vgm_drawTreeArgs";
+    _drawArgs call vgm_c_fnc_skills_ui_drawTree;
+}] call para_g_fnc_event_subscribeLocal;
+
+_display setVariable ["vgm_drawHandlerId", _drawHandlerId];
+_display displayAddEventHandler ["Unload", {
+    params ["_display"];
+    diag_log (_display getVariable "vgm_drawHandlerId");
+    [_display getVariable "vgm_drawHandlerId"] call para_g_fnc_event_unsubscribe;
+}];
 
 private _fnc_draw = {
     params ["_display", "_skillTree","_index"];
@@ -75,6 +89,7 @@ private _fnc_draw = {
 vgm_c_fnc_skills_ui_drawTree = {
     params ["_ctrlGrp", "_skillTree", ["_prevTrees", []]];
     private _display = ctrlParent _ctrlGrp;
+    _ctrlGrp setVariable ["vgm_drawTreeArgs", _this];
 
     {
         ctrlDelete _x;
@@ -206,9 +221,6 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
         if (!_learn) exitWith {};
 
         [_skill, _display] call vgm_c_fnc_skills_learnRequest;
-
-        // TODO handle via local events, eg. "onSkillLearnt"
-        _drawArgs call vgm_c_fnc_skills_ui_drawTree;
     };
 };
 
