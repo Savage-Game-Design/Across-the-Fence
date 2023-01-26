@@ -20,6 +20,15 @@ class vgm_c
         class init_info_panel_handler_loop {};
     };
 
+    class shared_hub
+    {
+        VGM_CLIENT_PATH(\systems\shared_hub\client);
+
+        class sharedHub_areaLimiterDisable {};
+        class sharedHub_areaLimiterEnable {};
+        class sharedHub_teleportPlayerToHub {};
+    };
+
     class skills
     {
         VGM_CLIENT_PATH(\systems\skills\client);

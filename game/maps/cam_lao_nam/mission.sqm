@@ -8,22 +8,22 @@ class EditorData
 	toggles=521;
 	class ItemIDProvider
 	{
-		nextID=1325;
+		nextID=1328;
 	};
 	class MarkerIDProvider
 	{
-		nextID=40;
+		nextID=42;
 	};
 	class LayerIndexProvider
 	{
-		nextID=653;
+		nextID=655;
 	};
 	class Camera
 	{
-		pos[]={16415.654,205.4752,8020.2642};
-		dir[]={-0.29379079,-0.72370148,0.62446821};
-		up[]={-0.30808493,0.69010907,0.65485179};
-		aside[]={0.90486878,-2.370216e-007,0.42570943};
+		pos[]={16343.648,95.028191,8150.1943};
+		dir[]={-0.16509344,-0.89274836,-0.41926774};
+		up[]={-0.32709178,0.45054245,-0.83067536};
+		aside[]={-0.93048364,-7.8463927e-008,0.36639225};
 	};
 };
 binarizationWanted=0;
@@ -35,13 +35,14 @@ addons[]=
 	"weapons_f_vietnam_c",
 	"sounds_f_vietnam_c",
 	"modules_f_vietnam",
-	"A3_Modules_F_Curator_Curator"
+	"A3_Modules_F_Curator_Curator",
+	"A3_Ui_F"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=6;
+		items=7;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -81,6 +82,13 @@ class AddonsMetaData
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item6
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -130,14 +138,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -181,14 +189,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -238,7 +246,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			dataType="Logic";
@@ -281,25 +289,26 @@ class Mission
 			name="Players";
 			class Entities
 			{
-				items=34;
+				items=1;
 				class Item0
 				{
 					dataType="Group";
 					side="West";
 					class Entities
 					{
-						items=1;
+						items=34;
 						class Item0
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={16341.911,74.511444,8135.9072};
+								position[]={16341.911,74.511444,8135.9067};
 							};
 							side="West";
 							flags=7;
 							class Attributes
 							{
+								isPlayer=1;
 								isPlayable=1;
 								class Inventory
 								{
@@ -467,20 +476,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1195;
-				};
-				class Item1
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item1
 						{
 							dataType="Object";
 							class PositionInfo
@@ -488,7 +484,7 @@ class Mission
 								position[]={16340.714,74.511444,8136.4839};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -658,20 +654,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1197;
-				};
-				class Item2
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item2
 						{
 							dataType="Object";
 							class PositionInfo
@@ -679,7 +662,7 @@ class Mission
 								position[]={16339.556,74.511444,8137.0264};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -849,20 +832,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1199;
-				};
-				class Item3
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item3
 						{
 							dataType="Object";
 							class PositionInfo
@@ -870,7 +840,7 @@ class Mission
 								position[]={16338.158,74.511444,8137.6646};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -1040,20 +1010,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1201;
-				};
-				class Item4
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item4
 						{
 							dataType="Object";
 							class PositionInfo
@@ -1061,7 +1018,7 @@ class Mission
 								position[]={16336.845,74.511444,8138.0776};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -1231,20 +1188,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1203;
-				};
-				class Item5
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item5
 						{
 							dataType="Object";
 							class PositionInfo
@@ -1252,7 +1196,7 @@ class Mission
 								position[]={16335.457,74.511444,8138.7783};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -1422,20 +1366,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1205;
-				};
-				class Item6
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item6
 						{
 							dataType="Object";
 							class PositionInfo
@@ -1443,7 +1374,7 @@ class Mission
 								position[]={16334.325,74.511444,8139.2876};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -1613,20 +1544,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1207;
-				};
-				class Item7
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item7
 						{
 							dataType="Object";
 							class PositionInfo
@@ -1634,7 +1552,7 @@ class Mission
 								position[]={16333.208,74.511444,8139.6392};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -1804,20 +1722,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1209;
-				};
-				class Item8
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item8
 						{
 							dataType="Object";
 							class PositionInfo
@@ -1825,7 +1730,7 @@ class Mission
 								position[]={16332.035,74.511444,8140.0737};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -1995,20 +1900,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1211;
-				};
-				class Item9
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item9
 						{
 							dataType="Object";
 							class PositionInfo
@@ -2016,7 +1908,7 @@ class Mission
 								position[]={16331.016,74.511444,8140.4604};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -2186,28 +2078,15 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1213;
-				};
-				class Item10
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item10
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={16342.601,74.540443,8137.5093};
+								position[]={16342.601,74.511444,8137.5093};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -2346,7 +2225,6 @@ class Mission
 							};
 							id=1216;
 							type="vn_b_men_sf_06";
-							atlOffset=0.028999329;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -2378,29 +2256,15 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1215;
-					atlOffset=0.028999329;
-				};
-				class Item11
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item11
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={16341.403,74.540443,8138.0859};
+								position[]={16341.403,74.511444,8138.0859};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -2539,7 +2403,6 @@ class Mission
 							};
 							id=1218;
 							type="vn_b_men_sf_06";
-							atlOffset=0.028999329;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -2571,29 +2434,15 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1217;
-					atlOffset=0.028999329;
-				};
-				class Item12
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item12
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={16340.245,74.540443,8138.6284};
+								position[]={16340.245,74.511444,8138.6284};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -2732,7 +2581,6 @@ class Mission
 							};
 							id=1220;
 							type="vn_b_men_sf_06";
-							atlOffset=0.028999329;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -2764,29 +2612,15 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1219;
-					atlOffset=0.028999329;
-				};
-				class Item13
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item13
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={16338.848,74.540443,8139.2666};
+								position[]={16338.848,74.511444,8139.2666};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -2925,7 +2759,6 @@ class Mission
 							};
 							id=1222;
 							type="vn_b_men_sf_06";
-							atlOffset=0.028999329;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -2957,29 +2790,15 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1221;
-					atlOffset=0.028999329;
-				};
-				class Item14
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item14
 						{
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={16337.534,74.540443,8139.6797};
+								position[]={16337.534,74.511444,8139.6797};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -3118,7 +2937,6 @@ class Mission
 							};
 							id=1224;
 							type="vn_b_men_sf_06";
-							atlOffset=0.028999329;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -3150,21 +2968,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1223;
-					atlOffset=0.028999329;
-				};
-				class Item15
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item15
 						{
 							dataType="Object";
 							class PositionInfo
@@ -3172,7 +2976,7 @@ class Mission
 								position[]={16336.146,74.511444,8140.3804};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -3342,20 +3146,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1225;
-				};
-				class Item16
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item16
 						{
 							dataType="Object";
 							class PositionInfo
@@ -3363,7 +3154,7 @@ class Mission
 								position[]={16335.015,74.511444,8140.8896};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -3533,20 +3324,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1227;
-				};
-				class Item17
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item17
 						{
 							dataType="Object";
 							class PositionInfo
@@ -3554,7 +3332,7 @@ class Mission
 								position[]={16333.897,74.511444,8141.2412};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -3724,20 +3502,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1229;
-				};
-				class Item18
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item18
 						{
 							dataType="Object";
 							class PositionInfo
@@ -3745,7 +3510,7 @@ class Mission
 								position[]={16332.725,74.511444,8141.6758};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -3915,20 +3680,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1231;
-				};
-				class Item19
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item19
 						{
 							dataType="Object";
 							class PositionInfo
@@ -3936,7 +3688,7 @@ class Mission
 								position[]={16331.705,74.511444,8142.0625};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -4106,20 +3858,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1233;
-				};
-				class Item20
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item20
 						{
 							dataType="Object";
 							class PositionInfo
@@ -4127,7 +3866,7 @@ class Mission
 								position[]={16343.312,74.511444,8139.0127};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -4297,20 +4036,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1235;
-				};
-				class Item21
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item21
 						{
 							dataType="Object";
 							class PositionInfo
@@ -4318,7 +4044,7 @@ class Mission
 								position[]={16342.114,74.511444,8139.5894};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -4488,20 +4214,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1237;
-				};
-				class Item22
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item22
 						{
 							dataType="Object";
 							class PositionInfo
@@ -4509,7 +4222,7 @@ class Mission
 								position[]={16340.956,74.511444,8140.1318};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -4679,20 +4392,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1239;
-				};
-				class Item23
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item23
 						{
 							dataType="Object";
 							class PositionInfo
@@ -4700,7 +4400,7 @@ class Mission
 								position[]={16339.559,74.511444,8140.77};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -4870,20 +4570,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1241;
-				};
-				class Item24
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item24
 						{
 							dataType="Object";
 							class PositionInfo
@@ -4891,7 +4578,7 @@ class Mission
 								position[]={16338.245,74.511444,8141.1831};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -5061,20 +4748,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1243;
-				};
-				class Item25
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item25
 						{
 							dataType="Object";
 							class PositionInfo
@@ -5082,7 +4756,7 @@ class Mission
 								position[]={16336.857,74.511444,8141.8838};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -5252,20 +4926,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1245;
-				};
-				class Item26
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item26
 						{
 							dataType="Object";
 							class PositionInfo
@@ -5273,7 +4934,7 @@ class Mission
 								position[]={16335.726,74.511444,8142.3931};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -5443,20 +5104,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1247;
-				};
-				class Item27
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item27
 						{
 							dataType="Object";
 							class PositionInfo
@@ -5464,7 +5112,7 @@ class Mission
 								position[]={16334.608,74.511444,8142.7446};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -5634,20 +5282,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1249;
-				};
-				class Item28
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item28
 						{
 							dataType="Object";
 							class PositionInfo
@@ -5655,7 +5290,7 @@ class Mission
 								position[]={16333.436,74.511444,8143.1792};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -5825,20 +5460,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1251;
-				};
-				class Item29
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item29
 						{
 							dataType="Object";
 							class PositionInfo
@@ -5846,7 +5468,7 @@ class Mission
 								position[]={16332.416,74.511444,8143.5659};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -6016,20 +5638,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1253;
-				};
-				class Item30
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item30
 						{
 							dataType="Object";
 							class PositionInfo
@@ -6037,7 +5646,7 @@ class Mission
 								position[]={16344.022,74.511444,8140.8188};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -6207,20 +5816,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1275;
-				};
-				class Item31
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item31
 						{
 							dataType="Object";
 							class PositionInfo
@@ -6228,7 +5824,7 @@ class Mission
 								position[]={16342.839,74.511444,8141.626};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -6398,20 +5994,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1277;
-				};
-				class Item32
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item32
 						{
 							dataType="Object";
 							class PositionInfo
@@ -6419,7 +6002,7 @@ class Mission
 								position[]={16341.697,74.511444,8142.103};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -6589,20 +6172,7 @@ class Mission
 								nAttributes=2;
 							};
 						};
-					};
-					class Attributes
-					{
-					};
-					id=1279;
-				};
-				class Item33
-				{
-					dataType="Group";
-					side="West";
-					class Entities
-					{
-						items=1;
-						class Item0
+						class Item33
 						{
 							dataType="Object";
 							class PositionInfo
@@ -6610,7 +6180,7 @@ class Mission
 								position[]={16340.431,74.511444,8142.6782};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayable=1;
@@ -6784,11 +6354,10 @@ class Mission
 					class Attributes
 					{
 					};
-					id=1281;
+					id=1195;
 				};
 			};
 			id=1321;
-			atlOffset=7.6293945e-006;
 		};
 		class Item4
 		{
@@ -7261,6 +6830,33 @@ class Mission
 			};
 			id=1323;
 			atlOffset=1.6450043;
+		};
+		class Item5
+		{
+			dataType="Layer";
+			name="Shared Hub";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={16330.562,73.573997,8114.624};
+					name="vgm_shared_hub";
+					text="Shared Hub";
+					markerType="ELLIPSE";
+					type="";
+					fillName="Border";
+					a=116.409;
+					b=132.65601;
+					angle=195.55998;
+					drawBorder=1;
+					id=1327;
+					atlOffset=-0.93600464;
+				};
+			};
+			id=1325;
+			atlOffset=-0.93600464;
 		};
 	};
 };
