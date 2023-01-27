@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-01-26
+    Last Update: 2023-01-27
     Public: No
 
     Description:
@@ -17,16 +17,13 @@
 
 if (!hasInterface) exitWith {};
 
-// TODO, placeholder until event system is available
-// request skill data from server
-["vgm_skills_requestData", player] call para_g_fnc_event_trigger;
-
+[] call vgm_c_fnc_skills_requestSkillsData;
 
 // dev action, uses path instead of function so there's no need for recompiling
 _fnc_addActionSkillMenu = {
     _this addAction ["Open skills menu", {
         call compileScript ["functions\systems\skills\client\fn_skills_openSkillTree.sqf"];
-    }, nil, -1e10];
+    }, nil, -1e10, true, false, "", "_originalTarget == _this"];
 };
 
 player call _fnc_addActionSkillMenu;

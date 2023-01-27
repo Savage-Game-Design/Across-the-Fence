@@ -30,9 +30,22 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\skills\server);
 
+        class skills_addSkillpoint {};
+
+        class skills_dbGet {};
+        class skills_dbSave {};
+
         class skills_preInit
         {
             preInit = 1;
         };
+    };
+
+    class skills_network
+    {
+        VGM_SERVER_PATH(\systems\skills\server\network);
+
+        class skills_handle_skillsDataRequest {};
+        class skills_handle_skillLearnRequest {};
     };
 };

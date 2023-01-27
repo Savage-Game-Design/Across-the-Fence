@@ -34,6 +34,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skills\client);
 
         class skills_canLearn {};
+        class skills_getSkillPoints {};
         class skills_getSkillTreeFromSkill {};
         class skills_isKnown {};
         class skills_learnRequest {};
@@ -47,6 +48,17 @@ class vgm_c
         {
             preInit = 1;
         };
+    };
+
+    class skills_network
+    {
+        VGM_CLIENT_PATH(\systems\skills\client\network);
+
+        class skills_receiveSkillLearn {};
+        class skills_receiveSkillsData {};
+
+        class skills_requestSkillLearn {};
+        class skills_requestSkillsData {};
     };
 };
 
@@ -72,6 +84,8 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
 
+        class skills_canLearn {};
+        class skills_getByPath {};
         class skills_parseTreeCfg {};
         class skills_preInit
         {

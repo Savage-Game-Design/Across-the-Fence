@@ -2,7 +2,7 @@
     File: fn_skills_isKnown.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-01-15
+    Last Update: 2023-01-27
     Public: Yes
 
     Description:
@@ -20,4 +20,5 @@
 
 params ["_skill"];
 
-(_skill get "path") in vgm_skills_knownSkills // return
+private _skillsData = player getVariable "vgm_g_skillsData";
+(_skill get "path") in (_skillsData get "skillPaths") // return

@@ -1,9 +1,9 @@
 #include "\a3\ui_f\hpp\defineCommonGrids.inc"
 /*
     File: fn_openSkillTree.sqf
-    Author:
+    Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-01-26
+    Last Update: 2023-01-27
     Public: No
 
     Description:
@@ -49,7 +49,6 @@ private _drawHandlerId = ["vgm_skills_learnt", {
 _display setVariable ["vgm_drawHandlerId", _drawHandlerId];
 _display displayAddEventHandler ["Unload", {
     params ["_display"];
-    diag_log (_display getVariable "vgm_drawHandlerId");
     [_display getVariable "vgm_drawHandlerId"] call para_g_fnc_event_unsubscribe;
 }];
 
@@ -216,11 +215,11 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
         params ["_display", "_skill", "_drawArgs"];
         private _learn = [parseText ([
             "Do you want to learn: <t color='#ff0000'>", _skill get "displayName", "</t><br/>",
-            format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", vgm_skills_points, _skill get "cost"]
-        ] joinString ""), "Confirm", _skill call vgm_c_fnc_skills_canLearn, true, _display] call BIS_fnc_guiMessage;
+            format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", call vgm_c_fnc_skills_getSkillPoints, _skill get "cost"]
+        ] joinString ""), "Confirm", [player, _skill] call vgm_g_fnc_skills_canLearn, true, _display] call BIS_fnc_guiMessage;
         if (!_learn) exitWith {};
 
-        [_skill, _display] call vgm_c_fnc_skills_learnRequest;
+        [_skill, _display] call vgm_c_fnc_skills_requestSkillLearn;
     };
 };
 

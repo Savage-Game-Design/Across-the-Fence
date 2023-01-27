@@ -1,33 +1,37 @@
 /*
     File: fn_skills_canLearn.sqf
-    Author:
+    Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-01-15
+    Last Update: 2023-01-27
     Public: No
 
     Description:
-        No description added yet.
+        Check if player is eligible for learning given skill.
 
     Parameter(s):
-        N/A
+        _player - Player trying to learn the skill [OBJECT]
+        _skill - Skill [HashMap]
 
     Returns:
         Player can learn the skill [BOOL]
 
     Example(s):
-        _skill call vgm_c_fnc_skills_canLearn
+        [player, _skill] call vgm_g_fnc_skills_canLearn
  */
 
-params ["_skill"];
+params ["_player", "_skill"];
 
-(vgm_skills_points >= (_skill get "cost"))
+private _skillsData = _player getVariable "vgm_g_skillsData";
+
+((_skillsData get "skillPoints") >= (_skill get "cost"))
 && {
     // check if knows at least one skill from previous tier
     private _tier = _skill get "tier";
     if (_tier < 1) exitWith {true};
 
+    // TODO handle previous trees required for subtrees
     private _tiersArray = (_skill call vgm_c_fnc_skills_getSkillTreeFromSkill) get "skills";
     _previousTierSkills = _tiersArray select (_tier - 1);
     _previousTierSkills findIf {_x call vgm_c_fnc_skills_isKnown} > -1 // return
 }
-&& {player call (_skill get "conditionUnlock")} // return
+&& {_player call (_skill get "conditionUnlock")} // return
