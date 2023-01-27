@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-01-22
+    Last Update: 2023-01-27
     Public: Yes
 
     Description:
@@ -65,7 +65,7 @@ private _fnc_parseSkillTree = {
         _skillTree set ["subtreesHash", _subtrees];
 
         {
-            _subtrees set [configName _x, [_x, _path] call _fnc_parseSkillTree];
+            _subtrees set [configName _x, [_x, +_path] call _fnc_parseSkillTree];
         } forEach ("true" configClasses _cfgSubtrees);
     };
 
