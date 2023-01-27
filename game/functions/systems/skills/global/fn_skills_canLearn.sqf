@@ -3,7 +3,7 @@
     Author: veteran29
     Date: 2022-12-22
     Last Update: 2023-01-27
-    Public: No
+    Public: Yes
 
     Description:
         Check if player is eligible for learning given skill.
@@ -19,11 +19,14 @@
         [player, _skill] call vgm_g_fnc_skills_canLearn
  */
 
-params ["_player", "_skill"];
+params [
+    ["_player", objNull],
+    ["_skill", createHashMap]
+];
 
-private _skillsData = _player getVariable "vgm_g_skillsData";
+private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
 
-((_skillsData get "skillPoints") >= (_skill get "cost"))
+((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
 && {
     // check if knows at least one skill from previous tier
     private _tier = _skill get "tier";

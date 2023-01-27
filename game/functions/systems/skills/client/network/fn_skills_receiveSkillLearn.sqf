@@ -20,6 +20,8 @@
 
 params ["_result", "_skillsData", "_skillPath"];
 
+["DEBUG", format ["VGM: Received skills learn for %1 with result %2", _skillPath, _result]] call para_g_fnc_log;
+
 // close the popup
 // TODO keep the popup display in variable and close it via it
 uiNamespace setVariable ["BIS_fnc_guiMessage_status", _result];

@@ -33,12 +33,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skills\client);
 
-        class skills_canLearn {};
         class skills_getSkillPoints {};
         class skills_getSkillTreeFromSkill {};
         class skills_isKnown {};
-        class skills_learnRequest {};
-        class skills_learn {};
         class skills_openSkillTree {};
         class skills_postInit
         {
