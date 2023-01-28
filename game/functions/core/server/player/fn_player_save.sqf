@@ -35,7 +35,7 @@ private _profile = createHashMap;
 _profile set ["name", name _player];
 _profile set ["uid", getPlayerUID _player];
 
-private _savedData = ["player", getPlayerUID _player, _player] call vgm_s_fnc_db_typed_save;
+private _savedData = ["player", getPlayerUID _player, _profile] call vgm_s_fnc_db_typed_save;
 saveMissionProfileNamespace;
 
 _savedData //result
