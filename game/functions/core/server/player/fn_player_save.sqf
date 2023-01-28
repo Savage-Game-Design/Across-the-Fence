@@ -2,14 +2,11 @@
     File: fn_player_set_var.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-08
+    Last Update: 2023-01-28
     Public: No
 
     Description:
         This function will force a save of the player's information to the database.
-
-        This shouldn't be required since the information is a reference to
-            the missionNamespace object, but it's here just in case.
 
     Parameter(s):
         _player - The player object to save
