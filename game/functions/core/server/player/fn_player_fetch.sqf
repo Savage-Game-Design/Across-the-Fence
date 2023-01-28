@@ -1,8 +1,8 @@
 /*
-    File: fn_player_get_fetch.sqf
+    File: fn_player_fetch.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-08
+    Last Update: 2023-01-28
     Public: No
 
     Description:
