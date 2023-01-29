@@ -1,21 +1,30 @@
 /*
     File: fn_event_startForwardingMatchingEvents.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-24
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: No
 
     Description:
-        No description added yet.
+        Called by clients to request the server start forward any matching events to them.
+
+        Sets up event forwarding, resolves the clients list to machine IDs and tells the client they can attach the handler.
 
     Parameter(s):
-        N/A
+        _clients - Machines the requester wants to listen to. Can be numbers or objects [ARRAY]
+        _event - Event the requester wants forwarding to them. Must be [event name, topic] formatted [ARRAY]
+        _handlerId - ID of the handler to register on the client, once the machine ids have been resolved. [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        // Requests "owner of cursorObject" and "server" forward "myEvent", with topic cursorObject, to the client.
+        [
+            [cursorObject, 2],
+            ["myEvent", cursorObject],
+            _cachedHandlerId
+        ] remoteExec ["para_s_fnc_event_startForwardingMatchingEvents", 2];
  */
 
 params [

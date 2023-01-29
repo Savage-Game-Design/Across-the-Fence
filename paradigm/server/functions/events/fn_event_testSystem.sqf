@@ -1,21 +1,27 @@
 /*
     File: fn_event_testSystem.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-12-09
-    Last Update: 2022-12-24
-    Public: No
+    Last Update: 2023-01-29
+    Public: Yes
 
     Description:
-        No description added yet.
+        Runs basic tests on the event system.
+        Needs to be done on a dedicated server, with a client.
+
+        Sets up a bunch of test data, that doesn't get cleaned up.
+        As a result, the system will need reinitialising to run the tests again.
+
+        Running this on a live game shouldn't cause any problems, but can only really be done once, else the tests will probably fail.
 
     Parameter(s):
-        N/A
+        None
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call para_s_fnc_event_testSystem
  */
 
 para_s_event_testRunning = true;
