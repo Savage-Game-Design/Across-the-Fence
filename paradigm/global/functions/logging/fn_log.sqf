@@ -7,12 +7,12 @@
 	    Writes a log entry.
 
     Parameter(s):
-		- _logLevel - Log level [STRING]
+		- _logLevel - Log level - One of: ERROR, WARNING, INFO, VERBOSE, DEBUG [STRING]
 		- _message - Log message [STRING]
 		- _file - File that's being logged from [STRING]
 		- _callingFile - File that called the file being logged from [STRING] (Optional)
 
-    Returns: 
+    Returns:
 		Nothing
 
     Example(s):

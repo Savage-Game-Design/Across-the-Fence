@@ -2,17 +2,17 @@
     File: fn_client_init.sqf
     Author:  Savage Game Design
     Public: No
-    
+
     Description:
 		Starts the paradigm init process on the client.
 		Alternates between performing init, and waiting for the server to perform init.
-    
+
     Parameter(s):
 		None
-    
+
     Returns:
 		None
-    
+
     Example(s):
         [parameter] call vn_fnc_myFunction
 */
@@ -43,7 +43,7 @@ addMissionEventHandler ["PreloadFinished", {
 	waitUntil {
 		uiSleep 0.1;
 		//After pre-load is completed (all functions initialised)
-		missionNamespace getVariable ["bis_fnc_init", false] 
+		missionNamespace getVariable ["bis_fnc_init", false]
 		//No loading screens
 		&& !(call BIS_fnc_isLoading)
 		//After briefing
