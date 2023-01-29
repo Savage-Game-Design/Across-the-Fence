@@ -9,6 +9,7 @@ class vgm_skillTemplate {
     applyOnRespawn = 0;
 
     conditionUnlock = "true";
+    conditionShow = "true";
     codeApply = "systemChat 'skill applied'";
     codeActivate = "systemChat 'skill activated'";
 };

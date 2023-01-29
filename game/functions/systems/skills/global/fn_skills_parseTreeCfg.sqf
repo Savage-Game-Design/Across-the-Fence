@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-01-27
+    Last Update: 2023-01-29
     Public: Yes
 
     Description:
@@ -50,6 +50,7 @@ private _fnc_parseSkillTree = {
                 ["isActive", getNumber (_x >> "isActive") > 0],
                 ["applyOnRespawn", getNumber (_x >> "applyOnRespawn") > 0],
                 ["conditionUnlock", compileFinal getText (_x >> "conditionUnlock")],
+                ["conditionShow", compileFinal getText (_x >> "conditionShow")],
                 ["codeApply", compileFinal getText (_x >> "codeApply")],
                 ["codeActivate", compileFinal getText (_x >> "codeActivate")]
             ];
