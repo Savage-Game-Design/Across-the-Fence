@@ -1,21 +1,21 @@
 /*
     File: fn_event_handlePlayerDisconnected.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-12-05
-    Last Update: 2022-12-05
+    Last Update: 2023-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Called on clients when a player disconnects, to clear out anything associated with their machine ID on this client.
 
     Parameter(s):
-        N/A
+        _disconnectedMachineId - Machine ID of the disconnected player [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [36] call para_g_fnc_event_handlePlayerDisconnected;
  */
 
 params ["_disconnectedMachineId"];

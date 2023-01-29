@@ -1,21 +1,24 @@
 /*
     File: fn_event_callRegisteredHandlers.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-21
-    Last Update: 2022-12-20
+    Last Update: 2023-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Calls the event handlers associated with the given event and origin machine.
 
     Parameter(s):
-        N/A
+        _originMachineId - Machine ID of the client sending the event [NUMBER]
+        _hashableEvent - Event to listen to, in the hashable format (string, string) [ARRAY]
+        _originalEvent - Original event, before being converted to a hashable event [ARRAY]
+        _data - Data sent with the event [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [2, ["eventName", hashValue objNull], ["eventName", objNull], _someData] call para_g_fnc_event_callRegisteredHandlers;
  */
 
 params ["_originMachineId", "_hashableEvent", "_originalEvent", "_data"];

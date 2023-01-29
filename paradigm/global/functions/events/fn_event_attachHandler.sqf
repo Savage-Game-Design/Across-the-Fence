@@ -1,21 +1,26 @@
 /*
     File: fn_event_attachHandler.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-21
-    Last Update: 2022-12-20
+    Last Update: 2023-01-22
     Public: No
 
     Description:
         Sets a handler to be called whenever an event is received from a specific machine, with an optional topic.
 
     Parameter(s):
-        N/A
+        _machineIds - Machine IDs of the clients we're listening to the events from [ARRAY]
+        _hashableEvent - Event to listen to, in the hashable format (string, string) [ARRAY]
+        _originalEvent - Original event, before being converted to a hashable event [ARRAY]
+        _handlerId - Unique ID of the callback to call when the event is received [ANY]
+        _keepHandlerInCache - Whether or not to remove the handler from the handler cache when we attach it. Should be false, unless handler needs to be added multiple times. [BOOL]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
+        [[1,2,3], _hashableEvent, _event, _handlerId] call para_g_fnc_event_attachHandler;
  */
 
 params [["_machineIds", [clientOwner]], "_hashableEvent", "_originalEvent", "_handlerId", ["_keepHandlerInCache", false]];

@@ -1,21 +1,24 @@
 /*
     File: fnc_event_trigger.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2022-12-20
+    Last Update: 2023-01-29
     Public: Yes
 
     Description:
-        No description added yet.
+        Triggers the given event on any client that's listening.
+        Optional data parameter is sent with the event to those clients.
 
     Parameter(s):
-        N/A
+        _event - Triggering event. Can either be a string, or [event, topic] array, where event is a string, and topic is anything hashable. [STRING/ARRAY]
+        _data - Optional data to send to the clients. This is passed to the callbacks. [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["myCustomEvent", 3] call para_g_fnc_event_trigger;
+        [["myCustomEvent", "ducks"], [getPlayerUID player]] call para_g_fnc_event_trigger;
  */
 
 params ["_event", "_data"];

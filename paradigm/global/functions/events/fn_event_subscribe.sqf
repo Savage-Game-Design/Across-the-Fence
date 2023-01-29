@@ -1,21 +1,42 @@
 /*
     File: fnc_event_subscribe.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2022-12-20
+    Last Update: 2023-01-29
     Public: Yes
 
     Description:
-        No description added yet.
+        Causes the handler to be called, whenever the specified event fires on one of the provided clients.
+        Event can be a string, or a combination of event and topic, where topic is anything hashable.
+        - Just specifying an event means all events of that type are received
+        - Specifying an event and topic, means only events with a matching topic will cause the callback to fire
+
+        IMPORTANT:
+            There's a delay between calling this, and the client receiving events from remote clients.
+            I.e, not all events fired after calling this are guaranteed to trigger the callback.
+            If you need that behaviour, consider using other systems.
+
+            This does NOT apply to local events.
+            Firing an event locally immediately after subscribing guarantees the callback will be called.
+
 
     Parameter(s):
-        N/A
+        _clients - Where to listen for the event being fired from. Can be a number or networked object [ARRAY]
+        _event - Event to listen to. Can either be a string, or [event, topic] array, where event is a string, and topic is anything hashable. [STRING/ARRAY]
+        _handler - Callback to fire when one of the clients triggers the event. [CODE] or [parameters, code] [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Handler ID, used to unsubscribe.
 
     Example(s):
-        [parameter] call paraX_fnc_component_myFunction
+        // Register to a local event
+        [[clientOwner], "myCustomEvent", {}] call para_g_fnc_event_subscribe
+
+        // Register to a local or server event, with a topic
+        [[2, clientOwner], ["myCustomEvent", "ducks"], {}] call para_g_fnc_event_subscribe
+
+        // Register to an event from any client, with a topic, and parameter for the callback
+        [[0], ["myCustomEvent", player], [[32], {}]] call para_g_fnc_event_subscribe
  */
 
 params [["_clients", [clientOwner]], "_event", "_handler"];
