@@ -45,7 +45,14 @@ class vgm_skillTrees {
 
             class tier_4 {
                 class skill_7: vgm_skillTemplate {};
-                class skill_8: vgm_skillTemplate {};
+                class zeusBolt: vgm_skillTemplate {
+                    displayName = "Zeus bolt";
+                    description = "POWE OF THE GODS!";
+                    isActive = 1;
+
+                    applyOnRespawn = 1;
+                    codeApply = "hint 'boom'";
+                };
             };
         };
 
