@@ -17,8 +17,13 @@
 
 if (!hasInterface) exitWith {};
 
+vgm_c_skills_applyOnRespawn = createHashMap;
+
 ["vgm_skills_learnt", {
-    params ["_path", "_skill"];
+    _this#0 params ["_path", "_skill"];
 
     player call (_skill get "codeApply");
+    if (_skill get "applyOnRespawn") then {
+        vgm_c_skills_applyOnRespawn set [_path, _skill]
+    };
 }] call para_g_fnc_event_subscribeLocal;
