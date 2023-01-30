@@ -29,7 +29,7 @@ if (isNil "_skillsData") exitWith {
 player setVariable ["vgm_g_skillsData", _skillsData];
 
 {
-    private _skill = _x call vmg_g_skills_getSkillByPath;
+    private _skill = _x call vgm_g_fnc_skills_getByPath;
     if (isNil "_skill") then {
         ["ERROR", format ["VGM: Skill does not exist '%1'", _x]] call para_g_fnc_log;
         continue;
@@ -45,4 +45,4 @@ player setVariable ["vgm_g_skillsData", _skillsData];
     ["DEBUG", format ["VGM: New skill '%1'", _x]] call para_g_fnc_log;
 
     ["vgm_skills_learnt", [_x, _skill]] call para_g_fnc_event_trigger;
-} forEach (_skillsData get "skillsPaths");
+} forEach (_skillsData get "skillPaths");
