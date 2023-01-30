@@ -3,6 +3,40 @@
 #define VGM_CLIENT_PATH(PATH) file=QUOTE(CONCAT_3(VGM_PATH,functions,PATH))
 #define VGM_GLOBAL_PATH(PATH) file=QUOTE(CONCAT_3(VGM_PATH,functions,PATH))
 
+class vgm_g
+{
+    class default
+    {
+        VGM_GLOBAL_PATH(\);
+    };
+
+    class core
+    {
+        VGM_GLOBAL_PATH(\core\global);
+
+        class execNextFrame {};
+        class preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class skills
+    {
+        VGM_GLOBAL_PATH(\systems\skills\global);
+
+        class skills_canLearn {};
+        class skills_canSee {};
+        class skills_getByPath {};
+        class skills_parseTreeCfg {};
+        class skills_preInit
+        {
+            preInit = 1;
+        };
+        class skills_treesHashToPathsHash;
+    };
+};
+
 class vgm_c
 {
     class default
@@ -58,38 +92,3 @@ class vgm_c
         class skills_requestSkillsData {};
     };
 };
-
-class vgm_g
-{
-    class default
-    {
-        VGM_GLOBAL_PATH(\);
-    };
-
-    class core
-    {
-        VGM_GLOBAL_PATH(\core\global);
-
-        class execNextFrame {};
-        class preInit
-        {
-            preInit = 1;
-        };
-    };
-
-    class skills
-    {
-        VGM_GLOBAL_PATH(\systems\skills\global);
-
-        class skills_canLearn {};
-        class skills_canSee {};
-        class skills_getByPath {};
-        class skills_parseTreeCfg {};
-        class skills_preInit
-        {
-            preInit = 1;
-        };
-        class skills_treesHashToPathsHash;
-    };
-};
-
