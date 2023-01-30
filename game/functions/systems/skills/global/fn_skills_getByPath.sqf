@@ -2,7 +2,7 @@
     File: fn_skills_getSkillByPath.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-01-27
+    Last Update: 2023-01-30
     Public: No
 
     Description:
@@ -15,8 +15,8 @@
         Skill or SkillTree [HashMap]
 
     Example(s):
-        [_path] call vmg_g_skills_getSkillByPath
-        _path call vmg_g_skills_getSkillByPath
+        [_path] call vgm_g_fnc_skills_getByPath
+        _path call vgm_g_fnc_skills_getByPath
  */
 
 if (_this#0 isEqualType []) then {
