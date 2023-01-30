@@ -2,17 +2,17 @@
     File: fn_skills_receiveSkillsData.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-01-27
+    Last Update: 2023-01-30
     Public: No
 
     Description:
-        No description added yet.
+        Handle receiving skills data from the server.
 
     Parameter(s):
-        N/A
+        _skillsData - Skills data hash [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [_skillsData] call vgm_c_fnc_skills_receiveSkillsData
@@ -20,13 +20,13 @@
 
 params ["_skillsData"];
 
+if (isNil "_skillsData") exitWith {
+    ["ERROR", "VGM: Empty skills data"] call para_g_fnc_log;
+};
+
 ["DEBUG", format ["VGM: Received skills data '%1'", _skillsData]] call para_g_fnc_log;
 
 player setVariable ["vgm_g_skillsData", _skillsData];
-
-private _skillsCodeToApply = _skillsData get "skillsPaths" select {
-    !(_x in vgm_c_skillsCodeApplied)
-};
 
 {
     private _skill = _x call vmg_g_skills_getSkillByPath;
@@ -35,8 +35,14 @@ private _skillsCodeToApply = _skillsData get "skillsPaths" select {
         continue;
     };
 
-    ["DEBUG", format ["VGM: Applying skill callback '%1'", _x]] call para_g_fnc_log;
+    if (_skill getOrDefault ["_known", false]) then {
+        ["DEBUG", format ["VGM: Skill known previously '%1'", _x]] call para_g_fnc_log;
+        continue;
+    };
 
-    player call (_skill get "codeApply");
-    vgm_c_skillsCodeApplied set [_x, true];
-} forEach _skillsCodeToApply;
+    _skill set ["_known", true];
+
+    ["DEBUG", format ["VGM: New skill '%1'", _x]] call para_g_fnc_log;
+
+    ["vgm_skills_learnt", [_x, _skill]] call para_g_fnc_event_trigger;
+} forEach (_skillsData get "skillsPaths");

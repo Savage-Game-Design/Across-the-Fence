@@ -2,14 +2,16 @@
     File: fn_skills_receiveSkillLearn.sqf
     Author:
     Date: 2023-01-27
-    Last Update: 2023-01-27
+    Last Update: 2023-01-30
     Public: No
 
     Description:
-        No description added yet.
+        Handle receiving skill learning response from the server.
 
     Parameter(s):
-        N/A
+        _reuslt - Was the learning successful [BOOL]
+        _skillsData - Skills data hash if learning was successful [HASHMAP]
+        _skillPath - Path of the skill that was being learned [HASHMAP]
 
     Returns:
         Something [BOOL]
@@ -31,7 +33,5 @@ if (!_result) exitWith {
 };
 
 hint "Learnt skill";
-
-["vgm_skills_learnt", _skillPath] call para_g_fnc_event_trigger;
 
 [_skillsData] call vgm_c_fnc_skills_receiveSkillsData;

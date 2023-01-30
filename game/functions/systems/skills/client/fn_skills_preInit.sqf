@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-01-27
+    Last Update: 2023-01-30
     Public: No
 
     Description:
@@ -17,4 +17,8 @@
 
 if (!hasInterface) exitWith {};
 
-vgm_c_skillsCodeApplied = createHashMap;
+["vgm_skills_learnt", {
+    params ["_path", "_skill"];
+
+    player call (_skill get "codeApply");
+}] call para_g_fnc_event_subscribeLocal;
