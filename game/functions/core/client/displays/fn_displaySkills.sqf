@@ -4,6 +4,8 @@ diag_log ["displaySkills", _this];
 switch _mode do {
     case "onLoad":{
         _params params ["_display"];
+        private _ctrlSkills = _display displayCtrl VGM_IDC_RSCDISPLAYSKILLS_SKILLS;
+        _ctrlSkills tvSetCurSel [0];
     };
     case "initSkills": {
         _params params ["_ctrlSkills"];
@@ -34,6 +36,8 @@ switch _mode do {
         private _display = ctrlParent _ctrlSkills;
         private _ctrlDescription = _display displayCtrl VGM_IDC_RSCDISPLAYSKILLS_DESCRIPTION;
         private _ctrlSkillTree = _display displayCtrl VGM_IDC_RSCDISPLAYSKILLS_SKILLTREE;
+        diag_log [_display, _ctrlSkillTree, VGM_IDC_RSCDISPLAYSKILLS_SKILLTREE];
+        diag_log (allControls _display);
         // Get the appropate action for the selected entry
         switch (count _path) do {
             case 1: {
@@ -56,6 +60,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
             ["Ultimate Ability<br/>Heads Down!<br/>6 Skill Points"]
         ];
         // Remove all old controls
+
         allControls _ctrlSkillTree apply { ctrlDelete _x };
         // Save some coordinates for later use
         ctrlPosition _ctrlSkillTree params ["", "", "_wSkillTree"];
@@ -73,19 +78,22 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                 // Draw a horizontal line connecting the skills from the
                 // previous level to the skills of the current level
                 private _ctrlSkillLineH = _display ctrlCreate ["VGM_ctrlSkillTreeBranchH", -1, _ctrlSkillTree];
-                private _wLineH = (_previousSkillCount max _currentSkillCount - 1);
-                _wLineH = _wLineH * _wSkill + (_wLineH+1) * VGM_GRID_MARGIN * VGM_GRID_W;
+                private _hlineW = (_previousSkillCount max _currentSkillCount - 1);
+                _hlineW = _hlineW * _wSkill + _hlineW * VGM_GRID_W;
+                // TODO: Make line just wide enough to touch all vertical lines
                 _ctrlSkillLineH ctrlSetPosition [
                     // Middle of tree, go back half the width of the line and a bit
-                    0.5 * _wSkillTree - 0.5 * _wLineH - 0.25 * VGM_GRID_MARGIN * VGM_GRID_W,
+                    // 0.5 * _wSkillTree - 0.5 * _hlineW,
+                    0,
                     _yPos,
-                    _wLineH,
-                    VGM_GRID_MARGIN * VGM_GRID_H
+                    // _hlineW,
+                    _wSkillTree,
+                    1 * VGM_GRID_H
                 ];
                 _ctrlSkillLineH ctrlCommit 0;
                 _previousSkillCount = _currentSkillCount;
             };
-            _yPos = _yPos + 0.5 * VGM_GRID_H;
+            _yPos = _yPos + 1.5 * VGM_GRID_H;
             // Center the controls
             _xPos = switch (count _levelSkills) do {
                 case 1: { 0.5 * _wSkillTree - 0.5 * _wSkill };
@@ -94,7 +102,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
             };
             // Iterate over the skills of the current level
             _levelSkills apply {
-                private _xLineV = _xPos + 0.5 * _wSkill - 0.5 * VGM_GRID_MARGIN * VGM_GRID_W;
+                private _xLineV = _xPos + 0.5 * _wSkill - 0.5 * VGM_GRID_W;
                 if (_forEachIndex > 0) then {
                     // Draw a vertical line into the top of the skill connecting
                     // it to the horizontal line of the previous iteration
@@ -115,25 +123,25 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                 _ctrlSkillLineVBottom ctrlSetPosition [_xLineV, _yPos + _hSkill];
                 _ctrlSkillLineVBottom ctrlCommit 0;
 
-                _xPos = _xPos + _wSkill + VGM_GRID_MARGIN * VGM_GRID_W;
+                _xPos = _xPos + _wSkill + 1 * VGM_GRID_W;
             };
             _yPos = _yPos + _hSkill + 0.5 * VGM_GRID_H;
         } forEach _skills;
 
         // Horizontal line for the root (name of the branch)
         private _ctrlSkillLineHRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchH", -1, _ctrlSkillTree];
-        private _wRootLine = (_previousSkillCount - 1) * _wSkill + _previousSkillCount * VGM_GRID_MARGIN * VGM_GRID_W;
+        private _wRootLine = _wSkillTree;//(_previousSkillCount - 1) * _wSkill + _previousSkillCount * 1 * VGM_GRID_W;
         _ctrlSkillLineHRoot ctrlSetPositionW _wRootLine;
-        _ctrlSkillLineHRoot ctrlSetPosition [0.5 * _wSkillTree - 0.5 * _wRootLine, _yPos, _wRootLine, VGM_GRID_MARGIN * VGM_GRID_H];
+        _ctrlSkillLineHRoot ctrlSetPosition [0.5 * _wSkillTree - 0.5 * _wRootLine, _yPos, _wRootLine, 1 * VGM_GRID_H];
         _ctrlSkillLineHRoot ctrlCommit 0;
         // Vertical line going into the root
         private _ctrlSkillLineVRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
         _ctrlSkillLineVRoot ctrlSetPosition [
-            0.5 * _wSkillTree - 0.5 * VGM_GRID_MARGIN * VGM_GRID_W,
+            0.5 * _wSkillTree - 0.5 * VGM_GRID_W,
             _yPos
         ];
         _ctrlSkillLineVRoot ctrlCommit 0;
-        _yPos = _yPos + 0.5 * VGM_GRID_H;
+        _yPos = _yPos + 1.5 * VGM_GRID_H;
         // Add root with name of branch
         private _ctrlBranchName = _display ctrlCreate ["VGM_ctrlBranchName", -1, _ctrlSkillTree];
         _ctrlBranchName ctrlSetPositionY _yPos;
