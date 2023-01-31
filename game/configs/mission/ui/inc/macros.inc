@@ -1,3 +1,14 @@
+/*
+    File: macros.inc
+    Author: Savage Game Design
+    Date: 2023-01-31
+    Last Update:
+    Public: Yes
+
+    Description:
+        Contains all macros used by the UI system.
+ */
+// Include Eden macros
 #include "\a3\3den\ui\resincl.inc"
 
 // Include all other macros
@@ -9,7 +20,8 @@
 #define VGM_UIFNC(NAME) CONCAT_2(vgm_c_fnc_display,NAME)
 // Call the function of the display with the given event and event arguments,
 // see https://community.bistudio.com/wiki/User_Interface_Event_Handlers
-// e.g. `VGM_UIEH(onLoad,Example)` will expand to `["onLoad", _this] call VGM_UIFNC(Example)`
+// e.g. `VGM_UIEH(onLoad,Example)` will expand to
+// `["onLoad", _this] call VGM_UIFNC(Example)`
 #define VGM_UIEH(EVENT,CLASS) [#EVENT, _this] call VGM_UIFNC(CLASS)
 
 // Default text font, monospaced typewriter-style from SOG:PF
