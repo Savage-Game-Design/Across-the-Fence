@@ -1,10 +1,9 @@
 #include "macros.inc"
 params ["_mode", "_params"];
-diag_log ["displaySkills", _this];
 switch _mode do {
     case "onLoad":{
         _params params ["_display"];
-        private _ctrlSkills = _display displayCtrl VGM_IDC_RSCDISPLAYSKILLS_SKILLS;
+        private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
         _ctrlSkills tvSetCurSel [0];
     };
     case "initSkills": {
@@ -34,10 +33,8 @@ switch _mode do {
     case "selectSkill":{
         _params params ["_ctrlSkills", "_path"];
         private _display = ctrlParent _ctrlSkills;
-        private _ctrlDescription = _display displayCtrl VGM_IDC_RSCDISPLAYSKILLS_DESCRIPTION;
-        private _ctrlSkillTree = _display displayCtrl VGM_IDC_RSCDISPLAYSKILLS_SKILLTREE;
-        diag_log [_display, _ctrlSkillTree, VGM_IDC_RSCDISPLAYSKILLS_SKILLTREE];
-        diag_log (allControls _display);
+        private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
+        private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
         // Get the appropate action for the selected entry
         switch (count _path) do {
             case 1: {
@@ -66,6 +63,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
         ctrlPosition _ctrlSkillTree params ["", "", "_wSkillTree"];
         private _wSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "w");
         private _hSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "h");
+        private _hBranchV = getNumber (missionConfigFile >> "VGM_ctrlSkillTreeBranchV" >> "h");
         // Start adding from Ultimate to Lowest Level skill
         reverse _skills;
         private _xPos = 0;
@@ -92,8 +90,9 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                 ];
                 _ctrlSkillLineH ctrlCommit 0;
                 _previousSkillCount = _currentSkillCount;
+                // spacing below horizontal line
+                _yPos = _yPos + 3 * VGM_GRID_H;
             };
-            _yPos = _yPos + 1.5 * VGM_GRID_H;
             // Center the controls
             _xPos = switch (count _levelSkills) do {
                 case 1: { 0.5 * _wSkillTree - 0.5 * _wSkill };
@@ -107,14 +106,17 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                     // Draw a vertical line into the top of the skill connecting
                     // it to the horizontal line of the previous iteration
                     private _ctrlSkillLineVTop = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
-                    _ctrlSkillLineVTop ctrlSetPosition [_xLineV, _yPos - 0.5 * VGM_GRID_H];
+                    _ctrlSkillLineVTop ctrlSetPosition [
+                        _xLineV,
+                        _yPos - _hBranchV
+                    ];
                     _ctrlSkillLineVTop ctrlCommit 0;
                 };
                 // Create controls for skills of this level
                 private _ctrlSkill = _display ctrlCreate ["VGM_ctrlSkill", -1, _ctrlSkillTree];
                 _ctrlSkill ctrlSetPosition [_xPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
-                private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_RSCDISPLAYSKILLS_SKILLDESCRIPTION;
+                private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
                 _ctrlDescription ctrlSetStructuredText parseText _x;
 
                 // Create a vertical line going into the bottom of the skill
@@ -125,7 +127,8 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
                 _xPos = _xPos + _wSkill + 1 * VGM_GRID_W;
             };
-            _yPos = _yPos + _hSkill + 0.5 * VGM_GRID_H;
+            // Space below skill control
+            _yPos = _yPos + _hSkill + 2 * VGM_GRID_H;
         } forEach _skills;
 
         // Horizontal line for the root (name of the branch)
@@ -136,17 +139,18 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
         _ctrlSkillLineHRoot ctrlCommit 0;
         // Vertical line going into the root
         private _ctrlSkillLineVRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
+        _yPos = _yPos + 1 * VGM_GRID_H;
         _ctrlSkillLineVRoot ctrlSetPosition [
             0.5 * _wSkillTree - 0.5 * VGM_GRID_W,
             _yPos
         ];
         _ctrlSkillLineVRoot ctrlCommit 0;
-        _yPos = _yPos + 1.5 * VGM_GRID_H;
+        _yPos = _yPos + _hBranchV;
         // Add root with name of branch
         private _ctrlBranchName = _display ctrlCreate ["VGM_ctrlBranchName", -1, _ctrlSkillTree];
         _ctrlBranchName ctrlSetPositionY _yPos;
         _ctrlBranchName ctrlCommit 0;
-        private _ctrlBranchNameName = _ctrlBranchName controlsGroupCtrl VGM_IDC_RSCDISPLAYSKILLS_BRANCHNAME_NAME;
+        private _ctrlBranchNameName = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
         _ctrlBranchNameName ctrlSetText (_ctrlSkills tvText (tvCurSel _ctrlSkills));
     };
 };

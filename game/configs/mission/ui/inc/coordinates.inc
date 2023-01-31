@@ -11,19 +11,20 @@
         on all UI scale settings at least.
 */
 
-#include "\a3\3den\UI\macros.inc" // imports CENTER_X/Y, pixelScale
+#include "\a3\3den\UI\macros.inc" // imports CENTER_X/Y
 
-//// Define the width and height of a single column/line
+//// Define the width and height of a single column/row
 // 3 * VGM_GRID_H is the default height of a control
 // 1 grid is the spacing between two controls
-#define VGM_GRID_W (pixelW * pixelGridNoUIScale * pixelScale)
-#define VGM_GRID_H (pixelH * pixelGridNoUIScale * pixelScale)
+#define VGM_PIXELSCALE 0.25
+#define VGM_GRID_W (pixelW * pixelGridNoUIScale * VGM_PIXELSCALE)
+#define VGM_GRID_H (pixelH * pixelGridNoUIScale * VGM_PIXELSCALE)
 
 //// Define boundaries so the UI does not go off-screen
 // Maximum width of a control when palced at the minimum x coordinate
-#define VGM_GRID_MAX_W 160
+#define VGM_GRID_MAX_W 320
 // Maximum height of a control when placed at the minimum y coordinate
-#define VGM_GRID_MAX_H 110
+#define VGM_GRID_MAX_H 220
 // Minimum x coordinate, anything left of it should be considered offscreen
 #define VGM_GRID_MIN_X (CENTER_X - 0.5 * VGM_GRID_MAX_W * VGM_GRID_W)
 // Minimum y coordinate, anything above of it should be considered offscreen
@@ -36,6 +37,6 @@
 #define VGM_CTRLSKILL_W (1/3 * (VGM_DISPLAYSKILLS_PAGE_W - 2))
 
 // Font heights used for size and sizeEx attributes
-#define VGM_FONT_S 2.5
-#define VGM_FONT_M 3 // Default size
+#define VGM_FONT_M 5 // Default size
+#define VGM_FONT_L 7.5
 

@@ -1,6 +1,6 @@
 class VGM_DisplaySkills
 {
-    idd = VGM_IDD_RSCDISPLAYSKILLS;
+    idd = VGM_IDD_DISPLAYSKILLS;
     onLoad = VGM_UIEH(onLoad,Skills);
     class ControlsBackground
     {
@@ -17,12 +17,12 @@ class VGM_DisplaySkills
     {
         class SPAvailable: VGM_ctrlStructuredText
         {
-            idc = VGM_IDC_RSCDISPLAYSKILLS_SPAVAILABLE;
+            idc = VGM_IDC_DISPLAYSKILLS_SPAVAILABLE;
             text = "%1 Skill Points Available";
             x = VGM_GRID_MIN_X + 1 * VGM_GRID_H;
             y = VGM_GRID_MIN_Y + 1 * VGM_GRID_H;
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = 3 * VGM_GRID_H;
+            h = 5 * VGM_GRID_H;
             class Attributes
             {
                 font = VGM_FONT;
@@ -34,13 +34,13 @@ class VGM_DisplaySkills
         };
         class Skills: VGM_ctrlTree
         {
-            idc = VGM_IDC_RSCDISPLAYSKILLS_SKILLS;
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLS;
             onLoad = VGM_UIEH(initSkills,Skills);
             onTreeSelChanged = VGM_UIEH(selectSkill,Skills);
             x = VGM_GRID_MIN_X + 1 * VGM_GRID_H;
-            y = VGM_GRID_MIN_Y + 5 * VGM_GRID_H;
+            y = VGM_GRID_MIN_Y + 6 * VGM_GRID_H;
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = (VGM_GRID_MAX_H - 6) * VGM_GRID_H;
+            h = (VGM_GRID_MAX_H - 7) * VGM_GRID_H;
         };
 
         class HeaderRight: SPAvailable
@@ -50,35 +50,35 @@ class VGM_DisplaySkills
             x = CENTER_X + 1 * VGM_GRID_W;
             y = VGM_GRID_MIN_Y + 1 * VGM_GRID_H;
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = 3 * VGM_GRID_H;
+            h = 5 * VGM_GRID_H;
         };
         class Description: VGM_ctrlStructuredText
         {
-            idc = VGM_IDC_RSCDISPLAYSKILLS_DESCRIPTION;
+            idc = VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
             x = CENTER_X + 1 * VGM_GRID_W;
-            y = VGM_GRID_MIN_Y + 5 * VGM_GRID_H;
+            y = VGM_GRID_MIN_Y + 6 * VGM_GRID_H;
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = 9 * VGM_GRID_H;
+            h = 23 * VGM_GRID_H;
             colorBackground[] = {0.8,0.8,0.8,1};
-            size = VGM_FONT_S * VGM_GRID_H;
+            size = VGM_FONT_M * VGM_GRID_H;
         };
         class Unlock: VGM_ctrlButton
         {
             idc = -1;
             text = "Unlock - 3 SP";
-            x = CENTER_X + 44 * VGM_GRID_W;
-            y = VGM_GRID_MIN_Y + 14 * VGM_GRID_H;
-            w = 35 * VGM_GRID_W;
-            h = 3 * VGM_GRID_H;
+            x = CENTER_X + (VGM_DISPLAYSKILLS_PAGE_W - 49) * VGM_GRID_W;
+            y = VGM_GRID_MIN_Y + 29 * VGM_GRID_H;
+            w = 50 * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
             colorBackground[] = {0.7,0.7,0.7,1};
         };
         class SkillTree: VGM_ctrlControlsGroupNoScrollbars
         {
-            idc = VGM_IDC_RSCDISPLAYSKILLS_SKILLTREE;
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLTREE;
             x = CENTER_X + 1 * VGM_GRID_W;
-            y = VGM_GRID_MIN_Y + 18 * VGM_GRID_H;
+            y = VGM_GRID_MIN_Y + 35 * VGM_GRID_H;
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = (VGM_GRID_MAX_H - 19) * VGM_GRID_H;
+            h = (VGM_GRID_MAX_H - 35) * VGM_GRID_H;
             colorBackground[] = {1,0,0,0.2};
         };
     };
