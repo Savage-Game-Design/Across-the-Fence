@@ -81,6 +81,18 @@ class vgm_c
         };
     };
 
+    class skills_active
+    {
+        VGM_CLIENT_PATH(\systems\skills\client\active);
+
+        class skills_active_openAssignMenu {};
+
+        class skills_active_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills_network
     {
         VGM_CLIENT_PATH(\systems\skills\client\network);

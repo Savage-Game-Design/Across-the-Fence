@@ -5,7 +5,7 @@ class vgm_skillTemplate {
     description = "SKILL DESCRIPTION";
     icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_a_ca.paa";
 
-    isActive = 0;
+    isActive = 0; // 1 - primary skill, 2 - ultimate skill
     applyOnRespawn = 0;
 
     conditionUnlock = "true";
@@ -44,13 +44,16 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
-                class skill_7: vgm_skillTemplate {};
+                class fieldHeal: vgm_skillTemplate {
+                    displayName = "Field heal";
+                    description = "Free healthcare.";
+                    isActive = 1;
+                };
                 class zeusBolt: vgm_skillTemplate {
                     displayName = "Zeus bolt";
-                    description = "POWE OF THE GODS!";
-                    isActive = 1;
+                    description = "POWER OF THE GODS!";
+                    isActive = 2;
 
-                    applyOnRespawn = 1;
                     codeApply = "hint 'boom'";
                 };
             };
