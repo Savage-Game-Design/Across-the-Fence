@@ -39,8 +39,7 @@ switch _mode do {
         switch (count _path) do {
             case 1: {
                 // Top level category
-                _ctrlDescription ctrlSetStructuredText parseText "<t size='1.5'>Combat Skill Trees</t><br/>
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolore."; // Max length approx 199
+                _ctrlDescription ctrlSetStructuredText parseText "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolore."; // Max length approx 199
             };
             // TODO: Skill trees, Subtrees
         };
@@ -48,13 +47,13 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
         // TODO: Get skills
         _skills = [
             // Level 1
-            ["Minor Passive<br/>-5% Weapon Sway<br/>1 Skill Point", "Minor Passive<br/>+5% Reload Speed<br/>1 Skill Point"],
+            ["Minor Passive<br/>-5% Weapon Sway", "Minor Passive<br/>+5% Reload Speed"],
             // Level 2
-            ["Moderate Passive<br/>+25% Ammunition<br/>2 Skill Points", "Loadout Upgrade<br/>Advanced Autorifleman<br/>3 Skill Points", "Minor Passive<br/>+10% Stamina<br/>1 Skill Point"],
+            ["Moderate Passive<br/>+25% Ammunition", "Loadout Upgrade<br/>Advanced Autorifleman", "Minor Passive<br/>+10% Stamina"],
             // Level 3
-            ["Major Passive<br/>-15% Recoil<br/>3 Skill Points", "Standard Ability<br/>Quick Change<br/>4 Skill Points"],
+            ["Major Passive<br/>-15% Recoil", "Standard Ability<br/>Quick Change"],
             // Ultimate
-            ["Ultimate Ability<br/>Heads Down!<br/>6 Skill Points"]
+            ["Ultimate Ability<br/>Heads Down!"]
         ];
         // Remove all old controls
 
@@ -118,6 +117,12 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                 _ctrlSkill ctrlCommit 0;
                 private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
                 _ctrlDescription ctrlSetStructuredText parseText _x;
+
+                private _ctrlUnlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
+
+                private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
+                private _skillCost = -1; // TODO: Get actual cost
+                _ctrlCost ctrlSetText format ["%1 SP", _skillCost];
 
                 // Create a vertical line going into the bottom of the skill
                 // and connecting it to the horizontal line below

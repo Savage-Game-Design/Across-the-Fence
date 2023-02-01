@@ -112,12 +112,12 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
         };
     };
 };
-class VGM_ctrlSkill: VGM_ctrlControlsGroup
+class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
 {
     x = 0;
     y = 0;
     w = VGM_CTRLSKILL_W * VGM_GRID_W;
-    h = 30 * VGM_GRID_H;
+    h = 20 * VGM_GRID_H;
     class Controls
     {
         class Background: VGM_ctrlStatic
@@ -125,8 +125,17 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroup
             x = 0;
             y = 0;
             w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 30 * VGM_GRID_H;
+            h = 20 * VGM_GRID_H;
             colorBackground[] = {0.8,0.8,0.8,1};
+        };
+        class Cost: VGM_ctrlStructuredText
+        {
+            text = "xx SP";
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLCOST;
+            x = 0;
+            y = 0;
+            w = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
         };
         class Description: VGM_ctrlStructuredText
         {
@@ -134,7 +143,7 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroup
             x = 0;
             y = 5 * VGM_GRID_H;
             w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 25 * VGM_GRID_H;
+            h = 15 * VGM_GRID_H;
             class Attributes
             {
                 font = VGM_FONT;
@@ -146,6 +155,7 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroup
         };
         class Unlock: VGM_ctrlButtonPicture
         {
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
             text = "P:\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
             colorText[] = {0,0,0,1};
             colorBackground[] = {0.7,0.7,0.7,1};
