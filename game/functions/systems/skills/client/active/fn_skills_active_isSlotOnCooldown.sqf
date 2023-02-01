@@ -26,4 +26,4 @@ if (_slot isEqualType "") then {
     _slot = vgm_c_skills_active_slots getOrDefault [_slot, createHashMap];
 };
 
-time > (_slot getOrDefault ["cooldown", 1e10]) // return
+time < (_slot getOrDefault ["cooldown", 1e10]) // return
