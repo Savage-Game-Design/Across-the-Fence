@@ -125,6 +125,6 @@ private _fnc_drawSlot = {
     [_ctrlContainer, _x, _forEachIndex] call _fnc_drawSlot;
 } forEach [
     "ability1",
-    "ability2",
+    // "ability2",
     "ultimate"
 ];

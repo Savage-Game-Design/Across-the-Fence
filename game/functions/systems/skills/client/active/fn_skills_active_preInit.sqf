@@ -29,7 +29,7 @@ private _fnc_createSlot = {
 
 vgm_c_skills_active_slots = createHashMapFromArray [
     ["ability1", call _fnc_createSlot],
-    ["ability2", call _fnc_createSlot],
+    // ["ability2", call _fnc_createSlot],
     ["ultimate", call _fnc_createSlot]
 ];
 

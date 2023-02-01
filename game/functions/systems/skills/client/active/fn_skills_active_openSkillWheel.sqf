@@ -37,8 +37,8 @@ private _iconsArray = [];
     ];
 } forEach [
     "ultimate",
-    "ability1",
-    "ability2"
+    "ability1"
+    // ,"ability2"
 ];
 
 [_iconsArray] call vn_fnc_wm_init;
