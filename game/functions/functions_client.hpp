@@ -85,7 +85,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skills\client\active);
 
+        class skills_active_assignSkillToSlot {};
         class skills_active_openAssignMenu {};
+        class skills_active_openSkillWheel {};
 
         class skills_active_preInit
         {

@@ -3,17 +3,17 @@
     File: fn_openSkillTree.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-01-27
+    Last Update: 2023-02-01
     Public: No
 
     Description:
-        No description added yet.
+        Opens skill tree.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [] call vgm_c_fnc_skills_openSkillTree.sqf

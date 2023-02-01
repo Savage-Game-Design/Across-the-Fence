@@ -3,20 +3,20 @@
     File: fn_skills_active_openAssignMenu.sqf
     Author: veteran29
     Date: 2023-01-30
-    Last Update: 2023-01-31
+    Last Update: 2023-02-01
     Public: No
 
     Description:
-        No description added yet.
+        Open skill slot assigment menu.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call vgm_c_fnc_skills_active_openAssignMenu
  */
 
 // #define DEBUG_PAINT_TREE_LAYOUT
@@ -70,11 +70,13 @@ private _fnc_drawSlot = {
 
         private _slot = _ctrlContainer getVariable "vgm_skills_slot";
         private _skill = parseSimpleArray _lbData call vgm_g_fnc_skills_getByPath;
-        if (_slot == "ultimate" && {!(_skill get "isUltimate")}) exitWith {
-            hint "Can't put ultimate skill in primary skill slot!";
-        };
 
-        vgm_c_skills_active_slots get _slot set ["skill", _skill];
+        private _result = [_slot, _skill] call vgm_c_fnc_skills_active_assignSkillToSlot;
+        if (_result) then {
+            hint "Assigned skill to slot";
+        } else {
+            hint "Failed to assign skill to slot";
+        };
     }];
 
     #define SKILL_ICON_W (GUI_GRID_H * 2.5)
