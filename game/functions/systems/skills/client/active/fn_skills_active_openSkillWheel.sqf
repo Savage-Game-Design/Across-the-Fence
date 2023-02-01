@@ -29,7 +29,7 @@ private _iconsArray = [];
         [
 
             [
-                _skill, // function additional arg
+                [_slot, _skill], // function additional arg
                 _skill getOrDefault ["displayName", format ["Empty (%1)", _x]] // label
             ],
             "vgm_c_fnc_skills_active_skillWheelActivate" // function
