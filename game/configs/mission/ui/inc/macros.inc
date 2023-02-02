@@ -10,6 +10,7 @@
  */
 // Include Eden macros
 #include "\a3\3den\ui\resincl.inc"
+#define CT_CONTROLS_TABLE 19 // Not defined by Arma
 
 // Include all other macros
 #include "idcs.inc"
@@ -27,3 +28,4 @@
 // Default text font, monospaced typewriter-style from SOG:PF
 #define VGM_FONT "tt2020base_vn"
 
+#define ADD_Y(DELTA) __EVAL([DELTA] call _fnc_add_y)

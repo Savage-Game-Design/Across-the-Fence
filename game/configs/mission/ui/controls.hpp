@@ -1,3 +1,4 @@
+import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
 import ctrlTree;
@@ -5,9 +6,39 @@ import ctrlControlsGroup;
 import ctrlControlsGroupNoScrollbars;
 import ctrlButton;
 import ctrlButtonPicture;
+import ctrlStaticFrame;
+import ctrlStaticPicture;
 
 #define COLOR_BLACK {0,0,0,1}
+class VGM_ctrlDefault: ctrlDefault {
+    class ScrollBar
+    {
+        width = 0;
+        height = 0;
+        scrollSpeed = 0.06;
+        arrowEmpty = "\a3\3DEN\Data\Controls\ctrlDefault\arrowEmpty_ca.paa";
+        arrowFull = "\a3\3DEN\Data\Controls\ctrlDefault\arrowFull_ca.paa";
+        border = "\a3\3DEN\Data\Controls\ctrlDefault\border_ca.paa";
+        thumb = "\a3\3DEN\Data\Controls\ctrlDefault\thumb_ca.paa";
+        color[] = {1,1,1,1};
+    };
+};
 class VGM_ctrlStatic: ctrlStatic {};
+
+class VGM_ctrlStaticFrame: ctrlStaticFrame
+{
+    colorText[] = COLOR_BLACK;
+};
+
+class VGM_ctrlBackground: VGM_ctrlStatic
+{
+    colorBackground[] = {1,1,1,1};
+};
+
+class VGM_ctrlStaticPicture: ctrlStaticPicture
+{
+};
+
 class VGM_ctrlStructuredText : ctrlStructuredText
 {
     size = VGM_FONT_M * VGM_GRID_H;
@@ -44,6 +75,7 @@ class VGM_ctrlControlsGroupNoScrollbars: ctrlControlsGroupNoScrollbars
 
 class VGM_ctrlButton: ctrlButton
 {
+    colorBackground[] = {0.6,0.6,0.6,1};
     colorText[] = {0,0,0,1};
     font = VGM_FONT;
     sizeEx = VGM_FONT_M * VGM_GRID_H;
@@ -51,6 +83,45 @@ class VGM_ctrlButton: ctrlButton
 
 class VGM_ctrlButtonPicture: ctrlButtonPicture
 {
+};
+
+class VGM_ctrlButtonInvisible: VGM_ctrlButton
+{
+    colorBackground[] = {0,0,0,0};
+    color[] = {0,0,0,0};
+    colorBackgroundActive[] = {0,0,0,0};
+    colorBackgroundDisabled[] = {0,0,0,0};
+    colorFocused[] = {0,0,0,0};
+    colorFocused2[] = {0,0,0,0};
+};
+
+class VGM_ctrlControlsTable: VGM_ctrlDefault
+{
+    idc = -1;
+    type = CT_CONTROLS_TABLE;
+    style = ST_LEFT;
+    firstIDC = 900;
+    lastIDC = 999;
+    headerHeight = 5 * VGM_GRID_H;
+    lineSpacing = 0;
+    rowHeight = 5 * VGM_GRID_H;
+    selectedRowAnimLength = 7.5;
+    selectedRowColorFrom[] = {0,1,0,0};
+    selectedRowColorTo[] = {0,1,0,1};
+    class HeaderTemplate
+    {
+    };
+    class RowTemplate
+    {
+    };
+    class VScrollbar: ScrollBar
+    {
+        width = 2 * VGM_GRID_W;
+    };
+    class HScrollbar: ScrollBar
+    {
+        height = 0;
+    };
 };
 
 // Controls for VGM_DisplaySkills

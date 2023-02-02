@@ -39,4 +39,5 @@
 // Font heights used for size and sizeEx attributes
 #define VGM_FONT_M 4 // Default size
 #define VGM_FONT_L 5
+#define VGM_FONT_XL 6
 

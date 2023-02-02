@@ -13,7 +13,8 @@ class vgm_c
     class displays
     {
         VGM_CLIENT_PATH(\core\client\displays);
-        class displaySkills;
+        class displaySkills {};
+        class displayAbilities {};
     };
 
     class ui
