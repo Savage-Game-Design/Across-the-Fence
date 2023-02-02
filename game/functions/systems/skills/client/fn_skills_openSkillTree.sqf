@@ -141,7 +141,7 @@ vgm_c_fnc_skills_ui_drawTree = {
             _ctrlSkillGrp ctrlCommit 0;
             _lastCtrlSkillGrp = _ctrlSkillGrp;
 
-            if (_skill call vgm_c_fnc_skills_isKnown) then {
+            if (_skill call vgm_g_fnc_skills_isKnown) then {
                 private _ctrlSkillIconBg = _display ctrlCreate ["RscText", -1, _ctrlSkillGrp];
                 _ctrlSkillIconBg ctrlSetBackgroundColor [0, 1, 0, 0.4];
                 _ctrlSkillIconBg ctrlSetPosition [(SKILL_TREE_COL_W - SKILL_ICON_W) / 2, 0, SKILL_ICON_W, SKILL_ICON_H];
@@ -208,7 +208,7 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
     (ctrlParentControlsGroup _ctrlSkillIcon getVariable "vgm_params") params ["_skill", "_drawArgs"];
     private _display = ctrlParent _ctrlSkillIcon;
 
-    if (_skill call vgm_c_fnc_skills_isKnown) exitWith {};
+    if (_skill call vgm_g_fnc_skills_isKnown) exitWith {};
 
     // confirm skill selection
     [_display, _skill, _drawArgs] spawn {

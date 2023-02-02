@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-01-28
+    Last Update: 2023-02-02
     Public: Yes
 
     Description:
@@ -31,7 +31,7 @@ private _fnc_tierUnlocked = {
 
     private _tiersArray = _tree get "skills";
     _tierSkills = _tiersArray select (_tier - 1);
-    _tierSkills findIf {_x call vgm_c_fnc_skills_isKnown} > -1 // return
+    _tierSkills findIf {_x call vgm_g_fnc_skills_isKnown} > -1 // return
 };
 
 ((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
