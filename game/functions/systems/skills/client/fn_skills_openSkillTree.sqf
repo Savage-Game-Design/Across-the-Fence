@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-02-01
+    Last Update: 2023-02-02
     Public: No
 
     Description:
@@ -129,6 +129,9 @@ vgm_c_fnc_skills_ui_drawTree = {
         {
             private _skill = _x;
             private _colIdx = _forEachIndex;
+
+            // skip rendering of invisible skills
+            if (!(_skill call vgm_g_fnc_skills_canSee)) then {continue};
 
             // paint skill group
             private _ctrlSkillGrp = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1, _ctrlGrp];

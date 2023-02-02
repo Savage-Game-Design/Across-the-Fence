@@ -2,7 +2,7 @@
     File: fn_skills_canShow.sqf
     Author: veteran29
     Date: 2023-01-29
-    Last Update: 2023-01-29
+    Last Update: 2023-02-02
     Public: Yes
 
     Description:
@@ -20,8 +20,8 @@
  */
 
 params [
-    ["_player", objNull],
-    ["_skill", createHashMap]
+    ["_skill", createHashMap, [createHashMap]],
+    ["_player", player, [objNull]]
 ];
 
-_player call (_skill get "conditionShow") // return
+([_skill, _player] call vgm_g_fnc_skills_isKnown) || {_player call (_skill get "conditionShow")} // return
