@@ -39,6 +39,8 @@ class vgm_s
         {
             preInit = 1;
         };
+
+        class skills_teachSkill {};
     };
 
     class skills_network

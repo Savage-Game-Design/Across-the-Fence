@@ -101,6 +101,18 @@ class vgm_skillTrees {
 
     class utilityTree {
         displayName = "Utility";
+
+        class skills {
+            class tier_1 {
+                class hiddenSkill: vgm_skillTemplate {
+                    displayName = "Hidden utility skill";
+                    description = "Hidden utility skill.";
+
+                    conditionShow = "false";
+                };
+                class skill_2: vgm_skillTemplate {};
+            };
+        };
     };
     class socialTree {
         displayName = "Social";

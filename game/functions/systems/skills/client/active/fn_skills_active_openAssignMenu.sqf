@@ -3,7 +3,7 @@
     File: fn_skills_active_openAssignMenu.sqf
     Author: veteran29
     Date: 2023-01-30
-    Last Update: 2023-02-01
+    Last Update: 2023-02-02
     Public: No
 
     Description:
@@ -93,7 +93,7 @@ private _fnc_drawSlot = {
 
     private _ctrlLabel = _display ctrlCreate ["RscStructuredText", -1, _ctrlContainer];
     _ctrlLabel ctrlSetPosition [0, GUI_GRID_H, _w/2, _h - GUI_GRID_H];
-    _ctrlLabel ctrlSetText (_skill getOrDefault ["displayName", "Drag & Drop skill to assign"]);
+    _ctrlLabel ctrlSetText (_skill getOrDefault ["displayName", format ["Drag & Drop skill to assign %1%2", endl, _slot]]);
     _ctrlLabel ctrlCommit 0;
 
     #ifdef DEBUG_PAINT_TREE_LAYOUT
