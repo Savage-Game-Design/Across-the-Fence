@@ -9,6 +9,7 @@ import ctrlButtonPicture;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
+import ctrlXListbox;
 
 #define COLOR_BLACK {0,0,0,1}
 class VGM_ctrlDefault: ctrlDefault {
@@ -127,6 +128,12 @@ class VGM_ctrlControlsTable: VGM_ctrlDefault
 
 class VGM_ctrlMap: ctrlMap
 {
+};
+
+class VGM_ctrlXListBox: ctrlXListbox
+{
+    sizeEx = VGM_FONT_M * VGM_GRID_H;
+    font = VGM_FONT;
 };
 
 // Controls for VGM_DisplaySkills
