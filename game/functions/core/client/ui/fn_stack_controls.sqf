@@ -8,8 +8,9 @@
         Stacks all controls of a CT_CONTROLS_GROUP on top of each other.
         Controls that have the attribute `stackDisable` are skipped. If a
         control has the attribute `stackFill` it will take the remaining space
-        of the controls group. The gap between controls is given by the
-        attribute `stackMargin` in the config class of the controls group.
+        of the controls group. This will only work for one control of the stack.
+        The gap between controls is given by the attribute `stackMargin` in the
+        config class of the controls group.
 
     Parameter(s):
         _ctrlGroup - The controls group [CONTROL]
@@ -38,14 +39,14 @@ private _stack = allControls _ctrlGroup select {
     private _cfgX = _cfgCtrlGroup >> "Controls" >> ctrlClassName _x;
     _x ctrlSetPositionY _posY;
     if (getNumber (_cfgX >> "stackFill") == 1) then {
+        // This control fills the remaining space
+        // _hFill = Height of controls group - y position of the control - bottom margin
         private _hFill = (ctrlPosition _ctrlGroup select 3) - _posY - _margin;
-        diag_log ["posy", _posY / VGM_GRID_H, _hFill / VGM_GRID_H];
         _stack select [_forEachIndex+1, count _stack] apply {
-            diag_log ["apply2", (ctrlClassName _x), (ctrlPosition _x select 3) / VGM_GRID_H];
+            // Collect the height with margin of the following controls
             _hFill = _hFill - (ctrlPosition _x select 3) - _margin
         };
         _x ctrlSetPositionH _hFill;
-        diag_log [_hFill / VGM_GRID_H];
     };
     _x ctrlCommit 0;
     _posY = _posY + (ctrlPosition _x select 3) + _margin;
