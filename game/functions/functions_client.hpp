@@ -26,6 +26,7 @@ class vgm_c
         class handle_light_level_loop {};
         class handle_welcome_screen {};
         class init_info_panel_handler_loop {};
+        class stack_controls {};
     };
 
     class shared_hub

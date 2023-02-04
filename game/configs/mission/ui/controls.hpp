@@ -139,6 +139,12 @@ class VGM_ctrlXListBox: ctrlXListbox
     font = VGM_FONT;
 };
 
+class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars
+{
+    onLoad = "_this call vgm_c_fnc_stack_controls;";
+    stackMargin = 1 * VGM_GRID_H;
+};
+
 // Controls for VGM_DisplaySkills
 class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
 {
@@ -252,3 +258,4 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
         };
     };
 };
+
