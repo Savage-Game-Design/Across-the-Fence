@@ -43,6 +43,9 @@ class VGM_ctrlStaticPicture: ctrlStaticPicture
 
 class VGM_ctrlStructuredText : ctrlStructuredText
 {
+#ifdef __A3_DEBUG__
+    colorBackground[] = {1,0,0,0.2};
+#endif
     size = VGM_FONT_M * VGM_GRID_H;
     shadow = 0;
     class Attributes
@@ -105,7 +108,7 @@ class VGM_ctrlControlsTable: VGM_ctrlDefault
     firstIDC = 900;
     lastIDC = 999;
     headerHeight = 5 * VGM_GRID_H;
-    lineSpacing = 0;
+    lineSpacing = 1 * VGM_GRID_H;
     rowHeight = 5 * VGM_GRID_H;
     selectedRowAnimLength = 7.5;
     selectedRowColorFrom[] = {0,1,0,0};

@@ -158,22 +158,23 @@ class VGM_DisplayMissions
             h = 10 * VGM_GRID_H;
             onButtonClick = VGM_UIEH(generate,Missions);
         };
+
         class Message: VGM_ctrlControlsGroupNoScrollbars
         {
             idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE;
             show = 0;
-            x = safeZoneX;
-            y = safeZoneY;
-            w = safeZoneW;
-            h = safeZoneH;
+            x = DISPLAY_X;
+            y = DISPLAY_Y;
+            w = DISPLAY_W * VGM_GRID_W;
+            h = DISPLAY_H * VGM_GRID_H;
             class Controls
             {
                 class BackgroundFull: VGM_ctrlStatic
                 {
                     x = 0;
                     y = 0;
-                    w = safeZoneWAbs;
-                    h = safeZoneH;
+                    w = DISPLAY_W * VGM_GRID_W;
+                    h = DISPLAY_H * VGM_GRID_H;
                     colorBackground[] = {0.3,0.3,0.3,0.8};
                 };
 #define _MESSAGE_W 0.5 * DISPLAY_W
@@ -235,5 +236,113 @@ class VGM_DisplayMissions
                 };
             };
         };
+        VGM_SET_Y(0)
+        class Briefing: Message
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING;
+            show = 1;
+            class Controls: Controls
+            {
+                class BackgroundFull: BackgroundFull
+                {
+                };
+                class BackgroundBriefing: VGM_ctrlBackground
+                {
+                    x = COLUMN_CTRL_W * VGM_GRID_W;
+                    y = VGM_Y_Y(0,0);
+                    w = (3 * COLUMN_W + 1) * VGM_GRID_W;
+                    h = (DISPLAY_H - 6) * VGM_GRID_H;
+                };
+#define _X (COLUMN_CTRL_W + 1) * VGM_GRID_W
+#define _W (3 * COLUMN_W - 1)
+                class Title: VGM_ctrlStructuredText
+                {
+                    text = "Standard Mission on targetBoxName";
+                    x = _X;
+                    y = VGM_Y_Y(0,1);
+                    w = _W * VGM_GRID_W;
+                    h = VGM_Y_H(5);
+                    size = 5 * VGM_GRID_H;
+                    class Attributes
+                    {
+                        font = VGM_FONT;
+                        color = "#000000";
+                        colorLink = "#D09B43";
+                        align = "center";
+                        shadow = 0;
+                    };
+                };
+                class OperationName: VGM_ctrlStructuredText
+                {
+                    text = "Operation generatedName";
+                    size = VGM_FONT_L * VGM_GRID_H;
+                    x = _X;
+                    y = VGM_Y_Y(0,1);
+                    w = _W * VGM_GRID_W;
+                    h = VGM_Y_H(5);
+                };
+                class Description: OperationName
+                {
+                    text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+                    size = VGM_FONT_M * VGM_GRID_H;
+                    y = VGM_Y_Y(0,1);
+                    h = VGM_Y_H(20);
+                };
+                class MissionPropertiesText: OperationName
+                {
+                    text = "Mission Properties:";
+                    y = VGM_Y_Y(0,1);
+                    h = VGM_Y_H(5);
+                };
+                class MissionProperties: VGM_ctrlControlsTable
+                {
+                    onLoad = VGM_UIEH(loadProperties,Missions);
+                    x = _X;
+                    y = VGM_Y_Y(0,1);
+                    w = _W * VGM_GRID_W;
+                    h = VGM_Y_H(15);
+                    class RowTemplate
+                    {
+                        class Background
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlBackground"};
+                            columnX = 1 * VGM_GRID_W;
+                            controlOffsetY = 0;
+                            columnW = (_W - 1) * VGM_GRID_W;
+                            controlH = 5 * VGM_GRID_H;
+                        };
+                        class Property
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
+                            columnX = 2 * VGM_GRID_W;
+                            controlOffsetY = 0;
+                            columnW = (_W - 53) * VGM_GRID_W;
+                            controlH = 5 * VGM_GRID_H;
+                        };
+                        class Reveal: Property
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlButton"};
+                            columnX = (_W - 50) * VGM_GRID_W;
+                            columnW = 47 * VGM_GRID_W;
+                        };
+                    };
+                };
+#define _W 96
+                class Confirm: VGM_ctrlButton
+                {
+                    text = "Confirm";
+                    x = _X + 0 * VGM_GRID_W;
+                    y = VGM_Y_Y(0,1);
+                    w = _W * VGM_GRID_W;
+                    h = 5 * VGM_GRID_H;
+                };
+                class Discard: Confirm
+                {
+                    text = "Discard Mission [Intel Penalty]";
+                    x = _X + (_W + 1) * VGM_GRID_W;
+                };
+            };
+        };
+
     };
 };

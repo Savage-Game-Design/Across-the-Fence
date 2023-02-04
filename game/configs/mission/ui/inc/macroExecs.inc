@@ -28,7 +28,7 @@ __EXEC(\
         ANCHOR - The origin of the display [MACRO]
 
     Returns:
-        `y` attribute [STRING]
+        `y` attribute in format "ANCHOR + _y * VGM_GRID_H" [STRING]
 
     Example(s):
         VGM_Y(VGM_GRID_MIN_Y)
@@ -67,7 +67,7 @@ __EXEC(\
         H - Height of the control [NUMBER]
 
     Returns:
-        `h` attribute [STRING]
+        `h` attribute in format "H * VGM_GRID_H" [STRING]
 
     Example(s):
         VGM_Y(VGM_GRID_MIN_Y)
@@ -88,7 +88,7 @@ __EXEC(\
         H - Delta [NUMBER]
 
     Returns:
-        `y` attribute [STRING]
+        `y` attribute in format "ANCHOR + H * VGM_GRID_H" [STRING]
 
     Example(s):
         VGM_Y_Y(VGM_GRID_MIN_Y,1)

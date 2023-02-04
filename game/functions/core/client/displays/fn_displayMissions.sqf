@@ -18,6 +18,7 @@
 */
 #include "macros.inc"
 #include "\a3\ui_f\hpp\defineDIKCodes.inc"
+#define SELF vgm_c_fnc_displayMissions
 #ifdef __A3_DEBUG__
 diag_log _this;
 #endif
@@ -69,6 +70,36 @@ switch _mode do {
         _controlsToEnable apply {_x ctrlEnable true};
         _ctrlMessage ctrlShow false;
         _ctrlMessage ctrlEnable false;
+    };
+    case "loadProperties": {
+        _params params ["_ctrlMissionProperties"];
+        for "_i" from 0 to 10 do {
+            (ctAddRow _ctrlMissionProperties select 1) params ["", "_ctrlProperty", "_ctrlReveal"];
+            _ctrlProperty ctrlSetText format ["Test %1", _i];
+            _ctrlReveal ctrlSetText format ["Reveal [%1 Intel]", 100];
+            private _ehid = _ctrlReveal ctrlAddEventHandler ["ButtonClick", {
+                ["revealProperty", _this] call SELF;
+            }];
+            _ctrlReveal setVariable ["_ehidReveal", _ehid];
+        };
+    };
+    case "revealProperty": {
+        _params params ["_ctrlReveal"];
+        private _display = ctrlParent _ctrlReveal;
+        private _ctrlMissionProperties = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_BRIEFING_MISSIONPROPERTIES;
+        private _selectedIndex = ctCurSel _ctrlMissionProperties;
+        _ctrlReveal ctrlSetText format ["Remove [%1 Intel]", 100];
+        _ctrlReveal ctrlRemoveEventHandler ["ButtonClick", (_ctrlReveal getVariable ["_ehidReveal", -1])];
+        _ctrlReveal ctrlAddEventHandler ["ButtonClick", {
+            ["removeProperty", _this] spawn SELF;
+        }];
+    };
+    case "removeProperty": {
+        _params params ["_ctrlReveal"];
+        private _display = ctrlParent _ctrlReveal;
+        private _ctrlMissionProperties = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_BRIEFING_MISSIONPROPERTIES;
+        private _selectedIndex = ctCurSel _ctrlMissionProperties;
+        _ctrlMissionProperties ctRemoveRows [_selectedIndex];
     };
     default {
         false
