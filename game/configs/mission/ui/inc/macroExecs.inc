@@ -1,3 +1,5 @@
+// Auxillary functions in the parsingNamespace
+// Check macro documentation below for usage
 __EXEC(\
     _fnc_y_h = {\
         params ["_delta", "_gridH"];\
@@ -7,7 +9,6 @@ __EXEC(\
     _fnc_y_y = {\
         params ["_anchor", "_delta", "_gridH"];\
         _y = _y + _delta;\
-        diag_log _this;\
         format ["%1 + %2 * %3", _anchor, _y, _gridH]\
     };\
 )
@@ -18,7 +19,10 @@ __EXEC(\
     Public: No
 
     Description:
-        Getter for the y offset.
+        Getter for the y offset. The y offset is the offset from a given base
+        line (anchor). These macros are meant to keep track of the current y
+        coordinate so if a control were to be removed later in development all
+        the controls below are moved upwards as well.
 
     Parameter(s):
         ANCHOR - The origin of the display [MACRO]

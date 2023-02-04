@@ -28,4 +28,3 @@
 // Default text font, monospaced typewriter-style from SOG:PF
 #define VGM_FONT "tt2020base_vn"
 
-#define ADD_Y(DELTA) __EVAL([DELTA] call _fnc_add_y)

@@ -8,7 +8,7 @@
 class VGM_DisplayMissions
 {
     idd = VGM_IDD_DISPLAYMISSIONS;
-    onLoad = ONLOAD;
+    onLoad = VGM_UIEH(onLoad,Missions);
     class ControlsBackground
     {
         class Background: VGM_ctrlBackground
@@ -23,6 +23,7 @@ class VGM_DisplayMissions
     {
         class Map: VGM_ctrlMap
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_MAP;
             onLoad = "_this select 0 ctrlEnable false;";
             x = DISPLAY_X;
             y = DISPLAY_Y;
@@ -34,6 +35,7 @@ class VGM_DisplayMissions
 #define _W (COLUMN_CTRL_W - 2)
         class Target: VGM_ctrlXListBox
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_TARGET;
             onLoad = VGM_UIEH(initTargets,Missions);
             x = _X;
             y = VGM_Y(DISPLAY_Y);
@@ -42,6 +44,7 @@ class VGM_DisplayMissions
         };
         class Modifiers: VGM_ctrlStructuredText
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_MODIFIERS;
             text = "+targetBoxModifiers<br/>+targetBoxModifiers<br/>+targetBoxModifiers";
             x = _X;
             y = VGM_Y_Y(DISPLAY_Y,1);
@@ -51,6 +54,7 @@ class VGM_DisplayMissions
         };
         class FullTargetList: VGM_ctrlButton
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_FULLTARGETLIST;
             text = "Full Target Box List";
             x = _X;
             y = VGM_Y_Y(DISPLAY_Y,1);
@@ -60,6 +64,7 @@ class VGM_DisplayMissions
         VGM_SET_Y(6)
         class Recon: VGM_ctrlControlsGroup
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_RECON;
             x = DISPLAY_X + COLUMN_W * VGM_GRID_W;
             y = VGM_Y(DISPLAY_Y);
             w = COLUMN_CTRL_W * VGM_GRID_W;
@@ -69,6 +74,7 @@ class VGM_DisplayMissions
             {
                 class Status: VGM_ctrlStructuredText
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_STATUS;
                     text = "Active";
                     x = 0;
                     y = 0;
@@ -78,13 +84,16 @@ class VGM_DisplayMissions
                 };
                 class Name: Status
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_NAME;
                     text = "Recon";
                     size = VGM_FONT_L * VGM_GRID_H;
                     y = 5 * VGM_GRID_H;
                 };
-                class Image: VGM_ctrlStaticPicture
+                class Image: VGM_ctrlButtonPicture
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_IMAGE;
                     text = "#(rgb,1,1,1)color(0,1,0,1)";
+                    onButtonClick = VGM_UIEH(selectDifficulty,Missions);
                     x = 0;
                     y = 10 * VGM_GRID_H;
                     w = COLUMN_CTRL_W * VGM_GRID_W;
@@ -94,6 +103,7 @@ class VGM_DisplayMissions
         };
         class Standard: Recon
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_STANDARD;
             x = DISPLAY_X + 2 * COLUMN_W * VGM_GRID_W;
             class Controls: Controls
             {
@@ -111,6 +121,7 @@ class VGM_DisplayMissions
         };
         class Elite: Recon
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_ELITE;
             x = DISPLAY_X + 3 * COLUMN_W * VGM_GRID_W;
             class Controls: Controls
             {
@@ -128,6 +139,7 @@ class VGM_DisplayMissions
         };
         class Description: VGM_ctrlStructuredText
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_DESCRIPTION;
             text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
             x = DISPLAY_X + COLUMN_W * VGM_GRID_W;
             y = VGM_Y(DISPLAY_Y);
@@ -137,16 +149,18 @@ class VGM_DisplayMissions
         };
         class Generate: VGM_ctrlButton
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_GENERATE;
             text = "Generate";
             sizeEx = 10 * VGM_GRID_H;
             x = DISPLAY_X + (COLUMN_W + 0.75 * COLUMN_W) * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
             w = (1.5 * COLUMN_W) * VGM_GRID_W;
             h = 10 * VGM_GRID_H;
-            onButtonClick = UIEH(generate,Missions);
+            onButtonClick = VGM_UIEH(generate,Missions);
         };
-        class GenerateConfirmGroup: VGM_ctrlControlsGroupNoScrollbars
+        class Message: VGM_ctrlControlsGroupNoScrollbars
         {
+            idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE;
             show = 0;
             x = safeZoneX;
             y = safeZoneY;
@@ -175,8 +189,9 @@ class VGM_DisplayMissions
                     colorBackground[] = {0.8,0.8,0.8,1};
                 };
                 VGM_SET_Y(1)
-                class Message: VGM_ctrlStructuredText
+                class Text: VGM_ctrlStructuredText
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_TEXT;
                     text = "Generate a Recon mission in targetBoxName?";
                     size = VGM_FONT_L * VGM_GRID_H;
                     x = _MESSAGE_X + 1 * VGM_GRID_W;
@@ -203,7 +218,9 @@ class VGM_DisplayMissions
                 };
                 class Confirm: VGM_ctrlButton
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_CONFIRM;
                     text = "Confirm";
+                    onButtonClick = VGM_UIEH(handleMessage,Missions);
                     x = _MESSAGE_X + 40 * VGM_GRID_W;
                     y = VGM_Y_Y(_MESSAGE_Y,1);
                     w = (_MESSAGE_W - 80) * VGM_GRID_W;
@@ -211,7 +228,9 @@ class VGM_DisplayMissions
                 };
                 class Cancel: Confirm
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_CANCEL;
                     text = "Cancel";
+                    onButtonClick = VGM_UIEH(handleMessage,Missions);
                     y = VGM_Y_Y(_MESSAGE_Y,1);
                 };
             };
