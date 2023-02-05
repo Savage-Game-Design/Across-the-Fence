@@ -367,6 +367,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
             {
                 class Title: VGM_ctrlStructuredText
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_TITLE;
                     text = "Standard Mission on targetBoxName";
                     x = 0;
                     w = _W * VGM_GRID_W;
@@ -383,6 +384,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                 };
                 class OperationName: VGM_ctrlStructuredText
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_OPERATIONNAME;
                     text = "Operation generatedName";
                     size = VGM_FONT_L * VGM_GRID_H;
                     x = 0;
@@ -391,6 +393,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                 };
                 class Description: OperationName
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_DESCRIPTION;
                     text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
                     size = VGM_FONT_M * VGM_GRID_H;
                     h = VGM_Y_H(20);
@@ -403,6 +406,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                 };
                 class MissionProperties: VGM_ctrlControlsTable
                 {
+                    idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_MISSIONPROPERTIES;
                     onLoad = VGM_UIEH(loadProperties,Missions);
                     x = 0;
                     w = _W * VGM_GRID_W;
@@ -443,6 +447,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                     {
                         class ConfirmMission: VGM_ctrlButton
                         {
+                            idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_CONFIRMMISSION;
                             text = "Confirm";
                             onButtonClick = VGM_UIEH(confirmMission,Missions);
                             x = 0;
@@ -452,6 +457,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                         };
                         class DiscardMission: ConfirmMission
                         {
+                            idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_DISCARDMISSION;
                             text = "Discard Mission [Intel Penalty]";
                             onButtonClick = VGM_UIEH_SPAWN(discardMission,Missions);
                             x = (_W + 1) * VGM_GRID_W;
