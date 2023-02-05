@@ -27,6 +27,7 @@ class vgm_c
         class handle_welcome_screen {};
         class init_info_panel_handler_loop {};
         class stack_controls {};
+        class toggle_controls_group_overlay {};
     };
 
     class shared_hub

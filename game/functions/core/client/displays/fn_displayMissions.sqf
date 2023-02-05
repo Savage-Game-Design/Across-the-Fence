@@ -49,27 +49,19 @@ switch _mode do {
     case "generate": {
         _params params ["_ctrlGenerate"];
         private _display = ctrlParent _ctrlGenerate;
-        private _ctrlMessage = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_MESSAGE;
-        // Block all other controls but keep track of current state
-        private _enabledControls = allControls _display select {
-            ctrlEnabled _x && ctrlParentControlsGroup _x != _ctrlMessage
+        // private _result = ["showMessage", [_display, "Generate a Recon mission in targetBoxName?"]] call SELF;
+        _result = true;
+        if (_result) then {
+            private _ctrlBriefing = _display ctrlCreate ["VGM_ctrlDisplayMissionsBriefing", VGM_IDC_DISPLAYMISSIONS_BRIEFING];
+            [_ctrlBriefing, true] call vgm_c_fnc_toggle_controls_group_overlay;
         };
-        _display setVariable ["_enabledControls", _enabledControls];
-        _enabledControls apply {_x ctrlEnable false};
-        _ctrlMessage ctrlShow true;
-        _ctrlMessage ctrlEnable true;
-        ctrlSetFocus _ctrlMessage;
-        diag_log [_display getVariable "_selectedDifficulty"];
     };
     case "handleMessage": {
         _params params ["_ctrl"];
         private _display = ctrlParent _ctrl;
-        private _ctrlMessage = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_MESSAGE;
+        private _ctrlMessage = ctrlParentControlsGroup _ctrl;
         private _success = ctrlIDC _ctrl == VGM_IDC_DISPLAYMISSIONS_MESSAGE_CONFIRM;
-        private _controlsToEnable = _display getVariable ["_enabledControls", []];
-        _controlsToEnable apply {_x ctrlEnable true};
-        _ctrlMessage ctrlShow false;
-        _ctrlMessage ctrlEnable false;
+        _ctrlMessage setVariable ["_result", _success];
     };
     case "loadProperties": {
         _params params ["_ctrlMissionProperties"];
@@ -101,6 +93,34 @@ switch _mode do {
         private _selectedIndex = ctCurSel _ctrlMissionProperties;
         _ctrlMissionProperties ctRemoveRows [_selectedIndex];
     };
+    case "confirmMission": {
+        _params params ["_ctrlBriefingConfirmMission"];
+        private _display = ctrlParent _ctrlBriefingConfirmMission;
+        _display closeDisplay IDC_OK;
+    };
+    case "discardMission": {
+        _params params ["_ctrlBriefingDiscardMission"];
+        private _display = ctrlParent _ctrlBriefingDiscardMission;
+        private _ctrlBriefing = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_BRIEFING;
+        private _messageResult = ["showMessage", [_display, "Discard Operation generatedName?"]] call SELF;
+        if (_messageResult) then {
+            [_ctrlBriefing, false] call vgm_c_fnc_toggle_controls_group_overlay;
+        } else {
+        };
+
+    };
+    case "showMessage": {
+        _params params ["_display", "_message"];
+        private _ctrlMessage = _display ctrlCreate ["VGM_ctrlDisplayMissionsMessage", -1];
+        [_ctrlMessage, true] call vgm_c_fnc_toggle_controls_group_overlay;
+        private _ctrlMessageText = _ctrlMessage controlsGroupCtrl VGM_IDC_DISPLAYMISSIONS_MESSAGE_TEXT;
+        _ctrlMessageText ctrlSetStructuredText parseText _message;
+        waitUntil {!isNil {_ctrlMessage getVariable "_result"}};
+        private _result = _ctrlMessage getVariable "_result";
+        [_ctrlMessage, false] call vgm_c_fnc_toggle_controls_group_overlay;
+        _result
+    };
+
     default {
         false
     };

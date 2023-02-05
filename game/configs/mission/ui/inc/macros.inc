@@ -24,6 +24,7 @@
 // e.g. `VGM_UIEH(onLoad,Example)` will expand to
 // `["onLoad", _this] call VGM_UIFNC(Example)`
 #define VGM_UIEH(EVENT,CLASS) [#EVENT, _this] call VGM_UIFNC(CLASS)
+#define VGM_UIEH_SPAWN(EVENT,CLASS) [#EVENT, _this] spawn VGM_UIFNC(CLASS)
 
 // Default text font, monospaced typewriter-style from SOG:PF
 #define VGM_FONT "tt2020base_vn"

@@ -259,3 +259,206 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
     };
 };
 
+class VGM_ctrlControlsGroupOverlay: VGM_ctrlControlsGroupNoScrollbars
+{
+    /* onLoad = [_this select 0, true] call vgm_c_fnc_toggle_controls_group_overlay; */
+    onKillFocus = diag_log ["kill focus", _this];
+};
+
+class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlControlsGroupNoScrollbars
+{
+    idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE;
+    x = VGM_DISPLAYMISSIONS_X;
+    y = VGM_DISPLAYMISSIONS_Y;
+    w = VGM_DISPLAYMISSIONS_W;
+    h = VGM_DISPLAYMISSIONS_H;
+    class Controls
+    {
+        class BackgroundFull: VGM_ctrlStatic
+        {
+            x = 0;
+            y = 0;
+            w = VGM_DISPLAYMISSIONS_W * VGM_GRID_W;
+            h = VGM_DISPLAYMISSIONS_H * VGM_GRID_H;
+            colorBackground[] = {0.3,0.3,0.3,0.8};
+        };
+#define _MESSAGE_W 0.5 * VGM_DISPLAYMISSIONS_W
+#define _MESSAGE_H 20
+#define _MESSAGE_X 0.5 * safeZoneWAbs - 0.5 * _MESSAGE_W * GRID_W
+#define _MESSAGE_Y 0.5 * safeZoneH - 0.5 * _MESSAGE_H * VGM_GRID_H
+        class BackgroundMessage: VGM_ctrlStatic
+        {
+            x = _MESSAGE_X;
+            y = _MESSAGE_Y;
+            w = _MESSAGE_W * VGM_GRID_W;
+            h = _MESSAGE_H * VGM_GRID_H;
+            colorBackground[] = {0.8,0.8,0.8,1};
+        };
+        VGM_SET_Y(1)
+        class Text: VGM_ctrlStructuredText
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_TEXT;
+            text = "Generate a Recon mission in targetBoxName?";
+            size = VGM_FONT_L * VGM_GRID_H;
+            x = _MESSAGE_X + 1 * VGM_GRID_W;
+            y = VGM_Y(_MESSAGE_Y);
+            w = (_MESSAGE_W - 2) * VGM_GRID_W;
+            h = VGM_Y_H(5);
+            class Attributes
+            {
+                font = VGM_FONT;
+                color = "#000000";
+                colorLink = "#D09B43";
+                align = "center";
+                shadow = 0;
+            };
+            colorBackground[] = {1,0,0,0.2};
+        };
+        class Seperator: VGM_ctrlStatic
+        {
+            x = _MESSAGE_X;
+            y = VGM_Y_Y(_MESSAGE_Y,1);
+            w = _MESSAGE_W * VGM_GRID_W;
+            h = pixelH;
+            colorBackground[] = {0.5,0.5,0.5,1};
+        };
+        class Confirm: VGM_ctrlButton
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_CONFIRM;
+            text = "Confirm";
+            onButtonClick = VGM_UIEH(handleMessage,Missions);
+            x = _MESSAGE_X + 40 * VGM_GRID_W;
+            y = VGM_Y_Y(_MESSAGE_Y,1);
+            w = (_MESSAGE_W - 80) * VGM_GRID_W;
+            h = VGM_Y_H(5);
+        };
+        class Cancel: Confirm
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_CANCEL;
+            text = "Cancel";
+            onButtonClick = VGM_UIEH(handleMessage,Missions);
+            y = VGM_Y_Y(_MESSAGE_Y,1);
+        };
+    };
+};
+
+class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
+{
+    idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING;
+    class Controls: Controls
+    {
+        class BackgroundFull: BackgroundFull
+        {
+        };
+        class BackgroundBriefing: VGM_ctrlBackground
+        {
+            x = VGM_DISPLAYMISSIONS_COLUMN_CTRL_W * VGM_GRID_W;
+            w = (3 * VGM_DISPLAYMISSIONS_COLUMN_W + 1) * VGM_GRID_W;
+            h = (VGM_DISPLAYMISSIONS_H - 6) * VGM_GRID_H;
+        };
+#define _W (3 * VGM_DISPLAYMISSIONS_COLUMN_W - 1)
+        class BriefingStack: VGM_ctrlStack
+        {
+            x = (VGM_DISPLAYMISSIONS_COLUMN_CTRL_W + 1) * VGM_GRID_W;
+            y = 0;
+            w = _W * VGM_GRID_W;
+            h = (VGM_DISPLAYMISSIONS_H - 6) * VGM_GRID_H;
+            class Controls
+            {
+                class Title: VGM_ctrlStructuredText
+                {
+                    text = "Standard Mission on targetBoxName";
+                    x = 0;
+                    w = _W * VGM_GRID_W;
+                    h = VGM_Y_H(5);
+                    size = 5 * VGM_GRID_H;
+                    class Attributes
+                    {
+                        font = VGM_FONT;
+                        color = "#000000";
+                        colorLink = "#D09B43";
+                        align = "center";
+                        shadow = 0;
+                    };
+                };
+                class OperationName: VGM_ctrlStructuredText
+                {
+                    text = "Operation generatedName";
+                    size = VGM_FONT_L * VGM_GRID_H;
+                    x = 0;
+                    w = _W * VGM_GRID_W;
+                    h = VGM_Y_H(5);
+                };
+                class Description: OperationName
+                {
+                    text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+                    size = VGM_FONT_M * VGM_GRID_H;
+                    h = VGM_Y_H(20);
+                    stackFill = 1;
+                };
+                class MissionPropertiesText: OperationName
+                {
+                    text = "Mission Properties:";
+                    h = VGM_Y_H(5);
+                };
+                class MissionProperties: VGM_ctrlControlsTable
+                {
+                    onLoad = VGM_UIEH(loadProperties,Missions);
+                    x = 0;
+                    w = _W * VGM_GRID_W;
+                    h = VGM_Y_H(20);
+                    class RowTemplate
+                    {
+                        class Background
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlBackground"};
+                            columnX = 1 * VGM_GRID_W;
+                            controlOffsetY = 0;
+                            columnW = (_W - 1) * VGM_GRID_W;
+                            controlH = 5 * VGM_GRID_H;
+                        };
+                        class Property
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
+                            columnX = 2 * VGM_GRID_W;
+                            controlOffsetY = 0;
+                            columnW = (_W - 53) * VGM_GRID_W;
+                            controlH = 5 * VGM_GRID_H;
+                        };
+                        class Reveal: Property
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlButton"};
+                            columnX = (_W - 50) * VGM_GRID_W;
+                            columnW = 47 * VGM_GRID_W;
+                        };
+                    };
+                };
+                class Buttons: VGM_ctrlControlsGroupNoScrollbars
+                {
+                    x = 0;
+                    w = _W * VGM_GRID_W;
+                    h = 5 * VGM_GRID_H;
+#define _W 96
+                    class Controls
+                    {
+                        class ConfirmMission: VGM_ctrlButton
+                        {
+                            text = "Confirm";
+                            onButtonClick = VGM_UIEH(confirmMission,Missions);
+                            x = 0;
+                            y = 0;
+                            w = _W * VGM_GRID_W;
+                            h = 5 * VGM_GRID_H;
+                        };
+                        class DiscardMission: ConfirmMission
+                        {
+                            text = "Discard Mission [Intel Penalty]";
+                            onButtonClick = VGM_UIEH_SPAWN(discardMission,Missions);
+                            x = (_W + 1) * VGM_GRID_W;
+                        };
+                    };
+                };
+            };
+        }; // BriefingStack
+    };
+};
