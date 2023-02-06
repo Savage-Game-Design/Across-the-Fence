@@ -158,9 +158,5 @@ class VGM_DisplayMissions
             h = 10 * VGM_GRID_H;
             onButtonClick = VGM_UIEH_SPAWN(generate,Missions);
         };
-        // class briefing: VGM_ctrlDisplayMissionsBriefing
-        // {
-        //     show = 1;
-        // };
     };
 };

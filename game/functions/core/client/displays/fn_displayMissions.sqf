@@ -28,17 +28,17 @@ switch _mode do {
         _params params ["_display"];
         private _ctrlTargets = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_TARGET;
         _ctrlTargets lbSetCurSel 0;
-        _display setVariable ["_selectedDifficulty", 0];
+        _display setVariable ["_difficulty", 0];
     };
     case "selectDifficulty": {
         _params params ["_ctrlImage"];
         private _display = ctrlParent _ctrlImage;
-        private _selectedDifficulty = [
+        private _difficulty = [
             VGM_IDC_DISPLAYMISSIONS_RECON,
             VGM_IDC_DISPLAYMISSIONS_STANDARD,
             VGM_IDC_DISPLAYMISSIONS_ELITE
         ] findIf {ctrlIDC ctrlParentControlsGroup _ctrlImage == _x};
-        _display setVariable ["_selectedDifficulty", _selectedDifficulty];
+        _display setVariable ["_difficulty", _difficulty];
     };
     case "initTargets":{
         _params params ["_ctrlTargets"];
@@ -49,12 +49,51 @@ switch _mode do {
     case "generate": {
         _params params ["_ctrlGenerate"];
         private _display = ctrlParent _ctrlGenerate;
-        // private _result = ["showMessage", [_display, "Generate a Recon mission in targetBoxName?"]] call SELF;
-        _result = true;
-        if (_result) then {
-            private _ctrlBriefing = _display ctrlCreate ["VGM_ctrlDisplayMissionsBriefing", VGM_IDC_DISPLAYMISSIONS_BRIEFING];
-            [_ctrlBriefing, true] call vgm_c_fnc_toggle_controls_group_overlay;
+        if (_display getVariable "_difficulty" == 0) then {
+            // Recon difficulty, only ask for confirmation
+            private _result = ["showMessage", [_display, "Generate a Recon mission in targetBoxName?"]] call SELF;
+            if (_result) then {
+                private _ctrlBriefing = _display ctrlCreate ["VGM_ctrlDisplayMissionsBriefing", VGM_IDC_DISPLAYMISSIONS_BRIEFING];
+                [_ctrlBriefing, true] call vgm_c_fnc_toggle_controls_group_overlay;
+            };
+        } else {
+            // Standard or Elite difficutly
+            private _ctrlObjectives = _display ctrlCreate ["VGM_ctrlDisplayMissionsObjectives", VGM_IDC_DISPLAYMISSIONS_OBJECTIVES];
+            [_ctrlObjectives, true] call vgm_c_fnc_toggle_controls_group_overlay;
+            private _ctrlObjectivesList = _ctrlObjectives controlsGroupCtrl VGM_IDC_DISPLAYMISSIONS_OBJECTIVES_LIST;
+            private _objectives = [];
+            _objectives resize 20;
+            _objectives apply {
+                (ctAddRow _ctrlObjectivesList select 1) params ["_ctrlIcon", "_ctrlName", "_ctrlDescription", "_ctrlLevel", "_ctrlSelect"];
+                _ctrlIcon ctrlSetText "#(rgb,1,1,1)color(0,1,0,1)";
+                _ctrlName ctrlSetStructuredText parseText format ["<t size='%1'>Destroy Something</t>", 1.25];
+                _ctrlDescription ctrlSetText "Head into targetBoxName and destroy a key enemy asset";
+                _ctrlLevel ctrlSetText "Level 5";
+                _ctrlSelect ctrlSetText "[99 Intel]";
+                _ctrlSelect ctrlAddEventHandler ["ButtonClick", {
+                    ["objectiveSelect", _this] call SELF;
+                }];
+            };
         };
+    };
+    case "objectiveSelect": {
+        _params params ["_ctrlSelect"];
+        private _display = ctrlParent _ctrlSelect;
+        private _ctrlObjectives = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_OBJECTIVES;
+        [_ctrlObjectives, false] call vgm_c_fnc_toggle_controls_group_overlay;
+        private _ctrlBriefing = _display ctrlCreate ["VGM_ctrlDisplayMissionsBriefing", VGM_IDC_DISPLAYMISSIONS_BRIEFING];
+        [_ctrlBriefing, true] call vgm_c_fnc_toggle_controls_group_overlay;
+    };
+    case "objectivesReroll": {
+        _params params ["_ctrlObjectivesReroll"];
+        private _display = ctrlParent _ctrlObjectivesReroll;
+    };
+    case "objectivesCancel": {
+        _params params ["_ctrlObjectivesCancel"];
+        private _display = ctrlParent _ctrlObjectivesCancel;
+        private _ctrlObjectives = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_OBJECTIVES;
+        [_ctrlObjectives, false] call vgm_c_fnc_toggle_controls_group_overlay;
+        diag_log [_ctrlObjectives, _display];
     };
     case "handleMessage": {
         _params params ["_ctrl"];

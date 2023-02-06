@@ -145,6 +145,13 @@ class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars
     stackMargin = 1 * VGM_GRID_H;
 };
 
+class VGM_ctrlSeperator: VGM_ctrlStatic
+{
+    h = pixelH;
+    w = pixelW;
+    colorBackground[] = {0.75,0.75,0.75,1};
+};
+
 // Controls for VGM_DisplaySkills
 class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
 {
@@ -284,7 +291,7 @@ class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlCon
         };
 #define _MESSAGE_W 0.5 * VGM_DISPLAYMISSIONS_W
 #define _MESSAGE_H 20
-#define _MESSAGE_X 0.5 * safeZoneWAbs - 0.5 * _MESSAGE_W * GRID_W
+#define _MESSAGE_X 0.5 * safeZoneWAbs - 0.5 * _MESSAGE_W * VGM_GRID_W
 #define _MESSAGE_Y 0.5 * safeZoneH - 0.5 * _MESSAGE_H * VGM_GRID_H
         class BackgroundMessage: VGM_ctrlStatic
         {
@@ -466,5 +473,132 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                 };
             };
         }; // BriefingStack
+    };
+};
+
+#define _W 0.5 * VGM_DISPLAYMISSIONS_W
+#define _H 0.5 * VGM_DISPLAYMISSIONS_H
+#define _X (0.5 * _W * VGM_GRID_W)
+#define _Y (0.5 * _H * VGM_GRID_H)
+class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
+{
+    idc = VGM_IDC_DISPLAYMISSIONS_OBJECTIVES;
+    class Controls: Controls
+    {
+        class BackgroundFull: BackgroundFull
+        {
+        };
+        class BackgroundContent: VGM_ctrlBackground
+        {
+            x = _X;
+            y = _Y;
+            w = _W * VGM_GRID_W;
+            h = _H * VGM_GRID_H;
+        };
+        class Stack: VGM_ctrlStack
+        {
+            x = _X;
+            y = _Y;
+            w = _W * VGM_GRID_W;
+            h = _H * VGM_GRID_H;
+#define _W2 (_W - 2)
+#define _X2 (1 * VGM_GRID_W)
+            class Controls
+            {
+                class Title: VGM_ctrlStructuredText
+                {
+                    text = "Select a Primary Objective for the Mission";
+                    size = VGM_FONT_L * VGM_GRID_H;
+                    x = _X2;
+                    w = _W2 * VGM_GRID_W;
+                    h = 5 * VGM_GRID_H;
+                    class Attributes
+                    {
+                        font = VGM_FONT;
+                        color = "#000000";
+                        colorLink = "#D09B43";
+                        align = "center";
+                        shadow = 0;
+                    };
+                };
+                class Seperator: VGM_ctrlSeperator
+                {
+                    x = 0;
+                    w = _W * VGM_GRID_W;
+                };
+#define _ROW_H 20
+                class List: VGM_ctrlControlsTable
+                {
+                    idc = VGM_IDC_DISPLAYMISSIONS_OBJECTIVES_LIST;
+                    x = _X2;
+                    w = _W2 * VGM_GRID_W;
+                    stackFill = 1;
+                    rowHeight = _ROW_H * VGM_GRID_H;
+                    class RowTemplate
+                    {
+                        class Icon
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
+                            columnX = 0;
+                            controlOffsetY = 0;
+                            columnW = _ROW_H * VGM_GRID_W;
+                            controlH = _ROW_H * VGM_GRID_H;
+                        };
+                        class Name: Icon
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
+                            columnX = _ROW_H * VGM_GRID_W;
+                            columnW = (_W2 - _ROW_H - 3) * VGM_GRID_W;
+                            controlH = 5 * VGM_GRID_H;
+                        };
+                        class Description: Name
+                        {
+                            controlOffsetY = 5 * VGM_GRID_H;
+                            columnW = (_W2 - _ROW_H - 23) * VGM_GRID_W;
+                            controlH = 15 * VGM_GRID_H;
+                        };
+                        class Level: Name
+                        {
+                            columnX = (_W2 - 23) * VGM_GRID_W;
+                            controlOffsetY = (_ROW_H - 10) * VGM_GRID_H;
+                            columnW = 20 * VGM_GRID_W;
+                            controlH = 5 * VGM_GRID_H;
+                        };
+                        class Select: Level
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlButton"};
+                            controlOffsetY = (_ROW_H - 5) * VGM_GRID_H;
+                        };
+                    };
+                };
+                class Buttons: VGM_ctrlControlsGroupNoScrollbars
+                {
+                    x = _X2;
+                    w = _W2 * VGM_GRID_W;
+                    h = 5 * VGM_GRID_H;
+#define _W (0.25 * VGM_DISPLAYMISSIONS_W - 1.5)
+                    class Controls
+                    {
+                        class Reroll: VGM_ctrlButton
+                        {
+                            idc = VGM_IDC_DISPLAYMISSIONS_OBJECTIVES_REROLL;
+                            text = "Reroll Objectives [50 Intel]";
+                            x = 0;
+                            y = 0;
+                            w = _W * VGM_GRID_W;
+                            h = 5 * VGM_GRID_H;
+                            onButtonClick = VGM_UIEH(objectivesReroll,Missions);
+                        };
+                        class Cancel: Reroll
+                        {
+                            idc = VGM_IDC_DISPLAYMISSIONS_OBJECTIVES_CANCEL;
+                            text = "Cancel";
+                            x = (_W + 1) * VGM_GRID_W;
+                            onButtonClick = VGM_UIEH(objectivesCancel,Missions);
+                        };
+                    };
+                };
+            };
+        };
     };
 };
