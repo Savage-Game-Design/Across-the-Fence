@@ -16,6 +16,7 @@ class vgm_c
         class displaySkills {};
         class displayAbilities {};
         class displayMissions {};
+        class displayMissionsTargets {};
     };
 
     class ui

@@ -159,6 +159,12 @@ switch _mode do {
         [_ctrlMessage, false] call vgm_c_fnc_toggle_controls_group_overlay;
         _result
     };
+    case "fullTargetList": {
+        _params params ["_ctrlFullTargetList"];
+        private _display = ctrlParent _ctrlFullTargetList;
+        private _displayTargets = _display createDisplay "VGM_DisplayMissionsTargets";
+        diag_log [_display, _displayTargets];
+    };
 
     default {
         false

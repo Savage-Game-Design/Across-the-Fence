@@ -60,6 +60,7 @@ class VGM_DisplayMissions
             y = VGM_Y_Y(DISPLAY_Y,1);
             w = _W * VGM_GRID_W;
             h = 5 * VGM_GRID_H;
+            onButtonClick = VGM_UIEH(fullTargetList,Missions);
         };
         VGM_SET_Y(6)
         class Recon: VGM_ctrlControlsGroup
