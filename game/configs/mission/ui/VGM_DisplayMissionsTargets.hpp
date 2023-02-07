@@ -32,7 +32,7 @@ class VGM_DisplayMissionsTargets
                 color[] = {0,0,0,0};
                 colorBackground[] = {1,1,1,0};
                 font = VGM_FONT;
-                sizeEX = 0
+                sizeEX = 0;
             };
         };
         class Stack: VGM_ctrlStack
