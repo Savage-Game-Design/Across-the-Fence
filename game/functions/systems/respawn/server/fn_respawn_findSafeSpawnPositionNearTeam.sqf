@@ -76,7 +76,7 @@ for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
         _safePosition = AGLToASL [_safePosition select 0, _safePosition select 1, 0];
 
         // TODO: line of sight checks with enemies and unit's group
-        private _totalNearbyEnemies = _unit countEnemy (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
+        private _totalNearbyEnemies = _unit countEnemy (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]); // BUG: for some reason this returns 0 even when unit is next to enemies
         if (_totalNearbyEnemies == 0) then {
             _spawnPosition = _safePosition;
             break;
