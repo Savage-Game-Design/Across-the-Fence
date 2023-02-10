@@ -75,6 +75,8 @@ for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
     private _safePosition = [_searchOriginASL, 0, _searchRadius, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
     if (!(_safePosition isEqualTo [0, 0])) then {
         _safePosition = AGLToASL [_safePosition select 0, _safePosition select 1, 0];
+
+        // TODO: line of sight checks with enemies and unit's group
         private _totalNearbyEnemies = _unit countEnemy (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
         if (_totalNearbyEnemies == 0) then {
             _spawnPosition = _safePosition;
