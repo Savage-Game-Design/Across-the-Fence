@@ -11,7 +11,7 @@
         _unit - The unit to find a safe spawn position for [OBJECT]
         _minDistanceFromTeam - The minimum distance to search away from teammates [NUMBER]
         _maxDistanceFromTeam - The maximum distance to search away from teammates [NUMBER]
-        _enemyAvoidanceDistance - The distance to search and avoid enemies [NUMBER]
+        _unitAvoidanceDistance - The distance to search to avoid enemies and friendlies [NUMBER]
 
     Returns:
         ASL position of a safe spawn position for the given unit
@@ -27,7 +27,7 @@ params [
     ["_unit", objNull, [objNull]],
     ["_minDistanceFromTeam", 300, [300]],
     ["_maxDistanceFromTeam", 500, [500]],
-    ["_enemyAvoidanceDistance", 100, [100]]
+    ["_unitAvoidanceDistance", 100, [100]]
 ];
 
 if (isNull _unit) exitWith {
@@ -45,8 +45,8 @@ if (_maxDistanceFromTeam < 0) exitWith {
 if (_maxDistanceFromTeam <= _minDistanceFromTeam) exitWith {
     ["Expected _maxDistanceFromTeam to be greater than or equal to _minDistanceFromTeam. Received _minDistanceFromTeam: %1, _maxDistanceFromTeam: %2", _minDistanceFromTeam, _maxDistanceFromTeam] call BIS_fnc_error;
 };
-if (_enemyAvoidanceDistance < 0) exitWith {
-    ["Expected _enemyAvoidanceDistance to be greater than 0. Received _enemyAvoidanceDistance: %1", _enemyAvoidanceDistance] call BIS_fnc_error;
+if (_unitAvoidanceDistance < 0) exitWith {
+    ["Expected _unitAvoidanceDistance to be greater than 0. Received _unitAvoidanceDistance: %1", _unitAvoidanceDistance] call BIS_fnc_error;
 };
 
 private _spawnPosition = call VGM_s_fnc_respawn_getInitialSpawnPointMarkerPosition;
@@ -76,8 +76,8 @@ for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
         _safePosition = AGLToASL [_safePosition select 0, _safePosition select 1, 0];
 
         // TODO: line of sight checks with enemies and unit's group
-        private _totalNearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
-        if (_totalNearbyEnemies == 0) then {
+        private _totalNearbyEnemiesAndPlayers = { { side _x in _enemySides } || { isPlayer _x } } count (_safePosition nearEntities ["AllVehicles", _unitAvoidanceDistance]);
+        if (_totalNearbyEnemiesAndPlayers == 0) then {
             _spawnPosition = _safePosition;
             break;
         };
