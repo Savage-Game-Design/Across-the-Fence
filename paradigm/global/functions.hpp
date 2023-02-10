@@ -246,6 +246,16 @@ class para_g
 		PARA_GLOBAL_PATH(\tools);
 		class is_valid_axe_target {};
 	};
+
+    class tracked_state
+    {
+        PARA_GLOBAL_PATH(\tracked_state);
+        class trState_callHandlers {};
+        class trState_data {};
+        class trState_setLocal {};
+        class trState_whenChanged {};
+        class trState_whenEqual {};
+    };
 };
 
 #endif
