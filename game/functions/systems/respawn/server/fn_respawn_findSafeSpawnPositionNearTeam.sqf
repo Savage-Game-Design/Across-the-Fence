@@ -1,6 +1,6 @@
 /*
     File: fn_respawn_findSafeSpawnPositionNearTeam.sqf
-    Author:  Savage Game Design
+    Author: Savage Game Design
     Public: Yes
 
     Description:
@@ -64,7 +64,6 @@ private _targetUnitPositionASL = getPosASL _targetUnit;
 
 // imagine the search circle rolling around the circumference of the target unit
 for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
-    systemChat format ["%1 | %2", time, _searchAttempt];
     private _searchDirection = _initialSearchDirection + (SEARCH_ANGLE * _searchAttempt);
     private _searchOriginASL = _targetUnitPositionASL vectorAdd [
         _searchCircleDistanceFromTargetUnit * (cos _searchDirection),
