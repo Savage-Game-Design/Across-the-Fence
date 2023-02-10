@@ -55,7 +55,7 @@ if (count _eligbleUnitsInGroup == 0) exitWith {
     _spawnPosition;
 };
 
-private _unitSide = side _unit;
+private _enemySides = ([side _unit] call BIS_fnc_enemySides) createHashMapFromArray [];
 private _initialSearchDirection = random 360;
 private _searchRadius = (_maxDistanceFromTeam - _minDistanceFromTeam) / 2;
 private _searchCircleDistanceFromTargetUnit = _minDistanceFromTeam + _searchRadius;
@@ -76,7 +76,7 @@ for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
         _safePosition = AGLToASL [_safePosition select 0, _safePosition select 1, 0];
 
         // TODO: line of sight checks with enemies and unit's group
-        private _totalNearbyEnemies = _unit countEnemy (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]); // BUG: for some reason this returns 0 even when unit is next to enemies (EDIT: according to the wiki, the countEnemy command is tied to the unit's knowledge/awareness of enemies, so we need to take a different approach here)
+        private _totalNearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
         if (_totalNearbyEnemies == 0) then {
             _spawnPosition = _safePosition;
             break;
