@@ -25,13 +25,13 @@ params ["_mode", "_params"];
 switch _mode do {
     case "onLoad":{
         _params params ["_display"];
-        ["stdselect", _display displayCtrl VGM_IDC_DISPLAYABILITIES_STDSELECT] call SELF;
+        ["stdselect", _display displayCtrl VGM_IDC_DISPLAYABILITIES_STDTITLE] call SELF;
     };
     case "stdselect": {
         _params params ["_ctrlStdSelect"];
         private _display = ctrlParent _ctrlStdSelect;
         private _ctrlAvailable = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLE;
-        private _available = ["hoof_it"]; // TODO: Get list of abilities
+        private _available = []; // TODO: Get list of abilities
         _available resize 100;
         _available apply {
             private _name = "Hoof It"; // TODO: Get actual name
@@ -39,16 +39,15 @@ switch _mode do {
             private _category = "Standard Rifleman Ability"; // TODO: Get actual category
 
             (ctAddRow _ctrlAvailable select 1) params [
-                "_ctrlRowBackground",
-                "_ctrlRowTitle",
-                "_ctrlCategory",
-                "_ctrlIcon",
-                "_ctrlRowEquip"];
-            _ctrlRowBackground ctrlSetBackgroundColor [0.75,0.75,0.75,1];
+                "_ctrlRowName",
+                "_ctrlRowCategory",
+                "_ctrlRowIcon",
+                "_ctrlRowEquip"
+            ];
 
-            _ctrlRowTitle ctrlSetStructuredText parseText format ["<t size='1.25'>%1</t>", _name];
-            _ctrlCategory ctrlSetText _category;
-            _ctrlIcon ctrlSetText _icon;
+            _ctrlRowName ctrlSetStructuredText parseText format ["<t size='1.25'>%1</t>", _name];
+            _ctrlRowCategory ctrlSetText _category;
+            _ctrlRowIcon ctrlSetText _icon;
             _ctrlRowEquip ctrlSetText "Equip"; // TODO: Localize
             _ctrlRowEquip ctrlAddEventHandler ["ButtonClick", {
                 ["equip", _this] call SELF;

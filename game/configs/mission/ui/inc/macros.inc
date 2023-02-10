@@ -9,12 +9,14 @@
         Contains all macros used by the UI system.
  */
 // Include Eden macros
+#include "\a3\3den\UI\macros.inc"
 #include "\a3\3den\ui\resincl.inc"
 #define CT_CONTROLS_TABLE 19 // Not defined by Arma
 
 // Include all other macros
 #include "idcs.inc"
 #include "coordinates.inc"
+#include "colors.inc"
 
 // Gets the associated sqf function of a display.
 // e.g `VGM_UIFNC(Example)` will expand to `vgm_c_fnc_displayExample`

@@ -34,7 +34,7 @@ class VGM_ctrlStaticFrame: ctrlStaticFrame
 
 class VGM_ctrlBackground: VGM_ctrlStatic
 {
-    colorBackground[] = {1,1,1,1};
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
 };
 
 class VGM_ctrlStaticPicture: ctrlStaticPicture
@@ -44,16 +44,30 @@ class VGM_ctrlStaticPicture: ctrlStaticPicture
 class VGM_ctrlStructuredText : ctrlStructuredText
 {
 #ifdef __A3_DEBUG__
-    colorBackground[] = {1,0,0,0.2};
+    // colorBackground[] = {1,0,0,0.2};
 #endif
     size = VGM_FONT_M * VGM_GRID_H;
     shadow = 0;
     class Attributes
     {
         font = VGM_FONT;
-        color = "#000000";
+        color = "#ffffff";
         colorLink = "#D09B43";
         align = "left";
+        shadow = 0;
+    };
+};
+
+class VGM_ctrlTitle: VGM_ctrlStructuredText
+{
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
+    size = VGM_FONT_L * VGM_GRID_H;
+    class Attributes
+    {
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "center";
         shadow = 0;
     };
 };
@@ -78,10 +92,46 @@ class VGM_ctrlControlsGroupNoScrollbars: ctrlControlsGroupNoScrollbars
 {
 };
 
+// Special frame that acts more precisely than the default frame
+class VGM_ctrlFrame: VGM_ctrlControlsGroup
+{
+    onLoad = _this spawn vgm_c_fnc_frame;
+    frameColor[] = {VGM_UI_COLOR_FRAME};
+    frameWidth = 0.5 * VGM_GRID_W;
+    frameHeight = 0.5 * VGM_GRID_H;
+    deleteable = 1;
+    x = 0;
+    y = 0;
+    w = 0;
+    h = 0;
+    class Controls
+    {
+        class BorderT: VGM_ctrlStatic
+        {
+            idc = VGM_IDC_CTRLFRAME_T;
+            colorBackground[] = {VGM_UI_COLOR_FRAME};
+            // coordinates set via function
+        };
+        class BorderL: BorderT
+        {
+            idc = VGM_IDC_CTRLFRAME_L;
+        };
+        class BorderR: BorderL
+        {
+            idc = VGM_IDC_CTRLFRAME_R;
+        };
+        class BorderB: BorderT
+        {
+            idc = VGM_IDC_CTRLFRAME_B;
+        };
+    };
+};
+
 class VGM_ctrlButton: ctrlButton
 {
-    colorBackground[] = {0.6,0.6,0.6,1};
-    colorText[] = {0,0,0,1};
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND_DESELECTED};
+    colorText[] = {VGM_UI_COLOR_TEXT};
+    colorBackgroundActive[] = {VGM_UI_COLOR_ACTIVE};
     font = VGM_FONT;
     sizeEx = VGM_FONT_M * VGM_GRID_H;
 };
@@ -111,13 +161,21 @@ class VGM_ctrlControlsTable: VGM_ctrlDefault
     lineSpacing = 1 * VGM_GRID_H;
     rowHeight = 5 * VGM_GRID_H;
     selectedRowAnimLength = 7.5;
-    selectedRowColorFrom[] = {0,1,0,0};
-    selectedRowColorTo[] = {0,1,0,1};
+    selectedRowColorFrom[] = {VGM_UI_COLOR_ACTIVE};
+    selectedRowColorTo[] = {VGM_UI_COLOR_ACTIVE};
     class HeaderTemplate
     {
     };
     class RowTemplate
     {
+        class Example
+        {
+            controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
+            columnX = 0;
+            controlOffsetY = 0;
+            columnW = 1;
+            controlH = 1;
+        };
     };
     class VScrollbar: ScrollBar
     {
@@ -143,6 +201,8 @@ class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars
 {
     onLoad = "_this call vgm_c_fnc_stack_controls;";
     stackMargin = 1 * VGM_GRID_H;
+    stackDisable = 0;
+    stackFill = 0;
 };
 
 class VGM_ctrlSeperator: VGM_ctrlStatic

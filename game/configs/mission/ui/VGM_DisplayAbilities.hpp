@@ -11,250 +11,316 @@ class VGM_DisplayAbilities
     onLoad = VGM_UIEH(onLoad,Abilities);
     class ControlsBackground
     {
-        class Background: VGM_ctrlBackground
+        class Min: VGM_ctrlBackground
         {
-            x = DISPLAY_X;
-            y = DISPLAY_Y;
-            w = DISPLAY_W * VGM_GRID_W;
-            h = DISPLAY_H * VGM_GRID_H;
+            x = VGM_GRID_MIN_X;
+            y = VGM_GRID_MIN_Y;
+            w = VGM_GRID_MAX_W * VGM_GRID_W;
+            h = VGM_GRID_MAX_H * VGM_GRID_H;
+            colorBackground[] = {0,0,1,0.2};
         };
-        class BackgroundAvailable: VGM_ctrlBackground
+        class StdTitleFrame: VGM_ctrlFrame
         {
-            x = DISPLAY_X + (COLUMN_W + 6) * VGM_GRID_W;
-            y = DISPLAY_Y + 12 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = (DISPLAY_H - 13) * VGM_GRID_H;
-            colorBackground[] = {0.85,0.85,0.85,1};
+            frameIDC = VGM_IDC_DISPLAYABILITIES_STDTITLE;
         };
-        class BackgroundSkill: VGM_ctrlBackground
+        class StdBackgroundFrame: VGM_ctrlFrame
         {
-            x = COLUMN3_X;
-            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            frameIDC = VGM_IDC_DISPLAYABILITIES_STDSTACK;
+        };
+
+        class UltTitleFrame: VGM_ctrlFrame
+        {
+            frameIDC = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
+        };
+        class UltBackgroundFrame: VGM_ctrlFrame
+        {
+            frameIDC = VGM_IDC_DISPLAYABILITIES_ULTSTACK;
+        };
+
+        class AvailableTitleFrame: VGM_ctrlFrame
+        {
+            frameIDC = VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
+        };
+        class AvailableFrame: VGM_ctrlFrame
+        {
+            frameIDC = VGM_IDC_DISPLAYABILITIES_AVAILABLE;
+        };
+        class AvailableBackground: VGM_ctrlBackground
+        {
+            x = DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 6.5 * VGM_GRID_H;
             w = COLUMN_W * VGM_GRID_W;
             h = (DISPLAY_H - 7) * VGM_GRID_H;
-            colorBackground[] = {0.85,0.85,0.85,1};
+        };
+
+        class AbilityTitleFrame: VGM_ctrlFrame
+        {
+            frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYTITLE;
+        };
+        class AbilityStackFrame: VGM_ctrlFrame
+        {
+            frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYSTACK;
+        };
+        class AbilityBackground: VGM_ctrlBackground
+        {
+            x = DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 6.5 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = (DISPLAY_H - 7) * VGM_GRID_H;
         };
     };
     class Controls
     {
-        class StdInfo: VGM_ctrlStructuredText
+        VGM_SET_Y(0)
+        class StdTitle: VGM_ctrlTitle
         {
-            idc = VGM_IDC_DISPLAYABILITIES_STDINFO;
-            text = "Standard Ability (i)";
+            idc = VGM_IDC_DISPLAYABILITIES_STDTITLE;
+            text = "Standard Abilitiy";
             x = DISPLAY_X + 1 * VGM_GRID_W;
-            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            y = VGM_Y_Y(DISPLAY_Y,1);
+            w = 0.75 * COLUMN_W * VGM_GRID_W;
+            h = VGM_Y_H(5);
+        };
+#define _ICON_W 18.5
+        class StdStack: VGM_ctrlStack
+        {
+            idc = VGM_IDC_DISPLAYABILITIES_STDSTACK;
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = VGM_Y_Y(DISPLAY_Y,0.5);
             w = COLUMN_W * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-            colorBackground[] = {1,0,0,0.2};
+            h = VGM_Y_H(0.5 * DISPLAY_H - 9);
+#define _W (COLUMN_W - 2)
+            class Controls
+            {
+                class Background: VGM_ctrlBackground
+                {
+                    stackDisable = 1;
+                    x = 0;
+                    y = 0;
+                    w = COLUMN_W * VGM_GRID_W;
+                    h = (0.5 * DISPLAY_H - 9) * VGM_GRID_H;
+                };
+                class StdIconFrame: VGM_ctrlFrame
+                {
+                    frameColor[] = {1,1,1,1};
+                    stackDisable = 1;
+                    frameIDC = VGM_IDC_DISPLAYABILITIES_STDULT_ICON;
+                };
+                class StdIcon: VGM_ctrlStaticPicture
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_STDULT_ICON;
+                    text = "#(rgb,1,1,1)color(0,1,0,1)";
+                    stackDisable = 1;
+                    x = (_W - _ICON_W + 1) * VGM_GRID_W;
+                    y = 1.5 * VGM_GRID_H;
+                    w = (_ICON_W - 1) * VGM_GRID_W;
+                    h = (_ICON_W - 1) * VGM_GRID_H;
+                };
+#define _W (COLUMN_W - _ICON_W - 3)
+                class StdName: VGM_ctrlStructuredText
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_STDULT_NAME;
+                    text = "Mobility Kill";
+                    size = VGM_FONT_L * VGM_GRID_H;
+                    x = 1 * VGM_GRID_W;
+                    w = _W * VGM_GRID_W;
+                    h = 5 * VGM_GRID_H;
+                };
+                class StdSeperator: VGM_ctrlStaticPicture
+                {
+                    text = "\a3\ui_f\data\GUI\RscCommon\RscBackgroundGUI\gradient_left_gs.paa";
+                    x = 1 * VGM_GRID_W;
+                    w = _W * VGM_GRID_W;
+                    h = 0.5 * VGM_GRID_H;
+                };
+                class StdCategory: StdName
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_STDULT_CATEGORY;
+                    text = "Light Anti-Tank Ability";
+                    size = VGM_FONT_M * VGM_GRID_H;
+                    stackOffset = 0;
+                    h = 5 * VGM_GRID_H;
+                };
+                class StdCooldown: StdCategory
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_STDULT_COOLDOWN;
+                    text = "X second cooldown";
+                    h = 5 * VGM_GRID_H;
+                    stackOffset = 0;
+                };
+                class StdDescription: StdCategory
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_STDULT_DESCRIPTION;
+                    text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+                    stackFill = 1;
+                    w = (COLUMN_W - 2) * VGM_GRID_W;
+                };
+            };
         };
-        class StdName: VGM_ctrlStructuredText
+        class UltTitle: StdTitle
         {
-            idc = VGM_IDC_DISPLAYABILITIES_STDNAME;
-            text = "No ability equipped.";
-            x = DISPLAY_X + 1 * VGM_GRID_W;
-            y = DISPLAY_Y + 11 * VGM_GRID_H;
-            w = 80 * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-            size = VGM_FONT_L * VGM_GRID_H;
+            idc = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
+            text = "Ultimate Ability";
+            y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
-        class Std: VGM_ctrlStructuredText
+        class UltStack: StdStack
         {
-            idc = VGM_IDC_DISPLAYABILITIES_STD;
-            text = "Suffer no stamina drain for 30 seconds.";
-            /* text = ""; */
-            x = DISPLAY_X + 1 * VGM_GRID_W;
-            y = DISPLAY_Y + 17 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = 20 * VGM_GRID_H;
-            colorBackground[] = {0.8,0.8,0.8,1};
-            size = VGM_FONT_L * VGM_GRID_H;
-        };
-        class StdCooldownTime: Std
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_STDCOOLDOWNTIME;
-            text = "XX seconds cooldown time.";
-            y = DISPLAY_Y + 37 * VGM_GRID_H;
-            h = 5 * VGM_GRID_H;
-            colorBackground[] = {0.8,0.8,0.8,1};
-        };
-        class StdSelect: VGM_ctrlButtonInvisible
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_STDSELECT;
-            onButtonClick = VGM_UIEH(stdselect,Abilities);
-            x = DISPLAY_X + 1 * VGM_GRID_W;
-            y = DISPLAY_Y + 17 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = 25 * VGM_GRID_H;
-        };
-        class StdCooldown: VGM_ctrlStructuredText
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_STDCOOLDOWN;
-            text = "Cooldown:";
-            x = DISPLAY_X + 1 * VGM_GRID_W;
-            y = DISPLAY_Y + 43 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            idc = VGM_IDC_DISPLAYABILITIES_ULTSTACK;
+            y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
 
-        class UltInfo: StdInfo
+#define _X DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W
+#define _W COLUMN_W
+VGM_SET_Y(0);
+        class AvailableTitle: StdTitle
         {
-            idc = VGM_IDC_DISPLAYABILITIES_ULTINFO;
-            text = "Ultimate Ability (i)";
-            y = DISPLAY_Y + 56 * VGM_GRID_H;
+            idc = VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
+            x = _X;
+            w = _W * VGM_GRID_W;
         };
-        class UltName: StdName
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ULTNAME;
-            y = DISPLAY_Y + 62 * VGM_GRID_H;
-        };
-        class Ult: Std
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ULT;
-            y = DISPLAY_Y + 68 * VGM_GRID_H;
-        };
-        class UltCooldownTime: StdCooldownTime
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ULTCOOLDOWNTIME;
-            y = DISPLAY_Y + 88 * VGM_GRID_H;
-        };
-        class UltSelect: StdSelect
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ULTSELECT;
-            onButtonClick = VGM_UIEH(ultselect,Abilities);
-            y = DISPLAY_Y + 68 * VGM_GRID_H;
-        };
-        class UltCooldown: StdCooldown
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ULTCOOLDOWN;
-            y = DISPLAY_Y + 94 * VGM_GRID_H;
-        };
-
-        class AvailableText: VGM_ctrlStructuredText
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_AVAILABLETEXT;
-            text = "Select an ability to the left to start.";
-            x = DISPLAY_X + (COLUMN_W + 6) * VGM_GRID_W;
-            y = DISPLAY_Y + 6 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-            colorBackground[] = {1,0,0,0.2};
-        };
+#define _ICON_W 20
         class Available: VGM_ctrlControlsTable
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLE;
-            rowHeight = 15 * VGM_GRID_H;
-            lineSpacing = 1 * VGM_GRID_H;
-            x = DISPLAY_X + (COLUMN_W + 6) * VGM_GRID_W;
-            y = DISPLAY_Y + 13 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = (DISPLAY_H - 14) * VGM_GRID_H;
+            rowHeight = (_ICON_W + 6) * VGM_GRID_H;
+            x = _X;
+            y = VGM_Y_Y(DISPLAY_Y, 6.5);
+            w = _W * VGM_GRID_W;
+            h = (DISPLAY_H - 7) * VGM_GRID_H;
+VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
             class RowTemplate
             {
-                class RowBackground
-                {
-                    controlBaseClassPath[] = {"VGM_ctrlBackground"};
-                    columnX = 1 * VGM_GRID_W;
-                    controlOffsetY = 0;
-                    columnW = (COLUMN_W - 2) * VGM_GRID_W;
-                    controlH = 15 * VGM_GRID_H;
-                };
-                class Title: RowBackground
+                class Name
                 {
                     controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
-                    columnW = (COLUMN_W - 17) * VGM_GRID_W;
+                    columnX = 1 * VGM_GRID_W;
+                    controlOffsetY = VGM_Y_Y(0,0);
+                    columnW = (_W - _ICON_W - 4) * VGM_GRID_W;
+                    controlH = VGM_Y_H(5);
                 };
-                class Category: Title
+                class Category: Name
                 {
-                    controlOffsetY = 5 * VGM_GRID_H;
+                    controlOffsetY = VGM_Y_Y(0,0);
                 };
-                class Icon: Title
+                class Icon
                 {
                     controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
-                    columnX = (COLUMN_W - 16) * VGM_GRID_W;
-                    columnW = 15 * VGM_GRID_W;
-                    controlH = 15 * VGM_GRID_H;
+                    columnX = (COLUMN_W - _ICON_W - 3) * VGM_GRID_W;
+                    controlOffsetY = 1 * VGM_GRID_H;
+                    columnW = _ICON_W * VGM_GRID_W;
+                    controlH = _ICON_W * VGM_GRID_H;
                 };
-                class Equip: Title
+                class Equip: Icon
                 {
                     controlBaseClassPath[] = {"VGM_ctrlButton"};
-                    controlOffsetY = 10 * VGM_GRID_H;
+                    controlOffsetY = _ICON_W * VGM_GRID_H;
+                    controlH = 5 * VGM_GRID_H;
                 };
             };
         };
 
-        class DetailsFrame: VGM_ctrlStaticFrame
-        {
-            x = COLUMN3_X;
-            y = DISPLAY_Y + 6 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = (DISPLAY_H - 7) * VGM_GRID_H;
-        };
-        class AbilityTitleFrame: DetailsFrame
-        {
-            h = 6 * VGM_GRID_H;
-        };
-        class AbilityTitle: VGM_ctrlStructuredText
+#define _X DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W
+        class AbilityTitle: AvailableTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYTITLE;
-            text = "//Ability Name";
-            size = VGM_FONT_XL * VGM_GRID_H;
-            x = COLUMN3_X;
-            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            x = _X;
+        };
+#define _W (COLUMN_W - 2)
+        class AbilityStack: VGM_ctrlStack
+        {
+            idc = VGM_IDC_DISPLAYABILITIES_ABILITYSTACK;
+            x = _X;
+            y = DISPLAY_Y + 6.5 * VGM_GRID_H;
             w = COLUMN_W * VGM_GRID_W;
-            h = 6 * VGM_GRID_H;
-        };
-        class Description: VGM_ctrlStructuredText
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ABILITYDESCRIPTION;
-            text = "// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-            x = COLUMN3_X;
-            y = DISPLAY_Y + 13 * VGM_GRID_H;
-            w = COLUMN_W * VGM_GRID_W;
-            h = 40 * VGM_GRID_H;
-            colorBackground[] = {1,0,0,0.2};
-        };
-        class Category: VGM_ctrlStructuredText
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ABILITYCATEGORY;
-            text = "// Rifleman Ability";
-            x = COLUMN3_X;
-            y = DISPLAY_Y + 64 * VGM_GRID_H;
-            w = (COLUMN_W - 22) * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-            colorBackground[] = {1,0,0,0.2};
-        };
-        class Cooldown: Category
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ABILITYCOOLDOWN;
-            text = "// X Seconds Cooldown";
-            y = DISPLAY_Y + 69 * VGM_GRID_H;
-        };
-        class Icon: VGM_ctrlStaticPicture
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ABILITYICON;
-            text = "#(argb,1,1,1)color(0,1,0,1)";
-            x = COLUMN3_X + (COLUMN_W - 21) * VGM_GRID_W;
-            y = DISPLAY_Y + 54 * VGM_GRID_H;
-            w = 20 * VGM_GRID_W;
-            h = 20 * VGM_GRID_H;
-        };
-        class Picture: VGM_ctrlStaticPicture
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ABILITYPICTURE;
-            text = "#(argb,1,1,1)color(0,1,0,1)";
-            x = COLUMN3_X + 20 * VGM_GRID_W;
-            y = DISPLAY_Y + 75 * VGM_GRID_H;
-            w = PICTURE_H * VGM_GRID_W;
-            h = PICTURE_H * VGM_GRID_H;
-        };
-        class Equip: VGM_ctrlButton
-        {
-            idc = VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
-            text = "Equip";
-            x = COLUMN3_X + 5 * VGM_GRID_W;
-            y = DISPLAY_Y + (DISPLAY_H - 12) * VGM_GRID_H;
-            w = (COLUMN_W - 10) * VGM_GRID_W;
-            h = 10 * VGM_GRID_H;
+            h = (DISPLAY_H - 7) * VGM_GRID_H;
+            class Controls
+            {
+                class AbilityDescription: VGM_ctrlStructuredText
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_ABILITYDESCRIPTION;
+                    text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+                    stackFill = 1;
+                    x = 1 * VGM_GRID_W;
+                    w = _W * VGM_GRID_W;
+                };
+                class Row: ctrlControlsGroupNoScrollbars
+                {
+                    x = 1 * VGM_GRID_W;
+                    w = _W * VGM_GRID_W;
+                    h = 10 * VGM_GRID_H;
+                    class Controls
+                    {
+                        class AbilityCategory: VGM_ctrlStructuredText
+                        {
+                            idc = VGM_IDC_DISPLAYABILITIES_ABILITYCATEGORY;
+                            text = "Service Essentials Ability";
+                            x = 0;
+                            y = 0;
+                            w = (_W - 10) * VGM_GRID_W;
+                            h = 5 * VGM_GRID_H;
+                        };
+                        class AbilityCooldown: AbilityCategory
+                        {
+                            idc = VGM_IDC_DISPLAYABILITIES_ABILITYCOOLDOWN;
+                            text = "X second cooldown";
+                            y = 5 * VGM_GRID_H;
+                        };
+                        class AbilityIconFrame: VGM_ctrlFrame
+                        {
+                            frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYICON;
+                            frameColor[] = {1,1,1,1};
+                        };
+                        class AbilityIcon: VGM_ctrlStaticPicture
+                        {
+                            idc = VGM_IDC_DISPLAYABILITIES_ABILITYICON;
+                            text = "#(rgb,1,1,1)color(0,1,0,1)";
+                            x = (_W - 10) * VGM_GRID_W;
+                            y = 0.5 * VGM_GRID_H;
+                            w = 9 * VGM_GRID_W;
+                            h = 9 * VGM_GRID_H;
+                        };
+                    };
+                };
+                class _Spacer: VGM_ctrlStatic
+                {
+                    x = 0;
+                    y = 0;
+                    w = 0;
+                    h = 0.5 * VGM_GRID_H;
+                };
+                class AbilityImageFrame: VGM_ctrlFrame
+                {
+                    frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYIMAGE;
+                    frameColor[] = {1,1,1,1};
+                    stackDisable = 1;
+                };
+                class AbilityImage: VGM_ctrlStaticPicture
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_ABILITYIMAGE;
+                    text = "#(rgb,1,1,1)color(0,1,0,1)";
+                    x = 1.5 * VGM_GRID_W;
+                    w = (_W - 1) * VGM_GRID_W;
+                    h = ((9/16) * _W - 1) * VGM_GRID_H;
+                };
+                class _Spacer1: _Spacer
+                {
+                };
+                class AbilityEquipFrame: AbilityImageFrame
+                {
+                    frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
+                };
+                class AbilityEquip: VGM_ctrlButton
+                {
+                    idc = VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
+                    text = "Equip";
+                    x = (0.25 * _W + 0.5) * VGM_GRID_W;
+                    w = (0.5 * _W - 1) * VGM_GRID_W;
+                    h = 9 * VGM_GRID_H;
+                };
+                class _Spacer2: _Spacer
+                {
+                };
+            };
         };
     };
 };

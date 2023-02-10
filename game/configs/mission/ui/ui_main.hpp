@@ -1,4 +1,5 @@
 #include "inc\macros.inc"
+#include "\a3\3den\UI\macroExecs.inc"
 #include "inc\macroExecs.inc"
 #include "controls.hpp"
 
@@ -6,3 +7,4 @@
 #include "VGM_DisplayAbilities.hpp"
 #include "VGM_DisplayMissions.hpp"
 #include "VGM_DisplayMissionsTargets.hpp"
+#include "VGM_DisplayTest.hpp"
