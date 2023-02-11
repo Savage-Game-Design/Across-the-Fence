@@ -1,6 +1,6 @@
 /*
     File: fn_respawn_findSafeSpawnPositionNearTeam.sqf
-    Author: Savage Game Design
+    Author: Savage Game Design, Xorberax
     Public: Yes
 
     Description:
@@ -30,22 +30,22 @@ params [
 ];
 
 if (isNull _unit) exitWith {
-    ["Expected _unit to be defined. Received _unit: %1", _unit] call BIS_fnc_error;
+    ["ERROR", format ["Expected _unit to be defined. Received _unit: %1", _unit]] call para_g_fnc_log;
 };
 if (!(_unit isKindOf "CAManBase")) exitWith {
-    ["Expected _unit to be of type CAManBase. Received typeOf _unit: %1", typeOf _unit] call BIS_fnc_error;
+    ["ERROR", format ["Expected _unit to be of type CAManBase. Received typeOf _unit: %1", typeOf _unit]] call para_g_fnc_log;
 };
 if (_minDistanceFromTeam < 0) exitWith {
-    ["Expected _minDistanceFromTeam to be greater than 0. Received _minDistanceFromTeam: %1", _minDistanceFromTeam] call BIS_fnc_error;
+    ["ERROR", format ["Expected _minDistanceFromTeam to be greater than 0. Received _minDistanceFromTeam: %1", _minDistanceFromTeam]] call para_g_fnc_log;
 };
 if (_maxDistanceFromTeam < 0) exitWith {
-    ["Expected _maxDistanceFromTeam to be greater than 0. Received _maxDistanceFromTeam: %1", _maxDistanceFromTeam] call BIS_fnc_error;
+    ["ERROR", format ["Expected _maxDistanceFromTeam to be greater than 0. Received _maxDistanceFromTeam: %1", _maxDistanceFromTeam]] call para_g_fnc_log;
 };
 if (_maxDistanceFromTeam <= _minDistanceFromTeam) exitWith {
-    ["Expected _maxDistanceFromTeam to be greater than or equal to _minDistanceFromTeam. Received _minDistanceFromTeam: %1, _maxDistanceFromTeam: %2", _minDistanceFromTeam, _maxDistanceFromTeam] call BIS_fnc_error;
+    ["ERROR", format ["Expected _maxDistanceFromTeam to be greater than or equal to _minDistanceFromTeam. Received _minDistanceFromTeam: %1, _maxDistanceFromTeam: %2", _minDistanceFromTeam, _maxDistanceFromTeam]] call para_g_fnc_log;
 };
 if (_enemyAvoidanceDistance < 0) exitWith {
-    ["Expected _enemyAvoidanceDistance to be greater than 0. Received _enemyAvoidanceDistance: %1", _enemyAvoidanceDistance] call BIS_fnc_error;
+    ["ERROR", format ["Expected _enemyAvoidanceDistance to be greater than 0. Received _enemyAvoidanceDistance: %1", _enemyAvoidanceDistance]] call para_g_fnc_log;
 };
 
 private _safeSpawnPosition = call VGM_s_fnc_respawn_getInitialSpawnPointMarkerPosition; // fallback spawn position if a safe one can't be found near teammates
