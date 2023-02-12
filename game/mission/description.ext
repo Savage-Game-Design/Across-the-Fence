@@ -52,6 +52,8 @@ enableDebugConsole[] = {
     "76561197974575839",
     //Aceb
     "76561198022706949",
+    //Xorberax
+    "76561198008065973",
 };
 
 allowFunctionsLog = 1;
