@@ -13,12 +13,7 @@ class Header
     maxPlayers = 24;
 };
 
-respawn = "BASE";
-respawnDelay = 20;
-respawnDialog = 0;
-respawnButton = 1;
-respawnOnStart = -1;
-respawnTemplates[] = { "MenuPosition" };
+#include "respawn.hpp"
 
 onPauseScript = "";
 

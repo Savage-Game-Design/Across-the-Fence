@@ -38,7 +38,8 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\respawn\server);
 
-        class respawn_findSafeSpawnPositionNearTeam {};
-        class respawn_getInitialSpawnPointMarkerPosition {};
+        class respawn_onPlayerRespawn {};
+        class respawn_findSafeSpawnTransformNearTeam {};
+        class respawn_getInitialSpawnPointMarkerTransform {};
     }
 };
