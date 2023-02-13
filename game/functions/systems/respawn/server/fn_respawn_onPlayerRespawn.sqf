@@ -7,10 +7,10 @@
         Handles player respawn behavior.
 
     Parameter(s):
-        _newUnit: Object
-        _oldUnit: Object
-        _respawnType: Number
-        _respawnDelay: Number
+        _newUnit [OBJECT]
+        _oldUnit [OBJECT]
+        _respawnType [NUMBER]
+        _respawnDelay [NUMBER]
 
     Returns:
         NONE

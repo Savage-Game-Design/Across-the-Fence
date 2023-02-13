@@ -240,6 +240,7 @@ class para_g
 		class parse_pos_config {};
 		class vehicle_will_collide_at_pos {};
 		class unit_is_incapacitated {};
+        class get_group_majority_position {};
 	};
 	class tools
 	{
