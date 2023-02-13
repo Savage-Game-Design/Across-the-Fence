@@ -43,7 +43,7 @@ if (count _memberCountToMembers == 0) exitWith {
 };
 
 private _majorityUnits = _memberCountToMembers get (selectMax (keys _memberCountToMembers));
-private _positionSum = [0, 0];
+private _positionSum = [0, 0, 0];
 private _unitCountSum = 0;
 {
     private _unit = _x;
