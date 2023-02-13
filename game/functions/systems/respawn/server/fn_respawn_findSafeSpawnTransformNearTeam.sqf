@@ -20,7 +20,7 @@
         ]
 
     Example(s):
-        _safeSpawnTransform = [_unit, 100, 200, 100] call vgm_s_fnc_respawn_findSafeSpawnTransformNearTeam;
+        _safeSpawnTransform = [_unit, 300, 500, 100] call vgm_s_fnc_respawn_findSafeSpawnTransformNearTeam;
 */
 
 #define MAX_SEARCH_ATTEMPTS 5
@@ -52,23 +52,22 @@ if (_enemyAvoidanceDistance < 0) exitWith {
 };
 
 private _safeSpawnTransform = call vgm_s_fnc_respawn_getInitialSpawnPointMarkerTransform; // fallback spawn position if a safe one can't be found near teammates
-private _eligbleUnitsInGroup = (units (group _unit)) select { alive _x && _x != _unit }; // TODO: check for downed state
-if (count _eligbleUnitsInGroup == 0) exitWith {
+private _groupPositionAGL = [group _unit, { alive _this }] call para_g_fnc_get_group_majority_position;
+if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith {
     _safeSpawnTransform;
 };
 
 private _enemySides = ([side _unit] call BIS_fnc_enemySides) createHashMapFromArray [];
-private _targetUnit = selectRandom _eligbleUnitsInGroup;
-private _targetUnitPositionASL = getPosASL _targetUnit;
+_groupPositionASL = AGLToASL _groupPositionAGL;
 
 for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
-    private _safePosition = [_targetUnitPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
+    private _safePosition = [_groupPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
     if (!(_safePosition isEqualTo [0, 0])) then {
         _safePosition = AGLToASL [_safePosition#0, _safePosition#1, 0];
         private _totalNearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
         private _totalNearbyFriendlies = { !(side _x in _enemySides) } count (_safePosition nearEntities ["AllVehicles", _minDistanceFromTeam]);
         if (_totalNearbyEnemies == 0 && _totalNearbyFriendlies == 0) then { // TODO: line of sight checks with enemies and unit's group
-            _safeSpawnTransform = [_safePosition, _safePosition getDir _targetUnitPositionASL];
+            _safeSpawnTransform = [_safePosition, _safePosition getDir _groupPositionASL];
             break;
         };
     }
