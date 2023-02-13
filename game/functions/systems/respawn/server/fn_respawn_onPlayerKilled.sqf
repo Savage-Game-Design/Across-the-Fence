@@ -1,0 +1,25 @@
+/*
+    File: fn_respawn_onPlayerKilled.sqf
+    Author: Savage Game Design, Xorberax
+    Public: Yes
+
+    Description:
+        Handles the player killed behavior.
+
+    Parameter(s):
+        _oldUnit [OBJECT]
+        _killer [OBJECT]
+        _respawnType [NUMBER]
+        _respawnDelay [NUMBER]
+
+    Returns:
+        NONE
+
+    Example(s):
+        See `CfgRespawnTemplates/vgm_respawn`.
+*/
+
+params ["_oldUnit", "_killer", "_respawnType", "_respawnDelay"];
+
+sleep 1;
+[0, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;

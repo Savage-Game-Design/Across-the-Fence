@@ -38,6 +38,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\respawn\server);
 
+        class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
         class respawn_findSafeSpawnTransformNearTeam {};
         class respawn_getInitialSpawnPointMarkerTransform {};

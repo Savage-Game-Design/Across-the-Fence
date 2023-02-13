@@ -4,7 +4,7 @@
     Public: Yes
 
     Description:
-        Handles player respawn behavior.
+        Handles the player respawn behavior.
 
     Parameter(s):
         _newUnit [OBJECT]
@@ -24,3 +24,6 @@ params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
 _safeSpawnTransform = [_newUnit, 300, 500, 100] call vgm_s_fnc_respawn_findSafeSpawnTransformNearTeam;
 _newUnit setPosASL _safeSpawnTransform#0;
 _newUnit setDir _safeSpawnTransform#1;
+
+sleep 3;
+[1, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
