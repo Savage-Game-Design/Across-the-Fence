@@ -1,7 +1,7 @@
 /*
     File: fn_respawn_onPlayerKilled.sqf
     Author: Savage Game Design, Xorberax
-    Public: Yes
+    Public: No
 
     Description:
         Handles the player killed behavior.

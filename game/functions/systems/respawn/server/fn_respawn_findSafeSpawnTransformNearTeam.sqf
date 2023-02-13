@@ -1,7 +1,7 @@
 /*
     File: fn_respawn_findSafeSpawnTransformNearTeam.sqf
     Author: Savage Game Design, Xorberax
-    Public: Yes
+    Public: No
 
     Description:
         Finds a safe spawn transform for a unit, around a random team member, between a specified distance, avoiding enemies and water.

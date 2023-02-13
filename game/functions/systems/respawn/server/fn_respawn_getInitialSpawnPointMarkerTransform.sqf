@@ -1,7 +1,7 @@
 /*
     File: fn_respawn_getInitialSpawnPointMarkerTransform.sqf
     Author: Savage Game Design, Xorberax
-    Public: Yes
+    Public: No
 
     Description:
         Gets the transform of the marker named "initial_spawn_point".
