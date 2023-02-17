@@ -29,27 +29,29 @@ if (isNull _group) exitWith {
 };
 
 private _unitsInGroup = units _group;
-private _memberCountToMembers = createHashMap;
+private _largestUnitGrouping = [];
+private _totalUnitsInLargestUnitGrouping = 0;
 {
     private _unit = _x;
-    private _nearGroupMembers = (_unitsInGroup inAreaArray  [getPos _unit, LONEWOLF_DISTANCE, LONEWOLF_DISTANCE]) select { _x call _groupMemberPredicate };
-    if (count (_nearGroupMembers select { _x != _unit }) > 0) then {
-        _memberCountToMembers set [count _nearGroupMembers, _nearGroupMembers];
+    private _nearbyGroupMembers = (_unitsInGroup inAreaArray  [getPos _unit, LONEWOLF_DISTANCE, LONEWOLF_DISTANCE]) select { _x call _groupMemberPredicate };
+    private _totalNearbyGroupMembers = count _nearbyGroupMembers;
+    if (_totalNearbyGroupMembers > _totalUnitsInLargestUnitGrouping) then {
+        _largestUnitGrouping = _nearbyGroupMembers;
+        _totalUnitsInLargestUnitGrouping = _totalNearbyGroupMembers;
     };
 } forEach _unitsInGroup;
 
-if (count _memberCountToMembers == 0) exitWith {
+if (_totalUnitsInLargestUnitGrouping == 0) exitWith {
     [0, 0, 0];
 };
 
-private _majorityUnits = _memberCountToMembers get (selectMax (keys _memberCountToMembers));
 private _positionSum = [0, 0, 0];
 private _unitCountSum = 0;
 {
     private _unit = _x;
     private _unitPosition = getPos _unit;
-    _positionSum = _positionSum vectorAdd [_unitPosition#0, _unitPosition#1, 0];
+    _positionSum = _positionSum vectorAdd [_unitPosition#0, _unitPosition#1];
     _unitCountSum = _unitCountSum + 1;
-} forEach _majorityUnits;
+} forEach _largestUnitGrouping;
 
 _positionSum vectorMultiply (1 / _unitCountSum);
