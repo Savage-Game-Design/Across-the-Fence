@@ -8,7 +8,7 @@
 
     Parameter(s):
         _group - The group to get the average position of [GROUP]
-        _groupMemberPredicate - The condition that must be satisfied to count as a nearby group member [CODE]. Optional.
+        _groupMemberPredicate - The condition that must be satisfied to count as a nearby group member. [CODE]. Optional.
     Returns:
         Average position of group or [0, 0, 0] if undetermined [PositionAGL]
 
@@ -32,7 +32,7 @@ private _unitsInGroup = units _group;
 private _memberCountToMembers = createHashMap;
 {
     private _unit = _x;
-    private _nearGroupMembers = (_unit nearEntities ["AllVehicles", LONEWOLF_DISTANCE]) select { group _x == _group && _x call _groupMemberPredicate};
+    private _nearGroupMembers = (_unitsInGroup inAreaArray  [getPos _unit, LONEWOLF_DISTANCE, LONEWOLF_DISTANCE]) select { _x call _groupMemberPredicate };
     if (count (_nearGroupMembers select { _x != _unit }) > 0) then {
         _memberCountToMembers set [count _nearGroupMembers, _nearGroupMembers];
     };
