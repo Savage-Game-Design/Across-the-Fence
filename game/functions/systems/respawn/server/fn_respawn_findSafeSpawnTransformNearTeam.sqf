@@ -52,7 +52,15 @@ if (_enemyAvoidanceDistance < 0) exitWith {
 };
 
 private _safeSpawnTransform = call vgm_s_fnc_respawn_getInitialSpawnPointMarkerTransform; // fallback spawn position if a safe one can't be found near teammates
-private _groupPositionAGL = [group _unit, { alive _this }] call para_g_fnc_get_group_majority_position;
+private _groupPositionAGL = [
+    group _unit,
+    {
+        params ["_unit", "_args"];
+        _args params ["_unitToRespawn"];
+        alive _unit && _unit != _unitToRespawn;
+    },
+    [_unit]
+] call para_g_fnc_get_group_majority_position;
 if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith {
     _safeSpawnTransform;
 };
