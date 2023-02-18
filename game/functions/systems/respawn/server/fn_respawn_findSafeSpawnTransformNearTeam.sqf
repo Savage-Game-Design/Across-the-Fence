@@ -66,7 +66,7 @@ if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith {
 };
 
 private _enemySides = ([side _unit] call BIS_fnc_enemySides) createHashMapFromArray [];
-_groupPositionASL = AGLToASL _groupPositionAGL;
+private _groupPositionASL = AGLToASL _groupPositionAGL;
 
 for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
     private _safePosition = [_groupPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
