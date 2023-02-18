@@ -41,6 +41,6 @@ class vgm_s
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
         class respawn_findSafeSpawnTransformNearTeam {};
-        class respawn_getInitialSpawnPointMarkerTransform {};
+        class respawn_findFallbackSpawnTransform {};
     }
 };

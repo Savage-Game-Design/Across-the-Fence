@@ -51,7 +51,7 @@ if (_enemyAvoidanceDistance < 0) exitWith {
     ["ERROR", format ["Expected _enemyAvoidanceDistance to be greater than 0. Received _enemyAvoidanceDistance: %1", _enemyAvoidanceDistance]] call para_g_fnc_log;
 };
 
-private _safeSpawnTransform = call vgm_s_fnc_respawn_getInitialSpawnPointMarkerTransform; // fallback spawn position if a safe one can't be found near teammates
+private _safeSpawnTransform = [_unit, _minDistanceFromTeam, _maxDistanceFromTeam, _minDistanceFromTeam, _maxDistanceFromTeam] call vgm_s_fnc_respawn_findFallbackSpawnTransform;
 private _unitGroup = group _unit;
 private _groupPositionAGL = [
     _unitGroup,
@@ -62,7 +62,8 @@ private _groupPositionAGL = [
     },
     [_unit]
 ] call para_g_fnc_get_group_majority_position;
-if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith {
+
+if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith { // couldn't determine group position (maybe they're all dead?), use fallback spawn transform
     _safeSpawnTransform;
 };
 
