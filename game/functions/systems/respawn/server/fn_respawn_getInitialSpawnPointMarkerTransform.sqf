@@ -23,7 +23,7 @@
 
 private _markerPositionASL = AGLToASL (getMarkerPos MARKER_NAME);
 if (_markerPositionASL isEqualTo [0, 0, 0]) exitWith {
-    private _errorMessage = format ["%1 is undefined! The mission author must place a marker in the mission named ""%1"" to give players a fallback position to respawn at.", MARKER_NAME];
+    private _errorMessage = format ["MISSION CONFIGURATION ERROR: %1 marker is undefined! The mission author must place a marker named ""%1"" to give players a fallback position to respawn at (see vgm_s_fnc_respawn_getInitialSpawnPointMarkerTransform).", MARKER_NAME];
     ["ERROR", _errorMessage] call para_g_fnc_log;
     systemChat _errorMessage;
     hint _errorMessage;
