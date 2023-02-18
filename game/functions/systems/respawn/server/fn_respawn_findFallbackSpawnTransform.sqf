@@ -63,7 +63,7 @@ if (isNil { _fallbackSpawnUnitPositionASL }) then { // no teammates to choose fr
 };
 
 private _fallbackSpawnPositionASL = AGLToASL (([_fallbackSpawnUnitPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos) vectorAdd [0, 0, 0]);
-if (_fallbackSpawnPositionASL isEqualTo [0, 0, 0]) exitWith { // worst case scenario: can't find a safe position near the team or self, so just use _unit's current position
+if (_fallbackSpawnPositionASL isEqualTo [0, 0, 0]) exitWith { // worst case scenario: can't find a safe position near the team or self, so just use _unit's current transform
     [
         getPosASL _unit,
         getDir _unit
