@@ -23,6 +23,11 @@
 
 private _markerPositionASL = AGLToASL (getMarkerPos MARKER_NAME);
 if (_markerPositionASL isEqualTo [0, 0, 0]) exitWith {
-    [getPosASL player, direction player]; // TODO: remove before merge -- this is only for testing!!!
+    private _errorMessage = format ["%1 is undefined! The mission author must place a marker in the mission named ""%1"" to give players a fallback position to respawn at.", MARKER_NAME];
+    ["ERROR", _errorMessage] call para_g_fnc_log;
+    systemChat _errorMessage;
+    hint _errorMessage;
+
+    [getPosASL player, direction player];
 };
 [_markerPositionASL, markerDir MARKER_NAME];
