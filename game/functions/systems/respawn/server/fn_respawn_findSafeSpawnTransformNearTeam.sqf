@@ -52,8 +52,9 @@ if (_enemyAvoidanceDistance < 0) exitWith {
 };
 
 private _safeSpawnTransform = call vgm_s_fnc_respawn_getInitialSpawnPointMarkerTransform; // fallback spawn position if a safe one can't be found near teammates
+private _unitGroup = group _unit;
 private _groupPositionAGL = [
-    group _unit,
+    _unitGroup,
     {
         params ["_unit", "_args"];
         _args params ["_unitToRespawn"];
@@ -73,7 +74,7 @@ for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
     if (!(_safePosition isEqualTo [0, 0])) then {
         _safePosition = AGLToASL [_safePosition#0, _safePosition#1, 0];
         private _totalNearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
-        private _totalNearbyFriendlies = { !(side _x in _enemySides) } count (_safePosition nearEntities ["AllVehicles", _minDistanceFromTeam]);
+        private _totalNearbyFriendlies = count ((units _unitGroup) inAreaArray [_safePosition, _minDistanceFromTeam, _minDistanceFromTeam]);
         if (_totalNearbyEnemies == 0 && _totalNearbyFriendlies == 0) then { // TODO: line of sight checks with enemies and unit's group
             _safeSpawnTransform = [_safePosition, _safePosition getDir _groupPositionASL];
             break;
