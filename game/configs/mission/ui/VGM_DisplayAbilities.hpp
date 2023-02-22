@@ -121,7 +121,7 @@ class VGM_DisplayAbilities
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_NAME;
                     text = "Mobility Kill";
-                    size = VGM_FONT_L * VGM_GRID_H;
+                    size = VGM_FONT_M;
                     x = 1 * VGM_GRID_W;
                     w = _W * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;
@@ -137,7 +137,7 @@ class VGM_DisplayAbilities
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_CATEGORY;
                     text = "Light Anti-Tank Ability";
-                    size = VGM_FONT_M * VGM_GRID_H;
+                    size = VGM_FONT_M;
                     stackOffset = 0;
                     h = 5 * VGM_GRID_H;
                 };

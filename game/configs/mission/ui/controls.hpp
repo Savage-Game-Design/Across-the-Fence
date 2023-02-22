@@ -46,7 +46,7 @@ class VGM_ctrlStructuredText : ctrlStructuredText
 #ifdef __A3_DEBUG__
     // colorBackground[] = {1,0,0,0.2};
 #endif
-    size = VGM_FONT_M * VGM_GRID_H;
+    size = VGM_FONT_M;
     shadow = 0;
     class Attributes
     {
@@ -61,7 +61,7 @@ class VGM_ctrlStructuredText : ctrlStructuredText
 class VGM_ctrlTitle: VGM_ctrlStructuredText
 {
     colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
-    size = VGM_FONT_L * VGM_GRID_H;
+    size = VGM_FONT_M;
     class Attributes
     {
         font = VGM_FONT;
@@ -81,7 +81,7 @@ class VGM_ctrlTree: ctrlTree
     hiddenTexture = "";
     expandedTexture = "";
     font = VGM_FONT;
-    sizeEx = VGM_FONT_M * VGM_GRID_H;
+    sizeEx = VGM_FONT_M;
 };
 
 class VGM_ctrlControlsGroup: ctrlControlsGroup
@@ -133,7 +133,7 @@ class VGM_ctrlButton: ctrlButton
     colorText[] = {VGM_UI_COLOR_TEXT};
     colorBackgroundActive[] = {VGM_UI_COLOR_ACTIVE};
     font = VGM_FONT;
-    sizeEx = VGM_FONT_M * VGM_GRID_H;
+    sizeEx = VGM_FONT_M;
 };
 
 class VGM_ctrlButtonPicture: ctrlButtonPicture
@@ -193,7 +193,7 @@ class VGM_ctrlMap: ctrlMap
 
 class VGM_ctrlXListBox: ctrlXListbox
 {
-    sizeEx = VGM_FONT_M * VGM_GRID_H;
+    sizeEx = VGM_FONT_M;
     font = VGM_FONT;
 };
 
@@ -233,7 +233,7 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
     x = 0.25 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
     y = 0;
     w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-    h = (VGM_FONT_L + 2) * VGM_GRID_H;
+    h = (5 + 2) * VGM_GRID_H;
     class Controls
     {
         class Background: VGM_ctrlStatic
@@ -241,7 +241,7 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
             x = 0;
             y = 0;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = (VGM_FONT_L + 2) * VGM_GRID_H;
+            h = (5 + 2) * VGM_GRID_H;
             colorBackground[] = {0.7,0.7,0.7,1};
         };
         class BackgroundMiddle: VGM_ctrlStatic
@@ -249,7 +249,7 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
             x = 0;
             y = 1 * VGM_GRID_H;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = VGM_FONT_L * VGM_GRID_H;
+            h = 5 * VGM_GRID_H;
             colorBackground[] = {0.8,0.8,0.8,1};
         };
         class Name: VGM_ctrlStructuredText
@@ -258,8 +258,8 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
             x = 0;
             y = 1 * VGM_GRID_H;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = VGM_FONT_L * VGM_GRID_H;
-            size = VGM_FONT_L * VGM_GRID_H;
+            h = 5 * VGM_GRID_H;
+            size = VGM_FONT_L;
             class Attributes
             {
                 font = VGM_FONT;
@@ -366,7 +366,7 @@ class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlCon
         {
             idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_TEXT;
             text = "Generate a Recon mission in targetBoxName?";
-            size = VGM_FONT_L * VGM_GRID_H;
+            size = VGM_FONT_L;
             x = _MESSAGE_X + 1 * VGM_GRID_W;
             y = VGM_Y(_MESSAGE_Y);
             w = (_MESSAGE_W - 2) * VGM_GRID_W;
@@ -439,7 +439,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = VGM_Y_H(5);
-                    size = 5 * VGM_GRID_H;
+                    size = VGM_FONT_L;
                     class Attributes
                     {
                         font = VGM_FONT;
@@ -453,7 +453,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                 {
                     idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_OPERATIONNAME;
                     text = "Operation generatedName";
-                    size = VGM_FONT_L * VGM_GRID_H;
+                    size = VGM_FONT_L;
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = VGM_Y_H(5);
@@ -462,7 +462,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                 {
                     idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_DESCRIPTION;
                     text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-                    size = VGM_FONT_M * VGM_GRID_H;
+                    size = VGM_FONT_M;
                     h = VGM_Y_H(20);
                     stackFill = 1;
                 };
@@ -568,7 +568,7 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                 class Title: VGM_ctrlStructuredText
                 {
                     text = "Select a Primary Objective for the Mission";
-                    size = VGM_FONT_L * VGM_GRID_H;
+                    size = VGM_FONT_L;
                     x = _X2;
                     w = _W2 * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;

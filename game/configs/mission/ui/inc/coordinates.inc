@@ -43,8 +43,3 @@
 #define VGM_DISPLAYMISSIONS_X (CENTER_X - 0.5 * VGM_DISPLAYMISSIONS_W * VGM_GRID_W)
 #define VGM_DISPLAYMISSIONS_Y (CENTER_Y - 0.5 * VGM_DISPLAYMISSIONS_H * VGM_GRID_H)
 
-// Font heights used for size and sizeEx attributes
-#define VGM_FONT_M 4 // Default size
-#define VGM_FONT_L 5
-#define VGM_FONT_XL 6
-
