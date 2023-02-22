@@ -55,12 +55,14 @@ private _safeSpawnTransform = [_unit, _minDistanceFromTeam, _maxDistanceFromTeam
 private _unitGroup = group _unit;
 private _groupPositionAGL = [
     _unitGroup,
-    {
-        params ["_unit", "_args"];
-        _args params ["_unitToRespawn"];
-        alive _unit && _unit != _unitToRespawn;
-    },
-    [_unit]
+    [
+        [_unit],
+        {
+            params ["_unit", "_args"];
+            _args params ["_unitToRespawn"];
+            alive _unit && _unit != _unitToRespawn;
+        }
+    ]
 ] call para_g_fnc_get_group_majority_position;
 
 if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith { // couldn't determine group position (maybe they're all dead?), use fallback spawn transform
