@@ -43,9 +43,6 @@ call para_g_fnc_event_subsystem_init;
 call vgm_c_fnc_init_loading_text;
 
 
-private _respawnDelay = ["respawn_delay", 20] call BIS_fnc_getParamValue;
-setplayerrespawntime _respawnDelay;
-
 // Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
 if (!isServer) then {
     call para_g_fnc_ai_create_behaviour_execution_loop;
