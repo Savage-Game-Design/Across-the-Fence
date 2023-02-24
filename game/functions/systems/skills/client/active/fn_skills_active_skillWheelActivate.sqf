@@ -2,7 +2,7 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2023-02-01
+    Last Update: 2023-02-24
     Public: No
 
     Description:
@@ -26,5 +26,5 @@ if (_slot call vgm_c_fnc_skills_active_isSlotOnCooldown) exitWith {
 };
 
 player call (_skill get "codeActivate");
-private _cooldown = time + ([30, 60] select (_skill get "isUltimate"));
+private _cooldown = time + (_skill get "cooldown");
 _slot set ["cooldown", _cooldown];
