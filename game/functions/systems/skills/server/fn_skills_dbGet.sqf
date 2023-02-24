@@ -2,7 +2,7 @@
     File: fn_skills_dbGet.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-01-27
+    Last Update: 2023-02-24
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ if (isNil "_hash") then {
     _player setVariable ["vgm_g_skillsData", _hash];
 };
 
-_hash getOrDefault ["skillPoints" , 0, true];
-_hash getOrDefault ["skillPaths" , [], true];
+_hash set ["skillPoints" , 0, true];
+_hash set ["skillPaths" , [], true];
 
 _hash // return

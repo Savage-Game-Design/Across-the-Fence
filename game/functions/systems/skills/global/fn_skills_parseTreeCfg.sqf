@@ -54,7 +54,8 @@ private _fnc_parseSkillTree = {
                 ["conditionUnlock", compileFinal getText (_x >> "conditionUnlock")],
                 ["conditionShow", compileFinal getText (_x >> "conditionShow")],
                 ["codeApply", compileFinal getText (_x >> "codeApply")],
-                ["codeActivate", compileFinal getText (_x >> "codeActivate")]
+                ["codeActivate", compileFinal getText (_x >> "codeActivate")],
+                ["codeDeactivate", compileFinal getText (_x >> "codeDeactivate")]
             ];
         };
 
