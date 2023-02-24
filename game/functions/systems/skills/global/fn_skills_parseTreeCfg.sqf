@@ -43,7 +43,6 @@ private _fnc_parseSkillTree = {
             createHashMapFromArray [
                 ["path", _path + [configName _x]],
                 ["tier", _tier],
-                ["cost", 1],
                 ["displayName", getText (_x >> "displayName")],
                 ["description", getText (_x >> "description")],
                 ["icon", getText (_x >> "icon")],
@@ -51,6 +50,7 @@ private _fnc_parseSkillTree = {
                 ["isUltimate", getNumber (_x >> "isActive") > 1],
                 ["applyOnRespawn", getNumber (_x >> "applyOnRespawn") > 0],
                 ["cooldown", getNumber (_x >> "cooldown")],
+                ["cost", getNumber (_x >> "cost")],
                 ["conditionUnlock", compileFinal getText (_x >> "conditionUnlock")],
                 ["conditionShow", compileFinal getText (_x >> "conditionShow")],
                 ["codeApply", compileFinal getText (_x >> "codeApply")],

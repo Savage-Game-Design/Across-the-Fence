@@ -8,6 +8,7 @@ class vgm_skillTemplate {
     isActive = 0; // 1 - primary skill, 2 - ultimate skill
     applyOnRespawn = 0;
 
+    cost = 1;
     cooldown = 10;
 
     conditionUnlock = "true";
@@ -56,7 +57,9 @@ class vgm_skillTrees {
                     description = "POWER OF THE GODS!";
                     isActive = 2;
 
+                    cost = 2;
                     cooldown = 30;
+
                     codeApply = "hint 'boom'";
                 };
             };

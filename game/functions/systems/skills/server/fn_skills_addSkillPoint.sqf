@@ -21,7 +21,7 @@
 
 params ["_player", ["_amount", 1]];
 
-["INFO", format ["VGM: Adding skill point to %1 (%2)", name _player, getPlayerUID _player]] call para_g_fnc_log;
+["INFO", format ["VGM: Adding skill %3 points to %1 (%2)", name _player, getPlayerUID _player, _amount]] call para_g_fnc_log;
 
 private _skillsData = _player call vgm_s_fnc_skills_dbGet;
 private _skillPoints = _skillsData get "skillPoints";
