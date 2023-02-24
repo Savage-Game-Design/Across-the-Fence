@@ -12,7 +12,7 @@
         _player - Player to get the skill data for [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Player skills data [HASHMAP]
 
     Example(s):
         _player call vgm_s_fnc_skills_dbGet
@@ -20,13 +20,13 @@
 
 params ["_player"];
 
-private _hash = _player getVariable "vgm_g_skillsData";
-if (isNil "_hash") then {
-    _hash = ["player_skills", getPlayerUID _player] call vgm_s_fnc_db_get;
-    _player setVariable ["vgm_g_skillsData", _hash];
+private _hashMap = _player getVariable "vgm_g_skillsData";
+if (isNil "_hashMap") then {
+    _hashMap = ["player_skills", getPlayerUID _player] call vgm_s_fnc_db_get;
+    _player setVariable ["vgm_g_skillsData", _hashMap];
 };
 
-_hash set ["skillPoints" , 0, true];
-_hash set ["skillPaths" , [], true];
+_hashMap set ["skillPoints" , 0, true];
+_hashMap set ["skillPaths" , [], true];
 
-_hash // return
+_hashMap // return
