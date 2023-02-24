@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author:
     Date: 2023-01-27
-    Last Update: 2023-01-27
+    Last Update: 2023-02-24
     Public: No
 
     Description:
@@ -23,22 +23,19 @@ private _canLearn = [_player, _skill] call vgm_g_fnc_skills_canLearn;
 if (!_canLearn) exitWith {
     ["WARNING", format ["VGM: Discarding learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
 
-    // send updated skills data to the client
-    [_canLearn, nil, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
+    // inform the player that he failed to learn the skill
+    [_canLearn, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
 };
 
 
-["SUCCESS", format ["VGM: Handling learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
-
-// add skill path to known skills
-private _skillsData = _player call vgm_s_fnc_skills_dbGet;
-_skillsData get "skillPaths" pushBackUnique _skillPath;
+["INFO", format ["VGM: Handling learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
 
 // decrease amount of skill points
+private _skillsData = _player call vgm_s_fnc_skills_dbGet;
 private _skillPoints = _skillsData get "skillPoints";
 _skillsData set ["skillPoints", _skillPoints - 1];
 
-[_player, _skillsData] call vgm_s_fnc_skills_dbSave;
+[_player, _skillPath] call vgm_s_fnc_skills_teachSkill;
 
-// send updated skills data to the client
-[_canLearn, _skillsData, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
+// inform the player that he succeded to learn the skill
+[_canLearn, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];

@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillLearn.sqf
     Author:
     Date: 2023-01-27
-    Last Update: 2023-01-30
+    Last Update: 2023-02-24
     Public: No
 
     Description:
@@ -10,7 +10,6 @@
 
     Parameter(s):
         _reuslt - Was the learning successful [BOOL]
-        _skillsData - Skills data hash if learning was successful [HASHMAP]
         _skillPath - Path of the skill that was being learned [HASHMAP]
 
     Returns:
@@ -20,7 +19,7 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_result", "_skillsData", "_skillPath"];
+params ["_result", "_skillPath"];
 
 ["DEBUG", format ["VGM: Received skills learn for %1 with result %2", _skillPath, _result]] call para_g_fnc_log;
 
@@ -33,5 +32,3 @@ if (!_result) exitWith {
 };
 
 hint "Learnt skill";
-
-[_skillsData] call vgm_c_fnc_skills_receiveSkillsData;
