@@ -91,10 +91,7 @@ class vgm_c
         class skills_active_openSkillWheel {};
         class skills_active_skillWheelActivate {};
 
-        class skills_active_preInit
-        {
-            preInit = 1;
-        };
+        class skills_active_init {};
     };
 
     class skills_network

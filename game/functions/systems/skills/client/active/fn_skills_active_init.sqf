@@ -1,21 +1,21 @@
 /*
     File: fn_skills_active_preInit.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-02-01
+    Last Update: 2023-02-24
     Public: No
 
     Description:
-        No description added yet.
+        Initialize active skills framework.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call vgm_c_fnc_skills_active_init
  */
 
 vgm_c_skills_active_list = createHashMap;

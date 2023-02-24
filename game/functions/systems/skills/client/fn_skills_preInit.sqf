@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-01-30
+    Last Update: 2023-02-24
     Public: No
 
     Description:
@@ -27,3 +27,5 @@ vgm_c_skills_applyOnRespawn = createHashMap;
         vgm_c_skills_applyOnRespawn set [_path, _skill]
     };
 }] call para_g_fnc_event_subscribeLocal;
+
+[] call vgm_c_fnc_skills_active_init;
