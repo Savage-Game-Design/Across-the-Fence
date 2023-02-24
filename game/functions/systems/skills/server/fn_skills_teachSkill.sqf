@@ -2,7 +2,7 @@
     File: fn_skills_teachSkill.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-02-02
+    Last Update: 2023-02-24
     Public: Yes
 
     Description:
@@ -10,7 +10,7 @@
 
     Parameter(s):
         _player - Player to give the skill point to [OBJECT]
-        _skillPath - Path to the skill being teched [ARRAY]
+        _skillPath - Path to the skill being taught [ARRAY]
 
     Returns:
         Nothing
