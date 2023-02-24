@@ -30,10 +30,12 @@ if (!_canLearn) exitWith {
 
 ["INFO", format ["VGM: Handling learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
 
+private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
+
 // decrease amount of skill points
 private _skillsData = _player call vgm_s_fnc_skills_dbGet;
 private _skillPoints = _skillsData get "skillPoints";
-_skillsData set ["skillPoints", _skillPoints - 1];
+_skillsData set ["skillPoints", _skillPoints - (_skill get "cost")];
 
 [_player, _skillPath] call vgm_s_fnc_skills_teachSkill;
 
