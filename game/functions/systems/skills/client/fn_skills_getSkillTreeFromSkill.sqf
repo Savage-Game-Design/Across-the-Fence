@@ -6,13 +6,13 @@
     Public: No
 
     Description:
-        No description added yet.
+        Get parent skill from from a skill.
 
     Parameter(s):
-        _skill - Skill hash [HashMap]
+        _skill - Skill hashmap [HASHMAP]
 
     Returns:
-        Skill tree [HashMap]
+        Skill tree [HASHMAP]
 
     Example(s):
         _skill call vgm_c_fnc_skills_getSkillTreeFromSkill
@@ -24,9 +24,9 @@ private _path = +(_skill get "path");
 
 private _item = vgm_skills_treesHashMap get (_path deleteAt 0);
 while {true} do {
-    if (count _path == 1) exitWith {
+    if (count _path <= 1) exitWith {
         _item // return
     };
 
     _item = _item get "subtreesHash" get (_path deleteAt 0);
-};
+} // return
