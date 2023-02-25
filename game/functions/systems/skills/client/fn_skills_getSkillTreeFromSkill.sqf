@@ -2,7 +2,7 @@
     File: fn_skills_getSkillTreeFromSkill.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-01-22
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -22,7 +22,7 @@ params ["_skill"];
 
 private _path = +(_skill get "path");
 
-private _item = vgm_skills_treesHash get (_path deleteAt 0);
+private _item = vgm_skills_treesHashMap get (_path deleteAt 0);
 while {true} do {
     if (count _path == 1) exitWith {
         _item // return

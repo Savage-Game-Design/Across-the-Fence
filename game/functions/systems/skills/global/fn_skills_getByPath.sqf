@@ -2,7 +2,7 @@
     File: fn_skills_getSkillByPath.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-01-30
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -23,4 +23,4 @@ if (_this#0 isEqualType []) then {
     _this = _this#0;
 };
 
-vgm_skills_pathsHash get _this;
+vgm_skills_pathsHashMap get _this;

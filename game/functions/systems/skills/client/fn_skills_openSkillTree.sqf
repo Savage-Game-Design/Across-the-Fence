@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-02-02
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -230,7 +230,7 @@ vgm_c_fnc_skills_ui_skill_onButtonClick = {
 // ensure that we display tabs in config order, hashmaps are unordered
 private _skillTreeClasses = "true" configClasses (missionConfigFile >> "vgm_skillTrees") apply {configName _x};
 
-private _skillTreesHash = missionNamespace getVariable "vgm_skills_treesHash";
+private _skillTreesHash = missionNamespace getVariable "vgm_skills_treesHashMap";
 {
     [_display, _skillTreesHash get _x, _forEachIndex] call _fnc_draw;
 } forEach _skillTreeClasses;

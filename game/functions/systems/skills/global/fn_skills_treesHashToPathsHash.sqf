@@ -2,7 +2,7 @@
     File: fn_skills_treesHashToPathsHash.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-01-22
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         Paths hash [HashMap]
 
     Example(s):
-        [vgm_skills_treesHash] call vgm_g_fnc_skills_treesHashToPathsHash;
+        [vgm_skills_treesHashMap] call vgm_g_fnc_skills_treesHashToPathsHash;
  */
 
 params [
