@@ -29,7 +29,7 @@
             "language": "sqf",
             "template": [
                 "File: <<filename>>",
-                "Author: ",
+                "Author: Savage Game Design",
                 "Date: <<filecreated('YYYY-MM-DD')>>",
                 "Last Update:",
                 "Public: No",
