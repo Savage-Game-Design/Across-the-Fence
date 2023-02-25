@@ -13,9 +13,11 @@ class vgm_skillTemplate {
 
     conditionUnlock = "true";
     conditionShow = "true";
+
     codeApply = "systemChat 'skill applied'";
+    codeUnapply = "systemChat 'skill un-applied'";
+
     codeActivate = "systemChat 'skill activated'";
-    codeDeactivate = "systemChat 'skill deactivated'";
 };
 
 class vgm_skillTrees {
