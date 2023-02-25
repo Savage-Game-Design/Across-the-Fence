@@ -225,6 +225,7 @@ class para_s
 	class remoteExec
 	{
 		PARA_SERVER_PATH(\remoteExec);
+        class remoteExec_validateDirectPlayIdIsRemoteExecOwner {};
 		class remoteExec_jip_obj_stacked {};
 		class remoteExecCall_jip_obj_stacked {};
 	};
