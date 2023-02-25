@@ -2,7 +2,7 @@
     File: fn_skills_addSkillPoint.sqf
     Author:
     Date: 2023-01-27
-    Last Update: 2023-02-24
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -23,7 +23,7 @@ params ["_player", ["_amount", 1]];
 
 ["INFO", format ["VGM: Adding skill %3 points to %1 (%2)", name _player, getPlayerUID _player, _amount]] call para_g_fnc_log;
 
-private _skillsData = _player call vgm_s_fnc_skills_dbGet;
+private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 private _skillPoints = _skillsData get "skillPoints";
 
 _skillsData set ["skillPoints", _skillPoints + _amount];

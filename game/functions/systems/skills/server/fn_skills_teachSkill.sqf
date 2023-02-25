@@ -2,7 +2,7 @@
     File: fn_skills_teachSkill.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-02-24
+    Last Update: 2023-02-25
     Public: Yes
 
     Description:
@@ -22,7 +22,7 @@
 params ["_player", "_skillPath"];
 
 // add skill path to known skills
-private _skillsData = _player call vgm_s_fnc_skills_dbGet;
+private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 _skillsData get "skillPaths" pushBackUnique _skillPath;
 
 [_player, _skillsData] call vgm_s_fnc_skills_dbSave;
