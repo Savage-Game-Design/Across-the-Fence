@@ -22,6 +22,7 @@ if (isServer && !hasInterface) exitWith {};
 
 addMissionEventHandler ["PreloadFinished", {
 	para_c_preload_finished = true;
+    diag_log "Mission preload finished";
 	removeMissionEventHandler ["PreloadFinished", _thisEventHandler];
 }];
 
