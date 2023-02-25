@@ -18,6 +18,7 @@
 if (!hasInterface) exitWith {};
 
 vgm_c_skills_applyOnRespawn = createHashMap;
+vgm_c_skills_knownPathsList = [];
 
 ["vgm_skills_learnt", {
     _this#0 params ["_path", "_skill"];

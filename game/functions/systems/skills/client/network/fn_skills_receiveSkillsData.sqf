@@ -28,6 +28,7 @@ if (isNil "_skillsData") exitWith {
 
 player setVariable ["vgm_g_skillsData", _skillsData];
 
+private _knownSkillPathsList = _skillsData get "skillPaths";
 {
     private _skill = _x call vgm_g_fnc_skills_getByPath;
     if (isNil "_skill") then {
@@ -35,14 +36,14 @@ player setVariable ["vgm_g_skillsData", _skillsData];
         continue;
     };
 
-    if (_skill getOrDefault ["_known", false]) then {
+    if (_x in vgm_c_skills_knownPathsList) then {
         ["DEBUG", format ["VGM: Skill known previously '%1'", _x]] call para_g_fnc_log;
         continue;
     };
 
-    _skill set ["_known", true];
-
     ["DEBUG", format ["VGM: New skill '%1'", _x]] call para_g_fnc_log;
 
+    vgm_c_skills_knownPathsList pushBack _x;
     ["vgm_skills_learnt", [_x, _skill]] call para_g_fnc_event_trigger;
-} forEach (_skillsData get "skillPaths");
+
+} forEach _knownSkillPathsList;
