@@ -1,5 +1,5 @@
 /*
-    File: fn_trstate_setLocal.sqf
+    File: fn_trackedState_setLocal.sqf
     Author: Savage Game Design
     Date: 2023-02-09
     Last Update: 2023-02-25
@@ -16,12 +16,12 @@
         Nothing
 
     Example(s):
-        ["Local_GamemodeStage", "Starting"] call para_g_fnc_trstate_setLocal;
+        ["Local_GamemodeStage", "Starting"] call para_g_fnc_trackedState_setLocal;
  */
 
 params ["_stateVariable", "_newValue"];
 
-private _trStateData = [] call para_g_fnc_trState_data;
+private _trStateData = [] call para_g_fnc_trackedState_getData;
 
 private _state = _trStateData get "state";
 // Shouldn't matter if this is nil, as long as it's only used in arrays
@@ -46,4 +46,4 @@ private _equalsHandlers =
     _stateVariable,
     _newValue,
     _oldValue
-] call para_g_fnc_trState_callHandlers;
+] call para_g_fnc_trackedState_callHandlers;

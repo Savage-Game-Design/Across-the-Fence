@@ -1,5 +1,5 @@
 /*
-    File: fn_trState_callHandlers.sqf
+    File: fn_trackedState_callHandlers.sqf
     Author: Savage Game Design
     Date: 2023-02-09
     Last Update: 2023-02-25
@@ -25,7 +25,7 @@
             "Local_GamemodeStatus",
             "Starting",
             "Warmup"
-        ] call para_g_fnc_trState_callHandlers;
+        ] call para_g_fnc_trackedState_callHandlers;
  */
 
 params ["_handlers", "_stateVariable", "_currentValue", "_oldValue"];

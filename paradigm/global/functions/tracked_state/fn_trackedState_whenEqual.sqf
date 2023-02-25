@@ -1,5 +1,5 @@
 /*
-    File: fn_trstate_whenEqual.sqf
+    File: fn_trackedState_whenEqual.sqf
     Author: Savage Game Design
     Date: 2023-02-09
     Last Update: 2023-02-25
@@ -20,12 +20,12 @@
         ID which can be used to remove the handler [ANY]
 
     Example(s):
-        ["Local_GamemodeStage", "Starting", [[32], { DO THINGS }]] call para_g_fnc_trstate_whenEqual
+        ["Local_GamemodeStage", "Starting", [[32], { DO THINGS }]] call para_g_fnc_trackedState_whenEqual
  */
 
 params ["_stateVariable", "_valueToMatch", "_callback"];
 
-private _trStateData = [] call para_g_fnc_trState_data;
+private _trStateData = [] call para_g_fnc_trackedState_getData;
 
 private _valueHash = hashValue _valueToMatch;
 
@@ -44,7 +44,7 @@ if (!isNil "_currentValue" && { hashValue _currentValue isEqualTo _valueHash }) 
         _stateVariable,
         _currentValue,
         _currentValue
-    ] call para_g_fnc_trState_callHandlers;
+    ] call para_g_fnc_trackedState_callHandlers;
 };
 
 /* Return ID for handler removal */
