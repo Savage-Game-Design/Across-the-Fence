@@ -30,6 +30,24 @@ player setVariable ["vgm_g_skillsData", _skillsData];
 
 private _knownSkillPathsList = _skillsData get "skillPaths";
 {
+    if (_x in _knownSkillPathsList) then {continue};
+    ["DEBUG", format ["VGM: Skill not known anymore '%1'", _x]] call para_g_fnc_log;
+
+    vgm_c_skills_appliedSkillsPaths = vgm_c_skills_appliedSkillsPaths - [_x];
+
+    private _skill = _x call vgm_g_fnc_skills_getByPath;
+    if (isNil "_skill") then {
+        ["ERROR", format ["VGM: Skill does not exist '%1'", _x]] call para_g_fnc_log;
+        continue;
+    };
+
+    ["DEBUG", format ["VGM: Forgotten skill '%1'", _x]] call para_g_fnc_log;
+
+    ["vgm_skills_forgotten", [_x, _skill]] call para_g_fnc_event_trigger;
+
+} forEach +vgm_c_skills_appliedSkillsPaths;
+
+{
     private _skill = _x call vgm_g_fnc_skills_getByPath;
     if (isNil "_skill") then {
         ["ERROR", format ["VGM: Skill does not exist '%1'", _x]] call para_g_fnc_log;

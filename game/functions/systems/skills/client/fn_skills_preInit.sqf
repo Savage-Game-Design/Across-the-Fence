@@ -29,4 +29,11 @@ vgm_c_skills_appliedSkillsPaths = [];
     };
 }] call para_g_fnc_event_subscribeLocal;
 
+["vgm_skills_forgotten", {
+    _this#0 params ["_path", "_skill"];
+
+    player call (_skill get "codeUnapply");
+    vgm_c_skills_applyOnRespawn deleteAt _path;
+}] call para_g_fnc_event_subscribeLocal;
+
 [] call vgm_c_fnc_skills_active_init;

@@ -41,6 +41,13 @@ vgm_c_skills_active_slots = createHashMapFromArray [
 
 }] call para_g_fnc_event_subscribeLocal;
 
+["vgm_skills_forgotten", {
+    _this#0 params ["_path"];
+
+    vgm_c_skills_active_list deleteAt _path;
+
+}] call para_g_fnc_event_subscribeLocal;
+
 // intercept select all units in group bind for skill wheel
 // (grave/tilde `/~ by default)
 addUserActionEventHandler ["selectAll", "Activate", {
