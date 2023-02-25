@@ -1,21 +1,25 @@
 /*
     File: fn_skills_handle_skillLearnRequest.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-01-27
     Last Update: 2023-02-25
     Public: No
 
     Description:
-        No description added yet.
+        Handle client skill learn request.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
  */
 
 params ["_player", "_skillPath"];
+
+if (owner _player isNotEqualTo remoteExecutedOwner) exitWith {
+    ["ERROR", format ["VGM: Learn request for %1, owner not matching %2 != %3", name _player, owner _player, remoteExecutedOwner]] call para_g_fnc_log;
+};
 
 private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
 private _canLearn = [_player, _skill] call vgm_g_fnc_skills_canLearn;
