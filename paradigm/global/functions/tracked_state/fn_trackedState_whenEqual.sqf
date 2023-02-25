@@ -20,7 +20,19 @@
         ID which can be used to remove the handler [ANY]
 
     Example(s):
-        ["Local_GamemodeStage", "Starting", [[32], { DO THINGS }]] call para_g_fnc_trackedState_whenEqual
+        [
+            "Local_GamemodeStage",
+            "Starting",
+            [
+                [32], {
+                    params ["_variable", "_currentValue", "_oldValue", "_savedArgs"];
+                    // _variable is Local_GamemodeStage
+                    // _currentValue is Starting
+                    // _oldValue is nil (no former value)
+                    // _savedArgs is [32]
+                }
+            ]
+        ] call para_g_fnc_trackedState_whenEqual
  */
 
 params ["_stateVariable", "_valueToMatch", "_callback"];
