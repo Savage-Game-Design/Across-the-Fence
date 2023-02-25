@@ -2,7 +2,7 @@
     File: fn_trstate_setLocal.sqf
     Author: Savage Game Design
     Date: 2023-02-09
-    Last Update: 2023-02-09
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -23,9 +23,12 @@ params ["_stateVariable", "_newValue"];
 
 private _trStateData = [] call para_g_fnc_trState_data;
 
-private _state = _trstateData get "state";
+private _state = _trStateData get "state";
 // Shouldn't matter if this is nil, as long as it's only used in arrays
 private _oldValue = _state get _stateVariable;
+
+// Use hash value comparison, as that's how equality is checked in whenEqual
+if (hashValue _oldValue isEqualTo hashValue _newValue) exitWith {};
 
 _state set [_stateVariable, _newValue];
 

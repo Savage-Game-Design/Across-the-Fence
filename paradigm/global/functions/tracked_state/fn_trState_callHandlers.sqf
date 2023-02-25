@@ -2,14 +2,14 @@
     File: fn_trState_callHandlers.sqf
     Author: Savage Game Design
     Date: 2023-02-09
-    Last Update: 2023-02-10
+    Last Update: 2023-02-25
     Public: No
 
     Description:
         Calls the given handlers with the given parameters.
 
     Parameter(s):
-        _handlers - Handlers to call [ARRAY]
+        _handlers - Array of handlers to call, with each handler in the format [arguments, code] [ARRAY]
         _stateVariable - State variable that's being observed [ANY HASHMAP KEY]
         _currentValue - Current value of the state variable [ANY HASHABLE]
         _oldValue - Old value of the state variable, may be nil [ANY HASHABLE]
@@ -19,7 +19,9 @@
 
     Example(s):
         [
-            _equalsHandlers,
+            [
+                [[1,2,3], { // Handler code }],
+            ],
             "Local_GamemodeStatus",
             "Starting",
             "Warmup"

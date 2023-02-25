@@ -2,7 +2,7 @@
     File: fn_trstate_whenEqual.sqf
     Author: Savage Game Design
     Date: 2023-02-09
-    Last Update: 2023-02-10
+    Last Update: 2023-02-25
     Public: Yes
 
     Description:
@@ -20,7 +20,7 @@
         ID which can be used to remove the handler [ANY]
 
     Example(s):
-        ["Local_GamemodeStage", "Starting", [[32], { DO THINGS }]] call para_g_fnc_trstate_whenChanged
+        ["Local_GamemodeStage", "Starting", [[32], { DO THINGS }]] call para_g_fnc_trstate_whenEqual
  */
 
 params ["_stateVariable", "_valueToMatch", "_callback"];
@@ -38,7 +38,7 @@ private _handler = [_handlerId, _callback];
 _matchingValueHandlers pushBack _handler;
 
 private _currentValue = _trStateData get "state" get _stateVariable;
-if (!isNil "_currentValue" && { hashValue _currentValue isEqualTo hashValue _valueToMatch }) then {
+if (!isNil "_currentValue" && { hashValue _currentValue isEqualTo _valueHash }) then {
     [
         [_handler],
         _stateVariable,
