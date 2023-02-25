@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillsData.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-01-30
+    Last Update: 2023-02-25
     Public: No
 
     Description:
@@ -36,14 +36,14 @@ private _knownSkillPathsList = _skillsData get "skillPaths";
         continue;
     };
 
-    if (_x in vgm_c_skills_knownPathsList) then {
+    if (_x in vgm_c_skills_appliedSkillsPaths) then {
         ["DEBUG", format ["VGM: Skill known previously '%1'", _x]] call para_g_fnc_log;
         continue;
     };
 
     ["DEBUG", format ["VGM: New skill '%1'", _x]] call para_g_fnc_log;
 
-    vgm_c_skills_knownPathsList pushBack _x;
+    vgm_c_skills_appliedSkillsPaths pushBack _x;
     ["vgm_skills_learnt", [_x, _skill]] call para_g_fnc_event_trigger;
 
 } forEach _knownSkillPathsList;
