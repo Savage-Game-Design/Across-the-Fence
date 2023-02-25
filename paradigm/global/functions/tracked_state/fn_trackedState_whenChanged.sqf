@@ -21,6 +21,10 @@
 
 params ["_stateVariable", "_callback"];
 
+if (_callback isEqualType {}) then {
+    _callback = [[], _callback];
+};
+
 private _trStateData = [] call para_g_fnc_trackedState_getData;
 
 private _stateChangedHandlers = _trstateData get "changedHandlers";

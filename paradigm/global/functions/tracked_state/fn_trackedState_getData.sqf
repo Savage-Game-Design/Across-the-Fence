@@ -18,7 +18,7 @@
         private _trStateData = [] call para_g_fnc_trackedState_getData
  */
 
-if !(isNil "para_l_trState_initialised") exitWith { localNamespace getVariable "tracked_state_system" };
+if !(isNil "para_l_trackedState_initialised") exitWith { localNamespace getVariable "tracked_state_system" };
 
 localNamespace setVariable ["tracked_state_system", createHashMapFromArray [
     ["state", createHashMap],
@@ -26,6 +26,6 @@ localNamespace setVariable ["tracked_state_system", createHashMapFromArray [
     ["changedHandlers", createhashMap]
 ]];
 
-para_l_trState_initialised = true;
+para_l_trackedState_initialised = true;
 
 localNamespace getVariable "tracked_state_system"

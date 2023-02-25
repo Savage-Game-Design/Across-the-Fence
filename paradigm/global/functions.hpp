@@ -250,11 +250,11 @@ class para_g
     class tracked_state
     {
         PARA_GLOBAL_PATH(\tracked_state);
-        class trState_callHandlers {};
-        class trState_data {};
-        class trState_setLocal {};
-        class trState_whenChanged {};
-        class trState_whenEqual {};
+        class trackedState_callHandlers {};
+        class trackedState_getData {};
+        class trackedState_setLocal {};
+        class trackedState_whenChanged {};
+        class trackedState_whenEqual {};
     };
 };
 
