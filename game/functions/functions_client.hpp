@@ -46,5 +46,23 @@ class vgm_g
             preInit = 1;
         };
     };
+
+    class debug
+    {
+        VGM_GLOBAL_PATH(\debug\global);
+
+        class log {
+            headerType = -1;
+        };
+        class logError {
+            headerType = -1;
+        };
+        class logInfo {
+            headerType = -1;
+        };
+        class logWarning {
+            headerType = -1;
+        };
+    };
 };
 

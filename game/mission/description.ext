@@ -51,7 +51,7 @@ enableDebugConsole[] = {
     "76561198008065973",
 };
 
-allowFunctionsLog = 1;
+allowFunctionsLog = 0;
 allowFunctionsRecompile = 1;
 joinUnassigned = 0;
 forceRotorLibSimulation = 0;
