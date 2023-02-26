@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-02-02
+    Last Update: 2023-02-26
     Public: Yes
 
     Description:
@@ -44,12 +44,12 @@ private _fnc_tierUnlocked = {
         // no previous tree, always unlocked
         if (count _path < 3) exitWith {true};
 
+        // get path of the parent skill tree
         _path = _path select [0, count _path - 2];
-        private _skillTree = _path call vgm_g_fnc_skills_getByPath;
-        private _tiersCount = count (_skillTree get "skills");
-        diag_log [_skillTree get "displayName", count (_skillTree get "skills")];
+        private _parentSkillTree = _path call vgm_g_fnc_skills_getByPath;
+        private _tiersCount = count (_parentSkillTree get "skills");
 
-        [_skillTree, _tiersCount] call _fnc_tierUnlocked // return
+        [_parentSkillTree, _tiersCount] call _fnc_tierUnlocked // return
     };
 
     // check if knows at least one skill from previous tier

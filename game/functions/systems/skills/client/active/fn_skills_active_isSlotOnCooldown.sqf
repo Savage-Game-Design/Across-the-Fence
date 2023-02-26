@@ -2,7 +2,7 @@
     File: fn_skills_active_isSlotOnCooldown.sqf
     Author: veteran29
     Date: 2023-02-01
-    Last Update: 2023-02-01
+    Last Update: 2023-02-26
     Public: Yes
 
     Description:
@@ -26,4 +26,4 @@ if (_slot isEqualType "") then {
     _slot = vgm_c_skills_active_slots getOrDefault [_slot, createHashMap];
 };
 
-time < (_slot getOrDefault ["cooldown", 1e10]) // return
+time < (_slot getOrDefault ["cooldownUntil", 1e10]) // return

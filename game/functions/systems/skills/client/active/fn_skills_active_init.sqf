@@ -22,7 +22,7 @@ vgm_c_skills_active_list = createHashMap;
 
 private _fnc_createSlot = {
     createHashMapFromArray [
-        ["cooldown", 0],
+        ["cooldownUntil", 0],
         ["skill", createHashMap]
     ]
 };
