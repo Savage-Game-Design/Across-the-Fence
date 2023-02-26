@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-02-25
+    Last Update: 2023-02-26
     Public: No
 
     Description:
@@ -35,11 +35,15 @@ if (!_canLearn) exitWith {
 ["INFO", format ["VGM: Handling learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
 
 private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
+private _skillCost = _skill get "cost";
 
-// decrease amount of skill points
+
 private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 private _skillPoints = _skillsData get "skillPoints";
-_skillsData set ["skillPoints", _skillPoints - (_skill get "cost")];
+private _skillPointsSpent = _skillsData get "skillPointsSpent";
+
+_skillsData set ["skillPoints", _skillPoints - _skillCost];
+_skillsData set ["skillPointsSpent", _skillPointsSpent + _skillCost];
 
 [_player, _skillPath] call vgm_s_fnc_skills_teachSkill;
 

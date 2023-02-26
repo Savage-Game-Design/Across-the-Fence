@@ -25,8 +25,9 @@ addMissionEventHandler ["PlayerConnected", {
     ["DEBUG", format ["VGM: Loading skills data - %1", _uid]] call para_g_fnc_log;
 
     private _playerSkillsData = ["player_skills", _uid] call vgm_s_fnc_db_get;
-    _playerSkillsData set ["skillPoints" , 0, true];
-    _playerSkillsData set ["skillPaths" , [], true];
+    _playerSkillsData set ["skillPoints", 0, true];
+    _playerSkillsData set ["skillPointsSpent", 0, true];
+    _playerSkillsData set ["skillPaths", [], true];
 
     vgm_s_skills_playerSkillsDataCache set [_uid, _playerSkillsData];
 }];
