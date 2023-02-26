@@ -2,7 +2,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-02-24
+    Last Update: 2023-02-26
     Public: No
 
     Description:
@@ -42,9 +42,16 @@ vgm_c_skills_active_slots = createHashMapFromArray [
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_skills_forgotten", {
-    _this#0 params ["_path"];
+    _this#0 params ["_path", "_skill"];
 
     vgm_c_skills_active_list deleteAt _path;
+
+    // remove the skill from ability slot if it's not known anymore
+    {
+        if (_y get "skill" isEqualTo _skill) then {
+            [_x, nil] call vgm_c_fnc_skills_active_assignSkillToSlot;
+        };
+    } forEach vgm_c_skills_active_slots;
 
 }] call para_g_fnc_event_subscribeLocal;
 
