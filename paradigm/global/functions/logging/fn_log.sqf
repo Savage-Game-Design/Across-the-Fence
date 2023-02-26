@@ -16,11 +16,15 @@
 		Nothing
 
     Example(s):
+        ["ERROR", "Something bad happened"] call para_g_fnc_log;
 */
-params ["_logLevel", "_message", "_file", "_callingFile"];
+params ["_logLevel", "_message", "_file", "_callingFile", ["_identifier", "PARADIGM"]];
+
+if (is3DENPreview) exitWith {
+    diag_log text format ["[%1] %2: %3", _identifier, _logLevel, _message];
+};
 
 private _timestamp = format (["%1-%2-%3 %4:%5:%6:%7"] + systemTimeUTC);
-private _identifier = missionNamespace getVariable ["para_g_log_identifier", "PARADIGM"];
 
 if (isNil "_file") then {
 	_file = if (!isNil "_fnc_scriptName") then {
