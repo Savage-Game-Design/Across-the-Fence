@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-01-30
+    Last Update: 2023-02-26
     Public: No
 
     Description:
@@ -17,7 +17,7 @@
 
 if (!hasInterface) exitWith {};
 
-[] call vgm_c_fnc_skills_requestSkillsData;
+[] spawn vgm_c_fnc_skills_requestSkillsData;
 
 player addEventHandler ["Respawn", {
     params ["_player"];
