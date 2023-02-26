@@ -36,6 +36,12 @@ private _fnc_addActions = {
     _player addAction ["Open assigment menu", {
         call compileScript ["functions\systems\skills\client\active\fn_skills_active_openAssignMenu.sqf"];
     }, nil, -1e10, true, false, "", "_originalTarget == _this"];
+
+    _player addAction ["Respec all skills", {
+        call compileScript ["functions\systems\skills\client\network\fn_skills_requestSkillRespec.sqf"];
+    }, nil, -1e10, true, false, "", "_originalTarget == _this"];
+
+
 };
 
 player call _fnc_addActions;

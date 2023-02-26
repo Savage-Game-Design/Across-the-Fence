@@ -99,9 +99,11 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skills\client\network);
 
         class skills_receiveSkillLearn {};
+        class skills_receiveSkillRespec {};
         class skills_receiveSkillsData {};
 
         class skills_requestSkillLearn {};
+        class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
     };
 };

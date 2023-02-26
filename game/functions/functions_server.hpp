@@ -49,7 +49,8 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\skills\server\network);
 
-        class skills_handle_skillsDataRequest {};
         class skills_handle_skillLearnRequest {};
+        class skills_handle_skillRespecRequest {};
+        class skills_handle_skillsDataRequest {};
     };
 };

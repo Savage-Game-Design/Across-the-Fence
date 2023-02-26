@@ -25,14 +25,14 @@ private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
 private _canLearn = [_player, _skill] call vgm_g_fnc_skills_canLearn;
 
 if (!_canLearn) exitWith {
-    ["WARNING", format ["VGM: Discarding learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
+    ["WARNING", format ["VGM: Discarding learn request for %1 (%2), %3", name _player, getPlayerUID _player, _skillPath]] call para_g_fnc_log;
 
     // inform the player that he failed to learn the skill
     [_canLearn, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
 };
 
 
-["INFO", format ["VGM: Handling learn request for %1 (%2), %3", name _player, getPlayeRUID _player, _skillPath]] call para_g_fnc_log;
+["INFO", format ["VGM: Handling learn request for %1 (%2), %3", name _player, getPlayerUID _player, _skillPath]] call para_g_fnc_log;
 
 private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
 private _skillCost = _skill get "cost";
