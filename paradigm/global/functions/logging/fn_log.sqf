@@ -40,7 +40,7 @@ if (isNil "_callingFile" && !isNil "_fnc_scriptNameParent") then {
 
 private _callingFileText = if (!isNil "_callingFile") then { format ["Called By: %1 |", _callingFile] } else { "" };
 
-diag_log format [
+diag_log text format [
 	"%1 | %2 | %3 | File: %4 | %5 | %6",
 	_timestamp,
 	_identifier,
