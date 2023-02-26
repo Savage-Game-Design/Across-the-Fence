@@ -5,7 +5,7 @@ class vgm_skillTemplate {
     description = "SKILL DESCRIPTION";
     icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_a_ca.paa";
 
-    isActive = 0; // 1 - primary skill, 2 - ultimate skill
+    skillType = 0; // 0 - passive, 1 - primary, 2 - ultimate
     applyOnRespawn = 0;
 
     cost = 1;
@@ -53,12 +53,12 @@ class vgm_skillTrees {
                 class fieldHeal: vgm_skillTemplate {
                     displayName = "Field heal";
                     description = "Free healthcare.";
-                    isActive = 1;
+                    skillType = 1;
                 };
                 class zeusBolt: vgm_skillTemplate {
                     displayName = "Zeus bolt";
                     description = "POWER OF THE GODS!";
-                    isActive = 2;
+                    skillType = 2;
 
                     cost = 2;
                     cooldown = 30;
