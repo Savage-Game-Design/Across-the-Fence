@@ -35,7 +35,7 @@ class vgm_s
         class skills_dataGetCached {};
         class skills_dbSave {};
 
-        class skills_forgetSkill {};
+        class skills_forgetSkills {};
 
         class skills_preInit
         {
