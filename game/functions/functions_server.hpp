@@ -51,6 +51,7 @@ class vgm_s
         class skills_addSkillpoint {};
 
         class skills_dataGetCached {};
+        class skills_dbGet {};
         class skills_dbSave {};
 
         class skills_forgetSkills {};

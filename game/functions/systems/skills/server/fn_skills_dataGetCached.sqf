@@ -2,7 +2,7 @@
     File: fn_skills_dbGet.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-02-25
+    Last Update: 2023-02-28
     Public: No
 
     Description:
@@ -22,7 +22,7 @@ params ["_player"];
 
 private _hashMap = _player getVariable "vgm_g_skillsData";
 if (isNil "_hashMap") then {
-    _hashMap = vgm_s_skills_playerSkillsDataCache get getPlayerUID _player;
+    _hashMap = _player call vgm_s_fnc_skills_dbGet;
     _player setVariable ["vgm_g_skillsData", _hashMap];
 };
 
