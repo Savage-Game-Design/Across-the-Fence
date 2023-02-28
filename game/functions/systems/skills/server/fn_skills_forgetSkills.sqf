@@ -2,7 +2,7 @@
     File: fn_skills_teachSkill.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-02-26
+    Last Update: 2023-02-28
     Public: Yes
 
     Description:
@@ -26,15 +26,10 @@ if (_skillPaths isEqualTypeParams ["", ""]) then {
     _skillPaths = [_skillPaths];
 };
 
-diag_log _skillPaths;
-
 private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 private _knownSkillPaths = _skillsData get "skillPaths";
 // remove skill path from known skills
 {
-    diag_log "forgetting";
-    diag_log _x;
-
     _knownSkillPaths deleteAt (_knownSkillPaths find _x);
 } forEach _skillPaths;
 
