@@ -49,6 +49,8 @@ enableDebugConsole[] = {
     "76561198022706949",
     //Xorberax
     "76561198008065973",
+    // veteran29
+    "76561197993041837"
 };
 
 allowFunctionsLog = 0;
