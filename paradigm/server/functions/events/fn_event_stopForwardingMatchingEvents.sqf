@@ -1,21 +1,27 @@
 /*
     File: fn_event_stopForwardingMatchingEvents.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-12-04
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: No
 
     Description:
-        No description added yet.
+        Tells the server to stop forwarding certain events from certain clients.
 
     Parameter(s):
-        N/A
+        _originMachineIds - Machine IDs to stop forwarding from, number [ARRAY]
+        _event - Event to stop forwarding, as [event name, topic] formatted [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        // Stops any event forwarding from the server for myCustomEvent with that topic.
+        // Any forwarding from other origins will continue.
+        [
+            [2],
+            ["myCustomEvent", cursorObject]
+        ] remoteExec ["para_s_fnc_stopForwardingMatchingEvents", 2];
  */
 
 params ["_originMachineIds", "_event"];

@@ -21,6 +21,24 @@ class vgm_g
         };
     };
 
+    class debug
+    {
+        VGM_GLOBAL_PATH(\debug\global);
+
+        class log {
+            headerType = -1;
+        };
+        class logError {
+            headerType = -1;
+        };
+        class logInfo {
+            headerType = -1;
+        };
+        class logWarning {
+            headerType = -1;
+        };
+    };
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);

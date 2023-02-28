@@ -1,8 +1,8 @@
 /*
     File: fn_event_convertEventToHashableEvent.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-12-20
-    Last Update: 2022-12-20
+    Last Update: 2023-01-22
     Public: No
 
     Description:
@@ -10,13 +10,13 @@
         Idempotent operation - If call this function on its result, the result is unchanged.
 
     Parameter(s):
-        N/A
+        _event - Event to convert to a hashable event, (STRING, ANY) [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Hashable event (STRING, STRING) [ARRAY]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["eventName", objNull] call para_g_fnc_event_convertEventToHashableEvent;
  */
 
 params [["_event", nil, [[]], 2]];

@@ -1,21 +1,21 @@
 /*
     File: fn_event_startForwardingMatchingEventsToServer.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-27
-    Last Update: 2022-12-24
+    Last Update: 2023-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Starts forwarding events from this machine to the server, if they match the given event name and topic.
 
     Parameter(s):
-        N/A
+        _hashableEvents - Events to forward to the server, in a hashable format (string, string) [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [[["eventName", "myTopic"]]] remoteExec ["para_g_fnc_event_startForwardingMatchingEventsToServer", -2];
  */
 
 params ["_hashableEvents"];

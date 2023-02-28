@@ -1,21 +1,22 @@
 /*
     File: fn_event_registerClient.sqf
-    Author:
+    Author: Savage Gmae Design
     Date: 2022-11-27
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: No
 
     Description:
-        No description added yet.
+        Unregisters a client when they disconnect, cleaning up after them.
+        Tells any other clients to clean up and remove any data associated with the disconnected client.
 
     Parameter(s):
-        N/A
+        _clientMachineId - Machine id of the client to unregister (usually after disconnect) [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_disconnectedOwner] call para_s_fnc_event_unregisterClient
  */
 
 params ["_clientMachineId"];

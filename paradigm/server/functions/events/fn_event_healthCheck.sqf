@@ -1,22 +1,24 @@
 /*
     File: fn_event_healthCheck.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-12-01
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: Yes
 
     Description:
         Checks the event system for consistency and errors.
         Should be run manually or infrequently, as good performance isn't guaranteed.
 
+        Currently intended to be "good enough", rather than a perfect health check.
+
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Status of the check, and any error/success messages [HASHMAP]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call para_s_fnc_event_healthCheck;
  */
 
 para_s_event_clientHealthInfo = createHashMap;

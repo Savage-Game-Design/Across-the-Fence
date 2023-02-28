@@ -1,8 +1,8 @@
 /*
     File: fnc_event_unsubscribe.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2022-12-20
+    Last Update: 2023-01-29
     Public: Yes
 
     Description:

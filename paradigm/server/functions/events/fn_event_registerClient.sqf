@@ -1,21 +1,22 @@
 /*
-    File: fn_event_onPlayerConnected.sqf
-    Author:
+    File: fn_event_registerClient.sqf
+    Author: Savage Game Design
     Date: 2022-11-27
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: No
 
     Description:
-        No description added yet.
+        Registers a client with the event system when they connect.
+        Does initial setup, and tells them up to globally forward events.
 
     Parameter(s):
-        N/A
+        _clientMachineId - Machine id of the client to register with the system [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_clientOwner] call para_s_fnc_event_registerClient
  */
 
 params ["_clientMachineId"];

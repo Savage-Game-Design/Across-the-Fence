@@ -1,21 +1,24 @@
 /*
     File: fn_event_callHandlersById.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-24
-    Last Update: 2022-12-23
+    Last Update: 2023-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Calls the handlers with the specified IDs, passing them the given event, origin machine ID and event data.
 
     Parameter(s):
-        N/A
+        _handlerIds - IDs of the existing handlers to call, as returned by subscribe [ANY]
+        _originMachineId - Machine ID of the client the event is arriving from [NUMBER]
+        _event - Event received. Should NOT be in the hashable form, as we want to use the original topic. [ARRAY]
+        _data - Data sent with the event [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [[_registeredHandler], 2, ["eventName", objNull], 'ANYDATA'] call para_g_fnc_event_callHandlersById;
  */
 
 params ["_handlerIds", "_originMachineId", "_event", "_data"];

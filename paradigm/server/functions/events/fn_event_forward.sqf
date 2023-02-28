@@ -1,21 +1,23 @@
 /*
     File: fn_event_forward.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-27
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: No
 
     Description:
-        No description added yet.
+        Forwards the given event to any clients listening to it.
+        This works as the server maintains a forwarding table with all listening clients.
 
     Parameter(s):
-        N/A
+        _event - Event to send to any listening clients. Uses both the event name and topic to check for who is listening. [event, topic] [ARRAY]
+        _data - Data to send with the event [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [["myCustomEvent", 32], ["ANYTHING"]] remoteExec ["para_s_fnc_event_forward", 2];
  */
 
 params [["_event", nil, [[]], 2], "_data"];

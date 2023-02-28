@@ -1,8 +1,8 @@
 /*
     File: fn_event_system_init.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2022-12-24
+    Last Update: 2023-01-29
     Public: Yes
 
     Description:

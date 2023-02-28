@@ -1,21 +1,21 @@
 /*
     File: fn_event_stopForwardingMatchingEventsToServer.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-11-27
-    Last Update: 2022-12-24
+    Last Update: 2023-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Stops forwarding any matching events to the server.
 
     Parameter(s):
-        N/A
+        _hashableEvents - Events to forward to the server, in a hashable format (string, string) [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [[["eventName", "myTopic"]]] remoteExec ["para_g_fnc_event_stopForwardingMatchingEventsToServer", -2];
  */
 
 params ["_hashableEvents"];

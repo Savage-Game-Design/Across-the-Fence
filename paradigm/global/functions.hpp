@@ -240,12 +240,23 @@ class para_g
 		class parse_pos_config {};
 		class vehicle_will_collide_at_pos {};
 		class unit_is_incapacitated {};
+        class get_group_majority_position {};
 	};
 	class tools
 	{
 		PARA_GLOBAL_PATH(\tools);
 		class is_valid_axe_target {};
 	};
+
+    class tracked_state
+    {
+        PARA_GLOBAL_PATH(\tracked_state);
+        class trackedState_callHandlers {};
+        class trackedState_getData {};
+        class trackedState_setLocal {};
+        class trackedState_whenChanged {};
+        class trackedState_whenEqual {};
+    };
 };
 
 #endif

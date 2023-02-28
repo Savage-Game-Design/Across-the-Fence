@@ -26,6 +26,24 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class player
+    {
+        VGM_SERVER_PATH(\core\server\player);
+
+        class player_fetch {};
+        class player_save {};
+    };
+
+    class respawn
+    {
+        VGM_SERVER_PATH(\systems\respawn\server);
+
+        class respawn_onPlayerKilled {};
+        class respawn_onPlayerRespawn {};
+        class respawn_findSafeSpawnTransformNearTeam {};
+        class respawn_findFallbackSpawnTransform {};
+    };
+
     class skills
     {
         VGM_SERVER_PATH(\systems\skills\server);

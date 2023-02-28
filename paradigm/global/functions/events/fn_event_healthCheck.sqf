@@ -1,21 +1,21 @@
 /*
     File: fn_event_healthCheck.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2022-12-01
-    Last Update: 2022-12-05
+    Last Update: 2023-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Called by the server, to fetch data for the health check
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] remoteExec ["para_g_fnc_event_healthCheck", 0];
  */
 
 [createHashMapFromArray [
