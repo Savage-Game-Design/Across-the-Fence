@@ -1,5 +1,5 @@
 /*
-    File: fn_skills_dbSave.sqf
+    File: fn_skills_dbGet.sqf
     Author: veteran29
     Date: 2023-02-28
     Last Update: 2023-02-28
