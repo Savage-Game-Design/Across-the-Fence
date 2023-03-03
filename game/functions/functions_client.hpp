@@ -3,6 +3,59 @@
 #define VGM_CLIENT_PATH(PATH) file=QUOTE(CONCAT_3(VGM_PATH,functions,PATH))
 #define VGM_GLOBAL_PATH(PATH) file=QUOTE(CONCAT_3(VGM_PATH,functions,PATH))
 
+class vgm_g
+{
+    class default
+    {
+        VGM_GLOBAL_PATH(\);
+    };
+
+    class core
+    {
+        VGM_GLOBAL_PATH(\core\global);
+
+        class execNextFrame {};
+        class preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class debug
+    {
+        VGM_GLOBAL_PATH(\debug\global);
+
+        class log {
+            headerType = -1;
+        };
+        class logError {
+            headerType = -1;
+        };
+        class logInfo {
+            headerType = -1;
+        };
+        class logWarning {
+            headerType = -1;
+        };
+    };
+
+    class skills
+    {
+        VGM_GLOBAL_PATH(\systems\skills\global);
+
+        class skills_canLearn {};
+        class skills_canSee {};
+        class skills_getByPath {};
+        class skills_isKnown {};
+        class skills_parseTreeCfg {};
+        class skills_preInit
+        {
+            preInit = 1;
+        };
+        class skills_treesHashToPathsHash;
+    };
+};
+
 class vgm_c
 {
     class default
@@ -28,41 +81,47 @@ class vgm_c
         class sharedHub_areaLimiterEnable {};
         class sharedHub_teleportPlayerToHub {};
     };
-};
 
-class vgm_g
-{
-    class default
+    class skills
     {
-        VGM_GLOBAL_PATH(\);
-    };
+        VGM_CLIENT_PATH(\systems\skills\client);
 
-    class core
-    {
-        VGM_GLOBAL_PATH(\core\global);
-
-        class preInit
+        class skills_getSkillPoints {};
+        class skills_getSkillTreeFromSkill {};
+        class skills_openSkillTree {};
+        class skills_postInit
+        {
+            postInit = 1;
+        };
+        class skills_preInit
         {
             preInit = 1;
         };
     };
 
-    class debug
+    class skills_active
     {
-        VGM_GLOBAL_PATH(\debug\global);
+        VGM_CLIENT_PATH(\systems\skills\client\active);
 
-        class log {
-            headerType = -1;
-        };
-        class logError {
-            headerType = -1;
-        };
-        class logInfo {
-            headerType = -1;
-        };
-        class logWarning {
-            headerType = -1;
-        };
+        class skills_active_isSlotOnCooldown {};
+        class skills_active_assignSkillToSlot {};
+        class skills_active_openAssignMenu {};
+        class skills_active_openSkillWheel {};
+        class skills_active_skillWheelActivate {};
+
+        class skills_active_init {};
+    };
+
+    class skills_network
+    {
+        VGM_CLIENT_PATH(\systems\skills\client\network);
+
+        class skills_receiveSkillLearn {};
+        class skills_receiveSkillRespec {};
+        class skills_receiveSkillsData {};
+
+        class skills_requestSkillLearn {};
+        class skills_requestSkillRespec {};
+        class skills_requestSkillsData {};
     };
 };
-
