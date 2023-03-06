@@ -266,6 +266,7 @@ class para_g
         PARA_GLOBAL_PATH(\tracked_state);
         class trackedState_callHandlers {};
         class trackedState_getData {};
+        class trackedState_getValue {};
         class trackedState_setLocal {};
         class trackedState_whenChanged {};
         class trackedState_whenEqual {};
