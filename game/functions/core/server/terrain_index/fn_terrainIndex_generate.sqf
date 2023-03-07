@@ -42,7 +42,7 @@ private _gridSize = _worldSize / _gridSquareSize;
 for "_y" from 0 to (_gridSize - 1) do {
     for "_x" from 0 to (_gridSize - 1) do {
         private _points = [];
-        private _highestPoint = [_x * _gridSquareSize, _y * _gridSquareSize];
+        private _highestPoint = [_x * _gridSquareSize, _y * _gridSquareSize, 0];
 
         for "_i" from 0 to 20 do { // x-axis
             for "_j" from 0 to 20 do { // y-axis
@@ -66,7 +66,7 @@ for "_y" from 0 to (_gridSize - 1) do {
 
                 private _positionHeight = getTerrainHeightASL _position;
                 if (_positionHeight > _highestPoint select 2) then {
-                    _highestPoint = [_position select 0, _position select 1];
+                    _highestPoint = [_position select 0, _position select 1, _positionHeight];
                 };
 
                 _points pushBack _position;
