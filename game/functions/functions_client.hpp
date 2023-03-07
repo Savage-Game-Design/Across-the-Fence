@@ -54,6 +54,15 @@ class vgm_g
         };
         class skills_treesHashToPathsHash;
     };
+
+    class area
+    {
+        VGM_GLOBAL_PATH(\core\global\area);
+
+        class area_get_gradient {};
+        class area_get_local_objects {};
+        class area_near_water {};
+    };
 };
 
 class vgm_c

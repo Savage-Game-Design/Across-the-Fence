@@ -72,4 +72,14 @@ class vgm_s
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
     };
+
+    class terrainIndex
+    {
+        VGM_SERVER_PATH(\core\server\terrainIndex);
+
+        class terrainIndex_generate {};
+        class terrainIndex_getArea {};
+        class terrainIndex_getGridSquareContents {};
+        class terrainIndex_loadIndex {};
+    }
 };
