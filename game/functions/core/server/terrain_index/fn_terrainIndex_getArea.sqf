@@ -9,16 +9,21 @@
         Returns the entries in the terrain index that are within the given area.
 
     Parameter(s):
-        N/A
+        0: _corner1 [POSITION] - The corners of the rectangle to search in.
+        1: _corner2 [POSITION] - The corners of the rectangle to search in.
+        2: _gridSize [NUMBER] - The size of the grid. Found by dividing the map size by the grid square size.
+        3: _gridSquareSize [NUMBER] - The size of each grid square.
+        4: _terrainIndex [ARRAY] - The terrain index to use.
 
     Returns:
-        Something [BOOL]
+        _entries [ARRAY] - The entries in the terrain index that are within the given area.
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [[1000,1000], [1200,1200], 100, 100, _artilleryIndex] call vgm_s_fnc_terrainIndex_getArea;
  */
 
-params ["_corner1", "_corner2", "_gridSize", "_gridSquareSize", "_indexEntries", "_gridIndex"];
+params ["_corner1", "_corner2", "_gridSize", "_gridSquareSize", "_terrainIndex"];
+_terrainIndex params ["_gridIndex", "_indexEntries"];
 
 // Calculate the bottom left corner of the rectangle..
 private _gridMinX = floor ((_corner1 # 0 min _corner2 # 0) / _gridSquareSize);
@@ -35,6 +40,7 @@ private _entries = [];
 // - get the start of the range from the first cell in the row
 // - get the end of the range from the last cell in the row.
 // Works even if cells are empty, since empty cells store the start pos of the next populated cell, and end pos of the last populated cell.
+
 for "_y" from _gridMinY to _gridMaxY do {
     private _rowRangeStart = _gridIndex # (_y * _gridSize + _gridMinX) # 0;
     private _rowRangeEnd = _gridIndex # (_y * _gridSize + _gridMaxX) # 1;

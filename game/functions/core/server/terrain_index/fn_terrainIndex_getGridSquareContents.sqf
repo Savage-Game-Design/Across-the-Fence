@@ -9,16 +9,19 @@
         Returns the contents of a grid square.
 
     Parameter(s):
-        N/A
+        0: _position [ARRAY] - Position to fetch contents for
+        1: _gridSize [NUMBER] - Size of the grid, calculated by dividing the world size by the grid square size;
+        2: _terrainIndex [ARRAY] - Terrain index to fetch from
 
     Returns:
-        Something [BOOL]
+        Array of positions [ARRAY]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [[1200,1200], 100, _artilleryIndex] call vgm_s_fnc_terrainIndex_getGridSquareContents;
  */
 
-params ["_position", "_gridSize", "_indexEntries", "_gridIndex"];
+params ["_position", "_gridSize", "_terrainIndex"];
+_terrainIndex params ["_indexEntries", "_gridIndex"];
 
 // Figure out which cell this position is in.
 private _x = floor (_position # 0 / 100);
