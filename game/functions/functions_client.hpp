@@ -59,9 +59,9 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\core\global\area);
 
-        class area_get_gradient {};
-        class area_get_local_objects {};
-        class area_near_water {};
+        class area_getGradient {};
+        class area_getLocalObjects {};
+        class area_isNearWater {};
     };
 };
 
