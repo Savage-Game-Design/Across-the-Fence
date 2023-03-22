@@ -75,7 +75,7 @@ class vgm_s
 
     class terrainIndex
     {
-        VGM_SERVER_PATH(\core\server\terrainIndex);
+        VGM_SERVER_PATH(\core\server\terrain_index);
 
         class terrainIndex_generate {};
         class terrainIndex_getArea {};

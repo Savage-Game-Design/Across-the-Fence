@@ -2,7 +2,7 @@
     File: fn_terrainIndex_generate.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-03-06
+    Last Update: 2023-03-22
     Public: No
 
     Description:
@@ -10,11 +10,13 @@
         WARNING: This is a VERY heavy function. It will take a couple of minutes to complete.
 
     Parameter(s):
-        0: worldSize [NUMBER] - The size of the world in meters.
-        1: gridSquareSize [NUMBER] - The size of each grid square in meters.
-        2: maxGradient [NUMBER] - The maximum gradient of the terrain in degrees.
-        3: sizeOfArea [NUMBER] - The size of the area to check in meters.
-        4: filteredObjects [ARRAY] - An array of objects to filter out of the terrain index.
+        1: _gridSquareSize [NUMBER] - The size of each grid square in meters.
+        2: _maxGradient [NUMBER] - The maximum gradient of the terrain in degrees.
+        3: _sizeOfArea [NUMBER] - The size of the area to check in meters.
+        4: _filteredObjects [ARRAY] - An array of objects to filter out of the terrain index.
+        5: _pointGenerator [CODE] - A function that generates points to check. It should take two parameters, _points and _x, _y.
+            _points is an array of points to check.
+            _x and _y are the x and y coordinates of the grid square to check.
 
     Returns:
         0: terrainIndex [ARRAY]
@@ -24,7 +26,7 @@
         _artilleryIndex params ["_indexEntries", "_gridIndex"];
  */
 
-params ["_worldSize", "_gridSquareSize", "_maxGradient", "_sizeOfArea", "_filteredObjects"];
+params ["_pointGenerator"];
 
 // Array of things that can be found in the index.
 // The entries for one grid row form a continuous block within the array, and each cell is also a continuous block.
@@ -36,55 +38,26 @@ private _indexEntries = [];
 // Each entry contains the range in index_entries that has the cell contents. I.e, if the range is "[11, 32]", then items 11 through 32 of index_entries are in that cell.
 private _gridIndex = [];
 
-private _gridSize = _worldSize / _gridSquareSize;
+private _gridSize = worldSize / 100;
 
 // This performs setup, populating the index.
 for "_y" from 0 to (_gridSize - 1) do {
     for "_x" from 0 to (_gridSize - 1) do {
-        private _points = [];
-        private _highestPoint = [_x * _gridSquareSize, _y * _gridSquareSize, 0];
-
-        for "_i" from 0 to 20 do { // x-axis
-            for "_j" from 0 to 20 do { // y-axis
-                private _position = [_x * _gridSquareSize + (_i * 5), _y * _gridSquareSize + (_j * 5)];
-
-                private _nearestTerrainObjects = [_position, _sizeOfArea, _filteredObjects] call vgm_g_fnc_area_getLocalObjects;
-                if (count _nearestTerrainObjects > 0) then {
-                    continue;
-                };
-
-                private _nearWater = [_position, _sizeOfArea] call vgm_g_fnc_area_isNearWater;
-                if (surfaceIsWater _position || _nearWater) then {
-                    continue;
-                };
-
-                private _positionGradient = abs (aCos ([0,0,1] vectorCos (surfaceNormal _position)));
-                private _areaGradient = [_position, _sizeOfArea] call vgm_g_fnc_area_getGradient;
-                if ((_areaGradient > _maxGradient || _positionGradient > _maxGradient) && _maxGradient != 0) then {
-                    continue;
-                };
-
-                private _positionHeight = getTerrainHeightASL _position;
-                if (_positionHeight > _highestPoint select 2) then {
-                    _highestPoint = [_position select 0, _position select 1, _positionHeight];
-                };
-
-                _points pushBack _position;
-            };
-        };
+        private _points = [_x, _y] call _pointGenerator;
 
         // Calculating the range in index_entries where the data can be found.
         private _start = count _indexEntries;
         private _end = _start + count _points - 1;
         if (count _points > 0) then {
             _indexEntries append _points;
+
             // Boolean true if the grid cell has entries, false otherwise
-            _gridIndex pushBack [_start, _end, true, _highestPoint];
+            _gridIndex pushBack [_start, _end, true];
         } else {
             // Start is the index of the first entry in the *next* grid cell
             // End is the index of the last entry in the previous grid cell.
             // Makes the querying logic nice and simple, when we're fetching a range of grid cells.
-            _gridIndex pushBack [_start, _end, false, _highestPoint];
+            _gridIndex pushBack [_start, _end, false];
         };
     };
 };

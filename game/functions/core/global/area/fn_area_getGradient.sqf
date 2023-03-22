@@ -2,14 +2,14 @@
     File: fn_area_getGradient.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-03-06
+    Last Update: 2023-03-21
     Public: Yes
 
     Description:
         Gets the gradient of the area in degrees.
 
     Parameter(s):
-        0: Position [Array]
+        _pos - Central position to find average gradient at [ARRAY]
 
     Returns:
         Gradient in degrees [Number]
