@@ -2,7 +2,7 @@
     File: fn_terrainIndex_generate.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-03-22
+    Last Update: 2023-03-23
     Public: No
 
     Description:
@@ -10,23 +10,21 @@
         WARNING: This is a VERY heavy function. It will take a couple of minutes to complete.
 
     Parameter(s):
-        1: _gridSquareSize [NUMBER] - The size of each grid square in meters.
-        2: _maxGradient [NUMBER] - The maximum gradient of the terrain in degrees.
-        3: _sizeOfArea [NUMBER] - The size of the area to check in meters.
-        4: _filteredObjects [ARRAY] - An array of objects to filter out of the terrain index.
-        5: _pointGenerator [CODE] - A function that generates points to check. It should take two parameters, _points and _x, _y.
+        _pointGenerator [CODE] - A function that generates points to check. It should take two parameters, _points and _x, _y.
             _points is an array of points to check.
             _x and _y are the x and y coordinates of the grid square to check.
+        _gridSquareSize [NUMBER] - The size of each grid square, in meters.
+        _quality [NUMBER] - The number of points to check per grid square. The higher the number, the more accurate the results, but the longer it takes to generate the index. 1-10 is a good range.
 
     Returns:
-        0: terrainIndex [ARRAY]
+        _terrainIndex [HASHMAP] - A hashmap containing the terrain index data and metadata.
 
     Example(s):
         _artilleryIndex = [10000, 100, 10, 40, ["HOUSE", "FENCE"]] call vgm_s_fnc_terrainIndex_generate; // Generates a terrain index for a 10km x 10km map with a 10 degree average gradient and a 40m area to check.
         _artilleryIndex params ["_indexEntries", "_gridIndex"];
  */
 
-params ["_pointGenerator"];
+params ["_pointGenerator", "_gridSquareSize", "_quality"];
 
 // Array of things that can be found in the index.
 // The entries for one grid row form a continuous block within the array, and each cell is also a continuous block.
@@ -38,12 +36,12 @@ private _indexEntries = [];
 // Each entry contains the range in index_entries that has the cell contents. I.e, if the range is "[11, 32]", then items 11 through 32 of index_entries are in that cell.
 private _gridIndex = [];
 
-private _gridSize = worldSize / 100;
+private _gridSize = worldSize / _gridSquareSize;
 
 // This performs setup, populating the index.
 for "_y" from 0 to (_gridSize - 1) do {
     for "_x" from 0 to (_gridSize - 1) do {
-        private _points = [_x, _y] call _pointGenerator;
+        private _points = [_x, _y, _gridSquareSize, _quality] call _pointGenerator;
 
         // Calculating the range in index_entries where the data can be found.
         private _start = count _indexEntries;
@@ -62,4 +60,10 @@ for "_y" from 0 to (_gridSize - 1) do {
     };
 };
 
-[_indexEntries, _gridIndex]
+createHashMapFromArray [
+    ["index_entries", _indexEntries],
+    ["grid_index", _gridIndex],
+    ["grid_size", _gridSize],
+    ["grid_square_size", _gridSquareSize]
+];
+
