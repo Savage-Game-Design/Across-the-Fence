@@ -20,8 +20,25 @@
         _terrainIndex [HASHMAP] - A hashmap containing the terrain index data and metadata.
 
     Example(s):
-        _artilleryIndex = [10000, 100, 10, 40, ["HOUSE", "FENCE"]] call vgm_s_fnc_terrainIndex_generate; // Generates a terrain index for a 10km x 10km map with a 10 degree average gradient and a 40m area to check.
-        _artilleryIndex params ["_indexEntries", "_gridIndex"];
+        _artilleryIndex = [{
+            params ["_x", "_y", "_gridSquareSize", "_quality"];
+
+            private _return = [];
+            private _itrCount = _gridSquareSize / _quality;
+
+            for "_i" from 0 to _itrCount do { // x-axis
+                for "_j" from 0 to _itrCount do { // y-axis
+                    private _position = [_x * _gridSquareSize + (_i * _quality), _y * _gridSquareSize + (_j * _quality)];
+
+                    private _nearWater = [_position, 5] call vgm_g_fnc_area_isNearWater;
+                    if (!surfaceIsWater _position && _nearWater) then {
+                        _return pushBack _position;
+                    };
+                };
+            };
+
+            _return
+        }, 100, 5] call vgm_s_fnc_terrainIndex_generate;
  */
 
 params ["_pointGenerator", "_gridSquareSize", "_quality"];
