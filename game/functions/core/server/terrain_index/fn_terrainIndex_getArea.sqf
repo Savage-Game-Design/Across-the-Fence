@@ -9,17 +9,15 @@
         Returns the entries in the terrain index that are within the given area.
 
     Parameter(s):
-        0: _corner1 [POSITION] - The corners of the rectangle to search in.
-        1: _corner2 [POSITION] - The corners of the rectangle to search in.
-        2: _gridSize [NUMBER] - The size of the grid. Found by dividing the map size by the grid square size.
-        3: _gridSquareSize [NUMBER] - The size of each grid square.
-        4: _terrainIndex [ARRAY] - The terrain index to use.
+        _corner1 [POSITION] - The corners of the rectangle to search in.
+        _corner2 [POSITION] - The corners of the rectangle to search in.
+        _terrainIndex [ARRAY] - The terrain index to use.
 
     Returns:
         _entries [ARRAY] - The entries in the terrain index that are within the given area.
 
     Example(s):
-        [[1000,1000], [1200,1200], 100, 100, _artilleryIndex] call vgm_s_fnc_terrainIndex_getArea;
+        [[1000,1000], [1200,1200], artilleryIndex] call vgm_s_fnc_terrainIndex_getArea;
  */
 
 params ["_corner1", "_corner2", "_terrainIndex"];
