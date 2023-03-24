@@ -2,7 +2,7 @@
     File: fn_terrainIndex_getArea.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-03-06
+    Last Update: 2023-03-23
     Public: No
 
     Description:
@@ -22,8 +22,12 @@
         [[1000,1000], [1200,1200], 100, 100, _artilleryIndex] call vgm_s_fnc_terrainIndex_getArea;
  */
 
-params ["_corner1", "_corner2", "_gridSize", "_gridSquareSize", "_terrainIndex"];
-_terrainIndex params ["_gridIndex", "_indexEntries"];
+params ["_corner1", "_corner2", "_terrainIndex"];
+
+private _gridIndex = _terrainIndex get "grid_index";
+private _indexEntries = _terrainIndex get "index_entries";
+private _gridSize = _terrainIndex get "grid_size";
+private _gridSquareSize = _terrainIndex get "grid_square_size";
 
 // Calculate the bottom left corner of the rectangle..
 private _gridMinX = floor ((_corner1 # 0 min _corner2 # 0) / _gridSquareSize);
