@@ -2,12 +2,14 @@
     File: fn_terrainIndex_generate.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-03-23
+    Last Update: 2023-04-05
     Public: No
 
     Description:
         Generates an terrain index for the entire map. Store these later for future use with getArea, getGridSquareContents, etc.
-        WARNING: This is a VERY heavy function. It will take a couple of minutes to complete.
+        The result will be copied to your clipboard as a string, which you can paste into indices.hpp
+
+        WARNING: This is a VERY heavy function. The time it takes to generate the index is directly proportional to the size of the map and the quality of the index.
 
     Parameter(s):
         _pointGenerator [CODE] - A function that generates points to check. It should take two parameters, _points and _x, _y.
@@ -77,10 +79,18 @@ for "_y" from 0 to (_gridSize - 1) do {
     };
 };
 
-createHashMapFromArray [
+private _result = createHashMapFromArray [
     ["index_entries", _indexEntries],
     ["grid_index", _gridIndex],
     ["grid_size", _gridSize],
     ["grid_square_size", _gridSquareSize]
 ];
 
+private _clipboard = str _result;
+_clipboard = _clipboard regexReplace ["\[", "{"];
+_clipboard = _clipboard regexReplace ["\]", "}"];
+_clipboard = _clipboard + ";";
+
+copyToClipboard _clipboard;
+
+_result

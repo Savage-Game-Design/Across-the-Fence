@@ -2,19 +2,26 @@
     File: fn_terrainIndex_loadIndex.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-03-06
+    Last Update: 2023-04-05
     Public: No
 
     Description:
-        Loads the index for the terrain indexes.
+        Loads a terrain index from vgm_map_indices config for the current map.
 
     Parameter(s):
-        N/A
+        _name - Name of the terrain index [STRING]
 
     Returns:
-        Something [BOOL]
+        _index - Terrain index [HASHMAP]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        _terrainIndex = ["land"] call vgm_s_fnc_terrainIndex_loadIndex;
  */
+
+params ["_name"];
+
+private _configIndex = getArray(missionConfigFile >> "vgm_terrain_indices" >> toLower worldName >> _name);
+if (count _configIndex == 0) exitWith { [] }; // No index found
+
+createHashMapFromArray _configIndex
 

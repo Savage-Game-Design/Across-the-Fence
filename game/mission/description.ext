@@ -153,3 +153,6 @@ class CfgFunctions {
 
 // Extra config built during the build process
 #include "configs\built_config.hpp"
+
+// Terrain Indices
+#include "configs\indices.hpp"
