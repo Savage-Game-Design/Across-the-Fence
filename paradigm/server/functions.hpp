@@ -157,16 +157,16 @@ class para_s
 		class profile_db {};
 	};
 
-    class event
+    class events
     {
         PARA_SERVER_PATH(\events);
-        class event_forward {};
-        class event_healthCheck {};
-        class event_registerClient {};
-        class event_reportClientHealth {};
-        class event_startForwardingMatchingEvents {};
-        class event_stopForwardingMatchingEvents {};
         class event_testSystem {};
+    };
+
+    class events_internal
+    {
+        PARA_SERVER_PATH(\events\internal);
+        class event_registerClient {};
         class event_unregisterClient {};
     };
 

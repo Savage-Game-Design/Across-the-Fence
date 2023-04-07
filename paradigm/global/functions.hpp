@@ -130,20 +130,33 @@ class para_g
     class events
     {
         PARA_GLOBAL_PATH(\events);
+        class event_subscribe {};
+        class event_subscribeLocal {};
+        class event_subscribeServer {};
+        class event_subscribeToClients {};
+        class event_system_init {};
+        class event_triggerGlobal {};
+        class event_triggerLocal {};
+        class event_triggerServer {};
+        class event_triggerServerAndLocal {};
+        class event_triggerTargets {};
+        class event_unsubscribe {};
+    };
+
+    class events_internal
+    {
+        PARA_GLOBAL_PATH(\events\internal);
         class event_attachHandler {};
         class event_callHandlersById {};
         class event_callRegisteredHandlers {};
         class event_convertEventToHashableEvent {};
         class event_handlePlayerDisconnected {};
-        class event_healthCheck {};
-        class event_startForwardingMatchingEventsToServer {};
-        class event_stopForwardingMatchingEventsToServer {};
-        class event_subscribe {};
-        class event_subscribeLocal {};
-        class event_subscribeServer {};
-        class event_system_init {};
-        class event_trigger {};
-        class event_unsubscribe {};
+    };
+
+    class events_network
+    {
+        PARA_GLOBAL_PATH(\events\network);
+        class event_remoteExec_trigger {};
     };
 
 	class events_local_legacy

@@ -1,12 +1,12 @@
 /*
-    File: fnc_event_trigger.sqf
+    File: fnc_event_triggerServerAndLocal.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-01-29
+    Last Update: 2023-04-14
     Public: Yes
 
     Description:
-        Triggers the given event on any client that's listening.
+        Triggers the given event locally and on the server.
         Optional data parameter is sent with the event to those clients.
 
     Parameter(s):
@@ -17,8 +17,8 @@
         Nothing
 
     Example(s):
-        ["myCustomEvent", 3] call para_g_fnc_event_trigger;
-        [["myCustomEvent", "ducks"], [getPlayerUID player]] call para_g_fnc_event_trigger;
+        ["myCustomEvent", 3] call para_g_fnc_event_triggerServerAndLocal;
+        [["myCustomEvent", "ducks"], [getPlayerUID player]] call para_g_fnc_event_triggerServerAndLocal;
  */
 
 params ["_event", "_data"];
@@ -29,15 +29,8 @@ if !(_event isEqualType []) then {
 };
 
 private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
-private _generalEvent = [_event # 0, ""];
 
-private _eventsToforward = localNamespace getVariable "para_event_eventsToForward";
+[clientOwner, _event, _data] remoteExec ["para_g_fnc_event_remoteExec_trigger"];
 
-// Forward event to server only if the client has been asked for it
-if (_eventsToForward getOrDefault [_hashableEvent, false] || _eventsToForward getOrDefault [_generalEvent, false]) then {
-    [_event, _data] remoteExec ["para_s_fnc_event_forward", 2];
-};
-
-// Call any local handlers
 [clientOwner, _hashableEvent, _event, _data] call para_g_fnc_event_callRegisteredHandlers;
 
