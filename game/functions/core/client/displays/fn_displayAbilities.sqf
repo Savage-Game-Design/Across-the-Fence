@@ -36,11 +36,14 @@ switch _mode do {
         _available apply {
             private _name = "Hoof It"; // TODO: Get actual name
             private _icon = "\a3\3den\Data\Displays\Display3DENMsgBox\picture_ca.paa"; // TODO: Get actual icon
+            /* private _icon = "#(rgb,8,8,3)color(1,0,0,0.5)"; */
             private _category = "Standard Rifleman Ability"; // TODO: Get actual category
 
             (ctAddRow _ctrlAvailable select 1) params [
+                "", // Frame
                 "_ctrlRowName",
                 "_ctrlRowCategory",
+                "", // Icon frame
                 "_ctrlRowIcon",
                 "_ctrlRowEquip"
             ];

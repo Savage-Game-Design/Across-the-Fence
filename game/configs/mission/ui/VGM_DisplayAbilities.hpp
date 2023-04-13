@@ -19,52 +19,105 @@ class VGM_DisplayAbilities
             h = VGM_GRID_MAX_H * VGM_GRID_H;
             colorBackground[] = {0,0,1,0.2};
         };
-        class StdTitleFrame: VGM_ctrlFrame
+        class BackgroundStdTitle: VGM_ctrlBackgroundTitle
         {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_STDTITLE;
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = DISPLAY_Y + 1 * VGM_GRID_H;
+            w = 0.75 * COLUMN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
         };
-        class StdBackgroundFrame: VGM_ctrlFrame
+        class FrameStdTitle: VGM_ctrlFrame
         {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_STDSTACK;
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = DISPLAY_Y + 1 * VGM_GRID_H;
+            w = 0.75 * COLUMN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+        };
+        class BackgroundStd: VGM_ctrlBackground
+        {
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = VGM_Y_H(0.5 * DISPLAY_H - 9);
+        };
+        class FrameStd: VGM_ctrlFrame
+        {
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = (0.5 * DISPLAY_H - 9) * VGM_GRID_H;
+        };
+        class BackgroundUltTitle: BackgroundStdTitle
+        {
+            y = DISPLAY_Y + (0.5 * DISPLAY_H + 3) * VGM_GRID_H;
+        };
+        class FrameUltTitle: FrameStdTitle
+        {
+            y = DISPLAY_Y + (0.5 * DISPLAY_H + 3) * VGM_GRID_H;
+        };
+        class BackgroundUlt: BackgroundStd
+        {
+            y = DISPLAY_Y + (0.5 * DISPLAY_H + 8) * VGM_GRID_H;
+        };
+        class FrameUlt: FrameStd
+        {
+            y = DISPLAY_Y + (0.5 * DISPLAY_H + 8) * VGM_GRID_H;
         };
 
-        class UltTitleFrame: VGM_ctrlFrame
-        {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
-        };
-        class UltBackgroundFrame: VGM_ctrlFrame
-        {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_ULTSTACK;
-        };
-
-        class AvailableTitleFrame: VGM_ctrlFrame
-        {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
-        };
-        class AvailableFrame: VGM_ctrlFrame
-        {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_AVAILABLE;
-        };
-        class AvailableBackground: VGM_ctrlBackground
+        class BackgroundAvailableTitle: VGM_ctrlBackgroundTitle
         {
             x = DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W;
-            y = DISPLAY_Y + 6.5 * VGM_GRID_H;
+            y = DISPLAY_Y + 1 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+        };
+        class FrameAvailableTitle: VGM_ctrlFrame
+        {
+            x = DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 1 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+        };
+        class BackgroundAvailable: VGM_ctrlBackground
+        {
+            x = DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = (DISPLAY_H - 7) * VGM_GRID_H;
+        };
+        class FrameAvailable: VGM_ctrlFrame
+        {
+            x = DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 6 * VGM_GRID_H;
             w = COLUMN_W * VGM_GRID_W;
             h = (DISPLAY_H - 7) * VGM_GRID_H;
         };
 
-        class AbilityTitleFrame: VGM_ctrlFrame
-        {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYTITLE;
-        };
-        class AbilityStackFrame: VGM_ctrlFrame
-        {
-            frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYSTACK;
-        };
-        class AbilityBackground: VGM_ctrlBackground
+        class BackgroundAbilityTitle: VGM_ctrlBackgroundTitle
         {
             x = DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W;
-            y = DISPLAY_Y + 6.5 * VGM_GRID_H;
+            y = DISPLAY_Y + 1 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+        };
+        class FrameAbilityTitle: VGM_ctrlFrame
+        {
+            x = DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 1 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+        };
+        class BackgroundAbility: VGM_ctrlBackground
+        {
+            x = DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 6 * VGM_GRID_H;
+            w = COLUMN_W * VGM_GRID_W;
+            h = (DISPLAY_H - 7) * VGM_GRID_H;
+        };
+        class FrameAbility: VGM_ctrlFrame
+        {
+            x = DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W;
+            y = DISPLAY_Y + 6 * VGM_GRID_H;
             w = COLUMN_W * VGM_GRID_W;
             h = (DISPLAY_H - 7) * VGM_GRID_H;
         };
@@ -81,7 +134,7 @@ class VGM_DisplayAbilities
             w = 0.75 * COLUMN_W * VGM_GRID_W;
             h = VGM_Y_H(5);
         };
-#define _ICON_W 18.5
+#define _ICON_W 18
         class StdStack: VGM_ctrlStack
         {
             idc = VGM_IDC_DISPLAYABILITIES_STDSTACK;
@@ -92,27 +145,22 @@ class VGM_DisplayAbilities
 #define _W (COLUMN_W - 2)
             class Controls
             {
-                class Background: VGM_ctrlBackground
-                {
-                    stackDisable = 1;
-                    x = 0;
-                    y = 0;
-                    w = COLUMN_W * VGM_GRID_W;
-                    h = (0.5 * DISPLAY_H - 9) * VGM_GRID_H;
-                };
                 class StdIconFrame: VGM_ctrlFrame
                 {
-                    frameColor[] = {1,1,1,1};
                     stackDisable = 1;
-                    frameIDC = VGM_IDC_DISPLAYABILITIES_STDULT_ICON;
+                    x = (_W - _ICON_W + 1) * VGM_GRID_W;
+                    y = 1 * VGM_GRID_H;
+                    w = (_ICON_W - 1) * VGM_GRID_W + pixelW;
+                    h = (_ICON_W - 1) * VGM_GRID_H + pixelH;
+                    style = ST_WITH_RECT;
                 };
                 class StdIcon: VGM_ctrlStaticPicture
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_ICON;
-                    text = "#(rgb,1,1,1)color(0,1,0,1)";
+                    text = "#(rgb,1,1,1)color(0,1,0,0.5)";
                     stackDisable = 1;
                     x = (_W - _ICON_W + 1) * VGM_GRID_W;
-                    y = 1.5 * VGM_GRID_H;
+                    y = 1 * VGM_GRID_H;
                     w = (_ICON_W - 1) * VGM_GRID_W;
                     h = (_ICON_W - 1) * VGM_GRID_H;
                 };
@@ -182,38 +230,54 @@ VGM_SET_Y(0);
         class Available: VGM_ctrlControlsTable
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLE;
-            rowHeight = (_ICON_W + 6) * VGM_GRID_H;
+            rowHeight = (_ICON_W + 9) * VGM_GRID_H;
             x = _X;
             y = VGM_Y_Y(DISPLAY_Y, 6.5);
             w = _W * VGM_GRID_W;
-            h = (DISPLAY_H - 7) * VGM_GRID_H;
+            h = (DISPLAY_H - 8) * VGM_GRID_H;
 VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
             class RowTemplate
             {
+                class Frame
+                {
+                    controlBaseClassPath[] = {"VGM_ctrlFrame"};
+                    columnX = 1 * VGM_GRID_W;
+                    controlOffsetY = 1 * VGM_GRID_H;
+                    columnW = (_W - 4) * VGM_GRID_W;
+                    controlH = (_ICON_W + 7) * VGM_GRID_H;
+                }
                 class Name
                 {
                     controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
                     columnX = 1 * VGM_GRID_W;
-                    controlOffsetY = VGM_Y_Y(0,0);
+                    controlOffsetY = (0.5 * _ICON_W) * VGM_GRID_H;
                     columnW = (_W - _ICON_W - 4) * VGM_GRID_W;
                     controlH = VGM_Y_H(5);
                 };
                 class Category: Name
                 {
-                    controlOffsetY = VGM_Y_Y(0,0);
+                    controlOffsetY = (0.5 * _ICON_W + 5) * VGM_GRID_H;
+                };
+                class FrameRight
+                {
+                    controlBaseClassPath[] = {"VGM_ctrlFrame"};
+                    columnX = (COLUMN_W - _ICON_W - 5) * VGM_GRID_W;
+                    controlOffsetY = 1 * VGM_GRID_H;
+                    columnW = (_ICON_W + 2) * VGM_GRID_W;
+                    controlH = (_ICON_W + 7) * VGM_GRID_H;
                 };
                 class Icon
                 {
                     controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
-                    columnX = (COLUMN_W - _ICON_W - 3) * VGM_GRID_W;
-                    controlOffsetY = 1 * VGM_GRID_H;
+                    columnX = (COLUMN_W - _ICON_W - 4) * VGM_GRID_W;
+                    controlOffsetY = 2 * VGM_GRID_H;
                     columnW = _ICON_W * VGM_GRID_W;
                     controlH = _ICON_W * VGM_GRID_H;
                 };
                 class Equip: Icon
                 {
                     controlBaseClassPath[] = {"VGM_ctrlButton"};
-                    controlOffsetY = _ICON_W * VGM_GRID_H;
+                    controlOffsetY = (_ICON_W + 2) * VGM_GRID_H;
                     controlH = 5 * VGM_GRID_H;
                 };
             };
@@ -267,8 +331,10 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                         };
                         class AbilityIconFrame: VGM_ctrlFrame
                         {
-                            frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYICON;
-                            frameColor[] = {1,1,1,1};
+                            x = (_W - 10) * VGM_GRID_W;
+                            y = 0.5 * VGM_GRID_H;
+                            w = 9 * VGM_GRID_W + pixelW;
+                            h = 9 * VGM_GRID_H + pixelH;
                         };
                         class AbilityIcon: VGM_ctrlStaticPicture
                         {
@@ -288,26 +354,24 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                     w = 0;
                     h = 0.5 * VGM_GRID_H;
                 };
-                class AbilityImageFrame: VGM_ctrlFrame
+                class FrameAbilityImage: VGM_ctrlFrame
                 {
-                    frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYIMAGE;
-                    frameColor[] = {1,1,1,1};
                     stackDisable = 1;
+                    x = 1.5 * VGM_GRID_W;
+                    y = 76 * VGM_GRID_H;
+                    w = (_W - 1) * VGM_GRID_W + pixelW;
+                    h = ((9/16) * _W - 1) * VGM_GRID_H + pixelH;
                 };
                 class AbilityImage: VGM_ctrlStaticPicture
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_ABILITYIMAGE;
-                    text = "#(rgb,1,1,1)color(0,1,0,1)";
+                    text = "#(rgb,1,1,1)color(0,1,0,0.5)";
                     x = 1.5 * VGM_GRID_W;
                     w = (_W - 1) * VGM_GRID_W;
                     h = ((9/16) * _W - 1) * VGM_GRID_H;
                 };
                 class _Spacer1: _Spacer
                 {
-                };
-                class AbilityEquipFrame: AbilityImageFrame
-                {
-                    frameIDC = VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
                 };
                 class AbilityEquip: VGM_ctrlButton
                 {

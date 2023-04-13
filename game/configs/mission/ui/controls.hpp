@@ -37,6 +37,11 @@ class VGM_ctrlBackground: VGM_ctrlStatic
     colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
 };
 
+class VGM_ctrlBackgroundTitle: VGM_ctrlBackground
+{
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
+};
+
 class VGM_ctrlStaticPicture: ctrlStaticPicture
 {
 };
@@ -60,7 +65,6 @@ class VGM_ctrlStructuredText : ctrlStructuredText
 
 class VGM_ctrlTitle: VGM_ctrlStructuredText
 {
-    colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
     size = VGM_FONT_M;
     class Attributes
     {
@@ -92,39 +96,15 @@ class VGM_ctrlControlsGroupNoScrollbars: ctrlControlsGroupNoScrollbars
 {
 };
 
-// Special frame that acts more precisely than the default frame
-class VGM_ctrlFrame: VGM_ctrlControlsGroup
+class VGM_ctrlFrame: VGM_ctrlStatic
 {
-    onLoad = _this spawn vgm_c_fnc_frame;
-    frameColor[] = {VGM_UI_COLOR_FRAME};
-    frameWidth = 0.5 * VGM_GRID_W;
-    frameHeight = 0.5 * VGM_GRID_H;
-    deleteable = 1;
-    x = 0;
-    y = 0;
-    w = 0;
-    h = 0;
-    class Controls
-    {
-        class BorderT: VGM_ctrlStatic
-        {
-            idc = VGM_IDC_CTRLFRAME_T;
-            colorBackground[] = {VGM_UI_COLOR_FRAME};
-            // coordinates set via function
-        };
-        class BorderL: BorderT
-        {
-            idc = VGM_IDC_CTRLFRAME_L;
-        };
-        class BorderR: BorderL
-        {
-            idc = VGM_IDC_CTRLFRAME_R;
-        };
-        class BorderB: BorderT
-        {
-            idc = VGM_IDC_CTRLFRAME_B;
-        };
-    };
+    style = ST_FRAME;
+    colorText[] = {0,0,0,1};
+};
+
+class VGM_ctrlFramePicture: VGM_ctrlFrame
+{
+    colorText[] = {1,1,1,1};
 };
 
 class VGM_ctrlButton: ctrlButton
