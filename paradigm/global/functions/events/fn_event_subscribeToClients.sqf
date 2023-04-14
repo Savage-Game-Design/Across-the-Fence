@@ -2,7 +2,7 @@
     File: fnc_event_subscribeToClients.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-04-07
+    Last Update: 2023-04-14
     Public: Yes
 
     Description:
@@ -52,22 +52,7 @@ if !(_clients isEqualTypeAll 0) then {
     _clients = _clients select {_x isEqualType 0};
 };
 
-private _machineIdRefersToLocalClient = {
-       _x isEqualTo 0
-    || _x isEqualTo clientOwner
-    || isServer && _x isEqualTo 2
-    || _x < 0 && _x != -clientOwner
-};
-
-private _isListeningLocally = _clients findIf _machineIdRefersToLocalClient > -1;
-
 ["DEBUG", format ["New subscription to %1 on %2, with topic %3 (%4).", _event # 0, _clients, _event # 1]] call para_g_fnc_log;
-
-// Registering locally-relevant events as machine-specific events like this allows us to speed up local event triggering later
-// This is because we can bypass the global handler checks.
-if (_isListeningLocally) then {
-    _clients pushBackUnique clientOwner;
-};
 
 private _handlerId = [_clients, _event, _handler] call para_g_fnc_event_attachHandler;
 
