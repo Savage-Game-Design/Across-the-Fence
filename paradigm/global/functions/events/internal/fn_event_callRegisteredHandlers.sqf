@@ -30,4 +30,6 @@ private _eventListenersByOrigin = localNamespace getVariable "para_event_listene
 // See attachHandler for more information.
 private _handlerIdsToCall = flatten (_eventListenersByOrigin getOrDefault [_originMachineId, createHashMap] getOrDefault [_hashableEvent, []]);
 
+if (_handlerIdsToCall isEqualTo []) exitWith {};
+
 [_handlerIdsToCall, _originMachineId, _originalEvent, _data] call para_g_fnc_event_callHandlersById;
