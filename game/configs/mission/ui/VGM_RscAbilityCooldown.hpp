@@ -1,8 +1,3 @@
-#include "\a3\ui_f\hpp\defineCommonGrids.inc"
-import RscText;
-import RscPicture;
-import RscProgress;
-import RscStructuredText;
 #define ICON_SIZE 3
 #define DISPLAY_W (2 * ICON_SIZE + 0.5)
 #define DISPLAY_H ICON_SIZE

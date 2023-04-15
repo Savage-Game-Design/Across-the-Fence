@@ -1,3 +1,7 @@
+import RscText;
+import RscPicture;
+import RscProgress;
+import RscStructuredText;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
