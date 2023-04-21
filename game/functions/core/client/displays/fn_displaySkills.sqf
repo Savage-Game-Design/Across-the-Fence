@@ -6,35 +6,39 @@ switch _mode do {
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
         _ctrlSkills tvSetCurSel [0];
     };
+    // fill left panel with skill trees
     case "initSkills": {
         _params params ["_ctrlSkills"];
-        // TODO: Replace with actual skills
-        private _skills = [
-            "COMBAT", ["Rifleman", "Autorifleman", ["Machine Gunner", "Heavy Gunner"], "Sharpshooter", "Light Anti Tank", "Pointman"],
-            "UTILITY", ["Service Essentials", "Autorifleman"]
-        ];
-        private _fnc_addSkills = {
-            // Function to add skills recursively
-            params ["_path", "_list"];
-            private "_ind"; // Make variable visible for this scope
-            _list apply {
-                if (_x isEqualType "") then {
-                    // Category/Skill
-                    _ind = _ctrlSkills tvAdd [_path, _x];
-                } else {
-                    // List of subcategories/skills
-                    // _ind should always be defined
-                    [_path + [_ind], _x] call _fnc_addSkills;
-                };
-            };
+
+        private _fnc_draw = {
+            params ["_skillTree", "_skillTreePath", ["_treeViewPath", []]];
+
+            _treeViewPath pushBack (_ctrlSkills tvAdd [_treeViewPath, _skillTree get "displayName"]);
+            _ctrlSkills tvSetData [_treeViewPath, str _skillTreePath];
+
+            {
+                [_y, (_skillTreePath + [_x]), +_treeViewPath] call _fnc_draw;
+            } forEach (_skillTree get "subtreesHash");
         };
-        [[], _skills] call _fnc_addSkills;
+
+        // ensure that we display tabs in config order, hashmaps are unordered
+        private _skillTreeClasses = "true" configClasses (missionConfigFile >> "vgm_skillTrees") apply {configName _x};
+        private _skillTreesHashMap = missionNamespace getVariable "vgm_skills_treesHashMap";
+        {
+            private _skillTree = _skillTreesHashMap get _x;
+            [_skillTree, [_x]] call _fnc_draw;
+        } forEach _skillTreeClasses;
     };
+    // fill right panel with skill cards
     case "selectSkill":{
         _params params ["_ctrlSkills", "_path"];
         private _display = ctrlParent _ctrlSkills;
         private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
         private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
+
+        private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _path);
+        private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
+
         // Get the appropate action for the selected entry
         switch (count _path) do {
             case 1: {
@@ -44,27 +48,18 @@ switch _mode do {
             // TODO: Skill trees, Subtrees
         };
 
-        // TODO: Get skills
-        _skills = [
-            // Level 1
-            ["Minor Passive<br/>-5% Weapon Sway", "Minor Passive<br/>+5% Reload Speed"],
-            // Level 2
-            ["Moderate Passive<br/>+25% Ammunition", "Loadout Upgrade<br/>Advanced Autorifleman", "Minor Passive<br/>+10% Stamina"],
-            // Level 3
-            ["Major Passive<br/>-15% Recoil", "Standard Ability<br/>Quick Change"],
-            // Ultimate
-            ["Ultimate Ability<br/>Heads Down!"]
-        ];
         // Remove all old controls
-
         allControls _ctrlSkillTree apply { ctrlDelete _x };
         // Save some coordinates for later use
         ctrlPosition _ctrlSkillTree params ["", "", "_wSkillTree"];
         private _wSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "w");
         private _hSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "h");
         private _hBranchV = getNumber (missionConfigFile >> "VGM_ctrlSkillTreeBranchV" >> "h");
+
         // Start adding from Ultimate to Lowest Level skill
+        private _skills = +(_skillTree get "skills");
         reverse _skills;
+
         private _xPos = 0;
         private _yPos = 0;
         private _previousSkillCount = -1;
@@ -92,14 +87,17 @@ switch _mode do {
                 // spacing below horizontal line
                 _yPos = _yPos + 3 * VGM_GRID_H;
             };
+
             // Center the controls
             _xPos = switch (count _levelSkills) do {
                 case 1: { 0.5 * _wSkillTree - 0.5 * _wSkill };
                 case 2: { 1/3 * _wSkillTree - 0.5 * _wSkill };
                 default { 0 };
             };
+
             // Iterate over the skills of the current level
             _levelSkills apply {
+                private _skill = _x;
                 private _xLineV = _xPos + 0.5 * _wSkill - 0.5 * VGM_GRID_W;
                 if (_forEachIndex > 0) then {
                     // Draw a vertical line into the top of the skill connecting
@@ -116,13 +114,12 @@ switch _mode do {
                 _ctrlSkill ctrlSetPosition [_xPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
                 private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
-                _ctrlDescription ctrlSetStructuredText parseText _x;
+                _ctrlDescription ctrlSetStructuredText parseText (_skill get "displayName");
 
                 private _ctrlUnlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
 
                 private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
-                private _skillCost = -1; // TODO: Get actual cost
-                _ctrlCost ctrlSetText format ["%1 SP", _skillCost];
+                _ctrlCost ctrlSetText format ["%1 SP", _skill get "cost"];
 
                 // Create a vertical line going into the bottom of the skill
                 // and connecting it to the horizontal line below

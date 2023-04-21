@@ -3,7 +3,7 @@
     File: fn_openSkillTree.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-02-25
+    Last Update: 2023-04-21
     Public: No
 
     Description:
@@ -18,6 +18,10 @@
     Example(s):
         [] call vgm_c_fnc_skills_openSkillTree.sqf
  */
+
+if (true) exitWith {
+    findDisplay 46 createDisplay "VGM_DisplaySkills";
+};
 
 // #define DEBUG_PAINT_TREE_LAYOUT
 
