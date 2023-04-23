@@ -2,6 +2,7 @@ class VGM_DisplaySkills
 {
     idd = VGM_IDD_DISPLAYSKILLS;
     onLoad = VGM_UIEH(onLoad,Skills);
+    onUnload = VGM_UIEH(onUnload,Skills);
     class ControlsBackground
     {
         class Background: VGM_ctrlStatic

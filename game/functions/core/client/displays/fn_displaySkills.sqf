@@ -4,13 +4,41 @@ params ["_mode", "_params"];
 _this = _params;
 
 switch _mode do {
-    case "onLoad":{
+    case "onLoad": {
         params ["_display"];
+
+        vgm_skills_ui_currentSkillTree = createHashMap;
+        vgm_skills_ui_currentSkill = createHashMap;
+
+        vgm_skills_ui_learntHandlerId = ["vgm_skills_learnt", [_display, {
+            params ["", "_display"];
+            ["refreshUI", _display] call vgm_c_fnc_displaySkills;
+        }]] call para_g_fnc_event_subscribeLocal;
+
+        ["refreshUI", _display] call vgm_c_fnc_displaySkills;
+    };
+
+    case "onUnload": {
+        [vgm_skills_ui_learntHandlerId] call para_g_fnc_event_unsubscribe;
+
+        vgm_skills_ui_currentSkillTree = nil;
+        vgm_skills_ui_currentSkill = nil;
+
+        vgm_skills_ui_learntHandlerId = nil;
+    };
+
+    case "refreshUI": {
+        params ["_display"];
+
+        "Refreshing Skills display" call vgm_g_fnc_logInfo;
+
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
-        _ctrlSkills tvSetCurSel [0];
+        _ctrlSkills tvSetCurSel ([[0], tvCurSel _ctrlSkills] select (vgm_skills_ui_currentSkillTree isNotEqualTo createHashMap));
 
         ["updateSpAvailableHeader", _display] call vgm_c_fnc_displaySkills;
+        ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
     };
+
     // fill left panel with skill trees
     case "initSkillTrees": {
         params ["_ctrlSkills"];
@@ -34,6 +62,7 @@ switch _mode do {
             [_skillTree, [_x]] call _fnc_draw;
         } forEach _skillTreeClasses;
     };
+
     // fill right panel with skill cards
     case "selectSkillTree": {
         params ["_ctrlSkills", "_path"];
@@ -44,14 +73,11 @@ switch _mode do {
         private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _path);
         private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
+        vgm_skills_ui_currentSkillTree = _skillTree;
+        vgm_skills_ui_currentSkill = createHashMap;
+
         // Update header
-        [
-            "setSkillTreeHeader",
-            [
-                _display,
-                [format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _skillTree get "displayName"], _skillTree get "description"]
-            ]
-        ] call vgm_c_fnc_displaySkills;
+        ["updateSkillTreeHeader",_display] call vgm_c_fnc_displaySkills;
 
         // Remove all old controls
         allControls _ctrlSkillTree apply { ctrlDelete _x };
@@ -172,24 +198,20 @@ switch _mode do {
         _ctrlBranchNameName ctrlSetText (_ctrlSkills tvText (tvCurSel _ctrlSkills));
     };
 
-    case "setSkillTreeHeader": {
-        params ["_display", "_headerParams", ["_skill", createHashMap]];
-        _headerParams params ["_title", "_description"];
+    case "updateSkillTreeHeader": {
+        params ["_display"];
 
         private _ctrlDescriptionTitle = _display displayCtrl VGM_IDC_DISPLAYSKILLS_TITLE;
         private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
         private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
 
-        _ctrlUnlock setVariable ["vgm_params", nil];
+        // render Skill info
+        if (vgm_skills_ui_currentSkill isNotEqualTo createHashMap) exitWith {
+            private _skill = vgm_skills_ui_currentSkill;
 
-        // Update header
-        _ctrlDescriptionTitle ctrlSetText _title;
-        _ctrlDescription ctrlSetStructuredText parseText _description; // Max length approx 199
+            _ctrlDescriptionTitle ctrlSetText (_skill get "displayName");
+            _ctrlDescription ctrlSetStructuredText parseText (_skill get "description");
 
-        if (_skill isEqualTo createHashMap) then {
-            _ctrlUnlock ctrlEnable false;
-            _ctrlUnlock ctrlSetText "";
-        } else {
             if (_skill call vgm_g_fnc_skills_isKnown) exitWith {
                 _ctrlUnlock ctrlSetText localize "STR_VGM_SKILLS_UI_KNOWN";
                 _ctrlUnlock ctrlEnable false;
@@ -197,6 +219,18 @@ switch _mode do {
 
             _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
             _ctrlUnlock ctrlEnable ([player, _skill] call vgm_g_fnc_skills_canLearn);
+            _ctrlUnlock setVariable ["vgm_params", [_skill]];
+        };
+
+        // render Skill Tree info
+        if (vgm_skills_ui_currentSkillTree isNotEqualTo createHashMap) exitWith {
+            private _skillTree = vgm_skills_ui_currentSkillTree;
+
+            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _skillTree get "displayName"]);
+            _ctrlDescription ctrlSetStructuredText parseText (_skillTree get "description");
+
+            _ctrlUnlock ctrlEnable false;
+            _ctrlUnlock ctrlSetText "";
         };
     };
 
@@ -213,10 +247,32 @@ switch _mode do {
         private _ctrlSkill = ctrlParentControlsGroup _ctrlUnlock;
         (_ctrlSkill getVariable "vgm_params") params ["_skill"];
 
-        [
-            "setSkillTreeHeader",
-            [ctrlParent _ctrlUnlock, [_skill get "displayName", _skill get "description"], _skill]
-        ] call vgm_c_fnc_displaySkills;
+        vgm_skills_ui_currentSkill = _skill;
+
+        ["updateSkillTreeHeader", ctrlParent _ctrlUnlock] call vgm_c_fnc_displaySkills;
+    };
+
+    case "unlockSkill": {
+        params ["_ctrlUnlock"];
+        (_ctrlUnlock getVariable "vgm_params") params [["_skill", createHashMap]];
+        if (_skill isEqualTo createHashMap) exitWith {
+            "unlockSkill executed with no skill selected" call vgm_g_fnc_logWarning;
+        };
+
+        // confirm skill selection
+        // TODO this would need some sort of fitting UI design
+        [ctrlParent _ctrlUnlock, _skill] spawn {
+            params ["_display", "_skill"];
+            private _learn = [parseText ([
+                "Do you want to learn: <t color='#ff0000'>", _skill get "displayName", "</t><br/>",
+                format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", call vgm_c_fnc_skills_getSkillPoints, _skill get "cost"],
+                ["<br/>Can't learn!", ""] select ([player, _skill] call vgm_g_fnc_skills_canLearn)
+            ] joinString ""), "Confirm", true, true, _display] call BIS_fnc_guiMessage;
+            // check if confirmed
+            if (!_learn) exitWith {};
+
+            [_skill, _display] call vgm_c_fnc_skills_requestSkillLearn;
+        };
     };
 
     default {
