@@ -83,7 +83,6 @@ class vgm_c
         class init_info_panel_handler_loop {};
         class stack_controls {};
         class toggle_controls_group_overlay {};
-        class frame {};
     };
 
     class shared_hub
