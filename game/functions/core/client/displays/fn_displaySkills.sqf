@@ -1,9 +1,11 @@
 #include "macros.inc"
 
 params ["_mode", "_params"];
+_this = _params;
+
 switch _mode do {
     case "onLoad":{
-        _params params ["_display"];
+        params ["_display"];
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
         _ctrlSkills tvSetCurSel [0];
 
@@ -11,7 +13,7 @@ switch _mode do {
     };
     // fill left panel with skill trees
     case "initSkillTrees": {
-        _params params ["_ctrlSkills"];
+        params ["_ctrlSkills"];
 
         private _fnc_draw = {
             params ["_skillTree", "_skillTreePath", ["_treeViewPath", []]];
@@ -34,7 +36,7 @@ switch _mode do {
     };
     // fill right panel with skill cards
     case "selectSkillTree": {
-        _params params ["_ctrlSkills", "_path"];
+        params ["_ctrlSkills", "_path"];
         private _display = ctrlParent _ctrlSkills;
 
         private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
@@ -171,12 +173,14 @@ switch _mode do {
     };
 
     case "setSkillTreeHeader": {
-        _params params ["_display", "_headerParams", ["_skill", createHashMap]];
+        params ["_display", "_headerParams", ["_skill", createHashMap]];
         _headerParams params ["_title", "_description"];
 
         private _ctrlDescriptionTitle = _display displayCtrl VGM_IDC_DISPLAYSKILLS_TITLE;
         private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
         private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
+
+        _ctrlUnlock setVariable ["vgm_params", nil];
 
         // Update header
         _ctrlDescriptionTitle ctrlSetText _title;
@@ -197,7 +201,7 @@ switch _mode do {
     };
 
     case "updateSpAvailableHeader": {
-        _params params ["_display"];
+        params ["_display"];
 
         private _ctrlSpHeader = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SPAVAILABLE;
 
@@ -205,7 +209,7 @@ switch _mode do {
     };
 
     case "focusSkill": {
-        _params params ["_ctrlUnlock"];
+        params ["_ctrlUnlock"];
         private _ctrlSkill = ctrlParentControlsGroup _ctrlUnlock;
         (_ctrlSkill getVariable "vgm_params") params ["_skill"];
 
