@@ -13,12 +13,7 @@ class Header
     maxPlayers = 24;
 };
 
-respawn = "BASE";
-respawnDelay = 20;
-respawnDialog = 0;
-respawnButton = 1;
-respawnOnStart = -1;
-respawnTemplates[] = { "MenuPosition" };
+#include "respawn.hpp"
 
 onPauseScript = "";
 
@@ -52,9 +47,13 @@ enableDebugConsole[] = {
     "76561197974575839",
     //Aceb
     "76561198022706949",
+    //Xorberax
+    "76561198008065973",
+    // veteran29
+    "76561197993041837"
 };
 
-allowFunctionsLog = 1;
+allowFunctionsLog = 0;
 allowFunctionsRecompile = 1;
 joinUnassigned = 0;
 forceRotorLibSimulation = 0;

@@ -2,7 +2,7 @@
     File: fn_db_typed_save.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2022-11-13
+    Last Update: 2023-01-05
     Public: No
 
     Description:
@@ -14,7 +14,7 @@
         2: Data - Data for the entry [HASHMAP]
 
     Returns:
-        Nothing
+        0: Data saved to the database [HASHMAP]
 
     Example(s):
         private _playerUID = getPlayerUID player;
@@ -34,6 +34,7 @@ if !(_data isEqualType createHashMap) exitWith {
 
 // don't overwrite existing key
 private _vgmID = format ["vgm_%1_%2", _key, _id];
+
 // set key and id only if not present in data already
 _data set ["key", _key, true];
 _data set ["id", _vgmID, true];
@@ -41,4 +42,5 @@ _data set ["id", _vgmID, true];
 _data set ["version", vgm_version];
 
 private _formattedID = format ["%1_%2", _key, _id];
-[_formattedID, _data] call vgm_s_fnc_db_save;
+
+[_formattedID, _data] call vgm_s_fnc_db_save //result

@@ -127,10 +127,29 @@ class para_g
 		class serialize_struct {};
 	};
 
-	class events
+    class events
+    {
+        PARA_GLOBAL_PATH(\events);
+        class event_attachHandler {};
+        class event_callHandlersById {};
+        class event_callRegisteredHandlers {};
+        class event_convertEventToHashableEvent {};
+        class event_handlePlayerDisconnected {};
+        class event_healthCheck {};
+        class event_startForwardingMatchingEventsToServer {};
+        class event_stopForwardingMatchingEventsToServer {};
+        class event_subscribe {};
+        class event_subscribeLocal {};
+        class event_subscribeServer {};
+        class event_system_init {};
+        class event_trigger {};
+        class event_unsubscribe {};
+    };
+
+	class events_local_legacy
 	{
-		PARA_GLOBAL_PATH(\events);
-		class event_add_handler {};
+		PARA_GLOBAL_PATH(\events_local_legacy);
+        class event_add_handler {};
 		class event_dispatch_immediate {};
 		class event_dispatch {};
 		class event_dispatcher_job {};
@@ -221,12 +240,23 @@ class para_g
 		class parse_pos_config {};
 		class vehicle_will_collide_at_pos {};
 		class unit_is_incapacitated {};
+        class get_group_majority_position {};
 	};
 	class tools
 	{
 		PARA_GLOBAL_PATH(\tools);
 		class is_valid_axe_target {};
 	};
+
+    class tracked_state
+    {
+        PARA_GLOBAL_PATH(\tracked_state);
+        class trackedState_callHandlers {};
+        class trackedState_getData {};
+        class trackedState_setLocal {};
+        class trackedState_whenChanged {};
+        class trackedState_whenEqual {};
+    };
 };
 
 #endif

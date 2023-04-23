@@ -2,7 +2,7 @@
     File: fn_db_get.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2022-11-13
+    Last Update: 2023-01-05
     Public: No
 
     Description:
@@ -22,5 +22,6 @@
 params ["_key", "_id"];
 
 private _variable = format ["vgm_%1_%2", _key, _id];
+private _result = missionProfileNamespace getVariable [_variable, createHashMap];
 
-missionProfileNamespace getVariable [_variable, createHashMap]
++_result
