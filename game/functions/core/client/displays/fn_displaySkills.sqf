@@ -1,13 +1,16 @@
 #include "macros.inc"
+
 params ["_mode", "_params"];
 switch _mode do {
     case "onLoad":{
         _params params ["_display"];
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
         _ctrlSkills tvSetCurSel [0];
+
+        ["updateSpAvailableHeader", _display] call vgm_c_fnc_displaySkills;
     };
     // fill left panel with skill trees
-    case "initSkills": {
+    case "initSkillTrees": {
         _params params ["_ctrlSkills"];
 
         private _fnc_draw = {
@@ -30,23 +33,23 @@ switch _mode do {
         } forEach _skillTreeClasses;
     };
     // fill right panel with skill cards
-    case "selectSkill":{
+    case "selectSkillTree": {
         _params params ["_ctrlSkills", "_path"];
         private _display = ctrlParent _ctrlSkills;
-        private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
+
         private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
 
         private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _path);
         private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
-        // Get the appropate action for the selected entry
-        switch (count _path) do {
-            case 1: {
-                // Top level category
-                _ctrlDescription ctrlSetStructuredText parseText "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolore."; // Max length approx 199
-            };
-            // TODO: Skill trees, Subtrees
-        };
+        // Update header
+        [
+            "setSkillTreeHeader",
+            [
+                _display,
+                [format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _skillTree get "displayName"], _skillTree get "description"]
+            ]
+        ] call vgm_c_fnc_displaySkills;
 
         // Remove all old controls
         allControls _ctrlSkillTree apply { ctrlDelete _x };
@@ -98,6 +101,7 @@ switch _mode do {
             // Iterate over the skills of the current level
             _levelSkills apply {
                 private _skill = _x;
+
                 private _xLineV = _xPos + 0.5 * _wSkill - 0.5 * VGM_GRID_W;
                 if (_forEachIndex > 0) then {
                     // Draw a vertical line into the top of the skill connecting
@@ -111,21 +115,30 @@ switch _mode do {
                 };
                 // Create controls for skills of this level
                 private _ctrlSkill = _display ctrlCreate ["VGM_ctrlSkill", -1, _ctrlSkillTree];
+                _ctrlSkill setVariable ["vgm_params", [_skill]];
+                if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
                 _ctrlSkill ctrlSetPosition [_xPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
+
                 private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
                 _ctrlDescription ctrlSetStructuredText parseText (_skill get "displayName");
 
                 private _ctrlUnlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
+                _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["focusSkill", _this] call vgm_c_fnc_displaySkills}];
+                if (_skill call vgm_g_fnc_skills_isKnown) then {
+                    _ctrlUnlock ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
+                };
 
                 private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
                 _ctrlCost ctrlSetText format ["%1 SP", _skill get "cost"];
 
                 // Create a vertical line going into the bottom of the skill
                 // and connecting it to the horizontal line below
-                private _ctrlSkillLineVBottom = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
-                _ctrlSkillLineVBottom ctrlSetPosition [_xLineV, _yPos + _hSkill];
-                _ctrlSkillLineVBottom ctrlCommit 0;
+                if (_skill call vgm_g_fnc_skills_canSee) then {
+                    private _ctrlSkillLineVBottom = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
+                    _ctrlSkillLineVBottom ctrlSetPosition [_xLineV, _yPos + _hSkill];
+                    _ctrlSkillLineVBottom ctrlCommit 0;
+                };
 
                 _xPos = _xPos + _wSkill + 1 * VGM_GRID_W;
             };
@@ -139,6 +152,7 @@ switch _mode do {
         _ctrlSkillLineHRoot ctrlSetPositionW _wRootLine;
         _ctrlSkillLineHRoot ctrlSetPosition [0.5 * _wSkillTree - 0.5 * _wRootLine, _yPos, _wRootLine, 1 * VGM_GRID_H];
         _ctrlSkillLineHRoot ctrlCommit 0;
+
         // Vertical line going into the root
         private _ctrlSkillLineVRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
         _yPos = _yPos + 1 * VGM_GRID_H;
@@ -154,5 +168,54 @@ switch _mode do {
         _ctrlBranchName ctrlCommit 0;
         private _ctrlBranchNameName = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
         _ctrlBranchNameName ctrlSetText (_ctrlSkills tvText (tvCurSel _ctrlSkills));
+    };
+
+    case "setSkillTreeHeader": {
+        _params params ["_display", "_headerParams", ["_skill", createHashMap]];
+        _headerParams params ["_title", "_description"];
+
+        private _ctrlDescriptionTitle = _display displayCtrl VGM_IDC_DISPLAYSKILLS_TITLE;
+        private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
+        private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
+
+        // Update header
+        _ctrlDescriptionTitle ctrlSetText _title;
+        _ctrlDescription ctrlSetStructuredText parseText _description; // Max length approx 199
+
+        if (_skill isEqualTo createHashMap) then {
+            _ctrlUnlock ctrlEnable false;
+            _ctrlUnlock ctrlSetText "";
+        } else {
+            if (_skill call vgm_g_fnc_skills_isKnown) exitWith {
+                _ctrlUnlock ctrlSetText localize "STR_VGM_SKILLS_UI_KNOWN";
+                _ctrlUnlock ctrlEnable false;
+            };
+
+            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
+            _ctrlUnlock ctrlEnable ([player, _skill] call vgm_g_fnc_skills_canLearn);
+        };
+    };
+
+    case "updateSpAvailableHeader": {
+        _params params ["_display"];
+
+        private _ctrlSpHeader = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SPAVAILABLE;
+
+        _ctrlSpHeader ctrlSetText format [localize "STR_VGM_SKILLS_UI_SP_AVAILABLE", [] call vgm_c_fnc_skills_getSkillPoints];
+    };
+
+    case "focusSkill": {
+        _params params ["_ctrlUnlock"];
+        private _ctrlSkill = ctrlParentControlsGroup _ctrlUnlock;
+        (_ctrlSkill getVariable "vgm_params") params ["_skill"];
+
+        [
+            "setSkillTreeHeader",
+            [ctrlParent _ctrlUnlock, [_skill get "displayName", _skill get "description"], _skill]
+        ] call vgm_c_fnc_displaySkills;
+    };
+
+    default {
+        format ["Invalid mode provided - %1", _mode] call vgm_g_fnc_logError;
     };
 };

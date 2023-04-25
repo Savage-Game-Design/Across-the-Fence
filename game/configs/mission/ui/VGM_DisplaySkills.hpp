@@ -35,8 +35,8 @@ class VGM_DisplaySkills
         class Skills: VGM_ctrlTree
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLS;
-            onLoad = VGM_UIEH(initSkills,Skills);
-            onTreeSelChanged = VGM_UIEH(selectSkill,Skills);
+            onLoad = VGM_UIEH(initSkillTrees,Skills);
+            onTreeSelChanged = VGM_UIEH(selectSkillTree,Skills);
             x = VGM_GRID_MIN_X + 1 * VGM_GRID_H;
             y = VGM_GRID_MIN_Y + 6 * VGM_GRID_H;
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
@@ -67,11 +67,13 @@ class VGM_DisplaySkills
         {
             idc = VGM_IDC_DISPLAYSKILLS_UNLOCK;
             text = "Unlock - 3 SP";
+            onButtonClick = VGM_UIEH(unlockSkill,Skills);
             x = CENTER_X + (VGM_DISPLAYSKILLS_PAGE_W - 49) * VGM_GRID_W;
             y = VGM_GRID_MIN_Y + 6 * VGM_GRID_H;
             w = 50 * VGM_GRID_W;
             h = 5 * VGM_GRID_H;
             colorBackground[] = {0.7,0.7,0.7,1};
+            colorDisabled[] = {0,0,0,1};
         };
         class Description: VGM_ctrlStructuredText
         {
