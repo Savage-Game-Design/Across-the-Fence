@@ -3,7 +3,7 @@
     File: fn_skills_active_openAssignMenu.sqf
     Author: veteran29
     Date: 2023-01-30
-    Last Update: 2023-02-02
+    Last Update: 2023-04-25
     Public: No
 
     Description:
@@ -18,6 +18,12 @@
     Example(s):
         [] call vgm_c_fnc_skills_active_openAssignMenu
  */
+
+if (true) exitWith {
+    private _display = findDisplay 46 createDisplay "VGM_DisplayAbilities";
+    // prevent user input
+    _display displayAddEventhandler["KeyDown", {(_this select 1) != 1}];
+};
 
 // #define DEBUG_PAINT_TREE_LAYOUT
 
