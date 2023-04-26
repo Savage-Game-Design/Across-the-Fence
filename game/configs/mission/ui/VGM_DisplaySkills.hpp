@@ -57,7 +57,7 @@ class VGM_DisplaySkills
         {
             idc = VGM_IDC_DISPLAYSKILLS_TITLE;
             text = "Branch/Skill Title";
-            size = VGM_FONT_L * VGM_GRID_H;
+            size = VGM_FONT_L;
             x = CENTER_X + 1 * VGM_GRID_W;
             y = VGM_GRID_MIN_Y + 6 * VGM_GRID_H;
             w = (VGM_DISPLAYSKILLS_PAGE_W - 50) * VGM_GRID_W;
@@ -84,7 +84,7 @@ class VGM_DisplaySkills
             w = VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
             h = 16 * VGM_GRID_H;
             colorBackground[] = {0.8,0.8,0.8,1};
-            size = VGM_FONT_M * VGM_GRID_H;
+            size = VGM_FONT_M;
         };
         class SkillTree: VGM_ctrlControlsGroupNoScrollbars
         {

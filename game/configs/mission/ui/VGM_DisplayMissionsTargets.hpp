@@ -50,13 +50,13 @@ class VGM_DisplayMissionsTargets
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;
-                    size = VGM_FONT_L * VGM_GRID_H;
+                    size = VGM_FONT_L;
                 };
                 class Mods: Name
                 {
                     idc = VGM_IDC_DISPLAYMISSIONSTARGET_MODS;
                     text = "dedTargetBoxMods";
-                    size = VGM_FONT_M * VGM_GRID_H;
+                    size = VGM_FONT_M;
                     stackFill = 1;
                 };
                 class Accept: VGM_ctrlButton

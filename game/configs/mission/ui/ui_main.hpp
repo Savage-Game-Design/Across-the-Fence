@@ -6,8 +6,8 @@
 #include "ctrls.hpp"
 #include "VGM_DisplaySkills.hpp"
 #include "VGM_DisplayAbilities.hpp"
-// #include "VGM_DisplayMissions.hpp"
-// #include "VGM_DisplayMissionsTargets.hpp"
+#include "VGM_DisplayMissions.hpp"
+#include "VGM_DisplayMissionsTargets.hpp"
 class RscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"

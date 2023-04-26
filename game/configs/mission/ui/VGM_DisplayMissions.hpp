@@ -87,7 +87,7 @@ class VGM_DisplayMissions
                 {
                     idc = VGM_IDC_DISPLAYMISSIONS_NAME;
                     text = "Recon";
-                    size = VGM_FONT_L * VGM_GRID_H;
+                    size = VGM_FONT_L;
                     y = 5 * VGM_GRID_H;
                 };
                 class Image: VGM_ctrlButtonPicture
