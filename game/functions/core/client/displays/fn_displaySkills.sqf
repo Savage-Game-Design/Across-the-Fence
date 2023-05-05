@@ -7,24 +7,22 @@ switch _mode do {
     case "onLoad": {
         params ["_display"];
 
-        vgm_skills_ui_currentSkillTree = createHashMap;
-        vgm_skills_ui_currentSkill = createHashMap;
+        _display setVariable ["vgm_currentSkillTree", createHashMap];
+        _display setVariable ["vgm_currentSkill", createHashMap];
 
-        vgm_skills_ui_learntHandlerId = ["vgm_skills_learnt", [_display, {
+        private _handlerId = ["vgm_skills_learnt", [_display, {
             params ["", "_display"];
             ["refreshUI", _display] call vgm_c_fnc_displaySkills;
         }]] call para_g_fnc_event_subscribeLocal;
+        _display setVariable ["vgm_skills_ui_learntHandlerId", _handlerId];
 
         ["refreshUI", _display] call vgm_c_fnc_displaySkills;
     };
 
     case "onUnload": {
-        [vgm_skills_ui_learntHandlerId] call para_g_fnc_event_unsubscribe;
-
-        vgm_skills_ui_currentSkillTree = nil;
-        vgm_skills_ui_currentSkill = nil;
-
-        vgm_skills_ui_learntHandlerId = nil;
+        params ["_display"];
+        systemChat str _display;
+        [_display getVariable "vgm_skills_ui_learntHandlerId"] call para_g_fnc_event_unsubscribe;
     };
 
     case "refreshUI": {
@@ -33,7 +31,7 @@ switch _mode do {
         "Refreshing Skills display" call vgm_g_fnc_logInfo;
 
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
-        _ctrlSkills tvSetCurSel ([[0], tvCurSel _ctrlSkills] select (vgm_skills_ui_currentSkillTree isNotEqualTo createHashMap));
+        _ctrlSkills tvSetCurSel ([[0], tvCurSel _ctrlSkills] select ((_display getVariable "vgm_currentSkillTree") isNotEqualTo createHashMap));
 
         ["updateSpAvailableHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
@@ -73,8 +71,8 @@ switch _mode do {
         private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _path);
         private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
-        vgm_skills_ui_currentSkillTree = _skillTree;
-        vgm_skills_ui_currentSkill = createHashMap;
+        _display setVariable ["vgm_currentSkillTree", _skillTree];
+        _display setVariable ["vgm_currentSkill", createHashMap];
 
         // Update header
         ["updateSkillTreeHeader",_display] call vgm_c_fnc_displaySkills;
@@ -206,28 +204,28 @@ switch _mode do {
         private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
 
         // render Skill info
-        if (vgm_skills_ui_currentSkill isNotEqualTo createHashMap) exitWith {
-            private _skill = vgm_skills_ui_currentSkill;
+        private _currentSkill = _display getVariable "vgm_currentSkill";
+        if (_currentSkill isNotEqualTo createHashMap) exitWith {
 
-            _ctrlDescriptionTitle ctrlSetText (_skill get "displayName");
-            _ctrlDescription ctrlSetStructuredText parseText (_skill get "description");
+            _ctrlDescriptionTitle ctrlSetText (_currentSkill get "displayName");
+            _ctrlDescription ctrlSetStructuredText parseText (_currentSkill get "description");
 
-            if (_skill call vgm_g_fnc_skills_isKnown) exitWith {
+            if (_currentSkill call vgm_g_fnc_skills_isKnown) exitWith {
                 _ctrlUnlock ctrlSetText localize "STR_VGM_SKILLS_UI_KNOWN";
                 _ctrlUnlock ctrlEnable false;
             };
 
             _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
-            _ctrlUnlock ctrlEnable ([player, _skill] call vgm_g_fnc_skills_canLearn);
-            _ctrlUnlock setVariable ["vgm_params", [_skill]];
+            _ctrlUnlock ctrlEnable ([player, _currentSkill] call vgm_g_fnc_skills_canLearn);
+            _ctrlUnlock setVariable ["vgm_params", [_currentSkill]];
         };
 
         // render Skill Tree info
-        if (vgm_skills_ui_currentSkillTree isNotEqualTo createHashMap) exitWith {
-            private _skillTree = vgm_skills_ui_currentSkillTree;
+        private _currentSkillTre = _display getVariable "vgm_currentSkillTree";
+        if (_currentSkillTre isNotEqualTo createHashMap) exitWith {
 
-            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _skillTree get "displayName"]);
-            _ctrlDescription ctrlSetStructuredText parseText (_skillTree get "description");
+            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _currentSkillTre get "displayName"]);
+            _ctrlDescription ctrlSetStructuredText parseText (_currentSkillTre get "description");
 
             _ctrlUnlock ctrlEnable false;
             _ctrlUnlock ctrlSetText "";
@@ -244,10 +242,11 @@ switch _mode do {
 
     case "focusSkill": {
         params ["_ctrlUnlock"];
+        private _display = ctrlParent _ctrlUnlock;
         private _ctrlSkill = ctrlParentControlsGroup _ctrlUnlock;
         (_ctrlSkill getVariable "vgm_params") params ["_skill"];
 
-        vgm_skills_ui_currentSkill = _skill;
+        _display setVariable ["vgm_currentSkill", _skill];
 
         ["updateSkillTreeHeader", ctrlParent _ctrlUnlock] call vgm_c_fnc_displaySkills;
     };
