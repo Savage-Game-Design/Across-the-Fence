@@ -19,4 +19,18 @@
             <Original>You've wandered too far...</Original>
         </Key>
     </Package>
+    <Package name="Skills UI">
+        <Key ID="STR_VGM_SKILLS_UI_SKILL_TREE">
+            <Original>%1 Skill Tree</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_UNLOCK">
+            <Original>Unlock - %1 SP</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_KNOWN">
+            <Original>Known</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_SP_AVAILABLE">
+            <Original>%1 Skill Points Available</Original>
+        </Key>
+    </Package>
 </Project>
