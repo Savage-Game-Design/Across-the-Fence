@@ -2,7 +2,7 @@
     File: fn_openSkillTree.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-04-25
+    Last Update: 2023-05-05
     Public: No
 
     Description:
@@ -18,4 +18,4 @@
         [] call vgm_c_fnc_skills_openSkillTree.sqf
  */
 
-findDisplay 46 createDisplay "VGM_DisplaySkills";
+createDialog "VGM_DisplaySkills";
