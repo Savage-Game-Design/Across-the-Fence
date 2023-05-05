@@ -21,7 +21,6 @@ switch _mode do {
 
     case "onUnload": {
         params ["_display"];
-        systemChat str _display;
         [_display getVariable "vgm_skills_ui_learntHandlerId"] call para_g_fnc_event_unsubscribe;
     };
 
