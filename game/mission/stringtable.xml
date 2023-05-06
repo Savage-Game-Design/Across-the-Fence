@@ -32,5 +32,8 @@
         <Key ID="STR_VGM_SKILLS_UI_SP_AVAILABLE">
             <Original>%1 Skill Points Available</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_EQUIP">
+            <Original>Equip</Original>
+        </Key>
     </Package>
 </Project>
