@@ -1,3 +1,4 @@
+#include "macros.inc"
 /*
     File: fn_displayAbilities.sqf
     Author: Savage Game Design
@@ -16,19 +17,22 @@
     Example(s):
         [parameter] call vgm_c_fnc_displayAbilities
 */
-#include "macros.inc"
-#if __A3_DEBUG__
-diag_log ["fn_displayAbilities", _this];
-#endif
 #define SELF vgm_c_fnc_displayAbilities
+
+#if __A3_DEBUG__
+    diag_log ["fn_displayAbilities", _this];
+#endif
+
 params ["_mode", "_params"];
+_this = _params;
+
 switch _mode do {
     case "onLoad":{
-        _params params ["_display"];
+        params ["_display"];
         ["stdselect", _display displayCtrl VGM_IDC_DISPLAYABILITIES_STDTITLE] call SELF;
     };
     case "stdselect": {
-        _params params ["_ctrlStdSelect"];
+        params ["_ctrlStdSelect"];
         private _display = ctrlParent _ctrlStdSelect;
         private _ctrlAvailable = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLE;
         private _available = []; // TODO: Get list of abilities
@@ -59,9 +63,13 @@ switch _mode do {
 
     };
     case "ultselect": {
-        _params params ["_ctrlStdSelect"];
+        params ["_ctrlStdSelect"];
     };
     case "equip": {
-        _params params ["_ctrlRowEquip"];
+        params ["_ctrlRowEquip"];
+    };
+
+    default {
+        format ["Invalid mode provided - %1", _mode] call vgm_g_fnc_logError;
     };
 };
