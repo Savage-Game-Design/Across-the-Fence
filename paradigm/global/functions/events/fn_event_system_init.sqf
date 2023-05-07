@@ -2,7 +2,7 @@
     File: fn_event_system_init.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-04-07
+    Last Update: 2023-05-07
     Public: Yes
 
     Description:
@@ -67,4 +67,4 @@ if (isServer) then {
 };
 
 // Assumes the server has been set up with the event system already. This should be guaranteed by the mission.
-[] remoteExec ["para_s_fnc_event_registerClient", 2];
+[] remoteExecCall ["para_s_fnc_event_registerClient", 2];

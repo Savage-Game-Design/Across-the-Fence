@@ -26,9 +26,4 @@
 
 params ["_event", "_data", "_targets"];
 
-// Standardise event format
-if !(_event isEqualType []) then {
-    _event = [_event, ""]
-};
-
-[clientOwner, _event, _data] remoteExec ["para_g_fnc_event_remoteExec_trigger", _targets];
+[clientOwner, _event, _data] remoteExecCall ["para_g_fnc_event_remoteExec_trigger", _targets];

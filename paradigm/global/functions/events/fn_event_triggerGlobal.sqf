@@ -23,13 +23,6 @@
 
 params ["_event", "_data"];
 
-// Standardise event format
-if !(_event isEqualType []) then {
-    _event = [_event, ""]
-};
+[clientOwner, _event, _data] remoteExecCall ["para_g_fnc_event_remoteExec_trigger", -clientOwner];
 
-private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
-
-[clientOwner, _event, _data] remoteExec ["para_g_fnc_event_remoteExec_trigger", -clientOwner];
-
-[clientOwner, _hashableEvent, _event, _data] call para_g_fnc_event_callRegisteredHandlers;
+_this call para_g_fnc_event_triggerLocal;

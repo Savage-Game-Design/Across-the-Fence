@@ -18,7 +18,7 @@
         Nothing
 
     Example(s):
-        [clientOwner, "MyEventName", ["Content"]] remoteExec ["para_g_fnc_event_remoteExec_trigger", 0]
+        [clientOwner, "MyEventName", ["Content"]] remoteExecCall ["para_g_fnc_event_remoteExec_trigger", 0]
  */
 
 params ["_originClient", "_event", "_data"];
