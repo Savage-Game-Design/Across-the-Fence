@@ -1,8 +1,8 @@
 /*
-    File: fnc_event_triggerServerAndLocal.sqf
+    File: fn_event_triggerServerAndLocal.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-04-14
+    Last Update: 2023-05-07
     Public: Yes
 
     Description:

@@ -1,12 +1,12 @@
 /*
-    File: fnc_event_remoteExec_trigger.sqf
+    File: fn_event_remoteExec_trigger.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-04-13
+    Last Update: 2023-05-07
     Public: Yes
 
     Description:
-        Remote executed from another clien to trigger the given event.
+        Remote executed from another client to trigger the given event.
         Optional data parameter is sent with the event to those clients.
 
     Parameter(s):
@@ -18,8 +18,7 @@
         Nothing
 
     Example(s):
-        ["myCustomEvent", 3] call para_g_fnc_event_triggerLocal;
-        [["myCustomEvent", "ducks"], [getPlayerUID player]] call para_g_fnc_event_triggerLocal;
+        [clientOwner, "MyEventName", ["Content"]] remoteExec ["para_g_fnc_event_remoteExec_trigger", 0]
  */
 
 params ["_originClient", "_event", "_data"];

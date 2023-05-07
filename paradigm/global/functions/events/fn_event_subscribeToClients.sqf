@@ -1,8 +1,8 @@
 /*
-    File: fnc_event_subscribeToClients.sqf
+    File: fn_event_subscribeToClients.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-04-14
+    Last Update: 2023-05-07
     Public: Yes
 
     Description:
@@ -13,7 +13,8 @@
         - Specifying an event and topic, means only events with a matching topic will cause the callback to fire
 
         This immediately registers the handler, so that the next event received will invoke it.
-        It's safe to assume that once this function has been called, all
+        It's safe to assume that once this function has been called, all events emitted after this point will
+        result in the handler being called.
 
     Parameter(s):
         _clients - Where to listen for the event being fired from. Must be a numerical machine id, e.g returned by clientOwner [ARRAY]
