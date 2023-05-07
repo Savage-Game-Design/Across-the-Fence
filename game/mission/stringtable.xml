@@ -47,6 +47,9 @@
         <Key ID="STR_VGM_SKILLS_UI_EQUIP">
             <Original>Equip</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_EQUIPPED">
+            <Original>Equipped</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_COOLDOWN_LONG">
             <Original>%1 second cooldown</Original>
         </Key>

@@ -137,6 +137,12 @@ switch _mode do {
         private _ctrlEquip = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
 
         private _focusedSkill = _display getVariable "vgm_focusedSkill";
+
+        // disable the button if skill already equipped
+        private _skillSlot = _focusedSkill call VGM_C_fnc_skills_active_getSlot;
+        _ctrlEquip ctrlSetText localize (["STR_VGM_SKILLS_UI_EQUIPPED", "STR_VGM_SKILLS_UI_EQUIP"] select (_skillSlot == ""));
+        _ctrlEquip ctrlEnable (_skillSlot == "");
+
         if (_focusedSkill isEqualTo createHashMap) exitWith {
             _ctrlTitle ctrlSetText "-";
             _ctrlIcon ctrlSetText "#(rgb,1,1,1)color(1,0,0,0.5)";
@@ -197,6 +203,10 @@ switch _mode do {
             _ctrlRowEquip setVariable ["vgm_skill", _skill];
             _ctrlRowEquip ctrlSetText localize "STR_VGM_SKILLS_UI_EQUIP";
             _ctrlRowEquip ctrlAddEventHandler ["ButtonClick", {["equipSkill", _this] call SELF}];
+            // disable the button if skill already equipped
+            private _skillSlot = _skill call VGM_C_fnc_skills_active_getSlot;
+            _ctrlRowEquip ctrlSetText localize (["STR_VGM_SKILLS_UI_EQUIPPED", "STR_VGM_SKILLS_UI_EQUIP"] select (_skillSlot == ""));
+            _ctrlRowEquip ctrlEnable (_skillSlot == "");
         } forEach (values vgm_c_skills_active_list select {_x get "isUltimate" == (_slot == SLOT_ULTIMATE)});
 
         _ctrlAvailable ctSetCurSel 0;
