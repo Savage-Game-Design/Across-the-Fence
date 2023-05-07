@@ -235,6 +235,7 @@ VGM_SET_Y(0);
             y = VGM_Y_Y(DISPLAY_Y, 6.5);
             w = _W * VGM_GRID_W;
             h = (DISPLAY_H - 8) * VGM_GRID_H;
+            onLBSelChanged = VGM_UIEH(skillSelected,Abilities);
 VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
             class RowTemplate
             {
