@@ -128,7 +128,7 @@ class VGM_DisplayAbilities
         class StdTitle: VGM_ctrlTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_STDTITLE;
-            text = "Standard Abilitiy";
+            text = "$STR_VGM_SKILLS_UI_ABILITY_STD";
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
             w = 0.75 * COLUMN_W * VGM_GRID_W;
@@ -142,6 +142,7 @@ class VGM_DisplayAbilities
             y = VGM_Y_Y(DISPLAY_Y,0.5);
             w = COLUMN_W * VGM_GRID_W;
             h = VGM_Y_H(0.5 * DISPLAY_H - 9);
+
 #define _W (COLUMN_W - 2)
             class Controls
             {
@@ -168,7 +169,7 @@ class VGM_DisplayAbilities
                 class StdName: VGM_ctrlStructuredText
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_NAME;
-                    text = "Mobility Kill";
+                    text = "Ability Name";
                     size = VGM_FONT_M;
                     x = 1 * VGM_GRID_W;
                     w = _W * VGM_GRID_W;
@@ -184,7 +185,7 @@ class VGM_DisplayAbilities
                 class StdCategory: StdName
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_CATEGORY;
-                    text = "Light Anti-Tank Ability";
+                    text = "Ability Category";
                     size = VGM_FONT_M;
                     stackOffset = 0;
                     h = 5 * VGM_GRID_H;
@@ -208,7 +209,7 @@ class VGM_DisplayAbilities
         class UltTitle: StdTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
-            text = "Ultimate Ability";
+            text = "$STR_VGM_SKILLS_UI_ABILITY_ULT";
             y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
         class UltStack: StdStack
@@ -217,12 +218,29 @@ class VGM_DisplayAbilities
             y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
 
+        VGM_SET_Y(5)
+        class StdStackButton: VGM_ctrlButtonInvisible
+        {
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = VGM_Y_Y(DISPLAY_Y,1);
+            w = COLUMN_W * VGM_GRID_W;
+            h = VGM_Y_H(0.5 * DISPLAY_H - 9);
+            colorBackgroundActive[] = {VGM_UI_COLOR_ACTIVE_RGB, 0.1};
+            onButtonClick = VGM_UIEH(slotSelectStandard,Abilities);
+        };
+        class UltStackButton: StdStackButton
+        {
+            y = VGM_Y_Y(DISPLAY_Y,10.5);
+            onButtonClick = VGM_UIEH(slotSelectUltimate,Abilities);
+        };
+
 #define _X DISPLAY_X + (COLUMN_W + 5) * VGM_GRID_W
 #define _W COLUMN_W
 VGM_SET_Y(0);
         class AvailableTitle: StdTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
+            text = "Available Skills";
             x = _X;
             w = _W * VGM_GRID_W;
         };
@@ -288,6 +306,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
         class AbilityTitle: AvailableTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYTITLE;
+            text = "Focused Ability";
             x = _X;
         };
 #define _W (COLUMN_W - 2)

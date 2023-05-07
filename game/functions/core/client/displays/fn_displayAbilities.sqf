@@ -34,15 +34,13 @@ switch _mode do {
     case "onLoad":{
         params ["_display"];
 
-        _display setVariable ["vgm_focusedSkill", createHashMap];
-
-        ["initSkillsList", _display] call SELF;
         ["refreshUI", _display] call SELF;
     };
 
     case "refreshUI": {
         params ["_display"];
 
+        ["fillSkillsList", _display] call SELF;
         ["updateStandardSkillStack", _display] call SELF;
         ["updateUltimateSkillStack", _display] call SELF;
         ["updateFocusedSkillStack", _display] call SELF;
@@ -95,8 +93,35 @@ switch _mode do {
         _ctrlDescription ctrlSetText (_skill get "description");
     };
 
+    // player wants to assign his standard ability
+    case "slotSelectStandard": {
+        params ["_ctrlSlotSelect"];
+        private _display = ctrlParent _ctrlSlotSelect;
+
+        ["fillSkillsList", [_display, SLOT_STANDARD]] call SELF;
+    };
+
+    // player wants to assign his ultimate ability
+    case "slotSelectUltimate": {
+        params ["_ctrlSlotSelect"];
+        private _display = ctrlParent _ctrlSlotSelect;
+
+        ["fillSkillsList", [_display, SLOT_ULTIMATE]] call SELF;
+    };
+
+    // skill was selected on available skills list
     case "skillSelected": {
-        systemChat str _this;
+        params ["_ctrlAvailable", "_idx"];
+        private _display = ctrlParent _ctrlAvailable;
+
+        if (_idx > -1) then {
+            private _skillPath = (_ctrlAvailable getVariable "vgm_skills") get _idx;
+            private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
+
+            _display setVariable ["vgm_focusedSkill", _skill];
+        };
+
+        ["updateFocusedSkillStack", _display] call SELF;
     };
 
     // update right panel with currently focused skill
@@ -130,24 +155,20 @@ switch _mode do {
     };
 
     // fill central panel with skills
-    case "initSkillsList": {
-        params ["_display"];
+    case "fillSkillsList": {
+        params ["_display", ["_slot", SLOT_STANDARD]];
+
+        _display setVariable ["vgm_focusedSkill", createHashMap];
+
+        private _ctrlTitle = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
+        private _title = ["STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD", "STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_ULT"] select (_slot == SLOT_ULTIMATE);
+        _ctrlTitle ctrlSetText localize _title;
 
         private _ctrlAvailable = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLE;
         private _skillPathsHashMap = createHashMap;
         _ctrlAvailable setVariable ["vgm_skills", _skillPathsHashMap];
 
-        _ctrlAvailable ctrlAddEventHandler ["LBSelChanged", {
-            params ["_ctrl", "_idx"];
-            private _display = ctrlParent _ctrl;
-
-            private _skillPath = (_ctrl getVariable "vgm_skills") get _idx;
-            private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
-
-            _display setVariable ["vgm_focusedSkill", _skill];
-            ["updateFocusedSkillStack", _display] call SELF;
-        }];
-
+        ctClear _ctrlAvailable;
         {
             private _skill = _x;
             private _name = _skill get "displayName";
@@ -174,10 +195,12 @@ switch _mode do {
             _ctrlRowEquip setVariable ["vgm_skill", _skill];
             _ctrlRowEquip ctrlSetText localize "STR_VGM_SKILLS_UI_EQUIP";
             _ctrlRowEquip ctrlAddEventHandler ["ButtonClick", {["equipSkill", _this] call SELF}];
-        } forEach (values vgm_c_skills_active_list);
+        } forEach (values vgm_c_skills_active_list select {_x get "isUltimate" == (_slot == SLOT_ULTIMATE)});
 
+        _ctrlAvailable ctSetCurSel 0;
     };
 
+    // put the skill into currently selected slot
     case "equipSkill": {
         params ["_ctrlRowEquip"];
 
