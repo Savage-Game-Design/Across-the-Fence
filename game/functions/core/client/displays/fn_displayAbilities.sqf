@@ -43,7 +43,6 @@ switch _mode do {
         ["fillSkillsList", _display] call SELF;
         ["updateStandardSkillStack", _display] call SELF;
         ["updateUltimateSkillStack", _display] call SELF;
-        ["updateFocusedSkillStack", _display] call SELF;
     };
 
     // update standard skill panel on the left
@@ -135,6 +134,7 @@ switch _mode do {
         private _ctrlCategory = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYCATEGORY;
         private _ctrlCooldown = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYCOOLDOWN;
         private _ctrlDescription = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYDESCRIPTION;
+        private _ctrlEquip = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
 
         private _focusedSkill = _display getVariable "vgm_focusedSkill";
         if (_focusedSkill isEqualTo createHashMap) exitWith {
@@ -143,6 +143,7 @@ switch _mode do {
             _ctrlCategory ctrlSetText "-";
             _ctrlCooldown ctrlSetText "-";
             _ctrlDescription ctrlSetText "-";
+            _ctrlEquip setVariable ["vgm_skill", createHashMap];
         };
 
         private _skillTree = _focusedSkill call vgm_c_fnc_skills_getSkillTreeFromSkill;
@@ -152,6 +153,7 @@ switch _mode do {
         _ctrlCategory ctrlSetText (_skillTree get "displayName");
         _ctrlCooldown ctrlSetText format [localize "STR_VGM_SKILLS_UI_COOLDOWN_LONG", _focusedSkill get "cooldown"];
         _ctrlDescription ctrlSetText (_focusedSkill get "description");
+        _ctrlEquip setVariable ["vgm_skill", _focusedSkill];
     };
 
     // fill central panel with skills
@@ -202,16 +204,16 @@ switch _mode do {
 
     // put the skill into currently selected slot
     case "equipSkill": {
-        params ["_ctrlRowEquip"];
+        params ["_ctrlEquip"];
 
-        private _skill = _ctrlRowEquip getVariable "vgm_skill";
+        private _skill = _ctrlEquip getVariable "vgm_skill";
         private _slot = [SLOT_STANDARD, SLOT_ULTIMATE] select (_skill get "isUltimate");
 
         private _result = [_slot, _skill] call vgm_c_fnc_skills_active_assignSkillToSlot;
         // this should not really happen, does not need translation
         if (!_result) then {hint "Failed to assign skill to slot"};
 
-        ["refreshUI", ctrlParent _ctrlRowEquip] call SELF;
+        ["refreshUI", ctrlParent _ctrlEquip] call SELF;
     };
 
     default {

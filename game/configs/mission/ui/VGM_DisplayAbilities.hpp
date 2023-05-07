@@ -396,7 +396,8 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 class AbilityEquip: VGM_ctrlButton
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
-                    text = "Equip";
+                    onButtonClick = VGM_UIEH(equipSkill,Abilities);
+                    text = "$STR_VGM_SKILLS_UI_EQUIP";
                     x = (0.25 * _W + 0.5) * VGM_GRID_W;
                     w = (0.5 * _W - 1) * VGM_GRID_W;
                     h = 9 * VGM_GRID_H;
