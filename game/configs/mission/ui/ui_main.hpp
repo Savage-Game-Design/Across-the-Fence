@@ -8,6 +8,7 @@
 #include "VGM_DisplayAbilities.hpp"
 // #include "VGM_DisplayMissions.hpp"
 // #include "VGM_DisplayMissionsTargets.hpp"
+#include "VGM_DisplayEquipment.hpp"
 class RscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"

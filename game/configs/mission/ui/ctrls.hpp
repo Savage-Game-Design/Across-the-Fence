@@ -10,10 +10,12 @@ import ctrlControlsGroup;
 import ctrlControlsGroupNoScrollbars;
 import ctrlButton;
 import ctrlButtonPicture;
+import ctrlButtonPictureKeepAspect;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
 import ctrlXListbox;
+import ctrlProgress;
 
 #define COLOR_BLACK {0,0,0,1}
 class VGM_ctrlDefault: ctrlDefault {
@@ -63,6 +65,17 @@ class VGM_ctrlStructuredText : ctrlStructuredText
         color = "#ffffff";
         colorLink = "#D09B43";
         align = "left";
+        shadow = 0;
+    };
+};
+class VGM_ctrlStructuredTextCentered: VGM_ctrlStructuredText
+{
+    class Attributes
+    {
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "center";
         shadow = 0;
     };
 };
@@ -121,6 +134,10 @@ class VGM_ctrlButton: ctrlButton
 };
 
 class VGM_ctrlButtonPicture: ctrlButtonPicture
+{
+};
+
+class VGM_ctrlButtonPictureKeepAspect: ctrlButtonPictureKeepAspect
 {
 };
 
@@ -194,6 +211,9 @@ class VGM_ctrlSeperator: VGM_ctrlStatic
     h = pixelH;
     w = pixelW;
     colorBackground[] = {0.75,0.75,0.75,1};
+};
+class VGM_ctrlProgress: ctrlProgress
+{
 };
 
 // Controls for VGM_DisplaySkills
