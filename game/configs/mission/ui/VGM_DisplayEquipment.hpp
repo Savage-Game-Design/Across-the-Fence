@@ -469,7 +469,7 @@ VGM_SET_Y(0)
         {
             idc = VGM_IDC_DISPLAYEQUIPMENT_ADVANCEDSTATS;
             x = safeZoneX + safeZoneW - 40 * VGM_GRID_W;
-            y = CENTER_Y - 0.5 * _H * VGM_GRID_H;
+            y = (DISPLAY_Y + 0.5 * DISPLAY_H * VGM_GRID_H) - 0.5 * _H * VGM_GRID_H;
             w = _W * VGM_GRID_W;
             h = _H * VGM_GRID_H;
             class Controls
