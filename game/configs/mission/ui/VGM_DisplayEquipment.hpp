@@ -7,6 +7,7 @@
 class VGM_DisplayEquipment
 {
     idd = -1;
+    onLoad = VGM_UIEH(onLoad,Equipment);
     class ControlsBackground
     {
         class BackgroundLeft: VGM_ctrlBackground
