@@ -45,6 +45,7 @@ class VGM_DisplayEquipment
         VGM_SET_Y(0)
         class Name: VGM_ctrlStructuredTextCentered
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_NAME;
             text = "Private Ace ""The Bronco"", Level 4";
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
@@ -53,6 +54,7 @@ class VGM_DisplayEquipment
         };
         class LevelCurrent: VGM_ctrlStructuredTextCentered
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LEVELCURRENT;
             text = "99";
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
@@ -61,10 +63,12 @@ class VGM_DisplayEquipment
         };
         class LevelNext: LevelCurrent
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LEVELNEXT;
             x = DISPLAY_X + (DISPLAY_W - 8) * VGM_GRID_W;
         };
         class LevelProgress: VGM_ctrlProgress
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LEVELPROGRESS;
             onLoad = "(_this select 0) progressSetPosition 0.25";
             x = DISPLAY_X + 7 * VGM_GRID_H;
             y = VGM_Y_Y(DISPLAY_Y,2);
@@ -73,6 +77,7 @@ class VGM_DisplayEquipment
         };
         class LevelXP: VGM_ctrlStructuredTextCentered
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LEVELXP;
             text = "9999/9999 EXP";
             x = DISPLAY_X + 7 * VGM_GRID_H;
             y = VGM_Y_Y(DISPLAY_Y,0);
@@ -83,6 +88,7 @@ class VGM_DisplayEquipment
 
         class RifleLabel: VGM_ctrlStructuredText
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLELABEL;
             text = "M16A1 Rifle";
             x = DISPLAY_X + (SLOT_H + 2) * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
@@ -91,6 +97,7 @@ class VGM_DisplayEquipment
         };
         class Backpack: VGM_ctrlButtonPictureKeepAspect
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_BACKPACK;
             text = "\vn\characters_f_vietnam\ui\icon_vn_b_pack_01_ca.paa";
             colorBackground[] = {VGM_UI_COLOR_INACTIVE};
             x = DISPLAY_X + 1 * VGM_GRID_W;
@@ -100,27 +107,32 @@ class VGM_DisplayEquipment
         };
         class Rifle: Backpack
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLE;
             text = "\vn\weapons_f_vietnam\ui\icon_vn_m16_ca.paa";
             x = DISPLAY_X + (SLOT_H + 2) * VGM_GRID_W;
             w = 2 * SLOT_H * VGM_GRID_W;
         };
         class RifleOptic: Backpack
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEOPTIC;
             x = DISPLAY_X + (3 * SLOT_H + 3) * VGM_GRID_W;
             w = SLOT_SMALL_H * VGM_GRID_W;
             h = SLOT_SMALL_H * VGM_GRID_H;
         };
         class RifleAttachment: RifleOptic
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEATTACHMENT;
             x = DISPLAY_X + (3 * SLOT_H + SLOT_SMALL_H + 4) * VGM_GRID_W;
             h = VGM_Y_H(SLOT_SMALL_H);
         };
         class RifleMagazine: RifleOptic
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEMAGAZINE;
             y = VGM_Y_Y(DISPLAY_Y,1);
         };
         class RifleMagazineCount: VGM_ctrlControlsGroupNoScrollbars
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEMAGAZINECOUNT;
             x = DISPLAY_X + (3 * SLOT_H + 2 * SLOT_SMALL_H + 5) * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,-0.5 * SLOT_SMALL_H);
             w = (3 * SLOT_SMALL_H) * VGM_GRID_W;
@@ -129,6 +141,7 @@ class VGM_DisplayEquipment
             {
                 class Decrease: VGM_ctrlButtonPicture
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEMAGAZINECOUNT_DECREASE;
                     text = "\a3\ui_f\data\GUI\RscCommon\RscHTML\arrow_left_ca.paa";
                     x = 0;
                     y = 0;
@@ -140,6 +153,7 @@ class VGM_DisplayEquipment
                 };
                 class Image: VGM_ctrlStaticPicture
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEMAGAZINECOUNT_IMAGE;
                     text = "\a3\3den\Data\Displays\Display3DENMsgBox\picture_ca.paa";
                     x = 0.5 * SLOT_SMALL_H * VGM_GRID_W;
                     y = 0;
@@ -148,6 +162,7 @@ class VGM_DisplayEquipment
                 };
                 class Count: VGM_ctrlStatic
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEMAGAZINECOUNT_COUNT;
                     text = "99";
                     style = ST_RIGHT;
                     x = (1.5 * SLOT_SMALL_H) * VGM_GRID_W;
@@ -160,6 +175,7 @@ class VGM_DisplayEquipment
                 };
                 class Increase: Decrease
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_RIFLEMAGAZINECOUNT_INCREASE;
                     text = "\a3\ui_f\data\GUI\RscCommon\RscHTML\arrow_right_ca.paa";
                     x = 2.5 * SLOT_SMALL_H * VGM_GRID_W;
                 };
@@ -169,101 +185,122 @@ class VGM_DisplayEquipment
 
         class LauncherLabel: RifleLabel
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LAUNCHERLABEL;
             text = "None";
             y = VGM_Y_Y(DISPLAY_Y,0.5 * SLOT_SMALL_H + 1);
         };
         class Uniform: Backpack
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UNIFORM;
             y = VGM_Y_Y(DISPLAY_Y,5);
         }
         class Launcher: Rifle
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LAUNCHER;
             y = VGM_Y_Y(DISPLAY_Y,0);
         };
         class LauncherOptic: RifleOptic
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LAUNCHEROPTIC;
             y = VGM_Y_Y(DISPLAY_Y,0);
         };
         class LauncherMagazineCount: RifleMagazineCount
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LAUNCHERMAGAZINECOUNT;
             y = VGM_Y_Y(DISPLAY_Y,0.5 * SLOT_SMALL_H);
         };
         class LauncherMagazine: RifleMagazine
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LAUNCHERMAGAZINE;
             y = VGM_Y_Y(DISPLAY_Y,0.5 * SLOT_SMALL_H + 1);
         };
 
 
         class ExplosiveLabel: RifleLabel
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_EXPLOSIVELABEL;
             text = "Frag Grenade";
             y = VGM_Y_Y(DISPLAY_Y,SLOT_SMALL_H + 1);
             w = SLOT_H * VGM_GRID_W;
         };
         class HandgunLabel: ExplosiveLabel
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_HANDGUNLABEL;
             text = "M1911A1";
             x = DISPLAY_X + (2 * SLOT_H + 3) * VGM_GRID_W;
         };
 
         class Headwear: Backpack
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_HEADWEAR;
             y = VGM_Y_Y(DISPLAY_Y,5);
         };
 
         class Explosive: Rifle
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_EXPLOSIVE;
             y = VGM_Y_Y(DISPLAY_Y,0);
             w = SLOT_H * VGM_GRID_W;
         };
         class Handgun: Explosive
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_HANDGUN;
             x = DISPLAY_X + (2 * SLOT_H + 3) * VGM_GRID_W;
         };
         class HandgunOptic: RifleOptic
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_HANDGUNOPTIC;
             x = DISPLAY_X + (3 * SLOT_H + 4) * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,0);
         };
         class HandgunMagazineCount: RifleMagazineCount
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_HANDGUNMAGAZINECOUNT;
             y = VGM_Y_Y(DISPLAY_Y,0.5 * SLOT_SMALL_H);
         };
         class HandgunMagazine: RifleMagazine
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_HANDGUNMAGAZINE;
             x = DISPLAY_X + (3 * SLOT_H + 4) * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,0.5 * SLOT_SMALL_H + 1);
         };
 
         class Utility1: Backpack
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UTILITY1;
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,SLOT_SMALL_H + 5);
         };
         class Utility2: Utility1
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UTILITY2;
             x = DISPLAY_X + (2 + SLOT_H) * VGM_GRID_W;
         };
         class Utility3: Utility1
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UTILITY3;
             x = DISPLAY_X + (3 + 2 * SLOT_H) * VGM_GRID_W;
         };
         class Utility4: Utility1
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UTILITY4;
             x = DISPLAY_X + (4 + 3 * SLOT_H) * VGM_GRID_W;
         };
         class Utility5: Utility1
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UTILITY5;
             x = DISPLAY_X + (5 + 4 * SLOT_H) * VGM_GRID_W;
         };
         class Utility6: Utility1
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_UTILITY6;
             x = DISPLAY_X + (6 + 5 * SLOT_H) * VGM_GRID_W;
         };
 
         class Load: VGM_ctrlControlsGroupNoScrollbars
         {
 #define _W 40
+            idc = VGM_IDC_DISPLAYEQUIPMENT_LOAD;
             text = "Equipment Load<br/><t size='1.5'>Light</t>";
             x = DISPLAY_X + (DISPLAY_W + 1) * VGM_GRID_W;
             y = DISPLAY_Y;
@@ -285,7 +322,7 @@ class VGM_DisplayEquipment
                     w = _W * VGM_GRID_W;
                     h = 13 * VGM_GRID_H;
                 };
-                class LoadLabel: VGM_ctrlStructuredTextCentered
+                class Label: VGM_ctrlStructuredTextCentered
                 {
                     text = "Equipment Load";
                     x = 0;
@@ -293,8 +330,9 @@ class VGM_DisplayEquipment
                     w = _W * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;
                 };
-                class Load: LoadLabel
+                class Value: Label
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_LOAD_VALUE;
                     text = "Light";
                     y = 5 * VGM_GRID_H;
                     h = 7 * VGM_GRID_H;
@@ -308,8 +346,9 @@ class VGM_DisplayEquipment
                         size = 1.5;
                     };
                 };
-                class LoadProgress: VGM_ctrlProgress
+                class Progress: VGM_ctrlProgress
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_LOAD_PROGRESS;
                     onLoad = "(_this#0) progressSetPosition 0.25";
                     x = 0;
                     y = 12 * VGM_GRID_H;
@@ -322,6 +361,7 @@ VGM_SET_Y(0)
         class BuildSummary: Load
         {
 #define _H (7 * 5 + 2)
+            idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY;
             y = DISPLAY_Y + (DISPLAY_H - _H) * VGM_GRID_H;
             h = _H * VGM_GRID_H;
             class Controls: Controls
@@ -350,6 +390,7 @@ VGM_SET_Y(0)
                 };
                 class RiflemanPoints: Rifleman
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY_RIFLEMANPOINTS;
                     text = "99";
                     x = (_W - 7) * VGM_GRID_W;
                     w = 7 * VGM_GRID_W;
@@ -369,6 +410,7 @@ VGM_SET_Y(0)
                 };
                 class ServiceEssentialsPoints: RiflemanPoints
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY_SERVICEPOINTS;
                     y = VGM_Y_Y(0,0);
                 };
                 class BasicAid: Rifleman
@@ -378,6 +420,7 @@ VGM_SET_Y(0)
                 };
                 class BasicAidPoints: RiflemanPoints
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY_BASICAIDPOINTS;
                     y = VGM_Y_Y(0,0);
                 };
                 class Autorifleman: Rifleman
@@ -387,6 +430,7 @@ VGM_SET_Y(0)
                 };
                 class AutoriflemanPoints: RiflemanPoints
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY_AUTORIFLEMANPOINTS;
                     y = VGM_Y_Y(0,0);
                 };
                 class Marksman: Rifleman
@@ -396,6 +440,7 @@ VGM_SET_Y(0)
                 };
                 class MarksmanPoints: RiflemanPoints
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY_MARKSMANPOINTS;
                     y = VGM_Y_Y(0,0);
                 };
                 class Seperator: VGM_ctrlSeperator
@@ -411,6 +456,7 @@ VGM_SET_Y(0)
                 };
                 class TotalPoints: RiflemanPoints
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_BUILDSUMMARY_TOTALPOINTS;
                     y = VGM_Y_Y(0,0);
                 };
             };
@@ -421,6 +467,7 @@ VGM_SET_Y(0)
 VGM_SET_Y(0)
         class AdvancedStats: VGM_ctrlControlsGroupNoScrollbars
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_ADVANCEDSTATS;
             x = safeZoneX + safeZoneW - 40 * VGM_GRID_W;
             y = CENTER_Y - 0.5 * _H * VGM_GRID_H;
             w = _W * VGM_GRID_W;
@@ -449,8 +496,11 @@ VGM_SET_Y(0)
                     w = _W * VGM_GRID_W;
                     h = VGM_Y_H(5);
                 };
-                class Stats: VGM_ctrlControlsTable
+                class List: VGM_ctrlControlsTable
                 {
+                    idc = VGM_IDC_DISPLAYEQUIPMENT_ADVANCEDSTATS_LIST;
+                    firstIDC = VGM_IDC_DISPLAYEQUIPMENT_ADVANCEDSTATS_LIST_FIRSTIDC;
+                    lastIDC = VGM_IDC_DISPLAYEQUIPMENT_ADVANCEDSTATS_LIST_LASTIDC;
                     x = 0;
                     y = VGM_Y_Y(0,0);
                     w = _W * VGM_GRID_W;
@@ -485,6 +535,7 @@ VGM_SET_Y(0)
 
         class Cosmetics: VGM_ctrlButton
         {
+            idc = VGM_IDC_DISPLAYEQUIPMENT_COSMETICS;
             text = "Change Cosmetics";
             x = DISPLAY_X + (DISPLAY_W + 43) * VGM_GRID_W;
             y = DISPLAY_Y + (DISPLAY_H - 5) * VGM_GRID_H;
