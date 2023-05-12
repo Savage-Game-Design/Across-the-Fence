@@ -20,6 +20,18 @@
         </Key>
     </Package>
     <Package name="Skills UI">
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
+            <Original>Standard Ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT">
+            <Original>Ultimate Ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD">
+            <Original>Available Standard Abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_ULT">
+            <Original>Available Ultimate Abilities</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_SKILL_TREE">
             <Original>%1 Skill Tree</Original>
         </Key>
@@ -31,6 +43,15 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_SP_AVAILABLE">
             <Original>%1 Skill Points Available</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_EQUIP">
+            <Original>Equip</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_EQUIPPED">
+            <Original>Equipped</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_COOLDOWN_LONG">
+            <Original>%1 second cooldown</Original>
         </Key>
     </Package>
 </Project>
