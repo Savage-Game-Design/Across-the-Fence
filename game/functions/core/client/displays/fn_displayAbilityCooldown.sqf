@@ -1,6 +1,6 @@
 #include "macros.inc"
 /*
-    File: game/functions/core/client/displays/fn_displayAbilityCooldown.sqf
+    File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
     Last Update: 2023-05-12
@@ -17,8 +17,12 @@
             Nothing [NIL]
 
     Example(s):
-            [] call vgm_c_fnc_displayAbilityCooldown;
+            ["startCooldown", ["ultimate", 20]] call vgm_c_fnc_displayAbilityCooldown;
 */
+
+#define SELF vgm_c_fnc_displayAbilityCooldown
+#define SLOT_STANDARD "ability1"
+#define SLOT_ULTIMATE "ultimate"
 
 #if __A3_DEBUG__
     diag_log ["fn_displayAbilityCooldown", _this];
@@ -31,20 +35,46 @@ switch _mode do {
     case "onLoad":{
         params ["_display"];
         uiNamespace setVariable ["VGM_RscDisplayAbilityCooldown", _display];
+
+        ["refreshUI"] call SELF;
     };
+
+    case "refreshUI": {
+        private _display = uiNamespace getVariable ["VGM_RscDisplayAbilityCooldown", displayNull];
+
+        {
+            _x params ["_idcIcon", "_slotName"];
+
+            private _slot = vgm_c_skills_active_slots get _slotName;
+            private _skill = _slot get "skill";
+
+            (_display displayCtrl _idcIcon) ctrlSetText (_skill getOrDefault [
+                "icon",
+                "\a3\ui_f\data\Map\VehicleIcons\iconVehicle_ca.paa"
+            ]);
+        } forEach [
+            [VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY, SLOT_STANDARD],
+            [VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY, SLOT_ULTIMATE]
+        ];
+    };
+
     case "startCooldown": {
         params ["_skill", "_seconds"];
+
         private _display = uiNamespace getVariable ["VGM_RscDisplayAbilityCooldown", displayNull];
         if (isNull _display) exitWith {
-            ["VGM_RscDisplayAbilityCooldown is not available!"] call BIS_fnc_error;
+            ["Ability cooldown HUD not available"] call vgm_g_fnc_logError;
         };
+
         private _idcs = [
             [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSPRIMARY],
             [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSULTIMATE]
-        ] select (_skill == "ulimate");
+        ] select (_skill == SLOT_ULTIMATE);
+
         (_idcs apply {_display displayCtrl _x}) params ["_ctrlCooldown", "_ctrlSeconds"];
         _ctrlSeconds ctrlSetFade 0;
-        _ctrlSeconds ctrlCommit 05;
+        _ctrlSeconds ctrlCommit 5;
+
         private _delta = 0.01;
         for "_i" from 0 to _seconds step _delta do {
             _ctrlCooldown progressSetPosition (1 - _i / _seconds);

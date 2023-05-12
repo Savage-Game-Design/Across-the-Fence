@@ -22,7 +22,6 @@
 #define SLOT_STANDARD "ability1"
 #define SLOT_ULTIMATE "ultimate"
 
-
 #if __A3_DEBUG__
     diag_log ["fn_displayAbilities", _this];
 #endif
