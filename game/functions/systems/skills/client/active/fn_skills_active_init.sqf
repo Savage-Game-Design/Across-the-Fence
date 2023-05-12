@@ -2,7 +2,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-02-26
+    Last Update: 2023-05-12
     Public: No
 
     Description:
@@ -66,3 +66,5 @@ addUserActionEventHandler ["selectAll", "Activate", {
 
     [] call vgm_c_fnc_skills_active_openSkillWheel;
 }];
+
+[] spawn VGM_C_fnc_skills_active_toggleHud;
