@@ -223,7 +223,8 @@ switch _mode do {
         // this should not really happen, does not need translation
         if (!_result) then {hint "Failed to assign skill to slot"};
 
-        ["refreshUI", ctrlParent _ctrlEquip] call SELF;
+        // must be spawned as the current control will be deleted due to list being refreshed
+        ["refreshUI", ctrlParent _ctrlEquip] spawn SELF;
     };
 
     default {
