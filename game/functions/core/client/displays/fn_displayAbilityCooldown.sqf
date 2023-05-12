@@ -1,8 +1,9 @@
+#include "macros.inc"
 /*
     File: game/functions/core/client/displays/fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2023-06-14
+    Last Update: 2023-05-12
     Public: No
 
     Description:
@@ -18,16 +19,21 @@
     Example(s):
             [] call vgm_c_fnc_displayAbilityCooldown;
 */
-#include "macros.inc"
+
+#if __A3_DEBUG__
+    diag_log ["fn_displayAbilityCooldown", _this];
+#endif
+
 params ["_mode", "_params"];
-diag_log _this;
+_this = _params;
+
 switch _mode do {
     case "onLoad":{
-        _params params ["_display"];
+        params ["_display"];
         uiNamespace setVariable ["VGM_RscDisplayAbilityCooldown", _display];
     };
     case "startCooldown": {
-        _params params ["_skill", "_seconds"];
+        params ["_skill", "_seconds"];
         private _display = uiNamespace getVariable ["VGM_RscDisplayAbilityCooldown", displayNull];
         if (isNull _display) exitWith {
             ["VGM_RscDisplayAbilityCooldown is not available!"] call BIS_fnc_error;
