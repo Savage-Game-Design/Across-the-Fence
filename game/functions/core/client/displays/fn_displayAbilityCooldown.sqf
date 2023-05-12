@@ -36,7 +36,18 @@ switch _mode do {
         params ["_display"];
         uiNamespace setVariable ["VGM_RscDisplayAbilityCooldown", _display];
 
+        private _handlerId = ["vgm_skills_active_slotted", [_display, {
+            params ["", "_display"];
+            ["refreshUI", _display] call SELF;
+        }]] call para_g_fnc_event_subscribeLocal;
+        _display setVariable ["vgm_skills_ui_skillSlottedHandlerId", _handlerId];
+
         ["refreshUI"] call SELF;
+    };
+
+    case "onUnload": {
+        params ["_display"];
+        [_display getVariable "vgm_skills_ui_skillSlottedHandlerId"] call para_g_fnc_event_unsubscribe;
     };
 
     case "refreshUI": {
@@ -54,7 +65,7 @@ switch _mode do {
             ]);
         } forEach [
             [VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY, SLOT_STANDARD],
-            [VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY, SLOT_ULTIMATE]
+            [VGM_IDC_RSCABILITYCOOLDOWN_ICONULTIMATE, SLOT_ULTIMATE]
         ];
     };
 
