@@ -223,8 +223,8 @@ switch _mode do {
         // this should not really happen, does not need translation
         if (!_result) then {hint "Failed to assign skill to slot"};
 
-        // must be spawned as the current control will be deleted due to list being refreshed
-        ["refreshUI", ctrlParent _ctrlEquip] spawn SELF;
+        // delay by frame to prevent crash, current control will be deleted on UI refresh
+        [SELF, ["refreshUI", ctrlParent _ctrlEquip]] call vgm_g_fnc_execNextFrame;
     };
 
     default {
