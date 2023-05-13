@@ -2,7 +2,7 @@
     File: fn_event_callHandlersById.sqf
     Author: Savage Game Design
     Date: 2022-11-24
-    Last Update: 2023-01-22
+    Last Update: 2023-04-14
     Public: No
 
     Description:
@@ -21,6 +21,7 @@
         [[_registeredHandler], 2, ["eventName", objNull], 'ANYDATA'] call para_g_fnc_event_callHandlersById;
  */
 
+#define DATA_PARAMETER_INDEX 3
 params ["_handlerIds", "_originMachineId", "_event", "_data"];
 
 _event params ["_eventName", "_topic"];
@@ -41,5 +42,6 @@ private _handlersForGlobalOrigin = _handlersByOrigin getOrDefault [0, createHash
             ]
         ];
     _handler params ["_savedParameters", "_code"];
-    [_data, _savedParameters, _eventName, _topic, _originMachineId] call _code;
+    // Use `_this param` instead of _data, as _data may be nil and cause a runtime error
+    [_this param [DATA_PARAMETER_INDEX], _savedParameters, _eventName, _topic, _originMachineId] call _code;
 } forEach _handlerIds;

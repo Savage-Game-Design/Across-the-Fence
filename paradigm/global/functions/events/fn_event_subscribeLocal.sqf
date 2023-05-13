@@ -2,13 +2,13 @@
     File: fn_event_subscribeLocal.sqf
     Author: Savage Game Design
     Date: 2022-11-24
-    Last Update: 2023-01-29
+    Last Update: 2023-04-07
     Public: Yes
 
     Description:
-        Identical behaviour to para_g_fnc_event_subscribe, but only listens to local events.
+        Identical behaviour to para_g_fnc_event_subscribeToClients, but only listens to local events.
 
-        Wrapper for para_g_fnc_event_subscribe.
+        Wrapper for para_g_fnc_event_subscribeToClients.
 
 
     Parameter(s):
@@ -26,4 +26,4 @@
         [["myCustomEvent", player], [[32], {}]] call para_g_fnc_event_subscribeLocal
  */
 
-([[clientOwner]] + _this) call para_g_fnc_event_subscribe;
+([[clientOwner]] + _this) call para_g_fnc_event_subscribeToClients;
