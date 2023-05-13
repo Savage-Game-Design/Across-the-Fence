@@ -2,11 +2,11 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2023-02-26
+    Last Update: 2023-05-13
     Public: No
 
     Description:
-        Run skill skill activate from skill wheel.
+        Run skill activate code from skill wheel.
 
     Parameter(s):
         N/A
@@ -28,3 +28,5 @@ if (_slot call vgm_c_fnc_skills_active_isSlotOnCooldown) exitWith {
 player call (_skill get "codeActivate");
 private _cooldownUntil = time + (_skill get "cooldown");
 _slot set ["cooldownUntil", _cooldownUntil];
+
+["vgm_skills_active_activated", _slot get "name", _skill] call para_g_fnc_event_trigger;
