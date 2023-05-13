@@ -100,6 +100,7 @@ class vgm_c
 
         class skills_getSkillPoints {};
         class skills_getSkillTreeFromSkill {};
+        class skills_getSkillTreePoints {};
         class skills_openSkillTree {};
         class skills_postInit
         {

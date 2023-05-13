@@ -27,21 +27,26 @@ class vgm_skillTrees {
         // rifleman skills
         class skills {
             class tier_1 {
+                class steadyAim: vgm_skillTemplate {
+                    displayName = "Steady Aim";
+                    description = "Decreases weapon sway.";
+                    codeApply = "_this setCustomAimCoef 0.5";
+                };
+
+                class loweredRecoil: vgm_skillTemplate {
+                    displayName = "Lowered Recoil";
+                    description = "Decreases weapon recoil.";
+                    codeApply = "_this setUnitRecoilCoefficient ((unitRecoilCoefficient _this) - ((unitRecoilCoefficient _this) * (('combatTree' call vgm_c_fnc_skills_getSkillTreePoints) * 0.01)))";
+                };
+            };
+
+            class tier_2 {
                 class moreStamina: vgm_skillTemplate {
                     displayName = "More Stamina";
                     description = "Increases amount of available stamina.";
                     codeApply = "_this setUnitTrait ['loadCoef', 2]";
                 };
 
-                class steadyAim: vgm_skillTemplate {
-                    displayName = "Steady Aim";
-                    description = "Decreases weapon sway.";
-                    codeApply = "_this setCustomAimCoef 0.5";
-                };
-            };
-
-            class tier_2 {
-                class skill_3: vgm_skillTemplate {};
                 class skill_4: vgm_skillTemplate {};
             };
 
@@ -101,6 +106,8 @@ class vgm_skillTrees {
                     };
                 };
             };
+
+
 
             class engineerTree {
                 displayName = "Engineer";

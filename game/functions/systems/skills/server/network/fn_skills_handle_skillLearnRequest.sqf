@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-02-26
+    Last Update: 2023-05-13
     Public: No
 
     Description:
@@ -37,13 +37,20 @@ if (!_canLearn) exitWith {
 private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
 private _skillCost = _skill get "cost";
 
-
 private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 private _skillPoints = _skillsData get "skillPoints";
 private _skillPointsSpent = _skillsData get "skillPointsSpent";
 
+private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
+private _skillTreeName = _skillTree get "path" select 0; // is there a better way of doing this?
+private _skillTreePointsSpent = _skillPointsSpent getOrDefault [_skillTreeName, 0, true];
+private _totalSkillPointsSpent = _skillPointsSpent get "totalPointsSpent";
+
+_skillPointsSpent set [_skillTreeName, _skillTreePointsSpent + _skillCost];
+_skillPointsSpent set ["totalPointsSpent", _totalSkillPointsSpent + _skillCost];
+
 _skillsData set ["skillPoints", _skillPoints - _skillCost];
-_skillsData set ["skillPointsSpent", _skillPointsSpent + _skillCost];
+_skillsData set ["skillPointsSpent", _skillPointsSpent];
 
 [_player, _skillPath] call vgm_s_fnc_skills_teachSkill;
 
