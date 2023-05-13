@@ -17,7 +17,7 @@
             Nothing [NIL]
 
     Example(s):
-            ["startCooldown", ["ultimate", 20]] call vgm_c_fnc_displayAbilityCooldown;
+            ["refreshUI", _display] call vgm_c_fnc_displayAbilityCooldown;
 */
 
 #define SELF vgm_c_fnc_displayAbilityCooldown
