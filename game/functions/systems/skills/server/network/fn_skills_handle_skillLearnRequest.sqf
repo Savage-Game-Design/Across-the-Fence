@@ -41,8 +41,7 @@ private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 private _skillPoints = _skillsData get "skillPoints";
 private _skillPointsSpent = _skillsData get "skillPointsSpent";
 
-private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
-private _skillTreeName = _skillTree get "path" select 0; // is there a better way of doing this?
+private _skillTreeName = _skillPath select ((count _skillPath) - 1);
 private _skillTreePointsSpent = _skillPointsSpent getOrDefault [_skillTreeName, 0, true];
 private _totalSkillPointsSpent = _skillPointsSpent get "totalPointsSpent";
 
