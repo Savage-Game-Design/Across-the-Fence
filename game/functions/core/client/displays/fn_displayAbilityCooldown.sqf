@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2023-05-12
+    Last Update: 2023-05-13
     Public: No
 
     Description:
@@ -36,22 +36,34 @@ switch _mode do {
         params ["_display"];
         uiNamespace setVariable ["VGM_RscDisplayAbilityCooldown", _display];
 
-        private _handlerId = ["vgm_skills_active_slotted", [_display, {
+        private _handlers = [];
+        _handlers pushBack (["vgm_skills_active_slotted", [_display, {
             params ["", "_display"];
+
             ["refreshUI", _display] call SELF;
-        }]] call para_g_fnc_event_subscribeLocal;
-        _display setVariable ["vgm_skills_ui_skillSlottedHandlerId", _handlerId];
+        }]] call para_g_fnc_event_subscribeLocal);
+
+        _handlers pushBack (["vgm_skills_active_activated", [_display, {
+            params ["_eventArgs", "_display"];
+            _eventArgs params ["_slotName", "_skill"];
+
+            ["renderCooldown", [_display, _slotName, _skill]] call SELF;
+        }]] call para_g_fnc_event_subscribeLocal);
+
+        _display setVariable ["vgm_skills_ui_eventHandlersIds", _handlers];
 
         ["refreshUI"] call SELF;
     };
 
     case "onUnload": {
         params ["_display"];
-        [_display getVariable "vgm_skills_ui_skillSlottedHandlerId"] call para_g_fnc_event_unsubscribe;
+        {
+            [_x] call para_g_fnc_event_unsubscribe;
+        } forEach (_display getVariable "vgm_skills_ui_eventHandlersIds");
     };
 
     case "refreshUI": {
-        private _display = uiNamespace getVariable ["VGM_RscDisplayAbilityCooldown", displayNull];
+        params ["_display"];
 
         {
             _x params ["_idcIcon", "_slotName"];
@@ -69,31 +81,47 @@ switch _mode do {
         ];
     };
 
-    case "startCooldown": {
-        params ["_skill", "_seconds"];
+    case "renderCooldown": {
+        params ["_display", "_slotName", "_skill"];
 
-        private _display = uiNamespace getVariable ["VGM_RscDisplayAbilityCooldown", displayNull];
-        if (isNull _display) exitWith {
-            ["Ability cooldown HUD not available"] call vgm_g_fnc_logError;
-        };
+        private _slot = vgm_c_skills_active_slots get _slotName;
 
         private _idcs = [
             [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSPRIMARY],
             [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSULTIMATE]
-        ] select (_skill == SLOT_ULTIMATE);
+        ] select (_slotName == SLOT_ULTIMATE);
 
         (_idcs apply {_display displayCtrl _x}) params ["_ctrlCooldown", "_ctrlSeconds"];
         _ctrlSeconds ctrlSetFade 0;
         _ctrlSeconds ctrlCommit 5;
 
-        private _delta = 0.01;
-        for "_i" from 0 to _seconds step _delta do {
-            _ctrlCooldown progressSetPosition (1 - _i / _seconds);
-            _ctrlSeconds ctrlSetText format ["%1 s", ceil (_seconds - _i)];
-            uiSleep _delta;
-        };
-        _ctrlSeconds ctrlSetText "0 s";
-        _ctrlSeconds ctrlSetFade 1;
-        _ctrlSeconds ctrlCommit 3;
+        _ctrlCooldown progressSetPosition 1;
+
+        // start cooldown ticker
+        #define TICK_TIME 0.5
+        addMissionEventHandler ["EachFrame", {
+            _thisArgs params ["_deltaT", "_ctrlCooldown", "_ctrlSeconds", "_remainingCooldown", "_totalCooldown"];
+
+            if (_deltaT >= TICK_TIME) then {
+                _remainingCooldown = _remainingCooldown - _deltaT;
+                _thisArgs set [3, _remainingCooldown];
+                _deltaT = 0;
+
+                _ctrlCooldown progressSetPosition (_remainingCooldown / _totalCooldown);
+                _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
+            };
+
+            // stop the loop
+            if (_remainingCooldown <= 0) exitWith {
+                _ctrlSeconds ctrlSetText "0 s";
+                _ctrlSeconds ctrlSetFade 1;
+                _ctrlSeconds ctrlCommit 3;
+
+                removeMissionEventHandler [_thisEvent, _thisEventHandler]
+            };
+
+            _deltaT = _deltaT + diag_deltaTime;
+            _thisArgs set [0, _deltaT];
+        }, [0, _ctrlCooldown, _ctrlSeconds, _skill get "cooldown", _skill get "cooldown"]];
     };
 };
