@@ -121,7 +121,7 @@ switch _mode do {
                 _ctrlCooldown progressSetPosition (_remainingCooldown / _totalCooldown);
                 _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
 
-                _deltaT = 0;
+                _deltaT = _deltaT mod TICK_TIME;
                 _thisArgs set [3, _remainingCooldown];
             };
 
