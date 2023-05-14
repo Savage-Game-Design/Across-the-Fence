@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2023-05-13
+    Last Update: 2023-05-15
     Public: No
 
     Description:
@@ -102,25 +102,29 @@ switch _mode do {
         addMissionEventHandler ["EachFrame", {
             _thisArgs params ["_deltaT", "_ctrlCooldown", "_ctrlSeconds", "_remainingCooldown", "_totalCooldown"];
 
+            _deltaT = _deltaT + diag_deltaTime;
+
             if (_deltaT >= TICK_TIME) then {
                 _remainingCooldown = _remainingCooldown - _deltaT;
-                _thisArgs set [3, _remainingCooldown];
-                _deltaT = 0;
 
+                // stop the loop, reset controls
+                if (_remainingCooldown <= 0) exitWith {
+                    _ctrlSeconds ctrlSetText "0 s";
+                    _ctrlSeconds ctrlSetFade 1;
+                    _ctrlSeconds ctrlCommit 3;
+                    _ctrlCooldown progressSetPosition 0;
+
+                    removeMissionEventHandler [_thisEvent, _thisEventHandler]
+                };
+
+                // progress the indicator
                 _ctrlCooldown progressSetPosition (_remainingCooldown / _totalCooldown);
                 _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
+
+                _deltaT = 0;
+                _thisArgs set [3, _remainingCooldown];
             };
 
-            // stop the loop
-            if (_remainingCooldown <= 0) exitWith {
-                _ctrlSeconds ctrlSetText "0 s";
-                _ctrlSeconds ctrlSetFade 1;
-                _ctrlSeconds ctrlCommit 3;
-
-                removeMissionEventHandler [_thisEvent, _thisEventHandler]
-            };
-
-            _deltaT = _deltaT + diag_deltaTime;
             _thisArgs set [0, _deltaT];
         }, [0, _ctrlCooldown, _ctrlSeconds, _skill get "cooldown", _skill get "cooldown"]];
     };
