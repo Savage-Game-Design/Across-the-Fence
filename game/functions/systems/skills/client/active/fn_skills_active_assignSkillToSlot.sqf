@@ -2,7 +2,7 @@
     File: fn_skills_active_assignSkillToSlot.sqf
     Author: veteran29
     Date: 2023-02-01
-    Last Update: 2023-05-12
+    Last Update: 2023-05-14
     Public: Yes
 
     Description:
@@ -42,7 +42,7 @@ if (_skill isNotEqualTo createHashMap && {values vgm_c_skills_active_slots findI
 private _assigned = vgm_c_skills_active_slots getOrDefault [_slot, createHashMap] set ["skill", _skill];
 
 if (_assigned) then {
-    ["vgm_skills_active_slotted", [_slot, _skill]] call para_g_fnc_event_trigger;
+    ["vgm_skills_active_slotted", [_slot, _skill]] call para_g_fnc_event_triggerLocal;
 };
 
 _assigned // return
