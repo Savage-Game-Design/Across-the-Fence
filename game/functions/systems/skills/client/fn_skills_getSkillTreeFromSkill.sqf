@@ -2,11 +2,11 @@
     File: fn_skills_getSkillTreeFromSkill.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-02-25
+    Last Update: 2023-05-13
     Public: No
 
     Description:
-        Get parent skill from from a skill.
+        Get parent skill tree from a skill.
 
     Parameter(s):
         _skill - Skill hashmap [HASHMAP]
