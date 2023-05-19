@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-02-28
+    Last Update: 2023-05-19
     Public: Yes
 
     Description:
@@ -30,7 +30,7 @@ private _fnc_tierUnlocked = {
     params ["_tree", "_tier"];
 
     private _tiersArray = _tree get "skills";
-    _tierSkills = _tiersArray select (_tier - 1);
+    _tierSkills = _tiersArray select _tier;
     _tierSkills findIf {[_x, _player] call vgm_g_fnc_skills_isKnown} > -1 // return
 };
 
@@ -38,6 +38,16 @@ private _fnc_tierUnlocked = {
 && {
 
     private _tier = _skill get "tier";
+
+    // check if knows at least one skill from current tier
+    private _currentTierUnlocked = [
+        _skill call vgm_c_fnc_skills_getSkillTreeFromSkill,
+        _tier
+    ] call _fnc_tierUnlocked;
+
+    // we allow only one skill per tier
+    if (_currentTierUnlocked) exitWith {false};
+
     // if first tier check if has previous tree
     if (_tier < 1) exitWith {
         private _path = _skill get "path";
@@ -49,13 +59,15 @@ private _fnc_tierUnlocked = {
         private _parentSkillTree = _path call vgm_g_fnc_skills_getByPath;
         private _tiersCount = count (_parentSkillTree get "skills");
 
-        [_parentSkillTree, _tiersCount] call _fnc_tierUnlocked // return
+        // check if last tier of previous tree is unlocked
+        private _lastTierPrevTree = _tiersCount - 1;
+        [_parentSkillTree, _lastTierPrevTree] call _fnc_tierUnlocked // return
     };
 
     // check if knows at least one skill from previous tier
     [
         _skill call vgm_c_fnc_skills_getSkillTreeFromSkill,
-        _tier
+        (_tier - 1)
     ] call _fnc_tierUnlocked // return
 }
 && {_player call (_skill get "conditionUnlock")} // return
