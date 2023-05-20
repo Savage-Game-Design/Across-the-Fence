@@ -53,7 +53,6 @@ class vgm_s
         class skills_dataGetCached {};
         class skills_dbGet {};
         class skills_dbSave {};
-
         class skills_forgetSkills {};
 
         class skills_preInit
@@ -72,4 +71,12 @@ class vgm_s
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
     };
+
+    class skills_applicators
+    {
+        VGM_SERVER_PATH(\systems\skills\server\applicators);
+
+        class skills_apply_steadyAim {};
+        class skills_apply_moreStamina {};
+    }
 };

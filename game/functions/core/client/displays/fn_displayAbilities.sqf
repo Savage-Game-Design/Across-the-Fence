@@ -83,7 +83,7 @@ switch _mode do {
             _ctrlDescription ctrlSetText "-";
         };
 
-        private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
+        private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 
         _ctrlTitle ctrlSetText (_skill get "displayName");
         _ctrlIcon ctrlSetText (_skill get "icon");
@@ -152,7 +152,7 @@ switch _mode do {
             _ctrlEquip setVariable ["vgm_skill", createHashMap];
         };
 
-        private _skillTree = _focusedSkill call vgm_c_fnc_skills_getSkillTreeFromSkill;
+        private _skillTree = _focusedSkill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 
         _ctrlTitle ctrlSetText (_focusedSkill get "displayName");
         _ctrlIcon ctrlSetText (_focusedSkill get "icon");
@@ -181,7 +181,7 @@ switch _mode do {
             private _skill = _x;
             private _name = _skill get "displayName";
             private _icon = _skill get "icon";
-            private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
+            private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
             private _category = _skillTree get "displayName";
 
             ctAddRow _ctrlAvailable params ["_idx", "_rowData"];

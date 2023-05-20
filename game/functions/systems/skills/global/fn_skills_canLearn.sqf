@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-02-28
+    Last Update: 2023-05-20
     Public: Yes
 
     Description:
@@ -54,7 +54,7 @@ private _fnc_tierUnlocked = {
 
     // check if knows at least one skill from previous tier
     [
-        _skill call vgm_c_fnc_skills_getSkillTreeFromSkill,
+        _skill call vgm_g_fnc_skills_getSkillTreeFromSkill,
         _tier
     ] call _fnc_tierUnlocked // return
 }

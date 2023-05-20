@@ -48,6 +48,8 @@ class vgm_g
         class skills_getByPath {};
         class skills_isKnown {};
         class skills_parseTreeCfg {};
+        class skills_getSkillTreePoints {};
+        class skills_getSkillTreeFromSkill {};
         class skills_preInit
         {
             preInit = 1;
@@ -99,7 +101,6 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skills\client);
 
         class skills_getSkillPoints {};
-        class skills_getSkillTreeFromSkill {};
         class skills_openSkillTree {};
         class skills_postInit
         {

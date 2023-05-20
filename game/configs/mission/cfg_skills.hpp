@@ -36,7 +36,9 @@ class vgm_skillTrees {
                 class steadyAim: vgm_skillTemplate {
                     displayName = "Steady Aim";
                     description = "Decreases weapon sway.";
-                    codeApply = "_this setCustomAimCoef 0.5";
+                    codeApply = "_this call vgm_s_fnc_skills_apply_steadyAim";
+                    skillType = 0;
+                    applyOnRespawn = 1;
                 };
             };
 
