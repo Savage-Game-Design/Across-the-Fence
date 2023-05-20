@@ -26,28 +26,15 @@ params [
 
 private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
 
-private _fnc_tierUnlocked = {
-    params ["_tree", "_tier"];
-
-    private _tiersArray = _tree get "skills";
-    _tierSkills = _tiersArray select _tier;
-    _tierSkills findIf {[_x, _player] call vgm_g_fnc_skills_isKnown} > -1 // return
-};
-
 ((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
 && {
-
+    private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
     private _tier = _skill get "tier";
 
-    // if first tier check if has previous tree
+    // first tier specific checks
     if (_tier < 1) exitWith {
-        // check if knows at least one skill from current tier
-        private _currentTierUnlocked = [
-            _skill call vgm_c_fnc_skills_getSkillTreeFromSkill,
-            _tier
-        ] call _fnc_tierUnlocked;
         // we allow only one skill in first tiers
-        if (_currentTierUnlocked) exitWith {false};
+        if ([_player, _skillTree, _tier] call vgm_g_fnc_skills_tierInvested) exitWith {false};
 
         private _path = _skill get "path";
         // no previous tree, always unlocked
@@ -60,13 +47,10 @@ private _fnc_tierUnlocked = {
 
         // check if last tier of previous tree is unlocked
         private _lastTierPrevTree = _tiersCount - 1;
-        [_parentSkillTree, _lastTierPrevTree] call _fnc_tierUnlocked // return
+        [_player, _parentSkillTree, _lastTierPrevTree] call vgm_g_fnc_skills_tierInvested // return
     };
 
     // check if knows at least one skill from previous tier
-    [
-        _skill call vgm_c_fnc_skills_getSkillTreeFromSkill,
-        (_tier - 1)
-    ] call _fnc_tierUnlocked // return
+    [_player, _skillTree, _tier - 1] call vgm_g_fnc_skills_tierInvested // return
 }
 && {_player call (_skill get "conditionUnlock")} // return

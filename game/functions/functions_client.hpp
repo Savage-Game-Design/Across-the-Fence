@@ -52,6 +52,7 @@ class vgm_g
         {
             preInit = 1;
         };
+        class skills_tierInvested {};
         class skills_treesHashToPathsHash;
     };
 };
