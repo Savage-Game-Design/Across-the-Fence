@@ -142,7 +142,10 @@ switch _mode do {
         private _previousSkillCount = -1;
         {
             private _tierSkills = _x;
+            private _currentTier = _tierSkills#0 get "tier";
+            private _currentTierUnlocked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierUnlocked;
             private _currentSkillCount = count _tierSkills;
+
             if (_forEachIndex > 0) then {
                 // Draw a horizontal line connecting the skills from the
                 // previous level to the skills of the current level
@@ -163,6 +166,22 @@ switch _mode do {
                 _previousSkillCount = _currentSkillCount;
                 // spacing below horizontal line
                 _yPos = _yPos + 3 * VGM_GRID_H;
+            };
+
+            // show padlock on the right side of the tier row if it's not unlocked
+            if (!_currentTierUnlocked) then {
+                private _ctrlTierLocked = _display ctrlCreate ["VGM_ctrlStaticPicture", -1, _ctrlSkillTree];
+                private _iconWH = 10 * VGM_GRID_W;
+                _ctrlTierLocked ctrlSetText "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa";
+                _ctrlTierLocked ctrlSetPosition [
+                    _wSkillTree - _iconWH,
+                    _yPos + _hSkill/2 - _hBranchV - _iconWH/2 + (2 * VGM_GRID_W),
+                    _iconWH,
+                    _iconWH
+                ];
+                _ctrlTierLocked ctrlSetTextColor [0,0,0,1];
+                _ctrlTierLocked ctrlSetTooltip localize "STR_VGM_SKILLS_UI_TIER_LOCKED";
+                _ctrlTierLocked ctrlCommit 0;
             };
 
             // Center the controls
@@ -205,8 +224,6 @@ switch _mode do {
                     _ctrlUnlock ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
                     _ctrlUnlock ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
                 } else {
-                    private _tier = _skill get "tier";
-
                     _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
                     _ctrlUnlock setVariable ["vgm_params", [_skill]];
 
@@ -214,12 +231,12 @@ switch _mode do {
                     _ctrlUnlock ctrlEnable _canLearn;
                     _ctrlUnlock ctrlSetTooltip ([localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS", ""] select _canLearn);
 
-                    _ctrlUnlock ctrlShow ([player, _skillTree, _tier] call vgm_g_fnc_skills_tierUnlocked);
+                    _ctrlUnlock ctrlShow _currentTierUnlocked;
 
                     // show the padlock icon over first tier skills which were not choosen
-                    if (_tier < 1) exitWith {
+                    if (_currentTier < 1) exitWith {
                         private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
-                        private _locked = [player, _skillTree, _tier] call vgm_g_fnc_skills_tierInvested;
+                        private _locked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierInvested;
                         _ctrlPadlock ctrlShow _locked;
                         _ctrlUnlock ctrlShow (ctrlShown _ctrlUnlock && !_locked);
                     };
