@@ -83,6 +83,7 @@ switch _mode do {
         private _ctrlDescriptionTitle = _display displayCtrl VGM_IDC_DISPLAYSKILLS_TITLE;
         private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
         private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
+        _ctrlUnlock ctrlShow true;
 
         // render Skill info
         private _currentSkill = _display getVariable "vgm_currentSkill";
@@ -108,6 +109,7 @@ switch _mode do {
             _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _currentSkillTre get "displayName"]);
             _ctrlDescription ctrlSetStructuredText parseText (_currentSkillTre get "description");
 
+            _ctrlUnlock ctrlShow false;
             _ctrlUnlock ctrlEnable false;
             _ctrlUnlock ctrlSetText "";
         };
@@ -195,10 +197,32 @@ switch _mode do {
                 private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
                 _ctrlDescription ctrlSetStructuredText parseText (_skill get "displayName");
 
+                private _ctrlFocus = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLFOCUS;
+                _ctrlFocus ctrlAddEventHandler ["ButtonClick", {["focusSkill", _this] call vgm_c_fnc_displaySkills}];
+
                 private _ctrlUnlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
-                _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["focusSkill", _this] call vgm_c_fnc_displaySkills}];
                 if (_skill call vgm_g_fnc_skills_isKnown) then {
                     _ctrlUnlock ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
+                    _ctrlUnlock ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
+                } else {
+                    _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
+                    _ctrlUnlock setVariable ["vgm_params", [_skill]];
+
+                    private _canLearn = [player, _skill] call vgm_g_fnc_skills_canLearn;
+                    _ctrlUnlock ctrlEnable _canLearn;
+                    _ctrlUnlock ctrlSetTooltip ([localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS", ""] select _canLearn);
+
+                    private _tier = _skill get "tier";
+                    // show the padlock icon over first tier skills which were not choosen
+                    if (_tier < 1) exitWith {
+                        private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
+                        private _locked = [player, _skillTree, _tier] call vgm_g_fnc_skills_tierInvested;
+                        _ctrlPadlock ctrlShow _locked;
+                        _ctrlUnlock ctrlShow !_locked;
+                    };
+
+                    // previous tier is not unlocked
+                    _ctrlUnlock ctrlShow ([player, _skillTree, _tier - 1] call vgm_g_fnc_skills_tierInvested);
                 };
 
                 private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
@@ -238,8 +262,8 @@ switch _mode do {
         private _ctrlBranchName = _display ctrlCreate ["VGM_ctrlBranchName", -1, _ctrlSkillTree];
         _ctrlBranchName ctrlSetPositionY _yPos;
         _ctrlBranchName ctrlCommit 0;
-        private _ctrlBranchNameName = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
-        _ctrlBranchNameName ctrlSetText (_ctrlSkills tvText (tvCurSel _ctrlSkills));
+        private _ctrlBranchNameLabel = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
+        _ctrlBranchNameLabel ctrlSetText (_skillTree get "displayName");
     };
 
     case "updateSpAvailableHeader": {
@@ -251,14 +275,14 @@ switch _mode do {
     };
 
     case "focusSkill": {
-        params ["_ctrlUnlock"];
-        private _display = ctrlParent _ctrlUnlock;
-        private _ctrlSkill = ctrlParentControlsGroup _ctrlUnlock;
+        params ["_ctrlFocus"];
+        private _display = ctrlParent _ctrlFocus;
+        private _ctrlSkill = ctrlParentControlsGroup _ctrlFocus;
         (_ctrlSkill getVariable "vgm_params") params ["_skill"];
 
         _display setVariable ["vgm_currentSkill", _skill];
 
-        ["updateSkillTreeHeader", ctrlParent _ctrlUnlock] call vgm_c_fnc_displaySkills;
+        ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
     };
 
     case "unlockSkill": {

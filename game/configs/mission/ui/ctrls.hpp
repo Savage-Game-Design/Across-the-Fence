@@ -296,10 +296,30 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
                 shadow = 0;
             };
         };
+
+        class Locked: VGM_ctrlStaticPicture
+        {
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
+            text = "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa";
+            show = 0;
+            x = 0;
+            y = 0;
+            w = VGM_CTRLSKILL_W * VGM_GRID_W;
+            h = 20 * VGM_GRID_H;
+        };
+        class Focus: VGM_ctrlButtonInvisible
+        {
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLFOCUS;
+            colorBackground[] = {0,0,0,0};
+            x = 0;
+            y = 0;
+            w = VGM_CTRLSKILL_W * VGM_GRID_W - 5 * VGM_GRID_W;
+            h = 20 * VGM_GRID_H;
+        };
         class Unlock: VGM_ctrlButtonPicture
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
-            text = "P:\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
+            text = "\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
             colorText[] = {0,0,0,1};
             colorBackground[] = {0.7,0.7,0.7,1};
             x = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
