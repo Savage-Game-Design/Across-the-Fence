@@ -53,6 +53,7 @@ class vgm_g
             preInit = 1;
         };
         class skills_tierInvested {};
+        class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
 };
