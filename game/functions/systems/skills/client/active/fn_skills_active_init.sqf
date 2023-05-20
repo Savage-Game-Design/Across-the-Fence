@@ -2,7 +2,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-02-26
+    Last Update: 2023-05-13
     Public: No
 
     Description:
@@ -21,16 +21,16 @@
 vgm_c_skills_active_list = createHashMap;
 
 private _fnc_createSlot = {
-    createHashMapFromArray [
+    [_this, createHashMapFromArray [
+        ["name", _this],
         ["cooldownUntil", 0],
         ["skill", createHashMap]
-    ]
+    ]]
 };
 
 vgm_c_skills_active_slots = createHashMapFromArray [
-    ["ability1", call _fnc_createSlot],
-    // ["ability2", call _fnc_createSlot],
-    ["ultimate", call _fnc_createSlot]
+    "ability1" call _fnc_createSlot,
+    "ultimate" call _fnc_createSlot
 ];
 
 ["vgm_skills_learnt", {
@@ -66,3 +66,5 @@ addUserActionEventHandler ["selectAll", "Activate", {
 
     [] call vgm_c_fnc_skills_active_openSkillWheel;
 }];
+
+[] spawn VGM_C_fnc_skills_active_toggleHud;
