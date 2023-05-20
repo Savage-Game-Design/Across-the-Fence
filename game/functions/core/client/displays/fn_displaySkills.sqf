@@ -34,6 +34,7 @@ switch _mode do {
 
         ["updateSpAvailableHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
+        ["updateSkillTree", _display] call vgm_c_fnc_displaySkills;
     };
 
     // fill left panel with skill trees
@@ -65,8 +66,6 @@ switch _mode do {
         params ["_ctrlSkills", "_path"];
         private _display = ctrlParent _ctrlSkills;
 
-        private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
-
         private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _path);
         private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
@@ -74,10 +73,58 @@ switch _mode do {
         _display setVariable ["vgm_currentSkill", createHashMap];
 
         // Update header
-        ["updateSkillTreeHeader",_display] call vgm_c_fnc_displaySkills;
+        ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
+        ["updateSkillTree", _display] call vgm_c_fnc_displaySkills;
+    };
+
+    case "updateSkillTreeHeader": {
+        params ["_display"];
+
+        private _ctrlDescriptionTitle = _display displayCtrl VGM_IDC_DISPLAYSKILLS_TITLE;
+        private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
+        private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
+
+        // render Skill info
+        private _currentSkill = _display getVariable "vgm_currentSkill";
+        if (_currentSkill isNotEqualTo createHashMap) exitWith {
+
+            _ctrlDescriptionTitle ctrlSetText (_currentSkill get "displayName");
+            _ctrlDescription ctrlSetStructuredText parseText (_currentSkill get "description");
+
+            if (_currentSkill call vgm_g_fnc_skills_isKnown) exitWith {
+                _ctrlUnlock ctrlSetText localize "STR_VGM_SKILLS_UI_KNOWN";
+                _ctrlUnlock ctrlEnable false;
+            };
+
+            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
+            _ctrlUnlock ctrlEnable ([player, _currentSkill] call vgm_g_fnc_skills_canLearn);
+            _ctrlUnlock setVariable ["vgm_params", [_currentSkill]];
+        };
+
+        // render Skill Tree info
+        private _currentSkillTre = _display getVariable "vgm_currentSkillTree";
+        if (_currentSkillTre isNotEqualTo createHashMap) exitWith {
+
+            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _currentSkillTre get "displayName"]);
+            _ctrlDescription ctrlSetStructuredText parseText (_currentSkillTre get "description");
+
+            _ctrlUnlock ctrlEnable false;
+            _ctrlUnlock ctrlSetText "";
+        };
+    };
+
+    case "updateSkillTree": {
+        params ["_display"];
+
+        private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
+        private _skillTree = _display getVariable "vgm_currentSkillTree";
 
         // Remove all old controls
         allControls _ctrlSkillTree apply { ctrlDelete _x };
+
+        // nothing to render if no skill tree selected
+        if (_skillTree isEqualTo createHashMap) exitWith {};
+
         // Save some coordinates for later use
         ctrlPosition _ctrlSkillTree params ["", "", "_wSkillTree"];
         private _wSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "w");
@@ -92,8 +139,8 @@ switch _mode do {
         private _yPos = 0;
         private _previousSkillCount = -1;
         {
-            private _levelSkills = _x;
-            private _currentSkillCount = count _levelSkills;
+            private _tierSkills = _x;
+            private _currentSkillCount = count _tierSkills;
             if (_forEachIndex > 0) then {
                 // Draw a horizontal line connecting the skills from the
                 // previous level to the skills of the current level
@@ -117,14 +164,14 @@ switch _mode do {
             };
 
             // Center the controls
-            _xPos = switch (count _levelSkills) do {
+            _xPos = switch (count _tierSkills) do {
                 case 1: { 0.5 * _wSkillTree - 0.5 * _wSkill };
                 case 2: { 1/3 * _wSkillTree - 0.5 * _wSkill };
                 default { 0 };
             };
 
-            // Iterate over the skills of the current level
-            _levelSkills apply {
+            // Iterate over the skills of the current tier
+            _tierSkills apply {
                 private _skill = _x;
 
                 private _xLineV = _xPos + 0.5 * _wSkill - 0.5 * VGM_GRID_W;
@@ -138,7 +185,7 @@ switch _mode do {
                     ];
                     _ctrlSkillLineVTop ctrlCommit 0;
                 };
-                // Create controls for skills of this level
+                // Create controls for skills of this tier
                 private _ctrlSkill = _display ctrlCreate ["VGM_ctrlSkill", -1, _ctrlSkillTree];
                 _ctrlSkill setVariable ["vgm_params", [_skill]];
                 if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
@@ -193,42 +240,6 @@ switch _mode do {
         _ctrlBranchName ctrlCommit 0;
         private _ctrlBranchNameName = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
         _ctrlBranchNameName ctrlSetText (_ctrlSkills tvText (tvCurSel _ctrlSkills));
-    };
-
-    case "updateSkillTreeHeader": {
-        params ["_display"];
-
-        private _ctrlDescriptionTitle = _display displayCtrl VGM_IDC_DISPLAYSKILLS_TITLE;
-        private _ctrlDescription = _display displayCtrl VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
-        private _ctrlUnlock = _display displayCtrl VGM_IDC_DISPLAYSKILLS_UNLOCK;
-
-        // render Skill info
-        private _currentSkill = _display getVariable "vgm_currentSkill";
-        if (_currentSkill isNotEqualTo createHashMap) exitWith {
-
-            _ctrlDescriptionTitle ctrlSetText (_currentSkill get "displayName");
-            _ctrlDescription ctrlSetStructuredText parseText (_currentSkill get "description");
-
-            if (_currentSkill call vgm_g_fnc_skills_isKnown) exitWith {
-                _ctrlUnlock ctrlSetText localize "STR_VGM_SKILLS_UI_KNOWN";
-                _ctrlUnlock ctrlEnable false;
-            };
-
-            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
-            _ctrlUnlock ctrlEnable ([player, _currentSkill] call vgm_g_fnc_skills_canLearn);
-            _ctrlUnlock setVariable ["vgm_params", [_currentSkill]];
-        };
-
-        // render Skill Tree info
-        private _currentSkillTre = _display getVariable "vgm_currentSkillTree";
-        if (_currentSkillTre isNotEqualTo createHashMap) exitWith {
-
-            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _currentSkillTre get "displayName"]);
-            _ctrlDescription ctrlSetStructuredText parseText (_currentSkillTre get "description");
-
-            _ctrlUnlock ctrlEnable false;
-            _ctrlUnlock ctrlSetText "";
-        };
     };
 
     case "updateSpAvailableHeader": {
