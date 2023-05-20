@@ -14,6 +14,7 @@ import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
 import ctrlXListbox;
+import ctrlActivePicture;
 
 #define COLOR_BLACK {0,0,0,1}
 class VGM_ctrlDefault: ctrlDefault {
@@ -194,6 +195,10 @@ class VGM_ctrlSeperator: VGM_ctrlStatic
     h = pixelH;
     w = pixelW;
     colorBackground[] = {0.75,0.75,0.75,1};
+};
+
+class VGM_ctrlActivePicture: ctrlActivePicture
+{
 };
 
 // Controls for VGM_DisplaySkills

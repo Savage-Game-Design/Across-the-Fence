@@ -71,6 +71,7 @@ class vgm_c
         class displayMissions {};
         class displayMissionsTargets {};
         class displayAbilityCooldown {};
+        class displayMedical {};
     };
 
     class ui
