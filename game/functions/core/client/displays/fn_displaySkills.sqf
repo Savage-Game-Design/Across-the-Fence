@@ -205,6 +205,8 @@ switch _mode do {
                     _ctrlUnlock ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
                     _ctrlUnlock ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
                 } else {
+                    private _tier = _skill get "tier";
+
                     _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
                     _ctrlUnlock setVariable ["vgm_params", [_skill]];
 
@@ -212,17 +214,15 @@ switch _mode do {
                     _ctrlUnlock ctrlEnable _canLearn;
                     _ctrlUnlock ctrlSetTooltip ([localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS", ""] select _canLearn);
 
-                    private _tier = _skill get "tier";
+                    _ctrlUnlock ctrlShow ([player, _skillTree, _tier] call vgm_g_fnc_skills_tierUnlocked);
+
                     // show the padlock icon over first tier skills which were not choosen
                     if (_tier < 1) exitWith {
                         private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
                         private _locked = [player, _skillTree, _tier] call vgm_g_fnc_skills_tierInvested;
                         _ctrlPadlock ctrlShow _locked;
-                        _ctrlUnlock ctrlShow !_locked;
+                        _ctrlUnlock ctrlShow (ctrlShown _ctrlUnlock && !_locked);
                     };
-
-                    // previous tier is not unlocked
-                    _ctrlUnlock ctrlShow ([player, _skillTree, _tier - 1] call vgm_g_fnc_skills_tierInvested);
                 };
 
                 private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
