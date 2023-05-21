@@ -33,6 +33,7 @@ class VGM_DisplayMedical
 {
     idd = -1;
     onLoad = VGM_UIEH(onLoad,Medical);
+    onMouseButtonDown = VGM_UIEH(mouseDown,Medical);
     class ControlsBackground
     {
         class Min: VGM_ctrlStatic
@@ -43,72 +44,18 @@ class VGM_DisplayMedical
             h = DISPLAY_H * VGM_GRID_H;
             colorBackground[] = {1,0,0,0.2};
         };
-        // class Patient: VGM_ctrlActivePicture
-        // {
-        //     x = DISPLAY_X;
-        //     y = DISPLAY_Y;
-        //     w = DISPLAY_W * VGM_GRID_W;
-        //     h = DISPLAY_H * VGM_GRID_H;
-        // };
     };
     class Controls
     {
-        class HeadIcon: VGM_ctrlActivePicture
-        {
-            text = "soldier_head.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * HEAD_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN) * VGM_GRID_H;
-            w = HEAD_W * VGM_GRID_W;
-            h = HEAD_H * VGM_GRID_H;
-        };
-        class TorsoIcon: HeadIcon
-        {
-            text = "soldier_torso.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H) * VGM_GRID_H;
-            w = TORSO_W * VGM_GRID_W;
-            h = TORSO_H * VGM_GRID_H;
-        };
-        class ArmLeftIcon: TorsoIcon
-        {
-            text = "soldier_arm_l.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - ARMS_W - 0.5 * TORSO_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H + 3.5) * VGM_GRID_H;
-            w = ARMS_W * VGM_GRID_W;
-            h = ARMS_H * VGM_GRID_H;
-        };
-        class ArmRightIcon: ArmLeftIcon
-        {
-            text = "soldier_arm_r.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W + 0.5 * TORSO_W) * VGM_GRID_W;
-        };
-        class LegLeftIcon: TorsoIcon
-        {
-            text = "soldier_leg_l.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W - 2) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H + TORSO_H) * VGM_GRID_H;
-            w = LEG_L_W * VGM_GRID_W;
-            h = LEG_L_H * VGM_GRID_H;
-        };
-        class LegRightIcon: LegLeftIcon
-        {
-            text = "soldier_leg_r.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W + 0.3) * VGM_GRID_W;
-            w = LEG_R_W * VGM_GRID_W;
-            h = LEG_R_H * VGM_GRID_H;
-        };
-
-        class Head: VGM_ctrlStack
+        class Treatment: VGM_ctrlStack
         {
 #define _W 50
 #define _H 50
-            idc = VGM_IDC_DISPLAYMEDICAL_HEAD;
-            text = "Head";
-            x = DISPLAY_X;
-            y = DISPLAY_Y;
+            idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+            x = 0;
+            y = 0;
             w = _W * VGM_GRID_W;
             h = _H * VGM_GRID_H;
-            show = 0;
             class Controls
             {
                 class Background: VGM_ctrlBackground
@@ -127,22 +74,23 @@ class VGM_DisplayMedical
                 };
                 class Title: VGM_ctrlTitle
                 {
-                    onLoad = VGM_UIEH(setPartTitle,Medical);
-                    idc = VGM_IDC_DISPLAYMEDICAL_PART_TITLE;
+                    idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT_TITLE;
+                    text = "Part";
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;
                 };
-                class InjuriesLabel: VGM_ctrlStructuredText
+                class InjuriesCount: VGM_ctrlStructuredText
                 {
-                    text = "Injuries";
+                    idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT_INJURIESCOUNT;
+                    text = "99 Injuries";
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;
                 };
                 class Injuries: VGM_ctrlControlsTable
                 {
-                    idc = VGM_IDC_DISPLAYMEDICAL_PART_INJURIES;
+                    idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT_INJURIES;
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = _H * VGM_GRID_H;
@@ -161,5 +109,58 @@ class VGM_DisplayMedical
                 };
             };
         };
+
+        class HeadIcon: VGM_ctrlActivePicture
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_HEAD;
+            text = "soldier_head.paa";
+            onButtonClick = VGM_UIEH(selectPart,Medical);
+            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * HEAD_W) * VGM_GRID_W;
+            y = DISPLAY_Y + (MARGIN) * VGM_GRID_H;
+            w = HEAD_W * VGM_GRID_W;
+            h = HEAD_H * VGM_GRID_H;
+        };
+        class TorsoIcon: HeadIcon
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_TORSO;
+            text = "soldier_torso.paa";
+            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W) * VGM_GRID_W;
+            y = DISPLAY_Y + (MARGIN + HEAD_H) * VGM_GRID_H;
+            w = TORSO_W * VGM_GRID_W;
+            h = TORSO_H * VGM_GRID_H;
+        };
+        class ArmLeftIcon: TorsoIcon
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_ARMLEFT;
+            text = "soldier_arm_l.paa";
+            x = DISPLAY_X + (0.5 * DISPLAY_W - ARMS_W - 0.5 * TORSO_W) * VGM_GRID_W;
+            y = DISPLAY_Y + (MARGIN + HEAD_H + 3.5) * VGM_GRID_H;
+            w = ARMS_W * VGM_GRID_W;
+            h = ARMS_H * VGM_GRID_H;
+        };
+        class ArmRightIcon: ArmLeftIcon
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_ARMRIGHT;
+            text = "soldier_arm_r.paa";
+            x = DISPLAY_X + (0.5 * DISPLAY_W + 0.5 * TORSO_W) * VGM_GRID_W;
+        };
+        class LegLeftIcon: TorsoIcon
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_LEGLEFT;
+            text = "soldier_leg_l.paa";
+            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W - 2) * VGM_GRID_W;
+            y = DISPLAY_Y + (MARGIN + HEAD_H + TORSO_H) * VGM_GRID_H;
+            w = LEG_L_W * VGM_GRID_W;
+            h = LEG_L_H * VGM_GRID_H;
+        };
+        class LegRightIcon: LegLeftIcon
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_LEGRIGHT;
+            text = "soldier_leg_r.paa";
+            x = DISPLAY_X + (0.5 * DISPLAY_W + 0.3) * VGM_GRID_W;
+            w = LEG_R_W * VGM_GRID_W;
+            h = LEG_R_H * VGM_GRID_H;
+        };
+
     };
 };

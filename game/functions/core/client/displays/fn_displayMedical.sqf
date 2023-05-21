@@ -19,20 +19,46 @@
         ["onLoad", [findDisplay 28000]] call vgm_c_fnc_displayMedical;
 */
 #include "macros.inc"
-params ["_mode", "_this"];
 diag_log _this;
+params ["_mode", "_this"];
 switch _mode do {
     case "onLoad":{
         params ["_display"];
     };
-    case "setPartTitle":{
-        params ["_ctrlTitle", "_cfg"];
-        // Containing group contains the title, access the config hierarchy
-        private _cfgHierarchy = configHierarchy _cfg;
-        // Get the config of the group relative to the passed control
-        // missionConfigFile >> Display >> Controls >> Part >> Controls >> Title
-        private _cfgGroup = _cfgHierarchy select (count _cfgHierarchy - 3);
-        private _title = getText (_cfgGroup >> "text");
+    case "selectPart": {
+        params ["_ctrlPartIcon"];
+        private _display = ctrlParent _ctrlPartIcon;
+        // Set the title for the treatment options
+        private _title = ["Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
+        private _ctrlTitle = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_TITLE;
         _ctrlTitle ctrlSetText _title;
+        // Activate the treatment options
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        _ctrlTreatment ctrlShow true;
+        ctrlPosition _ctrlTreatment params ["","","_cw", "_ch"];
+        getMousePosition params ["_xPos", "_yPos"];
+        // Clamp position to not go offscreen
+        _ctrlTreatment ctrlSetPosition [
+            (_xPos+pixelW) min (safeZoneX + safeZoneW - _cw),
+            (_yPos+pixelH) min (safeZoneY + safeZoneH - _ch)
+        ];
+        _ctrlTreatment ctrlCommit 0;
+        ctrlSetFocus _ctrlTreatment;
+    };
+    case "mouseDown": {
+        params ["_display", "_button", "_xPos", "_yPos"];
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        // Get area of treatment options control
+        ctrlPosition _ctrlTreatment params ["_cX", "_cY", "_cW", "_cH"];
+        _cW = _cW/2;
+        _cH = _cH/2;
+        _cX = _cX + _cW;
+        _cY = _cY + _cH;
+        private _cArea = [[_cX,_cY], _cW, _cH, 0, true];
+        getMousePosition params ["_mouseX", "_mouseY"];
+        // Hide treatment options when clicked outside of treatment options group
+        if (ctrlShown _ctrlTreatment && !(getMousePosition inArea _cArea)) then {
+            _ctrlTreatment ctrlShow false;
+        };
     };
 };
