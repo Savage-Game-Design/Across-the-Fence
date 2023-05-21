@@ -88,13 +88,14 @@ class VGM_DisplayMedical
                     w = _W * VGM_GRID_W;
                     h = 5 * VGM_GRID_H;
                 };
-                class Injuries: VGM_ctrlControlsTable
+                class Options: VGM_ctrlControlsTable
                 {
-                    idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT_INJURIES;
+                    idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT_OPTIONS;
                     x = 0;
                     w = _W * VGM_GRID_W;
                     h = _H * VGM_GRID_H;
                     stackFill = 1;
+                    rowHeight = 10 * VGM_GRID_H;
                     class RowTemplate
                     {
                         class Image
@@ -102,8 +103,14 @@ class VGM_DisplayMedical
                             controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
                             columnX = 0;
                             controlOffsetY = 0;
-                            columnW = 5 * VGM_GRID_W;
-                            controlH = 5 * VGM_GRID_H;
+                            columnW = (16/9) * 10 * VGM_GRID_W;
+                            controlH = 10 * VGM_GRID_H;
+                        };
+                        class Name: Image
+                        {
+                            controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
+                            columnX = (16/9) * 10 * VGM_GRID_W;
+                            columnW = (_W - (16/9) * 10) * VGM_GRID_W;
                         };
                     };
                 };

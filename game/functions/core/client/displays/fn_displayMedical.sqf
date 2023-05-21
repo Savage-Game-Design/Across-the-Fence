@@ -19,7 +19,6 @@
         ["onLoad", [findDisplay 28000]] call vgm_c_fnc_displayMedical;
 */
 #include "macros.inc"
-diag_log _this;
 params ["_mode", "_this"];
 switch _mode do {
     case "onLoad":{
@@ -32,6 +31,19 @@ switch _mode do {
         private _title = ["Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
         private _ctrlTitle = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_TITLE;
         _ctrlTitle ctrlSetText _title;
+
+        // Add treatment options
+        private _ctrlOptions = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_OPTIONS;
+        ctClear _ctrlOptions;
+        private _options = ["fak", "medkit"];
+        _options apply {
+            private _name = _x;
+            private _count = 99;
+            (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName"];
+            _ctrlOptionIcon ctrlSetText "\vn\editorpreviews_f_vietnam\weapons\preview_vn_b_item_firstaidkit.jpg";
+            _ctrlOptionName ctrlSetStructuredText parseText format ["%1<br/>Owned: %2", _name, _count];
+        };
+
         // Activate the treatment options
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
         _ctrlTreatment ctrlShow true;
@@ -57,6 +69,7 @@ switch _mode do {
         private _cArea = [[_cX,_cY], _cW, _cH, 0, true];
         getMousePosition params ["_mouseX", "_mouseY"];
         // Hide treatment options when clicked outside of treatment options group
+        // (if part is selected it will be shown again, because ButtonClick EH fires after this one)
         if (ctrlShown _ctrlTreatment && !(getMousePosition inArea _cArea)) then {
             _ctrlTreatment ctrlShow false;
         };
