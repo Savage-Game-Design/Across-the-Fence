@@ -19,11 +19,11 @@
         Nothing
 
     Example(s):
-        [_player] call vgm_s_fnc_skills_reapply;
-        [_player, "primary"] call vgm_s_fnc_skills_reapply;
+        call vgm_c_fnc_skills_reapply;
+        "primary" call vgm_c_fnc_skills_reapply;
  */
 
-params ["_player", ["_type", "passive"]];
+params [["_type", "passive"]];
 
 private _skillType = switch (_type) do {
 	case "primary": {1};
@@ -31,13 +31,14 @@ private _skillType = switch (_type) do {
 	default {0};
 };
 
-private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
+[] call vgm_c_fnc_skills_requestSkillsData;
+private _skillsData = player getVariable ["vgm_g_skillsData", []];
 private _skills = _skillsData get "skillPaths";
 
 {
     private _skill = _x call vgm_g_fnc_skills_getByPath;
 
     if (_skill get "skillType" == _skillType) then {
-        _player call (_skill get "codeApply");
+        player call (_skill get "codeApply");
     };
 } forEach _skills;
