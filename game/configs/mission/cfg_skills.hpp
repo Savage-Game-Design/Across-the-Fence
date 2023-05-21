@@ -27,12 +27,6 @@ class vgm_skillTrees {
         // rifleman skills
         class skills {
             class tier_1 {
-                class moreStamina: vgm_skillTemplate {
-                    displayName = "More Stamina";
-                    description = "Increases amount of available stamina.";
-                    codeApply = "_this setUnitTrait ['loadCoef', 2]";
-                };
-
                 class steadyAim: vgm_skillTemplate {
                     displayName = "Steady Aim";
                     description = "Decreases weapon sway.";
@@ -43,13 +37,24 @@ class vgm_skillTrees {
             };
 
             class tier_2 {
-                class skill_3: vgm_skillTemplate {};
-                class skill_4: vgm_skillTemplate {};
+                class athletic: vgm_skillTemplate {
+                    displayName = "Athletic";
+                    description = "Decreases stamina comsumption from current weight.";
+                    codeApply = "_this call vgm_s_fnc_skills_apply_athletic";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                    cost = 3;
+                };
             };
 
             class tier_3 {
-                class skill_5: vgm_skillTemplate {};
-                class skill_6: vgm_skillTemplate {};
+                class hoofIt: vgm_skillTemplate {
+                    displayName = "Hoof It";
+                    description = "Removes stamina cost for 30 seconds.";
+                    skillType = 1;
+                    cost = 4;
+                    cooldown = 150;
+                };
             };
 
             class tier_4 {

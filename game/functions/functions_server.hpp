@@ -54,6 +54,7 @@ class vgm_s
         class skills_dbGet {};
         class skills_dbSave {};
         class skills_forgetSkills {};
+        class skills_reapply{};
 
         class skills_preInit
         {
@@ -77,6 +78,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\skills\server\applicators);
 
         class skills_apply_steadyAim {};
-        class skills_apply_moreStamina {};
+        class skills_apply_athletic {};
+        class skills_apply_hoofIt {};
     }
 };
