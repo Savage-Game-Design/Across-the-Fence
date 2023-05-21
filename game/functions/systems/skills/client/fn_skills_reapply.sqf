@@ -9,11 +9,11 @@
         Reapplies skills of a type to a player.
 
     Parameter(s):
-        _player [OBJECT] - Player to reapply skills to.
-
         _type [STRING] - "passive" (default)
                          "primary"
                          "ultimate"
+
+        _default [BOOL] - defaults the
 
     Returns:
         Nothing
@@ -31,7 +31,6 @@ private _skillType = switch (_type) do {
 	default {0};
 };
 
-[] call vgm_c_fnc_skills_requestSkillsData;
 private _skillsData = player getVariable ["vgm_g_skillsData", []];
 private _skills = _skillsData get "skillPaths";
 
