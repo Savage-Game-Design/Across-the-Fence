@@ -31,6 +31,7 @@ class vgm_skillTrees {
                     displayName = "Steady Aim";
                     description = "Decreases weapon sway.";
                     codeApply = "call vgm_c_fnc_skills_apply_steadyAim";
+                    codeUnapply = "player setCustomAimCoef 1";
                     skillType = 0;
                     applyOnRespawn = 1;
                 };
@@ -41,6 +42,7 @@ class vgm_skillTrees {
                     displayName = "Athletic";
                     description = "Decreases stamina comsumption from current weight.";
                     codeApply = "call vgm_c_fnc_skills_apply_athletic";
+                    codeUnapply = "player setUnitTrait ['loadCoef', 1]";
                     skillType = 0;
                     applyOnRespawn = 1;
                     cost = 3;
