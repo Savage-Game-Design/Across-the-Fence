@@ -21,7 +21,7 @@ private _skill = ["combatTree", "athletic"] call vgm_g_fnc_skills_getByPath;
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 private _skillTreePoints = [_skillTree] call vgm_g_fnc_skills_getSkillTreePoints;
 
-private _coef = [1 - (_skillTreePoints * 0.1), 0.1, 1] call BIS_fnc_clamp;
+private _coef = (1 - _skillTreePoints * 0.1) max 0.1 min 1;
 player setUnitTrait ["loadCoef", _coef];
 
 _coef // result
