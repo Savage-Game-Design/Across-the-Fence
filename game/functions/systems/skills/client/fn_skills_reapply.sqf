@@ -13,8 +13,6 @@
                          "primary"
                          "ultimate"
 
-        _default [BOOL] - defaults the
-
     Returns:
         Nothing
 
