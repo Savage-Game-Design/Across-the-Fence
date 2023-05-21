@@ -21,7 +21,7 @@ private _skill = ["combatTree", "steadyAim"] call vgm_g_fnc_skills_getByPath;
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 private _skillTreePoints = [_skillTree] call vgm_g_fnc_skills_getSkillTreePoints;
 
-private _coef = [1 - (0.01 * _skillTreePoints), 0, 1] call BIS_fnc_clamp;
+private _coef = (1 - 0.01 * _skillTreePoints) max 0 min 1;
 player setCustomAimCoef _coef; // Probably should store this in the db for stacking purposes.
 
 _coef // result
