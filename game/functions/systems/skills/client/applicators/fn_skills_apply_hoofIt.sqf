@@ -7,7 +7,6 @@
 
     Description:
         Disables stamina for 30 seconds.
-        WARNING: This is ran on the client-side.
 
     Parameter(s):
 
