@@ -25,6 +25,6 @@ if (_slot call vgm_c_fnc_skills_active_isSlotOnCooldown) exitWith {
     hint "Skill on cooldown!";
 };
 
-[_skill get "path"] call vgm_c_fnc_skills_requestSkillActivation;
+player call (_skill get "codeActivate");
 private _cooldownUntil = time + (_skill get "cooldown"); // cooldown handling probably should be server-sided as well.
 _slot set ["cooldownUntil", _cooldownUntil];

@@ -68,18 +68,8 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\skills\server\network);
 
-        class skills_handle_skillActivationRequest {};
         class skills_handle_skillLearnRequest {};
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
     };
-
-    class skills_applicators
-    {
-        VGM_SERVER_PATH(\systems\skills\server\applicators);
-
-        class skills_apply_steadyAim {};
-        class skills_apply_athletic {};
-        class skills_apply_hoofIt {};
-    }
 };

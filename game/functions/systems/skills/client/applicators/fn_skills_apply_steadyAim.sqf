@@ -9,22 +9,19 @@
         Applies the steady aim effect to the player.
 
     Parameter(s):
-        _player - The player to apply the steady aim to.
 
     Returns:
         _coef [Number] - The coefficient to apply to the weapon sway.
 
     Example(s):
-        [_player] call vgm_s_fnc_skills_apply_steadyAim;
+        call vgm_c_fnc_skills_apply_steadyAim;
 */
-
-params ["_player"];
 
 private _skill = ["combatTree", "steadyAim"] call vgm_g_fnc_skills_getByPath;
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 private _skillTreePoints = [_skillTree] call vgm_g_fnc_skills_getSkillTreePoints;
 
 private _coef = [1 - (0.01 * _skillTreePoints), 0, 1] call BIS_fnc_clamp;
-_player setCustomAimCoef _coef; // Probably should store this in the db for stacking purposes.
+player setCustomAimCoef _coef; // Probably should store this in the db for stacking purposes.
 
 _coef // result

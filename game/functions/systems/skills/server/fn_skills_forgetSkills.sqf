@@ -2,7 +2,7 @@
     File: fn_skills_teachSkill.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-02-28
+    Last Update: 2023-05-21
     Public: Yes
 
     Description:

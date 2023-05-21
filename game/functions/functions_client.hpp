@@ -134,9 +134,17 @@ class vgm_c
         class skills_receiveSkillRespec {};
         class skills_receiveSkillsData {};
 
-        class skills_requestSkillActivation {};
         class skills_requestSkillLearn {};
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
     };
+
+    class skills_applicators
+    {
+        VGM_CLIENT_PATH(\systems\skills\client\applicators);
+
+        class skills_apply_steadyAim {};
+        class skills_apply_athletic {};
+        class skills_apply_hoofIt {};
+    }
 };

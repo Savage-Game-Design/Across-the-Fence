@@ -14,7 +14,6 @@ class vgm_skillTemplate {
     conditionUnlock = "true";
     conditionShow = "true";
 
-    clientSided = 0; // Is the code ran on the client-side?
     codeApply = "systemChat 'skill applied'";
     codeUnapply = "systemChat 'skill un-applied'";
 
@@ -31,7 +30,7 @@ class vgm_skillTrees {
                 class steadyAim: vgm_skillTemplate {
                     displayName = "Steady Aim";
                     description = "Decreases weapon sway.";
-                    codeApply = "_this call vgm_s_fnc_skills_apply_steadyAim";
+                    codeApply = "call vgm_c_fnc_skills_apply_steadyAim";
                     skillType = 0;
                     applyOnRespawn = 1;
                 };
@@ -41,7 +40,7 @@ class vgm_skillTrees {
                 class athletic: vgm_skillTemplate {
                     displayName = "Athletic";
                     description = "Decreases stamina comsumption from current weight.";
-                    codeApply = "_this call vgm_s_fnc_skills_apply_athletic";
+                    codeApply = "call vgm_c_fnc_skills_apply_athletic";
                     skillType = 0;
                     applyOnRespawn = 1;
                     cost = 3;
@@ -52,11 +51,10 @@ class vgm_skillTrees {
                 class hoofIt: vgm_skillTemplate {
                     displayName = "Hoof It";
                     description = "Removes stamina cost for 30 seconds.";
-                    codeActivate = "_this call vgm_s_fnc_skills_apply_hoofIt";
+                    codeActivate = "call vgm_c_fnc_skills_apply_hoofIt";
                     skillType = 1;
                     cost = 4;
                     cooldown = 150;
-                    clientSided = 1;
                 };
             };
 

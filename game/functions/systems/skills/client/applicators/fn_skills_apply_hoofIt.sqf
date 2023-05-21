@@ -10,13 +10,12 @@
         WARNING: This is ran on the client-side.
 
     Parameter(s):
-        _player - The player to apply the ability to.
 
     Returns:
         [BOOL] - Skill activated successfully.
 
     Example(s):
-        [_player] call vgm_s_fnc_skills_apply_hoofIt;
+        call vgm_c_fnc_skills_apply_hoofIt;
  */
 
 player enableStamina false;
