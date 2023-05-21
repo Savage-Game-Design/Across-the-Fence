@@ -33,6 +33,7 @@ switch _mode do {
         _ctrlSkills tvSetCurSel ([[0], tvCurSel _ctrlSkills] select ((_display getVariable "vgm_currentSkillTree") isNotEqualTo createHashMap));
 
         ["updateSpAvailableHeader", _display] call vgm_c_fnc_displaySkills;
+        ["updateSkillTreeListLabels", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTree", _display] call vgm_c_fnc_displaySkills;
     };
@@ -41,11 +42,15 @@ switch _mode do {
     case "initSkillTrees": {
         params ["_ctrlSkills"];
 
+        "Filling Skills list" call vgm_g_fnc_logInfo;
+
+        private _skillsTvPaths = [];
         private _fnc_draw = {
             params ["_skillTree", "_skillTreePath", ["_treeViewPath", []]];
 
-            _treeViewPath pushBack (_ctrlSkills tvAdd [_treeViewPath, _skillTree get "displayName"]);
+            _treeViewPath pushBack (_ctrlSkills tvAdd [_treeViewPath, "<unset>"]);
             _ctrlSkills tvSetData [_treeViewPath, str _skillTreePath];
+            _skillsTvPaths pushBack _treeViewPath;
 
             {
                 [_y, (_skillTreePath + [_x]), +_treeViewPath] call _fnc_draw;
@@ -59,6 +64,8 @@ switch _mode do {
             private _skillTree = _skillTreesHashMap get _x;
             [_skillTree, [_x]] call _fnc_draw;
         } forEach _skillTreeClasses;
+
+        _ctrlSkills setVariable ["vgm_skillsListPaths", _skillsTvPaths];
     };
 
     // fill right panel with skill cards
@@ -75,6 +82,22 @@ switch _mode do {
         // Update header
         ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTree", _display] call vgm_c_fnc_displaySkills;
+    };
+
+    // update labels of skilltrees in tree control in left panel
+    case "updateSkillTreeListLabels": {
+        params ["_display"];
+        private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
+
+        {
+            private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _x);
+            private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
+
+            private _skillTreePoints = _skillTree call vgm_g_fnc_skills_getTreeSkillPoints;
+            private _label = format ["%1 (%2/%3)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
+
+            _ctrlSkills tvSetText [_x, _label];
+        } forEach (_ctrlSkills getVariable "vgm_skillsListPaths");
     };
 
     case "updateSkillTreeHeader": {
