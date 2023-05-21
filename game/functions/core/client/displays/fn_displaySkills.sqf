@@ -132,6 +132,7 @@ switch _mode do {
         private _wSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "w");
         private _hSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "h");
         private _hBranchV = getNumber (missionConfigFile >> "VGM_ctrlSkillTreeBranchV" >> "h");
+        private _hBranchH = getNumber (missionConfigFile >> "VGM_ctrlSkillTreeBranchH" >> "h");
 
         // Start adding from Ultimate to Lowest Level skill
         private _skills = +(_skillTree get "skills");
@@ -150,17 +151,14 @@ switch _mode do {
                 // Draw a horizontal line connecting the skills from the
                 // previous level to the skills of the current level
                 private _ctrlSkillLineH = _display ctrlCreate ["VGM_ctrlSkillTreeBranchH", -1, _ctrlSkillTree];
-                private _hlineW = (_previousSkillCount max _currentSkillCount - 1);
+                private _hlineW = (_previousSkillCount max _currentSkillCount - 1) max 1;
                 _hlineW = _hlineW * _wSkill + _hlineW * VGM_GRID_W;
-                // TODO: Make line just wide enough to touch all vertical lines
                 _ctrlSkillLineH ctrlSetPosition [
                     // Middle of tree, go back half the width of the line and a bit
-                    // 0.5 * _wSkillTree - 0.5 * _hlineW,
-                    0,
+                    0.5 * _wSkillTree - 0.5 * _hlineW,
                     _yPos,
-                    // _hlineW,
-                    _wSkillTree,
-                    1 * VGM_GRID_H
+                    _hlineW,
+                    _hBranchH
                 ];
                 _ctrlSkillLineH ctrlCommit 0;
                 _previousSkillCount = _currentSkillCount;
@@ -261,7 +259,8 @@ switch _mode do {
 
         // Horizontal line for the root (name of the branch)
         private _ctrlSkillLineHRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchH", -1, _ctrlSkillTree];
-        private _wRootLine = _wSkillTree;//(_previousSkillCount - 1) * _wSkill + _previousSkillCount * 1 * VGM_GRID_W;
+        private _wRootLine = _previousSkillCount - 1;
+        _wRootLine = _wRootLine * _wSkill + _wRootLine * VGM_GRID_W;
         _ctrlSkillLineHRoot ctrlSetPositionW _wRootLine;
         _ctrlSkillLineHRoot ctrlSetPosition [0.5 * _wSkillTree - 0.5 * _wRootLine, _yPos, _wRootLine, 1 * VGM_GRID_H];
         _ctrlSkillLineHRoot ctrlCommit 0;

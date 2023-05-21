@@ -202,7 +202,7 @@ class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
     x = 0;
     y = 0;
     w = 1 * VGM_GRID_W;
-    h = 2 * VGM_GRID_H;
+    h = 3 * VGM_GRID_H;
     colorBackground[] = {0.8,0.8,0.8,1};
 };
 class VGM_ctrlSkillTreeBranchH: VGM_ctrlSkillTreeBranchV
