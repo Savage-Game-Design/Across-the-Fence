@@ -134,6 +134,7 @@ class vgm_c
         class skills_receiveSkillRespec {};
         class skills_receiveSkillsData {};
 
+        class skills_requestSkillActivation {};
         class skills_requestSkillLearn {};
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};

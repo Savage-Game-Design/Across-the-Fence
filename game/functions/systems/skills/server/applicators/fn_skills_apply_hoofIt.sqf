@@ -7,6 +7,7 @@
 
     Description:
         Disables stamina for 30 seconds.
+        WARNING: This is ran on the client-side.
 
     Parameter(s):
         _player - The player to apply the ability to.
@@ -18,19 +19,14 @@
         [_player] call vgm_s_fnc_skills_apply_hoofIt;
  */
 
-params ["_player"];
+player enableStamina false;
+systemChat "You feel a sudden burst of energy!";
 
-if (isNil "_player") exitWith {false};
+[player] spawn {
+    params ["_player"];
 
-[[], {
-    player enableStamina false;
+    sleep 30;
+    systemChat "You feel tired again.";
+    _player enableStamina true;
+};
 
-    [player] spawn {
-        params ["_player"];
-
-        sleep 30;
-        _player enableStamina true;
-    };
-}] remoteExec ["call", [_player]];
-
-true

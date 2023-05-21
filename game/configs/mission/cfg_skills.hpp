@@ -14,6 +14,7 @@ class vgm_skillTemplate {
     conditionUnlock = "true";
     conditionShow = "true";
 
+    clientSided = 0; // Is the code ran on the client-side?
     codeApply = "systemChat 'skill applied'";
     codeUnapply = "systemChat 'skill un-applied'";
 
@@ -51,9 +52,11 @@ class vgm_skillTrees {
                 class hoofIt: vgm_skillTemplate {
                     displayName = "Hoof It";
                     description = "Removes stamina cost for 30 seconds.";
+                    codeActivate = "_this call vgm_s_fnc_skills_apply_hoofIt";
                     skillType = 1;
                     cost = 4;
                     cooldown = 150;
+                    clientSided = 1;
                 };
             };
 
