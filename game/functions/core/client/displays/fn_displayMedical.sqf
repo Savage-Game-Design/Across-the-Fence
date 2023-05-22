@@ -39,9 +39,10 @@ switch _mode do {
         _options apply {
             private _name = _x;
             private _count = 99;
-            (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName"];
+            (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName", "_ctrlOptionButton"];
             _ctrlOptionIcon ctrlSetText "\vn\editorpreviews_f_vietnam\weapons\preview_vn_b_item_firstaidkit.jpg";
             _ctrlOptionName ctrlSetStructuredText parseText format ["%1<br/>Owned: %2", _name, _count];
+            _ctrlOptionButton setVariable ["option", _x];
         };
 
         // Activate the treatment options
@@ -73,5 +74,14 @@ switch _mode do {
         if (ctrlShown _ctrlTreatment && !(getMousePosition inArea _cArea)) then {
             _ctrlTreatment ctrlShow false;
         };
+    };
+    case "selectTreatment": {
+        params ["_ctrlOptionButton"];
+        private _display = ctrlParent _ctrlOptionButton;
+        // Get the selected treatment option
+        private _option = _ctrlOptionButton getVariable "option";
+        // Hide the treatment options
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        _ctrlTreatment ctrlShow false;
     };
 };

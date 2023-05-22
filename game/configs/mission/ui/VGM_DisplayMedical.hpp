@@ -112,6 +112,16 @@ class VGM_DisplayMedical
                             columnX = (16/9) * 10 * VGM_GRID_W;
                             columnW = (_W - (16/9) * 10) * VGM_GRID_W;
                         };
+                        class Button: VGM_ctrlButtonInvisible
+                        {
+                            controlBaseClassPath[] = {"VGM_DisplayMedical", "Controls", "Treatment", "Controls", "Options", "RowTemplate", "Button"};
+                            columnX = 0;
+                            controlOffsetY = 0;
+                            columnW = _W * VGM_GRID_W;
+                            controlH = 10 * VGM_GRID_H;
+                            colorBackgroundActive[] = {VGM_UI_COLOR_ACTIVE_RGB, 0.3};
+                            onButtonClick = VGM_UIEH(selectTreatment,Medical);
+                        };
                     };
                 };
             };
