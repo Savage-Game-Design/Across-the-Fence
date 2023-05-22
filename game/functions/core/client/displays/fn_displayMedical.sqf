@@ -23,6 +23,20 @@ params ["_mode", "_this"];
 switch _mode do {
     case "onLoad":{
         params ["_display"];
+        private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
+        private _modifiers = [];
+        _modifiers resize 20;
+        _modifiers apply {
+            private _part = "Head";
+            private _type = "Trauma";
+            private _level = "Severe";
+            private _effect = "Occasional Blurred Vision";
+            private _icon = "#(rgb,1,1,1)color(1,0,0,1)";
+
+            (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
+            _ctrlIcon ctrlSetText _icon;
+            _ctrlDescription ctrlSetStructuredText parseText format ["%1 %2 %3<br/>%4", _level, _part, _type, _effect];
+        };
     };
     case "selectPart": {
         params ["_ctrlPartIcon"];

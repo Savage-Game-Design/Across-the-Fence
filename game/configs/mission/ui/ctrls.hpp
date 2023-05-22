@@ -14,6 +14,7 @@ import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
 import ctrlXListbox;
+import ctrlListbox;
 import ctrlActivePicture;
 
 #define COLOR_BLACK {0,0,0,1}
@@ -30,6 +31,18 @@ class VGM_ctrlDefault: ctrlDefault {
         color[] = {1,1,1,1};
     };
 };
+
+class ScrollbarInvisible
+{
+    width = 0;
+    height = 0;
+    arrowEmpty = "";
+    arrowFull = "";
+    border = "";
+    thumb = "";
+    color[] = {0,0,0,0};
+};
+
 class VGM_ctrlStatic: ctrlStatic {};
 
 class VGM_ctrlStaticFrame: ctrlStaticFrame
@@ -180,6 +193,14 @@ class VGM_ctrlXListBox: ctrlXListbox
 {
     sizeEx = VGM_FONT_M;
     font = VGM_FONT;
+};
+
+class VGM_ctrlListBox: ctrlListbox
+{
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+    shadow = 0;
 };
 
 class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars

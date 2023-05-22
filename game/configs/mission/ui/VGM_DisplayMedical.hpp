@@ -179,5 +179,47 @@ class VGM_DisplayMedical
             h = LEG_R_H * VGM_GRID_H;
         };
 
+#define _W 80
+#define _H_ROW 12
+        class ModifierList: VGM_ctrlControlsTable
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
+            x = DISPLAY_X + (DISPLAY_W - _W) * VGM_GRID_W;
+            y = DISPLAY_Y;
+            w = _W * VGM_GRID_W;
+            h = DISPLAY_H * VGM_GRID_H;
+            rowHeight = _H_ROW * VGM_GRID_H;
+            class VScrollbar: ScrollbarInvisible
+            {
+            };
+            class RowTemplate
+            {
+                class Background
+                {
+                    controlBaseClassPath[] = {"VGM_ctrlBackground"};
+                    columnX = 0;
+                    controlOffsetY = 0;
+                    columnW = _W * VGM_GRID_W;
+                    controlH = _H_ROW * VGM_GRID_H;
+                };
+                class Icon: Background
+                {
+                    controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
+                    columnX = 1 * VGM_GRID_W;
+                    controlOffsetY = 1 * VGM_GRID_H;
+                    columnW = (_H_ROW - 2) * VGM_GRID_W;
+                    controlH = (_H_ROW - 2) * VGM_GRID_H;
+                };
+                class Description: Background
+                {
+                    controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
+                    columnX = (_H_ROW) * VGM_GRID_W;
+                    controlOffsetY = 1 * VGM_GRID_H;
+                    columnW = (_W - _H_ROW) * VGM_GRID_W;
+                    controlH = (_H_ROW - 2) * VGM_GRID_H;
+                };
+            };
+        };
+
     };
 };
