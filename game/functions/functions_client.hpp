@@ -42,6 +42,12 @@ class vgm_g
     class leveling
     {
         VGM_GLOBAL_PATH(\systems\leveling\global);
+
+        class leveling_parseCfg {};
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
     };
 
     class skills
