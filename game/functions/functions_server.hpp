@@ -44,6 +44,20 @@ class vgm_s
         class respawn_findFallbackSpawnTransform {};
     };
 
+    class leveling
+    {
+        VGM_SERVER_PATH(\systems\leveling\server);
+
+        class leveling_dataGetCached {};
+        class leveling_dbGet {};
+        class leveling_dbSave {};
+
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_SERVER_PATH(\systems\skills\server);

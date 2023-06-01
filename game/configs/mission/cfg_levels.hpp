@@ -1,7 +1,7 @@
 class vgm_levels {
     class level_1 {
-        experience = 500;
-        skillPoints = 5;
+        experience = 500; // amount of XP needed to advance to next level
+        skillPoints = 5; // amount of SP gained when reaching the level
     };
     class level_2 {
         experience = 575;
