@@ -22,6 +22,11 @@ params [
     ["_cfgLeveling", configNull, [configNull]]
 ];
 
+if (isNull _cfgLeveling) exitWith {
+    ["Leveling config is null"] call vgm_g_fnc_logError;
+    createHashMap
+};
+
 private _fnc_parseLevel = {
     params ["_cfgLevel", "_index"];
 

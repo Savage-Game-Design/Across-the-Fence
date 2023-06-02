@@ -2,7 +2,7 @@
     File: fn_leveling_dbSave.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2023-06-01
+    Last Update: 2023-06-02
     Public: No
 
     Description:
@@ -23,7 +23,7 @@ params ["_player"];
 private _uid = getPlayerUID _player;
 private _hashMap = _player call vgm_s_fnc_leveling_dataGetCached;
 if (isNil "_hashMap") exitWith {
-    ["ERROR", format ["VGM: No data for player %1 (%2)", name _player, _uid]] call para_g_fnc_log;
+    (format ["No leveling data for player %1 (%2)", name _player, _uid]) call vgm_g_fnc_logError;
     false // return
 };
 
