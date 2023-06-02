@@ -1,6 +1,6 @@
 /*
     File: fn_preInit.sqf
-    Author: veteran29
+    Author: Savage Game Design
     Date: 2023-05-30
     Last Update: 2023-06-01
     Public: No
@@ -17,7 +17,8 @@
 
 if (!hasInterface) exitWith {};
 
-["vgm_leveling_initClient", {
+["vgm_leveling_updateData", {
     params ["_levelingData"];
+
     player setVariable ["vgm_g_levelingData", _levelingData];
 }] call para_g_fnc_event_subscribeServer;

@@ -1,6 +1,6 @@
 /*
     File: fn_postInit.sqf
-    Author: veteran29
+    Author: Savage Game Design
     Date: 2023-05-30
     Last Update: 2023-06-01
     Public: No
@@ -17,4 +17,5 @@
 
 if (!hasInterface) exitWith {};
 
+// request system init from the server
 ["vgm_leveling_init", player] call para_g_fnc_event_triggerServer;
