@@ -43,7 +43,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\leveling\global);
 
-        class leveling_parseCfg {};
+        class leveling_parseLevelsCfg {};
         class leveling_preInit
         {
             preInit = 1;

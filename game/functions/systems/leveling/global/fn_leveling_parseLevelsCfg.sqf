@@ -1,15 +1,15 @@
 /*
-    File: fn_leveling_parseCfg.sqf
+    File: fn_leveling_parseLevelsCfg.sqf
     Author: Savage Game Design
     Date: 2023-01-15
     Last Update: 2023-06-02
     Public: Yes
 
     Description:
-        Parse leveling config into a HashMap.
+        Parse levels config into a HashMap.
 
     Parameter(s):
-        _cfgSkillTrees - Skill trees config [CONFIG]
+        _cfgLevels - Levels config [CONFIG]
 
     Returns:
         Skill tree hash [HashMap]
@@ -19,10 +19,10 @@
  */
 
 params [
-    ["_cfgLeveling", configNull, [configNull]]
+    ["_cfgLevels", configNull, [configNull]]
 ];
 
-if (isNull _cfgLeveling) exitWith {
+if (isNull _cfgLevels) exitWith {
     ["Leveling config is null"] call vgm_g_fnc_logError;
     createHashMap
 };
@@ -40,6 +40,6 @@ private _fnc_parseLevel = {
 private _skillTrees = createHashMap;
 {
     _skillTrees set [_forEachIndex, [_x, _forEachIndex] call _fnc_parseLevel];
-} forEach ("true" configClasses _cfgLeveling);
+} forEach ("true" configClasses _cfgLevels);
 
 _skillTrees // return
