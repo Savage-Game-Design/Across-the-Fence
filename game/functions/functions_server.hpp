@@ -48,6 +48,8 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\leveling\server);
 
+        class leveling_addExperience {};
+
         class leveling_dataGetCached {};
         class leveling_dbGet {};
         class leveling_dbSave {};
