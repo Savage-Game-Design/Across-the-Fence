@@ -2,7 +2,7 @@
     File: fn_leveling_parseCfg.sqf
     Author: Savage Game Design
     Date: 2023-01-15
-    Last Update: 2023-06-01
+    Last Update: 2023-06-02
     Public: Yes
 
     Description:
@@ -15,7 +15,7 @@
         Skill tree hash [HashMap]
 
     Example(s):
-        [missionConfigFile >> "vgm_leveling"] call vgm_g_fnc_leveling_parseCfg
+        [missionConfigFile >> "vgm_levels"] call vgm_g_fnc_leveling_parseCfg
  */
 
 params [
@@ -27,8 +27,8 @@ private _fnc_parseLevel = {
 
     createHashMapFromArray [
         ["displayName", str _index],
-        ["experience", getText (_cfgLevel >> "experience")],
-        ["skillPoints", getText (_cfgLevel >> "skillPoints")]
+        ["experience", getNumber (_cfgLevel >> "experience")],
+        ["skillPoints", getNumber (_cfgLevel >> "skillPoints")]
     ] // return
 };
 
