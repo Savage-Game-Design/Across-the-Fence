@@ -94,6 +94,22 @@ class vgm_c
         class sharedHub_teleportPlayerToHub {};
     };
 
+    class medical
+    {
+        VGM_CLIENT_PATH(\systems\medical\client);
+
+        class medical_handleDamage {};
+
+        class medical_postInit
+        {
+            postInit = 1;
+        };
+        class medical_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_CLIENT_PATH(\systems\skills\client);
