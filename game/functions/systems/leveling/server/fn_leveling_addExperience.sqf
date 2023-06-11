@@ -32,7 +32,11 @@ if (_currentLevel >= vgm_g_leveling_maxLvl) exitWith {
 
 private _currentExperience = _levelingData get "experience";
 
+// award the gained XP
 _currentExperience = _currentExperience + _experience;
+// clamp XP to the amount needed to reach max level
+_currentExperience = _currentExperience min (vgm_g_leveling_levelsHashMap get (vgm_g_leveling_maxLvl-1) get "experience");
+
 _levelingData set ["experience", _currentExperience];
 
 private _currentLevelData = vgm_g_leveling_levelsHashMap get _currentLevel;
