@@ -20,3 +20,15 @@
 
 if (!hasInterface) exitWith {};
 
+["vgm_medical_addAction", {
+    params ["_player"];
+    if (player == _player || {_player getVariable ["vgm_c_medical_actions", false]}) exitWith {};
+    _player setVariable ["vgm_c_medical_actions", true];
+
+    _player addAction ["Heal", {}];
+
+}] call para_g_fnc_event_subscribe;
+
+addUserActionEventHandler ["Help", "Activate", {
+
+}];

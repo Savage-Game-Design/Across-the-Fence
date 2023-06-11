@@ -68,6 +68,9 @@ private _newDamage = _currentDamage + _hitDamage;
 if (_newDamage >= 1 && !_downed) exitWith {
     _unit setVariable ["vgm_c_knockedOutGraceTime", time + KNOCKED_OUT_GRACE_TIME];
     _unit setUnconscious true;
+
+    ["vgm_medical_knockedOut", [_unit]] call para_g_fnc_event_triggerLocal;
+
     0.99 // return
 };
 

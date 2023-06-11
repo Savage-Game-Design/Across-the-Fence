@@ -99,6 +99,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\medical\client);
 
         class medical_handleDamage {};
+        class medical_openMedicalMenu {};
 
         class medical_postInit
         {
