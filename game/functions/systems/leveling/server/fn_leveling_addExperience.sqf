@@ -2,17 +2,18 @@
     File: fn_leveling_addExperience.sqf
     Author: Savage Game Design
     Date: 2023-06-01
-    Last Update: 2023-06-02
+    Last Update: 2023-06-11
     Public: No
 
     Description:
-        No description added yet.
+        Give experiene to the player and publish the leveling data.
 
     Parameter(s):
-        N/A
+        _player - Player to give the XP to [OBJECT]
+        _experience - Amount of XP to be gained [NUMBER]
 
     Returns:
-        Something [BOOL]
+        XP was added [BOOL]
 
     Example(s):
         [player, 300] call vgm_s_fnc_leveling_addExperience
@@ -24,6 +25,11 @@ params ["_player", "_experience"];
 
 private _levelingData = _player call vgm_s_fnc_leveling_dataGetCached;
 private _currentLevel = _levelingData get "level";
+if (_currentLevel >= vgm_g_leveling_maxLvl) exitWith {
+    (format ["Player at max level %1 (%2)", name _player, getPlayerUID _player, _experience]) call vgm_g_fnc_logInfo;
+    false
+};
+
 private _currentExperience = _levelingData get "experience";
 
 _currentExperience = _currentExperience + _experience;
@@ -45,3 +51,5 @@ while {_currentExperience >= (_currentLevelData get "experience")} do {
 [_player, _levelingData] call vgm_s_fnc_leveling_dbSave;
 
 ["vgm_leveling_updateData", _levelingData, _player] call para_g_fnc_event_triggerTargets;
+
+true
