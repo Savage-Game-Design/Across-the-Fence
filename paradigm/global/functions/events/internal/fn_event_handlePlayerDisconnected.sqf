@@ -2,7 +2,7 @@
     File: fn_event_handlePlayerDisconnected.sqf
     Author: Savage Game Design
     Date: 2022-12-05
-    Last Update: 2023-01-22
+    Last Update: 2023-04-07
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ _eventListenersByOrigin deleteAt _disconnectedMachineId;
 _handlersByOrigin deleteAt _disconnectedMachineId;
 
 // para_event_handlerRegistrations is cleaned up when the client unsubscribes
-// and has minimal performance impact.
+// and has minimal performance impact. Is only used for unsubscribing, so it's safe to leave it.
 
 // para_event_eventsToForward is handled when an event is forwarded to the server
 // that the server is no longer forwarding.

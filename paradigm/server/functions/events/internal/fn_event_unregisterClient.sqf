@@ -2,7 +2,7 @@
     File: fn_event_registerClient.sqf
     Author: Savage Gmae Design
     Date: 2022-11-27
-    Last Update: 2023-01-29
+    Last Update: 2023-04-07
     Public: No
 
     Description:
@@ -21,17 +21,7 @@
 
 params ["_clientMachineId"];
 
-private _machineIdReferences = localNamespace getVariable "para_event_machineIdReferences";
-private _forwardingForOriginMachineId = localNamespace getVariable "para_event_forwardingForOriginMachineId";
-
-// Removes all forwarding entries originating from the disconnected client
-_forwardingForOriginMachineId deleteAt _clientMachineId;
-
-// Removes all forwarding addressed to the originating client.
-_machineIdReferences get _clientMachineId resize 0;
-_machineIdReferences deleteAt _clientMachineId;
-
-// Clients may still forward to the server, which will tell them to stop forwarding if no listeners left.
+["INFO", format ["Event system - unregistering client %1", _clientMachineId]] call para_g_fnc_log;
 
 // Tell all clients to remove any listeners for that machine specifically.
 [_clientMachineId] remoteExec ["para_g_fnc_event_handlePlayerDisconnected", -_clientMachineId];

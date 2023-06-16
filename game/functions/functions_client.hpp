@@ -123,6 +123,7 @@ class vgm_c
         class skills_active_openAssignMenu {};
         class skills_active_openSkillWheel {};
         class skills_active_skillWheelActivate {};
+        class skills_active_toggleHud {};
 
         class skills_active_init {};
     };
