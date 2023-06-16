@@ -2,7 +2,7 @@
     File: fn_skills_apply_steadyAim.sqf
     Author: Savage Game Design
     Date: 2023-05-20
-    Last Update: 2023-05-21
+    Last Update: 2023-06-16
     Public: No
 
     Description:
@@ -19,7 +19,7 @@
 
 private _skill = ["combatTree", "steadyAim"] call vgm_g_fnc_skills_getByPath;
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
-private _skillTreePoints = [_skillTree] call vgm_g_fnc_skills_getSkillTreePoints;
+private _skillTreePoints = [_skillTree] call vgm_g_fnc_skills_getTreeSkillPoints;
 
 private _coef = (1 - 0.01 * _skillTreePoints) max 0 min 1;
 player setCustomAimCoef _coef;
