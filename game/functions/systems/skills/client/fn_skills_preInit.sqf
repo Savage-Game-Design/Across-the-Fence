@@ -27,6 +27,18 @@ vgm_c_skills_appliedSkillsPaths = [];
     if (_skill get "applyOnRespawn") then {
         vgm_c_skills_applyOnRespawn set [_path, _skill]
     };
+
+    // reapply all passive skills
+    private _skillsData = player getVariable ["vgm_g_skillsData", []];
+    private _skills = _skillsData get "skillPaths";
+
+    {
+        private _skill = _x call vgm_g_fnc_skills_getByPath;
+
+        if (!(_skill get "isActive")) then {
+            player call (_skill get "codeApply");
+        };
+    } forEach _skills;
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_skills_forgotten", {
