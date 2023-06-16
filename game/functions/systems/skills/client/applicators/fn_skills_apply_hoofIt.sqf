@@ -18,13 +18,14 @@
  */
 
 player enableStamina false;
-systemChat "You feel a sudden burst of energy!";
+systemChat "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_APPLY";
 
 [player] spawn {
     params ["_player"];
 
     sleep 30;
-    systemChat "You feel tired again.";
+    systemChat "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_UNAPPLY";
     _player enableStamina true;
+    _player setFatigue 1;
 };
 

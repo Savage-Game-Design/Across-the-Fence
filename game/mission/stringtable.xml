@@ -66,8 +66,8 @@
         </Key>
     </Package>
     <Package name="Skills Skill">
-    <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
-        <Original>-1% Weapon recoil per point</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
+            <Original>-1% Weapon recoil per point</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
             <Original>+1% Bleedout time per point</Original>
@@ -89,6 +89,12 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT">
             <Original>Hoof It!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_APPLY">
+            <Original>You feel a sudden burst of energy!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_UNAPPLY">
+            <Original>You feel tired again.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC">
             <Original>Suffer no stamina drain for 30 seconds</Original>
