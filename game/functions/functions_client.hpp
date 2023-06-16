@@ -102,7 +102,6 @@ class vgm_c
 
         class skills_getSkillPoints {};
         class skills_openSkillTree {};
-        class skills_reapply{};
         class skills_postInit
         {
             postInit = 1;
