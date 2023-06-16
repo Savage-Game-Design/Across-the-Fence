@@ -14,45 +14,63 @@ class vgm_skillTemplate {
     conditionUnlock = "true";
     conditionShow = "true";
 
-    codeApply = "systemChat 'skill applied'";
-    codeUnapply = "systemChat 'skill un-applied'";
+    codeApply = "";
+    codeUnapply = "";
 
-    codeActivate = "systemChat 'skill activated'";
+    codeActivate = "";
 };
 
 class vgm_skillTrees {
-    class combatTree {
-        displayName = "Combat";
-        description = "Combat tree description.";
+    class rifleman {
+        displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
+        description = "";
+
         // rifleman skills
         class skills {
             class tier_1 {
                 class steadyAim: vgm_skillTemplate {
-                    displayName = "Steady Aim";
-                    description = "Decreases weapon sway.";
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
+
                     codeApply = "call vgm_c_fnc_skills_apply_steadyAim";
                     codeUnapply = "player setCustomAimCoef 1";
                     skillType = 0;
                     applyOnRespawn = 1;
                 };
+                class tough: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH";
+
+                    cost = 1e10; // prevent learning until medical system is done
+                };
             };
 
             class tier_2 {
+                class quick: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_QUICK";
+                    applyOnRespawn = 1;
+                    cost = 1e10; // prevent learning until custom stamina system is done
+                };
+                class advanced_loadout: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC";
+                    cost = 3;
+                };
                 class athletic: vgm_skillTemplate {
-                    displayName = "Athletic";
-                    description = "Decreases stamina comsumption from current weight.";
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC";
                     codeApply = "call vgm_c_fnc_skills_apply_athletic";
                     codeUnapply = "player setUnitTrait ['loadCoef', 1]";
-                    skillType = 0;
                     applyOnRespawn = 1;
                     cost = 3;
                 };
             };
 
             class tier_3 {
+                class moreAmmo: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO";
+                    cost = 4;
+                };
                 class hoofIt: vgm_skillTemplate {
-                    displayName = "Hoof It";
-                    description = "Removes stamina cost for 30 seconds.";
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC";
                     codeActivate = "call vgm_c_fnc_skills_apply_hoofIt";
                     skillType = 1;
                     cost = 4;
@@ -61,82 +79,23 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
-                class fieldHeal: vgm_skillTemplate {
-                    displayName = "Field heal";
-                    description = "Free healthcare.";
-                    skillType = 1;
-                };
-                class zeusBolt: vgm_skillTemplate {
-                    displayName = "Zeus bolt";
-                    description = "POWER OF THE GODS!";
-                    skillType = 2;
-
-                    cost = 2;
-                    cooldown = 30;
-
-                    codeApply = "hint 'boom'";
+                class combatSalvaging: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING";
+                    description = "STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC";
+                    cost = 6;
                 };
             };
         };
 
         // specializations
         class subtrees {
-            class medicTree {
-                displayName = "Medic";
-                class skills {
-                    class tier_1 {
-                        class medicTrait: vgm_skillTemplate {
-                            displayName = "Medic Trait";
-                            description = "Allows to use MediKits.";
-                            codeApply = "_this setUnitTrait ['Medic', true]";
-                        };
-                    };
-
-                    class tier_2 {
-                        class skill_3: vgm_skillTemplate {};
-                        class skill_4: vgm_skillTemplate {};
-                    };
-                };
-
-                // expertise
-                class subtrees {
-                    class surgeonTree {
-                        displayName = "Surgeon";
-                        class skills {
-                            class tier_1 {
-                                class skill_1: vgm_skillTemplate {};
-                                class skill_2: vgm_skillTemplate {};
-                            };
-                        };
-                    };
-                };
-            };
-
-            class engineerTree {
-                displayName = "Engineer";
-                class skills {};
+            class autorifleman {
+                displayName = "$STR_VGM_SKILLS_TREE_AUTORIFLEMAN";
             };
         };
     };
 
-    class utilityTree {
-        displayName = "Utility";
-        description = "Utility tree description.";
-
-        class skills {
-            class tier_1 {
-                class hiddenSkill: vgm_skillTemplate {
-                    displayName = "Hidden utility skill";
-                    description = "Hidden utility skill.";
-
-                    conditionShow = "false";
-                };
-                class skill_2: vgm_skillTemplate {};
-            };
-        };
-    };
-    class socialTree {
-        displayName = "Social";
-        description = "Social tree description.";
+    class serviceEssentials {
+        displayName = "$STR_VGM_SKILLS_TREE_SERVICEESSENTIALS";
     };
 };

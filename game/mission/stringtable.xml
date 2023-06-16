@@ -54,4 +54,50 @@
             <Original>%1 second cooldown</Original>
         </Key>
     </Package>
+    <Package name="Skills Tree">
+        <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
+            <Original>Rifleman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_AUTORIFLEMAN">
+            <Original>Autorifleman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_SERVICEESSENTIALS">
+            <Original>Service Essentials</Original>
+        </Key>
+    </Package>
+    <Package name="Skills Skill">
+    <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
+        <Original>-1% Weapon recoil per point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
+            <Original>+1% Bleedout time per point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_QUICK">
+            <Original>+10% Stamina Regen Rate</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT">
+            <Original>Advanced Rifleman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
+            <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC">
+            <Original>+10% Stamina Regen Rate</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO">
+            <Original>+25% Ammo for all loadouts</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT">
+            <Original>Hoof It!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC">
+            <Original>Suffer no stamina drain for 30 seconds</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING">
+            <Original>Combat Salvaging</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC">
+            <Original>Combat Salvaging</Original>
+        </Key>
+    </Package>
 </Project>
