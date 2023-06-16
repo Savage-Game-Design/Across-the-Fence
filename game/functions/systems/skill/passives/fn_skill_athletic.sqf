@@ -1,5 +1,5 @@
 /*
-    File: fn_skills_apply_athletic.sqf
+    File: fn_skill_passive_athletic.sqf
     Author: Savage Game Design
     Date: 2023-05-20
     Last Update: 2023-06-16
@@ -14,7 +14,7 @@
         _coef - The coefficient of the skill.
 
     Example(s):
-        call vgm_c_fnc_skills_apply_athletic;
+        call vgm_c_fnc_skill_athletic;
  */
 
 private _skill = ["combatTree", "athletic"] call vgm_g_fnc_skills_getByPath;

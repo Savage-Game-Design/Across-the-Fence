@@ -31,7 +31,7 @@ class vgm_skillTrees {
                 class steadyAim: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
 
-                    codeApply = "call vgm_c_fnc_skills_apply_steadyAim";
+                    codeApply = "call vgm_c_fnc_skill_steadyAim";
                     codeUnapply = "player setCustomAimCoef 1";
                     skillType = 0;
                     applyOnRespawn = 1;
@@ -56,7 +56,7 @@ class vgm_skillTrees {
                 };
                 class athletic: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC";
-                    codeApply = "call vgm_c_fnc_skills_apply_athletic";
+                    codeApply = "call vgm_c_fnc_skill_athletic";
                     codeUnapply = "player setUnitTrait ['loadCoef', 1]";
                     applyOnRespawn = 1;
                     cost = 3;
@@ -71,7 +71,7 @@ class vgm_skillTrees {
                 class hoofIt: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC";
-                    codeActivate = "call vgm_c_fnc_skills_apply_hoofIt";
+                    codeActivate = "call vgm_c_fnc_skill_hoofIt";
                     skillType = 1;
                     cost = 4;
                     cooldown = 150;

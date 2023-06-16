@@ -140,12 +140,18 @@ class vgm_c
         class skills_requestSkillsData {};
     };
 
-    class skills_applicators
+    class skill_passive
     {
-        VGM_CLIENT_PATH(\systems\skills\client\applicators);
+        VGM_CLIENT_PATH(\systems\skill\passives);
 
-        class skills_apply_steadyAim {};
-        class skills_apply_athletic {};
-        class skills_apply_hoofIt {};
+        class skill_steadyAim {};
+        class skill_athletic {};
+    }
+
+    class skill_active
+    {
+        VGM_CLIENT_PATH(\systems\skill\actives);
+        
+        class skill_hoofIt {};
     }
 };
