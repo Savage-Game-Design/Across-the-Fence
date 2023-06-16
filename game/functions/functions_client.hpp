@@ -47,9 +47,9 @@ class vgm_g
         class skills_canSee {};
         class skills_getByPath {};
         class skills_isKnown {};
-        class skills_parseTreeCfg {};
-        class skills_getSkillTreePoints {};
         class skills_getSkillTreeFromSkill {};
+        class skills_getTreeSkillPoints {};
+        class skills_parseTreeCfg {};
         class skills_preInit
         {
             preInit = 1;
