@@ -45,8 +45,6 @@ private _skillPointsSpent = _skillsData get "skillPointsSpent";
 _skillsData set ["skillPoints", _skillPoints - _skillCost];
 _skillsData set ["skillPointsSpent", _skillPointsSpent + _skillCost];
 
-[] remoteExecCall ["vgm_c_fnc_skills_reapply", _player];
-
 [_player, _skillPath] call vgm_s_fnc_skills_teachSkill;
 
 // inform the player that he succeded to learn the skill

@@ -30,8 +30,6 @@ private _skillPointsSpent = _skillsData get "skillPointsSpent";
 _skillsData set ["skillPoints", _skillPoints + _skillPointsSpent];
 _skillsData set ["skillPointsSpent", 0];
 
-[] remoteExecCall ["vgm_c_fnc_skills_reapply", _player];
-
 [_player, +(_skillsData get "skillPaths")] call vgm_s_fnc_skills_forgetSkills;
 
 // inform the player that respec succeded
