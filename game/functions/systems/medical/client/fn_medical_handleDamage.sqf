@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_medical_handleDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-11
+    Last Update: 2023-06-17
     Public: No
 
     Description:
@@ -18,11 +19,9 @@
         call vgm_c_fnc_medical_handleDamage
  */
 
-#define COEF_FRIENDLY_FIRE 0.25
-#define KNOCKED_OUT_GRACE_TIME 1
-
 params ["_unit", "_selection", "_damage", "_source", "_projectile", "_hitIndex", "_instigator", "_hitPoint", "_directHit"];
-if (!isDamageAllowed _unit) exitWith {};
+// HD can rarely fire for non local units, ignore
+if (!local _unit) exitWith {nil};
 
 // damage of the unit/hitpoint BEFORE currently processed damage instance
 private _currentDamage = 0;
@@ -33,47 +32,35 @@ if (_hitPoint isEqualTo "") then {
     _currentDamage = _unit getHitIndex _hitIndex;
 };
 
+if (!isDamageAllowed _unit) exitWith {_currentDamage};
+
+// validate damage
+if (_projectile isEqualTo "" && {isNull _source}) exitWith {
+    #ifdef DEBUG
+    format ["(%2) Invalid damage: %1", _hitPoint, diag_frameNo] call vgm_g_fnc_logError;
+    #endif
+    _currentDamage
+};
+
 private _hitDamage = _damage - _currentDamage;
+// filter out tiny amounts of damage
+if (_hitDamage < 1e-3) exitWith {_currentDamage};
 
-/*
-// Drowning applies constant stuctural damage in fixed increments
-if (
-    _hitPoint isEqualTo "#structural" &&
-    {getOxygenRemaining _unit <= 0.5} &&
-    {_damage isEqualTo (_currentDamage + 0.005)}
-) then {
-};
-*/
-
-// decrease amount of damage taken due to friendly fire
-if (
-    !isNull _instigator && {
-    _instigator isNotEqualTo _unit && {
-    (side group _unit) isEqualTo (side group _instigator)}
-}) then {
-    _hitDamage = _hitDamage * COEF_FRIENDLY_FIRE;
-};
+#ifdef DEBUG
+format ["(%6) Damage: %1 | %2 | %3 | %4 | %5", _hitPoint, _hitDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logInfo;
+#endif
 
 private _downed = lifeState _unit == "INCAPACITATED";
-// prevent unit from being killed immedatiely after being knocked out
-if (
-    _downed
-    && {time < (_unit getVariable ["vgm_c_knockedOutGraceTime", -1])}
-) exitWith {
-    _currentDamage // return
-};
+// prevent unit from being killed when downed
+if (_downed) exitWith {_currentDamage};
 
-private _newDamage = _currentDamage + _hitDamage;
-// knock out the unit
-if (_newDamage >= 1 && !_downed) exitWith {
-    _unit setVariable ["vgm_c_knockedOutGraceTime", time + KNOCKED_OUT_GRACE_TIME];
-    _unit setUnconscious true;
+// TODO armor scaling
+private _realDamage = _hitDamage;
 
-    ["vgm_medical_knockedOut", [_unit]] call para_g_fnc_event_triggerLocal;
+[_unit, _realDamage, _hitPoint, [_source, _instigator] select isNull _source, _projectile] call vgm_c_fnc_medical_receiveDamage;
 
-    0.99 // return
-};
+// damage of these hitpoint controls visuals or engine features like limping sway etc.
+// retain the values set by our other functionalities
+if (_hitPoint in ["hithead", "hitbody", "hithands", "hitlegs"]) exitWith {_currentDamage};
 
-// private _source = [_source, _instigator] select isNull _source;
-
-_newDamage // return
+0 // prevent engine damage handling for all other hitpoints

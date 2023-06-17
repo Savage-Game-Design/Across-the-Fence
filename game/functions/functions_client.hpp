@@ -109,6 +109,8 @@ class vgm_c
         {
             preInit = 1;
         };
+
+        class medical_receiveDamage {};
     };
 
     class skills
