@@ -28,7 +28,7 @@ class vgm_skillTrees {
         // rifleman skills
         class skills {
             class tier_1 {
-                class steadyAim: vgm_skillTemplate {
+                class steadyAimPassive: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
 
                     codeApply = "call vgm_c_fnc_skill_increasedAccuracy";
@@ -98,10 +98,10 @@ class vgm_skillTrees {
 
                 class skills {
                     class tier_1 {
-                        class steadyAim: vgm_skillTemplate {
-                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM";
+                        class steadyAimPassive: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM_PASSIVE";
 
-                            codeApply = "call vgm_c_fnc_skill_steadyAim";
+                            codeApply = "call vgm_c_fnc_skill_steadyAimPassive";
                             codeUnapply = "player setCustomAimCoef 1";
                             skillType = 0;
                             applyOnRespawn = 1;
@@ -154,6 +154,61 @@ class vgm_skillTrees {
                         class headsDown: vgm_skillTemplate {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN";
                             description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN_DESC";
+                            cost = 6;
+                        };
+                    };
+                };
+            };
+
+            class sharpshooter {
+                displayName = "$STR_VGM_SKILLS_TREE_SHARPSHOOTER";
+
+                class skills {
+                    class tier_1 {
+                        class hitShrug: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_HIT_SHRUG";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_HIT_SHRUG_DESC";
+                            cost = 1e10; // prevent learning until medical system is done
+                        };
+                    };
+
+                    class tier_2 {
+                        class increasedAmmo: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INCREASED_AMMO";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INCREASED_AMMO_DESC";
+                            cost = 1e10; // prevent learning until custom stamina system is done
+                        };
+
+                        class advancedLoadout: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_ADVANCED_LOADOUT";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_ADVANCED_LOADOUT_DESC";
+                            cost = 3;
+                        };
+
+                        class decreasedRecoil: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_DECREASED_RECOIL";
+                            cost = 3;
+                        };
+                    };
+
+                    class tier_3 {
+                        class relaxedPosture: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_RELAXED_POSTURE";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STRENGTH_TRAINING_DESC";
+                            cost = 4;
+                        };
+
+                        class intentionalShotPlacement: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INTENTIONAL_SHOT_PLACEMENT";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INTENTIONAL_SHOT_PLACEMENT_DESC";
+                            cost = 4;
+                        };
+                    };
+
+                    class tier_4 {
+                        class steadyAim: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_DESC";
                             cost = 6;
                         };
                     };

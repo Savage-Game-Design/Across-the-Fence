@@ -1,5 +1,5 @@
 /*
-    File: fn_skill_passive_steadyAim.sqf
+    File: fn_skill_passive_steadyAimPassive.sqf
     Author: Savage Game Design
     Date: 2023-05-20
     Last Update: 2023-06-16
@@ -14,10 +14,10 @@
         _coef [Number] - The coefficient to apply to the weapon sway.
 
     Example(s):
-        call vgm_c_fnc_skill_steadyAim;
+        call vgm_c_fnc_skill_steadyAimPassive;
 */
 
-private _skill = ["combatTree", "steadyAim"] call vgm_g_fnc_skills_getByPath;
+private _skill = ["combatTree", "steadyAimPassive"] call vgm_g_fnc_skills_getByPath;
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 private _skillTreePoints = [_skillTree] call vgm_g_fnc_skills_getTreeSkillPoints;
 

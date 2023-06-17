@@ -61,6 +61,9 @@
         <Key ID="STR_VGM_SKILLS_TREE_AUTORIFLEMAN">
             <Original>Autorifleman</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_SHARPSHOOTER">
+            <Original>Sharpshooter</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_TREE_SERVICEESSENTIALS">
             <Original>Service Essentials</Original>
         </Key>
@@ -105,7 +108,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC">
             <Original>Combat Salvaging</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM">
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM_PASSIVE">
             <Original>-1% Weapon sway per point</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HARDENED">
@@ -143,6 +146,42 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN_DESC">
             <Original>For the next 60 seconds, enemies you shoot at will suffer major penalties and will drop prone.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_HIT_SHRUG">
+            <Original>+.75% Hit Shrug Chance</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INCREASED_AMMO">
+            <Original>+25 Ammo for Sharpshooter loadouts</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INCREASED_AMMO_DESC">
+            <Original>DMR&lt;br/&gt;Sniper</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_ADVANCED_LOADOUT">
+            <Original>Advanced Sharpshooter Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_ADVANCED_LOADOUT_DESC">
+            <Original>M14 (20rnd Magazines)&lt;br/&gt;SVD</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_DECREASED_RECOIL">
+            <Original>-10% Weapon Recoil</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_RELAXED_POSTURE">
+            <Original>Relaxed Posture</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_RELAXED_POSTURE_DESC">
+            <Original>-25% weapon sway when crouched or prone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INTENTIONAL_SHOT_PLACEMENT">
+            <Original>Intentional Shot Placement</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INTENTIONAL_SHOT_PLACEMENT_DESC">
+            <Original>For the next 60 seconds, firing in semi-auto makes all non-headshots count as torso shots.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE">
+            <Original>Steady Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE_DESC">
+            <Original>For the next 30 seconds, your weapon sway is reduced by 100%.</Original>
         </Key>
     </Package>
 </Project>

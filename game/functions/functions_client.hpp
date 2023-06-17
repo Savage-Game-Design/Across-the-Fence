@@ -144,14 +144,14 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\passives);
 
-        class skill_steadyAim {};
+        class skill_steadyAimPassive {};
         class skill_athletic {};
     }
 
     class skill_active
     {
         VGM_CLIENT_PATH(\systems\skill\actives);
-        
+
         class skill_hoofIt {};
     }
 };
