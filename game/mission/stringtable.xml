@@ -295,7 +295,7 @@
             <Original>Motivation</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEADERSHIP_MOTIVATION_DESC">
-            <Original>reduce the cooldown time of all ally abilities at 20% (Global cap at 50%). Additionally gain a small EXP bonus when allies use their abilities, capped at X.</Original>
+            <Original>Reduce the cooldown time of all ally abilities at 20% (Global cap at 50%). Additionally gain a small EXP bonus when allies use their abilities, capped at X.</Original>
         </Key>
     </Package>
 </Project>
