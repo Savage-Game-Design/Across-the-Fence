@@ -2,7 +2,7 @@
     File: fn_skill_active_hoofIt.sqf
     Author: Savage Game Design
     Date: 2023-05-20
-    Last Update: 2023-05-21
+    Last Update: 2023-06-17
     Public: No
 
     Description:
@@ -14,7 +14,7 @@
         [BOOL] - Skill activated successfully.
 
     Example(s):
-        call vgm_c_fnc_skill_hoofIt;
+        call vgm_c_fnc_skill_active_hoofIt;
  */
 
 player enableStamina false;

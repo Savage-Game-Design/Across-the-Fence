@@ -31,7 +31,7 @@ class vgm_skillTrees {
                 class steadyAimPassive: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
 
-                    codeApply = "call vgm_c_fnc_skill_increasedAccuracy";
+                    codeApply = "call vgm_c_fnc_skill_passive_increasedAccuracy";
                     codeUnapply = "player setUnitRecoilCoefficient 1";
                     skillType = 0;
                     applyOnRespawn = 1;
@@ -59,7 +59,7 @@ class vgm_skillTrees {
 
                 class athletic: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC";
-                    codeApply = "call vgm_c_fnc_skill_athletic";
+                    codeApply = "call vgm_c_fnc_skill_passive_athletic";
                     codeUnapply = "player setUnitTrait ['loadCoef', 1]";
                     applyOnRespawn = 1;
                     cost = 3;
@@ -75,7 +75,7 @@ class vgm_skillTrees {
                 class hoofIt: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC";
-                    codeActivate = "call vgm_c_fnc_skill_hoofIt";
+                    codeActivate = "call vgm_c_fnc_skill_active_hoofIt";
                     skillType = 1;
                     cost = 4;
                     cooldown = 150;

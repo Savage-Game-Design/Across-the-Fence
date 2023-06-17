@@ -1,8 +1,8 @@
 /*
-    File: fn_skill_increasedAccuracy.sqf
+    File: fn_skill_passive_increasedAccuracy.sqf
     Author: Savage Game Design
     Date: 2023-06-16
-    Last Update: 2023-06-16
+    Last Update: 2023-06-17
     Public: No
 
     Description:
@@ -16,7 +16,7 @@
         Something [BOOL]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        call vgm_c_fnc_skill_passive_increasedAccuracy;
  */
 
 private _skill = ["combatTree", "increasedAccuracy"] call vgm_g_fnc_skills_getByPath;
