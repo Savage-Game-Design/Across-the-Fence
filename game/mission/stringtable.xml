@@ -183,5 +183,35 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE_DESC">
             <Original>For the next 30 seconds, your weapon sway is reduced by 100%.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_STABILIZER">
+            <Original>+1% Stabilization per point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_FAST_HEALING">
+            <Original>+1% Healing Speed per point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_FAST_REVIVING">
+            <Original>+10% Revive Speed</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_BASIC_EQUIPMENT">
+            <Original>Basic Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_BASIC_EQUIPMENT_DESC">
+            <Original>Extra meds and ammo for teammates.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_FAST_REPAIRING">
+            <Original>+10% Repair Speed</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_EXTRA_UTILITY">
+            <Original>Extra Utility Slot</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_ABILITY_LENGTH">
+            <Original>+10% Ability Length</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_OVERPACKING">
+            <Original>Overpacking</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_OVERPACKING_DESC">
+            <Original>You can double up on a single Utility Item.</Original>
+        </Key>
     </Package>
 </Project>

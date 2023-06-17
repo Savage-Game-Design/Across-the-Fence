@@ -207,8 +207,8 @@ class vgm_skillTrees {
 
                     class tier_4 {
                         class steadyAim: vgm_skillTemplate {
-                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM";
-                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_DESC";
+                            displayName = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE";
+                            description = "$STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE_DESC";
                             cost = 6;
                         };
                     };
@@ -219,5 +219,60 @@ class vgm_skillTrees {
 
     class serviceEssentials {
         displayName = "$STR_VGM_SKILLS_TREE_SERVICEESSENTIALS";
+
+        class skills {
+            class tier_1 {
+                class stabilizer: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_STABILIZER";
+                    cost = 1e10;
+                };
+
+                class fastHealing : vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_FAST_HEALING";
+                    cost = 1e10;
+                };
+            };
+
+            class tier_2 {
+                class fastReviving: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_FAST_REVIVING";
+                    cost = 1e10;
+                };
+
+                class basicEquipment: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_BASIC_EQUIPMENT";
+                    description = "$STR_VGM_SKILLS_SKILL_SERVICE_BASIC_EQUIPMENT_DESC";
+                    cost = 3;
+                };
+
+                class fastRepairing: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_FAST_REPAIRING";
+                    cost = 1e10;
+                };
+            };
+
+            class tier_3
+            {
+                class extraUtility: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_EXTRA_UTILITY";
+                    description = "$STR_VGM_SKILLS_SKILL_SERVICE_EXTRA_UTILITY_DESC";
+                    cost = 4;
+                };
+
+                class abilityLength: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_ABILITY_LENGTH";
+                    description = "$STR_VGM_SKILLS_SKILL_SERVICE_ABILITY_LENGTH_DESC";
+                    cost = 4;
+                };
+            };
+
+            class tier_4 {
+                class overpacking: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SERVICE_OVERPACKING";
+                    description = "$STR_VGM_SKILLS_SKILL_SERVICE_OVERPACKING_DESC";
+                    cost = 6;
+                };
+            }
+        }
     };
 };
