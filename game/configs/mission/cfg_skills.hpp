@@ -218,7 +218,7 @@ class vgm_skillTrees {
     };
 
     class serviceEssentials {
-        displayName = "$STR_VGM_SKILLS_TREE_SERVICEESSENTIALS";
+        displayName = "$STR_VGM_SKILLS_TREE_SERVICE_ESSENTIALS";
 
         class skills {
             class tier_1 {
@@ -279,54 +279,120 @@ class vgm_skillTrees {
             class basicAid {
                 displayName = "$STR_VGM_SKILLS_TREE_BASIC_AID";
 
-                class tier_1 {
-                    class fastRevivingPassive: vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FAST_REVIVING_PASSIVE"
+                class skills {
+                    class tier_1 {
+                        class fastRevivingPassive: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FAST_REVIVING_PASSIVE"
+                        };
+
+                        class retainHealingItem: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_RETAIN_HEALING_ITEM";
+                            description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_RETAIN_HEALING_ITEM_DESC";
+                            cost = 1e10;
+                        };
                     };
 
-                    class retainHealingItem: vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_RETAIN_HEALING_ITEM";
-                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_RETAIN_HEALING_ITEM_DESC";
-                        cost = 1e10;
-                    };
-                };
+                    class tier_2 {
+                        class extraFAKHealing: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_EXTRA_FAK_HEALING";
+                            description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_EXTRA_FAK_HEALING_DESC";
+                            cost = 3;
+                        };
 
-                class tier_2 {
-                    class extraFAKHealing: vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_EXTRA_FAK_HEALING";
-                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_EXTRA_FAK_HEALING_DESC";
-                        cost = 3;
-                    };
+                        class intermediateMedTools : vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_INTERMEDIATE_MED_TOOLS";
+                            description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_INTERMEDIATE_MED_TOOLS_DESC";
+                            cost = 3;
+                        };
 
-                    class intermediateMedTools : vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_INTERMEDIATE_MED_TOOLS";
-                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_INTERMEDIATE_MED_TOOLS_DESC";
-                        cost = 3;
-                    };
-                };
-
-                class tier_3 {
-                    class morphineShots: vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORPHINE_SHOTS";
-                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORPHINE_SHOTS_DESC";
-                        cost = 4;
+                        class moreFAKs: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORE_FAKS";
+                            cost = 3;
+                        };
                     };
 
-                    class hastenedAid: vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_HASTENED_AID";
-                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_HASTENED_AID_DESC";
-                        cost = 4;
-                    };
-                };
+                    class tier_3 {
+                        class morphineShots: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORPHINE_SHOTS";
+                            description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORPHINE_SHOTS_DESC";
+                            cost = 4;
+                        };
 
-                class tier_4 {
-                    class firstAidMastery: vgm_skillTemplate {
-                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FIRST_AID_MASTERY";
-                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FIRST_AID_MASTERY_DESC";
-                        cost = 6;
+                        class hastenedAid: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_HASTENED_AID";
+                            description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_HASTENED_AID_DESC";
+                            cost = 4;
+                        };
+                    };
+
+                    class tier_4 {
+                        class firstAidMastery: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FIRST_AID_MASTERY";
+                            description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FIRST_AID_MASTERY_DESC";
+                            cost = 6;
+                        };
                     };
                 };
             };
+
+            class leadershipTraining
+            {
+                displayName = "$STR_VGM_SKILLS_TREE_LEADERSHIP_TRAINING";
+
+                class skills {
+                    class tier_1 {
+                        class slowBleedout {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_SLOW_BLEEDOUT";
+                            cost = 1e10;
+                        };
+
+                        class abilityLengthPassive {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_ABILITY_LENGTH_PASSIVE";
+                            cost = 1e10;
+                        };
+                    };
+
+                    class tier_2 {
+                        class squadMedicalTraining {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_SQUAD_MEDICAL_TRAINING";
+                            description = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_SQUAD_MEDICAL_TRAINING_DESC";
+                            cost = 1e10;
+                        };
+
+                        class squadStamina {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_SQUAD_STAMINA";
+                            cost = 1e10;
+                        };
+
+                        class squadIntelGain {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_SQUAD_INTEL_GAIN";
+                            cost = 1e10;
+                        };
+                    };
+
+                    class tier_3 {
+                        class pepTalk {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_PEP_TALK";
+                            description = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_PEP_TALK_DESC";
+                            cost = 1e10;
+                        };
+
+                        class doubleTime {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_DOUBLE_TIME";
+                            description = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_DOUBLE_TIME_DESC";
+                            cost = 1e10;
+                        };
+                    };
+
+                    class tier_4 {
+                        class motivation {
+                            displayName = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_MOTIVATION";
+                            description = "$STR_VGM_SKILLS_SKILL_LEADERSHIP_MOTIVATION_DESC";
+                            cost = 1e10;
+                        };
+                    };
+                };
+            }
         };
     };
 };
