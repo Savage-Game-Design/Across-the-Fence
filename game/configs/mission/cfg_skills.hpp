@@ -272,7 +272,61 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_SERVICE_OVERPACKING_DESC";
                     cost = 6;
                 };
-            }
-        }
+            };
+        };
+
+        class subtrees {
+            class basicAid {
+                displayName = "$STR_VGM_SKILLS_TREE_BASIC_AID";
+
+                class tier_1 {
+                    class fastRevivingPassive: vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FAST_REVIVING_PASSIVE"
+                    };
+
+                    class retainHealingItem: vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_RETAIN_HEALING_ITEM";
+                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_RETAIN_HEALING_ITEM_DESC";
+                        cost = 1e10;
+                    };
+                };
+
+                class tier_2 {
+                    class extraFAKHealing: vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_EXTRA_FAK_HEALING";
+                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_EXTRA_FAK_HEALING_DESC";
+                        cost = 3;
+                    };
+
+                    class intermediateMedTools : vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_INTERMEDIATE_MED_TOOLS";
+                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_INTERMEDIATE_MED_TOOLS_DESC";
+                        cost = 3;
+                    };
+                };
+
+                class tier_3 {
+                    class morphineShots: vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORPHINE_SHOTS";
+                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_MORPHINE_SHOTS_DESC";
+                        cost = 4;
+                    };
+
+                    class hastenedAid: vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_HASTENED_AID";
+                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_HASTENED_AID_DESC";
+                        cost = 4;
+                    };
+                };
+
+                class tier_4 {
+                    class firstAidMastery: vgm_skillTemplate {
+                        displayName = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FIRST_AID_MASTERY";
+                        description = "$STR_VGM_SKILLS_SKILL_BASIC_AID_FIRST_AID_MASTERY_DESC";
+                        cost = 6;
+                    };
+                };
+            };
+        };
     };
 };
