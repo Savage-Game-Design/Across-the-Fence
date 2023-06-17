@@ -28,7 +28,7 @@ class vgm_skillTrees {
         // rifleman skills
         class skills {
             class tier_1 {
-                class steadyAimPassive: vgm_skillTemplate {
+                class steadyAim: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
 
                     codeApply = "call vgm_c_fnc_skill_passive_increasedAccuracy";
@@ -51,7 +51,7 @@ class vgm_skillTrees {
                     cost = 1e10; // prevent learning until custom stamina system is done
                 };
 
-                class advanced_loadout: vgm_skillTemplate {
+                class advancedLoadout: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC";
                     cost = 3;
@@ -69,7 +69,7 @@ class vgm_skillTrees {
             class tier_3 {
                 class moreAmmo: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO";
-                    cost = 4;
+                    cost = 1e10;
                 };
 
                 class hoofIt: vgm_skillTemplate {
@@ -86,7 +86,8 @@ class vgm_skillTrees {
                 class combatSalvaging: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING";
                     description = "STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC";
-                    cost = 6;
+                    cost = 10e1;
+                    skillType = 2;
                 };
             };
         };
@@ -121,18 +122,22 @@ class vgm_skillTrees {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_MORE_AMMO";
                             description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_MORE_AMMO_DESC";
                             applyOnRespawn = 1;
-                            cost = 1e10; // prevent learning until custom stamina system is done
+
+                            cost = 1e10; // prevent learning until ammo system is done
                         };
 
                         class advancedLoadout: vgm_skillTemplate {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_ADVANCED_LOADOUT";
                             description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_ADVANCED_LOADOUT_DESC";
-                            cost = 3;
+
+                            cost = 1e10; // needs discussion
                         };
 
                         class increasedStamina: vgm_skillTemplate {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_INCREASED_STAMINA";
+
                             cost = 3;
+                            codeApply = "player "
                         };
                     };
 
@@ -140,12 +145,14 @@ class vgm_skillTrees {
                         class strengthTraining: vgm_skillTemplate {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STRENGTH_TRAINING";
                             description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STRENGTH_TRAINING_DESC";
+
                             cost = 4;
                         };
 
                         class learnTheRhythm: vgm_skillTemplate {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_LEARN_THE_RHYTHM";
                             description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_LEARN_THE_RHYTHM_DESC";
+
                             cost = 4;
                         };
                     };
@@ -154,6 +161,7 @@ class vgm_skillTrees {
                         class headsDown: vgm_skillTemplate {
                             displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN";
                             description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN_DESC";
+
                             cost = 6;
                         };
                     };
