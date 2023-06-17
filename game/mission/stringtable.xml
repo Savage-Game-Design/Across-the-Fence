@@ -66,7 +66,7 @@
         </Key>
     </Package>
     <Package name="Skills Skill">
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-1% Weapon recoil per point</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
@@ -104,6 +104,45 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC">
             <Original>Combat Salvaging</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM">
+            <Original>-1% Weapon sway per point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HARDENED">
+            <Original>+1% Outgoing Suppression per point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_MORE_AMMO">
+            <Original>+25% Ammo for certain loadouts</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_MORE_AMMO_DESC">
+            <Original>Autorifleman&lt;br/&gt;Machine gunner&lt;br/&gt;Heavy gunner</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_ADVANCED_LOADOUT">
+            <Original>Advanced Autorifleman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_ADVANCED_LOADOUT_DESC">
+            <Original>M16/XM177 (30rnd Magazines)&lt;br/&gt;M60&lt;br/&gt;M63&lt;br/&gt;RPD</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_INCREASED_STAMINA">
+            <Original>+10% Stamina</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STRENGTH_TRAINING">
+            <Original>Strength Training</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STRENGTH_TRAINING_DESC">
+            <Original>Reduce the effective weight of all standard weapons by half</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_LEARN_THE_RHYTHM">
+            <Original>Learn the Rhythm</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_LEARN_THE_RHYTHM_DESC">
+            <Original>For the next 30 seconds, maintaining automatic fire will slowly reduce your recoil. This reduction is reset when you release the trigger or reload.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN">
+            <Original>Heads Down</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN_DESC">
+            <Original>For the next 60 seconds, enemies you shoot at will suffer major penalties and will drop prone.</Original>
         </Key>
     </Package>
 </Project>

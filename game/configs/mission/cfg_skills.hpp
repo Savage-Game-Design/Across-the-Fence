@@ -29,13 +29,14 @@ class vgm_skillTrees {
         class skills {
             class tier_1 {
                 class steadyAim: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
 
-                    codeApply = "call vgm_c_fnc_skill_steadyAim";
-                    codeUnapply = "player setCustomAimCoef 1";
+                    codeApply = "call vgm_c_fnc_skill_increasedAccuracy";
+                    codeUnapply = "player setUnitRecoilCoefficient 1";
                     skillType = 0;
                     applyOnRespawn = 1;
                 };
+
                 class tough: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH";
 
@@ -49,11 +50,13 @@ class vgm_skillTrees {
                     applyOnRespawn = 1;
                     cost = 1e10; // prevent learning until custom stamina system is done
                 };
+
                 class advanced_loadout: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC";
                     cost = 3;
                 };
+
                 class athletic: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC";
                     codeApply = "call vgm_c_fnc_skill_athletic";
@@ -68,6 +71,7 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO";
                     cost = 4;
                 };
+
                 class hoofIt: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC";
@@ -91,6 +95,69 @@ class vgm_skillTrees {
         class subtrees {
             class autorifleman {
                 displayName = "$STR_VGM_SKILLS_TREE_AUTORIFLEMAN";
+
+                class skills {
+                    class tier_1 {
+                        class steadyAim: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM";
+
+                            codeApply = "call vgm_c_fnc_skill_steadyAim";
+                            codeUnapply = "player setCustomAimCoef 1";
+                            skillType = 0;
+                            applyOnRespawn = 1;
+                        };
+
+                        class increasedAccuracy : vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HARDENED";
+
+                            codeApply = "call vgm_c_fnc_skill_hardened";
+                            applyOnRespawn = 1;
+                            cost = 1e10; // prevent learning until custom stamina system is done
+                        };
+                    };
+
+                    class tier_2 {
+                        class increasedAmmo : vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_MORE_AMMO";
+                            description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_MORE_AMMO_DESC";
+                            applyOnRespawn = 1;
+                            cost = 1e10; // prevent learning until custom stamina system is done
+                        };
+
+                        class advancedLoadout: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_ADVANCED_LOADOUT";
+                            description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_ADVANCED_LOADOUT_DESC";
+                            cost = 3;
+                        };
+
+                        class increasedStamina: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_INCREASED_STAMINA";
+                            cost = 3;
+                        };
+                    };
+
+                    class tier_3 {
+                        class strengthTraining: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STRENGTH_TRAINING";
+                            description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STRENGTH_TRAINING_DESC";
+                            cost = 4;
+                        };
+
+                        class learnTheRhythm: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_LEARN_THE_RHYTHM";
+                            description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_LEARN_THE_RHYTHM_DESC";
+                            cost = 4;
+                        };
+                    };
+
+                    class tier_4 {
+                        class headsDown: vgm_skillTemplate {
+                            displayName = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN";
+                            description = "$STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN_DESC";
+                            cost = 6;
+                        };
+                    };
+                };
             };
         };
     };
