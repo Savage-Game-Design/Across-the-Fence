@@ -98,9 +98,10 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client);
 
+        class medical_getArmorHitPoint {};
+        class medical_getArmorItem {};
         class medical_handleDamage {};
         class medical_openMedicalMenu {};
-
         class medical_postInit
         {
             postInit = 1;
@@ -109,7 +110,6 @@ class vgm_c
         {
             preInit = 1;
         };
-
         class medical_receiveDamage {};
     };
 

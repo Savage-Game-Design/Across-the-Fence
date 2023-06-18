@@ -3,20 +3,17 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-17
+    Last Update: 2023-06-18
     Public: No
 
     Description:
-        No description added yet.
+        Client preInit for medical component.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
-
-    Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        Nothing
  */
 
 if (!hasInterface) exitWith {};
@@ -54,3 +51,5 @@ vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
     ["incapacitated", BODY_PART_TORSO],
     ["#structural", BODY_PART_TORSO]
 ];
+
+vgm_c_medical_armorCache = createHashMap;
