@@ -198,6 +198,18 @@ class para_g
 		class load_interop_functions { postInit = 1; };
 	};
 
+    class netmap
+    {
+        PARA_GLOBAL_PATH(\netmap);
+        class netmap_count {};
+        class netmap_forEach {};
+        class netmap_get {};
+        class netmap_getOrDefault {};
+        class netmap_keys {};
+        class netmap_onReady {};
+        class netmap_values {};
+    };
+
 	class networked_actions
 	{
 		PARA_GLOBAL_PATH(\networked_actions);

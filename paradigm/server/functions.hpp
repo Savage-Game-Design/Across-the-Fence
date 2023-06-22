@@ -198,6 +198,18 @@ class para_s
 		class loadbal_suggest_host {};
 	};
 
+	class netmap {
+        PARA_SERVER_PATH(\netmap);
+        class netmap_createNamedNetmap {};
+        class netmap_createNamedNetmapFromArray {};
+        class netmap_createNetmap {};
+        class netmap_createNetmapFromArray {};
+        class netmap_deleteAt {};
+        class netmap_requestAllNetmaps {};
+        class netmap_set {};
+        class netmap_terminate {};
+    };
+
 	class networked_actions
 	{
 		PARA_SERVER_PATH(\networked_actions);
