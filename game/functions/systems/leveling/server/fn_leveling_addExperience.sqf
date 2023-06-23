@@ -49,7 +49,7 @@ while {_currentExperience >= (_currentLevelData get "experienceThreshold")} do {
     _currentLevelData = vgm_g_leveling_levelsHashMap get _currentLevel;
     _levelingData set ["level", _currentLevel];
 
-    ["vgm_leveling_levelGained", [_player, _currentLevelData]] call para_g_fnc_event_triggerLocal;
+    ["vgm_leveling_levelGained", [_player, _currentLevelData]] call para_g_fnc_event_triggerGlobal;
 };
 
 [_player, _levelingData] call vgm_s_fnc_leveling_dbSave;
