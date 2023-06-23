@@ -100,9 +100,7 @@ class vgm_c
 
         class missions_endMission {};
         class missions_finishDeploy {};
-        class missions_setCurrentMission {};
         class missions_startDeploy {};
-        class missions_updateMissionData {};
     };
 
     class ui

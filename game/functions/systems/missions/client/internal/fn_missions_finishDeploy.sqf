@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-04-24
+    Last Update: 2023-06-22
     Public: No
 
     Description:
@@ -20,7 +20,6 @@
 
 ["Finalising mission deploy"] call vgm_g_fnc_logInfo;
 
-private _missionsData = localNamespace getVariable "vgm_c_missions_data";
 private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 
 if (isNil "_currentMission") exitWith {};

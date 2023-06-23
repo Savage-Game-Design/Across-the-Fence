@@ -2,7 +2,7 @@
     File: fn_missions_updateStatus.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-04-24
+    Last Update: 2023-06-22
     Public: No
 
     Description:
@@ -22,15 +22,13 @@
 params ["_mission", "_status"];
 
 if !(_status in ["CREATED", "IN PROGRESS", "FINISHED"]) exitWith {
-    ["ERROR", format ["Cannot set status of mission %1 to invalid status %2", _mission get "id", _status]] call para_g_fnc_log;
+    ["ERROR", format ["Cannot set status of mission %1 to invalid status %2", _mission get "public" get "id", _status]] call para_g_fnc_log;
 };
 
-_mission set ["status", _status];
-
-[_mission] call vgm_s_fnc_missions_updateMissionDataOnClients;
+[_mission get "public", "status", _status] call para_s_fnc_netmap_set;
 
 [
     "mission status changed",
-    [_mission get "id", _status]
+    [_mission get "public" get "id", _status]
 ] call para_g_fnc_event_triggerLocal;
 

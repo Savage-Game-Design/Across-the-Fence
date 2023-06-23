@@ -61,7 +61,6 @@ class vgm_s
         class missions_preventJoining {};
         class missions_removePlayerFromMission {};
         class missions_spawnMission {};
-        class missions_updateMissionDataOnClients {};
         class missions_updateStatus {};
     };
 

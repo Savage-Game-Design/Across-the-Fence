@@ -2,7 +2,7 @@
     File: fn_missions_postInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-20
+    Last Update: 2023-06-22
     Public: Yes
 
     Description:
@@ -18,7 +18,9 @@
         [] call vgm_c_fnc_missions_postInit
  */
 
-[getPlayerID player] remoteExecCall ["vgm_s_fnc_missions_remoteExec_requestMissionData", 2];
+[{
+    ["vgm_missions_clientReady", []] call para_g_fnc_event_triggerServer;
+}] call para_c_fnc_netmap_onReady;
 
 // To remove later, this is just for debugging right now.
 ["missions system postinit", []] call para_g_fnc_event_triggerLocal;
