@@ -65,7 +65,7 @@ switch _mode do {
             [_skillTree, [_x]] call _fnc_draw;
         } forEach _skillTreeClasses;
 
-        _ctrlSkills setVariable ["vgm_skillsListPaths", _skillsTvPaths];
+        _ctrlSkills setVariable ["vgm_skillsListTvPaths", _skillsTvPaths];
     };
 
     // fill right panel with skill cards
@@ -97,7 +97,7 @@ switch _mode do {
             private _label = format ["%1 (%2/%3)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
 
             _ctrlSkills tvSetText [_x, _label];
-        } forEach (_ctrlSkills getVariable "vgm_skillsListPaths");
+        } forEach (_ctrlSkills getVariable "vgm_skillsListTvPaths");
     };
 
     case "updateSkillTreeHeader": {
