@@ -2,7 +2,7 @@
     File: fn_leveling_addExperience.sqf
     Author: Savage Game Design
     Date: 2023-06-01
-    Last Update: 2023-06-11
+    Last Update: 2023-06-23
     Public: No
 
     Description:
@@ -41,7 +41,7 @@ _levelingData set ["experience", _currentExperience];
 
 private _currentLevelData = vgm_g_leveling_levelsHashMap get _currentLevel;
 
-while {_currentExperience >= (_currentLevelData get "experience")} do {
+while {_currentExperience >= (_currentLevelData get "experienceThreshold")} do {
     // advance to next level
     _currentLevel = _currentLevel + 1;
     (format ["Level %3 gained by %1 (%2)", name _player, getPlayerUID _player, _currentLevel]) call vgm_g_fnc_logInfo;
