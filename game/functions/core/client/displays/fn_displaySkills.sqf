@@ -126,11 +126,11 @@ switch _mode do {
         };
 
         // render Skill Tree info
-        private _currentSkillTre = _display getVariable "vgm_currentSkillTree";
-        if (_currentSkillTre isNotEqualTo createHashMap) exitWith {
+        private _currentSkillTree = _display getVariable "vgm_currentSkillTree";
+        if (_currentSkillTree isNotEqualTo createHashMap) exitWith {
 
-            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _currentSkillTre get "displayName"]);
-            _ctrlDescription ctrlSetStructuredText parseText (_currentSkillTre get "description");
+            _ctrlDescriptionTitle ctrlSetText (format [localize "STR_VGM_SKILLS_UI_SKILL_TREE", _currentSkillTree get "displayName"]);
+            _ctrlDescription ctrlSetStructuredText parseText (_currentSkillTree get "description");
 
             _ctrlUnlock ctrlShow false;
             _ctrlUnlock ctrlEnable false;
