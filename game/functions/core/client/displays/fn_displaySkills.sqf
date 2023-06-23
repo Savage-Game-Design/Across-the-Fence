@@ -122,7 +122,7 @@ switch _mode do {
 
             _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
             _ctrlUnlock ctrlEnable ([player, _currentSkill] call vgm_g_fnc_skills_canLearn);
-            _ctrlUnlock setVariable ["vgm_params", [_currentSkill]];
+            _ctrlUnlock setVariable ["vgm_skill", _currentSkill];
         };
 
         // render Skill Tree info
@@ -229,7 +229,7 @@ switch _mode do {
                 };
                 // Create controls for skills of this tier
                 private _ctrlSkill = _display ctrlCreate ["VGM_ctrlSkill", -1, _ctrlSkillTree];
-                _ctrlSkill setVariable ["vgm_params", [_skill]];
+                _ctrlSkill setVariable ["vgm_skill", _skill];
                 if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
                 _ctrlSkill ctrlSetPosition [_xPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
@@ -246,7 +246,7 @@ switch _mode do {
                     _ctrlUnlock ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
                 } else {
                     _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
-                    _ctrlUnlock setVariable ["vgm_params", [_skill]];
+                    _ctrlUnlock setVariable ["vgm_skill", _skill];
 
                     private _canLearn = [player, _skill] call vgm_g_fnc_skills_canLearn;
                     _ctrlUnlock ctrlEnable _canLearn;
@@ -317,7 +317,7 @@ switch _mode do {
         params ["_ctrlFocus"];
         private _display = ctrlParent _ctrlFocus;
         private _ctrlSkill = ctrlParentControlsGroup _ctrlFocus;
-        (_ctrlSkill getVariable "vgm_params") params ["_skill"];
+        private _skill = _ctrlSkill getVariable "vgm_skill";
 
         _display setVariable ["vgm_currentSkill", _skill];
 
@@ -326,7 +326,7 @@ switch _mode do {
 
     case "unlockSkill": {
         params ["_ctrlUnlock"];
-        (_ctrlUnlock getVariable "vgm_params") params [["_skill", createHashMap]];
+        private _skill = _ctrlUnlock getVariable ["vgm_skill", createHashMap];
         if (_skill isEqualTo createHashMap) exitWith {
             "unlockSkill executed with no skill selected" call vgm_g_fnc_logWarning;
         };
