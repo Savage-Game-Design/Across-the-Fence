@@ -18,8 +18,6 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_netmapId"];
-
 private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
 
-_netmaps get _netmapId
+_netmaps getOrDefault _this

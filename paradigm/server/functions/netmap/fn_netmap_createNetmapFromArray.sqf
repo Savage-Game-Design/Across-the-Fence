@@ -27,4 +27,4 @@ private _lastNetmapId = localNamespace getVariable ["para_s_lastNetmapId", 0];
 private _thisNetmapId = _lastNetmapId + 1;
 localNamespace setVariable ["para_s_lastNetmapId", _thisNetmapId];
 
-[_thisNetmapId, []] call para_s_fnc_netmap_createNamedNetmapFromArray;
+[_thisNetmapId, _array] call para_s_fnc_netmap_createNamedNetmapFromArray;

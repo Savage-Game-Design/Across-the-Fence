@@ -1,8 +1,8 @@
 /*
-    File: fn_netmap_get.sqf
+    File: fn_netmap_keys.sqf
     Author:
-    Date: 2023-06-22
-    Last Update: 2023-06-22
+    Date: 2023-06-23
+    Last Update: 2023-06-23
     Public: No
 
     Description:
@@ -18,8 +18,6 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_netmapId"];
+params ["_netmap"];
 
-private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
-
-_netmaps get _netmapId
+keys _netmap - ["_netmap"]
