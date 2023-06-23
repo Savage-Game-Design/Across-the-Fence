@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2023-06-20
+    Last Update: 2023-06-23
     Public: Yes
 
     Description:
@@ -70,7 +70,10 @@ localNamespace setVariable ["vgm_c_fnc_addJoinMissionAction", {
 localNamespace setVariable ["vgm_c_fnc_addAllJoinMissionActions", {
     params ["_object"];
 
-    private _joinableMissions = values ([] call vgm_c_fnc_missions_getMissions) select { count (_x get "prevent joining") == 0 };
+    private _missions = ([] call vgm_c_fnc_missions_getMissions) call para_g_fnc_netmap_values;
+    private _joinableMissions = _missions select {
+        ((_x get "preventJoining") call para_g_fnc_netmap_count) == 0
+    };
     private _fnc_addJoinMissionAction = localNamespace getVariable "vgm_c_fnc_addJoinMissionAction";
 
     // Add actions to join joinable missions

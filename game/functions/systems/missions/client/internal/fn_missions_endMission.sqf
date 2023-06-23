@@ -2,7 +2,7 @@
     File: fn_missions_onMissionEnd.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-06-20
+    Last Update: 2023-06-22
     Public: No
 
     Description:
@@ -22,7 +22,5 @@
  */
 
 player setPos ([] call vgm_g_fnc_missions_getHubSpawnPos);
-
-[nil] call vgm_c_fnc_missions_setCurrentMission;
 
 // Show end of mission screen

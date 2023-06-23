@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-20
+    Last Update: 2023-06-22
     Public: Yes
 
     Description:
@@ -17,10 +17,3 @@
     Example(s):
         [] call vgm_c_fnc_missions_preInit
  */
-
-private _emptyMissionsHashmap = createHashMap;
-
-localNamespace setVariable ["vgm_c_missions_data", createHashMapFromArray [
-    ["missions", _emptyMissionsHashmap],
-    ["currentMission", nil]
-]];

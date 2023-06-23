@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-06-20
+    Last Update: 2023-06-23
     Public: No
 
     Description:
@@ -20,30 +20,36 @@
 
 params ["_missionId"];
 
-private _missionsData = localNamespace getVariable "vgm_missions_data";
-private _mission = _missionsData get "missions" get _missionId;
+private _mission = localNamespace getVariable "vgm_missions" get _missionId;
 
 if (isNil "_mission") exitWith {};
 
+private _missionPublic = _mission get "public";
+
 [_mission, "FINISHED"] call vgm_s_fnc_missions_updateStatus;
 
-private _missionMemberPlayerIds = keys (_mission get "players");
+private _missionMemberPlayerIds = (_missionPublic get "players") call para_g_fnc_netmap_keys;
 private _missionMemberMachineIds = values (_mission get "machineIds");
 
 [] remoteExecCall ["vgm_c_fnc_missions_endMission", _missionMemberMachineIds];
 
 [
     "mission ended",
-    [_mission get "id"]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 {
     [_x, _mission] call vgm_s_fnc_missions_removePlayerFromMission;
 } forEach _missionMemberPlayerIds;
 
-_missionsData get "missions" deleteAt _missionId;
-
-[_mission] call vgm_s_fnc_missions_updateMissionDataOnClients;
+localNamespace getVariable "vgm_missions" deleteAt (_missionPublic get "id");
+[
+    ["vgm_missions_publicMissionInfo"] call para_g_fnc_netmap_get,
+    _missionPublic get "id"
+] call para_s_fnc_netmap_deleteAt;
+[_missionPublic] call para_s_fnc_netmap_terminate;
+[_missionPublic get "players"] call para_s_fnc_netmap_terminate;
+[_missionPublic get "preventJoining"] call para_s_fnc_netmap_terminate;
 
 // TODO
 // Disable damage

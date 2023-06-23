@@ -2,7 +2,7 @@
     File: fn_missions_setPlayerReadiness.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-04-23
+    Last Update: 2023-06-22
     Public: Yes
 
     Description:
@@ -21,23 +21,20 @@
 
 params ["_playerId", "_isReady"];
 
-private _missionsData = localNamespace getVariable "vgm_missions_data";
+private _missions = localNamespace getVariable "vgm_missions";
+private _missionId = (["vgm_mission_assignments"] call para_g_fnc_netmap_get) get _playerId;
 
-private _mission = _missionsData get "currentMissionAssignments" get _playerId;
-
-if (isNil "_mission") exitWith {
+if (isNil "_missionId") exitWith {
     [format ["Unable to set readiness of player %1 to %2, no mission assigned", _playerId, _isReady]] call vgm_g_fnc_logError;
 };
 
-// No risk of nil value - if player is in currentMissionAssignments, this should be guaranteed.
-private _missionPlayerData = _mission get "players" get _playerId;
-_missionPlayerData set ["ready", _isReady];
-
-[_mission] call vgm_s_fnc_missions_updateMissionDataOnClients;
+// No risk of nil value - if player is in currentMissionAssignments, this *should* be guaranteed.
+private _mission = _missions get _missionId;
+[_mission get "public" get "players" get _playerId, "ready", _isReady] call para_s_fnc_netmap_set;
 
 [
     "mission player readiness changed",
-    [_playerId, _isReady]
+    [_playerId, _isReady, _mission get "public" get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 _isReady

@@ -2,7 +2,7 @@
     File: fn_missions_joinMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-04-24
+    Last Update: 2023-06-22
     Public: Yes
 
     Description:
@@ -21,9 +21,7 @@
 
 params ["_playerId", "_missionId"];
 
-private _missionsData = localNamespace getVariable "vgm_missions_data";
-private _missions = _missionsData get "missions";
-private _currentMissionAssignments = _missionsData get "currentMissionAssignments";
+private _missions = localNamespace getVariable "vgm_missions";
 
 if (
     // Mission needs to exist

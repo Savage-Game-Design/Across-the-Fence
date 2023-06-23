@@ -2,7 +2,7 @@
     File: fn_missions_leaveMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-04-24
+    Last Update: 2023-06-22
     Public: Yes
 
     Description:
@@ -20,19 +20,20 @@
 
 params ["_playerId"];
 
-private _missionsData = localNamespace getVariable "vgm_missions_data";
-private _currentMissionAssignments = _missionsData get "currentMissionAssignments";
+private _missions = localNamespace getVariable "vgm_missions";
+private _currentMissionAssignments = ["vgm_mission_assignments"] call para_g_fnc_netmap_get;
 
 if (
     !(_playerId in _currentMissionAssignments)
 ) exitWith { false };
 
-private _mission = _currentMissionAssignments get _playerId;
+private _missionId = _currentMissionAssignments get _playerId;
+private _mission = _missions get _missionId;
 
 private _removeSuccessful = [_playerId, _mission] call vgm_s_fnc_missions_removePlayerFromMission;
 
 if (!_removeSuccessful) exitWith {
-    [format ["Unable to remove player %1 from mission %2", _playerId, _mission get "id"]] call vgm_g_fnc_logWarning;
+    [format ["Unable to remove player %1 from mission %2", _playerId, _missionId]] call vgm_g_fnc_logWarning;
     false
 };
 

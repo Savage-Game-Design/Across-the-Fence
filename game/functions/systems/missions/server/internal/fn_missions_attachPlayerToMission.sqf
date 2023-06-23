@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-06-20
+    Last Update: 2023-06-22
     Public: No
 
     Description:
@@ -25,8 +25,8 @@
 
 params ["_playerId", "_mission"];
 
-private _missionsData = localNamespace getVariable "vgm_missions_data";
-private _currentMissionAssignments = _missionsData get "currentMissionAssignments";
+private _currentMissionAssignments = ["vgm_mission_assignments"] call para_g_fnc_netmap_get;
+private _missionPublic = _mission get "public";
 
 if (
     // Player must not be assigned to a mission already
@@ -34,26 +34,26 @@ if (
     // PlayerId must be a valid user
     || getUserInfo _playerId isEqualTo []
     // Mission must not be at max players
-    || count (_mission get "players") >= (_mission get "maxPlayers")
+    || count (_missionPublic get "players") >= (_missionPublic get "maxPlayers")
     // Mission can't have already started when a player is joining
-    || _mission get "status" isNotEqualTo "CREATED"
+    || _missionPublic get "status" isNotEqualTo "CREATED"
 ) exitWith { false };
 
-_currentMissionAssignments set [_playerId, _mission];
-_mission get "players" set [_playerId, createHashMap];
-_mission get "machineIds" set [_playerId, getUserInfo _playerId select 1];
+[_currentMissionAssignments, _playerId, _missionPublic get "id"] call para_s_fnc_netmap_set;
+[
+    _missionPublic get "players",
+    _playerId,
+    [] call para_s_fnc_netmap_createNetmap
+] call para_s_fnc_netmap_set;
 
-// Update clients with result from attachPlayerToMission
-[_mission] call vgm_s_fnc_missions_updateMissionDataOnClients;
-
-[_mission get "id"] remoteExecCall ["vgm_c_fnc_missions_setCurrentMission", _mission get "machineIds" get _playerId];
+(_mission get "machineIds") set [_playerId, getUserInfo _playerId select 1];
 
 [
     "player attached to mission",
-    [_playerId, _mission]
+    [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-private _missionIsFull = count (_mission get "players") >= _mission get "maxPlayers";
+private _missionIsFull = count (_missionPublic get "players") >= _missionPublic get "maxPlayers";
 [_mission, "mission full", _missionIsFull] call vgm_s_fnc_missions_preventJoining;
 
 true

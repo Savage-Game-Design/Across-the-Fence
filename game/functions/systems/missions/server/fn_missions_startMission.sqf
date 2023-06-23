@@ -2,7 +2,7 @@
     File: fn_missions_startMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-04-24
+    Last Update: 2023-06-23
     Public: Yes
 
     Description:
@@ -20,14 +20,15 @@
 
 params ["_missionId"];
 
-private _missionsData = localNamespace getVariable "vgm_missions_data";
-private _mission = _missionsData get "missions" get _missionId;
+private _mission = localNamespace getVariable "vgm_missions" get _missionId;
 
 if (isNil "_mission") exitWith {
     [format ["Cannot start mission %1 - mission does not exist", _missionId]] call vgm_g_fnc_logError;
 };
 
-if (_mission get "status" isNotEqualTo "CREATED") exitWith {
+private _missionPublic = _mission get "public";
+
+if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
     ["Attempted to start a mission that has already started"] call vgm_g_fnc_logWarning;
 };
 
@@ -44,9 +45,7 @@ if (_mission get "status" isNotEqualTo "CREATED") exitWith {
 
 [] remoteExecCall ["vgm_c_fnc_missions_finishDeploy", values (_mission get "machineIds")];
 
-[_mission] call vgm_s_fnc_missions_updateMissionDataOnClients;
-
 [
     "mission started",
-    [_mission get "id"]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;

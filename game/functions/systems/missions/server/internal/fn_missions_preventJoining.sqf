@@ -2,7 +2,7 @@
     File: fn_missions_preventJoining.sqf
     Author: Savage Game Design
     Date: 2023-04-24
-    Last Update: 2023-06-20
+    Last Update: 2023-06-23
     Public: No
 
     Description:
@@ -26,19 +26,20 @@
  */
 params ["_mission", "_reason", "_preventJoining"];
 
-private _isJoinable = count (_mission get "prevent joining") == 0;
+private _missionPublic = _mission get "public";
+private _preventJoiningReasons = _missionPublic get "preventJoining";
+
+private _isJoinable = (_preventJoiningReasons call para_g_fnc_netmap_count) == 0;
 
 if (_preventJoining) then {
-    _mission get "prevent joining" set [_reason, true];
+    [_preventJoiningReasons, _reason, true] call para_s_fnc_netmap_set;
 } else {
-    _mission deleteAt _reason;
+    [_preventJoiningReasons, _reason] call para_s_fnc_netmap_deleteAt;
 };
 
-private _shouldBeJoinable = count (_mission get "prevent joining") == 0;
+private _shouldBeJoinable = (_preventJoiningReasons call para_g_fnc_netmap_count) == 0;
 
 if (_shouldBeJoinable == _isJoinable) exitWith {};
-
-[_mission] call vgm_s_fnc_missions_updateMissionDataOnClients;
 
 if (_shouldBeJoinable) then {
     [
