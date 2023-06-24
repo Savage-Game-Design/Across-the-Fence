@@ -2,7 +2,7 @@
     File: fn_event_triggerGlobal.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-06-20
+    Last Update: 2023-05-07
     Public: Yes
 
     Description:
@@ -23,4 +23,6 @@
 
 params ["_event", "_data"];
 
-[clientOwner, _event, _data] remoteExecCall ["para_g_fnc_event_remoteExec_trigger", 0];
+[clientOwner, _event, _data] remoteExecCall ["para_g_fnc_event_remoteExec_trigger", -clientOwner];
+
+_this call para_g_fnc_event_triggerLocal;
