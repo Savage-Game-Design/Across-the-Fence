@@ -3,7 +3,7 @@
     File: fn_medical_getArmorItem.sqf
     Author: Pterolatypus, modified by Savage Game Design
     Date: 2023-06-18
-    Last Update: 2023-06-18
+    Last Update: 2023-06-25
     Public: No
 
     Description:
@@ -25,7 +25,7 @@ private _fnc_getArmor = {
     call {
         params ["_item", "_hitPoint"];
 
-        ["DEBUG", format ["Calculating item armor: %1 | %2", _item, _hitPoint]] call vgm_g_fnc_log;
+        ["DEBUG", format ["Calculating item armor: %1 | %2", str _item, _hitPoint]] call vgm_g_fnc_log;
 
         if ("" in [_item, _hitPoint]) exitWith {0};
 
