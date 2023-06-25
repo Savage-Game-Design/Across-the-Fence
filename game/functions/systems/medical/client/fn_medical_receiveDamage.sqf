@@ -3,7 +3,7 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-06-25
+    Last Update: 2023-06-26
     Public: No
 
     Description:
@@ -27,11 +27,29 @@ if (isNil "_bodyPart") exitWith {
     format ["(Medical) Invalid HitPoint: %1", _hitPoint] call vgm_g_fnc_logError;
 };
 
-#ifdef DEBUG
-format ["(%4) Receive damage: %1 | %2 | %3", _damage, _bodyPart, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
-#endif
+private _normalizedDamage = _damage * getNumber (configOf _unit >> "HitPoints" >> _hitPoint >> "armor");
+
+private _damageLevel = switch (_bodyPart) do {
+    case BODY_PART_HEAD;
+    case BODY_PART_TORSO;
+    case BODY_PART_LEGS: {
+        if (_normalizedDamage > 8) exitWith {3};
+        // threshold of 4 gives us 2 "hit levels" for most rifles at smaller ranges
+        if (_normalizedDamage > 4) exitWith {2};
+        1
+    };
+    case BODY_PART_ARMS: {
+        if (_normalizedDamage > 6) exitWith {3};
+        if (_normalizedDamage > 3) exitWith {2};
+        1
+    };
+    default {
+        format ["(Medical) Invalid BodyPart: %1", _bodyPart] call vgm_g_fnc_logError;
+        1
+    };
+};
+
+format ["(%5) Receive damage: %1 | %2 | %3 | %4", _normalizedDamage, _damageLevel, _bodyPart, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
 
 private _varDamage = format ["vgm_c_medical_damage$%1", _bodyPart];
-private _bodyPartDamage = _unit getVariable [_varDamage, 0];
-
-_unit setVariable [_varDamage, _bodyPartDamage + _damage];
+private _currentDamageLevel = _unit getVariable [_varDamage, 0];
