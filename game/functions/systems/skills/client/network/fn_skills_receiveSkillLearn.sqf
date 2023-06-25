@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillLearn.sqf
     Author:
     Date: 2023-01-27
-    Last Update: 2023-02-24
+    Last Update: 2023-06-02
     Public: No
 
     Description:
@@ -21,7 +21,7 @@
 
 params ["_result", "_skillPath"];
 
-["DEBUG", format ["VGM: Received skills learn for %1 with result %2", _skillPath, _result]] call para_g_fnc_log;
+["DEBUG", format ["Received skills learn for %1 with result %2", _skillPath, _result]] call vgm_g_fnc_log;
 
 // close the popup
 // TODO keep the popup display in variable and close it via it

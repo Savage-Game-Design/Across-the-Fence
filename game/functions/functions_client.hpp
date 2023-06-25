@@ -39,6 +39,17 @@ class vgm_g
         };
     };
 
+    class leveling
+    {
+        VGM_GLOBAL_PATH(\systems\leveling\global);
+
+        class leveling_parseLevelsCfg {};
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
@@ -92,6 +103,20 @@ class vgm_c
         class sharedHub_areaLimiterDisable {};
         class sharedHub_areaLimiterEnable {};
         class sharedHub_teleportPlayerToHub {};
+    };
+
+    class leveling
+    {
+        VGM_CLIENT_PATH(\systems\leveling\client);
+
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+        class leveling_postInit
+        {
+            postInit = 1;
+        };
     };
 
     class skills
