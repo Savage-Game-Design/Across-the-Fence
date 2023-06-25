@@ -66,13 +66,14 @@ format ["(%7) Damage: %1 | %2 | %3 | %4 | %5 | %6", _hitPoint, _hitDamage, _real
 #endif
 
 // store multiple hits that happen in a single frame and sort them by damage frame later
-private _hitsArray = _unit getVariable "vgm_medical_hits";
-if (isNil "_hitsArray") then {
-    _hitsArray = [];
-    _unit setVariable ["vgm_medical_hits", _hitsArray];
+private _hitsData = _unit getVariable "vgm_medical_hits";
+if (isNil "_hitsData") then {
+    _hitsData = createHashMap;
+    _unit setVariable ["vgm_medical_hits", _hitsData];
 
     [{
-        params ["_unit", "_hitsArray", "_source", "_projectile", "_directHit"];
+        params ["_unit", "_hitsData", "_source", "_projectile", "_directHit"];
+        private _hitsArray = values _hitsData;
         _unit setVariable ["vgm_medical_hits", nil];
 
         #ifdef DEBUG
@@ -94,10 +95,10 @@ if (isNil "_hitsArray") then {
             if (_directHit) exitWith {};
         } forEach _hitsArray;
 
-    }, [_unit, _hitsArray, [_source, _instigator] select isNull _source, _projectile, _directHit]] call vgm_g_fnc_execNextFrame;
+    }, [_unit, _hitsData, [_source, _instigator] select isNull _source, _projectile, _directHit]] call vgm_g_fnc_execNextFrame;
 };
 
-_hitsArray pushBack [_realDamage, _hitPoint, _hitDamage];
+_hitsData set [_hitPoint, [_realDamage, _hitPoint, _hitDamage]];
 
 // damage of these hitpoint controls visuals or engine features like limping sway etc.
 // retain the values set by our other functionalities
