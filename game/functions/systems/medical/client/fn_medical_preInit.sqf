@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-18
+    Last Update: 2023-06-25
     Public: No
 
     Description:
@@ -48,8 +48,7 @@ vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
     // legs
     ["hitlegs", BODY_PART_LEGS],
     // other
-    ["incapacitated", BODY_PART_TORSO],
-    ["#structural", BODY_PART_TORSO]
+    ["incapacitated", BODY_PART_TORSO]
 ];
 
 vgm_c_medical_armorCache = createHashMap;

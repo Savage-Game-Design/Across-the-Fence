@@ -50,6 +50,12 @@ private _downed = lifeState _unit == "INCAPACITATED";
 // prevent unit from being killed when downed
 if (_downed) exitWith {_currentDamage};
 
+// ignore problematic hitpoints for hitpoint handling
+// #structural - we do not want to handle it for hits
+// incapacitatd - some system hitpoint, idk what it exactly does
+// hitbody - it's redundant as it depends on hitpelvis, hitabdomen, hitdipaghram and hitchest, has 1000 armor and causes issues
+if (_hitPoint in ["#structural", "incapacitated", "hitbody"]) exitWith {_currentDamage};
+
 // calculate approximated amount of damage the unit received before armor calculations
 // currently does not take passthrough into account
 private _armor = [_unit, _hitPoint] call vgm_c_fnc_medical_getArmorHitPoint;
