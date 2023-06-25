@@ -3,7 +3,7 @@
     File: fn_medical_handleDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-25
+    Last Update: 2023-06-26
     Public: No
 
     Description:
@@ -54,7 +54,10 @@ if (_downed) exitWith {_currentDamage};
 // #structural - we do not want to handle it for hits
 // incapacitatd - some system hitpoint, idk what it exactly does
 // hitbody - it's redundant as it depends on hitpelvis, hitabdomen, hitdipaghram and hitchest, has 1000 armor and causes issues
-if (_hitPoint in ["#structural", "incapacitated", "hitbody"]) exitWith {_currentDamage};
+if (_hitPoint in ["#structural", "incapacitated", "hitbody"]) exitWith {
+    format ["(%6) Skipped Damage: %1 | %2 | %3 | %4 | %5", _hitPoint, _hitDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logInfo;
+    _currentDamage
+};
 
 // calculate approximated amount of damage the unit received before armor calculations
 // currently does not take passthrough into account
