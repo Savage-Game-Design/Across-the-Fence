@@ -66,29 +66,32 @@ if (isNil "_hitsArray") then {
     _unit setVariable ["vgm_medical_hits", _hitsArray];
 
     [{
-        params ["_unit", "_hitsArray", "_source", "_projectile"];
+        params ["_unit", "_hitsArray", "_source", "_projectile", "_directHit"];
         _unit setVariable ["vgm_medical_hits", nil];
 
         #ifdef DEBUG
         ["DEBUG", format ["(%2) HitsArray: %1", _hitsArray, diag_frameNo]] call vgm_g_fnc_log;
         #endif
 
-        if (_hitsArray isEqualTo []) exitWith {};
-
+        // sort the hits by damage
         _hitsArray sort false;
-        // highest damage is most likely the hitpoint the unit was shot at
-        _hitsArray#0 params ["_realDamage", "_hitPoint", "_hitDamage"];
 
-        format ["(%3) Highest damage: %1 | %2", _realDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+        // apply damage
+        {
+            _x params ["_realDamage", "_hitPoint", "_hitDamage"];
 
-        [_unit, _hitDamage, _hitPoint, _source, _projectile] call vgm_c_fnc_medical_receiveDamage;
+            format ["(%4) Applying damage: %1 | %2 | %3", _realDamage, _hitPoint, _hitDamage, diag_frameNo] call vgm_g_fnc_logInfo;
 
-    }, [_unit, _hitsArray, [_source, _instigator] select isNull _source, _projectile]] call vgm_g_fnc_execNextFrame;
+            [_unit, _hitDamage, _hitPoint, _source, _projectile, _directHit] call vgm_c_fnc_medical_receiveDamage;
+
+            // hitpoint with most damage is one that (most likely) directly received the hit in case of direct hit
+            if (_directHit) exitWith {};
+        } forEach _hitsArray;
+
+    }, [_unit, _hitsArray, [_source, _instigator] select isNull _source, _projectile, _directHit]] call vgm_g_fnc_execNextFrame;
 };
 
 _hitsArray pushBack [_realDamage, _hitPoint, _hitDamage];
-
-
 
 // damage of these hitpoint controls visuals or engine features like limping sway etc.
 // retain the values set by our other functionalities

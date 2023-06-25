@@ -19,7 +19,7 @@
         [parameter] call vgm_c_fnc_medical_receiveDamage
  */
 
-params ["_unit", "_damage", "_hitPoint", "_source", "_projectile"];
+params ["_unit", "_damage", "_hitPoint", "_source", "_projectile", "_directHit"];
 
 private _bodyPart = vgm_c_medical_hitPointBodyPartMap get _hitPoint;
 
