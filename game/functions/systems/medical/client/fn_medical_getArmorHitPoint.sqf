@@ -2,7 +2,7 @@
     File: fn_medical_getArmorHitPoint.sqf
     Author: Pterolatypus, modified by Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-06-18
+    Last Update: 2023-06-27
     Public: No
 
     Description:
@@ -35,7 +35,9 @@ private _loadout = [
 ];
 
 private _fnc_getArmor = {
-    format ["Fetching hitpoint armor: %1 | %2", _hitPoint, _loadout] call vgm_g_fnc_logInfo;
+    #ifdef DEBUG
+    format ["Fetching hitpoint armor: %1 | %2", _hitPoint, _loadout] call vgm_g_fnc_logDebug;
+    #endif
 
     private _armor = 0;
     {

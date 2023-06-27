@@ -3,7 +3,7 @@
     File: fn_medical_handleDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-26
+    Last Update: 2023-06-27
     Public: No
 
     Description:
@@ -37,7 +37,7 @@ if (!isDamageAllowed _unit) exitWith {_currentDamage};
 // validate damage
 if (_projectile isEqualTo "" && {isNull _source}) exitWith {
     #ifdef DEBUG
-    format ["(%2) Invalid damage: %1", _hitPoint, diag_frameNo] call vgm_g_fnc_logError;
+    format ["(%2) Invalid damage: %1", _hitPoint, diag_frameNo] call vgm_g_fnc_logDebug;
     #endif
     _currentDamage
 };
@@ -52,10 +52,12 @@ if (_downed) exitWith {_currentDamage};
 
 // ignore problematic hitpoints for hitpoint handling
 // #structural - we do not want to handle it for hits
-// incapacitatd - some system hitpoint, idk what it exactly does
+// incapacitated - some system hitpoint, idk what it exactly does
 // hitbody - it's redundant as it depends on hitpelvis, hitabdomen, hitdipaghram and hitchest, has 1000 armor and causes issues
 if (_hitPoint in ["#structural", "incapacitated", "hitbody"]) exitWith {
-    format ["(%6) Skipped Damage: %1 | %2 | %3 | %4 | %5", _hitPoint, _hitDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logInfo;
+    #ifdef DEBUG
+    format ["(%6) Skipped Damage: %1 | %2 | %3 | %4 | %5", _hitPoint, _hitDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logDebug;
+    #endif
     _currentDamage
 };
 
@@ -65,7 +67,7 @@ private _armor = [_unit, _hitPoint] call vgm_c_fnc_medical_getArmorHitPoint;
 private _realDamage = _hitDamage * _armor;
 
 #ifdef DEBUG
-format ["(%7) Damage: %1 | %2 | %3 | %4 | %5 | %6", _hitPoint, _hitDamage, _realDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logInfo;
+format ["(%7) Damage: %1 | %2 | %3 | %4 | %5 | %6", _hitPoint, _hitDamage, _realDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logDebug;
 #endif
 
 // store multiple hits that happen in a single frame and sort them by damage frame later
@@ -90,7 +92,9 @@ if (isNil "_hitsData") then {
         {
             _x params ["_realDamage", "_hitPoint", "_hitDamage"];
 
-            format ["(%4) Applying damage: %1 | %2 | %3", _realDamage, _hitPoint, _hitDamage, diag_frameNo] call vgm_g_fnc_logInfo;
+            #ifdef DEBUG
+            format ["(%4) Applying damage: %1 | %2 | %3", _realDamage, _hitPoint, _hitDamage, diag_frameNo] call vgm_g_fnc_logDebug;
+            #endif
 
             [_unit, _hitDamage, _hitPoint, _source, _projectile, _directHit] call vgm_c_fnc_medical_receiveDamage;
 

@@ -3,7 +3,7 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-06-26
+    Last Update: 2023-06-27
     Public: No
 
     Description:
@@ -49,7 +49,7 @@ private _damageLevel = switch (_bodyPart) do {
     };
 };
 
-format ["(%5) Receive damage: %1 | %2 | %3 | %4", _normalizedDamage, _damageLevel, _bodyPart, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+format ["(%6) Receive damage: %1 | %2 | %3 | %4 | %5", _normalizedDamage, _damageLevel, _bodyPart, _hitPoint, _projectile, diag_frameNo] call vgm_g_fnc_logInfo;
 
 private _varDamage = format ["vgm_c_medical_damage$%1", _bodyPart];
 private _currentDamageLevel = _unit getVariable [_varDamage, 0];

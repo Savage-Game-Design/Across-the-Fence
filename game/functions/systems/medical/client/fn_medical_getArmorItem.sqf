@@ -3,7 +3,7 @@
     File: fn_medical_getArmorItem.sqf
     Author: Pterolatypus, modified by Savage Game Design
     Date: 2023-06-18
-    Last Update: 2023-06-25
+    Last Update: 2023-06-27
     Public: No
 
     Description:
@@ -25,15 +25,15 @@ private _fnc_getArmor = {
     call {
         params ["_item", "_hitPoint"];
 
-        ["DEBUG", format ["Calculating item armor: %1 | %2", str _item, _hitPoint]] call vgm_g_fnc_log;
+        #ifdef DEBUG
+        format ["Calculating item armor: %1 | %2", str _item, _hitPoint] call vgm_g_fnc_logDebug;
+        #endif
 
         if ("" in [_item, _hitPoint]) exitWith {0};
 
         private _itemInfo = configFile >> "CfgWeapons" >> _item >> "ItemInfo";
 
         if (getNumber (_itemInfo >> "type") == TYPE_UNIFORM) exitWith {
-            ["DEBUG", "Uniform"] call vgm_g_fnc_log;
-
             private _unitCfg = configFile >> "CfgVehicles" >> getText (_itemInfo >> "uniformClass");
 
             if (_hitPoint == "#structural") exitWith {
@@ -43,8 +43,6 @@ private _fnc_getArmor = {
             private _entry = _unitCfg >> "HitPoints" >> _hitPoint;
             getNumber (_unitCfg >> "armor") * (1 max getNumber (_entry >> "armor")) // return
         };
-
-        ["DEBUG", "Other"] call vgm_g_fnc_log;
 
         private _condition = format ["getText (_x >> 'hitpointName') == '%1'", _hitPoint];
         private _entry = configProperties [_itemInfo >> "HitpointsProtectionInfo", _condition] param [0, configNull];

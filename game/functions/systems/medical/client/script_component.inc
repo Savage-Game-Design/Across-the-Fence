@@ -1,5 +1,5 @@
 
-#define DEBUG
+// #define DEBUG
 
 #define TYPE_VEST 701
 #define TYPE_UNIFORM 801
