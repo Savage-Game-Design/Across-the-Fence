@@ -28,6 +28,9 @@ class vgm_g
         class log {
             headerType = -1;
         };
+        class logDebug {
+            headerType = -1;
+        };
         class logError {
             headerType = -1;
         };
