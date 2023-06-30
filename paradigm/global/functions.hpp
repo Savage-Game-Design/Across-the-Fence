@@ -206,6 +206,7 @@ class para_g
         class netmap_get {};
         class netmap_getOrDefault {};
         class netmap_keys {};
+        class netmap_onReady {};
         class netmap_values {};
     };
 

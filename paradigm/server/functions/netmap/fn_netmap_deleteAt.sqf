@@ -1,8 +1,8 @@
 /*
     File: fn_netmap_deleteAt.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-26
     Public: No
 
     Description:
@@ -25,7 +25,7 @@ private _netmapDetails = _hashMap get "_netmap";
 _hashMap deleteAt _key;
 
 if (isNil "_netmapDetails") exitWith {
-    format ["netmap_deleteAt used on non-netmap hashmap: %1", keys _hashMap] call vgm_g_fnc_logWarning;
+    ["WARNING", format ["netmap_deleteAt used on non-netmap hashmap: %1", keys _hashMap]] call para_g_fnc_log;
 };
 
 [_netmapDetails get "id", _key] remoteExecCall ["para_c_fnc_netmap_deleteAt", -clientOwner];

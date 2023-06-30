@@ -1,21 +1,25 @@
 /*
-    File: fn_netmap_add.sqf
-    Author:
+    File: fn_netmap_deleteAt.sqf
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
-        No description added yet.
+        Deletes a property on a netmap.
+
+        Used when a property is deleted in the server, to synchronise that deletion to the client.
 
     Parameter(s):
-        N/A
+        _netmapId - ID of the netmap affects [STRING]
+        _key - Key that was deleted [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_myNetmap get "_netmap" get "id", "someKey"] remoteExec ["para_c_fnc_netmap_deleteAt", -2];
+
  */
 
 params ["_netmapId", "_key"];

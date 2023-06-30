@@ -1,21 +1,21 @@
 /*
     File: fn_netmap_add.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
-        No description added yet.
+        Initialises the netmap system on the client
 
     Parameter(s):
-        N/A
+        Nothing
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        N/A - Trigger in functions.hpp as a preInit function.
  */
 
 localNamespace setVariable ["para_netmaps", createHashMap];

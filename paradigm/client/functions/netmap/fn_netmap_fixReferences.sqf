@@ -1,21 +1,36 @@
 /*
     File: fn_netmap_fixReferences.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
-        No description added yet.
+        Makes a netmap referentially consistent on the client.
+
+        If on the server, we have three netmaps: A, B and C.
+            A has a key "a" that references C.
+
+        Then we set the key "b" on B to the value C.
+
+        When this set arrives on the client, A "a" and B "b" refer to different objects,
+        due to Arma deserializing them on the client.
+
+        This function scans the values of a netmap, and if it finds any nested netmaps, it sets the
+        value to the netmap object from the global netmap store.
+
+        This means than on the client, A "a" and B "b" refer to the same hashmap.
+
+        That way, if "C" is modified, the changes are reflected in both A "a" and B "b"
 
     Parameter(s):
-        N/A
+        _netmap - Netmap to check and fix [HashMap]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_myNewNetmap] call para_c_fnc_netmap_fixReferences;
  */
 
 params ["_netmap"];

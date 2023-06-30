@@ -1,21 +1,30 @@
 /*
-    File: fn_netmap_add.sqf
-    Author:
+    File: fn_netmap_terminate.sqf
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
-        No description added yet.
+        Stops the networking on a netmap, turning it into a normal hashmap.
+
+        Removes the netmap from the netmap tracker, and clears the `_netmap` metadata.
+
+        Does NOT delete the hashmap.
+
+        Should only be used from the server.
 
     Parameter(s):
-        N/A
+        _netmapId - ID of the netmap to remove from the system [STRING]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        // Usage on the server
+        [_myNetmap] call para_s_fnc_netmap_terminate;
+        // Or to call this directly (which shouldn't be done):
+        [_myNetmap get "_netmap" get "id"] remoteExec ["para_c_fnc_netmap_terminate", -2];
  */
 
 params ["_netmapId"];

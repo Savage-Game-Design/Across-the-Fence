@@ -1,21 +1,25 @@
 /*
-    File: fn_netmap_add.sqf
-    Author:
+    File: fn_netmap_set.sqf
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
-        No description added yet.
+        Sets a key on a netmap to the given value.
+
+        Should only be used by the server to synchronise changes.
 
     Parameter(s):
-        N/A
+        _netmapId - ID of the netmap to update [STRING]
+        _key - Key to update [ANY]
+        _value - New value for that key [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_myNetmap get "_netmap" get "id", "A", 1] remoteExec ["para_c_fnc_netmap_set", -2];
  */
 
 params ["_netmapId", "_key", "_value"];

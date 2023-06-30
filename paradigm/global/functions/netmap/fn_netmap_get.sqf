@@ -1,21 +1,21 @@
 /*
     File: fn_netmap_get.sqf
-    Author:
-    Date: 2023-06-22
-    Last Update: 2023-06-22
-    Public: No
+    Author: Savage Game Design
+    Date: 2023-06-23
+    Last Update: 2023-06-30
+    Public: Yes
 
     Description:
-        No description added yet.
+        Fetches the netmap with the provided name or ID.
 
     Parameter(s):
-        N/A
+        _netmapId - ID of the netmap, either the name it was created with, or generated id [STRING]
 
     Returns:
-        Something [BOOL]
+        The netmap if it exists, nil otherwise
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        private _myNetmap = ["myNetmap"] call para_g_fnc_netmap_get;
  */
 
 params ["_netmapId"];

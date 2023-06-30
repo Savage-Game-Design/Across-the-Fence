@@ -1,35 +1,41 @@
 /*
-    File: fn_netmap_makeIntoNamedNetmap copy.sqf
-    Author:
+    File: fn_netmap_terminate.sqf
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
-    Public: No
+    Last Update: 2023-06-26
+    Public: Yes
 
     Description:
-        No description added yet.
+        Terminates networking on a netmap, turning it into a normal hashmap.
+
+        Removes the `_netmap` key, and clears the netmap from the serverside and clientside netmap systems.
+
+        Does NOT delete the hashmap - anything with a reference to the hashmap will still hold that reference.
 
     Parameter(s):
-        N/A
+        _netmap - Netmap to stop the networking on [HashMap]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        private _myNetmap = [] call para_s_fnc_netmap_createNetmap;
+
+        [_myNetmap] call para_s_fnc_netmap_terminate;
  */
 
-params ["_hashMap"];
+params ["_netmap"];
 
-private _netmapDetails = _hashMap get "_netmap";
+private _netmapDetails = _netmap get "_netmap";
 
 if (isNil "_netmapDetails") exitWith {
-    format ["netmap_terminate used on non-netmap hashmap: %1", keys _hashMap] call vgm_g_fnc_logWarning;
+    format ["netmap_terminate used on non-netmap hashmap: %1", keys _netmap] call vgm_g_fnc_logWarning;
 };
 
 private _id = _netmapDetails get "id";
 private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
 
 _netmaps deleteAt _id;
-_hashMap deleteAt "_netmap";
+_netmap deleteAt "_netmap";
 
 [_id] remoteExecCall ["para_c_fnc_netmap_terminate", -clientOwner];

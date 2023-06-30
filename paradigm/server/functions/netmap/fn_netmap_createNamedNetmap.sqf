@@ -1,23 +1,21 @@
 /*
-    File: fn_netmap_makeIntoNamedNetmap.sqf
-    Author:
+    File: fn_netmap_createNamedNetmap.sqf
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
-    Public: No
+    Last Update: 2023-06-26
+    Public: Yes
 
     Description:
-        Initialises networking on a hashmap, and makes it available on the client using the given name.
+        Creates a new netmap (networked hashmap), whose data is available to all clients using the name provided.
 
     Parameter(s):
-        _hashMap - hashmap to network [HashMap]
-        _name - Name that the clients will be able to access the hashmap using. Optional, will use a random ID if not provided. [String]
+        _name - Name that the clients will be able to access the hashmap using. [String]
 
     Returns:
-        The original hashmap passed in as an argument.
+        The created hashmap.
 
     Example(s):
-        private _myNetmap = createHashMap;
-        [_myNetmap, "myNetmap"] call para_s_fnc_netmap_makeIntoNamedNetmap;
+        private _myNetmap = ["myNetmap"] call para_s_fnc_netmap_createNamedNetmap;
 
         // On the client
         private _myNetmap = ["myNetmap"] call para_s_fnc_netmap_get;

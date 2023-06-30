@@ -2,7 +2,7 @@
     File: fn_missions_postInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: Yes
 
     Description:
@@ -20,7 +20,7 @@
 
 [{
     ["vgm_missions_clientReady", []] call para_g_fnc_event_triggerServer;
-}] call para_c_fnc_netmap_onReady;
+}] call para_g_fnc_netmap_onReady;
 
 // To remove later, this is just for debugging right now.
 ["missions system postinit", []] call para_g_fnc_event_triggerLocal;

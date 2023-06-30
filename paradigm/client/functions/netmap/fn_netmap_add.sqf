@@ -1,21 +1,24 @@
 /*
     File: fn_netmap_add.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
-        No description added yet.
+        Stores a new netmap on the client. Called by the server when a new netmap is created.
+
+        Maintains referential consistency - if two netmaps refer to a third netmap on the server,
+        then they'll refer to the same netmap on the client.
 
     Parameter(s):
-        N/A
+        _netmap - Netmap to store on the client. Must have a `_netmap` property [HashMap]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_myNetmap] remoteExec ["para_c_fnc_netmap_add", -2];
  */
 
 params ["_netmap"];
