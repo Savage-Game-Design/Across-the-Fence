@@ -34,7 +34,7 @@ localNamespace setVariable ["para_netmaps", createHashMap];
         } forEach values _netmaps;
 
         ["netmaps ready", []] spawn para_g_fnc_event_triggerLocal;
-        localNamespace setVariable ["vgm_netmaps_ready", true];
+        localNamespace setVariable ["para_netmaps_ready", true];
     }
 ] call para_g_fnc_event_subscribeServer;
 

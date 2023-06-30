@@ -2,17 +2,18 @@
     File: fn_netmap_deleteAt.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-26
-    Public: No
+    Last Update: 2023-06-30
+    Public: Yes
 
     Description:
-        No description added yet.
+        Deletes the given key from the netmap, and immediately synchronises it to the clients.
 
     Parameter(s):
-        N/A
+        _netmap - Netmap to delete entry from [HashMap]
+        _key - Key to delete [ANY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [parameter] call vgm_X_fnc_component_myFunction

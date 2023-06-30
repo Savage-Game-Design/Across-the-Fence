@@ -27,7 +27,7 @@ if !(_callback isEqualType []) then {
 };
 
 // Netmaps are always ready on the server, as the server doesn't need to fetch them.
-if (isServer || localNamespace getVariable ["vgm_netmaps_ready", false]) exitWith {
+if (isServer || localNamespace getVariable ["para_netmaps_ready", false]) exitWith {
     [[], _callback # 0] call (_callback # 1);
 };
 

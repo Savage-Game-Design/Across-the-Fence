@@ -2,7 +2,7 @@
     File: fn_netmap_terminate.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-26
+    Last Update: 2023-06-30
     Public: Yes
 
     Description:
@@ -29,7 +29,7 @@ params ["_netmap"];
 private _netmapDetails = _netmap get "_netmap";
 
 if (isNil "_netmapDetails") exitWith {
-    format ["netmap_terminate used on non-netmap hashmap: %1", keys _netmap] call vgm_g_fnc_logWarning;
+    ["WARNING", format ["netmap_terminate used on non-netmap hashmap: %1", keys _netmap]] call para_g_fnc_log;
 };
 
 private _id = _netmapDetails get "id";

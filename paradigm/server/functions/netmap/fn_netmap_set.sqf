@@ -2,7 +2,7 @@
     File: fn_netmap_set.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-26
+    Last Update: 2023-06-30
     Public: No
 
     Description:
@@ -30,7 +30,7 @@ private _netmapDetails = _netmap get "_netmap";
 _netmap set [_key, _value];
 
 if (isNil "_netmapDetails") exitWith {
-    format ["netmap_set used on non-netmap hashmap: %1", keys _netmap] call vgm_g_fnc_logWarning;
+    ["WARNING", format ["netmap_set used on non-netmap hashmap: %1", keys _netmap]] call para_g_fnc_log;
 };
 
 [_netmapDetails get "id", _key, _value] remoteExecCall ["para_c_fnc_netmap_set", -clientOwner];
