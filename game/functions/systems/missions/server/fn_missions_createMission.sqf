@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-23
+    Last Update: 2023-06-30
     Public: Yes
 
     Description:
@@ -23,7 +23,10 @@
         ] call vgm_s_fnc_missions_createMission;
  */
 
-params ["_parameters", ["_creatorId", ""]];
+params [
+    ["_parameters", nil, [createHashMap]],
+    ["_creatorId", "", [""]]
+];
 
 // This method of creating IDs assumes missions aren't persistent across restarts/servers
 private _lastMissionId = localNamespace getVariable ["vgm_last_mission_id_created", 0];
