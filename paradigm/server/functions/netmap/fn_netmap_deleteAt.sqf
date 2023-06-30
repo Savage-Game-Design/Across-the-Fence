@@ -16,7 +16,7 @@
         Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_myNetmap, "A"] call para_s_fnc_netmap_deleteAt;
  */
 
 params ["_hashMap", "_key"];
