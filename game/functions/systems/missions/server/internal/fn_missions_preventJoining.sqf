@@ -2,7 +2,7 @@
     File: fn_missions_preventJoining.sqf
     Author: Savage Game Design
     Date: 2023-04-24
-    Last Update: 2023-06-23
+    Last Update: 2023-06-30
     Public: No
 
     Description:
@@ -44,11 +44,11 @@ if (_shouldBeJoinable == _isJoinable) exitWith {};
 if (_shouldBeJoinable) then {
     [
         "mission joinable",
-        [_mission get "id"]
+        [_missionPublic get "id"]
     ] call para_g_fnc_event_triggerGlobal;
 } else {
     [
         "mission stopped being joinable",
-        [_mission get "id"]
+        [_missionPublic get "id"]
     ] call para_g_fnc_event_triggerGlobal;
 };
