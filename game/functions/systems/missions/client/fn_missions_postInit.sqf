@@ -18,6 +18,8 @@
         [] call vgm_c_fnc_missions_postInit
  */
 
+if (!hasInterface) exitWith {};
+
 [{
     ["vgm_missions_clientReady", []] call para_g_fnc_event_triggerServer;
 }] call para_g_fnc_netmap_onReady;
