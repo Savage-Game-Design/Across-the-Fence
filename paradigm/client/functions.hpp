@@ -83,7 +83,6 @@ class para_c
         class netmap_add {};
         class netmap_deleteAt {};
         class netmap_fixReferences {};
-        class netmap_onReady {};
         class netmap_preInit {
             preInit = 1;
         };
