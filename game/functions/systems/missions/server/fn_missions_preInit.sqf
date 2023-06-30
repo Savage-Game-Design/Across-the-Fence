@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-22
+    Last Update: 2023-06-30
     Public: No
 
     Description:
@@ -17,6 +17,8 @@
     Example(s):
         [] call vgm_s_fnc_missions_initSystem
  */
+
+if (!isServer) exitWith {};
 
 // Serverside mission data
 localNamespace setVariable ["vgm_missions", createHashMap];
