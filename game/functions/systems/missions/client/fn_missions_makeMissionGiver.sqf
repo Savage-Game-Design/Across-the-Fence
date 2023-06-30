@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2023-06-23
+    Last Update: 2023-06-30
     Public: Yes
 
     Description:
@@ -40,11 +40,11 @@ _object addAction [
     false,
     true,
     "",
-    "isNil vgm_c_fnc_missions_getCurrentMission",
+    "isNil { call vgm_c_fnc_missions_getCurrentMission }",
     10
 ];
 
-localNamespace setVariable ["vgm_c_fnc_addJoinMissionAction", {
+vgm_c_fnc_addJoinMissionAction = {
     params ["_missionId", "_object"];
 
     private _actionId = _object addAction [
@@ -65,24 +65,23 @@ localNamespace setVariable ["vgm_c_fnc_addJoinMissionAction", {
     ];
 
     _object getVariable "vgm_c_missions_joinActions" set [_missionId, _actionId];
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_addAllJoinMissionActions", {
+vgm_c_fnc_addAllJoinMissionActions = {
     params ["_object"];
 
     private _missions = ([] call vgm_c_fnc_missions_getMissions) call para_g_fnc_netmap_values;
     private _joinableMissions = _missions select {
         ((_x get "preventJoining") call para_g_fnc_netmap_count) == 0
     };
-    private _fnc_addJoinMissionAction = localNamespace getVariable "vgm_c_fnc_addJoinMissionAction";
 
     // Add actions to join joinable missions
     {
-        [_x get "id", _object] call _fnc_addJoinMissionAction;
+        [_x get "id", _object] call vgm_c_fnc_addJoinMissionAction;
     } forEach _joinableMissions;
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_addLeaveMissionAction", {
+vgm_c_fnc_addLeaveMissionAction = {
     params ["_object"];
 
     // Add action to leave mission
@@ -103,9 +102,9 @@ localNamespace setVariable ["vgm_c_fnc_addLeaveMissionAction", {
     ];
 
     _object setVariable ["vgm_c_missions_leaveAction", _leaveMissionActionId];
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_removeLeaveMissionAction", {
+vgm_c_fnc_removeLeaveMissionAction = {
     params ["_object"];
 
     private _actionId = _object getVariable "vgm_c_missions_leaveAction";
@@ -113,9 +112,9 @@ localNamespace setVariable ["vgm_c_fnc_removeLeaveMissionAction", {
 
     _object removeAction _actionId;
     _object setVariable ["vgm_c_missions_leaveAction", nil];
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_addStartMissionAction", {
+vgm_c_fnc_addStartMissionAction = {
     params ["_object"];
 
     private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
@@ -134,14 +133,14 @@ localNamespace setVariable ["vgm_c_fnc_addStartMissionAction", {
         false,
         true,
         "",
-        "!(isNil vgm_c_fnc_missions_getCurrentMission)",
+        "!(isNil { call vgm_c_fnc_missions_getCurrentMission})",
         10
     ];
 
     _object setVariable ["vgm_c_missions_startAction", _startMissionActionId];
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_removeStartMissionAction", {
+vgm_c_fnc_removeStartMissionAction = {
     params ["_object"];
 
     private _actionId = _object getVariable "vgm_c_missions_startAction";
@@ -149,9 +148,9 @@ localNamespace setVariable ["vgm_c_fnc_removeStartMissionAction", {
 
     _object removeAction _actionId;
     _object setVariable ["vgm_c_missions_startAction", nil];
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_removeJoinMissionAction", {
+vgm_c_fnc_removeJoinMissionAction = {
     params ["_missionId", "_object"];
 
     private _joinActions = _object getVariable "vgm_c_missions_joinActions";
@@ -160,17 +159,17 @@ localNamespace setVariable ["vgm_c_fnc_removeJoinMissionAction", {
 
     _object removeAction _actionId;
     _joinActions deleteAt _missionId;
-}];
+};
 
-localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
+vgm_c_fnc_removeAllJoinMissionActions = {
     params [ "_object"];
 
     private _joinActions = _object getVariable "vgm_c_missions_joinActions";
 
     {
-        [_x, _object] call (localNamespace getVariable "vgm_c_fnc_removeJoinMissionAction");
+        [_x, _object] call vgm_c_fnc_removeJoinMissionAction;
     } forEach (keys _joinActions);
-}];
+};
 
 [
     "mission stopped being joinable",
@@ -183,7 +182,7 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
             // TODO - Remove handler if object no longer exists.
         };
 
-        [_missionId, _object] call (localNamespace getVariable "vgm_c_fnc_removeJoinMissionAction");
+        [_missionId, _object] call vgm_c_fnc_removeJoinMissionAction;
     }]
 ] call para_g_fnc_event_subscribeServer;
 
@@ -198,7 +197,7 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
             // TODO - Remove handler if object no longer exists.
         };
 
-        [_missionId, _object] call (localNamespace getVariable "vgm_c_fnc_addJoinMissionAction");
+        [_missionId, _object] call vgm_c_fnc_addJoinMissionAction;
     }]
 ] call para_g_fnc_event_subscribeServer;
 
@@ -214,9 +213,9 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
         };
 
         if (_playerId isEqualTo getPlayerID player) then {
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeAllJoinMissionActions");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_addStartMissionAction");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_addLeaveMissionAction");
+            [_object] call vgm_c_fnc_removeAllJoinMissionActions;
+            [_object] call vgm_c_fnc_addStartMissionAction;
+            [_object] call vgm_c_fnc_addLeaveMissionAction;
         };
 
     }]
@@ -234,9 +233,9 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
         };
 
         if (_playerId isEqualTo getPlayerID player) then {
-            [_object] call (localNamespace getVariable "vgm_c_fnc_addAllJoinMissionActions");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeStartMissionAction");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeLeaveMissionAction");
+            [_object] call vgm_c_fnc_addAllJoinMissionActions;
+            [_object] call vgm_c_fnc_removeStartMissionAction;
+            [_object] call vgm_c_fnc_removeLeaveMissionAction;
         };
     }]
 ] call para_g_fnc_event_subscribeServer;
@@ -254,9 +253,9 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
 
         private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
         if (!isNil "_currentMission" && { _currentMission get "id" isEqualTo _missionId }) then {
-            [_object] call (localNamespace getVariable "vgm_c_fnc_addAllJoinMissionActions");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeStartMissionAction");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeLeaveMissionAction");
+            [_object] call vgm_c_fnc_addAllJoinMissionActions;
+            [_object] call vgm_c_fnc_removeStartMissionAction;
+            [_object] call vgm_c_fnc_removeLeaveMissionAction;
         };
     }]
 ] call para_g_fnc_event_subscribeServer;
@@ -273,8 +272,8 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
         };
 
         if (_missionId isEqualTo (([] call vgm_c_fnc_missions_getCurrentMission) get "id")) then {
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeStartMissionAction");
-            [_object] call (localNamespace getVariable "vgm_c_fnc_removeLeaveMissionAction");
+            [_object] call vgm_c_fnc_removeStartMissionAction;
+            [_object] call vgm_c_fnc_removeLeaveMissionAction;
         };
     }]
 ] call para_g_fnc_event_subscribeServer;
@@ -282,8 +281,8 @@ localNamespace setVariable ["vgm_c_fnc_removeAllJoinMissionActions", {
 private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 
 if (isNil "_currentMission") then {
-    [_object] call (localNamespace getVariable "vgm_c_fnc_addAllJoinMissionActions");
+    [_object] call vgm_c_fnc_addAllJoinMissionActions;
 } else {
-    [_object] call (localNamespace getVariable "vgm_c_fnc_addStartMissionAction");
-    [_object] call (localNamespace getVariable "vgm_c_fnc_addLeaveMissionAction");
+    [_object] call vgm_c_fnc_addStartMissionAction;
+    [_object] call vgm_c_fnc_addLeaveMissionAction;
 };
