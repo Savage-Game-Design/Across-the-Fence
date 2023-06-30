@@ -2,7 +2,7 @@
     File: fn_event_system_init.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2023-01-29
+    Last Update: 2023-05-07
     Public: Yes
 
     Description:
@@ -31,26 +31,19 @@ para_event_handlerCount = 0;
 para_event_max_integer = 16777216;
 // Max players the system supports. Used to create some fixed-size arrays.
 para_event_max_supported_players = 60;
+
 // Template array we can copy, with room for an entry for each client.
 // Very fast to copy, enumerate and modify, making them preferable to hashmaps which are slow to copy and enumerate.
 // Also very fast to turn into a flat list using `flatten`
 para_event_client_array_template = [];
 para_event_client_array_template resize [para_event_max_supported_players, []];
 
-// Prevents being re-initialised if client has already received forwarding requests.
-if (isNil {localNamespace getVariable "para_event_eventsToForward"}) then {
-    // Events to forward to the server
-    localNamespace setVariable ["para_event_eventsToForward", createHashMap];
-};
-
-// Temporary area for handlers to be saved, before being attached to an event locally.
-localNamespace setVariable ["para_event_handlerCache", createHashMap];
 // Nested hashmap, machine id -> handlerId -> handler.
 // Stored per-machine-id, so we can easily drop when a player disconnects.
 localNamespace setVariable ["para_event_handlersByOrigin", createHashMap];
 // Listeners, stored by machine id for fast handling when we receive a networked event.
 localNamespace setVariable ["para_event_listenersByEventOrigin", createHashMap];
-// Paths we've registered a single handler at, for fast unsubscribing.
+// Paths we've registered a handler at, for fast unsubscribing. Indexed by handlerId
 localNamespace setVariable ["para_event_handlerRegistrations", createHashMap];
 
 if (isServer) then {
@@ -74,4 +67,4 @@ if (isServer) then {
 };
 
 // Assumes the server has been set up with the event system already. This should be guaranteed by the mission.
-[] remoteExec ["para_s_fnc_event_registerClient", 2];
+[] remoteExecCall ["para_s_fnc_event_registerClient", 2];

@@ -23,6 +23,7 @@ class vgm_skillTemplate {
 class vgm_skillTrees {
     class combatTree {
         displayName = "Combat";
+        description = "Combat tree description.";
         // rifleman skills
         class skills {
             class tier_1 {
@@ -110,6 +111,7 @@ class vgm_skillTrees {
 
     class utilityTree {
         displayName = "Utility";
+        description = "Utility tree description.";
 
         class skills {
             class tier_1 {
@@ -125,5 +127,6 @@ class vgm_skillTrees {
     };
     class socialTree {
         displayName = "Social";
+        description = "Social tree description.";
     };
 };

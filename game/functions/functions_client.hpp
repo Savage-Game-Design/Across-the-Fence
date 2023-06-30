@@ -72,6 +72,16 @@ class vgm_c
         VGM_CLIENT_PATH(\);
     };
 
+    class displays
+    {
+        VGM_CLIENT_PATH(\core\client\displays);
+        class displaySkills {};
+        class displayAbilities {};
+        class displayMissions {};
+        class displayMissionsTargets {};
+        class displayAbilityCooldown {};
+    };
+
     class ui
     {
         VGM_CLIENT_PATH(\core\client\ui);
@@ -80,6 +90,8 @@ class vgm_c
         class handle_light_level_loop {};
         class handle_welcome_screen {};
         class init_info_panel_handler_loop {};
+        class stack_controls {};
+        class toggle_controls_group_overlay {};
     };
 
     class shared_hub
@@ -113,10 +125,12 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skills\client\active);
 
         class skills_active_isSlotOnCooldown {};
+        class skills_active_getSlot {};
         class skills_active_assignSkillToSlot {};
         class skills_active_openAssignMenu {};
         class skills_active_openSkillWheel {};
         class skills_active_skillWheelActivate {};
+        class skills_active_toggleHud {};
 
         class skills_active_init {};
     };
