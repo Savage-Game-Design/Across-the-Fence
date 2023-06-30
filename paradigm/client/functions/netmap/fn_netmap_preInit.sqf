@@ -18,6 +18,8 @@
         N/A - Trigger in functions.hpp as a preInit function.
  */
 
+if (isServer) exitWith {};
+
 localNamespace setVariable ["para_netmaps", createHashMap];
 
 [

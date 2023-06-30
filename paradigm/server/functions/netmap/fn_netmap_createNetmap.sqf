@@ -2,7 +2,7 @@
     File: fn_netmap_createNetmap.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-26
+    Last Update: 2023-06-30
     Public: Yes
 
     Description:
@@ -28,7 +28,5 @@
         private _myNetmap = ["myNetmap"] call para_s_fnc_netmap_get;
         private _a = _myNetmap get "something" get "A"; // Value is '1'
  */
-
-params [];
 
 [[]] call para_s_fnc_netmap_createNetmapFromArray;

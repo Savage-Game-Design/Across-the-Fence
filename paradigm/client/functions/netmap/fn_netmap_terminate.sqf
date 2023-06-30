@@ -32,7 +32,7 @@ params ["_netmapId"];
 private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
 
 if !(_netmapId in _netmaps) exitWith {
-    format ["Attempted to delete non-existent netmap %1", _netmapId] call vgm_g_fnc_logError;
+    ["ERROR", format ["Attempted to delete non-existent netmap %1", _netmapId]] call para_g_fnc_log;
 };
 
 // Remove the metadata, so the client knows this is no longer a netmap

@@ -27,7 +27,7 @@ params ["_netmapId", "_key", "_value"];
 private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
 
 if !(_netmapId in _netmaps) exitWith {
-    format ["Attempted to set key %1 on non-existent netmap %2", _key, _netmapId] call vgm_g_fnc_logError;
+    ["ERROR", format ["Attempted to set key %1 on non-existent netmap %2", _key, _netmapId]] call para_g_fnc_log;
 };
 
 // If value is a netmap, use our local copy, so we maintain referential integrity + updates work correctly.

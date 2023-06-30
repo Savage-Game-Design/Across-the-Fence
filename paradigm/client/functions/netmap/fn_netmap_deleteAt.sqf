@@ -27,7 +27,7 @@ params ["_netmapId", "_key"];
 private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
 
 if !(_netmapId in _netmaps) exitWith {
-    format ["Attempted to delete key %1 on non-existent netmap %2", _key, _netmapId] call vgm_g_fnc_logError;
+    ["ERROR", format ["Attempted to delete key %1 on non-existent netmap %2", _key, _netmapId]] call para_g_fnc_log;
 };
 
 _netmaps get _netmapId deleteAt _key;
