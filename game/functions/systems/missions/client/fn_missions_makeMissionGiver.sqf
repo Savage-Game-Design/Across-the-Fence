@@ -133,7 +133,7 @@ vgm_c_fnc_addStartMissionAction = {
         false,
         true,
         "",
-        "!(isNil vgm_c_fnc_missions_getCurrentMission)",
+        "!(isNil { call vgm_c_fnc_missions_getCurrentMission})",
         10
     ];
 
