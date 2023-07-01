@@ -102,6 +102,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\medical\client);
 
         class medical_addWound {};
+        class medical_fullHeal {};
         class medical_getArmorHitPoint {};
         class medical_getArmorItem {};
         class medical_handleDamage {};
