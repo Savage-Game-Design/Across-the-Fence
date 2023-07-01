@@ -81,5 +81,12 @@ class vgm_s
         class terrainIndex_getArea {};
         class terrainIndex_getGridSquareContents {};
         class terrainIndex_loadIndex {};
+    };
+
+    class terrainIndex_pointsGenerators
+    {
+        VGM_SERVER_PATH(\core\server\terrain_index\points_generators);
+
+        class terrainIndex_generator_flatEmpty {};
     }
 };
