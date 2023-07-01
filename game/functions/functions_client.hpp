@@ -101,9 +101,12 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client);
 
+        class medical_addWound {};
         class medical_getArmorHitPoint {};
         class medical_getArmorItem {};
         class medical_handleDamage {};
+        class medical_itemApplyFAK {};
+        class medical_itemApplyMedikit {};
         class medical_openMedicalMenu {};
         class medical_postInit
         {
@@ -114,6 +117,7 @@ class vgm_c
             preInit = 1;
         };
         class medical_receiveDamage {};
+        class medical_removeWound {};
     };
 
     class skills

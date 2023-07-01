@@ -3,7 +3,7 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-06-27
+    Last Update: 2023-07-01
     Public: No
 
     Description:
@@ -29,7 +29,7 @@ if (isNil "_bodyPart") exitWith {
 
 private _normalizedDamage = _damage * getNumber (configOf _unit >> "HitPoints" >> _hitPoint >> "armor");
 
-private _damageLevel = switch (_bodyPart) do {
+private _woundIntensity = switch (_bodyPart) do {
     case BODY_PART_HEAD;
     case BODY_PART_TORSO;
     case BODY_PART_LEGS: {
@@ -49,7 +49,19 @@ private _damageLevel = switch (_bodyPart) do {
     };
 };
 
-format ["(%6) Receive damage: %1 | %2 | %3 | %4 | %5", _normalizedDamage, _damageLevel, _bodyPart, _hitPoint, _projectile, diag_frameNo] call vgm_g_fnc_logInfo;
+format ["(%6) Receive damage: %1 | %2 | %3 | %4 | %5", _normalizedDamage, _woundIntensity, _bodyPart, _hitPoint, _projectile, diag_frameNo] call vgm_g_fnc_logInfo;
 
-private _varDamage = format ["vgm_c_medical_damage$%1", _bodyPart];
-private _currentDamageLevel = _unit getVariable [_varDamage, 0];
+
+private _damageParams = [_unit, _bodyPart, _woundIntensity];
+
+// TODO add handlers that can modify damage
+{
+    private _stopExecution = _damageParams call {
+        private ["_damageParams"];
+        _this call _x
+    };
+
+    if (true isEqualTo _stopExecution) exitWith {};
+} forEach _damageHandlers;
+
+_damageParams call vgm_c_fnc_medical_addWound;

@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-27
+    Last Update: 2023-06-30
     Public: No
 
     Description:
@@ -24,6 +24,18 @@ if (!hasInterface) exitWith {};
     _player setVariable ["vgm_c_medical_actions", true];
 
     _player addAction ["Heal", {}];
+
+}] call para_g_fnc_event_subscribe;
+
+["vgm_medical_heal", {
+    (_this#0) params ["_healer", "_patient", "_itemType", "_bodyPart"];
+    if (!isNull _healer) then {
+        // check if healer has required item and consume it
+    };
+
+    format ["Received heal: %1 | %2 | %3", _healer, _patient, str _itemType] call vgm_g_fnc_logInfo;
+
+    [_patient, _bodyPart, [2, 1] select (_itemType == "medikit")] call vgm_c_fnc_medical_removeWound;
 
 }] call para_g_fnc_event_subscribe;
 
