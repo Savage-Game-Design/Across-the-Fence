@@ -77,20 +77,13 @@ for "_y" from 0 to (_gridSizeInSquares - 1) do {
         private _currentY = (_gridOrigin # 1) + (_y * _gridSquareSize);
         private _points = [_currentX, _currentY, _gridSquareSize, _generatorParams] call _pointGenerator;
 
-        // Reduce the number of points down to the maximum.
-        if (_maxPointsPerGridSquare > 0 && count _points > _maxPointsPerGridSquare) then {
-            // Limit the number of points removed, as we don't want to accidentally remove too many if there's only a couple to begin with.
-            private _pointsLeftToRemove = count _points - _maxPointsPerGridSquare;
-            private _retentionProbability = _maxPointsPerGridSquare / (count _points max 1);
+        // If there's a limit on max points, select that many random points.
+        if (_maxPointsPerGridSquare > 0) then {
+            private _originalPoints = _points;
+            _points = [];
 
-            _points = _points select {
-                (
-                    _pointsLeftToRemove <= 0 ||
-                    random 1 < _retentionProbability
-                ) || {
-                    _pointsLeftToRemove = _pointsLeftToRemove - 1;
-                    false
-                }
+            for "_i" from 1 to _maxPointsPerGridSquare do {
+                _points pushBack (selectRandom _originalPoints);
             };
         };
 
