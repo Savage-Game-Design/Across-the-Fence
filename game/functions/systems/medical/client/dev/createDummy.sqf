@@ -11,4 +11,6 @@ _agent setUnitLoadout [[],[],[],[],[],[],"","",[],["","","","","",""]];
 
 _agent addEventHandler ["HandleDamage", {call vgm_c_fnc_medical_handleDamage}];
 
+player reveal _agent;
+
 _agent // return
