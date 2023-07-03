@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillsDataRequest.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-02-25
+    Last Update: 2023-06-02
     Public: No
 
     Description:
@@ -18,10 +18,10 @@
 params ["_player"];
 
 if (owner _player isNotEqualTo remoteExecutedOwner) exitWith {
-    ["ERROR", format ["VGM: Skill data request for %1, owner not matching %2 != %3", name _player, owner _player, remoteExecutedOwner]] call para_g_fnc_log;
+    (format ["Skill data request for %1, owner not matching %2 != %3", name _player, owner _player, remoteExecutedOwner]) call vgm_g_fnc_logError;
 };
 
-["DEBUG", format ["VGM: Received player skills load request %1 (%2)", name _player, getPlayerUID _player]] call para_g_fnc_log;
+["DEBUG", format ["Received player skills load request %1 (%2)", name _player, getPlayerUID _player]] call vgm_g_fnc_log;
 
 private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 

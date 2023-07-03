@@ -2,7 +2,7 @@
     File: fn_event_callRegisteredHandlers.sqf
     Author: Savage Game Design
     Date: 2022-11-21
-    Last Update: 2023-04-14
+    Last Update: 2023-06-01
     Public: No
 
     Description:
@@ -29,6 +29,11 @@ private _eventListenersByOrigin = localNamespace getVariable "para_event_listene
 // This handles global listeners + general topic, due to the format the listeners are stored in.
 // See attachHandler for more information.
 private _handlerIdsToCall = flatten (_eventListenersByOrigin getOrDefault [_originMachineId, createHashMap] getOrDefault [_hashableEvent, []]);
+
+// Fallback to global handlers if there were no handlers registered for that specific origin
+if (_handlerIdsToCall isEqualTo []) then {
+    _handlerIdsToCall = flatten (_eventListenersByOrigin getOrDefault [0, createHashMap] getOrDefault [_hashableEvent, []]);
+};
 
 if (_handlerIdsToCall isEqualTo []) exitWith {};
 

@@ -2,7 +2,7 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2023-05-14
+    Last Update: 2023-06-02
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 if (_skill isEqualTo createHashMap) exitWith {};
 
 if (_slot call vgm_c_fnc_skills_active_isSlotOnCooldown) exitWith {
-    ["WARNING", format ["VGM: Skill on cooldown`", _skill get "path"]] call para_g_fnc_log;
+    (format ["Skill on cooldown`", _skill get "path"]) call vgm_g_fnc_logWarning;
     hint "Skill on cooldown!";
 };
 
