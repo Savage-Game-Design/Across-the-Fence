@@ -26,6 +26,44 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class missions
+    {
+        VGM_SERVER_PATH(\systems\missions\server);
+
+        class missions_createMission {};
+        class missions_endMission {};
+        class missions_joinMission {};
+        class missions_leaveMission {};
+        class missions_preInit {
+            preInit = 1;
+        };
+        class missions_setPlayerReadiness {};
+        class missions_startMission {};
+    };
+
+    class missions_remoteExec
+    {
+        VGM_SERVER_PATH(\systems\missions\server\remoteExec);
+
+        class missions_remoteExec_createMission {};
+        class missions_remoteExec_joinMission {};
+        class missions_remoteExec_leaveMission {};
+        class missions_remoteExec_requestMissionData {};
+        class missions_remoteExec_setReadiness {};
+        class missions_remoteExec_startMission {};
+    };
+
+    class missions_internal
+    {
+        VGM_SERVER_PATH(\systems\missions\server\internal);
+
+        class missions_attachPlayerToMission {};
+        class missions_preventJoining {};
+        class missions_removePlayerFromMission {};
+        class missions_spawnMission {};
+        class missions_updateStatus {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);

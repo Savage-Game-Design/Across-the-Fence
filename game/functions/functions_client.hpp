@@ -49,6 +49,14 @@ class vgm_g
             preInit = 1;
         };
     };
+    
+    class missions
+    {
+        VGM_GLOBAL_PATH(\systems\missions\global);
+
+        class missions_getHubSpawnPos {};
+    };
+
 
     class skills
     {
@@ -82,6 +90,29 @@ class vgm_c
         class displayMissions {};
         class displayMissionsTargets {};
         class displayAbilityCooldown {};
+    };
+
+    class missions
+    {
+        VGM_CLIENT_PATH(\systems\missions\client);
+        class missions_getCurrentMission {};
+        class missions_getMissions {};
+        class missions_makeMissionGiver {};
+        class missions_preInit {
+            preInit = 1;
+        };
+        class missions_postInit {
+            postInit = 1;
+        };
+    };
+
+    class missions_internal
+    {
+        VGM_CLIENT_PATH(\systems\missions\client\internal);
+
+        class missions_endMission {};
+        class missions_finishDeploy {};
+        class missions_startDeploy {};
     };
 
     class ui

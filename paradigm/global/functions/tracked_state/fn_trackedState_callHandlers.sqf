@@ -2,7 +2,7 @@
     File: fn_trackedState_callHandlers.sqf
     Author: Savage Game Design
     Date: 2023-02-09
-    Last Update: 2023-02-25
+    Last Update: 2023-03-05
     Public: No
 
     Description:
@@ -13,6 +13,7 @@
         _stateVariable - State variable that's being observed [ANY HASHMAP KEY]
         _currentValue - Current value of the state variable [ANY HASHABLE]
         _oldValue - Old value of the state variable, may be nil [ANY HASHABLE]
+        _reason - Reason the value is changing. Can be any arbitrary data [ANY]
 
     Returns:
         Nothing
@@ -28,10 +29,10 @@
         ] call para_g_fnc_trackedState_callHandlers;
  */
 
-params ["_handlers", "_stateVariable", "_currentValue", "_oldValue"];
+params ["_handlers", "_stateVariable", "_currentValue", "_oldValue", "_reason"];
 
 {
     _x params ["_thisHandlerId", "_handler"];
-    [_stateVariable, _currentValue, _oldValue, _handler # 0] call (_handler # 1);
+    [_stateVariable, _currentValue, _oldValue, _handler # 0, _reason] call (_handler # 1);
 } forEach _handlers;
 

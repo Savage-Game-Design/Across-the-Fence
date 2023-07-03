@@ -78,3 +78,5 @@ call vgm_c_fnc_handle_light_level_loop;
 call vgm_c_fnc_handle_welcome_screen;
 
 call vgm_c_fnc_init_info_panel_handler_loop;
+
+diag_log "VGM client init finished";
