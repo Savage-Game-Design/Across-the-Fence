@@ -65,12 +65,15 @@ class vgm_g
         class skills_canLearn {};
         class skills_canSee {};
         class skills_getByPath {};
+        class skills_getTreeSkillPoints {};
         class skills_isKnown {};
         class skills_parseTreeCfg {};
         class skills_preInit
         {
             preInit = 1;
         };
+        class skills_tierInvested {};
+        class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
 };

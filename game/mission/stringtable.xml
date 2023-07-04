@@ -53,5 +53,11 @@
         <Key ID="STR_VGM_SKILLS_UI_COOLDOWN_LONG">
             <Original>%1 second cooldown</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS">
+            <Original>Not enough skill points</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
+            <Original>Tier locked</Original>
+        </Key>
     </Package>
 </Project>
