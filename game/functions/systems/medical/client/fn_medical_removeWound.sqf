@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-06
+    Last Update: 2023-07-07
     Public: No
 
     Description:
@@ -28,11 +28,21 @@ _woundIntensity = (_woundIntensity - _removeWoundIntensity) max 0;
 
 _unit setVariable [_varDamage, _woundIntensity, true];
 
-if (lifeState _unit == "INCAPACITATED" && {_bodyPart in [BODY_PART_HEAD, BODY_PART_TORSO]}) then {
-    private _severelyWounded = WOUND_MAX in ([BODY_PART_HEAD, BODY_PART_TORSO] apply {_unit getVariable [format ["vgm_g_medical_wound$%1", _x], 0]});
+if (lifeState _unit == "INCAPACITATED") then {
+    private _severelyWounded = WOUND_MAX in (BODY_PARTS_ARR apply {[_unit, _x] call vgm_c_fnc_medical_getWound});
     if (!_severelyWounded) then {
         _unit setUnconscious false;
     };
+};
+
+// stop bleeding when Arms or Legs are not severly damaged andd all body parts total damage is < 6
+private _fnc_shouldNotBleed = {
+    !(WOUND_MAX in ([BODY_PART_ARMS, BODY_PART_LEGS] apply {[_unit, _x] call vgm_c_fnc_medical_getWound}))
+    && {([_unit, "total"] call vgm_c_fnc_medical_getWound) < 6}
+};
+
+if (call _fnc_shouldNotBleed) then {
+    [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 };
 
 // this part needs refactoring

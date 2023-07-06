@@ -3,7 +3,7 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-06
+    Last Update: 2023-07-07
     Public: No
 
     Description:
@@ -27,6 +27,16 @@ private _woundIntensity = _unit getVariable [_varDamage, 0];
 _woundIntensity = (_woundIntensity + _addWoundIntensity) min WOUND_MAX;
 
 _unit setVariable [_varDamage, _woundIntensity, true];
+
+// start bleeding when Arms or Legs are severly damaged or all body parts total damage is >= 6
+private _fnc_shouldBleed = {
+    WOUND_MAX in ([BODY_PART_ARMS, BODY_PART_LEGS] apply {[_unit, _x] call vgm_c_fnc_medical_getWound})
+    || {([_unit, "total"] call vgm_c_fnc_medical_getWound) >= 6}
+};
+
+if (call _fnc_shouldBleed) then {
+    [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_set;
+};
 
 // this part needs refactoring
 call {
@@ -91,4 +101,3 @@ call {
         };
     };
 };
-
