@@ -3,7 +3,7 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-07-01
+    Last Update: 2023-07-06
     Public: No
 
     Description:
@@ -54,7 +54,6 @@ format ["(%6) Receive damage: %1 | %2 | %3 | %4 | %5", _normalizedDamage, _wound
 
 private _damageParams = [_unit, _bodyPart, _woundIntensity];
 
-// TODO add handlers that can modify damage
 {
     private _stopExecution = _damageParams call {
         private ["_damageParams"];
@@ -62,6 +61,6 @@ private _damageParams = [_unit, _bodyPart, _woundIntensity];
     };
 
     if (true isEqualTo _stopExecution) exitWith {};
-} forEach _damageHandlers;
+} forEach vgm_c_medical_damageModifiers;
 
 _damageParams call vgm_c_fnc_medical_addWound;
