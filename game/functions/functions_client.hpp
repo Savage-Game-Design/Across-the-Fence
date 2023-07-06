@@ -106,6 +106,7 @@ class vgm_c
         class medical_fullHeal {};
         class medical_getArmorHitPoint {};
         class medical_getArmorItem {};
+        class medical_getWound {};
         class medical_handleDamage {};
         class medical_itemApplyFAK {};
         class medical_itemApplyMedikit {};
