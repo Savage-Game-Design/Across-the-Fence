@@ -3,7 +3,7 @@
     File: fn_medical_openMedicalMenu.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-30
+    Last Update: 2023-07-06
     Public: No
 
     Description:
@@ -23,6 +23,8 @@ private _target = cursorTarget;
 if (!(_target isKindOf "CAManBase") || {player distance _target > 15}) then {
     _target = player;
 };
+
+private _activeStatusEffects = keys vgm_c_statusEffect_map select {[_target, _x] call vgm_c_fnc_statusEffect_get};;
 
 private _display = findDisplay 46 createDisplay "RscDisplayEmpty";
 _display setVariable ["vgm_medical_patient", _target];
@@ -48,7 +50,7 @@ _ctrlBg ctrlCommit 0;
 _h = _h/count BODY_PARTS_ARR;
 
 private _ctrlHeader = _display ctrlCreate ["RscText", -1];
-_ctrlHeader ctrlSetText name _target;
+_ctrlHeader ctrlSetText format ["%1 | Status effects: %2", name _target, _activeStatusEffects];
 _ctrlHeader ctrlSetBackgroundColor [0,0,0,1];
 _ctrlHeader ctrlSetPosition [_x, _y - _h, _w, _h];
 _ctrlHeader ctrlCommit 0;
