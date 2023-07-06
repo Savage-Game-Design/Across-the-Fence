@@ -35,59 +35,62 @@ if (lifeState _unit == "INCAPACITATED" && {_bodyPart in [BODY_PART_HEAD, BODY_PA
     };
 };
 
-if (_woundIntensity < 1) then {
-    switch (_bodyPart) do {
-        case BODY_PART_HEAD: {
-            // minor blur
+// this part needs refactoring
+call {
+    if (_woundIntensity < 1) then {
+        switch (_bodyPart) do {
+            case BODY_PART_HEAD: {
+                // minor blur
 
-            // dice roll if unconscious
-        };
-        case BODY_PART_TORSO: {
-            // a bit reduced stamina
-        };
-        case BODY_PART_ARMS: {
-            // increased recoil
-        };
-        case BODY_PART_LEGS: {
-            [_unit, "forceJog", "medical"] call vgm_c_fnc_statusEffect_remove;
+                // dice roll if unconscious
+            };
+            case BODY_PART_TORSO: {
+                // a bit reduced stamina
+            };
+            case BODY_PART_ARMS: {
+                // increased recoil
+            };
+            case BODY_PART_LEGS: {
+                [_unit, "forceJog", "medical"] call vgm_c_fnc_statusEffect_remove;
+            };
         };
     };
-};
 
-if (_woundIntensity < 2) then {
-    switch (_bodyPart) do {
-        case BODY_PART_HEAD: {
-            // medium blur
-        };
-        case BODY_PART_TORSO: {
-            // strongly reduced stamina
+    if (_woundIntensity < 2) then {
+        switch (_bodyPart) do {
+            case BODY_PART_HEAD: {
+                // medium blur
+            };
+            case BODY_PART_TORSO: {
+                // strongly reduced stamina
 
-            // dice roll if unconscious
-        };
-        case BODY_PART_ARMS: {
-            // increased aim sway
-            // reduced throw distance
-            // a bit slower actions
-        };
-        case BODY_PART_LEGS: {
-            [_unit, "forceWalk", "medical"] call vgm_c_fnc_statusEffect_remove;
+                // dice roll if unconscious
+            };
+            case BODY_PART_ARMS: {
+                // increased aim sway
+                // reduced throw distance
+                // a bit slower actions
+            };
+            case BODY_PART_LEGS: {
+                [_unit, "forceWalk", "medical"] call vgm_c_fnc_statusEffect_remove;
+            };
         };
     };
-};
 
-if (_woundIntensity < WOUND_MAX) then {
-    switch (_bodyPart) do {
-        case BODY_PART_HEAD;
-        case BODY_PART_TORSO: {};
-        case BODY_PART_ARMS: {
-            // even more increased aim sway
-            // even more increased recoil
-            // even more reduced throw distance
-            // a lot slower actions
-            // block ADS
-        };
-        case BODY_PART_LEGS: {
-            // force prone
+    if (_woundIntensity < WOUND_MAX) then {
+        switch (_bodyPart) do {
+            case BODY_PART_HEAD;
+            case BODY_PART_TORSO: {};
+            case BODY_PART_ARMS: {
+                // even more increased aim sway
+                // even more increased recoil
+                // even more reduced throw distance
+                // a lot slower actions
+                // block ADS
+            };
+            case BODY_PART_LEGS: {
+                // force prone
+            };
         };
     };
 };
