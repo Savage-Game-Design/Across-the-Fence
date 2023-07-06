@@ -2,7 +2,7 @@
     File: fn_event_attachHandler.sqf
     Author: Savage Game Design
     Date: 2022-11-21
-    Last Update: 2023-04-14
+    Last Update: 2023-06-22
     Public: No
 
     Description:
@@ -21,6 +21,10 @@
  */
 
 params [["_machineIds", [clientOwner]], "_event", "_handler"];
+
+// Safe to call, as it will only initialise once.
+// Allows us to register handlers in preInit code, before the event system has initialised.
+[] call para_g_fnc_event_system_init;
 
 private _hashableEvent = [_event] call para_g_fnc_event_convertEventToHashableEvent;
 _hashableEvent params ["_eventName", "_topicString"];

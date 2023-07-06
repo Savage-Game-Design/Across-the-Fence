@@ -42,6 +42,25 @@ class vgm_g
         };
     };
 
+    class leveling
+    {
+        VGM_GLOBAL_PATH(\systems\leveling\global);
+
+        class leveling_parseLevelsCfg {};
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+    };
+    
+    class missions
+    {
+        VGM_GLOBAL_PATH(\systems\missions\global);
+
+        class missions_getHubSpawnPos {};
+    };
+
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
@@ -49,12 +68,15 @@ class vgm_g
         class skills_canLearn {};
         class skills_canSee {};
         class skills_getByPath {};
+        class skills_getTreeSkillPoints {};
         class skills_isKnown {};
         class skills_parseTreeCfg {};
         class skills_preInit
         {
             preInit = 1;
         };
+        class skills_tierInvested {};
+        class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
 };
@@ -76,6 +98,29 @@ class vgm_c
         class displayAbilityCooldown {};
     };
 
+    class missions
+    {
+        VGM_CLIENT_PATH(\systems\missions\client);
+        class missions_getCurrentMission {};
+        class missions_getMissions {};
+        class missions_makeMissionGiver {};
+        class missions_preInit {
+            preInit = 1;
+        };
+        class missions_postInit {
+            postInit = 1;
+        };
+    };
+
+    class missions_internal
+    {
+        VGM_CLIENT_PATH(\systems\missions\client\internal);
+
+        class missions_endMission {};
+        class missions_finishDeploy {};
+        class missions_startDeploy {};
+    };
+
     class ui
     {
         VGM_CLIENT_PATH(\core\client\ui);
@@ -95,6 +140,20 @@ class vgm_c
         class sharedHub_areaLimiterDisable {};
         class sharedHub_areaLimiterEnable {};
         class sharedHub_teleportPlayerToHub {};
+    };
+
+    class leveling
+    {
+        VGM_CLIENT_PATH(\systems\leveling\client);
+
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+        class leveling_postInit
+        {
+            postInit = 1;
+        };
     };
 
     class medical

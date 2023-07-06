@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillLearn.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-02-26
+    Last Update: 2023-06-02
     Public: No
 
     Description:
@@ -18,7 +18,7 @@
         [] remoteExecCall ["vgm_c_fnc_skills_receiveSkillRespec", _player];
  */
 
-["DEBUG", "VGM: Received skills respec"] call para_g_fnc_log;
+["DEBUG", "Received skills respec"] call vgm_g_fnc_log;
 
 // close the popup
 // TODO keep the popup display in variable and close it via it
