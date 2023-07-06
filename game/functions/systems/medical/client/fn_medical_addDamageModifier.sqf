@@ -6,10 +6,11 @@
     Public: Yes
 
     Description:
-        No description added yet.
+        Add damage modifier function which can modifiy the damage params via reference.
+        If the function will return "true" then the processing will stop. Modifiers are executed in the order they are added.
 
     Parameter(s):
-        N/A
+        _fnc_modifier - Damage modifier function [CODE]
 
     Returns:
         Damage modifier was added [BOOL]
@@ -17,7 +18,8 @@
     Example(s):
         [{
             params ["_unit", "_bodyPart", "_woundIntensity"];
-            if (_bodyPart in ["torso", "head"] && {random 100 > 90}) then {
+
+            if (_bodyPart in ["head", "torso"] && {random 100 > 90}) then {
                 private _redirectedBodyPart = selectRandom ["arms", "legs"];
                 format ["Redirecting damage: %1 | %2 | %3", _unit, _bodyPart, _redirectedBodyPart] call vgm_g_fnc_logInfo;
                 _this set [1, _redirectedBodyPart];

@@ -3,7 +3,7 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-06-30
+    Last Update: 2023-07-06
     Public: No
 
     Description:
@@ -28,6 +28,46 @@ _woundIntensity = (_woundIntensity + _addWoundIntensity) min WOUND_MAX;
 
 _unit setVariable [_varDamage, _woundIntensity, true];
 
+if (_woundIntensity >= 1) then {
+    switch (_bodyPart) do {
+        case BODY_PART_HEAD: {
+            // minor blur
+
+            // dice roll if unconscious
+        };
+        case BODY_PART_TORSO: {
+            // a bit reduced stamina
+        };
+        case BODY_PART_ARMS: {
+            // increased recoil
+        };
+        case BODY_PART_LEGS: {
+            [_unit, "forceJog", "medical"] call vgm_c_fnc_statusEffect_set;
+        };
+    };
+};
+
+if (_woundIntensity >= 2) then {
+    switch (_bodyPart) do {
+        case BODY_PART_HEAD: {
+            // medium blur
+        };
+        case BODY_PART_TORSO: {
+            // strongly reduced stamina
+
+            // dice roll if unconscious
+        };
+        case BODY_PART_ARMS: {
+            // increased aim sway
+            // reduced throw distance
+            // a bit slower actions
+        };
+        case BODY_PART_LEGS: {
+            [_unit, "forceWalk", "medical"] call vgm_c_fnc_statusEffect_set;
+        };
+    };
+};
+
 if (_woundIntensity >= WOUND_MAX) then {
     switch (_bodyPart) do {
         case BODY_PART_HEAD;
@@ -37,10 +77,18 @@ if (_woundIntensity >= WOUND_MAX) then {
             // [_unit, false, true] remoteExec ["vn_fnc_revive_actions_local", 0, true];
         };
         case BODY_PART_ARMS: {
+            // even more increased aim sway
+            // even more increased recoil
+            // even more reduced throw distance
+            // a lot slower actions
+            // block ADS
 
+            [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_set;
         };
         case BODY_PART_LEGS: {
-
+            [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_set;
+            // force prone
         };
     };
 };
+
