@@ -27,8 +27,8 @@ params [
 ];
 
 
-if (!(_effect in vgm_c_statusEffect_map)) exitWith {
-    format ["Invalid status effect, available values: %1", keys vgm_c_statusEffect_map] call vgm_g_fnc_logError;
+if (!(_effect in vgm_c_statusEffect_allEffects)) exitWith {
+    format ["Invalid status effect, available values: %1", keys vgm_c_statusEffect_allEffects] call vgm_g_fnc_logError;
 };
 
 private _effectsMap = _unit getVariable "vgm_c_statusEffect_map";
@@ -50,7 +50,7 @@ _reasonList deleteAt _idx;
 if (count _reasonList == 0) then {
     format ["Status effect stopped: %1", _effect] call vgm_g_fnc_logInfo;
 
-    [_unit, false] call (vgm_c_statusEffect_map get _effect);
+    [_unit, false] call (vgm_c_statusEffect_allEffects get _effect);
 };
 
 nil

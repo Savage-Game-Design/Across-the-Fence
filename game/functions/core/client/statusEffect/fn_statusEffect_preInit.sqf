@@ -2,7 +2,7 @@
     File: fnc_preInit.sqf
     Author: Savage Game Design
     Date: 2023-07-02
-    Last Update: 2023-07-05
+    Last Update: 2023-07-12
     Public: No
 
     Description:
@@ -11,7 +11,7 @@
 
 if (!hasInterface) exitWith {};
 
-vgm_c_statusEffect_map = createHashMap;
+vgm_c_statusEffect_allEffects = createHashMap;
 
 ["forceWalk", {
     params ["_unit", "_inEffect"];

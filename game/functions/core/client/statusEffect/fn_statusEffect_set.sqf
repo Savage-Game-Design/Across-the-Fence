@@ -2,7 +2,7 @@
     File: fnc_statusEffect_set.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-07-05
+    Last Update: 2023-07-12
     Public: Yes
 
     Description:
@@ -27,8 +27,8 @@ params [
 ];
 
 
-if (!(_effect in vgm_c_statusEffect_map)) exitWith {
-    format ["Invalid status effect, available values: %1", keys vgm_c_statusEffect_map] call vgm_g_fnc_logError;
+if (!(_effect in vgm_c_statusEffect_allEffects)) exitWith {
+    format ["Invalid status effect, available values: %1", keys vgm_c_statusEffect_allEffects] call vgm_g_fnc_logError;
 };
 
 private _effectsMap = _unit getVariable "vgm_c_statusEffect_map";
@@ -48,7 +48,7 @@ _reasonList pushBack _reason;
 if (count _reasonList == 1) then {
     format ["Status effect started: %1", _effect] call vgm_g_fnc_logInfo;
 
-    [_unit, true] call (vgm_c_statusEffect_map get _effect);
+    [_unit, true] call (vgm_c_statusEffect_allEffects get _effect);
 };
 
 nil

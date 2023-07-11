@@ -2,7 +2,7 @@
     File: fnc_statusEffect_create.sqf
     Author: Savage Game Design
     Date: 2023-07-02
-    Last Update: 2023-07-05
+    Last Update: 2023-07-12
     Public: Yes
 
     Description:
@@ -28,6 +28,6 @@ params [
     ["_fnc_onChange", nil, [{}]]
 ];
 
-vgm_c_statusEffect_map set [_name, _fnc_onChange];
+vgm_c_statusEffect_allEffects set [_name, _fnc_onChange];
 
 nil
