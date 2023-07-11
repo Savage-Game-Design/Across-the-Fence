@@ -35,6 +35,14 @@ private _effectsMap = _unit getVariable "vgm_c_statusEffect_map";
 if (isNil "_effectsMap") then {
     _effectsMap = createHashMap;
     _unit setVariable ["vgm_c_statusEffect_currentEffects", _effectsMap];
+    // clear all status effects upon respawn
+    _unit addEventHandler ["Respawn", {
+        params ["_unit"];
+        {
+            private _effect = _x;
+            {[_unit, _effect, _x] call vgm_c_fnc_statusEffect_remove} forEach _y;
+        } forEach (_unit getVariable "vgm_c_statusEffect_currentEffects");
+    }]
 };
 
 format ["Adding status effect reason: %1 | %2", _effect, _reason] call vgm_g_fnc_logInfo;
