@@ -11,8 +11,6 @@
 
 if (!hasInterface) exitWith {};
 
-vgm_c_statusEffect_allEffects = createHashMap;
-
 ["forceWalk", {
     params ["_unit", "_inEffect"];
     _unit forceWalk _inEffect;

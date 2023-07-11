@@ -28,6 +28,10 @@ params [
     ["_fnc_onChange", nil, [{}]]
 ];
 
+if (isNil "vgm_c_statusEffect_allEffects") then {
+    vgm_c_statusEffect_allEffects = createHashMap;
+};
+
 vgm_c_statusEffect_allEffects set [_name, _fnc_onChange];
 
 nil
