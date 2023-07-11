@@ -2,7 +2,7 @@
     File: fnc_statusEffect_get.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-07-05
+    Last Update: 2023-07-12
     Public: Yes
 
     Description:
@@ -24,6 +24,6 @@ params [
     ["_effect", "", [""]]
 ];
 
-private _effectMap = _unit getVariable ["vgm_c_statusEffect_map", createHashMap];
+private _effectMap = _unit getVariable ["vgm_c_statusEffect_currentEffects", createHashMap];
 
 count (_effectMap getOrDefault [_effect, []]) > 0 // return

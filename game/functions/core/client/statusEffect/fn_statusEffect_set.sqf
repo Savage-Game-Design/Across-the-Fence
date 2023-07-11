@@ -34,7 +34,7 @@ if (!(_effect in vgm_c_statusEffect_allEffects)) exitWith {
 private _effectsMap = _unit getVariable "vgm_c_statusEffect_map";
 if (isNil "_effectsMap") then {
     _effectsMap = createHashMap;
-    _unit setVariable ["vgm_c_statusEffect_map", _effectsMap];
+    _unit setVariable ["vgm_c_statusEffect_currentEffects", _effectsMap];
 };
 
 format ["Adding status effect reason: %1 | %2", _effect, _reason] call vgm_g_fnc_logInfo;

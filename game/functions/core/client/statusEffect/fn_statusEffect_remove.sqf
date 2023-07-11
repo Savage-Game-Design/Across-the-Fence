@@ -2,7 +2,7 @@
     File: fn_statusEffect_remove.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-07-05
+    Last Update: 2023-07-12
     Public: No
 
     Description:
@@ -31,7 +31,7 @@ if (!(_effect in vgm_c_statusEffect_allEffects)) exitWith {
     format ["Invalid status effect, available values: %1", keys vgm_c_statusEffect_allEffects] call vgm_g_fnc_logError;
 };
 
-private _effectsMap = _unit getVariable "vgm_c_statusEffect_map";
+private _effectsMap = _unit getVariable "vgm_c_statusEffect_currentEffects";
 if (isNil "_effectsMap") then {
     _effectsMap = createHashMap;
     _unit setVariable ["vgm_c_statusEffect_map", _effectsMap];
