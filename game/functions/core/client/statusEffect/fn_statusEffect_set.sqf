@@ -31,8 +31,10 @@ if (!(_effect in vgm_c_statusEffect_allEffects)) exitWith {
     format ["Invalid status effect, available values: %1", keys vgm_c_statusEffect_allEffects] call vgm_g_fnc_logError;
 };
 
-private _effectsMap = _unit getVariable "vgm_c_statusEffect_map";
+private _effectsMap = _unit getVariable "vgm_c_statusEffect_currentEffects";
 if (isNil "_effectsMap") then {
+    format ["Creating current effects map: %1", _unit] call vgm_g_fnc_logDebug;
+
     _effectsMap = createHashMap;
     _unit setVariable ["vgm_c_statusEffect_currentEffects", _effectsMap];
     // clear all status effects upon respawn
