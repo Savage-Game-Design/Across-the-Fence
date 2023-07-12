@@ -2,7 +2,7 @@
     File: fn_medical_postInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-07-06
+    Last Update: 2023-07-12
     Public: No
 
     Description:
@@ -16,6 +16,10 @@
  */
 
 if (!hasInterface) exitWith {};
+
+if (entities "vn_module_advanced_revive" isNotEqualTo []) then {
+    "S.O.G. Advanced Revive module detected in the mission. VGM Medical will NOT function corectly!" call vgm_g_fnc_logError;
+};
 
 vgm_c_medical_eh = player addEventHandler ["HandleDamage", {call vgm_c_fnc_medical_handleDamage}];
 
