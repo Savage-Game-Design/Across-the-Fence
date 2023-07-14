@@ -3,20 +3,26 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-07-06
+    Last Update: 2023-07-15
     Public: No
 
     Description:
-        No description added yet.
+        Receive damage after it was processed by HandleDamage,
+        normalize it for wound intensity calculation and apply damage modifiers.
 
     Parameter(s):
-        N/A
+        _unit - Unit receiving the damage [OBJECT]
+        _damage - Damage amount [NUMBER]
+        _hitPoint - Hit point name [STRING]
+        _source - Source of the damage [OBJECT]
+        _projectile - Classname of the ammo causing the damage [STRING]
+        _directHit - Is the damage a direct hit [BOOL]
 
     Returns:
         Nothing
 
     Example(s):
-        [parameter] call vgm_c_fnc_medical_receiveDamage
+        [player, 2, "hitchest", player, "vn_762x33", true] call vgm_c_fnc_medical_receiveDamage
  */
 
 params ["_unit", "_damage", "_hitPoint", "_source", "_projectile", "_directHit"];
