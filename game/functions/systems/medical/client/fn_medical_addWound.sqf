@@ -3,14 +3,16 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-07
+    Last Update: 2023-07-14
     Public: No
 
     Description:
         Add wound to the specified body part.
 
     Parameter(s):
-        N/A
+        _unit - Unit to add the wound to [OBJECT]
+        _bodyPart - Target body part [STRING]
+        _removeWoundIntensity - How many levels of intensity to add [NUMBER]
 
     Returns:
         Something [BOOL]

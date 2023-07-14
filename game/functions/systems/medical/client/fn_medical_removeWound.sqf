@@ -3,14 +3,16 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-07
-    Public: No
+    Last Update: 2023-07-14
+    Public: Yes
 
     Description:
         Remove wound from the specified body part.
 
     Parameter(s):
-        N/A
+        _unit - Unit to remove the wound from [OBJECT]
+        _bodyPart - Target body part [STRING]
+        _removeWoundIntensity - How many levels of intensity to remove [NUMBER]
 
     Returns:
         Something [BOOL]
