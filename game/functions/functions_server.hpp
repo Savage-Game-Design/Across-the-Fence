@@ -48,7 +48,6 @@ class vgm_s
         class missions_remoteExec_createMission {};
         class missions_remoteExec_joinMission {};
         class missions_remoteExec_leaveMission {};
-        class missions_remoteExec_requestMissionData {};
         class missions_remoteExec_setReadiness {};
         class missions_remoteExec_startMission {};
     };
