@@ -1,5 +1,5 @@
 /*
-    [cursorObject, "vn_762x33"] call compileScript ["functions\systems\medical\client\dev\shootWith.sqf"];
+    [cursorObject, "legs", "vn_762x33"] call compileScript ["functions\systems\medical\client\dev\shootWith.sqf"];
 
     vn_762x51 = M60
     vn_762x33 - M1
