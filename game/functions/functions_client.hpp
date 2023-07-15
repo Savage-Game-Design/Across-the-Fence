@@ -185,6 +185,14 @@ class vgm_c
         class medical_shouldBleed {};
     };
 
+    class medical_feedback
+    {
+        VGM_CLIENT_PATH(\systems\medical\client\feedback);
+
+        class medical_feedbackBleeding {};
+        class medical_feedbackHit {};
+    };
+
     class skills
     {
         VGM_CLIENT_PATH(\systems\skills\client);
