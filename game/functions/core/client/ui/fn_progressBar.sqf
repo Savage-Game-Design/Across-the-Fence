@@ -11,10 +11,16 @@
         Start progress bar for player action.
 
     Parameter(s):
-        N/A
+        _title - Title of the progress bar [STRING, defaults to ""]
+        _duration - Duration in seconds [NUMBER, defaults to 5]
+        _fnc_condition - Code executed every tick, must return <BOOL>, progress bar will stop on false [CODE, defaults to {true}]
+        _fnc_onSuccess - Code executed on progress bar completion [CODE, defaults to {}]
+        _fnc_onFailure - Code executed on progress bar failure [CODE, defaults to {}]
+        _arguments - Additional arguments to be passed to callbacks [ANY, defaults to []]
+        _blockInput - Should input be blocked during the progress bar [BOOL, defaults to true]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         ["My progress bar", 10, {
@@ -26,6 +32,7 @@
             systemChat "completed!";
         }, {
             params ["_args", "_startedAt", "_duration", "_reason"];
+            // possible reasons: cancelled | condition | overriden
             systemChat format ["failed due to: %1", _reason];
         }, [getPos player, player]] call vgm_c_fnc_progressBar;
 */
@@ -39,7 +46,7 @@ if (!hasInterface) exitWith {
 
 params [
     ["_title", "", [""]],
-    ["_duration", 1, [0]],
+    ["_duration", 5, [0]],
     ["_fnc_condition", {true}, [{}]],
     ["_fnc_onSuccess", {}, [{}]],
     ["_fnc_onFailure", {}, [{}]],
@@ -80,7 +87,7 @@ _ctrlDrawHandler ctrlAddEventHandler ["Draw", {
     (_display getVariable "vgm_params") params ["_fnc_condition", "_fnc_onSuccess", "_fnc_onFailure", "_arguments", "_startedAt", "_duration"];
 
     private _continue = [_fnc_condition, [_arguments, _startedAt, _duration]] call {
-        private ["_fnc_condition", "_fnc_onSuccess", "_fnc_onFailure", "_arguments", "_startedAt", "_duration"];
+        private ["_display", "_fnc_condition", "_fnc_onSuccess", "_fnc_onFailure", "_arguments", "_startedAt", "_duration"];
         _this#1 call _this#0 // return
     };
 
