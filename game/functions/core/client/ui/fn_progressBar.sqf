@@ -1,3 +1,4 @@
+#include "\a3\ui_f\hpp\defineDikCodes.inc"
 #include "script_component.inc"
 /*
     File: fn_progressBar.sqf
@@ -29,6 +30,9 @@
         }, [getPos player, player]] call vgm_c_fnc_progressBar;
 */
 
+#define CLOSE_DISPLAY_BLOCK ((uiNamespace getVariable ["vgm_displayBlockInput", displayNull]) closeDisplay 0)
+#define CLOSE_DISPLAY_PROGRESS ("vgm_progressBar" cutText ["", "PLAIN"])
+
 if (!hasInterface) exitWith {
     "Could not open progress bar without interface" call vgm_g_fnc_logError;
 };
@@ -39,7 +43,8 @@ params [
     ["_fnc_condition", {true}, [{}]],
     ["_fnc_onSuccess", {}, [{}]],
     ["_fnc_onFailure", {}, [{}]],
-    ["_arguments", []]
+    ["_arguments", []],
+    ["_blockInput", true, [false]]
 ];
 
 
@@ -84,20 +89,50 @@ _ctrlDrawHandler ctrlAddEventHandler ["Draw", {
     if (!_continue) exitWith {
         ["Progress bar failed"] call vgm_g_fnc_logInfo;
 
-        [{"vgm_progressBar" cutText ["", "PLAIN"]}, _display] call vgm_g_fnc_execNextFrame;
+        [{CLOSE_DISPLAY_PROGRESS}] call vgm_g_fnc_execNextFrame;
+        CLOSE_DISPLAY_BLOCK;
 
         [_arguments, _startedAt, _duration, "condition"] call _fnc_onFailure;
     };
 
     if (_elapsedTime >= _duration) exitWith {
-        ["Progress bar succeded"] call vgm_g_fnc_logInfo;
+        ["Progress bar succeeded"] call vgm_g_fnc_logInfo;
 
-        [{"vgm_progressBar" cutText ["", "PLAIN"]}, _display] call vgm_g_fnc_execNextFrame;
+        [{CLOSE_DISPLAY_PROGRESS}] call vgm_g_fnc_execNextFrame;
+        CLOSE_DISPLAY_BLOCK;
 
         [_arguments, _startedAt, _duration] call _fnc_onSuccess;
     };
 
-
     private _ctrlProgress = _display displayCtrl VGM_IDC_PROGRESSBAR_PROGRESSBAR;
     _ctrlProgress progressSetPosition (_elapsedTime / _duration);
 }];
+
+CLOSE_DISPLAY_BLOCK;
+
+if (_blockInput) then {
+    private _displayMission = findDisplay 46;
+    private _blockInputDisplay = _displayMission createDisplay "RscDisplayEmpty";
+    uiNamespace setVariable ["vgm_displayBlockInput", _blockInputDisplay];
+
+    _blockInputDisplay displayAddEventHandler ["KeyDown", {
+        params ["_display", "_key", "_shift", "_control", "_alt"];
+
+        if (_key == DIK_ESCAPE) exitWith {
+            format ["Cancelling current progress bar"] call vgm_g_fnc_logInfo;
+
+            private _displayProgress = uiNamespace getVariable ["vgm_rscProgressBar", displayNull];
+            (_displayProgress getVariable "vgm_params") params ["", "", "_fnc_onFailure", "_arguments", "_startedAt", "_duration"];
+
+            CLOSE_DISPLAY_PROGRESS;
+
+            [_arguments, _startedAt, _duration, "cancelled"] call _fnc_onFailure;
+
+            false // do not block input
+        };
+
+        true // block input
+    }];
+};
+
+nil
