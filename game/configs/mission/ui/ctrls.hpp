@@ -13,6 +13,8 @@ import ctrlButtonPicture;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
+import ctrlMapEmpty;
+import ctrlProgress;
 import ctrlXListbox;
 
 #define COLOR_BLACK {0,0,0,1}
