@@ -2,7 +2,7 @@
     File: fn_execNextFrame.sqf
     Author:
     Date: 2022-12-20
-    Last Update: 2022-12-20
+    Last Update: 2023-07-17
     Public: No
 
     Description:
@@ -18,7 +18,7 @@
         [{diag_log [_this, diag_frameNo]}, diag_frameNo] call vgm_g_fnc_execNextFrame
  */
 
-params ["_code", "_args"];
+params ["_code", ["_args", []]];
 
 addMissionEventHandler ["EachFrame", {
 	_thisArgs params ["_frameNo", "_code", "_args"];
