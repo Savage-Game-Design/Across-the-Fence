@@ -2,6 +2,7 @@ import RscText;
 import RscPicture;
 import RscProgress;
 import RscStructuredText;
+import RscMapControlEmpty;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;

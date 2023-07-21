@@ -1,3 +1,8 @@
+#define PROGRESS_BAR_X (GUI_GRID_CENTER_X + GUI_GRID_CENTER_W)
+#define PROGRESS_BAR_Y GUI_GRID_CENTER_Y
+#define PROGRESS_BAR_W (38 * GUI_GRID_CENTER_W)
+#define PROGRESS_BAR_H GUI_GRID_CENTER_H
+
 class VGM_RscProgressBar
 {
     idd = -1;
@@ -17,41 +22,40 @@ class VGM_RscProgressBar
             h = "safezoneH";
         };
 
-        class ProgressBarBackground: VGM_ctrlStatic
+        class ProgressBarBackground: RscText
         {
             colorBackground[] = {0,0,0,0.25};
 
-            x = VGM_GRID_MIN_X + ((VGM_GRID_MAX_W * 0.5) * VGM_GRID_W) * 0.5;
-            y = VGM_GRID_MIN_Y;
-            w = (VGM_GRID_MAX_W * 0.5) * VGM_GRID_W;
-            h = VGM_GRID_H * 3.5;
+            x = PROGRESS_BAR_X;
+            y = PROGRESS_BAR_Y;
+            w = PROGRESS_BAR_W;
+            h = PROGRESS_BAR_H;
         };
 
-        class ProgressBar: VGM_ctrlProgress
+        class ProgressBar: RscProgress
         {
             idc = VGM_IDC_PROGRESSBAR_PROGRESSBAR;
 
-            x = VGM_GRID_MIN_X + ((VGM_GRID_MAX_W * 0.5) * VGM_GRID_W) * 0.5;
-            y = VGM_GRID_MIN_Y;
-            w = (VGM_GRID_MAX_W * 0.5) * VGM_GRID_W;
-            h = VGM_GRID_H * 3.5;
+            x = PROGRESS_BAR_X;
+            y = PROGRESS_BAR_Y;
+            w = PROGRESS_BAR_W;
+            h = PROGRESS_BAR_H;
         };
 
-        class Title: VGM_ctrlStatic
+        class Title: RscText
         {
             idc = VGM_IDC_PROGRESSBAR_TITLE;
             style = ST_CENTER;
-            sizeEx = VGM_FONT_S;
 
             text = "<TEXT>";
 
-            x = VGM_GRID_MIN_X;
-            y = VGM_GRID_MIN_Y;
-            w = VGM_GRID_MAX_W * VGM_GRID_W;
-            h = VGM_GRID_H * 3;
+            x = PROGRESS_BAR_X;
+            y = PROGRESS_BAR_Y;
+            w = PROGRESS_BAR_W;
+            h = PROGRESS_BAR_H;
         };
 
-        class DrawHandler: ctrlMapEmpty
+        class DrawHandler: RscMapControlEmpty
         {
             idc = VGM_IDC_PROGRESSBAR_DRAWHANDLER;
             w = 0;
