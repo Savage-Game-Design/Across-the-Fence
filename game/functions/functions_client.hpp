@@ -180,6 +180,7 @@ class vgm_c
         };
         class medical_receiveDamage {};
         class medical_removeWound {};
+        class medical_setUnconscious {};
         class medical_shouldBleed {};
     };
 
