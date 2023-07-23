@@ -3,11 +3,11 @@
     File: fn_medical_fullHeal.sqf
     Author: Savage Game Design
     Date: 2023-07-01
-    Last Update: 2023-07-02
+    Last Update: 2023-07-23
     Public: Yes
 
     Description:
-        Fully heal an unit.
+        Fully heal an unit. Should be used on local units only.
 
     Parameter(s):
         _unit - Unit to be fully healed [OBJECT]
