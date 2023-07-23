@@ -3,27 +3,25 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-07-06
+    Last Update: 2023-07-23
     Public: No
 
     Description:
         Client preInit for medical component.
-
-    Parameter(s):
-        N/A
-
-    Returns:
-        Nothing
  */
 
 if (!hasInterface) exitWith {};
 
 ["vgm_medical_addAction", {
     params ["_player"];
-    if (player == _player || {_player getVariable ["vgm_c_medical_actions", false]}) exitWith {};
+    if (_player getVariable ["vgm_c_medical_actions", false]) exitWith {};
     _player setVariable ["vgm_c_medical_actions", true];
 
-    _player addAction ["Heal", {}];
+    private _text = ["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player);
+    _player addAction [localize _text, {
+        params ["_target"];
+        _target call vgm_c_fnc_medical_openMedicalMenu;
+    }];
 
 }] call para_g_fnc_event_subscribe;
 
@@ -38,10 +36,6 @@ if (!hasInterface) exitWith {};
     [_patient, _bodyPart, [2, 1] select (_itemType == "medikit")] call vgm_c_fnc_medical_removeWound;
 
 }] call para_g_fnc_event_subscribe;
-
-addUserActionEventHandler ["Help", "Activate", {
-    [] call vgm_c_fnc_medical_openMedicalMenu;
-}];
 
 // maps hitpoint to our virtual body parts handled by our medical system
 vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [

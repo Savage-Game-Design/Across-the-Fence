@@ -3,28 +3,28 @@
     File: fn_medical_openMedicalMenu.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-07-06
+    Last Update: 2023-07-23
     Public: No
 
     Description:
-        No description added yet.
+        Open medical menu on a target unit.
 
     Parameter(s):
-        N/A
+        _unit - The target unit [OBJECT, defaults to cursorTarget]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [] call vgm_c_fnc_medical_openMedicalMenu;
  */
 
-private _target = cursorTarget;
+private _target = param [0, cursorTarget];
 if (!(_target isKindOf "CAManBase") || {player distance _target > 15}) then {
     _target = player;
 };
 
-private _activeStatusEffects = keys vgm_c_statusEffect_map select {[_target, _x] call vgm_c_fnc_statusEffect_get};;
+private _activeStatusEffects = keys vgm_c_statusEffect_allEffects select {[_target, _x] call vgm_c_fnc_statusEffect_get};;
 
 private _display = findDisplay 46 createDisplay "RscDisplayEmpty";
 _display setVariable ["vgm_medical_patient", _target];
