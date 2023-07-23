@@ -2,20 +2,22 @@
     File: fn_medical_itemApplyMedikit.sqf
     Author: Savage Game Design
     Date: 2023-06-30
-    Last Update: 2023-06-30
+    Last Update: 2023-07-23
     Public: No
 
     Description:
-        No description added yet.
+        Apply Medikit to the patient.
 
     Parameter(s):
-        N/A
+        _healer - Unit doing the healing [OBJECT]
+        _patient - Unit being healed [OBJECT]
+        _bodyPart - Body part that is being healed [STRING]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [player, cursorObject] call vgm_c_fnc_medical_itemApplyMedikit
+        [player, cursorObject, "legs"] call vgm_c_fnc_medical_itemApplyMedikit
  */
 
 params ["_healer", "_patient", "_bodyPart"];
