@@ -16,3 +16,4 @@
 #define DMG_3 0.9
 
 #define WOUND_MAX 3
+#define WOUNDS_BLEED_THRESHOLD 6

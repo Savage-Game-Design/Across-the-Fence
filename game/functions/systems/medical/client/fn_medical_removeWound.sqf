@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-14
+    Last Update: 2023-07-23
     Public: Yes
 
     Description:
@@ -37,13 +37,7 @@ if (lifeState _unit == "INCAPACITATED") then {
     };
 };
 
-// stop bleeding when Arms or Legs are not severly damaged andd all body parts total damage is < 6
-private _fnc_shouldNotBleed = {
-    !(WOUND_MAX in ([BODY_PART_ARMS, BODY_PART_LEGS] apply {[_unit, _x] call vgm_c_fnc_medical_getWound}))
-    && {([_unit, "total"] call vgm_c_fnc_medical_getWound) < 6}
-};
-
-if (call _fnc_shouldNotBleed) then {
+if (!(_unit call vgm_c_fnc_medical_shouldBleed)) then {
     [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 };
 

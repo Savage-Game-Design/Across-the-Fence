@@ -52,7 +52,7 @@ class vgm_g
             preInit = 1;
         };
     };
-    
+
     class missions
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
@@ -180,6 +180,7 @@ class vgm_c
         };
         class medical_receiveDamage {};
         class medical_removeWound {};
+        class medical_shouldBleed {};
     };
 
     class skills
