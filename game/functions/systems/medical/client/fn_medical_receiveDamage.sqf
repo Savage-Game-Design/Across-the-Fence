@@ -3,7 +3,7 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-07-15
+    Last Update: 2023-07-23
     Public: No
 
     Description:
@@ -30,7 +30,7 @@ params ["_unit", "_damage", "_hitPoint", "_source", "_projectile", "_directHit"]
 private _bodyPart = vgm_c_medical_hitPointBodyPartMap get _hitPoint;
 
 if (isNil "_bodyPart") exitWith {
-    format ["(Medical) Invalid HitPoint: %1", _hitPoint] call vgm_g_fnc_logError;
+    format ["(Medical) Invalid HitPoint: %1", _hitPoint] call vgm_g_fnc_logWarning;
 };
 
 private _normalizedDamage = _damage * getNumber (configOf _unit >> "HitPoints" >> _hitPoint >> "armor");
