@@ -81,8 +81,7 @@ call {
             case BODY_PART_HEAD;
             case BODY_PART_TORSO: {
                 if (lifeState _unit == "INCAPACITATED") exitWith {};
-                _unit setUnconscious true;
-                // [_unit, false, true] remoteExec ["vn_fnc_revive_actions_local", 0, true];
+                _unit call vgm_c_fnc_medical_setUnconscious;
             };
             case BODY_PART_ARMS: {
                 // even more increased aim sway

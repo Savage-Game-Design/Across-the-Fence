@@ -43,7 +43,7 @@ vgm_c_medical_eh = player addEventHandler ["HandleDamage", {call vgm_c_fnc_medic
     private _eh = addMissionEventHandler ["EachFrame", {
         _thisArgs params ["_deltaT", "_unit", "_bleedOutAt"];
 
-        if (lifeState _unit in ["INCAPACITATED", "DEAD-RESPAWN"]) exitWith {
+        if (lifeState _unit == "INCAPACITATED") exitWith {
             if (isPlayer _unit) then {"vgm_medical_bleeding" cutText ["", "PLAIN"]};
             [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
         };
@@ -56,7 +56,7 @@ vgm_c_medical_eh = player addEventHandler ["HandleDamage", {call vgm_c_fnc_medic
             private _remainingTime = _bleedOutAt - time;
             if (_remainingTime <= 0) exitWith {
                 if (isPlayer _unit) then {"vgm_medical_bleeding" cutText ["", "PLAIN"]};
-                _unit setUnconscious true;
+                _unit call vgm_c_fnc_medical_setUnconscious;
             };
 
             if (isPlayer _unit) then {

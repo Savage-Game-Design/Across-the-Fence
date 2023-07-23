@@ -33,7 +33,7 @@ _unit setVariable [_varDamage, _woundIntensity, true];
 if (lifeState _unit == "INCAPACITATED") then {
     private _severelyWounded = WOUND_MAX in (BODY_PARTS_ARR apply {[_unit, _x] call vgm_c_fnc_medical_getWound});
     if (!_severelyWounded) then {
-        _unit setUnconscious false;
+        [_unit, false] call vgm_c_fnc_medical_setUnconscious;
     };
 };
 
