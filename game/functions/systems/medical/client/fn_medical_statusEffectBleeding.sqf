@@ -47,11 +47,15 @@ private _eh = addMissionEventHandler ["EachFrame", {
 
         private _remainingTime = _bleedOutAt - time;
         if (_remainingTime <= 0) exitWith {
-            if (isPlayer _unit) then {"vgm_medical_bleeding" cutText ["", "PLAIN"]};
+            if (isPlayer _unit) then {
+                0 call vgm_c_fnc_medical_feedbackBleeding;
+                "vgm_medical_bleeding" cutText ["", "PLAIN"]
+            };
             _unit call vgm_c_fnc_medical_setUnconscious;
         };
 
         if (isPlayer _unit) then {
+            _remainingTime call vgm_c_fnc_medical_feedbackBleeding;
             "vgm_medical_bleeding" cutText [format ["<t size='1.5'>Bleeding out - %1</t>", _remainingTime toFixed 0], "PLAIN DOWN", -1, true, true];
         };
     };
