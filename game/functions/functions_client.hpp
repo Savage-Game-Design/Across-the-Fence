@@ -28,6 +28,9 @@ class vgm_g
         class log {
             headerType = -1;
         };
+        class logDebug {
+            headerType = -1;
+        };
         class logError {
             headerType = -1;
         };
@@ -152,6 +155,34 @@ class vgm_c
         {
             postInit = 1;
         };
+    };
+
+    class medical
+    {
+        VGM_CLIENT_PATH(\systems\medical\client);
+
+        class medical_addDamageModifier {};
+        class medical_addWound {};
+        class medical_fullHeal {};
+        class medical_getArmorHitPoint {};
+        class medical_getArmorItem {};
+        class medical_getWound {};
+        class medical_handleDamage {};
+        class medical_itemApplyFAK {};
+        class medical_itemApplyMedikit {};
+        class medical_openMedicalMenu {};
+        class medical_postInit
+        {
+            postInit = 1;
+        };
+        class medical_preInit
+        {
+            preInit = 1;
+        };
+        class medical_receiveDamage {};
+        class medical_removeWound {};
+        class medical_setUnconscious {};
+        class medical_shouldBleed {};
     };
 
     class skills

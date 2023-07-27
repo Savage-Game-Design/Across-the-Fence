@@ -1,12 +1,12 @@
 /*
-    File: fn_logError.sqf
+    File: fn_logInfo.sqf
     Author: Savage Game Design
     Date: 2023-02-26
     Last Update: 2023-06-27
     Public: Yes
 
     Description:
-        Write error to log file.
+        Write debug to log file.
 
     Parameter(s):
         _logLevel - Log level [STRING]
@@ -16,10 +16,10 @@
         Something [BOOL]
 
     Example(s):
-        "something happended" call vgm_g_fnc_logError
+        "debug data" call vgm_g_fnc_log;
  */
 
 params ["_message"];
 
-["ERROR", _message] call vgm_g_fnc_log;
+["DEBUG", _message] call vgm_g_fnc_log;
 

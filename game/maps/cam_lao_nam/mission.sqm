@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=679;
+		nextID=682;
 	};
 	class Camera
 	{
@@ -162,14 +162,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -213,14 +213,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -6463,205 +6463,8 @@ class Mission
 			name="Modules";
 			class Entities
 			{
-				items=6;
+				items=5;
 				class Item0
-				{
-					dataType="Logic";
-					class PositionInfo
-					{
-						position[]={20097.965,5.9080887,6469.9995};
-					};
-					id=258;
-					type="vn_module_advanced_revive";
-					atlOffset=0.73217821;
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="vn_module_revive_revive_requirement";
-							expression="_this setVariable ['revive_requirement',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=0;
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="vn_module_revive_revive_item";
-							expression="_this setVariable ['revive_item',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="STRING";
-									value="['vn_b_item_firstaidkit','vn_o_item_firstaidkit','vn_b_item_medikit_01', 'FirstAidKit', 'Medikit']";
-								};
-							};
-						};
-						class Attribute2
-						{
-							property="vn_module_revive_bleedout_affects_actions";
-							expression="_this setVariable ['bleedout_affects_actions',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=1;
-								};
-							};
-						};
-						class Attribute3
-						{
-							property="vn_module_revive_revive_item_remove";
-							expression="_this setVariable ['revive_item_remove',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=0;
-								};
-							};
-						};
-						class Attribute4
-						{
-							property="vn_module_revive_bleedout_time";
-							expression="_this setVariable ['bleedout_time',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=300;
-								};
-							};
-						};
-						class Attribute5
-						{
-							property="vn_module_revive_bandage_item";
-							expression="_this setVariable ['bandage_item',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="STRING";
-									value="['vn_b_item_firstaidkit','vn_o_item_firstaidkit','vn_b_item_medikit_01', 'FirstAidKit', 'Medikit']";
-								};
-							};
-						};
-						class Attribute6
-						{
-							property="vn_module_revive_revive_delay";
-							expression="_this setVariable ['revive_delay',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=5;
-								};
-							};
-						};
-						class Attribute7
-						{
-							property="vn_module_revive_medic_boost";
-							expression="_this setVariable ['medic_boost',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="BOOL";
-									value=1;
-								};
-							};
-						};
-						class Attribute8
-						{
-							property="vn_module_revive_grenade_chance";
-							expression="_this setVariable ['grenade_chance',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=100;
-								};
-							};
-						};
-						class Attribute9
-						{
-							property="vn_module_revive_bandage_item_remove";
-							expression="_this setVariable ['bandage_item_remove',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=1;
-								};
-							};
-						};
-						class Attribute10
-						{
-							property="vn_module_revive_time_to_respawn_action";
-							expression="_this setVariable ['time_to_respawn_action',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=75;
-								};
-							};
-						};
-						class Attribute11
-						{
-							property="vn_module_revive_withstand_percentage";
-							expression="_this setVariable ['withstand_percentage',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=80;
-								};
-							};
-						};
-						class Attribute12
-						{
-							property="vn_module_revive_downed_icon_distance";
-							expression="_this setVariable ['downed_icon_distance',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=50;
-								};
-							};
-						};
-						class Attribute13
-						{
-							property="vn_module_revive_move_chance";
-							expression="_this setVariable ['move_chance',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=75;
-								};
-							};
-						};
-						nAttributes=14;
-					};
-				};
-				class Item1
 				{
 					dataType="Logic";
 					class PositionInfo
@@ -6672,7 +6475,7 @@ class Mission
 					type="vn_module_logistics";
 					atlOffset=1.2619944;
 				};
-				class Item2
+				class Item1
 				{
 					dataType="Logic";
 					class PositionInfo
@@ -6700,7 +6503,7 @@ class Mission
 						nAttributes=1;
 					};
 				};
-				class Item3
+				class Item2
 				{
 					dataType="Logic";
 					class PositionInfo
@@ -6769,7 +6572,7 @@ class Mission
 						nAttributes=4;
 					};
 				};
-				class Item4
+				class Item3
 				{
 					dataType="Logic";
 					class PositionInfo
@@ -6799,7 +6602,7 @@ class Mission
 						nAttributes=1;
 					};
 				};
-				class Item5
+				class Item4
 				{
 					dataType="Logic";
 					class PositionInfo
