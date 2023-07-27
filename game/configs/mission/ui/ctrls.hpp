@@ -2,6 +2,7 @@ import RscText;
 import RscPicture;
 import RscProgress;
 import RscStructuredText;
+import RscMapControlEmpty;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -13,6 +14,8 @@ import ctrlButtonPicture;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
+import ctrlMapEmpty;
+import ctrlProgress;
 import ctrlXListbox;
 
 #define COLOR_BLACK {0,0,0,1}
@@ -29,7 +32,11 @@ class VGM_ctrlDefault: ctrlDefault {
         color[] = {1,1,1,1};
     };
 };
-class VGM_ctrlStatic: ctrlStatic {};
+class VGM_ctrlStatic: ctrlStatic
+{
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+};
 
 class VGM_ctrlStaticFrame: ctrlStaticFrame
 {
@@ -98,6 +105,18 @@ class VGM_ctrlControlsGroup: ctrlControlsGroup
 
 class VGM_ctrlControlsGroupNoScrollbars: ctrlControlsGroupNoScrollbars
 {
+};
+
+class VGM_ctrlProgress: ctrlProgress
+{
+    colorBar[] = {
+        "(profilenamespace getvariable ['GUI_BCG_RGB_R', 0.13])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_G', 0.54])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_B', 0.21])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_A', 0.8])"
+    };
+    colorFrame[] = {0,0,0,0.5};
+    texture = "#(argb,8,8,3)color(1,1,1,0.8)";
 };
 
 class VGM_ctrlFrame: VGM_ctrlStatic

@@ -11,5 +11,6 @@
 class RscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
+    #include "VGM_RscProgressBar.hpp"
 };
 #include "VGM_DisplayTest.hpp"
