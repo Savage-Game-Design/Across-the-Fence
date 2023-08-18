@@ -183,6 +183,7 @@ class vgm_c
         class medical_removeWound {};
         class medical_setUnconscious {};
         class medical_shouldBleed {};
+        class medical_statusEffectBleeding {};
     };
 
     class medical_feedback

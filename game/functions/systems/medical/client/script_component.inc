@@ -11,3 +11,5 @@
 
 #define WOUND_MAX 3
 #define WOUNDS_BLEED_THRESHOLD 6
+
+#define BLEED_OUT_TIME 30
