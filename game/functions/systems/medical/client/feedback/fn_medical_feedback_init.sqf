@@ -24,6 +24,12 @@
     -1 call vgm_c_fnc_medical_feedbackBleeding;
 }] call para_g_fnc_event_subscribe;
 
+["vgm_medical_woundAdded", {
+    (_this#0) params ["_unit"];
+    if (_unit != player) exitWith {};
+    [] call vgm_c_fnc_medical_feedbackHit;
+}] call para_g_fnc_event_subscribe;
+
 player addEventHandler ["Killed", {
     -1 call vgm_c_fnc_medical_feedbackBleeding;
 }];

@@ -2,19 +2,22 @@
     File: fn_medical_feedbackHit.sqf
     Author: Savage Game Design
     Date: 2023-07-15
-    Last Update: 2023-07-15
+    Last Update: 2023-08-18
     Public: No
 
     Description:
-        No description added yet.
+        Handle feedback effects of being hit.
 
     Parameter(s):
-        N/A
+        None
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call vgm_c_fnc_medical_feedbackHit
  */
 
+if (BIS_canStartRed) then {
+    BIS_hitArray call BIS_fnc_radialRed;
+};
