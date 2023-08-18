@@ -243,4 +243,19 @@ class vgm_c
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
     };
+
+    class stamina
+    {
+        VGM_CLIENT_PATH(\systems\stamina\client);
+
+        class stamina_preInit
+        {
+            preInit = 1;
+        };
+        class stamina_postInit
+        {
+            postInit = 1;
+        };
+        class stamina_unitInit {};
+    };
 };
