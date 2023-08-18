@@ -57,5 +57,3 @@ vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
 
 vgm_c_medical_armorCache = createHashMap;
 vgm_c_medical_damageModifiers = [];
-
-[] call vgm_c_fnc_medical_feedback_init;
