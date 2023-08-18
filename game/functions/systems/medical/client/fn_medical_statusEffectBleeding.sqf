@@ -3,7 +3,7 @@
     File: fn_medical_statusEffectBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-07-24
+    Last Update: 2023-08-18
     Public: No
 
     Description:
@@ -56,7 +56,9 @@ private _eh = addMissionEventHandler ["EachFrame", {
 
         if (isPlayer _unit) then {
             _remainingTime call vgm_c_fnc_medical_feedbackBleeding;
+            #ifdef DEBUG
             "vgm_medical_bleeding" cutText [format ["<t size='1.5'>Bleeding out - %1</t>", _remainingTime toFixed 0], "PLAIN DOWN", -1, true, true];
+            #endif
         };
     };
 
