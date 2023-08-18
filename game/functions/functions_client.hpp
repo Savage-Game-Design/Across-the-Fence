@@ -190,6 +190,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client\feedback);
 
+        class medical_feedback_init {};
         class medical_feedbackBleeding {};
         class medical_feedbackHit {};
     };
