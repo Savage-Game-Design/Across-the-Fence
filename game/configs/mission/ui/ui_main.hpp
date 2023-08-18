@@ -8,9 +8,15 @@
 #include "VGM_DisplayAbilities.hpp"
 #include "VGM_DisplayMissions.hpp"
 #include "VGM_DisplayMissionsTargets.hpp"
+
+import RscHealthTextures from RscTitles;
 class RscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
     #include "VGM_RscProgressBar.hpp"
+    class VGM_RscHealthTextures: RscHealthTextures
+    {
+        onLoad = "uiNamespace setVariable ['vgm_RscHealthTextures', _this select 0]";
+    };
 };
 #include "VGM_DisplayTest.hpp"
