@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-07-23
+    Last Update: 2023-08-18
     Public: No
 
     Description:
@@ -17,11 +17,22 @@ if (!hasInterface) exitWith {};
     if (_player getVariable ["vgm_c_medical_actions", false]) exitWith {};
     _player setVariable ["vgm_c_medical_actions", true];
 
-    private _text = ["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player);
-    _player addAction [localize _text, {
-        params ["_target"];
-        _target call vgm_c_fnc_medical_openMedicalMenu;
-    }];
+    private _fnc_addAction = {
+        params ["_player", ["_previousPlayer", objNull]];
+
+        _previousPlayer removeAction (_previousPlayer getVariable ["vgm_medical_actionHeal", -1]);
+
+        private _text = ["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player);
+        private _actionId = _player addAction [localize _text, {
+            params ["_target"];
+            _target call vgm_c_fnc_medical_openMedicalMenu;
+        }, nil, 1, false];
+
+        _player setVariable ["vgm_medical_actionHeal", _actionId];
+    };
+
+    _player call _fnc_addAction;
+    _player addEventHandler ["Respawn", _fnc_addAction];
 
 }] call para_g_fnc_event_subscribe;
 
