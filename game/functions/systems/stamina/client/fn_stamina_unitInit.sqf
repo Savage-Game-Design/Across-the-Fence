@@ -60,7 +60,21 @@ private _idx = addMissionEventHandler ["EachFrame", {
     _stamina = _stamina - _drain min 100 max 0;
 
     _unit setVariable ["vgm_stamina", _stamina];
+
+    private _exhausted = _unit getVariable "vgm_stamina_exhausted";
+    if (_stamina < 1 && !_exhausted) then {
+        _unit setVariable ["vgm_stamina_exhausted", true];
+        _unit setVariable ["vgm_stamina_exhaustedUntil", time + 10];
+        [_unit, "forceJog", "stamina"] call vgm_c_fnc_statusEffect_set;
+    };
+    if (_exhausted && {time > _unit getVariable "vgm_stamina_exhaustedUntil"}) then {
+        _unit setVariable ["vgm_stamina_exhausted", false];
+        [_unit, "forceJog", "stamina"] call vgm_c_fnc_statusEffect_remove;
+    };
+
 }, [0, _unit]];
 
 _unit setVariable ["vgm_stamina_eh", _idx];
+_unit setVariable ["vgm_stamina_exhausted", false];
+_unit setVariable ["vgm_stamina_exhaustedUntil", -1];
 _unit setVariable ["vgm_stamina", 100];
