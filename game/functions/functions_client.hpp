@@ -248,6 +248,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\stamina\client);
 
+        class stamina_getAnimCoef {};
         class stamina_preInit
         {
             preInit = 1;

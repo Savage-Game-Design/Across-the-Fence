@@ -12,8 +12,4 @@
 
 if (!hasInterface) exitWith {};
 
-vgm_stamina_stanceCoef = createHashMapFromArray [
-    ["STAND", COEF_STD],
-    ["CROUCH", COEF_KNL],
-    ["PRONE", COEF_PNE]
-];
+vgm_stamina_animCoefCache = createHashMap;
