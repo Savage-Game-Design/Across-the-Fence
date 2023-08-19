@@ -39,6 +39,9 @@ private _idx = addMissionEventHandler ["EachFrame", {
 
     systemChat str ["tick", time];
 
+    if (!alive _unit) exitWith {
+        removeMissionEventHandler ["EachFrame", _unit getVariable ["vgm_stamina_eh", -1]];
+    };
 }, [0, _unit]];
 
 _unit setVariable ["vgm_stamina_eh", _idx];
