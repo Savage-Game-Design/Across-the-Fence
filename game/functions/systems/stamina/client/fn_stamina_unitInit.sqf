@@ -7,13 +7,13 @@
     Public: No
 
     Description:
-        No description added yet.
+        Switch local unit to VGM stamina system, disables vanilla stamina.
 
     Parameter(s):
-        N/A
+        _unit - Unit to be switched to VGM stamina system [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [player] call vgm_c_fnc_stamina_unitInit
