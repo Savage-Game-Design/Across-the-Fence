@@ -48,4 +48,8 @@ private _treatmentTime = 5;
     _args params ["_healer", "_patient", "_bodyPart"];
 
     ["vgm_medical_heal", [_healer, _patient, HEAL_MEDIKIT, _bodyPart], [_patient]] call para_g_fnc_event_triggerTargets;
-}, {}, [_healer, _patient, _bodyPart]] call vgm_c_fnc_progressBar;
+
+    [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
+}, {
+    [_this#0#1] spawn vgm_c_fnc_medical_openMedicalMenu;
+}, [_healer, _patient, _bodyPart]] call vgm_c_fnc_progressBar;
