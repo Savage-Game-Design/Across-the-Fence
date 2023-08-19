@@ -3,7 +3,7 @@
     File: fn_medical_openMedicalMenu.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-07-23
+    Last Update: 2023-08-19
     Public: No
 
     Description:
@@ -93,12 +93,9 @@ vgm_c_medicalMenu_fnc_render = {
             private _display = ctrlParent _ctrlBtn;
             private _target = _display getVariable "vgm_medical_patient";
             private _bodyPart = _ctrlBtn getVariable "vgm_medical_bodyPart";
-            [objNull, _target, _bodyPart] call vgm_c_fnc_medical_itemApplyFAK;
 
-            [_display, _target] spawn {
-                sleep 1;
-                _this call (missionNamespace getVariable "vgm_c_medicalMenu_fnc_render");
-            };
+            _display closeDisplay 1;
+            [player, _target, _bodyPart] spawn vgm_c_fnc_medical_itemApplyFAK;
         }];
 
         private _ctrlBtnMedikit = _display ctrlCreate ["RscButton", -1, _ctrlContainer];
@@ -112,12 +109,9 @@ vgm_c_medicalMenu_fnc_render = {
             private _display = ctrlParent _ctrlBtn;
             private _target = _display getVariable "vgm_medical_patient";
             private _bodyPart = _ctrlBtn getVariable "vgm_medical_bodyPart";
-            [objNull, _target, _bodyPart] call vgm_c_fnc_medical_itemApplyMedikit;
 
-            [_display, _target] spawn {
-                sleep 1;
-                _this call (missionNamespace getVariable "vgm_c_medicalMenu_fnc_render");
-            };
+            _display closeDisplay 1;
+            [player, _target, _bodyPart] spawn vgm_c_fnc_medical_itemApplyMedikit;
         }];
 
         _ctrls append [_ctrlLabel, _ctrlDmg, _ctrlBtnFak, _ctrlBtnMedikit];
