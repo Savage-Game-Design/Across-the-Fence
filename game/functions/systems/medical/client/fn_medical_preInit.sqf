@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-08-18
+    Last Update: 2023-08-19
     Public: No
 
     Description:
@@ -39,15 +39,40 @@ if (!hasInterface) exitWith {};
 
 }] call para_g_fnc_event_subscribe;
 
+vgm_medical_healItems = createHashMapFromArray [
+    [HEAL_FAK, ["vn_b_item_firstaidkit", "vn_o_item_firstaidkit"]],
+    [HEAL_MEDIKIT, ["vn_b_item_medikit_01"]]
+];
+
 ["vgm_medical_heal", {
     (_this#0) params ["_healer", "_patient", "_itemType", "_bodyPart"];
+
+    private _canHeal = true;
+    private _consumeItem = "";
+
+    // check for required item
     if (!isNull _healer) then {
-        // check if healer has required item and consume it
+        private _requiredItems = vgm_medical_healItems get _itemType;
+        private _foundItems = items _healer arrayIntersect _requiredItems;
+
+        if (_foundItems isEqualTo []) exitWith {
+            format ["Unable to heal, no item: %1 | %2 | %3", _healer, _patient, str _itemType] call vgm_g_fnc_logWarning;
+            _canHeal = false;
+        };
+
+        if (_itemType == HEAL_FAK) then {
+            _consumeItem = _foundItems select 0;
+        };
     };
 
-    format ["Received heal: %1 | %2 | %3", _healer, _patient, str _itemType] call vgm_g_fnc_logInfo;
+    // prevent healing if no required item found
+    if (!_canHeal) exitWith {};
 
-    [_patient, _bodyPart, [2, 1] select (_itemType == "medikit")] call vgm_c_fnc_medical_removeWound;
+    format ["Received heal: %1 | %2 | %3 | %4", _healer, _patient, str _itemType, str _consumeItem] call vgm_g_fnc_logInfo;
+
+    _healer removeItem _consumeItem;
+
+    [_patient, _bodyPart, [2, 1] select (_itemType == HEAL_MEDIKIT)] call vgm_c_fnc_medical_removeWound;
 
 }] call para_g_fnc_event_subscribe;
 
