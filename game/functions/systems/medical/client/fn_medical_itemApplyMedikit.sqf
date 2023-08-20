@@ -3,7 +3,7 @@
     File: fn_medical_itemApplyMedikit.sqf
     Author: Savage Game Design
     Date: 2023-06-30
-    Last Update: 2023-08-19
+    Last Update: 2023-08-20
     Public: No
 
     Description:
@@ -25,31 +25,9 @@ params ["_healer", "_patient", "_bodyPart"];
 
 format ["Applying Medikit: %1 | %2 | %3", _healer, _patient, _bodyPart] call vgm_g_fnc_logInfo;
 
-private _treatmentTime = 5;
+[_healer, _patient, _bodyPart, createHashMapFromArray [
+    ["type", HEAL_MEDIKIT],
+    ["time", 5],
+    ["displayName", localize "STR_VGM_MEDICAL_UI_APPLY_MEDIKIT"]
+]] call vgm_c_fnc_medical_itemApply;
 
-[format [localize "STR_VGM_MEDICAL_UI_APPLY_MEDIKIT", name _patient], _treatmentTime, {
-    params ["_args", "_startedAt", "_duration"];
-    _args params ["_healer", "_patient"];
-
-    if (_healer distance _patient > 5) exitWith {
-        hint localize "STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_TOO_FAR"; // TODO custom notification system?
-        false // return
-    };
-
-    private _requiredItems = vgm_medical_healItems get HEAL_MEDIKIT;
-    if (items _healer arrayIntersect _requiredItems isEqualTo []) exitWith {
-        hint localize "STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS"; // TODO custom notification system?
-        false // return
-    };
-
-    true // return
-}, {
-    params ["_args", "_startedAt", "_duration"];
-    _args params ["_healer", "_patient", "_bodyPart"];
-
-    ["vgm_medical_heal", [_healer, _patient, HEAL_MEDIKIT, _bodyPart], [_patient]] call para_g_fnc_event_triggerTargets;
-
-    [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
-}, {
-    [_this#0#1] spawn vgm_c_fnc_medical_openMedicalMenu;
-}, [_healer, _patient, _bodyPart]] call vgm_c_fnc_progressBar;
