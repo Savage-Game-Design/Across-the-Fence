@@ -3,7 +3,7 @@
     File: fn_stamina_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-08-18
-    Last Update: 2023-08-19
+    Last Update: 2023-08-20
     Public: No
 
     Description:
@@ -53,8 +53,6 @@ private _idx = addMissionEventHandler ["EachFrame", {
 
     // 100 / 4 = 25s of full speed sprint
     private _drain = linearConversion [0, MAX_SPEED_STD, _speed, -3, 4, true];
-
-    systemChat str ["drain", _drain];
 
     private _stamina = _unit getVariable "vgm_stamina";
     _stamina = _stamina - _drain min 100 max 0;
