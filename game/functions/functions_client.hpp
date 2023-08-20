@@ -121,6 +121,20 @@ class vgm_c
         class missions_startDeploy {};
     };
 
+    class status_effect
+    {
+        VGM_CLIENT_PATH(\core\client\statusEffect);
+
+        class statusEffect_create {};
+        class statusEffect_get {};
+        class statusEffect_preInit
+        {
+            preInit = 1;
+        };
+        class statusEffect_remove {};
+        class statusEffect_set {};
+    };
+
     class ui
     {
         VGM_CLIENT_PATH(\core\client\ui);

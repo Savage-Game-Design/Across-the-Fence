@@ -17,11 +17,25 @@ if (!hasInterface) exitWith {};
     if (_player getVariable ["vgm_c_medical_actions", false]) exitWith {};
     _player setVariable ["vgm_c_medical_actions", true];
 
-    private _text = ["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player);
-    _player addAction [localize _text, {
-        params ["_target"];
-        _target call vgm_c_fnc_medical_openMedicalMenu;
-    }];
+    private _fnc_addAction = {
+        params ["_player"];
+
+        private _text = ["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player);
+        private _actionId = _player addAction [localize _text, {
+            params ["_target"];
+            _target call vgm_c_fnc_medical_openMedicalMenu;
+        }, nil, 1, false];
+
+        _player setVariable ["vgm_medical_actionHeal", _actionId];
+    };
+
+    _player call _fnc_addAction;
+    _player addEventHandler ["Respawn", _fnc_addAction];
+    _player addEventHandler ["Killed", {
+        params ["_player"];
+        _player removeAction (_player getVariable ["vgm_medical_actionHeal", -1]);
+        _player setVariable ["vgm_medical_actionHeal", nil];
+    }]
 
 }] call para_g_fnc_event_subscribe;
 
