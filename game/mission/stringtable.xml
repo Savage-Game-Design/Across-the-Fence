@@ -60,4 +60,18 @@
             <Original>Tier locked</Original>
         </Key>
     </Package>
+    <Package name="Medical UI">
+        <Key ID="STR_VGM_MEDICAL_UI_APPLY_FAK">
+            <Original>Applying FAK to %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_APPLY_MEDIKIT">
+            <Original>Applying Medikit to %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_TOO_FAR">
+            <Original>Patient is too far!</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS">
+            <Original>Missing required items!</Original>
+        </Key>
+    </Package>
 </Project>
