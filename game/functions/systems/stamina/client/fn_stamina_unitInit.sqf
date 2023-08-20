@@ -39,6 +39,7 @@ private _idx = addMissionEventHandler ["EachFrame", {
     _thisArgs set [0, _deltaT];
 
     if (!alive _unit) exitWith {
+        format ["Disabling custom stamina for %1, unit dead", _unit] call vgm_g_fnc_logDebug;
         removeMissionEventHandler ["EachFrame", _unit getVariable ["vgm_stamina_eh", -1]];
     };
 
@@ -76,3 +77,11 @@ _unit setVariable ["vgm_stamina_eh", _idx];
 _unit setVariable ["vgm_stamina_exhausted", false];
 _unit setVariable ["vgm_stamina_exhaustedUntil", -1];
 _unit setVariable ["vgm_stamina", 100];
+
+if (isNil {_unit getVariable "vgm_stamina_ehRespawn"}) then {
+    private _idx = _unit addEventHandler ["Respawn", {
+        params ["_unit"];
+        _unit call vgm_c_fnc_stamina_unitInit;
+    }];
+    _unit setVariable ["vgm_stamina_ehRespawn", _idx];
+};
