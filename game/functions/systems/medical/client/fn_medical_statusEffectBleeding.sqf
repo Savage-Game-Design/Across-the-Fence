@@ -3,7 +3,7 @@
     File: fn_medical_statusEffectBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-08-18
+    Last Update: 2023-08-20
     Public: No
 
     Description:
@@ -27,6 +27,8 @@ if (!_bleeding) exitWith {
 
     removeMissionEventHandler ["EachFrame", _unit getVariable ["vgm_c_medical_bleedingEachFrameEH", -1]];
     _unit setVariable ["vgm_c_medical_bleedingEachFrameEH", nil];
+
+    -1 call vgm_c_fnc_medical_feedbackBleeding;
 };
 
 format ["Starting bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;
