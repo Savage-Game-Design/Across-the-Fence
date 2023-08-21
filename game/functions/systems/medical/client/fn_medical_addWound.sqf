@@ -3,7 +3,7 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-23
+    Last Update: 2023-08-18
     Public: No
 
     Description:
@@ -33,6 +33,8 @@ _unit setVariable [_varDamage, _woundIntensity, true];
 if (_unit call vgm_c_fnc_medical_shouldBleed) then {
     [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_set;
 };
+
+["vgm_medical_woundAdded", _this] call para_g_fnc_event_triggerLocal;
 
 // this part needs refactoring
 call {

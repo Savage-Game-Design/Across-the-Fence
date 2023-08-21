@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-07-23
+    Last Update: 2023-08-18
     Public: Yes
 
     Description:
@@ -40,6 +40,8 @@ if (lifeState _unit == "INCAPACITATED") then {
 if (!(_unit call vgm_c_fnc_medical_shouldBleed)) then {
     [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 };
+
+["vgm_medical_woundRemoved", _this] call para_g_fnc_event_triggerLocal;
 
 // this part needs refactoring
 call {
