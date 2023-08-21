@@ -1,0 +1,67 @@
+/*
+    File: fn_coefficient_set.sqf
+    Author: Savage Game Design
+    Date: 2023-08-21
+    Last Update: 2023-08-21
+    Public: No
+
+    Description:
+        No description added yet.
+
+    Parameter(s):
+        N/A
+
+    Returns:
+        Something [BOOL]
+
+    Example(s):
+        [player, "aim", "stamina", 2] call vgm_c_fnc_coefficient_set
+        [player, "aim", "skills", -0.15, true] call vgm_c_fnc_coefficient_set
+ */
+
+params [
+    ["_unit", objNull, [objNull]],
+    ["_coefficient", "", [""]],
+    ["_reason", [""]],
+    ["_value", [0]],
+    ["_persistent", false, [true]]
+];
+
+
+if (!(_coefficient in vgm_c_coefficient_allCoefficients)) exitWith {
+    format ["Invalid coefficient, available values: %1", keys vgm_c_coefficient_allCoefficients] call vgm_g_fnc_logError;
+};
+
+private _coefficientMap = _unit getVariable "vgm_c_coefficient_currentCoefficients";
+if (isNil "_coefficientMap") then {
+    format ["Creating current coefficients map: %1", _unit] call vgm_g_fnc_logDebug;
+
+    _coefficientMap = createHashMap;
+    _unit setVariable ["vgm_c_coefficient_currentCoefficients", _coefficientMap];
+    // clear all non persistent coefficients upon respawn
+    _unit addEventHandler ["Respawn", {
+        params ["_unit"];
+        {
+            private _coefficient = _x;
+            {
+                private _reason = _x;
+                private _coefficientValues = _y;
+                // ignore persistent coefficients
+                if (_coefficientValues # 1) then {continue};
+                [_unit, _coefficient, _reason] call vgm_c_fnc_coefficient_remove;
+            } forEach _y;
+        } forEach (_unit getVariable "vgm_c_coefficient_currentCoefficients");
+    }]
+};
+
+format ["Setting coefficient reason: %1 | %2 | %3 | %4", _coefficient, _reason, _value, _persistent] call vgm_g_fnc_logInfo;
+
+private _coefficientValues = _coefficientMap getOrDefault [_coefficient, createHashMap, true];
+
+_coefficientValues set [_reason, [_value, _persistent]];
+
+private _calculatedValue = [_unit, _coefficient] call vgm_c_fnc_coefficient_get;
+
+[_unit, _calculatedValue] call (vgm_c_coefficient_allCoefficients get _coefficient get "onChange");
+
+_calculatedValue // return

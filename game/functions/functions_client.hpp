@@ -88,6 +88,20 @@ class vgm_c
         VGM_CLIENT_PATH(\);
     };
 
+    class coefficient
+    {
+        VGM_CLIENT_PATH(\core\client\coefficient);
+
+        class coefficient_create {};
+        class coefficient_get {};
+        class coefficient_preInit
+        {
+            preInit = 1;
+        };
+        class coefficient_remove {};
+        class coefficient_set {};
+    };
+
     class displays
     {
         VGM_CLIENT_PATH(\core\client\displays);
