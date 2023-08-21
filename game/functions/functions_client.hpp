@@ -182,6 +182,7 @@ class vgm_c
         class medical_getArmorItem {};
         class medical_getWound {};
         class medical_handleDamage {};
+        class medical_itemApply {};
         class medical_itemApplyFAK {};
         class medical_itemApplyMedikit {};
         class medical_openMedicalMenu {};
@@ -252,5 +253,24 @@ class vgm_c
         class skills_requestSkillLearn {};
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
+    };
+
+    class stamina
+    {
+        VGM_CLIENT_PATH(\systems\stamina\client);
+
+        class stamina_getAnimCoef
+        {
+            headerType = -1;
+        };
+        class stamina_preInit
+        {
+            preInit = 1;
+        };
+        class stamina_postInit
+        {
+            postInit = 1;
+        };
+        class stamina_unitInit {};
     };
 };
