@@ -11,5 +11,6 @@
 
 ["aim", {
     params ["_unit", "_value"];
-    _unit setCustomAimCoef _value;
+    // coef should be always greater than 0 to allow the weapon to settle on the middle of the screen
+    _unit setCustomAimCoef (_value max 0.1 min 4);
 }] call vgm_c_fnc_coefficient_create;
