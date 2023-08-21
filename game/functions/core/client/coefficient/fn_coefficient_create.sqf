@@ -18,7 +18,11 @@
         Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["aim", {
+            _unit setCustomAimCoef (_value max 0.1 min 4);
+        }] call vgm_c_fnc_coefficient_create;
+
+        ["stamina"] call vgm_c_fnc_coefficient_create;
  */
 
 params [
