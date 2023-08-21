@@ -3,19 +3,21 @@
     Author: Savage Game Design
     Date: 2023-08-21
     Last Update: 2023-08-21
-    Public: No
+    Public: Yes
 
     Description:
-        No description added yet.
+        Remove coefficient reason/value from an unit.
 
     Parameter(s):
-        N/A
+        _unit - Unit to remove the coefficient reason from [OBJECT]
+        _coefficient - Coefficient name [STRING]
+        _reason - Coefficient reason [STRING]
 
     Returns:
-        Something [BOOL]
+        Calculated coefficient value [NUMBER]
 
     Example(s):
-        [player, "aim", "stamina", 2] call vgm_c_fnc_coefficient_remove
+        [player, "aim", "skills"] call vgm_c_fnc_coefficient_remove
  */
 
 params [

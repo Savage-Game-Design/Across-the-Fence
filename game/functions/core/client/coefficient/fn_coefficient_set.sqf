@@ -3,16 +3,20 @@
     Author: Savage Game Design
     Date: 2023-08-21
     Last Update: 2023-08-21
-    Public: No
+    Public: Yes
 
     Description:
-        No description added yet.
+        Set coefficient reason/value on an unit.
 
     Parameter(s):
-        N/A
+        _unit - Unit to set the coefficient on [OBJECT]
+        _coefficient - Coefficient name [STRING]
+        _reason - Coefficient reason [STRING]
+        _value - Coefficient value, will be added to "base" value of the coefficient [NUMBER, defaults to 0]
+        _persistent - Should the reason/value be re-applied upon respawn [BOOL, defaults to false]
 
     Returns:
-        Something [BOOL]
+        Calculated coefficient value [NUMBER]
 
     Example(s):
         [player, "aim", "stamina", 2] call vgm_c_fnc_coefficient_set

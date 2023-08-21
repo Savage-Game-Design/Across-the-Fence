@@ -3,16 +3,19 @@
     Author: Savage Game Design
     Date: 2023-08-21
     Last Update: 2023-08-21
-    Public: No
+    Public: Yes
 
     Description:
-        No description added yet.
+        Create coefficient.
+        The effect callback will be applied every time coefficient reason/value is set or removed.
 
     Parameter(s):
-        N/A
+        _name - Name of the coefficient [STRING]
+        _fnc_onChange - Function to be called coefficient reason is set/removed [CODE]
+        _baseValue - Base value of the coefficient, all reason values will summed with it (∑) [NUMBER, defaults to 1]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [parameter] call vgm_X_fnc_component_myFunction
