@@ -22,8 +22,8 @@
 params [
     ["_unit", objNull, [objNull]],
     ["_coefficient", "", [""]],
-    ["_reason", [""]],
-    ["_value", [0]],
+    ["_reason", nil, [""]],
+    ["_value", 0, [0]],
     ["_persistent", false, [true]]
 ];
 
@@ -50,15 +50,19 @@ if (isNil "_coefficientMap") then {
                 if (_coefficientValues # 1) then {continue};
                 [_unit, _coefficient, _reason] call vgm_c_fnc_coefficient_remove;
             } forEach _y;
+            // re-apply persistent coefficient values, needed in case "remove" was not called at least once
+            [_unit, _coefficient, nil] call vgm_c_fnc_coefficient_set;
         } forEach (_unit getVariable "vgm_c_coefficient_currentCoefficients");
     }]
 };
 
 format ["Setting coefficient reason: %1 | %2 | %3 | %4", _coefficient, _reason, _value, _persistent] call vgm_g_fnc_logInfo;
 
-private _coefficientValues = _coefficientMap getOrDefault [_coefficient, createHashMap, true];
-
-_coefficientValues set [_reason, [_value, _persistent]];
+// if there's no reason just re-apply the onChange function
+if (!isNil "_reason") then {
+    private _coefficientValues = _coefficientMap getOrDefault [_coefficient, createHashMap, true];
+    _coefficientValues set [_reason, [_value, _persistent]];
+};
 
 private _calculatedValue = [_unit, _coefficient] call vgm_c_fnc_coefficient_get;
 
