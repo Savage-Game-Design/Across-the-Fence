@@ -14,6 +14,7 @@ class RscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
     #include "VGM_RscProgressBar.hpp"
+    #include "VGM_RscStaminaBar.hpp"
     class VGM_RscHealthTextures: RscHealthTextures
     {
         onLoad = "uiNamespace setVariable ['vgm_RscHealthTextures', _this select 0]";
