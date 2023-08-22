@@ -3,6 +3,7 @@ import RscPicture;
 import RscProgress;
 import RscStructuredText;
 import RscMapControlEmpty;
+import RscControlsGroupNoScrollbars;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -682,6 +683,25 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                     };
                 };
             };
+        };
+    };
+};
+
+class VGM_ctrlStaminaBar: RscControlsGroupNoScrollbars
+{
+    x = IGUI_GRID_STAMINA_X;
+    y = IGUI_GRID_STAMINA_Y;
+    w = IGUI_GRID_STAMINA_WAbs;
+    h = 0.2 * IGUI_GRID_STAMINA_H;
+
+    class Controls {
+        class StaminaBar: RscPicture {
+            idc = 10;
+            text = "\A3\Ui_f\data\IGUI\RscIngameUI\RscUnitInfo\stamina_ca.paa";
+            x = 0;
+            y = 0;
+            w = IGUI_GRID_STAMINA_WAbs;
+            h = 0.2 * IGUI_GRID_STAMINA_H;
         };
     };
 };
