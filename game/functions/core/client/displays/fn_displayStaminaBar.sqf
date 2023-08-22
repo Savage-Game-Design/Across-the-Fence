@@ -35,7 +35,7 @@ switch _mode do {
         missionNamespace setVariable ["vgm_stamina_barWidth", ctrlPosition _ctrlStaminaBar # 2];
 
         _ctrlStaminaBarContainer ctrlSetFade 1;
-        _ctrlStaminaBarContainer ctrlCommit 1;
+        _ctrlStaminaBarContainer ctrlCommit 0;
     };
 
     default {

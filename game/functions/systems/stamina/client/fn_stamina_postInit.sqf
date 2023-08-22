@@ -13,4 +13,4 @@ if (!hasInterface) exitWith {};
 
 player call vgm_c_fnc_stamina_unitInit;
 
-"vgm_stamina_bar" cutRsc ["vgm_RscStaminaBar", "PLAIN", -1, false];
+"vgm_stamina_bar" cutRsc ["VGM_RscStaminaBar", "PLAIN", -1, false];
