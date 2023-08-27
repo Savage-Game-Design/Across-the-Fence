@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-08-18
+    Last Update: 2023-08-27
     Public: Yes
 
     Description:
@@ -48,15 +48,13 @@ call {
     if (_woundIntensity < 1) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
-                // minor blur
-
-                // dice roll if unconscious
+                // remove minor blur
             };
             case BODY_PART_TORSO: {
-                // a bit reduced stamina
+                [_unit, "staminaDrain", "medical", 0] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_ARMS: {
-                // increased recoil
+                [_unit, "recoil", "medical", 0] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_LEGS: {
                 [_unit, "forceJog", "medical"] call vgm_c_fnc_statusEffect_remove;
@@ -67,17 +65,15 @@ call {
     if (_woundIntensity < 2) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
-                // medium blur
+                // minor blur
             };
             case BODY_PART_TORSO: {
-                // strongly reduced stamina
-
-                // dice roll if unconscious
+                [_unit, "staminaDrain", "medical", DEBUFF_STAMINA_MINOR] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_ARMS: {
-                // increased aim sway
-                // reduced throw distance
-                // a bit slower actions
+                [_unit, "recoil", "medical", DEBUFF_AIM_MINOR] call vgm_c_fnc_coefficient_set;
+                [_unit, "throw", "medical", 0] call vgm_c_fnc_coefficient_set;
+                [_unit, "interact", "medical", 0] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_LEGS: {
                 [_unit, "forceWalk", "medical"] call vgm_c_fnc_statusEffect_remove;
@@ -90,14 +86,14 @@ call {
             case BODY_PART_HEAD;
             case BODY_PART_TORSO: {};
             case BODY_PART_ARMS: {
-                // even more increased aim sway
-                // even more increased recoil
-                // even more reduced throw distance
-                // a lot slower actions
-                // block ADS
+                [_unit, "recoil", "medical", DEBUFF_AIM_MINOR] call vgm_c_fnc_coefficient_set;
+                [_unit, "aim", "medical", DEBUFF_AIM_MINOR] call vgm_c_fnc_coefficient_set;
+                [_unit, "throw", "medical", DEBUFF_THROW_MINOR] call vgm_c_fnc_coefficient_set;
+                [_unit, "interact", "medical", DEBUFF_INTERACT_MINOR] call vgm_c_fnc_coefficient_set;
+                // remove block ADS
             };
             case BODY_PART_LEGS: {
-                // force prone
+                [_unit, "forceCrawl", "medical"] call vgm_c_fnc_statusEffect_remove;
             };
         };
     };
