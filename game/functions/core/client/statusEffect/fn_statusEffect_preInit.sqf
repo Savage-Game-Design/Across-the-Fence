@@ -45,3 +45,22 @@ if (!hasInterface) exitWith {};
         terminate _script;
     };
 }] call vgm_c_fnc_statusEffect_create;
+
+["blockADS", {
+    params ["_unit", "_inEffect"];
+
+    private _eh = _unit getVariable "vgm_c_statusEffect_adsEh";
+    if (_inEffect && isNil "_eh") exitWith {
+        _eh = _unit addEventHandler ["OpticsSwitch", {
+            params ["_unit", "_isADS"];
+            if (!_isADS) exitWith {};
+            _unit switchCamera cameraView;
+        }];
+        _unit setVariable ["vgm_c_statusEffect_adsEh", _eh];
+    };
+
+    if (!_inEffect) then {
+        _unit setVariable ["vgm_c_statusEffect_adsEh", nil];
+        _unit removeEventHandler ["OpticsSwitch", _eh];
+    };
+}] call vgm_c_fnc_statusEffect_create;
