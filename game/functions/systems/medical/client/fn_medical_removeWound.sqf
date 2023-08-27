@@ -90,7 +90,8 @@ call {
                 [_unit, "aim", "medical", DEBUFF_AIM_MINOR] call vgm_c_fnc_coefficient_set;
                 [_unit, "throw", "medical", DEBUFF_THROW_MINOR] call vgm_c_fnc_coefficient_set;
                 [_unit, "interact", "medical", DEBUFF_INTERACT_MINOR] call vgm_c_fnc_coefficient_set;
-                // remove block ADS
+
+                [_unit , "blockADS", "medical"] call vgm_c_fnc_statusEffect_remove;
             };
             case BODY_PART_LEGS: {
                 [_unit, "forceCrawl", "medical"] call vgm_c_fnc_statusEffect_remove;
