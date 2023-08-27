@@ -38,6 +38,7 @@ if (_unit call vgm_c_fnc_medical_shouldBleed) then {
 
 // this part needs refactoring
 call {
+    // 0 => 1
     if (_woundIntensity >= 1) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
@@ -57,6 +58,7 @@ call {
         };
     };
 
+    // 1 => 2
     if (_woundIntensity >= 2) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
@@ -78,6 +80,7 @@ call {
         };
     };
 
+    // 2 => 3
     if (_woundIntensity >= WOUND_MAX) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD;

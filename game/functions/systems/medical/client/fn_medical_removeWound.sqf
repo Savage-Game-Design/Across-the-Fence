@@ -45,42 +45,7 @@ if (!(_unit call vgm_c_fnc_medical_shouldBleed)) then {
 
 // this part needs refactoring
 call {
-    if (_woundIntensity < 1) then {
-        switch (_bodyPart) do {
-            case BODY_PART_HEAD: {
-                // remove minor blur
-            };
-            case BODY_PART_TORSO: {
-                [_unit, "staminaDrain", "medical", 0] call vgm_c_fnc_coefficient_set;
-            };
-            case BODY_PART_ARMS: {
-                [_unit, "recoil", "medical", 0] call vgm_c_fnc_coefficient_set;
-            };
-            case BODY_PART_LEGS: {
-                [_unit, "forceJog", "medical"] call vgm_c_fnc_statusEffect_remove;
-            };
-        };
-    };
-
-    if (_woundIntensity < 2) then {
-        switch (_bodyPart) do {
-            case BODY_PART_HEAD: {
-                // minor blur
-            };
-            case BODY_PART_TORSO: {
-                [_unit, "staminaDrain", "medical", DEBUFF_STAMINA_MINOR] call vgm_c_fnc_coefficient_set;
-            };
-            case BODY_PART_ARMS: {
-                [_unit, "recoil", "medical", DEBUFF_AIM_MINOR] call vgm_c_fnc_coefficient_set;
-                [_unit, "throw", "medical", 0] call vgm_c_fnc_coefficient_set;
-                [_unit, "interact", "medical", 0] call vgm_c_fnc_coefficient_set;
-            };
-            case BODY_PART_LEGS: {
-                [_unit, "forceWalk", "medical"] call vgm_c_fnc_statusEffect_remove;
-            };
-        };
-    };
-
+    // 3 => 2
     if (_woundIntensity < WOUND_MAX) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD;
@@ -95,6 +60,44 @@ call {
             };
             case BODY_PART_LEGS: {
                 [_unit, "forceCrawl", "medical"] call vgm_c_fnc_statusEffect_remove;
+            };
+        };
+    };
+
+    // 2 => 1
+    if (_woundIntensity < 2) then {
+        switch (_bodyPart) do {
+            case BODY_PART_HEAD: {
+                // minor blur
+            };
+            case BODY_PART_TORSO: {
+                [_unit, "staminaDrain", "medical", DEBUFF_STAMINA_MINOR] call vgm_c_fnc_coefficient_set;
+            };
+            case BODY_PART_ARMS: {
+                [_unit, "aim", "medical", 0] call vgm_c_fnc_coefficient_set;
+                [_unit, "throw", "medical", 0] call vgm_c_fnc_coefficient_set;
+                [_unit, "interact", "medical", 0] call vgm_c_fnc_coefficient_set;
+            };
+            case BODY_PART_LEGS: {
+                [_unit, "forceWalk", "medical"] call vgm_c_fnc_statusEffect_remove;
+            };
+        };
+    };
+
+    // 1 => 0
+    if (_woundIntensity < 1) then {
+        switch (_bodyPart) do {
+            case BODY_PART_HEAD: {
+                // remove minor blur
+            };
+            case BODY_PART_TORSO: {
+                [_unit, "staminaDrain", "medical", 0] call vgm_c_fnc_coefficient_set;
+            };
+            case BODY_PART_ARMS: {
+                [_unit, "recoil", "medical", 0] call vgm_c_fnc_coefficient_set;
+            };
+            case BODY_PART_LEGS: {
+                [_unit, "forceJog", "medical"] call vgm_c_fnc_statusEffect_remove;
             };
         };
     };
