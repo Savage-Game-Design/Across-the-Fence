@@ -2,7 +2,7 @@
     File: fnc_preInit.sqf
     Author: Savage Game Design
     Date: 2023-07-02
-    Last Update: 2023-08-27
+    Last Update: 2023-08-28
     Public: No
 
     Description:
@@ -34,7 +34,6 @@ if (!hasInterface) exitWith {};
                     sleep 0.1;
                     stance _this in ["CROUCH", "STAND"]
                 };
-                systemChat str time;
                 _this playAction "PlayerProne";
             };
         };
