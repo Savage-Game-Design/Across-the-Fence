@@ -53,6 +53,17 @@ class vgm_g
         };
     };
 
+    class medical
+    {
+        VGM_GLOBAL_PATH(\systems\medical\global);
+
+        class medical_postInit
+        {
+            postInit = 1;
+        };
+        class medical_replaceItems {};
+    };
+
     class missions
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
