@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-08-27
+    Last Update: 2023-09-01
     Public: Yes
 
     Description:
@@ -68,7 +68,7 @@ call {
     if (_woundIntensity < 2) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
-                // minor blur
+                [_unit, "blurryVision", "medical", DEBUFF_BLURRYVISION_MINOR] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_TORSO: {
                 [_unit, "staminaDrain", "medical", DEBUFF_STAMINA_MINOR] call vgm_c_fnc_coefficient_set;
@@ -88,7 +88,7 @@ call {
     if (_woundIntensity < 1) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
-                // remove minor blur
+                [_unit, "blurryVision", "medical", 0] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_TORSO: {
                 [_unit, "staminaDrain", "medical", 0] call vgm_c_fnc_coefficient_set;

@@ -3,7 +3,7 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-08-30
+    Last Update: 2023-09-01
     Public: No
 
     Description:
@@ -42,7 +42,7 @@ call {
     if (_woundIntensity >= 1) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
-                [_unit, "blurryVision", "medical"] call vgm_c_fnc_statusEffect_set;
+                [_unit, "blurryVision", "medical", DEBUFF_BLURRYVISION_MINOR] call vgm_c_fnc_coefficient_set;
 
                 // dice roll if unconscious
             };
@@ -62,7 +62,7 @@ call {
     if (_woundIntensity >= 2) then {
         switch (_bodyPart) do {
             case BODY_PART_HEAD: {
-                [_unit, "blurryVision", "medical"] call vgm_c_fnc_statusEffect_set;
+                [_unit, "blurryVision", "medical", DEBUFF_BLURRYVISION_MAJOR] call vgm_c_fnc_coefficient_set;
             };
             case BODY_PART_TORSO: {
                 [_unit, "staminaDrain", "medical", DEBUFF_STAMINA_MAJOR] call vgm_c_fnc_coefficient_set;

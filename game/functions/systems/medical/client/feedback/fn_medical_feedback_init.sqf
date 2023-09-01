@@ -2,7 +2,7 @@
     File: fn_medical_feedbackInit.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-08-30
+    Last Update: 2023-09-01
     Public: No
 
     Description:
@@ -25,16 +25,19 @@
 }] call para_g_fnc_event_subscribe;
 
 ["blurryVision", {
-    params ["_unit", "_inEffect"];
-    if (_unit != player) exitWith {};
+    params ["_unit", "_value"];
+    if (!isPlayer _unit) exitWith {};
+
+    _unit setVariable ["vgm_c_medical_feedback_blurStrength", _value max 0 min 1];
 
     private _script = missionNamespace getVariable ["vgm_c_medical_feedback_blurScript", scriptNull];
-    if (_inEffect && isNull _script) exitWith {
-        vgm_c_medical_feedback_blurScript = [] spawn {
+    if (_value > 0 && isNull _script) exitWith {
+        vgm_c_medical_feedback_blurScript = _unit spawn {
             vgm_c_medical_feedback_ppBlur ppEffectEnable true;
             while {true} do {
+                private _blurStrength = _this getVariable "vgm_c_medical_feedback_blurStrength";
                 // blur screen
-                vgm_c_medical_feedback_ppBlur ppEffectAdjust [1];
+                vgm_c_medical_feedback_ppBlur ppEffectAdjust [_blurStrength];
                 vgm_c_medical_feedback_ppBlur ppEffectCommit 2;
                 waitUntil {ppEffectCommitted vgm_c_medical_feedback_ppBlur};
                 // unblur screen
@@ -45,12 +48,14 @@
         };
     };
 
-    if (!_inEffect) exitWith {
+    if (_value <= 0) exitWith {
+        vgm_c_medical_feedback_ppBlur ppEffectAdjust [0];
+        vgm_c_medical_feedback_ppBlur ppEffectCommit 0;
         vgm_c_medical_feedback_ppBlur ppEffectEnable false;
         terminate vgm_c_medical_feedback_blurScript;
     };
 
-}] call vgm_c_fnc_statusEffect_create;
+}, 0] call vgm_c_fnc_coefficient_create;
 
 // setup blood effect overlay
 call {
