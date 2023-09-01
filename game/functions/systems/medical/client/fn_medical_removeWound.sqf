@@ -43,7 +43,7 @@ if (!(_unit call vgm_c_fnc_medical_shouldBleed)) then {
 
 ["vgm_medical_woundRemoved", _this] call para_g_fnc_event_triggerLocal;
 
-// this part needs refactoring
+// this part needs refactoring, possibly into some sort of statemachine?
 call {
     // 3 => 2
     if (_woundIntensity < WOUND_MAX) then {
