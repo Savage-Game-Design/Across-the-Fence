@@ -17,7 +17,6 @@
 #define HEAL_MEDIKIT "medikit"
 #define HEAL_FAK "fak"
 
-
 // debuffs
 #define DEBUFF_STAMINA_MINOR 0.1
 #define DEBUFF_STAMINA_MAJOR 0.25
