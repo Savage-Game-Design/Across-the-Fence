@@ -74,6 +74,28 @@ private _idx = addMissionEventHandler ["EachFrame", {
         [_unit, "forceJog", "stamina"] call vgm_c_fnc_statusEffect_remove;
     };
 
+    // update HUD
+    if (isPlayer _unit) then {
+        private _ctrlStaminaBarContainer = uiNamespace getVariable "vgm_stamina_barContainer";
+        private _ctrlStaminaBar = uiNamespace getVariable "vgm_stamina_bar";
+
+        _ctrlStaminaBarContainer ctrlSetPositionW (vgm_stamina_barWidth * _stamina / 100);
+        _ctrlStaminaBarContainer ctrlSetFade parseNumber (_stamina >= 100);
+        if (_exhausted) then {
+            _ctrlStaminaBar ctrlSetTextColor [1,0,0,1];
+        } else {
+            // start coloring orange below 40% (2 bars)
+            if (_stamina < 40) exitWith {
+                _ctrlStaminaBar ctrlSetTextColor (
+                    [1, 0.65, 0, 1] vectorAdd ([0, 0.35, 1] vectorMultiply ((_stamina - 25) / 25))
+                );
+            };
+            _ctrlStaminaBar ctrlSetTextColor [1,1,1,1];
+        };
+
+        _ctrlStaminaBarContainer ctrlCommit 1;
+    };
+
 }, [0, _unit]];
 
 _unit setVariable ["vgm_stamina_eh", _idx];
