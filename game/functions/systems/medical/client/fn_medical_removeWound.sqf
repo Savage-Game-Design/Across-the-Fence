@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-09-01
+    Last Update: 2023-09-02
     Public: Yes
 
     Description:
@@ -24,7 +24,7 @@
 params ["_unit", "_bodyPart", "_removeWoundIntensity"];
 
 private _varDamage = format ["vgm_g_medical_wound$%1", _bodyPart];
-private _woundIntensity = _unit getVariable [_varDamage, 0];
+private _woundIntensity = _unit getVariable [_varDamage, WOUND_NONE];
 
 _woundIntensity = (_woundIntensity - _removeWoundIntensity) max 0;
 
@@ -41,7 +41,7 @@ if (!(_unit call vgm_c_fnc_medical_shouldBleed)) then {
     [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 };
 
-[_unit, _bodyPart, _woundIntensity > 0] call vgm_c_fnc_medical_updateVisuals;
+[_unit, _bodyPart, _woundIntensity > WOUND_NONE] call vgm_c_fnc_medical_updateVisuals;
 
 ["vgm_medical_woundRemoved", _this] call para_g_fnc_event_triggerLocal;
 
