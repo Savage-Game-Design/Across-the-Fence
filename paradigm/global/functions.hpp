@@ -198,6 +198,18 @@ class para_g
 		class load_interop_functions { postInit = 1; };
 	};
 
+    class netmap
+    {
+        PARA_GLOBAL_PATH(\netmap);
+        class netmap_count {};
+        class netmap_forEach {};
+        class netmap_get {};
+        class netmap_getOrDefault {};
+        class netmap_keys {};
+        class netmap_onReady {};
+        class netmap_values {};
+    };
+
 	class networked_actions
 	{
 		PARA_GLOBAL_PATH(\networked_actions);
@@ -266,6 +278,7 @@ class para_g
         PARA_GLOBAL_PATH(\tracked_state);
         class trackedState_callHandlers {};
         class trackedState_getData {};
+        class trackedState_getValue {};
         class trackedState_setLocal {};
         class trackedState_whenChanged {};
         class trackedState_whenEqual {};

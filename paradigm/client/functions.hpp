@@ -77,6 +77,19 @@ class para_c
 		class init_key_up {};
 	};
 
+    class netmap
+    {
+        PARA_CLIENT_PATH(\netmap);
+        class netmap_add {};
+        class netmap_deleteAt {};
+        class netmap_fixReferences {};
+        class netmap_preInit {
+            preInit = 1;
+        };
+        class netmap_set {};
+        class netmap_terminate {};
+    };
+
 	class networked_actions
 	{
 		PARA_CLIENT_PATH(\networked_actions);

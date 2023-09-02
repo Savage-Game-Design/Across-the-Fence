@@ -8,6 +8,7 @@ class VGM_RscAbilityCooldown
 {
     idd = -1;
     onLoad = VGM_UIEH(onLoad,AbilityCooldown);
+    onUnload = VGM_UIEH(onUnload,AbilityCooldown);
     duration = 1e+6;
     fadeIn = 0;
     fadeOut = 0;

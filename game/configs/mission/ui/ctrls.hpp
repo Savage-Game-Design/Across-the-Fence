@@ -2,6 +2,7 @@ import RscText;
 import RscPicture;
 import RscProgress;
 import RscStructuredText;
+import RscMapControlEmpty;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -13,6 +14,8 @@ import ctrlButtonPicture;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlMap;
+import ctrlMapEmpty;
+import ctrlProgress;
 import ctrlXListbox;
 import ctrlListbox;
 import ctrlActivePicture;
@@ -43,7 +46,11 @@ class ScrollbarInvisible
     color[] = {0,0,0,0};
 };
 
-class VGM_ctrlStatic: ctrlStatic {};
+class VGM_ctrlStatic: ctrlStatic
+{
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+};
 
 class VGM_ctrlStaticFrame: ctrlStaticFrame
 {
@@ -112,6 +119,18 @@ class VGM_ctrlControlsGroup: ctrlControlsGroup
 
 class VGM_ctrlControlsGroupNoScrollbars: ctrlControlsGroupNoScrollbars
 {
+};
+
+class VGM_ctrlProgress: ctrlProgress
+{
+    colorBar[] = {
+        "(profilenamespace getvariable ['GUI_BCG_RGB_R', 0.13])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_G', 0.54])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_B', 0.21])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_A', 0.8])"
+    };
+    colorFrame[] = {0,0,0,0.5};
+    texture = "#(argb,8,8,3)color(1,1,1,0.8)";
 };
 
 class VGM_ctrlFrame: VGM_ctrlStatic
@@ -228,7 +247,7 @@ class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
     x = 0;
     y = 0;
     w = 1 * VGM_GRID_W;
-    h = 2 * VGM_GRID_H;
+    h = 3 * VGM_GRID_H;
     colorBackground[] = {0.8,0.8,0.8,1};
 };
 class VGM_ctrlSkillTreeBranchH: VGM_ctrlSkillTreeBranchV
@@ -322,10 +341,30 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
                 shadow = 0;
             };
         };
+
+        class Locked: VGM_ctrlStaticPicture
+        {
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
+            text = "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa";
+            show = 0;
+            x = 0;
+            y = 0;
+            w = VGM_CTRLSKILL_W * VGM_GRID_W;
+            h = 20 * VGM_GRID_H;
+        };
+        class Focus: VGM_ctrlButtonInvisible
+        {
+            idc = VGM_IDC_DISPLAYSKILLS_SKILLFOCUS;
+            colorBackground[] = {0,0,0,0};
+            x = 0;
+            y = 0;
+            w = VGM_CTRLSKILL_W * VGM_GRID_W - 5 * VGM_GRID_W;
+            h = 20 * VGM_GRID_H;
+        };
         class Unlock: VGM_ctrlButtonPicture
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
-            text = "P:\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
+            text = "\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
             colorText[] = {0,0,0,1};
             colorBackground[] = {0.7,0.7,0.7,1};
             x = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
