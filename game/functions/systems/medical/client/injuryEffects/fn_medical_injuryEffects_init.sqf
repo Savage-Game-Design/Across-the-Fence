@@ -63,7 +63,7 @@ vgm_medical_injuryEffects = createHashMapFromArray [
                     ["interact", DEBUFF_INTERACT_MINOR]
                 ]],
                 ["statusEffect", [
-                    ["blockAds", false]
+                    ["blockADS", false]
                 ]]
             ]],
             [WOUND_SEVERE, createHashMapFromArray [
@@ -74,7 +74,7 @@ vgm_medical_injuryEffects = createHashMapFromArray [
                     ["interact", DEBUFF_INTERACT_MAJOR]
                 ]],
                 ["statusEffect", [
-                    ["blockAds", true]
+                    ["blockADS", true]
                 ]]
             ]]
         ]
