@@ -28,14 +28,14 @@ private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
 private _step = [1, -1] select (_previousWoundLevel > _currentWoundLevel);
 for "_woundLevel" from (_previousWoundLevel + _step) to _currentWoundLevel step _step do {
     #ifdef DEBUG
-        format ["Applying injury effects: %1 | %2 | %3", _unit, _bodyPart, _woundLevel] call vgm_g_fnc_logDebug;
+        format ["Applying injury effects: %1 | %2 | %3", name _unit, _bodyPart, _woundLevel] call vgm_g_fnc_logDebug;
     #endif
 
     private _injuryEffects = _bodyPartInjuryEffects get _woundLevel;
 
     {
         _x params ["_coefficient", "_value"];
-        [_unit, _coefficient, _value, "medical"] call vgm_c_fnc_coefficient_set;
+        [_unit, _coefficient, "medical", _value] call vgm_c_fnc_coefficient_set;
     } forEach (_injuryEffects get "coefficient");
 
     {
