@@ -18,6 +18,8 @@ import ctrlMap;
 import ctrlMapEmpty;
 import ctrlProgress;
 import ctrlXListbox;
+import ctrlListbox;
+import ctrlActivePicture;
 
 #define COLOR_BLACK {0,0,0,1}
 class VGM_ctrlDefault: ctrlDefault {
@@ -33,6 +35,18 @@ class VGM_ctrlDefault: ctrlDefault {
         color[] = {1,1,1,1};
     };
 };
+
+class ScrollbarInvisible
+{
+    width = 0;
+    height = 0;
+    arrowEmpty = "";
+    arrowFull = "";
+    border = "";
+    thumb = "";
+    color[] = {0,0,0,0};
+};
+
 class VGM_ctrlStatic: ctrlStatic
 {
     font = VGM_FONT;
@@ -201,6 +215,14 @@ class VGM_ctrlXListBox: ctrlXListbox
     font = VGM_FONT;
 };
 
+class VGM_ctrlListBox: ctrlListbox
+{
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+    shadow = 0;
+};
+
 class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars
 {
     onLoad = "_this call vgm_c_fnc_stack_controls;";
@@ -214,6 +236,10 @@ class VGM_ctrlSeperator: VGM_ctrlStatic
     h = pixelH;
     w = pixelW;
     colorBackground[] = {0.75,0.75,0.75,1};
+};
+
+class VGM_ctrlActivePicture: ctrlActivePicture
+{
 };
 
 // Controls for VGM_DisplaySkills
