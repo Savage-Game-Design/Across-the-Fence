@@ -100,7 +100,7 @@ class VGM_DisplayMedical
                     {
                         class Image
                         {
-                            controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
+                            controlBaseClassPath[] = {"VGM_ctrlStaticPictureKeepAspect"};
                             columnX = 0;
                             controlOffsetY = 0;
                             columnW = (16/9) * 10 * VGM_GRID_W;
