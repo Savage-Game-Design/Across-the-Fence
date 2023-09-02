@@ -1,3 +1,4 @@
+#include "script_component.inc"
 /*
     File: fn_medical_injuryEffects_init.sqf
     Author: Savage Game Design
@@ -19,7 +20,7 @@
  */
 
 vgm_medical_injuryEffects = createHashMapFromArray [
-    [BODY_PART_HEAD, [
+    [BODY_PART_HEAD,
         createHashMapFromArray [
             [WOUND_NONE, createHashMapFromArray [
                 ["coefficient", [
@@ -42,8 +43,8 @@ vgm_medical_injuryEffects = createHashMapFromArray [
                 }]
             ]]
         ]
-    ]],
-    [BODY_PART_ARMS, [
+    ],
+    [BODY_PART_ARMS,
         createHashMapFromArray [
             [WOUND_NONE, createHashMapFromArray [
                 ["coefficient", [
@@ -77,8 +78,8 @@ vgm_medical_injuryEffects = createHashMapFromArray [
                 ]]
             ]]
         ]
-    ]],
-    [BODY_PART_TORSO, [
+    ],
+    [BODY_PART_TORSO,
         createHashMapFromArray [
             [WOUND_NONE, createHashMapFromArray [
                 ["coefficient", [
@@ -104,8 +105,8 @@ vgm_medical_injuryEffects = createHashMapFromArray [
                 }]
             ]]
         ]
-    ]],
-    [BODY_PART_LEGS, [
+    ],
+    [BODY_PART_LEGS,
         createHashMapFromArray [
             [WOUND_NONE, createHashMapFromArray [
                 ["statusEffect", [
@@ -130,5 +131,5 @@ vgm_medical_injuryEffects = createHashMapFromArray [
                 ]]
             ]]
         ]
-    ]]
+    ]
 ];
