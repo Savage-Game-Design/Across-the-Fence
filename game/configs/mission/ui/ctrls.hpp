@@ -3,6 +3,7 @@ import RscPicture;
 import RscProgress;
 import RscStructuredText;
 import RscMapControlEmpty;
+import RscControlsGroupNoScrollbars;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;

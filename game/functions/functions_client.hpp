@@ -121,6 +121,7 @@ class vgm_c
         class displayMissions {};
         class displayMissionsTargets {};
         class displayAbilityCooldown {};
+        class displayStaminaBar {};
     };
 
     class missions
