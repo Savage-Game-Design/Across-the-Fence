@@ -21,9 +21,9 @@
         [player, "body", true] call vgm_c_fnc_medical_updateVisuals
  */
 
-// structural damage threshold at which character makes pain sounds and can bleed
+// minimum damage needed for the character to make pain sounds and be able to bleed
 #define INJURED_THRESHOLD 0.15
-// threshold at which hitpoints show blood texture
+// Minimum damage needed on the hitpoint to show the blood texture
 #define BLOOD_THRESHOLD 0.45
 
 params ["_unit", "_bodyPart", "_wounded"];
