@@ -10,7 +10,10 @@
         Updates unit injury effects.
 
     Parameter(s):
-        None
+        _unit - Unit to update [OBJECT]
+        _bodyPart - Body part of which injury level was changed [STRING]
+        _previousWoundLevel - Wound level to start the transiton from [NUMBER]
+        _currentWoundLevel - Wound level to transtion to [NUMBER]
 
     Returns:
         Nothing
