@@ -2,7 +2,7 @@
     File: fn_statusEffect_remove.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-07-12
+    Last Update: 2023-08-21
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 params [
     ["_unit", objNull, [objNull]],
     ["_effect", "", [""]],
-    ["_reason", [""]]
+    ["_reason", nil, [""]]
 ];
 
 
