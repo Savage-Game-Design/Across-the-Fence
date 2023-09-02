@@ -22,6 +22,7 @@
 */
 
 #define SELF vgm_c_fnc_displayMedical
+#define HEALER player
 #define MENU_TARGET player
 
 #if __A3_DEBUG__
@@ -35,6 +36,9 @@ switch _mode do {
         params ["_display"];
 
         ["colorParts", _display] call SELF;
+
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        _ctrlTreatment ctrlShow false;
 
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
         private _modifiers = [];
@@ -79,15 +83,33 @@ switch _mode do {
         // Add treatment options
         private _ctrlOptions = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_OPTIONS;
         ctClear _ctrlOptions;
-        private _options = ["fak", "medkit"];
-        _options apply {
-            private _name = _x;
-            private _count = 99;
+        _ctrlOptions ctrlEnable (_injuries > 0);
+
+        private _targetItemCounts = uniqueUnitItems [MENU_TARGET, 0, 2, 2, 2, false];
+        {
+            _x params ["_treatment", "_itemCfg", "_function"];
+
+            private _optionItems = vgm_medical_healItems get _treatment;
+            private _requiredItemCount = 0;
+            {_requiredItemCount = _requiredItemCount + (_targetItemCounts getOrDefault [_x, 0])} forEach _optionItems;
+
             (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName", "_ctrlOptionButton"];
-            _ctrlOptionIcon ctrlSetText "\vn\editorpreviews_f_vietnam\weapons\preview_vn_b_item_firstaidkit.jpg";
-            _ctrlOptionName ctrlSetStructuredText parseText format ["%1<br/>Owned: %2", _name, _count];
-            _ctrlOptionButton setVariable ["option", _x];
-        };
+            _ctrlOptionIcon ctrlSetText getText (_itemCfg >> "picture");
+            _ctrlOptionName ctrlSetStructuredText parseText format [localize "STR_VGM_MEDICAL_UI_OWNED", getText (_itemCfg >> "displayName"), _requiredItemCount];
+            _ctrlOptionButton ctrlEnable (_requiredItemCount > 0);
+
+            // setup on click action
+            _ctrlOptionButton setVariable ["vgm_params", [HEALER, MENU_TARGET, _bodyPart]];
+            _ctrlOptionButton setVariable ["vgm_function", _function];
+            _ctrlOptionButton ctrlAddEventHandler ["ButtonClick", {
+                params ["_ctrlButton"];
+                (_ctrlButton getVariable "vgm_params") call (_ctrlButton getVariable "vgm_function");
+                closeDialog 0;
+            }];
+        } forEach [
+            [HEAL_FAK, configFile >> "CfgWeapons" >> "vn_helper_item_firstaidkit", vgm_c_fnc_medical_itemApplyFAK],
+            [HEAL_MEDIKIT, configFile >> "CfgWeapons" >> "vn_helper_item_medikit", vgm_c_fnc_medical_itemApplyMedikit]
+        ];
 
         // Activate the treatment options
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
