@@ -64,10 +64,10 @@ switch _mode do {
         private _partData = createHashMapFromArray [
             ["head", ["STR_VGM_MEDICAL_UI_BODY_PART_HEAD", BODY_PART_HEAD]],
             ["torso", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_TORSO]],
-            ["left_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_ARMS]],
-            ["right_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_ARMS]],
-            ["left_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_LEGS]],
-            ["right_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_LEGS]]
+            ["left_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARM_LEFT", BODY_PART_ARMS]],
+            ["right_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARM_RIGHT", BODY_PART_ARMS]],
+            ["left_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEG_LEFT", BODY_PART_LEGS]],
+            ["right_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEG_RIGHT", BODY_PART_LEGS]]
         ] get _visualPart;
 
         _partData params ["_title", "_bodyPart"];

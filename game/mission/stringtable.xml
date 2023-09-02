@@ -86,10 +86,10 @@
         <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_ARM_RIGHT">
             <Original>Arms</Original>
         </Key>
-        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_LEGS_LEFT">
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_LEG_LEFT">
             <Original>Legs</Original>
         </Key>
-        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_LEGS_RIGHT">
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_LEG_RIGHT">
             <Original>Legs</Original>
         </Key>
         <!-- -->
