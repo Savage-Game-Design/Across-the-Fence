@@ -53,6 +53,17 @@ class vgm_g
         };
     };
 
+    class medical
+    {
+        VGM_GLOBAL_PATH(\systems\medical\global);
+
+        class medical_postInit
+        {
+            postInit = 1;
+        };
+        class medical_replaceItems {};
+    };
+
     class missions
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
@@ -86,6 +97,20 @@ class vgm_c
     class default
     {
         VGM_CLIENT_PATH(\);
+    };
+
+    class coefficient
+    {
+        VGM_CLIENT_PATH(\core\client\coefficient);
+
+        class coefficient_create {};
+        class coefficient_get {};
+        class coefficient_preInit
+        {
+            preInit = 1;
+        };
+        class coefficient_remove {};
+        class coefficient_set {};
     };
 
     class displays

@@ -3,7 +3,7 @@
     File: fn_stamina_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-08-18
-    Last Update: 2023-08-22
+    Last Update: 2023-08-27
     Public: No
 
     Description:
@@ -49,11 +49,14 @@ private _idx = addMissionEventHandler ["EachFrame", {
     // crouched, prone and swimming movement are slower so we need to adjust current speed
     // this will make the stamina costs roughly the same for all stances
     // this also allows us to balance them easily by changing the "max" speeds of the stances
-    private _coef = animationState _unit call vgm_c_fnc_stamina_getAnimCoef;
-    _speed = (_speed * _coef) min 6;
+    private _animCoef = animationState _unit call vgm_c_fnc_stamina_getAnimCoef;
+    _speed = (_speed * _animCoef) min 6;
 
     // 100 / 4 = 25s of full speed sprint
     private _drain = linearConversion [0, MAX_SPEED_STD, _speed, -3, 4, true];
+    if (_drain > 0) then {
+        _drain = _drain * (_unit getVariable ["vgm_c_staminaDrainCoef", 1]);
+    };
 
     private _stamina = _unit getVariable "vgm_stamina";
     _stamina = _stamina - _drain min 100 max 0;
