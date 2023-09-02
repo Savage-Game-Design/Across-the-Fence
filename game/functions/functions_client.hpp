@@ -239,6 +239,14 @@ class vgm_c
         class medical_feedbackHit {};
     };
 
+    class medical_injury_effects
+    {
+        VGM_CLIENT_PATH(\systems\medical\client\injuryEffects);
+
+        class medical_injuryEffects_init {};
+        class medical_injuryEffectsUpdate {};
+    };
+
     class skills
     {
         VGM_CLIENT_PATH(\systems\skills\client);
