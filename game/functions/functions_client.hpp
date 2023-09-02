@@ -210,9 +210,11 @@ class vgm_c
         };
         class medical_receiveDamage {};
         class medical_removeWound {};
+        class medical_setStructuralDamage {};
         class medical_setUnconscious {};
         class medical_shouldBleed {};
         class medical_statusEffectBleeding {};
+        class medical_updateVisuals {};
     };
 
     class medical_feedback

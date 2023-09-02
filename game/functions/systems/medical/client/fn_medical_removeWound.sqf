@@ -41,6 +41,8 @@ if (!(_unit call vgm_c_fnc_medical_shouldBleed)) then {
     [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 };
 
+[_unit, _bodyPart, _woundIntensity > 0] call vgm_c_fnc_medical_updateVisuals;
+
 ["vgm_medical_woundRemoved", _this] call para_g_fnc_event_triggerLocal;
 
 // this part needs refactoring, possibly into some sort of statemachine?
