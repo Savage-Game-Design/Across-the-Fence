@@ -51,13 +51,30 @@ switch _mode do {
             _ctrlDescription ctrlSetStructuredText parseText format ["%1 %2 %3<br/>%4", _level, _part, _type, _effect];
         };
     };
+    // handle selection of body part for treatment
     case "selectPart": {
         params ["_ctrlPartIcon"];
         private _display = ctrlParent _ctrlPartIcon;
-        // Set the title for the treatment options
-        private _title = ["Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
+        private _visualPart = ["head", "torso", "left_arm", "right_arm", "left_leg", "right_leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
+
+        private _partData = createHashMapFromArray [
+            ["head", ["STR_VGM_MEDICAL_UI_BODY_PART_HEAD", BODY_PART_HEAD]],
+            ["torso", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_TORSO]],
+            ["left_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_ARMS]],
+            ["right_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_ARMS]],
+            ["left_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_LEGS]],
+            ["right_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_LEGS]]
+        ] get _visualPart;
+
+        _partData params ["_title", "_bodyPart"];
+
+        private _injuries = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+
         private _ctrlTitle = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_TITLE;
-        _ctrlTitle ctrlSetText _title;
+        _ctrlTitle ctrlSetText localize _title;
+
+        private _ctrlInjuriesCount = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_INJURIESCOUNT;
+        _ctrlInjuriesCount ctrlSetText format [localize "STR_VGM_MEDICAL_UI_INJURIES", _injuries];
 
         // Add treatment options
         private _ctrlOptions = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_OPTIONS;
@@ -91,7 +108,6 @@ switch _mode do {
         params ["_display"];
 
         {
-            systemChat str _x;
             _x params ["_idc", "_bodyPart"];
             private _ctrl = _display displayCtrl _idc;
 
