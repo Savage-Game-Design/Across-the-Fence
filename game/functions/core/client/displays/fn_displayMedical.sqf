@@ -1,8 +1,10 @@
+#include "..\..\..\..\functions\systems\medical\client\script_component.inc"
+#include "macros.inc"
 /*
-    File: P:\SGD\Tour-of-Duty\game\functions\core\client\displays\fn_displayMedical.sqf
+    File: fn_displayMedical.sqf
     Author: Savage Game Design
-    Date: 2023-35-18
-    Last Update: 2023-35-18
+    Date: 2023-05-18
+    Last Update: 2023-09-02
     Public: No
 
     Description:
@@ -18,11 +20,22 @@
     Example(s):
         ["onLoad", [findDisplay 28000]] call vgm_c_fnc_displayMedical;
 */
-#include "macros.inc"
+
+#define SELF vgm_c_fnc_displayMedical
+#define MENU_TARGET player
+
+#if __A3_DEBUG__
+    diag_log ["fn_displayMedical", _this];
+#endif
+
 params ["_mode", "_this"];
+
 switch _mode do {
     case "onLoad":{
         params ["_display"];
+
+        ["colorParts", _display] call SELF;
+
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
         private _modifiers = [];
         _modifiers resize 20;
@@ -72,6 +85,34 @@ switch _mode do {
         _ctrlTreatment ctrlCommit 0;
         ctrlSetFocus _ctrlTreatment;
     };
+
+    // handle colorization of body parts
+    case "colorParts": {
+        params ["_display"];
+
+        {
+            systemChat str _x;
+            _x params ["_idc", "_bodyPart"];
+            private _ctrl = _display displayCtrl _idc;
+
+            private _color = [
+                [1,1,1,1],
+                [1,1,0,1],
+                [1,0.5,0,1],
+                [1,0,0,1]
+            ] select ([MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound);
+
+            _ctrl ctrlSetTextColor _color;
+        } forEach [
+            [VGM_IDC_DISPLAYMEDICAL_HEAD, BODY_PART_HEAD],
+            [VGM_IDC_DISPLAYMEDICAL_ARMLEFT, BODY_PART_ARMS],
+            [VGM_IDC_DISPLAYMEDICAL_ARMRIGHT, BODY_PART_ARMS],
+            [VGM_IDC_DISPLAYMEDICAL_TORSO, BODY_PART_TORSO],
+            [VGM_IDC_DISPLAYMEDICAL_LEGLEFT, BODY_PART_LEGS],
+            [VGM_IDC_DISPLAYMEDICAL_LEGRIGHT, BODY_PART_LEGS]
+        ];
+    };
+
     case "mouseDown": {
         params ["_display", "_button", "_xPos", "_yPos"];
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
