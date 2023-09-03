@@ -38,14 +38,27 @@
 params ["_mode", "_this"];
 
 switch _mode do {
-    case "onLoad":{
+    case "onLoad": {
         params ["_display"];
-
-        ["colorBodyParts", _display] call SELF;
-        ["updateDebuffsList", _display] call SELF;
 
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
         _ctrlTreatment ctrlShow false;
+
+        ["refreshUI", _display] call SELF;
+        _display spawn {
+            waitUntil {
+                uiSleep 1;
+                isNil {["refreshUI", _this] call SELF};
+                isNull _this // return
+            };
+        };
+    };
+
+    case "refreshUI": {
+        params ["_display"];
+
+        ["colorBodyParts", _this] call SELF;
+        ["updateDebuffsList", _this] call SELF;
     };
 
     // handle selection of body part for treatment
