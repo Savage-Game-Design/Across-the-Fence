@@ -25,6 +25,12 @@
 #define HEALER player
 #define MENU_TARGET player
 
+#define COLOR_NONE 1,1,1
+#define COLOR_MINOR 0.89,0.8,0
+#define COLOR_MAJOR 0.9,0.1,0
+#define COLOR_SEVERE 0.58,0,0
+#define COLOR_ARR [[COLOR_NONE], [COLOR_MINOR], [COLOR_MAJOR], [COLOR_SEVERE]]
+
 #if __A3_DEBUG__
     diag_log ["fn_displayMedical", _this];
 #endif
@@ -120,14 +126,8 @@ switch _mode do {
             _x params ["_idc", "_bodyPart"];
             private _ctrl = _display displayCtrl _idc;
 
-            private _color = [
-                [1,1,1,1],
-                [1,1,0,1],
-                [1,0.5,0,1],
-                [1,0,0,1]
-            ] select ([MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound);
-
-            _ctrl ctrlSetTextColor _color;
+            private _color = COLOR_ARR select ([MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound);
+            _ctrl ctrlSetTextColor (_color + [1]);
         } forEach [
             [VGM_IDC_DISPLAYMEDICAL_HEAD, BODY_PART_HEAD],
             [VGM_IDC_DISPLAYMEDICAL_ARMLEFT, BODY_PART_ARMS],
@@ -155,15 +155,13 @@ switch _mode do {
             for "_woundLevel" from WOUND_NONE to _currentWoundLeveL do {
                 private _injuryEffects = _bodyPartInjuryEffects get _woundLevel;
 
+                // insert will overwrite with latest value of the debuff
                 _coefficients insert (_injuryEffects get "coefficient");
                 _statusEffects insert (_injuryEffects get "statusEffect");
             };
 
-            // add row
             private _fnc_addRow = {
                 params ["_title", "_description", "_icon"];
-
-                private _icon = "#(rgb,1,1,1)color(1,0,0,1)";
 
                 (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
                 _ctrlIcon ctrlSetText _icon;
@@ -171,25 +169,27 @@ switch _mode do {
                 _ctrlDescription ctrlSetStructuredText parseText _text;
             };
 
+            private _icon = format (["#(rgb,1,1,1)color(%1,%2,%3,1)"] + (COLOR_ARR select _currentWoundLevel));
             private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
             private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
             private _title = format ["%1 %2 Trauma", _level, _bodyPart];
 
+            // render debuff rows
             private _effects = [];
             {
                 if (!_y) then {continue};
                 private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
-                [_title, _statusDescription] call _fnc_addRow;
+                [_title, _statusDescription, _icon] call _fnc_addRow;
             } forEach _statusEffects;
 
             {
-                if (_y == 0)  then {continue};
+                if (_y == 0) then {continue};
                 private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
-                [_title, _coefDescription] call _fnc_addRow;
+                [_title, _coefDescription, _icon] call _fnc_addRow;
             } forEach _coefficients;
 
-        } forEach vgm_medical_injuryEffects;
+        } forEach BODY_PARTS_ARR;
     };
 
     case "mouseDown": {
