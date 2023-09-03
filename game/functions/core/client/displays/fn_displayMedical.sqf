@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2023-09-02
+    Last Update: 2023-09-03
     Public: No
 
     Description:
@@ -35,26 +35,13 @@ switch _mode do {
     case "onLoad":{
         params ["_display"];
 
-        ["colorParts", _display] call SELF;
+        ["colorBodyParts", _display] call SELF;
+        ["updateDebuffsList", _display] call SELF;
 
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
         _ctrlTreatment ctrlShow false;
-
-        private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
-        private _modifiers = [];
-        _modifiers resize 20;
-        _modifiers apply {
-            private _part = "Head";
-            private _type = "Trauma";
-            private _level = "Severe";
-            private _effect = "Occasional Blurred Vision";
-            private _icon = "#(rgb,1,1,1)color(1,0,0,1)";
-
-            (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
-            _ctrlIcon ctrlSetText _icon;
-            _ctrlDescription ctrlSetStructuredText parseText format ["%1 %2 %3<br/>%4", _level, _part, _type, _effect];
-        };
     };
+
     // handle selection of body part for treatment
     case "selectPart": {
         params ["_ctrlPartIcon"];
@@ -64,10 +51,10 @@ switch _mode do {
         private _partData = createHashMapFromArray [
             ["head", ["STR_VGM_MEDICAL_UI_BODY_PART_HEAD", BODY_PART_HEAD]],
             ["torso", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_TORSO]],
-            ["left_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARM_LEFT", BODY_PART_ARMS]],
-            ["right_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARM_RIGHT", BODY_PART_ARMS]],
-            ["left_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEG_LEFT", BODY_PART_LEGS]],
-            ["right_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEG_RIGHT", BODY_PART_LEGS]]
+            ["left_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARMS", BODY_PART_ARMS]],
+            ["right_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARMS", BODY_PART_ARMS]],
+            ["left_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEGS", BODY_PART_LEGS]],
+            ["right_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEGS", BODY_PART_LEGS]]
         ] get _visualPart;
 
         _partData params ["_title", "_bodyPart"];
@@ -126,7 +113,7 @@ switch _mode do {
     };
 
     // handle colorization of body parts
-    case "colorParts": {
+    case "colorBodyParts": {
         params ["_display"];
 
         {
@@ -149,6 +136,60 @@ switch _mode do {
             [VGM_IDC_DISPLAYMEDICAL_LEGLEFT, BODY_PART_LEGS],
             [VGM_IDC_DISPLAYMEDICAL_LEGRIGHT, BODY_PART_LEGS]
         ];
+    };
+
+    case "updateDebuffsList": {
+        params ["_display"];
+
+        private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
+        ctClear _ctrlModifierList;
+
+        {
+            private _bodyPart = _x;
+            private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
+
+            private _currentWoundLevel = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+            private _coefficients = createHashMap;
+            private _statusEffects = createHashMap;
+
+            for "_woundLevel" from WOUND_NONE to _currentWoundLeveL do {
+                private _injuryEffects = _bodyPartInjuryEffects get _woundLevel;
+
+                _coefficients insert (_injuryEffects get "coefficient");
+                _statusEffects insert (_injuryEffects get "statusEffect");
+            };
+
+            // add row
+            private _fnc_addRow = {
+                params ["_title", "_description", "_icon"];
+
+                private _icon = "#(rgb,1,1,1)color(1,0,0,1)";
+
+                (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
+                _ctrlIcon ctrlSetText _icon;
+                private _text = format ["%1<br/>%2", _title, _description];
+                _ctrlDescription ctrlSetStructuredText parseText _text;
+            };
+
+            private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
+            private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
+            private _title = format ["%1 %2 Trauma", _level, _bodyPart];
+
+            private _effects = [];
+            {
+                if (!_y) then {continue};
+                private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
+                [_title, _statusDescription] call _fnc_addRow;
+            } forEach _statusEffects;
+
+            {
+                if (_y == 0)  then {continue};
+                private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
+                _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
+                [_title, _coefDescription] call _fnc_addRow;
+            } forEach _coefficients;
+
+        } forEach vgm_medical_injuryEffects;
     };
 
     case "mouseDown": {
