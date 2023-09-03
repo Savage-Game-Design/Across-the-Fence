@@ -78,13 +78,13 @@ switch _mode do {
         ctClear _ctrlOptions;
         _ctrlOptions ctrlEnable (_injuries > 0);
 
-        private _targetItemCounts = uniqueUnitItems [MENU_TARGET, 0, 2, 2, 2, false];
+        private _healerItemCount = uniqueUnitItems [HEALER, 0, 2, 2, 2, false];
         {
             _x params ["_treatment", "_itemCfg", "_function"];
 
             private _optionItems = vgm_medical_healItems get _treatment;
             private _requiredItemCount = 0;
-            {_requiredItemCount = _requiredItemCount + (_targetItemCounts getOrDefault [_x, 0])} forEach _optionItems;
+            {_requiredItemCount = _requiredItemCount + (_healerItemCount getOrDefault [_x, 0])} forEach _optionItems;
 
             (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName", "_ctrlOptionButton"];
             _ctrlOptionIcon ctrlSetText getText (_itemCfg >> "picture");
