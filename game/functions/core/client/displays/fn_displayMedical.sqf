@@ -23,7 +23,7 @@
 
 #define SELF vgm_c_fnc_displayMedical
 #define HEALER player
-#define MENU_TARGET player
+#define MENU_TARGET (missionNamespace getVariable ["vgm_c_medical_menuTarget", player])
 
 #define COLOR_NONE 1,1,1
 #define COLOR_MINOR 0.89,0.8,0
