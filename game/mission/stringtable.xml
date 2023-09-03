@@ -106,7 +106,7 @@
             <Original>Decreased aim stability</Original>
         </Key>
         <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLOCKADS">
-            <Original>Unable to aim</Original>
+            <Original>Unable to aim down sights</Original>
         </Key>
         <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_STAMINADRAIN">
             <Original>Increased stamina drain</Original>
