@@ -73,5 +73,69 @@
         <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS">
             <Original>Missing required items!</Original>
         </Key>
+        <!-- body parts -->
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_HEAD">
+            <Original>Head</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_TORSO">
+            <Original>Torso</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_ARMS">
+            <Original>Arms</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_LEGS">
+            <Original>Legs</Original>
+        </Key>
+        <!-- Debuffs -->
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLURRYVISION">
+            <Original>Occasional Blurred Vision</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_FORCEJOG">
+            <Original>Unable to sprint</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_FORCEWALK">
+            <Original>Unable to run</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_FORCECRAWL">
+            <Original>Unable to stand</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_RECOIL">
+            <Original>Increased recoil</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_AIM">
+            <Original>Decreased aim stability</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLOCKADS">
+            <Original>Unable to aim down sights</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_STAMINADRAIN">
+            <Original>Increased stamina drain</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_INTERACT">
+            <Original>Slower interaction</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_THROW">
+            <Original>Weaker throwing strength</Original>
+        </Key>
+        <!-- -->
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_0">
+            <Original>No</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_1">
+            <Original>Minor</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_2">
+            <Original>Major</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_3">
+            <Original>Severe</Original>
+        </Key>
+        <!-- -->
+        <Key ID="STR_VGM_MEDICAL_UI_INJURIES">
+            <Original>%1 Injuries</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OWNED">
+            <Original>%1&lt;br/&gt;Owned: %2</Original>
+        </Key>
     </Package>
 </Project>

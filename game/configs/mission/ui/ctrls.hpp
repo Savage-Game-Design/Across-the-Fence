@@ -14,6 +14,7 @@ import ctrlButton;
 import ctrlButtonPicture;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
+import ctrlStaticPictureKeepAspect;
 import ctrlMap;
 import ctrlMapEmpty;
 import ctrlProgress;
@@ -69,6 +70,10 @@ class VGM_ctrlBackgroundTitle: VGM_ctrlBackground
 };
 
 class VGM_ctrlStaticPicture: ctrlStaticPicture
+{
+};
+
+class VGM_ctrlStaticPictureKeepAspect: ctrlStaticPictureKeepAspect
 {
 };
 
