@@ -53,82 +53,94 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         private _unit = player;
 
         #define LIST_H (_h/3)
-        private _ctrlStatusLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-        _ctrlStatusLabel ctrlSetText "Status effects:";
-        _ctrlStatusLabel ctrlSetPosition [0, 0, _w, GUI_GRID_H];
-        _ctrlStatusLabel ctrlCommit 0;
-
-        private _ctrlStatusList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-        _ctrlStatusList ctrlSetPosition [0, GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-        _ctrlStatusList ctrlCommit 0;
-
-        private _ctrlCoefLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-        _ctrlCoefLabel ctrlSetText "Coefficients:";
-        _ctrlCoefLabel ctrlSetPosition [0, LIST_H, _w, GUI_GRID_H];
-        _ctrlCoefLabel ctrlCommit 0;
-
-        private _ctrlCoefList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-        _ctrlCoefList ctrlSetPosition [0, LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-        _ctrlCoefList ctrlCommit 0;
-
-        private _ctrlVarLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-        _ctrlVarLabel ctrlSetText "Variables:";
-        _ctrlVarLabel ctrlSetPosition [0, LIST_H * 2, _w, GUI_GRID_H];
-        _ctrlVarLabel ctrlCommit 0;
-
-        private _ctrlVarList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-        _ctrlVarList ctrlSetPosition [0, LIST_H * 2 + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-        _ctrlVarList ctrlCommit 0;
-
-        _ctrlStatusList lnbSetColumnsPos [0.1, 0.5];
-        _ctrlCoefList lnbSetColumnsPos [0.1, 0.5, 0.7];
-        _ctrlVarList lnbSetColumnsPos [0.1, 0.5];
+        private _sections = 0;
 
         // status effects
-        {
-            private _status = _x;
-            private _state = [_unit, _status] call vgm_c_fnc_statusEffect_get;
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Status effects:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
 
-            private _row = _ctrlStatusList lnbAddRow [
-                _status,
-                str _state
-            ];
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
 
-            private _reasons = _unit getVariable "vgm_c_statusEffect_currentEffects" get _status;
-            _ctrlStatusList lnbSetTooltip [[_row, 0], _reasons joinString endl];
-        } forEach vgm_c_statusEffect_allEffects;
+            _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+            {
+                private _status = _x;
+                private _state = [_unit, _status] call vgm_c_fnc_statusEffect_get;
+
+                private _row = _ctrlList lnbAddRow [
+                    _status,
+                    str _state
+                ];
+
+                private _reasons = _unit getVariable "vgm_c_statusEffect_currentEffects" get _status;
+                _ctrlList lnbSetTooltip [[_row, 0], _reasons joinString endl];
+            } forEach vgm_c_statusEffect_allEffects;
+        };
+        _sections = _sections + 1;
 
         // coefficients
-        {
-            private _coefficient = _x;
-            private _baseValue = _y get "baseValue";
-            private _value = [_unit, _coefficient] call vgm_c_fnc_coefficient_get;
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Coefficients:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
 
-            private _row = _ctrlCoefList lnbAddRow [
-                _coefficient,
-                str _value,
-                str _baseValue
-            ];
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
 
-            private _reasons = _unit getVariable "vgm_c_coefficient_currentCoefficients" get _coefficient apply {
-                [_x, _y#0, ["", "persistent"] select _y#1] joinString " "
-            };
-            _ctrlCoefList lnbSetTooltip [[_row, 0], _reasons joinString endl];
-        } forEach vgm_c_coefficient_allCoefficients;
+            _ctrlList lnbSetColumnsPos [0.1, 0.5, 0.65];
+
+            {
+                private _coefficient = _x;
+                private _baseValue = _y get "baseValue";
+                private _value = [_unit, _coefficient] call vgm_c_fnc_coefficient_get;
+
+                private _row = _ctrlList lnbAddRow [
+                    _coefficient,
+                    str _value,
+                    str _baseValue
+                ];
+
+                private _reasons = _unit getVariable "vgm_c_coefficient_currentCoefficients" get _coefficient apply {
+                    [_x, _y#0, ["", "persistent"] select _y#1] joinString " "
+                };
+                _ctrlList lnbSetTooltip [[_row, 0], _reasons joinString endl];
+            } forEach vgm_c_coefficient_allCoefficients;
+        };
+        _sections = _sections + 1;
 
         // variables
-        {
-            private _variable = _x;
-            private _value = _unit getVariable [_x, "nil"];
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Variables:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
 
-            private _row = _ctrlVarList lnbAddRow [
-                _variable,
-                str _value
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
+
+            _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+            {
+                private _variable = _x;
+                private _value = _unit getVariable [_x, "nil"];
+
+                private _row = _ctrlList lnbAddRow [
+                    _variable,
+                    str _value
+                ];
+            } forEach [
+                "vgm_stamina",
+                "vgm_stamina_exhausted"
             ];
-        } forEach [
-            "vgm_stamina",
-            "vgm_stamina_exhausted"
-        ];
+        };
     };
 
     private _fnc_tabPersistence = {
