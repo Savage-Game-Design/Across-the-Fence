@@ -19,7 +19,10 @@
         [] call vgm_c_fnc_initDebugMenu
  */
 
-[true, "OnGameInterrupt", vgm_c_debugMenuEH] call BIS_fnc_removeScriptedEventHandler;
+if (!isNil "vgm_c_debugMenuEH") then {
+    // makes development easier
+    [true, "OnGameInterrupt", vgm_c_debugMenuEH] call BIS_fnc_removeScriptedEventHandler;
+};
 
 vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
     params ["_display"];
@@ -128,10 +131,59 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         ];
     };
 
+    private _fnc_tabPersistence = {
+        params ["_display", "_ctrlContainer", "_containerPosition"];
+        _containerPosition params ["", "", "_w", "_h"];
+        private _unit = player;
+
+        #define LIST_H (_h/4)
+        private _sections = 0;
+
+        // leveling data
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Leveling:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
+
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
+
+            _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+            private _levelingData = _unit getVariable "vgm_g_levelingData";
+            private _level = _levelingData get "level";
+            _ctrlList lnbAddRow ["level", str _level];
+            _ctrlList lnbAddRow ["xp", str (_levelingData get "experience")];
+            _ctrlList lnbAddRow ["next level xp", str (vgm_g_leveling_levelsHashMap get _level get "experienceThreshold")];
+        };
+        _sections = _sections + 1;
+
+        // skills data
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Skills:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
+
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
+
+            _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+            private _skillsData = _unit getVariable "vgm_g_skillsData";
+            _ctrlList lnbAddRow ["skill points", str ([] call vgm_c_fnc_skills_getSkillPoints)];
+            _ctrlList lnbAddRow ["spent skill points", str (_skillsData get "skillPointsSpent")];
+        };
+        _sections = _sections + 1;
+    };
+
     //----- add tabs
     private _tabs = [
         ["Player state", _fnc_tabPlayer],
-        ["Persistence", {}]
+        ["Persistence", _fnc_tabPersistence]
     ];
 
     {
