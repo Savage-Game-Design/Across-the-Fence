@@ -166,11 +166,8 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\core\client\ui);
         class update_loading_screen {};
-        class init_loading_text {};
         class progressBar {};
         class handle_light_level_loop {};
-        class handle_welcome_screen {};
-        class init_info_panel_handler_loop {};
         class stack_controls {};
         class toggle_controls_group_overlay {};
     };
