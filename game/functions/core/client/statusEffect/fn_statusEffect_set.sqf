@@ -2,7 +2,7 @@
     File: fnc_statusEffect_set.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-08-21
+    Last Update: 2023-09-02
     Public: Yes
 
     Description:
@@ -47,7 +47,7 @@ if (isNil "_effectsMap") then {
     }]
 };
 
-format ["Adding status effect reason: %1 | %2", _effect, _reason] call vgm_g_fnc_logInfo;
+format ["Adding status effect reason: %1 | %2", _effect, _reason] call vgm_g_fnc_logDebug;
 
 private _reasonList = _effectsMap getOrDefault [_effect, [], true];
 

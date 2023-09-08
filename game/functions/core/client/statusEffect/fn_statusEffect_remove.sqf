@@ -2,7 +2,7 @@
     File: fn_statusEffect_remove.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-08-21
+    Last Update: 2023-09-02
     Public: No
 
     Description:
@@ -34,7 +34,7 @@ if (!(_effect in vgm_c_statusEffect_allEffects)) exitWith {
 private _effectsMap = _unit getVariable "vgm_c_statusEffect_currentEffects";
 if (isNil "_effectsMap") exitWith {};
 
-format ["Removing status effect reason: %1 | %2", _effect, _reason] call vgm_g_fnc_logInfo;
+format ["Removing status effect reason: %1 | %2", _effect, _reason] call vgm_g_fnc_logDebug;
 
 private _reasonList = _effectsMap getOrDefault [_effect, [], true];
 

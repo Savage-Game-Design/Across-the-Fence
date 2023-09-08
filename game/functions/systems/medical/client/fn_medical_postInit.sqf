@@ -2,7 +2,7 @@
     File: fn_medical_postInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-01
+    Last Update: 2023-09-02
     Public: No
 
     Description:
@@ -33,3 +33,4 @@ vgm_c_medical_respawnEH = player addEventHandler ["Respawn", {
 ["bleeding", {call vgm_c_fnc_medical_statusEffectBleeding}] call vgm_c_fnc_statusEffect_create;
 
 [] call vgm_c_fnc_medical_feedback_init;
+[] call vgm_c_fnc_medical_injuryEffects_init;
