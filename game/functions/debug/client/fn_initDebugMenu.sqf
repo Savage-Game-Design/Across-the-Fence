@@ -46,6 +46,9 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
     _ctrlTabs ctrlSetPosition [_xBase, _yBase, _wTotal, _hTabs];
     _ctrlTabs ctrlCommit 0;
 
+    {ctrlDelete _x} forEach (_display getVariable ["vgm_debugControls", []]);
+    _display setVariable ["vgm_debugControls", [_ctrlBg, _ctrlTabs]];
+
     //----- add tabs logic
     private _fnc_tabPlayer = {
         params ["_display", "_ctrlContainer", "_containerPosition"];
