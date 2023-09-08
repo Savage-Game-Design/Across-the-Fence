@@ -99,6 +99,16 @@ class vgm_c
         VGM_CLIENT_PATH(\);
     };
 
+    class debug
+    {
+        VGM_GLOBAL_PATH(\debug\client);
+
+        class initDebugMenu
+        {
+            postInit = 1;
+        };
+    };
+
     class coefficient
     {
         VGM_CLIENT_PATH(\core\client\coefficient);
