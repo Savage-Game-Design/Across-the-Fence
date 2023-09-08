@@ -2,10 +2,10 @@
 <Project name="VGM">
     <Package name="General">
         <Key ID="STR_VGM_MISSION_NAME_VERSION">
-            <Original>GAMEMODE_NAME (#VERSION#)</Original>
+            <Original>Across the Fence (#VERSION#)</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_NAME">
-            <Original>GAMEMODE_NAME</Original>
+            <Original>Across the Fence</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_VERSION">
             <Original>#VERSION#</Original>
