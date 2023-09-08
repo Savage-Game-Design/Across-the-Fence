@@ -180,10 +180,60 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         _sections = _sections + 1;
     };
 
+    private _fnc_tabMedical = {
+        params ["_display", "_ctrlContainer", "_containerPosition"];
+        _containerPosition params ["", "", "_w", "_h"];
+        private _unit = player;
+
+        #define LIST_H (_h/3)
+        private _sections = 0;
+
+        // medical data
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Medical:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
+
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
+
+            _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+            _ctrlList lnbAddRow ["dmg modifiers", str count vgm_c_medical_damageModifiers];
+            _ctrlList lnbAddRow ["dmg structural", str damage _unit];
+            _ctrlList lnbAddRow ["visual bleed", str getBleedingRemaining _unit];
+        };
+        _sections = _sections + 1;
+
+        // wounds
+        call {
+            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+            _ctrlLabel ctrlSetText "Wounds:";
+            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
+            _ctrlLabel ctrlCommit 0;
+
+            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+            _ctrlList ctrlCommit 0;
+
+            _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+            private _woundVarPrefix = "vgm_g_medical_wound";
+            {
+                private _bodyPart = _x select [count _woundVarPrefix + 1];
+                _ctrlList lnbAddRow [_bodyPart, str (_unit getVariable [_x, -1])];
+            } forEach (allVariables _unit select {_x find _woundVarPrefix == 0});
+        };
+        _sections = _sections + 1;
+    };
+
     //----- add tabs
     private _tabs = [
         ["Player state", _fnc_tabPlayer],
-        ["Persistence", _fnc_tabPersistence]
+        ["Persistence", _fnc_tabPersistence],
+        ["Medical state", _fnc_tabMedical]
     ];
 
     {
