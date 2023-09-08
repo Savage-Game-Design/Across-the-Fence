@@ -148,6 +148,18 @@ class vgm_c
         class missions_startDeploy {};
     };
 
+    class loading
+    {
+        VGM_CLIENT_PATH(\core\client\loading);
+
+        class loading_addHandler {};
+        class loading_postInit
+        {
+            postInit = 1;
+        };
+        class loading_setText {};
+    };
+
     class status_effect
     {
         VGM_CLIENT_PATH(\core\client\statusEffect);

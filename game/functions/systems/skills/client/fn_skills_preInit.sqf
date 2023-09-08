@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2023-02-25
+    Last Update: 2023-09-09
     Public: No
 
     Description:
@@ -37,3 +37,7 @@ vgm_c_skills_appliedSkillsPaths = [];
 }] call para_g_fnc_event_subscribeLocal;
 
 [] call vgm_c_fnc_skills_active_init;
+
+["skills", {
+    !isNil {player getVariable "vgm_g_skillsData"}
+}] call vgm_c_fnc_loading_addHandler;
