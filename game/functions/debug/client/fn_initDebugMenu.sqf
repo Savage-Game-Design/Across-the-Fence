@@ -49,26 +49,37 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         _containerPosition params ["", "", "_w", "_h"];
         private _unit = player;
 
+        #define LIST_H (_h/3)
         private _ctrlStatusLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
         _ctrlStatusLabel ctrlSetText "Status effects:";
         _ctrlStatusLabel ctrlSetPosition [0, 0, _w, GUI_GRID_H];
         _ctrlStatusLabel ctrlCommit 0;
 
         private _ctrlStatusList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-        _ctrlStatusList ctrlSetPosition [0, GUI_GRID_H, _w, _h/2 - GUI_GRID_H];
+        _ctrlStatusList ctrlSetPosition [0, GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
         _ctrlStatusList ctrlCommit 0;
 
         private _ctrlCoefLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
         _ctrlCoefLabel ctrlSetText "Coefficients:";
-        _ctrlCoefLabel ctrlSetPosition [0, _h/2, _w, GUI_GRID_H];
+        _ctrlCoefLabel ctrlSetPosition [0, LIST_H, _w, GUI_GRID_H];
         _ctrlCoefLabel ctrlCommit 0;
 
         private _ctrlCoefList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-        _ctrlCoefList ctrlSetPosition [0, _h/2 + GUI_GRID_H, _w, _h/2 - GUI_GRID_H];
+        _ctrlCoefList ctrlSetPosition [0, LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
         _ctrlCoefList ctrlCommit 0;
+
+        private _ctrlVarLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+        _ctrlVarLabel ctrlSetText "Variables:";
+        _ctrlVarLabel ctrlSetPosition [0, LIST_H * 2, _w, GUI_GRID_H];
+        _ctrlVarLabel ctrlCommit 0;
+
+        private _ctrlVarList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+        _ctrlVarList ctrlSetPosition [0, LIST_H * 2 + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
+        _ctrlVarList ctrlCommit 0;
 
         _ctrlStatusList lnbSetColumnsPos [0.1, 0.5];
         _ctrlCoefList lnbSetColumnsPos [0.1, 0.5, 0.7];
+        _ctrlVarList lnbSetColumnsPos [0.1, 0.5];
 
         // status effects
         {
@@ -101,6 +112,20 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
             };
             _ctrlCoefList lnbSetTooltip [[_row, 0], _reasons joinString endl];
         } forEach vgm_c_coefficient_allCoefficients;
+
+        // variables
+        {
+            private _variable = _x;
+            private _value = _unit getVariable [_x, "nil"];
+
+            private _row = _ctrlVarList lnbAddRow [
+                _variable,
+                str _value
+            ];
+        } forEach [
+            "vgm_stamina",
+            "vgm_stamina_exhausted"
+        ];
     };
 
     //----- add tabs
