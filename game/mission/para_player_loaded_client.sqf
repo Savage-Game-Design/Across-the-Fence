@@ -51,4 +51,4 @@ player addEventHandler ["Respawn", _fnc_disableChatter];
 player enableSimulation false;
 
 // Start loading screen, so we wait while server init completes.
-startLoadingScreen [localize "STR_VGM_MISSION_NAME/*, "MikeForce_loadingScreen"*/];
+startLoadingScreen [localize "STR_VGM_MISSION_NAME"/*, "MikeForce_loadingScreen"*/];
