@@ -26,7 +26,7 @@ vgm_c_debugMenu_addSection = {
     if (isNil "_sections") then {_sections = 0};
 
     private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-    _ctrlLabel ctrlSetText format ["%1", _title];
+    _ctrlLabel ctrlSetText format ["%1:", _title];
     _ctrlLabel ctrlSetPosition [0, _sections * _sectionH, _w, GUI_GRID_H];
     _ctrlLabel ctrlCommit 0;
 
