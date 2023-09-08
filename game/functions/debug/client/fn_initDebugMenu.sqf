@@ -19,9 +19,25 @@
         [] call vgm_c_fnc_initDebugMenu
  */
 
-if (!isNil "vgm_c_debugMenuEH") then {
-    // makes development easier
-    [true, "OnGameInterrupt", vgm_c_debugMenuEH] call BIS_fnc_removeScriptedEventHandler;
+// internal function,
+// should be only executed in the context of debug menu tab handlers
+vgm_c_debugMenu_addSection = {
+    params ["_title", "_fnc_addData"];
+    if (isNil "_sections") then {_sections = 0};
+
+    private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
+    _ctrlLabel ctrlSetText format ["%1", _title];
+    _ctrlLabel ctrlSetPosition [0, _sections * _sectionH, _w, GUI_GRID_H];
+    _ctrlLabel ctrlCommit 0;
+
+    private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
+    _ctrlList ctrlSetPosition [0, _sections * _sectionH + GUI_GRID_H, _w, _sectionH - GUI_GRID_H];
+    _ctrlList ctrlCommit 0;
+
+    _ctrlList lnbSetColumnsPos [0.1, 0.5];
+
+    _ctrlList call _fnc_addData;
+    _sections = _sections + 1;
 };
 
 vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
@@ -55,56 +71,32 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         _containerPosition params ["", "", "_w", "_h"];
         private _unit = player;
 
-        #define LIST_H (_h/3)
+        private _sectionH = _h/3;
         private _sections = 0;
 
-        // status effects
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Status effects:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5];
-
+        ["Status effects", {
             {
                 private _status = _x;
                 private _state = [_unit, _status] call vgm_c_fnc_statusEffect_get;
 
-                private _row = _ctrlList lnbAddRow [
+                private _row = _this lnbAddRow [
                     _status,
                     str _state
                 ];
 
                 private _reasons = _unit getVariable "vgm_c_statusEffect_currentEffects" get _status;
-                _ctrlList lnbSetTooltip [[_row, 0], _reasons joinString endl];
+                _this lnbSetTooltip [[_row, 0], _reasons joinString endl];
             } forEach vgm_c_statusEffect_allEffects;
-        };
-        _sections = _sections + 1;
+        }] call vgm_c_debugMenu_addSection;
 
-        // coefficients
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Coefficients:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5, 0.65];
-
+        ["Coefficients", {
+            _this lnbSetColumnsPos [0.1, 0.5, 0.65];
             {
                 private _coefficient = _x;
                 private _baseValue = _y get "baseValue";
                 private _value = [_unit, _coefficient] call vgm_c_fnc_coefficient_get;
 
-                private _row = _ctrlList lnbAddRow [
+                private _row = _this lnbAddRow [
                     _coefficient,
                     str _value,
                     str _baseValue
@@ -113,29 +105,16 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
                 private _reasons = _unit getVariable "vgm_c_coefficient_currentCoefficients" get _coefficient apply {
                     [_x, _y#0, ["", "persistent"] select _y#1] joinString " "
                 };
-                _ctrlList lnbSetTooltip [[_row, 0], _reasons joinString endl];
+                _this lnbSetTooltip [[_row, 0], _reasons joinString endl];
             } forEach vgm_c_coefficient_allCoefficients;
-        };
-        _sections = _sections + 1;
+        }] call vgm_c_debugMenu_addSection;
 
-        // variables
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Variables:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5];
-
+        ["Variables", {
             {
                 private _variable = _x;
                 private _value = _unit getVariable [_x, "nil"];
 
-                private _row = _ctrlList lnbAddRow [
+                private _row = _this lnbAddRow [
                     _variable,
                     str _value
                 ];
@@ -143,7 +122,7 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
                 "vgm_stamina",
                 "vgm_stamina_exhausted"
             ];
-        };
+        }] call vgm_c_debugMenu_addSection;
     };
 
     private _fnc_tabPersistence = {
@@ -151,48 +130,24 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         _containerPosition params ["", "", "_w", "_h"];
         private _unit = player;
 
-        #define LIST_H (_h/4)
+        private _sectionH = _h/4;
         private _sections = 0;
 
         // leveling data
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Leveling:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5];
-
+        ["Leveling", {
             private _levelingData = _unit getVariable "vgm_g_levelingData";
             private _level = _levelingData get "level";
-            _ctrlList lnbAddRow ["level", str _level];
-            _ctrlList lnbAddRow ["xp", str (_levelingData get "experience")];
-            _ctrlList lnbAddRow ["next level xp", str (vgm_g_leveling_levelsHashMap get _level get "experienceThreshold")];
-        };
-        _sections = _sections + 1;
+            _this lnbAddRow ["level", str _level];
+            _this lnbAddRow ["xp", str (_levelingData get "experience")];
+            _this lnbAddRow ["next level xp", str (vgm_g_leveling_levelsHashMap get _level get "experienceThreshold")];
+        }] call vgm_c_debugMenu_addSection;
 
         // skills data
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Skills:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5];
-
+        ["Skills", {
             private _skillsData = _unit getVariable "vgm_g_skillsData";
-            _ctrlList lnbAddRow ["skill points", str ([] call vgm_c_fnc_skills_getSkillPoints)];
-            _ctrlList lnbAddRow ["spent skill points", str (_skillsData get "skillPointsSpent")];
-        };
-        _sections = _sections + 1;
+            _this lnbAddRow ["skill points", str ([] call vgm_c_fnc_skills_getSkillPoints)];
+            _this lnbAddRow ["spent skill points", str (_skillsData get "skillPointsSpent")];
+        }] call vgm_c_debugMenu_addSection;
     };
 
     private _fnc_tabMedical = {
@@ -200,48 +155,24 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         _containerPosition params ["", "", "_w", "_h"];
         private _unit = player;
 
-        #define LIST_H (_h/3)
+        private _sectionH = _h/3;
         private _sections = 0;
 
         // medical data
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Medical:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5];
-
+        ["Medical", {
             _ctrlList lnbAddRow ["dmg modifiers", str count vgm_c_medical_damageModifiers];
             _ctrlList lnbAddRow ["dmg structural", str damage _unit];
             _ctrlList lnbAddRow ["visual bleed", str getBleedingRemaining _unit];
-        };
-        _sections = _sections + 1;
+        }] call vgm_c_debugMenu_addSection;
 
         // wounds
-        call {
-            private _ctrlLabel = _display ctrlCreate ["RscText", -1, _ctrlContainer];
-            _ctrlLabel ctrlSetText "Wounds:";
-            _ctrlLabel ctrlSetPosition [0, _sections * LIST_H, _w, GUI_GRID_H];
-            _ctrlLabel ctrlCommit 0;
-
-            private _ctrlList = _display ctrlCreate ["RscListNBox", -1, _ctrlContainer];
-            _ctrlList ctrlSetPosition [0, _sections * LIST_H + GUI_GRID_H, _w, LIST_H - GUI_GRID_H];
-            _ctrlList ctrlCommit 0;
-
-            _ctrlList lnbSetColumnsPos [0.1, 0.5];
-
+        ["Wounds", {
             private _woundVarPrefix = "vgm_g_medical_wound";
             {
                 private _bodyPart = _x select [count _woundVarPrefix + 1];
-                _ctrlList lnbAddRow [_bodyPart, str (_unit getVariable [_x, -1])];
+                _this lnbAddRow [_bodyPart, str (_unit getVariable [_x, -1])];
             } forEach (allVariables _unit select {_x find _woundVarPrefix == 0});
-        };
-        _sections = _sections + 1;
+        }] call vgm_c_debugMenu_addSection;
     };
 
     //----- add tabs
