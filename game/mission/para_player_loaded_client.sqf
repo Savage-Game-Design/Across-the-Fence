@@ -51,5 +51,4 @@ player addEventHandler ["Respawn", _fnc_disableChatter];
 player enableSimulation false;
 
 // Start loading screen, so we wait while server init completes.
-startLoadingScreen ["Welcome to Mike Force!"/*, "MikeForce_loadingScreen"*/];
-//Spoffy TODO: Probably change this to 'Tour of Duty'. Maybe this should pull from a string table for localization /shrug
+startLoadingScreen [localize "STR_VGM_MISSION_NAME"/*, "MikeForce_loadingScreen"*/];
