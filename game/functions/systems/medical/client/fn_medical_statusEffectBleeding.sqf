@@ -3,7 +3,7 @@
     File: fn_medical_statusEffectBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-09-02
+    Last Update: 2023-09-13
     Public: No
 
     Description:
@@ -31,8 +31,10 @@ if (!_bleeding) exitWith {
     if (isPlayer _unit) then {-1 call vgm_c_fnc_medical_feedbackBleeding};
 };
 
+private _bleedOutTime = BLEED_OUT_TIME * ([_unit, "bleedOut"] call vgm_c_fnc_coefficient_get);
+
 // visual bleeding effect, stops when `damage _unit` < 0.1
-_unit setBleedingRemaining BLEED_OUT_TIME;
+_unit setBleedingRemaining _bleedOutTime;
 
 format ["Starting bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;
 
@@ -68,6 +70,6 @@ private _eh = addMissionEventHandler ["EachFrame", {
     };
 
     _thisArgs set [0, _deltaT];
-}, [0, _unit, time + BLEED_OUT_TIME]];
+}, [0, _unit, time + _bleedOutTime]];
 
 _unit setVariable ["vgm_c_medical_bleedingEachFrameEH", _eh];
