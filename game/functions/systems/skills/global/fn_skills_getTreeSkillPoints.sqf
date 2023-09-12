@@ -2,7 +2,7 @@
     File: fn_skills_getTreeSkillPoints.sqf
     Author: Savage Game Design
     Date: 2023-05-13
-    Last Update: 2023-06-16
+    Last Update: 2023-05-21
     Public: No
 
     Description:

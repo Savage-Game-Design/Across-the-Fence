@@ -1,0 +1,234 @@
+#include "..\..\..\..\functions\systems\medical\client\script_component.inc"
+#include "macros.inc"
+/*
+    File: fn_displayMedical.sqf
+    Author: Savage Game Design
+    Date: 2023-05-18
+    Last Update: 2023-09-03
+    Public: No
+
+    Description:
+        Adds functionality to the Medical UI.
+
+    Parameter(s):
+        _mode - Determines the part of this function to execute [STRING]
+        _this - Parameters for the given _mode [ARRAY]
+
+    Returns:
+        nil [NOTHING]
+
+    Example(s):
+        ["onLoad", [findDisplay 28000]] call vgm_c_fnc_displayMedical;
+*/
+
+#define SELF vgm_c_fnc_displayMedical
+#define HEALER player
+#define MENU_TARGET (missionNamespace getVariable ["vgm_c_medical_menuTarget", player])
+
+#define COLOR_NONE 1,1,1
+#define COLOR_MINOR 0.89,0.8,0
+#define COLOR_MAJOR 0.9,0.1,0
+#define COLOR_SEVERE 0.58,0,0
+#define COLOR_ARR [[COLOR_NONE], [COLOR_MINOR], [COLOR_MAJOR], [COLOR_SEVERE]]
+
+#if __A3_DEBUG__
+    diag_log ["fn_displayMedical", _this];
+#endif
+
+params ["_mode", "_this"];
+
+switch _mode do {
+    case "onLoad": {
+        params ["_display"];
+
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        _ctrlTreatment ctrlShow false;
+
+        ["refreshUI", _display] call SELF;
+        _display spawn {
+            waitUntil {
+                uiSleep 1;
+                isNil {["refreshUI", _this] call SELF};
+                isNull _this // return
+            };
+        };
+    };
+
+    case "refreshUI": {
+        params ["_display"];
+
+        ["colorBodyParts", _this] call SELF;
+        ["updateDebuffsList", _this] call SELF;
+    };
+
+    // handle selection of body part for treatment
+    case "selectPart": {
+        params ["_ctrlPartIcon"];
+        private _display = ctrlParent _ctrlPartIcon;
+        private _visualPart = ["head", "torso", "left_arm", "right_arm", "left_leg", "right_leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
+
+        private _partData = createHashMapFromArray [
+            ["head", ["STR_VGM_MEDICAL_UI_BODY_PART_HEAD", BODY_PART_HEAD]],
+            ["torso", ["STR_VGM_MEDICAL_UI_BODY_PART_TORSO", BODY_PART_TORSO]],
+            ["left_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARMS", BODY_PART_ARMS]],
+            ["right_arm", ["STR_VGM_MEDICAL_UI_BODY_PART_ARMS", BODY_PART_ARMS]],
+            ["left_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEGS", BODY_PART_LEGS]],
+            ["right_leg", ["STR_VGM_MEDICAL_UI_BODY_PART_LEGS", BODY_PART_LEGS]]
+        ] get _visualPart;
+
+        _partData params ["_title", "_bodyPart"];
+
+        private _injuries = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+
+        private _ctrlTitle = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_TITLE;
+        _ctrlTitle ctrlSetText localize _title;
+
+        private _ctrlInjuriesCount = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_INJURIESCOUNT;
+        _ctrlInjuriesCount ctrlSetText format [localize "STR_VGM_MEDICAL_UI_INJURIES", _injuries];
+
+        // Add treatment options
+        private _ctrlOptions = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT_OPTIONS;
+        ctClear _ctrlOptions;
+        _ctrlOptions ctrlEnable (_injuries > 0);
+
+        private _healerItemCount = uniqueUnitItems [HEALER, 0, 2, 2, 2, false];
+        {
+            _x params ["_treatment", "_itemCfg", "_function"];
+
+            private _optionItems = vgm_medical_healItems get _treatment;
+            private _requiredItemCount = 0;
+            {_requiredItemCount = _requiredItemCount + (_healerItemCount getOrDefault [_x, 0])} forEach _optionItems;
+
+            (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName", "_ctrlOptionButton"];
+            _ctrlOptionIcon ctrlSetText getText (_itemCfg >> "picture");
+            _ctrlOptionName ctrlSetStructuredText parseText format [localize "STR_VGM_MEDICAL_UI_OWNED", getText (_itemCfg >> "displayName"), _requiredItemCount];
+            _ctrlOptionButton ctrlEnable (_requiredItemCount > 0);
+
+            // setup on click action
+            _ctrlOptionButton setVariable ["vgm_params", [HEALER, MENU_TARGET, _bodyPart]];
+            _ctrlOptionButton setVariable ["vgm_function", _function];
+            _ctrlOptionButton ctrlAddEventHandler ["ButtonClick", {
+                params ["_ctrlButton"];
+                (_ctrlButton getVariable "vgm_params") call (_ctrlButton getVariable "vgm_function");
+                closeDialog 0;
+            }];
+        } forEach [
+            [HEAL_FAK, configFile >> "CfgWeapons" >> "vn_helper_item_firstaidkit", vgm_c_fnc_medical_itemApplyFAK],
+            [HEAL_MEDIKIT, configFile >> "CfgWeapons" >> "vn_helper_item_medikit", vgm_c_fnc_medical_itemApplyMedikit]
+        ];
+
+        // Activate the treatment options
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        _ctrlTreatment ctrlShow true;
+        ctrlPosition _ctrlTreatment params ["","","_cw", "_ch"];
+        getMousePosition params ["_xPos", "_yPos"];
+        // Clamp position to not go offscreen
+        _ctrlTreatment ctrlSetPosition [
+            (_xPos+pixelW) min (safeZoneX + safeZoneW - _cw),
+            (_yPos+pixelH) min (safeZoneY + safeZoneH - _ch)
+        ];
+        _ctrlTreatment ctrlCommit 0;
+        ctrlSetFocus _ctrlTreatment;
+    };
+
+    // handle colorization of body parts
+    case "colorBodyParts": {
+        params ["_display"];
+
+        {
+            _x params ["_idc", "_bodyPart"];
+            private _ctrl = _display displayCtrl _idc;
+
+            private _color = COLOR_ARR select ([MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound);
+            _ctrl ctrlSetTextColor (_color + [1]);
+        } forEach [
+            [VGM_IDC_DISPLAYMEDICAL_HEAD, BODY_PART_HEAD],
+            [VGM_IDC_DISPLAYMEDICAL_ARMLEFT, BODY_PART_ARMS],
+            [VGM_IDC_DISPLAYMEDICAL_ARMRIGHT, BODY_PART_ARMS],
+            [VGM_IDC_DISPLAYMEDICAL_TORSO, BODY_PART_TORSO],
+            [VGM_IDC_DISPLAYMEDICAL_LEGLEFT, BODY_PART_LEGS],
+            [VGM_IDC_DISPLAYMEDICAL_LEGRIGHT, BODY_PART_LEGS]
+        ];
+    };
+
+    case "updateDebuffsList": {
+        params ["_display"];
+
+        private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
+        ctClear _ctrlModifierList;
+
+        {
+            private _bodyPart = _x;
+            private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
+
+            private _currentWoundLevel = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+            private _coefficients = createHashMap;
+            private _statusEffects = createHashMap;
+
+            for "_woundLevel" from WOUND_NONE to _currentWoundLeveL do {
+                private _injuryEffects = _bodyPartInjuryEffects get _woundLevel;
+
+                // insert will overwrite with latest value of the debuff
+                _coefficients insert (_injuryEffects get "coefficient");
+                _statusEffects insert (_injuryEffects get "statusEffect");
+            };
+
+            private _fnc_addRow = {
+                params ["_title", "_description", "_icon"];
+
+                (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
+                _ctrlIcon ctrlSetText _icon;
+                private _text = format ["%1<br/>%2", _title, _description];
+                _ctrlDescription ctrlSetStructuredText parseText _text;
+            };
+
+            private _icon = format (["#(rgb,1,1,1)color(%1,%2,%3,1)"] + (COLOR_ARR select _currentWoundLevel));
+            private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
+            private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
+            private _title = format ["%1 %2 Trauma", _level, _bodyPart];
+
+            // render debuff rows
+            private _effects = [];
+            {
+                if (!_y) then {continue};
+                private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
+                [_title, _statusDescription, _icon] call _fnc_addRow;
+            } forEach _statusEffects;
+
+            {
+                if (_y == 0) then {continue};
+                private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
+                _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
+                [_title, _coefDescription, _icon] call _fnc_addRow;
+            } forEach _coefficients;
+
+        } forEach BODY_PARTS_ARR;
+    };
+
+    case "mouseDown": {
+        params ["_display", "_button", "_xPos", "_yPos"];
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        // Get area of treatment options control
+        ctrlPosition _ctrlTreatment params ["_cX", "_cY", "_cW", "_cH"];
+        _cW = _cW/2;
+        _cH = _cH/2;
+        _cX = _cX + _cW;
+        _cY = _cY + _cH;
+        private _cArea = [[_cX,_cY], _cW, _cH, 0, true];
+        getMousePosition params ["_mouseX", "_mouseY"];
+        // Hide treatment options when clicked outside of treatment options group
+        // (if part is selected it will be shown again, because ButtonClick EH fires after this one)
+        if (ctrlShown _ctrlTreatment && !(getMousePosition inArea _cArea)) then {
+            _ctrlTreatment ctrlShow false;
+        };
+    };
+    case "selectTreatment": {
+        params ["_ctrlOptionButton"];
+        private _display = ctrlParent _ctrlOptionButton;
+        // Get the selected treatment option
+        private _option = _ctrlOptionButton getVariable "option";
+        // Hide the treatment options
+        private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
+        _ctrlTreatment ctrlShow false;
+    };
+};

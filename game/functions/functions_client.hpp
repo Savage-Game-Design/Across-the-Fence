@@ -28,6 +28,9 @@ class vgm_g
         class log {
             headerType = -1;
         };
+        class logDebug {
+            headerType = -1;
+        };
         class logError {
             headerType = -1;
         };
@@ -39,6 +42,36 @@ class vgm_g
         };
     };
 
+    class leveling
+    {
+        VGM_GLOBAL_PATH(\systems\leveling\global);
+
+        class leveling_parseLevelsCfg {};
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class medical
+    {
+        VGM_GLOBAL_PATH(\systems\medical\global);
+
+        class medical_postInit
+        {
+            postInit = 1;
+        };
+        class medical_replaceItems {};
+    };
+
+    class missions
+    {
+        VGM_GLOBAL_PATH(\systems\missions\global);
+
+        class missions_getHubSpawnPos {};
+    };
+
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
@@ -46,6 +79,7 @@ class vgm_g
         class skills_canLearn {};
         class skills_canSee {};
         class skills_getByPath {};
+        class skills_getTreeSkillPoints {};
         class skills_isKnown {};
         class skills_getSkillTreeFromSkill {};
         class skills_getTreeSkillPoints {};
@@ -54,6 +88,8 @@ class vgm_g
         {
             preInit = 1;
         };
+        class skills_tierInvested {};
+        class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
 };
@@ -65,6 +101,20 @@ class vgm_c
         VGM_CLIENT_PATH(\);
     };
 
+    class coefficient
+    {
+        VGM_CLIENT_PATH(\core\client\coefficient);
+
+        class coefficient_create {};
+        class coefficient_get {};
+        class coefficient_preInit
+        {
+            preInit = 1;
+        };
+        class coefficient_remove {};
+        class coefficient_set {};
+    };
+
     class displays
     {
         VGM_CLIENT_PATH(\core\client\displays);
@@ -73,6 +123,45 @@ class vgm_c
         class displayMissions {};
         class displayMissionsTargets {};
         class displayAbilityCooldown {};
+        class displayMedical {};
+        class displayStaminaBar {};
+    };
+
+    class missions
+    {
+        VGM_CLIENT_PATH(\systems\missions\client);
+        class missions_getCurrentMission {};
+        class missions_getMissions {};
+        class missions_makeMissionGiver {};
+        class missions_preInit {
+            preInit = 1;
+        };
+        class missions_postInit {
+            postInit = 1;
+        };
+    };
+
+    class missions_internal
+    {
+        VGM_CLIENT_PATH(\systems\missions\client\internal);
+
+        class missions_endMission {};
+        class missions_finishDeploy {};
+        class missions_startDeploy {};
+    };
+
+    class status_effect
+    {
+        VGM_CLIENT_PATH(\core\client\statusEffect);
+
+        class statusEffect_create {};
+        class statusEffect_get {};
+        class statusEffect_preInit
+        {
+            preInit = 1;
+        };
+        class statusEffect_remove {};
+        class statusEffect_set {};
     };
 
     class ui
@@ -80,6 +169,7 @@ class vgm_c
         VGM_CLIENT_PATH(\core\client\ui);
         class update_loading_screen {};
         class init_loading_text {};
+        class progressBar {};
         class handle_light_level_loop {};
         class handle_welcome_screen {};
         class init_info_panel_handler_loop {};
@@ -94,6 +184,69 @@ class vgm_c
         class sharedHub_areaLimiterDisable {};
         class sharedHub_areaLimiterEnable {};
         class sharedHub_teleportPlayerToHub {};
+    };
+
+    class leveling
+    {
+        VGM_CLIENT_PATH(\systems\leveling\client);
+
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+        class leveling_postInit
+        {
+            postInit = 1;
+        };
+    };
+
+    class medical
+    {
+        VGM_CLIENT_PATH(\systems\medical\client);
+
+        class medical_addDamageModifier {};
+        class medical_addWound {};
+        class medical_fullHeal {};
+        class medical_getArmorHitPoint {};
+        class medical_getArmorItem {};
+        class medical_getWound {};
+        class medical_handleDamage {};
+        class medical_itemApply {};
+        class medical_itemApplyFAK {};
+        class medical_itemApplyMedikit {};
+        class medical_openMedicalMenu {};
+        class medical_postInit
+        {
+            postInit = 1;
+        };
+        class medical_preInit
+        {
+            preInit = 1;
+        };
+        class medical_receiveDamage {};
+        class medical_removeWound {};
+        class medical_setStructuralDamage {};
+        class medical_setUnconscious {};
+        class medical_shouldBleed {};
+        class medical_statusEffectBleeding {};
+        class medical_updateVisuals {};
+    };
+
+    class medical_feedback
+    {
+        VGM_CLIENT_PATH(\systems\medical\client\feedback);
+
+        class medical_feedback_init {};
+        class medical_feedbackBleeding {};
+        class medical_feedbackHit {};
+    };
+
+    class medical_injury_effects
+    {
+        VGM_CLIENT_PATH(\systems\medical\client\injuryEffects);
+
+        class medical_injuryEffects_init {};
+        class medical_injuryEffectsUpdate {};
     };
 
     class skills
@@ -147,12 +300,31 @@ class vgm_c
         class skill_passive_increasedAccuracy {};
         class skill_passive_steadyAimPassive {};
         class skill_passive_athletic {};
-    }
+    };
 
     class skill_active
     {
         VGM_CLIENT_PATH(\systems\skill\actives);
 
         class skill_active_hoofIt {};
-    }
+    };
+
+    class stamina
+    {
+        VGM_CLIENT_PATH(\systems\stamina\client);
+
+        class stamina_getAnimCoef
+        {
+            headerType = -1;
+        };
+        class stamina_preInit
+        {
+            preInit = 1;
+        };
+        class stamina_postInit
+        {
+            postInit = 1;
+        };
+        class stamina_unitInit {};
+    };
 };

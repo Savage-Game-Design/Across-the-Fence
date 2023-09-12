@@ -1,0 +1,18 @@
+/*
+_agent = [] call compileScript ["functions\systems\medical\client\dev\createDummy.sqf"];
+
+_agent addVest "vn_b_vest_usmc_01";
+_agent addVest "V_PlateCarrierGL_blk";
+*/
+
+private _pos = positionCameraToWorld [0,10,0];
+private _agent = createAgent ["vn_b_men_sf_01", _pos, [], 0, "CAN_COLLIDE"];
+_agent setUnitLoadout [[],[],[],[],[],[],"","",[],["","","","","",""]];
+
+_agent addEventHandler ["HandleDamage", {call vgm_c_fnc_medical_handleDamage}];
+
+["vgm_medical_addAction", _agent] call para_g_fnc_event_triggerGlobal;
+
+player reveal _agent;
+
+_agent // return

@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-05-21
+    Last Update: 2023-06-02
     Public: Yes
 
     Description:
@@ -22,6 +22,11 @@ params [
     ["_cfgSkillTrees", configNull, [configNull]]
 ];
 
+if (isNull _cfgSkillTrees) exitWith {
+    ["Skill trees config is null"] call vgm_g_fnc_logError;
+    createHashMap
+};
+
 #define SKILL_TIERS ["tier_1", "tier_2", "tier_3", "tier_4"]
 
 private _fnc_parseSkillTree = {
@@ -32,7 +37,8 @@ private _fnc_parseSkillTree = {
         ["path", _path],
         ["displayName", getText (_cfgSkillTree >> "displayName")],
         ["description", getText (_cfgSkillTree >> "description")],
-        ["skills", []]
+        ["skills", []],
+        ["skillPointsMax", 0]
     ];
     private _cfgSkills = _cfgSkillTree >> "skills";
     {
@@ -59,6 +65,14 @@ private _fnc_parseSkillTree = {
                 ["codeActivate", compileFinal getText (_x >> "codeActivate")]
             ];
         };
+
+        private _skillPointsMax = _skillTree get "skillPointsMax";
+        {
+            _skillPointsMax = _skillPointsMax + (_x get "cost");
+            // only one skill can be invested in first tier, break the loop
+            if (_tier == 0) exitWith {};
+        } forEach _skills;
+        _skillTree set ["skillPointsMax", _skillPointsMax];
 
         _skillTree get "skills" pushBack _skills;
     } forEach SKILL_TIERS;
