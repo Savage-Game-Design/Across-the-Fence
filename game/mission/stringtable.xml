@@ -160,10 +160,10 @@
     </Package>
     <Package name="Skills Skill">
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
-            <Original>-1% Weapon recoil per point</Original>
+            <Original>-25% Weapon recoil</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
-            <Original>+1% Bleedout time per point</Original>
+            <Original>20% Slower bleedout</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_QUICK">
             <Original>+10% Stamina Regen Rate</Original>

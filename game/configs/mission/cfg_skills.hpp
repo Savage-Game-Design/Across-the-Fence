@@ -28,11 +28,11 @@ class vgm_skillTrees {
         // rifleman skills
         class skills {
             class tier_1 {
-                class steadyAim: vgm_skillTemplate {
+                class steadyHand: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
 
-                    codeApply = "call vgm_c_fnc_skill_passive_increasedAccuracy";
-                    codeUnapply = "player setUnitRecoilCoefficient 1";
+                    codeApply = "[player, 'recoil', 'skills', -0.25] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'recoil', 'skills', 0] call vgm_c_fnc_coefficient_set";
                     skillType = 0;
                     applyOnRespawn = 1;
                 };
@@ -40,7 +40,10 @@ class vgm_skillTrees {
                 class tough: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH";
 
-                    cost = 1e10; // prevent learning until medical system is done
+                    codeApply = "[player, 'bleedOut', 'skills', 0.2] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'bleedOut', 'skills', 0] call vgm_c_fnc_coefficient_set";
+                    skillType = 0;
+                    applyOnRespawn = 1;
                 };
             };
 
