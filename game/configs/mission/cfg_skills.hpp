@@ -48,23 +48,26 @@ class vgm_skillTrees {
             };
 
             class tier_2 {
-                class quick: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_QUICK";
-                    applyOnRespawn = 1;
-                    cost = 1e10; // prevent learning until custom stamina system is done
-                };
+                class loadout_containers: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_CONTAINERS";
 
-                class advancedLoadout: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC";
+                    applyOnRespawn = 1;
                     cost = 3;
                 };
 
-                class athletic: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC";
-                    codeApply = "call vgm_c_fnc_skill_passive_athletic";
-                    codeUnapply = "player setUnitTrait ['loadCoef', 1]";
-                    applyOnRespawn = 1;
+                class overprepared: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passive_overprepared";
+                    codeUnapply = "false call vgm_c_fnc_skill_passive_overprepared";
+                    cost = 3;
+                };
+
+                class loadout: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_DESC";
+
                     cost = 3;
                 };
             };
@@ -72,7 +75,7 @@ class vgm_skillTrees {
             class tier_3 {
                 class moreAmmo: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO";
-                    cost = 1e10;
+                    cost = 4;
                 };
 
                 class hoofIt: vgm_skillTemplate {
@@ -89,7 +92,7 @@ class vgm_skillTrees {
                 class combatSalvaging: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING";
                     description = "STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC";
-                    cost = 10e1;
+                    cost = 4;
                     skillType = 2;
                 };
             };

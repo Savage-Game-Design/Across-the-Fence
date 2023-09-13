@@ -165,17 +165,26 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
             <Original>20% Slower bleedout</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_QUICK">
-            <Original>+10% Stamina Regen Rate</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_CONTAINERS">
+            <Original>Vests and Backpacks</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT">
-            <Original>Advanced Rifleman Loadout</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_CONTAINERS_DESC">
+            <Original>Unlocks Vests and Backpacks in the Arsenal</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT">
+            <Original>Rifleman Loadout</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
             <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ATHLETIC">
-            <Original>+10% Stamina Regen Rate</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED">
+            <Original>Overprepared</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC">
+            <Original>The first time you run out of ammo for your primary weapon, receive two more magazines</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_ACTIVATED">
+            <Original>Overprepared activated</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO">
             <Original>+25% Ammo for all loadouts</Original>

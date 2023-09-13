@@ -297,9 +297,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\passives);
 
-        class skill_passive_increasedAccuracy {};
-        class skill_passive_steadyAimPassive {};
-        class skill_passive_athletic {};
+        class skill_passive_overprepared {};
     };
 
     class skill_active
