@@ -2,7 +2,7 @@
     File: fn_skill_passive_overprepared.sqf
     Author: Savage Game Design
     Date: 2023-09-13
-    Last Update: 2023-09-13
+    Last Update: 2023-09-14
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        true call vgm_c_fnc_skill_passive_overprepared
+        true call vgm_c_fnc_skill_passives_overprepared
  */
 
 params ["_known"];

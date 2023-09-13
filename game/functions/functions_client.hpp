@@ -79,10 +79,9 @@ class vgm_g
         class skills_canLearn {};
         class skills_canSee {};
         class skills_getByPath {};
-        class skills_getTreeSkillPoints {};
-        class skills_isKnown {};
         class skills_getSkillTreeFromSkill {};
         class skills_getTreeSkillPoints {};
+        class skills_isKnown {};
         class skills_parseTreeCfg {};
         class skills_preInit
         {
@@ -293,18 +292,19 @@ class vgm_c
         class skills_requestSkillsData {};
     };
 
-    class skill_passive
+    class skill_passives
     {
         VGM_CLIENT_PATH(\systems\skill\passives);
 
-        class skill_passive_overprepared {};
+        class skill_passives_bornLeader {};
+        class skill_passives_overprepared {};
     };
 
-    class skill_active
+    class skill_actives
     {
         VGM_CLIENT_PATH(\systems\skill\actives);
 
-        class skill_active_hoofIt {};
+        class skill_actives_steadyAim {};
     };
 
     class stamina

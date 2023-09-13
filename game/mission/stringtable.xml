@@ -159,6 +159,7 @@
         </Key>
     </Package>
     <Package name="Skills Skill">
+        <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
         </Key>
@@ -186,30 +187,25 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_ACTIVATED">
             <Original>Overprepared activated</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO">
-            <Original>+25% Ammo for all loadouts</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
+            <Original>Steady Aim</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT">
-            <Original>Hoof It!</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC">
+            <Original>For the next 30 seconds, your weapon sway is reduced by 100%</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_APPLY">
-            <Original>You feel a sudden burst of energy!</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER">
+            <Original>Born Leader</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_UNAPPLY">
-            <Original>You feel tired again.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC">
+            <Original>Reduce the cooldown time of all ally abilities by 20% (Global cap at 50%)</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC">
-            <Original>Suffer no stamina drain for 30 seconds</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON">
+            <Original>Lucky-Son-Of-A-Bitch</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING">
-            <Original>Combat Salvaging</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC">
+            <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC">
-            <Original>Combat Salvaging</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_STEADY_AIM_PASSIVE">
-            <Original>-1% Weapon sway per point</Original>
-        </Key>
+
         <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HARDENED">
             <Original>+1% Outgoing Suppression per point</Original>
         </Key>
@@ -246,6 +242,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_AUTORIFLEMAN_HEADS_DOWN_DESC">
             <Original>For the next 60 seconds, enemies you shoot at will suffer major penalties and will drop prone.</Original>
         </Key>
+
         <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_HIT_SHRUG">
             <Original>+.75% Hit Shrug Chance</Original>
         </Key>
@@ -276,12 +273,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_INTENTIONAL_SHOT_PLACEMENT_DESC">
             <Original>For the next 60 seconds, firing in semi-auto makes all non-headshots count as torso shots.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE">
-            <Original>Steady Aim</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SHARPSHOOTER_STEADY_AIM_ACTIVE_DESC">
-            <Original>For the next 30 seconds, your weapon sway is reduced by 100%.</Original>
-        </Key>
+
         <Key ID="STR_VGM_SKILLS_SKILL_SERVICE_STABILIZER">
             <Original>+1% Stabilization per point</Original>
         </Key>

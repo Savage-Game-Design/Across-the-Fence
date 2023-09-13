@@ -59,8 +59,8 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC";
 
-                    codeApply = "true call vgm_c_fnc_skill_passive_overprepared";
-                    codeUnapply = "false call vgm_c_fnc_skill_passive_overprepared";
+                    codeApply = "true call vgm_c_fnc_skill_passives_overprepared";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_overprepared";
                     cost = 3;
                 };
 
@@ -73,25 +73,30 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
-                class moreAmmo: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_MORE_AMMO";
+                class bornLeader: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_bornLeader";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_bornLeader";
                     cost = 4;
                 };
 
-                class hoofIt: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_HOOFIT_DESC";
-                    codeActivate = "call vgm_c_fnc_skill_active_hoofIt";
+                class steadyAim: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_steadyAim";
                     skillType = 1;
                     cost = 4;
-                    cooldown = 150;
+                    cooldown = 120;
                 };
             };
 
             class tier_4 {
-                class combatSalvaging: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING";
-                    description = "STR_VGM_SKILLS_SKILL_RIFLEMAN_COMBATSALVAGING_DESC";
+                class luckySon: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON";
+                    description = "STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
                     cost = 4;
                     skillType = 2;
                 };
