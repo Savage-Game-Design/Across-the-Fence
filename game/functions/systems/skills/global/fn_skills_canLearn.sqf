@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-05-21
+    Last Update: 2023-09-14
     Public: Yes
 
     Description:
@@ -28,7 +28,7 @@ private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
 
 ((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
 && {
-    private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
+    private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
     private _tier = _skill get "tier";
     (
         _tier >= 1
