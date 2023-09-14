@@ -20,4 +20,4 @@
 
 params ["_mission"];
 
-terminate (_mission get "overlord_fsm");
+(_mission get "overlord_fsm") setFSMVariable ["_forceStop", true];
