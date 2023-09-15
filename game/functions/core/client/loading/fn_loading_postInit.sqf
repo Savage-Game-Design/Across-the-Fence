@@ -15,6 +15,8 @@
         Nothing
  */
 
+#define TIMEOUT 10
+
 ["vgm_loading", "", "VGM_DisplayLoading"] call BIS_fnc_startLoadingScreen;
 localize "STR_LOADING" call vgm_c_fnc_loading_setText;
 0 call BIS_fnc_progressLoadingScreen;
@@ -23,6 +25,7 @@ private _handlers = missionNamespace getVariable ["vgm_loading_handlers", []];
 [_handlers] spawn {
     params ["_handlers"];
 
+    private _timeout = diag_tickTime + TIMEOUT;
     private _total = count _handlers;
     while {count _handlers > 0} do {
         {
@@ -38,6 +41,25 @@ private _handlers = missionNamespace getVariable ["vgm_loading_handlers", []];
         ] call vgm_c_fnc_loading_setText;
 
         (1 - (count _handlers / _total)) call BIS_fnc_progressLoadingScreen;
+
+        if (diag_tickTime > _timeout) then {
+            private _msg = format ["Loading handlers did not complete: %1", _handlers apply {_x get "name"}];
+            _msg call vgm_g_fnc_logError;
+
+            // show error to admins and let them get into the mission
+            if (isServer || {call BIS_fnc_admin > 0} || {call BIS_fnc_isDebugConsoleAllowed}) exitWith {
+                _msg spawn {
+                    waitUntil {!isNull call BIS_fnc_displayMission};
+                    [_this, "Error"] call BIS_fnc_GUImessage;
+                };
+                break;
+            };
+
+            // kick normal player out of the mission
+            failMission "TimedOut";
+            break;
+        };
+
         uiSleep 0.1;
     };
 
