@@ -2,20 +2,17 @@
     File: fn_loading_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-08
-    Last Update: 2023-09-09
+    Last Update: 2023-09-15
     Public: No
 
     Description:
-        No description added yet.
+        Client postInit function for loading system.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
-
-    Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        Nothing
  */
 
 ["vgm_loading", "", "VGM_DisplayLoading"] call BIS_fnc_startLoadingScreen;
