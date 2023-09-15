@@ -29,9 +29,14 @@ private _handlers = missionNamespace getVariable ["vgm_loading_handlers", []];
     private _total = count _handlers;
     while {count _handlers > 0} do {
         {
-            if (call (_x get "handler")) then {
-                _handlers deleteAt _forEachIndex;
+            // spawn handlers to prevent them from breaking current script
+            private _script = [_x, _handlers, _forEachIndex] spawn {
+                params ["_x", "_handlers", "_forEachIndex"];
+                if (call (_x get "handler")) then {
+                    _handlers deleteAt _forEachIndex;
+                };
             };
+            waitUntil {scriptDone _script};
         } forEachReversed _handlers;
 
         format [
