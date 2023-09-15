@@ -158,6 +158,7 @@ class vgm_c
             postInit = 1;
         };
         class loading_setText {};
+        class loading_tickerDots {};
     };
 
     class status_effect

@@ -15,7 +15,7 @@
         Nothing
  */
 
-#define TIMEOUT 10
+#define TIMEOUT 30
 
 ["vgm_loading", "", "VGM_DisplayLoading"] call BIS_fnc_startLoadingScreen;
 localize "STR_LOADING" call vgm_c_fnc_loading_setText;
@@ -39,14 +39,17 @@ private _handlers = missionNamespace getVariable ["vgm_loading_handlers", []];
             waitUntil {scriptDone _script};
         } forEachReversed _handlers;
 
+        // Loading... ticker text
         format [
-            "%1... %2",
+            "%1%2 %3",
             localize "STR_LOADING",
+            [] call vgm_c_fnc_loading_tickerDots,
             (_handlers apply {_x get "name"}) joinString endl
         ] call vgm_c_fnc_loading_setText;
 
         (1 - (count _handlers / _total)) call BIS_fnc_progressLoadingScreen;
 
+        // prevent infinite loading screen
         if (diag_tickTime > _timeout) then {
             private _msg = format ["Loading handlers did not complete: %1", _handlers apply {_x get "name"}];
             _msg call vgm_g_fnc_logError;
