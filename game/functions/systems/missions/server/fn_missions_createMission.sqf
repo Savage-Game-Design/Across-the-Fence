@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-30
+    Last Update: 2023-09-07
     Public: Yes
 
     Description:
@@ -40,6 +40,7 @@ private _mission = createHashMapFromArray [
         ["creator", _creatorId],
         ["status", "CREATED"],
         ["maxPlayers", 6],
+        // Each player on the mission should have a netmap in here for storing player data
         ["players", [] call para_s_fnc_netmap_createNetmap],
         // Maps player ID to their client ID for easy remoteExec'ing
         ["machineIds", createHashMap],

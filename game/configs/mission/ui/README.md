@@ -1,5 +1,5 @@
-# TOUR OF DUTY - UI SYSTEM
-This document serves as an explanation of the user interface (UI) system used by Tour of Duty. It will cover the following topics:
+# ACROSS THE FENCE - UI SYSTEM
+This document serves as an explanation of the user interface (UI) system used by Across the Fence. It will cover the following topics:
 
 1. [Macros](#macros)
 2. [Configs](#configs)
