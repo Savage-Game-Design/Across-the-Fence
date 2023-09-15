@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-09-08
+    Last Update: 2023-09-14
     Public: No
 
     Description:
@@ -32,7 +32,11 @@ player setPosASL _startPosASL;
 
 // Adds tracker system event handlers
 // TODO: Remove when switching to main AI system
-player addEventHandler ["Fired", {_this call vn_ms_fnc_tracker_onPlayerFired}];
+player setVariable [
+    "vgm_c_trackerFiredHandler",
+    player addEventHandler ["Fired", {_this call vn_ms_fnc_tracker_onPlayerFired}]
+];
+
 [] call vn_ms_fnc_tracker_tracksLoop;
 
 //- Unfades the screen
