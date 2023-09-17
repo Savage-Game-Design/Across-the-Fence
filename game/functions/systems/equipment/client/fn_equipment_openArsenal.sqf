@@ -2,7 +2,7 @@
     File: fn_equipment_openArsenal.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-09-16
+    Last Update: 2023-09-17
     Public: No
 
     Description:
@@ -24,10 +24,11 @@
 
 private _arsenal = player;
 
-// clear all items
-{
-    [_arsenal, [true], GLOBAL, _x] call BIS_fnc_removeVirtualItemCargo;
-} ForEach [0,1,2,3];
+// clear all items{
+[_arsenal, [], GLOBAL] call BIS_fnc_removeVirtualWeaponCargo;
+[_arsenal, [], GLOBAL] call BIS_fnc_removeVirtualMagazineCargo;
+[_arsenal, [], GLOBAL] call BIS_fnc_removeVirtualBackpackCargo;
+[_arsenal, [], GLOBAL] call BIS_fnc_removeVirtualItemCargo;
 
 // add available equipment presets to arsenal
 {
