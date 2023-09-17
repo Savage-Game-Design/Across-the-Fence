@@ -135,6 +135,17 @@ class vgm_c
         class displayStaminaBar {};
     };
 
+    class equipment
+    {
+        VGM_GLOBAL_PATH(\systems\equipment\client);
+
+        class equipment_openArsenal {};
+        class equipment_postInit
+        {
+            postInit = 1;
+        };
+    };
+
     class missions
     {
         VGM_CLIENT_PATH(\systems\missions\client);
