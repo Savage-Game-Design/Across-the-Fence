@@ -2,20 +2,20 @@
     File: fn_equipment_openArsenal.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-09-17
+    Last Update: 2023-09-19
     Public: No
 
     Description:
-        No description added yet.
+        Open whitelisted arsenal, item availability depends on scripted conditions.
 
     Parameter(s):
-        N/A
+        None
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_c_fnc_equipment_openArsenal
+        [] call vgm_c_fnc_equipment_openArsenal
  */
 
 #define FULL false

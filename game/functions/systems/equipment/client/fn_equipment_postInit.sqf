@@ -1,18 +1,12 @@
 /*
     File: fn_postInit.sqf
     Author: Savage Game Design
-    Date: 2023-05-30
-    Last Update: 2023-09-17
+    Date: 2023-09-16
+    Last Update: 2023-09-19
     Public: No
 
     Description:
         Client postInit function for equipment system.
-
-    Parameter(s):
-        N/A
-
-    Returns:
-        Nothing
  */
 
 if (!hasInterface) exitWith {};
