@@ -9,6 +9,12 @@ class vgm_s
         VGM_SERVER_PATH(\);
     };
 
+    class core
+    {
+        VGM_GLOBAL_PATH(\core\server);
+
+        class preventGroupAutoDeletion {};
+    };
 
     class paradigm_interop
     {
