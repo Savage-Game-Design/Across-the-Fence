@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-09-14
+    Last Update: 2023-09-19
     Public: No
 
     Description:
@@ -29,6 +29,7 @@ private _safeStartPosASL = _defaultStartPosASL findEmptyPosition [1, 20, "CAManB
 private _startPosASL = [AGLtoASL _safeStartPosASL, _defaultStartPosASL] select (_safeStartPosASL isEqualTo []);
 
 player setPosASL _startPosASL;
+[player] joinSilent (_currentMission get "group");
 
 // Adds tracker system event handlers
 // TODO: Remove when switching to main AI system

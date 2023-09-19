@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-09-07
+    Last Update: 2023-09-19
     Public: No
 
     Description:
@@ -32,6 +32,7 @@ private _missionMemberPlayerIds = (_missionPublic get "players") call para_g_fnc
 private _missionMemberMachineIds = values (_mission get "machineIds");
 
 [] remoteExecCall ["vgm_c_fnc_missions_endMission", _missionMemberMachineIds];
+units (_missionPublic get "group") joinSilent vgm_core_lobbyGroup;
 
 [
     "mission ended",
