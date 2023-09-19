@@ -6681,6 +6681,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this setVariable [""vgm_equipment_arsenal"", true];";
 			};
 			id=1335;
 			type="Land_vn_pavn_weapons_stack3";
@@ -6697,6 +6698,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this setVariable [""vgm_equipment_arsenal"", true];";
 			};
 			id=1336;
 			type="Land_vn_pavn_weapons_stack1";
