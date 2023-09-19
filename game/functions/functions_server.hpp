@@ -9,6 +9,16 @@ class vgm_s
         VGM_SERVER_PATH(\);
     };
 
+    class core
+    {
+        VGM_GLOBAL_PATH(\core\global);
+
+        class postInit
+        {
+            postInit = 1;
+        };
+    };
+
     class paradigm_interop
     {
         VGM_SERVER_PATH(\paradigm_interop\server);

@@ -48,7 +48,7 @@ private _mission = createHashMapFromArray [
         ["preventJoining", [] call para_s_fnc_netmap_createNetmap],
         // TODO - Use an actual position for the mission
         ["startPosASL", AGLtoASL getMarkerPos "vgm_test_mission_start_pos"],
-        ["group", createGroup vgm_s_missions_playerSide]
+        ["group", createGroup side vgm_core_lobbyGroup]
     ]] call para_s_fnc_netmap_createNetmapFromArray],
     // Copy the parameters hashmap to prevent it being accidentally modified elsewhere.
     ["parameters", +_parameters],

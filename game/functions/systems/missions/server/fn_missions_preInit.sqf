@@ -27,8 +27,6 @@ localNamespace setVariable ["vgm_missions", createHashMap];
 // Missions that players are assigned to.
 ["vgm_mission_assignments"] call para_s_fnc_netmap_createNamedNetmap;
 
-vgm_s_missions_playerSide = WEST;
-
 ["vgm_missions_clientReady", {
     private _originMachineId = param [4];
     private _missions = localNamespace getVariable "vgm_missions";
