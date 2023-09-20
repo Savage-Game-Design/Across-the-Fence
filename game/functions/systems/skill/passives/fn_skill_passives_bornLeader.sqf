@@ -2,7 +2,7 @@
     File: fn_skill_passive_overprepared.sqf
     Author: Savage Game Design
     Date: 2023-09-14
-    Last Update: 2023-09-14
+    Last Update: 2023-09-20
     Public: No
 
     Description:
@@ -20,4 +20,4 @@
 
 params ["_known"];
 
-player setVariable ['vgm_g_skill_actives_bornLeader', _known, true];
+player setVariable ["vgm_g_skill_actives_bornLeader", _known, true];

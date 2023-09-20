@@ -298,6 +298,10 @@ class vgm_c
 
         class skill_passives_bornLeader {};
         class skill_passives_overprepared {};
+        class skill_passives_preInit
+        {
+            preInit = 1;
+        };
     };
 
     class skill_actives

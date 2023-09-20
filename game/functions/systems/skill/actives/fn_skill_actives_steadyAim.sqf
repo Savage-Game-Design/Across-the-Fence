@@ -2,20 +2,20 @@
     File: fn_skill_active_steadyAim.sqf
     Author: Savage Game Design
     Date: 2023-09-14
-    Last Update: 2023-09-14
+    Last Update: 2023-09-20
     Public: No
 
     Description:
-        No description added yet.
+        Adds logic for Rifleman Tier 3 Steady Aim skill.
 
     Parameter(s):
-        N/A
+        None
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call vgm_c_fnc_skill_actives_steadyAim;
  */
 
 ["Rifleman/Steady Aim skill activated"] call vgm_g_fnc_logInfo;
