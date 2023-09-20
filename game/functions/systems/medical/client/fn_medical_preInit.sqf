@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-13
+    Last Update: 2023-09-20
     Public: No
 
     Description:
@@ -101,3 +101,8 @@ vgm_c_medical_damageModifiers = [];
     params ["_unit", "_value"];
     _unit setVariable ["vgm_c_medical_coefficient_bleedout", _value max 0.5 min 3];
 }] call vgm_c_fnc_coefficient_create;
+
+["hitShrug", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_hitShrug", _value max 0 min 1];
+}, 0] call vgm_c_fnc_coefficient_create;
