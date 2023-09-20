@@ -2,7 +2,7 @@
     File: fn_missions_startMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-06-23
+    Last Update: 2023-09-20
     Public: Yes
 
     Description:
@@ -46,6 +46,6 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 [] remoteExecCall ["vgm_c_fnc_missions_finishDeploy", values (_mission get "machineIds")];
 
 [
-    "mission started",
+    "vgm_mission_started",
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;

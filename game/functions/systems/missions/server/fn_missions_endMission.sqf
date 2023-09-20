@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-09-19
+    Last Update: 2023-09-20
     Public: No
 
     Description:
@@ -35,7 +35,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
 units (_missionPublic get "group") joinSilent vgm_core_lobbyGroup;
 
 [
-    "mission ended",
+    "vgm_mission_ended",
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 

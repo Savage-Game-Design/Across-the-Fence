@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2023-09-19
+    Last Update: 2023-09-20
     Public: Yes
 
     Description:
@@ -172,7 +172,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 };
 
 [
-    "mission stopped being joinable",
+    "vgm_mission_notJoinable",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_missionId"];
@@ -187,7 +187,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 ] call para_g_fnc_event_subscribeServer;
 
 [
-    "mission joinable",
+    "vgm_mission_joinable",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_missionId"];
@@ -241,7 +241,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 ] call para_g_fnc_event_subscribeServer;
 
 [
-    "mission ended",
+    "vgm_mission_ended",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_missionId"];
@@ -261,7 +261,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 ] call para_g_fnc_event_subscribeServer;
 
 [
-    "mission started",
+    "vgm_mission_started",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_missionId"];
