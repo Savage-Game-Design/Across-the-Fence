@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-06-30
+    Last Update: 2023-09-20
     Public: No
 
     Description:
@@ -31,3 +31,5 @@ private _startPosASL = [AGLtoASL _safeStartPosASL, _defaultStartPosASL] select (
 player setPosASL _startPosASL;
 
 //- Unfades the screen
+
+["vgm_mission_deploy_local", _currentMission] call para_g_fnc_event_triggerLocal;
