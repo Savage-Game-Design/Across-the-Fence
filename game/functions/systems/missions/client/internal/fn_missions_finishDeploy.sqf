@@ -30,6 +30,15 @@ private _startPosASL = [AGLtoASL _safeStartPosASL, _defaultStartPosASL] select (
 
 player setPosASL _startPosASL;
 
+// Adds tracker system event handlers
+// TODO: Remove when switching to main AI system
+player setVariable [
+    "vgm_c_trackerFiredHandler",
+    player addEventHandler ["Fired", {_this call vn_ms_fnc_tracker_onPlayerFired}]
+];
+
+[] call vn_ms_fnc_tracker_tracksLoop;
+
 //- Unfades the screen
 
 ["vgm_mission_deploy_local", _currentMission] call para_g_fnc_event_triggerLocal;
