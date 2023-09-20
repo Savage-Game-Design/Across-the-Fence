@@ -166,11 +166,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
             <Original>20% Slower bleedout</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_CONTAINERS">
-            <Original>Vests and Backpacks</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL">
+            <Original>Historical Equipment</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_CONTAINERS_DESC">
-            <Original>Unlocks Vests and Backpacks in the Arsenal</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC">
+            <Original>Unlocks "Historical Equipment"</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT">
             <Original>Rifleman Loadout</Original>

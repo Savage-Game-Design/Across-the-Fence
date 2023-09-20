@@ -48,11 +48,11 @@ class vgm_skillTrees {
             };
 
             class tier_2 {
-                class loadout_containers: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_CONTAINERS";
+                class loadout_historical: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC";
 
                     applyOnRespawn = 1;
-                    cost = 3;
                 };
 
                 class overprepared: vgm_skillTemplate {
@@ -61,14 +61,11 @@ class vgm_skillTrees {
 
                     codeApply = "true call vgm_c_fnc_skill_passives_overprepared";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_overprepared";
-                    cost = 3;
                 };
 
                 class loadout: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_DESC";
-
-                    cost = 3;
                 };
             };
 
@@ -79,7 +76,7 @@ class vgm_skillTrees {
 
                     codeApply = "true call vgm_c_fnc_skill_passives_bornLeader";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_bornLeader";
-                    cost = 4;
+                    cost = 2;
                 };
 
                 class steadyAim: vgm_skillTemplate {
@@ -88,7 +85,7 @@ class vgm_skillTrees {
 
                     codeActivate = "call vgm_c_fnc_skill_actives_steadyAim";
                     skillType = 1;
-                    cost = 4;
+                    cost = 2;
                     cooldown = 120;
                 };
             };
