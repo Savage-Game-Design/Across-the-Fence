@@ -15,15 +15,10 @@ class vgm_g
         VGM_GLOBAL_PATH(\core\global);
 
         class execNextFrame {};
-        class postInit
-        {
-            postInit = 1;
-        };
         class preInit
         {
             preInit = 1;
         };
-        class preventGroupAutoDeletion {};
     };
 
     class debug
@@ -106,7 +101,7 @@ class vgm_c
 
     class debug
     {
-        VGM_GLOBAL_PATH(\debug\client);
+        VGM_CLIENT_PATH(\debug\client);
 
         class initDebugMenu
         {

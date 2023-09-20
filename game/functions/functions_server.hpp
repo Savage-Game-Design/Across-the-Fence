@@ -11,7 +11,7 @@ class vgm_s
 
     class core
     {
-        VGM_GLOBAL_PATH(\core\global);
+        VGM_SERVER_PATH(\core\server);
 
         class postInit
         {
