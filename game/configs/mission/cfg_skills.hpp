@@ -93,7 +93,9 @@ class vgm_skillTrees {
             class tier_4 {
                 class luckySon: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON";
-                    description = "STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_luckySon";
                     cost = 4;
                     skillType = 2;
                 };
