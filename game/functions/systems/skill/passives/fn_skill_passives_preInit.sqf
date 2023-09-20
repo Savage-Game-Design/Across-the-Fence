@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
     format ["Applying Rifleman/Born Leader for mission: %1", _mission] call vgm_g_fnc_logDebug;
 
     private _group = _mission get "group";
+    _group = group player; // TODO remove after "group" in missions is merged
+
     private _fnc_onUnitJoined = {
         params ["", "_unit"];
         if (_unit getVariable ["vgm_g_skill_actives_bornLeader", false]) then {
