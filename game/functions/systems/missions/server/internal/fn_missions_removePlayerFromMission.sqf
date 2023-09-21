@@ -2,7 +2,7 @@
     File: fn_missions_removePlayerFromMission.sqf
     Author: Savage Game Design
     Date: 2023-03-20
-    Last Update: 2023-06-22
+    Last Update: 2023-09-21
     Public: No
 
     Description:
@@ -37,6 +37,8 @@ private _playerMachineId = _mission get "machineIds" get _playerId;
 [_currentMissionAssignments, _playerId] call para_s_fnc_netmap_deleteAt;
 [_missionPublic get "players", _playerId] call para_s_fnc_netmap_deleteAt;
 _mission get "machineIds" deleteAt _playerId;
+
+[_playerId call vgm_s_fnc_player_fromId] joinSilent vgm_core_lobbyGroup;
 
 [
     "player removed from mission",
