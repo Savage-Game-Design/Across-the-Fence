@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=685;
+		nextID=688;
 	};
 	class Camera
 	{
 		pos[]={8376.2959,256.76303,14356.489};
 		dir[]={0,-0.70710683,0.70710683};
 		up[]={0,0.70710677,0.70710677};
-		aside[]={0.99999994,0,-0};
+		aside[]={0.99999994,0,0};
 	};
 };
 binarizationWanted=0;
@@ -6463,7 +6463,7 @@ class Mission
 			name="Modules";
 			class Entities
 			{
-				items=5;
+				items=4;
 				class Item0
 				{
 					dataType="Logic";
@@ -6602,74 +6602,6 @@ class Mission
 						nAttributes=1;
 					};
 				};
-				class Item4
-				{
-					dataType="Logic";
-					class PositionInfo
-					{
-						position[]={20049.914,5.2536345,6468.1099};
-						angles[]={0.081816852,0,0.015998369};
-					};
-					id=1322;
-					type="vn_module_whitelistedarsenal";
-					atlOffset=4.7683716e-007;
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="vn_module_whitelistedarsenal_rank";
-							expression="_this setVariable ['rank',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=0;
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="vn_module_whitelistedarsenal_equipment";
-							expression="_this setVariable ['equipment',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=0;
-								};
-							};
-						};
-						class Attribute2
-						{
-							property="vn_module_whitelistedarsenal_scope";
-							expression="_this setVariable ['scope',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="STRING";
-									value="[""vn_default""]";
-								};
-							};
-						};
-						class Attribute3
-						{
-							property="vn_module_whitelistedarsenal_side";
-							expression="_this setVariable ['side',_value,true];";
-							class Value
-							{
-								class data
-								{
-									singleType="SCALAR";
-									value=0;
-								};
-							};
-						};
-						nAttributes=4;
-					};
-				};
 			};
 			id=1323;
 			atlOffset=0.062398434;
@@ -6749,6 +6681,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this setVariable [""vgm_equipment_arsenal"", true];";
 			};
 			id=1335;
 			type="Land_vn_pavn_weapons_stack3";
@@ -6765,6 +6698,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this setVariable [""vgm_equipment_arsenal"", true];";
 			};
 			id=1336;
 			type="Land_vn_pavn_weapons_stack1";
@@ -6863,37 +6797,6 @@ class Mission
 			type="mil_flag";
 			colorName="ColorGreen";
 			id=1345;
-		};
-	};
-	class Connections
-	{
-		class LinkIDProvider
-		{
-			nextID=2;
-		};
-		class Links
-		{
-			items=2;
-			class Item0
-			{
-				linkID=0;
-				item0=1322;
-				item1=1336;
-				class CustomData
-				{
-					type="Sync";
-				};
-			};
-			class Item1
-			{
-				linkID=1;
-				item0=1322;
-				item1=1335;
-				class CustomData
-				{
-					type="Sync";
-				};
-			};
 		};
 	};
 };
