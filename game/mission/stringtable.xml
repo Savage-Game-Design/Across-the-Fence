@@ -142,20 +142,8 @@
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
             <Original>Rifleman</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_AUTORIFLEMAN">
-            <Original>Autorifleman</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_SHARPSHOOTER">
-            <Original>Sharpshooter</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_SERVICE_ESSENTIALS">
-            <Original>Service Essentials</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_BASIC_AID">
-            <Original>Basic Aid</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_LEADERSHIP_TRAINING">
-            <Original>Leadership Training</Original>
+        <Key ID="STR_VGM_SKILLS_TREE_RECON">
+            <Original>Recon</Original>
         </Key>
     </Package>
     <Package name="Skills Skill">
@@ -204,6 +192,10 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC">
             <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
+        </Key>
+        <!-- Recon -->
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
+            <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
     </Package>
 </Project>

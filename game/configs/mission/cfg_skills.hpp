@@ -105,4 +105,26 @@ class vgm_skillTrees {
         // specializations
         class subtrees {};
     };
+
+    class recon {
+        displayName = "$STR_VGM_SKILLS_TREE_RECON";
+        description = "";
+
+        // rifleman skills
+        class skills {
+            class tier_1 {
+                class betterAim: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_recon_betterAim";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_betterAim";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+            };
+        };
+
+        // specializations
+        class subtrees {};
+    };
 };

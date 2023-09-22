@@ -339,6 +339,12 @@ class vgm_c
         class skill_passives_infantryman_bornLeader {};
         class skill_passives_infantryman_overprepared {};
     };
+    class skill_passives_recon
+    {
+        VGM_CLIENT_PATH(\systems\skill\passives\recon);
+
+        class skill_passives_recon_betterAim {};
+    };
 
     class skill_actives
     {
