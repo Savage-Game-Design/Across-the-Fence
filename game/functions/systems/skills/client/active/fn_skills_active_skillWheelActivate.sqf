@@ -2,7 +2,7 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2023-06-02
+    Last Update: 2023-09-22
     Public: No
 
     Description:
@@ -28,7 +28,10 @@ if (_slot call vgm_c_fnc_skills_active_isSlotOnCooldown) exitWith {
 };
 
 player call (_skill get "codeActivate");
-private _cooldownUntil = time + (_skill get "cooldown"); // cooldown handling probably should be server-sided as well.
+
+private _cooldownTime = (_skill get "cooldown") * (player getVariable ["vgm_c_skills_cooldownCoef", 1]);
+private _cooldownUntil = time + _cooldownTime; // cooldown handling probably should be server-sided as well.
+_slot set ["cooldownTime", _cooldownTime];
 _slot set ["cooldownUntil", _cooldownUntil];
 
 ["vgm_skills_active_activated", [_slot get "name", _skill]] call para_g_fnc_event_triggerLocal;
