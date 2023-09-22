@@ -38,7 +38,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-[] call vgm_s_fnc_missions_despawnMission;
+[] call vgm_s_fnc_missions_cleanupMission;
 
 {
     [_x, _mission] call vgm_s_fnc_missions_removePlayerFromMission;

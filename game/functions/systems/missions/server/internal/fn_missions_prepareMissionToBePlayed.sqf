@@ -1,15 +1,15 @@
 /*
-    File: fn_missions_spawnMission.sqf
+    File: fn_missions_prepareMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-09-08
+    Last Update: 2023-09-14
     Public: No
 
     Description:
-        Spawns the entities involves with the mission, such as locations, oddities, objectives.
+        Initialises a mission so that it's ready to be played.
 
     Parameter(s):
-        _mission - Mission to spawn [HASHMAP]
+        _mission - Mission to initialise [HASHMAP]
 
     Returns:
         Nothing

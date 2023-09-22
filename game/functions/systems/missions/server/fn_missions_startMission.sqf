@@ -37,7 +37,7 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 
 [] remoteExecCall ["vgm_c_fnc_missions_startDeploy", values (_mission get "machineIds")];
 
-[_mission] call vgm_s_fnc_missions_spawnMission;
+[_mission] call vgm_s_fnc_missions_prepareMissionToBePlayed;
 
 // TODO
 // - Setup extract mechanics

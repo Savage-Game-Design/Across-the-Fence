@@ -75,7 +75,6 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
 ] call para_g_fnc_event_triggerGlobal;
 
 if !(_creatorId isEqualTo "") then {
-    // Use this instead of fn_missions_joinMission to prevent two updates on the client.
     [_creatorId, _mission] call vgm_s_fnc_missions_attachPlayerToMission;
 };
 
