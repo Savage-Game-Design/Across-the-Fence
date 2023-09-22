@@ -2,7 +2,7 @@
     File: fn_skill_preInit.sqf
     Author: Savage Game Design
     Date: 2023-09-14
-    Last Update: 2023-09-20
+    Last Update: 2023-09-22
     Public: No
 
     Description:
@@ -29,7 +29,7 @@ if (!hasInterface) exitWith {};
     };
     private _fnc_onUnitLeft = {
         params ["", "_unit"];
-        [player, "skillCooldown", format ["skill_born_leader_%1", getPlayerId _unit], 0] call vgm_c_fnc_coefficient_set;
+        [player, "skillCooldown", format ["skill_born_leader_%1", getPlayerId _unit]] call vgm_c_fnc_coefficient_remove;
     };
 
     // apply retroactively for players in the group

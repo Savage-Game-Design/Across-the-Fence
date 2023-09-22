@@ -31,19 +31,17 @@ class vgm_skillTrees {
                 class steadyHand: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
 
-                    codeApply = "[player, 'recoil', 'skills', -0.25] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'recoil', 'skills', 0] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'recoil', 'skills', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'recoil', 'skills'] call vgm_c_fnc_coefficient_remove";
                     skillType = 0;
-                    applyOnRespawn = 1;
                 };
 
                 class tough: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH";
 
-                    codeApply = "[player, 'bleedOut', 'skills', 0.2] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'bleedOut', 'skills', 0] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'bleedOut', 'skills', 0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'bleedOut', 'skills'] call vgm_c_fnc_coefficient_remove";
                     skillType = 0;
-                    applyOnRespawn = 1;
                 };
             };
 
