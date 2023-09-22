@@ -10,7 +10,7 @@
 #include "VGM_DisplayMissionsTargets.hpp"
 #include "VGM_DisplayMedical.hpp"
 #include "VGM_DisplayLoading.hpp"
-#include "VGM_DisplayEndOfMission.hpp"
+#include "VGM_DisplayMissionManagement.hpp"
 
 import RscHealthTextures from RscTitles;
 class RscTitles

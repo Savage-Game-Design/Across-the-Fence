@@ -1,5 +1,5 @@
 /*
-    File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
+    File: game/functions/core/client/displays/fn_displayMissionManagement.sqf
     Author: Savage Game Design
     Date: 2023-09-22
     Last Update: 2023-09-22
@@ -16,7 +16,7 @@
             Nothing [NIL]
 
     Example(s):
-            ["onLoad", _display] call vgm_c_fnc_displayEndOfMission;
+            ["onLoad", _display] call vgm_c_fnc_displayMissionManagement;
 */
 #include "macros.inc"
 params ["_mode", "_this"];
