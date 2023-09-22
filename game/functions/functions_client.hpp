@@ -339,6 +339,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\actives);
 
+        class skill_actives_luckySon {};
         class skill_actives_steadyAim {};
     };
 
