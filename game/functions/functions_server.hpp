@@ -9,6 +9,15 @@ class vgm_s
         VGM_SERVER_PATH(\);
     };
 
+    class core
+    {
+        VGM_SERVER_PATH(\core\server);
+
+        class postInit
+        {
+            postInit = 1;
+        };
+    };
 
     class paradigm_interop
     {
@@ -69,6 +78,7 @@ class vgm_s
         VGM_SERVER_PATH(\core\server\player);
 
         class player_fetch {};
+        class player_fromId {};
         class player_save {};
     };
 

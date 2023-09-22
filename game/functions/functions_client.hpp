@@ -101,7 +101,7 @@ class vgm_c
 
     class debug
     {
-        VGM_GLOBAL_PATH(\debug\client);
+        VGM_CLIENT_PATH(\debug\client);
 
         class initDebugMenu
         {

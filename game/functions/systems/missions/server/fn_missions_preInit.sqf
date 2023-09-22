@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-30
+    Last Update: 2023-09-20
     Public: No
 
     Description:
@@ -32,7 +32,7 @@ localNamespace setVariable ["vgm_missions", createHashMap];
     private _missions = localNamespace getVariable "vgm_missions";
 
     [
-        "missions available",
+        "vgm_mission_available",
         [keys _missions],
         [_originMachineId]
     ] call para_g_fnc_event_triggerTargets;

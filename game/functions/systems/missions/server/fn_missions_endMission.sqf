@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-09-07
+    Last Update: 2023-09-21
     Public: No
 
     Description:
@@ -34,7 +34,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
 [] remoteExecCall ["vgm_c_fnc_missions_endMission", _missionMemberMachineIds];
 
 [
-    "mission ended",
+    "vgm_mission_ended",
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 

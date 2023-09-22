@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-09-07
+    Last Update: 2023-09-20
     Public: Yes
 
     Description:
@@ -47,7 +47,8 @@ private _mission = createHashMapFromArray [
         // Whether or not players can join the mission. Players can join if no values are "false"
         ["preventJoining", [] call para_s_fnc_netmap_createNetmap],
         // TODO - Use an actual position for the mission
-        ["startPosASL", AGLtoASL getMarkerPos "vgm_test_mission_start_pos"]
+        ["startPosASL", AGLtoASL getMarkerPos "vgm_test_mission_start_pos"],
+        ["group", createGroup side vgm_core_lobbyGroup]
     ]] call para_s_fnc_netmap_createNetmapFromArray],
     // Copy the parameters hashmap to prevent it being accidentally modified elsewhere.
     ["parameters", +_parameters],
@@ -64,12 +65,12 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
 [_missionsPublicInfo, _newMissionId, _mission get "public"] call para_s_fnc_netmap_set;
 
 [
-    "missions available",
+    "vgm_mission_available",
     [[_mission get "public" get "id"]]
 ] call para_g_fnc_event_triggerGlobal;
 
 [
-    "mission joinable",
+    "vgm_mission_joinable",
     [_mission get "public" get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 

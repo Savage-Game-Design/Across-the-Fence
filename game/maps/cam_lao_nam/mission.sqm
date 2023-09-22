@@ -6449,6 +6449,7 @@ class Mission
 					};
 					class Attributes
 					{
+						name="vgm_core_lobbyGroup";
 					};
 					id=1195;
 					atlOffset=3.3378601e-006;

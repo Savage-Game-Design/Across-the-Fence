@@ -1,8 +1,8 @@
 /*
-    File: fn_missions_onMissionEnd.sqf
+    File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-09-08
+    Last Update: 2023-09-19
     Public: No
 
     Description:
@@ -15,10 +15,10 @@
         Nothing
 
     Example(s):
-        [] remoteExecCall ["vgm_c_fnc_missions_onMissionEnd", _playersOnMission];
+        [] remoteExecCall ["vgm_c_fnc_missions_endMission", _playersOnMission];
 
         // Should be triggered by ending the mission on the server.
-        [] call vgm_s_fnc_missions_onMissionEnd;
+        [] call vgm_s_fnc_missions_endMission;
  */
 
 // Removes player-specific tracker module handlers.

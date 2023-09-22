@@ -2,7 +2,7 @@
     File: fn_missions_getHubSpawnPos.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-02-26
+    Last Update: 2023-09-19
     Public: Yes
 
     Description:
@@ -15,7 +15,7 @@
         PositionASL [ARRAY]
 
     Example(s):
-        [] call vgm_s_fnc_missions_getHubSpawnPos;
+        [] call vgm_g_fnc_missions_getHubSpawnPos;
  */
 
 private _pos = getMarkerPos "vgm_shared_hub_respawn";

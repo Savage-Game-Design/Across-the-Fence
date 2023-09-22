@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-09-14
+    Last Update: 2023-09-21
     Public: No
 
     Description:
