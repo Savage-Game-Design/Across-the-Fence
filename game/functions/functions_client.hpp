@@ -14,6 +14,9 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\core\global);
 
+        class startScheduler {
+            postInit = 1;
+        };
         class execNextFrame {};
         class preInit
         {
@@ -39,6 +42,14 @@ class vgm_g
         };
         class logWarning {
             headerType = -1;
+        };
+    };
+
+    class ai
+    {
+        VGM_GLOBAL_PATH(\systems\ai\global);
+        class ai_init {
+            postInit = 1;
         };
     };
 
