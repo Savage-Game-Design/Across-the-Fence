@@ -1,8 +1,8 @@
 /*
-    File: fn_missions_despawnMission.sqf
+    File: fn_missions_cleanupMission.sqf
     Author:
     Date: 2023-09-08
-    Last Update: 2023-09-08
+    Last Update: 2023-09-22
     Public: No
 
     Description:
