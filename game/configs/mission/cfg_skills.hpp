@@ -94,6 +94,7 @@ class vgm_skillTrees {
                 class luckySon: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
+                    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
 
                     codeActivate = "call vgm_c_fnc_skill_actives_luckySon";
                     skillType = 2;
