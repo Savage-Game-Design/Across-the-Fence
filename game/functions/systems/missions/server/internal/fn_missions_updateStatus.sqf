@@ -2,7 +2,7 @@
     File: fn_missions_updateStatus.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-06-22
+    Last Update: 2023-09-20
     Public: No
 
     Description:
@@ -28,7 +28,7 @@ if !(_status in ["CREATED", "IN PROGRESS", "FINISHED"]) exitWith {
 [_mission get "public", "status", _status] call para_s_fnc_netmap_set;
 
 [
-    "mission status changed",
+    "vgm_mission_status_changed",
     [_mission get "public" get "id", _status]
 ] call para_g_fnc_event_triggerLocal;
 

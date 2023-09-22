@@ -2,7 +2,7 @@
     File: fn_missions_setPlayerReadiness.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-06-22
+    Last Update: 2023-09-20
     Public: Yes
 
     Description:
@@ -33,7 +33,7 @@ private _mission = _missions get _missionId;
 [_mission get "public" get "players" get _playerId, "ready", _isReady] call para_s_fnc_netmap_set;
 
 [
-    "mission player readiness changed",
+    "vgm_mission_player_readiness_changed",
     [_playerId, _isReady, _mission get "public" get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 

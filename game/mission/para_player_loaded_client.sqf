@@ -45,10 +45,3 @@ player addEventHandler ["Respawn", _fnc_disableChatter];
 [true, "arsenalClosed", {
     [player, "NoVoice"] remoteExec ["setSpeaker", 0];
 }] call BIS_fnc_addScriptedEventHandler;
-
-//Pin the player in place, and disable camera/shooting/etc, without disabling user input.
-//This way they can still exit if they want.
-player enableSimulation false;
-
-// Start loading screen, so we wait while server init completes.
-startLoadingScreen [localize "STR_VGM_MISSION_NAME"/*, "MikeForce_loadingScreen"*/];

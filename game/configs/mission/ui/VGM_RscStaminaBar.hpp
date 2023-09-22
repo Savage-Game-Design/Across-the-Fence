@@ -2,7 +2,7 @@
 class VGM_RscStaminaBar
 {
     idd = -1;
-    onLoad = "['onLoad', _this#0] call vgm_c_fnc_displayStaminaBar;"
+    onLoad = "['onLoad', _this#0] call vgm_c_fnc_displayStaminaBar;";
     duration = 1e39;
     fadeIn = 0;
     fadeOut = 0;

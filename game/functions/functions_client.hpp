@@ -102,7 +102,7 @@ class vgm_c
 
     class debug
     {
-        VGM_GLOBAL_PATH(\debug\client);
+        VGM_CLIENT_PATH(\debug\client);
 
         class initDebugMenu
         {
@@ -136,6 +136,17 @@ class vgm_c
         class displayStaminaBar {};
     };
 
+    class equipment
+    {
+        VGM_GLOBAL_PATH(\systems\equipment\client);
+
+        class equipment_openArsenal {};
+        class equipment_postInit
+        {
+            postInit = 1;
+        };
+    };
+
     class missions
     {
         VGM_CLIENT_PATH(\systems\missions\client);
@@ -159,6 +170,19 @@ class vgm_c
         class missions_startDeploy {};
     };
 
+    class loading
+    {
+        VGM_CLIENT_PATH(\core\client\loading);
+
+        class loading_addHandler {};
+        class loading_postInit
+        {
+            postInit = 1;
+        };
+        class loading_setText {};
+        class loading_tickerDots {};
+    };
+
     class status_effect
     {
         VGM_CLIENT_PATH(\core\client\statusEffect);
@@ -177,11 +201,8 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\core\client\ui);
         class update_loading_screen {};
-        class init_loading_text {};
         class progressBar {};
         class handle_light_level_loop {};
-        class handle_welcome_screen {};
-        class init_info_panel_handler_loop {};
         class stack_controls {};
         class toggle_controls_group_overlay {};
     };
