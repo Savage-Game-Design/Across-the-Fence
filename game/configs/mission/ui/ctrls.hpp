@@ -97,6 +97,7 @@ class VGM_ctrlStructuredText : ctrlStructuredText
 class VGM_ctrlTitle: VGM_ctrlStructuredText
 {
     size = VGM_FONT_M;
+    h = 5 * VGM_GRID_H;
     class Attributes
     {
         font = VGM_FONT;
