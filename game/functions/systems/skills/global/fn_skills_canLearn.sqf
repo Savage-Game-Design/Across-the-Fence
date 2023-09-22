@@ -19,7 +19,7 @@
         [player, _skill] call vgm_g_fnc_skills_canLearn
  */
 
-#define FIRST_TIER_EXCLUSIVE
+// #define FIRST_TIER_EXCLUSIVE
 
 params [
     ["_player", objNull],
@@ -37,6 +37,8 @@ private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
         #ifdef FIRST_TIER_EXCLUSIVE
         // we allow only one skill in first tier (0 idx)
         || {!([_player, _skillTree, _tier] call vgm_g_fnc_skills_tierInvested)}
+        #else
+        || {true}
         #endif
     )
     // check if the tier is unlocked

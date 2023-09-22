@@ -1,6 +1,6 @@
 #include "macros.inc"
 
-#define FIRST_TIER_EXCLUSIVE
+// #define FIRST_TIER_EXCLUSIVE
 
 params ["_mode", "_params"];
 _this = _params;
