@@ -327,20 +327,29 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\passives);
 
-        class skill_passives_bornLeader {};
-        class skill_passives_overprepared {};
         class skill_passives_preInit
         {
             preInit = 1;
         };
     };
+    class skill_passives_infantryman
+    {
+        VGM_CLIENT_PATH(\systems\skill\passives\infantryman);
+
+        class skill_passives_infantryman_bornLeader {};
+        class skill_passives_infantryman_overprepared {};
+    };
 
     class skill_actives
     {
         VGM_CLIENT_PATH(\systems\skill\actives);
+    };
+    class skill_actives_infantryman
+    {
+        VGM_CLIENT_PATH(\systems\skill\actives\infantryman);
 
-        class skill_actives_luckySon {};
-        class skill_actives_steadyAim {};
+        class skill_actives_infantryman_luckySon {};
+        class skill_actives_infantryman_steadyAim {};
     };
 
     class stamina

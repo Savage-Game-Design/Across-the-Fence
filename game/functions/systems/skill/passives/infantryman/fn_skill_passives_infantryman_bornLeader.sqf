@@ -1,8 +1,8 @@
 /*
-    File: fn_skill_passive_overprepared.sqf
+    File: fn_skill_passive_infantryman_overprepared.sqf
     Author: Savage Game Design
     Date: 2023-09-14
-    Last Update: 2023-09-20
+    Last Update: 2023-09-23
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        true call vgm_c_fnc_skill_passives_bornLeader
+        true call vgm_c_fnc_skill_passives_infantryman_bornLeader
  */
 
 params ["_known"];

@@ -1,8 +1,8 @@
 /*
-    File: fn_skill_active_steadyAim.sqf
+    File: fn_skill_actives_infantryman_steadyAim.sqf
     Author: Savage Game Design
     Date: 2023-09-14
-    Last Update: 2023-09-20
+    Last Update: 2023-09-23
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        [] call vgm_c_fnc_skill_actives_steadyAim;
+        [] call vgm_c_fnc_skill_actives_infantryman_steadyAim;
  */
 
 ["Rifleman/Steady Aim skill activated"] call vgm_g_fnc_logInfo;
@@ -24,5 +24,5 @@
 
 ["skill_active_steadyAim", {
     ["Rifleman/Steady Aim skill exhausted"] call vgm_g_fnc_logInfo;
-    [player, "aim", 'skill_active_steadyAim', 0] call vgm_c_fnc_coefficient_set
+    [player, "aim", "skill_active_steadyAim"] call vgm_c_fnc_coefficient_remove
 }, 30, "seconds"] call BIS_fnc_runLater;

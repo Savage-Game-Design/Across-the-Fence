@@ -57,8 +57,8 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC";
 
-                    codeApply = "true call vgm_c_fnc_skill_passives_overprepared";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_overprepared";
+                    codeApply = "true call vgm_c_fnc_skill_passives_infantryman_overprepared";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_overprepared";
                 };
 
                 class loadout: vgm_skillTemplate {
@@ -72,8 +72,8 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC";
 
-                    codeApply = "true call vgm_c_fnc_skill_passives_bornLeader";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_bornLeader";
+                    codeApply = "true call vgm_c_fnc_skill_passives_infantryman_bornLeader";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_bornLeader";
                     cost = 2;
                 };
 
@@ -81,7 +81,7 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC";
 
-                    codeActivate = "call vgm_c_fnc_skill_actives_steadyAim";
+                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_steadyAim";
                     skillType = 1;
                     cost = 2;
                     cooldown = 120;
@@ -94,7 +94,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
                     icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
 
-                    codeActivate = "call vgm_c_fnc_skill_actives_luckySon";
+                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_luckySon";
                     skillType = 2;
                     cost = 4;
                     cooldown = 120;
