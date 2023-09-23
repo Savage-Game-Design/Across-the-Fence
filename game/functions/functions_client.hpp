@@ -344,6 +344,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\passives\recon);
 
         class skill_passives_recon_betterAim {};
+        class skill_passives_recon_keenEye {};
     };
 
     class skill_actives

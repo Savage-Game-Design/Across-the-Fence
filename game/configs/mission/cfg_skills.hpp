@@ -127,6 +127,15 @@ class vgm_skillTrees {
                     codeUnapply = "[player, 'staminaDrain', 'skill_recon_athletic'] call vgm_c_fnc_coefficient_remove";
                 };
             };
+            class tier_2 {
+                class keenEye: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_recon_keenEye";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_keenEye";
+                };
+            };
         };
 
         // specializations
