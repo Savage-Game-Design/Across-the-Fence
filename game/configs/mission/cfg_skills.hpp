@@ -33,7 +33,6 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'recoil', 'skills', -0.25, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'recoil', 'skills'] call vgm_c_fnc_coefficient_remove";
-                    skillType = 0;
                 };
 
                 class tough: vgm_skillTemplate {
@@ -41,7 +40,6 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'bleedOut', 'skills', 0.2, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'bleedOut', 'skills'] call vgm_c_fnc_coefficient_remove";
-                    skillType = 0;
                 };
             };
 
@@ -120,6 +118,13 @@ class vgm_skillTrees {
                     codeUnapply = "false call vgm_c_fnc_skill_passives_recon_betterAim";
                     skillType = 0;
                     applyOnRespawn = 1;
+                };
+
+                class athletic: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_ATHLETIC";
+
+                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'staminaDrain', 'skill_recon_athletic'] call vgm_c_fnc_coefficient_remove";
                 };
             };
         };
