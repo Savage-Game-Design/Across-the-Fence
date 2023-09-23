@@ -1,5 +1,7 @@
 #include "macros.inc"
 
+// #define FIRST_TIER_EXCLUSIVE
+
 params ["_mode", "_params"];
 _this = _params;
 
@@ -254,6 +256,7 @@ switch _mode do {
 
                     _ctrlUnlock ctrlShow _currentTierUnlocked;
 
+                    #ifdef FIRST_TIER_EXCLUSIVE
                     // show the padlock icon over first tier skills which were not choosen
                     if (_currentTier < 1) exitWith {
                         private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
@@ -261,6 +264,7 @@ switch _mode do {
                         _ctrlPadlock ctrlShow _locked;
                         _ctrlUnlock ctrlShow (ctrlShown _ctrlUnlock && !_locked);
                     };
+                    #endif
                 };
 
                 private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
