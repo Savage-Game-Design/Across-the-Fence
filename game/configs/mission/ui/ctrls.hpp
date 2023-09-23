@@ -109,10 +109,10 @@ class VGM_ctrlTitle: VGM_ctrlStructuredText
 
 class VGM_ctrlTree: ctrlTree
 {
-    colorText[] = COLOR_BLACK;
-    colorBorder[] = COLOR_BLACK;
-    colorLines[] = COLOR_BLACK;
-    colorArrow[] = COLOR_BLACK;
+    colorText[] = {VGM_UI_COLOR_TEXT};
+    colorBorder[] = {VGM_UI_COLOR_TEXT};
+    colorLines[] = {VGM_UI_COLOR_TEXT};
+    colorArrow[] = {VGM_UI_COLOR_TEXT};
     hiddenTexture = "";
     expandedTexture = "";
     font = VGM_FONT;
@@ -271,21 +271,19 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
     h = (5 + 2) * VGM_GRID_H;
     class Controls
     {
-        class Background: VGM_ctrlStatic
+        class Background: VGM_ctrlBackground
         {
             x = 0;
             y = 0;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
             h = (5 + 2) * VGM_GRID_H;
-            colorBackground[] = {0.7,0.7,0.7,1};
         };
-        class BackgroundMiddle: VGM_ctrlStatic
+        class BackgroundMiddle: VGM_ctrlBackground
         {
             x = 0;
             y = 1 * VGM_GRID_H;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
             h = 5 * VGM_GRID_H;
-            colorBackground[] = {0.8,0.8,0.8,1};
         };
         class Name: VGM_ctrlStructuredText
         {
@@ -298,7 +296,7 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
             class Attributes
             {
                 font = VGM_FONT;
-                color = "#000000";
+                color = "#ffffff";
                 colorLink = "#D09B43";
                 align = "center";
                 shadow = 0;
@@ -314,13 +312,12 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
     h = 20 * VGM_GRID_H;
     class Controls
     {
-        class Background: VGM_ctrlStatic
+        class Background: VGM_ctrlBackground
         {
             x = 0;
             y = 0;
             w = VGM_CTRLSKILL_W * VGM_GRID_W;
             h = 20 * VGM_GRID_H;
-            colorBackground[] = {0.8,0.8,0.8,1};
         };
         class Cost: VGM_ctrlStructuredText
         {
@@ -341,7 +338,7 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
             class Attributes
             {
                 font = VGM_FONT;
-                color = "#000000";
+                color = "#ffffff";
                 colorLink = "#D09B43";
                 align = "center";
                 shadow = 0;
@@ -371,8 +368,6 @@ class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
             text = "\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
-            colorText[] = {0,0,0,1};
-            colorBackground[] = {0.7,0.7,0.7,1};
             x = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
             y = 0;
             w = 5 * VGM_GRID_W;
