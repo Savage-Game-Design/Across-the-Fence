@@ -35,6 +35,18 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class mission_director
+    {
+        VGM_SERVER_PATH(\systems\mission_director\server);
+        class director_handlePlayerExplosion {};
+        class director_handlePlayerShots {};
+        class director_preInit {
+            preInit = 1;
+        };
+        class director_startMission {};
+        class director_stopMission {};
+    };
+
     class missions
     {
         VGM_SERVER_PATH(\systems\missions\server);
@@ -66,8 +78,6 @@ class vgm_s
         VGM_SERVER_PATH(\systems\missions\server\internal);
 
         class missions_attachPlayerToMission {};
-        class missions_cleanupMission {};
-        class missions_prepareMissionToBePlayed {};
         class missions_preventJoining {};
         class missions_removePlayerFromMission {};
         class missions_updateStatus {};

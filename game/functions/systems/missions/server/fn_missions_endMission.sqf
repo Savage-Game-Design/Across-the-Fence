@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-09-21
+    Last Update: 2023-09-23
     Public: No
 
     Description:
@@ -38,7 +38,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-[] call vgm_s_fnc_missions_cleanupMission;
+[_mission] call vgm_s_fnc_director_stopMission;
 
 {
     [_x, _mission] call vgm_s_fnc_missions_removePlayerFromMission;

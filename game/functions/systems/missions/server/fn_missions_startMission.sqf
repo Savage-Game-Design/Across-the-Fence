@@ -2,7 +2,7 @@
     File: fn_missions_startMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-09-20
+    Last Update: 2023-09-23
     Public: Yes
 
     Description:
@@ -37,7 +37,7 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 
 [] remoteExecCall ["vgm_c_fnc_missions_startDeploy", values (_mission get "machineIds")];
 
-[_mission] call vgm_s_fnc_missions_prepareMissionToBePlayed;
+[_mission] call vgm_s_fnc_director_startMission;
 
 // TODO
 // - Setup extract mechanics
