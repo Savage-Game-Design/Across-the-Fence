@@ -206,5 +206,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC">
             <Original>When looking through binoculars, you can press 'Reveal Target' to get an approximate distance to the target</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN">
+            <Original>Marksman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN">
+            <Original>Pointman Loadout</Original>
+        </Key>
     </Package>
 </Project>
