@@ -37,9 +37,11 @@ addMissionEventHandler ["EntityCreated", {
             [_threats, _unit] spawn {
                 params ["_threats", "_unit"];
                 waitUntil {getSuppression _unit <= 0};
-                _unit setVariable ["vgm_s_skill_threats", nil];
-                // send event to all players that suppressed the unit
-                ["vgm_unit_suppressEnd", _unit, _threats] call para_g_fnc_event_triggerTargets;
+                isNil { // make array clear and event send atomic
+                    _unit setVariable ["vgm_s_skill_threats", nil];
+                    // send event to all players that suppressed the unit
+                    ["vgm_unit_suppressEnd", _unit, _threats] call para_g_fnc_event_triggerTargets;
+                };
             };
         };
 
