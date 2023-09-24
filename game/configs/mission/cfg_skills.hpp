@@ -147,6 +147,16 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN_DESC";
                 };
             };
+
+            class tier_3 {
+                class followTheTracers: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_recon_followTheTracers";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_followTheTracers";
+                };
+            };
         };
 
         // specializations
