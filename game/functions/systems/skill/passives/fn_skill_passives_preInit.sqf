@@ -2,7 +2,7 @@
     File: fn_skill_preInit.sqf
     Author: Savage Game Design
     Date: 2023-09-14
-    Last Update: 2023-09-22
+    Last Update: 2023-09-24
     Public: No
 
     Description:
@@ -17,7 +17,6 @@ if (!hasInterface) exitWith {};
     format ["Applying Rifleman/Born Leader for mission: %1", _mission] call vgm_g_fnc_logDebug;
 
     private _group = _mission get "group";
-    _group = group player; // TODO remove after "group" in missions is merged
 
     private _fnc_onUnitJoined = {
         params ["", "_unit"];
