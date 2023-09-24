@@ -28,3 +28,11 @@
 params ["_mission"];
 
 [] remoteExec ["vgm_c_fnc_director_stopClientsideMonitoring", values (_mission get "machineIds")];
+
+private _directorData = _mission get "director";
+
+{
+    {
+        deleteVehicle _x;
+    } forEach units _x;
+} forEach (_directorData getOrDefault ["squads", []]);
