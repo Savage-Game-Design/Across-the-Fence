@@ -2,7 +2,7 @@
     File: fn_skill_passives_recon_betterAim.sqf
     Author: Savage Game Design
     Date: 2023-09-22
-    Last Update: 2023-09-22
+    Last Update: 2023-09-24
     Public: No
 
     Description:
@@ -35,8 +35,13 @@ private _eh = player addEventHandler ["AnimDone", {
     params ["_unit"];
 
     private _stance = stance _unit;
+    private _lastStance = _unit getVariable ["vgm_c_skill_passives_recon_lastStance", ""];
+    // optimize by not calling coefficient functions if stance did not change
+    if (_stance isEqualTo _lastStance) exitWith {};
+    _unit setVariable ["vgm_c_skill_passives_recon_lastStance", _stance];
+
     if (_stance == "STAND") exitWith {
-        [player, "aim", "skill_recon_betterAim", 0] call vgm_c_fnc_coefficient_set;
+        [player, "aim", "skill_recon_betterAim"] call vgm_c_fnc_coefficient_remove;
     };
 
     [player, "aim", "skill_recon_betterAim", -0.5] call vgm_c_fnc_coefficient_set;
