@@ -79,6 +79,7 @@ class vgm_g
         class skills_canLearn {};
         class skills_canSee {};
         class skills_getByPath {};
+        class skills_getSkillTreeFromSkill {};
         class skills_getTreeSkillPoints {};
         class skills_isKnown {};
         class skills_parseTreeCfg {};
@@ -283,7 +284,6 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skills\client);
 
         class skills_getSkillPoints {};
-        class skills_getSkillTreeFromSkill {};
         class skills_openSkillTree {};
         class skills_postInit
         {
@@ -321,6 +321,35 @@ class vgm_c
         class skills_requestSkillLearn {};
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
+    };
+
+    class skill_passives
+    {
+        VGM_CLIENT_PATH(\systems\skill\passives);
+
+        class skill_passives_preInit
+        {
+            preInit = 1;
+        };
+    };
+    class skill_passives_infantryman
+    {
+        VGM_CLIENT_PATH(\systems\skill\passives\infantryman);
+
+        class skill_passives_infantryman_bornLeader {};
+        class skill_passives_infantryman_overprepared {};
+    };
+
+    class skill_actives
+    {
+        VGM_CLIENT_PATH(\systems\skill\actives);
+    };
+    class skill_actives_infantryman
+    {
+        VGM_CLIENT_PATH(\systems\skill\actives\infantryman);
+
+        class skill_actives_infantryman_luckySon {};
+        class skill_actives_infantryman_steadyAim {};
     };
 
     class stamina

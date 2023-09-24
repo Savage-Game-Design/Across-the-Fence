@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-01
+    Last Update: 2023-09-22
     Public: No
 
     Description:
@@ -96,3 +96,24 @@ vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
 
 vgm_c_medical_armorCache = createHashMap;
 vgm_c_medical_damageModifiers = [];
+
+["bleedOut", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_bleedout", _value max 0.5 min 3];
+}] call vgm_c_fnc_coefficient_create;
+
+["hitShrug", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_hitShrug", _value max 0 min 1];
+}, 0] call vgm_c_fnc_coefficient_create;
+
+[{
+    params ["_unit"];
+
+    private _chance = _unit getVariable ["vgm_c_medical_coefficient_hitShrug", 0];
+    if (random 1 < _chance) then {
+        "Shrugging hit" call vgm_g_fnc_logDebug;
+        _this set [2, 0];
+        true // stop processing
+    };
+}] call vgm_c_fnc_medical_addDamageModifier;

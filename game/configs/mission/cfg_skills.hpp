@@ -14,119 +14,95 @@ class vgm_skillTemplate {
     conditionUnlock = "true";
     conditionShow = "true";
 
-    codeApply = "systemChat 'skill applied'";
-    codeUnapply = "systemChat 'skill un-applied'";
+    codeApply = "";
+    codeUnapply = "";
 
-    codeActivate = "systemChat 'skill activated'";
+    codeActivate = "";
 };
 
 class vgm_skillTrees {
-    class combatTree {
-        displayName = "Combat";
-        description = "Combat tree description.";
+    class rifleman {
+        displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
+        description = "";
+
         // rifleman skills
         class skills {
             class tier_1 {
-                class moreStamina: vgm_skillTemplate {
-                    displayName = "More Stamina";
-                    description = "Increases amount of available stamina.";
-                    codeApply = "_this setUnitTrait ['loadCoef', 2]";
+                class steadyHand: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
+
+                    codeApply = "[player, 'recoil', 'skills', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'recoil', 'skills'] call vgm_c_fnc_coefficient_remove";
+                    skillType = 0;
                 };
 
-                class steadyAim: vgm_skillTemplate {
-                    displayName = "Steady Aim";
-                    description = "Decreases weapon sway.";
-                    codeApply = "_this setCustomAimCoef 0.5";
+                class tough: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH";
+
+                    codeApply = "[player, 'bleedOut', 'skills', 0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'bleedOut', 'skills'] call vgm_c_fnc_coefficient_remove";
+                    skillType = 0;
                 };
             };
 
             class tier_2 {
-                class skill_3: vgm_skillTemplate {};
-                class skill_4: vgm_skillTemplate {};
+                class loadout_historical: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC";
+
+                    applyOnRespawn = 1;
+                };
+
+                class overprepared: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_infantryman_overprepared";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_overprepared";
+                };
+
+                class loadout: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_DESC";
+                };
             };
 
             class tier_3 {
-                class skill_5: vgm_skillTemplate {};
-                class skill_6: vgm_skillTemplate {};
+                class bornLeader: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_infantryman_bornLeader";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_bornLeader";
+                    cost = 2;
+                };
+
+                class steadyAim: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_steadyAim";
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 120;
+                };
             };
 
             class tier_4 {
-                class fieldHeal: vgm_skillTemplate {
-                    displayName = "Field heal";
-                    description = "Free healthcare.";
-                    skillType = 1;
-                };
-                class zeusBolt: vgm_skillTemplate {
-                    displayName = "Zeus bolt";
-                    description = "POWER OF THE GODS!";
+                class luckySon: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
+                    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_luckySon";
                     skillType = 2;
-
-                    cost = 2;
-                    cooldown = 30;
-
-                    codeApply = "hint 'boom'";
+                    cost = 4;
+                    cooldown = 120;
                 };
             };
         };
 
         // specializations
-        class subtrees {
-            class medicTree {
-                displayName = "Medic";
-                class skills {
-                    class tier_1 {
-                        class medicTrait: vgm_skillTemplate {
-                            displayName = "Medic Trait";
-                            description = "Allows to use MediKits.";
-                            codeApply = "_this setUnitTrait ['Medic', true]";
-                        };
-                    };
-
-                    class tier_2 {
-                        class skill_3: vgm_skillTemplate {};
-                        class skill_4: vgm_skillTemplate {};
-                    };
-                };
-
-                // expertise
-                class subtrees {
-                    class surgeonTree {
-                        displayName = "Surgeon";
-                        class skills {
-                            class tier_1 {
-                                class skill_1: vgm_skillTemplate {};
-                                class skill_2: vgm_skillTemplate {};
-                            };
-                        };
-                    };
-                };
-            };
-
-            class engineerTree {
-                displayName = "Engineer";
-                class skills {};
-            };
-        };
-    };
-
-    class utilityTree {
-        displayName = "Utility";
-        description = "Utility tree description.";
-
-        class skills {
-            class tier_1 {
-                class hiddenSkill: vgm_skillTemplate {
-                    displayName = "Hidden utility skill";
-                    description = "Hidden utility skill.";
-
-                    conditionShow = "false";
-                };
-                class skill_2: vgm_skillTemplate {};
-            };
-        };
-    };
-    class socialTree {
-        displayName = "Social";
-        description = "Social tree description.";
+        class subtrees {};
     };
 };

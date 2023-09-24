@@ -117,7 +117,6 @@ class vgm_s
         class skills_dataGetCached {};
         class skills_dbGet {};
         class skills_dbSave {};
-
         class skills_forgetSkills {};
 
         class skills_preInit

@@ -36,6 +36,11 @@ vgm_c_skills_appliedSkillsPaths = [];
     vgm_c_skills_applyOnRespawn deleteAt _path;
 }] call para_g_fnc_event_subscribeLocal;
 
+["skillCooldown", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_skills_cooldownCoef", _value max 0.5 min 1];
+}] call vgm_c_fnc_coefficient_create;
+
 [] call vgm_c_fnc_skills_active_init;
 
 ["skills", {
