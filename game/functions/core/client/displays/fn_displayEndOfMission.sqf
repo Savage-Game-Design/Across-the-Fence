@@ -18,9 +18,15 @@
     Example(s):
             ["onLoad", [_display]] call vgm_c_fnc_displayEndOfMission;
 */
+#include "./macros.inc"
 params ["_mode", "_this"];
 switch _mode do {
     case "onLoad":{
         params ["_display"];
+        private _ctrlLevelProgress = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELPROGRESS;
+        _ctrlLevelProgress progressSetPosition 0.8;
+    };
+    case "onUnload":{
+        params ["_display", "_exitCode"];
     };
 };
