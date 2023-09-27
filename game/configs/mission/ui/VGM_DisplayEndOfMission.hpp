@@ -2,7 +2,7 @@
 #define DH VGM_GRID_MAX_H
 #define DX VGM_GRID_MIN_X + (0.5 * DW) * VGM_GRID_W
 #define DY VGM_GRID_MIN_Y
-#define SPACING 3
+#define SPACING 5
 
 VGM_SET_Y(0)
 class VGM_DisplayEndOfMission
@@ -32,7 +32,6 @@ class VGM_DisplayEndOfMission
             w = (DW - 2) * VGM_GRID_W;
             h = VGM_Y_H(10);
             size = 10 * VGM_GRID_H;
-            colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
         };
         class LevelCurrent: VGM_ctrlStructuredText
         {
@@ -90,13 +89,14 @@ class VGM_DisplayEndOfMission
                 shadow = 1;
             };
         };
+#define _W 0.5 * DW
         class LevelMessage: VGM_ctrlTitle
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELMESSAGE;
             text = "Level Up!";
-            x = DX + 1 * VGM_GRID_W;
+            x = DX + (0.5 * DW - 0.5 * _W) * VGM_GRID_W;
             y = VGM_Y_Y(DY,SPACING);
-            w = (DW - 2) * VGM_GRID_W;
+            w = _W * VGM_GRID_W;
             h = VGM_Y_H(5);
             colorBackground[] = {0,0.7,0,0.8};
         };
@@ -117,6 +117,7 @@ class VGM_DisplayEndOfMission
             y = VGM_Y_Y(DY, SPACING);
             w = 50 * VGM_GRID_W;
             h = VGM_Y_H(5);
+            colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
         };
     };
 };
