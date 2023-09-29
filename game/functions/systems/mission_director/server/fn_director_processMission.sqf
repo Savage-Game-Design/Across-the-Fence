@@ -18,10 +18,6 @@
         [_mission] call vgm_s_fnc_director_processMission;
  */
 
-#define UNSUPPRESSED_LISTEN_RANGE 250
-#define SUPPRESSED_LISTEN_RANGE 100
-#define EXPLOSION_LISTEN_RANGE 350
-
 params ["_mission"];
 
 private _publicMission = _mission get "public";
