@@ -2,7 +2,7 @@
     File: fn_director_handlePlayerExplosion.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2023-09-29
     Public: No
 
     Description:
@@ -26,6 +26,14 @@
 
 params ["_eventData"];
 
-if !([_eventData get "playerId"] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {};
+private _playerId = _eventData get "playerId";
 
-// hint str _this;
+if !([_playerId] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {};
+
+private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;
+
+if (isNil "_mission") exitWith {
+    [format ["Player %1 reported explosion, but isn't assigned to a mission", _playerId]] call vgm_g_fnc_logWarning;
+};
+
+_mission get "director" get "explosionIngestionQueue" pushBack _eventData;

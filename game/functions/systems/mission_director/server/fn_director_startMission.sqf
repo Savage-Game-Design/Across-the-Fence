@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2023-09-29
     Public: Yes
 
     Description:
@@ -30,34 +30,21 @@ params ["_mission"];
 
 private _directorData = _mission getOrDefault ["director", createHashMap, true];
 
+// Explosions reported by other systems / clients. Processed during the main loop.
+_directorData set ["explosionIngestionQueue", []];
+// Shots reported by other systems / clients. Processed during the main loop.
+_directorData set ["shotsIngestionQueue", []];
+// AI groups that currently exist on this mission
+_directorData set ["aiGroups", []];
+
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 
-private _insertionLocation = _mission get "public" get "startPosASL";
-private _objective = markerPos "marker_47";
+[_mission] call vgm_s_fnc_director_spawnInitialPatrols;
 
+private _jobId = format ["missionDirector%1", _mission get "public" get "id"];
+[_jobId, { _this call vgm_s_fnc_director_processMission }, [_mission], 10] call para_g_fnc_scheduler_add_job;
 
-private _unitClasses = "true" configClasses (configFile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva" >> "vn_o_group_men_nva_04") apply {getText (_x >> "vehicle")};
-
-private _desiredSquads = 10;
-
-private _angleToObjective = _insertionLocation getDir _objective;
-private _spawnAngles = [_angleToObjective + 90, _angleToObjective - 90];
-private _spawnIntervalDistance = (_insertionLocation distance2D _objective) /_desiredSquads;
-
-private _squads = [];
-
-for "_i" from 1 to _desiredSquads do {
-    private _spawnCenterlinePos = _insertionLocation getPos [_spawnIntervalDistance * _i, _angleToObjective];
-    private _spawnPos = _spawnCenterlinePos getPos [100 + random 100, selectRandom _spawnAngles];
-
-    private _squad = [_unitClasses, east, _spawnPos] call para_s_fnc_loadbal_create_squad;
-    private _group = _squad select 1;
-    _group setVariable ["behaviourEnabled", true, true];
-    _group setVariable ["orders", ["patrol", _spawnPos, 100]];
-    _squads pushBack _group;
-};
-
-_directorData set ["squads", _squads];
+_directorData set ["schedulerJob", _jobId];
 
 // TODO - Start clientside monitoring on JIP players
 // Use startDeploy and finishDeploy as events for ease of use.
