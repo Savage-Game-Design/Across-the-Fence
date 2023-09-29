@@ -54,6 +54,7 @@ class vgm_s
 
         class missions_createMission {};
         class missions_endMission {};
+        class missions_getAssignedMission {};
         class missions_joinMission {};
         class missions_leaveMission {};
         class missions_preInit {
