@@ -18,6 +18,8 @@
         [] call vgm_c_fnc_director_sendRecentShotsToServer;
  */
 
+if (vgm_c_director_recentShots get "totalShots" == 0) exitWith {};
+
 vgm_c_director_recentShots set ["time", serverTime];
 
 [
