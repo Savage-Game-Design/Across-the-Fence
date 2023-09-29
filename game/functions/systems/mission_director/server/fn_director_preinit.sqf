@@ -2,7 +2,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2023-09-29
     Public: No
 
     Description:
@@ -17,6 +17,10 @@
     Example(s):
         [] call vgm_s_fnc_director_preinit;
  */
+
+vgm_s_director_unsuppressed_listen_range = 250;
+vgm_s_director_suppressed_listen_range = 100;
+vgm_s_director_explosion_listen_range = 350;
 
 [
     "vgm_director_playerCausedExplosion",

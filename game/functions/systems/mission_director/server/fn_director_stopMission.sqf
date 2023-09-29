@@ -2,7 +2,7 @@
     File: fn_director_stopMonitoringMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2023-09-29
     Public: Yes
 
     Description:
@@ -36,3 +36,6 @@ private _directorData = _mission get "director";
         deleteVehicle _x;
     } forEach units _x;
 } forEach (_directorData getOrDefault ["squads", []]);
+
+// Removes the job from the scheduler after it next runs.
+[_directorData get "schedulerJob"] call para_g_fnc_scheduler_remove_job;

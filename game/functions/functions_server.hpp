@@ -43,6 +43,7 @@ class vgm_s
         class director_preInit {
             preInit = 1;
         };
+        class director_processMission {};
         class director_spawnInitialPatrols {};
         class director_startMission {};
         class director_stopMission {};
