@@ -57,7 +57,7 @@ vgm_c_director_firedHandler = player addEventHandler ["FiredMan", {
             createHashMapFromArray [
                 ["time", serverTime],
                 ["playerId", getPlayerID player],
-                ["pos", _pos]
+                ["pos", AGLToASL _pos]
             ]
         ] call para_g_fnc_event_triggerServer;
     }];
