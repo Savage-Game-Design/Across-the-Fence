@@ -2,7 +2,7 @@
     File: fn_missions_startClientsideMonitoring.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2023-09-29
     Public: No
 
     Description:
@@ -55,6 +55,7 @@ vgm_c_director_firedHandler = player addEventHandler ["FiredMan", {
         [
             "vgm_director_playerCausedExplosion",
             createHashMapFromArray [
+                ["time", serverTime],
                 ["playerId", getPlayerID player],
                 ["pos", _pos]
             ]

@@ -2,7 +2,7 @@
     File: fn_missions_reportFiredDataToServer.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2023-09-29
     Public: No
 
     Description:
@@ -17,6 +17,8 @@
     Example(s):
         [] call vgm_c_fnc_director_sendRecentShotsToServer;
  */
+
+vgm_c_director_recentShots set ["time", serverTime];
 
 [
     "vgm_director_recentPlayerShots",
