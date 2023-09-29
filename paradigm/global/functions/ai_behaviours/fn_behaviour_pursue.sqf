@@ -54,7 +54,7 @@ if (behaviour leader _group != "AWARE") then {
 };
 
 private _desiredCombatMode = "WHITE";
-if (leader _group distance2D _unitTarget < 150) exitWith {
+if (leader _group distance2D _unitTarget < 150) then {
 	_desiredCombatMode = "RED";
 };
 
