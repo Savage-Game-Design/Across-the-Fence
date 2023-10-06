@@ -18,6 +18,8 @@
         true call vgm_c_fnc_skill_passives_recon_followTheTracers
  */
 
+#define FONT_SIZE 0.045
+
 params ["_known"];
 
 if (!_known) exitWith {
@@ -32,10 +34,18 @@ vgm_c_skill_passives_recon_followTheTracers_items = createHashMap;
 player setVariable ["vgm_g_skill_passives_recon_followTheTracers", true, true];
 
 vgm_c_skill_passives_recon_followTheTracersDrawEh = addMissionEventHandler ["Draw3d", {
+    private _text = localize "STR_A3_ENEMY_"; // yes, with an underscore at the end...
     {
-        private _unit = _y;
-        // TODO needs design
-        drawIcon3D ["", [1,0,0,1], ASLToAGL getPosASLVisual _unit, 0, 0, 0, "Target", 1, 0.05, "PuristaMedium"];
+        drawIcon3D [
+            "",
+            [1,0,0,1],
+            ASLToAGL getPosASLVisual _y,
+            0, 0, 0,
+            _text,
+            2, // shadow
+            FONT_SIZE,
+            "PuristaMedium"
+        ];
     } forEach vgm_c_skill_passives_recon_followTheTracers_items;
 }];
 
