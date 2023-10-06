@@ -2,7 +2,7 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-08-27
+    Last Update: 2023-10-06
     Public: No
 
     Description:
@@ -13,6 +13,16 @@
     params ["_unit", "_value"];
     // coef should be always greater than 0 to allow the weapon to settle on the middle of the screen
     _unit setCustomAimCoef (_value max 0.1 min 4);
+}] call vgm_c_fnc_coefficient_create;
+
+["camouflage", {
+    params ["_unit", "_value"];
+    _unit setUnitTrait ["camouflageCoef", _value max 0.1 min 1];
+}] call vgm_c_fnc_coefficient_create;
+
+["audible", {
+    params ["_unit", "_value"];
+    _unit setUnitTrait ["audibleCoef", _value max 0.15 min 1];
 }] call vgm_c_fnc_coefficient_create;
 
 ["recoil", {
