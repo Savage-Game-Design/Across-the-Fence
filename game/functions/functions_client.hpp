@@ -364,6 +364,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
 
         class skill_actives_recon_sixthSense {};
+        class skill_actives_recon_thickBrush {};
     };
 
     class stamina

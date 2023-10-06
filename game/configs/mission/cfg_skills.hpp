@@ -168,6 +168,18 @@ class vgm_skillTrees {
                     cooldown = 120;
                 };
             };
+
+            class tier_4 {
+                class thickBrush: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_recon_thickBrush";
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 180;
+                };
+            };
         };
 
         // specializations
