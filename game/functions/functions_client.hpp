@@ -359,6 +359,12 @@ class vgm_c
         class skill_actives_infantryman_luckySon {};
         class skill_actives_infantryman_steadyAim {};
     };
+    class skill_actives_recon
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
+
+        class skill_actives_recon_sixthSense {};
+    };
 
     class stamina
     {

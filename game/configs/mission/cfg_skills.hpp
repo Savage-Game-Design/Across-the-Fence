@@ -155,6 +155,17 @@ class vgm_skillTrees {
 
                     codeApply = "true call vgm_c_fnc_skill_passives_recon_followTheTracers";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_recon_followTheTracers";
+                    cost = 2;
+                };
+
+                class sixthSense: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_recon_sixthSense";
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 120;
                 };
             };
         };

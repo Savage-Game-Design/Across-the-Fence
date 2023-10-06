@@ -218,5 +218,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
             <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when thier suppression return to zero naturally.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
+            <Original>6th Sense</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC">
+            <Original>Briefly add a 3D marker to all enemies in within 150m, and add an approximate marker of thier locations to your map.</Original>
+        </Key>
     </Package>
 </Project>
