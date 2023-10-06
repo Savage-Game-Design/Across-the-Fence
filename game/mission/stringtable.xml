@@ -145,6 +145,9 @@
         <Key ID="STR_VGM_SKILLS_TREE_RECON">
             <Original>Recon</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
+            <Original>Fire Support</Original>
+        </Key>
     </Package>
     <Package name="Skills Skill">
         <!-- Rifleman -->
@@ -229,6 +232,10 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
             <Original>For 60 seconds, AI are much less likely to see you and hear you.</Original>
+        </Key>
+        <!-- Fire Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
+            <Original>50% increased suppresion strength</Original>
         </Key>
     </Package>
 </Project>

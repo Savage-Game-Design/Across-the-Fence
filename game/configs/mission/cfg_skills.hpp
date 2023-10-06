@@ -185,4 +185,15 @@ class vgm_skillTrees {
         // specializations
         class subtrees {};
     };
+
+    class fireSupport {
+        displayName = "$STR_VGM_SKILLS_TREE_FIRE_SUPPORT";
+        description = "";
+
+        // rifleman skills
+        class skills {
+            class tier_1 {
+            };
+        };
+    };
 };

@@ -347,6 +347,12 @@ class vgm_c
         class skill_passives_recon_followTheTracers {};
         class skill_passives_recon_keenEye {};
     };
+    class skill_passives_fireSupport
+    {
+        VGM_CLIENT_PATH(\systems\skill\passives\fire_support);
+
+        // class skill_passives_fireSupport_ {};
+    };
 
     class skill_actives
     {
@@ -365,6 +371,12 @@ class vgm_c
 
         class skill_actives_recon_sixthSense {};
         class skill_actives_recon_thickBrush {};
+    };
+    class skill_actives_fireSupport
+    {
+        VGM_CLIENT_PATH(\systems\skill\actives\fire_support);
+
+        // class skill_actives_fireSupport_ {};
     };
 
     class stamina
