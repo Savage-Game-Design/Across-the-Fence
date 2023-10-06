@@ -2,7 +2,7 @@
     File: fn_skill_passives_recon_betterAim.sqf
     Author: Savage Game Design
     Date: 2023-09-22
-    Last Update: 2023-09-24
+    Last Update: 2023-10-06
     Public: No
 
     Description:
@@ -34,6 +34,7 @@ if (!_known) exitWith {
 private _eh = player addEventHandler ["AnimDone", {
     params ["_unit"];
 
+    // TODO reading the stance from anim name could be more reliable
     private _stance = stance _unit;
     private _lastStance = _unit getVariable ["vgm_c_skill_passives_recon_lastStance", ""];
     // optimize by not calling coefficient functions if stance did not change

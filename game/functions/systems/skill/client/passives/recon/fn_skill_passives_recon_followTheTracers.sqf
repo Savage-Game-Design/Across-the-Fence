@@ -2,7 +2,7 @@
     File: fn_skill_passives_recon_followTheTracers.sqf
     Author: Savage Game Design
     Date: 2023-09-24
-    Last Update: 2023-09-24
+    Last Update: 2023-10-06
     Public: No
 
     Description:
@@ -23,13 +23,15 @@ params ["_known"];
 if (!_known) exitWith {
     player setVariable ["vgm_g_skill_passives_recon_followTheTracers", false, true];
 
-    removeMissionEventHandler ["Draw3D", vgm_c_skill_passives_recon_followTheTracersEh];
+    removeMissionEventHandler ["Draw3D", vgm_c_skill_passives_recon_followTheTracersDrawEh];
+    [vgm_c_skill_passives_recon_followTheTracersSuppressStartEh] call para_g_fnc_event_unsubscribe;
+    [vgm_c_skill_passives_recon_followTheTracersSuppressEndEh] call para_g_fnc_event_unsubscribe;
 };
 
 vgm_c_skill_passives_recon_followTheTracers_items = createHashMap;
 player setVariable ["vgm_g_skill_passives_recon_followTheTracers", true, true];
 
-vgm_c_skill_passives_recon_followTheTracersEh = addMissionEventHandler ["Draw3d", {
+vgm_c_skill_passives_recon_followTheTracersDrawEh = addMissionEventHandler ["Draw3d", {
     {
         private _unit = _y;
         // TODO needs design
@@ -37,14 +39,12 @@ vgm_c_skill_passives_recon_followTheTracersEh = addMissionEventHandler ["Draw3d"
     } forEach vgm_c_skill_passives_recon_followTheTracers_items;
 }];
 
-// TODO clear EH if skill not known
-["vgm_unit_suppressStart", {
+vgm_c_skill_passives_recon_followTheTracersSuppressStartEh = ["vgm_unit_suppressStart", {
     params ["_unit"];
     vgm_c_skill_passives_recon_followTheTracers_items set [netId _unit, _unit];
 }] call para_g_fnc_event_subscribeServer;
 
-// TODO clear EH if skill not known
-["vgm_unit_suppressEnd", {
+vgm_c_skill_passives_recon_followTheTracersSuppressEndEh = ["vgm_unit_suppressEnd", {
     params ["_unit"];
     vgm_c_skill_passives_recon_followTheTracers_items deleteAt netId _unit;
 }] call para_g_fnc_event_subscribeServer;
