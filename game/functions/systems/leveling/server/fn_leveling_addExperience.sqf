@@ -2,7 +2,7 @@
     File: fn_leveling_addExperience.sqf
     Author: Savage Game Design
     Date: 2023-06-01
-    Last Update: 2023-06-23
+    Last Update: 2023-10-06
     Public: No
 
     Description:
@@ -35,7 +35,7 @@ private _currentExperience = _levelingData get "experience";
 // award the gained XP
 _currentExperience = _currentExperience + _experience;
 // clamp XP to the amount needed to reach max level
-_currentExperience = _currentExperience min (vgm_g_leveling_levelsHashMap get (vgm_g_leveling_maxLvl-1) get "experience");
+_currentExperience = _currentExperience min vgm_g_leveling_maxExperience;
 
 _levelingData set ["experience", _currentExperience];
 
