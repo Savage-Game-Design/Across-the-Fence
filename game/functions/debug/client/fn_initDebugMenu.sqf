@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2023-09-08
+    Last Update: 2023-10-06
     Public: No
 
     Description:
@@ -139,7 +139,10 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
             private _level = _levelingData get "level";
             _this lnbAddRow ["level", str _level];
             _this lnbAddRow ["xp", str (_levelingData get "experience")];
-            _this lnbAddRow ["next level xp", str (vgm_g_leveling_levelsHashMap get _level get "experienceThreshold")];
+            _this lnbAddRow ["next level xp", [
+                str (vgm_g_leveling_levelsHashMap get _level get "experienceThreshold"),
+                "max"
+            ] select (_level >= vgm_g_leveling_maxLvl)];
         }] call vgm_c_debugMenu_addSection;
 
         // skills data
