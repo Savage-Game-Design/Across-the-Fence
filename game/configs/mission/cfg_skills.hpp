@@ -108,7 +108,7 @@ class vgm_skillTrees {
         displayName = "$STR_VGM_SKILLS_TREE_RECON";
         description = "";
 
-        // rifleman skills
+        // recon skills
         class skills {
             class tier_1 {
                 class betterAim: vgm_skillTemplate {
@@ -123,7 +123,7 @@ class vgm_skillTrees {
                 class athletic: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_ATHLETIC";
 
-                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.3, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'staminaDrain', 'skill_recon_athletic'] call vgm_c_fnc_coefficient_remove";
                 };
             };
