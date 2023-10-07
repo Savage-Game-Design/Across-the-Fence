@@ -2,7 +2,7 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-10-06
+    Last Update: 2023-10-07
     Public: No
 
     Description:
@@ -29,6 +29,12 @@
     params ["_unit", "_value"];
     // coef should be always greater than 0 to prevent no animation at all
     _unit setUnitRecoilCoefficient (_value max 0.25 min 4);
+}] call vgm_c_fnc_coefficient_create;
+
+["load", {
+    params ["_unit", "_value"];
+    // coef should be always greater than 0 to prevent infinite carry capacity
+    _unit setUnitTrait ["loadCoef", _value max 0.1 min 2];
 }] call vgm_c_fnc_coefficient_create;
 
 ["throw", {
