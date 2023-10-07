@@ -190,9 +190,15 @@ class vgm_skillTrees {
         displayName = "$STR_VGM_SKILLS_TREE_FIRE_SUPPORT";
         description = "";
 
-        // rifleman skills
+        // fire support skills
         class skills {
             class tier_1 {
+                class heavySuppression: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_heavySuppression";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_heavySuppression";
+                };
             };
         };
     };

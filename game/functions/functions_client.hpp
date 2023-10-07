@@ -349,9 +349,9 @@ class vgm_c
     };
     class skill_passives_fireSupport
     {
-        VGM_CLIENT_PATH(\systems\skill\passives\fire_support);
+        VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
 
-        // class skill_passives_fireSupport_ {};
+        class skill_passives_fireSupport_heavySuppression {};
     };
 
     class skill_actives
@@ -374,7 +374,7 @@ class vgm_c
     };
     class skill_actives_fireSupport
     {
-        VGM_CLIENT_PATH(\systems\skill\actives\fire_support);
+        VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
 
         // class skill_actives_fireSupport_ {};
     };
