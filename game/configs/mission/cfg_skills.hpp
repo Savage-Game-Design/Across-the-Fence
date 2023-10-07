@@ -199,6 +199,23 @@ class vgm_skillTrees {
                     codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_heavySuppression";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_heavySuppression";
                 };
+
+                class packMule: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE";
+
+                    codeApply = "\
+                        [player, 'load', 'skill_fireSupport_packMule', -0.3, true] call vgm_c_fnc_coefficient_set;\
+                        [player, 'staminaDrain', 'skill_fireSupport_packMule', -0.2, true] call vgm_c_fnc_coefficient_set;\
+                    ";
+                    codeUnapply = "\
+                        [player, 'load', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
+                        [player, 'staminaDrain', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
+                    ";
+                };
+            };
+
+            class tier_2 {
+
             };
         };
     };
