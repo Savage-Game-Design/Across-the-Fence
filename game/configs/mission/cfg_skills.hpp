@@ -47,8 +47,6 @@ class vgm_skillTrees {
                 class loadout_historical: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC";
-
-                    applyOnRespawn = 1;
                 };
 
                 class overprepared: vgm_skillTemplate {
@@ -215,8 +213,24 @@ class vgm_skillTrees {
             };
 
             class tier_2 {
+                class loadout_machineGunner: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER_DESC";
+                };
 
+                class loadout_explosives: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES_DESC";
+                };
+
+                class loadout_grenadier: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER_DESC";
+                };
             };
         };
+
+        // fire support specializations
+        class subtrees {};
     };
 };

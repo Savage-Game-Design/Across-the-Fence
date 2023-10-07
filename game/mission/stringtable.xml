@@ -240,5 +240,14 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
             <Original>Carry 30% more weight and consume 20% less stamina</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER">
+            <Original>Machine Gunner Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES">
+            <Original>Explosives Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
+            <Original>Grenadier and AT Equipment</Original>
+        </Key>
     </Package>
 </Project>
