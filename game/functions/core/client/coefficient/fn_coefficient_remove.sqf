@@ -2,7 +2,7 @@
     File: fn_coefficient_remove.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-08-21
+    Last Update: 2023-10-08
     Public: Yes
 
     Description:
@@ -33,7 +33,7 @@ if (!(_coefficient in vgm_c_coefficient_allCoefficients)) exitWith {
 private _coefficientMap = _unit getVariable "vgm_c_coefficient_currentCoefficients";
 if (isNil "_coefficientMap") exitWith {};
 
-format ["Removing coefficient reason: %1 | %2", _coefficient, _reason] call vgm_g_fnc_logInfo;
+format ["Removing coefficient reason: %1 | %2", _coefficient, _reason] call vgm_g_fnc_logDebug;
 
 private _coefficientValues = _coefficientMap getOrDefault [_coefficient, [], true];
 
