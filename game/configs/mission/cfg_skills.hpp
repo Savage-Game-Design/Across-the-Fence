@@ -216,6 +216,14 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";
                 };
 
+                class resourceful: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL_DESC";
+
+                    codeApply = "player setVariable ['vgm_c_skill_passives_support_resourceful', true, true]";
+                    codeUnapply = "player setVariable ['vgm_c_skill_passives_support_resourceful', false, false]";
+                };
+
                 class loadout_rto: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL";
                     description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";

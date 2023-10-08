@@ -246,5 +246,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO">
             <Original>RTO Equipment</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL">
+            <Original>Efficient and Resourceful</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL_DESC">
+            <Original>You have a 30% chance to not consume a utility item when using one.</Original>
+        </Key>
     </Package>
 </Project>

@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-22
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -61,6 +61,11 @@ vgm_medical_healItems = createHashMapFromArray [
         };
 
         if (_itemType == HEAL_FAK) then {
+            if (
+                (_healer getVariable ["vgm_c_skill_passives_support_resourceful", false]) // TODO consider coefficient?
+                && {random 1 < 0.3}
+            ) exitWith {format ["Not consuming item due to skill: %1 | %2 | %3", _healer, _patient, str _itemType] call vgm_g_fnc_logInfo};
+
             _consumeItem = _foundItems select 0;
         };
     };
