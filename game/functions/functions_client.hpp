@@ -352,6 +352,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
 
         class skill_passives_fireSupport_heavySuppression {};
+        class skill_passives_fireSupport_learnTheRhytm {};
     };
 
     class skill_actives

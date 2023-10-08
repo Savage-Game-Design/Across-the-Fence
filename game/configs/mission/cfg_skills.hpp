@@ -228,6 +228,16 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER_DESC";
                 };
             };
+
+            class tier_3 {
+                class learnTheRhytm: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RYTHM";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RYTHM_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_learnTheRhytm";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_learnTheRhytm";
+                };
+            };
         };
 
         // fire support specializations
