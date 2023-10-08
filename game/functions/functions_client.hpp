@@ -357,6 +357,11 @@ class vgm_c
     class skill_actives
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives);
+
+        class skill_actives_preInit
+        {
+            preInit = 1;
+        };
     };
     class skill_actives_infantryman
     {
@@ -377,6 +382,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\support);
 
         class skill_actives_support_quickBandage {};
+        class skill_actives_support_getToTheLz {};
     };
 
     class stamina

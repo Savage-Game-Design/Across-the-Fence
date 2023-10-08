@@ -264,5 +264,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY">
             <Original>Target is not bleeding!</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ">
+            <Original>Get To The LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC">
+            <Original>For 30 seconds, the team has: 50% reduced stamina consumption, 40% hit shrug chance, all actions are 10% faster</Original>
+        </Key>
     </Package>
 </Project>

@@ -250,7 +250,7 @@ class vgm_skillTrees {
 
                     skillType = 1;
                     cost = 2;
-                    cooldown = 120;
+                    cooldown = 60;
                 };
 
                 class heavySupport: vgm_skillTemplate {
@@ -273,7 +273,7 @@ class vgm_skillTrees {
                     codeActivate = "call vgm_c_fnc_skill_actives_support_getToTheLz";
                     skillType = 2;
                     cost = 2;
-                    cooldown = 120;
+                    cooldown = 480;
                 };
             };
         };
