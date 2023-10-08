@@ -233,5 +233,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
             <Original>For 60 seconds, AI are much less likely to see you and hear you.</Original>
         </Key>
+        <!-- Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">
+            <Original>25% increased medical actions speed</Original>
+        </Key>
     </Package>
 </Project>

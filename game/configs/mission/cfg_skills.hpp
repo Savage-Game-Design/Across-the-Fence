@@ -193,6 +193,13 @@ class vgm_skillTrees {
         // support skills
         class skills {
             class tier_1 {
+                class nimbleHands: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS";
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS_DESC";
+
+                    codeApply = "[player, 'interact', 'skill_support_nimbleHands', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'interact', 'skill_support_nimbleHands'] call vgm_c_fnc_coefficient_remove";
+                };
             };
 
             class tier_2 {
