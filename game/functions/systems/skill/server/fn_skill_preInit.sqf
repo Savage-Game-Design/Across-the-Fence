@@ -61,14 +61,7 @@ vgm_s_skill_relaySuppression = {
 vgm_s_skill_multiplySuppression = {
     params ["_unit", "", "_shooter"];
 
-    private _coef = 0;
-    {
-        _coef = _coef + (_shooter getVariable [_x, 0]);
-    } forEach [
-        "vgm_g_skill_passives_fireSupport_heavySuppresion",
-        "vgm_g_skill_actives_fireSupport_overwhelmingFire"
-    ];
-
+    private _coef = _shooter getVariable ["vgm_g_suppressCoef", 0];
     if (_coef <= 0) exitWith {};
 
     private _lastSuppression = _unit getVariable ["vgm_s_skill_lastSuppression", 0];

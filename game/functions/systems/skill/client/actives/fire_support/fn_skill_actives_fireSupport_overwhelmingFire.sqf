@@ -23,11 +23,11 @@
 ["skill_active_sixthSense", {
     ["Fire Support/Overwhelming Fire skill exhausted"] call vgm_g_fnc_logInfo;
 
-    player setVariable ["vgm_g_skill_actives_fireSupport_overwhelmingFire", 0, true];
+    [player, "suppress", "skill_fireSupport_overwhelmingFire"] call vgm_c_fnc_coefficient_remove;
     player removeEventHandler ["Fired", vgm_c_skill_actives_fireSupport_overwhelmingFire_firedEh]
 }, 120, "seconds"] call BIS_fnc_runLater;
 
-player setVariable ["vgm_g_skill_actives_fireSupport_overwhelmingFire", 0.5, true];
+[player, "suppress", "skill_fireSupport_overwhelmingFire", 0.5] call vgm_c_fnc_coefficient_set;
 
 vgm_c_skill_actives_fireSupport_overwhelmingFire_firedEh = player addEventHandler ["Fired", {
     params ["_unit", "_weapon", "_muzzle", "", "", "_magazine"];
