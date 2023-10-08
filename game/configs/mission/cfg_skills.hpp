@@ -211,6 +211,15 @@ class vgm_skillTrees {
             };
 
             class tier_2 {
+                class loadout_medical: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";
+                };
+
+                class loadout_rto: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";
+                };
             };
 
             class tier_3 {

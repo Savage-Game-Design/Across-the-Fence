@@ -240,5 +240,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD">
             <Original>Team members are visible on the map</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL">
+            <Original>Advanced Medical Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO">
+            <Original>RTO Equipment</Original>
+        </Key>
     </Package>
 </Project>
