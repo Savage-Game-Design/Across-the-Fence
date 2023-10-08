@@ -231,6 +231,16 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
+                class heavySupport: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT_DESC";
+
+                    codeApply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', true]";
+                    codeUnapply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', false]";
+
+                    // cost = 2;
+                    cost = 0; // air support not implemented yet
+                };
             };
 
             class tier_4 {
