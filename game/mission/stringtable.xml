@@ -249,10 +249,10 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
             <Original>Grenadier and AT Equipment</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTM">
-            <Original>Learn the Rhytm</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYHTM">
+            <Original>Learn the Rhythm</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTM_DESC">
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYHTM_DESC">
             <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
@@ -260,6 +260,12 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
             <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE">
+            <Original>Overwhelming Fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
+            <Original>For the next 120 seconds, your magazine is twice as large, and you suppress enemies 50% more.</Original>
         </Key>
     </Package>
 </Project>
