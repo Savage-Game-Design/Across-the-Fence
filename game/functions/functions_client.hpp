@@ -376,7 +376,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\support);
 
-        // class skill_actives_support_ {};
+        class skill_actives_support_quickBandage {};
     };
 
     class stamina
