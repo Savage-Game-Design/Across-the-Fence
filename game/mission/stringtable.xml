@@ -237,5 +237,8 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">
             <Original>25% increased medical actions speed</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD">
+            <Original>Team members are visible on the map</Original>
+        </Key>
     </Package>
 </Project>

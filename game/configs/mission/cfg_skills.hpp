@@ -186,7 +186,7 @@ class vgm_skillTrees {
         class subtrees {};
     };
 
-    class recon {
+    class support {
         displayName = "$STR_VGM_SKILLS_TREE_SUPPORT";
         description = "";
 
@@ -195,10 +195,18 @@ class vgm_skillTrees {
             class tier_1 {
                 class nimbleHands: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS";
-                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS_DESC";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS_DESC";
 
                     codeApply = "[player, 'interact', 'skill_support_nimbleHands', -0.25, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'interact', 'skill_support_nimbleHands'] call vgm_c_fnc_coefficient_remove";
+                };
+
+                class shepherd: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_support_shepherd";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_support_shepherd";
                 };
             };
 
@@ -212,7 +220,7 @@ class vgm_skillTrees {
             };
         };
 
-        // specializations
+        // support specializations
         class subtrees {};
     };
 };

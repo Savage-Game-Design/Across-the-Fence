@@ -351,7 +351,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\support);
 
-        // class skill_passives_support_ {};
+        class skill_passives_support_shepherd {};
     };
 
     class skill_actives
