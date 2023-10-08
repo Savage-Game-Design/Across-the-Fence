@@ -185,4 +185,27 @@ class vgm_skillTrees {
         // specializations
         class subtrees {};
     };
+
+    class recon {
+        displayName = "$STR_VGM_SKILLS_TREE_SUPPORT";
+        description = "";
+
+        // support skills
+        class skills {
+            class tier_1 {
+            };
+
+            class tier_2 {
+            };
+
+            class tier_3 {
+            };
+
+            class tier_4 {
+            };
+        };
+
+        // specializations
+        class subtrees {};
+    };
 };

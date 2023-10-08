@@ -145,6 +145,9 @@
         <Key ID="STR_VGM_SKILLS_TREE_RECON">
             <Original>Recon</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_SUPPORT">
+            <Original>Support</Original>
+        </Key>
     </Package>
     <Package name="Skills Skill">
         <!-- Rifleman -->
