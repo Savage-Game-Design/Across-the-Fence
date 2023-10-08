@@ -13,11 +13,13 @@ class vgm_skillTemplate {
 
     conditionUnlock = "true";
     conditionShow = "true";
+    conditionActivate = "true";
 
     codeApply = "";
     codeUnapply = "";
 
     codeActivate = "";
+    codeUnableToActivate = "";
 };
 
 class vgm_skillTrees {
@@ -231,6 +233,26 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
+                class quickBandage: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_DESC";
+
+                    conditionActivate = "\
+                        private _target = cursorTarget;\
+                        _target getVariable ['vgm_g_medical_bleeding', false]\
+                        && {_target distance player <= 10}\
+                    ";
+                    codeActivate = "call vgm_c_fnc_skill_actives_support_quickBandage";
+                    codeUnableToActivate = "\
+                        if (cursorTarget distance player > 10) exitWith {}; \
+                        hint localize 'STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY'\
+                    ";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 120;
+                };
+
                 class heavySupport: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT";
                     description = "$STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT_DESC";
@@ -244,6 +266,15 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
+                class getToTheLz: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_support_getToTheLz";
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 120;
+                };
             };
         };
 

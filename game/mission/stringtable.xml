@@ -255,5 +255,14 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT">
             <Original>(WIP) Heavy Support</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE">
+            <Original>Quick Bandage</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_DESC">
+            <Original>Add 60 seconds to a player's bleedout timer.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY">
+            <Original>Target is not bleeding!</Original>
+        </Key>
     </Package>
 </Project>
