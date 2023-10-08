@@ -255,5 +255,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTM_DESC">
             <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
+            <Original>Grenades case</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
+            <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
+        </Key>
     </Package>
 </Project>

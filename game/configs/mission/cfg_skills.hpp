@@ -236,6 +236,19 @@ class vgm_skillTrees {
 
                     codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_learnTheRhytm";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_learnTheRhytm";
+
+                    cost = 2;
+                };
+
+                class grenadesCase: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_grenadesCase";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 180;
                 };
             };
         };
