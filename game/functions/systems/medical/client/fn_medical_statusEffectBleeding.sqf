@@ -26,8 +26,10 @@ if (!_bleeding) exitWith {
     format ["Stopping bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;
 
     removeMissionEventHandler ["EachFrame", _unit getVariable ["vgm_c_medical_bleedingEachFrameEH", -1]];
-    _unit setVariable ["vgm_c_medical_bleedingEachFrameEH", nil];
+
+    _unit setVariable ["vgm_g_medical_bleeding", false, true];
     _unit setVariable ["vgm_c_medical_bleedOutAt", nil];
+    _unit setVariable ["vgm_c_medical_bleedingEachFrameEH", nil];
 
     if (isPlayer _unit) then {-1 call vgm_c_fnc_medical_feedbackBleeding};
 };
@@ -37,6 +39,7 @@ private _bleedOutTime = BLEED_OUT_TIME * ([_unit, "bleedOut"] call vgm_c_fnc_coe
 // visual bleeding effect, stops when `damage _unit` < 0.1
 _unit setBleedingRemaining _bleedOutTime;
 
+_unit setVariable ["vgm_g_medical_bleeding", true, true];
 _unit setVariable ["vgm_c_medical_bleedOutAt", time + _bleedOutTime];
 
 format ["Starting bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;

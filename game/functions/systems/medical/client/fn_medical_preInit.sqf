@@ -81,6 +81,20 @@ vgm_medical_healItems = createHashMapFromArray [
 
 }] call para_g_fnc_event_subscribe;
 
+["vgm_medical_adjustBleedOutAt", {
+    (_this#0) params ["_unit", ["_adjust", nil, [0]]];
+
+    if (!(_unit getVariable ["vgm_g_medical_bleeding", false])) exitWith {};
+
+    format ["Adjusting bleed out time: %1 | %2", _unit, _adjust] call vgm_g_fnc_logInfo;
+
+    private _bleedOutAt = _unit getVariable "vgm_c_medical_bleedOutAt";
+    _unit setVariable ["vgm_c_medical_bleedOutAt", _bleedOutAt + _adjust];
+    // visual bleeding effect, stops when `damage _unit` < 0.1
+    _unit setBleedingRemaining (_bleedOutAt - time);
+
+}] call para_g_fnc_event_subscribe;
+
 // maps hitpoint to our virtual body parts handled by our medical system
 vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
     ["hitface", BODY_PART_HEAD],
