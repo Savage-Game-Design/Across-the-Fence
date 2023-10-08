@@ -265,7 +265,7 @@
             <Original>Overwhelming Fire</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
-            <Original>For the next 120 seconds, your magazine is twice as large, and you suppress enemies 50% more.</Original>
+            <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 50% more.</Original>
         </Key>
     </Package>
 </Project>

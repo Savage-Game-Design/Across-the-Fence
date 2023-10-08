@@ -2,7 +2,7 @@
     File: fn_skill_passives_preInit.sqf
     Author: Savage Game Design
     Date: 2023-09-24
-    Last Update: 2023-10-07
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -61,9 +61,15 @@ vgm_s_skill_relaySuppression = {
 vgm_s_skill_multiplySuppression = {
     params ["_unit", "", "_shooter"];
 
-    if (
-        !(_shooter getVariable ["vgm_g_skill_passives_fireSupport_heavySuppresion", false])
-    ) exitWith {};
+    private _coef = 0;
+    {
+        _coef = _coef + (_shooter getVariable [_x, 0]);
+    } forEach [
+        "vgm_g_skill_passives_fireSupport_heavySuppresion",
+        "vgm_g_skill_actives_fireSupport_overwhelmingFire"
+    ];
+
+    if (_coef <= 0) exitWith {};
 
     private _lastSuppression = _unit getVariable ["vgm_s_skill_lastSuppression", 0];
     private _currentSuppression = getSuppression _unit;
@@ -72,5 +78,5 @@ vgm_s_skill_multiplySuppression = {
     if (_currentSuppression < _lastSuppression) exitWith {};
 
     private _gainedSupression = _currentSuppression - _lastSuppression;
-    _unit setSuppression (_currentSuppression + (_gainedSupression / 2));
+    _unit setSuppression (_currentSuppression + (_gainedSupression * _coef));
 };

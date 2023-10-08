@@ -2,7 +2,7 @@
     File: fn_skill_passives_fireSupport_heavySuppression.sqf
     Author: Savage Game Design
     Date: 2023-10-07
-    Last Update: 2023-10-07
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -20,4 +20,8 @@
 
 params ["_known"];
 
-player setVariable ["vgm_g_skill_passives_fireSupport_heavySuppresion", _known, true];
+if (!_known) exitWith {
+    player setVariable ["vgm_g_skill_passives_fireSupport_heavySuppresion", 0, true];
+};
+
+player setVariable ["vgm_g_skill_passives_fireSupport_heavySuppresion", 0.5, true];

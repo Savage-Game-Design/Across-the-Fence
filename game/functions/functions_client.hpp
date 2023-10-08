@@ -378,6 +378,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
 
         class skill_actives_fireSupport_grenadesCase {};
+        class skill_actives_fireSupport_overwhelmingFire {};
     };
 
     class stamina
