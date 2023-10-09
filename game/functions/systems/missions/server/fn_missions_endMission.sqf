@@ -49,9 +49,9 @@ localNamespace getVariable "vgm_missions" deleteAt (_missionPublic get "id");
     ["vgm_missions_publicMissionInfo"] call para_g_fnc_netmap_get,
     _missionPublic get "id"
 ] call para_s_fnc_netmap_deleteAt;
+
+// Terminate public netmap, and all owned netmaps (all children should be owned)
 [_missionPublic] call para_s_fnc_netmap_terminate;
-[_missionPublic get "players"] call para_s_fnc_netmap_terminate;
-[_missionPublic get "preventJoining"] call para_s_fnc_netmap_terminate;
 
 // TODO
 // Disable damage

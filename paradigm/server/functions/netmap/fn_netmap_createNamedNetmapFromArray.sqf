@@ -2,7 +2,7 @@
     File: fn_netmap_createNamedNetmapFromArray.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-26
+    Last Update: 2023-09-14
     Public: Yes
 
     Description:
@@ -36,7 +36,10 @@ if (_name in _netmaps) exitWith {
 private _hashMap = createHashMapFromArray _array;
 
 _hashMap set ["_netmap", createHashMapFromArray [
-    ["id", _name]
+    ["id", _name],
+    // Documentation only - absence means unowned
+    // ["owner", nil]
+    ["ownedNetmaps", []]
 ]];
 
 _netmaps set [_name, _hashMap];
