@@ -22,4 +22,4 @@
 
 params ["_side"];
 
-[sideEnemy, east, west, resistance, civilian] select {_side getFriend _x < FRIENDSHIP_CONST} // return
+[sideEnemy] + ([east, west, resistance, civilian] select {_side getFriend _x < FRIENDSHIP_CONST}) // return
