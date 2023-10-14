@@ -2,7 +2,7 @@
     File: fn_skill_actives_fireSupport_grenadesCase.sqf
     Author: Savage Game Design
     Date: 2023-10-08
-    Last Update: 2023-10-08
+    Last Update: 2023-10-14
     Public: No
 
     Description:
@@ -15,12 +15,12 @@
         Nothing
 
     Example(s):
-        [] call vgm_c_fnc_skill_passives_fireSupport_grenadesCase
+        [] call vgm_c_fnc_skill_actives_fireSupport_grenadesCase
  */
 
 ["Fire Support/Grenades Case skill activated"] call vgm_g_fnc_logInfo;
 
-["skill_active_sixthSense", {
+["skill_actives_fireSupport_grenadesCase", {
     ["Fire Support/Grenades Case skill exhausted"] call vgm_g_fnc_logInfo;
 
     player removeEventHandler ["Fired", vgm_c_skill_actives_fireSupport_grenadesCase_firedEh]
