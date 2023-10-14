@@ -2,7 +2,7 @@
     File: fn_skill_actives_recon_sixthSense.sqf
     Author: Savage Game Design
     Date: 2023-09-29
-    Last Update: 2023-10-06
+    Last Update: 2023-10-14
     Public: No
 
     Description:
@@ -32,8 +32,8 @@
 }, 20, "seconds"] call BIS_fnc_runLater;
 
 
-private _enemySides = playerSide call BIS_fnc_enemySides;
-private _enemies = flatten (_enemySides apply {units _x});
+private _enemySides = playerSide call vgm_g_fnc_enemySides;
+private _enemies = flatten (_enemySides apply {units _x}) inAreaArray [player, RADIUS, RADIUS];
 // cache object draw data
 {
     private _icon = getText (configOf _x >> "icon");
@@ -43,7 +43,7 @@ private _enemies = flatten (_enemySides apply {units _x});
     _x setVariable ["vgm_c_objectColor", side _x call BIS_fnc_sideColor];
 } forEach _enemies;
 
-vgm_c_skill_actives_recon_sixthSense_list = _enemies inAreaArray [player, RADIUS, RADIUS];
+vgm_c_skill_actives_recon_sixthSense_list = _enemies;
 
 vgm_c_skill_actives_recon_sixthSense_draw3DEh = addMissionEventHandler ["Draw3D", {
     {
@@ -66,7 +66,6 @@ vgm_c_skill_actives_recon_sixthSenseDrawEh = CTRL_MAP ctrlAddEventHandler ["Draw
     params ["_ctrlMap"];
 
     {
-        // TODO needs design
         _ctrlMap drawIcon [
             _x getVariable "vgm_c_objectIcon",
             _x getVariable "vgm_c_objectColor",
