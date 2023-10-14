@@ -14,6 +14,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\core\global);
 
+        class enemySides {};
         class execNextFrame {};
         class preInit
         {
