@@ -231,8 +231,8 @@ class vgm_skillTrees {
 
             class tier_3 {
                 class learnTheRhythm: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYHTM";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYHTM_DESC";
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC";
 
                     codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";

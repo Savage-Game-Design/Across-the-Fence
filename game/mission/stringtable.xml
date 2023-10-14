@@ -249,10 +249,10 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
             <Original>Grenadier and AT Equipment</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYHTM">
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM">
             <Original>Learn the Rhythm</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYHTM_DESC">
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC">
             <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">

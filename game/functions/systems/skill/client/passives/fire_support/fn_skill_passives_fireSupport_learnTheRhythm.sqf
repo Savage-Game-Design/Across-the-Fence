@@ -2,11 +2,11 @@
     File: fn_skill_passives_fireSupport_learnTheRhythm.sqf
     Author: Savage Game Design
     Date: 2023-10-07
-    Last Update: 2023-10-08
+    Last Update: 2023-10-14
     Public: No
 
     Description:
-        Adds logic for Rifleman Tier 3 Learn the Rhyhtm skill.
+        Adds logic for Rifleman Tier 3 Learn the Rhythm skill.
 
     Parameter(s):
         _known - Is skill known [BOOL]
