@@ -21,6 +21,7 @@
 #define FONT_SIZE 0.042
 #define CTRL_MAP (findDisplay 12 displayCtrl 51)
 #define RADIUS 150
+#define COLOR_OPACITY(DIST) (linearConversion [30, RADIUS, DIST, 1, 0.3, true])
 
 ["Recon/6th Sense skill activated"] call vgm_g_fnc_logInfo;
 
@@ -47,9 +48,12 @@ vgm_c_skill_actives_recon_sixthSense_list = _enemies;
 
 vgm_c_skill_actives_recon_sixthSense_draw3DEh = addMissionEventHandler ["Draw3D", {
     {
+        private _color = _x getVariable "vgm_c_objectColor";
+        _color set [3, COLOR_OPACITY(_x distance player)];
+
         drawIcon3D [
             _x getVariable "vgm_c_objectIcon",
-            _x getVariable "vgm_c_objectColor",
+            _color,
             ASLToAGL getPosASLVisual _x,
             0.5, 0.5, 0, // icon w, h, angle
             _x getVariable "vgm_c_objectName",
