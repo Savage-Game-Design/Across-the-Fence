@@ -138,6 +138,14 @@
             <Original>%1&lt;br/&gt;Owned: %2</Original>
         </Key>
     </Package>
+    <Package name="Mission End UI">
+        <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
+            <Original>Level %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION">
+            <Original>Mission completion</Original>
+        </Key>
+    </Package>
     <Package name="Skills Tree">
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
             <Original>Rifleman</Original>

@@ -33,3 +33,6 @@ player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandle
 player setPos ([] call vgm_g_fnc_missions_getHubSpawnPos);
 
 // Show end of mission screen
+private _dialog = createDialog ["VGM_DisplayEndOfMission", true];
+
+["renderProgress", [_dialog, [_levelingDataCopy, _milestones]]] call vgm_c_fnc_displayEndOfMission;
