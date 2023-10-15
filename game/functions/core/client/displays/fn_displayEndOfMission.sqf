@@ -35,7 +35,9 @@ switch _mode do {
     };
 
     case "onUnload": {
-        params ["_display", "_exitCode"];
+        params ["_display"];
+
+        terminate (_display getVariable ["vgm_progressScript", scriptNull]);
     };
 
     case "renderProgress": {
