@@ -45,7 +45,10 @@ switch _mode do {
         params ["_display", "_args"];
         _args params ["_levelingData", "_milestones"];
 
-        ["updateLevelsHeader", [_display, _levelingData]] call SELF;
+        private _currentLevel = _levelingData get "level";
+        private _experienceOffset = vgm_g_leveling_levelsHashMap get (_currentLevel - 1) get "experienceThreshold";
+
+        ["updateLevelsHeader", [_display, _levelingData, _experienceOffset]] call SELF;
 
         private _script = [_display, [_levelingData, _milestones]] spawn {
             params ["_display", "_args"];
@@ -119,7 +122,7 @@ switch _mode do {
     };
 
     case "updateLevelsHeader": {
-        params ["_display", "_levelingData"];
+        params ["_display", "_levelingData", "_offset"];
 
         private _currentLevelData = vgm_g_leveling_levelsHashMap get (_levelingData get "level");
         private _nextLevelData = vgm_g_leveling_levelsHashMap get LEVEL_NEXT(_levelingData get "level");
@@ -130,7 +133,7 @@ switch _mode do {
         private _ctrlNextLevel = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELNEXT;
         _ctrlNextLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _nextLevelData get "displayName"];
 
-        ["updateXpProgress", [_display, _levelingData get "experience", _currentLevelData get "experienceThreshold"]] call SELF;
+        ["updateXpProgress", [_display, _levelingData get "experience", _currentLevelData get "experienceThreshold", _offset]] call SELF;
     };
 
     case "updateXpProgress": {
