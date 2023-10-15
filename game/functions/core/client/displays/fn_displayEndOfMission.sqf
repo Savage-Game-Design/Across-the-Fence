@@ -64,6 +64,7 @@ switch _mode do {
             private _experienceOffset = vgm_g_leveling_levelsHashMap get (_currentLevel - 1) get "experienceThreshold";
 
             private _text = [];
+            // Update XP every Milestone
             {
                 uiSleep 0.5;
                 _x params ["_milestoneName", "_milestoneXp"];
@@ -76,13 +77,14 @@ switch _mode do {
                 private _time = time;
                 private _animTime = _time + _animDuration;
                 private _newExperience = _currentExperience;
-
+                // XP gain animation
                 while {_time < _animTime} do {
                     uiSleep 0.05; _time = _time + 0.05;
 
                     _newExperience = linearConversion [_animDuration, 0, _animTime - _time, _currentExperience, _currentExperience + _milestoneXp, true];
                     ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
 
+                    // level up
                     if (_newExperience >= _experienceThreshold) then {
                         playSoundUI ["\a3\sounds_f\sfx\UI\Tactical_Ping\Tactical_Ping.wss", 0.2];
 
@@ -90,14 +92,14 @@ switch _mode do {
                         _currentLevelData = vgm_g_leveling_levelsHashMap get _currentLevel;
                         _experienceOffset = _experienceThreshold;
                         _experienceThreshold = _currentLevelData get "experienceThreshold";
-                        ["updateXpProgress", [_display, _newExperience, _experienceThreshold, _experienceOffset]] call SELF;
 
+                        ["updateXpProgress", [_display, _newExperience, _experienceThreshold, _experienceOffset]] call SELF;
+                        // increase current and next level texts
                         _ctrlCurrentLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _currentLevelData get "displayName"];
                         private _nextLevelData = vgm_g_leveling_levelsHashMap get LEVEL_NEXT(_currentLevel);
                         _ctrlNextLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _nextLevelData get "displayName"];
-
+                        // show level up toast
                         _ctrlLevelUp ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL_UP", _currentLevelData get "skillPoints"];
-
                         _ctrlLevelUp ctrlSetFade 0;
                         _ctrlLevelUp ctrlCommit 0.5;
                         waitUntil {ctrlCommitted _ctrlLevelUp};
