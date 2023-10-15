@@ -142,6 +142,9 @@
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
             <Original>Level %1</Original>
         </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_LEVEL_UP">
+            <Original>Level Up! +%1 SP</Original>
+        </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION">
             <Original>Mission completion</Original>
         </Key>

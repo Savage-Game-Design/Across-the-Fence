@@ -30,7 +30,8 @@ switch _mode do {
     case "onLoad": {
         params ["_display"];
 
-        (_display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELMESSAGE) ctrlShow false;
+        (_display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELMESSAGE) ctrlSetFade 1;
+        (_display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELMESSAGE) ctrlCommit 0;
         (_display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_XPBREAKDOWN) ctrlSetText "";
     };
 
@@ -46,13 +47,21 @@ switch _mode do {
 
         ["updateLevelsHeader", [_display, _levelingData]] call SELF;
 
-        [_display, [_levelingData, _milestones]] spawn {
+        private _script = [_display, [_levelingData, _milestones]] spawn {
             params ["_display", "_args"];
             _args params ["_levelingData", "_milestones"];
 
+            private _ctrlCurrentLevel = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELCURRENT;
+            private _ctrlNextLevel = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELNEXT;
+
             private _ctrlBreakdown = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_XPBREAKDOWN;
+            private _ctrlLevelUp = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELMESSAGE;
 
             private _currentExperience = _levelingData get "experience";
+            private _currentLevel = _levelingData get "level";
+            private _currentLevelData = vgm_g_leveling_levelsHashMap get _currentLevel;
+            private _experienceThreshold = _currentLevelData get "experienceThreshold";
+            private _experienceOffset = vgm_g_leveling_levelsHashMap get (_currentLevel - 1) get "experienceThreshold";
 
             private _text = [];
             {
@@ -64,22 +73,47 @@ switch _mode do {
                 playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
 
                 private _animDuration = 1 + (_milestoneXp / 500);
-                private _animTime = time + _animDuration;
+                private _time = time;
+                private _animTime = _time + _animDuration;
                 private _newExperience = _currentExperience;
 
-                while {time < _animTime} do {
-                    uiSleep 0.05;
+                while {_time < _animTime} do {
+                    uiSleep 0.05; _time = _time + 0.05;
 
-                    _newExperience = linearConversion [_animDuration, 0, _animTime - time, _currentExperience, _currentExperience + _milestoneXp, true];
-                    ["updateXpProgress", [_display, _newExperience]] call SELF;
+                    _newExperience = linearConversion [_animDuration, 0, _animTime - _time, _currentExperience, _currentExperience + _milestoneXp, true];
+                    ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
+
+                    if (_newExperience >= _experienceThreshold) then {
+                        playSoundUI ["\a3\sounds_f\sfx\UI\Tactical_Ping\Tactical_Ping.wss", 0.2];
+
+                        _currentLevel = LEVEL_NEXT(_currentLevel);
+                        _currentLevelData = vgm_g_leveling_levelsHashMap get _currentLevel;
+                        _experienceOffset = _experienceThreshold;
+                        _experienceThreshold = _currentLevelData get "experienceThreshold";
+                        ["updateXpProgress", [_display, _newExperience, _experienceThreshold, _experienceOffset]] call SELF;
+
+                        _ctrlCurrentLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _currentLevelData get "displayName"];
+                        private _nextLevelData = vgm_g_leveling_levelsHashMap get LEVEL_NEXT(_currentLevel);
+                        _ctrlNextLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _nextLevelData get "displayName"];
+
+                        _ctrlLevelUp ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL_UP", _currentLevelData get "skillPoints"];
+
+                        _ctrlLevelUp ctrlSetFade 0;
+                        _ctrlLevelUp ctrlCommit 0.5;
+                        waitUntil {ctrlCommitted _ctrlLevelUp};
+                        _ctrlLevelUp ctrlSetFade 1;
+                        _ctrlLevelUp ctrlCommit 2.5;
+                        waitUntil {ctrlCommitted _ctrlLevelUp};
+                    };
                 };
 
                 _currentExperience = _newExperience;
 
                 uiSleep 0.2;
             } forEach _milestones;
-
         };
+
+        _display setVariable ["vgm_progressScript", _script];
     };
 
     case "updateLevelsHeader": {
@@ -98,7 +132,7 @@ switch _mode do {
     };
 
     case "updateXpProgress": {
-        params ["_display", "_leftXp", "_rightXp"];
+        params ["_display", "_leftXp", "_rightXp", ["_offset", 0]];
 
         private _ctrlProgressBarText = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_XPPROGRESS;
         if (isNil "_rightXp") then {
@@ -110,7 +144,7 @@ switch _mode do {
         _ctrlProgressBarText ctrlSetText format ["%1 / %2", _leftXp toFixed 0, _rightXp];
 
         private _ctrlProgress = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELPROGRESS;
-        _ctrlProgress progressSetPosition (_leftXp / _rightXp);
+        _ctrlProgress progressSetPosition ((_leftXp - _offset) / (_rightXp - _offset));
     };
 
     default {
