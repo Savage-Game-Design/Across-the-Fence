@@ -66,6 +66,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\missions\server\internal);
 
         class missions_attachPlayerToMission {};
+        class missions_calculateMilestones {};
         class missions_despawnMission {};
         class missions_preventJoining {};
         class missions_removePlayerFromMission {};
