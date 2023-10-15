@@ -3,7 +3,7 @@
     File: fn_medical_handleDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-06-27
+    Last Update: 2023-10-15
     Public: No
 
     Description:
@@ -44,7 +44,8 @@ if (_projectile isEqualTo "" && {isNull _source}) exitWith {
 
 private _hitDamage = _damage - _currentDamage;
 // filter out tiny amounts of damage
-if (_hitDamage < 1e-3) exitWith {_currentDamage};
+private _ignoreThreshold = [0.2, 0.001] select _directHit;
+if (_hitDamage < _ignoreThreshold) exitWith {_currentDamage};
 
 private _downed = lifeState _unit == "INCAPACITATED";
 // prevent unit from being killed when downed
