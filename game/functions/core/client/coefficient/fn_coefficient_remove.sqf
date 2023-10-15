@@ -2,7 +2,7 @@
     File: fn_coefficient_remove.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-08-21
+    Last Update: 2023-10-06
     Public: Yes
 
     Description:
@@ -35,7 +35,7 @@ if (isNil "_coefficientMap") exitWith {};
 
 format ["Removing coefficient reason: %1 | %2", _coefficient, _reason] call vgm_g_fnc_logInfo;
 
-private _coefficientValues = _coefficientMap getOrDefault [_coefficient, [], true];
+private _coefficientValues = _coefficientMap getOrDefault [_coefficient, createHashMap];
 
 _coefficientValues deleteAt _reason;
 
