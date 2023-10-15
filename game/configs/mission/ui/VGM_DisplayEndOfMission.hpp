@@ -36,7 +36,7 @@ class VGM_DisplayEndOfMission
         class LevelCurrent: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELCURRENT;
-            text = "Level 999";
+            text = "Level -";
             x = DX + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DY, SPACING);
             w = 25 * VGM_GRID_W;
@@ -62,7 +62,7 @@ class VGM_DisplayEndOfMission
         class XpProgress: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_XPPROGRESS;
-            text = "9999 / 9999";
+            text = "- / -";
             x = DX + (0.5 * DW - 20) * VGM_GRID_W;
             y = VGM_Y(DY);
             w = 40 * VGM_GRID_W;
