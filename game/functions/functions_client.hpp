@@ -135,6 +135,7 @@ class vgm_c
         class displayAbilityCooldown {};
         class displayMedical {};
         class displayStaminaBar {};
+        class displayEndOfMission {};
     };
 
     class equipment
