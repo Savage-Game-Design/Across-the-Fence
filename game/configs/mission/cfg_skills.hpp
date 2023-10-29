@@ -13,11 +13,13 @@ class vgm_skillTemplate {
 
     conditionUnlock = "true";
     conditionShow = "true";
+    conditionActivate = "true";
 
     codeApply = "";
     codeUnapply = "";
 
     codeActivate = "";
+    codeUnableToActivate = "";
 };
 
 class vgm_skillTrees {
@@ -267,6 +269,100 @@ class vgm_skillTrees {
         };
 
         // fire support specializations
+        class subtrees {};
+    };
+
+    class support {
+        displayName = "$STR_VGM_SKILLS_TREE_SUPPORT";
+        description = "";
+
+        // support skills
+        class skills {
+            class tier_1 {
+                class nimbleHands: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS_DESC";
+
+                    codeApply = "[player, 'interact', 'skill_support_nimbleHands', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'interact', 'skill_support_nimbleHands'] call vgm_c_fnc_coefficient_remove";
+                };
+
+                class shepherd: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_support_shepherd";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_support_shepherd";
+                };
+            };
+
+            class tier_2 {
+                class loadout_medical: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";
+                };
+
+                class resourceful: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL_DESC";
+
+                    codeApply = "player setVariable ['vgm_c_skill_passives_support_resourceful', true, true]";
+                    codeUnapply = "player setVariable ['vgm_c_skill_passives_support_resourceful', false, false]";
+                };
+
+                class loadout_rto: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";
+                };
+            };
+
+            class tier_3 {
+                class quickBandage: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_DESC";
+
+                    conditionActivate = "\
+                        private _target = cursorTarget;\
+                        _target getVariable ['vgm_g_medical_bleeding', false]\
+                        && {_target distance player <= 10}\
+                    ";
+                    codeActivate = "call vgm_c_fnc_skill_actives_support_quickBandage";
+                    codeUnableToActivate = "\
+                        if (cursorTarget distance player > 10) exitWith {}; \
+                        hint localize 'STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY'\
+                    ";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 60;
+                };
+
+                class heavySupport: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT_DESC";
+
+                    codeApply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', true]";
+                    codeUnapply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', false]";
+
+                    // cost = 2;
+                    cost = 0; // air support not implemented yet
+                };
+            };
+
+            class tier_4 {
+                class getToTheLz: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ";
+                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_support_getToTheLz";
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 480;
+                };
+            };
+        };
+
+        // support specializations
         class subtrees {};
     };
 };

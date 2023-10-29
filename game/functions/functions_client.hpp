@@ -14,6 +14,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\core\global);
 
+        class enemySides {};
         class execNextFrame {};
         class preInit
         {
@@ -353,10 +354,21 @@ class vgm_c
 
         class skill_passives_fireSupport_learnTheRhythm {};
     };
+    class skill_passives_support
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\support);
+
+        class skill_passives_support_shepherd {};
+    };
 
     class skill_actives
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives);
+
+        class skill_actives_preInit
+        {
+            preInit = 1;
+        };
     };
     class skill_actives_infantryman
     {

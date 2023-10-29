@@ -2,7 +2,7 @@
     File: fn_skill_actives_recon_sixthSense.sqf
     Author: Savage Game Design
     Date: 2023-09-29
-    Last Update: 2023-10-06
+    Last Update: 2023-10-14
     Public: No
 
     Description:
@@ -21,6 +21,7 @@
 #define FONT_SIZE 0.042
 #define CTRL_MAP (findDisplay 12 displayCtrl 51)
 #define RADIUS 150
+#define COLOR_OPACITY(DIST) (linearConversion [30, RADIUS, DIST, 1, 0.3, true])
 
 ["Recon/6th Sense skill activated"] call vgm_g_fnc_logInfo;
 
@@ -32,8 +33,8 @@
 }, 20, "seconds"] call BIS_fnc_runLater;
 
 
-private _enemySides = playerSide call BIS_fnc_enemySides;
-private _enemies = flatten (_enemySides apply {units _x});
+private _enemySides = playerSide call vgm_g_fnc_enemySides;
+private _enemies = flatten (_enemySides apply {units _x}) inAreaArray [player, RADIUS, RADIUS];
 // cache object draw data
 {
     private _icon = getText (configOf _x >> "icon");
@@ -43,13 +44,16 @@ private _enemies = flatten (_enemySides apply {units _x});
     _x setVariable ["vgm_c_objectColor", side _x call BIS_fnc_sideColor];
 } forEach _enemies;
 
-vgm_c_skill_actives_recon_sixthSense_list = _enemies inAreaArray [player, RADIUS, RADIUS];
+vgm_c_skill_actives_recon_sixthSense_list = _enemies;
 
 vgm_c_skill_actives_recon_sixthSense_draw3DEh = addMissionEventHandler ["Draw3D", {
     {
+        private _color = _x getVariable "vgm_c_objectColor";
+        _color set [3, COLOR_OPACITY(_x distance player)];
+
         drawIcon3D [
             _x getVariable "vgm_c_objectIcon",
-            _x getVariable "vgm_c_objectColor",
+            _color,
             ASLToAGL getPosASLVisual _x,
             0.5, 0.5, 0, // icon w, h, angle
             _x getVariable "vgm_c_objectName",
@@ -66,7 +70,6 @@ vgm_c_skill_actives_recon_sixthSenseDrawEh = CTRL_MAP ctrlAddEventHandler ["Draw
     params ["_ctrlMap"];
 
     {
-        // TODO needs design
         _ctrlMap drawIcon [
             _x getVariable "vgm_c_objectIcon",
             _x getVariable "vgm_c_objectColor",

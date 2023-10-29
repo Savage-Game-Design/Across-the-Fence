@@ -145,6 +145,9 @@
         <Key ID="STR_VGM_SKILLS_TREE_RECON">
             <Original>Recon</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_SUPPORT">
+            <Original>Support</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
             <Original>Fire Support</Original>
         </Key>
@@ -266,6 +269,43 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
             <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 50% more.</Original>
+        </Key>
+        <!-- Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">
+            <Original>25% increased medical actions speed</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD">
+            <Original>Team members are visible on the map</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL">
+            <Original>Advanced Medical Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO">
+            <Original>RTO Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL">
+            <Original>Efficient and Resourceful</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL_DESC">
+            <Original>You have a 30% chance to not consume a utility item when using one.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT">
+            <Original>(WIP) Heavy Support</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE">
+            <Original>Quick Bandage</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_DESC">
+            <Original>Add 60 seconds to a player's bleedout timer.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY">
+            <Original>Target is not bleeding!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ">
+            <Original>Get To The LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC">
+            <Original>For 30 seconds, the team has: 50% reduced stamina consumption, 40% hit shrug chance, all actions are 10% faster</Original>
         </Key>
     </Package>
 </Project>

@@ -2,7 +2,7 @@
     File: fn_skill_passives_recon_followTheTracers.sqf
     Author: Savage Game Design
     Date: 2023-09-24
-    Last Update: 2023-10-06
+    Last Update: 2023-10-14
     Public: No
 
     Description:
@@ -19,6 +19,7 @@
  */
 
 #define FONT_SIZE 0.045
+#define COLOR_OPACITY(DIST) (linearConversion [30, 300, DIST, 1, 0.3, true])
 
 params ["_known"];
 
@@ -38,7 +39,7 @@ vgm_c_skill_passives_recon_followTheTracersDrawEh = addMissionEventHandler ["Dra
     {
         drawIcon3D [
             "",
-            [1,0,0,1],
+            [1,0,0,COLOR_OPACITY(_y distance player)],
             ASLToAGL getPosASLVisual _y,
             0, 0, 0,
             _text,

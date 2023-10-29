@@ -15,6 +15,12 @@
     _unit setCustomAimCoef (_value max 0.1 min 4);
 }] call vgm_c_fnc_coefficient_create;
 
+["animSpeed", {
+    params ["_unit", "_value"];
+    // values are limited to prevent too much jankiness
+    _unit setAnimSpeedCoef (_value max 0.8 min 1.5);
+}] call vgm_c_fnc_coefficient_create;
+
 ["camouflage", {
     params ["_unit", "_value"];
     _unit setUnitTrait ["camouflageCoef", _value max 0.1 min 1];
