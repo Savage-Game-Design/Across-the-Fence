@@ -37,6 +37,17 @@
     _unit setUnitRecoilCoefficient (_value max 0.25 min 4);
 }] call vgm_c_fnc_coefficient_create;
 
+["load", {
+    params ["_unit", "_value"];
+    // coef should be always greater than 0 to prevent infinite carry capacity
+    _unit setUnitTrait ["loadCoef", _value max 0.1 min 2];
+}] call vgm_c_fnc_coefficient_create;
+
+["suppress", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_g_suppressCoef", _value, true];
+}, 0] call vgm_c_fnc_coefficient_create;
+
 ["throw", {
     params ["_unit", "_value"];
 

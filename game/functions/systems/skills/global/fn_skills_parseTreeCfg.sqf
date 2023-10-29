@@ -18,6 +18,8 @@
         [missionConfigFile >> "vgm_skillTrees"] call vgm_g_fnc_skills_parseTreeCfg
  */
 
+// #define FIRST_TIER_EXCLUSIVE
+
 params [
     ["_cfgSkillTrees", configNull, [configNull]]
 ];
@@ -71,8 +73,10 @@ private _fnc_parseSkillTree = {
         private _skillPointsMax = _skillTree get "skillPointsMax";
         {
             _skillPointsMax = _skillPointsMax + (_x get "cost");
+            #ifdef FIRST_TIER_EXCLUSIVE
             // only one skill can be invested in first tier, break the loop
             if (_tier == 0) exitWith {};
+            #endif
         } forEach _skills;
         _skillTree set ["skillPointsMax", _skillPointsMax];
 

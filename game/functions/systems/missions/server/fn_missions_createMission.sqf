@@ -56,22 +56,28 @@ private _mission = createHashMapFromArray [
     ["machineIds", createHashMap]
 ];
 
+private _missionPublic = _mission get "public";
+
+// Cleanup the child netmaps when the mission is deleted.
+[_missionPublic get "players", _missionPublic] call para_s_fnc_netmap_setOwningNetmap;
+[_missionPublic get "preventJoining", _missionPublic] call para_s_fnc_netmap_setOwningNetmap;
+
 // Register the mission on the server.
 private _missions = localNamespace getVariable "vgm_missions";
 _missions set [_newMissionId, _mission];
 
 // Registers the mission's public variables in a netmap, so the client can access them.
 private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc_netmap_get;
-[_missionsPublicInfo, _newMissionId, _mission get "public"] call para_s_fnc_netmap_set;
+[_missionsPublicInfo, _newMissionId, _missionPublic] call para_s_fnc_netmap_set;
 
 [
     "vgm_mission_available",
-    [[_mission get "public" get "id"]]
+    [[_missionPublic get "id"]]
 ] call para_g_fnc_event_triggerGlobal;
 
 [
     "vgm_mission_joinable",
-    [_mission get "public" get "id"]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 if !(_creatorId isEqualTo "") then {

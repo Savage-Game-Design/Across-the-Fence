@@ -2,7 +2,7 @@
     File: fn_netmap_terminate.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-30
+    Last Update: 2023-09-28
     Public: Yes
 
     Description:
@@ -32,10 +32,17 @@ if (isNil "_netmapDetails") exitWith {
     ["WARNING", format ["netmap_terminate used on non-netmap hashmap: %1", keys _netmap]] call para_g_fnc_log;
 };
 
-private _id = _netmapDetails get "id";
+private _ownedNetmapIds = _netmapDetails get "ownedNetmaps";
 private _netmaps = localNamespace getVariable ["para_netmaps", createHashMap];
+private _id = _netmapDetails get "id";
 
-_netmaps deleteAt _id;
+[_netmap, nil] call para_s_fnc_netmap_setOwningNetmap;
+
+{
+    private _ownedNetmap = _netmaps get _x;
+    [_ownedNetmap] call para_s_fnc_netmap_terminate;
+} forEach _ownedNetmapIds;
+
 _netmap deleteAt "_netmap";
-
+_netmaps deleteAt _id;
 [_id] remoteExecCall ["para_c_fnc_netmap_terminate", -clientOwner];
