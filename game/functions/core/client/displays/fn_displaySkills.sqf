@@ -96,7 +96,7 @@ switch _mode do {
             private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
             private _skillTreePoints = _skillTree call vgm_g_fnc_skills_getTreeSkillPoints;
-            private _label = format ["%1 (%2/%3)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
+            private _label = format ["%1 (%2/%3 SP)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
 
             _ctrlSkills tvSetText [_x, _label];
         } forEach (_ctrlSkills getVariable "vgm_skillsListTvPaths");

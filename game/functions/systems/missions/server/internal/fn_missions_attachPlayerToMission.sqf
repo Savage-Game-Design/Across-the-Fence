@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-09-21
+    Last Update: 2023-06-22
     Public: No
 
     Description:
@@ -40,10 +40,14 @@ if (
 ) exitWith { false };
 
 [_currentMissionAssignments, _playerId, _missionPublic get "id"] call para_s_fnc_netmap_set;
+
+private _playerInfoNetmap = [] call para_s_fnc_netmap_createNetmap;
+[_playerInfoNetmap, _missionPublic get "players"] call para_s_fnc_netmap_setOwningNetmap;
+
 [
     _missionPublic get "players",
     _playerId,
-    [] call para_s_fnc_netmap_createNetmap
+    _playerInfoNetmap
 ] call para_s_fnc_netmap_set;
 
 (_mission get "machineIds") set [_playerId, getUserInfo _playerId select 1];

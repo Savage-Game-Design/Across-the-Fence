@@ -35,7 +35,7 @@ if (isNil "_coefficientMap") exitWith {};
 
 format ["Removing coefficient reason: %1 | %2", _coefficient, _reason] call vgm_g_fnc_logDebug;
 
-private _coefficientValues = _coefficientMap getOrDefault [_coefficient, [], true];
+private _coefficientValues = _coefficientMap getOrDefault [_coefficient, createHashMap];
 
 _coefficientValues deleteAt _reason;
 
