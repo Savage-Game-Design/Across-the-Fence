@@ -108,6 +108,16 @@ class vgm_s
         };
     };
 
+    class skill
+    {
+        VGM_SERVER_PATH(\systems\skill\server);
+
+        class skill_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_SERVER_PATH(\systems\skills\server);

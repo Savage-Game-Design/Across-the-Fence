@@ -33,7 +33,6 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'recoil', 'skill_passives_steadyHand', -0.25, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'recoil', 'skill_passives_steadyHand'] call vgm_c_fnc_coefficient_remove";
-                    skillType = 0;
                 };
 
                 class tough: vgm_skillTemplate {
@@ -41,7 +40,6 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'bleedOut', 'skill_passives_tough', 0.2, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'bleedOut', 'skill_passives_tough'] call vgm_c_fnc_coefficient_remove";
-                    skillType = 0;
                 };
             };
 
@@ -98,6 +96,88 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 4;
                     cooldown = 120;
+                };
+            };
+        };
+
+        // specializations
+        class subtrees {};
+    };
+
+    class recon {
+        displayName = "$STR_VGM_SKILLS_TREE_RECON";
+        description = "";
+
+        // rifleman skills
+        class skills {
+            class tier_1 {
+                class betterAim: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_recon_betterAim";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_betterAim";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+
+                class athletic: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_ATHLETIC";
+
+                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'staminaDrain', 'skill_recon_athletic'] call vgm_c_fnc_coefficient_remove";
+                };
+            };
+
+            class tier_2 {
+                class loadout_marksman: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN_DESC";
+                };
+
+                class keenEye: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_recon_keenEye";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_keenEye";
+                };
+
+                class loadout_pointman: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN_DESC";
+                };
+            };
+
+            class tier_3 {
+                class followTheTracers: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_recon_followTheTracers";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_followTheTracers";
+                    cost = 2;
+                };
+
+                class sixthSense: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_recon_sixthSense";
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 120;
+                };
+            };
+
+            class tier_4 {
+                class thickBrush: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_recon_thickBrush";
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 180;
                 };
             };
         };

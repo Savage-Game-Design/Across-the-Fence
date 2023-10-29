@@ -1,5 +1,5 @@
 /*
-    File: fn_skill_preInit.sqf
+    File: fn_skill_passives_preInit.sqf
     Author: Savage Game Design
     Date: 2023-09-14
     Last Update: 2023-09-24

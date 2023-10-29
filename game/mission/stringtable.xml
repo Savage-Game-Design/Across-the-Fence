@@ -142,20 +142,8 @@
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
             <Original>Rifleman</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_AUTORIFLEMAN">
-            <Original>Autorifleman</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_SHARPSHOOTER">
-            <Original>Sharpshooter</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_SERVICE_ESSENTIALS">
-            <Original>Service Essentials</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_BASIC_AID">
-            <Original>Basic Aid</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_LEADERSHIP_TRAINING">
-            <Original>Leadership Training</Original>
+        <Key ID="STR_VGM_SKILLS_TREE_RECON">
+            <Original>Recon</Original>
         </Key>
     </Package>
     <Package name="Skills Skill">
@@ -204,6 +192,43 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC">
             <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
+        </Key>
+        <!-- Recon -->
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
+            <Original>50% less weapon sway when crouched or prone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_ATHLETIC">
+            <Original>20% less stamina drain</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE">
+            <Original>Keen Eye</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC">
+            <Original>When looking through binoculars, you can press 'Reveal Target' to get an approximate distance to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN">
+            <Original>Marksman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN">
+            <Original>Pointman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS">
+            <Original>Follow the Tracers</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
+            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when thier suppression return to zero naturally.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
+            <Original>6th Sense</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC">
+            <Original>Briefly add a 3D marker to all enemies in within 150m, and add an approximate marker of thier locations to your map.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH">
+            <Original>Thick Brush</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
+            <Original>For 60 seconds, AI are much less likely to see you and hear you.</Original>
         </Key>
     </Package>
 </Project>

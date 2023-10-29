@@ -325,7 +325,7 @@ class vgm_c
 
     class skill_passives
     {
-        VGM_CLIENT_PATH(\systems\skill\passives);
+        VGM_CLIENT_PATH(\systems\skill\client\passives);
 
         class skill_passives_preInit
         {
@@ -334,22 +334,37 @@ class vgm_c
     };
     class skill_passives_infantryman
     {
-        VGM_CLIENT_PATH(\systems\skill\passives\infantryman);
+        VGM_CLIENT_PATH(\systems\skill\client\passives\infantryman);
 
         class skill_passives_infantryman_bornLeader {};
         class skill_passives_infantryman_overprepared {};
     };
+    class skill_passives_recon
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\recon);
+
+        class skill_passives_recon_betterAim {};
+        class skill_passives_recon_followTheTracers {};
+        class skill_passives_recon_keenEye {};
+    };
 
     class skill_actives
     {
-        VGM_CLIENT_PATH(\systems\skill\actives);
+        VGM_CLIENT_PATH(\systems\skill\client\actives);
     };
     class skill_actives_infantryman
     {
-        VGM_CLIENT_PATH(\systems\skill\actives\infantryman);
+        VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
 
         class skill_actives_infantryman_luckySon {};
         class skill_actives_infantryman_steadyAim {};
+    };
+    class skill_actives_recon
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
+
+        class skill_actives_recon_sixthSense {};
+        class skill_actives_recon_thickBrush {};
     };
 
     class stamina
