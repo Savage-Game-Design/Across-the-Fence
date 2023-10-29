@@ -47,8 +47,6 @@ class vgm_skillTrees {
                 class loadout_historical: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC";
-
-                    applyOnRespawn = 1;
                 };
 
                 class overprepared: vgm_skillTemplate {
@@ -108,7 +106,7 @@ class vgm_skillTrees {
         displayName = "$STR_VGM_SKILLS_TREE_RECON";
         description = "";
 
-        // rifleman skills
+        // recon skills
         class skills {
             class tier_1 {
                 class betterAim: vgm_skillTemplate {
@@ -123,7 +121,7 @@ class vgm_skillTrees {
                 class athletic: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_ATHLETIC";
 
-                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.3, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'staminaDrain', 'skill_recon_athletic'] call vgm_c_fnc_coefficient_remove";
                 };
             };
@@ -183,6 +181,92 @@ class vgm_skillTrees {
         };
 
         // specializations
+        class subtrees {};
+    };
+
+    class fireSupport {
+        displayName = "$STR_VGM_SKILLS_TREE_FIRE_SUPPORT";
+        description = "";
+
+        // fire support skills
+        class skills {
+            class tier_1 {
+                class heavySuppression: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION";
+
+                    codeApply = "[player, 'suppress', 'skill_fireSupport_heavySuppression', 0.5, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'suppress', 'skill_fireSupport_heavySuppression'] call vgm_c_fnc_coefficient_remove";
+                };
+
+                class packMule: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE";
+
+                    codeApply = "\
+                        [player, 'load', 'skill_fireSupport_packMule', -0.3, true] call vgm_c_fnc_coefficient_set;\
+                        [player, 'staminaDrain', 'skill_fireSupport_packMule', -0.2, true] call vgm_c_fnc_coefficient_set;\
+                    ";
+                    codeUnapply = "\
+                        [player, 'load', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
+                        [player, 'staminaDrain', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
+                    ";
+                };
+            };
+
+            class tier_2 {
+                class loadout_machineGunner: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER_DESC";
+                };
+
+                class loadout_explosives: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES_DESC";
+                };
+
+                class loadout_grenadier: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER_DESC";
+                };
+            };
+
+            class tier_3 {
+                class learnTheRhythm: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
+
+                    cost = 2;
+                };
+
+                class grenadesCase: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_grenadesCase";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 180;
+                };
+            };
+
+            class tier_4 {
+                class overwhelmingFire: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_overwhelmingFire";
+
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 240;
+                };
+            };
+        };
+
+        // fire support specializations
         class subtrees {};
     };
 };

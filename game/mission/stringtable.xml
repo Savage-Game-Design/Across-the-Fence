@@ -145,6 +145,9 @@
         <Key ID="STR_VGM_SKILLS_TREE_RECON">
             <Original>Recon</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
+            <Original>Fire Support</Original>
+        </Key>
     </Package>
     <Package name="Skills Skill">
         <!-- Rifleman -->
@@ -229,6 +232,40 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
             <Original>For 60 seconds, AI are much less likely to see you and hear you.</Original>
+        </Key>
+        <!-- Fire Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
+            <Original>50% increased suppression strength</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
+            <Original>Carry 30% more weight and consume 20% less stamina</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER">
+            <Original>Machine Gunner Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES">
+            <Original>Explosives Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
+            <Original>Grenadier and AT Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM">
+            <Original>Learn the Rhythm</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC">
+            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
+            <Original>Grenades case</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
+            <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE">
+            <Original>Overwhelming Fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
+            <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 50% more.</Original>
         </Key>
     </Package>
 </Project>

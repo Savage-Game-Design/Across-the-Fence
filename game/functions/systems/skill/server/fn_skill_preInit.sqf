@@ -2,7 +2,7 @@
     File: fn_skill_passives_preInit.sqf
     Author: Savage Game Design
     Date: 2023-09-24
-    Last Update: 2023-10-07
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -20,7 +20,12 @@ addMissionEventHandler ["EntityCreated", {
     ) exitWith {};
 
     _unit addEventHandler ["Suppressed", {
+        params ["_unit"];
+
         call vgm_s_skill_relaySuppression;
+        call vgm_s_skill_multiplySuppression;
+
+        _unit setVariable ["vgm_s_skill_lastSuppression", getSuppression _unit];
     }];
 }];
 
@@ -51,4 +56,20 @@ vgm_s_skill_relaySuppression = {
 
     _threats pushBack _shooter;
     ["vgm_unit_suppressStart", _unit, _shooter] call para_g_fnc_event_triggerTargets;
+};
+
+vgm_s_skill_multiplySuppression = {
+    params ["_unit", "", "_shooter"];
+
+    private _coef = _shooter getVariable ["vgm_g_suppressCoef", 0];
+    if (_coef <= 0) exitWith {};
+
+    private _lastSuppression = _unit getVariable ["vgm_s_skill_lastSuppression", 0];
+    private _currentSuppression = getSuppression _unit;
+    // the first shot after suppression faded down below saved value will be ignored
+    // otherwise it would cause negative "gain"
+    if (_currentSuppression < _lastSuppression) exitWith {};
+
+    private _gainedSupression = _currentSuppression - _lastSuppression;
+    _unit setSuppression (_currentSuppression + (_gainedSupression * _coef));
 };
