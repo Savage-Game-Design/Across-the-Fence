@@ -156,6 +156,18 @@ class vgm_c
         class displayEndOfMission {};
     };
 
+    class carry
+    {
+        VGM_GLOBAL_PATH(\systems\carry\client);
+
+        class carry_canCarry {};
+        class carry_doCarry {};
+        class carry_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class equipment
     {
         VGM_GLOBAL_PATH(\systems\equipment\client);
