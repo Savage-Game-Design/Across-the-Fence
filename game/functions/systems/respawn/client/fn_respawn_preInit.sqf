@@ -18,13 +18,14 @@
     ["itemAdd", [
         "vgm_respawn_isAlone",
         {
-            format ["Player %1 is downed and alone, respawning", player] call vgm_g_fnc_logInfo;
-            forceRespawn player;
+            if (((units player inAreaArray [player, ALONE_DIST, ALONE_DIST]) - [player]) isEqualTo []) then {
+                format ["Player %1 is downed and alone, respawning", player] call vgm_g_fnc_logInfo;
+                forceRespawn player;
+            };
         },
         3,
         "seconds",
-        {((units player inAreaArray [player, ALONE_DIST, ALONE_DIST]) - [player]) isEqualTo []}, // execute condition
-        {lifeState player != "INCAPACITATED"}, // abort condition
-        true // execute once
+        {true}, // execute condition
+        {lifeState player != "INCAPACITATED"} // abort condition, checked only if code ran
     ]] call BIS_fnc_loop;
 }] call para_g_fnc_event_subscribeLocal;
