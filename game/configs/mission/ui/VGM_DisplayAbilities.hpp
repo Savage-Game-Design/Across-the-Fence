@@ -11,14 +11,6 @@ class VGM_DisplayAbilities
     onLoad = VGM_UIEH(onLoad,Abilities);
     class ControlsBackground
     {
-        class Min: VGM_ctrlBackground
-        {
-            x = VGM_GRID_MIN_X;
-            y = VGM_GRID_MIN_Y;
-            w = VGM_GRID_MAX_W * VGM_GRID_W;
-            h = VGM_GRID_MAX_H * VGM_GRID_H;
-            colorBackground[] = {0,0,1,0.2};
-        };
         class BackgroundStdTitle: VGM_ctrlBackgroundTitle
         {
             x = DISPLAY_X + 1 * VGM_GRID_W;
