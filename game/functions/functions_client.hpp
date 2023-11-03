@@ -281,6 +281,15 @@ class vgm_c
         class medical_injuryEffectsUpdate {};
     };
 
+    class respawn
+    {
+        VGM_CLIENT_PATH(\systems\respawn\client);
+        class respawn_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_CLIENT_PATH(\systems\skills\client);
