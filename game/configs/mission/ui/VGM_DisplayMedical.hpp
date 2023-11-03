@@ -36,13 +36,12 @@ class VGM_DisplayMedical
     onMouseButtonDown = VGM_UIEH(mouseDown,Medical);
     class ControlsBackground
     {
-        class Min: VGM_ctrlStatic
+        class Min: VGM_ctrlBackground
         {
             x = DISPLAY_X;
             y = DISPLAY_Y;
             w = DISPLAY_W * VGM_GRID_W;
             h = DISPLAY_H * VGM_GRID_H;
-            colorBackground[] = {1,0,0,0.2};
         };
     };
     class Controls
