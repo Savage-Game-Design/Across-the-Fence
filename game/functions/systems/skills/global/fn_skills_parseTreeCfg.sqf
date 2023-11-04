@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-06-02
+    Last Update: 2023-10-08
     Public: Yes
 
     Description:
@@ -17,6 +17,8 @@
     Example(s):
         [missionConfigFile >> "vgm_skillTrees"] call vgm_g_fnc_skills_parseTreeCfg
  */
+
+// #define FIRST_TIER_EXCLUSIVE
 
 params [
     ["_cfgSkillTrees", configNull, [configNull]]
@@ -60,17 +62,21 @@ private _fnc_parseSkillTree = {
                 ["cost", getNumber (_x >> "cost")],
                 ["conditionUnlock", compileFinal getText (_x >> "conditionUnlock")],
                 ["conditionShow", compileFinal getText (_x >> "conditionShow")],
+                ["conditionActivate", compileFinal getText (_x >> "conditionActivate")],
                 ["codeApply", compileFinal getText (_x >> "codeApply")],
                 ["codeUnapply", compileFinal getText (_x >> "codeUnapply")],
-                ["codeActivate", compileFinal getText (_x >> "codeActivate")]
+                ["codeActivate", compileFinal getText (_x >> "codeActivate")],
+                ["codeUnableToActivate", compileFinal getText (_x >> "codeUnableToActivate")]
             ];
         };
 
         private _skillPointsMax = _skillTree get "skillPointsMax";
         {
             _skillPointsMax = _skillPointsMax + (_x get "cost");
+            #ifdef FIRST_TIER_EXCLUSIVE
             // only one skill can be invested in first tier, break the loop
             if (_tier == 0) exitWith {};
+            #endif
         } forEach _skills;
         _skillTree set ["skillPointsMax", _skillPointsMax];
 

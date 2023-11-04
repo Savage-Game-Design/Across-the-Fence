@@ -31,7 +31,19 @@ private _missionPublic = _mission get "public";
 private _missionMemberPlayerIds = (_missionPublic get "players") call para_g_fnc_netmap_keys;
 private _missionMemberMachineIds = values (_mission get "machineIds");
 
-[] remoteExecCall ["vgm_c_fnc_missions_endMission", _missionMemberMachineIds];
+// award experience for mission performance and show mission end screen on client
+{
+    private _player = getUserInfo _x param [10, objNull];
+
+    private _levelingDataCopy = +(_player getVariable "vgm_g_levelingData");
+    private _milestones = _x call vgm_s_fnc_missions_calculateMilestones;
+
+    [_levelingDataCopy, _milestones] remoteExecCall ["vgm_c_fnc_missions_endMission", _player];
+
+    private _totalExperience = 0;
+    {_totalExperience = _totalExperience + _x#1} forEach _milestones;
+    [_player, _totalExperience] call vgm_s_fnc_leveling_addExperience;
+} forEach _missionMemberPlayerIds;
 
 [
     "vgm_mission_ended",
@@ -49,11 +61,10 @@ localNamespace getVariable "vgm_missions" deleteAt (_missionPublic get "id");
     ["vgm_missions_publicMissionInfo"] call para_g_fnc_netmap_get,
     _missionPublic get "id"
 ] call para_s_fnc_netmap_deleteAt;
+
+// Terminate public netmap, and all owned netmaps (all children should be owned)
 [_missionPublic] call para_s_fnc_netmap_terminate;
-[_missionPublic get "players"] call para_s_fnc_netmap_terminate;
-[_missionPublic get "preventJoining"] call para_s_fnc_netmap_terminate;
 
 // TODO
 // Disable damage
 // Needs to handle downed or dead players
-// Award XP?

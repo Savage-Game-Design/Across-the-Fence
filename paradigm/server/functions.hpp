@@ -207,6 +207,7 @@ class para_s
         class netmap_deleteAt {};
         class netmap_requestAllNetmaps {};
         class netmap_set {};
+        class netmap_setOwningNetmap {};
         class netmap_terminate {};
     };
 

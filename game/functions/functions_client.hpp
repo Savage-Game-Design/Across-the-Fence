@@ -14,13 +14,14 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\core\global);
 
-        class startScheduler {
-            postInit = 1;
-        };
+        class enemySides {};
         class execNextFrame {};
         class preInit
         {
             preInit = 1;
+        };
+        class startScheduler {
+            postInit = 1;
         };
     };
 
@@ -44,7 +45,6 @@ class vgm_g
             headerType = -1;
         };
     };
-
     class ai
     {
         VGM_GLOBAL_PATH(\systems\ai\global);
@@ -90,6 +90,7 @@ class vgm_g
         class skills_canLearn {};
         class skills_canSee {};
         class skills_getByPath {};
+        class skills_getSkillTreeFromSkill {};
         class skills_getTreeSkillPoints {};
         class skills_isKnown {};
         class skills_parseTreeCfg {};
@@ -144,6 +145,7 @@ class vgm_c
         class displayAbilityCooldown {};
         class displayMedical {};
         class displayStaminaBar {};
+        class displayEndOfMission {};
     };
 
     class equipment
@@ -302,7 +304,6 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skills\client);
 
         class skills_getSkillPoints {};
-        class skills_getSkillTreeFromSkill {};
         class skills_openSkillTree {};
         class skills_postInit
         {
@@ -340,6 +341,74 @@ class vgm_c
         class skills_requestSkillLearn {};
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
+    };
+
+    class skill_passives
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives);
+
+        class skill_passives_preInit
+        {
+            preInit = 1;
+        };
+    };
+    class skill_passives_infantryman
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\infantryman);
+
+        class skill_passives_infantryman_bornLeader {};
+        class skill_passives_infantryman_overprepared {};
+    };
+    class skill_passives_recon
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\recon);
+
+        class skill_passives_recon_betterAim {};
+        class skill_passives_recon_followTheTracers {};
+        class skill_passives_recon_keenEye {};
+    };
+    class skill_passives_fireSupport
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
+
+        class skill_passives_fireSupport_learnTheRhythm {};
+    };
+    class skill_passives_support
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\support);
+
+        class skill_passives_support_shepherd {};
+    };
+
+    class skill_actives
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives);
+
+        class skill_actives_preInit
+        {
+            preInit = 1;
+        };
+    };
+    class skill_actives_infantryman
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
+
+        class skill_actives_infantryman_luckySon {};
+        class skill_actives_infantryman_steadyAim {};
+    };
+    class skill_actives_recon
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
+
+        class skill_actives_recon_sixthSense {};
+        class skill_actives_recon_thickBrush {};
+    };
+    class skill_actives_fireSupport
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
+
+        class skill_actives_fireSupport_grenadesCase {};
+        class skill_actives_fireSupport_overwhelmingFire {};
     };
 
     class stamina

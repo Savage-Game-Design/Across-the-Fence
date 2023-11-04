@@ -2,7 +2,7 @@
     File: fn_skills_getSkillTreeFromSkill.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2023-05-13
+    Last Update: 2023-09-14
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         Skill tree [HASHMAP]
 
     Example(s):
-        _skill call vgm_c_fnc_skills_getSkillTreeFromSkill
+        _skill call vgm_g_fnc_skills_getSkillTreeFromSkill
  */
 
 params ["_skill"];

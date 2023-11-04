@@ -40,3 +40,5 @@ player setVariable [
 [] call vn_ms_fnc_tracker_tracksLoop;
 
 //- Unfades the screen
+
+["vgm_mission_deploy_local", _currentMission] call para_g_fnc_event_triggerLocal;

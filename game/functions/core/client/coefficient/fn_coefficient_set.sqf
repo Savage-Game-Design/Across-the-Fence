@@ -2,7 +2,7 @@
     File: fn_coefficient_set.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-09-20
+    Last Update: 2023-10-08
     Public: Yes
 
     Description:
@@ -61,7 +61,7 @@ if (isNil "_coefficientMap") then {
 };
 // set a reason if there's one, onChange function will always be applied
 if (!isNil "_reason") then {
-    format ["Setting coefficient reason: %1 | %2 | %3 | %4", _coefficient, _reason, _value, _persistent] call vgm_g_fnc_logInfo;
+    format ["Setting coefficient reason: %1 | %2 | %3 | %4", _coefficient, _reason, _value, _persistent] call vgm_g_fnc_logDebug;
 
     private _coefficientValues = _coefficientMap getOrDefault [_coefficient, createHashMap, true];
 

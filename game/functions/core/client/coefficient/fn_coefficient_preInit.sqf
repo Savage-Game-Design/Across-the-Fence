@@ -2,7 +2,7 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-08-27
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -15,11 +15,38 @@
     _unit setCustomAimCoef (_value max 0.1 min 4);
 }] call vgm_c_fnc_coefficient_create;
 
+["animSpeed", {
+    params ["_unit", "_value"];
+    // values are limited to prevent too much jankiness
+    _unit setAnimSpeedCoef (_value max 0.8 min 1.5);
+}] call vgm_c_fnc_coefficient_create;
+
+["camouflage", {
+    params ["_unit", "_value"];
+    _unit setUnitTrait ["camouflageCoef", _value max 0.1 min 1];
+}] call vgm_c_fnc_coefficient_create;
+
+["audible", {
+    params ["_unit", "_value"];
+    _unit setUnitTrait ["audibleCoef", _value max 0.15 min 1];
+}] call vgm_c_fnc_coefficient_create;
+
 ["recoil", {
     params ["_unit", "_value"];
     // coef should be always greater than 0 to prevent no animation at all
     _unit setUnitRecoilCoefficient (_value max 0.25 min 4);
 }] call vgm_c_fnc_coefficient_create;
+
+["load", {
+    params ["_unit", "_value"];
+    // coef should be always greater than 0 to prevent infinite carry capacity
+    _unit setUnitTrait ["loadCoef", _value max 0.1 min 2];
+}] call vgm_c_fnc_coefficient_create;
+
+["suppress", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_g_suppressCoef", _value, true];
+}, 0] call vgm_c_fnc_coefficient_create;
 
 ["throw", {
     params ["_unit", "_value"];

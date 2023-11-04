@@ -3,7 +3,7 @@
     File: fn_medical_statusEffectBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-09-02
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -26,25 +26,34 @@ if (!_bleeding) exitWith {
     format ["Stopping bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;
 
     removeMissionEventHandler ["EachFrame", _unit getVariable ["vgm_c_medical_bleedingEachFrameEH", -1]];
+
+    _unit setVariable ["vgm_g_medical_bleeding", false, true];
+    _unit setVariable ["vgm_c_medical_bleedOutAt", nil];
     _unit setVariable ["vgm_c_medical_bleedingEachFrameEH", nil];
 
     if (isPlayer _unit) then {-1 call vgm_c_fnc_medical_feedbackBleeding};
 };
 
+private _bleedOutTime = BLEED_OUT_TIME * ([_unit, "bleedOut"] call vgm_c_fnc_coefficient_get);
+
 // visual bleeding effect, stops when `damage _unit` < 0.1
-_unit setBleedingRemaining BLEED_OUT_TIME;
+_unit setBleedingRemaining _bleedOutTime;
+
+_unit setVariable ["vgm_g_medical_bleeding", true, true];
+_unit setVariable ["vgm_c_medical_bleedOutAt", time + _bleedOutTime];
 
 format ["Starting bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;
 
 #define TICK_TIME 1
 private _eh = addMissionEventHandler ["EachFrame", {
-    _thisArgs params ["_deltaT", "_unit", "_bleedOutAt"];
+    _thisArgs params ["_deltaT", "_unit"];
 
     if (lifeState _unit == "INCAPACITATED") exitWith {
         if (isPlayer _unit) then {"vgm_medical_bleeding" cutText ["", "PLAIN"]};
         [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
     };
 
+    private _bleedOutAt = _unit getVariable "vgm_c_medical_bleedOutAt";
     _deltaT = _deltaT + diag_deltaTime;
 
     if (_deltaT >= TICK_TIME) then {
@@ -68,6 +77,6 @@ private _eh = addMissionEventHandler ["EachFrame", {
     };
 
     _thisArgs set [0, _deltaT];
-}, [0, _unit, time + BLEED_OUT_TIME]];
+}, [0, _unit]];
 
 _unit setVariable ["vgm_c_medical_bleedingEachFrameEH", _eh];

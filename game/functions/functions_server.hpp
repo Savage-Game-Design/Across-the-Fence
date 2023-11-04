@@ -81,6 +81,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\missions\server\internal);
 
         class missions_attachPlayerToMission {};
+        class missions_calculateMilestones {};
         class missions_preventJoining {};
         class missions_removePlayerFromMission {};
         class missions_updateStatus {};
@@ -121,6 +122,16 @@ class vgm_s
         };
     };
 
+    class skill
+    {
+        VGM_SERVER_PATH(\systems\skill\server);
+
+        class skill_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_SERVER_PATH(\systems\skills\server);
@@ -130,7 +141,6 @@ class vgm_s
         class skills_dataGetCached {};
         class skills_dbGet {};
         class skills_dbSave {};
-
         class skills_forgetSkills {};
 
         class skills_preInit

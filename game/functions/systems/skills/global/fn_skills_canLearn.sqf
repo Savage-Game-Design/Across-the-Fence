@@ -30,7 +30,7 @@ private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
 
 ((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
 && {
-    private _skillTree = _skill call vgm_c_fnc_skills_getSkillTreeFromSkill;
+    private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
     private _tier = _skill get "tier";
     (
         _tier >= 1

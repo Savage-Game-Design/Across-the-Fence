@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-01
+    Last Update: 2023-10-08
     Public: No
 
     Description:
@@ -61,6 +61,11 @@ vgm_medical_healItems = createHashMapFromArray [
         };
 
         if (_itemType == HEAL_FAK) then {
+            if (
+                (_healer getVariable ["vgm_c_skill_passives_support_resourceful", false]) // TODO consider coefficient?
+                && {random 1 < 0.3}
+            ) exitWith {format ["Not consuming item due to skill: %1 | %2 | %3", _healer, _patient, str _itemType] call vgm_g_fnc_logInfo};
+
             _consumeItem = _foundItems select 0;
         };
     };
@@ -73,6 +78,20 @@ vgm_medical_healItems = createHashMapFromArray [
     _healer removeItem _consumeItem;
 
     [_patient, _bodyPart, [2, 1] select (_itemType == HEAL_MEDIKIT)] call vgm_c_fnc_medical_removeWound;
+
+}] call para_g_fnc_event_subscribe;
+
+["vgm_medical_adjustBleedOutAt", {
+    (_this#0) params ["_unit", ["_adjust", nil, [0]]];
+
+    if (!(_unit getVariable ["vgm_g_medical_bleeding", false])) exitWith {};
+
+    format ["Adjusting bleed out time: %1 | %2", _unit, _adjust] call vgm_g_fnc_logInfo;
+
+    private _bleedOutAt = _unit getVariable "vgm_c_medical_bleedOutAt";
+    _unit setVariable ["vgm_c_medical_bleedOutAt", _bleedOutAt + _adjust];
+    // visual bleeding effect, stops when `damage _unit` < 0.1
+    _unit setBleedingRemaining (_bleedOutAt - time);
 
 }] call para_g_fnc_event_subscribe;
 
@@ -96,3 +115,24 @@ vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
 
 vgm_c_medical_armorCache = createHashMap;
 vgm_c_medical_damageModifiers = [];
+
+["bleedOut", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_bleedout", _value max 0.5 min 3];
+}] call vgm_c_fnc_coefficient_create;
+
+["hitShrug", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_hitShrug", _value max 0 min 1];
+}, 0] call vgm_c_fnc_coefficient_create;
+
+[{
+    params ["_unit"];
+
+    private _chance = _unit getVariable ["vgm_c_medical_coefficient_hitShrug", 0];
+    if (random 1 < _chance) then {
+        "Shrugging hit" call vgm_g_fnc_logDebug;
+        _this set [2, 0];
+        true // stop processing
+    };
+}] call vgm_c_fnc_medical_addDamageModifier;
