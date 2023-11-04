@@ -3,7 +3,7 @@
     File: fn_medical_itemApplyFAK.sqf
     Author: Savage Game Design
     Date: 2023-06-30
-    Last Update: 2023-08-20
+    Last Update: 2023-11-04
     Public: No
 
     Description:
@@ -27,6 +27,6 @@ format ["Applying FAK: %1 | %2 | %3", _healer, _patient, _bodyPart] call vgm_g_f
 
 [_healer, _patient, _bodyPart, createHashMapFromArray [
     ["type", HEAL_FAK],
-    ["time", 3],
+    ["time", 10],
     ["displayName", localize "STR_VGM_MEDICAL_UI_APPLY_FAK"]
 ]] call vgm_c_fnc_medical_itemApply;
