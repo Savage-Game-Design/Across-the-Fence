@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-11-04
+    Last Update: 2023-11-10
     Public: No
 
     Description:
@@ -23,3 +23,8 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
         {call vgm_c_fnc_equipment_openArsenal}
     ]
 } forEach _arsenals;
+
+// Add our special Medical items to "Misc" tab
+[missionNamespace, "arsenalPreOpen", {
+	{BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach ["vn_helper_item_firstaidkit", "vn_helper_item_medikit"];
+}] call BIS_fnc_addScriptedEventHandler;

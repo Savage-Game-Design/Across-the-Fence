@@ -52,6 +52,7 @@ class vgm_equipment {
             // Accessories
             "vn_s_ppk",
             "vn_s_m1911",
+            "vn_helper_item_firstaidkit",
             // Uniforms
             "vn_b_uniform_sog_01_01",
             "vn_b_uniform_sog_01_02",
