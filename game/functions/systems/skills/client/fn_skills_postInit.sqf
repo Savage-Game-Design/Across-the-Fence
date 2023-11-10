@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-02-28
+    Last Update: 2023-11-10
     Public: No
 
     Description:
@@ -44,5 +44,4 @@ private _fnc_addActions = {
 
 };
 
-player call _fnc_addActions;
-player addEventHandler ["Respawn", _fnc_addActions];
+vgm_core_lobbyOfficer call _fnc_addActions;
