@@ -8,7 +8,7 @@ class EditorData
 	toggles=521;
 	class ItemIDProvider
 	{
-		nextID=1346;
+		nextID=1348;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=694;
+		nextID=697;
 	};
 	class Camera
 	{
-		pos[]={20060.295,17.55806,6605.2568};
-		dir[]={0.44496855,-0.7149213,0.53935516};
-		up[]={0.45496464,0.69920391,0.55147141};
-		aside[]={0.77137691,4.0163286e-008,-0.63638806};
+		pos[]={20064.668,17.108746,6624.8833};
+		dir[]={0.68379539,-0.69938457,0.20810339};
+		up[]={0.66908938,0.71474117,0.20362732};
+		aside[]={0.2911523,3.1886157e-007,-0.95668674};
 	};
 };
 binarizationWanted=0;
@@ -37,13 +37,14 @@ addons[]=
 	"A3_Ui_F",
 	"objects_f_vietnam_c",
 	"structures_f_vietnam_c",
-	"A3_Misc_F_Helpers"
+	"A3_Misc_F_Helpers",
+	"weapons_f_vietnam_c"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=8;
+		items=9;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -100,6 +101,13 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item8
+		{
+			className="weapons_f_vietnam_c";
+			name="weapons_f_vietnam_c";
+			author="Savage Game Design";
+			url="https://www.arma3.com";
+		};
 	};
 };
 class DynamicSimulation
@@ -146,14 +154,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -197,14 +205,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -2273,40 +2281,6 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={20074.637,4.9040928,6627.6079};
-				angles[]={0,1.8395256,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				init="this setVariable [""vgm_equipment_arsenal"", true];";
-			};
-			id=1335;
-			type="Land_vn_pavn_weapons_stack3";
-		};
-		class Item10
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={20078.418,4.8968029,6618.9668};
-				angles[]={0,4.8924046,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				init="this setVariable [""vgm_equipment_arsenal"", true];";
-			};
-			id=1336;
-			type="Land_vn_pavn_weapons_stack1";
-		};
-		class Item11
-		{
-			dataType="Object";
-			class PositionInfo
-			{
 				position[]={20083.1,4.9162602,6628.645};
 				angles[]={0,4.2438903,0};
 			};
@@ -2339,7 +2313,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item12
+		class Item10
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2355,7 +2329,7 @@ class Mission
 			type="Sign_Arrow_Green_F";
 			atlOffset=0.49578094;
 		};
-		class Item13
+		class Item11
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2371,7 +2345,7 @@ class Mission
 			type="Sign_Arrow_Green_F";
 			atlOffset=0.99862385;
 		};
-		class Item14
+		class Item12
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2387,7 +2361,7 @@ class Mission
 			id=1344;
 			type="vn_flag_sog";
 		};
-		class Item15
+		class Item13
 		{
 			dataType="Marker";
 			position[]={7204.6641,69.769997,14912.639};
@@ -2396,6 +2370,76 @@ class Mission
 			type="mil_flag";
 			colorName="ColorGreen";
 			id=1345;
+		};
+		class Item14
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20080.555,4.8987575,6620.1841};
+				angles[]={-0,4.8924022,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this setVariable [""vgm_equipment_arsenal"", true];";
+				disableSimulation=1;
+			};
+			id=1346;
+			type="vn_b_ammobox_07";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item15
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20072.006,4.905829,6633.1772};
+				angles[]={6.2651882,3.8149331,0.017997233};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this setVariable [""vgm_equipment_arsenal"", true];";
+				disableSimulation=1;
+			};
+			id=1347;
+			type="vn_b_ammobox_07";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 	};
 };
