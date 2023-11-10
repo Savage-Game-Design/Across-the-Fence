@@ -8,7 +8,7 @@ class EditorData
 	toggles=521;
 	class ItemIDProvider
 	{
-		nextID=1348;
+		nextID=1350;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=697;
+		nextID=700;
 	};
 	class Camera
 	{
-		pos[]={20064.668,17.108746,6624.8833};
-		dir[]={0.68379539,-0.69938457,0.20810339};
-		up[]={0.66908938,0.71474117,0.20362732};
-		aside[]={0.2911523,3.1886157e-007,-0.95668674};
+		pos[]={20060.725,17.108746,6620.7461};
+		dir[]={0.69793946,-0.69260186,0.18216245};
+		up[]={0.67015207,0.72132003,0.17490992};
+		aside[]={0.25254035,-7.4505806e-009,-0.96758628};
 	};
 };
 binarizationWanted=0;
@@ -154,14 +154,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -205,14 +205,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -316,7 +316,7 @@ class Mission
 					side="West";
 					class Entities
 					{
-						items=34;
+						items=35;
 						class Item0
 						{
 							dataType="Object";
@@ -326,7 +326,7 @@ class Mission
 								angles[]={0,0.90452993,0};
 							};
 							side="West";
-							flags=7;
+							flags=5;
 							class Attributes
 							{
 								isPlayer=1;
@@ -2052,17 +2052,78 @@ class Mission
 								nAttributes=2;
 							};
 						};
+						class Item34
+						{
+							dataType="Object";
+							class PositionInfo
+							{
+								position[]={20077.055,4.9014387,6629.4878};
+								angles[]={0,3.7629473,0};
+							};
+							side="West";
+							flags=7;
+							class Attributes
+							{
+								rank="MAJOR";
+								init="this disableAI ""ALL"";" \n "this enableAI ""ANIM"";" \n "this setCaptive true;";
+								name="vgm_core_lobbyOfficer";
+								ignoreByDynSimulGrid=1;
+							};
+							id=1349;
+							type="vn_b_men_sog_22";
+							class CustomAttributes
+							{
+								class Attribute0
+								{
+									property="allowDamage";
+									expression="_this allowdamage _value;";
+									class Value
+									{
+										class data
+										{
+											singleType="BOOL";
+											value=0;
+										};
+									};
+								};
+								class Attribute1
+								{
+									property="speaker";
+									expression="_this setspeaker _value;";
+									class Value
+									{
+										class data
+										{
+											singleType="STRING";
+											value="Male09ENG";
+										};
+									};
+								};
+								class Attribute2
+								{
+									property="pitch";
+									expression="_this setpitch _value;";
+									class Value
+									{
+										class data
+										{
+											singleType="SCALAR";
+											value=1.03;
+										};
+									};
+								};
+								nAttributes=3;
+							};
+						};
 					};
 					class Attributes
 					{
 						name="vgm_core_lobbyGroup";
 					};
 					id=1195;
-					atlOffset=3.3378601e-006;
 				};
 			};
 			id=1321;
-			atlOffset=3.3378601e-006;
 		};
 		class Item4
 		{
@@ -2377,7 +2438,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={20080.555,4.8987575,6620.1841};
-				angles[]={-0,4.8924022,0};
+				angles[]={0,4.8924022,0};
 			};
 			side="Empty";
 			flags=4;
@@ -2388,6 +2449,7 @@ class Mission
 			};
 			id=1346;
 			type="vn_b_ammobox_07";
+			atlOffset=-0.013510227;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2423,6 +2485,7 @@ class Mission
 			};
 			id=1347;
 			type="vn_b_ammobox_07";
+			atlOffset=-0.00036430359;
 			class CustomAttributes
 			{
 				class Attribute0
