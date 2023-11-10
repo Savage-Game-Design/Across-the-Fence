@@ -28,3 +28,6 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
 [missionNamespace, "arsenalPreOpen", {
 	{BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach ["vn_helper_item_firstaidkit", "vn_helper_item_medikit"];
 }] call BIS_fnc_addScriptedEventHandler;
+
+// Prevent arsenal "Open" from adding the action to the player
+player setvariable ["BIS_fnc_arsenal_action", -1];
