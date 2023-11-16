@@ -23,5 +23,8 @@ if (isNull _lobbyOfficer || {!(_lobbyOfficer in units _lobbyGroup)}) then {
     private _logic = _lobbyGroup createUnit ["Logic", [0,0,0], [], 0, "CAN_COLLIDE"];
     _logic enableSimulationGlobal false;
     [_logic, "ALL"] remoteExec ["disableAI", 0, true];
-    vgm_core_lobbyGroup selectLeader _logic;
+
+    [vgm_core_lobbyGroup, _logic] remoteExec ["selectLeader", vgm_core_lobbyGroup];
+} else {
+    [vgm_core_lobbyGroup, _lobbyOfficer] remoteExec ["selectLeader", vgm_core_lobbyGroup];
 };
