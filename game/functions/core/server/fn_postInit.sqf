@@ -21,8 +21,8 @@ if (isNull _lobbyOfficer || {!(_lobbyOfficer in units _lobbyGroup)}) then {
     "'vgm_core_lobbyOfficer' not in 'vgm_core_lobbyGroup', adding Logic to prevent group deletion" call vgm_g_fnc_logWarning;
 
     private _logic = _lobbyGroup createUnit ["Logic", [0,0,0], [], 0, "CAN_COLLIDE"];
-    _logic enableSimulation false;
-    _logic disableAI "ALL";
+    _logic enableSimulationGlobal false;
+    [_logic, "ALL"] remoteExec ["disableAI", 0, true];
 
     [vgm_core_lobbyGroup, _logic] remoteExec ["selectLeader", vgm_core_lobbyGroup];
 } else {
