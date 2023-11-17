@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=521;
+	toggles=1545;
 	class ItemIDProvider
 	{
 		nextID=1350;
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=700;
+		nextID=706;
 	};
 	class Camera
 	{
@@ -262,7 +262,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=16;
+		items=15;
 		class Item0
 		{
 			dataType="Logic";
@@ -2280,36 +2280,36 @@ class Mission
 			name="Shared Hub";
 			class Entities
 			{
-				items=1;
+				items=2;
 				class Item0
 				{
 					dataType="Marker";
-					position[]={16330.562,73.573997,8114.624};
+					position[]={20175.895,3.8756983,6605.8315};
 					name="vgm_shared_hub";
 					text="Shared Hub";
 					markerType="ELLIPSE";
 					type="";
 					fillName="Border";
-					a=116.409;
-					b=132.65601;
-					angle=195.55994;
+					a=122.28793;
+					b=226.7897;
+					angle=250.66487;
 					drawBorder=1;
 					id=1327;
-					atlOffset=-0.93600464;
+					atlOffset=0.064961195;
+				};
+				class Item1
+				{
+					dataType="Marker";
+					position[]={20076.402,4.9000001,6623.6768};
+					name="vgm_shared_hub_respawn";
+					type="Empty";
+					id=1331;
 				};
 			};
 			id=1325;
-			atlOffset=-0.93600464;
+			atlOffset=-0.44131851;
 		};
 		class Item6
-		{
-			dataType="Marker";
-			position[]={20076.402,4.9000001,6623.6768};
-			name="vgm_shared_hub_respawn";
-			type="Empty";
-			id=1331;
-		};
-		class Item7
 		{
 			dataType="Marker";
 			position[]={8369.7217,231.058,14375.95};
@@ -2320,7 +2320,7 @@ class Mission
 			id=1332;
 			atlOffset=0.00033569336;
 		};
-		class Item8
+		class Item7
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2337,7 +2337,7 @@ class Mission
 			type="vn_flag_sog";
 			atlOffset=7.6293945e-005;
 		};
-		class Item9
+		class Item8
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2374,7 +2374,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item10
+		class Item9
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2390,7 +2390,7 @@ class Mission
 			type="Sign_Arrow_Green_F";
 			atlOffset=0.49578094;
 		};
-		class Item11
+		class Item10
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2406,7 +2406,7 @@ class Mission
 			type="Sign_Arrow_Green_F";
 			atlOffset=0.99862385;
 		};
-		class Item12
+		class Item11
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2422,7 +2422,7 @@ class Mission
 			id=1344;
 			type="vn_flag_sog";
 		};
-		class Item13
+		class Item12
 		{
 			dataType="Marker";
 			position[]={7204.6641,69.769997,14912.639};
@@ -2432,7 +2432,7 @@ class Mission
 			colorName="ColorGreen";
 			id=1345;
 		};
-		class Item14
+		class Item13
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2468,7 +2468,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item15
+		class Item14
 		{
 			dataType="Object";
 			class PositionInfo

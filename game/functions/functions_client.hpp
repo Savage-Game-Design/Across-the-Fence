@@ -215,6 +215,10 @@ class vgm_c
 
         class sharedHub_areaLimiterDisable {};
         class sharedHub_areaLimiterEnable {};
+        class sharedHub_postInit
+        {
+            postInit = 1;
+        };
         class sharedHub_teleportPlayerToHub {};
     };
 
