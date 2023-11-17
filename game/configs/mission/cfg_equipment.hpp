@@ -93,7 +93,7 @@ class vgm_equipment {
     };
 
     class rifleman {
-        condition = "[vgm_skills_pathsHashMap get ['rifleman', 'loadout']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['rifleman', 'loadout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
            "vn_xm177",
@@ -142,7 +142,7 @@ class vgm_equipment {
     };
 
     class historical {
-        condition = "[vgm_skills_pathsHashMap get ['rifleman', 'loadout_historical']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['rifleman', 'loadout_historical'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_m3a1",
@@ -207,7 +207,7 @@ class vgm_equipment {
     };
 
     class marksman {
-        condition = "[vgm_skills_pathsHashMap get ['recon', 'loadout_marksman']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['recon', 'loadout_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_m14",
@@ -286,7 +286,7 @@ class vgm_equipment {
     };
 
     class pointman {
-        condition = "[vgm_skills_pathsHashMap get ['recon', 'loadout_pointman']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['recon', 'loadout_pointman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_m3a1",
@@ -341,7 +341,7 @@ class vgm_equipment {
 
 
     class machine_gunner {
-        condition = "[vgm_skills_pathsHashMap get ['fireSupport', 'loadout_machineGunner']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['fireSupport', 'loadout_machineGunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_rpd_shorty_01",
@@ -399,7 +399,7 @@ class vgm_equipment {
     };
 
     class explosives {
-        condition = "[vgm_skills_pathsHashMap get ['fireSupport', 'loadout_explosives']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['fireSupport', 'loadout_explosives'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
         };
@@ -448,7 +448,7 @@ class vgm_equipment {
     };
 
     class grenadier {
-        condition = "[vgm_skills_pathsHashMap get ['fireSupport', 'loadout_grenadier']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['fireSupport', 'loadout_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_m16_xm148",
@@ -549,7 +549,7 @@ class vgm_equipment {
     };
 
     class advanced_medical {
-        condition = "[vgm_skills_pathsHashMap get ['support', 'loadout_medical']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['support', 'loadout_medical'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_m1a1_tommy",
@@ -592,7 +592,7 @@ class vgm_equipment {
     };
 
     class rto {
-        condition = "[vgm_skills_pathsHashMap get ['support', 'loadout_rto']] call vgm_g_fnc_skills_isKnown";
+        condition = "(['support', 'loadout_rto'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
         weapons[] = {
             "vn_mc10",
