@@ -236,6 +236,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client);
 
+        class medical_addAction {};
         class medical_addDamageModifier {};
         class medical_addWound {};
         class medical_fullHeal {};
