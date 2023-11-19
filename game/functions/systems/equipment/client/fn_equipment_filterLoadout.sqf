@@ -75,9 +75,7 @@ private _fnc_checkContainer = {
 #define IDX_BINOCULAR 8
 #define IDX_ASSIGNED_ITEMS 9
 
-params ["_unit"];
-
-private _loadout = getUnitLoadout _unit;
+params ["_loadout"];
 
 // weapons
 {

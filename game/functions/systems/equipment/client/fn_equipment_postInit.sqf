@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-11-10
+    Last Update: 2023-11-19
     Public: No
 
     Description:
@@ -25,8 +25,18 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
 } forEach _arsenals;
 
 // Add our special Medical items to "Misc" tab
-[missionNamespace, "arsenalPreOpen", {
-	{BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach ["vn_helper_item_firstaidkit", "vn_helper_item_medikit"];
+[true, "arsenalPreOpen", {
+    {BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach ["vn_helper_item_firstaidkit", "vn_helper_item_medikit"];
+}] call BIS_fnc_addScriptedEventHandler;
+
+// Prevent players from getting forbidden items
+[true, "arsenalClosed", {
+    private _loadout = getUnitLoadout player;
+    private _filteredLoadout = [+_loadout] call vgm_c_fnc_equipment_filterLoadout;
+    if (_filteredLoadout isNotEqualTo _loadout) then {
+        "Forbidden items were removed from your inventory" spawn BIS_fnc_guiMessage;
+        player setUnitLoadout _filteredLoadout;
+    };
 }] call BIS_fnc_addScriptedEventHandler;
 
 // Prevent arsenal "Open" from adding the action to the player
