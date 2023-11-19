@@ -2,7 +2,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-05-13
+    Last Update: 2023-11-19
     Public: No
 
     Description:
@@ -64,6 +64,7 @@ addUserActionEventHandler ["selectAll", "Activate", {
         showCommandingMenu "";
     };
 
+    if (dialog || {!isNull (uiNamespace getVariable "RscDisplayArsenal")}) exitWith {};
     [] call vgm_c_fnc_skills_active_openSkillWheel;
 }];
 
