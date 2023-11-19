@@ -3,19 +3,19 @@
     Author: Savage Game Design
     Date: 2023-11-17
     Last Update: 2023-11-19
-    Public: No
+    Public: Yes
 
     Description:
-        No description added yet.
+        Filters given loadout depending on items available to player.
 
     Parameter(s):
-        N/A
+        _loadout - Loadout array <https://community.bistudio.com/wiki/Unit_Loadout_Array> [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Loadout array [ARRAY]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [getUnitLoadout player] call vgm_c_fnc_equipment_filterLoadout
  */
 
 private _allowedItems = createHashMapFromArray [["", nil]];
@@ -40,12 +40,8 @@ private _fnc_checkWeapon = {
     } forEach _this;
 };
 
-private _fnc_checkItem = {
-
-};
-
 private _fnc_checkContainer = {
-    params ["_container", "_items"];
+    params [["_container", ""], ["_items", []]];
 
     if (!(_container in _allowedItems)) exitWith {
         _this resize 0;
