@@ -2,7 +2,7 @@
     File: fn_equipment_filterLoadout.sqf
     Author: Savage Game Design
     Date: 2023-11-17
-    Last Update: 2023-11-19
+    Last Update: 2023-11-20
     Public: Yes
 
     Description:
@@ -30,33 +30,44 @@ private _allowedItems = createHashMapFromArray [["", nil]];
 } forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
 
 
-private _fnc_checkWeapon = {
+private _fnc_filterWeapon = {
+    params ["_weaponData"];
     {
         private _className = _x param [0, ""];
         if (!(_className in _allowedItems)) then {
             private _replacement = ["", []] select (_x isEqualType []);
-            _this set [_forEachIndex, _replacement];
+            _weaponData set [_forEachIndex, _replacement];
         };
-    } forEach _this;
+    } forEach _weaponData;
 };
 
-private _fnc_checkContainer = {
+private _fnc_filterContainer = {
     params [["_container", ""], ["_items", []]];
 
     if (!(_container in _allowedItems)) exitWith {
+        // remove the container from parent array
         _this resize 0;
     };
 
     {
         if (count _x == 7) then {
-            _x call _fnc_checkWeapon;
+            [_x] call _fnc_filterWeapon;
             continue;
         };
+
+        // uniform/vest/backpack
+        if (_x isEqualTypeArray ["", true]) then {
+            _x params ["_itemClass", "_isBackpack"];
+            // `getUnitLoadout` does not return content of nested containers
+            // outright remove them for sake of simplicity
+            _items set [_forEachIndex, []];
+            continue;
+        };
+
         private _itemClass = _x select 0;
         if (!(_itemClass in _allowedItems)) then {
             _items set [_forEachIndex, []];
         };
-        // TODO is it possible to have container in container?
     } forEach _items;
 };
 
@@ -76,13 +87,13 @@ params ["_loadout"];
 // weapons
 {
     private _itemData = _loadout select _x;
-    _itemData call _fnc_checkWeapon;
+    [_itemData] call _fnc_filterWeapon;
 } forEach [IDX_PRIMARY, IDX_SECONDARY, IDX_HANDGUN, IDX_BINOCULAR];
 
 // containers
 {
     private _containerData = _loadout select _x;
-    _containerData call _fnc_checkContainer;
+    _containerData call _fnc_filterContainer;
 } forEach [IDX_UNIFORM, IDX_VEST, IDX_BACKPACK];
 
 // items
