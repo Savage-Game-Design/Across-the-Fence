@@ -84,6 +84,8 @@ private _fnc_filterContainer = {
 
 params ["_loadout"];
 
+_loadout = +_loadout;
+
 // weapons
 {
     private _itemData = _loadout select _x;

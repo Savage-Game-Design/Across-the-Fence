@@ -3,7 +3,7 @@
     File: fn_equipment_arsenalInit.sqf
     Author: Savage Game Design
     Date: 2023-11-19
-    Last Update: 2023-11-19
+    Last Update: 2023-11-20
     Public: No
 
     Description:
@@ -39,7 +39,7 @@
 
         _display spawn {
             private _loadout = getUnitLoadout player;
-            private _filteredLoadout = [+_loadout] call vgm_c_fnc_equipment_filterLoadout;
+            private _filteredLoadout = [_loadout] call vgm_c_fnc_equipment_filterLoadout;
             if (_filteredLoadout isNotEqualTo _loadout) then {
                 ["showMessage", [_this, localize "STR_A3_RscDisplayArsenal_message_unavailable"]] call BIS_fnc_arsenal;
                 player setUnitLoadout _filteredLoadout;
@@ -55,7 +55,7 @@
 
 [true, "arsenalClosed", {
     private _loadout = getUnitLoadout player;
-    private _filteredLoadout = [+_loadout] call vgm_c_fnc_equipment_filterLoadout;
+    private _filteredLoadout = [_loadout] call vgm_c_fnc_equipment_filterLoadout;
     if (_filteredLoadout isNotEqualTo _loadout) then {
         localize "STR_A3_RscDisplayArsenal_message_unavailable" spawn BIS_fnc_guiMessage;
         player setUnitLoadout _filteredLoadout;
