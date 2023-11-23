@@ -30,7 +30,7 @@ _this spawn {
     private _safeStartPosASL = _defaultStartPosASL findEmptyPosition [1, 20, "CAManBase"];
     private _startPosASL = [AGLtoASL _safeStartPosASL, _defaultStartPosASL] select (_safeStartPosASL isEqualTo []);
 
-    player setPosASL _startPosASL;
+    player setVehiclePosition [ASLToATL _startPosASL, [], 5, "NONE"];
 
     // Adds tracker system event handlers
     // TODO: Remove when switching to main AI system
