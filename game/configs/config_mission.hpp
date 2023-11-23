@@ -3,4 +3,5 @@
 
 #include "cfg_equipment.hpp"
 #include "cfg_levels.hpp"
+#include "cfg_missions.hpp"
 #include "cfg_skills.hpp"

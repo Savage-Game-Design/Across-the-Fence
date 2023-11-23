@@ -2,7 +2,7 @@
     File: fn_missions_startMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-09-20
+    Last Update: 2023-11-23
     Public: Yes
 
     Description:
@@ -35,6 +35,7 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 [_mission, "IN PROGRESS"] call vgm_s_fnc_missions_updateStatus;
 [_mission, "mission started", true] call vgm_s_fnc_missions_preventJoining;
 
+_mission call compile getText (vgm_missions_config >> (_missionPublic get "type") >> "deploy" >> "onStartServer");
 [] remoteExecCall ["vgm_c_fnc_missions_startDeploy", values (_mission get "machineIds")];
 
 [_mission] call vgm_s_fnc_missions_spawnMission;
@@ -43,6 +44,7 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 // - Setup extract mechanics
 // - Mark target box as occupied? Or is this a mission selection thing?
 
+_mission call compile getText (vgm_missions_config >> (_missionPublic get "type") >> "deploy" >> "onFinishServer");
 [] remoteExecCall ["vgm_c_fnc_missions_finishDeploy", values (_mission get "machineIds")];
 
 [
