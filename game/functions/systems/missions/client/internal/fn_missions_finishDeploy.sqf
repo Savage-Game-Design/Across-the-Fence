@@ -41,8 +41,6 @@ _this spawn {
 
     [] call vn_ms_fnc_tracker_tracksLoop;
 
-    _currentMission call compile getText (vgm_missions_config >> (_currentMission get "type") >> "deploy" >> "onFinishClient");
-
     ["vgm_mission_deploy_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
     // - Unfades the screen

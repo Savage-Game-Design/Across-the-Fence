@@ -8,5 +8,3 @@
     Description:
         Global preInit for the missions system.
  */
-
-vgm_missions_config = missionConfigFile >> "vgm_missions";
