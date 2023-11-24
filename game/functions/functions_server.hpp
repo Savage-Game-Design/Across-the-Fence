@@ -88,6 +88,13 @@ class vgm_s
         class missions_gameplay_ambient_departHelicopter {};
     };
 
+    class missions_gameplay_extraction
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\extraction);
+
+        class missions_gameplay_extraction_startExtract {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);
