@@ -8,15 +8,15 @@ class EditorData
 	toggles=1545;
 	class ItemIDProvider
 	{
-		nextID=1350;
+		nextID=1352;
 	};
 	class MarkerIDProvider
 	{
-		nextID=48;
+		nextID=49;
 	};
 	class LayerIndexProvider
 	{
-		nextID=706;
+		nextID=710;
 	};
 	class Camera
 	{
@@ -154,14 +154,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -205,14 +205,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -262,7 +262,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			dataType="Logic";
@@ -2503,6 +2503,15 @@ class Mission
 				};
 				nAttributes=1;
 			};
+		};
+		class Item15
+		{
+			dataType="Marker";
+			position[]={16579.914,14.98,6922.8911};
+			name="vgm_mission_heli_despawn";
+			text="Heli despawn";
+			type="Empty";
+			id=1351;
 		};
 	};
 };
