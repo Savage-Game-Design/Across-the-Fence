@@ -25,5 +25,7 @@ _safeSpawnTransform = [_newUnit, 300, 500, 100] call vgm_s_fnc_respawn_findSafeS
 _newUnit setPosASL _safeSpawnTransform#0;
 _newUnit setDir _safeSpawnTransform#1;
 
+_newUnit setUnitLoadout (_newUnit getVariable ["vgm_respawn_loadout", getUnitLoadout typeOf _newUnit]);
+
 sleep 3;
 [1, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
