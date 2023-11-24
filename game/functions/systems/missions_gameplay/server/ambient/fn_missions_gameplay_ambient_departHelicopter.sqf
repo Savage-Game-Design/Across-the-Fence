@@ -24,17 +24,9 @@ params ["_position", ["_class", "vn_b_air_uh1d_02_06"]];
 private _inAirPos = +_position;
 _inAirPos set [2, 5];
 
-private _helicopter = createVehicle [_class, [0,0,0], [], 0, "FLY"];
+private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
 _helicopter setPosATL _inAirPos;
 _helicopter setDir random 360;
-
-private _group = createVehicleCrew _helicopter;
-_helicopter setCaptive true;
-{_x triggerDynamicSimulation false} forEach units _group;
-_group deleteGroupWhenEmpty true;
-
-_helicopter allowDamage false;
-{_x allowDamage false} forEach units _group;
 
 private _flyToPos = markerPos "vgm_mission_heli_despawn";
 
