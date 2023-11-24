@@ -19,7 +19,7 @@
         [getPos player] call vgm_s_fnc_missions_gameplay_ambient_departHelicopter
  */
 
-params ["_position", ["_class", "vn_b_air_uh1d_02_06"]];
+params ["_position", ["_class", "vn_b_air_uh1d_02_07"]];
 
 private _inAirPos = +_position;
 _inAirPos set [2, 5];

@@ -22,7 +22,7 @@
 params [
     "_missionId",
     "_lzPosition",
-    ["_class", "vn_b_air_uh1d_02_06"],
+    ["_class", "vn_b_air_uh1d_02_07"],
     ["_distance", 3000],
     ["_originPos", markerPos "vgm_shared_hub"]
 ];
