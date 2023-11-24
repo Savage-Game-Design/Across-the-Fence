@@ -26,6 +26,7 @@ _newUnit setPosASL _safeSpawnTransform#0;
 _newUnit setDir _safeSpawnTransform#1;
 
 _newUnit setUnitLoadout (_newUnit getVariable ["vgm_respawn_loadout", getUnitLoadout typeOf _newUnit]);
+deleteVehicle _oldUnit;
 
 sleep 3;
 [1, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
