@@ -18,6 +18,9 @@
         ["vn_b_air_uh1d_02_06"] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter
  */
 
+#define PILOT_TURRET [-1]
+#define COPILOT_TURRET [0]
+
 params ["_class"];
 
 private _helicopter = createVehicle [_class, [0,0,0], [], 0, "FLY"];
@@ -30,4 +33,8 @@ _group deleteGroupWhenEmpty true;
 _helicopter allowDamage false;
 {_x allowDamage false} forEach units _group;
 
-_helicopter
+// prevent players from taking the seats from AI
+[_helicopter, true] remoteExec ["lockDriver", _helicopter];
+[_helicopter, [COPILOT_TURRET, true]] remoteExec ["lockTurret", _helicopter];
+
+_helicopter // return
