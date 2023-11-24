@@ -56,8 +56,8 @@ _landWp setWaypointType "SCRIPTED";
 _landWp setWaypointScript "vn\missions_f_vietnam\functions\waypoint\fn_waypoint_land.sqf";
 _landWp setWaypointStatements ["true", toString {group this setVariable ["vgm_missions_extractionLanded", true, true]}];
 
-private _script = [_mission, _helicopter] spawn {
-    params ["_mission", "_helicopter"];
+private _script = [_missionId, _mission, _helicopter] spawn {
+    params ["_missionId", "_mission", "_helicopter"];
     private _playerGroup = _mission get "public" get "group";
     waitUntil {
         private _alivePlayers = units _playerGroup select {alive _x && lifeState _x != "INCAPACITATED"};
@@ -66,7 +66,7 @@ private _script = [_mission, _helicopter] spawn {
 
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 20;
-    [_mission get "id"] call vgm_s_fnc_missions_endMission;
+    [_missionId] call vgm_s_fnc_missions_endMission;
     sleep 10;
     {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
     deleteVehicle _helicopter;
