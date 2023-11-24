@@ -74,6 +74,13 @@ class vgm_s
         class missions_updateStatus {};
     };
 
+    class missions_gameplay_ambient
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\ambient);
+
+        class missions_gameplay_ambient_departHelicopter {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);
