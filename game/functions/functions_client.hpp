@@ -117,6 +117,10 @@ class vgm_c
 
         class coefficient_create {};
         class coefficient_get {};
+        class coefficient_postInit
+        {
+            postInit = 1;
+        };
         class coefficient_preInit
         {
             preInit = 1;
