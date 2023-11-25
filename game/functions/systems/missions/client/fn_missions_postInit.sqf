@@ -2,20 +2,11 @@
     File: fn_missions_postInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-07-03
-    Public: Yes
+    Last Update: 2023-11-23
+    Public: No
 
     Description:
         Initialises the mission system on the client, setting up necessary state.
-
-    Parameter(s):
-        None
-
-    Returns:
-        Nothing
-
-    Example(s):
-        [] call vgm_c_fnc_missions_postInit
  */
 
 if (!hasInterface) exitWith {};

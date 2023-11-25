@@ -8,15 +8,15 @@ class EditorData
 	toggles=1545;
 	class ItemIDProvider
 	{
-		nextID=1350;
+		nextID=1352;
 	};
 	class MarkerIDProvider
 	{
-		nextID=48;
+		nextID=49;
 	};
 	class LayerIndexProvider
 	{
-		nextID=706;
+		nextID=713;
 	};
 	class Camera
 	{
@@ -262,7 +262,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			dataType="Logic";
@@ -2325,17 +2325,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={8363.6709,234.85815,14375.586};
+				position[]={8363.6709,234.85808,14375.586};
 			};
 			side="Empty";
 			flags=5;
 			class Attributes
 			{
-				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];";
+				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];" \n "this addAction [  " \n "    ""Request extraction"",  " \n "    {  " \n "        params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; " \n "        [call vgm_c_fnc_missions_getCurrentMission get ""id"", getPos player] remoteExecCall [""vgm_s_fnc_missions_gameplay_extraction_startExtract"", 2]; " \n "    },  " \n "    [],  " \n "    115,  " \n "    false,  " \n "    true,  " \n "    """",  " \n "    ""true"",  " \n "    10  " \n "];";
 			};
 			id=1333;
 			type="vn_flag_sog";
-			atlOffset=7.6293945e-005;
 		};
 		class Item8
 		{
@@ -2417,7 +2416,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];";
+				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];" \n "this addAction [  " \n "    ""Request extraction"",  " \n "    {  " \n "        params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; " \n "        [call vgm_c_fnc_missions_getCurrentMission get ""id"", getPos player] remoteExecCall [""vgm_s_fnc_missions_gameplay_extraction_startExtract"", 2]; " \n "    },  " \n "    [],  " \n "    115,  " \n "    false,  " \n "    true,  " \n "    """",  " \n "    ""true"",  " \n "    10  " \n "];";
 			};
 			id=1344;
 			type="vn_flag_sog";
@@ -2503,6 +2502,15 @@ class Mission
 				};
 				nAttributes=1;
 			};
+		};
+		class Item15
+		{
+			dataType="Marker";
+			position[]={16579.914,14.98,6922.8911};
+			name="vgm_mission_heli_despawn";
+			text="Heli despawn";
+			type="Empty";
+			id=1351;
 		};
 	};
 };
