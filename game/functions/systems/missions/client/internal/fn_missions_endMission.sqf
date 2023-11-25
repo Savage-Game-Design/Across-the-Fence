@@ -30,6 +30,7 @@ params ["_levelingDataCopy", "_milestones"];
 player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandler"];
 ["ItemRemove", ["vn_tracksLoop"]] call BIS_fnc_loop;
 
+moveOut player;
 player setVehiclePosition [([] call vgm_g_fnc_missions_getHubSpawnPos), [], 0, "NONE"];
 [] call vgm_c_fnc_sharedHub_areaLimiterEnable;
 
