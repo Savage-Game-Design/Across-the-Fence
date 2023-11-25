@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-11-19
+    Last Update: 2023-11-25
     Public: No
 
     Description:
@@ -25,3 +25,8 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
 } forEach _arsenals;
 
 [] call vgm_c_fnc_equipment_arsenalInit;
+
+// give player basic gear from config
+private _cfgEquipment = missionConfigFile >> "vgm_equipment";
+player addUniform getText (_cfgEquipment >> "startingUniform");
+{player linkItem _x} forEach getArray (_cfgEquipment >> "startingItems");
