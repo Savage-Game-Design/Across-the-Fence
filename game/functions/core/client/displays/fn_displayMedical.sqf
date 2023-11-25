@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2023-09-03
+    Last Update: 2023-11-25
     Public: No
 
     Description:
@@ -43,6 +43,9 @@ switch _mode do {
 
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
         _ctrlTreatment ctrlShow false;
+
+        private _ctrlTitlePatient = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_PATIENT_TITLE;
+        _ctrlTitlePatient ctrlSetText name MENU_TARGET;
 
         ["refreshUI", _display] call SELF;
         _display spawn {
