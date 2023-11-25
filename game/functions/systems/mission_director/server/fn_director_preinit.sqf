@@ -18,15 +18,15 @@
         [] call vgm_s_fnc_director_preinit;
  */
 
-vgm_s_director_unsuppressed_listen_range = 250;
-vgm_s_director_suppressed_listen_range = 100;
+vgm_s_director_unsuppressed_listen_range = 150;
+vgm_s_director_suppressed_listen_range = 75;
 vgm_s_director_explosion_listen_range = 350;
 vgm_s_director_investigate_track_chance = 0.5;
 vgm_s_director_max_alertness = 30;
 vgm_s_director_min_time_between_trackers_secs = 90;
 vgm_s_director_max_time_between_trackers_secs = 300;
 vgm_s_director_patrol_max_groups = 10;
-vgm_s_director_dynamic_max_groups = 6;
+vgm_s_director_dynamic_max_groups = 8;
 
 // TODO - Replace these with Mike Force's squad generator
 vgm_s_director_patrol_classes = [
