@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-09-20
+    Last Update: 2023-10-02
     Public: Yes
 
     Description:
@@ -42,8 +42,6 @@ private _mission = createHashMapFromArray [
         ["maxPlayers", 6],
         // Each player on the mission should have a netmap in here for storing player data
         ["players", [] call para_s_fnc_netmap_createNetmap],
-        // Maps player ID to their client ID for easy remoteExec'ing
-        ["machineIds", createHashMap],
         // Whether or not players can join the mission. Players can join if no values are "false"
         ["preventJoining", [] call para_s_fnc_netmap_createNetmap],
         // TODO - Use an actual position for the mission
@@ -81,7 +79,6 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
 ] call para_g_fnc_event_triggerGlobal;
 
 if !(_creatorId isEqualTo "") then {
-    // Use this instead of fn_missions_joinMission to prevent two updates on the client.
     [_creatorId, _mission] call vgm_s_fnc_missions_attachPlayerToMission;
 };
 

@@ -35,12 +35,27 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class mission_director
+    {
+        VGM_SERVER_PATH(\systems\mission_director\server);
+        class director_handlePlayerExplosion {};
+        class director_handlePlayerShots {};
+        class director_preInit {
+            preInit = 1;
+        };
+        class director_processMission {};
+        class director_spawnInitialPatrols {};
+        class director_startMission {};
+        class director_stopMission {};
+    };
+
     class missions
     {
         VGM_SERVER_PATH(\systems\missions\server);
 
         class missions_createMission {};
         class missions_endMission {};
+        class missions_getAssignedMission {};
         class missions_joinMission {};
         class missions_leaveMission {};
         class missions_preInit {
@@ -67,10 +82,8 @@ class vgm_s
 
         class missions_attachPlayerToMission {};
         class missions_calculateMilestones {};
-        class missions_despawnMission {};
         class missions_preventJoining {};
         class missions_removePlayerFromMission {};
-        class missions_spawnMission {};
         class missions_updateStatus {};
     };
 

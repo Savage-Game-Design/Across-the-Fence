@@ -20,6 +20,9 @@ class vgm_g
         {
             preInit = 1;
         };
+        class startScheduler {
+            postInit = 1;
+        };
     };
 
     class debug
@@ -40,6 +43,13 @@ class vgm_g
         };
         class logWarning {
             headerType = -1;
+        };
+    };
+    class ai
+    {
+        VGM_GLOBAL_PATH(\systems\ai\global);
+        class ai_init {
+            postInit = 1;
         };
     };
 
@@ -157,6 +167,14 @@ class vgm_c
         {
             postInit = 1;
         };
+    };
+
+    class mission_director
+    {
+        VGM_CLIENT_PATH(\systems\mission_director\client);
+        class director_sendRecentShotsToServer {};
+        class director_startClientsideMonitoring {};
+        class director_stopClientsideMonitoring {};
     };
 
     class missions

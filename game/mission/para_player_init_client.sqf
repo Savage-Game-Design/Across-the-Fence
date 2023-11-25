@@ -37,13 +37,6 @@ player createDiaryRecord ["Diary", [localize "STR_vn_mf_other_keys", localize "S
 // Instantiate the main scheduler
 [] call para_g_fnc_scheduler_subsystem_init;
 
-call para_g_fnc_event_subsystem_init;
-
-// Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
-if (!isServer) then {
-    call para_g_fnc_ai_create_behaviour_execution_loop;
-};
-
 // Set up automatic view distance scaling for performance
 [] call para_c_fnc_perf_enable_dynamic_view_distance;
 

@@ -2,17 +2,17 @@
 	File: fnai_behaviour_init.sqf
 	Author:  Savage Game Design
 	Public: No
-	
+
 	Description:
 	   Initialises group control script for Mike Force. Sets the group's initial states.
 	   Can be safely called multiple times on the same group without issue.
-	
+
 	Parameter(s):
 	   _group - Group to run the behaviour on
-	
+
 	Returns:
 		True if the group initialised successfully
-	
+
 	Example(s):
 		[_group] call para_g_fnc_ai_behaviour_init;
  */
@@ -51,9 +51,10 @@ _group setVariable ["behaviourDefendRestDuration", 60];
 
 _group setVariable ["behaviourHoldRadius", 50];
 
-_group setVariable ["behaviourInvestigateRange", 300];
+// Reduced down for VGM, to allow mission director more control.
+_group setVariable ["behaviourInvestigateRange", 100];
 
-_group setVariable ["behaviourRetainContactInfoRange", 600];
+_group setVariable ["behaviourRetainContactInfoRange", 300];
 _group setVariable ["behaviourRetainContactInfoDuration", 600];
 
 _group setVariable ["behaviourEnemyTrackingRange", 200];
