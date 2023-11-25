@@ -239,13 +239,13 @@
             <Original>6th Sense</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC">
-            <Original>Briefly add a 3D marker to all enemies in within 150m, and add an approximate marker of thier locations to your map.</Original>
+            <Original>Briefly add a 3D marker to all enemies in within 150m, and add an approximate marker of their locations to your map.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH">
             <Original>Thick Brush</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
-            <Original>For 60 seconds, AI are much less likely to see you and hear you.</Original>
+            <Original>For 60 seconds, enemies are much less likely to see you and hear you.</Original>
         </Key>
         <!-- Fire Support -->
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
