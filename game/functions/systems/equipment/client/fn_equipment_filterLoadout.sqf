@@ -1,0 +1,116 @@
+/*
+    File: fn_equipment_filterLoadout.sqf
+    Author: Savage Game Design
+    Date: 2023-11-17
+    Last Update: 2023-11-20
+    Public: Yes
+
+    Description:
+        Filters given loadout depending on items available to player.
+
+    Parameter(s):
+        _loadout - Loadout array <https://community.bistudio.com/wiki/Unit_Loadout_Array> [ARRAY]
+
+    Returns:
+        Loadout array [ARRAY]
+
+    Example(s):
+        [getUnitLoadout player] call vgm_c_fnc_equipment_filterLoadout
+ */
+
+private _allowedItems = createHashMapFromArray [["", nil]];
+{
+    if (!call compile (getText (_x >> "condition"))) then {continue};
+
+    private _equipmentCfg = _x;
+    {
+        private _items = getArray (_equipmentCfg >> _x);
+        _allowedItems insert [true, _items, []];
+    } forEach ["weapons", "magazines", "backpacks", "items"];
+} forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
+
+
+private _fnc_filterWeapon = {
+    params ["_weaponData"];
+    {
+        private _className = _x param [0, ""];
+        if (!(_className in _allowedItems)) then {
+            private _replacement = ["", []] select (_x isEqualType []);
+            _weaponData set [_forEachIndex, _replacement];
+        };
+    } forEach _weaponData;
+};
+
+private _fnc_filterContainer = {
+    params [["_container", ""], ["_items", []]];
+
+    if (!(_container in _allowedItems)) exitWith {
+        // remove the container from parent array
+        _this resize 0;
+    };
+
+    {
+        if (count _x == 7) then {
+            [_x] call _fnc_filterWeapon;
+            continue;
+        };
+
+        // uniform/vest/backpack
+        if (_x isEqualTypeArray ["", true]) then {
+            _x params ["_itemClass", "_isBackpack"];
+            // `getUnitLoadout` does not return content of nested containers
+            // outright remove them for sake of simplicity
+            _items set [_forEachIndex, []];
+            continue;
+        };
+
+        private _itemClass = _x select 0;
+        if (!(_itemClass in _allowedItems)) then {
+            _items set [_forEachIndex, []];
+        };
+    } forEach _items;
+};
+
+#define IDX_PRIMARY 0
+#define IDX_SECONDARY 1
+#define IDX_HANDGUN 2
+#define IDX_UNIFORM 3
+#define IDX_VEST 4
+#define IDX_BACKPACK 5
+#define IDX_HEADWEAR 6
+#define IDX_FACEWEAR 7
+#define IDX_BINOCULAR 8
+#define IDX_ASSIGNED_ITEMS 9
+
+params ["_loadout"];
+
+_loadout = +_loadout;
+
+// weapons
+{
+    private _itemData = _loadout select _x;
+    [_itemData] call _fnc_filterWeapon;
+} forEach [IDX_PRIMARY, IDX_SECONDARY, IDX_HANDGUN, IDX_BINOCULAR];
+
+// containers
+{
+    private _containerData = _loadout select _x;
+    _containerData call _fnc_filterContainer;
+} forEach [IDX_UNIFORM, IDX_VEST, IDX_BACKPACK];
+
+// items
+{
+    private _itemClass = _loadout select _x;
+    if (!(_itemClass in _allowedItems)) then {
+        _loadout set [_x, ""];
+    };
+} forEach [IDX_HEADWEAR, IDX_FACEWEAR];
+
+private _assignedItems = _loadout select IDX_ASSIGNED_ITEMS;
+{
+    if (!(_x in _allowedItems)) then {
+        _assignedItems set [_forEachIndex, ""];
+    };
+} forEach _assignedItems;
+
+_loadout

@@ -80,6 +80,10 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\missions\global);
 
         class missions_getHubSpawnPos {};
+        class missions_preInit
+        {
+            preInit = 1;
+        };
     };
 
 
@@ -127,6 +131,10 @@ class vgm_c
 
         class coefficient_create {};
         class coefficient_get {};
+        class coefficient_postInit
+        {
+            postInit = 1;
+        };
         class coefficient_preInit
         {
             preInit = 1;
@@ -152,6 +160,8 @@ class vgm_c
     {
         VGM_GLOBAL_PATH(\systems\equipment\client);
 
+        class equipment_arsenalInit {};
+        class equipment_filterLoadout {};
         class equipment_openArsenal {};
         class equipment_postInit
         {
@@ -233,6 +243,10 @@ class vgm_c
 
         class sharedHub_areaLimiterDisable {};
         class sharedHub_areaLimiterEnable {};
+        class sharedHub_postInit
+        {
+            postInit = 1;
+        };
         class sharedHub_teleportPlayerToHub {};
     };
 
@@ -254,6 +268,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client);
 
+        class medical_addAction {};
         class medical_addDamageModifier {};
         class medical_addWound {};
         class medical_fullHeal {};
@@ -297,6 +312,15 @@ class vgm_c
 
         class medical_injuryEffects_init {};
         class medical_injuryEffectsUpdate {};
+    };
+
+    class respawn
+    {
+        VGM_CLIENT_PATH(\systems\respawn\client);
+        class respawn_preInit
+        {
+            preInit = 1;
+        };
     };
 
     class skills

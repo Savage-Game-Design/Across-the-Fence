@@ -3,7 +3,7 @@
     File: fn_medical_itemApplyMedikit.sqf
     Author: Savage Game Design
     Date: 2023-06-30
-    Last Update: 2023-08-20
+    Last Update: 2023-11-04
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ format ["Applying Medikit: %1 | %2 | %3", _healer, _patient, _bodyPart] call vgm
 
 [_healer, _patient, _bodyPart, createHashMapFromArray [
     ["type", HEAL_MEDIKIT],
-    ["time", 5],
+    ["time", 7],
     ["displayName", localize "STR_VGM_MEDICAL_UI_APPLY_MEDIKIT"]
 ]] call vgm_c_fnc_medical_itemApply;
 

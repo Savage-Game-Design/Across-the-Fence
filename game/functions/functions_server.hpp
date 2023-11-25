@@ -87,6 +87,27 @@ class vgm_s
         class missions_updateStatus {};
     };
 
+    class missions_gameplay
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server);
+
+        class missions_gameplay_createCrewedHelicopter {};
+    };
+
+    class missions_gameplay_ambient
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\ambient);
+
+        class missions_gameplay_ambient_departHelicopter {};
+    };
+
+    class missions_gameplay_extraction
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\extraction);
+
+        class missions_gameplay_extraction_startExtract {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);

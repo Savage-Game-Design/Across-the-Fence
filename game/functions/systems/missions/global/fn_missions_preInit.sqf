@@ -1,12 +1,10 @@
 /*
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
-    Date: 2023-02-25
+    Date: 2023-1-23
     Last Update: 2023-11-23
     Public: No
 
     Description:
-        Prepares the mission system on the client for initialisation
+        Global preInit for the missions system.
  */
-
-if (!hasInterface) exitWith {};

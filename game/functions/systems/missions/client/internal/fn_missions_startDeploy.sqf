@@ -2,7 +2,7 @@
     File: fn_missions_startDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-06-30
+    Last Update: 2023-11-23
     Public: No
 
     Description:
@@ -20,4 +20,7 @@
 
 ["Beginning mission deploy"] call vgm_g_fnc_logInfo;
 
+[] call vgm_c_fnc_sharedHub_areaLimiterDisable;
+
 // - Fades the player screen to black
+vgm_c_missions_fadeEffectScript = [0, "BLACK", 2, 1] spawn BIS_fnc_fadeEffect;

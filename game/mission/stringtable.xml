@@ -233,7 +233,7 @@
             <Original>Follow the Tracers</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
-            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when thier suppression return to zero naturally.</Original>
+            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when their suppression return to zero naturally.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
             <Original>6th Sense</Original>

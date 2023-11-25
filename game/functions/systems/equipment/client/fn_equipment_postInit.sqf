@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-09-19
+    Last Update: 2023-11-19
     Public: No
 
     Description:
@@ -20,6 +20,8 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
 {
     _x addAction [
         "Open Arsenal",
-        {call vgm_c_equipment_openArsenal}
+        {call vgm_c_fnc_equipment_openArsenal}
     ]
 } forEach _arsenals;
+
+[] call vgm_c_fnc_equipment_arsenalInit;
