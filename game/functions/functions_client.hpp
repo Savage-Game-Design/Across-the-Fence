@@ -150,6 +150,8 @@ class vgm_c
     {
         VGM_GLOBAL_PATH(\systems\equipment\client);
 
+        class equipment_arsenalInit {};
+        class equipment_filterLoadout {};
         class equipment_openArsenal {};
         class equipment_postInit
         {
