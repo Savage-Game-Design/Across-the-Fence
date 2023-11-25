@@ -1,4 +1,7 @@
 class vgm_equipment {
+    startingUniform = "vn_b_uniform_sog_02_05";
+    startingItems[] = {"vn_b_item_map", "vn_b_item_compass", "vn_b_item_watch", "vn_b_item_radio_urc10"};
+
     class default {
         condition = "true";
 
