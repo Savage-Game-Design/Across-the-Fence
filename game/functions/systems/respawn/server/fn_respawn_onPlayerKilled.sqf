@@ -21,5 +21,7 @@
 
 params ["_oldUnit", "_killer", "_respawnType", "_respawnDelay"];
 
+_oldUnit setVariable ["vgm_respawn_loadout", getUnitLoadout _oldUnit];
+
 sleep 1;
 [0, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
