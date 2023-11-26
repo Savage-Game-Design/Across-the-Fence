@@ -276,6 +276,7 @@ class vgm_c
         class medical_getArmorItem {};
         class medical_getWound {};
         class medical_handleDamage {};
+        class medical_itemAnimation {};
         class medical_itemApply {};
         class medical_itemApplyFAK {};
         class medical_itemApplyMedikit {};

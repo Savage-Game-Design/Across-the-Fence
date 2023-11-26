@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2023-08-27
+    Last Update: 2023-11-26
     Public: No
 
     Description:
@@ -31,6 +31,8 @@ format ["Applying item: %1 | %2 | %3 | %4", _healer, _patient, _bodyPart, _itemD
 
 private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_coefficient_get);
 
+[_healer, _patient, _time] call vgm_c_fnc_medical_itemAnimation;
+
 [format [_itemData get "displayName", name _patient], _time, {
     params ["_args", "_startedAt", "_duration"];
     _args params ["_healer", "_patient", "", "_itemData"];
@@ -54,6 +56,15 @@ private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_c
     ["vgm_medical_heal", [_healer, _patient, _itemData get "type", _bodyPart], [_patient]] call para_g_fnc_event_triggerTargets;
 
     [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
+
+    // do not force animation speed anymore
+    [_healer, "animSpeed", "medical_item", false] call vgm_c_fnc_coefficient_override;
+    _healer playMoveNow (_healer getVariable "vgm_c_medical_itemDoneAnim");
 }, {
-    [_this#0#1] spawn vgm_c_fnc_medical_openMedicalMenu;
+    (_this#0) params ["_healer", "_patient"];
+    [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
+
+    // do not force animation speed anymore
+    [_healer, "animSpeed", "medical_item", false] call vgm_c_fnc_coefficient_override;
+    _healer switchMove (_healer getVariable "vgm_c_medical_itemDoneAnim");
 }, [_healer, _patient, _bodyPart, _itemData]] call vgm_c_fnc_progressBar;
