@@ -141,6 +141,7 @@ class vgm_c
         };
         class coefficient_remove {};
         class coefficient_set {};
+        class coefficient_unitInit {};
     };
 
     class displays
