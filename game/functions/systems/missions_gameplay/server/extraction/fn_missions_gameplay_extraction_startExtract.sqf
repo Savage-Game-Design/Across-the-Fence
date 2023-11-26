@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2023-11-24
+    Last Update: 2023-11-26
     Public: No
 
     Description:
@@ -49,12 +49,15 @@ if (_safeLzPosition isEqualTo []) then {
 };
 
 // having WP directly above LZ makes LAND more robust
-_group addWaypoint [_safeLzPosition, 100];
+_group addWaypoint [_safeLzPosition, 0];
 
 private _landWp = _group addWaypoint [_safeLzPosition, 0];
 _landWp setWaypointType "SCRIPTED";
 _landWp setWaypointScript "vn\missions_f_vietnam\functions\waypoint\fn_waypoint_land.sqf";
-_landWp setWaypointStatements ["true", toString {group this setVariable ["vgm_missions_extractionLanded", true, true]}];
+_landWp setWaypointStatements ["true", toString {
+    group this setVariable ["vgm_missions_extractionLanded", true, true];
+    vehicle this flyInHeight 0;
+}];
 
 private _script = [_missionId, _mission, _helicopter] spawn {
     params ["_missionId", "_mission", "_helicopter"];
@@ -63,6 +66,8 @@ private _script = [_missionId, _mission, _helicopter] spawn {
         private _alivePlayers = units _playerGroup select {alive _x && lifeState _x != "INCAPACITATED"};
         _alivePlayers findIf {!(_x in _helicopter)} == -1 // all alive players are inside the heli
     };
+
+    _helicopter flyInHeight [100, true];
 
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 20;
