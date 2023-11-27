@@ -23,6 +23,7 @@ class vn_artillery_settings {
     class aircraft {
         class he {
             displayname = $STR_VN_ARTILLERY_AIRCRAFT_HE_HE_NAME;
+
             class rambler {
                 displayname = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_NAME;
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_433tfs_ca.paa";
@@ -58,6 +59,7 @@ class vn_artillery_settings {
 
         class cluster {
             displayname = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_CLUSTER_NAME;
+
             class rambler {
                 displayname = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_NAME;
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_433tfs_ca.paa";
