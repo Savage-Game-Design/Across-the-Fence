@@ -347,8 +347,7 @@ class vgm_skillTrees {
                     codeApply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', true]";
                     codeUnapply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', false]";
 
-                    // cost = 2;
-                    cost = 0; // air support not implemented yet
+                    cost = 2;
                 };
             };
 

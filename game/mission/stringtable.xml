@@ -301,7 +301,7 @@
             <Original>You have a 30% chance to not consume a utility item when using one.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT">
-            <Original>(WIP) Heavy Support</Original>
+            <Original>Heavy Support</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE">
             <Original>Quick Bandage</Original>
