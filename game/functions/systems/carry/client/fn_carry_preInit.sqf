@@ -40,7 +40,6 @@ if (!hasInterface) exitWith {};
 
 ["vgm_carry_disable", {
     (_this#0) params ["_target"];
-    private _unit = _target getVariable ["vgm_carry_carriedBy", objNull];
 
-    _unit removeAction (_unit getVariable ["vgm_carry_actionCarry", -1]);
+    _target removeAction (_target getVariable ["vgm_carry_actionCarry", -1]);
 }] call para_g_fnc_event_subscribe;
