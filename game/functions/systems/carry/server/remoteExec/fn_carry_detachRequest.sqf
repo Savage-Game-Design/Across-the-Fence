@@ -43,4 +43,4 @@ private _id = format ["vgm_carry_detach$%1", netId _unit];
 
     // inform the caller about detach
     [_unit, _target] remoteExec ["vgm_c_fnc_carry_detachResponse", _unit];
-}, [0, 3.25] select _instant] call BIS_fnc_runLater;
+}, [3.25, 0] select _instant] call BIS_fnc_runLater;
