@@ -37,6 +37,10 @@ private _id = format ["vgm_carry_attach$%1", netId _unit];
 
     format ["Delayed attach: %1 | %2", _unit, _target] call vgm_g_fnc_logDebug;
 
+    if (!alive _unit || (lifeState _unit == "INCAPACITATED")) exitWith {
+        format ["Carrier is downed, aborting: %1 | %2", _unit, _target] call vgm_g_fnc_logWarning;
+    };
+
     _target attachTo [_unit, [0.2, -0.07, -1.1], "spine3"];
     _target setDir 0;
 
