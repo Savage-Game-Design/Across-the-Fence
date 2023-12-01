@@ -158,7 +158,7 @@ class vgm_c
 
     class carry
     {
-        VGM_GLOBAL_PATH(\systems\carry\client);
+        VGM_CLIENT_PATH(\systems\carry\client);
 
         class carry_canCarry {};
         class carry_doCarry {};
@@ -168,9 +168,17 @@ class vgm_c
         };
     };
 
+    class carry_remoteExec
+    {
+        VGM_CLIENT_PATH(\systems\carry\client\remoteExec);
+
+        class carry_attachResponse {};
+        class carry_detachResponse {};
+    };
+
     class equipment
     {
-        VGM_GLOBAL_PATH(\systems\equipment\client);
+        VGM_CLIENT_PATH(\systems\equipment\client);
 
         class equipment_arsenalInit {};
         class equipment_filterLoadout {};

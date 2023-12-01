@@ -35,6 +35,24 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class carry
+    {
+        VGM_SERVER_PATH(\systems\carry\server);
+
+        class carry_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class carry_remoteExec
+    {
+        VGM_SERVER_PATH(\systems\carry\server\remoteExec);
+
+        class carry_attachRequest {};
+        class carry_detachRequest {};
+    };
+
     class mission_director
     {
         VGM_SERVER_PATH(\systems\mission_director\server);

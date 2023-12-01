@@ -2,30 +2,19 @@
     File: fn_carry_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2023-11-03
+    Last Update: 2023-12-01
     Public: No
 
     Description:
-        No description added yet.
-
-    Parameter(s):
-        N/A
-
-    Returns:
-        Something [BOOL]
-
-    Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        Client preInit for carry component.
  */
+
+if (!hasInterface) exitWith {};
 
 ["vgm_medical_unconscious", {
     (_this#0) params ["_unit", "_state"];
 
-    if (_state) then {
-        ["vgm_carry_enable", _unit] call para_g_fnc_event_triggerGlobal;
-    } else {
-        ["vgm_carry_disable", _unit] call para_g_fnc_event_triggerGlobal;
-    };
+    [["vgm_carry_disable", "vgm_carry_enable"] select _state, _unit] call para_g_fnc_event_triggerGlobal;
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_carry_enable", {
@@ -45,11 +34,13 @@
         "[_this, _originalTarget] call vgm_c_fnc_carry_canCarry",
         3
     ];
+    _unit setVariable ["vgm_carry_actionCarry", _action];
 
-}] call para_g_fnc_event_subscribeLocal;
+}] call para_g_fnc_event_subscribe;
 
 ["vgm_carry_disable", {
-    (_this#0) params ["_unit"];
+    (_this#0) params ["_target"];
+    private _unit = _target getVariable ["vgm_carry_carriedBy", objNull];
 
-
-}] call para_g_fnc_event_subscribeLocal;
+    _unit removeAction (_unit getVariable ["vgm_carry_actionCarry", -1]);
+}] call para_g_fnc_event_subscribe;
