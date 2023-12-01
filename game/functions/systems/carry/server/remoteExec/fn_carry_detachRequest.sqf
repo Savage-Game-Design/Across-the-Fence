@@ -22,6 +22,10 @@ params ["_unit", "_target", ["_instant", false]];
 
 format ["Detaching: %1 | %2", _unit, _target] call vgm_g_fnc_logInfo;
 
+if (!_instant) then {
+    [_unit, "released"] remoteExec ["playActionNow", _unit];
+};
+
 private _id = format ["vgm_carry_detach$%1", netId _unit];
 [_id, {
     // exploit implicitly passed handler ID to get the unit via netId

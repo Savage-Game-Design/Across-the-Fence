@@ -39,7 +39,6 @@ private _fnc_detach = {
     params ["_unit"];
     private _target = _unit getVariable ["vgm_carry_carriedObject", objNull];
 
-    _unit playActionNow "released";
     [_unit, _target] remoteExec ["vgm_s_fnc_carry_detachRequest", 2];
 };
 
