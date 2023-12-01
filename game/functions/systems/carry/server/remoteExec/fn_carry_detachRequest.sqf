@@ -36,7 +36,10 @@ private _id = format ["vgm_carry_detach$%1", netId _unit];
         [_unit, ""] remoteExec ["switchMove"];
     };
 
-    [_target, (["", "UnconsciousReviveDefault"] select (lifeState _target == "INCAPACITATED"))] remoteExec ["switchMove"];
+    [_target, ([
+        "AmovPpneMstpSnonWnonDnon",
+        "UnconsciousReviveDefault"
+    ] select (lifeState _target == "INCAPACITATED"))] remoteExec ["switchMove"];
 
     _unit setVariable ["vgm_carry_carriedObject", nil, true];
     _target setVariable ["vgm_carry_carriedBy", nil, true];
