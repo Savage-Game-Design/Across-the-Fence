@@ -31,6 +31,8 @@ format ["Applying item: %1 | %2 | %3 | %4", _healer, _patient, _bodyPart, _itemD
 
 private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_coefficient_get);
 
+[_healer, _patient, _time] call vgm_c_fnc_medical_itemAnimation;
+
 [format [_itemData get "displayName", name _patient], _time, {
     params ["_args", "_startedAt", "_duration"];
     _args params ["_healer", "_patient", "", "_itemData"];
@@ -62,6 +64,15 @@ private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_c
         };
         _patient call vgm_c_fnc_medical_openMedicalMenu;
     };
+
+    // do not force animation speed anymore
+    [_healer, "animSpeed", "medical_item", false] call vgm_c_fnc_coefficient_override;
+    _healer playMoveNow (_healer getVariable "vgm_c_medical_itemDoneAnim");
 }, {
-    [_this#0#1] spawn vgm_c_fnc_medical_openMedicalMenu;
+    (_this#0) params ["_healer", "_patient"];
+    [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
+
+    // do not force animation speed anymore
+    [_healer, "animSpeed", "medical_item", false] call vgm_c_fnc_coefficient_override;
+    _healer switchMove (_healer getVariable "vgm_c_medical_itemDoneAnim");
 }, [_healer, _patient, _bodyPart, _itemData]] call vgm_c_fnc_progressBar;
