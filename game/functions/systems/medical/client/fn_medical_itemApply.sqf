@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2023-08-27
+    Last Update: 2023-11-26
     Public: No
 
     Description:
@@ -53,7 +53,15 @@ private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_c
 
     ["vgm_medical_heal", [_healer, _patient, _itemData get "type", _bodyPart], [_patient]] call para_g_fnc_event_triggerTargets;
 
-    [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
+    [_patient] spawn {
+        sleep 0.1;
+        params ["_patient"];
+        // do not reopen for fully healed, might not work on remote units due to network delay
+        if ([_patient, "total"] call vgm_c_fnc_medical_getWound < 1) exitWith {
+            hint localize "STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_HEALTHY";
+        };
+        _patient call vgm_c_fnc_medical_openMedicalMenu;
+    };
 }, {
     [_this#0#1] spawn vgm_c_fnc_medical_openMedicalMenu;
 }, [_healer, _patient, _bodyPart, _itemData]] call vgm_c_fnc_progressBar;
