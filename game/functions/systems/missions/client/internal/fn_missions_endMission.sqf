@@ -33,10 +33,9 @@ player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandle
 moveOut player;
 player setVelocity [0,0,0];
 player setVehiclePosition [([] call vgm_g_fnc_missions_getHubSpawnPos), [], 0, "NONE"];
+[] call vgm_c_fnc_sharedHub_areaLimiterEnable;
 
 player call vgm_c_fnc_medical_fullHeal;
-
-[] call vgm_c_fnc_sharedHub_areaLimiterEnable;
 
 // Show end of mission screen
 private _dialog = createDialog ["VGM_DisplayEndOfMission", true];
