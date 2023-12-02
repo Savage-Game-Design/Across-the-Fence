@@ -39,17 +39,27 @@ class VGM_DisplayMedical
         class Min: VGM_ctrlBackground
         {
             x = DISPLAY_X;
-            y = DISPLAY_Y;
+            y = DISPLAY_Y - (4 * VGM_GRID_H);
             w = DISPLAY_W * VGM_GRID_W;
-            h = DISPLAY_H * VGM_GRID_H;
+            h = DISPLAY_H * VGM_GRID_H + (4 * VGM_GRID_H);
+        };
+        class TitlePatient: VGM_ctrlTitle
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_PATIENT_TITLE;
+            text = "PatientName";
+            colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
+            x = DISPLAY_X;
+            y = DISPLAY_Y - (3.5 * VGM_GRID_H);
+            w = DISPLAY_W * VGM_GRID_W;
+            h = 4 * VGM_GRID_H;
         };
     };
     class Controls
     {
         class Treatment: VGM_ctrlStack
         {
-#define _W 50
-#define _H 50
+            #define _W 50
+            #define _H 50
             idc = VGM_IDC_DISPLAYMEDICAL_TREATMENT;
             x = 0;
             y = 0;
@@ -178,10 +188,10 @@ class VGM_DisplayMedical
             h = LEG_R_H * VGM_GRID_H;
         };
 
-#define _W 80
-#define _H_ROW 12
         class ModifierList: VGM_ctrlControlsTable
         {
+            #define _W 80
+            #define _H_ROW 12
             idc = VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
             x = DISPLAY_X + (DISPLAY_W - _W) * VGM_GRID_W;
             y = DISPLAY_Y;
