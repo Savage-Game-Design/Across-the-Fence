@@ -2,7 +2,7 @@
     File: fn_coefficient_override.sqf
     Author: Savage Game Design
     Date: 2023-11-26
-    Last Update: 2023-11-26
+    Last Update: 2023-12-02
     Public: Yes
 
     Description:
@@ -38,7 +38,8 @@ if (isNil "_coefficientOverridesMap") then {
     _coefficientOverridesMap = createHashMap;
     _unit setVariable ["vgm_c_coefficient_currentCoefficientsOverrides", _coefficientOverridesMap];
 };
-// set a reason if there's one, onChange function will always be applied
+
+// not possible to override without reason
 if (isNil "_reason") exitWith {
     format ["No reason given: %1 | %2", _coefficient, _override] call vgm_g_fnc_logError;
     false
