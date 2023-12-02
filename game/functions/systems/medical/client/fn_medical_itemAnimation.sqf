@@ -2,7 +2,7 @@
     File: fn_medical_itemAnimation.sqf
     Author: Savage Game Design
     Date: 2023-11-25
-    Last Update: 2023-11-26
+    Last Update: 2023-12-02
     Public: No
 
     Description:
@@ -43,4 +43,4 @@ _healer setVariable ["vgm_c_medical_itemDoneAnim", _animDone];
 [_healer, "animSpeed", "medical_item", true] call vgm_c_fnc_coefficient_override;
 _healer setAnimSpeedCoef (_animDuration / _itemTime);
 
-_healer playMove _anim;
+_healer playMoveNow _anim;
