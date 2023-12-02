@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-11-25
+    Last Update: 2023-12-02
     Public: No
 
     Description:
@@ -31,6 +31,7 @@ player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandle
 ["ItemRemove", ["vn_tracksLoop"]] call BIS_fnc_loop;
 
 moveOut player;
+player setVelocity [0,0,0];
 player setVehiclePosition [([] call vgm_g_fnc_missions_getHubSpawnPos), [], 0, "NONE"];
 [] call vgm_c_fnc_sharedHub_areaLimiterEnable;
 
