@@ -30,15 +30,13 @@ params ["_levelingDataCopy", "_milestones"];
 player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandler"];
 ["ItemRemove", ["vn_tracksLoop"]] call BIS_fnc_loop;
 
-player allowDamage false;
-
 moveOut player;
+player setVelocity [0,0,0];
 player setVehiclePosition [([] call vgm_g_fnc_missions_getHubSpawnPos), [], 0, "NONE"];
 
 player call vgm_c_fnc_medical_fullHeal;
 
 [] call vgm_c_fnc_sharedHub_areaLimiterEnable;
-[] spawn {sleep 5; player allowDamage true};
 
 // Show end of mission screen
 private _dialog = createDialog ["VGM_DisplayEndOfMission", true];
