@@ -313,6 +313,9 @@ class vgm_skillTrees {
                 class loadout_rto: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO";
                     description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO_DESC";
+
+                    codeApply = "player setUnitTrait ['vn_artillery', true, true]";
+                    codeUnapply = "player setUnitTrait ['vn_artillery', false, true]";
                 };
             };
 
@@ -344,8 +347,7 @@ class vgm_skillTrees {
                     codeApply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', true]";
                     codeUnapply = "player setVariable ['vgm_c_skill_passives_support_heavySupport', false]";
 
-                    // cost = 2;
-                    cost = 0; // air support not implemented yet
+                    cost = 2;
                 };
             };
 
