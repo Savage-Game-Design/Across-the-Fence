@@ -2,7 +2,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-11-04
+    Last Update: 2023-11-25
     Public: No
 
     Description:
@@ -61,4 +61,28 @@ vgm_s_director_attack_classes = [
     "vgm_director_recentPlayerShots",
     // Wrapped in code block to allow recompilation when testing.
     { _this call vgm_s_fnc_director_handlePlayerShots }
+] call para_g_fnc_event_subscribe;
+
+[
+    "vgm_medical_unconscious",
+    {
+        (_this # 0) params ["_unit", "_state"];
+
+        if (!_state) exitWith {};
+
+        private _playerId = getPlayerID _unit;
+
+        if !([getPlayerID _unit] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {};
+
+        private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;
+
+        if (isNil "_mission") exitWith {};
+
+        private _playersOnMission = units _unit;
+        private _alivePlayers = _playersOnMission select {alive _x && {lifeState _x != "INCAPACITATED"}};
+
+        if (_alivePlayers isNotEqualTo []) exitWith {};
+
+        [_mission get "public" get "id"] call vgm_s_fnc_missions_endMission;
+    }
 ] call para_g_fnc_event_subscribe;

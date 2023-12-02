@@ -27,7 +27,7 @@ _unit setUnconscious _state;
 _unit setCaptive _state;
 
 if (lifeState _unit != _previousLifeState) then {
-    ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerLocal;
+    ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerServerAndLocal;
 };
 
 nil

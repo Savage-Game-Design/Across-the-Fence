@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-06-22
+    Last Update: 2023-11-25
     Public: No
 
     Description:
@@ -51,6 +51,10 @@ private _playerInfoNetmap = [] call para_s_fnc_netmap_createNetmap;
 ] call para_s_fnc_netmap_set;
 
 (_mission get "machineIds") set [_playerId, getUserInfo _playerId select 1];
+
+if (isNull (_missionPublic get "group")) then {
+    [_missionPublic, "group", createGroup side vgm_core_lobbyGroup] call para_s_fnc_netmap_set;
+};
 
 [_playerId call vgm_s_fnc_player_fromId] joinSilent (_missionPublic get "group");
 
