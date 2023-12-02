@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_createCrewedHelicopter.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2023-11-24
+    Last Update: 2023-11-26
     Public: Yes
 
     Description:
@@ -31,7 +31,13 @@ _helicopter setCaptive true;
 _group deleteGroupWhenEmpty true;
 
 _helicopter allowDamage false;
-{_x allowDamage false} forEach units _group;
+{
+    _x allowDamage false;
+    _x disableAI "AUTOCOMBAT";
+} forEach units _group;
+
+driver _helicopter setCombatBehaviour "CARELESS";
+_helicopter setEffectiveCommander driver _helicopter;
 
 // prevent players from taking the seats from AI
 [_helicopter, true] remoteExec ["lockDriver", _helicopter];
