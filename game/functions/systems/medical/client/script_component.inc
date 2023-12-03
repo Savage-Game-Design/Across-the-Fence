@@ -40,3 +40,6 @@
 
 #define DEBUFF_BLURRYVISION_MINOR 0.35
 #define DEBUFF_BLURRYVISION_MAJOR 1
+
+// frequent hits to the same hitpoint more often than this value will be ignored
+#define MAX_HIT_FREQ 0.75
