@@ -140,6 +140,9 @@
         <Key ID="STR_VGM_MEDICAL_UI_OWNED">
             <Original>%1&lt;br/&gt;Owned: %2</Original>
         </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING">
+            <Original>%1&lt;br/&gt;No training</Original>
+        </Key>
     </Package>
     <Package name="Mission End UI">
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL">

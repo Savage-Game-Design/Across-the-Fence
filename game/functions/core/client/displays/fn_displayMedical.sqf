@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2023-11-25
+    Last Update: 2023-12-03
     Public: No
 
     Description:
@@ -96,7 +96,7 @@ switch _mode do {
 
         private _healerItemCount = uniqueUnitItems [HEALER, 0, 2, 2, 2, false];
         {
-            _x params ["_treatment", "_itemCfg", "_function"];
+            _x params ["_treatment", "_itemCfg", "_function", ["_condition", {true}]];
 
             private _optionItems = vgm_medical_healItems get _treatment;
             private _requiredItemCount = 0;
@@ -104,8 +104,12 @@ switch _mode do {
 
             (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName", "_ctrlOptionButton"];
             _ctrlOptionIcon ctrlSetText getText (_itemCfg >> "picture");
-            _ctrlOptionName ctrlSetStructuredText parseText format [localize "STR_VGM_MEDICAL_UI_OWNED", getText (_itemCfg >> "displayName"), _requiredItemCount];
-            _ctrlOptionButton ctrlEnable (_requiredItemCount > 0);
+            _ctrlOptionName ctrlSetStructuredText parseText format [
+                localize (["STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING", "STR_VGM_MEDICAL_UI_OWNED"] select (call _condition)),
+                getText (_itemCfg >> "displayName"),
+                _requiredItemCount
+            ];
+            _ctrlOptionButton ctrlEnable ((_requiredItemCount > 0) && _condition);
 
             // setup on click action
             _ctrlOptionButton setVariable ["vgm_params", [HEALER, MENU_TARGET, _bodyPart]];
@@ -117,7 +121,7 @@ switch _mode do {
             }];
         } forEach [
             [HEAL_FAK, configFile >> "CfgWeapons" >> "vn_helper_item_firstaidkit", vgm_c_fnc_medical_itemApplyFAK],
-            [HEAL_MEDIKIT, configFile >> "CfgWeapons" >> "vn_helper_item_medikit", vgm_c_fnc_medical_itemApplyMedikit]
+            [HEAL_MEDIKIT, configFile >> "CfgWeapons" >> "vn_helper_item_medikit", vgm_c_fnc_medical_itemApplyMedikit, {HEALER getUnitTrait "Medic"}]
         ];
 
         // Activate the treatment options
