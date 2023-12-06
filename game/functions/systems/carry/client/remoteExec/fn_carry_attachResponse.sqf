@@ -2,7 +2,7 @@
     File: fn_carry_attachResponse.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2023-12-01
+    Last Update: 2023-12-06
     Public: No
 
     Description:
@@ -24,13 +24,9 @@ _unit setVariable ["vgm_carry_carriedObject", _target];
 
 if (isNull _target) exitWith {
     "Failed to attach" call vgm_g_fnc_logError;
-    _unit switchMove "";
 };
 
 format ["Attached: %1 | %2", _unit, _target] call vgm_g_fnc_logInfo;
-
-// carry anim that allows shooting
-_unit switchMove "AcinPercMstpSrasWrflDnon";
 
 // prevent unable to move in combat pace
 [_unit, "forceWalk", "carry"] call vgm_c_fnc_statusEffect_set;

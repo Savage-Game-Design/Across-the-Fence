@@ -2,7 +2,7 @@
     File: fn_carry_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2023-12-01
+    Last Update: 2023-12-06
     Public: No
 
     Description:
@@ -16,8 +16,8 @@ addMissionEventHandler ["HandleDisconnect", {
     private _target = _unit getVariable ["vgm_carry_carriedObject", objNull];
     if (isNull _target) exitWith {};
 
-    // immediately drop carried unit when carrier disconnects
-    [objNull, _target, true] call vgm_s_fnc_carry_detachRequest;
+    // drop carried unit when carrier disconnects
+    [objNull, _target] call vgm_s_fnc_carry_detachRequest;
 }];
 
 addMissionEventHandler ["EntityKilled", {
@@ -25,8 +25,8 @@ addMissionEventHandler ["EntityKilled", {
     private _target = _unit getVariable ["vgm_carry_carriedObject", objNull];
     if (isNull _target) exitWith {};
 
-    // immediately drop carried unit when carrier is killed
-    [_unit, _target, true] call vgm_s_fnc_carry_detachRequest;
+    // drop carried unit when carrier is killed
+    [_unit, _target] call vgm_s_fnc_carry_detachRequest;
 }];
 
 ["vgm_carry_enable", {
@@ -34,8 +34,8 @@ addMissionEventHandler ["EntityKilled", {
     private _target = _unit getVariable ["vgm_carry_carriedObject", objNull];
     if (isNull _target) exitWith {};
 
-    // immediately drop carried unit when carrier goes unconscious
-    [_unit, _target, true] call vgm_s_fnc_carry_detachRequest;
+    // drop carried unit when carrier goes unconscious
+    [_unit, _target] call vgm_s_fnc_carry_detachRequest;
 }] call para_g_fnc_event_subscribe;
 
 ["vgm_carry_disable", {

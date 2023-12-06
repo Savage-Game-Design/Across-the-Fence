@@ -2,14 +2,15 @@
     File: fn_carry_detachRequest.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2023-12-01
+    Last Update: 2023-12-06
     Public: No
 
     Description:
         Detach carried target from unit.
 
     Parameter(s):
-        N/A
+        _unit - Carrying unit [OBJECT]
+        _target - Carried unit [OBJECT]
 
     Returns:
         Nothing
@@ -18,36 +19,27 @@
         [attachedTo player, player] call vgm_s_fnc_carry_detachRequest
  */
 
-params ["_unit", "_target", ["_instant", false]];
+params ["_unit", "_target"];
 
 format ["Detaching: %1 | %2", _unit, _target] call vgm_g_fnc_logInfo;
 
-if (!_instant) then {
-    [_unit, "released"] remoteExec ["playActionNow", _unit];
+[_target, ([
+    "AmovPpneMstpSnonWnonDnon",
+    "UnconsciousReviveDefault"
+] select (lifeState _target == "INCAPACITATED"))] remoteExec ["switchMove"];
+
+private _detachPos = _unit modelToWorldWorld (_unit selectionPosition "RightShoulder" vectorAdd [0,0.1,0]);
+private _detachDir = getDir _target - 90;
+detach _target;
+_target setPosWorld _detachPos;
+_target setDir _detachDir;
+
+if (lifeState _unit != "INCAPACITATED") then {
+    [_unit, ""] remoteExec ["switchMove"];
 };
 
-private _id = format ["vgm_carry_detach$%1", netId _unit];
-[_id, {
-    // exploit implicitly passed handler ID to get the unit via netId
-    private _unit = (_id splitString "$" param [1, "-1"]) call BIS_fnc_objectFromNetId;
-    _target = _unit getVariable ["vgm_carry_carriedObject", objNull];
+_unit setVariable ["vgm_carry_carriedObject", nil, true];
+_target setVariable ["vgm_carry_carriedBy", nil, true];
 
-    format ["Delayed detach: %1 | %2", _unit, _target] call vgm_g_fnc_logDebug;
-
-    detach _target;
-
-    if (lifeState _unit != "INCAPACITATED") then {
-        [_unit, ""] remoteExec ["switchMove"];
-    };
-
-    [_target, ([
-        "AmovPpneMstpSnonWnonDnon",
-        "UnconsciousReviveDefault"
-    ] select (lifeState _target == "INCAPACITATED"))] remoteExec ["switchMove"];
-
-    _unit setVariable ["vgm_carry_carriedObject", nil, true];
-    _target setVariable ["vgm_carry_carriedBy", nil, true];
-
-    // inform the caller about detach
-    [_unit, _target] remoteExec ["vgm_c_fnc_carry_detachResponse", _unit];
-}, [3.25, 0] select _instant] call BIS_fnc_runLater;
+// inform the caller about detach
+[_unit, _target] remoteExec ["vgm_c_fnc_carry_detachResponse", _unit];
