@@ -2,7 +2,7 @@
     File: fn_carry_canCarry.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2023-12-01
+    Last Update: 2023-12-06
     Public: No
 
     Description:
@@ -22,5 +22,6 @@
 params ["_unit", "_target"];
 
 !(alive _target != isAwake _target) // is not ragdolling
+&& stance _unit != "PRONE"
 && lifeState _target == "INCAPACITATED"
 && isNull attachedTo _target // return
