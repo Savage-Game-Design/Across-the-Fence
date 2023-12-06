@@ -2,7 +2,7 @@
     File: fn_carry_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2023-12-01
+    Last Update: 2023-12-06
     Public: No
 
     Description:
@@ -43,3 +43,12 @@ if (!hasInterface) exitWith {};
 
     _target removeAction (_target getVariable ["vgm_carry_actionCarry", -1]);
 }] call para_g_fnc_event_subscribe;
+
+// weapon lower/raise plays "put down" animation
+// force to drop carried target to prevent abuse
+addUserActionEventHandler ["toggleRaiseWeapon", "Activate", {
+    private _unit = player;
+    private _target = _unit getVariable ["vgm_carry_carriedObject", objNull];
+    if (isNull _target) exitWith {};
+    [_unit, _target] remoteExec ["vgm_s_fnc_carry_detachRequest", 2];
+}];
