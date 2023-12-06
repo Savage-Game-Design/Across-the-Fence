@@ -13,10 +13,10 @@
         _target - Carried unit [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [player, cursorObject] remoteExec ["vgm_s_fnc_carry_attachRequest", 2];
  */
 
 params ["_unit", "_target"];

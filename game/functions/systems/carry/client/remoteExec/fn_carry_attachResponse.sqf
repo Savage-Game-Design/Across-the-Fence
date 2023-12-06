@@ -6,16 +6,17 @@
     Public: No
 
     Description:
-        No description added yet.
+        Handle server response for attach request.
 
     Parameter(s):
-        N/A
+        _unit - Unit doing the attach [OBJECT]
+        _target - Attached target [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_unit, _target] remoteExec ["vgm_c_fnc_carry_attachResponse", _unit];
  */
 
 params ["_unit", "_target"];

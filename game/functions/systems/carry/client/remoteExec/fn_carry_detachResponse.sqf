@@ -2,20 +2,21 @@
     File: fn_carry_detachResponse.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2023-12-01
+    Last Update: 2023-12-06
     Public: No
 
     Description:
-        No description added yet.
+        Handle server response for detach request.
 
     Parameter(s):
-        N/A
+        _unit - Unit doing the attach [OBJECT]
+        _target - Attached target [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_unit, _target] remoteExec ["vgm_c_fnc_carry_detachResponse", _unit];
  */
 
 params ["_unit", "_target"];

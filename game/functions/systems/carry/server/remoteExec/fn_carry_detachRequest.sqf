@@ -16,7 +16,7 @@
         Nothing
 
     Example(s):
-        [attachedTo player, player] call vgm_s_fnc_carry_detachRequest
+        [attachedTo player, player] remoteExec ["vgm_s_fnc_carry_detachRequest", 2]
  */
 
 params ["_unit", "_target"];

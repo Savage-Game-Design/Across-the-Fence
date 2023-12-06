@@ -6,7 +6,7 @@
     Public: No
 
     Description:
-        Make unit carry the target with pickup animations.
+        Make unit carry the target.
 
     Parameter(s):
         _unit   - Unit trying to carry [OBJECT]
