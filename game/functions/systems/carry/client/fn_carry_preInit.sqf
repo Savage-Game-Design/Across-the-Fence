@@ -2,7 +2,7 @@
     File: fn_carry_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2023-12-06
+    Last Update: 2023-12-07
     Public: No
 
     Description:
@@ -20,20 +20,25 @@ if (!hasInterface) exitWith {};
 ["vgm_carry_enable", {
     (_this#0) params ["_unit"];
 
-    private _action = _unit addAction [
+    private _action = [
+        _unit,
         format ["<t color='#ed872d'>%1</t>", localize "STR_VN_REVIVE_ACTION_PICKUP"],
+        "\a3\ui_f\data\IGUI\Cfg\holdactions\holdaction_loaddevice_ca.paa",
+        "\a3\ui_f\data\IGUI\Cfg\holdactions\holdaction_loaddevice_ca.paa",
+        toString {[_this, _target] call vgm_c_fnc_carry_canCarry},
+        "true",
+        {},
+        {},
         {
             params ["_target", "_unit"];
             [_unit, _target] call vgm_c_fnc_carry_doCarry;
         },
+        {},
         nil,
+        1,
         100,
-        true,
-        true,
-        "",
-        "[_this, _originalTarget] call vgm_c_fnc_carry_canCarry",
-        3
-    ];
+        false
+    ] call BIS_fnc_holdActionAdd;
     _unit setVariable ["vgm_carry_actionCarry", _action];
 
 }] call para_g_fnc_event_subscribe;

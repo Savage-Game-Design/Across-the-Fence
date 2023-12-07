@@ -2,7 +2,7 @@
     File: fn_carry_attachResponse.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2023-12-06
+    Last Update: 2023-12-07
     Public: No
 
     Description:
@@ -39,15 +39,20 @@ private _fnc_detach = {
     [_unit, _target] remoteExec ["vgm_s_fnc_carry_detachRequest", 2];
 };
 
-private _action = _unit addAction [
+private _action = [
+    _unit,
     format ["<t color='#ff0000'>%1</t>", localize "STR_VN_REVIVE_ACTION_DROP"],
+    "\a3\ui_f\data\IGUI\Cfg\holdactions\holdaction_unloaddevice_ca.paa",
+    "\a3\ui_f\data\IGUI\Cfg\holdactions\holdaction_unloaddevice_ca.paa",
+    toString {!isNull (_this getVariable ['vgm_carry_carriedObject', objNull])},
+    "true",
+    {},
+    {},
     _fnc_detach,
+    {},
     nil,
-    50,
-    true,
-    true,
-    "",
-    "!isNull (_this getVariable ['vgm_carry_carriedObject', objNull])",
-    -1
-];
+    1,
+    100,
+    false
+] call BIS_fnc_holdActionAdd;
 _unit setVariable ["vgm_carry_actionDrop", _action];
