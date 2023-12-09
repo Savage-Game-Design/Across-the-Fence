@@ -1,3 +1,61 @@
+tree =createHashMapFromArray [
+	["type", "sequence"],
+	["name", "testsequence"],
+	["children", [
+		createHashMapFromArray [
+			["type", "action"],
+			["name", "testaction1"],
+			["onEnter", { ["running"] }],
+			["onTick", { ["succeeded"] }],
+			["onExit", {}]
+		],
+		createHashMapFromArray [
+			["type", "selector"],
+			["name", "testselector"],
+			["children", [
+				createHashMapFromArray [
+					["type", "action"],
+					["name", "testaction2"],
+					["onEnter", { ["failed"] }],
+					["onTick", { ["succeeded"] }],
+					["onExit", {}]
+				],
+				createHashMapFromArray [
+					["type", "action"],
+					["name", "testaction3"],
+					["onEnter", { ["running"] }],
+					["onTick", { ["succeeded"] }],
+					["onExit", {}]
+				]
+			]]
+		],
+		createHashMapFromArray [
+			["type", "decorator"],
+			["name", "testdecorator"],
+			["onEnter", { ["failed"] }],
+			["onChildFinished", { _this }],
+			["onExit", {}],
+			["children", [
+				createHashMapFromArray [
+					["type", "action"],
+					["name", "testaction4"],
+					["onEnter", { ["running"] }],
+					["onTick", { ["succeeded"] }],
+					["onExit", {}]
+				]
+			]]
+		],
+		createHashMapFromArray [
+			["type", "action"],
+			["name", "testaction5"],
+			["onEnter", { ["running"] }],
+			["onTick", { ["succeeded"] }],
+			["onExit", {}]
+		]
+	]]
+
+]
+
 // Setup tree
 
 params ["_tree", "_group"];
@@ -24,7 +82,7 @@ params ["_group"];
 private _actionLog = [];
 private _messageLog = [];
 
-private _tree = _group getVariable "vgm_l_currentBehaviourTree";
+private _tree = _group getVariable "vgm_l_btree_current";
 
 if (isNil "_tree") exitWith {};
 
@@ -49,7 +107,6 @@ private _servicesStack = _state getOrDefault ["currentInterruptStack", [], true]
 // TODO - Logic for aborting and service checks
 
 // (Re)start tree execution.
-
 private _nextAction = "run current node";
 private _nextActionParams = [];
 
@@ -266,17 +323,20 @@ while {_nextAction isNotEqualTo ""} do {
     _actionLog pushBack [_nextAction, _nextActionParams];
     switch (_nextAction) do {
         case "run root node": {
-            private _result = [_tree get "root"] call _fnc_enterNode;
+            private _result = [_tree] call _fnc_enterNode;
             _nextAction = _result # 0;
             _nextActionParams = _result # 1;
         };
-        case "run child": {
-            _nextActionParams params ["_childIndex"];
-            // Possible bug if stack is empty here
-            private _result = [_stack select (count _stack - 1)] call _fnc_enterNode;
-            _nextAction = _result # 0;
-            _nextActionParams = _result # 1;
-        };
+		case "run child": {
+			_nextActionParams params ["_childIndex"];
+			// Possible bug if stack is empty here
+			(_stack # (count _stack - 1)) params ["_node", "_state"];
+			private _child = _node get "children" select _childIndex;
+			_state set ["executingChild", _childIndex];
+			private _result = [_child] call _fnc_enterNode;
+			_nextAction = _result # 0;
+			_nextActionParams = _result # 1;
+		};
         case "return to parent": {
             private _result = _nextActionParams call _fnc_returnToParent;
             _nextAction = _result # 0;
