@@ -3,7 +3,7 @@
     File: fn_medical_receiveDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-17
-    Last Update: 2023-07-23
+    Last Update: 2023-12-03
     Public: No
 
     Description:
@@ -31,6 +31,14 @@ private _bodyPart = vgm_c_medical_hitPointBodyPartMap get _hitPoint;
 
 if (isNil "_bodyPart") exitWith {
     format ["(Medical) Invalid HitPoint: %1", _hitPoint] call vgm_g_fnc_logWarning;
+};
+
+private _lastHitAtMap = _unit getVariable "vgm_c_medical_lastHitAt";
+private _lastBodyPartHitAt = _lastHitAtMap get _bodyPart;
+
+if (_directHit && ((time - _lastBodyPartHitAt) < MAX_HIT_FREQ)) exitWith {
+    format ["(%5) Ignoring damage: %1 | %2 | %3 | %4", _bodyPart, _hitPoint, _projectile, time - _lastBodyPartHitAt, diag_frameNo] call vgm_g_fnc_logDebug;
+    // _lastHitAtMap set [_bodyPart, -1]; // This would allow us to ignore only one shot
 };
 
 private _normalizedDamage = _damage * getNumber (configOf _unit >> "HitPoints" >> _hitPoint >> "armor");
@@ -68,5 +76,7 @@ private _damageParams = [_unit, _bodyPart, _woundIntensity];
 
     if (true isEqualTo _stopExecution) exitWith {};
 } forEach vgm_c_medical_damageModifiers;
+
+_lastHitAtMap set [_bodyPart, time];
 
 _damageParams call vgm_c_fnc_medical_addWound;
