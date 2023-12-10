@@ -300,6 +300,9 @@ class vgm_skillTrees {
                 class loadout_medical: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL";
                     description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL_DESC";
+
+                    codeApply = "player setUnitTrait ['Medic', true]";
+                    codeUnapply = "player setUnitTrait ['Medic', false]";
                 };
 
                 class resourceful: vgm_skillTemplate {
