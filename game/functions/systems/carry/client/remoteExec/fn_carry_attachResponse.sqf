@@ -21,8 +21,6 @@
 
 params ["_unit", "_target"];
 
-_unit setVariable ["vgm_carry_carriedObject", _target];
-
 if (isNull _target) exitWith {
     "Failed to attach" call vgm_g_fnc_logError;
 };
