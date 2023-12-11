@@ -2,7 +2,7 @@
     File: fn_coefficient_set.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-10-08
+    Last Update: 2023-11-26
     Public: Yes
 
     Description:
@@ -38,26 +38,7 @@ if (!(_coefficient in vgm_c_coefficient_allCoefficients)) exitWith {
 
 private _coefficientMap = _unit getVariable "vgm_c_coefficient_currentCoefficients";
 if (isNil "_coefficientMap") then {
-    format ["Creating current coefficients map: %1", _unit] call vgm_g_fnc_logDebug;
-
-    _coefficientMap = createHashMap;
-    _unit setVariable ["vgm_c_coefficient_currentCoefficients", _coefficientMap];
-    // clear all non persistent coefficients upon respawn
-    _unit addEventHandler ["Respawn", {
-        params ["_unit"];
-        {
-            private _coefficient = _x;
-            {
-                private _reason = _x;
-                private _coefficientValues = _y;
-                // ignore persistent coefficients
-                if (_coefficientValues # 1) then {continue};
-                [_unit, _coefficient, _reason] call vgm_c_fnc_coefficient_remove;
-            } forEach _y;
-            // re-apply persistent coefficient values, needed in case "remove" was not called at least once
-            [_unit, _coefficient, nil] call vgm_c_fnc_coefficient_set;
-        } forEach (_unit getVariable "vgm_c_coefficient_currentCoefficients");
-    }]
+    _coefficientMap = [_unit] call vgm_c_fnc_coefficient_unitInit;
 };
 // set a reason if there's one, onChange function will always be applied
 if (!isNil "_reason") then {
@@ -74,6 +55,9 @@ if (!isNil "_reason") then {
 
 private _calculatedValue = [_unit, _coefficient] call vgm_c_fnc_coefficient_get;
 
-[_unit, _calculatedValue] call (vgm_c_coefficient_allCoefficients get _coefficient get "onChange");
+private _isOverriden = count values ((_unit getVariable ["vgm_c_coefficient_currentCoefficientsOverrides", createHashMap]) getOrDefault [_coefficient, createHashMap]) > 0;
+if (!_isOverriden) then {
+    [_unit, _calculatedValue] call (vgm_c_coefficient_allCoefficients get _coefficient get "onChange");
+};
 
 _calculatedValue // return

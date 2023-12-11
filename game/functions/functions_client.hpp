@@ -131,6 +131,7 @@ class vgm_c
 
         class coefficient_create {};
         class coefficient_get {};
+        class coefficient_override {};
         class coefficient_postInit
         {
             postInit = 1;
@@ -141,6 +142,7 @@ class vgm_c
         };
         class coefficient_remove {};
         class coefficient_set {};
+        class coefficient_unitInit {};
     };
 
     class displays

@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2023-10-06
+    Last Update: 2023-11-26
     Public: No
 
     Description:
@@ -105,7 +105,10 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
                 private _reasons = _unit getVariable "vgm_c_coefficient_currentCoefficients" get _coefficient apply {
                     [_x, _y#0, ["", "persistent"] select _y#1] joinString " "
                 };
-                _this lnbSetTooltip [[_row, 0], _reasons joinString endl];
+                private _overrides = _unit getVariable "vgm_c_coefficient_currentCoefficientsOverrides" get _coefficient apply {
+                    ["override", _x] joinString " "
+                };
+                _this lnbSetTooltip [[_row, 0], trim ([_reasons joinString endl, _overrides joinString endl] joinString endl)];
             } forEach vgm_c_coefficient_allCoefficients;
         }] call vgm_c_debugMenu_addSection;
 
