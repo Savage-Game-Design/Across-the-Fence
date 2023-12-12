@@ -158,9 +158,29 @@ class vgm_c
         class displayEndOfMission {};
     };
 
+    class carry
+    {
+        VGM_CLIENT_PATH(\systems\carry\client);
+
+        class carry_canCarry {};
+        class carry_doCarry {};
+        class carry_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class carry_remoteExec
+    {
+        VGM_CLIENT_PATH(\systems\carry\client\remoteExec);
+
+        class carry_attachResponse {};
+        class carry_detachResponse {};
+    };
+
     class equipment
     {
-        VGM_GLOBAL_PATH(\systems\equipment\client);
+        VGM_CLIENT_PATH(\systems\equipment\client);
 
         class equipment_arsenalInit {};
         class equipment_filterLoadout {};
