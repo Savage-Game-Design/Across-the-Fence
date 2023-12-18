@@ -2,7 +2,7 @@
     File: fn_btree_childFinished_action.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -11,7 +11,7 @@
         This is called for stack frames with the 'action' node type.
 
     Parameter(s):
-        _stackItem - The stack frame of the node whose child has finished [HASHMAP]
+        _stackFrame - The stack frame of the node whose child has finished [HASHMAP]
         _childResult - The result the child exited with [STRING]
 
     Returns:

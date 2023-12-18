@@ -2,7 +2,7 @@
     File: fn_btree_childFinished_selector.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -11,7 +11,7 @@
         This is called for stack frames with the 'selector' node type.
 
     Parameter(s):
-        _stackItem - The stack frame of the node whose child has finished [HASHMAP]
+        _stackFrame - The stack frame of the node whose child has finished [HASHMAP]
         _childResult - The result the child exited with [STRING]
 
     Returns:
@@ -24,15 +24,15 @@
 
 #include "..\behaviour_trees.inc"
 
-params ["_stackItem", "_childResult"];
+params ["_stackFrame", "_childResult"];
 
-private _node = _stackItem get "node";
+private _node = _stackFrame get "node";
 private _children = _node get "children";
-private _lastExecutedChild = _stackItem get "state" get "executingChildIndex";
+private _lastExecutedChild = _stackFrame get "state" get "executingChildIndex";
 
 if (_childResult isEqualTo RESULT_FAILED && _lastExecutedChild < count _children) exitWith {
     if (_children # _lastExecutedChild get "abortLowerPriority") then {
-        _stackItem get "higherPriorityNodes" pushBackUnique _lastExecutedChild;
+        _stackFrame get "higherPriorityNodes" pushBackUnique _lastExecutedChild;
     };
     [[_lastExecutedChild + 1], ACTION_RUN_CHILD]
 };

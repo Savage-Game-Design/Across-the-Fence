@@ -9,7 +9,7 @@
         Handles entering an "action" type node.
 
     Parameter(s):
-        _stackItem - Stack frame for the current node [HASHMAP]
+        _stackFrame - Stack frame for the current node [HASHMAP]
 
     Returns:
         The next action to perform:
@@ -21,10 +21,10 @@
 
 #include "..\behaviour_trees.inc"
 
-params ["_stackItem"];
+params ["_stackFrame"];
 
-private _node = _stackItem get "node";
-private _state = _stackItem get "state";
+private _node = _stackFrame get "node";
+private _state = _stackFrame get "state";
 
 private _enterResult = [_node, _state] call (_node get "onEnter");
 _enterResult params ["_statusCode"];

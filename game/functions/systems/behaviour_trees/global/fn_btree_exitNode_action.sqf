@@ -9,7 +9,7 @@
         Handles exiting from a "action" type node.
 
     Parameter(s):
-        _stackItem - Stack frame of the current node (topmost stack frame) [HASHMAP]
+        _stackFrame - Stack frame of the current node (topmost stack frame) [HASHMAP]
         _result - Resulting status of the node - i.e, the status its exitin with [STRING]
 
     Returns:
@@ -19,9 +19,9 @@
         N/A
  */
 
-params ["_stackItem", "_result"];
+params ["_stackFrame", "_result"];
 
-private _node = _stackItem get "node";
-private _state = _stackItem get "state";
+private _node = _stackFrame get "node";
+private _state = _stackFrame get "state";
 
 [_node, _state, _result] call (_node get "onExit");

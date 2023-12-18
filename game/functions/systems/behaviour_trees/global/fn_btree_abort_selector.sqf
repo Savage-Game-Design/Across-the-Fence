@@ -2,7 +2,7 @@
     File: fn_btree_abort_selector.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
         This handler is for stack frames for "selector" nodes.
 
     Parameter(s):
-        _stackItem - Stack item to abort [HASHMAP]
+        _stackFrame - Stack item to abort [HASHMAP]
 
     Returns:
         Nothing

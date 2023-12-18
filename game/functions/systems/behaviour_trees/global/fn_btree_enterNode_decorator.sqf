@@ -9,7 +9,7 @@
         Handles entering a "decorator" type node.
 
     Parameter(s):
-        _stackItem - Stack frame for the current node [HASHMAP]
+        _stackFrame - Stack frame for the current node [HASHMAP]
 
     Returns:
         The next action to perform:
@@ -21,9 +21,9 @@
 
 #include "..\behaviour_trees.inc"
 
-params ["_stackItem"];
+params ["_stackFrame"];
 
-private _node = _stackItem get "node";
+private _node = _stackFrame get "node";
 
 private _conditionResult = [_node] call (_node get "condition");
 if (!_conditionResult) exitWith {
@@ -34,8 +34,8 @@ private _enterResult = [_node] call (_node get "onEnter");
 _enterResult params ["_statusCode"];
 
 if (_statusCode isEqualTo RESULT_RUNNING) exitWith {
-    _stackitem set ["isInterruptNode", _node get "abortChildrenOnConditionFailure"];
-    _stackitem set ["isServiceNode", _node get "isService"];
+    _stackFrame set ["isInterruptNode", _node get "abortChildrenOnConditionFailure"];
+    _stackFrame set ["isServiceNode", _node get "isService"];
     // TODO: Services stack
 
     [[0], ACTION_RUN_CHILD]

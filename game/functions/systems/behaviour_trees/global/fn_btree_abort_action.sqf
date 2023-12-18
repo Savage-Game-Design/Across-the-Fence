@@ -2,7 +2,7 @@
     File: fn_btree_abort_action.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
         This handler is for stack frames for "action" nodes.
 
     Parameter(s):
-        _stackItem - Stack item to abort [HASHMAP]
+        _stackFrame - Stack item to abort [HASHMAP]
 
     Returns:
         Nothing
@@ -22,9 +22,9 @@
         [_stack # (count _stack - 1)] call vgm_g_fnc_btree_abort_action;
  */
 
-params ["_stackItem"];
+params ["_stackFrame"];
 
-private _node = _stackItem get "node";
-private _state = _stackItem get "state";
+private _node = _stackFrame get "node";
+private _state = _stackFrame get "state";
 
 [_node, _state, RESULT_ABORTED] call (_node get "onExit");

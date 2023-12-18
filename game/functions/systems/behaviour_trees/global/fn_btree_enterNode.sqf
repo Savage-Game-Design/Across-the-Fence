@@ -34,7 +34,7 @@ params ["_node"];
 
 private _nodeState = createHashMap;
 
-private _stackItem = (createHashMapFromArray [
+private _stackFrame = (createHashMapFromArray [
     ["node", _node],
     ["state", _nodeState],
     ["higherPriorityNodes", []],
@@ -42,13 +42,13 @@ private _stackItem = (createHashMapFromArray [
     ["isServiceNode", false]
 ]);
 
-_stack pushBack _stackItem;
+_stack pushBack _stackFrame;
 
 private _nodeType = _node get "type";
 
 private _handler = localNamespace getVariable "vgm_l_btree_enterNodeHandlers" get _nodeType;
 
-private _result = [_stackItem] call _handler;
+private _result = [_stackFrame] call _handler;
 
 // Handler for the specific node type decides the next action
 _result

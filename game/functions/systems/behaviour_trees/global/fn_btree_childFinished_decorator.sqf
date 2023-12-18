@@ -2,7 +2,7 @@
     File: fn_btree_childFinished_decorator.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -11,7 +11,7 @@
         This is called for stack frames with the 'decorator' node type.
 
     Parameter(s):
-        _stackItem - The stack frame of the node whose child has finished [HASHMAP]
+        _stackFrame - The stack frame of the node whose child has finished [HASHMAP]
         _childResult - The result the child exited with [STRING]
 
     Returns:
@@ -24,10 +24,10 @@
 
 #include "..\behaviour_trees.inc"
 
-params ["_stackItem", "_childResult"];
+params ["_stackFrame", "_childResult"];
 
-private _node = _stackItem get "node";
-private _state = _stackItem get "state";
+private _node = _stackFrame get "node";
+private _state = _stackFrame get "state";
 
 private _result = [_node, _state, _childResult] call (_node get "onChildFinished");
 _result params ["_statusCode"];

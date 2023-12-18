@@ -9,7 +9,7 @@
         Handles entering a "selector" type node.
 
     Parameter(s):
-        _stackItem - Stack frame for the current node [HASHMAP]
+        _stackFrame - Stack frame for the current node [HASHMAP]
 
     Returns:
         The next action to perform:
@@ -21,6 +21,6 @@
 
 #include "..\behaviour_trees.inc"
 
-params ["_stackItem"];
+params ["_stackFrame"];
 
 [[0], ACTION_RUN_CHILD]

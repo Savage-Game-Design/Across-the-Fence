@@ -29,8 +29,8 @@
 params ["_childIndex"];
 
 // Possible bug if stack is empty here
-private _stackItem = (_stack # (count _stack - 1));
-private _node = _stackItem get "node";
+private _stackFrame = (_stack # (count _stack - 1));
+private _node = _stackFrame get "node";
 
 [format ["Running child: %1 (%2) at index %3", _node getOrDefault ["name", ""], _node get "type", _childIndex]] call vgm_g_fnc_btree_log;
 
@@ -39,6 +39,6 @@ if !(_node get "type" in [NODE_TYPE_DECORATOR, NODE_TYPE_SELECTOR, NODE_TYPE_SEQ
 };
 
 private _child = _node get "children" select _childIndex;
-_stackItem get "state" set ["executingChildIndex", _childIndex];
+_stackFrame get "state" set ["executingChildIndex", _childIndex];
 
 [_child] call ACTION_ENTER_NODE

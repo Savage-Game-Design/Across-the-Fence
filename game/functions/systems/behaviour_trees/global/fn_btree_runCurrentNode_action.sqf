@@ -11,7 +11,7 @@
         Only triggered when that node is of type "action".
 
     Parameter(s):
-        _stackItem - Stack frame for the current node [HASHMAP]
+        _stackFrame - Stack frame for the current node [HASHMAP]
 
     Returns:
         The next action to perform:
@@ -23,10 +23,10 @@
 
 #include "../behaviour_trees.inc"
 
-params ["_stackItem"];
+params ["_stackFrame"];
 
-private _node = _stackItem get "node";
-private _state = _stackItem get "state";
+private _node = _stackFrame get "node";
+private _state = _stackFrame get "state";
 
 private _result = [_node, _state] call (_node get "onTick");
 private _statusCode = _result # 0;
