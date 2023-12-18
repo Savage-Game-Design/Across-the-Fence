@@ -1,21 +1,22 @@
 /*
     File: fn_btree_enterNode_sequence.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
-        No description added yet.
+        Handles entering a "sequence" type node.
 
     Parameter(s):
-        N/A
+        _stackItem - Stack frame for the current node [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        The next action to perform:
+            [_nextActionParams, _nextAction] [ARRAY, CODE]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        N/A
  */
 
 #include "..\behaviour_trees.inc"

@@ -1,21 +1,22 @@
 /*
     File: fn_btree_exitNode_action.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
-        No description added yet.
+        Handles exiting from a "action" type node.
 
     Parameter(s):
-        N/A
+        _stackItem - Stack frame of the current node (topmost stack frame) [HASHMAP]
+        _result - Resulting status of the node - i.e, the status its exitin with [STRING]
 
     Returns:
         Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        N/A
  */
 
 params ["_stackItem", "_result"];

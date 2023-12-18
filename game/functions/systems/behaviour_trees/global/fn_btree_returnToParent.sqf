@@ -1,24 +1,28 @@
 /*
     File: fn_btree_returnToParent.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
-        No description added yet.
+        Behaviour tree action
+        Exits the currently executing node and decides what to execute next based on its parent.
 
     Parameter(s):
-        N/A
+        _childResult - Result from the node that completed [STRING]
 
     Variables defined in environment:
         _stack - Current stack of the behaviour tree.
 
     Returns:
-        Something [BOOL]
+        The next action to perform:
+            [_nextActionParams, _nextAction] [ARRAY, CODE]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [RESULT_SUCCEEDED] call vgm_g_fnc_btree_returnToParent
+        // or
+        [RESULT_SUCCEEDED] call ACTION_RETURN_TO_PARENT
  */
 
 #include "..\behaviour_trees.inc"

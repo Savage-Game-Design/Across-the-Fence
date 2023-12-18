@@ -1,24 +1,28 @@
 /*
     File: fn_btree_runChild.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
-        No description added yet.
+        Behaviour tree action
+        Starts executing the child of the current node at index X.
 
     Parameter(s):
-        N/A
+        _childIndex - Index of the child to start running [NUMBER]
 
     Variables defined in environment:
         _stack - Current stack of the behaviour tree.
 
     Returns:
-        Something [BOOL]
+        The next action to perform:
+            [_nextActionParams, _nextAction] [ARRAY, CODE]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [0] call vgm_g_fnc_btree_runChild;
+        // or
+        [0] call ACTION_RUN_CHILD
  */
 #include "..\behaviour_trees.inc"
 

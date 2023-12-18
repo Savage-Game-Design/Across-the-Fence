@@ -1,8 +1,8 @@
 /*
     File: fn_btree_panic.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         _btreeState - Current state of the behaviour tree.
 
     Returns:
-        [[], {}] -
+        NO NEXT ACTION - Stops the runner executing any more actions [[], {}] [ARRAY, CODE]
 
     Example(s):
         ["Cannot continue - invalid situation"] call vgm_g_fnc_btree_panic;

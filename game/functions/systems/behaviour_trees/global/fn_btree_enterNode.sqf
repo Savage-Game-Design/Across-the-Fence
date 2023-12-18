@@ -1,12 +1,15 @@
 /*
     File: fn_btree_enterNode.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
         Called to try and run a new node in the behaviour tree.
+
+        Generally shouldn't be used by handlers, as it can break the flow of the behaviour tree.
+        ACTION_RUN_CHILD is the correct choice most of the time.
 
     Parameter(s):
         _node - Node that's being entered [HashMap]
@@ -18,7 +21,9 @@
         [_nextActionParameters, _nextActionToRun] [ARRAY, CODE]
 
     Example(s):
-        TODO
+        [_node] call vgm_g_fnc_btree_enterNode;
+        // or
+        [_node] call ACTION_ENTER_NODE;
  */
 
 #include "..\behaviour_trees.inc"

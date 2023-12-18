@@ -1,12 +1,13 @@
 /*
     File: fn_btree_runCurrentNode.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
-        No description added yet.
+        Behaviour tree action
+        Ticks the currently running node (i.e the topmost stack frame)
 
     Parameter(s):
         N/A
@@ -15,10 +16,14 @@
         _stack - Current stack of the behaviour tree.
 
     Returns:
-        Something [BOOL]
+        The next action to perform:
+            [_nextActionParams, _nextAction] [ARRAY, CODE]
+
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call vgm_g_fnc_btree_runCurrentNode;
+        // or
+        [] call ACTION_RUN_CURRENT_NODE
  */
 
 private _currentStackIndex = count _stack - 1;

@@ -1,8 +1,8 @@
 /*
     File: fn_btree_preInit.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
@@ -12,10 +12,10 @@
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        N/A
  */
 
 #include "..\behaviour_trees.inc"

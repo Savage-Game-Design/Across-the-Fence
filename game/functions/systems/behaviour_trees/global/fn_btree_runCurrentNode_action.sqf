@@ -1,27 +1,27 @@
 /*
     File: fn_btree_runCurrentNode_action.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2023-12-18
     Public: No
 
     Description:
-        No description added yet.
+        Runs the current node (i.e the node on the topmost stack frame).
+
+        Only triggered when that node is of type "action".
 
     Parameter(s):
-        N/A
-
-    Variables defined in environment:
-        _stack - Current stack of the behaviour tree.
+        _stackItem - Stack frame for the current node [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        The next action to perform:
+            [_nextActionParams, _nextAction] [ARRAY, CODE]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        N/A
  */
 
-#include "..\behaviour_trees.inc"
+#include "../behaviour_trees.inc"
 
 params ["_stackItem"];
 
