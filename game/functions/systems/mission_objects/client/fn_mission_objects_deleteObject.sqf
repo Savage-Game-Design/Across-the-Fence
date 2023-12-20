@@ -24,6 +24,8 @@ if (remoteExecutedOwner != 2) then {
     format ["Mission object removal should be called from server to prevent object desync, expected 2 got %1 for %2", remoteExecutedOwner, _objectId] call vgm_g_fnc_logWarning;
 };
 
+format ["Deleting local object: %1", _objectId] call vgm_g_fnc_logInfo;
+
 deleteVehicle (vgm_c_mission_objects getOrDefault [_objectId, objNull]);
 vgm_c_mission_objects deleteAt _objectId;
 

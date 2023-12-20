@@ -31,6 +31,7 @@ vgm_s_mission_objects_data = createHashMap;
 
 ["vgm_mission_ended", {
     (_this#0) params ["_missionId"];
+
     format ["Removing server objects for: %1", _missionId] call vgm_g_fnc_logInfo;
     vgm_s_mission_objects_data deleteAt _missionId;
 }] call para_g_fnc_event_subscribeLocal;

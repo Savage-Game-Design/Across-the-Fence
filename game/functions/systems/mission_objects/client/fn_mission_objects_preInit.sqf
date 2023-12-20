@@ -25,7 +25,7 @@ vgm_c_mission_objects = createHashMap;
     private _currentMissionId = [] call vgm_c_fnc_missions_getCurrentMission get "id";
     if (isNil "_currentMissionId" || {_missionId != _currentMissionId}) exitWith {};
 
-    format ["Removing local objects for: %1", _missionId] call vgm_g_fnc_logInfo;
+    format ["Removing all local objects for: %1", _missionId] call vgm_g_fnc_logInfo;
 
     {
         deleteVehicle _y;
