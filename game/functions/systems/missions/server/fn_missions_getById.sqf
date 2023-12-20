@@ -3,21 +3,21 @@
     Author: Savage Game Design
     Date: 2023-12-19
     Last Update: 2023-12-20
-    Public: No
+    Public: Yes
 
     Description:
         Get mission by its ID.
 
     Parameter(s):
-        _missionId - Mission ID [STRING]
+        _missionId - Mission ID [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Mission or nil [HASHMAP]
 
     Example(s):
-        ["2"] call vgm_s_fnc_missions_getById
+        [2] call vgm_s_fnc_missions_getById
  */
 
-params ["_missionId"];
+params [["_missionId", -1, [0]]];
 
 localNamespace getVariable "vgm_missions" get _missionId // return

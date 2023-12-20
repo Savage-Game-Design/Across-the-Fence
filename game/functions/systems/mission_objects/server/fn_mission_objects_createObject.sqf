@@ -9,7 +9,7 @@
         Create virtual object in the mission, objects will be spawned locally by clients upon mission start.
 
     Parameter(s):
-        _mission - Mission Id or Mission to create the object in [HASHMAP, STRING]
+        _mission - Mission Id or Mission to create the object in [HASHMAP, NUMBER]
         _objectData - Array with object properties [ARRAY]
             _class      - Object class [STRING]
             _position   - Object position in AGL format [ARRAY]
@@ -30,7 +30,7 @@
 params ["_mission", "_objectData"];
 _objectData params ["_class", "_position", ["_dir", 0], ["_fnc_init", {}], ["_initParams", []]];
 
-if (_mission isEqualType "") then {
+if (_mission isEqualType 0) then {
     _mission = [_mission] call vgm_s_fnc_missions_getById;
 };
 

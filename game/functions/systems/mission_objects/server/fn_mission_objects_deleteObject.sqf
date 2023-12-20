@@ -9,7 +9,7 @@
         Delete virtual object from the mission, object instance will be deleted on client machines.
 
     Parameter(s):
-        _mission  - Mission ID or Mission to delete the object from [HASHMAP, STRING]
+        _mission  - Mission ID or Mission to delete the object from [HASHMAP, NUMBER]
         _objectId - Id of the object to be deleted [STRING]
 
     Returns:
@@ -21,7 +21,7 @@
 
 params ["_mission", "_objectId"];
 
-if (_mission isEqualType "") then {
+if (_mission isEqualType 0) then {
     _mission = [_mission] call vgm_s_fnc_missions_getById;
 };
 
