@@ -67,6 +67,16 @@ class vgm_s
         class director_stopMission {};
     };
 
+    class missions_objects
+    {
+        VGM_SERVER_PATH(\systems\mission_objects\server);
+
+        class mission_objects_createObject {};
+        class mission_objects_preInit {
+            preInit = 1;
+        };
+    };
+
     class missions
     {
         VGM_SERVER_PATH(\systems\missions\server);
