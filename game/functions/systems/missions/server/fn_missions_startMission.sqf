@@ -45,6 +45,8 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
     private _missionPublic = _mission get "public";
     private _pos = _missionPublic get "startPosASL";
 
+    // full example of object creation
+    // objects created before mission start event will be automatically spawned
     [_mission, ["vn_b_ammobox_01", ASLToAGL _pos, random 360, {
         params ["_object", "_params"];
         _object addAction ["Test action", {
@@ -60,6 +62,18 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
             [_missionId, _objectId] remoteExecCall ["vgm_s_fnc_mission_objects_deleteObject", 2];
         }];
     }, "test"]] call vgm_s_fnc_mission_objects_createObject;
+
+    // example of spawning objects during the mission
+    _mission spawn {
+        sleep 5;
+        params ["_mission"];
+        private _missionPublic = _mission get "public";
+        private _pos = _missionPublic get "startPosASL";
+
+        private _objectIds = [];
+        _objectIds pushBack ([_mission, ["vn_b_ammobox_02", ASLToAGL (_pos vectorAdd [0,2,0])]] call vgm_s_fnc_mission_objects_createObject);
+        [_mission, _objectIds] call vgm_s_fnc_mission_objects_spawnObjects;
+    };
 };
 
 // TODO

@@ -6,16 +6,7 @@
     Public: No
 
     Description:
-        No description added yet.
-
-    Parameter(s):
-        N/A
-
-    Returns:
-        Something [BOOL]
-
-    Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        Server preInit for mission_objects component.
  */
 
 vgm_s_mission_objects_data = createHashMap;

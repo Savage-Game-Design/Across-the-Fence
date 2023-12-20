@@ -6,19 +6,23 @@
     Public: No
 
     Description:
-        No description added yet.
+        Create "real" instances of virtual mission objects.
 
     Parameter(s):
-        N/A
+        _missionObjects - Mission objects [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_c_fnc_mission_objects_spawnObjects
+        [_missionObjects] call vgm_c_fnc_mission_objects_spawnObjects
  */
 
 params ["_missionObjects"];
+
+if (remoteExecutedOwner != 2) then {
+    format ["Mission object creation should be called from server to prevent object desync, expected 2 got %1", remoteExecutedOwner] call vgm_g_fnc_logWarning;
+};
 
 format ["Spawning %1 local mission objects", count _missionObjects] call vgm_g_fnc_logInfo;
 

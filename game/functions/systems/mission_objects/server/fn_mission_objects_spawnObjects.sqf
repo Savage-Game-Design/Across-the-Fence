@@ -9,10 +9,11 @@
         Spawn virtual objects on clients paricipating in the mission.
 
     Parameter(s):
-        _mission - Mission to spawn the objects in [HASHMAP]
+        _mission        - Mission to spawn the objects in [HASHMAP]
+        _missionObjects - Objects hashmap or array of object Ids [HASHMAP, STRING]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [_mission, _missionObjects] call vgm_s_fnc_mission_objects_spawnObjects
@@ -21,7 +22,7 @@
 params ["_mission", "_missionObjects"];
 private _missionId = _mission get "public" get "id";
 
-// turn object ids into a spawn "chunk" so we can send less over the network
+// turn object ids into a spawn "chunk"
 if (_missionObjects isEqualType []) then {
     private _allMissionObjects = vgm_s_mission_objects_data getOrDefault [_missionId, createHashMap];
     _missionObjects = createHashMapFromArray (_missionObjects select {_x in _allMissionObjects} apply {[_x, _allMissionObjects get _x]});
@@ -30,3 +31,5 @@ if (_missionObjects isEqualType []) then {
 format ["Sending %1 server objects for %2", count _missionObjects, _missionId] call vgm_g_fnc_logInfo;
 
 [_missionObjects] remoteExecCall ["vgm_c_fnc_mission_objects_spawnObjects", values (_mission get "machineIds")];
+
+nil
