@@ -39,6 +39,14 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 
 [_mission] call vgm_s_fnc_director_startMission;
 [_missionPublic get "startPosASL"] call vgm_s_fnc_missions_gameplay_ambient_departHelicopter; // TODO by what and where should this be fired?
+// TODO what should setup objects in the mission?
+[_mission] call {
+    params ["_mission"];
+    private _missionPublic = _mission get "public";
+    private _pos = _missionPublic get "startPosASL";
+
+    [_mission, ["vn_b_ammobox_01", ASLToAGL _pos]] call vgm_s_fnc_mission_objects_createObject;
+};
 
 // TODO
 // - Setup extract mechanics

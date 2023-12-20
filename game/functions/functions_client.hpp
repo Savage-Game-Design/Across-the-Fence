@@ -199,6 +199,16 @@ class vgm_c
         class director_stopClientsideMonitoring {};
     };
 
+    class missions_objects
+    {
+        VGM_CLIENT_PATH(\systems\mission_objects\client);
+
+        class mission_objects_spawnObjects {};
+        class mission_objects_preInit {
+            preInit = 1;
+        };
+    };
+
     class missions
     {
         VGM_CLIENT_PATH(\systems\missions\client);
