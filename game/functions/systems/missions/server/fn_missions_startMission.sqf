@@ -45,7 +45,21 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
     private _missionPublic = _mission get "public";
     private _pos = _missionPublic get "startPosASL";
 
-    [_mission, ["vn_b_ammobox_01", ASLToAGL _pos]] call vgm_s_fnc_mission_objects_createObject;
+    [_mission, ["vn_b_ammobox_01", ASLToAGL _pos, random 360, {
+        params ["_object", "_params"];
+        _object addAction ["Test action", {
+            params ["", "_caller", "", "_arguments"];
+            hint format ["I'm a box, hello %1 with params %2!", name _caller, _arguments];
+        }, _params];
+
+        _object addAction ["Delete me", {
+            params ["_object"];
+            private _objectId = _object getVariable "vgm_mission_objects_id";
+            private _missionId = [] call vgm_c_fnc_missions_getCurrentMission get "id";
+
+            [_missionId, _objectId] remoteExecCall ["vgm_s_fnc_mission_objects_deleteObject", 2];
+        }];
+    }, "test"]] call vgm_s_fnc_mission_objects_createObject;
 };
 
 // TODO
