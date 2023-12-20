@@ -2,7 +2,7 @@
     File: fn_missions_startMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-11-24
+    Last Update: 2023-12-20
     Public: Yes
 
     Description:
@@ -20,7 +20,7 @@
 
 params ["_missionId"];
 
-private _mission = localNamespace getVariable "vgm_missions" get _missionId;
+private _mission = [_missionId] call vgm_s_fnc_missions_getById;
 
 if (isNil "_mission") exitWith {
     [format ["Cannot start mission %1 - mission does not exist", _missionId]] call vgm_g_fnc_logError;
