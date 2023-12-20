@@ -3,19 +3,28 @@
     Author: Savage Game Design
     Date: 2023-12-18
     Last Update: 2023-12-20
-    Public: No
+    Public: Yes
 
     Description:
-        No description added yet.
+        Create virtual object in the mission, objects will be spawned locally by clients upon mission start.
 
     Parameter(s):
-        N/A
+        _mission - Mission to create the object in [HASHMAP]
+        _objectData - Array with object properties [ARRAY]
+            _class      - Object class [STRING]
+            _position   - Object position in AGL format [ARRAY]
+            _dir        - Object direction [NUMBER, defaults to 0]
+            _fnc_init   - Code to be executed upon object creation [CODE]
+            _initParams - Parameters passed additionaly to the init code [ANYTHING]
 
     Returns:
-        Something [BOOL]
+        Object ID [STRING]
 
     Example(s):
-        [_mission, ["vn_b_ammobox_01", ASLToAGL getPosASL player]] call vgm_s_fnc_mission_objects_createObject
+        [
+            _mission,
+            ["vn_b_ammobox_01", ASLToAGL getPosASL player]
+        ] call vgm_s_fnc_mission_objects_createObject
  */
 
 params ["_mission", "_objectData"];
