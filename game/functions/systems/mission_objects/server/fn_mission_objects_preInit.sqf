@@ -25,8 +25,7 @@ vgm_s_mission_objects_data = createHashMap;
     private _mission = [_missionId] call vgm_s_fnc_missions_getById;
     private _missionObjects = vgm_s_mission_objects_data getOrDefault [_missionId, createHashMap];
 
-    format ["Sending server objects for: %1", _missionId] call vgm_g_fnc_logInfo;
-    [_missionObjects] remoteExecCall ["vgm_c_fnc_mission_objects_spawnObjects", values (_mission get "machineIds")];
+    [_mission, _missionObjects] call vgm_s_fnc_mission_objects_spawnObjects;
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_mission_ended", {

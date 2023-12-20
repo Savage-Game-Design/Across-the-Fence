@@ -76,6 +76,7 @@ class vgm_s
         class mission_objects_preInit {
             preInit = 1;
         };
+        class mission_objects_spawnObjects {};
     };
 
     class missions
