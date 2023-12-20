@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-06-22
+    Last Update: 2023-12-19
     Public: No
 
     Description:
@@ -55,7 +55,7 @@ private _playerInfoNetmap = [] call para_s_fnc_netmap_createNetmap;
 [_playerId call vgm_s_fnc_player_fromId] joinSilent (_missionPublic get "group");
 
 [
-    "player attached to mission",
+    "vgm_mission_attached",
     [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
