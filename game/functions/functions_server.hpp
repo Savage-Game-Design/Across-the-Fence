@@ -72,6 +72,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\mission_objects\server);
 
         class mission_objects_createObject {};
+        class mission_objects_deleteObject {};
         class mission_objects_preInit {
             preInit = 1;
         };

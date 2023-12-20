@@ -203,6 +203,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\mission_objects\client);
 
+        class mission_objects_deleteObject {};
         class mission_objects_spawnObjects {};
         class mission_objects_preInit {
             preInit = 1;
