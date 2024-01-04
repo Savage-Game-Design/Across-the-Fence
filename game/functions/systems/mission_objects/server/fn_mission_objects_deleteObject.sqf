@@ -2,7 +2,7 @@
     File: fn_mission_objects_deleteObject.sqf
     Author: Savage Game Design
     Date: 2023-12-20
-    Last Update: 2023-12-20
+    Last Update: 2024-01-04
     Public: Yes
 
     Description:
@@ -25,10 +25,13 @@ if (_mission isEqualType 0) then {
     _mission = [_mission] call vgm_s_fnc_missions_getById;
 };
 
-private _missionObjects = vgm_s_mission_objects_data getOrDefault [(_mission get "public" get "id"), createHashMap, true];
+private _missionId = _mission get "public" get "id";
+private _missionObjects = vgm_s_mission_objects_data getOrDefault [_missionId, createHashMap, true];
 
 _missionObjects deleteAt _objectId;
 
-[_objectId] remoteExecCall ["vgm_c_fnc_mission_objects_deleteObject", values (_mission get "machineIds")];
+// spawn on all clients in mission and server
+private _machines = values (_mission get "machineIds") + [2];
+[_objectId] remoteExecCall ["vgm_g_fnc_mission_objects_deleteObject", _machines];
 
 nil

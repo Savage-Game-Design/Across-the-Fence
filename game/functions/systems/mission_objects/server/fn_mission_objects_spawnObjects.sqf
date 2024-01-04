@@ -2,11 +2,11 @@
     File: fn_mission_ojbect_spawnObjects.sqf
     Author: Savage Game Design
     Date: 2023-12-20
-    Last Update: 2023-12-20
+    Last Update: 2024-01-04
     Public: Yes
 
     Description:
-        Spawn virtual objects on clients paricipating in the mission.
+        Spawn virtual objects on server and clients paricipating in the mission.
 
     Parameter(s):
         _mission        - Mission to spawn the objects in [HASHMAP]
@@ -30,6 +30,8 @@ if (_missionObjects isEqualType []) then {
 
 format ["Sending %1 server objects for %2", count _missionObjects, _missionId] call vgm_g_fnc_logInfo;
 
-[_missionObjects] remoteExecCall ["vgm_c_fnc_mission_objects_spawnObjects", values (_mission get "machineIds")];
+// spawn on all clients in mission and server
+private _machines = values (_mission get "machineIds") + [2];
+[_missionId, _missionObjects] remoteExecCall ["vgm_g_fnc_mission_objects_spawnObjects", _machines];
 
 nil

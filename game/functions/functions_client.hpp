@@ -75,6 +75,17 @@ class vgm_g
         class medical_replaceItems {};
     };
 
+    class mission_objects
+    {
+        VGM_GLOBAL_PATH(\systems\mission_objects\global);
+
+        class mission_objects_deleteObject {};
+        class mission_objects_spawnObjects {};
+        class mission_objects_preInit {
+            preInit = 1;
+        };
+    };
+
     class missions
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
@@ -197,17 +208,6 @@ class vgm_c
         class director_sendRecentShotsToServer {};
         class director_startClientsideMonitoring {};
         class director_stopClientsideMonitoring {};
-    };
-
-    class missions_objects
-    {
-        VGM_CLIENT_PATH(\systems\mission_objects\client);
-
-        class mission_objects_deleteObject {};
-        class mission_objects_spawnObjects {};
-        class mission_objects_preInit {
-            preInit = 1;
-        };
     };
 
     class missions
