@@ -33,11 +33,14 @@ private _localObjectsData = vgm_g_mission_objects getOrDefault [_missionId, crea
     if (_id in _localObjectsData) then {continue};
     _y params ["_class", "_position", "_dir", "_fnc_init", "_initParams"];
 
-    private _object = createSimpleObject [_class, _position, true];
+    // create simple object if no init code
+    private _object = if (_fnc_init isEqualTo {}) then {createSimpleObject [_class, AGLToASL _position, true]} else {createVehicleLocal [_class, _position, [], 0, "CAN_COLLIDE"]};
+    if (!isSimpleObject _object) then {_object enableSimulation false};
     _object setDir _dir;
-
-    [_object, _initParams] call _fnc_init;
 
     _object setVariable ["vgm_mission_objects_id", _id];
     _localObjectsData set [_id, _object];
+
+    [_object, _initParams] call _fnc_init;
+
 } forEach _missionObjects;
