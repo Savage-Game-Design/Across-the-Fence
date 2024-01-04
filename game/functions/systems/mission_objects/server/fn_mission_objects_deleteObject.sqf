@@ -32,6 +32,6 @@ _missionObjects deleteAt _objectId;
 
 // spawn on all clients in mission and server
 private _machines = values (_mission get "machineIds") + [2];
-[_objectId] remoteExecCall ["vgm_g_fnc_mission_objects_deleteObject", _machines];
+[_missionId, _objectId] remoteExecCall ["vgm_g_fnc_mission_objects_deleteObject", _machines];
 
 nil
