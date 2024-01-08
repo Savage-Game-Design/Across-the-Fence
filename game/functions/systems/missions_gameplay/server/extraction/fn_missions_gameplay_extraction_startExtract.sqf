@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2023-12-03
+    Last Update: 2023-12-20
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ params [
     ["_originPos", markerPos "vgm_shared_hub"]
 ];
 
-private _mission = localNamespace getVariable "vgm_missions" get _missionId;
+private _mission = [_missionId] call vgm_s_fnc_missions_getById;
 
 if (isNil "_mission") exitWith {
     format ["Unable to extract, no mission with id: %1", _missionId] call vgm_g_fnc_logError;

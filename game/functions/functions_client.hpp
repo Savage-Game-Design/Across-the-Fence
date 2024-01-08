@@ -75,6 +75,17 @@ class vgm_g
         class medical_replaceItems {};
     };
 
+    class mission_objects
+    {
+        VGM_GLOBAL_PATH(\systems\mission_objects\global);
+
+        class mission_objects_deleteObject {};
+        class mission_objects_spawnObjects {};
+        class mission_objects_preInit {
+            preInit = 1;
+        };
+    };
+
     class missions
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
