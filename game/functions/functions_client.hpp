@@ -470,6 +470,17 @@ class vgm_c
         class skill_actives_fireSupport_overwhelmingFire {};
     };
 
+    class skill_investigate
+    {
+        VGM_CLIENT_PATH(\systems\skill_investigate\client);
+
+        class skill_investigate_postInit
+        {
+            postInit = 1;
+        };
+        class skill_investigate_setDesaturation {};
+    };
+
     class stamina
     {
         VGM_CLIENT_PATH(\systems\stamina\client);
