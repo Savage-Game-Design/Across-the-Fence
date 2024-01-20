@@ -2,7 +2,7 @@
     File: fn_skill_investigate_setDesaturation.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-01-17
+    Last Update: 2024-01-20
     Public: No
 
     Description:
@@ -21,7 +21,7 @@
 params [["_enable", true, [false]]];
 
 if (_enable) exitWith {
-    terminate vgm_c_skill_investigate_ppDisableScript;
+    terminate (missionNamespace getVariable ["vgm_c_skill_investigate_ppDisableScript", scriptNull]);
 
     vgm_c_skill_investigate_ppDesaturate ppEffectAdjust [
         1,
