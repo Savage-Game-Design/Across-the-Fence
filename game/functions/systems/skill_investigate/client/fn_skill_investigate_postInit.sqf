@@ -2,7 +2,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-01-20
+    Last Update: 2024-01-21
     Public: No
 
     Description:
@@ -36,38 +36,5 @@ call {
     vgm_c_skill_investigate_ppDesaturate = _effect;
 };
 
-// add hold action
-call {
-    [
-        player,
-        localize "STR_VGM_SKILL_INVESTIGATE_ACTION",
-        "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\listen_ca.paa",
-        "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\listen_ca.paa",
-        "true",
-        "speed _this < 1",
-        {
-            [true] call vgm_c_fnc_skill_investigate_setDesaturation;
-            // TODO start the listening loop
-        },
-        {
-            // this uses outer scope variables to prevent the ticker from having one "bar" in it.
-            private _frame = 3;
-            [_target,_actionID,_title,_iconProgress,bis_fnc_holdAction_texturesIn,_frame,"",_orig_iconProgress] call vn_fnc_holdAction_showIcon;
-        },
-        {},
-        {
-            params ["_target"];
-            if (speed _target >= 1) then {
-                hint localize "STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY";
-                playSoundUI ["\a3\ui_f_curator\Data\Sound\CfgSound\error02.wss", 0.1];
-            };
-            [false] call vgm_c_fnc_skill_investigate_setDesaturation;
-        },
-        [],
-        1e38,
-        -50,
-        false,
-        false,
-        true
-    ] call VN_fnc_holdActionAdd;
-};
+player call vgm_c_fnc_skill_investigate_addAction;
+player addEventHandler ["Respawn", {(_this#0) call vgm_c_fnc_skill_investigate_addAction}];

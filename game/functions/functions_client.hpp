@@ -474,11 +474,13 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill_investigate\client);
 
+        class skill_investigate_addAction {};
         class skill_investigate_postInit
         {
             postInit = 1;
         };
         class skill_investigate_setDesaturation {};
+        class skill_investigate_setListenMode {};
     };
 
     class stamina
