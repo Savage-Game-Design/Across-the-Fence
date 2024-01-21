@@ -74,6 +74,7 @@ fnc_drawIcon = {
     private _iconSize = ICON_BASE_SIZE * ((_elapsed * WAVE_SPEED));
     private _dist = getPosASLVisual player vectorDistance _posASL;
     _iconSize = _iconSize * (ICON_BASE_DIST / _dist); // furher the sound the smaller the wave
+    _iconSize = _iconSize * (speed _target call fnc_getSpeedCoef);
 
     private _fadeStr = _elapsed / FADE_TIME_COEF;
 
@@ -97,3 +98,32 @@ fnc_draw = {
         [_object, (_elapsed - _x), _texRotation#_forEachIndex] call fnc_drawIcon // return
     } forEach [WAVE1_TIME, WAVE2_TIME, WAVE3_TIME];
 };
+
+fnc_getSpeedCoef = {
+    params ["_speed"];
+
+    _progress = linearConversion [0, 18, _speed, 0, 1, true];
+    _progress bezierInterpolation [
+        [0.0, 0, 0],
+        [0.5, 0, 0],
+        [0.5, 0, 0],
+        [0.8, 0, 0],
+        [0.9, 0, 0],
+        [0.9, 0, 0],
+        [0.9, 0, 0],
+        [1.5, 0, 0]
+    ] params ["_coef"];
+
+    _coef // return
+};
+
+/*
+[0.0, 0, 0],
+[0.5, 0, 0],
+[0.5, 0, 0],
+[0.8, 0, 0],
+[0.9, 0, 0],
+[0.9, 0, 0],
+[0.9, 0, 0],
+[1.5, 0, 0]
+*/
