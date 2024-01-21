@@ -26,7 +26,7 @@ params ["_player"];
     "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\listen_ca.paa",
     "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\listen_ca.paa",
     "true",
-    "speed _this < 1",
+    "abs speed _this < 1",
     {
         params ["_target"];
         _target playActionNow "Stop";
@@ -41,7 +41,7 @@ params ["_player"];
     {},
     {
         params ["_target"];
-        if (speed _target >= 1) then {
+        if (abs speed _target >= 1) then {
             hint localize "STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY";
             playSoundUI ["\a3\ui_f_curator\Data\Sound\CfgSound\error02.wss", 0.1];
         };
