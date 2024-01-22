@@ -475,6 +475,11 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill_investigate\client);
 
         class skill_investigate_addAction {};
+        class skill_investigate_drawSoundWaves
+        {
+            headerType = -1;
+        };
+        class skill_investigate_getSpeedDrawCoef {};
         class skill_investigate_postInit
         {
             postInit = 1;

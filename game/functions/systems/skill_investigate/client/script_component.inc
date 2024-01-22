@@ -1,0 +1,12 @@
+
+#define PING_TICK 3
+
+#define WAVE_SPEED 45
+#define ICON_BASE_SIZE 0.1
+#define ICON_BASE_DIST 10
+#define ICON_ALPHA 0.4
+#define FADE_TIME_COEF 5
+
+#define WAVE1_TIME 0
+#define WAVE2_TIME 0.8
+#define WAVE3_TIME 1.6

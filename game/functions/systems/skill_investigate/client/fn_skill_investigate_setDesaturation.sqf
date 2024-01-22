@@ -2,17 +2,17 @@
     File: fn_skill_investigate_setDesaturation.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-01-20
+    Last Update: 2024-01-22
     Public: No
 
     Description:
-        No description added yet.
+        Sets desaturation PP filter.
 
     Parameter(s):
-        N/A
+        _enable - Filter toggle [BOOL]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [true] call vgm_c_fnc_skill_investigate_setDesaturation
