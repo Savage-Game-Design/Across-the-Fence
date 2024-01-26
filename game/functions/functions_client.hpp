@@ -53,9 +53,9 @@ class vgm_g
         };
     };
 
-    class behaviour_trees
+    class behaviour_trees_runner
     {
-        VGM_GLOBAL_PATH(\systems\behaviour_trees\global);
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\runner\global);
         class btree_preinit {
             preInit = 1;
         };
