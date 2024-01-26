@@ -2,7 +2,7 @@
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2024-01-26
     Public: Yes
 
     Description:
@@ -29,17 +29,17 @@ if (isNil "_tree") exitWith {};
 // These variables are available for ALL CALLED FUNCTIONS.
 // I.e - It should be safe to use them in any non-setup btree functions (actions, etc)
 // However - be careful, as changing them could break execution.
-private _group = _group;
-private _btreeState = _group getVariable "vgm_l_btree_state";
-private _stack = _btreeState get "stack";
-private _blackboard = _btreeState get "blackboard";
+private _extern_group = _group;
+private _extern_btreeState = _group getVariable "vgm_l_btree_state";
+private _extern_stack = _extern_btreeState get "stack";
+private _extern_blackboard = _extern_btreeState get "blackboard";
 
 // Run current node by default
 private _nextAction = ACTION_RUN_CURRENT_NODE;
 private _nextActionParams = [];
 
 // If no current node, start tree execution from the top.
-if (count _stack == 0) then {
+if (count _extern_stack == 0) then {
     _nextAction = ACTION_ENTER_NODE;
     _nextActionParams = [_tree];
 };
@@ -68,7 +68,7 @@ if (count _stack == 0) then {
         _nextAction = ACTION_RUN_CHILD;
         _nextActionParams = [_frame get "higherPriorityNodes" select _newChildToRunIndex];
     };
-} forEach _stack;
+} forEach _extern_stack;
 
 // Each action can return the next action that needs executing.
 // Actions can theoretically be any function, but only the constants in behaviour_trees.inc should be used.

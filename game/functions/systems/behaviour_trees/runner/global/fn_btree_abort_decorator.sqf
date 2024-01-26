@@ -2,7 +2,7 @@
     File: fn_btree_abort_decorator.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -19,7 +19,7 @@
         Nothing
 
     Example(s):
-        [_stack # (count _stack - 1)] call vgm_g_fnc_btree_abort_decorator;
+        [_extern_stack # (count _extern_stack - 1)] call vgm_g_fnc_btree_abort_decorator;
  */
 
 params ["_stackFrame"];

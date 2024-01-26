@@ -2,7 +2,7 @@
     File: fn_btree_unwindStackUpToIndex.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-17
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -12,14 +12,14 @@
         _stackIndex - Index to unwind until [NUMBER]
 
     Variables defined in environment:
-        _stack - Current stack of the behaviour tree.
+        _extern_stack - Current stack of the behaviour tree.
 
     Returns:
         Nothing
 
     Example(s):
         // Abort just the current node.
-        private _currentStackIndex = count _stack - 1;
+        private _currentStackIndex = count _extern_stack - 1;
         [_currentStackIndex - 1] call vgm_g_fnc_btree_unwindStackUpToIndex
  */
 
@@ -27,10 +27,10 @@
 
 params ["_index"];
 
-private _currentStackIndex = count _stack - 1;
+private _currentStackIndex = count _extern_stack - 1;
 
 while {_currentStackIndex > _index} do {
-    private _currentStackItem = (_stack # _currentStackIndex);
+    private _currentStackItem = (_extern_stack # _currentStackIndex);
     private _node = _currentStackItem get "node";
     private _state = _currentStackItem get "state";
 
@@ -40,7 +40,7 @@ while {_currentStackIndex > _index} do {
     private _handler = localNamespace getVariable "vgm_l_btree_abortNodeHandlers" get _nodeType;
     [_currentStackItem] call _handler;
 
-    _stack deleteAt _currentStackIndex;
+    _extern_stack deleteAt _currentStackIndex;
 
     _currentStackIndex = _currentStackIndex - 1;
 };

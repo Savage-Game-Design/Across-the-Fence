@@ -2,7 +2,7 @@
     File: fn_btree_log.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -14,7 +14,7 @@
         _message - Message to send [STRING]
 
     Variables defined in environment:
-        _group - Current group in the behaviour tree [GROUP]
+        _extern_group - Current group in the behaviour tree [GROUP]
 
     Returns:
         None
@@ -25,4 +25,4 @@
 
 params ["_message"];
 
-_group getVariable "vgm_l_btree_log" pushBack _message;
+_extern_group getVariable "vgm_l_btree_log" pushBack _message;

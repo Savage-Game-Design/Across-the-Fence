@@ -2,7 +2,7 @@
     File: fn_btree_panic.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -12,7 +12,7 @@
         N/A
 
     Variables defined in environment:
-        _btreeState - Current state of the behaviour tree.
+        _extern_btreeState - Current state of the behaviour tree.
 
     Returns:
         NO NEXT ACTION - Stops the runner executing any more actions [[], {}] [ARRAY, CODE]
@@ -31,6 +31,6 @@ private _formattedMessage = format ["BEHAVIOUR TREE PANIC: %1", _message];
 [_formattedMessage] call vgm_g_fnc_btree_log;
 
 // Reset the stack to make the behaviour tree start executing from the beginning.
-_btreeState set ["stack", []];
+_extern_btreeState set ["stack", []];
 
 NO_NEXT_ACTION

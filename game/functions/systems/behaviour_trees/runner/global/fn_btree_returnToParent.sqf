@@ -2,7 +2,7 @@
     File: fn_btree_returnToParent.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
         _childResult - Result from the node that completed [STRING]
 
     Variables defined in environment:
-        _stack - Current stack of the behaviour tree.
+        _extern_stack - Current stack of the behaviour tree.
 
     Returns:
         The next action to perform:
@@ -29,8 +29,8 @@
 
 params ["_childResult"];
 
-private _currentStackIndex = count _stack - 1;
-private _currentStackItem = (_stack # _currentStackIndex);
+private _currentStackIndex = count _extern_stack - 1;
+private _currentStackItem = (_extern_stack # _currentStackIndex);
 
 private _node = _currentStackItem get "node";
 private _state = _currentStackItem get "state";
@@ -42,14 +42,14 @@ private _handler = localNamespace getVariable "vgm_l_btree_exitNodeHandlers" get
 [_currentStackItem, _childResult] call _handler;
 
 // Pop the top item off of the stack.
-_stack deleteAt _currentStackIndex;
+_extern_stack deleteAt _currentStackIndex;
 
-if (count _stack == 0) exitWith {
+if (count _extern_stack == 0) exitWith {
     [format ["Return from root node, suspending execution until next tick"]] call vgm_g_fnc_btree_log;
     NO_NEXT_ACTION
 };
 
-private _parentStackItem = (_stack # (_currentStackIndex - 1));
+private _parentStackItem = (_extern_stack # (_currentStackIndex - 1));
 private _parentNode = _parentStackItem get "node";
 private _parentState = _parentStackItem get "state";
 private _parentNodeType = _parentNode get "type";

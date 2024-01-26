@@ -2,7 +2,7 @@
     File: fn_btree_runChild.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
         _childIndex - Index of the child to start running [NUMBER]
 
     Variables defined in environment:
-        _stack - Current stack of the behaviour tree.
+        _extern_stack - Current stack of the behaviour tree.
 
     Returns:
         The next action to perform:
@@ -29,7 +29,7 @@
 params ["_childIndex"];
 
 // Possible bug if stack is empty here
-private _stackFrame = (_stack # (count _stack - 1));
+private _stackFrame = (_extern_stack # (count _extern_stack - 1));
 private _node = _stackFrame get "node";
 
 [format ["Running child: %1 (%2) at index %3", _node getOrDefault ["name", ""], _node get "type", _childIndex]] call vgm_g_fnc_btree_log;

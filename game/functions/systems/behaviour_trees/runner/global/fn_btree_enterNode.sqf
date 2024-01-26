@@ -2,7 +2,7 @@
     File: fn_btree_enterNode.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-01-26
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         _node - Node that's being entered [HashMap]
 
     Variables defined in environment:
-        _stack - Current stack of the behaviour tree.
+        _extern_stack - Current stack of the behaviour tree.
 
     Returns:
         [_nextActionParameters, _nextActionToRun] [ARRAY, CODE]
@@ -42,7 +42,7 @@ private _stackFrame = (createHashMapFromArray [
     ["isServiceNode", false]
 ]);
 
-_stack pushBack _stackFrame;
+_extern_stack pushBack _stackFrame;
 
 private _nodeType = _node get "type";
 
