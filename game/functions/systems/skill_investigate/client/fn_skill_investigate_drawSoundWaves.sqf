@@ -3,7 +3,7 @@
     File: fn_skill_investigate_drawSoundWaves.sqf
     Author: Savage Game Design
     Date: 2024-01-22
-    Last Update: 2024-01-22
+    Last Update: 2024-01-27
     Public: No
 
     Description:
@@ -16,7 +16,7 @@
         _noiseStrength - Noise strength for icon size coef [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Sound wave was fully drawn/faded out [BOOL]
 
     Example(s):
         [parameter] call vgm_c_fnc_skill_investigate_drawSoundWaves
@@ -50,7 +50,7 @@ private _fnc_drawIcon = {
 
 private _elapsed = time - _startTime;
 {
-    if (_elapsed < _x) then {continue};
+    if (_elapsed < _x) then {continueWith false};
     private _drawCompleted = [(_elapsed - _x), _texRotation#_forEachIndex] call _fnc_drawIcon;
     _drawCompleted && (_x == WAVE3_TIME) // return, all waves were completed and last one faded out
 } forEach [WAVE1_TIME, WAVE2_TIME, WAVE3_TIME] // return

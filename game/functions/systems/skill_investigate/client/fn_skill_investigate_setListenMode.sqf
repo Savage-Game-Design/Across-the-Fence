@@ -3,7 +3,7 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-01-22
+    Last Update: 2024-01-27
     Public: No
 
     Description:
@@ -51,8 +51,7 @@ vgm_c_skill_investigate_drawEh = addMissionEventHandler ["Draw3D", {
     };
 
     //----- draw sound sources
-    {
-        private _completed = _x call vgm_c_fnc_skill_investigate_drawSoundWaves;
-        if (_completed) then {vgm_c_skill_investigate_noises deleteAt _forEachIndex}
-    } forEachReversed vgm_c_skill_investigate_noises;
+    vgm_c_skill_investigate_noises = vgm_c_skill_investigate_noises select {
+        !(_x call vgm_c_fnc_skill_investigate_drawSoundWaves) // return, discard completed
+    };
 }, [time]];
