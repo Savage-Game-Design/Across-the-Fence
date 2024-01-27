@@ -52,5 +52,5 @@ private _elapsed = time - _startTime;
 {
     if (_elapsed < _x) then {continueWith false};
     private _drawCompleted = [(_elapsed - _x), _texRotation#_forEachIndex] call _fnc_drawIcon;
-    _drawCompleted && (_x == WAVE3_TIME) // return, all waves were completed and last one faded out
-} forEach [WAVE1_TIME, WAVE2_TIME, WAVE3_TIME] // return
+    _drawCompleted && (_x == WAVE_FINAL_START_TIME) // return, all waves were completed and last one faded out
+} forEach [WAVE1_START_TIME, WAVE2_START_TIME, WAVE3_START_TIME] // return
