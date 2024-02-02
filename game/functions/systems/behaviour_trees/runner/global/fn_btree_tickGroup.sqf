@@ -49,17 +49,18 @@ if (count _extern_stack == 0) then {
 {
     // Check if there's any conditions on the current path that can cause us to abort.
     private _frame = _x;
-    if (_frame get "isInterruptNode" && {[_frame get "node", _frame get "state"] call (_frame get "condition") isEqualTo RESULT_FAILED} ) exitWith {
+    private _node = _frame get "node";
+    private _state = _frame get "state";
+
+    if (_frame get "isInterruptNode" && {[_node, _state] call (_node get "condition") isEqualTo RESULT_FAILED} ) exitWith {
         [_forEachIndex] call vgm_g_fnc_btree_unwindStackUpToIndex;
         _nextAction = ACTION_RETURN_TO_PARENT;
         _nextActionParams = [RESULT_FAILED];
     };
 
-    // TODO - Service nodes
-
     // Check if there's any higher priority nodes registered, that need us to abort and switch to them.
     private _newChildToRunIndex = _frame getOrDefault ["higherPriorityNodes", []] findIf {
-        private _child = _frame get "node" get "children" select _x;
+        private _child = _node get "children" select _x;
         [_child get "node"] call (_child get "condition")
     };
 
@@ -68,6 +69,11 @@ if (count _extern_stack == 0) then {
         _nextAction = ACTION_RUN_CHILD;
         _nextActionParams = [_frame get "higherPriorityNodes" select _newChildToRunIndex];
     };
+
+    if (_frame get "isServiceNode") then {
+        [_node, _state] call (_node get "onTick");
+    };
+
 } forEach _extern_stack;
 
 // Each action can return the next action that needs executing.

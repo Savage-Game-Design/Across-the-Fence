@@ -36,7 +36,6 @@ _enterResult params ["_statusCode"];
 if (_statusCode isEqualTo RESULT_RUNNING) exitWith {
     _stackFrame set ["isInterruptNode", _node get "abortChildrenOnConditionFailure"];
     _stackFrame set ["isServiceNode", _node get "isService"];
-    // TODO: Services stack
 
     [[0], ACTION_RUN_CHILD]
 };
