@@ -36,4 +36,4 @@ if (_statusCode isEqualTo RESULT_RUNNING) exitWith {
     [[0], ACTION_RUN_CHILD]
 };
 
-[[_childResult], ACTION_RETURN_TO_PARENT]
+[[_statusCode], ACTION_RETURN_TO_PARENT]
