@@ -53,6 +53,28 @@ class vgm_g
         };
     };
 
+    class behaviour_trees_compiler
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\compiler\global);
+        class btree_compileTree {};
+        class btree_runBasicTest {};
+    };
+
+    class behaviour_trees_nodes
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\nodes\global);
+
+        /* Template nodes / base nodes */
+        class btree_action_basic {};
+        class btree_composite_selector {};
+        class btree_composite_sequence {};
+        class btree_decorator_basic {};
+
+        /* Custom nodes */
+        class btree_decorator_alwaysFail {};
+        class btree_decorator_alwaysSucceed {};
+    };
+
     class behaviour_trees_runner
     {
         VGM_GLOBAL_PATH(\systems\behaviour_trees\runner\global);
