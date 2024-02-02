@@ -33,7 +33,8 @@ private _result = [_node, _state, _childResult] call (_node get "onChildFinished
 _result params ["_statusCode"];
 
 if (_statusCode isEqualTo RESULT_RUNNING) exitWith {
-    [[0], ACTION_RUN_CHILD]
+    [format ["Re-running child of decorator (%1) next tick", _node get "name"]] call vgm_g_fnc_btree_log;
+    NO_ACTION_UNTIL_NEXT_TICK
 };
 
 [[_statusCode], ACTION_RETURN_TO_PARENT]

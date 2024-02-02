@@ -45,7 +45,7 @@ _extern_stack deleteAt _currentStackIndex;
 
 if (count _extern_stack == 0) exitWith {
     [format ["Return from root node, suspending execution until next tick"]] call vgm_g_fnc_btree_log;
-    NO_NEXT_ACTION
+    NO_ACTION_UNTIL_NEXT_TICK
 };
 
 private _parentStackItem = (_extern_stack # (_currentStackIndex - 1));
