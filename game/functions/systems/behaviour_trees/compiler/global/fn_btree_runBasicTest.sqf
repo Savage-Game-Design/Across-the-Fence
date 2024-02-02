@@ -20,21 +20,28 @@
  */
 
 private _exampleTree =
-[SELECTOR, [["name", "root selector"]], [
-    [DECORATOR(alwaysFail), [], [
-        [DECORATOR(basic), [], [
+[DECORATOR(basicService), [], [
+    [SELECTOR, [["name", "root selector"]], [
+        [DECORATOR(alwaysFail), [], [
+            [DECORATOR(basic), [], [
+                [ACTION(basic), []]
+            ]]
+        ]],
+        [SEQUENCE, [["name", "fail before last child"]], [
+            [ACTION(basic), []],
+            [DECORATOR(alwaysFail), [], [
+                [ACTION(basic), []]
+            ]],
+            [ACTION(basic), [["name", "won't run"]]]
+        ]],
+        // Infinite loop means the tree doesn't ever return to root.
+        // Allows testing service and interrupt behaviour.
+        [DECORATOR(loopInfinitely), [], [
             [ACTION(basic), []]
         ]]
-    ]],
-    [SEQUENCE, [["name", "fail before last child"]], [
-        [ACTION(basic), []],
-        [DECORATOR(alwaysFail), [], [
-            [ACTION(basic), []]
-        ]],
-        [ACTION(basic), [["name", "won't run"]]]
-    ]],
-    [ACTION(basic), []]
-]];
+    ]]
+]]
+;
 
 private _compiledTree = [_exampleTree] call vgm_g_fnc_btree_compileTree;
 
@@ -42,6 +49,7 @@ private _testGroup = createGroup civilian;
 
 [_testGroup, _compiledTree] call vgm_g_fnc_btree_setTree;
 
+[_testGroup] call vgm_g_fnc_btree_tickGroup;
 [_testGroup] call vgm_g_fnc_btree_tickGroup;
 
 [

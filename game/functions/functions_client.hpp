@@ -69,10 +69,12 @@ class vgm_g
         class btree_composite_selector {};
         class btree_composite_sequence {};
         class btree_decorator_basic {};
+        class btree_decorator_basicService {};
 
         /* Custom nodes */
         class btree_decorator_alwaysFail {};
         class btree_decorator_alwaysSucceed {};
+        class btree_decorator_loopInfinitely {};
     };
 
     class behaviour_trees_runner
