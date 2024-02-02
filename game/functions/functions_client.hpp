@@ -53,6 +53,49 @@ class vgm_g
         };
     };
 
+    class behaviour_trees_runner
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\runner\global);
+        class btree_preinit {
+            preInit = 1;
+        };
+        class btree_abort_action {};
+        class btree_abort_decorator {};
+        class btree_abort_selector {};
+        class btree_abort_sequence {};
+
+        class btree_childFinished_action {};
+        class btree_childFinished_decorator {};
+        class btree_childFinished_selector {};
+        class btree_childFinished_sequence {};
+
+        class btree_enterNode_action {};
+        class btree_enterNode_decorator {};
+        class btree_enterNode_selector {};
+        class btree_enterNode_sequence {};
+        class btree_enterNode {};
+
+        class btree_exitNode_action {};
+        class btree_exitNode_decorator {};
+        class btree_exitNode_selector {};
+        class btree_exitNode_sequence {};
+
+        class btree_log {};
+        class btree_panic {};
+        class btree_returnToParent {};
+        class btree_runChild {};
+
+        class btree_runCurrentNode_action {};
+        class btree_runCurrentNode_decorator {};
+        class btree_runCurrentNode_selector {};
+        class btree_runCurrentNode_sequence {};
+        class btree_runCurrentNode {};
+
+        class btree_setTree {};
+        class btree_tickGroup {};
+        class btree_unwindStackUpToindex {};
+    };
+
     class leveling
     {
         VGM_GLOBAL_PATH(\systems\leveling\global);
