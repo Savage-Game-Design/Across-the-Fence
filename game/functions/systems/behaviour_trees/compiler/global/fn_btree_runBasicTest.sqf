@@ -21,17 +21,19 @@
 
 private _exampleTree =
 [SELECTOR, [["name", "root selector"]], [
-    [DECORATOR(basic), [], [
-        [ACTION(basic), []]
+    [DECORATOR(alwaysFail), [], [
+        [DECORATOR(basic), [], [
+            [ACTION(basic), []]
+        ]]
     ]],
-    [ACTION(basic), []],
-    [SEQUENCE, [["name", "dont execute last child"]], [
+    [SEQUENCE, [["name", "fail before last child"]], [
         [ACTION(basic), []],
         [DECORATOR(alwaysFail), [], [
             [ACTION(basic), []]
         ]],
         [ACTION(basic), [["name", "won't run"]]]
-    ]]
+    ]],
+    [ACTION(basic), []]
 ]];
 
 private _compiledTree = [_exampleTree] call vgm_g_fnc_btree_compileTree;
