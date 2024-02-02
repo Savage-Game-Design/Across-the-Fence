@@ -62,7 +62,7 @@ createHashMapFromArray [
         true
     }],
     ["onEnter", {
-        params ["_node"];
+        params ["_node", "_state"];
         // Execute the child
         [RESULT_RUNNING]
     }],
