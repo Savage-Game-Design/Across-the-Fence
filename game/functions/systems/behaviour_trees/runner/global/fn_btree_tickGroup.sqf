@@ -73,7 +73,7 @@ if (count _extern_stack == 0) then {
     };
 
     if (_frame get "isServiceNode") then {
-        [format ["Running service node: %1 (%2) (depth %3)", _node get "name", _node get "type", _forEachIndex]] call vgm_f_fnc_btree_log;
+        [format ["Running service node: %1 (%2) (depth %3)", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
         [_node, _state] call (_node get "onTick");
     };
 
