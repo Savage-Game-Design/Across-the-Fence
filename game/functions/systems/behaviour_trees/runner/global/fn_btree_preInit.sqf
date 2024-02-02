@@ -1,8 +1,9 @@
+#include "..\..\behaviour_trees.inc"
 /*
     File: fn_btree_preInit.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-02-02
     Public: No
 
     Description:
@@ -18,7 +19,6 @@
         N/A
  */
 
-#include "..\behaviour_trees.inc"
 
 // Use hashmap lookups for handlers, as it's slightly safer than 'format'ing a function name and calling it.
 localNamespace setVariable ["vgm_l_btree_enterNodeHandlers", createHashMapFromArray [

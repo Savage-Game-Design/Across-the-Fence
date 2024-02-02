@@ -1,8 +1,9 @@
+#include "..\..\behaviour_trees.inc"
 /*
     File: fn_btree_runChild.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-01-26
+    Last Update: 2024-02-02
     Public: No
 
     Description:
@@ -24,7 +25,6 @@
         // or
         [0] call ACTION_RUN_CHILD
  */
-#include "..\behaviour_trees.inc"
 
 params ["_childIndex"];
 

@@ -1,8 +1,9 @@
+#include "..\..\behaviour_trees.inc"
 /*
     File: fn_btree_unwindStackUpToIndex.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-01-26
+    Last Update: 2024-02-02
     Public: No
 
     Description:
@@ -22,8 +23,6 @@
         private _currentStackIndex = count _extern_stack - 1;
         [_currentStackIndex - 1] call vgm_g_fnc_btree_unwindStackUpToIndex
  */
-
-#include "..\behaviour_trees.inc"
 
 params ["_index"];
 

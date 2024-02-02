@@ -1,8 +1,9 @@
+#include "..\..\behaviour_trees.inc"
 /*
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-01-26
+    Last Update: 2024-02-02
     Public: Yes
 
     Description:
@@ -18,7 +19,6 @@
         [group cursorObject] call vgm_g_fnc_btree_tickGroup;
  */
 
-#include "..\behaviour_trees.inc"
 
 params ["_group"];
 

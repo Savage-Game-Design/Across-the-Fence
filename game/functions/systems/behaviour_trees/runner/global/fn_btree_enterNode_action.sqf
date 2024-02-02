@@ -1,8 +1,9 @@
+#include "..\..\behaviour_trees.inc"
 /*
     File: fn_btree_enterNode_action.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-02-02
     Public: No
 
     Description:
@@ -19,7 +20,6 @@
         N/A
  */
 
-#include "..\behaviour_trees.inc"
 
 params ["_stackFrame"];
 
