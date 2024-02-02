@@ -53,6 +53,7 @@ if (count _extern_stack == 0) then {
     private _state = _frame get "state";
 
     if (_frame get "isInterruptNode" && {[_node, _state] call (_node get "condition") isEqualTo RESULT_FAILED} ) exitWith {
+        [format ["Interrupting node %1 (%2) (depth %3) due to failed condition", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
         [_forEachIndex] call vgm_g_fnc_btree_unwindStackUpToIndex;
         _nextAction = ACTION_RETURN_TO_PARENT;
         _nextActionParams = [RESULT_FAILED];
@@ -65,12 +66,14 @@ if (count _extern_stack == 0) then {
     };
 
     if (_newChildToRunIndex > -1) exitWith {
+        [format ["Higher priority child available for %1 (%2) (depth %3), aborting current child", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
         [_forEachIndex] call vgm_g_fnc_btree_unwindStackUpToIndex;
         _nextAction = ACTION_RUN_CHILD;
         _nextActionParams = [_frame get "higherPriorityNodes" select _newChildToRunIndex];
     };
 
     if (_frame get "isServiceNode") then {
+        [format ["Running service node: %1 (%2) (depth %3)", _node get "name", _node get "type", _forEachIndex]] call vgm_f_fnc_btree_log;
         [_node, _state] call (_node get "onTick");
     };
 
