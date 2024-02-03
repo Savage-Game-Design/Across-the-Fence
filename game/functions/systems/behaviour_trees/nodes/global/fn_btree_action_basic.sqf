@@ -3,7 +3,7 @@
     File: fn_btree_action_basic.sqf
     Author:
     Date: 2024-02-02
-    Last Update: 2024-02-02
+    Last Update: 2024-02-03
     Public: No
 
     Description:
@@ -15,6 +15,9 @@
         "onEnter" is called when the node is first visited.
         "onTick" is executed every tick, but will not run unless "onEnter" returns RESULT_RUNNING
         "onExit" is always called to clean up the node, including if the action is aborted.
+
+        "onTreeAssigned" is called when the tree is assigned to a group, and is useful for setting up event handlers.
+        "onTreeUnassigned" is called when the tree is unassigned from the group or the group is deleted, and is useful for cleaning up event handlers.
 
     Parameter(s):
         _params - Any parameters accepted by the node. [HASHMAP]

@@ -3,7 +3,7 @@
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-02
+    Last Update: 2024-02-03
     Public: Yes
 
     Description:
@@ -41,7 +41,7 @@ private _nextActionParams = [];
 // If no current node, start tree execution from the top.
 if (count _extern_stack == 0) then {
     _nextAction = ACTION_ENTER_NODE;
-    _nextActionParams = [_tree];
+    _nextActionParams = [_tree get "rootNode"];
 };
 
 [format ["Ticking behaviour tree for group %1 at %2", str _group, serverTime]] call vgm_g_fnc_btree_log;

@@ -3,7 +3,7 @@
     File: fn_btree_decorator_basic.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-02
+    Last Update: 2024-02-03
     Public: Yes
 
     Description:
@@ -36,6 +36,14 @@
         "isService"
             - If true, run the "onTick" code every tick, while this decorator is running
               (i.e, any children are running)
+
+        "onTreeAssigned"
+            - Called when the tree is assigned to a group
+            - Useful for setting up event handlers.
+
+        "onTreeUnassigned"
+            - Called when the tree is unassigned from the group or the group is deleted
+            - Useful for cleaning up event handlers.
 
     Parameter(s):
         _params - Any parameters accepted by the node. [HASHMAP]

@@ -88,6 +88,9 @@ class vgm_g
         class btree_abort_selector {};
         class btree_abort_sequence {};
 
+        class btree_callOnTreeAssignedCallbacks {};
+        class btree_callOnTreeUnassignedCallbacks {};
+
         class btree_childFinished_action {};
         class btree_childFinished_decorator {};
         class btree_childFinished_selector {};

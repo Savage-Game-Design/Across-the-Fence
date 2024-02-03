@@ -2,7 +2,7 @@
     File: fn_btree_compileTree.sqf
     Author: Savage Game Design
     Date: 2024-01-26
-    Last Update: 2024-02-02
+    Last Update: 2024-02-03
     Public: No
 
     Description:
@@ -19,6 +19,10 @@
 
 params ["_tree"];
 
+// Hashmaps prevent identical code running multiple times.
+private _extern_onTreeAssignedCallbacks = createHashMap;
+private _extern_onTreeUnassignedCallbacks = createHashMap;
+
 // Recursive algorithm should be fine, as our behaviour trees are unlikely to ever be more than 10 nodes deep.
 private _fnc_compileNode = {
     params ["_constructor", "_params", "_children"];
@@ -26,7 +30,22 @@ private _fnc_compileNode = {
     private _childNodes = _children apply {_x call _fnc_compileNode};
 
     // By passing built children to the constructor, we enable the constructor to modify them as needed.
-    [createHashMapFromArray _params, _childNodes] call _constructor
+    private _node = [createHashMapFromArray _params, _childNodes] call _constructor;
+
+    if ("onTreeAssigned" in _node) then {
+        _extern_onTreeAssignedCallbacks set [_node get "onTreeAssigned", true];
+    };
+
+    if ("onTreeUnassigned" in _node) then {
+        _extern_onTreeUnassignedCallbacks set [_node get "onTreeUnassigned", true];
+    };
+
+    _node
 };
 
-_tree call _fnc_compileNode
+createHashMapFromArray [
+    ["rootNode", _tree call _fnc_compileNode],
+    ["onTreeAssignedCallbacks", keys _extern_onTreeAssignedCallbacks],
+    ["onTreeUnassignedCallbacks", keys _extern_onTreeUnassignedCallbacks]
+]
+

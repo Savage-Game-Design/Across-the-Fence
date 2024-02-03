@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2023-12-18
+    Last Update: 2024-02-03
     Public: Yes
 
     Description:
@@ -25,8 +25,14 @@ params ["_group", "_tree"];
 private _currentTree = _group getVariable "vgm_l_btree_current";
 
 if (!isNil "_currentTree" && { _currentTree isNotEqualTo _tree }) then {
-    // TODO - Make this function. Abort the full stack.
-	//[_group] call vgm_g_fnc_btree_abortCurrentTree;
+    private _extern_btreeState = _group getVariable "vgm_l_btree_state";
+    private _extern_stack = _extern_btreeState get "stack";
+
+    // Make sure all nodes are allowed to clean themselves up.
+    [-1] call vgm_g_fnc_btree_unwindStackUpToIndex;
+
+    // Allow nodes to cleanup anything they did when the tree was assigned.
+    [_group] call vgm_g_fnc_btree_callOnTreeUnassignedCallbacks;
 };
 
 _group setVariable ["vgm_l_btree_current", _tree];
@@ -36,4 +42,4 @@ _group setVariable ["vgm_l_btree_state", createHashMapFromArray [
 ]];
 _group setVariable ["vgm_l_btree_log", []];
 
-
+[_group] call vgm_g_fnc_btree_callOnTreeAssignedCallbacks;
