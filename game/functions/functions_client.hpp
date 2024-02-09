@@ -123,6 +123,15 @@ class vgm_g
         class btree_unwindStackUpToindex {};
     };
 
+    class groupwide_event_handlers
+    {
+        VGM_GLOBAL_PATH(\systems\groupwide_event_handlers\global);
+        class greh_addEventHandlerToAllUnitsInGroup {};
+        class greh_addEventHandlerToUnit {};
+        class greh_removeEventHandlerFromAllUnitsInGroup {};
+        class greh_removeEventHandlerFromUnit {};
+    };
+
     class leveling
     {
         VGM_GLOBAL_PATH(\systems\leveling\global);
