@@ -219,6 +219,17 @@ class vgm_g
         class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
+
+    class suppression
+    {
+        VGM_GLOBAL_PATH(\systems\suppression\global);
+
+        class suppression_add {};
+        class suppression_decay {};
+        class suppression_get {};
+        class suppression_setShooterMultiplier {};
+        class suppression_updateEffects {};
+    };
 };
 
 class vgm_c
