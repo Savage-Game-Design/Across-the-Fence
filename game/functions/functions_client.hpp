@@ -48,9 +48,10 @@ class vgm_g
     class ai
     {
         VGM_GLOBAL_PATH(\systems\ai\global);
-        class ai_init {
+        class ai_postInit {
             postInit = 1;
         };
+        class ai_tickAllBehaviourTrees {};
     };
 
     class behaviour_trees_compiler
@@ -75,6 +76,7 @@ class vgm_g
         class btree_decorator_alwaysFail {};
         class btree_decorator_alwaysSucceed {};
         class btree_decorator_loopInfinitely {};
+        class btree_decorator_updateKnowledgeService {};
     };
 
     class behaviour_trees_runner
@@ -121,6 +123,12 @@ class vgm_g
         class btree_setTree {};
         class btree_tickGroup {};
         class btree_unwindStackUpToindex {};
+    };
+
+    class behaviour_trees_trees
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\trees\global);
+        class btree_tree_enemyAI {};
     };
 
     class groupwide_event_handlers
