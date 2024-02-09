@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2024-02-03
+    Last Update: 2024-02-08
     Public: Yes
 
     Description:
@@ -32,14 +32,15 @@ if (!isNil "_currentTree" && { _currentTree isNotEqualTo _tree }) then {
     [-1] call vgm_g_fnc_btree_unwindStackUpToIndex;
 
     // Allow nodes to cleanup anything they did when the tree was assigned.
-    [_group] call vgm_g_fnc_btree_callOnTreeUnassignedCallbacks;
+    [_group, _extern_btreeState get "blackboard"] call vgm_g_fnc_btree_callOnTreeUnassignedCallbacks;
 };
 
 _group setVariable ["vgm_l_btree_current", _tree];
+private _newBlackboard = createHashMap;
 _group setVariable ["vgm_l_btree_state", createHashMapFromArray [
     ["stack", []],
-    ["blackboard", createHashMap]
+    ["blackboard", _newBlackboard]
 ]];
 _group setVariable ["vgm_l_btree_log", []];
 
-[_group] call vgm_g_fnc_btree_callOnTreeAssignedCallbacks;
+[_group, _newBlackboard] call vgm_g_fnc_btree_callOnTreeAssignedCallbacks;
