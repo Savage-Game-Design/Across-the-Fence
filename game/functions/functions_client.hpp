@@ -76,6 +76,7 @@ class vgm_g
         class btree_decorator_alwaysFail {};
         class btree_decorator_alwaysSucceed {};
         class btree_decorator_loopInfinitely {};
+        class btree_decorator_suppressionService {};
         class btree_decorator_updateKnowledgeService {};
     };
 
