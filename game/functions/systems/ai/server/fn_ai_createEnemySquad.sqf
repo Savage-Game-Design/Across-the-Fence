@@ -52,4 +52,4 @@ _group addEventHandler ["Local", {
     }
 }];
 
-_squad
+_group
