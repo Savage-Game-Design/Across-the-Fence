@@ -35,16 +35,21 @@ private _selectedClient = call para_s_fnc_loadbal_suggest_host;
 _group setGroupOwner _selectedClient;
 _group setVariable ["groupClientOwner", _selectedClient];
 _group setVariable ["behaviourEnabled", true, true];
+[_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
 
 //Update the owner variable if the group changes locality.
-//Can't run this on the group itself - need to use the units in it.
-{
-	_x addEventHandler ["Local", {
-		params ["_unit", "_isLocal"];
-		if (_isLocal) then {
-			group _unit setVariable ["groupClientOwner", clientOwner, true];
-		};
-	}];
-} forEach units _group;
+_group addEventHandler ["Local", {
+    params ["_group"];
+    if (local _group) then {
+        _group setVariable ["groupClientOwner", clientOwner, true];
+        // Reassign the behaviour tree on locality change, as it's local.
+        [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
+    } else {
+        // Remove the behaviour tree on the current host, the nodes are correctly aborted.
+        // TODO - Might need to consider race conditions here, if this gets done *after* the assignment on other host,
+        // and anything behaves globally.
+        [_group] call vgm_g_fnc_btree_setTree;
+    }
+}];
 
 _squad

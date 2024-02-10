@@ -146,7 +146,6 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
     private _spawnPos = [getPos _target] call para_g_fnc_spawning_find_valid_position_tracer select 0;
     private _group = [vgm_s_director_patrol_classes, east, _spawnPos] call vgm_s_fnc_ai_createEnemySquad;
 
-    _group setVariable ["behaviourEnabled", true, true];
     _group setVariable ["orders", ["pursue", _publicMission get "group"], true];
     _group setVariable ["vgm_s_director_command", "track"];
 

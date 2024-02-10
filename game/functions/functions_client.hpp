@@ -128,6 +128,12 @@ class vgm_g
     class behaviour_trees_trees
     {
         VGM_GLOBAL_PATH(\systems\behaviour_trees\trees\global);
+        class btree_preInit_compiledTrees {
+            preInit = 1;
+        };
+
+        class btree_getCompiledTree {};
+
         class btree_tree_enemyAI {};
     };
 

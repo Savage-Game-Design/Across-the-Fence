@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2024-02-08
+    Last Update: 2024-02-10
     Public: Yes
 
     Description:
@@ -24,7 +24,7 @@ params ["_group", "_tree"];
 
 private _currentTree = _group getVariable "vgm_l_btree_current";
 
-if (!isNil "_currentTree" && { _currentTree isNotEqualTo _tree }) then {
+if (!isNil "_currentTree" && (isNil "_tree" || { _currentTree isNotEqualTo _tree })) then {
     private _extern_btreeState = _group getVariable "vgm_l_btree_state";
     private _extern_stack = _extern_btreeState get "stack";
 
@@ -35,12 +35,14 @@ if (!isNil "_currentTree" && { _currentTree isNotEqualTo _tree }) then {
     [_group, _extern_btreeState get "blackboard"] call vgm_g_fnc_btree_callOnTreeUnassignedCallbacks;
 };
 
-_group setVariable ["vgm_l_btree_current", _tree];
-private _newBlackboard = createHashMap;
-_group setVariable ["vgm_l_btree_state", createHashMapFromArray [
-    ["stack", []],
-    ["blackboard", _newBlackboard]
-]];
-_group setVariable ["vgm_l_btree_log", []];
+if (!isNil "_tree") then {
+    _group setVariable ["vgm_l_btree_current", _tree];
+    private _newBlackboard = createHashMap;
+    _group setVariable ["vgm_l_btree_state", createHashMapFromArray [
+        ["stack", []],
+        ["blackboard", _newBlackboard]
+    ]];
+    _group setVariable ["vgm_l_btree_log", []];
 
-[_group, _newBlackboard] call vgm_g_fnc_btree_callOnTreeAssignedCallbacks;
+    [_group, _newBlackboard] call vgm_g_fnc_btree_callOnTreeAssignedCallbacks;
+};
