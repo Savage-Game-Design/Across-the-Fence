@@ -2,7 +2,7 @@
     File: fn_btree_decorator_updateKnowledgeService.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-09
+    Last Update: 2024-02-10
     Public: Yes
 
     Description:
@@ -61,9 +61,7 @@ _decorator set ["onTreeUnassigned", {
 }];
 
 _decorator set ["onTick", {
-    params ["_node", "_state"];
-
-    hint format ["Last danger event: %1", _extern_blackboard getOrDefault ["lastDangerEvent", 0]];
+    //params ["_node", "_state"];
 }];
 
 _decorator

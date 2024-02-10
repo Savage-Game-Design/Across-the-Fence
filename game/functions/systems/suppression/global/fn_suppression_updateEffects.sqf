@@ -2,7 +2,7 @@
     File: fn_suppression_updateEffects.sqf
     Author: Savage Game Design
     Date: 2024-02-09
-    Last Update: 2024-02-09
+    Last Update: 2024-02-10
     Public: No
 
     Description:
@@ -33,4 +33,5 @@ _unit setSkill ["aimingAccuracy", _newAccuracy];
 private _newShake = linearConversion [0, 1, _suppressionValue, (_unit getVariable "vgm_l_suppression_baseAimingShake"), 0, true];
 _unit setSkill ["aimingShake", _newShake];
 
-hint format ["%1 - S: %2 - A: %3 - AS: %4", _unit, _suppressionValue, _newAccuracy, _newShake];
+// Suppression debug logger
+//hint format ["%1 - S: %2 - A: %3 - AS: %4", _unit, _suppressionValue, _newAccuracy, _newShake];
