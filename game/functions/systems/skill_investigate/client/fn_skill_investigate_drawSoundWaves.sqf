@@ -3,7 +3,7 @@
     File: fn_skill_investigate_drawSoundWaves.sqf
     Author: Savage Game Design
     Date: 2024-01-22
-    Last Update: 2024-01-27
+    Last Update: 2024-02-10
     Public: No
 
     Description:
@@ -25,15 +25,16 @@
 params ["_startTime", "_object", "_texRotation", "_noiseStrength"];
 
 private _extern_posASL = getPosASLVisual _object;
-private _extern_speedCoef = _noiseStrength;
+private _extern_sizeCoef = _noiseStrength;
 private _extern_dist = getPosASLVisual player vectorDistance _extern_posASL;
 
 private _fnc_drawIcon = {
     params ["_elapsed", "_rot"];
 
-    private _iconSize = ICON_BASE_SIZE * ((_elapsed * WAVE_SPEED));
-    _iconSize = _iconSize * (ICON_BASE_DIST / _extern_dist); // furher the sound the smaller the wave
-    _iconSize = _iconSize * _extern_speedCoef;
+    // furher the sound the smaller the wave, stops scaling down past 100m
+    private _iconSize = ICON_BASE_SIZE * ((ICON_BASE_DIST / _extern_dist) max (ICON_BASE_DIST / 100));
+    _iconSize = _iconSize * _extern_sizeCoef;
+    _iconSize = _iconSize * ((_elapsed * WAVE_SPEED));
 
     private _fadeStr = _elapsed / FADE_TIME_COEF;
 
