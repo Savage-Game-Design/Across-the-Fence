@@ -1,0 +1,50 @@
+/*
+    File: fn_ai_createEnemySquad.sqf
+    Author: Savage Game Design
+    Date: 2024-02-10
+    Last Update: 2024-02-10
+    Public: Yes
+
+    Description:
+        Creates an enemy squad, enabling VGM specific enemy AI features in the process.
+
+        Accepts the same arguments as para_g_fnc_create_squad.
+
+    Parameter(s):
+		_units - Array of unit classes [Array, defaults to [] (empty array)]
+		_groupTarget - Group to put units in, or side to create units in [Group|Side]
+		_position - Position to spawn units around [Position3D]
+
+    Returns:
+        Group units were placed into [GROUP]
+
+    Example(s):
+        ["vn_west", "west"] call vgm_s_fnc_ai_createEnemySquad
+ */
+
+params [["_units", []], "_groupTarget", "_position"];
+
+// Create it on the server, to avoid an FPS stutter on a client. Also, easier to get a reference to them.
+// Generally speaking, the rest of the systems assume a squad is created on the server.
+private _squad = _this call para_g_fnc_create_squad;
+
+private _group = _squad select 1;
+
+//Set the squad's locality to the client with highest FPS
+private _selectedClient = call para_s_fnc_loadbal_suggest_host;
+_group setGroupOwner _selectedClient;
+_group setVariable ["groupClientOwner", _selectedClient];
+_group setVariable ["behaviourEnabled", true, true];
+
+//Update the owner variable if the group changes locality.
+//Can't run this on the group itself - need to use the units in it.
+{
+	_x addEventHandler ["Local", {
+		params ["_unit", "_isLocal"];
+		if (_isLocal) then {
+			group _unit setVariable ["groupClientOwner", clientOwner, true];
+		};
+	}];
+} forEach units _group;
+
+_squad

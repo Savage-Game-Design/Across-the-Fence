@@ -35,6 +35,13 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class ai
+    {
+        VGM_SERVER_PATH(\systems\ai\server);
+
+        class ai_createEnemySquad {};
+    };
+
     class carry
     {
         VGM_SERVER_PATH(\systems\carry\server);

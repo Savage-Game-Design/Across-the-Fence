@@ -144,7 +144,7 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
     private _target = selectRandom _missionPlayers;
     if (isNil "_target" || {isNull _target}) exitWith {};
     private _spawnPos = [getPos _target] call para_g_fnc_spawning_find_valid_position_tracer select 0;
-    private _group = [vgm_s_director_patrol_classes, east, _spawnPos] call para_s_fnc_loadbal_create_squad select 1;
+    private _group = [vgm_s_director_patrol_classes, east, _spawnPos] call vgm_s_fnc_ai_createEnemySquad;
 
     _group setVariable ["behaviourEnabled", true, true];
     _group setVariable ["orders", ["pursue", _publicMission get "group"], true];
