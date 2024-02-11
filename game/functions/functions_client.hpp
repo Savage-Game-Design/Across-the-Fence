@@ -527,6 +527,10 @@ class vgm_c
         {
             postInit = 1;
         };
+        class skill_investigate_queueNoise
+        {
+            headerType = -1;
+        };
         class skill_investigate_setDesaturation {};
         class skill_investigate_setListenMode {};
     };
