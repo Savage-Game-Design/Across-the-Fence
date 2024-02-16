@@ -2,7 +2,7 @@
     File: fn_suppression_decay.sqf
     Author: Savage Game Design
     Date: 2024-02-09
-    Last Update: 2024-02-09
+    Last Update: 2024-02-10
     Public: Yes
 
     Description:
@@ -22,7 +22,7 @@
 params ["_unit"];
 
 // Decay rate should be a variable for easy changes during testing.
-private _decayRatePerSecond = missionNamespace getVariable ["vgm_g_suppression_decayRatePerSecond", 0.1];
+private _decayRatePerSecond = missionNamespace getVariable ["vgm_g_suppression_decayRatePerSecond", 0.05];
 
 private _lastDecay = _unit getVariable ["vgm_l_suppression_lastDecay", 0];
 
