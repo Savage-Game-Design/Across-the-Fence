@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2024-02-10
+    Last Update: 2024-02-16
     Public: Yes
 
     Description:
@@ -33,6 +33,16 @@ if (!isNil "_currentTree" && (isNil "_tree" || { _currentTree isNotEqualTo _tree
 
     // Allow nodes to cleanup anything they did when the tree was assigned.
     [_group, _extern_btreeState get "blackboard"] call vgm_g_fnc_btree_callOnTreeUnassignedCallbacks;
+
+    _group setVariable ["vgm_l_btree_current", nil];
+};
+
+if (isNil "_currentTree") then {
+    // Make sure tree is cleaned up when the group is deleted.
+    _group addEventHandler ["Deleted", {
+        params ["_group"];
+        [_group] call vgm_g_fnc_btree_setTree;
+    }];
 };
 
 if (!isNil "_tree") then {
