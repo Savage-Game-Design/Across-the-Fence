@@ -523,6 +523,7 @@ class vgm_c
             headerType = -1;
         };
         class skill_investigate_getSpeedDrawCoef {};
+        class skill_investigate_getVoiceDrawCoef {};
         class skill_investigate_postInit
         {
             postInit = 1;

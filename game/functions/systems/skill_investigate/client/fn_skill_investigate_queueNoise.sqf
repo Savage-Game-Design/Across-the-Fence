@@ -2,7 +2,7 @@
     File: fn_skill_investigate_queueIcon.sqf
     Author: Savage Game Design
     Date: 2024-02-11
-    Last Update: 2024-02-11
+    Last Update: 2024-02-12
     Public: No
 
     Description:
@@ -20,12 +20,14 @@
 
 params [
     "_object",
-    ["_drawSizeCoef", 1]
+    ["_drawSizeCoef", 1],
+    ["_drawOffset", [0,0,0]]
 ];
 
 vgm_c_skill_investigate_noises pushBack [
     time,
     _object,
     [random 360, random 360, random 360],
-    _drawSizeCoef
+    _drawSizeCoef,
+    _drawOffset
 ];

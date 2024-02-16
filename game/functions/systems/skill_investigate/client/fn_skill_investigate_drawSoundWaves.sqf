@@ -3,7 +3,7 @@
     File: fn_skill_investigate_drawSoundWaves.sqf
     Author: Savage Game Design
     Date: 2024-01-22
-    Last Update: 2024-02-10
+    Last Update: 2024-02-12
     Public: No
 
     Description:
@@ -22,11 +22,11 @@
         [parameter] call vgm_c_fnc_skill_investigate_drawSoundWaves
  */
 
-params ["_startTime", "_object", "_texRotation", "_noiseStrength"];
+params ["_startTime", "_object", "_texRotation", "_noiseStrength", "_drawOffset"];
 
-private _extern_posASL = getPosASLVisual _object;
+private _extern_posAGL = _object modelToWorldVisual _drawOffset;
 private _extern_sizeCoef = _noiseStrength;
-private _extern_dist = getPosASLVisual player vectorDistance _extern_posASL;
+private _extern_dist = getPosATLVisual player vectorDistance _extern_posAGL;
 
 private _fnc_drawIcon = {
     params ["_elapsed", "_rot"];
@@ -41,7 +41,7 @@ private _fnc_drawIcon = {
     drawIcon3D [
         getMissionPath "SquiglyCircle_ca.paa",
         [0.9,1,1,ICON_ALPHA] vectorAdd [0,0,0, -_fadeStr],
-        ASLToAGL _extern_posASL,
+        _extern_posAGL,
         _iconSize, _iconSize,
         _rot, "", 1, 0.05, "TahomaB"
     ];
