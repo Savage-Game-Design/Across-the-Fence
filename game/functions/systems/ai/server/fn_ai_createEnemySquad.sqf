@@ -2,7 +2,7 @@
     File: fn_ai_createEnemySquad.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2024-02-10
+    Last Update: 2024-02-16
     Public: Yes
 
     Description:
@@ -44,12 +44,7 @@ _group addEventHandler ["Local", {
         _group setVariable ["groupClientOwner", clientOwner, true];
         // Reassign the behaviour tree on locality change, as it's local.
         [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
-    } else {
-        // Remove the behaviour tree on the current host, the nodes are correctly aborted.
-        // TODO - Might need to consider race conditions here, if this gets done *after* the assignment on other host,
-        // and anything behaves globally.
-        [_group] call vgm_g_fnc_btree_setTree;
-    }
+    };
 }];
 
 _group

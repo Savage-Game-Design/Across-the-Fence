@@ -43,6 +43,20 @@ if (isNil "_currentTree") then {
         params ["_group"];
         [_group] call vgm_g_fnc_btree_setTree;
     }];
+
+    // Make sure tree is cleaned up when the group changes locality.
+    // Behaviour tree system only works on local groups.
+    _group addEventHandler ["Local", {
+        params ["_group"];
+
+        // Cleanup the behaviour tree on the old host.
+        // Makes sure the nodes are correctly aborted, and unassigned callbacks fire.
+        // TODO - Might need to consider race conditions here, if this gets done *after* the assignment on other host,
+        // and anything behaves globally.
+        if (!local _group) then {
+            [_group] call vgm_g_fnc_btree_setTree;
+        };
+    }];
 };
 
 if (!isNil "_tree") then {
