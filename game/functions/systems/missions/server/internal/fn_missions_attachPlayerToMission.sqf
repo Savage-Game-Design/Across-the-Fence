@@ -52,6 +52,10 @@ private _playerInfoNetmap = [] call para_s_fnc_netmap_createNetmap;
 
 (_mission get "machineIds") set [_playerId, getUserInfo _playerId select 1];
 
+if (isNull (_missionPublic get "group")) then {
+    [_missionPublic, "group", createGroup side vgm_core_lobbyGroup] call para_s_fnc_netmap_set;
+};
+
 [_playerId call vgm_s_fnc_player_fromId] joinSilent (_missionPublic get "group");
 
 [

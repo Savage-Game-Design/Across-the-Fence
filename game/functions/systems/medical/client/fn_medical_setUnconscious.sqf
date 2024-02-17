@@ -27,11 +27,12 @@ _unit setUnconscious _state;
 _unit setCaptive _state;
 
 if (lifeState _unit != _previousLifeState) then {
+    ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerServerAndLocal;
     // prevent being stuck in unconscious animation if no weapon
     if (!_state && {currentWeapon _unit == ""}) then {
         _unit playMoveNow "UnconsciousOutProne";
     };
-    ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerLocal;
+    ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerServerAndcLocal;
 };
 
 nil
