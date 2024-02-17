@@ -140,6 +140,9 @@
         <Key ID="STR_VGM_MEDICAL_UI_OWNED">
             <Original>%1&lt;br/&gt;Owned: %2</Original>
         </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING">
+            <Original>%1&lt;br/&gt;No training</Original>
+        </Key>
     </Package>
     <Package name="Mission End UI">
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
@@ -320,6 +323,14 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC">
             <Original>For 30 seconds, the team has: 50% reduced stamina consumption, 40% hit shrug chance, all actions are 10% faster</Original>
+        </Key>
+    </Package>
+    <Package name="Skill Investigaste">
+        <Key ID="STR_VGM_SKILL_INVESTIGATE_ACTION">
+            <Original>Stop, Listen</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY">
+            <Original>Stay stationary to Listen</Original>
         </Key>
     </Package>
 </Project>

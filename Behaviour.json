@@ -1,0 +1,955 @@
+{
+  "version": "0.3.0",
+  "scope": "project",
+  "selectedTree": "c49c33b3-f11a-43ee-96ba-2c5a8029c684",
+  "trees": [
+    {
+      "version": "0.3.0",
+      "scope": "tree",
+      "id": "c49c33b3-f11a-43ee-96ba-2c5a8029c684",
+      "title": "A behavior tree",
+      "description": "",
+      "root": "64245c2b-ce2a-4a68-aafd-ab947ada970c",
+      "properties": {},
+      "nodes": {
+        "64245c2b-ce2a-4a68-aafd-ab947ada970c": {
+          "id": "64245c2b-ce2a-4a68-aafd-ab947ada970c",
+          "name": "Selector",
+          "title": "Selector",
+          "description": "Runs child nodes until one succeeds.",
+          "properties": {},
+          "display": {
+            "x": -132,
+            "y": -288
+          },
+          "children": [
+            "6f5de274-6323-46a8-841a-051caf2829bf",
+            "26a84aeb-6e7d-4237-8de1-5c86ef5b9eee",
+            "3061cffb-9b26-4aa7-9dd8-8fabfda5b75e",
+            "e327e881-36ce-4ecc-88c6-ed4655402dea"
+          ]
+        },
+        "6f5de274-6323-46a8-841a-051caf2829bf": {
+          "id": "6f5de274-6323-46a8-841a-051caf2829bf",
+          "name": "Condition",
+          "title": "In combat?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -2016,
+            "y": -156
+          },
+          "child": "2e6128b2-c50b-48f1-af3d-86c4584ef102"
+        },
+        "f1b607ef-6dbd-447a-a2ca-0c65eefac3cb": {
+          "id": "f1b607ef-6dbd-447a-a2ca-0c65eefac3cb",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -2016,
+            "y": 108
+          },
+          "children": [
+            "6f305767-29a3-4529-90e2-d66103452b61",
+            "58a05a86-b1e4-4493-8bf4-094b51b46f48"
+          ]
+        },
+        "2e6128b2-c50b-48f1-af3d-86c4584ef102": {
+          "id": "2e6128b2-c50b-48f1-af3d-86c4584ef102",
+          "name": "Service",
+          "title": "Apply Suppression (Service)",
+          "description": "Reduce accuracy\nReduce fire rate",
+          "properties": {},
+          "display": {
+            "x": -2016,
+            "y": -24
+          },
+          "child": "f1b607ef-6dbd-447a-a2ca-0c65eefac3cb"
+        },
+        "6f305767-29a3-4529-90e2-d66103452b61": {
+          "id": "6f305767-29a3-4529-90e2-d66103452b61",
+          "name": "Set Group Status",
+          "title": "Set Group Status",
+          "description": "Sets the overall group status",
+          "properties": {
+            "Behaviour": "COMBAT",
+            "Combat Mode": "RED",
+            "Speed": "FULL",
+            "Unit Position": "AUTO",
+            "Position (e.g Prone)": "AUTO"
+          },
+          "display": {
+            "x": -2112,
+            "y": 240
+          }
+        },
+        "58a05a86-b1e4-4493-8bf4-094b51b46f48": {
+          "id": "58a05a86-b1e4-4493-8bf4-094b51b46f48",
+          "name": "Condition",
+          "title": "Heavily Injured?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -1908,
+            "y": 240
+          },
+          "child": "a0228f5d-2ef0-4753-8eaf-fe0cde143b6d"
+        },
+        "a0228f5d-2ef0-4753-8eaf-fe0cde143b6d": {
+          "id": "a0228f5d-2ef0-4753-8eaf-fe0cde143b6d",
+          "name": "Condition",
+          "title": "Can call reinforcements?",
+          "description": "Has a radio, and hasn't recently called for reinforcements.",
+          "properties": {},
+          "display": {
+            "x": -1908,
+            "y": 372
+          },
+          "child": "4398ddec-a467-4dba-942a-b5ea8bca17ac"
+        },
+        "26a84aeb-6e7d-4237-8de1-5c86ef5b9eee": {
+          "id": "26a84aeb-6e7d-4237-8de1-5c86ef5b9eee",
+          "name": "Condition",
+          "title": "Nearby sounds?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -1500,
+            "y": -156
+          },
+          "child": "6c45a818-9eb5-4dd2-bd99-1b26eeee2099"
+        },
+        "6c45a818-9eb5-4dd2-bd99-1b26eeee2099": {
+          "id": "6c45a818-9eb5-4dd2-bd99-1b26eeee2099",
+          "name": "Condition",
+          "title": "Free to investigate?",
+          "description": "Not ordered to defend",
+          "properties": {},
+          "display": {
+            "x": -1500,
+            "y": -24
+          },
+          "child": "c3a4d410-4730-4315-9188-0dee7147b0fa"
+        },
+        "00e8e78d-2a5f-400b-82e8-c2b444e1455d": {
+          "id": "00e8e78d-2a5f-400b-82e8-c2b444e1455d",
+          "name": "Move to",
+          "title": "Move (<Where>)",
+          "description": "Move squad to a location",
+          "properties": {
+            "Where": "Sound location",
+            "Speed": "N/A"
+          },
+          "display": {
+            "x": -1488,
+            "y": 492
+          }
+        },
+        "f02f1197-6aa2-4c8e-8392-3bbc4c53e314": {
+          "id": "f02f1197-6aa2-4c8e-8392-3bbc4c53e314",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -1128,
+            "y": 372
+          },
+          "children": [
+            "1a3779c8-dda4-40c5-8c07-4d91745ce1c2",
+            "3e0e1a0f-022a-46d2-9655-c29ddf7be811"
+          ]
+        },
+        "1a3779c8-dda4-40c5-8c07-4d91745ce1c2": {
+          "id": "1a3779c8-dda4-40c5-8c07-4d91745ce1c2",
+          "name": "Time limit",
+          "title": "Max <max>s",
+          "description": "Run for at most X seconds",
+          "properties": {
+            "max": 20
+          },
+          "display": {
+            "x": -1284,
+            "y": 492
+          },
+          "child": "2d9c69bb-40ae-425d-a59f-9d4d4eaec8eb"
+        },
+        "3e0e1a0f-022a-46d2-9655-c29ddf7be811": {
+          "id": "3e0e1a0f-022a-46d2-9655-c29ddf7be811",
+          "name": "Condition",
+          "title": "Nearby tracks?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -972,
+            "y": 492
+          },
+          "child": "d1f6c63d-f46a-42ee-850c-a10bf55422e5"
+        },
+        "d1f6c63d-f46a-42ee-850c-a10bf55422e5": {
+          "id": "d1f6c63d-f46a-42ee-850c-a10bf55422e5",
+          "name": "Selector",
+          "title": "Selector",
+          "description": "Runs child nodes until one succeeds.",
+          "properties": {},
+          "display": {
+            "x": -972,
+            "y": 624
+          },
+          "children": [
+            "4c584285-ecf4-4c0f-997c-598fa8c539ac",
+            "9fa5cc99-97ef-463e-b1ff-c59f22e53260"
+          ]
+        },
+        "4c584285-ecf4-4c0f-997c-598fa8c539ac": {
+          "id": "4c584285-ecf4-4c0f-997c-598fa8c539ac",
+          "name": "Condition",
+          "title": "Can become tracker?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -1080,
+            "y": 756
+          },
+          "child": "5a543910-40c3-474c-80a1-2b479b1ba712"
+        },
+        "5a543910-40c3-474c-80a1-2b479b1ba712": {
+          "id": "5a543910-40c3-474c-80a1-2b479b1ba712",
+          "name": "Set task",
+          "title": "Set task to <task>",
+          "description": "Changes the squad's current goal.",
+          "properties": {
+            "task": "tracking"
+          },
+          "display": {
+            "x": -1080,
+            "y": 888
+          }
+        },
+        "9fa5cc99-97ef-463e-b1ff-c59f22e53260": {
+          "id": "9fa5cc99-97ef-463e-b1ff-c59f22e53260",
+          "name": "Can call reinforcements",
+          "title": "Can call reinforcements?",
+          "description": "Has a radio, and hasn't recently called for reinforcements.",
+          "properties": {},
+          "display": {
+            "x": -864,
+            "y": 756
+          },
+          "child": "0792c201-3f29-4419-a936-f9d75e2851a9"
+        },
+        "0792c201-3f29-4419-a936-f9d75e2851a9": {
+          "id": "0792c201-3f29-4419-a936-f9d75e2851a9",
+          "name": "Call reinforcements",
+          "title": "Call reinforcements",
+          "description": "Call reinforcements",
+          "properties": {},
+          "display": {
+            "x": -864,
+            "y": 888
+          }
+        },
+        "4398ddec-a467-4dba-942a-b5ea8bca17ac": {
+          "id": "4398ddec-a467-4dba-942a-b5ea8bca17ac",
+          "name": "Call reinforcements",
+          "title": "Call reinforcements",
+          "description": "Call reinforcements",
+          "properties": {},
+          "display": {
+            "x": -1908,
+            "y": 492
+          }
+        },
+        "4d435aa0-c3e1-4201-a860-69b3dc1716bf": {
+          "id": "4d435aa0-c3e1-4201-a860-69b3dc1716bf",
+          "name": "Set task",
+          "title": "Set task to <task>",
+          "description": "Changes the squad's current goal.",
+          "properties": {
+            "task": "investigate"
+          },
+          "display": {
+            "x": -1704,
+            "y": 240
+          }
+        },
+        "6444264f-173f-4275-b8af-ef35ec21091e": {
+          "id": "6444264f-173f-4275-b8af-ef35ec21091e",
+          "name": "Selector",
+          "title": "Selector",
+          "description": "Runs child nodes until one succeeds.",
+          "properties": {},
+          "display": {
+            "x": -1308,
+            "y": 240
+          },
+          "children": [
+            "ea3a5942-d7cc-482a-b3af-0a6df0c79708",
+            "f02f1197-6aa2-4c8e-8392-3bbc4c53e314"
+          ]
+        },
+        "ea3a5942-d7cc-482a-b3af-0a6df0c79708": {
+          "id": "ea3a5942-d7cc-482a-b3af-0a6df0c79708",
+          "name": "Condition",
+          "title": "Not near to sound location?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -1488,
+            "y": 372
+          },
+          "child": "00e8e78d-2a5f-400b-82e8-c2b444e1455d"
+        },
+        "c3a4d410-4730-4315-9188-0dee7147b0fa": {
+          "id": "c3a4d410-4730-4315-9188-0dee7147b0fa",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -1500,
+            "y": 108
+          },
+          "children": [
+            "4d435aa0-c3e1-4201-a860-69b3dc1716bf",
+            "6444264f-173f-4275-b8af-ef35ec21091e"
+          ]
+        },
+        "3061cffb-9b26-4aa7-9dd8-8fabfda5b75e": {
+          "id": "3061cffb-9b26-4aa7-9dd8-8fabfda5b75e",
+          "name": "Condition",
+          "title": "Has Orders?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": 924,
+            "y": -156
+          },
+          "child": "e65121ee-fdc6-4ead-a180-a7aa32aae209"
+        },
+        "e327e881-36ce-4ecc-88c6-ed4655402dea": {
+          "id": "e327e881-36ce-4ecc-88c6-ed4655402dea",
+          "name": "Custom Action",
+          "title": "Rest",
+          "description": "A custom SQF action.",
+          "properties": {},
+          "display": {
+            "x": 2040,
+            "y": -156
+          }
+        },
+        "b3b66b62-f6d9-403e-80e9-49d2ab577ef6": {
+          "id": "b3b66b62-f6d9-403e-80e9-49d2ab577ef6",
+          "name": "Condition",
+          "title": "Orders = Observe?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": -348,
+            "y": 108
+          },
+          "child": "f02e867c-587d-4967-ac88-6f33c0658eb8"
+        },
+        "e65121ee-fdc6-4ead-a180-a7aa32aae209": {
+          "id": "e65121ee-fdc6-4ead-a180-a7aa32aae209",
+          "name": "Selector",
+          "title": "Selector",
+          "description": "Runs child nodes until one succeeds.",
+          "properties": {},
+          "display": {
+            "x": 924,
+            "y": -24
+          },
+          "children": [
+            "b3b66b62-f6d9-403e-80e9-49d2ab577ef6",
+            "b63ff728-637e-48e9-ba17-c5d349ce6e9f",
+            "737fe3ee-278a-418d-80e9-744304bc3bcc",
+            "10b3f107-09dc-484f-9d4b-5ac8b4338da8",
+            "fc362719-6a72-4e7f-8eea-0c5b2412c1c5"
+          ]
+        },
+        "b63ff728-637e-48e9-ba17-c5d349ce6e9f": {
+          "id": "b63ff728-637e-48e9-ba17-c5d349ce6e9f",
+          "name": "Condition",
+          "title": "Orders = Patrol?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": 384,
+            "y": 108
+          },
+          "child": "cde6f40b-f730-41e9-b0bb-f19f2ee021e3"
+        },
+        "737fe3ee-278a-418d-80e9-744304bc3bcc": {
+          "id": "737fe3ee-278a-418d-80e9-744304bc3bcc",
+          "name": "Condition",
+          "title": "Orders = Defend?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": 1104,
+            "y": 108
+          },
+          "child": "b97163bc-cdbe-4b56-95a3-9addeabb7e63"
+        },
+        "10b3f107-09dc-484f-9d4b-5ac8b4338da8": {
+          "id": "10b3f107-09dc-484f-9d4b-5ac8b4338da8",
+          "name": "Condition",
+          "title": "Orders = Track?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": 1632,
+            "y": 108
+          },
+          "child": "874d33ce-f53a-4715-8af7-3d73ac1a7d92"
+        },
+        "fc362719-6a72-4e7f-8eea-0c5b2412c1c5": {
+          "id": "fc362719-6a72-4e7f-8eea-0c5b2412c1c5",
+          "name": "Condition",
+          "title": "Orders = Ambush?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": 1836,
+            "y": 108
+          }
+        },
+        "c87c19bb-04de-4471-b6ab-f2288e995643": {
+          "id": "c87c19bb-04de-4471-b6ab-f2288e995643",
+          "name": "Set Stance",
+          "title": "Set Stance (<stance>)",
+          "description": "Set the units stance to <stance>",
+          "properties": {
+            "stance": "prone"
+          },
+          "display": {
+            "x": -660,
+            "y": 492
+          }
+        },
+        "fc66ff5a-63b7-47ce-801e-ad86ee09b199": {
+          "id": "fc66ff5a-63b7-47ce-801e-ad86ee09b199",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -348,
+            "y": 372
+          },
+          "children": [
+            "c87c19bb-04de-4471-b6ab-f2288e995643",
+            "c13f17c6-a19b-4ad5-9043-8050cd16f4b6",
+            "667d19d3-0c20-49f7-899b-8fdfcdd92fda",
+            "dead7451-5583-4370-9085-fae57971c781"
+          ]
+        },
+        "c13f17c6-a19b-4ad5-9043-8050cd16f4b6": {
+          "id": "c13f17c6-a19b-4ad5-9043-8050cd16f4b6",
+          "name": "Set movement state",
+          "title": "<state> movement",
+          "description": "Enable or prevent the unit from moving.",
+          "properties": {
+            "state": "Prevent"
+          },
+          "display": {
+            "x": -456,
+            "y": 492
+          }
+        },
+        "667d19d3-0c20-49f7-899b-8fdfcdd92fda": {
+          "id": "667d19d3-0c20-49f7-899b-8fdfcdd92fda",
+          "name": "RepeatUntilSuccess",
+          "title": "Repeat Until Success",
+          "description": "",
+          "properties": {
+            "maxLoop": -1
+          },
+          "display": {
+            "x": -240,
+            "y": 492
+          },
+          "child": "aa4ef070-df16-4bf5-8ed9-1917a09ed585"
+        },
+        "aa4ef070-df16-4bf5-8ed9-1917a09ed585": {
+          "id": "aa4ef070-df16-4bf5-8ed9-1917a09ed585",
+          "name": "Observe",
+          "title": "Watch for players",
+          "description": "Watch the area for players",
+          "properties": {},
+          "display": {
+            "x": -240,
+            "y": 624
+          }
+        },
+        "dead7451-5583-4370-9085-fae57971c781": {
+          "id": "dead7451-5583-4370-9085-fae57971c781",
+          "name": "Call reinforcements",
+          "title": "Call reinforcements",
+          "description": "Call reinforcements",
+          "properties": {},
+          "display": {
+            "x": -36,
+            "y": 492
+          }
+        },
+        "f02e867c-587d-4967-ac88-6f33c0658eb8": {
+          "id": "f02e867c-587d-4967-ac88-6f33c0658eb8",
+          "name": "Disable AI while running",
+          "title": "Disable <behaviour> while running",
+          "description": "Disables the given AI behaviour while the child node is running.",
+          "properties": {
+            "behaviour": "shooting"
+          },
+          "display": {
+            "x": -348,
+            "y": 240
+          },
+          "child": "fc66ff5a-63b7-47ce-801e-ad86ee09b199"
+        },
+        "5dbab7ec-9b47-4eef-ad13-375ce7e99c74": {
+          "id": "5dbab7ec-9b47-4eef-ad13-375ce7e99c74",
+          "name": "Custom Action",
+          "title": "Follow patrol route",
+          "description": "A custom SQF action.",
+          "properties": {},
+          "display": {
+            "x": 168,
+            "y": 372
+          }
+        },
+        "cde6f40b-f730-41e9-b0bb-f19f2ee021e3": {
+          "id": "cde6f40b-f730-41e9-b0bb-f19f2ee021e3",
+          "name": "Selector",
+          "title": "Selector",
+          "description": "Runs child nodes until one succeeds.",
+          "properties": {},
+          "display": {
+            "x": 384,
+            "y": 240
+          },
+          "children": [
+            "5dbab7ec-9b47-4eef-ad13-375ce7e99c74",
+            "cb25c286-1c4b-424e-b415-cf8c43d182a4",
+            "6f3f0bc1-0747-40c2-88a4-00fc5e00ec5c"
+          ]
+        },
+        "6f3f0bc1-0747-40c2-88a4-00fc5e00ec5c": {
+          "id": "6f3f0bc1-0747-40c2-88a4-00fc5e00ec5c",
+          "name": "Condition",
+          "title": "Can search?",
+          "description": "Sufficient time has passed since the last search.",
+          "properties": {},
+          "display": {
+            "x": 588,
+            "y": 372
+          },
+          "child": "6a190a61-4e2b-43ee-afc0-76094b9deb8e"
+        },
+        "2d9c69bb-40ae-425d-a59f-9d4d4eaec8eb": {
+          "id": "2d9c69bb-40ae-425d-a59f-9d4d4eaec8eb",
+          "name": "Do search",
+          "title": "Conduct search",
+          "description": "Conduct a search of the area",
+          "properties": {},
+          "display": {
+            "x": -1284,
+            "y": 624
+          }
+        },
+        "6a190a61-4e2b-43ee-afc0-76094b9deb8e": {
+          "id": "6a190a61-4e2b-43ee-afc0-76094b9deb8e",
+          "name": "Do search",
+          "title": "Conduct search",
+          "description": "Conduct a search of the area",
+          "properties": {},
+          "display": {
+            "x": 588,
+            "y": 492
+          }
+        },
+        "9e38558c-a842-4f97-8fd6-e46ffb501d39": {
+          "id": "9e38558c-a842-4f97-8fd6-e46ffb501d39",
+          "name": "Custom Action",
+          "title": "Rest",
+          "description": "A custom SQF action.",
+          "properties": {},
+          "display": {
+            "x": 384,
+            "y": 492
+          }
+        },
+        "f677f2b2-acf6-49af-a566-33cce6ecacab": {
+          "id": "f677f2b2-acf6-49af-a566-33cce6ecacab",
+          "name": "Custom Action",
+          "title": "Spread out and hold position",
+          "description": "A custom SQF action.",
+          "properties": {},
+          "display": {
+            "x": 1416,
+            "y": 372
+          }
+        },
+        "6c236f2b-8931-492a-888d-53215db68012": {
+          "id": "6c236f2b-8931-492a-888d-53215db68012",
+          "name": "Condition",
+          "title": "Nearby statics?",
+          "description": "Nearby unclaimed static weapons?",
+          "properties": {},
+          "display": {
+            "x": 1008,
+            "y": 372
+          },
+          "child": "2e0eb1f1-23ef-410c-b8cd-5bb3fca9e9bc"
+        },
+        "b97163bc-cdbe-4b56-95a3-9addeabb7e63": {
+          "id": "b97163bc-cdbe-4b56-95a3-9addeabb7e63",
+          "name": "Selector",
+          "title": "Selector",
+          "description": "Runs child nodes until one succeeds.",
+          "properties": {},
+          "display": {
+            "x": 1104,
+            "y": 240
+          },
+          "children": [
+            "2893b466-2979-4974-8fb2-e905fa256563",
+            "6c236f2b-8931-492a-888d-53215db68012",
+            "f315b6b9-4459-4370-b88b-ec6915ac7bd6",
+            "f677f2b2-acf6-49af-a566-33cce6ecacab"
+          ]
+        },
+        "2893b466-2979-4974-8fb2-e905fa256563": {
+          "id": "2893b466-2979-4974-8fb2-e905fa256563",
+          "name": "Condition",
+          "title": "Not in position?",
+          "description": "Runs the child node if the condition is met",
+          "properties": {},
+          "display": {
+            "x": 792,
+            "y": 372
+          },
+          "child": "82b08f4f-6131-4b4f-8958-5a343d27abdf"
+        },
+        "82b08f4f-6131-4b4f-8958-5a343d27abdf": {
+          "id": "82b08f4f-6131-4b4f-8958-5a343d27abdf",
+          "name": "Move to",
+          "title": "Move (<Where>)",
+          "description": "Move squad to a location",
+          "properties": {
+            "Where": "Defend loc",
+            "Speed": "Run"
+          },
+          "display": {
+            "x": 792,
+            "y": 492
+          }
+        },
+        "2e0eb1f1-23ef-410c-b8cd-5bb3fca9e9bc": {
+          "id": "2e0eb1f1-23ef-410c-b8cd-5bb3fca9e9bc",
+          "name": "Custom Action",
+          "title": "Claim and mount statics",
+          "description": "A custom SQF action.",
+          "properties": {},
+          "display": {
+            "x": 1008,
+            "y": 492
+          }
+        },
+        "cb25c286-1c4b-424e-b415-cf8c43d182a4": {
+          "id": "cb25c286-1c4b-424e-b415-cf8c43d182a4",
+          "name": "Needs rest?",
+          "title": "Needs rest?",
+          "description": "Should the unit take a break?",
+          "properties": {},
+          "display": {
+            "x": 384,
+            "y": 372
+          },
+          "child": "9e38558c-a842-4f97-8fd6-e46ffb501d39"
+        },
+        "f315b6b9-4459-4370-b88b-ec6915ac7bd6": {
+          "id": "f315b6b9-4459-4370-b88b-ec6915ac7bd6",
+          "name": "Needs rest?",
+          "title": "Needs rest?",
+          "description": "Should the unit take a break?",
+          "properties": {},
+          "display": {
+            "x": 1212,
+            "y": 372
+          },
+          "child": "617f1109-61c5-4bf2-822c-4ad0e2b3fe88"
+        },
+        "617f1109-61c5-4bf2-822c-4ad0e2b3fe88": {
+          "id": "617f1109-61c5-4bf2-822c-4ad0e2b3fe88",
+          "name": "Custom Action",
+          "title": "Interact with nearby units",
+          "description": "A custom SQF action.",
+          "properties": {},
+          "display": {
+            "x": 1212,
+            "y": 492
+          }
+        },
+        "58e31946-f88f-47be-8b1d-443a5b2b2b76": {
+          "id": "58e31946-f88f-47be-8b1d-443a5b2b2b76",
+          "name": "Move to",
+          "title": "Move (<Where>)",
+          "description": "Move squad to a location",
+          "properties": {
+            "Where": "Next track",
+            "Speed": "N/A"
+          },
+          "display": {
+            "x": 1632,
+            "y": 624
+          }
+        },
+        "7fa5d01a-64b4-4b31-88ea-c9085e094d5a": {
+          "id": "7fa5d01a-64b4-4b31-88ea-c9085e094d5a",
+          "name": "RepeatUntilFailure",
+          "title": "Repeat Until Failure",
+          "description": "",
+          "properties": {
+            "maxLoop": -1
+          },
+          "display": {
+            "x": 1632,
+            "y": 372
+          },
+          "child": "476b4be9-bdf9-4c1a-943a-40fc3918163f"
+        },
+        "874d33ce-f53a-4715-8af7-3d73ac1a7d92": {
+          "id": "874d33ce-f53a-4715-8af7-3d73ac1a7d92",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": 1632,
+            "y": 240
+          },
+          "children": [
+            "7fa5d01a-64b4-4b31-88ea-c9085e094d5a"
+          ]
+        },
+        "476b4be9-bdf9-4c1a-943a-40fc3918163f": {
+          "id": "476b4be9-bdf9-4c1a-943a-40fc3918163f",
+          "name": "Condition",
+          "title": "Can find next track?",
+          "description": "Runs the child node if the condition is met.",
+          "properties": {},
+          "display": {
+            "x": 1632,
+            "y": 492
+          },
+          "child": "58e31946-f88f-47be-8b1d-443a5b2b2b76"
+        }
+      },
+      "display": {
+        "camera_x": 856,
+        "camera_y": 286.5,
+        "camera_z": 0.75,
+        "x": -132,
+        "y": -408
+      }
+    }
+  ],
+  "custom_nodes": [
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Selector",
+      "category": "composite",
+      "title": "Selector",
+      "description": "Runs child nodes until one succeeds.",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Condition",
+      "category": "decorator",
+      "title": "Condition",
+      "description": "Runs the child node if the condition is met.",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Custom Action",
+      "category": "action",
+      "title": "Custom Action",
+      "description": "A custom SQF action.",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Service",
+      "category": "decorator",
+      "title": "Service",
+      "description": "Runs each tick the subtree is running.",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Set Group Status",
+      "category": "action",
+      "title": "Set Group Status",
+      "description": "Sets the overall group status",
+      "properties": {
+        "Behaviour": "COMBAT",
+        "Combat Mode": "RED",
+        "Speed": "FULL",
+        "Unit Position": "AUTO"
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Conduct search",
+      "category": "action",
+      "title": "Conduct search",
+      "description": "Individual units spread out around the area.",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Parallel",
+      "category": "composite",
+      "title": "Parallel (Wait for <waitFor>)",
+      "description": "Runs nodes in parallel until all (or 1) of them succeeds.",
+      "properties": {
+        "waitFor": "one",
+        "abortOnAnyFail": "false"
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Move to",
+      "category": "action",
+      "title": "Move (<Where>)",
+      "description": "Move squad to a location",
+      "properties": {
+        "Where": "X",
+        "Speed": "N/A"
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Time limit",
+      "category": "decorator",
+      "title": "Max <max>s",
+      "description": "Run for at most X seconds",
+      "properties": {
+        "max": 0
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Track search",
+      "category": "action",
+      "title": "Check for nearby tracks (<radius>m)",
+      "description": "Check for any nearby tracks, and add it to the AI's knowledge.",
+      "properties": {
+        "radius": 50
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Can call reinforcements",
+      "category": "decorator",
+      "title": "Can call reinforcements?",
+      "description": "Has a radio, and hasn't recently called for reinforcements.",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Call reinforcements",
+      "category": "action",
+      "title": "Call reinforcements",
+      "description": "Call reinforcements",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Set task",
+      "category": "action",
+      "title": "Set task to <task>",
+      "description": "Changes the squad's current goal.",
+      "properties": {
+        "task": "tracking"
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Set Stance",
+      "category": "action",
+      "title": "Set Stance (<stance>)",
+      "description": "Set the units stance to <stance>",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Set movement state",
+      "category": "action",
+      "title": "<state> movement",
+      "description": "Enable or prevent the unit from moving.",
+      "properties": {
+        "state": "Prevent"
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Observe",
+      "category": "action",
+      "title": "Watch for players",
+      "description": "Watch the area for players",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Disable AI while running",
+      "category": "decorator",
+      "title": "Disable <behaviour> while running",
+      "description": "Disables the given AI behaviour while the child node is running.",
+      "properties": {
+        "behaviour": "AI"
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Do search",
+      "category": "action",
+      "title": "Conduct search",
+      "description": "Conduct a search of the area",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "Needs rest?",
+      "category": "decorator",
+      "title": "Needs rest?",
+      "description": "Should the unit take a break?",
+      "properties": {}
+    }
+  ]
+}

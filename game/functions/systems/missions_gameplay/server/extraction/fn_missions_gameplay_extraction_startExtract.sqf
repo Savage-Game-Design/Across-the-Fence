@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2023-11-26
+    Last Update: 2023-12-20
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ params [
     ["_originPos", markerPos "vgm_shared_hub"]
 ];
 
-private _mission = localNamespace getVariable "vgm_missions" get _missionId;
+private _mission = [_missionId] call vgm_s_fnc_missions_getById;
 
 if (isNil "_mission") exitWith {
     format ["Unable to extract, no mission with id: %1", _missionId] call vgm_g_fnc_logError;
@@ -73,7 +73,8 @@ private _script = [_missionId, _mission, _helicopter] spawn {
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 25;
     [_missionId] call vgm_s_fnc_missions_endMission;
-    sleep 10;
+    waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
+    sleep 5;
     {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
     deleteVehicle _helicopter;
 };

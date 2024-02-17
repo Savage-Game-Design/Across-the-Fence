@@ -3,7 +3,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-11-17
+    Last Update: 2023-12-03
     Public: No
 
     Description:
@@ -20,6 +20,11 @@ if (!hasInterface) exitWith {};
 vgm_medical_healItems = createHashMapFromArray [
     [HEAL_FAK, ["vn_helper_item_firstaidkit"]],
     [HEAL_MEDIKIT, ["vn_helper_item_medikit"]]
+];
+
+vgm_medical_healItemsTreatmentData = createHashMapFromArray [
+    [HEAL_FAK, 1],
+    [HEAL_MEDIKIT, 1]
 ];
 
 ["vgm_medical_heal", {
@@ -55,7 +60,7 @@ vgm_medical_healItems = createHashMapFromArray [
 
     _healer removeItem _consumeItem;
 
-    [_patient, _bodyPart, [2, 1] select (_itemType == HEAL_MEDIKIT)] call vgm_c_fnc_medical_removeWound;
+    [_patient, _bodyPart, vgm_medical_healItemsTreatmentData get _itemType] call vgm_c_fnc_medical_removeWound;
 
 }] call para_g_fnc_event_subscribe;
 

@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-11-25
+    Last Update: 2023-12-19
     Public: No
 
     Description:
@@ -59,7 +59,7 @@ if (isNull (_missionPublic get "group")) then {
 [_playerId call vgm_s_fnc_player_fromId] joinSilent (_missionPublic get "group");
 
 [
-    "player attached to mission",
+    "vgm_mission_attached",
     [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 

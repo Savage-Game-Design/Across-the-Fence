@@ -9,9 +9,7 @@ private _pos = positionCameraToWorld [0,10,0];
 private _agent = createAgent ["vn_b_men_sf_01", _pos, [], 0, "CAN_COLLIDE"];
 _agent setUnitLoadout [[],[],[],[],[],[],"","",[],["","","","","",""]];
 
-_agent addEventHandler ["HandleDamage", {call vgm_c_fnc_medical_handleDamage}];
-
-["vgm_medical_addAction", _agent] call para_g_fnc_event_triggerGlobal;
+_agent call vgm_c_fnc_medical_unitInit;
 
 player reveal _agent;
 

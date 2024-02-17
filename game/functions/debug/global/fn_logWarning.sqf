@@ -2,7 +2,7 @@
     File: fn_logWarning.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-02-26
+    Last Update: 2023-12-20
     Public: Yes
 
     Description:
@@ -16,7 +16,7 @@
         Something [BOOL]
 
     Example(s):
-        [parameter] call vgm_g_fnc_log;
+        "warning message" call vgm_g_fnc_logWarning;
  */
 
 params ["_message"];

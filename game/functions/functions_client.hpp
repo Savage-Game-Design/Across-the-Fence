@@ -53,6 +53,49 @@ class vgm_g
         };
     };
 
+    class behaviour_trees_runner
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\runner\global);
+        class btree_preinit {
+            preInit = 1;
+        };
+        class btree_abort_action {};
+        class btree_abort_decorator {};
+        class btree_abort_selector {};
+        class btree_abort_sequence {};
+
+        class btree_childFinished_action {};
+        class btree_childFinished_decorator {};
+        class btree_childFinished_selector {};
+        class btree_childFinished_sequence {};
+
+        class btree_enterNode_action {};
+        class btree_enterNode_decorator {};
+        class btree_enterNode_selector {};
+        class btree_enterNode_sequence {};
+        class btree_enterNode {};
+
+        class btree_exitNode_action {};
+        class btree_exitNode_decorator {};
+        class btree_exitNode_selector {};
+        class btree_exitNode_sequence {};
+
+        class btree_log {};
+        class btree_panic {};
+        class btree_returnToParent {};
+        class btree_runChild {};
+
+        class btree_runCurrentNode_action {};
+        class btree_runCurrentNode_decorator {};
+        class btree_runCurrentNode_selector {};
+        class btree_runCurrentNode_sequence {};
+        class btree_runCurrentNode {};
+
+        class btree_setTree {};
+        class btree_tickGroup {};
+        class btree_unwindStackUpToindex {};
+    };
+
     class leveling
     {
         VGM_GLOBAL_PATH(\systems\leveling\global);
@@ -73,6 +116,17 @@ class vgm_g
             postInit = 1;
         };
         class medical_replaceItems {};
+    };
+
+    class mission_objects
+    {
+        VGM_GLOBAL_PATH(\systems\mission_objects\global);
+
+        class mission_objects_deleteObject {};
+        class mission_objects_spawnObjects {};
+        class mission_objects_preInit {
+            preInit = 1;
+        };
     };
 
     class missions
@@ -131,6 +185,7 @@ class vgm_c
 
         class coefficient_create {};
         class coefficient_get {};
+        class coefficient_override {};
         class coefficient_postInit
         {
             postInit = 1;
@@ -141,6 +196,7 @@ class vgm_c
         };
         class coefficient_remove {};
         class coefficient_set {};
+        class coefficient_unitInit {};
     };
 
     class displays
@@ -156,9 +212,29 @@ class vgm_c
         class displayEndOfMission {};
     };
 
+    class carry
+    {
+        VGM_CLIENT_PATH(\systems\carry\client);
+
+        class carry_canCarry {};
+        class carry_doCarry {};
+        class carry_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class carry_remoteExec
+    {
+        VGM_CLIENT_PATH(\systems\carry\client\remoteExec);
+
+        class carry_attachResponse {};
+        class carry_detachResponse {};
+    };
+
     class equipment
     {
-        VGM_GLOBAL_PATH(\systems\equipment\client);
+        VGM_CLIENT_PATH(\systems\equipment\client);
 
         class equipment_arsenalInit {};
         class equipment_filterLoadout {};
@@ -276,6 +352,7 @@ class vgm_c
         class medical_getArmorItem {};
         class medical_getWound {};
         class medical_handleDamage {};
+        class medical_itemAnimation {};
         class medical_itemApply {};
         class medical_itemApplyFAK {};
         class medical_itemApplyMedikit {};
@@ -294,6 +371,7 @@ class vgm_c
         class medical_setUnconscious {};
         class medical_shouldBleed {};
         class medical_statusEffectBleeding {};
+        class medical_unitInit {};
         class medical_updateVisuals {};
     };
 
@@ -433,6 +511,24 @@ class vgm_c
 
         class skill_actives_fireSupport_grenadesCase {};
         class skill_actives_fireSupport_overwhelmingFire {};
+    };
+
+    class skill_investigate
+    {
+        VGM_CLIENT_PATH(\systems\skill_investigate\client);
+
+        class skill_investigate_addAction {};
+        class skill_investigate_drawSoundWaves
+        {
+            headerType = -1;
+        };
+        class skill_investigate_getSpeedDrawCoef {};
+        class skill_investigate_postInit
+        {
+            postInit = 1;
+        };
+        class skill_investigate_setDesaturation {};
+        class skill_investigate_setListenMode {};
     };
 
     class stamina
