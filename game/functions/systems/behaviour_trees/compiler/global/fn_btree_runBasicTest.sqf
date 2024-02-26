@@ -74,7 +74,7 @@ private _testGroup = createGroup civilian;
 [_testGroup] call vgm_g_fnc_btree_tickGroup;
 
 // Change the tree so the UnassignTree callbacks get called.
-private _alternateTree = [ACTION(basic), []] call vgm_g_fnc_btree_compileTree;
+private _alternateTree = [[ACTION(basic), []]] call vgm_g_fnc_btree_compileTree;
 [_testGroup, _alternateTree] call vgm_g_fnc_btree_setTree;
 
 private _result = createHashMap;
