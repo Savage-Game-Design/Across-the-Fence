@@ -3,7 +3,7 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-02-11
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -25,6 +25,7 @@ private _eh = missionNamespace getVariable ["vgm_c_skill_investigate_drawEh", -1
 if (!_enable) exitWith {
     removeMissionEventHandler ["Draw3D", _eh];
     vgm_c_skill_investigate_drawEh = -1;
+    vgm_c_skill_investigate_noises = nil;
 };
 
 if (_eh > -1) exitWith {};

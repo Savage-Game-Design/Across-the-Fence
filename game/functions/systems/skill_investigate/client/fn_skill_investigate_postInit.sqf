@@ -2,7 +2,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-02-12
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -50,3 +50,27 @@ player addEventHandler ["Respawn", {(_this#0) call vgm_c_fnc_skill_investigate_a
     ] call vgm_c_fnc_skill_investigate_queueNoise;
 
 }] call BIS_fnc_addScriptedEventHandler;
+
+// handle units firing
+call {
+    ["vgm_mission_director_squadCreated", {
+        params ["_groups"];
+
+        ["Handling Squad Created data for mission"] call vgm_g_fnc_logDebug;
+
+        {
+            {_x call vgm_c_fnc_skill_investigate_addFiredEh} forEach units _x;
+        } forEach _groups;
+    }] call para_g_fnc_event_subscribe;
+
+    ["vgm_mission_director_jipData", {
+        params ["_args"];
+        _args params ["_allGroups"];
+
+        ["Handling JIP data for mission"] call vgm_g_fnc_logDebug;
+
+        {
+            {_x call vgm_c_fnc_skill_investigate_addFiredEh} forEach units _x;
+        } forEach _allGroups;
+    }] call para_g_fnc_event_subscribe;
+};
