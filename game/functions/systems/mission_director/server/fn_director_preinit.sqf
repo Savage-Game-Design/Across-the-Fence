@@ -95,5 +95,5 @@ vgm_s_director_attack_classes = [
 
     [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", _machineId];
 
-    ["vgm_mission_director_squadCreated", _mission get "director" get "aiGroups", _machineId] call para_g_fnc_event_triggerTargets;
+    ["vgm_mission_director_jipData", [_mission get "director" get "aiGroups"], _machineId] call para_g_fnc_event_triggerTargets;
 }] call para_g_fnc_event_subscribeLocal;
