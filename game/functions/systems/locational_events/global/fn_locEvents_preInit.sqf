@@ -2,7 +2,7 @@
     File: fn_locEvents_preInit.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-02-16
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -23,7 +23,7 @@ private _locEventsData = localNamespace getVariable "vgm_l_locEvents_data";
 if (isNil "_locEventsData") then {
     _locEventsData = createHashMapFromArray [
         ["listenerEventTypes", createHashMap],
-        ["perceptionGroups", createHashMap]
+        ["eventGroups", createHashMap]
     ];
 
     localNamespace setVariable ["vgm_l_locEvents_data", _locEventsData];

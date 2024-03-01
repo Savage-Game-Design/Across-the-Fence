@@ -2,7 +2,7 @@
     File: fn_locEvents_removeHandlers.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-02-23
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -19,17 +19,17 @@
  */
 
 params ["_handlerDetails"];
-_handlerDetails params ["_perceptionGroup", "_listenerHash", "_handlerIds"];
+_handlerDetails params ["_eventGroup", "_listenerHash", "_handlerIds"];
 
 private _locEventsData = localNamespace getVariable "vgm_l_locEvents_data";
 
-private _perceptionGroups = _locEventsData get "perceptionGroups";
+private _eventGroups = _locEventsData get "eventGroups";
 private _listenerEventTypes = _locEventsData get "listenerEventTypes";
 
-// Perception group may have been wiped
-if !(_perceptionGroup in _perceptionGroups) exitWith {};
+// Event group may have been wiped
+if !(_eventGroup in _eventGroups) exitWith {};
 
-private _groupDetails = _perceptionGroups get _perceptionGroup;
+private _groupDetails = _eventGroups get _eventGroup;
 private _listenersByType = _groupDetails get "listenersByType";
 
 {
@@ -49,6 +49,6 @@ private _listenersByType = _groupDetails get "listenersByType";
         _typeListeners get "listenerHandlers" deleteAt _listenerHash;
         private _allListeners = _typeListeners get "allListeners";
         _allListeners deleteAt (_allListeners find (_listenerDetails get "listener"));
-        _listenerEventTypes get _listenerHash deleteAt [_perceptionGroup, _type];
+        _listenerEventTypes get _listenerHash deleteAt [_eventGroup, _type];
     };
 } forEach _handlerIds;

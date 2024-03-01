@@ -112,7 +112,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\locational_events\global);
 
         class locEvents_callHandlers {};
-        class locEvents_deletePerceptionGroup {};
+        class locEvents_deleteEventGroup {};
         class locEvents_onNearbyEvent {};
         class locEvents_preInit {};
         class locEvents_removeHandlers {};

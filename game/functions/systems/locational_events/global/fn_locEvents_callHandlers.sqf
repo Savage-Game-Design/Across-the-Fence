@@ -2,14 +2,14 @@
     File: fn_locEvents_callHandlers.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-02-16
+    Last Update: 2024-03-01
     Public: No
 
     Description:
         Calls handlers for a given event
 
     Parameter(s):
-        _perceptionGroup - The perception group ID to send the event to [STRING]
+        _eventGroup - The event group ID to send the event to [STRING]
         _pos - Where the event is occurring [ARRAY]
         _radius - How far away can the event be received? [NUMBER]
         _type - Type of event [STRING]
@@ -22,13 +22,13 @@
         ["default", [0,0,0], 100, "gunshot", []] call vgm_g_fnc_locEvents_triggerEvent;
  */
 
-params ["_perceptionGroup", "_pos", "_radius", "_type", "_details"];
+params ["_eventGroup", "_pos", "_radius", "_type", "_details"];
 
-private _perceptionGroups = localNamespace getVariable "vgm_l_locEvents_data" get "perceptionGroups";
+private _eventGroups = localNamespace getVariable "vgm_l_locEvents_data" get "eventGroups";
 
-if !(_perceptionGroup in _perceptionGroups) exitWith {};
+if !(_eventGroup in _eventGroups) exitWith {};
 
-private _typeListeners = _perceptionGroups get _perceptionGroup get "listenersByType" get _type;
+private _typeListeners = _eventGroups get _eventGroup get "listenersByType" get _type;
 
 if (isNil "_typeListeners") exitWith {};
 

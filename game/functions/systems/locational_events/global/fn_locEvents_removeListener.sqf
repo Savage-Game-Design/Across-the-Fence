@@ -2,7 +2,7 @@
     File: fn_locEvents_removeListener.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-02-23
+    Last Update: 2024-03-01
     Public: Yes
 
     Description:
@@ -22,7 +22,7 @@ params ["_listener"];
 
 private _locEventsData = localNamespace getVariable "vgm_l_locEvents_data";
 private _listenerEventTypes = _locEventsData get "listenerEventTypes";
-private _perceptionGroups = _locEventsData get "perceptionGroups";
+private _eventGroups = _locEventsData get "eventGroups";
 
 private _listenerHash = hashValue _listener;
 
@@ -31,11 +31,11 @@ if !(_listenerHash in _listenerEventTypes) exitWith {};
 private _eventTypes = keys (_listenerEventTypes get _listenerHash);
 
 {
-    _x params ["_perceptionGroup", "_type"];
+    _x params ["_eventGroup", "_type"];
 
-    private _perceptionGroup = _perceptionGroups get _perceptionGroup;
-    if (isNil "_perceptionGroup") then { continue };
-    private _typeListeners = _perceptionGroup get "listenersByType" get _type;
+    private _eventGroup = _eventGroups get _eventGroup;
+    if (isNil "_eventGroup") then { continue };
+    private _typeListeners = _eventGroup get "listenersByType" get _type;
     if (isNil "_typeListeners") then { continue };
 
     private _allListeners = _typeListeners get "allListeners";
