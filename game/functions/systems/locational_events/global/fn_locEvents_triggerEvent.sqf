@@ -29,8 +29,8 @@ params ["_perceptionGroup", "_pos", "_radius", "_type", "_details", ["_isLocal",
 
 private _arguments = _this select [0, 5];
 
-if (_isLocal) then {
+if (_isLocal) exitWith {
     _arguments call vgm_g_fnc_locEvents_callHandlers;
-} else {
-    _arguments remoteExecCall ["vgm_g_fnc_locEvents_callHandlers", 0];
 };
+
+_arguments remoteExecCall ["vgm_g_fnc_locEvents_callHandlers", 0];
