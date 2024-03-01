@@ -21,10 +21,12 @@
 private _locEventsData = localNamespace getVariable "vgm_l_locEvents_data";
 
 if (isNil "_locEventsData") then {
-    localNamespace setVariable ["vgm_l_locEvents_data", createHashMapFromArray [
+    _locEventsData = createHashMapFromArray [
         ["listenerEventTypes", createHashMap],
         ["perceptionGroups", createHashMap]
-    ]];
+    ];
+
+    localNamespace setVariable ["vgm_l_locEvents_data", _locEventsData];
 };
 
-localNamespace getVariable "vgm_l_locEvents_data";
+_locEventsData // return
