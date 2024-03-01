@@ -40,6 +40,3 @@ private _directorData = _mission get "director";
 
 // Removes the job from the scheduler after it next runs.
 [_directorData get "schedulerJob"] call para_g_fnc_scheduler_remove_job;
-
-// Remove all event subscriptions
-{[_x] call para_g_fnc_event_unsubscribe} forEach (_directorData get "eventHandlers");

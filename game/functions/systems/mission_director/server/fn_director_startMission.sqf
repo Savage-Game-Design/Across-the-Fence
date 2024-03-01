@@ -54,18 +54,3 @@ private _jobId = format ["missionDirector%1", _mission get "public" get "id"];
 [_jobId, { _this call vgm_s_fnc_director_processMission }, [_mission], 10] call para_g_fnc_scheduler_add_job;
 
 _directorData set ["schedulerJob", _jobId];
-
-// Handle JIPs
-private _attachedEh = ["vgm_mission_attached", [_mission, {
-    params ["_args", "_mission"];
-    _args params ["_playerId", "_missionId"];
-
-    if ((_mission get "public" get "id") != _missionId) exitWith {};
-    getUserInfo _playerId params ["", "_machineId"];
-
-    [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", _machineId];
-
-    ["vgm_mission_director_squadCreated", _mission get "director" get "aiGroups", _machineId] call para_g_fnc_event_triggerTargets;
-}]] call para_g_fnc_event_subscribeLocal;
-
-_directorData set ["eventHandlers", [_attachedEh]];

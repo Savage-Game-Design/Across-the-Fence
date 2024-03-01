@@ -2,7 +2,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-11-25
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -86,3 +86,14 @@ vgm_s_director_attack_classes = [
         [_mission get "public" get "id"] call vgm_s_fnc_missions_endMission;
     }
 ] call para_g_fnc_event_subscribe;
+
+["vgm_mission_attached", {
+    (_this#0) params ["_playerId", "_missionId"];
+    private _mission = [_missionId] call vgm_s_fnc_missions_getById;
+    if (isNil "_mission" || {(_mission get "public" get "status") != "IN PROGRESS"}) exitWith {};
+    getUserInfo _playerId params ["", "_machineId"];
+
+    [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", _machineId];
+
+    ["vgm_mission_director_squadCreated", _mission get "director" get "aiGroups", _machineId] call para_g_fnc_event_triggerTargets;
+}] call para_g_fnc_event_subscribeLocal;
