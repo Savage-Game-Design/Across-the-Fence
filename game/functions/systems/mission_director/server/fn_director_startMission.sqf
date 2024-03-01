@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-11-04
+    Last Update: 2024-03-01
     Public: Yes
 
     Description:
@@ -55,8 +55,17 @@ private _jobId = format ["missionDirector%1", _mission get "public" get "id"];
 
 _directorData set ["schedulerJob", _jobId];
 
-// TODO - Start clientside monitoring on JIP players
-// Use startDeploy and finishDeploy as events for ease of use.
+// Handle JIPs
+private _attachedEh = ["vgm_mission_attached", [_mission, {
+    params ["_args", "_mission"];
+    _args params ["_playerId", "_missionId"];
 
+    if ((_mission get "public" get "id") != _missionId) exitWith {};
+    getUserInfo _playerId params ["", "_machineId"];
 
+    [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", _machineId];
 
+    ["vgm_mission_director_squadCreated", _mission get "director" get "aiGroups", _machineId] call para_g_fnc_event_triggerTargets;
+}]] call para_g_fnc_event_subscribeLocal;
+
+_directorData set ["eventHandlers", [_attachedEh]];

@@ -2,7 +2,7 @@
     File: fn_director_stopMonitoringMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-11-04
+    Last Update: 2024-03-01
     Public: Yes
 
     Description:
@@ -40,3 +40,6 @@ private _directorData = _mission get "director";
 
 // Removes the job from the scheduler after it next runs.
 [_directorData get "schedulerJob"] call para_g_fnc_scheduler_remove_job;
+
+// Remove all event subscriptions
+{[_x] call para_g_fnc_event_unsubscribe} forEach (_directorData get "eventHandlers");

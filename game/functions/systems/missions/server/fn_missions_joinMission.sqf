@@ -2,7 +2,7 @@
     File: fn_missions_joinMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-22
+    Last Update: 2024-03-01
     Public: Yes
 
     Description:
@@ -16,7 +16,7 @@
         Whether or not the assignment was successful [BOOLEAN]
 
     Example(s):
-        [32, getPlayerId player] call vgm_s_fnc_missions_joinMission;
+        [getPlayerId player, 32] call vgm_s_fnc_missions_joinMission;
  */
 
 params ["_playerId", "_missionId"];
