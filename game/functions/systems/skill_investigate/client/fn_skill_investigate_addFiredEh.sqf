@@ -21,12 +21,12 @@
 params ["_unit"];
 
 private _ehId = _unit getVariable ["vgm_c_skill_investigate_firedEh", -1];
-if (_ehId > -1) exitWith {};
+if (_ehId > -1) exitWith {_ehId};
 
 _ehId = _unit addEventHandler ["Fired", {
     params ["_unit", "", "", "", "", "", "_projectile"];
 
-    if (time > (_unit getVariable ["vgm_c_skill_investigate_nextShotNoiseTime", -1])) exitWith {};
+    if (time < (_unit getVariable ["vgm_c_skill_investigate_nextShotNoiseTime", -1])) exitWith {};
     _unit setVariable ["vgm_c_skill_investigate_nextShotNoiseTime", time + 1];
 
     [
@@ -36,6 +36,6 @@ _ehId = _unit addEventHandler ["Fired", {
     ] call vgm_c_fnc_skill_investigate_queueNoise;
 }];
 
-_unit getVariable ["vgm_c_skill_investigate_firedEh", _ehId];
+_unit setVariable ["vgm_c_skill_investigate_firedEh", _ehId];
 
 _ehId // return
