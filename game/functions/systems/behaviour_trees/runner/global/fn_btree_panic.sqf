@@ -32,4 +32,4 @@ private _formattedMessage = format ["BEHAVIOUR TREE PANIC: %1", _message];
 // Reset the stack to make the behaviour tree start executing from the beginning.
 _extern_btreeState set ["stack", []];
 
-NO_NEXT_ACTION
+NO_ACTION_UNTIL_NEXT_TICK

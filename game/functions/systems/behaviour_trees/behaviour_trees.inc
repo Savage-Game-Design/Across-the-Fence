@@ -19,6 +19,6 @@
 #define ACTION_RUN_CURRENT_NODE vgm_g_fnc_btree_runCurrentNode
 #define ACTION_PANIC vgm_g_fnc_btree_panic
 
-#define NO_NEXT_ACTION [[], {}]
+#define NO_ACTION_UNTIL_NEXT_TICK [[], {}]
 
 #endif

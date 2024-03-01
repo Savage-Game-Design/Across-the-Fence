@@ -3,7 +3,7 @@
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-02
+    Last Update: 2024-02-03
     Public: Yes
 
     Description:
@@ -41,7 +41,7 @@ private _nextActionParams = [];
 // If no current node, start tree execution from the top.
 if (count _extern_stack == 0) then {
     _nextAction = ACTION_ENTER_NODE;
-    _nextActionParams = [_tree];
+    _nextActionParams = [_tree get "rootNode"];
 };
 
 [format ["Ticking behaviour tree for group %1 at %2", str _group, serverTime]] call vgm_g_fnc_btree_log;
@@ -49,25 +49,34 @@ if (count _extern_stack == 0) then {
 {
     // Check if there's any conditions on the current path that can cause us to abort.
     private _frame = _x;
-    if (_frame get "isInterruptNode" && {[_frame get "node", _frame get "state"] call (_frame get "condition") isEqualTo RESULT_FAILED} ) exitWith {
+    private _node = _frame get "node";
+    private _state = _frame get "state";
+
+    if (_frame get "isInterruptNode" && {[_node, _state] call (_node get "condition") isEqualTo RESULT_FAILED} ) exitWith {
+        [format ["Interrupting node %1 (%2) (depth %3) due to failed condition", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
         [_forEachIndex] call vgm_g_fnc_btree_unwindStackUpToIndex;
         _nextAction = ACTION_RETURN_TO_PARENT;
         _nextActionParams = [RESULT_FAILED];
     };
 
-    // TODO - Service nodes
-
     // Check if there's any higher priority nodes registered, that need us to abort and switch to them.
     private _newChildToRunIndex = _frame getOrDefault ["higherPriorityNodes", []] findIf {
-        private _child = _frame get "node" get "children" select _x;
+        private _child = _node get "children" select _x;
         [_child get "node"] call (_child get "condition")
     };
 
     if (_newChildToRunIndex > -1) exitWith {
+        [format ["Higher priority child available for %1 (%2) (depth %3), aborting current child", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
         [_forEachIndex] call vgm_g_fnc_btree_unwindStackUpToIndex;
         _nextAction = ACTION_RUN_CHILD;
         _nextActionParams = [_frame get "higherPriorityNodes" select _newChildToRunIndex];
     };
+
+    if (_frame get "isServiceNode") then {
+        [format ["Running service node: %1 (%2) (depth %3)", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
+        [_node, _state] call (_node get "onTick");
+    };
+
 } forEach _extern_stack;
 
 // Each action can return the next action that needs executing.

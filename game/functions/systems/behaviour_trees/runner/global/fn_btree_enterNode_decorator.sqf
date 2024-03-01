@@ -24,19 +24,19 @@
 params ["_stackFrame"];
 
 private _node = _stackFrame get "node";
+private _state = _stackFrame get "state";
 
 private _conditionResult = [_node] call (_node get "condition");
 if (!_conditionResult) exitWith {
     [[RESULT_FAILED], ACTION_RETURN_TO_PARENT]
 };
 
-private _enterResult = [_node] call (_node get "onEnter");
+private _enterResult = [_node, _state] call (_node get "onEnter");
 _enterResult params ["_statusCode"];
 
 if (_statusCode isEqualTo RESULT_RUNNING) exitWith {
     _stackFrame set ["isInterruptNode", _node get "abortChildrenOnConditionFailure"];
     _stackFrame set ["isServiceNode", _node get "isService"];
-    // TODO: Services stack
 
     [[0], ACTION_RUN_CHILD]
 };

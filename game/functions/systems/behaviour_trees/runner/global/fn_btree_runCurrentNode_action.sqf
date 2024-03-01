@@ -31,7 +31,7 @@ private _result = [_node, _state] call (_node get "onTick");
 private _statusCode = _result # 0;
 
 if (_statusCode isEqualTo RESULT_RUNNING) exitWith {
-    NO_NEXT_ACTION
+    NO_ACTION_UNTIL_NEXT_TICK
 };
 
 [[_statusCode], ACTION_RETURN_TO_PARENT]

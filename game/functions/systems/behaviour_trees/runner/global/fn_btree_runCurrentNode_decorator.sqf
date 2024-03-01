@@ -24,8 +24,5 @@
 
 params ["_stackFrame"];
 
-// Bad case, shouldn't happen.
-["Cannot run current node - Decorator nodes should never be current"] call vgm_g_fnc_btree_log;
-
-// Return to parent, to try and recover.
-[[], ACTION_RETURN_TO_PARENT]
+// If decorator is current node, it's waiting to run the child again.
+[[0], ACTION_RUN_CHILD]
