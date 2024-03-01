@@ -39,9 +39,7 @@ private _listenersByType = _groupDetails get "listenersByType";
     private _listenerDetails = _typeListeners get "listenerHandlers" get _listenerHash;
 
     // If the listener has already been removed, we can skip.
-    if (isNil "_listenerDetails") then {
-        continue;
-    };
+    if (isNil "_listenerDetails") then {continue};
 
     private _handlers = _listenerDetails get "handlers";
     _handlers deleteAt _id;
