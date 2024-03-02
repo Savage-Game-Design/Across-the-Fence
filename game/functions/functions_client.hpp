@@ -114,7 +114,9 @@ class vgm_g
         class locEvents_callHandlers {};
         class locEvents_deleteEventGroup {};
         class locEvents_onNearbyEvent {};
-        class locEvents_preInit {};
+        class locEvents_preInit {
+            preInit = 1;
+        };
         class locEvents_removeHandlers {};
         class locEvents_removeListener {};
         class locEvents_triggerEvent {};
