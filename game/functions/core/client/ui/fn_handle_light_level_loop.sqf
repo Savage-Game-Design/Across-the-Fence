@@ -6,7 +6,7 @@
     Public: No
 
     Description:
-        Used to set camera aperature based on light level
+        Used to set camera aperture based on light level
 
     Parameter(s):
         None
