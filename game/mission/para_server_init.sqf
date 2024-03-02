@@ -60,6 +60,7 @@ diag_log "VGM: Initialising Cleanup Routine";
 [
     createHashmapFromArray [
         ["minPlayerDistance", ["cleanup_min_player_distance", 400] call BIS_fnc_getParamValue],
+        ["minPlayerBodyDistance", ["cleanup_min_player_body_distance", 150] call BIS_fnc_getParamValue],
         ["maxBodies", ["cleanup_max_bodies", 50] call BIS_fnc_getParamValue],
         ["cleanPlacedGear", ["cleanup_placed_gear", 1] call BIS_fnc_getParamValue > 0],
         ["placedGearCleanupTime", ["cleanup_placed_gear_lifetime", 300] call BIS_fnc_getParamValue],

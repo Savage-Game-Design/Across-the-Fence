@@ -17,6 +17,7 @@
 params [["_params", createHashMap]];
 
 para_s_cleanup_minPlayerDistance = _params getOrDefault ["minPlayerDistance", 400];
+para_s_cleanup_minPlayerBodyDistance = _params getOrDefault ["minPlayerBodyDistance", 150];
 para_s_cleanup_max_bodies = _params getOrDefault ["maxBodies", 50];
 // Remove items placed on the ground by players
 para_s_cleanup_clean_placed_gear = _params getOrDefault ["cleanPlacedGear", true];

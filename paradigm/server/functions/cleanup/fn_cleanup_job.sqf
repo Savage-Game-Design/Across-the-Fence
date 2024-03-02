@@ -13,6 +13,9 @@
 	Example(s): none
 */
 
+#define CLEAN_MIN_DIST para_s_cleanup_minPlayerDistance
+#define CLEAN_BODY_MIN_DIST para_s_cleanup_minPlayerBodyDistance
+
 para_s_cleanup_items_delete_immediately = para_s_cleanup_items_delete_immediately - [objNull];
 
 // For every bucket that might have an item ready to be cleaned up
@@ -36,7 +39,7 @@ para_s_cleanup_items_delete_immediately append (_itemsPassingTimeCheck - _newRan
 
 private _inPlayerRange = [];
 {
-	_inPlayerRange append (para_s_cleanup_items_range_restricted inAreaArray [getPos _x, para_s_cleanup_minPlayerDistance, para_s_cleanup_minPlayerDistance]);
+	_inPlayerRange append (para_s_cleanup_items_range_restricted inAreaArray [_x, CLEAN_MIN_DIST, CLEAN_MIN_DIST]);
 } forEach allPlayers;
 
 private _canDelete = para_s_cleanup_items_range_restricted - _inPlayerRange;
@@ -45,8 +48,20 @@ para_s_cleanup_items_delete_immediately append _canDelete;
 
 private _deadBodyOverrun = count para_s_cleanup_items_bodies - para_s_cleanup_max_bodies;
 if (_deadBodyOverrun > 0) then {
-	para_s_cleanup_items_delete_immediately append (para_s_cleanup_items_bodies select [0, _deadBodyOverrun]);
-	para_s_cleanup_items_bodies deleteRange [0, _deadBodyOverrun];
+    private _deletedBodiesIndices = [];
+    {
+        if (count (allPlayers inAreaArray [_x, CLEAN_BODY_MIN_DIST, CLEAN_BODY_MIN_DIST]) > 0) then {continue};
+        if (count _deletedBodiesIndices >= _deadBodyOverrun) exitWith {};
+
+        _deletedBodiesIndices pushBack _forEachIndex;
+        para_s_cleanup_items_delete_immediately pushBack _x;
+    } forEach para_s_cleanup_items_bodies;
+
+    #if __GAME_VER_MIN__ >= 18
+	para_s_cleanup_items_bodies deleteAt _deletedBodiesIndices;
+    #else
+    {para_s_cleanup_items_bodies deleteAt _x} forEach _deletedBodiesIndices;
+    #endif
 };
 
 [] spawn {
