@@ -72,12 +72,16 @@ class vgm_g
         class btree_decorator_basic {};
         class btree_decorator_basicService {};
 
-        /* Custom nodes */
-        class btree_action_patrolArea {};
-
+        /* General purpose nodes */
         class btree_decorator_alwaysFail {};
         class btree_decorator_alwaysSucceed {};
         class btree_decorator_loopInfinitely {};
+
+        /* Custom nodes */
+        class btree_action_moveToInvestigationPoint {};
+        class btree_action_patrolArea {};
+
+        class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
         class btree_decorator_suppressionService {};
         class btree_decorator_updateKnowledgeService {};
     };
@@ -145,6 +149,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\behaviour_trees\ai_utilities\global);
         class btree_moveTo_execute {};
         class btree_moveTo_start {};
+        class btree_moveTo_updateDestination {};
         class btree_setGroupStance {};
         class btree_setWaypoint {};
     };
