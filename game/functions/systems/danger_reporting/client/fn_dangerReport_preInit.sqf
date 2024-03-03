@@ -21,12 +21,6 @@
 vgm_c_dangerReport_suppressedShotsNotifyDistance = 50;
 vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 120;
 
-// Curve mapping indirectHitRange to sound range.
-vgm_c_dangerReport_explosionRadiusBezierCurve = [
-    [1, 0, 0],
-    [10, 270, 0],
-    [30, 300, 0]
-];
 // Multiplier to convert flare brightness to range.
 vgm_c_dangerReport_brightnessToRangeMultiplier = 2 / 3;
 
@@ -37,10 +31,6 @@ vgm_c_dangerReport_shotsAggregateTemplate = createHashMapFromArray [
     ["unsuppressedShots", 0],
     ["suppressedShots", 0]
 ];
-
-// Event group to broadcast events to.
-vgm_c_dangerReport_defaultLocEventGroup = "dangerReports";
-vgm_c_dangerReport_locEventGroup = vgm_c_dangerReport_defaultLocEventGroup;
 
 // Data structure for this player's recent gunfire
 vgm_c_dangerReport_recentShots = +vgm_c_dangerReport_shotsAggregateTemplate;

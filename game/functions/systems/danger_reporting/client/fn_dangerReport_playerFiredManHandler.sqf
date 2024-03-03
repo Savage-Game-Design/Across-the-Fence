@@ -43,6 +43,13 @@ _projectile addEventHandler ["Explode", {
     private _indirectHit = getNumber (_config >> "indirectHit");
     private _indirectHitRadius = getNumber (_config >> "indirectHitRadius");
 
+    private _submunitionAmmo = getText (_config >> "submunitionAmmo");
+
+    if (_submunitionAmmo isNotEqualTo "") then {
+        private _submunitionBrightness = getNumber (configFile >> "CfgAmmo" >> _submunitionAmmo >> "brightness");
+        _brightness = _brightness max _submunitionBrightness;
+    };
+
     // Flares
     if (_brightness > 0) exitWith {
         [
@@ -56,13 +63,13 @@ _projectile addEventHandler ["Explode", {
 
     // Explosives
     if (_indirectHit > 0) exitWith {
-        private _t = linearConversion [0, 30, _indirectHitRadius, 0, 1, true];
-        private _dangerRadius = _t bezierInterpolation vgm_c_dangerReport_explosionRadiusBezierCurve;
+        // TODO: This isn't ideal, but works well enough for alpha/beta.
+        private _notifyRadius = linearConversion [1, 20, _indirectHitRadius, 75, 300, true];
 
         [
             vgm_c_dangerReport_locEventGroup,
             _pos,
-            _dangerRadius,
+            _notifyRadius,
             "player_explosion",
             [typeOf _projectile]
         ] call vgm_g_fnc_locEvents_triggerEvent;

@@ -149,6 +149,14 @@ class vgm_g
         class btree_setWaypoint {};
     };
 
+    class danger_reporting
+    {
+        VGM_GLOBAL_PATH(\systems\danger_reporting\global);
+
+        class dangerReport_preInit {
+            preInit = 1;
+        };
+    };
 
     class groupwide_event_handlers
     {
