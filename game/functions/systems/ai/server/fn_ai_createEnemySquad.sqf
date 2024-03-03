@@ -2,7 +2,7 @@
     File: fn_ai_createEnemySquad.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2024-02-16
+    Last Update: 2024-03-03
     Public: Yes
 
     Description:
@@ -34,7 +34,7 @@ private _group = _squad select 1;
 private _selectedClient = call para_s_fnc_loadbal_suggest_host;
 _group setGroupOwner _selectedClient;
 _group setVariable ["groupClientOwner", _selectedClient];
-_group setVariable ["behaviourEnabled", true, true];
+_group setVariable ["behaviourEnabled", false, true];
 [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
 
 //Update the owner variable if the group changes locality.
