@@ -21,4 +21,4 @@
 // Event group to broadcast events to.
 vgm_g_dangerReport_defaultLocEventGroup = "dangerReports";
 // Set it in global preInit, as it depends on the default group above.
-vgm_c_dangerReport_locEventGroup = vgm_c_dangerReport_defaultLocEventGroup;
+vgm_c_dangerReport_locEventGroup = vgm_g_dangerReport_defaultLocEventGroup;
