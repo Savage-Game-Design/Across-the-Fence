@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-12-02
+    Last Update: 2024-03-02
     Public: No
 
     Description:
@@ -24,6 +24,9 @@
  */
 
 params ["_levelingDataCopy", "_milestones"];
+
+private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
+["vgm_mission_end_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
 // Removes player-specific tracker module handlers.
 // TODO: Remove when switching to full AI system.

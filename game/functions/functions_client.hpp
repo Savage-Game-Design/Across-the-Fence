@@ -149,6 +149,7 @@ class vgm_g
         class btree_setWaypoint {};
     };
 
+
     class groupwide_event_handlers
     {
         VGM_GLOBAL_PATH(\systems\groupwide_event_handlers\global);
@@ -318,6 +319,17 @@ class vgm_c
 
         class carry_attachResponse {};
         class carry_detachResponse {};
+    };
+
+    class danger_reporting
+    {
+        VGM_CLIENT_PATH(\systems\danger_reporting\client);
+
+        class dangerReport_playerFiredManHandler {};
+        class dangerReport_preInit {
+            preInit = 1;
+        };
+        class dangerReport_sendRecentShotsToServer {};
     };
 
     class equipment
