@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2024-02-16
+    Last Update: 2024-03-03
     Public: Yes
 
     Description:
@@ -24,7 +24,7 @@ params ["_group", "_tree"];
 
 private _currentTree = _group getVariable "vgm_l_btree_current";
 
-if (!isNil "_currentTree" && (isNil "_tree" || { _currentTree isNotEqualTo _tree })) then {
+if (!isNil "_currentTree" && {isNil "_tree" || { _currentTree isNotEqualTo _tree }}) then {
     private _extern_btreeState = _group getVariable "vgm_l_btree_state";
     private _extern_stack = _extern_btreeState get "stack";
 
