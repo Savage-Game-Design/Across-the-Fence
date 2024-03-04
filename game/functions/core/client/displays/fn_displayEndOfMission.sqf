@@ -3,7 +3,7 @@
     File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
     Author: Savage Game Design
     Date: 2023-09-25
-    Last Update: 2023-10-15
+    Last Update: 2024-03-02
     Public: No
 
     Description:
@@ -85,6 +85,7 @@ switch _mode do {
                     uiSleep 0.05; _time = _time + 0.05;
 
                     _newExperience = linearConversion [_animDuration, 0, _animTime - _time, _currentExperience, _currentExperience + _milestoneXp, true];
+                    _newExperience = _newExperience min vgm_g_leveling_maxExperience;
                     ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
 
                     // level up
@@ -127,13 +128,16 @@ switch _mode do {
         private _currentLevelData = vgm_g_leveling_levelsHashMap get (_levelingData get "level");
         private _nextLevelData = vgm_g_leveling_levelsHashMap get LEVEL_NEXT(_levelingData get "level");
 
+        private _currentExperience = _levelingData get "experience";
+        private _nextLevelExperienceThreshold = [_currentLevelData get "experienceThreshold", _currentExperience] select (_currentLevelData isEqualTo _nextLevelData);
+
         private _ctrlCurrentLevel = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELCURRENT;
         _ctrlCurrentLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _currentLevelData get "displayName"];
 
         private _ctrlNextLevel = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELNEXT;
         _ctrlNextLevel ctrlSetText format [localize "STR_VGM_MISSION_END_UI_LEVEL", _nextLevelData get "displayName"];
 
-        ["updateXpProgress", [_display, _levelingData get "experience", _currentLevelData get "experienceThreshold", _offset]] call SELF;
+        ["updateXpProgress", [_display, _currentExperience, _nextLevelExperienceThreshold, _offset]] call SELF;
     };
 
     case "updateXpProgress": {
@@ -149,6 +153,9 @@ switch _mode do {
         _ctrlProgressBarText ctrlSetText format ["%1 / %2", _leftXp toFixed 0, _rightXp];
 
         private _ctrlProgress = _display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_LEVELPROGRESS;
+        if (_leftXp == _rightXp) exitWith {
+            _ctrlProgress progressSetPosition 1;
+        };
         _ctrlProgress progressSetPosition ((_leftXp - _offset) / (_rightXp - _offset));
     };
 
