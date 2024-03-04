@@ -174,6 +174,16 @@ class vgm_s
         };
     };
 
+    class shared_hub
+    {
+        VGM_SERVER_PATH(\systems\shared_hub\server);
+
+        class sharedHub_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skill
     {
         VGM_SERVER_PATH(\systems\skill\server);
