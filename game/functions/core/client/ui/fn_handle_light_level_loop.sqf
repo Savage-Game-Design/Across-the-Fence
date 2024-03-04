@@ -2,7 +2,7 @@
     File: fn_handle_light_level_loop.sqf
     Author: Gus Schultz
     Date: 2022-09-18
-    Last Update: 2024-03-02
+    Last Update: 2024-03-04
     Public: No
 
     Description:
@@ -22,6 +22,7 @@
 terminate (missionNamespace getVariable ["vgm_c_ui_apertureScript", scriptNull]);
 
 vgm_c_ui_apertureScript = [] spawn {
+    scriptName "vgm_c_ui_apertureScript";
     while {true} do {
         uiSleep 0.5;
         [] call para_c_fnc_set_aperture_based_on_light_level;
