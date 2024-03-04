@@ -712,3 +712,5 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
         };
     };
 };
+
+#include "VGM_ctrlHeaderBar.hpp"
