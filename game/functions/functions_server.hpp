@@ -62,6 +62,7 @@ class vgm_s
             preInit = 1;
         };
         class director_processMission {};
+        class director_registerGroups {};
         class director_spawnInitialPatrols {};
         class director_startMission {};
         class director_stopMission {};

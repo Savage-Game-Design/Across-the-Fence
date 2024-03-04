@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-11-04
+    Last Update: 2024-03-01
     Public: Yes
 
     Description:
@@ -54,9 +54,3 @@ private _jobId = format ["missionDirector%1", _mission get "public" get "id"];
 [_jobId, { _this call vgm_s_fnc_director_processMission }, [_mission], 10] call para_g_fnc_scheduler_add_job;
 
 _directorData set ["schedulerJob", _jobId];
-
-// TODO - Start clientside monitoring on JIP players
-// Use startDeploy and finishDeploy as events for ease of use.
-
-
-
