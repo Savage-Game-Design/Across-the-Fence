@@ -141,6 +141,7 @@ class VGM_DisplayMedical
             idc = VGM_IDC_DISPLAYMEDICAL_HEAD;
             text = "soldier_head.paa";
             onButtonClick = VGM_UIEH(selectPart,Medical);
+            colorActive[] = {0.8,0.8,0.8,1};
             x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * HEAD_W) * VGM_GRID_W;
             y = DISPLAY_Y + (MARGIN) * VGM_GRID_H;
             w = HEAD_W * VGM_GRID_W;

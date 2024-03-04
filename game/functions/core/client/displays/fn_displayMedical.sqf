@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2023-12-03
+    Last Update: 2024-03-02
     Public: No
 
     Description:
@@ -146,8 +146,13 @@ switch _mode do {
             _x params ["_idc", "_bodyPart"];
             private _ctrl = _display displayCtrl _idc;
 
-            private _color = COLOR_ARR select ([MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound);
+            private _wound = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+
+            private _color = COLOR_ARR select _wound;
             _ctrl ctrlSetTextColor (_color + [1]);
+
+            private _levelText = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _wound];
+            _ctrl ctrlSetTooltip format [localize "STR_VGM_MEDICAL_UI_INJURIES", _levelText];
         } forEach [
             [VGM_IDC_DISPLAYMEDICAL_HEAD, BODY_PART_HEAD],
             [VGM_IDC_DISPLAYMEDICAL_ARMLEFT, BODY_PART_ARMS],
