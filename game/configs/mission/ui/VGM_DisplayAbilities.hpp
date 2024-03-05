@@ -1,8 +1,9 @@
-#define COLUMN_W 80
-#define DISPLAY_W (3 * COLUMN_W + 12)
-#define DISPLAY_H VGM_GRID_MAX_H
-#define DISPLAY_X (CENTER_X - 0.5 * DISPLAY_W * VGM_GRID_W)
-#define DISPLAY_Y (CENTER_Y - 0.5 * DISPLAY_H * VGM_GRID_H)
+#define DISPLAY_X VGM_MENU_X
+#define DISPLAY_Y VGM_MENU_Y
+#define DISPLAY_W VGM_MENU_W
+#define DISPLAY_H (VGM_GRID_MAX_H - 6)
+
+#define COLUMN_W floor ((DISPLAY_W - 11) / 3)
 #define COLUMN3_X DISPLAY_X + (2 * COLUMN_W + 11) * VGM_GRID_W
 #define PICTURE_H (COLUMN_W - 35)
 class VGM_DisplayAbilities
@@ -13,10 +14,10 @@ class VGM_DisplayAbilities
     {
         class Background: VGM_ctrlBackground
         {
-            x = VGM_GRID_MIN_X;
-            y = VGM_GRID_MIN_Y;
-            w = VGM_GRID_MAX_W * VGM_GRID_W;
-            h = VGM_GRID_MAX_H * VGM_GRID_H;
+            x = DISPLAY_X;
+            y = DISPLAY_Y;
+            w = DISPLAY_W * VGM_GRID_W;
+            h = DISPLAY_H * VGM_GRID_H;
         };
         class BackgroundStdTitle: VGM_ctrlBackgroundTitle
         {
@@ -123,6 +124,9 @@ class VGM_DisplayAbilities
     };
     class Controls
     {
+        class HeaderBar: VGM_ctrlHeaderBar
+        {
+        };
         VGM_SET_Y(0)
         class StdTitle: VGM_ctrlTitle
         {
@@ -309,8 +313,9 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
             x = _X;
         };
 #define _W (COLUMN_W - 2)
-        class AbilityStack: VGM_ctrlStack
+        class AbilityStack: VGM_ctrlStack// VGM_ctrlStructuredText //
         {
+            colorBackground[] = {1,0,0,0.2};
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYSTACK;
             x = _X;
             y = DISPLAY_Y + 6.5 * VGM_GRID_H;
@@ -377,7 +382,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 {
                     stackDisable = 1;
                     x = 1.5 * VGM_GRID_W;
-                    y = 76 * VGM_GRID_H;
+                    y = 68.5 * VGM_GRID_H;
                     w = (_W - 1) * VGM_GRID_W + pixelW;
                     h = ((9/16) * _W - 1) * VGM_GRID_H + pixelH;
                 };

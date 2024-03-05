@@ -1,7 +1,8 @@
+#define VGM_MENUHEADER_H 7
 #define VGM_MENU_X VGM_GRID_MIN_X
-#define VGM_MENU_Y VGM_GRID_MIN_Y + 6 * VGM_GRID_H
+#define VGM_MENU_Y VGM_GRID_MIN_Y + VGM_MENUHEADER_H * VGM_GRID_H
 #define VGM_MENU_W VGM_GRID_MAX_W
-#define VGM_MENU_H (VGM_GRID_MAX_H - 6)
+#define VGM_MENU_H (VGM_GRID_MAX_H - VGM_MENUHEADER_H)
 
 #define _BTN_W ((VGM_MENU_W - 6) / 5)
 #define _BTN_X(I) (I * _BTN_W + (I + 1)) * VGM_GRID_W
@@ -9,7 +10,7 @@
 class VGM_ctrlHeaderBar: VGM_ctrlControlsGroupNoScrollbars
 {
     x = VGM_MENU_X;
-    y = VGM_MENU_Y;
+    y = VGM_GRID_MIN_Y;
     w = VGM_MENU_W * VGM_GRID_W;
     h = 7 * VGM_GRID_H;
     colorBackground[] = {1,0,0,0.2};
