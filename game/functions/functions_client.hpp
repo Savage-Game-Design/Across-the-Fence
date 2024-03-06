@@ -237,6 +237,7 @@ class vgm_c
         class displayMedical {};
         class displayStaminaBar {};
         class displayEndOfMission {};
+        class displayMenuBase {};
     };
 
     class carry

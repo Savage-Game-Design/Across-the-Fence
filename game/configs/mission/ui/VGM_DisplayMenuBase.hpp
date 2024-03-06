@@ -1,6 +1,7 @@
 #define _BTN_W ((VGM_MENU_W - 6) / 5)
 #define _BTN_X(I) (I * _BTN_W + (I + 1)) * VGM_GRID_W
 #define _STRTABLE(KEY) #$STR_VGM_HEADERBAR_##KEY
+#define _DISPLAY(NAME) QUOTE(CONCAT_2(VGM_Display,NAME))
 class VGM_DisplayMenuBase
 {
     idd = -1;
@@ -37,12 +38,14 @@ class VGM_DisplayMenuBase
             y = VGM_GRID_MIN_Y;
             w = VGM_MENU_W * VGM_GRID_W;
             h = VGM_MENUHEADER_H * VGM_GRID_H;
+            onLoad = VGM_UIEH(onLoad,MenuBase);
             class Controls
             {
                 class Equipment: VGM_ctrlButton
                 {
                     idc = -1;
                     text = _STRTABLE(EQUIPMENT);
+                    display = _DISPLAY(Equipment); // The display that is opened when clicking the button
                     x = _BTN_X(0);
                     y = 1 * VGM_GRID_H;
                     w = _BTN_W * VGM_GRID_W;
@@ -51,21 +54,25 @@ class VGM_DisplayMenuBase
                 class Abilities: Equipment
                 {
                     text = _STRTABLE(ABILITIES);
+                    display = _DISPLAY(Abilities);
                     x = _BTN_X(1);
                 };
                 class SkillTree: Equipment
                 {
                     text = _STRTABLE(SKILLTREE);
+                    display = _DISPLAY(Skills);
                     x = _BTN_X(2);
                 };
                 class Squad: Equipment
                 {
                     text = _STRTABLE(SQUAD);
+                    display = _DISPLAY(Squad);
                     x = _BTN_X(3);
                 };
                 class Settings: Equipment
                 {
                     text = _STRTABLE(SETTINGS);
+                    display = _DISPLAY(Settings);
                     x = _BTN_X(4);
                 };
             };
@@ -75,3 +82,5 @@ class VGM_DisplayMenuBase
 
 #undef _BTN_X
 #undef _BTN_W
+#undef _STRTABLE
+#undef _DISPLAY
