@@ -1,23 +1,19 @@
 #define DISPLAY_X VGM_MENU_X
 #define DISPLAY_Y VGM_MENU_Y
 #define DISPLAY_W VGM_MENU_W
-#define DISPLAY_H (VGM_GRID_MAX_H - 6)
+#define DISPLAY_H VGM_MENU_H
 
 #define COLUMN_W floor ((DISPLAY_W - 11) / 3)
 #define COLUMN3_X DISPLAY_X + (2 * COLUMN_W + 11) * VGM_GRID_W
 #define PICTURE_H (COLUMN_W - 35)
-class VGM_DisplayAbilities
+class VGM_DisplayAbilities: VGM_DisplayMenuBase
 {
     idd = VGM_IDD_DISPLAYABILITIES;
     onLoad = VGM_UIEH(onLoad,Abilities);
-    class ControlsBackground
+    class ControlsBackground: ControlsBackground
     {
-        class Background: VGM_ctrlBackground
+        class Background: Background
         {
-            x = DISPLAY_X;
-            y = DISPLAY_Y;
-            w = DISPLAY_W * VGM_GRID_W;
-            h = DISPLAY_H * VGM_GRID_H;
         };
         class BackgroundStdTitle: VGM_ctrlBackgroundTitle
         {
@@ -122,9 +118,9 @@ class VGM_DisplayAbilities
             h = (DISPLAY_H - 7) * VGM_GRID_H;
         };
     };
-    class Controls
+    class Controls: Controls
     {
-        class HeaderBar: VGM_ctrlHeaderBar
+        class HeaderBar: HeaderBar
         {
         };
         VGM_SET_Y(0)
@@ -382,7 +378,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 {
                     stackDisable = 1;
                     x = 1.5 * VGM_GRID_W;
-                    y = 68.5 * VGM_GRID_H;
+                    y = 64.5 * VGM_GRID_H;
                     w = (_W - 1) * VGM_GRID_W + pixelW;
                     h = ((9/16) * _W - 1) * VGM_GRID_H + pixelH;
                 };
