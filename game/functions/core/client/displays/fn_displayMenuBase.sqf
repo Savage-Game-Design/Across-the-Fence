@@ -28,26 +28,36 @@ private _fnc_getButtonDisplay = {
 };
 
 switch _mode do {
-    case "onLoad":{
-        params ["_ctrlHeaderBar"];
-        private _display = ctrlParent _ctrlHeaderBar;
+    case "onLoadButton": {
+        params ["_ctrl"];
         // Disable button that would open the current display
-        private _buttons = allControls _ctrlHeaderBar;
+        private _display = ctrlParent _ctrl;
         private _iddOpen = ctrlIDD _display;
-        private _ctrlCurrent = _buttons deleteAt (_buttons findIf {
-            private _class = _x call _fnc_getButtonDisplay;
-            private _idd = getNumber (missionConfigFile >> _class >> "idd");
-            _iddOpen == _idd
-        });
-        _ctrlCurrent ctrlEnable false;
-
-
-        // Add functinoality to all other buttons
-        _buttons apply {
-            _x ctrlAddEventHandler ["ButtonClick", {
-                ["switchMenu", _this] call SELF;
-            }];
+        private _class = _ctrl call _fnc_getButtonDisplay;
+        private _idd = getNumber (missionConfigFile >> _class >> "idd");
+        diag_log [_iddOpen, _idd, _class];
+        if (_iddOpen == _idd) exitWith {
+            _ctrl ctrlEnable false;
+            _ctrl ctrlSetText format ["[ %1 ]", ctrlText _ctrl];
+            _ctrl ctrlSetDisabledColor [VGM_UI_COLOR_TEXT];
         };
+
+        switch ctrlClassName _ctrl do {
+            case "Settings";
+            case "Squad": {
+                _ctrl ctrlEnable false;
+            };
+        };
+    };
+    case "onClickEquipment": {
+        params ["_ctrl"];
+        ctrlParent _ctrl closeDisplay IDC_OK;
+        [] spawn BIS_fnc_arsenal;
+    };
+    case "onClickAbilities";
+    case "onClickSkillTree": {
+        params ["_ctrl"];
+        ["switchMenu", [_ctrl]] call SELF;
     };
     case "switchMenu": {
         // Close current menu and open newly selected one

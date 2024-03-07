@@ -38,7 +38,6 @@ class VGM_DisplayMenuBase
             y = VGM_GRID_MIN_Y;
             w = VGM_MENU_W * VGM_GRID_W;
             h = VGM_MENUHEADER_H * VGM_GRID_H;
-            onLoad = VGM_UIEH(onLoad,MenuBase);
             class Controls
             {
                 class Equipment: VGM_ctrlButton
@@ -46,33 +45,40 @@ class VGM_DisplayMenuBase
                     idc = -1;
                     text = _STRTABLE(EQUIPMENT);
                     display = _DISPLAY(Equipment); // The display that is opened when clicking the button
+                    onLoad = VGM_UIEH(onLoadButton,MenuBase);
+                    onButtonClick = VGM_UIEH(onClickEquipment,MenuBase);
                     x = _BTN_X(0);
                     y = 1 * VGM_GRID_H;
                     w = _BTN_W * VGM_GRID_W;
                     h = (VGM_MENUHEADER_H - 2) * VGM_GRID_H;
+                    colorBackgroundDisabled[] = {VGM_UI_COLOR_BACKGROUND_DESELECTED};
                 };
                 class Abilities: Equipment
                 {
                     text = _STRTABLE(ABILITIES);
                     display = _DISPLAY(Abilities);
+                    onButtonClick = VGM_UIEH(onClickAbilities,MenuBase);
                     x = _BTN_X(1);
                 };
                 class SkillTree: Equipment
                 {
                     text = _STRTABLE(SKILLTREE);
                     display = _DISPLAY(Skills);
+                    onButtonClick = VGM_UIEH(onClickSkillTree,MenuBase);
                     x = _BTN_X(2);
                 };
                 class Squad: Equipment
                 {
                     text = _STRTABLE(SQUAD);
                     display = _DISPLAY(Squad);
+                    onButtonClick = VGM_UIEH(onClickSquad,MenuBase);
                     x = _BTN_X(3);
                 };
                 class Settings: Equipment
                 {
                     text = _STRTABLE(SETTINGS);
                     display = _DISPLAY(Settings);
+                    onButtonClick = VGM_UIEH(onClickSettings,MenuBase);
                     x = _BTN_X(4);
                 };
             };
