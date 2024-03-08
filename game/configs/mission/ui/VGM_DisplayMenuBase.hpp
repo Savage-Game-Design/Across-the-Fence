@@ -44,6 +44,7 @@ class VGM_DisplayMenuBase
                 {
                     idc = -1;
                     text = _STRTABLE(EQUIPMENT);
+                    tooltip = _STRTABLE(OPENS_ARSENAL);
                     display = _DISPLAY(Equipment); // The display that is opened when clicking the button
                     onLoad = VGM_UIEH(onLoadButton,MenuBase);
                     onButtonClick = VGM_UIEH(onClickEquipment,MenuBase);
@@ -56,6 +57,7 @@ class VGM_DisplayMenuBase
                 class Abilities: Equipment
                 {
                     text = _STRTABLE(ABILITIES);
+                    tooltip = "";
                     display = _DISPLAY(Abilities);
                     onButtonClick = VGM_UIEH(onClickAbilities,MenuBase);
                     x = _BTN_X(1);
@@ -63,6 +65,7 @@ class VGM_DisplayMenuBase
                 class SkillTree: Equipment
                 {
                     text = _STRTABLE(SKILLTREE);
+                    tooltip = "";
                     display = _DISPLAY(Skills);
                     onButtonClick = VGM_UIEH(onClickSkillTree,MenuBase);
                     x = _BTN_X(2);
@@ -70,6 +73,7 @@ class VGM_DisplayMenuBase
                 class Squad: Equipment
                 {
                     text = _STRTABLE(SQUAD);
+                    tooltip = "";
                     display = _DISPLAY(Squad);
                     onButtonClick = VGM_UIEH(onClickSquad,MenuBase);
                     x = _BTN_X(3);
@@ -77,6 +81,7 @@ class VGM_DisplayMenuBase
                 class Settings: Equipment
                 {
                     text = _STRTABLE(SETTINGS);
+                    tooltip = "";
                     display = _DISPLAY(Settings);
                     onButtonClick = VGM_UIEH(onClickSettings,MenuBase);
                     x = _BTN_X(4);
