@@ -262,6 +262,22 @@ class vgm_g
         class suppression_setShooterMultiplier {};
         class suppression_updateEffects {};
     };
+
+    class tracking
+    {
+        VGM_GLOBAL_PATH(\systems\tracking\global);
+        class tracking_nearestTrack {};
+        class tracking_preInit {
+            preInit = 1;
+        };
+        class tracking_postInit {
+            postInit = 1;
+        };
+        class tracking_recordTracks {};
+        class tracking_startRecordingTracks {};
+        class tracking_stopRecordingTracks {};
+        class tracking_trackRecordingJob {};
+    };
 };
 
 class vgm_c
