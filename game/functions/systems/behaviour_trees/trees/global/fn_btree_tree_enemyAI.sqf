@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-10
+    Last Update: 2024-03-03
     Public: No
 
     Description:
@@ -23,7 +23,12 @@
 [DECORATOR(updateKnowledgeService), [], [
     [DECORATOR(suppressionService), [], [
         [DECORATOR(loopInfinitely), [], [
-            [ACTION(basic), []]
+            [SELECTOR, [], [
+                [DECORATOR(fetchNearbyDangerReportAsInvestigationPoint), [["abortLowerPriority", true]], [
+                    [ACTION(moveToInvestigationPoint), []]
+                ]],
+                [ACTION(patrolArea), []]
+            ]]
         ]]
     ]]
 ]]
