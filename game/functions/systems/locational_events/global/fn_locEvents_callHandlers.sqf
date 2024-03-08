@@ -2,7 +2,7 @@
     File: fn_locEvents_callHandlers.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-03-01
+    Last Update: 2024-03-08
     Public: No
 
     Description:
@@ -33,17 +33,20 @@ private _typeListeners = _eventGroups get _eventGroup get "listenersByType" get 
 if (isNil "_typeListeners") exitWith {};
 
 private _allListeners = _typeListeners get "allListeners";
-private _nearbyListeners = _allListeners inAreaArray [_pos, _radius, _radius, 0, false];
+// Can't use inAreaArray as it doesn't support groups.
+private _nearbyListenerIndexes = _allListeners inAreaArrayIndexes [_pos, _radius, _radius, 0, false];
 private _listenerHandlers = _typeListeners get "listenerHandlers";
 
 // Call any global listeners for the event.
-_nearbyListeners pushBack "";
+// This approach scales nicer than other approaches when number of listeners is high.
+private _allListenersIncludingGlobal = _allListeners +  [""];
+_nearbyListenerIndexes pushBack (count _allListenersIncludingGlobal - 1);
 
 {
-    private _listener = _x;
-    private _handlers = values (_listenerHandlers get (hashValue _x) get "handlers");
+    private _listener = _allListenersIncludingGlobal select _x;
+    private _handlers = values (_listenerHandlers get (hashValue _listener) get "handlers");
     {
         _x params ["_args", "_code"];
         [_pos, _type, _listener, _details, _args] call _code;
     } forEach _handlers;
-} forEach _nearbyListeners;
+} forEach _nearbyListenerIndexes;
