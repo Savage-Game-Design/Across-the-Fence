@@ -2,7 +2,7 @@
     File: fn_btree_decorator_fetchNearbyDangerReportAsInvestigationPoint.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-03-03
+    Last Update: 2024-03-08
     Public: Yes
 
     Description:
@@ -48,7 +48,7 @@ _decorator set ["onTreeAssigned", {
             params ["_pos", "_type", "_listener", "_eventData", "_args"];
             _args params ["_group", "_blackboard"];
 
-            _blackboard set ["investigationPoint", _pos];
+            _blackboard set ["investigationPoint", ASLtoAGL _pos];
         }
     ] call vgm_g_fnc_locEvents_onNearbyEvent;
 
