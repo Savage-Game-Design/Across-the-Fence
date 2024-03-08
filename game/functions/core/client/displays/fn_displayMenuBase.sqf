@@ -35,7 +35,6 @@ switch _mode do {
         private _iddOpen = ctrlIDD _display;
         private _class = _ctrl call _fnc_getButtonDisplay;
         private _idd = getNumber (missionConfigFile >> _class >> "idd");
-        diag_log [_iddOpen, _idd, _class];
         if (_iddOpen == _idd) exitWith {
             _ctrl ctrlEnable false;
             _ctrl ctrlSetText format ["[ %1 ]", ctrlText _ctrl];
