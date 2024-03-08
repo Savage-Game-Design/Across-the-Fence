@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-03-01
+    Last Update: 2024-03-08
     Public: No
 
     Description:
@@ -144,7 +144,7 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
     private _target = selectRandom _missionPlayers;
     if (isNil "_target" || {isNull _target}) exitWith {};
     private _spawnPos = [getPos _target] call para_g_fnc_spawning_find_valid_position_tracer select 0;
-    private _group = [vgm_s_director_patrol_classes, east, _spawnPos] call vgm_s_fnc_ai_createEnemySquad;
+    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _publicMission get "id"] call vgm_s_fnc_ai_createEnemySquad;
 
     _group setVariable ["orders", ["pursue", _publicMission get "group"], true];
     _group setVariable ["vgm_s_director_command", "track"];

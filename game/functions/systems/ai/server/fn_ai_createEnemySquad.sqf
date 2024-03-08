@@ -2,7 +2,7 @@
     File: fn_ai_createEnemySquad.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2024-03-03
+    Last Update: 2024-03-08
     Public: Yes
 
     Description:
@@ -14,15 +14,16 @@
 		_units - Array of unit classes [Array, defaults to [] (empty array)]
 		_groupTarget - Group to put units in, or side to create units in [Group|Side]
 		_position - Position to spawn units around [Position3D]
+        _missionId - Mission the squad is being used in [STRING]
 
     Returns:
         Group units were placed into [GROUP]
 
     Example(s):
-        ["vn_west", "west"] call vgm_s_fnc_ai_createEnemySquad
+        ["vn_west", "west", [0, 0, 0], _mission get "public" get "id"] call vgm_s_fnc_ai_createEnemySquad
  */
 
-params [["_units", []], "_groupTarget", "_position"];
+params [["_units", []], "_groupTarget", "_position", ["_missionId", ""]];
 
 // Create it on the server, to avoid an FPS stutter on a client. Also, easier to get a reference to them.
 // Generally speaking, the rest of the systems assume a squad is created on the server.
@@ -36,6 +37,8 @@ _group setGroupOwner _selectedClient;
 _group setVariable ["groupClientOwner", _selectedClient];
 _group setVariable ["behaviourEnabled", false, true];
 [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
+
+_group setVariable ["vgm_g_missionId", _missionId, true];
 
 //Update the owner variable if the group changes locality.
 _group addEventHandler ["Local", {

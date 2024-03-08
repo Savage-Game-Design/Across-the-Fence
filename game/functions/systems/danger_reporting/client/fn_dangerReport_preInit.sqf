@@ -44,9 +44,13 @@ vgm_c_dangerReport_playerFiredManHandler = nil;
 [
     "vgm_mission_deploy_local",
     {
+        params ["_publicMissionInfo"];
+
         if !(isNil "vgm_c_dangerReport_playerFiredManHandler") exitWith {
             [format ["Attempting to setup danger reporting on %1 twice", player]] call vgm_g_fnc_logWarning;
         };
+
+        vgm_c_dangerReport_locEventGroup = _publicMissionInfo get "id";
 
         vgm_c_dangerReport_playerFiredManHandler =
             player addEventHandler ["FiredMan", vgm_c_fnc_dangerReport_playerFiredManHandler];
@@ -64,9 +68,13 @@ vgm_c_dangerReport_playerFiredManHandler = nil;
 [
     "vgm_mission_end_local",
     {
+        params ["_publicMissionInfo"];
+
         if (isNil "vgm_c_dangerReport_playerFiredManHandler") exitWith {
             [format ["Attempting to disabled danger reporting, but it's already disabled", player]] call vgm_g_fnc_logWarning;
         };
+
+        vgm_c_dangerReport_locEventGroup = vgm_g_dangerReport_defaultLocEventGroup;
 
         player removeEventHandler ["FiredMan", vgm_c_dangerReport_playerFiredManHandler];
         vgm_c_dangerReport_playerFiredManHandler = nil;
