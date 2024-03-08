@@ -4,7 +4,7 @@
     File: fn_btree_action_moveToInvestigationPoint.sqf
     Author: Savage Game Design
     Date: 2024-03-03
-    Last Update: 2024-03-03
+    Last Update: 2024-03-08
     Public: No
 
     Description:
@@ -43,7 +43,7 @@ _action set ["onEnter", {
 	_extern_group setFormation "COLUMN";
     [_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 
-    [_extern_group, _point get "pos", "NORMAL", 15] call vgm_g_fnc_btree_moveTo_start;
+    [_extern_group, _point, "NORMAL", 15] call vgm_g_fnc_btree_moveTo_start;
 
     [ RESULT_RUNNING ]
 }];
@@ -58,7 +58,7 @@ _action set ["onTick", {
     };
 
     // Update to the latest position then execute the move.
-    [_extern_group, _point get "pos"] call vgm_g_fnc_btree_moveTo_updateDestination;
+    [_extern_group, _point] call vgm_g_fnc_btree_moveTo_updateDestination;
     private _isAtDestination = [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
 
     if (_isAtDestination) then {
