@@ -3,7 +3,7 @@
     File: fn_btree_preInit.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-02
+    Last Update: 2024-03-08
     Public: No
 
     Description:
@@ -49,7 +49,7 @@ localNamespace setVariable ["vgm_l_btree_childFinishedHandlers", createHashMapFr
     [NODE_TYPE_SELECTOR, vgm_g_fnc_btree_childFinished_selector]
 ]];
 
-localNamespace setVariable ["vgm_l_btree_abortHandlers", createHashMapFromArray [
+localNamespace setVariable ["vgm_l_btree_abortNodeHandlers", createHashMapFromArray [
     [NODE_TYPE_ACTION, vgm_g_fnc_btree_abort_action],
     [NODE_TYPE_DECORATOR, vgm_g_fnc_btree_abort_decorator],
     [NODE_TYPE_SEQUENCE, vgm_g_fnc_btree_abort_sequence],
