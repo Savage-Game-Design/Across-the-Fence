@@ -2,7 +2,7 @@
     File: fn_dangerReport_playerFiredManHandler.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-03-03
+    Last Update: 2024-03-08
     Public: No
 
     Description:
@@ -19,21 +19,6 @@
  */
 
 params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_vehicle"];
-
-private _recentShots = vgm_c_dangerReport_recentShots;
-private _previousTotalShots = _recentShots get "totalShots";
-
-_recentShots set ["averagePosition",
-    (_recentShots get "averagePosition")
-    vectorMultiply _previousTotalShots
-    vectorAdd (getPosASL player)
-    vectorMultiply (1 / (_previousTotalShots + 1))
-];
-
-_recentShots set ["totalShots", _previousTotalShots + 1];
-_recentShots set ["unsuppressedShots", _previousTotalShots + 1];
-// TODO - Track whether shots are suppressed or not.
-_recentShots set ["suppressedShots",  0];
 
 _projectile addEventHandler ["Explode", {
     params ["_projectile", "_pos", "_velocity"];
@@ -75,3 +60,21 @@ _projectile addEventHandler ["Explode", {
         ] call vgm_g_fnc_locEvents_triggerEvent;
     };
 }];
+
+// Throwing grenades and placing charges shouldn't count as shooting.
+if (_weapon in ["Put", "Throw"]) exitWith {};
+
+private _recentShots = vgm_c_dangerReport_recentShots;
+private _previousTotalShots = _recentShots get "totalShots";
+
+_recentShots set ["averagePosition",
+    (_recentShots get "averagePosition")
+    vectorMultiply _previousTotalShots
+    vectorAdd (getPosASL player)
+    vectorMultiply (1 / (_previousTotalShots + 1))
+];
+
+_recentShots set ["totalShots", _previousTotalShots + 1];
+_recentShots set ["unsuppressedShots", _previousTotalShots + 1];
+// TODO - Track whether shots are suppressed or not.
+_recentShots set ["suppressedShots",  0];
