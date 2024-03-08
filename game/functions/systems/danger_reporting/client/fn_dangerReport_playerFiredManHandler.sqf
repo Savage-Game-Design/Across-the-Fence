@@ -49,7 +49,12 @@ _projectile addEventHandler ["Explode", {
     // Explosives
     if (_indirectHit > 0) exitWith {
         // TODO: This isn't ideal, but works well enough for alpha/beta.
-        private _notifyRadius = linearConversion [1, 20, _indirectHitRadius, 75, 300, true];
+        private _notifyRadius = linearConversion [
+            1, 20,
+            _indirectHitRadius,
+            vgm_c_dangerReport_explosion_minNotifyDistance, vgm_c_dangerReport_explosion_maxNotifyDistance,
+            true
+        ];
 
         [
             vgm_c_dangerReport_locEventGroup,

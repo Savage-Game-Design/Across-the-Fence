@@ -2,7 +2,7 @@
     File: fn_dangerReport_preInit.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-03-03
+    Last Update: 2024-03-08
     Public: Yes
 
     Description:
@@ -18,8 +18,11 @@
         N/A
  */
 
-vgm_c_dangerReport_suppressedShotsNotifyDistance = 50;
-vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 120;
+vgm_c_dangerReport_suppressedShotsNotifyDistance = 120;
+vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 300;
+
+vgm_c_dangerReport_explosion_minNotifyDistance = 75;
+vgm_c_dangerReport_explosion_maxNotifyDistance = 400;
 
 // Multiplier to convert flare brightness to range.
 vgm_c_dangerReport_brightnessToRangeMultiplier = 2 / 3;
