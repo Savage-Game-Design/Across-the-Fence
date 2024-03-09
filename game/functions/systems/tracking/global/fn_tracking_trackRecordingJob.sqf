@@ -2,7 +2,7 @@
     File: fn_tracking_trackRecordingJob.sqf
     Author:
     Date: 2024-03-08
-    Last Update: 2024-03-08
+    Last Update: 2024-03-09
     Public: No
 
     Description:
@@ -19,5 +19,5 @@
  */
 
 {
-    [_y] call vgm_g_fnc_tracking_recordTracks;
-} forEach vgm_l_tracking_groups;
+    [_x] call vgm_g_fnc_tracking_recordTracks;
+} forEach values vgm_l_tracking_trackingGroups;
