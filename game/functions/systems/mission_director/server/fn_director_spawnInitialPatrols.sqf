@@ -2,7 +2,7 @@
     File: fn_director_spawnInitialPatrols.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-03-08
+    Last Update: 2024-03-09
     Public: No
 
     Description:
@@ -35,7 +35,7 @@ for "_i" from 1 to _desiredSquads do {
     private _spawnCenterlinePos = _insertionLocation getPos [_spawnIntervalDistance * _i, _angleToObjective];
     private _spawnPos = _spawnCenterlinePos getPos [100 + random 100, selectRandom _spawnAngles];
 
-    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _mission get "id"] call vgm_s_fnc_ai_createEnemySquad;
+    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _mission get "public" get "id"] call vgm_s_fnc_ai_createEnemySquad;
     _group setVariable ["vgm_s_director_command", "patrol"];
     _squads pushBack _group;
 };
