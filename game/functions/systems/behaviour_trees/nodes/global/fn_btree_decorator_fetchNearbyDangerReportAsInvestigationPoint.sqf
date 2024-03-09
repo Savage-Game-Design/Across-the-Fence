@@ -2,7 +2,7 @@
     File: fn_btree_decorator_fetchNearbyDangerReportAsInvestigationPoint.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-03-08
+    Last Update: 2024-03-09
     Public: Yes
 
     Description:
@@ -37,7 +37,7 @@ _decorator set ["condition", {
 _decorator set ["onTreeAssigned", {
     params ["_group", "_blackboard"];
 
-    private _eventGroup = _group getVariable ["vgm_g_locEvents_group", vgm_g_dangerReport_defaultLocEventGroup];
+    private _eventGroup = _group getVariable ["vgm_g_missionId", vgm_g_dangerReport_defaultLocEventGroup];
 
     private _locEventHandlers = [
         _eventGroup,
