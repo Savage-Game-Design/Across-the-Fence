@@ -18,10 +18,10 @@
         [parameter] call vgm_X_fnc_component_myFunction
  */
 
-params ["_groupHash"];
+params ["_trackingGroupId", "_groupHash"];
 
 if (_groupHash isEqualType grpNull) then {
     _groupHash = hashValue _groupHash;
 };
 
-vgm_l_tracking_groups deleteAt _groupHash;
+vgm_l_tracking_trackingGroups getOrDefault [_trackingGroupId, createHashMap] get "groups" deleteAt _groupHash;

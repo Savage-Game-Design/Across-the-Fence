@@ -266,7 +266,7 @@ class vgm_g
     class tracking
     {
         VGM_GLOBAL_PATH(\systems\tracking\global);
-        class tracking_nearestTrack {};
+        class tracking_nearbyTracks {};
         class tracking_preInit {
             preInit = 1;
         };
