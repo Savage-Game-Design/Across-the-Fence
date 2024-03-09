@@ -33,7 +33,7 @@ _decorator set ["condition", {
     params ["_node", "_state"];
 
     // Allows the AI to resume tracking, and also optimises if this node is used multiple times in the same tree.
-    private _currentTrack = _extern_blackboard get ["tracking_currentTrack", createHashMap];
+    private _currentTrack = _extern_blackboard getOrDefault ["tracking_currentTrack", createHashMap];
     private _groupLeader = leader _extern_group;
 
     if (_currentTrack getOrDefault ["pos", [-1000, -1000]] distance2D getPos _groupLeader < 100) exitWith {

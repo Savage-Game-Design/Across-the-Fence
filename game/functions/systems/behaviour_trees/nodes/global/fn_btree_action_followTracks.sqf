@@ -29,7 +29,7 @@ _action set ["name", "follow tracks"];
 
 _action set ["getNextTrack", {
 
-    private _currentTrack = _extern_blackboard get ["tracking_currentTrack", createHashMap];
+    private _currentTrack = _extern_blackboard getorDefault ["tracking_currentTrack", createHashMap];
 
     if ("nextTrack" in _currentTrack) exitWith {
         _currentTrack get "nextTrack"
