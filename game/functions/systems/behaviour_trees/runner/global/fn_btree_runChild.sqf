@@ -3,7 +3,7 @@
     File: fn_btree_runChild.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-02
+    Last Update: 2024-03-09
     Public: No
 
     Description:
@@ -36,6 +36,20 @@ private _node = _stackFrame get "node";
 
 if !(_node get "type" in [NODE_TYPE_DECORATOR, NODE_TYPE_SELECTOR, NODE_TYPE_SEQUENCE]) exitWith {
     [[format ["Cannot run child on node type %1 (name: %2)", _node get "type", _node get "name"]], ACTION_PANIC]
+};
+
+private _children = _node get "children";
+if (_node get "type" isEqualTo NODE_TYPE_SELECTOR) then {
+    private _previousChildren = _children select [0, _childIndex];
+    private _higherPriorityChildIndexes = [];
+
+    {
+        if (_x getOrDefault ["abortLowerPriority", false]) then {
+            _higherPriorityChildIndexes pushBack _forEachIndex;
+        };
+    } forEach _previousChildren;
+
+    _stackFrame set ["higherPriorityNodes", _higherPriorityChildIndexes];
 };
 
 private _child = _node get "children" select _childIndex;
