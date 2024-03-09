@@ -25,6 +25,8 @@ private _trackDetails = _trackingGroup get "trackDetails";
 private _trackPositions = _trackingGroup get "trackPositions";
 private _lastTrackByUnit = _trackingGroup get "lastTrackByUnit";
 
+private _totalUnits = 0;
+
 {
     private _key = _x;
     private _group = _y;
@@ -36,6 +38,7 @@ private _lastTrackByUnit = _trackingGroup get "lastTrackByUnit";
     };
 
     private _units = units _group;
+    _totalUnits = _totalUnits + count _units;
 
     {
         private _pos = getPos _x;
@@ -69,3 +72,11 @@ private _lastTrackByUnit = _trackingGroup get "lastTrackByUnit";
         };
     } forEach _units;
 } forEach _groups;
+
+private _maxEntries = vgm_g_tracking_maxEntriesPerUnit * _totalUnits;
+// Should be identical calculation for both arrays, as they should map 1-to-1.
+private _toDelete = (count _trackPositions - _maxEntries) max 0;
+_trackPositions deleteRange [0, _toDelete];
+_trackDetails deleteRange [0, _toDelete];
+
+
