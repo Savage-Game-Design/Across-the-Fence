@@ -35,18 +35,17 @@ _action set ["getNextTrack", {
         _currentTrack get "nextTrack"
     };
 
-    private _nearbyTracks = [
-        _extern_group getVariable "vgm_g_missionId",
-        getPos leader _extern_group,
-        75
-    ] call vgm_g_fnc_tracking_nearbyTracks;
+    private _nearbyTracks = [_extern_group] call vgm_g_fnc_btree_tracking_findNearbyTracks;
+
+    if (_nearbyTracks isEqualTo []) exitWith {};
 
     private _currentTrackTime = _currentTrack getOrDefault ["time", 0];
-    private _moreRecentTrackIndex = _nearbyTracks findIf {_x get "time" > _currentTrackTime};
+    private _latestTrack = _nearbyTracks # -1;
 
-    if (_moreRecentTrackIndex == -1) exitWith {};
+    // Don't follow an older track, prevents loops.
+    if (_latestTrack get "time" < _currentTrackTime ) exitWith {};
 
-    _nearbyTracks # _moreRecentTrackIndex
+    _latestTrack
 }];
 
 _action set ["onEnter", {

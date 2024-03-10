@@ -154,6 +154,7 @@ class vgm_g
         class btree_moveTo_updateDestination {};
         class btree_setGroupStance {};
         class btree_setWaypoint {};
+        class btree_tracking_findNearbyTracks {};
     };
 
     class danger_reporting
