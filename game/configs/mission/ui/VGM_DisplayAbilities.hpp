@@ -128,6 +128,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
         {
             idc = VGM_IDC_DISPLAYABILITIES_STDTITLE;
             text = "$STR_VGM_SKILLS_UI_ABILITY_STD";
+            tooltip = "$STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP";
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
             w = 0.75 * COLUMN_W * VGM_GRID_W;
@@ -209,6 +210,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
         {
             idc = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
             text = "$STR_VGM_SKILLS_UI_ABILITY_ULT";
+            tooltip = "$STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP";
             y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
         class UltStack: StdStack
