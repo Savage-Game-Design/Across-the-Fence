@@ -159,6 +159,31 @@ class VGM_ctrlButton: ctrlButton
     sizeEx = VGM_FONT_M;
 };
 
+import RscButtonMenu;
+class VGM_ctrlShortcutButton: RscButtonMenu
+{
+    type = CT_SHORTCUTBUTTON;
+    size = VGM_FONT_M;
+    color[] = {1,1,1,1};
+    color2[] = {1,1,1,1};
+    colorBackground[] = {0,0,0,1};
+    colorBackground2[] = {0,0,0,1};
+    colorBackgroundFocused[] = {VGM_UI_COLOR_ACTIVE};
+    colorFocused[] = {1,1,1,1};
+    colorFocused2[] = {1,1,1,1};
+    /* period = 0; */
+    /* periodFocus = 0; */
+    /* periodOver = 0; */
+    class Attributes
+    {
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "left";
+        shadow = 0;
+    };
+};
+
 class VGM_ctrlButtonPicture: ctrlButtonPicture
 {
 };
