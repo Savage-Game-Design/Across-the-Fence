@@ -2,7 +2,7 @@
     File: fn_btree_decorator_hasNearbyTracks.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-03-09
+    Last Update: 2024-03-10
     Public: Yes
 
     Description:
@@ -40,15 +40,11 @@ _decorator set ["condition", {
         true
     };
 
-    private _nearbyTracks = [
-        _extern_group getVariable "vgm_g_missionId",
-        getPos leader _extern_group,
-        75
-    ] call vgm_g_fnc_tracking_nearbyTracks;
+    private _nearbyTracks = [_extern_group] call vgm_g_fnc_btree_tracking_findNearbyTracks;
 
     if (_nearbyTracks isEqualTo []) exitWith { false };
 
-    _extern_blackboard set ["tracking_currentTrack", _nearbyTracks # 0];
+    _extern_blackboard set ["tracking_currentTrack", _nearbyTracks # -1];
 
     true
 }];
