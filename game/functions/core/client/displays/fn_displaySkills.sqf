@@ -53,6 +53,8 @@ switch _mode do {
             private _displayName = _skillTree get "displayName";
             private _ind = _ctrlSkills lbAdd _displayName;
             _ctrlSkills lbSetData [_ind, str [_x]];
+            ["skillSetTooltip", [_ctrlSkills, _ind]] call vgm_c_fnc_displaySkills;
+            _ctrlSkills lbSetTooltip [_ind, format ["%1 (%2/%3)", _displayName, _skillTree call vgm_g_fnc_skills_getTreeSkillPoints, _skillTree get "skillPointsMax"]];
         } forEach _skillTreeClasses;
 
         _ctrlSkills setVariable ["vgm_skillsListTvPaths", _skillsTvPaths];
@@ -79,15 +81,9 @@ switch _mode do {
         params ["_display"];
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
 
-        {
-            private _skillTreePath = parseSimpleArray (_ctrlSkills lbData _x);
-            private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
-
-            private _skillTreePoints = _skillTree call vgm_g_fnc_skills_getTreeSkillPoints;
-            private _label = format ["%1 (%2/%3 SP)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
-
-            _ctrlSkills tvSetText [_x, _label];
-        } forEach (_ctrlSkills getVariable "vgm_skillsListTvPaths");
+        for "_i" from 0 to (lbSize _ctrlSkills - 1) do {
+            ["skillSetTooltip", [_ctrlSkills, _i]] call vgm_c_fnc_displaySkills;
+        };
     };
 
     case "updateSkillTreeHeader": {
@@ -330,6 +326,17 @@ switch _mode do {
 
             [_skill, _display] call vgm_c_fnc_skills_requestSkillLearn;
         };
+    };
+
+    case "skillSetTooltip": {
+        params ["_ctrlSkills", "_index"];
+        private _skillTreePath = parseSimpleArray (_ctrlSkills lbData _i);
+        private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
+
+        private _skillTreePoints = _skillTree call vgm_g_fnc_skills_getTreeSkillPoints;
+        private _label = format ["%1 (%2/%3 SP)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
+
+        _ctrlSkills lbSetTooltip [_i, _label];
     };
 
     default {
