@@ -230,10 +230,10 @@ switch _mode do {
 
                     private _canLearn = [player, _skill] call vgm_g_fnc_skills_canLearn;
                     _ctrlSkill ctrlEnable _canLearn;
-                    if (_tooltip != "") then {
-                        _tooltip = endl + endl + _tooltip;
-                    };
                     if (!_canLearn) then {
+                        if (_tooltip != "") then {
+                            _tooltip = endl + endl + _tooltip;
+                        };
                         _tooltip = localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS" + _tooltip;
                     };
 
