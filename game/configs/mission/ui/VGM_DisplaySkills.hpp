@@ -43,16 +43,6 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             w = _DISPLAY_W * VGM_GRID_W;
             h = 5 * VGM_GRID_H;
         };
-        /* class Skills: VGM_ctrlTree */
-        /* { */
-        /*     idc = VGM_IDC_DISPLAYSKILLS_SKILLS; */
-        /*     onLoad = VGM_UIEH(initSkillTrees,Skills); */
-        /*     onTreeSelChanged = VGM_UIEH(selectSkillTree,Skills); */
-        /*     x = _DISPLAY_X + 1 * VGM_GRID_H; */
-        /*     y = _DISPLAY_Y + 6 * VGM_GRID_H; */
-        /*     w = _PAGE_W * VGM_GRID_W; */
-        /*     h = (_DISPLAY_H - 7) * VGM_GRID_H; */
-        /* }; */
 
         class Title: VGM_ctrlStructuredText
         {
@@ -77,7 +67,6 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
         class Description: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
-            /* text = "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."; */
             x = CENTER_X + 1 * VGM_GRID_W;
             y = _DISPLAY_Y + 6 * VGM_GRID_H;
             w = _PAGE_W * VGM_GRID_W;

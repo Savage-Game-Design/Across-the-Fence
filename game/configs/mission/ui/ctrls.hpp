@@ -171,9 +171,6 @@ class VGM_ctrlShortcutButton: RscButtonMenu
     colorBackgroundFocused[] = {0.1,0.1,0.1,1};
     colorFocused[] = {1,1,1,1};
     colorFocused2[] = {1,1,1,1};
-    /* period = 0; */
-    /* periodFocus = 0; */
-    /* periodOver = 0; */
     class Attributes
     {
         font = VGM_FONT;
@@ -343,77 +340,6 @@ class VGM_ctrlSkill: VGM_ctrlShortcutButton
         shadow = 0;
     };
 };
-/* class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars */
-/* { */
-/*     x = 0; */
-/*     y = 0; */
-/*     w = VGM_CTRLSKILL_W * VGM_GRID_W; */
-/*     h = 20 * VGM_GRID_H; */
-/*     class Controls */
-/*     { */
-/*         class Background: VGM_ctrlBackground */
-/*         { */
-/*             x = 0; */
-/*             y = 0; */
-/*             w = VGM_CTRLSKILL_W * VGM_GRID_W; */
-/*             h = 20 * VGM_GRID_H; */
-/*         }; */
-/*         class Cost: VGM_ctrlStructuredText */
-/*         { */
-/*             text = "xx SP"; */
-/*             idc = VGM_IDC_DISPLAYSKILLS_SKILLCOST; */
-/*             x = 0; */
-/*             y = 0; */
-/*             w = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W; */
-/*             h = 5 * VGM_GRID_H; */
-/*         }; */
-/*         class Description: VGM_ctrlStructuredText */
-/*         { */
-/*             idc = VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION; */
-/*             x = 0; */
-/*             y = 5 * VGM_GRID_H; */
-/*             w = VGM_CTRLSKILL_W * VGM_GRID_W; */
-/*             h = 15 * VGM_GRID_H; */
-/*             class Attributes */
-/*             { */
-/*                 font = VGM_FONT; */
-/*                 color = "#ffffff"; */
-/*                 colorLink = "#D09B43"; */
-/*                 align = "center"; */
-/*                 shadow = 0; */
-/*             }; */
-/*         }; */
-/**/
-/*         class Locked: VGM_ctrlStaticPicture */
-/*         { */
-/*             idc = VGM_IDC_DISPLAYSKILLS_SKILLLOCKED; */
-/*             text = "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa"; */
-/*             show = 0; */
-/*             x = 0; */
-/*             y = 0; */
-/*             w = VGM_CTRLSKILL_W * VGM_GRID_W; */
-/*             h = 20 * VGM_GRID_H; */
-/*         }; */
-/*         class Focus: VGM_ctrlButtonInvisible */
-/*         { */
-/*             idc = VGM_IDC_DISPLAYSKILLS_SKILLFOCUS; */
-/*             colorBackground[] = {0,0,0,0}; */
-/*             x = 0; */
-/*             y = 0; */
-/*             w = VGM_CTRLSKILL_W * VGM_GRID_W - 5 * VGM_GRID_W; */
-/*             h = 20 * VGM_GRID_H; */
-/*         }; */
-/*         class Unlock: VGM_ctrlButtonPicture */
-/*         { */
-/*             idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK; */
-/*             text = "\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa"; */
-/*             x = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W; */
-/*             y = 0; */
-/*             w = 5 * VGM_GRID_W; */
-/*             h = 5 * VGM_GRID_H; */
-/*         }; */
-/*     }; */
-/* }; */
 
 class VGM_ctrlControlsGroupOverlay: VGM_ctrlControlsGroupNoScrollbars
 {
@@ -751,5 +677,3 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
         };
     };
 };
-
-#include "VGM_ctrlHeaderBar.hpp"
