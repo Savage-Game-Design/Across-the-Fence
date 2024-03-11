@@ -217,20 +217,25 @@ switch _mode do {
                 if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
                 _ctrlSkill ctrlSetPosition [_xPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
-
                 _ctrlSkill ctrlSetStructuredText parseText format ["%1 SP<br/>%2", _skill get "cost", _skill get "displayName"];
-
+                private _tooltip = _skill get "description";
 
                 if (_skill call vgm_g_fnc_skills_isKnown) then {
                     _ctrlSkill ctrlEnable false;
-                    _ctrlSkill ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
+                    _ctrlSkill ctrlSetBackgroundColor [VGM_UI_COLOR_GREY,1];
+                    _ctrlSkill ctrlSetDisabledColor [1,1,1,1];
                 } else {
                     _ctrlSkill ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
                     _ctrlSkill setVariable ["vgm_skill", _skill];
 
                     private _canLearn = [player, _skill] call vgm_g_fnc_skills_canLearn;
                     _ctrlSkill ctrlEnable _canLearn;
-                    _ctrlSkill ctrlSetTooltip ([localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS", ""] select _canLearn);
+                    if (_tooltip != "") then {
+                        _tooltip = endl + endl + _tooltip;
+                    };
+                    if (!_canLearn) then {
+                        _tooltip = localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS" + _tooltip;
+                    };
 
                     #ifdef FIRST_TIER_EXCLUSIVE
                     // show the padlock icon over first tier skills which were not choosen
@@ -242,6 +247,7 @@ switch _mode do {
                     };
                     #endif
                 };
+                _ctrlSkill ctrlSetTooltip _tooltip;
 
                 // Create a vertical line going into the bottom of the skill
                 // and connecting it to the horizontal line below

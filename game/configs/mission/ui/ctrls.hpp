@@ -331,6 +331,7 @@ class VGM_ctrlSkill: VGM_ctrlShortcutButton
 {
     w = VGM_CTRLSKILL_W * VGM_GRID_W;
     h = 20 * VGM_GRID_H;
+    colorBackground2[] = {VGM_UI_COLOR_GREY, 1};
     class Attributes
     {
         font = VGM_FONT;
