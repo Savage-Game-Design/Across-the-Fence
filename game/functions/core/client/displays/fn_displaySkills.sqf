@@ -1,7 +1,6 @@
 #include "macros.inc"
 
 // #define FIRST_TIER_EXCLUSIVE
-
 params ["_mode", "_params"];
 _this = _params;
 
@@ -32,7 +31,7 @@ switch _mode do {
         "Refreshing Skills display" call vgm_g_fnc_logInfo;
 
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
-        _ctrlSkills tvSetCurSel ([[0], tvCurSel _ctrlSkills] select ((_display getVariable "vgm_currentSkillTree") isNotEqualTo createHashMap));
+        _ctrlSkills lbSetCurSel ([0, lbCurSel _ctrlSkills] select ((_display getVariable "vgm_currentSkillTree") isNotEqualTo createHashMap));
 
         ["updateSpAvailableHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTreeListLabels", _display] call vgm_c_fnc_displaySkills;
@@ -46,25 +45,14 @@ switch _mode do {
 
         "Filling Skills list" call vgm_g_fnc_logInfo;
 
-        private _skillsTvPaths = [];
-        private _fnc_draw = {
-            params ["_skillTree", "_skillTreePath", ["_treeViewPath", []]];
-
-            _treeViewPath pushBack (_ctrlSkills tvAdd [_treeViewPath, "<unset>"]);
-            _ctrlSkills tvSetData [_treeViewPath, str _skillTreePath];
-            _skillsTvPaths pushBack _treeViewPath;
-
-            {
-                [_y, (_skillTreePath + [_x]), +_treeViewPath] call _fnc_draw;
-            } forEach (_skillTree get "subtreesHash");
-        };
-
         // ensure that we display tabs in config order, hashmaps are unordered
         private _skillTreeClasses = "true" configClasses (missionConfigFile >> "vgm_skillTrees") apply {configName _x};
         private _skillTreesHashMap = missionNamespace getVariable "vgm_skills_treesHashMap";
         {
             private _skillTree = _skillTreesHashMap get _x;
-            [_skillTree, [_x]] call _fnc_draw;
+            private _displayName = _skillTree get "displayName";
+            private _ind = _ctrlSkills lbAdd _displayName;
+            _ctrlSkills lbSetData [_ind, str [_x]];
         } forEach _skillTreeClasses;
 
         _ctrlSkills setVariable ["vgm_skillsListTvPaths", _skillsTvPaths];
@@ -72,10 +60,10 @@ switch _mode do {
 
     // fill right panel with skill cards
     case "selectSkillTree": {
-        params ["_ctrlSkills", "_path"];
+        params ["_ctrlSkills", "_ind"];
         private _display = ctrlParent _ctrlSkills;
 
-        private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _path);
+        private _skillTreePath = parseSimpleArray (_ctrlSkills lbData _ind);
         private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
         _display setVariable ["vgm_currentSkillTree", _skillTree];
@@ -92,7 +80,7 @@ switch _mode do {
         private _ctrlSkills = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLS;
 
         {
-            private _skillTreePath = parseSimpleArray (_ctrlSkills tvData _x);
+            private _skillTreePath = parseSimpleArray (_ctrlSkills lbData _x);
             private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
             private _skillTreePoints = _skillTree call vgm_g_fnc_skills_getTreeSkillPoints;
@@ -208,11 +196,9 @@ switch _mode do {
             };
 
             // Center the controls
-            _xPos = switch (count _tierSkills) do {
-                case 1: { 0.5 * _wSkillTree - 0.5 * _wSkill };
-                case 2: { 1/3 * _wSkillTree - 0.5 * _wSkill };
-                default { 0 };
-            };
+            private _tierCount = count _tierSkills;
+            // Go to the middle of the skill tree control, then go back half the width of the controls of the tier which is the sum of the buttons and the space between them
+            _xPos = 0.5 * _wSkillTree - 0.5 * (_tierCount * _wSkill + (_tierCount - 1) * VGM_GRID_W);
 
             // Iterate over the skills of the current tier
             _tierSkills apply {
@@ -236,25 +222,19 @@ switch _mode do {
                 _ctrlSkill ctrlSetPosition [_xPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
 
-                private _ctrlDescription = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
-                _ctrlDescription ctrlSetStructuredText parseText (_skill get "displayName");
+                _ctrlSkill ctrlSetStructuredText parseText format ["%1 SP<br/>%2", _skill get "cost", _skill get "displayName"];
 
-                private _ctrlFocus = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLFOCUS;
-                _ctrlFocus ctrlAddEventHandler ["ButtonClick", {["focusSkill", _this] call vgm_c_fnc_displaySkills}];
 
-                private _ctrlUnlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
                 if (_skill call vgm_g_fnc_skills_isKnown) then {
-                    _ctrlUnlock ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
-                    _ctrlUnlock ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
+                    _ctrlSkill ctrlEnable false;
+                    _ctrlSkill ctrlSetTooltip localize "STR_VGM_SKILLS_UI_KNOWN";
                 } else {
-                    _ctrlUnlock ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
-                    _ctrlUnlock setVariable ["vgm_skill", _skill];
+                    _ctrlSkill ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
+                    _ctrlSkill setVariable ["vgm_skill", _skill];
 
                     private _canLearn = [player, _skill] call vgm_g_fnc_skills_canLearn;
-                    _ctrlUnlock ctrlEnable _canLearn;
-                    _ctrlUnlock ctrlSetTooltip ([localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS", ""] select _canLearn);
-
-                    _ctrlUnlock ctrlShow _currentTierUnlocked;
+                    _ctrlSkill ctrlEnable _canLearn;
+                    _ctrlSkill ctrlSetTooltip ([localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS", ""] select _canLearn);
 
                     #ifdef FIRST_TIER_EXCLUSIVE
                     // show the padlock icon over first tier skills which were not choosen
@@ -266,9 +246,6 @@ switch _mode do {
                     };
                     #endif
                 };
-
-                private _ctrlCost = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLCOST;
-                _ctrlCost ctrlSetText format ["%1 SP", _skill get "cost"];
 
                 // Create a vertical line going into the bottom of the skill
                 // and connecting it to the horizontal line below
@@ -301,9 +278,13 @@ switch _mode do {
         ];
         _ctrlSkillLineVRoot ctrlCommit 0;
         _yPos = _yPos + _hBranchV;
+
         // Add root with name of branch
         private _ctrlBranchName = _display ctrlCreate ["VGM_ctrlBranchName", -1, _ctrlSkillTree];
-        _ctrlBranchName ctrlSetPositionY _yPos;
+        _ctrlBranchName ctrlSetPosition [
+            0.5 * _wSkillTree - 0.5 * (ctrlPosition _ctrlBranchName select 2),
+            _yPos
+        ];
         _ctrlBranchName ctrlCommit 0;
         private _ctrlBranchNameLabel = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
         _ctrlBranchNameLabel ctrlSetText (_skillTree get "displayName");
