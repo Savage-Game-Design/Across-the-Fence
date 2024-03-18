@@ -30,9 +30,15 @@ _action set ["name", "follow tracks"];
 _action set ["getNextTrack", {
 
     private _currentTrack = _extern_blackboard getorDefault ["tracking_currentTrack", createHashMap];
+    private _currentTrackPos = _currentTrack get "pos";
+    private _nextTrack = _currentTrack get "nextTrack";
 
-    if ("nextTrack" in _currentTrack) exitWith {
-        _currentTrack get "nextTrack"
+    if !(isNil "_nextTrack") exitWith {
+        // Find the furthest valid track we can path to.
+        while {"nextTrack" in _nextTrack && ((_nextTrack get "nextTrack" get "pos") distance2D _currentTrackPos) < 100} do {
+            _nextTrack = _nextTrack get "nextTrack";
+        };
+        _nextTrack
     };
 
     private _nearbyTracks = [_extern_group] call vgm_g_fnc_btree_tracking_findNearbyTracks;
