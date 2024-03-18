@@ -1,21 +1,21 @@
 /*
     File: fn_tracking_preInit.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2024-03-08
-    Last Update: 2024-03-09
+    Last Update: 2024-03-18
     Public: No
 
     Description:
-        No description added yet.
+        Tracking system preInit
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        N/A
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        N/A
  */
 
 vgm_g_tracking_minDistanceBetweenTracks = 25;
