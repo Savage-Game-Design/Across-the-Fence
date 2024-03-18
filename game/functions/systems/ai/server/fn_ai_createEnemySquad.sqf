@@ -2,7 +2,7 @@
     File: fn_ai_createEnemySquad.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2024-03-09
+    Last Update: 2024-03-18
     Public: Yes
 
     Description:
@@ -32,14 +32,12 @@ private _squad = _this call para_g_fnc_create_squad;
 private _group = _squad select 1;
 
 _group setVariable ["vgm_g_missionId", _missionId, true];
-_group setVariable ["behaviourEnabled", false, true];
 
 //Set the squad's locality to the client with highest FPS
 private _selectedClient = call para_s_fnc_loadbal_suggest_host;
 _group setGroupOwner _selectedClient;
 _group setVariable ["groupClientOwner", _selectedClient];
 [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
-
 
 //Update the owner variable if the group changes locality.
 _group addEventHandler ["Local", {
