@@ -37,97 +37,62 @@ if (_groupLeader distance2D _destPos <= _completionDistance) exitWith {
 
 private _wp = [_group, currentWaypoint _group];
 
-//If we're moving somewhere, we don't need to do anything!
-if (currentWaypoint _group <= count waypoints _group && waypointType _wp == "MOVE") exitWith {false};
+// Group currently has a valid move waypoint, no action needed.
+if (currentWaypoint _group < count waypoints _group && waypointType _wp == "MOVE") exitWith {false};
 
-//If we've completed all of our waypoints, and we've not exited this script because we're at our destination
-//We've either: Never set off, or our waypoint broke (no path?)
-//Run the 'repair state machine', a micro state machine with repair strategies.
-private _repairStrategy = _group getVariable ["vgm_l_btree_moveTo_repairStrategy", 0];
-
-private _fnc_lastWaypointSuccessful = {
-	private _lastWaypoint = waypoints _group select (currentWaypoint _group - 1);
-	_groupLeader distance2D waypointPosition _lastWaypoint < 15
-};
-
-//Micro state-machine for repairing!
+// Different types of move, designed to un-stick the AI from their current position.
 private _repairStrategies = [
 	//Strategy 0: Create a waypoint to the destination
 	{
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, -1] call vgm_g_fnc_btree_setWaypoint;
-		//If we fail this, move to repair attempt 2.
-		_repairStrategy = 1;
+		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, _completionDistance] call vgm_g_fnc_btree_setWaypoint;
 	},
 	//Strategy 1: Move halfway towards the destination
 	{
 		private _distance = _destPos distance2D getPos _groupLeader;
 		private _newPos = _groupLeader getPos [_distance / 2, _groupLeader getDir _destPos];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, -1] call vgm_g_fnc_btree_setWaypoint;
-		_repairStrategy = 2;
+		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, (_distance / 20) max _completionDistance] call vgm_g_fnc_btree_setWaypoint;
 	},
-	//Strategy 2: Direct move if last waypoint move was successful, else try a short hop forward
-	{
-		if (call _fnc_lastWaypointSuccessful) then {
-			_repairStrategy = 0;
-			call _fnc_performRepair;
-		} else {
-			_repairStrategy = 3;
-			call _fnc_performRepair;
-		};
-	},
-	//Strategy 3: A short move forward.
+	//Strategy 2: A short move forward.
 	{
 		private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos)];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, -1] call vgm_g_fnc_btree_setWaypoint;
-		_repairStrategy = 4;
+		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 5] call vgm_g_fnc_btree_setWaypoint;
 	},
-	//Strategy 4: Direct move if last waypoint move was successful, otherwises try a lateral movement.
-	{
-		if (call _fnc_lastWaypointSuccessful) then {
-			_repairStrategy = 0;
-			call _fnc_performRepair;
-		} else {
-			_repairStrategy = 5;
-			call _fnc_performRepair;
-		};
-	},
-	//Strategy 5: A short move sideways.
+	//Strategy 3: A short move sideways.
 	{
 		private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos) + 90];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, -1] call vgm_g_fnc_btree_setWaypoint;
-		_repairStrategy = 4;
+		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 5] call vgm_g_fnc_btree_setWaypoint;
 	},
-	//Strategy 6: Direct move if last waypoint move was successful, otherwise attempt a teleport.
-	{
-		if (call _fnc_lastWaypointSuccessful) then {
-			_repairStrategy = 0;
-			call _fnc_performRepair;
-		} else {
-			_repairStrategy = 7;
-			call _fnc_performRepair;
-		};
-	},
-	//Strategy 7: Teleport when no players are nearby. handles AI stuck in objects.
+	//Strategy 4: Teleport when no players are nearby. handles AI stuck in objects.
 	{
 		[format ["btree moveto: Group %1 is *very* stuck, attempting teleport.", _group]] call vgm_g_fnc_logWarning;
-		if (allPlayers inAreaArray [getPos _groupLeader, 300, 300] isEqualTo []) then {
+		if (allPlayers inAreaArray [getPos _groupLeader, 200, 200] isEqualTo []) then {
             [format ["btree moveto: Group %1 is *very* stuck, teleporting them now.", _group]] call vgm_g_fnc_logWarning;
 			private _newPos = _groupLeader getPos [20 + random 20, random 360];
 			{
 				_x setPos _newPos;
 			} forEach units _group;
-			_repairStrategy = 1;
-			call _fnc_performRepair;
+            // Set up a direct move after teleporting.
+			call (_repairStrategies # 0);
 		};
 	}
 ];
 
-private _fnc_performRepair = {
-	call (_repairStrategies select _repairStrategy)
+private _lastWaypoint = waypoints _group select (currentWaypoint _group - 1);
+private _lastWaypointSuccessful = _groupLeader distance2D waypointPosition _lastWaypoint < waypointCompletionRadius _lastWaypoint;
+
+//If we've completed all of our waypoints, and we've not exited this script because we're at our destination
+//We've either: Never set off, or our waypoint broke (no path?)
+//Run the 'repair state machine', a micro state machine with repair strategies.
+private _repairAttempts = _group getVariable ["vgm_l_btree_moveTo_repairAttempts", 0];
+
+if (_repairAttempts > 0 && _lastWaypointSuccessful) then {
+    _repairAttempts = 0;
 };
 
-call _fnc_performRepair;
 
-_group setVariable ["vgm_l_btree_moveTo_repairStrategy", _repairStrategy];
+private _chosenStrategy = _repairAttempts min (count _repairStrategies - 1);
+[] call (_repairStrategies # _chosenStrategy);
+
+_group setVariable ["vgm_l_btree_moveTo_repairAttempts", _repairAttempts + 1];
 
 false
