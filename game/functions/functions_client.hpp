@@ -269,6 +269,8 @@ class vgm_g
     class tracking
     {
         VGM_GLOBAL_PATH(\systems\tracking\global);
+        class tracking_debugHideTracks {};
+        class tracking_debugShowTracks {};
         class tracking_nearbyTracks {};
         class tracking_preInit {
             preInit = 1;
