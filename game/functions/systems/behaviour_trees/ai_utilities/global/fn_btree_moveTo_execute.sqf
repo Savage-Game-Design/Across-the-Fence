@@ -77,16 +77,19 @@ private _repairStrategies = [
 	}
 ];
 
-private _lastWaypoint = waypoints _group select (currentWaypoint _group - 1);
-private _lastWaypointSuccessful = _groupLeader distance2D waypointPosition _lastWaypoint < waypointCompletionRadius _lastWaypoint;
+private _waypoints = waypoints _group;
 
 //If we've completed all of our waypoints, and we've not exited this script because we're at our destination
 //We've either: Never set off, or our waypoint broke (no path?)
 //Run the 'repair state machine', a micro state machine with repair strategies.
 private _repairAttempts = _group getVariable ["vgm_l_btree_moveTo_repairAttempts", 0];
 
-if (_repairAttempts > 0 && _lastWaypointSuccessful) then {
-    _repairAttempts = 0;
+if (_repairAttempts > 0 && count _waypoints >= 1) then {
+    private _lastWaypoint = _waypoints select (currentWaypoint _group - 1);
+    private _lastWaypointSuccessful = _groupLeader distance2D waypointPosition _lastWaypoint < waypointCompletionRadius _lastWaypoint;
+    if (_lastWaypointSuccessful) then {
+        _repairAttempts = 0;
+    };
 };
 
 
