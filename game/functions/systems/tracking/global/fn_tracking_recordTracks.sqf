@@ -1,21 +1,24 @@
 /*
     File: fn_tracking_recordTracks.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2024-03-08
-    Last Update: 2024-03-09
+    Last Update: 2024-03-18
     Public: No
 
     Description:
-        No description added yet.
+        Records a new set of tracks for the given tracking group.
+        Should be called periodically.
 
     Parameter(s):
-        N/A
+        _trackingGroup - Trackin group to record tracks for [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        {
+            [_x] call vgm_g_fnc_tracking_recordTracks;
+        } forEach values vgm_l_tracking_trackingGroups;
  */
 
 params ["_trackingGroup"];

@@ -1,21 +1,22 @@
 /*
     File: fn_tracking_stopRecordingTracks.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2024-03-08
-    Last Update: 2024-03-08
-    Public: No
+    Last Update: 2024-03-18
+    Public: Yes
 
     Description:
-        No description added yet.
+        Stops recording tracks for the given Arma group, within a specific tracking group.
 
     Parameter(s):
-        N/A
+        _trackingGroupId - ID of the tracking group to remove the group from [STRING]
+        _groupHash - Group (or hashValue of group) to remove [GROUP/STRING]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["1", group player] call vgm_g_fnc_tracking_stopRecordingTracks;
  */
 
 params ["_trackingGroupId", "_groupHash"];

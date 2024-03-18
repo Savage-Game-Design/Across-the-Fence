@@ -1,21 +1,21 @@
 /*
     File: fn_tracking_deleteTrackingGroup.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2024-03-09
-    Last Update: 2024-03-09
-    Public: No
+    Last Update: 2024-03-18
+    Public: Yes
 
     Description:
-        No description added yet.
+        Deletes a tracking group from the system, with all data.
 
     Parameter(s):
-        N/A
+        _trackingGroupId - ID of the tracking group [STRING]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["1"] call vgm_g_fnc_tracking_deleteTrackingGroup;
  */
 
 params ["_trackingGroupId"];
