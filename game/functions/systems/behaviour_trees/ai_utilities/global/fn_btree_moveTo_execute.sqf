@@ -35,10 +35,11 @@ if (_groupLeader distance2D _destPos <= _completionDistance) exitWith {
     true
 };
 
+private _forceRepath = _group getVariable ["vgm_l_btree_moveTo_forceRepath", false];
 private _wp = [_group, currentWaypoint _group];
 
 // Group currently has a valid move waypoint, no action needed.
-if (currentWaypoint _group < count waypoints _group && waypointType _wp == "MOVE") exitWith {false};
+if (!_forceRepath && currentWaypoint _group < count waypoints _group && waypointType _wp == "MOVE") exitWith {false};
 
 // Different types of move, designed to un-stick the AI from their current position.
 private _repairStrategies = [
@@ -97,5 +98,6 @@ private _chosenStrategy = _repairAttempts min (count _repairStrategies - 1);
 [] call (_repairStrategies # _chosenStrategy);
 
 _group setVariable ["vgm_l_btree_moveTo_repairAttempts", _repairAttempts + 1];
+_group setVariable ["vgm_l_btree_moveTo_forceRepath", false];
 
 false

@@ -22,3 +22,5 @@
 params ["_group", "_destination"];
 
 _group setVariable ["vgm_l_btree_moveTo_destination", _destination];
+_group setVariable ["vgm_l_btree_moveTo_repairAttempts", nil];
+_group setVariable ["vgm_l_btree_moveTo_forceRepath", true];
