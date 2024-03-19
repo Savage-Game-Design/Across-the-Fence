@@ -24,9 +24,7 @@ params ["_group", "_destination", ["_speedMode", ""], ["_completionDistance", 10
 _group setVariable ["vgm_l_btree_moveTo_destination", _destination];
 _group setVariable ["vgm_l_btree_moveTo_completionDistance", _completionDistance];
 _group setVariable ["vgm_l_btree_moveTo_repairAttempts", nil];
-
-// Clear their current waypoint to force them to re-path
-deleteWaypoint [_group, (count waypoints _group) - 1];
+_group setVariable ["vgm_l_btree_moveTo_forceRepath", true];
 
 //Set behaviour to AWARE, otherwise they might enter combat and grind to a halt.
 //Maybe worth checking if speed is 'FULL'.
