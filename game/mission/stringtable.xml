@@ -63,7 +63,7 @@
             <Original>Not enough skill points</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
-            <Original>Tier locked</Original>
+            <Original>Tier locked. Learn skill in previous tier to unlock</Original>
         </Key>
     </Package>
     <Package name="Medical UI">

@@ -234,7 +234,8 @@ switch _mode do {
                         if (_tooltip != "") then {
                             _tooltip = endl + endl + _tooltip;
                         };
-                        _tooltip = localize "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS" + _tooltip;
+                        private _lockedTooltip = ["STR_VGM_SKILLS_UI_TIER_LOCKED", "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS"] select _currentTierUnlocked;
+                        _tooltip = localize _lockedTooltip + _tooltip;
                     };
 
                     #ifdef FIRST_TIER_EXCLUSIVE
