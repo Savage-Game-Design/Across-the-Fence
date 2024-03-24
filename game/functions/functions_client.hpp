@@ -229,6 +229,12 @@ class vgm_c
     class displays
     {
         VGM_CLIENT_PATH(\core\client\displays);
+
+        class display_preInit
+        {
+            preInit = 1;
+        };
+
         class displaySkills {};
         class displayAbilities {};
         class displayMissions {};

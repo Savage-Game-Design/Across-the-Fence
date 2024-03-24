@@ -41,6 +41,8 @@ switch _mode do {
             _ctrl ctrlEnable false;
             _ctrl ctrlSetText format ["[ %1 ]", ctrlText _ctrl];
             _ctrl ctrlSetDisabledColor [VGM_UI_COLOR_TEXT];
+
+            _display setVariable ["vgm_currentDisplay", _class];
         };
 
         switch ctrlClassName _ctrl do {
@@ -58,6 +60,7 @@ switch _mode do {
 
         private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
         if (isNil "_currentMission" || {_currentMission get "status" == "CREATED"}) exitWith {
+            vgm_display_reopen = ctrlParent _ctrl getVariable "vgm_currentDisplay";
             [] spawn vgm_c_fnc_equipment_openArsenal;
         };
 
