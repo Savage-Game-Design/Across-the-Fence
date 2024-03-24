@@ -26,6 +26,7 @@ class vgm_skillTrees {
     class rifleman {
         displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
         description = "";
+        icon = "assets\skills\rifleman_ca.paa";
 
         // rifleman skills
         class skills {
@@ -107,6 +108,7 @@ class vgm_skillTrees {
     class recon {
         displayName = "$STR_VGM_SKILLS_TREE_RECON";
         description = "";
+        icon = "assets\skills\recon_ca.paa";
 
         // recon skills
         class skills {
@@ -189,6 +191,7 @@ class vgm_skillTrees {
     class fireSupport {
         displayName = "$STR_VGM_SKILLS_TREE_FIRE_SUPPORT";
         description = "";
+        icon = "assets\skills\fire_support_ca.paa";
 
         // fire support skills
         class skills {
@@ -275,6 +278,7 @@ class vgm_skillTrees {
     class support {
         displayName = "$STR_VGM_SKILLS_TREE_SUPPORT";
         description = "";
+        icon = "assets\skills\support_ca.paa";
 
         // support skills
         class skills {

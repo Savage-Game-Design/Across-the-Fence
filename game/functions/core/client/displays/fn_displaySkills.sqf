@@ -50,14 +50,12 @@ switch _mode do {
         private _skillTreesHashMap = missionNamespace getVariable "vgm_skills_treesHashMap";
         {
             private _skillTree = _skillTreesHashMap get _x;
-            private _displayName = _skillTree get "displayName";
-            private _ind = _ctrlSkills lbAdd _displayName;
+            private _ind = _ctrlSkills lbAdd "";
+            _ctrlSkills lbSetPicture [_ind, _skillTree get "icon"];
             _ctrlSkills lbSetData [_ind, str [_x]];
             ["skillSetTooltip", [_ctrlSkills, _ind]] call vgm_c_fnc_displaySkills;
             _ctrlSkills lbSetTooltip [_ind, format ["%1 (%2/%3)", _displayName, _skillTree call vgm_g_fnc_skills_getTreeSkillPoints, _skillTree get "skillPointsMax"]];
         } forEach _skillTreeClasses;
-
-        _ctrlSkills setVariable ["vgm_skillsListTvPaths", _skillsTvPaths];
     };
 
     // fill right panel with skill cards
