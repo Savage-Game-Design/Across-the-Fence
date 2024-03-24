@@ -7,7 +7,7 @@
     Public: No
 
     Description:
-        Implements functionalities the "common" top bar in the gamemode displays.
+        Implements functionalities for the "common" top bar in the gamemode displays.
 
     Parameter(s):
         _mode - Determines the part of this function to execute [STRING]
