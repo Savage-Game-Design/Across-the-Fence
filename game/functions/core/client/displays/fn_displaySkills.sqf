@@ -290,6 +290,8 @@ switch _mode do {
         _ctrlBranchName ctrlCommit 0;
         private _ctrlBranchNameLabel = _ctrlBranchName controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
         _ctrlBranchNameLabel ctrlSetText (_skillTree get "displayName");
+
+        _display setVariable ["vgm_currentSkillTreeRootCtrl", _ctrlBranchNameLabel];
     };
 
     case "updateSpAvailableHeader": {
@@ -317,6 +319,9 @@ switch _mode do {
         if (_skill isEqualTo createHashMap) exitWith {
             "unlockSkill executed with no skill selected" call vgm_g_fnc_logWarning;
         };
+
+        // prevent skill tile from being focused
+        ctrlSetFocus (ctrlParent _ctrlUnlock getVariable "vgm_currentSkillTreeRootCtrl");
 
         // confirm skill selection
         // TODO this would need some sort of fitting UI design
