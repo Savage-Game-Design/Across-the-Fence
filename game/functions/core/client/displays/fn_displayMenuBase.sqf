@@ -1,28 +1,30 @@
+#include "macros.inc"
 /*
-    File: P:\SGD\Across-the-Fence\game\functions\core\client\displays\fn_displayMenuBase.sqf
+    File: fn_displayMenuBase.sqf
     Author: Savage Game Design
     Date: 2024-04-06
-    Last Update: 2024-04-06
+    Last Update: 2024-03-24
     Public: No
 
     Description:
-            __DESCRIPTION__
+        Implements functionalities the "common" top bar in the gamemode displays.
 
     Parameter(s):
-            _var - __DESC__ [TYPE]
+        _mode - Determines the part of this function to execute [STRING]
+        _this - Parameters for the given _mode [ARRAY]
 
     Returns:
-            __DESC__ [TYPE]
+        NOTHING
 
     Example(s):
-            [] call vgm_c_fnc_;
+            ["onClickEquipment"] call vgm_c_fnc_displayMenuBase;
 */
-#include "macros.inc"
 #define SELF vgm_c_fnc_displayMenuBase
+
 params ["_mode", "_this"];
 
+// Helper function to get the "display" attribute of a header button
 private _fnc_getButtonDisplay = {
-    // Helper function to get the "display" attribute of a header button
     params ["_btn"];
     getText (missionConfigFile >> "VGM_DisplayMenuBase" >> "Controls" >> "HeaderBar" >> "Controls" >> ctrlClassName _btn >> "display")
 };
@@ -30,11 +32,11 @@ private _fnc_getButtonDisplay = {
 switch _mode do {
     case "onLoadButton": {
         params ["_ctrl"];
-        // Disable button that would open the current display
         private _display = ctrlParent _ctrl;
         private _iddOpen = ctrlIDD _display;
         private _class = _ctrl call _fnc_getButtonDisplay;
         private _idd = getNumber (missionConfigFile >> _class >> "idd");
+        // Disable button that would open the current display
         if (_iddOpen == _idd) exitWith {
             _ctrl ctrlEnable false;
             _ctrl ctrlSetText format ["[ %1 ]", ctrlText _ctrl];
@@ -45,19 +47,29 @@ switch _mode do {
             case "Settings";
             case "Squad": {
                 _ctrl ctrlEnable false;
+                _ctrl ctrlSetTooltip "Work in Progress";
             };
         };
     };
+
     case "onClickEquipment": {
         params ["_ctrl"];
         ctrlParent _ctrl closeDisplay IDC_OK;
-        [] spawn BIS_fnc_arsenal;
+
+        private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
+        if (isNil "_currentMission" || {_currentMission get "status" == "CREATED"}) exitWith {
+            [] spawn vgm_c_fnc_equipment_openArsenal;
+        };
+
+        player action ["Gear", objNull];
     };
+
     case "onClickAbilities";
     case "onClickSkillTree": {
         params ["_ctrl"];
         ["switchMenu", [_ctrl]] call SELF;
     };
+
     case "switchMenu": {
         // Close current menu and open newly selected one
         params ["_ctrl"];

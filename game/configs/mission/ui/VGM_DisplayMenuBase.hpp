@@ -44,7 +44,7 @@ class VGM_DisplayMenuBase
                 {
                     idc = -1;
                     text = _STRTABLE(EQUIPMENT);
-                    tooltip = _STRTABLE(OPENS_ARSENAL);
+                    tooltip = _STRTABLE(MANAGE_EQUIPMENT);
                     display = _DISPLAY(Equipment); // The display that is opened when clicking the button
                     onLoad = VGM_UIEH(onLoadButton,MenuBase);
                     onButtonClick = VGM_UIEH(onClickEquipment,MenuBase);

@@ -343,8 +343,8 @@
         <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
             <Original>Equipment</Original>
         </Key>
-        <Key ID="STR_VGM_HEADERBAR_OPENS_ARSENAL">
-            <Original>Opens Arsenal</Original>
+        <Key ID="STR_VGM_HEADERBAR_MANAGE_EQUIPMENT">
+            <Original>Manage your equipment</Original>
         </Key>
         <Key ID="STR_VGM_HEADERBAR_ABILITIES">
             <Original>Abilities</Original>
