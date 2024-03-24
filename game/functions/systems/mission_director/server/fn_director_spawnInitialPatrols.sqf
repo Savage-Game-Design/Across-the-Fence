@@ -2,7 +2,7 @@
     File: fn_director_spawnInitialPatrols.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2023-11-04
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -43,5 +43,5 @@ for "_i" from 1 to _desiredSquads do {
     _squads pushBack _group;
 };
 
-_mission get "director" get "aiGroups" append _squads;
+[_mission, _squads] call vgm_s_fnc_director_registerGroups;
 _mission get "director" set ["initialAiGroups", _squads];

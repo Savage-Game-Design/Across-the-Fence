@@ -134,6 +134,21 @@ class vgm_g
         };
     };
 
+    class locational_events
+    {
+        VGM_GLOBAL_PATH(\systems\locational_events\global);
+
+        class locEvents_callHandlers {};
+        class locEvents_deleteEventGroup {};
+        class locEvents_onNearbyEvent {};
+        class locEvents_preInit {
+            preInit = 1;
+        };
+        class locEvents_removeHandlers {};
+        class locEvents_removeListener {};
+        class locEvents_triggerEvent {};
+    };
+
     class medical
     {
         VGM_GLOBAL_PATH(\systems\medical\global);
@@ -552,14 +567,20 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill_investigate\client);
 
         class skill_investigate_addAction {};
+        class skill_investigate_addFiredEh {};
         class skill_investigate_drawSoundWaves
         {
             headerType = -1;
         };
         class skill_investigate_getSpeedDrawCoef {};
+        class skill_investigate_getVoiceDrawCoef {};
         class skill_investigate_postInit
         {
             postInit = 1;
+        };
+        class skill_investigate_queueNoise
+        {
+            headerType = -1;
         };
         class skill_investigate_setDesaturation {};
         class skill_investigate_setListenMode {};

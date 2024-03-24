@@ -3,7 +3,7 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-01-27
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -25,6 +25,7 @@ private _eh = missionNamespace getVariable ["vgm_c_skill_investigate_drawEh", -1
 if (!_enable) exitWith {
     removeMissionEventHandler ["Draw3D", _eh];
     vgm_c_skill_investigate_drawEh = -1;
+    vgm_c_skill_investigate_noises = nil;
 };
 
 if (_eh > -1) exitWith {};
@@ -36,15 +37,13 @@ vgm_c_skill_investigate_drawEh = addMissionEventHandler ["Draw3D", {
     if (time >= _nextPingTime) then {
 
         private _ignoredGroup = group player;
-        private _noiseSources = player nearEntities ["CAManBase", 100];
+        private _noiseSources = player nearEntities ["CAManBase", 200];
 
         {
-            vgm_c_skill_investigate_noises pushBack [
-                time,
+            [
                 _x,
-                [random 360, random 360, random 360],
                 (abs speed _x) call vgm_c_fnc_skill_investigate_getSpeedDrawCoef
-            ];
+            ] call vgm_c_fnc_skill_investigate_queueNoise;
         } forEach (_noiseSources select {group _x != _ignoredGroup});
 
         _thisArgs set [0, time + PING_TICK];

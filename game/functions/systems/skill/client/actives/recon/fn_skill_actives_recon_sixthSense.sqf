@@ -2,7 +2,7 @@
     File: fn_skill_actives_recon_sixthSense.sqf
     Author: Savage Game Design
     Date: 2023-09-29
-    Last Update: 2023-10-14
+    Last Update: 2024-03-02
     Public: No
 
     Description:
@@ -48,6 +48,8 @@ vgm_c_skill_actives_recon_sixthSense_list = _enemies;
 
 vgm_c_skill_actives_recon_sixthSense_draw3DEh = addMissionEventHandler ["Draw3D", {
     {
+        if (!alive _x) then {continue};
+
         private _color = _x getVariable "vgm_c_objectColor";
         _color set [3, COLOR_OPACITY(_x distance player)];
 

@@ -62,6 +62,7 @@ class vgm_s
             preInit = 1;
         };
         class director_processMission {};
+        class director_registerGroups {};
         class director_spawnInitialPatrols {};
         class director_startMission {};
         class director_stopMission {};
@@ -169,6 +170,16 @@ class vgm_s
         class leveling_dbSave {};
 
         class leveling_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class shared_hub
+    {
+        VGM_SERVER_PATH(\systems\shared_hub\server);
+
+        class sharedHub_preInit
         {
             preInit = 1;
         };

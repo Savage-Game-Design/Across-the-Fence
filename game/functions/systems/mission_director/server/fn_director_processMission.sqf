@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2023-11-04
+    Last Update: 2024-03-01
     Public: No
 
     Description:
@@ -151,7 +151,7 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
     _group setVariable ["vgm_s_director_command", "track"];
 
 
-    _directorData get "aiGroups" pushBack _group;
+    [_mission, [_group]] call vgm_s_fnc_director_registerGroups;
     _directorData get "dynamicAiGroups" pushBack _group;
 
     _directorData set ["lastTrackerSent", serverTime];
