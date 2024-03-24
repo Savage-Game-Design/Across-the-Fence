@@ -23,8 +23,14 @@
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
             <Original>Standard Ability</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP">
+            <Original>Standard abilites offer a small benefit and are intended to be used frequently throughout the mission.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT">
             <Original>Ultimate Ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP">
+            <Original>Ultimate abilites offer a large benefit and are intended to be used at critical moments during the mission.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD">
             <Original>Available Standard Abilities</Original>
@@ -333,4 +339,25 @@
             <Original>Stay stationary to Listen</Original>
         </Key>
     </Package>
+    <Package name="Header Bar">
+        <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
+            <Original>Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_MANAGE_EQUIPMENT">
+            <Original>Manage your equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_ABILITIES">
+            <Original>Abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SKILLTREE">
+            <Original>Skill Tree</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SQUAD">
+            <Original>Squad</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SETTINGS">
+            <Original>Settings</Original>
+        </Key>
+    </Package>
+
 </Project>

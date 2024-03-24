@@ -4,6 +4,7 @@ import RscProgress;
 import RscStructuredText;
 import RscMapControlEmpty;
 import RscControlsGroupNoScrollbars;
+import RscButtonMenu;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -159,6 +160,27 @@ class VGM_ctrlButton: ctrlButton
     sizeEx = VGM_FONT_M;
 };
 
+class VGM_ctrlShortcutButton: RscButtonMenu
+{
+    type = CT_SHORTCUTBUTTON;
+    size = VGM_FONT_M;
+    color[] = {1,1,1,1};
+    color2[] = {1,1,1,1};
+    colorBackground[] = {0,0,0,1};
+    colorBackground2[] = {0,0,0,1};
+    colorBackgroundFocused[] = {0.1,0.1,0.1,1};
+    colorFocused[] = {1,1,1,1};
+    colorFocused2[] = {1,1,1,1};
+    class Attributes
+    {
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "left";
+        shadow = 0;
+    };
+};
+
 class VGM_ctrlButtonPicture: ctrlButtonPicture
 {
 };
@@ -265,10 +287,10 @@ class VGM_ctrlSkillTreeBranchH: VGM_ctrlSkillTreeBranchV
 };
 class VGM_ctrlBranchName: VGM_ctrlControlsGroup
 {
-    x = 0.25 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
+    x = 0;
     y = 0;
     w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-    h = (5 + 2) * VGM_GRID_H;
+    h = 7 * VGM_GRID_H;
     class Controls
     {
         class Background: VGM_ctrlBackground
@@ -304,75 +326,19 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
         };
     };
 };
-class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
+
+class VGM_ctrlSkill: VGM_ctrlShortcutButton
 {
-    x = 0;
-    y = 0;
     w = VGM_CTRLSKILL_W * VGM_GRID_W;
     h = 20 * VGM_GRID_H;
-    class Controls
+    colorBackground2[] = {VGM_UI_COLOR_GREY, 1};
+    class Attributes
     {
-        class Background: VGM_ctrlBackground
-        {
-            x = 0;
-            y = 0;
-            w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 20 * VGM_GRID_H;
-        };
-        class Cost: VGM_ctrlStructuredText
-        {
-            text = "xx SP";
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLCOST;
-            x = 0;
-            y = 0;
-            w = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-        };
-        class Description: VGM_ctrlStructuredText
-        {
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
-            x = 0;
-            y = 5 * VGM_GRID_H;
-            w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 15 * VGM_GRID_H;
-            class Attributes
-            {
-                font = VGM_FONT;
-                color = "#ffffff";
-                colorLink = "#D09B43";
-                align = "center";
-                shadow = 0;
-            };
-        };
-
-        class Locked: VGM_ctrlStaticPicture
-        {
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
-            text = "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa";
-            show = 0;
-            x = 0;
-            y = 0;
-            w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 20 * VGM_GRID_H;
-        };
-        class Focus: VGM_ctrlButtonInvisible
-        {
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLFOCUS;
-            colorBackground[] = {0,0,0,0};
-            x = 0;
-            y = 0;
-            w = VGM_CTRLSKILL_W * VGM_GRID_W - 5 * VGM_GRID_W;
-            h = 20 * VGM_GRID_H;
-        };
-        class Unlock: VGM_ctrlButtonPicture
-        {
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
-            text = "\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
-            x = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
-            y = 0;
-            w = 5 * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-        };
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "center";
+        shadow = 0;
     };
 };
 
