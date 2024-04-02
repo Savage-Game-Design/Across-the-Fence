@@ -2,7 +2,7 @@
     File: fn_ai_createEnemySquad.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2024-03-18
+    Last Update: 2024-04-02
     Public: Yes
 
     Description:
@@ -11,7 +11,7 @@
         Accepts the same arguments as para_g_fnc_create_squad.
 
     Parameter(s):
-		_units - Array of unit classes [Array, defaults to [] (empty array)]
+		_unitClasses - Array of unit classes [Array, defaults to [] (empty array)]
 		_groupTarget - Group to put units in, or side to create units in [Group|Side]
 		_position - Position to spawn units around [Position3D]
         _missionId - Mission the squad is being used in [STRING]
@@ -23,7 +23,7 @@
         ["vn_west", "west", [0, 0, 0], _mission get "public" get "id"] call vgm_s_fnc_ai_createEnemySquad
  */
 
-params [["_units", []], "_groupTarget", "_position", ["_missionId", ""]];
+params [["_unitClasses", []], "_groupTarget", "_position", ["_missionId", ""]];
 
 // Create it on the server, to avoid an FPS stutter on a client. Also, easier to get a reference to them.
 // Generally speaking, the rest of the systems assume a squad is created on the server.
@@ -35,18 +35,20 @@ _group setVariable ["vgm_g_missionId", _missionId, true];
 
 //Set the squad's locality to the client with highest FPS
 private _selectedClient = call para_s_fnc_loadbal_suggest_host;
-_group setGroupOwner _selectedClient;
-_group setVariable ["groupClientOwner", _selectedClient];
+_group setVariable ["groupClientOwner", _selectedClient, true];
+// TODO - this should be run on the client hosting, not the server.
 [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
 
 //Update the owner variable if the group changes locality.
-_group addEventHandler ["Local", {
-    params ["_group"];
-    if (local _group) then {
+[_group, ["Local", {
+    params ["_group", "_local"];
+    if (_local) then {
         _group setVariable ["groupClientOwner", clientOwner, true];
         // Reassign the behaviour tree on locality change, as it's local.
         [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
     };
-}];
+}]] remoteExec ["addEventHandler", 0];
+
+_group setGroupOwner _selectedClient;
 
 _group
