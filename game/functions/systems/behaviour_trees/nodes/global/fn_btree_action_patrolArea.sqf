@@ -1,14 +1,14 @@
 #include "..\..\behaviour_trees.inc"
 
 /*
-	File: fn_btree_action_patrolArea.sqf
-	Author:  Savage Game Design
-	Public: No
+    File: fn_btree_action_patrolArea.sqf
+    Author:  Savage Game Design
+    Public: No
 
-	Description:
+    Description:
         Action node.
 
-		Makes the group patrol around a point.
+        Makes the group patrol around a point.
 
     Parameter(s):
         _params - Any parameters accepted by the node. [HASHMAP]
@@ -48,9 +48,9 @@ _action set ["name", "patrol area"];
 _action set ["onEnter", {
     params ["_node", "_state"];
 
-	_extern_group setCombatMode "RED";
-	_extern_group setBehaviour "SAFE";
-	_extern_group setFormation "COLUMN";
+    _extern_group setCombatMode "RED";
+    _extern_group setBehaviour "SAFE";
+    _extern_group setFormation "COLUMN";
     [_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 
     private _nextPoint = [] call (_node get "getNextPoint");
