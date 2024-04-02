@@ -360,8 +360,8 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\danger_reporting\client);
 
         class dangerReport_playerFiredManHandler {};
-        class dangerReport_preInit {
-            preInit = 1;
+        class dangerReport_postInit {
+            postInit = 1;
         };
         class dangerReport_sendRecentShotsToServer {};
     };

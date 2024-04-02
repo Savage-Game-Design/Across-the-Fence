@@ -1,8 +1,8 @@
 /*
-    File: fn_dangerReport_preInit.sqf
+    File: fn_dangerReport_postInit.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-03-08
+    Last Update: 2024-04-02
     Public: Yes
 
     Description:
@@ -71,7 +71,7 @@ vgm_c_dangerReport_playerFiredManHandler = nil;
         params ["_publicMissionInfo"];
 
         if (isNil "vgm_c_dangerReport_playerFiredManHandler") exitWith {
-            [format ["Attempting to disabled danger reporting, but it's already disabled", player]] call vgm_g_fnc_logWarning;
+            [format ["Attempting to disable danger reporting, but it's already disabled", player]] call vgm_g_fnc_logWarning;
         };
 
         vgm_c_dangerReport_locEventGroup = vgm_g_dangerReport_defaultLocEventGroup;
