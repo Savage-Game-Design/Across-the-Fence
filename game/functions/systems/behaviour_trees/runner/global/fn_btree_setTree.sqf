@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2024-03-03
+    Last Update: 2024-04-02
     Public: Yes
 
     Description:
@@ -47,13 +47,13 @@ if (isNil "_currentTree") then {
     // Make sure tree is cleaned up when the group changes locality.
     // Behaviour tree system only works on local groups.
     _group addEventHandler ["Local", {
-        params ["_group"];
+        params ["_group", "_local"];
 
         // Cleanup the behaviour tree on the old host.
         // Makes sure the nodes are correctly aborted, and unassigned callbacks fire.
         // TODO - Might need to consider race conditions here, if this gets done *after* the assignment on other host,
         // and anything behaves globally.
-        if (!local _group) then {
+        if (!_local) then {
             [_group] call vgm_g_fnc_btree_setTree;
         };
     }];
