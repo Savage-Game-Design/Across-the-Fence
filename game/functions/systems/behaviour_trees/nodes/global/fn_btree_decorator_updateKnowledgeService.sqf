@@ -2,7 +2,7 @@
     File: fn_btree_decorator_updateKnowledgeService.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-10
+    Last Update: 2024-04-02
     Public: Yes
 
     Description:
@@ -34,14 +34,14 @@ _decorator set ["onTreeAssigned", {
     private _suppressedHandler = [_group, "Suppressed", {
         params ["_unit"];
         private _blackboard = group _unit getVariable "vgm_l_btree_state" get "blackboard";
-        _blackboard set ["lastDangerEvent", serverTime];
+        _blackboard set ["lastDangerEvent", time];
     }] call vgm_g_fnc_greh_addEventHandlerToAllUnitsInGroup;
     _group setVariable ["vgm_l_btree_suppressedDangerHandler", _suppressedHandler];
 
     private _hitHandler = [_group, "Hit", {
         params ["_unit"];
         private _blackboard = group _unit getVariable "vgm_l_btree_state" get "blackboard";
-        _blackboard set ["lastDangerEvent", serverTime];
+        _blackboard set ["lastDangerEvent", time];
     }] call vgm_g_fnc_greh_addEventHandlerToAllUnitsInGroup;
     _group setVariable ["vgm_l_btree_hitDangerHandler", _hitHandler];
 }];
