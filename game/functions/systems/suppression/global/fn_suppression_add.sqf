@@ -2,7 +2,7 @@
     File: fn_suppression_add.sqf
     Author: Savage Game Design
     Date: 2024-02-09
-    Last Update: 2024-02-09
+    Last Update: 2024-04-02
     Public: Yes
 
     Description:
@@ -30,7 +30,7 @@ private _shooterMultiplier = _shooter getVariable ["vgm_g_suppression_multiplier
 private _newSuppression = (_currentSuppression + (_amount * _shooterMultiplier)) min 1 max 0;
 
 if (_currentSuppression <= 0 && _newSuppression > 0) then {
-    _unit setVariable ["vgm_l_suppression_decayWindowStart", serverTime];
+    _unit setVariable ["vgm_l_suppression_decayWindowStart", time];
 };
 
 _unit setVariable ["vgm_l_suppression_value", _newSuppression];
