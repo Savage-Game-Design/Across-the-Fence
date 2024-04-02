@@ -24,7 +24,7 @@
 params ["_group"];
 
 private _groupLeader = leader _group;
-private _destPos = _group getVariable ["vgm_l_btree_moveTo_destination", getPos _groupLeader];
+private _destPos = _group getVariable ["vgm_l_btree_moveTo_destination", getPosATL _groupLeader];
 private _completionDistance = _group getVariable ["vgm_l_btree_moveTo_completionDistance", 10];
 
 // If moveTo_start was never called, this should be true due to the default variables above.
