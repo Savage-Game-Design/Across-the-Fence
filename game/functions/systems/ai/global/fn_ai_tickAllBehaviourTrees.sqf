@@ -1,5 +1,5 @@
 /*
-    File: fn_ai_run_behaviours_all_groups.sqf
+    File: fn_ai_tickAllBehaviourTrees.sqf
     Author:  Savage Game Design
     Public: No
 
@@ -13,7 +13,9 @@
 		None
 
     Example(s):
-        [parameter] call vn_fnc_myFunction
+        [] call vgm_g_fnc_ai_tickAllBehaviourTrees
+        // or
+        ["btree_runner", vgm_g_fnc_ai_tickAllBehaviourTrees, [], 5] call para_g_fnc_scheduler_add_job;
 */
 
 {

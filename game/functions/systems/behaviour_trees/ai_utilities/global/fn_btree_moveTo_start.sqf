@@ -16,7 +16,7 @@
         Nothing
 
     Example(s):
-        [createHashMap, []] call vgm_g_fnc_btree_action_moveTo;
+        [allGroups # 0, getPosATL player, "NORMAL", 10] call vgm_g_fnc_btree_action_moveTo;
  */
 
 params ["_group", "_destination", ["_speedMode", ""], ["_completionDistance", 10]];
