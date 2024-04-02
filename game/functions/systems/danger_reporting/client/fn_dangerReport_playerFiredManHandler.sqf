@@ -2,7 +2,7 @@
     File: fn_dangerReport_playerFiredManHandler.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-03-08
+    Last Update: 2024-04-02
     Public: No
 
     Description:
@@ -23,7 +23,7 @@ params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projecti
 _projectile addEventHandler ["Explode", {
     params ["_projectile", "_pos", "_velocity"];
 
-    private _config = (configFile >> "CfgAmmo" >> (typeOf _projectile));
+    private _config = configOf _projectile;
     private _brightness = getNumber (_config >> "brightness");
     private _indirectHit = getNumber (_config >> "indirectHit");
     private _indirectHitRadius = getNumber (_config >> "indirectHitRadius");
