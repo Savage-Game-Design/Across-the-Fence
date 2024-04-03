@@ -690,4 +690,14 @@ class vgm_c
         };
         class stamina_unitInit {};
     };
+
+    class suppression
+    {
+        VGM_CLIENT_PATH(\systems\suppression\client);
+
+        class suppression_preInit
+        {
+            preInit = 1;
+        };
+    };
 };
