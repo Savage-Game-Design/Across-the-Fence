@@ -2,7 +2,7 @@
     File: fn_dangerReport_playerFiredManHandler.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-04-02
+    Last Update: 2024-04-03
     Public: No
 
     Description:
@@ -23,17 +23,8 @@ params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projecti
 _projectile addEventHandler ["Explode", {
     params ["_projectile", "_pos", "_velocity"];
 
-    private _config = configOf _projectile;
-    private _brightness = getNumber (_config >> "brightness");
-    private _indirectHit = getNumber (_config >> "indirectHit");
-    private _indirectHitRadius = getNumber (_config >> "indirectHitRadius");
-
-    private _submunitionAmmo = getText (_config >> "submunitionAmmo");
-
-    if (_submunitionAmmo isNotEqualTo "") then {
-        private _submunitionBrightness = getNumber (configFile >> "CfgAmmo" >> _submunitionAmmo >> "brightness");
-        _brightness = _brightness max _submunitionBrightness;
-    };
+    private _projectileInfo = [configOf _projectile] call vgm_g_fnc_dangerReport_getProjectileInfo;
+    private _brightness = _projectileInfo get "brightness";
 
     // Flares
     if (_brightness > 0) exitWith {
@@ -47,11 +38,11 @@ _projectile addEventHandler ["Explode", {
     };
 
     // Explosives
-    if (_indirectHit > 0) exitWith {
+    if ((_projectileInfo get "indirectHit") > 0) exitWith {
         // TODO: This isn't ideal, but works well enough for alpha/beta.
         private _notifyRadius = linearConversion [
             1, 20,
-            _indirectHitRadius,
+            (_projectileInfo get "indirectHitRadius"),
             vgm_c_dangerReport_explosion_minNotifyDistance, vgm_c_dangerReport_explosion_maxNotifyDistance,
             true
         ];

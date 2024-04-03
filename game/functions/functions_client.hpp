@@ -161,6 +161,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\danger_reporting\global);
 
+        class dangerReport_getProjectileInfo {};
         class dangerReport_preInit {
             preInit = 1;
         };
