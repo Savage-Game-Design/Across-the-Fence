@@ -4,20 +4,23 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-03-09
+    Last Update: 2024-04-03
     Public: No
 
     Description:
-        No description added yet.
+        Full behaviour tree for the standard enemy AI.
+
+        Must be compiled before use.
 
     Parameter(s):
-        N/A
+        None
 
     Returns:
-        Something [BOOL]
+        Behaviour tree specification [ARRAY]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        private _tree = [[] call vgm_g_fnc_btree_tree_enemyAI] call vgm_g_fnc_btree_compileTree;
+        [_group, _tree] call vgm_g_fnc_btree_setTree;
  */
 
 [DECORATOR(updateKnowledgeService), [], [
