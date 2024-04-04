@@ -145,6 +145,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\missions_zones\server);
 
         class missions_zones_freeZone {};
+        class missions_zones_getStartPos {};
         class missions_zones_preInit
         {
             preInit = 1;
