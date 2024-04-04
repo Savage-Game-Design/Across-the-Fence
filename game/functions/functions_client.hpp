@@ -334,6 +334,19 @@ class vgm_c
         class missions_startDeploy {};
     };
 
+    class missions_zones
+    {
+        VGM_CLIENT_PATH(\systems\missions_zones\client);
+
+        class missions_zones_openMissionsDialog {};
+    };
+    class missions_zones_remoteExec
+    {
+        VGM_CLIENT_PATH(\systems\missions_zones\client\remoteExec);
+
+        class missions_zones_remoteExec_receiveList {};
+    };
+
     class loading
     {
         VGM_CLIENT_PATH(\core\client\loading);
