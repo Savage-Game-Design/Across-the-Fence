@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-12-20
+    Last Update: 2024-04-04
     Public: No
 
     Description:
@@ -50,6 +50,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
+[_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_freeZone;
 [_mission] call vgm_s_fnc_director_stopMission;
 
 {

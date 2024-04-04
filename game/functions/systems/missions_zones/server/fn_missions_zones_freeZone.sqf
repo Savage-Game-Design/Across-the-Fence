@@ -6,24 +6,24 @@
     Public: Yes
 
     Description:
-        No description added yet.
+        Removes the specified mission zone reservation.
 
     Parameter(s):
-        N/A
+        _zone - Name of the zone marker [STRING]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["vgm_targetBox_2"] call vgm_s_fnc_missions_zones_freeZone
  */
 
-params [["_targetZone", nil, [""]]];
+params [["_zone", nil, [""]]];
 
 private _zoneReservationNetmap = ["vgm_missions_zones_zoneReservations"] call para_g_fnc_netmap_get;
 
-if (!(_targetZone in _zoneReservationNetmap)) exitWith {};
+if (!(_zone in _zoneReservationNetmap)) exitWith {};
 
-format ["Freed zone %1", _targetZone] call vgm_g_fnc_logInfo;
+format ["Freed zone %1", _zone] call vgm_g_fnc_logInfo;
 
-[_zoneReservationNetmap, _targetZone] call para_s_fnc_netmap_deleteAt;
+[_zoneReservationNetmap, _zone] call para_s_fnc_netmap_deleteAt;
