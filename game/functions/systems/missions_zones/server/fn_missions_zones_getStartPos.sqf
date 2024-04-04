@@ -20,4 +20,4 @@
 
 params ["_zone"];
 
-getPosASL (entities "vn_flag_sog" inAreaArray _zone param [0, objNull]) // return
+getPosASL (allMissionObjects "vn_flag_sog" inAreaArray _zone param [0, objNull]) // return
