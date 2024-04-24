@@ -2,7 +2,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-03-01
+    Last Update: 2024-04-24
     Public: No
 
     Description:
@@ -83,7 +83,7 @@ vgm_s_director_attack_classes = [
 
         if (_alivePlayers isNotEqualTo []) exitWith {};
 
-        [_mission get "public" get "id"] call vgm_s_fnc_missions_endMission;
+        [_mission get "public" get "id", "FAILURE"] call vgm_s_fnc_missions_endMission;
     }
 ] call para_g_fnc_event_subscribe;
 

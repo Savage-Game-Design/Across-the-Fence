@@ -26,7 +26,7 @@ class VGM_DisplayEndOfMission
         class Status: VGM_ctrlTitle
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_STATUS;
-            text = "Mission Sucessful!";
+            text = "Mission Successful!";
             x = DX + 1 * VGM_GRID_W;
             y = VGM_Y(DY);
             w = (DW - 2) * VGM_GRID_W;

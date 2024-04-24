@@ -151,14 +151,23 @@
         </Key>
     </Package>
     <Package name="Mission End UI">
+        <Key ID="STR_VGM_MISSION_END_UI_SUCCESSFUL">
+            <Original>Mission Successful!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_FAILURE">
+            <Original>Mission failed.</Original>
+        </Key>
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
             <Original>Level %1</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL_UP">
             <Original>Level Up! +%1 SP</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION">
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_SUCCESS">
             <Original>Mission completion</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
+            <Original>Mission participation</Original>
         </Key>
     </Package>
     <Package name="Skills Tree">

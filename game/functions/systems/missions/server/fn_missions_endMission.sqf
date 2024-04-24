@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2023-12-20
+    Last Update: 2024-04-24
     Public: No
 
     Description:
@@ -15,10 +15,11 @@
         Nothing
 
     Example(s):
-        [32] call vgm_s_fnc_missions_endMission;
+        [31, "SUCCESS"] call vgm_s_fnc_missions_endMission;
+        [32, "FAILURE"] call vgm_s_fnc_missions_endMission;
  */
 
-params ["_missionId"];
+params ["_missionId", ["_endType", "SUCCESS"]];
 
 private _mission = [_missionId] call vgm_s_fnc_missions_getById;
 
@@ -36,9 +37,9 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     private _player = getUserInfo _x param [10, objNull];
 
     private _levelingDataCopy = +(_player getVariable "vgm_g_levelingData");
-    private _milestones = _x call vgm_s_fnc_missions_calculateMilestones;
+    private _milestones = [_endType, _x] call vgm_s_fnc_missions_calculateMilestones;
 
-    [_levelingDataCopy, _milestones] remoteExecCall ["vgm_c_fnc_missions_endMission", _player];
+    [_endType, _levelingDataCopy, _milestones] remoteExecCall ["vgm_c_fnc_missions_endMission", _player];
 
     private _totalExperience = 0;
     {_totalExperience = _totalExperience + _x#1} forEach _milestones;
@@ -47,7 +48,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
 
 [
     "vgm_mission_ended",
-    [_missionPublic get "id"]
+    [_missionPublic get "id", _endType]
 ] call para_g_fnc_event_triggerGlobal;
 
 [_mission] call vgm_s_fnc_director_stopMission;
