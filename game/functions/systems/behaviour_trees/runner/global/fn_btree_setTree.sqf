@@ -2,7 +2,7 @@
     File: fn_btree_setTree.sqf
     Author:
     Date: 2023-12-17
-    Last Update: 2024-04-02
+    Last Update: 2024-05-03
     Public: Yes
 
     Description:
@@ -37,7 +37,7 @@ if (!isNil "_currentTree" && {isNil "_tree" || { _currentTree isNotEqualTo _tree
     _group setVariable ["vgm_l_btree_current", nil];
 };
 
-if (isNil "_currentTree") then {
+if !(_group getVariable ["btree_groupSetupLocally", false]) then {
     // Make sure tree is cleaned up when the group is deleted.
     _group addEventHandler ["Deleted", {
         params ["_group"];
@@ -57,6 +57,8 @@ if (isNil "_currentTree") then {
             [_group] call vgm_g_fnc_btree_setTree;
         };
     }];
+
+    _group setVariable ["btree_groupSetupLocally", true];
 };
 
 if (!isNil "_tree") then {
