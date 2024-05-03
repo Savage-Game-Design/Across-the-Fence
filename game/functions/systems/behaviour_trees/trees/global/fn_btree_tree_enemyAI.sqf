@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-04-03
+    Last Update: 2024-05-03
     Public: No
 
     Description:
@@ -20,7 +20,7 @@
 
     Example(s):
         private _tree = [[] call vgm_g_fnc_btree_tree_enemyAI] call vgm_g_fnc_btree_compileTree;
-        [_group, _tree] call vgm_g_fnc_btree_setTree;
+        [_group, _tree] call vgm_g_fnc_btree_setTreeLocal;
  */
 
 [DECORATOR(updateKnowledgeService), [], [

@@ -129,7 +129,7 @@ class vgm_g
         class btree_runCurrentNode_sequence {};
         class btree_runCurrentNode {};
 
-        class btree_setTree {};
+        class btree_setTreeLocal {};
         class btree_tickGroup {};
         class btree_unwindStackUpToindex {};
     };

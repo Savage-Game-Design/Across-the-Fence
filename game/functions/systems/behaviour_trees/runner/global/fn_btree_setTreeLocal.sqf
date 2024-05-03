@@ -1,5 +1,5 @@
 /*
-    File: fn_btree_setTree.sqf
+    File: fn_btree_setTreeLocal.sqf
     Author:
     Date: 2023-12-17
     Last Update: 2024-05-03
@@ -17,7 +17,7 @@
         Nothing
 
     Example(s):
-        [group cursorObject, _compiledTree] call vgm_g_fnc_btree_setTree;
+        [group cursorObject, _compiledTree] call vgm_g_fnc_btree_setTreeLocal;
  */
 
 params ["_group", "_tree"];
@@ -41,7 +41,7 @@ if !(_group getVariable ["btree_groupSetupLocally", false]) then {
     // Make sure tree is cleaned up when the group is deleted.
     _group addEventHandler ["Deleted", {
         params ["_group"];
-        [_group] call vgm_g_fnc_btree_setTree;
+        [_group] call vgm_g_fnc_btree_setTreeLocal;
     }];
 
     // Make sure tree is cleaned up when the group changes locality.
@@ -54,7 +54,7 @@ if !(_group getVariable ["btree_groupSetupLocally", false]) then {
         // TODO - Might need to consider race conditions here, if this gets done *after* the assignment on other host,
         // and anything behaves globally.
         if (!_local) then {
-            [_group] call vgm_g_fnc_btree_setTree;
+            [_group] call vgm_g_fnc_btree_setTreeLocal;
         };
     }];
 

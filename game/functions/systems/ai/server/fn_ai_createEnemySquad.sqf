@@ -2,7 +2,7 @@
     File: fn_ai_createEnemySquad.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2024-04-03
+    Last Update: 2024-05-03
     Public: Yes
 
     Description:
@@ -43,7 +43,7 @@ _group setVariable ["groupClientOwner", _selectedClient, true];
     if (_local) then {
         _group setVariable ["groupClientOwner", clientOwner, true];
         // Reassign the behaviour tree on locality change, as it's local.
-        [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTree;
+        [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTreeLocal;
     };
 }]] remoteExec ["addEventHandler", 0];
 

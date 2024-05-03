@@ -3,14 +3,14 @@
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-03
+    Last Update: 2024-05-03
     Public: Yes
 
     Description:
         Ticks the behaviour tree assigned to the group.
 
     Parameter(s):
-        _group - Group to tick. Must be assigned a behaviour tree with vgm_g_fnc_btree_setTree [GROUP]
+        _group - Group to tick. Must be assigned a behaviour tree with vgm_g_fnc_btree_setTreeLocal [GROUP]
 
     Returns:
         Nothing
