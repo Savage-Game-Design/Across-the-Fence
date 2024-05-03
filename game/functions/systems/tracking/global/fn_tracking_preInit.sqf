@@ -2,7 +2,7 @@
     File: fn_tracking_preInit.sqf
     Author: Savage Game Design
     Date: 2024-03-08
-    Last Update: 2024-03-18
+    Last Update: 2024-05-03
     Public: No
 
     Description:
@@ -28,19 +28,3 @@ vgm_g_tracking_maxDistanceForSameTrail = vgm_g_tracking_trackRecordDelay * vgm_g
 
 vgm_g_tracking_minimumTrackRetentionTimeSeconds = 10 * 60;
 vgm_g_tracking_maxEntriesPerUnit = vgm_g_tracking_minimumTrackRetentionTimeSeconds / vgm_g_tracking_trackRecordDelay;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
