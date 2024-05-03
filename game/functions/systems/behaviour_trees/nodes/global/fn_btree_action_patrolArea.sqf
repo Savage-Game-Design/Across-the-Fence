@@ -28,7 +28,7 @@ private _action = _this call vgm_g_fnc_btree_action_basic;
 // Custom function - not a normal part of the node.
 _action set ["getNextPoint", {
     // Potential bug here if the blackboard data carries over from earlier. Should it be wiped when the node exits?
-    private _patrolCenter = _extern_blackboard getOrDefaultCall ["patrolAreaCenter", { getPos leader _group }, true];
+    private _patrolCenter = _extern_blackboard getOrDefaultCall ["patrolAreaCenter", { getPosATL leader _group }, true];
     private _patrolRadius = _extern_blackboard getOrDefaultCall ["patrolAreaRadius", { 50 + random 100 }, true];
     private _patrolAngleChange = _extern_blackboard getOrDefaultCall ["patrolAngleChange", { 30 * (selectRandom [1, -1]) }, true];
 

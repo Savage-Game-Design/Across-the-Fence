@@ -2,7 +2,7 @@
     File: fn_tracking_recordTracks.sqf
     Author: Savage Game Design
     Date: 2024-03-08
-    Last Update: 2024-03-18
+    Last Update: 2024-05-03
     Public: No
 
     Description:
@@ -44,7 +44,7 @@ private _totalUnits = 0;
     _totalUnits = _totalUnits + count _units;
 
     {
-        private _pos = getPos _x;
+        private _pos = getPosATL _x;
         private _lastTrack = _lastTrackByUnit getOrDefault [hashValue _x, createHashMap];
 
         private _distanceBetweenTracks = _pos distance2D (_lastTrack getOrDefault ["pos", [-1000, -1000, 0]]);
