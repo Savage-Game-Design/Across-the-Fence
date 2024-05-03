@@ -50,6 +50,6 @@ _group setVariable ["groupClientOwner", _selectedClient, true];
 _group setGroupOwner _selectedClient;
 
 // Start running the behaviour tree, now the group is on the client.
-[_group, "enemyAI"] remoteExec ["vgm_g_fnc_btree_setTreeByName", _selectedClient];
+[_group, "enemyAI"] remoteExec ["vgm_g_fnc_btree_setTreeByNameLocal", _selectedClient];
 
 _group

@@ -1,5 +1,5 @@
 /*
-    File: fn_btree_setTreeByName.sqf
+    File: fn_btree_setTreeByNameLocal.sqf
     Author: Savage Game Design
     Date: 2024-04-03
     Last Update: 2024-05-03
@@ -18,7 +18,7 @@
         Nothing
 
     Example(s):
-        [allGroups # 0, "enemyAI"] call vgm_g_fnc_btree_setTreeByName;
+        [allGroups # 0, "enemyAI"] call vgm_g_fnc_btree_setTreeByNameLocal;
  */
 
 params ["_group", "_name"];
