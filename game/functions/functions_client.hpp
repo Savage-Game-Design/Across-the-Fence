@@ -142,6 +142,7 @@ class vgm_g
         };
 
         class btree_getCompiledTree {};
+        class btree_setTreeByNameFromGroupGlobalVar {};
         class btree_setTreeByNameLocal {};
 
         class btree_tree_enemyAI {};

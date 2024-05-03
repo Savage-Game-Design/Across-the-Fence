@@ -10,7 +10,7 @@
         Ticks the behaviour tree assigned to the group.
 
     Parameter(s):
-        _group - Group to tick. Must be assigned a behaviour tree with vgm_g_fnc_btree_setTreeLocal [GROUP]
+        _group - Group to tick. Must be assigned a behaviour tree with vgm_g_fnc_btree_setTreeLocal or equivalent [GROUP]
 
     Returns:
         Nothing

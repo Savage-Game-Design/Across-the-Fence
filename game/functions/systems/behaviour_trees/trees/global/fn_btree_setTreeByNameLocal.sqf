@@ -23,4 +23,10 @@
 
 params ["_group", "_name"];
 
-[_group, [_name] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTreeLocal;
+private _compiledTree = [_name] call vgm_g_fnc_btree_getCompiledTree;
+
+if (isNil "_compiledTree") exitWith {
+    [format ["Compiled tree '%1' does not exist", _name]] call vgm_g_fnc_logError;
+};
+
+[_group, _compiledTree] call vgm_g_fnc_btree_setTreeLocal;

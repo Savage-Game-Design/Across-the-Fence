@@ -35,21 +35,11 @@ _group setVariable ["vgm_g_missionId", _missionId, true];
 
 //Set the squad's locality to the client with highest FPS
 private _selectedClient = call para_s_fnc_loadbal_suggest_host;
-_group setVariable ["groupClientOwner", _selectedClient, true];
-
-//Update the owner variable if the group changes locality.
-[_group, ["Local", {
-    params ["_group", "_local"];
-    if (_local) then {
-        _group setVariable ["groupClientOwner", clientOwner, true];
-        // Reassign the behaviour tree on locality change, as it's local.
-        [_group, ["enemyAI"] call vgm_g_fnc_btree_getCompiledTree] call vgm_g_fnc_btree_setTreeLocal;
-    };
-}]] remoteExec ["addEventHandler", 0];
 
 _group setGroupOwner _selectedClient;
 
 // Start running the behaviour tree, now the group is on the client.
-[_group, "enemyAI"] remoteExec ["vgm_g_fnc_btree_setTreeByNameLocal", _selectedClient];
+// Persists tree execution even if locality changes.
+[_group, "enemyAI"] call vgm_s_fnc_btree_setTreeByNameGlobal;
 
 _group
