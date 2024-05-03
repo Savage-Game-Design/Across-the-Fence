@@ -27,5 +27,5 @@ params ["_group", "_name", ["_persistOnLocalityChange", true]];
 [_group, _name] remoteExecCall ["vgm_g_fnc_btree_setTreeByNameLocal", groupOwner _group];
 
 if (_persistOnLocalityChange) then {
-    _group setVariable ["btree_g_globalTreeName", _name, true];
+    _group setVariable ["vgm_g_btree_globalTreeName", _name, true];
 };

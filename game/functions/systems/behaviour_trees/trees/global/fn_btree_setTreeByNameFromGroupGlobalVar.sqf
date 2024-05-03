@@ -26,7 +26,7 @@
 
 params ["_group"];
 
-private _globalTreeName = _group getVariable "btree_g_globalTreeName";
+private _globalTreeName = _group getVariable "vgm_g_btree_globalTreeName";
 
 if (isNil "_globalTreeName") exitWith {};
 

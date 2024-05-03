@@ -37,7 +37,7 @@ if (!isNil "_currentTree" && {isNil "_tree" || { _currentTree isNotEqualTo _tree
     _group setVariable ["vgm_l_btree_current", nil];
 };
 
-if !(_group getVariable ["btree_groupSetupLocally", false]) then {
+if !(_group getVariable ["vgm_l_btree_isGroupSetup", false]) then {
     // Make sure tree is cleaned up when the group is deleted.
     _group addEventHandler ["Deleted", {
         params ["_group"];
@@ -58,7 +58,7 @@ if !(_group getVariable ["btree_groupSetupLocally", false]) then {
         };
     }];
 
-    _group setVariable ["btree_groupSetupLocally", true];
+    _group setVariable ["vgm_l_btree_isGroupSetup", true];
 };
 
 if (!isNil "_tree") then {
