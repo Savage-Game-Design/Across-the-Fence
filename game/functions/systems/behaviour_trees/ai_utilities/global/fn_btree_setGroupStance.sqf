@@ -20,7 +20,7 @@
 
 params ["_group", "_pos", ["_force", false]];
 
-if (_group getVariable ["vgm_l_btree_unitPos", ""] != _pos) exitWith {
+if (_group getVariable ["vgm_l_btree_unitPos", ""] != _pos || _force) exitWith {
     {
         _x setUnitPos _pos;
     } forEach units _group;
