@@ -2,14 +2,14 @@
 	File: fn_ui_initEscapeMenu.sqf
 	Author:  Savage Game Design
 	Public: No
-	
+
 	Description:
 		Automatically adds buttosn to the escape menu which opens the keybindings menu. Called from CfgFunctions with postInit = 1.
-	
+
 	Parameter(s): none
-	
+
 	Returns: nothing
-	
+
 	Example(s): none
 */
 
@@ -22,7 +22,7 @@
 	_newBtn = _display ctrlCreate ["para_RscButtonMenu", -1];
 	_newBtn ctrlSetPosition [safeZoneX + UIW(1), safeZoneY + UIH(1), UIW(15), UIH(1)];
 	_newBtn ctrlCommit 0;
-	_newBtn ctrlSetText "GAMEMODE KEYBINDINGS";
+	_newBtn ctrlSetText localize "STR_PARA_KEYBINDINGS_MENU_BUTTON";
 	_newBtn ctrlAddEventHandler ["ButtonClick",{
 		params ["_btn"];
 		_escDisplay = ctrlParent _btn;

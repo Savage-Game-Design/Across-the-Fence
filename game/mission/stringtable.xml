@@ -348,6 +348,29 @@
             <Original>Stay stationary to Listen</Original>
         </Key>
     </Package>
+    <Package name="Paradigm keybinding menu">
+        <Key ID="STR_PARA_KEYBINDINGS_TITLE">
+            <Original>Edit Keybindings</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_ACTION">
+            <Original>Action</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_KEY">
+            <Original>Key</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_RESET">
+            <Original>Restore Defaults</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CONFIRM">
+            <Original>Save</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CANCEL">
+            <Original>Cancel</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_MENU_BUTTON">
+            <Original>Gamemode Keybindings</Original>
+        </Key>
+    </Package>
     <Package name="Header Bar">
         <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
             <Original>Equipment</Original>
@@ -368,5 +391,4 @@
             <Original>Settings</Original>
         </Key>
     </Package>
-
 </Project>
