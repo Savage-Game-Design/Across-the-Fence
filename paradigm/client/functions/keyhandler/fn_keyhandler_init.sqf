@@ -42,6 +42,7 @@ Keybinding registration data structure:
 [
     createHashmapFromArray [
         ["name", "ExampleActionName"],
+        ["displayName", "STR_MY_DISPLAY_NAME"],
         ["function", {}],
         // Fire on KeyUp instead of KeyDown
         ["onRelease", false],
