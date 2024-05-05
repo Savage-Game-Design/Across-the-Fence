@@ -70,11 +70,15 @@ class para_c
 	{
 		PARA_CLIENT_PATH(\keyhandler);
 		class change_key_bind {};
-		class eh_key_down {};
-		class eh_key_up {};
 		class get_key_bind {};
-		class init_key_down {};
-		class init_key_up {};
+
+        class keyhandler_init {
+            postInit = 1
+        };
+        class keyhandler_onKeypress {};
+        class keyhandler_saveKeybind {};
+        class keyhandler_setKeybind {};
+        class keyhandler_stringifyKeypress {};
 	};
 
     class netmap

@@ -1,0 +1,35 @@
+/*
+    File: fn_keyhandler_onKeypress.sqf
+    Author: Savage Game Design
+    Date: 2024-05-05
+    Last Update: 2024-05-05
+    Public: No
+
+    Description:
+        Triggers actions when the key is pressed.
+
+    Parameter(s):
+        _pressType - Either "KeyUp" or "KeyDown" [STRING]
+        _pressDetails - Infomation on the key pressed, as parameters for para_c_fnc_keyhandler_stringifyKeypress [ARRAY]
+
+    Returns:
+        Nothing
+
+    Example(s):
+        ["KeyUp", [5, true, false, false]] call para_c_fnc_keyhandler_onKeypress;
+ */
+
+params ["_pressType", "_pressDetails"];
+
+private _registeredActions = localNamespace getVariable "para_keyhandler_actions";
+private _registeredKeybindings = localNamespace getVariable "para_keyhandler_bindings";
+
+private _actionsToFire = _registeredKeybindings get _pressType getOrDefault [
+    _pressDetails call para_c_fnc_keyhandler_stringifyKeypress,
+    []
+];
+
+// Shouldn't need safety checks, as active keybindings should only refer to registered actions.
+{
+    [] call (_registeredActions get _x get "function")
+} forEach _actionsToFire;
