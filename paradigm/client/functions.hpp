@@ -69,34 +69,31 @@ class para_c
 	class keyhandler
 	{
 		PARA_CLIENT_PATH(\keyhandler);
-		class change_key_bind {};
-		class get_key_bind {};
-
-        class keyhandler_getAction {};
-        class keyhandler_getAllKeybinds {};
-        class keyhandler_getKeybind {};
-        class keyhandler_init {
-            postInit = 1
-        };
-        class keyhandler_onKeypress {};
-        class keyhandler_saveKeybind {};
-        class keyhandler_setKeybind {};
-        class keyhandler_stringifyKeybind {};
-        class keyhandler_stringifyKeypress {};
+		class keyhandler_getAction {};
+		class keyhandler_getAllKeybinds {};
+		class keyhandler_getKeybind {};
+		class keyhandler_init {
+			postInit = 1
+		};
+		class keyhandler_onKeypress {};
+		class keyhandler_saveKeybind {};
+		class keyhandler_setKeybind {};
+		class keyhandler_stringifyKeybind {};
+		class keyhandler_stringifyKeypress {};
 	};
 
-    class netmap
-    {
-        PARA_CLIENT_PATH(\netmap);
-        class netmap_add {};
-        class netmap_deleteAt {};
-        class netmap_fixReferences {};
-        class netmap_preInit {
-            preInit = 1;
-        };
-        class netmap_set {};
-        class netmap_terminate {};
-    };
+	class netmap
+	{
+		PARA_CLIENT_PATH(\netmap);
+		class netmap_add {};
+		class netmap_deleteAt {};
+		class netmap_fixReferences {};
+		class netmap_preInit {
+			preInit = 1;
+		};
+		class netmap_set {};
+		class netmap_terminate {};
+	};
 
 	class networked_actions
 	{
@@ -297,9 +294,11 @@ class para_c
 		class wheel_menu_create_entry {};
 		class wheel_menu_load_config_actions { preInit = 1; };
 		class wheel_menu_open {};
+		class wheel_menu_preInit {};
 		class wheel_menu_open_keybind {};
 		class wheel_menu_open_with_configured_actions {};
 		class wheel_menu_submenu_open {};
+		class wheel_menu_toggle_keybind {};
 	};
 
 	class survival_hints

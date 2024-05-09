@@ -2,7 +2,7 @@
     File: fn_keyhandler_init.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-09
+    Last Update: 2024-05-10
     Public: Yes
 
     Description:
@@ -60,7 +60,7 @@ Keybinding registration data structure:
     waitUntil { sleep 0.1; !(isNull findDisplay 46) };
 
     private _savedKeybindings = profileNamespace getVariable ["para_c_keyhandler_bindings", createHashMap];
-    private _allAvailableActions = [localNamespace, "para_fetch_keyhandler_actions", [], true] call BIS_fnc_callScriptedEventHandler;
+    private _allAvailableActions = flatten ([localNamespace, "para_c_fetch_keyhandler_actions", [], true] call BIS_fnc_callScriptedEventHandler);
 
     private _registeredKeybindings = createHashmapFromArray [
         ["KeyUp", createHashmap],

@@ -83,9 +83,8 @@ _description = format ([_description] + _variables);
 // Checking if this is a valid image
 private _picture = ["", _picture] select ((_picture select [(count _picture) - 4, 4]) isEqualTo ".paa"); // Yeah whatever
 
-private _keybind = ["para_keydown_open_wheel_menu"] call para_c_fnc_get_key_bind;
-_keybind params ["_key", "_shift", "_ctrl", "_alt"];
-private _keyName = (keyName _key) select [1,1];
+private _keybind = ["para_keydown_open_wheel_menu"] call para_c_fnc_getKeybind;
+private _keyName = [_keybind get "dikCode"] call para_c_fnc_getKeyName;
 
 private _keyNameControl = uiNamespace getVariable ['#para_InteractionOverlay_InteractionKeyName', controlNull];
 _keyNameControl ctrlSetText _keyName;
@@ -100,7 +99,11 @@ private _actionGroup = uiNamespace getVariable ['#para_InteractionOverlay_Action
 
 /* Modifier Handling */
 // Yes it's messy and all but it works
-if ("true" in _keybind) then {
+private _shiftModifier = _keybind getOrDefault ["shift", false];
+private _ctrlModifier = _keybind getOrDefault ["ctrl", false];
+private _altModifier = _keybind getOrDefault ["alt", false];
+
+if (_shiftModifier || _ctrlModifier || _altModifier) then {
 	{
 		_x params ["_control", "_pos"];
 		_control ctrlSetPositionX _pos;
@@ -114,7 +117,12 @@ if ("true" in _keybind) then {
 	_mainkeygroup ctrlSetPositionW ((UIH(0.8) * (3 / 4)) + _modifierOffset + UIH(0.1));
 	_mainkeygroup ctrlCommit 0;
 
-	private _modifierName = ["", "Shift", "Ctrl", "Alt"]#(_keybind find "true");
+    private _modifierName = [
+        ["", "Shift"] select _shiftModifier,
+        ["", "Ctrl"] select _ctrlModifier,
+        ["", "Alt"] select _altModifier
+    ] joinString "+";
+
 	private _modifierTextControl = uiNamespace getVariable ['#para_InteractionOverlay_InteractionModifierName', controlNull];
 	_modifierTextControl ctrlSetText _modifierName;
 
