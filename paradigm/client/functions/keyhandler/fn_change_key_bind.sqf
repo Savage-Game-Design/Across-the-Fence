@@ -43,7 +43,3 @@ if !(_old_key_data isEqualTo []) then
 
 // set new key
 profileNamespace setVariable [_action,[_key,_shift,_ctrl,_alt]];
-
-// reinit keys mapping
-call para_c_fnc_init_key_down;
-call para_c_fnc_init_key_up;

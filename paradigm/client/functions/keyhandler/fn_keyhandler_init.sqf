@@ -2,7 +2,7 @@
     File: fn_keyhandler_init.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-05
+    Last Update: 2024-05-09
     Public: Yes
 
     Description:
@@ -79,6 +79,7 @@ Keybinding registration data structure:
             [_actionName, _x get "defaultKey"] call para_c_fnc_keyhandler_saveKeybind;
         };
 
+        _x set ["localizedDisplayName", (_x get "displayName") call para_c_fnc_localize];
         _registeredActions set [_actionName, _x];
     } forEach _allAvailableActions;
 

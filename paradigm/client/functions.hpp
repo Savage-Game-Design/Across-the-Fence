@@ -72,12 +72,16 @@ class para_c
 		class change_key_bind {};
 		class get_key_bind {};
 
+        class keyhandler_getAction {};
+        class keyhandler_getAllKeybinds {};
+        class keyhandler_getKeybind {};
         class keyhandler_init {
             postInit = 1
         };
         class keyhandler_onKeypress {};
         class keyhandler_saveKeybind {};
         class keyhandler_setKeybind {};
+        class keyhandler_stringifyKeybind {};
         class keyhandler_stringifyKeypress {};
 	};
 
