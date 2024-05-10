@@ -37,14 +37,29 @@ private _action = _registeredActions get _actionName;
 
 if (isNil "_action" || (_keyBind get "dikCode") in _bannedKeys) exitWith { false };
 
-private _keypress = [
-    _keyBind get "dikCode",
-    _keyBind getOrDefault ["shift", false],
-    _keyBind getOrDefault ["ctrl", false],
-    _keyBind getOrDefault ["alt", false]
-] call para_c_fnc_keyhandler_stringifyKeypress;
-
 private _pressType = ["KeyDown", "KeyUp"] select (_action getOrDefault ["onRelease", false]);
-_registeredKeybindings get _pressType getOrDefault [_keypress, [], true] pushBack _actionName;
+
+private _newKeypress = [_keyBind] call para_c_fnc_keyhandler_keybindToKeypress;
+_newKeypress pushBack _pressType;
+
+private _oldKeybind = [_actionName] call para_c_fnc_keyhandler_getKeybind;
+
+// Remove the old keybinding.
+if !(isNil "_oldKeybind") then {
+    private _oldKeypress = [_oldKeybind] call para_c_fnc_keyhandler_keybindToKeypress;
+    _oldKeypress pushBack _pressType;
+
+    private _actionsForOldBinding = _registeredKeybindings getOrDefault [_oldKeypress, []];
+    _actionsForOldBinding deleteAt (_actionsForOldBinding find _actionName);
+
+    // If the old key has no more bound actions, remove it so we can save some processing in keypresses.
+    if (count _actionsForOldBinding <= 0) then {
+        _registeredKeybindings deleteAt _oldKeypress;
+    };
+};
+
+_registeredKeybindings
+    getOrDefault [_newKeypress, [], true]
+    pushBack _actionName;
 
 [_actionName, _keyBind] call para_c_fnc_keyhandler_saveKeybind;

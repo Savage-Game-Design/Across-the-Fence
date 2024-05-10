@@ -72,6 +72,7 @@ class para_c
 		class keyhandler_getAction {};
 		class keyhandler_getAllKeybinds {};
 		class keyhandler_getKeybind {};
+		class keyhandler_keybindToKeypress {};
 		class keyhandler_init {
 			postInit = 1
 		};

@@ -68,14 +68,10 @@ localNamespace setVariable ["para_c_keyhandler_bannedKeys", [
     private _savedKeybindings = profileNamespace getVariable ["para_c_keyhandler_bindings", createHashMap];
     private _allAvailableActions = flatten ([localNamespace, "para_c_fetch_keyhandler_actions", [], true] call BIS_fnc_callScriptedEventHandler);
 
-    private _registeredKeybindings = createHashmapFromArray [
-        ["KeyUp", createHashmap],
-        ["KeyDown", createHashMap]
-    ];
     private _registeredActions = createHashmap;
 
     profileNamespace setVariable ["para_c_keyhandler_bindings", _savedKeybindings];
-    localNamespace setVariable ["para_keyhandler_bindings", _registeredKeybindings];
+    localNamespace setVariable ["para_keyhandler_bindings", createHashMap];
     localNamespace setVariable ["para_keyhandler_actions", _registeredActions];
 
     {

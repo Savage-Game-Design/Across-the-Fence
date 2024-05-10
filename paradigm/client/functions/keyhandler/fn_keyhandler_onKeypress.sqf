@@ -21,16 +21,15 @@
 
 params ["_pressType", "_pressDetails"];
 
-private _registeredActions = localNamespace getVariable "para_keyhandler_actions";
 private _registeredKeybindings = localNamespace getVariable "para_keyhandler_bindings";
 
-private _actionNamesToFire = _registeredKeybindings get _pressType getOrDefault [
-    _pressDetails call para_c_fnc_keyhandler_stringifyKeypress,
-    []
-];
+private _bindingToCheck = _pressDetails + [_pressType];
 
-if (count _actionNamesToFire <= 0) exitWith { false };
+if !(_bindingToCheck in _registeredKeybindings) exitWith { false };
 
+private _actionNamesToFire = _registeredKeybindings getOrDefault [_bindingToCheck, []];
+
+private _registeredActions = localNamespace getVariable "para_keyhandler_actions";
 private _actionsToFire = _actionNamesToFire apply {_registeredActions get _x};
 
 // Shouldn't need safety checks, as active keybindings should only refer to registered actions.
