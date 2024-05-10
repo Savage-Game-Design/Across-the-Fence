@@ -2,7 +2,7 @@
     File: fn_keyhandler_onKeypress.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-05
+    Last Update: 2024-05-10
     Public: No
 
     Description:
@@ -24,12 +24,18 @@ params ["_pressType", "_pressDetails"];
 private _registeredActions = localNamespace getVariable "para_keyhandler_actions";
 private _registeredKeybindings = localNamespace getVariable "para_keyhandler_bindings";
 
-private _actionsToFire = _registeredKeybindings get _pressType getOrDefault [
+private _actionNamesToFire = _registeredKeybindings get _pressType getOrDefault [
     _pressDetails call para_c_fnc_keyhandler_stringifyKeypress,
     []
 ];
 
+if (count _actionNamesToFire <= 0) exitWith { false };
+
+private _actionsToFire = _actionNamesToFire apply {_registeredActions get _x};
+
 // Shouldn't need safety checks, as active keybindings should only refer to registered actions.
 {
-    [] call (_registeredActions get _x get "function")
+    [] call (_x get "function")
 } forEach _actionsToFire;
+
+true
