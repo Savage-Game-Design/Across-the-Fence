@@ -2,7 +2,7 @@
     File: fn_keyhandler_setKeybind.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-05
+    Last Update: 2024-05-10
     Public: Yes
 
     Description:
@@ -13,7 +13,7 @@
         _keyBind - Keybinding, in the format described in para_c_fnc_keyhandler_init [HASHMAP]
 
     Returns:
-        Nothing
+        Whether keybinding was successful [BOOLEAN]
 
     Example(s):
         [
@@ -31,10 +31,11 @@ params ["_actionName", "_keyBind"];
 
 private _registeredActions = localNamespace getVariable "para_keyhandler_actions";
 private _registeredKeybindings = localNamespace getVariable "para_keyhandler_bindings";
+private _bannedKeys = localNamespace getVariable "para_c_keyhandler_bannedKeys";
 
 private _action = _registeredActions get _actionName;
 
-if (isNil "_action") exitWith {};
+if (isNil "_action" || (_keyBind get "dikCode") in _bannedKeys) exitWith { false };
 
 private _keypress = [
     _keyBind get "dikCode",

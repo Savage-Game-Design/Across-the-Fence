@@ -1,3 +1,5 @@
+#include "\a3\ui_f\hpp\defineDikCodes.inc"
+
 /*
     File: fn_keyhandler_init.sqf
     Author: Savage Game Design
@@ -55,6 +57,10 @@ Keybinding registration data structure:
     ]
 ]
 */
+
+localNamespace setVariable ["para_c_keyhandler_bannedKeys", [
+    DIK_ESCAPE
+] createHashMapFromArray []];
 
 [] spawn {
     waitUntil { sleep 0.1; !(isNull findDisplay 46) };
