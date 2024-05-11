@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-03-02
+    Last Update: 2024-05-11
     Public: No
 
     Description:
@@ -40,6 +40,8 @@ params ["_mode", "_this"];
 switch _mode do {
     case "onLoad": {
         params ["_display"];
+
+        uiNamespace setVariable ["VGM_DisplayMedical", _display];
 
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
         _ctrlTreatment ctrlShow false;

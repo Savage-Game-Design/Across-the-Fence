@@ -1,9 +1,11 @@
 #include "script_component.inc"
+#include "\a3\ui_f\hpp\defineDIKCodes.inc"
+
 /*
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-12-03
+    Last Update: 2024-05-11
     Public: No
 
     Description:
@@ -119,3 +121,16 @@ vgm_c_medical_damageModifiers = [];
         true // stop processing
     };
 }] call vgm_c_fnc_medical_addDamageModifier;
+
+[
+    createHashMapFromArray [
+        ["name", "OpenMedicalMenu"],
+        ["displayName", "STR_VGM_SKILLS_UI_OPEN_MEDICAL_MENU"],
+        ["onRelease", false],
+        ["defaultKey", createHashMapFromArray [
+            ["dikCode", DIK_H]
+        ]]
+    ]
+] call para_c_fnc_keyhandler_registerAction;
+
+["OpenMedicalMenu", vgm_c_fnc_medical_openMedicalMenu] call para_c_fnc_keyhandler_addGeneralActionHandler;

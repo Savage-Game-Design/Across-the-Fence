@@ -3,7 +3,7 @@
     File: fn_medical_openMedicalMenu.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-03
+    Last Update: 2024-05-11
     Public: No
 
     Description:
@@ -18,6 +18,9 @@
     Example(s):
         [] call vgm_c_fnc_medical_openMedicalMenu;
  */
+
+private _currentMedicalMenu = uiNamespace getVariable ["VGM_DisplayMedical", displayNull];
+_currentMedicalMenu closeDisplay 2;
 
 private _target = param [0, cursorTarget];
 if (!(_target isKindOf "CAManBase") || {player distance _target > 15}) then {
