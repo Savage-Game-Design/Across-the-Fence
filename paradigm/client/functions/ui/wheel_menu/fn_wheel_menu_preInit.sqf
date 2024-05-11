@@ -2,7 +2,7 @@
     File: fn_wheel_menu_setup_keybinds.sqf
     Author: Savage Game Design
     Date: 2024-05-09
-    Last Update: 2024-05-10
+    Last Update: 2024-05-11
     Public: Yes
 
     Description:
@@ -23,19 +23,14 @@
 #include "\a3\ui_f\hpp\defineDIKCodes.inc"
 
 [
-    localNamespace,
-    "para_c_fetch_keyhandler_actions",
-    {
-        [
-            createHashMapFromArray [
-                ["name", "ToggleWheelMenu"],
-                ["displayName", "STR_PARA_WHEELMENU_TOGGLE"],
-                ["function", para_c_fnc_wheel_menu_toggle_keybind],
-                ["onRelease", false],
-                ["defaultKey", createHashMapFromArray [
-                    ["dikCode", DIK_6]
-                ]]
-            ]
-        ]
-    }
-] call BIS_fnc_addScriptedEventHandler;
+    createHashMapFromArray [
+        ["name", "ToggleWheelMenu"],
+        ["displayName", "STR_PARA_WHEELMENU_TOGGLE"],
+        ["onRelease", false],
+        ["defaultKey", createHashMapFromArray [
+            ["dikCode", DIK_6]
+        ]]
+    ]
+] call para_c_fnc_keyhandler_registerAction;
+
+["ToggleWheelMenu", para_c_fnc_wheel_menu_toggle_keybind] call para_c_fnc_keyhandler_addGeneralActionHandler;
