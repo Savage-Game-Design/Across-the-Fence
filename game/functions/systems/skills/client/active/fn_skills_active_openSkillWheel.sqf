@@ -2,7 +2,7 @@
     File: fn_skills_active_openSkillWheel.sqf
     Author: veteran29
     Date: 2023-02-01
-    Last Update: 2024-03-02
+    Last Update: 2024-05-11
     Public: Yes
 
     Description:
@@ -44,3 +44,6 @@ private _iconsArray = [];
 ];
 
 [_iconsArray] call vn_fnc_wm_init;
+private _display = uiNamespace getVariable ["vn_wheelmenu", displayNull];
+
+[_display] call para_c_fnc_keyhandler_enableGeneralActionTriggeringOnDisplay;
