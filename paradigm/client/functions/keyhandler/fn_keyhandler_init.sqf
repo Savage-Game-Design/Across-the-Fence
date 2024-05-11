@@ -4,7 +4,7 @@
     File: fn_keyhandler_init.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-10
+    Last Update: 2024-05-11
     Public: Yes
 
     Description:
@@ -40,12 +40,12 @@ createHashmapFromArray [
     ["CTRL+ALT+SHIFT+T", ["ExampleActionName", "OtherExampleActionName"]]
 ]
 
-Keybinding registration data structure:
+Action registration data structure:
+=======================================
 [
     createHashmapFromArray [
         ["name", "ExampleActionName"],
         ["displayName", "STR_MY_DISPLAY_NAME"],
-        ["function", {}],
         // Fire on KeyUp instead of KeyDown
         ["onRelease", false],
         ["defaultKey", createHashmapFromArray [
@@ -62,34 +62,14 @@ localNamespace setVariable ["para_c_keyhandler_bannedKeys", [
     DIK_ESCAPE
 ] createHashMapFromArray []];
 
-[] spawn {
-    waitUntil { sleep 0.1; !(isNull findDisplay 46) };
+private _savedKeybindings = profileNamespace getVariable ["para_c_keyhandler_bindings", createHashMap];
+profileNamespace setVariable ["para_c_keyhandler_bindings", _savedKeybindings];
 
-    private _savedKeybindings = profileNamespace getVariable ["para_c_keyhandler_bindings", createHashMap];
-    private _allAvailableActions = flatten ([localNamespace, "para_c_fetch_keyhandler_actions", [], true] call BIS_fnc_callScriptedEventHandler);
+localNamespace setVariable ["para_keyhandler_bindings", createHashMap];
 
-    private _registeredActions = createHashmap;
+private _registeredActions = localNamespace getVariable ["para_keyhandler_actions", createHashMap];
+localNamespace setVariable ["para_keyhandler_actions", _registeredActions];
 
-    profileNamespace setVariable ["para_c_keyhandler_bindings", _savedKeybindings];
-    localNamespace setVariable ["para_keyhandler_bindings", createHashMap];
-    localNamespace setVariable ["para_keyhandler_actions", _registeredActions];
-
-    {
-        private _actionName = _x get "name";
-        // Any new actions (e.g from gamemode updates) get saved to the profile.
-        if !(_actionName in _savedKeybindings) then {
-            [_actionName, _x get "defaultKey"] call para_c_fnc_keyhandler_saveKeybind;
-        };
-
-        _x set ["localizedDisplayName", (_x get "displayName") call para_c_fnc_localize];
-        _registeredActions set [_actionName, _x];
-    } forEach _allAvailableActions;
-
-    {
-        [_x, _y] call para_c_fnc_keyhandler_setKeybind;
-    } forEach _savedKeybindings;
-
-    private _display = findDisplay 46;
-    _display displayAddEventHandler ["KeyDown", { [ "KeyDown", _this select [1, 4]] call para_c_fnc_keyhandler_onKeypress }];
-    _display displayAddEventHandler ["KeyUp", { [ "KeyUp", _this select [1, 4]] call para_c_fnc_keyhandler_onKeypress }];
-};
+{
+    [_x, _y] call para_c_fnc_keyhandler_setKeybind;
+} forEach _savedKeybindings;
