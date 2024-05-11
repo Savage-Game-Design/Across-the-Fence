@@ -250,6 +250,11 @@ class vgm_c
             preInit = 1;
         };
 
+        class display_postInit
+        {
+            postInit = 1;
+        };
+
         class displaySkills {};
         class displayAbilities {};
         class displayMissions {};
