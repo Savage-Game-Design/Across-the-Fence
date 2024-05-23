@@ -368,5 +368,10 @@
             <Original>Settings</Original>
         </Key>
     </Package>
+    <Package name="Missions Extraction">
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
+            <Original>Request extraction</Original>
+        </Key>
+    </Package
 
 </Project>

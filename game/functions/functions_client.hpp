@@ -325,6 +325,23 @@ class vgm_c
         class missions_startDeploy {};
     };
 
+    class missions_gameplay
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client);
+
+        class missions_gameplay_postInit
+        {
+            postInit = 1;
+        };
+    };
+
+    class missions_gameplay_extraction
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client\extraction);
+
+        class missions_gameplay_extraction_addAction {};
+    };
+
     class loading
     {
         VGM_CLIENT_PATH(\core\client\loading);
