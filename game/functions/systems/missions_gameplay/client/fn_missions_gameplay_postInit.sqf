@@ -42,6 +42,7 @@ vgm_missions_gameplay_extraction_radioClasses = [
         for "_i" from 1 to 2 do {
             private _smoke = createVehicleLocal ["vn_m18_purple_ammo", [0,0,0], [], 0, "NONE"];
             _smoke setPosATL _lzPos;
+            _smoke awake false;
             waitUntil {isNull _smoke};
         };
     };

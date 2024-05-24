@@ -59,6 +59,8 @@ private _actionId = [
     nil,
     1,
     100,
+    false,
+    false,
     false
 ] call BIS_fnc_holdActionAdd;
 

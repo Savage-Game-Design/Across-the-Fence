@@ -76,6 +76,8 @@ private _script = [_missionId, _mission, _helicopter] spawn {
     _helicopter flyInHeight [100, true];
     _helicopter setCaptive false;
 
+    ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
+
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 25;
     [_missionId] call vgm_s_fnc_missions_endMission;
