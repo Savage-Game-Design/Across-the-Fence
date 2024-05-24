@@ -6,10 +6,10 @@
 ## Events
 
 
-| Event               | Arguments              |
-| ------------------- | ---------------------- |
-| vgm_mission_started | [_missionId]           |
-| vgm_mission_ended   | [_missionId, _endType] |
+| Event               | Arguments              | Scope  |
+| ------------------- | ---------------------- | ------ |
+| vgm_mission_started | [_missionId]           | Global |
+| vgm_mission_ended   | [_missionId, _endType] | Global |
 
 ## Global variables
 ### Client

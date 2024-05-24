@@ -34,3 +34,15 @@ vgm_missions_gameplay_extraction_radioClasses = [
     "vn_b_pack_prc77_01"
 ];
 
+["vgm_missions_gameplay_extractionStarted", {
+    (_this#0) spawn {
+        params ["", "_lzPos"];
+        _lzPos set [2, 0];
+        // 60s * N of smoke time
+        for "_i" from 1 to 2 do {
+            private _smoke = createVehicleLocal ["vn_m18_purple_ammo", [0,0,0], [], 0, "NONE"];
+            _smoke setPosATL _lzPos;
+            waitUntil {isNull _smoke};
+        };
+    };
+}] call para_g_fnc_event_subscribeServer;

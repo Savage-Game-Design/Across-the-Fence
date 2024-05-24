@@ -87,4 +87,6 @@ private _script = [_missionId, _mission, _helicopter] spawn {
 
 _group setVariable ["vgm_missions_extractionScript", _script];
 
+["vgm_missions_gameplay_extractionStarted", [_missionId, +_safeLzPosition, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
+
 _helicopter // return
