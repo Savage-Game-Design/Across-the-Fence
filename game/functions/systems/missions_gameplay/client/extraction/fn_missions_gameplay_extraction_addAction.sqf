@@ -23,7 +23,7 @@ params ["_player"];
 private _fnc_callExtraction = {
     params ["_target"];
 
-    private _nearbyObjects = _target nearEntities ["All", 50];
+    private _nearbyObjects = _target nearEntities ["All", 30];
     private _nearRadioIdx = _nearbyObjects findIf {
         if (_x isKindOf "CAManBase") then {
             backpack _x in vgm_missions_gameplay_extraction_radioClasses // return
@@ -38,7 +38,15 @@ private _fnc_callExtraction = {
     };
     private _nearRadio = _nearbyObjects select _nearRadioIdx;
 
-    [_target, _nearRadio] call vgm_c_fnc_missions_gameplay_extraction_requestExtraction;
+    // hide action menu
+    showCommandingMenu "RscGroupRootMenu"; showCommandingMenu "";
+
+    [_target, _nearRadio] spawn {
+        sleep 0.5;
+        if (["Are you sure?", "Confirm", true, true] call BIS_fnc_guiMessage) then {
+            _this call vgm_c_fnc_missions_gameplay_extraction_requestExtraction;
+        };
+    };
 };
 
 private _actionId = [
