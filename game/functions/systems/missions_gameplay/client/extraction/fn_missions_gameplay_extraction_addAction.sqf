@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_addAction.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-05-23
+    Last Update: 2024-05-24
     Public: No
 
     Description:
@@ -23,19 +23,22 @@ params ["_player"];
 private _fnc_callExtraction = {
     params ["_target"];
 
-    private _nearRadio = (_target nearEntities ["All", 50]) findIf {
+    private _nearbyObjects = _target nearEntities ["All", 50];
+    private _nearRadioIdx = _nearbyObjects findIf {
         if (_x isKindOf "CAManBase") then {
             backpack _x in vgm_missions_gameplay_extraction_radioClasses // return
         } else {
             typeOf _x in vgm_missions_gameplay_extraction_radioClasses // return
         };
-    } != -1;
-
-    if (!_nearRadio) exitWith {
-        hint "Not near radio!";
     };
 
-    hint "Near radio";
+    if (_nearRadioIdx == -1) exitWith {
+        hint localize "STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO";
+        playSoundUI ["3DEN_notificationWarning", 0.5];
+    };
+    private _nearRadio = _nearbyObjects select _nearRadioIdx;
+
+    [_target, _nearRadio] call vgm_c_fnc_missions_gameplay_extraction_requestExtraction;
 };
 
 private _actionId = [
@@ -43,7 +46,11 @@ private _actionId = [
     localize "STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION",
     "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_takeOff2_ca.paa",
     "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_takeOff2_ca.paa",
-    "vgm_mission_onMission",
+    toString {
+        vgm_mission_onMission
+        && leader _target == _target
+        && {group _target getVariable ["vgm_missions_extraction_canRequest", true]}
+    },
     "true",
     {},
     {},
@@ -55,6 +62,6 @@ private _actionId = [
     false
 ] call BIS_fnc_holdActionAdd;
 
-_player setVariable ["vgm_mission_gameplay_extraction_actionExtract", _actionId];
+_player setVariable ["vgm_missions_gameplay_extraction_actionExtract", _actionId];
 
 _actionId // return

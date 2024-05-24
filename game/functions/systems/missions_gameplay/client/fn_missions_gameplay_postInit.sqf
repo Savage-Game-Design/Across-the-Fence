@@ -2,11 +2,11 @@
     File: fn_missions_gameplay_postInit.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-05-23
+    Last Update: 2024-05-24
     Public: No
 
     Description:
-        Postinit for missions_gameplay component.
+        Client Postinit for missions_gameplay component.
  */
 
 if (!hasInterface) exitWith {};

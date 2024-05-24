@@ -340,6 +340,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\missions_gameplay\client\extraction);
 
         class missions_gameplay_extraction_addAction {};
+        class missions_gameplay_extraction_requestExtraction {};
     };
 
     class loading
