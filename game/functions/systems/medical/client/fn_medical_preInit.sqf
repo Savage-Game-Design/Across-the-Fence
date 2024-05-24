@@ -125,7 +125,7 @@ vgm_c_medical_damageModifiers = [];
 [
     createHashMapFromArray [
         ["name", "OpenMedicalMenu"],
-        ["displayName", "STR_VGM_SKILLS_UI_OPEN_MEDICAL_MENU"],
+        ["displayName", "STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU"],
         ["onRelease", false],
         ["defaultKey", createHashMapFromArray [
             ["dikCode", DIK_H]
