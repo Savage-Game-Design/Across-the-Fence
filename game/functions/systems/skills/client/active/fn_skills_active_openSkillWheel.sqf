@@ -2,7 +2,7 @@
     File: fn_skills_active_openSkillWheel.sqf
     Author: veteran29
     Date: 2023-02-01
-    Last Update: 2023-02-01
+    Last Update: 2024-03-02
     Public: Yes
 
     Description:
@@ -17,6 +17,8 @@
     Example(s):
         [] call vgm_c_fnc_skills_active_openSkillWheel
  */
+
+if (lifeState player == "INCAPACITATED") exitWith {};
 
 private _iconsArray = [];
 {

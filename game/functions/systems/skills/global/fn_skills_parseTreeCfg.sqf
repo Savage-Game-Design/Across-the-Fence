@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2023-04-23
+    Last Update: 2024-03-24
     Public: Yes
 
     Description:
@@ -18,9 +18,16 @@
         [missionConfigFile >> "vgm_skillTrees"] call vgm_g_fnc_skills_parseTreeCfg
  */
 
+// #define FIRST_TIER_EXCLUSIVE
+
 params [
     ["_cfgSkillTrees", configNull, [configNull]]
 ];
+
+if (isNull _cfgSkillTrees) exitWith {
+    ["Skill trees config is null"] call vgm_g_fnc_logError;
+    createHashMap
+};
 
 #define SKILL_TIERS ["tier_1", "tier_2", "tier_3", "tier_4"]
 
@@ -31,8 +38,10 @@ private _fnc_parseSkillTree = {
     private _skillTree = createHashMapFromArray [
         ["path", _path],
         ["displayName", getText (_cfgSkillTree >> "displayName")],
+        ["icon", getText (_cfgSkillTree >> "icon")],
         ["description", getText (_cfgSkillTree >> "description")],
-        ["skills", []]
+        ["skills", []],
+        ["skillPointsMax", 0]
     ];
     private _cfgSkills = _cfgSkillTree >> "skills";
     {
@@ -54,11 +63,23 @@ private _fnc_parseSkillTree = {
                 ["cost", getNumber (_x >> "cost")],
                 ["conditionUnlock", compileFinal getText (_x >> "conditionUnlock")],
                 ["conditionShow", compileFinal getText (_x >> "conditionShow")],
+                ["conditionActivate", compileFinal getText (_x >> "conditionActivate")],
                 ["codeApply", compileFinal getText (_x >> "codeApply")],
                 ["codeUnapply", compileFinal getText (_x >> "codeUnapply")],
-                ["codeActivate", compileFinal getText (_x >> "codeActivate")]
+                ["codeActivate", compileFinal getText (_x >> "codeActivate")],
+                ["codeUnableToActivate", compileFinal getText (_x >> "codeUnableToActivate")]
             ];
         };
+
+        private _skillPointsMax = _skillTree get "skillPointsMax";
+        {
+            _skillPointsMax = _skillPointsMax + (_x get "cost");
+            #ifdef FIRST_TIER_EXCLUSIVE
+            // only one skill can be invested in first tier, break the loop
+            if (_tier == 0) exitWith {};
+            #endif
+        } forEach _skills;
+        _skillTree set ["skillPointsMax", _skillPointsMax];
 
         _skillTree get "skills" pushBack _skills;
     } forEach SKILL_TIERS;

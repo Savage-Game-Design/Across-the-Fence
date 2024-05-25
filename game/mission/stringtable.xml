@@ -2,10 +2,10 @@
 <Project name="VGM">
     <Package name="General">
         <Key ID="STR_VGM_MISSION_NAME_VERSION">
-            <Original>GAMEMODE_NAME (#VERSION#)</Original>
+            <Original>Across the Fence (#VERSION#)</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_NAME">
-            <Original>GAMEMODE_NAME</Original>
+            <Original>Across the Fence</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_VERSION">
             <Original>#VERSION#</Original>
@@ -23,8 +23,14 @@
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
             <Original>Standard Ability</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP">
+            <Original>Standard abilites offer a small benefit and are intended to be used frequently throughout the mission.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT">
             <Original>Ultimate Ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP">
+            <Original>Ultimate abilites offer a large benefit and are intended to be used at critical moments during the mission.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD">
             <Original>Available Standard Abilities</Original>
@@ -53,5 +59,314 @@
         <Key ID="STR_VGM_SKILLS_UI_COOLDOWN_LONG">
             <Original>%1 second cooldown</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS">
+            <Original>Not enough skill points</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
+            <Original>Tier locked\nLearn any skill in previous level to unlock</Original>
+        </Key>
     </Package>
+    <Package name="Medical UI">
+        <Key ID="STR_VGM_MEDICAL_UI_APPLY_FAK">
+            <Original>Applying FAK to %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_APPLY_MEDIKIT">
+            <Original>Applying Medikit to %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_TOO_FAR">
+            <Original>Patient is too far!</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_HEALTHY">
+            <Original>Patient is healthy</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS">
+            <Original>Missing required items!</Original>
+        </Key>
+        <!-- body parts -->
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_HEAD">
+            <Original>Head</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_TORSO">
+            <Original>Torso</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_ARMS">
+            <Original>Arms</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_LEGS">
+            <Original>Legs</Original>
+        </Key>
+        <!-- Debuffs -->
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLURRYVISION">
+            <Original>Occasional Blurred Vision</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_FORCEJOG">
+            <Original>Unable to sprint</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_FORCEWALK">
+            <Original>Unable to run</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_FORCECRAWL">
+            <Original>Unable to stand</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_RECOIL">
+            <Original>Increased recoil</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_AIM">
+            <Original>Decreased aim stability</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLOCKADS">
+            <Original>Unable to aim down sights</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_STAMINADRAIN">
+            <Original>Increased stamina drain</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_INTERACT">
+            <Original>Slower interaction</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_THROW">
+            <Original>Weaker throwing strength</Original>
+        </Key>
+        <!-- -->
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_0">
+            <Original>No</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_1">
+            <Original>Minor</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_2">
+            <Original>Major</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_TRAUMA_3">
+            <Original>Severe</Original>
+        </Key>
+        <!-- -->
+        <Key ID="STR_VGM_MEDICAL_UI_INJURIES">
+            <Original>%1 Injuries</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OWNED">
+            <Original>%1&lt;br/&gt;Owned: %2</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING">
+            <Original>%1&lt;br/&gt;No training</Original>
+        </Key>
+    </Package>
+    <Package name="Mission End UI">
+        <Key ID="STR_VGM_MISSION_END_UI_SUCCESSFUL">
+            <Original>Mission Successful!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_FAILURE">
+            <Original>Mission failed.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
+            <Original>Level %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_LEVEL_UP">
+            <Original>Level Up! +%1 SP</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_SUCCESS">
+            <Original>Mission completion</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
+            <Original>Mission participation</Original>
+        </Key>
+    </Package>
+    <Package name="Skills Tree">
+        <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
+            <Original>Rifleman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_RECON">
+            <Original>Recon</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_SUPPORT">
+            <Original>Support</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
+            <Original>Fire Support</Original>
+        </Key>
+    </Package>
+    <Package name="Skills Skill">
+        <!-- Rifleman -->
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
+            <Original>-25% Weapon recoil</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
+            <Original>20% Slower bleedout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL">
+            <Original>Historical Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC">
+            <Original>Unlocks "Historical Equipment"</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT">
+            <Original>Rifleman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
+            <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED">
+            <Original>Overprepared</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC">
+            <Original>The first time you run out of ammo for your primary weapon, receive two more magazines</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_ACTIVATED">
+            <Original>Overprepared activated</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
+            <Original>Steady Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC">
+            <Original>For the next 30 seconds, your weapon sway is reduced by 100%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER">
+            <Original>Born Leader</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC">
+            <Original>Reduce the cooldown time of all ally abilities by 20% (Global cap at 50%)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON">
+            <Original>Lucky-Son-Of-A-Bitch</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC">
+            <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
+        </Key>
+        <!-- Recon -->
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
+            <Original>50% less weapon sway when crouched or prone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_ATHLETIC">
+            <Original>20% less stamina drain</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE">
+            <Original>Keen Eye</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC">
+            <Original>When looking through binoculars, you can press 'Reveal Target' to get an approximate distance to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN">
+            <Original>Marksman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN">
+            <Original>Pointman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS">
+            <Original>Follow the Tracers</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
+            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when their suppression return to zero naturally.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
+            <Original>6th Sense</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC">
+            <Original>Briefly add a 3D marker to all enemies in within 150m, and add an approximate marker of their locations to your map.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH">
+            <Original>Thick Brush</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
+            <Original>For 60 seconds, enemies are much less likely to see you and hear you.</Original>
+        </Key>
+        <!-- Fire Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
+            <Original>50% increased suppression strength</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
+            <Original>Carry 30% more weight and consume 20% less stamina</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER">
+            <Original>Machine Gunner Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES">
+            <Original>Explosives Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
+            <Original>Grenadier and AT Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM">
+            <Original>Learn the Rhythm</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC">
+            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
+            <Original>Grenades case</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
+            <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE">
+            <Original>Overwhelming Fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
+            <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 50% more.</Original>
+        </Key>
+        <!-- Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">
+            <Original>25% increased medical actions speed</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD">
+            <Original>Team members are visible on the map</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL">
+            <Original>Advanced Medical Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO">
+            <Original>RTO Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL">
+            <Original>Efficient and Resourceful</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL_DESC">
+            <Original>You have a 30% chance to not consume a utility item when using one.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT">
+            <Original>Heavy Support</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE">
+            <Original>Quick Bandage</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_DESC">
+            <Original>Add 60 seconds to a player's bleedout timer.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY">
+            <Original>Target is not bleeding!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ">
+            <Original>Get To The LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC">
+            <Original>For 30 seconds, the team has: 50% reduced stamina consumption, 40% hit shrug chance, all actions are 10% faster</Original>
+        </Key>
+    </Package>
+    <Package name="Skill Investigaste">
+        <Key ID="STR_VGM_SKILL_INVESTIGATE_ACTION">
+            <Original>Stop, Listen</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY">
+            <Original>Stay stationary to Listen</Original>
+        </Key>
+    </Package>
+    <Package name="Header Bar">
+        <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
+            <Original>Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_MANAGE_EQUIPMENT">
+            <Original>Manage your equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_ABILITIES">
+            <Original>Abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SKILLTREE">
+            <Original>Skill Tree</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SQUAD">
+            <Original>Squad</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SETTINGS">
+            <Original>Settings</Original>
+        </Key>
+    </Package>
+
 </Project>

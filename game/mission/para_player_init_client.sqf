@@ -37,44 +37,12 @@ player createDiaryRecord ["Diary", [localize "STR_vn_mf_other_keys", localize "S
 // Instantiate the main scheduler
 [] call para_g_fnc_scheduler_subsystem_init;
 
-call para_g_fnc_event_subsystem_init;
-
-// display initial loading text
-call vgm_c_fnc_init_loading_text;
-
-
-// Start AI processing for local player, if we're not a LAN server (as then serverside processing will kick in)
-if (!isServer) then {
-    call para_g_fnc_ai_create_behaviour_execution_loop;
-};
-
 // Set up automatic view distance scaling for performance
 [] call para_c_fnc_perf_enable_dynamic_view_distance;
 
 // initialize tools controller
 call para_c_fnc_tool_controller_init;
 
-//LOADING COMPLETE
-//Start tidying up ready for play.
-
-// end loading screen
-uiSleep 0.4;
-endLoadingScreen;
-// Fade in
-cutText ["", "BLACK IN", 4];
-// Bring sound back to normal
-4 fadeSound 1;
-// Fade out the music
-8 fadeMusic 0;
-// Restore the music volume in the near future.
-[] spawn {sleep 8; playMusic ""; 2 fadeMusic 1};
-// Re-enable simulation
-if (typeOf player != "VirtualCurator_F") then {
-    player enableSimulation true;
-};
-
 call vgm_c_fnc_handle_light_level_loop;
 
-call vgm_c_fnc_handle_welcome_screen;
-
-call vgm_c_fnc_init_info_panel_handler_loop;
+diag_log "VGM client init finished";

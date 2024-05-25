@@ -198,6 +198,19 @@ class para_s
 		class loadbal_suggest_host {};
 	};
 
+	class netmap {
+        PARA_SERVER_PATH(\netmap);
+        class netmap_createNamedNetmap {};
+        class netmap_createNamedNetmapFromArray {};
+        class netmap_createNetmap {};
+        class netmap_createNetmapFromArray {};
+        class netmap_deleteAt {};
+        class netmap_requestAllNetmaps {};
+        class netmap_set {};
+        class netmap_setOwningNetmap {};
+        class netmap_terminate {};
+    };
+
 	class networked_actions
 	{
 		PARA_SERVER_PATH(\networked_actions);
@@ -225,6 +238,7 @@ class para_s
 	class remoteExec
 	{
 		PARA_SERVER_PATH(\remoteExec);
+        class remoteExec_validateDirectPlayIdIsRemoteExecOwner {};
 		class remoteExec_jip_obj_stacked {};
 		class remoteExecCall_jip_obj_stacked {};
 	};

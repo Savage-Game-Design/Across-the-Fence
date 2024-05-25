@@ -60,7 +60,7 @@ forceRotorLibSimulation = 0;
 saving = 0;
 skipLobby = 0;
 
-corpseManagerMode = 1;
+corpseManagerMode = 0; // TODO Disabled for now as it seems to be buggy, revisit after 2.18 once KillzoneKid`s fixes are in
 corpseLimit = 10;
 corpseRemovalMinTime = 1200;
 corpseRemovalMaxTime = 3600;

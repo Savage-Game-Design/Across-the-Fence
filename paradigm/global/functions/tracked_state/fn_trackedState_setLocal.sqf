@@ -2,7 +2,7 @@
     File: fn_trackedState_setLocal.sqf
     Author: Savage Game Design
     Date: 2023-02-09
-    Last Update: 2023-02-25
+    Last Update: 2023-03-06
     Public: No
 
     Description:
@@ -11,6 +11,7 @@
     Parameter(s):
         _stateVariable - Variable to set [ANY HASHMAP KEY]
         _value - Value to set variable to [ANY]
+        _reason - Reason the value is being updated, this allows arbitrary data to be passed to the handlers for this update only. [ANY]
 
     Returns:
         Nothing
@@ -19,7 +20,7 @@
         ["Local_GamemodeStage", "Starting"] call para_g_fnc_trackedState_setLocal;
  */
 
-params ["_stateVariable", "_newValue"];
+params ["_stateVariable", "_newValue", "_reason"];
 
 private _trStateData = [] call para_g_fnc_trackedState_getData;
 
@@ -27,8 +28,8 @@ private _state = _trStateData get "state";
 // Shouldn't matter if this is nil, as long as it's only used in arrays
 private _oldValue = _state get _stateVariable;
 
-// Use hash value comparison, as that's how equality is checked in whenEqual
-if (hashValue _oldValue isEqualTo hashValue _newValue) exitWith {};
+// Don't check for equality here - it breaks if we mutate the state elsewhere, as it would see it as "equal".
+// We need to be able to mutate (e.g arrays, hashmaps) to avoid the awful performance of hashmaps
 
 _state set [_stateVariable, _newValue];
 
@@ -45,5 +46,6 @@ private _equalsHandlers =
     _changedHandlers + _equalsHandlers,
     _stateVariable,
     _newValue,
-    _oldValue
+    _oldValue,
+    _reason
 ] call para_g_fnc_trackedState_callHandlers;

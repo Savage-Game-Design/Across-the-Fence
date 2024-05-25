@@ -2,7 +2,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-05-13
+    Last Update: 2024-03-02
     Public: No
 
     Description:
@@ -64,7 +64,17 @@ addUserActionEventHandler ["selectAll", "Activate", {
         showCommandingMenu "";
     };
 
+    // the keybind creates its own display which can cause issues if topmost display is not the "mission display"
+    if (dialog || {!isNull (uiNamespace getVariable "RscDisplayArsenal")}) exitWith {};
     [] call vgm_c_fnc_skills_active_openSkillWheel;
 }];
+
+// close skills menu when unconscious
+["vgm_medical_unconscious", {
+    (_this#0) params ["_unit", "_state"];
+    if (!_state || (_unit != player)) exitWith {};
+
+    (uiNamespace getVariable ["vn_wheelmenu", displayNull]) closeDisplay 1;
+}] call para_g_fnc_event_subscribeLocal;
 
 [] spawn VGM_C_fnc_skills_active_toggleHud;

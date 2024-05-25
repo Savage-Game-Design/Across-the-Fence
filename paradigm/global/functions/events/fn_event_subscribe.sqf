@@ -2,7 +2,7 @@
     File: fn_event_subscribe.sqf
     Author: Savage Game Design
     Date: 2022-11-24
-    Last Update: 2023-04-07
+    Last Update: 2024-03-01
     Public: Yes
 
     Description:
@@ -23,7 +23,9 @@
         [ "myCustomEvent", {}] call para_g_fnc_event_subscribe
 
         // Register to local event, with a topic, and parameter for the callback
-        [["myCustomEvent", player], [[32], {}]] call para_g_fnc_event_subscribe
+        [["myCustomEvent", player], [[32], {
+            params ["_args", "_savedArgs", "_eventName", "_topic", "_originMachineId"];
+        }]] call para_g_fnc_event_subscribe
  */
 
 ([[0]] + _this) call para_g_fnc_event_subscribeToClients;

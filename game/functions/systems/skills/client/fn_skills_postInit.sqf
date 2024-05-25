@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-02-28
+    Last Update: 2023-11-10
     Public: No
 
     Description:
@@ -31,18 +31,15 @@ private _fnc_addActions = {
     params ["_player"];
     _player addAction ["Open skills menu", {
         call compileScript ["functions\systems\skills\client\fn_skills_openSkillTree.sqf"];
-    }, nil, -1e10, true, false, "", "_originalTarget == _this"];
+    }, nil, -1e10, true, false, "", "true"];
 
     _player addAction ["Open assigment menu", {
         call compileScript ["functions\systems\skills\client\active\fn_skills_active_openAssignMenu.sqf"];
-    }, nil, -1e10, true, false, "", "_originalTarget == _this"];
+    }, nil, -1e10, true, false, "", "true"];
 
     _player addAction ["Respec all skills", {
         call compileScript ["functions\systems\skills\client\network\fn_skills_requestSkillRespec.sqf"];
-    }, nil, -1e10, true, false, "", "_originalTarget == _this"];
-
-
+    }, nil, -1e10, true, false, "", "true"];
 };
 
-player call _fnc_addActions;
-player addEventHandler ["Respawn", _fnc_addActions];
+vgm_core_lobbyOfficer call _fnc_addActions;

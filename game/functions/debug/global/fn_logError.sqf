@@ -2,11 +2,11 @@
     File: fn_logError.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-02-26
+    Last Update: 2023-06-27
     Public: Yes
 
     Description:
-        Write errror to log file.
+        Write error to log file.
 
     Parameter(s):
         _logLevel - Log level [STRING]

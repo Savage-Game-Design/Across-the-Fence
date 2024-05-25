@@ -9,6 +9,15 @@ class vgm_s
         VGM_SERVER_PATH(\);
     };
 
+    class core
+    {
+        VGM_SERVER_PATH(\core\server);
+
+        class postInit
+        {
+            postInit = 1;
+        };
+    };
 
     class paradigm_interop
     {
@@ -26,11 +35,117 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class carry
+    {
+        VGM_SERVER_PATH(\systems\carry\server);
+
+        class carry_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class carry_remoteExec
+    {
+        VGM_SERVER_PATH(\systems\carry\server\remoteExec);
+
+        class carry_attachRequest {};
+        class carry_detachRequest {};
+    };
+
+    class mission_director
+    {
+        VGM_SERVER_PATH(\systems\mission_director\server);
+        class director_handlePlayerExplosion {};
+        class director_handlePlayerShots {};
+        class director_preInit {
+            preInit = 1;
+        };
+        class director_processMission {};
+        class director_registerGroups {};
+        class director_spawnInitialPatrols {};
+        class director_startMission {};
+        class director_stopMission {};
+    };
+
+    class missions_objects
+    {
+        VGM_SERVER_PATH(\systems\mission_objects\server);
+
+        class mission_objects_createObject {};
+        class mission_objects_deleteObject {};
+        class mission_objects_preInit {
+            preInit = 1;
+        };
+        class mission_objects_spawnObjects {};
+    };
+
+    class missions
+    {
+        VGM_SERVER_PATH(\systems\missions\server);
+
+        class missions_createMission {};
+        class missions_endMission {};
+        class missions_getAssignedMission {};
+        class missions_getById {};
+        class missions_joinMission {};
+        class missions_leaveMission {};
+        class missions_preInit {
+            preInit = 1;
+        };
+        class missions_setPlayerReadiness {};
+        class missions_startMission {};
+    };
+
+    class missions_remoteExec
+    {
+        VGM_SERVER_PATH(\systems\missions\server\remoteExec);
+
+        class missions_remoteExec_createMission {};
+        class missions_remoteExec_joinMission {};
+        class missions_remoteExec_leaveMission {};
+        class missions_remoteExec_setReadiness {};
+        class missions_remoteExec_startMission {};
+    };
+
+    class missions_internal
+    {
+        VGM_SERVER_PATH(\systems\missions\server\internal);
+
+        class missions_attachPlayerToMission {};
+        class missions_calculateMilestones {};
+        class missions_preventJoining {};
+        class missions_removePlayerFromMission {};
+        class missions_updateStatus {};
+    };
+
+    class missions_gameplay
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server);
+
+        class missions_gameplay_createCrewedHelicopter {};
+    };
+
+    class missions_gameplay_ambient
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\ambient);
+
+        class missions_gameplay_ambient_departHelicopter {};
+    };
+
+    class missions_gameplay_extraction
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\extraction);
+
+        class missions_gameplay_extraction_startExtract {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);
 
         class player_fetch {};
+        class player_fromId {};
         class player_save {};
     };
 
@@ -44,6 +159,42 @@ class vgm_s
         class respawn_findFallbackSpawnTransform {};
     };
 
+    class leveling
+    {
+        VGM_SERVER_PATH(\systems\leveling\server);
+
+        class leveling_addExperience {};
+
+        class leveling_dataGetCached {};
+        class leveling_dbGet {};
+        class leveling_dbSave {};
+
+        class leveling_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class shared_hub
+    {
+        VGM_SERVER_PATH(\systems\shared_hub\server);
+
+        class sharedHub_preInit
+        {
+            preInit = 1;
+        };
+    };
+
+    class skill
+    {
+        VGM_SERVER_PATH(\systems\skill\server);
+
+        class skill_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class skills
     {
         VGM_SERVER_PATH(\systems\skills\server);
@@ -53,7 +204,6 @@ class vgm_s
         class skills_dataGetCached {};
         class skills_dbGet {};
         class skills_dbSave {};
-
         class skills_forgetSkills {};
 
         class skills_preInit

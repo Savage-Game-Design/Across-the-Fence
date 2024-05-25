@@ -2,6 +2,9 @@ import RscText;
 import RscPicture;
 import RscProgress;
 import RscStructuredText;
+import RscMapControlEmpty;
+import RscControlsGroupNoScrollbars;
+import RscButtonMenu;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -12,8 +15,13 @@ import ctrlButton;
 import ctrlButtonPicture;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
+import ctrlStaticPictureKeepAspect;
 import ctrlMap;
+import ctrlMapEmpty;
+import ctrlProgress;
 import ctrlXListbox;
+import ctrlListbox;
+import ctrlActivePicture;
 
 #define COLOR_BLACK {0,0,0,1}
 class VGM_ctrlDefault: ctrlDefault {
@@ -29,7 +37,23 @@ class VGM_ctrlDefault: ctrlDefault {
         color[] = {1,1,1,1};
     };
 };
-class VGM_ctrlStatic: ctrlStatic {};
+
+class ScrollbarInvisible
+{
+    width = 0;
+    height = 0;
+    arrowEmpty = "";
+    arrowFull = "";
+    border = "";
+    thumb = "";
+    color[] = {0,0,0,0};
+};
+
+class VGM_ctrlStatic: ctrlStatic
+{
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+};
 
 class VGM_ctrlStaticFrame: ctrlStaticFrame
 {
@@ -47,6 +71,10 @@ class VGM_ctrlBackgroundTitle: VGM_ctrlBackground
 };
 
 class VGM_ctrlStaticPicture: ctrlStaticPicture
+{
+};
+
+class VGM_ctrlStaticPictureKeepAspect: ctrlStaticPictureKeepAspect
 {
 };
 
@@ -82,10 +110,10 @@ class VGM_ctrlTitle: VGM_ctrlStructuredText
 
 class VGM_ctrlTree: ctrlTree
 {
-    colorText[] = COLOR_BLACK;
-    colorBorder[] = COLOR_BLACK;
-    colorLines[] = COLOR_BLACK;
-    colorArrow[] = COLOR_BLACK;
+    colorText[] = {VGM_UI_COLOR_TEXT};
+    colorBorder[] = {VGM_UI_COLOR_TEXT};
+    colorLines[] = {VGM_UI_COLOR_TEXT};
+    colorArrow[] = {VGM_UI_COLOR_TEXT};
     hiddenTexture = "";
     expandedTexture = "";
     font = VGM_FONT;
@@ -98,6 +126,18 @@ class VGM_ctrlControlsGroup: ctrlControlsGroup
 
 class VGM_ctrlControlsGroupNoScrollbars: ctrlControlsGroupNoScrollbars
 {
+};
+
+class VGM_ctrlProgress: ctrlProgress
+{
+    colorBar[] = {
+        "(profilenamespace getvariable ['GUI_BCG_RGB_R', 0.13])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_G', 0.54])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_B', 0.21])",
+        "(profilenamespace getvariable ['GUI_BCG_RGB_A', 0.8])"
+    };
+    colorFrame[] = {0,0,0,0.5};
+    texture = "#(argb,8,8,3)color(1,1,1,0.8)";
 };
 
 class VGM_ctrlFrame: VGM_ctrlStatic
@@ -118,6 +158,27 @@ class VGM_ctrlButton: ctrlButton
     colorBackgroundActive[] = {VGM_UI_COLOR_ACTIVE};
     font = VGM_FONT;
     sizeEx = VGM_FONT_M;
+};
+
+class VGM_ctrlShortcutButton: RscButtonMenu
+{
+    type = CT_SHORTCUTBUTTON;
+    size = VGM_FONT_M;
+    color[] = {1,1,1,1};
+    color2[] = {1,1,1,1};
+    colorBackground[] = {0,0,0,1};
+    colorBackground2[] = {0,0,0,1};
+    colorBackgroundFocused[] = {0.1,0.1,0.1,1};
+    colorFocused[] = {1,1,1,1};
+    colorFocused2[] = {1,1,1,1};
+    class Attributes
+    {
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "left";
+        shadow = 0;
+    };
 };
 
 class VGM_ctrlButtonPicture: ctrlButtonPicture
@@ -181,6 +242,14 @@ class VGM_ctrlXListBox: ctrlXListbox
     font = VGM_FONT;
 };
 
+class VGM_ctrlListBox: ctrlListbox
+{
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+    shadow = 0;
+};
+
 class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars
 {
     onLoad = "_this call vgm_c_fnc_stack_controls;";
@@ -196,13 +265,17 @@ class VGM_ctrlSeperator: VGM_ctrlStatic
     colorBackground[] = {0.75,0.75,0.75,1};
 };
 
+class VGM_ctrlActivePicture: ctrlActivePicture
+{
+};
+
 // Controls for VGM_DisplaySkills
 class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
 {
     x = 0;
     y = 0;
     w = 1 * VGM_GRID_W;
-    h = 2 * VGM_GRID_H;
+    h = 3 * VGM_GRID_H;
     colorBackground[] = {0.8,0.8,0.8,1};
 };
 class VGM_ctrlSkillTreeBranchH: VGM_ctrlSkillTreeBranchV
@@ -214,27 +287,25 @@ class VGM_ctrlSkillTreeBranchH: VGM_ctrlSkillTreeBranchV
 };
 class VGM_ctrlBranchName: VGM_ctrlControlsGroup
 {
-    x = 0.25 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
+    x = 0;
     y = 0;
     w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-    h = (5 + 2) * VGM_GRID_H;
+    h = 7 * VGM_GRID_H;
     class Controls
     {
-        class Background: VGM_ctrlStatic
+        class Background: VGM_ctrlBackground
         {
             x = 0;
             y = 0;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
             h = (5 + 2) * VGM_GRID_H;
-            colorBackground[] = {0.7,0.7,0.7,1};
         };
-        class BackgroundMiddle: VGM_ctrlStatic
+        class BackgroundMiddle: VGM_ctrlBackground
         {
             x = 0;
             y = 1 * VGM_GRID_H;
             w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
             h = 5 * VGM_GRID_H;
-            colorBackground[] = {0.8,0.8,0.8,1};
         };
         class Name: VGM_ctrlStructuredText
         {
@@ -247,7 +318,7 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
             class Attributes
             {
                 font = VGM_FONT;
-                color = "#000000";
+                color = "#ffffff";
                 colorLink = "#D09B43";
                 align = "center";
                 shadow = 0;
@@ -255,58 +326,19 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
         };
     };
 };
-class VGM_ctrlSkill: VGM_ctrlControlsGroupNoScrollbars
+
+class VGM_ctrlSkill: VGM_ctrlShortcutButton
 {
-    x = 0;
-    y = 0;
     w = VGM_CTRLSKILL_W * VGM_GRID_W;
     h = 20 * VGM_GRID_H;
-    class Controls
+    colorBackground2[] = {VGM_UI_COLOR_GREY, 1};
+    class Attributes
     {
-        class Background: VGM_ctrlStatic
-        {
-            x = 0;
-            y = 0;
-            w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 20 * VGM_GRID_H;
-            colorBackground[] = {0.8,0.8,0.8,1};
-        };
-        class Cost: VGM_ctrlStructuredText
-        {
-            text = "xx SP";
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLCOST;
-            x = 0;
-            y = 0;
-            w = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-        };
-        class Description: VGM_ctrlStructuredText
-        {
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLDESCRIPTION;
-            x = 0;
-            y = 5 * VGM_GRID_H;
-            w = VGM_CTRLSKILL_W * VGM_GRID_W;
-            h = 15 * VGM_GRID_H;
-            class Attributes
-            {
-                font = VGM_FONT;
-                color = "#000000";
-                colorLink = "#D09B43";
-                align = "center";
-                shadow = 0;
-            };
-        };
-        class Unlock: VGM_ctrlButtonPicture
-        {
-            idc = VGM_IDC_DISPLAYSKILLS_SKILLUNLOCK;
-            text = "P:\a3\ui_f\data\GUI\Cfg\Cursors\add_gs.paa";
-            colorText[] = {0,0,0,1};
-            colorBackground[] = {0.7,0.7,0.7,1};
-            x = (VGM_CTRLSKILL_W - 5) * VGM_GRID_W;
-            y = 0;
-            w = 5 * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
-        };
+        font = VGM_FONT;
+        color = "#ffffff";
+        colorLink = "#D09B43";
+        align = "center";
+        shadow = 0;
     };
 };
 

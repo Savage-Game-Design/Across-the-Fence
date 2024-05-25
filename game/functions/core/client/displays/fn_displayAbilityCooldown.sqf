@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2023-05-15
+    Last Update: 2023-09-22
     Public: No
 
     Description:
@@ -126,6 +126,6 @@ switch _mode do {
             };
 
             _thisArgs set [0, _deltaT];
-        }, [0, _ctrlCooldown, _ctrlSeconds, _skill get "cooldown", _skill get "cooldown"]];
+        }, [0, _ctrlCooldown, _ctrlSeconds, _slot get "cooldownTime", _slot get "cooldownTime"]];
     };
 };
