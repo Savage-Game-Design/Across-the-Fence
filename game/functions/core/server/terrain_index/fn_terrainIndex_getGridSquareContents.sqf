@@ -2,7 +2,7 @@
     File: fn_terrainIndex_getGridSquareContents.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-06-30
+    Last Update: 2024-05-25
     Public: No
 
     Description:
@@ -35,11 +35,8 @@ private _xIndex = floor (_relativeX / _gridSizeSquare);
 private _yIndex = floor (_relativeY / _gridSizeSquare);
 
 // Fetch the data range for this cell
-private _range = _gridIndex select (_yIndex * _gridSizeInSquares + _xIndex);
-_range params ["_start", "_end", "_hasContents", "_highestPoint"];
+private _gridIndexEntry = _gridIndex select (_yIndex * _gridSizeInSquares + _xIndex);
 
-// No contents of the cell, nothing to fetch
-if (!_hasContents) exitWith {[]};
+_gridIndexEntry params ["_cellIndicesIndex", "_cellPoints"];
 
-// Returns the entries
-_indexEntries select [_start, (_end - _start) + 1]
+_cellPoints

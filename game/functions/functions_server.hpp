@@ -227,6 +227,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\core\server\terrain_index);
 
+        class terrainIndex_addPoints {};
         class terrainIndex_generate {};
         class terrainIndex_getArea {};
         class terrainIndex_getGridSquareContents {};

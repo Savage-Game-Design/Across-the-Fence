@@ -2,7 +2,7 @@
     File: fn_terrainIndex_generate.sqf
     Author: Savage Game Design
     Date: 2023-03-03
-    Last Update: 2023-07-01
+    Last Update: 2024-05-25
     Public: No
 
     Description:
@@ -64,6 +64,10 @@ params [
 // All entries for cell [1,1] will be in a single block. such as between pos 30 and pos 47 in index_entries.
 // All entries for row 3 will be in a single block, ordered by cell.
 private _indexEntries = [];
+// The index of the cell's data in _indexEntries is stored here.
+// This allows us to return dense results (only cells with data) by abusing flatten, then looking up the index.
+// It's still possible to dynamically add new data to cells at runtime, as there's a reserved index to put it in.
+private _cellIndices = [];
 // One entry per cell. The position in this array of each cell, can be found uniquely using the x and y coordinates (see get_grid_window, _rowRangeStart)
 // Each entry contains the range in index_entries that has the cell contents. I.e, if the range is "[11, 32]", then items 11 through 32 of index_entries are in that cell.
 private _gridIndex = [];
@@ -88,35 +92,30 @@ for "_y" from 0 to (_gridSizeInSquares - 1) do {
         };
 
         // Calculating the range in index_entries where the data can be found.
-        private _start = count _indexEntries;
-        private _end = _start + count _points - 1;
         if (count _points > 0) then {
-            _indexEntries append _points;
+            private _dataIndex = _indexEntries pushBack _points;
+            private _cellIndex = _cellIndices pushBack _dataIndex;
 
             // Boolean true if the grid cell has entries, false otherwise
-            _gridIndex pushBack [_start, _end, true];
+            _gridIndex pushBack [_cellIndex, _points];
         } else {
-            // Start is the index of the first entry in the *next* grid cell
-            // End is the index of the last entry in the previous grid cell.
-            // Makes the querying logic nice and simple, when we're fetching a range of grid cells.
-            _gridIndex pushBack [_start, _end, false];
+            private _cellIndex = _cellIndices pushBack [];
+            // Start is the index of the *next* grid cell with points
+            // End is the index of the last grid cell with points
+            // Makes the querying maths/logic nice and simple, when we're fetching a range of grid cells.
+            _gridIndex pushBack [_cellIndex, _points];
         };
     };
 };
 
 private _result = createHashMapFromArray [
     ["index_entries", _indexEntries],
+    ["cell_indices", _cellIndices],
     ["grid_index", _gridIndex],
     ["grid_size_in_squares", _gridSizeInSquares],
     ["grid_square_size", _gridSquareSize],
-    ["grid_origin", _gridOrigin]
+    ["grid_origin", _gridOrigin],
+    ["grid_size", _gridSize]
 ];
-
-private _clipboard = str _result;
-_clipboard = _clipboard regexReplace ["\[", "{"];
-_clipboard = _clipboard regexReplace ["\]", "}"];
-_clipboard = _clipboard + ";";
-
-copyToClipboard _clipboard;
 
 _result
