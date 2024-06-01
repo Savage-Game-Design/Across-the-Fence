@@ -1,8 +1,10 @@
+#include "../sites.inc"
+
 /*
     File: sites_getTemplate.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-06-27
+    Last Update: 2024-07-04
     Public: Yes
 
     Description:
@@ -21,6 +23,10 @@
 createHashMapFromArray [
     // Localizable name for the site, that may be displayed to players
     ["name", "STR_VGM_SITES_PLACEHOLDER"],
+    // Footprint of the site. See 'sites.inc' for definitions.
+    ["size", SITE_FOOTPRINT_SMALL],
+    // Location requirements. List of tags that need to be met for a spawn location to be valid.
+    ["locRequirements", []],
     // Called to spawn the site.
     ["spawnFunction", {
         params ["_pos2D"];

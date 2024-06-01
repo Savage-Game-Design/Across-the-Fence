@@ -17,8 +17,9 @@
 
     Example(s):
         private _mySite = [] call vgm_s_fnc_sites_getTemplate;
+        _mySite set ["id", "vgm_bunker"];
         // ...etc...
-        ["vgm_bunker", _mySite] call vgm_s_fnc_sites_addSiteType;
+        [_mySite] call vgm_s_fnc_sites_addSiteType;
  */
 
 params ["_id", "_siteType"];
@@ -30,7 +31,13 @@ if (isNil "_siteTypes") then {
     localNamespace setVariable ["vgm_s_sites_siteTypes", _siteTypes];
 };
 
+// Clone to make sure we have an internal copy, and prevent any weirdness due to outside modification.
 private _siteTypeClone = +_siteType;
 _siteTypeClone set ["id", _id];
+
+// Clean up location requirements to all be in the same format.
+private _locRequirements = _siteType get "locRequirements" apply {toLower trim _x};
+_locRequirements sort true;
+_siteTypeClone set ["locRequirements", _locRequirements];
 
 _siteTypes set [_id, _siteTypeClone];
