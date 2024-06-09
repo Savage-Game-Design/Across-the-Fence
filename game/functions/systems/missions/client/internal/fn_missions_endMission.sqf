@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2024-04-24
+    Last Update: 2024-06-09
     Public: No
 
     Description:
@@ -26,6 +26,8 @@
  */
 
 params ["_endType", "_levelingDataCopy", "_milestones"];
+
+vgm_mission_onMission = false;
 
 // Removes player-specific tracker module handlers.
 // TODO: Remove when switching to full AI system.
