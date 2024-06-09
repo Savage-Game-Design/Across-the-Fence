@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_addAction.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-05-24
+    Last Update: 2024-06-09
     Public: No
 
     Description:
@@ -23,25 +23,17 @@ params ["_player"];
 private _fnc_callExtraction = {
     params ["_target"];
 
-    private _nearbyObjects = _target nearEntities ["All", 30];
-    private _nearRadioIdx = _nearbyObjects findIf {
-        if (_x isKindOf "CAManBase") then {
-            backpack _x in vgm_missions_gameplay_extraction_radioClasses // return
-        } else {
-            typeOf _x in vgm_missions_gameplay_extraction_radioClasses // return
-        };
-    };
+    private _radio = _target call vgm_c_fnc_missions_gameplay_extraction_getNearbyRadio;
 
-    if (_nearRadioIdx == -1) exitWith {
+    if (isNull _radio) exitWith {
         hint localize "STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO";
         playSoundUI ["3DEN_notificationWarning", 0.5];
     };
-    private _nearRadio = _nearbyObjects select _nearRadioIdx;
 
     // hide action menu
     showCommandingMenu "RscGroupRootMenu"; showCommandingMenu "";
 
-    [_target, _nearRadio] spawn {
+    [_target, _radio] spawn {
         sleep 0.5;
         if (["Are you sure?", "Confirm", true, true] call BIS_fnc_guiMessage) then {
             _this call vgm_c_fnc_missions_gameplay_extraction_requestExtraction;

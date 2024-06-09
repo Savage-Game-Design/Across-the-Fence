@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_requestExtraction.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-05-24
+    Last Update: 2024-06-09
     Public: No
 
     Description:
@@ -39,7 +39,7 @@ _lzPosATL set [2, 0];
 [call vgm_c_fnc_missions_getCurrentMission get "id", _lzPosATL] remoteExecCall ["vgm_s_fnc_missions_gameplay_extraction_startExtract", 2];
 
 // dialog
-_this spawn {
+[_player, _radio] spawn {
     params ["_player", "_radio"];
     [_player, ["vgm_extraction_request", 100, 1, true]] remoteExec ["say3D", group _player];
     sleep 4;

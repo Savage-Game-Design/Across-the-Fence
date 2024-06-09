@@ -341,6 +341,7 @@ class vgm_c
 
         class missions_gameplay_extraction_addAction {};
         class missions_gameplay_extraction_requestExtraction {};
+        class missions_gameplay_extraction_getNearbyRadio {};
     };
 
     class loading
