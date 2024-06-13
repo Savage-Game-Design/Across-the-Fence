@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2023-12-20
+    Last Update: 2024-05-24
     Public: No
 
     Description:
@@ -32,6 +32,12 @@ private _mission = [_missionId] call vgm_s_fnc_missions_getById;
 if (isNil "_mission") exitWith {
     format ["Unable to extract, no mission with id: %1", _missionId] call vgm_g_fnc_logError;
 };
+
+private _playerGroup = _mission get "public" get "group";
+if (!(_playerGroup getVariable ["vgm_missions_extraction_canRequest", true])) exitWith {
+    format ["Already requested an extraction: %1", _missionId] call vgm_g_fnc_logError;
+};
+_playerGroup setVariable ["vgm_missions_extraction_canRequest", false, true];
 
 // spawn the helicopter, coming from the direction of the origin pos
 private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
@@ -70,6 +76,8 @@ private _script = [_missionId, _mission, _helicopter] spawn {
     _helicopter flyInHeight [100, true];
     _helicopter setCaptive false;
 
+    ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
+
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 25;
     [_missionId] call vgm_s_fnc_missions_endMission;
@@ -80,5 +88,7 @@ private _script = [_missionId, _mission, _helicopter] spawn {
 };
 
 _group setVariable ["vgm_missions_extractionScript", _script];
+
+["vgm_missions_gameplay_extractionStarted", [_missionId, +_safeLzPosition, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
 
 _helicopter // return

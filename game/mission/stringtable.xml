@@ -368,5 +368,22 @@
             <Original>Settings</Original>
         </Key>
     </Package>
+    <Package name="Missions Extraction">
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
+            <Original>Request extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO">
+            <Original>No radio or RTO nearby to call for extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_TITLE">
+            <English>Extract from AO</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_DESCRIPTION">
+            <English>&lt;img image=&quot;\vn\missions_f_vietnam\data\img\m06\ob14.jpg&quot; width=&quot;380&quot; height=&quot;190&quot;/&gt;&lt;br/&gt;Stay alive and wait for extraction.</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
+            <English>Board the helicopter</English>
+        </Key>
+    </Package
 
 </Project>
