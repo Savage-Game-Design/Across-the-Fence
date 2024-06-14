@@ -1,8 +1,8 @@
 /*
-    File: fn_missions_selection_freeZone.sqf
+    File: fn_missions_zones_freeZone.sqf
     Author: Savage Game Design
     Date: 2024-03-25
-    Last Update: 2024-04-04
+    Last Update: 2024-06-14
     Public: Yes
 
     Description:

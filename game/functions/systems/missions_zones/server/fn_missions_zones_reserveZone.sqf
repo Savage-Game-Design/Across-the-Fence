@@ -1,8 +1,8 @@
 /*
-    File: fn_missions_selection_reserveZone.sqf
+    File: fn_missions_zones_reserveZone.sqf
     Author: Savage Game Design
     Date: 2024-03-25
-    Last Update: 2024-04-04
+    Last Update: 2024-06-14
     Public: Yes
 
     Description:
@@ -15,7 +15,7 @@
         Zone was reserved successfuly [BOOL]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["2", "vgm_targetBox_2"] call vgm_s_fnc_missions_zones_reserveZone
  */
 
 params [["_playerId", nil, [""]], ["_targetZone", nil, [""]]];
