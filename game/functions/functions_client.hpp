@@ -299,6 +299,16 @@ class vgm_c
         };
     };
 
+    class keyhandler
+    {
+        VGM_CLIENT_PATH(\core\client\keyhandler);
+
+        class keyhandler_postInit
+        {
+            postInit = 1;
+        };
+    };
+
     class mission_director
     {
         VGM_CLIENT_PATH(\systems\mission_director\client);

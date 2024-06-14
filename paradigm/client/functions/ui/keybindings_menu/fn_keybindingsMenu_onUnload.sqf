@@ -29,5 +29,6 @@ if (_exitCode == 1) then {
         [_x, _y] call para_c_fnc_keyhandler_setKeybind;
     } forEach _currentKeybinds;
 
-
+    // Ensure changes are persisted to disk.
+    saveProfileNamespace;
 };

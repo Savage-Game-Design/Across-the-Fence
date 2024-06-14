@@ -4,14 +4,14 @@
     File: fn_keyhandler_init.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-11
+    Last Update: 2024-06-14
     Public: Yes
 
     Description:
         Sets up global keybindings.
 
     Parameter(s):
-        N/A
+        _gamemodeId - Unique ID for the gamemode to avoid keybinding conflicts [STRING]
 
     Returns:
         Nothing
@@ -58,12 +58,18 @@ Action registration data structure:
 ]
 */
 
+params ["_gamemodeId"];
+
+vgm_c_keyhandler_gamemodeId = _gamemodeId;
+vgm_c_keyhandler_savedKeybindsProfileKey = format ["para_c_keyhandler_gamemodeBindings_%1", _gamemodeId];
+
 localNamespace setVariable ["para_c_keyhandler_bannedKeys", [
     DIK_ESCAPE
 ] createHashMapFromArray []];
 
-private _savedKeybindings = profileNamespace getVariable ["para_c_keyhandler_bindings", createHashMap];
-profileNamespace setVariable ["para_c_keyhandler_bindings", _savedKeybindings];
+// Initialise the saved keybinds for this gamemode.
+private _savedKeybindings = profileNamespace getVariable [vgm_c_keyhandler_savedKeybindsProfileKey, createHashMap];
+profileNamespace setVariable [vgm_c_keyhandler_savedKeybindsProfileKey, _savedKeybindings];
 
 localNamespace setVariable ["para_keyhandler_bindings", createHashMap];
 

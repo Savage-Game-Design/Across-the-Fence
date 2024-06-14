@@ -2,7 +2,7 @@
     File: fn_keyhandler_saveKeybind.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-05
+    Last Update: 2024-06-14
     Public: No
 
     Description:
@@ -29,4 +29,4 @@
 
 params ["_actionName", "_keyBind"];
 
-profileNamespace getVariable "para_c_keyhandler_bindings" set [_actionName, _keyBind];
+profileNamespace getVariable vgm_c_keyhandler_savedKeybindsProfileKey set [_actionName, _keyBind];

@@ -18,4 +18,4 @@
 
 params ["_actionName"];
 
-profileNamespace getVariable "para_c_keyhandler_bindings" get _actionName
+([] call vgm_c_fnc_keyhandler_getSavedKeybinds) get _actionName
