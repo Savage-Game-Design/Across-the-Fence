@@ -2,7 +2,7 @@
     File: fn_keyhandler_addDisplayActionHandler.sqf
     Author: Savage Game Design
     Date: 2024-05-10
-    Last Update: 2024-05-10
+    Last Update: 2024-06-14
     Public: Yes
 
     Description:
@@ -17,7 +17,8 @@
         Nothing
 
     Example(s):
-        ["MyAction", para_c_fnc_doThing] call para_c_fnc_keyhandler_addGeneralActionHandler;
+        private _myDisplay = findDisplay 46 createDisplay "RscMyDisplay";
+        [myDisplay, "MyAction", para_c_fnc_doThing] call para_c_fnc_keyhandler_addGeneralActionHandler;
  */
 
 params ["_display", "_actionName", "_handler"];
