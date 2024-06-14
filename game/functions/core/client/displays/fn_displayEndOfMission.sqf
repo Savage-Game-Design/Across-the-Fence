@@ -3,7 +3,7 @@
     File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
     Author: Savage Game Design
     Date: 2023-09-25
-    Last Update: 2024-03-02
+    Last Update: 2024-04-24
     Public: No
 
     Description:
@@ -157,6 +157,18 @@ switch _mode do {
             _ctrlProgress progressSetPosition 1;
         };
         _ctrlProgress progressSetPosition ((_leftXp - _offset) / (_rightXp - _offset));
+    };
+
+    case "updateEndStatus": {
+        params ["_display", "_endType"];
+
+        private _text = switch (_endType) do {
+            case "SUCCESS": {localize "STR_VGM_MISSION_END_UI_SUCCESSFUL"};
+            case "FAILURE": {localize "STR_VGM_MISSION_END_UI_FAILURE"};
+            default {_endType};
+        };
+
+        (_display displayCtrl VGM_IDC_DISPLAYENDOFMISSION_STATUS) ctrlSetText _text;
     };
 
     default {

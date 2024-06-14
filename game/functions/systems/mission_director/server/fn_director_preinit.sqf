@@ -2,7 +2,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-03-01
+    Last Update: 2024-05-24
     Public: No
 
     Description:
@@ -83,7 +83,7 @@ vgm_s_director_attack_classes = [
 
         if (_alivePlayers isNotEqualTo []) exitWith {};
 
-        [_mission get "public" get "id"] call vgm_s_fnc_missions_endMission;
+        [_mission get "public" get "id", "FAILURE"] call vgm_s_fnc_missions_endMission;
     }
 ] call para_g_fnc_event_subscribe;
 
@@ -97,3 +97,52 @@ vgm_s_director_attack_classes = [
 
     ["vgm_mission_director_jipData", [_mission get "director" get "aiGroups"], _machineId] call para_g_fnc_event_triggerTargets;
 }] call para_g_fnc_event_subscribeLocal;
+
+// handle extraction
+call {
+    ["vgm_missions_gameplay_extractionStarted", {
+        (_this#0) spawn {
+            params ["_missionId", "_lzPos", "_helicopter"];
+
+            private _mission = [_missionId] call vgm_s_fnc_missions_getById;
+            private _playerGroup = _mission get "public" get "group";
+
+            sleep 3;
+            [
+                _playerGroup,
+                format ["vgm_extract_%1", _missionId],
+                ["STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_DESCRIPTION", "STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_TITLE"],
+                _lzPos,
+                "ASSIGNED",
+                -1,
+                true,
+                "heli"
+            ] call BIS_fnc_taskCreate;
+
+            waitUntil {group _helicopter getVariable ["vgm_missions_extractionLanded", false]};
+
+            [
+                _playerGroup,
+                [format ["vgm_extract_%1_board", _missionId], format ["vgm_extract_%1", _missionId]],
+                ["", "STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE"],
+                _helicopter,
+                "ASSIGNED",
+                -1,
+                true,
+                "getin"
+            ] call BIS_fnc_taskCreate;
+        };
+    }] call para_g_fnc_event_subscribeLocal;
+
+    ["vgm_missions_gameplay_extractionLiftOff", {
+        (_this#0) params ["_missionId", "_helicopter"];
+
+        [format ["vgm_extract_%1_board", _missionId], "SUCCEEDED"] call BIS_fnc_taskSetState;
+    }] call para_g_fnc_event_subscribeLocal;
+
+    ["vgm_mission_ended", {
+        (_this#0) params ["_missionId", "_helicopter"];
+
+        [format ["vgm_extract_%1", _missionId], true, true] call BIS_fnc_deleteTask;
+    }] call para_g_fnc_event_subscribeLocal;
+};
