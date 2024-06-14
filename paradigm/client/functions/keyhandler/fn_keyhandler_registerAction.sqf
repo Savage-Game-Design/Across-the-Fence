@@ -3,7 +3,7 @@
     Author: Savage Game Design
     Date: 2024-05-11
     Last Update: 2024-06-14
-    Public: No
+    Public: Yes
 
     Description:
         Registers a new action with the keybinding system, able to be triggered by a keypress.
@@ -19,7 +19,7 @@
         [_myActionHashMap] call para_c_fnc_keyhandler_registerAction;
  */
 
-params ["_action"];
+params [["_action", nil, [createHashMap]]];
 
 private _registeredActions = localNamespace getVariable ["para_keyhandler_actions", createHashMap];
 
