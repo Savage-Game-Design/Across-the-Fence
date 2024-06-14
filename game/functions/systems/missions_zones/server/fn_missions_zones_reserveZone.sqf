@@ -6,10 +6,11 @@
     Public: Yes
 
     Description:
-        No description added yet.
+        Tries to reserve the specified mission zone for player.
 
     Parameter(s):
-        N/A
+        _playerId   - Player that is doing the reservation [STRING]
+        _targetZone - Zone name [STRING]
 
     Returns:
         Zone was reserved successfuly [BOOL]
