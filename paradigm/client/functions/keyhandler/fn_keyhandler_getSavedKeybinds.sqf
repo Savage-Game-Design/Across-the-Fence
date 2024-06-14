@@ -12,10 +12,10 @@
         N/A
 
     Returns:
-        Saved keybindings, see vgm_c_fnc_keyhandler_init for the data structure [HashMap]
+        Saved keybindings, see para_c_fnc_keyhandler_init for the data structure [HashMap]
 
     Example(s):
-        [] call vgm_c_fnc_keyhandler_getSavedKeybinds;
+        [] call para_c_fnc_keyhandler_getSavedKeybinds;
  */
 
 profileNamespace getVariable vgm_c_keyhandler_savedKeybindsProfileKey

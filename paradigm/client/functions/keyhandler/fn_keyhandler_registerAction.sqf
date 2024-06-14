@@ -26,7 +26,7 @@ private _registeredActions = localNamespace getVariable ["para_keyhandler_action
 private _actionName = _action get "name";
 
 // Any new actions (e.g from gamemode updates) get saved to the profile.
-private _savedKeybindings = [] call vgm_c_fnc_keyhandler_getSavedKeybinds;
+private _savedKeybindings = [] call para_c_fnc_keyhandler_getSavedKeybinds;
 if !(_actionName in _savedKeybindings) then {
     [_actionName, _action get "defaultKey"] call para_c_fnc_keyhandler_saveKeybind;
 };
