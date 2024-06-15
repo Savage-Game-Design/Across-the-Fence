@@ -18,4 +18,4 @@
 
 params ["_actionName"];
 
-([] call vgm_c_fnc_keyhandler_getSavedKeybinds) get _actionName
+([] call para_c_fnc_keyhandler_getSavedKeybinds) get _actionName

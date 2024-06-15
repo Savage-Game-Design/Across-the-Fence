@@ -23,6 +23,6 @@ private _result = createHashMap;
     if (_x in _registeredActions) then {
         _result set [_x, _y];
     };
-} forEach ([] call vgm_c_fnc_keyhandler_getSavedKeybinds);
+} forEach ([] call para_c_fnc_keyhandler_getSavedKeybinds);
 
 _result

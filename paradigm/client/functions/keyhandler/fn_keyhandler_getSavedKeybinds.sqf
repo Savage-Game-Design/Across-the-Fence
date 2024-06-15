@@ -2,7 +2,7 @@
     File: fn_keyhandler_getSavedKeybinds.sqf
     Author: Savage Game Design
     Date: 2024-06-14
-    Last Update: 2024-06-14
+    Last Update: 2024-06-15
     Public: Yes
 
     Description:
@@ -18,5 +18,5 @@
         [] call para_c_fnc_keyhandler_getSavedKeybinds;
  */
 
-profileNamespace getVariable vgm_c_keyhandler_savedKeybindsProfileKey
+profileNamespace getVariable para_c_keyhandler_savedKeybindsProfileKey
 

@@ -2,7 +2,7 @@
     File: fn_keyhandler_registerAction.sqf
     Author: Savage Game Design
     Date: 2024-05-11
-    Last Update: 2024-06-14
+    Last Update: 2024-06-15
     Public: Yes
 
     Description:
@@ -20,6 +20,13 @@
  */
 
 params [["_action", nil, [createHashMap]]];
+
+// If the system isn't initialised, buffer the action registrations until it is
+if (isNil { [] call para_c_fnc_keyhandler_getSavedKeybinds }) exitWith {
+    private _pendingActionRegistrations = localNamespace getVariable ["para_c_keyhandler_pendingActionRegistrations", []];
+    _pendingActionRegistrations pushBack _this;
+    localNamespace setVariable ["para_c_keyhandler_pendingActionRegistrations", _pendingActionRegistrations];
+};
 
 private _registeredActions = localNamespace getVariable ["para_keyhandler_actions", createHashMap];
 
