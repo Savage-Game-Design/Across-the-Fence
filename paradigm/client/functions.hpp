@@ -70,19 +70,19 @@ class para_c
 	{
 		PARA_CLIENT_PATH(\keyhandler);
 
-        class keyhandler_addDisplayActionHandler {};
-        class keyhandler_addGeneralActionHandler {};
-        class keyhandler_enableGeneralActionTriggeringOnDisplay {};
+		class keyhandler_addDisplayActionHandler {};
+		class keyhandler_addGeneralActionHandler {};
+		class keyhandler_enableGeneralActionTriggeringOnDisplay {};
 		class keyhandler_getAction {};
 		class keyhandler_getAllKeybinds {};
 		class keyhandler_getKeybind {};
-        class keyhandler_getSavedKeybinds {};
-        class keyhandler_hookDisplayKeyEvents {};
+		class keyhandler_getSavedKeybinds {};
+		class keyhandler_hookDisplayKeyEvents {};
 		class keyhandler_keybindToKeypress {};
 		class keyhandler_init {};
 		class keyhandler_onKeypress {};
-        class keyhandler_registerAction {};
-        class keyhandler_registerActionAfterInit {};
+		class keyhandler_registerAction {};
+		class keyhandler_registerActionAfterInit {};
 		class keyhandler_saveKeybind {};
 		class keyhandler_setKeybind {};
 		class keyhandler_stringifyKeybind {};
