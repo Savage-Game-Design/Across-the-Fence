@@ -82,6 +82,7 @@ class para_c
 		class keyhandler_init {};
 		class keyhandler_onKeypress {};
         class keyhandler_registerAction {};
+        class keyhandler_registerActionAfterInit {};
 		class keyhandler_saveKeybind {};
 		class keyhandler_setKeybind {};
 		class keyhandler_stringifyKeybind {};

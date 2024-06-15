@@ -78,7 +78,7 @@ localNamespace setVariable ["para_keyhandler_actions", _registeredActions];
 
 // Register all pending actions, now all critical variables are initialised.
 {
-    _x call para_c_fnc_keyhandler_registerAction;
+    _x call para_c_fnc_keyhandler_registerActionAfterInit;
 } forEach (localNamespace getVariable "para_c_keyhandler_pendingActionRegistrations");
 
 {

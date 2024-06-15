@@ -28,17 +28,4 @@ if (isNil { [] call para_c_fnc_keyhandler_getSavedKeybinds }) exitWith {
     localNamespace setVariable ["para_c_keyhandler_pendingActionRegistrations", _pendingActionRegistrations];
 };
 
-private _registeredActions = localNamespace getVariable ["para_keyhandler_actions", createHashMap];
-
-private _actionName = _action get "name";
-
-// Any new actions (e.g from gamemode updates) get saved to the profile.
-private _savedKeybindings = [] call para_c_fnc_keyhandler_getSavedKeybinds;
-if !(_actionName in _savedKeybindings) then {
-    [_actionName, _action get "defaultKey"] call para_c_fnc_keyhandler_saveKeybind;
-};
-
-_action set ["localizedDisplayName", (_action get "displayName") call para_c_fnc_localize];
-_registeredActions set [_actionName, _action];
-
-localNamespace setVariable ["para_keyhandler_actions", _registeredActions];
+_this call para_c_fnc_keyhandler_registerActionAfterInit;
