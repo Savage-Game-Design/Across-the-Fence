@@ -182,6 +182,15 @@ class vgm_g
         };
     };
 
+    class missions_zones
+    {
+        VGM_GLOBAL_PATH(\systems\missions_zones\global);
+
+        class missions_zones_postInit
+        {
+            postInit = 1;
+        };
+    };
 
     class skills
     {
@@ -342,6 +351,19 @@ class vgm_c
         class missions_gameplay_extraction_addAction {};
         class missions_gameplay_extraction_requestExtraction {};
         class missions_gameplay_extraction_getNearbyRadio {};
+    };
+
+    class missions_zones
+    {
+        VGM_CLIENT_PATH(\systems\missions_zones\client);
+
+        class missions_zones_openMissionsDialog {};
+    };
+    class missions_zones_remoteExec
+    {
+        VGM_CLIENT_PATH(\systems\missions_zones\client\remoteExec);
+
+        class missions_zones_remoteExec_receiveList {};
     };
 
     class loading

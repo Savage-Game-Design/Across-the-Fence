@@ -12,3 +12,10 @@
 if (!hasInterface) exitWith {};
 
 vgm_mission_onMission = false;
+
+["vgm_mission_creationFailed", {
+    params ["_args"];
+    _args params ["_targetZone"];
+
+    hint format ["Failed to reserve zone %1 for mission.", markerText _targetZone];
+}] call para_g_fnc_event_subscribeServer;

@@ -2,7 +2,7 @@
     File: fn_missions_remoteExec_createMission.sqf
     Author: Savage Game Design
     Date: 2023-03-05
-    Last Update: 2023-06-20
+    Last Update: 2024-04-04
     Public: Yes
 
     Description:
@@ -15,14 +15,19 @@
         Nothing
 
     Example(s):
-        [getPlayerID player] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
+        [getPlayerID player, "vgm_targetBox_1"] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
  */
 
-params ["_playerId"];
+params ["_playerId", "_targetZone"];
 
 if !([_playerId] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {};
 
+if (!([_playerId, _targetZone] call vgm_s_fnc_missions_zones_reserveZone)) exitWith {
+    ["vgm_mission_creationFailed", [_targetZone], [remoteExecutedOwner]] call para_g_fnc_event_triggerTargets;
+};
+
 [
     createHashMap,
-    _playerId
+    _playerId,
+    _targetZone
 ] call vgm_s_fnc_missions_createMission;
