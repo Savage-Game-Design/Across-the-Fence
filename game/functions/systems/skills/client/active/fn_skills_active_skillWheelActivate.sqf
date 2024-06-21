@@ -2,7 +2,7 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2023-10-08
+    Last Update: 2024-06-21
     Public: No
 
     Description:
@@ -32,7 +32,7 @@ if (false isEqualTo call (_skill get "conditionActivate")) exitWith {
     player call (_skill get "codeUnableToActivate");
 };
 
-player call (_skill get "codeActivate");
+[player, _skill] call (_skill get "codeActivate");
 
 private _cooldownTime = (_skill get "cooldown") * (player getVariable ["vgm_c_skills_cooldownCoef", 1]);
 // TODO remember cooldowns to prevent resetting by doing a reconnect
