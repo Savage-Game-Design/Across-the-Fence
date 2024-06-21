@@ -10,6 +10,7 @@ class vgm_skillTemplate {
 
     cost = 1;
     cooldown = 10;
+    duration = 0;
 
     conditionUnlock = "true";
     conditionShow = "true";
@@ -97,6 +98,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 4;
                     cooldown = 120;
+                    duration = 20;
                 };
             };
         };
