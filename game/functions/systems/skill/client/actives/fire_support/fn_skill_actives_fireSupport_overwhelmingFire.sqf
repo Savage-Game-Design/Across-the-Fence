@@ -2,7 +2,7 @@
     File: fn_skill_actives_fireSupport_overwhelmingFire.sqf
     Author: Savage Game Design
     Date: 2023-10-08
-    Last Update: 2023-10-14
+    Last Update: 2024-06-23
     Public: No
 
     Description:
@@ -18,6 +18,8 @@
         [] call vgm_c_fnc_skill_passives_fireSupport_overwhelmingFire
  */
 
+params ["", "_skill"];
+
 ["Fire Support/Overwhelming Fire skill activated"] call vgm_g_fnc_logInfo;
 
 ["skill_fireSupport_overwhelmingFire", {
@@ -25,7 +27,7 @@
 
     [player, "suppress", "skill_fireSupport_overwhelmingFire"] call vgm_c_fnc_coefficient_remove;
     player removeEventHandler ["Fired", vgm_c_skill_actives_fireSupport_overwhelmingFire_firedEh]
-}, 120, "seconds"] call BIS_fnc_runLater;
+}, _skill get "duration", "seconds"] call BIS_fnc_runLater;
 
 [player, "suppress", "skill_fireSupport_overwhelmingFire", 0.5] call vgm_c_fnc_coefficient_set;
 
