@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2024-06-21
+    Last Update: 2024-06-23
     Public: No
 
     Description:
@@ -124,11 +124,10 @@ switch _mode do {
                 };
 
                 if (_remainingDuration > 0) then {
-                    hint str [_remainingDuration];
                     _ctrlDuration progressSetPosition (_remainingDuration / _totalDuration);
                     _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingDuration];
                 } else {
-                    hint str [_remainingCooldown, "cooldown"];
+                    _ctrlDuration progressSetPosition 0;
                     _ctrlCooldown progressSetPosition (1 - (_remainingCooldown / _totalCooldown));
                     _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
                 };
@@ -139,6 +138,6 @@ switch _mode do {
             };
 
             _thisArgs set [0, _deltaT];
-        }, [0, _ctrlCooldown, _ctrlSeconds, _ctrlDuration, _cooldown, (_cooldown - _totalDuration), _duration, _duration]];
+        }, [0, _ctrlCooldown, _ctrlSeconds, _ctrlDuration, _cooldown, (_cooldown - _duration), _duration, _duration]];
     };
 };
