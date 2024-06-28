@@ -4,4 +4,5 @@
 #include "cfg_artillery.hpp"
 #include "cfg_equipment.hpp"
 #include "cfg_levels.hpp"
+#include "cfg_site_types.hpp"
 #include "cfg_skills.hpp"

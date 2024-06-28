@@ -202,8 +202,17 @@ class vgm_s
         class sites_delete {};
         class sites_getSiteType {};
         class sites_getTemplate {};
+        class sites_loadSiteTypesFromConfig {};
         class sites_spawn {};
         class sites_spawnRandomFortifications {};
+    };
+
+    class site_types
+    {
+        VGM_SERVER_PATH(\systems\sites\types\server);
+
+        class sites_type_campfire {};
+        class sites_type_shelter {};
     };
 
     class skill

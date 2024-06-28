@@ -2,7 +2,7 @@
     File: sites_getTemplate.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-05-25
+    Last Update: 2024-06-27
     Public: Yes
 
     Description:
@@ -19,8 +19,6 @@
  */
 
 createHashMapFromArray [
-    // Unique ID for the site, and the name that will be used to create it.
-    ["id", ""],
     // Localizable name for the site, that may be displayed to players
     ["name", "STR_VGM_SITES_PLACEHOLDER"],
     // Called to spawn the site.
