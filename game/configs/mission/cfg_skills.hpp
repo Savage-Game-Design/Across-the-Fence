@@ -10,6 +10,7 @@ class vgm_skillTemplate {
 
     cost = 1;
     cooldown = 10;
+    duration = 0;
 
     conditionUnlock = "true";
     conditionShow = "true";
@@ -84,6 +85,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 120;
+                    duration = 30;
                 };
             };
 
@@ -97,6 +99,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 4;
                     cooldown = 120;
+                    duration = 20;
                 };
             };
         };
@@ -168,6 +171,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 120;
+                    duration = 20;
                 };
             };
 
@@ -180,6 +184,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 2;
                     cooldown = 180;
+                    duration = 60;
                 };
             };
         };
@@ -254,6 +259,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 180;
+                    duration = 10;
                 };
             };
 
@@ -267,6 +273,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 2;
                     cooldown = 240;
+                    duration = 120;
                 };
             };
         };
@@ -367,6 +374,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 2;
                     cooldown = 480;
+                    duration = 30;
                 };
             };
         };
