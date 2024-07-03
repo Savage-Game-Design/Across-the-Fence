@@ -259,6 +259,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 180;
+                    duration = 10;
                 };
             };
 
