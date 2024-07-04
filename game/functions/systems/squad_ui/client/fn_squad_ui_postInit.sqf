@@ -11,7 +11,7 @@
 
 if (!hasInterface) exitWith {};
 
-vgm_squad_ui_defaultIcon = if (difficultyOption "groupIndicators" > 0) then {""} else {"a3\ui_f\data\igui\cfg\cursors\select_ca.paa"};
+vgm_squad_ui_defaultIcon = if (difficultyOption "groupIndicators" > 0) then {""} else {getMissionPath "assets\hex_ca.paa"};
 
 vgm_squad_ui_draw3dEH = addMissionEventHandler ["Draw3D", {
     private _player = player;
@@ -67,7 +67,10 @@ vgm_squad_ui_draw3dEH = addMissionEventHandler ["Draw3D", {
     if ([_unit, "bleeding"] call vgm_c_fnc_statusEffect_get) exitWith {};
 
     private _wounds = [_unit, "total"] call vgm_c_fnc_medical_getWound;
-    if (_wounds > 1 && _wounds <= 3) exitWith {
+    if (_wounds > 3) exitWith {
+        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r75_ca.paa", true];
+    };
+    if (_wounds > 1) exitWith {
         _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r50_ca.paa", true];
     };
 
