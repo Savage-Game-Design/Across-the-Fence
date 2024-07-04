@@ -9,7 +9,8 @@
             "command": "py '${workspaceFolder}\\build\\build.py' build --overwrite",
             "problemMatcher": [],
             "group": {
-                "kind": "build"
+                "kind": "build",
+                "isDefault": true
             }
         },
         {
