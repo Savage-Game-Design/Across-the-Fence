@@ -68,6 +68,9 @@
         <Key ID="STR_VGM_SKILLS_UI_RESPEC">
             <Original>Reset all skills</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_HUD_ACTIVES">
+            <Original>Active abilities</Original>
+        </Key>
     </Package>
     <Package name="Medical UI">
         <Key ID="STR_VGM_MEDICAL_UI_APPLY_FAK">
