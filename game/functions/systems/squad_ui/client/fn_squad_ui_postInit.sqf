@@ -9,6 +9,11 @@
         Squad UI component client post init.
  */
 
+#define ICON_WOUND_MINOR "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r50_ca.paa"
+#define ICON_WOUND_MAJOR "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r75_ca.paa"
+#define ICON_BLEEDING "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r100_ca.paa"
+#define ICON_INCAPACITATED "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\u100_ca.paa"
+
 if (!hasInterface) exitWith {};
 
 vgm_squad_ui_defaultIcon = if (difficultyOption "groupIndicators" > 0) then {""} else {getMissionPath "assets\hex_ca.paa"};
@@ -36,7 +41,7 @@ vgm_squad_ui_draw3dEH = addMissionEventHandler ["Draw3D", {
     (_this#0) params ["_unit", "_state"];
 
     if (_state) then {
-        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\u100_ca.paa", true];
+        _unit setVariable ["vgm_squad_ui_icon", ICON_INCAPACITATED, true];
     } else {
         _unit setVariable ["vgm_squad_ui_icon", nil, true];
     };
@@ -47,15 +52,15 @@ vgm_squad_ui_draw3dEH = addMissionEventHandler ["Draw3D", {
     if (lifeState _unit == "INCAPACITATED") exitWith {};
 
     if ([_unit, "bleeding"] call vgm_c_fnc_statusEffect_get) exitWith {
-        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r100_ca.paa", true];
+        _unit setVariable ["vgm_squad_ui_icon", ICON_BLEEDING, true];
     };
 
     private _wounds = [_unit, "total"] call vgm_c_fnc_medical_getWound;
     if (_wounds > 3) exitWith {
-        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r75_ca.paa", true];
+        _unit setVariable ["vgm_squad_ui_icon", ICON_WOUND_MAJOR, true];
     };
     if (_wounds > 1) exitWith {
-        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r50_ca.paa", true];
+        _unit setVariable ["vgm_squad_ui_icon", ICON_WOUND_MINOR, true];
     };
 
 }] call para_g_fnc_event_subscribeLocal;
@@ -68,10 +73,10 @@ vgm_squad_ui_draw3dEH = addMissionEventHandler ["Draw3D", {
 
     private _wounds = [_unit, "total"] call vgm_c_fnc_medical_getWound;
     if (_wounds > 3) exitWith {
-        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r75_ca.paa", true];
+        _unit setVariable ["vgm_squad_ui_icon", ICON_WOUND_MAJOR, true];
     };
     if (_wounds > 1) exitWith {
-        _unit setVariable ["vgm_squad_ui_icon", "\a3\ui_f\data\IGUI\Cfg\Revive\overlayIconsGroup\r50_ca.paa", true];
+        _unit setVariable ["vgm_squad_ui_icon", ICON_WOUND_MINOR, true];
     };
 
     _unit setVariable ["vgm_squad_ui_icon", nil, true];
