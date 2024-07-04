@@ -35,10 +35,10 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             rowHeight = _ICON_H * VGM_GRID_H;
             style = ST_PICTURE;
         };
-        class Respec: VGM_ctrlButtonPicture
+        class Respec: VGM_ctrlButtonPictureKeepAspect
         {
             idc = VGM_IDC_DISPLAYSKILLS_RESPEC;
-            text = "";
+            text = "\a3\3den\data\attributes\loiterdirection\cw_ca.paa";
             tooltip = "$STR_VGM_SKILLS_UI_RESPEC";
             onButtonClick = VGM_UIEH(respec,Skills);
             x = _DISPLAY_X + 1 * VGM_GRID_W;

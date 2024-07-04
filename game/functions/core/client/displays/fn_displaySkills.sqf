@@ -11,18 +11,27 @@ switch _mode do {
         _display setVariable ["vgm_currentSkillTree", createHashMap];
         _display setVariable ["vgm_currentSkill", createHashMap];
 
-        private _handlerId = ["vgm_skills_learnt", [_display, {
-            params ["", "_display"];
-            ["refreshUI", _display] call vgm_c_fnc_displaySkills;
-        }]] call para_g_fnc_event_subscribeLocal;
-        _display setVariable ["vgm_skills_ui_learntHandlerId", _handlerId];
+        private _refreshHandlersIds = [];
+        _display setVariable ["vgm_skills_ui_refreshHandlerIds", _handlerIds];
+        {
+            private _ehId = [_x, [_display, {
+                params ["", "_display"];
+                ["refreshUI", _display] call vgm_c_fnc_displaySkills;
+            }]] call para_g_fnc_event_subscribeLocal;
+
+            _refreshHandlersIds pushBack _ehId;
+        } forEach [
+            "vgm_skills_learnt",
+            "vgm_skills_forgotten"
+        ];
 
         ["refreshUI", _display] call vgm_c_fnc_displaySkills;
     };
 
     case "onUnload": {
         params ["_display"];
-        [_display getVariable "vgm_skills_ui_learntHandlerId"] call para_g_fnc_event_unsubscribe;
+
+        {[_x] call para_g_fnc_event_unsubscribe} forEach (_display getVariable "vgm_skills_ui_refreshHandlerIds");
     };
 
     case "refreshUI": {
@@ -126,7 +135,7 @@ switch _mode do {
         params ["_display"];
 
         private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
-        private _skillTree = _display getVariable "vgm_currentSkillTree";
+        private _skillTree = _display getVariable ["vgm_currentSkillTree", createHashMap];
 
         // Remove all old controls
         allControls _ctrlSkillTree apply { ctrlDelete _x };
@@ -347,6 +356,11 @@ switch _mode do {
         private _label = format ["%1 (%2/%3 SP)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
 
         _ctrlSkills lbSetTooltip [_i, _label];
+    };
+
+    case "respec": {
+        params ["_ctrlRespec"];
+        [ctrlParent _ctrlRespec] call vgm_c_fnc_skills_requestSkillRespec;
     };
 
     default {
