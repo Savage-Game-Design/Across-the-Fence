@@ -12,7 +12,7 @@ switch _mode do {
         _display setVariable ["vgm_currentSkill", createHashMap];
 
         private _refreshHandlersIds = [];
-        _display setVariable ["vgm_skills_ui_refreshHandlerIds", _handlerIds];
+        _display setVariable ["vgm_skills_ui_refreshHandlerIds", _refreshHandlersIds];
         {
             private _ehId = [_x, [_display, {
                 params ["", "_display"];
