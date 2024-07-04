@@ -19,7 +19,7 @@ class VGM_RscAbilityCooldown
             text = "$STR_VGM_SKILLS_UI_HUD_ACTIVES";
             colorText[] = {1,1,1,0.75};
             x = DISPLAY_X + (ICON_SIZE * GUI_GRID_W / 3);
-            y = DISPLAY_Y - 1.5 * GUI_GRID_H;
+            y = DISPLAY_Y - 1.3 * GUI_GRID_H;
             w = DISPLAY_X + DISPLAY_W * GUI_GRID_W;
             h = 1 * GUI_GRID_H;
         };
