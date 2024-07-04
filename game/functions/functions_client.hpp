@@ -259,6 +259,11 @@ class vgm_c
             preInit = 1;
         };
 
+        class display_postInit
+        {
+            postInit = 1;
+        };
+
         class displaySkills {};
         class displayAbilities {};
         class displayMissions {};
@@ -298,6 +303,16 @@ class vgm_c
         class equipment_filterLoadout {};
         class equipment_openArsenal {};
         class equipment_postInit
+        {
+            postInit = 1;
+        };
+    };
+
+    class keyhandler
+    {
+        VGM_CLIENT_PATH(\core\client\keyhandler);
+
+        class keyhandler_postInit
         {
             postInit = 1;
         };

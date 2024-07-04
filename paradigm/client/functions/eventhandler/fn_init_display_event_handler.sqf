@@ -35,7 +35,3 @@ if !(isNull _display) then
 } else {
 	"ERROR: vn_mf_fnc_init_display_event_handler was called before display is ready!" call BIS_fnc_log;
 };
-
-// init key binds
-call para_c_fnc_init_key_down;
-call para_c_fnc_init_key_up;

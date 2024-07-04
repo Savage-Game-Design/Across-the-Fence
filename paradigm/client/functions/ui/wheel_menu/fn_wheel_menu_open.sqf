@@ -94,22 +94,6 @@ if (!isNull _oldDisplay) then {
 	// Try to stop wheel menus clashing with each other if close/open overlaps for some reason
 	uiSleep 0;
 
-	// close menu on repeated press
-	private _EH_closeWM = {
-		params["_display","_button","_shift","_ctrl","_alt"];
-
-		if (isNull (uiNamespace getVariable ["vn_wheelmenu", displayNull])) exitWith {};
-
-		private _key_bind = ["para_keydown_open_wheel_menu"] call para_c_fnc_get_key_bind;
-		if(([_button,_shift,_ctrl,_alt] joinString "_") isEqualTo (_key_bind joinString "_"))then
-		{
-			if(!isNull _display)then
-			{
-				_display closeDisplay 1;
-			};
-		};
-	};
-
 	private _EH_Unload = {
 		params ["_display", "_exitCode"];
 		uiNamespace setVariable ["vn_wheelmenu", nil];
@@ -142,7 +126,6 @@ if (!isNull _oldDisplay) then {
 	if (isNull _display) exitWith { false };
 
 	// add handler to close menu
-	_display displayAddEventHandler ["KeyDown", _EH_closeWM];
 	_display displayAddEventHandler ["Unload", _EH_Unload];
 
 	// add mission eachFrame EH to check distance

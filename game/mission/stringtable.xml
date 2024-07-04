@@ -65,6 +65,9 @@
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
             <Original>Tier locked\nLearn any skill in previous level to unlock</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_OPEN_SKILL_WHEEL">
+            <Original>Open skill wheel</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_RESPEC">
             <Original>Reset all skills</Original>
         </Key>
@@ -151,6 +154,9 @@
         </Key>
         <Key ID="STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING">
             <Original>%1&lt;br/&gt;No training</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU">
+            <Original>Open medical menu</Original>
         </Key>
     </Package>
     <Package name="Mission End UI">
@@ -351,6 +357,29 @@
             <Original>Stay stationary to Listen</Original>
         </Key>
     </Package>
+    <Package name="Paradigm keybinding menu">
+        <Key ID="STR_PARA_KEYBINDINGS_TITLE">
+            <Original>Edit Keybindings</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_ACTION">
+            <Original>Action</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_KEY">
+            <Original>Key</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_RESET">
+            <Original>Restore Defaults</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CONFIRM">
+            <Original>Save</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CANCEL">
+            <Original>Cancel</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_MENU_BUTTON">
+            <Original>Gamemode Keybindings</Original>
+        </Key>
+    </Package>
     <Package name="Header Bar">
         <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
             <Original>Equipment</Original>
@@ -387,6 +416,5 @@
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
         </Key>
-    </Package
-
+  </Package>
 </Project>
