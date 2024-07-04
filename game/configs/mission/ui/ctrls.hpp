@@ -13,6 +13,7 @@ import ctrlControlsGroup;
 import ctrlControlsGroupNoScrollbars;
 import ctrlButton;
 import ctrlButtonPicture;
+import ctrlButtonPictureKeepAspect;
 import ctrlStaticFrame;
 import ctrlStaticPicture;
 import ctrlStaticPictureKeepAspect;
@@ -183,6 +184,10 @@ class VGM_ctrlShortcutButton: RscButtonMenu
 
 class VGM_ctrlButtonPicture: ctrlButtonPicture
 {
+};
+class VGM_ctrlButtonPictureKeepAspect: ctrlButtonPictureKeepAspect
+{
+    colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
 };
 
 class VGM_ctrlButtonInvisible: VGM_ctrlButton

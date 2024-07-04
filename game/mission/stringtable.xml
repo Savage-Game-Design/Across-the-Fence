@@ -65,6 +65,9 @@
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
             <Original>Tier locked\nLearn any skill in previous level to unlock</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_RESPEC">
+            <Original>Reset all skills</Original>
+        </Key>
     </Package>
     <Package name="Medical UI">
         <Key ID="STR_VGM_MEDICAL_UI_APPLY_FAK">
