@@ -649,6 +649,16 @@ class vgm_c
         class skill_investigate_setListenMode {};
     };
 
+    class squad_ui
+    {
+        VGM_CLIENT_PATH(\systems\squad_ui\client);
+
+        class squad_ui_postInit
+        {
+            postInit = 1;
+        };
+    };
+
     class stamina
     {
         VGM_CLIENT_PATH(\systems\stamina\client);
