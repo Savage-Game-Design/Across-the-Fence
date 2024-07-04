@@ -60,6 +60,10 @@ Action registration data structure:
 
 params ["_gamemodeId"];
 
+if (!isNil "para_c_keyhandler_gamemodeId") then {
+    ["ERROR", format ["Keybinding system was already initialized: %1", _gamemodeId]] call para_g_fnc_log;
+};
+
 para_c_keyhandler_gamemodeId = _gamemodeId;
 para_c_keyhandler_savedKeybindsProfileKey = format ["para_c_keyhandler_gamemodeBindings_%1", _gamemodeId];
 
