@@ -2,7 +2,7 @@
     File: fn_skill_passives_fireSupport_learnTheRhythm.sqf
     Author: Savage Game Design
     Date: 2023-10-07
-    Last Update: 2023-10-14
+    Last Update: 2024-07-04
     Public: No
 
     Description:
@@ -23,7 +23,7 @@ params ["_known"];
 if (!_known) exitWith {
     player removeEventHandler ["Fired", vgm_c_skill_passives_fireSupport_learnTheRhythm_firedEh];
     player removeEventHandler ["Reloaded", vgm_c_skill_passives_fireSupport_learnTheRhythm_reloadedEh];
-    removeUserActionEventHandler ["defaultAction", "Decativate", vgm_c_skill_passives_fireSupport_learnTheRhythm_actionEh];
+    removeUserActionEventHandler ["defaultAction", "Deactivate", vgm_c_skill_passives_fireSupport_learnTheRhythm_actionEh];
 };
 
 vgm_c_skill_passives_fireSupport_learnTheRhythm_recoilCoef = 0;
@@ -42,7 +42,7 @@ vgm_c_skill_passives_fireSupport_learnTheRhythm_reloadedEh = player addEventHand
     [player, 'recoil', 'skill_fireSupport_learnTheRhythm'] call vgm_c_fnc_coefficient_remove;
 }];
 
-// reset them trigger is not pressed anymore
+// reset when trigger is not pressed anymore
 vgm_c_skill_passives_fireSupport_learnTheRhythm_actionEh = addUserActionEventHandler ["defaultAction", "Deactivate", {
     vgm_c_skill_passives_fireSupport_learnTheRhythm_recoilCoef = 0;
     [player, 'recoil', 'skill_fireSupport_learnTheRhythm'] call vgm_c_fnc_coefficient_remove;

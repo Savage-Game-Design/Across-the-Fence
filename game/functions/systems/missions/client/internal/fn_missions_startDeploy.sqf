@@ -2,7 +2,7 @@
     File: fn_missions_startDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-11-23
+    Last Update: 2024-06-09
     Public: No
 
     Description:
@@ -19,6 +19,8 @@
  */
 
 ["Beginning mission deploy"] call vgm_g_fnc_logInfo;
+
+vgm_mission_onMission = true;
 
 [] call vgm_c_fnc_sharedHub_areaLimiterDisable;
 

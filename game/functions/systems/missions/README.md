@@ -5,4 +5,13 @@
 
 ## Events
 
-TODO
+
+| Event               | Arguments              | Scope  |
+| ------------------- | ---------------------- | ------ |
+| vgm_mission_started | [_missionId]           | Global |
+| vgm_mission_ended   | [_missionId, _endType] | Global |
+
+## Global variables
+### Client
+
+`vgm_mission_onMission` - boolean indicating if player is on a mission

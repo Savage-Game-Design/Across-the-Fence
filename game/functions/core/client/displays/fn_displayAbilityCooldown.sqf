@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2023-09-22
+    Last Update: 2024-06-23
     Public: No
 
     Description:
@@ -87,25 +87,30 @@ switch _mode do {
         private _slot = vgm_c_skills_active_slots get _slotName;
 
         private _idcs = [
-            [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSPRIMARY],
-            [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSULTIMATE]
+            [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_DURATIONPRIMARY],
+            [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_DURATIONULTIMATE]
         ] select (_slotName == SLOT_ULTIMATE);
 
-        (_idcs apply {_display displayCtrl _x}) params ["_ctrlCooldown", "_ctrlSeconds"];
+        (_idcs apply {_display displayCtrl _x}) params ["_ctrlCooldown", "_ctrlSeconds", "_ctrlDuration"];
         _ctrlSeconds ctrlSetFade 0;
         _ctrlSeconds ctrlCommit 5;
 
-        _ctrlCooldown progressSetPosition 1;
+        _ctrlCooldown progressSetPosition 0;
+        _ctrlDuration progressSetPosition 1;
+
+        private _duration = _skill get "duration";
+        private _cooldown = _slot get "cooldownTime";
 
         // start cooldown ticker
         #define TICK_TIME 0.5
         addMissionEventHandler ["EachFrame", {
-            _thisArgs params ["_deltaT", "_ctrlCooldown", "_ctrlSeconds", "_remainingCooldown", "_totalCooldown"];
+            _thisArgs params ["_deltaT", "_ctrlCooldown", "_ctrlSeconds", "_ctrlDuration", "_remainingCooldown", "_totalCooldown", "_remainingDuration", "_totalDuration"];
 
             _deltaT = _deltaT + diag_deltaTime;
 
             if (_deltaT >= TICK_TIME) then {
                 _remainingCooldown = _remainingCooldown - _deltaT;
+                _remainingDuration = _remainingDuration - _deltaT;
 
                 // stop the loop, reset controls
                 if (_remainingCooldown <= 0) exitWith {
@@ -113,19 +118,26 @@ switch _mode do {
                     _ctrlSeconds ctrlSetFade 1;
                     _ctrlSeconds ctrlCommit 3;
                     _ctrlCooldown progressSetPosition 0;
+                    _ctrlDuration progressSetPosition 0;
 
                     removeMissionEventHandler [_thisEvent, _thisEventHandler]
                 };
 
-                // progress the indicator
-                _ctrlCooldown progressSetPosition (_remainingCooldown / _totalCooldown);
-                _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
+                if (_remainingDuration > 0) then {
+                    _ctrlDuration progressSetPosition (_remainingDuration / _totalDuration);
+                    _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingDuration];
+                } else {
+                    _ctrlDuration progressSetPosition 0;
+                    _ctrlCooldown progressSetPosition (1 - (_remainingCooldown / _totalCooldown));
+                    _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
+                };
 
                 _deltaT = _deltaT mod TICK_TIME;
-                _thisArgs set [3, _remainingCooldown];
+                _thisArgs set [4, _remainingCooldown];
+                _thisArgs set [6, _remainingDuration];
             };
 
             _thisArgs set [0, _deltaT];
-        }, [0, _ctrlCooldown, _ctrlSeconds, _slot get "cooldownTime", _slot get "cooldownTime"]];
+        }, [0, _ctrlCooldown, _ctrlSeconds, _ctrlDuration, _cooldown, (_cooldown - _duration), _duration, _duration]];
     };
 };

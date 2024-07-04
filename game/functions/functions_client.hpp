@@ -182,6 +182,15 @@ class vgm_g
         };
     };
 
+    class missions_zones
+    {
+        VGM_GLOBAL_PATH(\systems\missions_zones\global);
+
+        class missions_zones_postInit
+        {
+            postInit = 1;
+        };
+    };
 
     class skills
     {
@@ -338,6 +347,38 @@ class vgm_c
         class missions_endMission {};
         class missions_finishDeploy {};
         class missions_startDeploy {};
+    };
+
+    class missions_gameplay
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client);
+
+        class missions_gameplay_postInit
+        {
+            postInit = 1;
+        };
+    };
+
+    class missions_gameplay_extraction
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client\extraction);
+
+        class missions_gameplay_extraction_addAction {};
+        class missions_gameplay_extraction_requestExtraction {};
+        class missions_gameplay_extraction_getNearbyRadio {};
+    };
+
+    class missions_zones
+    {
+        VGM_CLIENT_PATH(\systems\missions_zones\client);
+
+        class missions_zones_openMissionsDialog {};
+    };
+    class missions_zones_remoteExec
+    {
+        VGM_CLIENT_PATH(\systems\missions_zones\client\remoteExec);
+
+        class missions_zones_remoteExec_receiveList {};
     };
 
     class loading
@@ -555,6 +596,13 @@ class vgm_c
             preInit = 1;
         };
     };
+    class skill_actives_fireSupport
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
+
+        class skill_actives_fireSupport_grenadesCase {};
+        class skill_actives_fireSupport_overwhelmingFire {};
+    };
     class skill_actives_infantryman
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
@@ -569,12 +617,12 @@ class vgm_c
         class skill_actives_recon_sixthSense {};
         class skill_actives_recon_thickBrush {};
     };
-    class skill_actives_fireSupport
+    class skill_actives_support
     {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
+        VGM_CLIENT_PATH(\systems\skill\client\actives\support);
 
-        class skill_actives_fireSupport_grenadesCase {};
-        class skill_actives_fireSupport_overwhelmingFire {};
+        class skill_actives_support_getToTheLz {};
+        class skill_actives_support_quickBandage {};
     };
 
     class skill_investigate

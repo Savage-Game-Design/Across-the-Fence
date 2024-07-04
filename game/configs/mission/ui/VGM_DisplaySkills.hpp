@@ -22,6 +22,7 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
         class HeaderBar: HeaderBar
         {
         };
+
         class Skills: VGM_ctrlListBox
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLS;
@@ -30,10 +31,22 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             x = _DISPLAY_X + 1 * VGM_GRID_W;
             y = _DISPLAY_Y + 1 * VGM_GRID_H;
             w = (_ICON_H + 3) * VGM_GRID_W;
-            h = (_DISPLAY_H - 2) * VGM_GRID_H;
+            h = (_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H);
             rowHeight = _ICON_H * VGM_GRID_H;
             style = ST_PICTURE;
         };
+        class Respec: VGM_ctrlButtonPictureKeepAspect
+        {
+            idc = VGM_IDC_DISPLAYSKILLS_RESPEC;
+            text = "\a3\3den\data\attributes\loiterdirection\cw_ca.paa";
+            tooltip = "$STR_VGM_SKILLS_UI_RESPEC";
+            onButtonClick = VGM_UIEH(respec,Skills);
+            x = _DISPLAY_X + 1 * VGM_GRID_W;
+            y =  (_DISPLAY_Y + 1 * VGM_GRID_H) + ((_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H));
+            w = (_ICON_H + 3) * VGM_GRID_W;
+            h = _ICON_H * VGM_GRID_H;
+        };
+
         class SPAvailable: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYSKILLS_SPAVAILABLE;

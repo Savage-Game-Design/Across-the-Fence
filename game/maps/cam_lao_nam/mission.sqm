@@ -8,22 +8,22 @@ class EditorData
 	toggles=1545;
 	class ItemIDProvider
 	{
-		nextID=1352;
+		nextID=1363;
 	};
 	class MarkerIDProvider
 	{
-		nextID=49;
+		nextID=50;
 	};
 	class LayerIndexProvider
 	{
-		nextID=713;
+		nextID=724;
 	};
 	class Camera
 	{
-		pos[]={20060.725,17.108746,6620.7461};
-		dir[]={0.69793946,-0.69260186,0.18216245};
-		up[]={0.67015207,0.72132003,0.17490992};
-		aside[]={0.25254035,-7.4505806e-009,-0.96758628};
+		pos[]={5560.8047,193.55492,18927.127};
+		dir[]={-0.64835441,-0.75725251,-0.078820348};
+		up[]={-0.75171185,0.65310013,-0.09138608};
+		aside[]={-0.12068434,-2.8574141e-07,0.99270189};
 	};
 };
 binarizationWanted=0;
@@ -38,13 +38,14 @@ addons[]=
 	"objects_f_vietnam_c",
 	"structures_f_vietnam_c",
 	"A3_Misc_F_Helpers",
-	"weapons_f_vietnam_c"
+	"weapons_f_vietnam_c",
+	"A3_Structures_F_Mil_Helipads"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=9;
+		items=10;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -108,6 +109,13 @@ class AddonsMetaData
 			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
+		class Item9
+		{
+			className="A3_Structures_F_Mil";
+			name="Arma 3 - Military Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 class DynamicSimulation
@@ -154,14 +162,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -205,14 +213,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -262,7 +270,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=16;
+		items=23;
 		class Item0
 		{
 			dataType="Logic";
@@ -275,7 +283,7 @@ class Mission
 			isPlayable=1;
 			id=1124;
 			type="HeadlessClient_F";
-			atlOffset=4.7683716e-007;
+			atlOffset=4.7683716e-07;
 		};
 		class Item1
 		{
@@ -337,7 +345,7 @@ class Mission
 							};
 							id=1196;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -388,7 +396,7 @@ class Mission
 							};
 							id=1198;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -439,7 +447,7 @@ class Mission
 							};
 							id=1200;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -490,7 +498,7 @@ class Mission
 							};
 							id=1202;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -541,7 +549,7 @@ class Mission
 							};
 							id=1204;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -592,7 +600,7 @@ class Mission
 							};
 							id=1206;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -643,7 +651,7 @@ class Mission
 							};
 							id=1208;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -694,7 +702,7 @@ class Mission
 							};
 							id=1210;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -745,7 +753,7 @@ class Mission
 							};
 							id=1212;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -796,7 +804,7 @@ class Mission
 							};
 							id=1214;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -847,7 +855,7 @@ class Mission
 							};
 							id=1216;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -898,7 +906,7 @@ class Mission
 							};
 							id=1218;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -949,7 +957,7 @@ class Mission
 							};
 							id=1220;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1000,7 +1008,7 @@ class Mission
 							};
 							id=1222;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1051,7 +1059,7 @@ class Mission
 							};
 							id=1224;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1102,7 +1110,7 @@ class Mission
 							};
 							id=1226;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1153,7 +1161,7 @@ class Mission
 							};
 							id=1228;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1204,7 +1212,7 @@ class Mission
 							};
 							id=1230;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1255,7 +1263,7 @@ class Mission
 							};
 							id=1232;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1306,7 +1314,7 @@ class Mission
 							};
 							id=1234;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1357,7 +1365,7 @@ class Mission
 							};
 							id=1236;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1408,7 +1416,7 @@ class Mission
 							};
 							id=1238;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1459,7 +1467,7 @@ class Mission
 							};
 							id=1240;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1510,7 +1518,7 @@ class Mission
 							};
 							id=1242;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1561,7 +1569,7 @@ class Mission
 							};
 							id=1244;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1612,7 +1620,7 @@ class Mission
 							};
 							id=1246;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1663,7 +1671,7 @@ class Mission
 							};
 							id=1248;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1714,7 +1722,7 @@ class Mission
 							};
 							id=1250;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1765,7 +1773,7 @@ class Mission
 							};
 							id=1252;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1816,7 +1824,7 @@ class Mission
 							};
 							id=1254;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1867,7 +1875,7 @@ class Mission
 							};
 							id=1276;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1918,7 +1926,7 @@ class Mission
 							};
 							id=1278;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -1969,7 +1977,7 @@ class Mission
 							};
 							id=1280;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -2020,7 +2028,7 @@ class Mission
 							};
 							id=1282;
 							type="vn_b_men_sf_06";
-							atlOffset=3.3378601e-006;
+							atlOffset=3.3378601e-06;
 							class CustomAttributes
 							{
 								class Attribute0
@@ -2251,7 +2259,7 @@ class Mission
 					presenceCondition="[""enable_air_support"", 1] call BIS_fnc_getParamValue != 0 || [""enable_arty_support"", 1] call BIS_fnc_getParamValue != 0";
 					id=984;
 					type="vn_module_artillery";
-					atlOffset=-4.7683716e-007;
+					atlOffset=-4.7683716e-07;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -2312,20 +2320,20 @@ class Mission
 		class Item6
 		{
 			dataType="Marker";
-			position[]={8369.7217,231.058,14375.95};
+			position[]={1086.2084,33.193432,11199.188};
 			name="vgm_test_mission_start_pos";
 			text="Test mission start";
 			type="mil_start";
 			colorName="ColorGreen";
 			id=1332;
-			atlOffset=0.00033569336;
+			atlOffset=0.0002822876;
 		};
 		class Item7
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={8363.6709,234.85808,14375.586};
+				position[]={1080.1576,37.97538,11198.824};
 			};
 			side="Empty";
 			flags=5;
@@ -2354,7 +2362,7 @@ class Mission
 			};
 			id=1337;
 			type="Land_vn_wall_board_03";
-			atlOffset=4.7683716e-007;
+			atlOffset=4.7683716e-07;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2407,31 +2415,15 @@ class Mission
 		};
 		class Item11
 		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={7202.4639,73.746803,14912.231};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];" \n "this addAction [  " \n "    ""Request extraction"",  " \n "    {  " \n "        params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; " \n "        [call vgm_c_fnc_missions_getCurrentMission get ""id"", getPos player] remoteExecCall [""vgm_s_fnc_missions_gameplay_extraction_startExtract"", 2]; " \n "    },  " \n "    [],  " \n "    115,  " \n "    false,  " \n "    true,  " \n "    """",  " \n "    ""true"",  " \n "    10  " \n "];";
-			};
-			id=1344;
-			type="vn_flag_sog";
-		};
-		class Item12
-		{
 			dataType="Marker";
-			position[]={7204.6641,69.769997,14912.639};
+			position[]={2218.1565,198.00539,13404.097};
 			name="marker_47";
 			text="Mission end";
 			type="mil_flag";
 			colorName="ColorGreen";
 			id=1345;
 		};
-		class Item13
+		class Item12
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2467,7 +2459,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item14
+		class Item13
 		{
 			dataType="Object";
 			class PositionInfo
@@ -2503,7 +2495,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item15
+		class Item14
 		{
 			dataType="Marker";
 			position[]={16579.914,14.98,6922.8911};
@@ -2511,6 +2503,147 @@ class Mission
 			text="Heli despawn";
 			type="Empty";
 			id=1351;
+		};
+		class Item15
+		{
+			dataType="Layer";
+			name="target_boxes";
+			class Entities
+			{
+				items=2;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={2239.2419,90.23111,11979.987};
+					name="vgm_targetBox_1";
+					text="Phok Ham";
+					markerType="RECTANGLE";
+					type="";
+					fillName="Border";
+					a=2000;
+					b=2000;
+					drawBorder=1;
+					id=1353;
+				};
+				class Item1
+				{
+					dataType="Marker";
+					position[]={5703.4331,124.632,17381.064};
+					name="vgm_targetBox_2";
+					text="Vong Xo";
+					markerType="ELLIPSE";
+					type="";
+					fillName="Border";
+					a=2000;
+					b=2000;
+					drawBorder=1;
+					id=1354;
+					atlOffset=0.00040435791;
+				};
+			};
+			id=1352;
+			atlOffset=148.33015;
+		};
+		class Item16
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2208.1047,201.7066,13423.222};
+				angles[]={0.027993103,0,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];" \n "this addAction [  " \n "    ""Request extraction"",  " \n "    {  " \n "        params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; " \n "        [call vgm_c_fnc_missions_getCurrentMission get ""id"", getPos player] remoteExecCall [""vgm_s_fnc_missions_gameplay_extraction_startExtract"", 2]; " \n "    },  " \n "    [],  " \n "    115,  " \n "    false,  " \n "    true,  " \n "    """",  " \n "    ""true"",  " \n "    10  " \n "];";
+			};
+			id=1356;
+			type="vn_flag_sog_dmg";
+		};
+		class Item17
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2220.873,197.67999,13382.079};
+				angles[]={0,1.079782,-0};
+			};
+			side="Empty";
+			class Attributes
+			{
+			};
+			id=1357;
+			type="Land_HelipadEmpty_F";
+		};
+		class Item18
+		{
+			dataType="Marker";
+			position[]={5621.9082,222.30373,15920.625};
+			name="marker_48";
+			text="Mission end";
+			type="mil_flag";
+			colorName="ColorGreen";
+			id=1358;
+		};
+		class Item19
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5635.7393,225.82155,15913.342};
+				angles[]={6.2611909,0,6.2172799};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];" \n "this addAction [  " \n "    ""Request extraction"",  " \n "    {  " \n "        params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; " \n "        [call vgm_c_fnc_missions_getCurrentMission get ""id"", getPos player] remoteExecCall [""vgm_s_fnc_missions_gameplay_extraction_startExtract"", 2]; " \n "    },  " \n "    [],  " \n "    115,  " \n "    false,  " \n "    true,  " \n "    """",  " \n "    ""true"",  " \n "    10  " \n "];";
+			};
+			id=1359;
+			type="vn_flag_sog_dmg";
+		};
+		class Item20
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5600.7852,221.6384,15926.426};
+				angles[]={0.03798008,1.079782,0.016002094};
+			};
+			side="Empty";
+			class Attributes
+			{
+			};
+			id=1360;
+			type="Land_HelipadEmpty_F";
+		};
+		class Item21
+		{
+			dataType="Marker";
+			position[]={5549.1143,172.33917,18925.563};
+			name="vgm_test_mission_start_pos_1";
+			text="Test mission start";
+			type="mil_start";
+			colorName="ColorGreen";
+			id=1361;
+			atlOffset=0.00028991699;
+		};
+		class Item22
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5543.0635,176.1465,18925.197};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="this addAction [ " \n "        ""Complete mission"", " \n "        { " \n "            params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; [[] call vgm_c_fnc_missions_getCurrentMission get ""id""] remoteExecCall [""vgm_s_fnc_missions_endMission"", 2];" \n "        }, " \n "        [], " \n "        110, " \n "        false, " \n "        true, " \n "        """", " \n "        ""true"", " \n "        10 " \n "    ];" \n "this addAction [  " \n "    ""Request extraction"",  " \n "    {  " \n "        params [""_target"", ""_caller"", ""_actionId"", ""_arguments""]; " \n "        [call vgm_c_fnc_missions_getCurrentMission get ""id"", getPos player] remoteExecCall [""vgm_s_fnc_missions_gameplay_extraction_startExtract"", 2]; " \n "    },  " \n "    [],  " \n "    115,  " \n "    false,  " \n "    true,  " \n "    """",  " \n "    ""true"",  " \n "    10  " \n "];";
+			};
+			id=1362;
+			type="vn_flag_sog";
 		};
 	};
 };

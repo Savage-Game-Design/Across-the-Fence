@@ -27,7 +27,17 @@ class VGM_RscAbilityCooldown
         {
             idc = VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY;
             style = ST_VERTICAL;
-            colorBar[] = {1,1,1,0.5};
+            colorBar[] = {1,0.8,0.8,0.5};
+            x = DISPLAY_X;
+            y = DISPLAY_Y;
+            w = ICON_SIZE * GUI_GRID_W;
+            h = ICON_SIZE * GUI_GRID_H;
+        };
+        class DurationPrimary: RscProgress
+        {
+            idc = VGM_IDC_RSCABILITYCOOLDOWN_DURATIONPRIMARY;
+            style = ST_VERTICAL;
+            colorBar[] = {0,1,0,0.3};
             x = DISPLAY_X;
             y = DISPLAY_Y;
             w = ICON_SIZE * GUI_GRID_W;
@@ -58,6 +68,11 @@ class VGM_RscAbilityCooldown
         class CooldownUlimate: CooldownPrimary
         {
             idc = VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE;
+            x = DISPLAY_X + (ICON_SIZE + 0.5) * GUI_GRID_W;
+        };
+        class DurationUlimate: DurationPrimary
+        {
+            idc = VGM_IDC_RSCABILITYCOOLDOWN_DURATIONULTIMATE;
             x = DISPLAY_X + (ICON_SIZE + 0.5) * GUI_GRID_W;
         };
         class SecondsUltimate: SecondsPrimary

@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-10-02
+    Last Update: 2024-04-04
     Public: Yes
 
     Description:
@@ -25,7 +25,8 @@
 
 params [
     ["_parameters", nil, [createHashMap]],
-    ["_creatorId", "", [""]]
+    ["_creatorId", "", [""]],
+    ["_targetZone", "", [""]]
 ];
 
 // This method of creating IDs assumes missions aren't persistent across restarts/servers
@@ -45,7 +46,8 @@ private _mission = createHashMapFromArray [
         // Whether or not players can join the mission. Players can join if no values are "false"
         ["preventJoining", [] call para_s_fnc_netmap_createNetmap],
         // TODO - Use an actual position for the mission
-        ["startPosASL", AGLtoASL getMarkerPos "vgm_test_mission_start_pos"],
+        ["startPosASL", _targetZone call vgm_s_fnc_missions_zones_getStartPos],
+        ["targetZone", _targetZone],
         ["group", createGroup side vgm_core_lobbyGroup]
     ]] call para_s_fnc_netmap_createNetmapFromArray],
     // Copy the parameters hashmap to prevent it being accidentally modified elsewhere.

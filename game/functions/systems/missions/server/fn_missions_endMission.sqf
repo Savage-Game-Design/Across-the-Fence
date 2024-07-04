@@ -51,6 +51,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id", _endType]
 ] call para_g_fnc_event_triggerGlobal;
 
+[_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_freeZone;
 [_mission] call vgm_s_fnc_director_stopMission;
 
 {
