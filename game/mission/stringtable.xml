@@ -415,6 +415,35 @@
             <Original>Settings</Original>
         </Key>
     </Package>
+    <Package name="Sites">
+        <Key ID="STR_VGM_SITES_AA">
+            <Original>Anti-aircraft gun</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_AMMO_CACHE">
+            <Original>Ammo Cache</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_BULLDOZER">
+            <Original>Bulldozer</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_CAMPFIRE">
+            <Original>Campfire</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_ENCAMPMENT">
+            <Original>Encampment</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_SHELTER">
+            <Original>Shelter</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_TRANSMITTER">
+            <Original>Transmitter</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_TRUCK_PARK">
+            <Original>Truck park</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_WAYPOINT">
+            <Original>Waypoint</Original>
+        </Key>
+    </Package>
     <Package name="Missions Extraction">
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
             <Original>Request extraction</Original>
@@ -431,5 +460,5 @@
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
         </Key>
-  </Package>
+    </Package>
 </Project>

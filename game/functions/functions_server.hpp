@@ -263,8 +263,16 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\sites\types\server);
 
+        class sites_type_aa {};
+        class sites_type_ammoCache {};
+        class sites_type_bulldozer {};
         class sites_type_campfire {};
+        class sites_type_encampment {};
         class sites_type_shelter {};
+        class sites_type_supplyDump {};
+        class sites_type_transmitter {};
+        class sites_type_truckPark {};
+        class sites_type_waypoint {};
     };
 
     class skill
