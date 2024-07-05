@@ -1,4 +1,4 @@
-#define DISPLAY_W (TORSO_W + ARMS_W * 2 + 5)
+#define DISPLAY_W (TORSO_W + ARMS_W * 2 + 19)
 #define DISPLAY_H (HEAD_H + TORSO_H + LEG_R_H)
 
 //#define DISPLAY_X (CENTER_X - 0.5 * DISPLAY_W * VGM_GRID_W)
@@ -55,6 +55,17 @@ class VGM_RscMedicalStatus
             w = DISPLAY_W * VGM_GRID_W;
             h = DISPLAY_H * VGM_GRID_H;
         };*/
+
+        class MainLabel: RscText
+        {
+            style = 2;
+            text = "$STR_VGM_MEDICAL_UI_HEALTH_STATUS";
+            colorText[] = {1,1,1,0.75};
+            x = DISPLAY_X;
+            y = DISPLAY_Y + (MARGIN - HEAD_H) * VGM_GRID_H;
+            w = DISPLAY_W * VGM_GRID_W;
+            h = 1 * GUI_GRID_H;
+        };
 
         class HeadIcon: VGM_ctrlPicture
         {
