@@ -1,4 +1,4 @@
-#define DISPLAY_W (TORSO_W + ARMS_W * 2)
+#define DISPLAY_W (TORSO_W + ARMS_W * 2 + 5)
 #define DISPLAY_H (HEAD_H + TORSO_H + LEG_R_H)
 
 //#define DISPLAY_X (CENTER_X - 0.5 * DISPLAY_W * VGM_GRID_W)
@@ -12,8 +12,8 @@
 // PX_***_X/Y are the original image sizes of the images cut from the full person
 #define PX_HEAD_X 74
 #define PX_HEAD_Y 78
-// HEAD_W is a constant and the reference point for all the other parts
-#define HEAD_W 20
+// HEAD_W is a constant and the reference point for all the other parts, this controls whole display size
+#define HEAD_W 5
 // PART_H the product of the ratio of the original image and the control's width
 #define HEAD_H (PX_HEAD_X/PX_HEAD_Y * HEAD_W)
 #define PX_TORSO_X 111
@@ -51,7 +51,7 @@ class VGM_RscMedicalStatus
             y = DISPLAY_Y;
             w = DISPLAY_W * VGM_GRID_W;
             h = DISPLAY_H * VGM_GRID_H;
-    };
+        };
 
         class HeadIcon: VGM_ctrlPicture
         {
@@ -76,7 +76,7 @@ class VGM_RscMedicalStatus
             idc = VGM_IDC_DISPLAYMEDICAL_ARMLEFT;
             text = "soldier_arm_l.paa";
             x = DISPLAY_X + (0.5 * DISPLAY_W - ARMS_W - 0.5 * TORSO_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H + 3.5) * VGM_GRID_H;
+            y = DISPLAY_Y + (MARGIN + HEAD_H + (HEAD_W/5.71)) * VGM_GRID_H;
             w = ARMS_W * VGM_GRID_W;
             h = ARMS_H * VGM_GRID_H;
         };
@@ -90,7 +90,7 @@ class VGM_RscMedicalStatus
         {
             idc = VGM_IDC_DISPLAYMEDICAL_LEGLEFT;
             text = "soldier_leg_l.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W - 2) * VGM_GRID_W;
+            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W - (HEAD_W/10)) * VGM_GRID_W;
             y = DISPLAY_Y + (MARGIN + HEAD_H + TORSO_H) * VGM_GRID_H;
             w = LEG_L_W * VGM_GRID_W;
             h = LEG_L_H * VGM_GRID_H;
@@ -99,7 +99,7 @@ class VGM_RscMedicalStatus
         {
             idc = VGM_IDC_DISPLAYMEDICAL_LEGRIGHT;
             text = "soldier_leg_r.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W + 0.3) * VGM_GRID_W;
+            x = DISPLAY_X + (0.5 * DISPLAY_W + (HEAD_W/66.66)) * VGM_GRID_W;
             w = LEG_R_W * VGM_GRID_W;
             h = LEG_R_H * VGM_GRID_H;
         };
