@@ -274,6 +274,11 @@ class VGM_ctrlActivePicture: ctrlActivePicture
 {
 };
 
+class VGM_ctrlPicture: VGM_ctrlStatic
+{
+    style = ST_PICTURE;
+};
+
 // Controls for VGM_DisplaySkills
 class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
 {

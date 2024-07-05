@@ -9,7 +9,7 @@ class VGM_RscAbilityCooldown
     idd = -1;
     onLoad = VGM_UIEH(onLoad,AbilityCooldown);
     onUnload = VGM_UIEH(onUnload,AbilityCooldown);
-    duration = 1e+6;
+    duration = 1e10;
     fadeIn = 0;
     fadeOut = 0;
     class Controls
