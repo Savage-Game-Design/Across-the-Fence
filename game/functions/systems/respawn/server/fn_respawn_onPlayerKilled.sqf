@@ -26,4 +26,4 @@ _oldUnit setVariable ["vgm_respawn_loadout", getUnitLoadout _oldUnit];
 sleep 1;
 [0, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
 
-["vgm_player_killed", nil, [_oldUnit]] call para_g_fnc_event_triggerTargets;
+["vgm_player_killed", [], [_oldUnit]] call para_g_fnc_event_triggerTargets;
