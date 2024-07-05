@@ -5,7 +5,10 @@
 //#define DISPLAY_Y (CENTER_Y - 0.5 * DISPLAY_H * VGM_GRID_H)
 
 #define DISPLAY_X (safeZoneX + safeZoneW - (DISPLAY_W) * VGM_GRID_W)
-#define DISPLAY_Y (safeZoneY + safeZoneH/2 - (DISPLAY_H/2) * VGM_GRID_H)
+// middle of the screen
+// #define DISPLAY_Y (safeZoneY + safeZoneH/2 - (DISPLAY_H/2) * VGM_GRID_H)
+// above cooldown icons
+#define DISPLAY_Y (safeZoneY + safeZoneH - (DISPLAY_H * VGM_GRID_H) - (5.5 * GUI_GRID_H))
 
 #define MARGIN 0
 
