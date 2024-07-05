@@ -30,6 +30,9 @@
 #define COLOR_MAJOR 0.9,0.1,0
 #define COLOR_SEVERE 0.58,0,0
 #define COLOR_ARR [[COLOR_NONE], [COLOR_MINOR], [COLOR_MAJOR], [COLOR_SEVERE]]
+// 1 - HUD_ALPHA + HUD_ALPHA_WOUND
+#define HUD_ALPHA 0.8
+#define HUD_ALPHA_WOUND 0.4
 
 #if __A3_DEBUG__
     diag_log ["fn_displayMedical", _this];
@@ -70,7 +73,7 @@ switch _mode do {
         {
             private _ehId = [_x, [_display, {
                 params ["", "_display"];
-                ["refreshUI", [_display, player]] call SELF;
+                ["refreshUI", [_display, player, HUD_ALPHA]] call SELF;
             }]] call para_g_fnc_event_subscribeLocal;
 
             _refreshHandlersIds pushBack _ehId;
@@ -79,6 +82,8 @@ switch _mode do {
             "vgm_medical_woundRemoved",
             "vgm_player_respawn"
         ];
+
+        ["refreshUI", [_display, player, HUD_ALPHA]] call SELF;
     };
 
     // onUnload for HUD variant of the medical UI
@@ -89,7 +94,7 @@ switch _mode do {
     };
 
     case "refreshUI": {
-        params ["_display", "_target"];
+        params ["_display", "_target", "_alphaModifier"];
 
         ["colorBodyParts", _this] call SELF;
         ["updateDebuffsList", _this] call SELF;
@@ -171,7 +176,7 @@ switch _mode do {
 
     // handle colorization of body parts
     case "colorBodyParts": {
-        params ["_display", ["_target", MENU_TARGET]];
+        params ["_display", ["_target", MENU_TARGET], ["_alphaModifier", 0]];
 
         {
             _x params ["_idc", "_bodyPart"];
@@ -180,7 +185,7 @@ switch _mode do {
             private _wound = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
 
             private _color = COLOR_ARR select _wound;
-            _ctrl ctrlSetTextColor (_color + [1]);
+            _ctrl ctrlSetTextColor (_color + [1 - _alphaModifier + (_wound min HUD_ALPHA_WOUND)]);
 
             private _levelText = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _wound];
             _ctrl ctrlSetTooltip format [localize "STR_VGM_MEDICAL_UI_INJURIES", _levelText];
