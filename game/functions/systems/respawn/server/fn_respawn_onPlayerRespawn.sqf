@@ -30,3 +30,5 @@ deleteVehicle _oldUnit;
 
 sleep 3;
 [1, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
+
+["vgm_player_respawn", nil, [_newUnit]] call para_g_fnc_event_triggerTargets;

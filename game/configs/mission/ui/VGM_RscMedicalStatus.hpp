@@ -37,21 +37,21 @@
 class VGM_RscMedicalStatus
 {
     idd = -1;
-    onLoad = VGM_UIEH(onLoad,MedicalStatus);
-    onUnload = VGM_UIEH(onUnload,MedicalStatus);
+    onLoad = VGM_UIEH(onLoadHud,Medical);
+    onUnload = VGM_UIEH(onUnloadHud,Medical);
     duration = 1e10;
     fadeIn = 0;
     fadeOut = 0;
 
     class Controls
     {
-        class Min: VGM_ctrlBackground
+        /*class Background: VGM_ctrlBackground
         {
             x = DISPLAY_X;
             y = DISPLAY_Y;
             w = DISPLAY_W * VGM_GRID_W;
             h = DISPLAY_H * VGM_GRID_H;
-        };
+        };*/
 
         class HeadIcon: VGM_ctrlPicture
         {

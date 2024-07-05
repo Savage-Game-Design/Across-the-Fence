@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-05-11
+    Last Update: 2024-07-05
     Public: No
 
     Description:
@@ -59,8 +59,37 @@ switch _mode do {
         };
     };
 
-    case "refreshUI": {
+    // onLoad for HUD variant of the medical UI
+    case "onLoadHud": {
         params ["_display"];
+
+        uiNamespace setVariable ["VGM_RscMedicalStatus", _display];
+
+        private _refreshHandlersIds = [];
+        _display setVariable ["vgm_medical_refreshHandlerIds", _refreshHandlersIds];
+        {
+            private _ehId = [_x, [_display, {
+                params ["", "_display"];
+                ["refreshUI", [_display, player]] call SELF;
+            }]] call para_g_fnc_event_subscribeLocal;
+
+            _refreshHandlersIds pushBack _ehId;
+        } forEach [
+            "vgm_medical_woundAdded",
+            "vgm_medical_woundRemoved",
+            "vgm_player_respawn"
+        ];
+    };
+
+    // onUnload for HUD variant of the medical UI
+    case "onUnloadHud": {
+        params ["_display"];
+
+        {[_x] call para_g_fnc_event_unsubscribe} forEach (_display getVariable "vgm_medical_refreshHandlerIds");
+    };
+
+    case "refreshUI": {
+        params ["_display", "_target"];
 
         ["colorBodyParts", _this] call SELF;
         ["updateDebuffsList", _this] call SELF;
@@ -142,13 +171,13 @@ switch _mode do {
 
     // handle colorization of body parts
     case "colorBodyParts": {
-        params ["_display"];
+        params ["_display", ["_target", MENU_TARGET]];
 
         {
             _x params ["_idc", "_bodyPart"];
             private _ctrl = _display displayCtrl _idc;
 
-            private _wound = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+            private _wound = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
 
             private _color = COLOR_ARR select _wound;
             _ctrl ctrlSetTextColor (_color + [1]);
@@ -169,6 +198,7 @@ switch _mode do {
         params ["_display"];
 
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
+        if (isNull _ctrlModifierList) exitWith {};
         ctClear _ctrlModifierList;
 
         {
