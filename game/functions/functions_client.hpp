@@ -653,6 +653,10 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\squad_ui\client);
 
+        class squad_ui_preInit
+        {
+            preInit = 1;
+        };
         class squad_ui_postInit
         {
             postInit = 1;
