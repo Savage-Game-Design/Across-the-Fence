@@ -2,7 +2,7 @@
     File: fn_keyhandler_stringifyKeypress.sqf
     Author: Savage Game Design
     Date: 2024-05-05
-    Last Update: 2024-05-09
+    Last Update: 2024-07-06
     Public: No
 
     Description:
@@ -24,7 +24,7 @@
                 ["shift", false]
             ],
             true
-        ] call para_c_fnc_keyhandler_stringifyKeypress;
+        ] call para_c_fnc_keyhandler_stringifyKeybind;
  */
 
 params ["_keyBind", ["_humanReadable", false]];

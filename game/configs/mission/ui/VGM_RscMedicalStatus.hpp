@@ -62,9 +62,21 @@ class VGM_RscMedicalStatus
             text = "$STR_VGM_MEDICAL_UI_HEALTH_STATUS";
             colorText[] = {1,1,1,0.75};
             x = DISPLAY_X;
-            y = DISPLAY_Y + (MARGIN - HEAD_H) * VGM_GRID_H;
+            y = DISPLAY_Y + (MARGIN - HEAD_H) * VGM_GRID_H - ((0.5 + 0.65 + 0.05) * GUI_GRID_H);
             w = DISPLAY_W * VGM_GRID_W;
             h = 1 * GUI_GRID_H;
+        };
+        class ControlsHint: RscText
+        {
+            idc = VGM_IDC_DISPLAYMEDICAL_CONTROLSHINT;
+            style = 2;
+            text = "$STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND";
+            colorText[] = {1,1,1,0.75};
+            x = DISPLAY_X;
+            y = DISPLAY_Y + (MARGIN - HEAD_H) * VGM_GRID_H - (0.5 * GUI_GRID_H);
+            w = DISPLAY_W * VGM_GRID_W;
+            h = 1 * GUI_GRID_H;
+            sizeEx = 0.65 * GUI_GRID_H;
         };
 
         class HeadIcon: VGM_ctrlPicture
