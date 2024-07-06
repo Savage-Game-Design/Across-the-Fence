@@ -80,7 +80,8 @@ switch _mode do {
         } forEach [
             "vgm_medical_woundAdded",
             "vgm_medical_woundRemoved",
-            "vgm_player_respawn"
+            "vgm_player_respawn",
+            "para_keybindingMenu_unload"
         ];
 
         ["refreshUI", [_display, player, HUD_ALPHA]] call SELF;
