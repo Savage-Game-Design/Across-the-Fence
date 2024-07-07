@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-07-06
+    Last Update: 2024-07-07
     Public: No
 
     Description:
@@ -210,7 +210,7 @@ switch _mode do {
     };
 
     case "updateDebuffsList": {
-        params ["_display"];
+        params ["_display", ["_target", MENU_TARGET]];
 
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
         if (isNull _ctrlModifierList) exitWith {};
@@ -220,7 +220,7 @@ switch _mode do {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
 
-            private _currentWoundLevel = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+            private _currentWoundLevel = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
             private _coefficients = createHashMap;
             private _statusEffects = createHashMap;
 
