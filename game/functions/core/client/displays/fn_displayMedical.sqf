@@ -60,6 +60,24 @@ switch _mode do {
                 isNull _this // return
             };
         };
+
+        if (MENU_TARGET == player) then {
+            {
+                _x ctrlSetFade 1;
+                _x ctrlCommit 1;
+            } forEach allControls (uiNamespace getVariable ["VGM_RscMedicalStatus", displayNull]);
+        };
+    };
+
+    case "onUnload": {
+        params ["_display"];
+
+        if (MENU_TARGET == player) then {
+            {
+                _x ctrlSetFade 0;
+                _x ctrlCommit 1;
+            } forEach allControls (uiNamespace getVariable ["VGM_RscMedicalStatus", displayNull]);
+        };
     };
 
     // onLoad for HUD variant of the medical UI
