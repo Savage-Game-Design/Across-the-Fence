@@ -166,7 +166,7 @@ switch _mode do {
     };
 
     case "updateDebuffsList": {
-        params ["_display"];
+        params ["_display", ["_target", MENU_TARGET]];
 
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
         ctClear _ctrlModifierList;
@@ -180,7 +180,7 @@ switch _mode do {
             _ctrlDescription ctrlSetStructuredText parseText _text;
         };
 
-        if ([MENU_TARGET, "bleeding"] call vgm_c_fnc_statusEffect_get) then {
+        if ([_target, "bleeding"] call vgm_c_fnc_statusEffect_get) then {
             [
                 localize "STR_VGM_MEDICAL_UI_DEBUFF_BLEEDING",
                 "",
@@ -192,7 +192,7 @@ switch _mode do {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
 
-            private _currentWoundLevel = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+            private _currentWoundLevel = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
             private _coefficients = createHashMap;
             private _statusEffects = createHashMap;
 
