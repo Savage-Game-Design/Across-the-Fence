@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_medical_addAction.sqf
     Author: Savage Game Design
     Date: 2023-11-10
-    Last Update: 2024-07-07
+    Last Update: 2024-07-09
     Public: No
 
     Description:
