@@ -2,7 +2,7 @@
     File: fn_skill_passives_recon_followTheTracers.sqf
     Author: Savage Game Design
     Date: 2023-09-24
-    Last Update: 2023-10-14
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -19,7 +19,8 @@
  */
 
 #define FONT_SIZE 0.045
-#define COLOR_OPACITY(DIST) (linearConversion [30, 300, DIST, 1, 0.3, true])
+#define COLOR_OPACITY(DIST) (linearConversion [30, 300, DIST, 0.9, 0.9, true])
+#define ICON_SIZE(DIST) (linearConversion [30, 300, DIST, 2, 1.2, true])
 
 params ["_known"];
 
@@ -35,14 +36,16 @@ vgm_c_skill_passives_recon_followTheTracers_items = createHashMap;
 player setVariable ["vgm_g_skill_passives_recon_followTheTracers", true, true];
 
 vgm_c_skill_passives_recon_followTheTracersDrawEh = addMissionEventHandler ["Draw3d", {
-    private _text = localize "STR_A3_ENEMY_"; // yes, with an underscore at the end...
+    // private _text = localize "STR_A3_ENEMY_"; // yes, with an underscore at the end...
     {
+        private _distance = _y distance player;
+        private _iconSize = ICON_SIZE(_distance);
         drawIcon3D [
+            "a3\ui_f\data\IGUI\Cfg\WeaponCursors\gl_gs.paa",
+            [1,0,0,COLOR_OPACITY(_distance)],
+            unitAimPositionVisual _y,
+            _iconSize, _iconSize, 90,
             "",
-            [1,0,0,COLOR_OPACITY(_y distance player)],
-            ASLToAGL getPosASLVisual _y,
-            0, 0, 0,
-            _text,
             2, // shadow
             FONT_SIZE,
             "PuristaMedium"

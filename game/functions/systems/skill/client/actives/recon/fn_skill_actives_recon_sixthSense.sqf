@@ -45,7 +45,7 @@ private _enemies = flatten (_enemySides apply {units _x}) inAreaArray [player, R
 
     _x setVariable ["vgm_c_objectIcon", _iconPath];
     _x setVariable ["vgm_c_objectName", getText (configOf _x >> "displayName")];
-    _x setVariable ["vgm_c_objectColor", side _x call BIS_fnc_sideColor;];
+    _x setVariable ["vgm_c_objectColor", side _x call BIS_fnc_sideColor];
 } forEach _enemies;
 
 vgm_c_skill_actives_recon_sixthSense_list = _enemies;
