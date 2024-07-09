@@ -105,6 +105,9 @@
             <Original>Legs</Original>
         </Key>
         <!-- Debuffs -->
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLEEDING">
+            <Original>Bleeding out</Original>
+        </Key>
         <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLURRYVISION">
             <Original>Occasional Blurred Vision</Original>
         </Key>

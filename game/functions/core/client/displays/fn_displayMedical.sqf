@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-05-11
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -171,6 +171,23 @@ switch _mode do {
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
         ctClear _ctrlModifierList;
 
+        private _fnc_addRow = {
+            params ["_title", "_description", "_icon"];
+
+            (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
+            _ctrlIcon ctrlSetText _icon;
+            private _text = format ["%1<br/>%2", _title, _description];
+            _ctrlDescription ctrlSetStructuredText parseText _text;
+        };
+
+        if ([MENU_TARGET, "bleeding"] call vgm_c_fnc_statusEffect_get) then {
+            [
+                localize "STR_VGM_MEDICAL_UI_DEBUFF_BLEEDING",
+                "",
+                format ["#(rgb,1,1,1)color(%1,%2,%3,1)", COLOR_SEVERE]
+            ] call _fnc_addRow;
+        };
+
         {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
@@ -185,15 +202,6 @@ switch _mode do {
                 // insert will overwrite with latest value of the debuff
                 _coefficients insert (_injuryEffects get "coefficient");
                 _statusEffects insert (_injuryEffects get "statusEffect");
-            };
-
-            private _fnc_addRow = {
-                params ["_title", "_description", "_icon"];
-
-                (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
-                _ctrlIcon ctrlSetText _icon;
-                private _text = format ["%1<br/>%2", _title, _description];
-                _ctrlDescription ctrlSetStructuredText parseText _text;
             };
 
             private _icon = format (["#(rgb,1,1,1)color(%1,%2,%3,1)"] + (COLOR_ARR select _currentWoundLevel));
