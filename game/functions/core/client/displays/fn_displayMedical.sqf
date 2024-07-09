@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-07-07
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -116,13 +116,15 @@ switch _mode do {
         params ["_display", "_target", "_alphaModifier"];
 
         private _ctrlControlsHint = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_CONTROLSHINT;
-        _ctrlControlsHint ctrlSetText format [
-            localize "STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND",
-            [
-                ["OpenMedicalMenu"] call para_c_fnc_keyhandler_getKeyBind,
-                true
-            ] call para_c_fnc_keyhandler_stringifyKeybind
-        ];
+        if (!isNull _ctrlControlsHint) then {
+            _ctrlControlsHint ctrlSetText format [
+                localize "STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND",
+                [
+                    ["OpenMedicalMenuSelf"] call para_c_fnc_keyhandler_getKeyBind,
+                    true
+                ] call para_c_fnc_keyhandler_stringifyKeybind
+            ];
+        };
 
         ["colorBodyParts", _this] call SELF;
         ["updateDebuffsList", _this] call SELF;
