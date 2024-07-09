@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-05-11
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -188,15 +188,17 @@ switch _mode do {
             };
 
             private _fnc_addRow = {
-                params ["_title", "_description", "_icon"];
+                params ["_title", "_description", "_icon", "_iconColor"];
 
                 (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
                 _ctrlIcon ctrlSetText _icon;
+                _ctrlIcon ctrlSetTextColor _iconColor + [1];
                 private _text = format ["%1<br/>%2", _title, _description];
                 _ctrlDescription ctrlSetStructuredText parseText _text;
             };
 
-            private _icon = format (["#(rgb,1,1,1)color(%1,%2,%3,1)"] + (COLOR_ARR select _currentWoundLevel));
+            private _iconFallback = "#(rgb,1,1,1)color(1,1,1,1)";
+            private _iconColor = COLOR_ARR select _currentWoundLevel;
             private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
             private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
             private _title = format ["%1 %2 Trauma", _level, _bodyPart];
@@ -206,14 +208,16 @@ switch _mode do {
             {
                 if (!_y) then {continue};
                 private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
-                [_title, _statusDescription, _icon] call _fnc_addRow;
+                private _statusIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
+                [_title, _statusDescription, _statusIcon, _iconColor] call _fnc_addRow;
             } forEach _statusEffects;
 
             {
                 if (_y == 0) then {continue};
                 private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
-                [_title, _coefDescription, _icon] call _fnc_addRow;
+                private _coefIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
+                [_title, _coefDescription, _coefIcon, _iconColor] call _fnc_addRow;
             } forEach _coefficients;
 
         } forEach BODY_PARTS_ARR;
