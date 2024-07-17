@@ -2,10 +2,10 @@
 	File: fn_createVote.sqf
 	Author:  Savage Game Design
 	Public: Yes
-	
+
 	Description:
 		Creates a vote.
-	
+
 	Parameter(s):
 		_title - Title of the vote [String]
 		_content - Body of the vote. Will be text parsed after [String]
@@ -13,10 +13,10 @@
 		_timeout - Duration of the vote [Number]
 		_callback - Function called when a player chose an option [Code]
 		_shouldSuspend - Whether the vote countdown should be paused when the vote is in the queue [Boolean, default false]
-	
+
 	Returns:
 		True if the vote was created, false if a vote was already ongoing.
-	
+
 	Example(s):
 		[
 			"Vote Initialized",
@@ -43,7 +43,7 @@ params [
 
 // Add vote to the queue if there's already an active vote.
 private _data = missionNamespace getVariable '#para_c_VoteData';
-if !(isNil "_data") exitWith { 
+if !(isNil "_data") exitWith {
 	private _queue = localNamespace getVariable ["para_c_vote_queue", []];
 	private _entry = [time, [_title, _content, _options, _timeout, _callback, _shouldSuspend]];
 
@@ -64,7 +64,7 @@ if !(isNil "_data") exitWith {
 
 	localNamespace setVariable ["para_c_vote_queue", _queue];
 
-	false 
+	false
 };
 
 _title = _title call para_c_fnc_localize;
@@ -107,11 +107,11 @@ private _keyControls = [
 	[_secondaryKeyControl, _secondaryTextControl, _secondaryControl]
 ];
 
-private _keybind1 = ["para_vote_1"] call para_c_fnc_get_key_bind;
-private _keybind2 = ["para_vote_2"] call para_c_fnc_get_key_bind;
+private _keybind1 = ["para_vote_1"] call para_c_fnc_getKeyBind;
+private _keybind2 = ["para_vote_2"] call para_c_fnc_getKeyBind;
 private _keys = [
-	[_keybind1#0] call para_c_fnc_getKeyName,
-	[_keybind2#0] call para_c_fnc_getKeyName
+	[_keybind1 get "dikCode"] call para_c_fnc_getKeyName,
+	[_keybind2 get "dikCode"] call para_c_fnc_getKeyName
 ];
 
 _titleControl ctrlSetText _title;
@@ -130,8 +130,8 @@ _backgroundControl ctrlSetPositionH _totalHeight;
 _backgroundControl ctrlCommit 0;
 
 if (_useMenu) then {
-	private _keybind3 = ["para_vote_3"] call para_c_fnc_get_key_bind;
-	_primaryKeyControl ctrlSetText ([_keybind3#0] call para_c_fnc_getKeyName);
+	private _keybind3 = ["para_vote_3"] call para_c_fnc_getKeyBind;
+	_primaryKeyControl ctrlSetText ([_keybind3 get "dikCode"] call para_c_fnc_getKeyName);
 	_primaryTextControl ctrlSetText localize "STR_vn_mf_voteMenu_open";
 
 	_secondaryControl ctrlShow false;

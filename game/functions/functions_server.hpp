@@ -154,6 +154,25 @@ class vgm_s
         class missions_gameplay_extraction_startExtract {};
     };
 
+    class missions_selection
+    {
+        VGM_SERVER_PATH(\systems\missions_zones\server);
+
+        class missions_zones_freeZone {};
+        class missions_zones_getStartPos {};
+        class missions_zones_preInit
+        {
+            preInit = 1;
+        };
+        class missions_zones_reserveZone {};
+    };
+    class missions_zones_remoteExec
+    {
+        VGM_SERVER_PATH(\systems\missions_zones\server\remoteExec);
+
+        class missions_zones_remoteExec_getList {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);

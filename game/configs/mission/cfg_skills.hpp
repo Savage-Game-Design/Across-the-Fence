@@ -10,6 +10,7 @@ class vgm_skillTemplate {
 
     cost = 1;
     cooldown = 10;
+    duration = 0;
 
     conditionUnlock = "true";
     conditionShow = "true";
@@ -26,6 +27,7 @@ class vgm_skillTrees {
     class rifleman {
         displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
         description = "";
+        icon = "assets\skills\rifleman_ca.paa";
 
         // rifleman skills
         class skills {
@@ -83,6 +85,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 120;
+                    duration = 30;
                 };
             };
 
@@ -96,6 +99,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 4;
                     cooldown = 120;
+                    duration = 20;
                 };
             };
         };
@@ -107,6 +111,7 @@ class vgm_skillTrees {
     class recon {
         displayName = "$STR_VGM_SKILLS_TREE_RECON";
         description = "";
+        icon = "assets\skills\recon_ca.paa";
 
         // recon skills
         class skills {
@@ -166,6 +171,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 120;
+                    duration = 20;
                 };
             };
 
@@ -178,6 +184,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 2;
                     cooldown = 180;
+                    duration = 60;
                 };
             };
         };
@@ -189,6 +196,7 @@ class vgm_skillTrees {
     class fireSupport {
         displayName = "$STR_VGM_SKILLS_TREE_FIRE_SUPPORT";
         description = "";
+        icon = "assets\skills\fire_support_ca.paa";
 
         // fire support skills
         class skills {
@@ -251,6 +259,7 @@ class vgm_skillTrees {
                     skillType = 1;
                     cost = 2;
                     cooldown = 180;
+                    duration = 10;
                 };
             };
 
@@ -264,6 +273,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 2;
                     cooldown = 240;
+                    duration = 120;
                 };
             };
         };
@@ -275,6 +285,7 @@ class vgm_skillTrees {
     class support {
         displayName = "$STR_VGM_SKILLS_TREE_SUPPORT";
         description = "";
+        icon = "assets\skills\support_ca.paa";
 
         // support skills
         class skills {
@@ -363,6 +374,7 @@ class vgm_skillTrees {
                     skillType = 2;
                     cost = 2;
                     cooldown = 480;
+                    duration = 30;
                 };
             };
         };

@@ -2,7 +2,7 @@
     File: fn_skill_actives_recon_thickBrush.sqf
     Author: Savage Game Design
     Date: 2023-10-06
-    Last Update: 2023-10-06
+    Last Update: 2024-06-23
     Public: No
 
     Description:
@@ -18,6 +18,8 @@
         [] call vgm_c_fnc_skill_actives_recon_thickBrush
  */
 
+params ["", "_skill"];
+
 ["Recon/6th Sense skill activated"] call vgm_g_fnc_logInfo;
 
 [player, 'camouflage', 'skill_recon_thickBrush', -1] call vgm_c_fnc_coefficient_set;
@@ -28,4 +30,4 @@
 
     [player, 'camouflage', 'skill_recon_thickBrush'] call vgm_c_fnc_coefficient_remove;
     [player, 'audible', 'skill_recon_thickBrush'] call vgm_c_fnc_coefficient_remove;
-}, 60, "seconds"] call BIS_fnc_runLater;
+}, _skill get "duration", "seconds"] call BIS_fnc_runLater;

@@ -2,7 +2,7 @@
     File: fn_skill_actives_preInit.sqf
     Author: Savage Game Design
     Date: 2023-10-08
-    Last Update: 2023-10-14
+    Last Update: 2024-06-23
     Public: No
 
     Description:
@@ -10,6 +10,7 @@
  */
 
 ["vgm_skill_support_getToTheLz", {
+    (_this#0) params ["_duration"];
 
     ["Support/To The LZ skill activated"] call vgm_g_fnc_logInfo;
 
@@ -23,6 +24,6 @@
         [player, "animSpeed", "skill_support_getToTheLz"] call vgm_c_fnc_coefficient_remove;
         [player, "hitShrug", "skill_support_getToTheLz"] call vgm_c_fnc_coefficient_remove;
         [player, "staminaDrain", "skill_support_getToTheLz"] call vgm_c_fnc_coefficient_remove;
-    }, 30, "seconds"] call BIS_fnc_runLater;
+    }, _duration, "seconds"] call BIS_fnc_runLater;
 
 }] call para_g_fnc_event_subscribe;

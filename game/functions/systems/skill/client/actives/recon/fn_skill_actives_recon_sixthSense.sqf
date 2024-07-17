@@ -2,7 +2,7 @@
     File: fn_skill_actives_recon_sixthSense.sqf
     Author: Savage Game Design
     Date: 2023-09-29
-    Last Update: 2024-03-02
+    Last Update: 2024-06-23
     Public: No
 
     Description:
@@ -23,6 +23,8 @@
 #define RADIUS 150
 #define COLOR_OPACITY(DIST) (linearConversion [30, RADIUS, DIST, 1, 0.3, true])
 
+params ["", "_skill"];
+
 ["Recon/6th Sense skill activated"] call vgm_g_fnc_logInfo;
 
 ["skill_active_sixthSense", {
@@ -30,7 +32,7 @@
 
     removeMissionEventHandler ["Draw3D", vgm_c_skill_actives_recon_sixthSense_draw3DEh];
     CTRL_MAP ctrlRemoveEventHandler ["Draw", vgm_c_skill_actives_recon_sixthSenseDrawEh];
-}, 20, "seconds"] call BIS_fnc_runLater;
+}, _skill get "duration", "seconds"] call BIS_fnc_runLater;
 
 
 private _enemySides = playerSide call vgm_g_fnc_enemySides;

@@ -1,22 +1,19 @@
-#define COLUMN_W 80
-#define DISPLAY_W (3 * COLUMN_W + 12)
-#define DISPLAY_H VGM_GRID_MAX_H
-#define DISPLAY_X (CENTER_X - 0.5 * DISPLAY_W * VGM_GRID_W)
-#define DISPLAY_Y (CENTER_Y - 0.5 * DISPLAY_H * VGM_GRID_H)
+#define DISPLAY_X VGM_MENU_X
+#define DISPLAY_Y VGM_MENU_Y
+#define DISPLAY_W VGM_MENU_W
+#define DISPLAY_H VGM_MENU_H
+
+#define COLUMN_W floor ((DISPLAY_W - 11) / 3)
 #define COLUMN3_X DISPLAY_X + (2 * COLUMN_W + 11) * VGM_GRID_W
 #define PICTURE_H (COLUMN_W - 35)
-class VGM_DisplayAbilities
+class VGM_DisplayAbilities: VGM_DisplayMenuBase
 {
     idd = VGM_IDD_DISPLAYABILITIES;
     onLoad = VGM_UIEH(onLoad,Abilities);
-    class ControlsBackground
+    class ControlsBackground: ControlsBackground
     {
-        class Background: VGM_ctrlBackground
+        class Background: Background
         {
-            x = VGM_GRID_MIN_X;
-            y = VGM_GRID_MIN_Y;
-            w = VGM_GRID_MAX_W * VGM_GRID_W;
-            h = VGM_GRID_MAX_H * VGM_GRID_H;
         };
         class BackgroundStdTitle: VGM_ctrlBackgroundTitle
         {
@@ -121,13 +118,17 @@ class VGM_DisplayAbilities
             h = (DISPLAY_H - 7) * VGM_GRID_H;
         };
     };
-    class Controls
+    class Controls: Controls
     {
+        class HeaderBar: HeaderBar
+        {
+        };
         VGM_SET_Y(0)
         class StdTitle: VGM_ctrlTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_STDTITLE;
             text = "$STR_VGM_SKILLS_UI_ABILITY_STD";
+            tooltip = "$STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP";
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DISPLAY_Y,1);
             w = 0.75 * COLUMN_W * VGM_GRID_W;
@@ -209,6 +210,7 @@ class VGM_DisplayAbilities
         {
             idc = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
             text = "$STR_VGM_SKILLS_UI_ABILITY_ULT";
+            tooltip = "$STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP";
             y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
         class UltStack: StdStack
@@ -309,8 +311,9 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
             x = _X;
         };
 #define _W (COLUMN_W - 2)
-        class AbilityStack: VGM_ctrlStack
+        class AbilityStack: VGM_ctrlStack// VGM_ctrlStructuredText //
         {
+            colorBackground[] = {1,0,0,0.2};
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYSTACK;
             x = _X;
             y = DISPLAY_Y + 6.5 * VGM_GRID_H;
@@ -377,7 +380,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 {
                     stackDisable = 1;
                     x = 1.5 * VGM_GRID_W;
-                    y = 76 * VGM_GRID_H;
+                    y = 64.5 * VGM_GRID_H;
                     w = (_W - 1) * VGM_GRID_W + pixelW;
                     h = ((9/16) * _W - 1) * VGM_GRID_H + pixelH;
                 };

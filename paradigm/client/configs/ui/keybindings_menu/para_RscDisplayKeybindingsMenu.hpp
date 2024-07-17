@@ -8,7 +8,7 @@ class para_RscDisplayKeybindingsMenu
 	{
 		class Title: para_RscText
 		{
-			text = $STR_vn_mf_keybindings_title;
+			text = $STR_PARA_KEYBINDINGS_TITLE;
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])","(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"};
 			x = UIX(10);
 			y = UIY(2.5);
@@ -40,11 +40,11 @@ class para_RscDisplayKeybindingsMenu
 			{
 				class Action
 				{
-					text = $STR_vn_mf_keybindings_header_action;
+					text = $STR_PARA_KEYBINDINGS_HEADER_ACTION;
 				};
 				class Keybind
 				{
-					text = $STR_vn_mf_keybindings_header_keybind;
+					text = $STR_PARA_KEYBINDINGS_HEADER_KEY;
 				};
 			};
 			x = UIX(10.1);
@@ -64,7 +64,7 @@ class para_RscDisplayKeybindingsMenu
 		class Reset: para_RscButtonMenu
 		{
 			idc = PARA_KEYBINDINGSMENU_RESET_IDC;
-			text = $STR_vn_mf_keybindings_reset;
+			text = $STR_PARA_KEYBINDINGS_RESET;
 			x = UIX(10.1);
 			y = UIY(20.2);
 			w = UIW(19.8);
@@ -80,14 +80,14 @@ class para_RscDisplayKeybindingsMenu
 		class Confirm: Reset
 		{
 			idc = 1;
-			text = $STR_vn_mf_keybindings_confirm;
+			text = $STR_PARA_KEYBINDINGS_CONFIRM;
 			y = UIY(21.4);
 			w = UIW(9);
 		};
 		class Cancel: Reset
 		{
 			idc = 2;
-			text = $STR_vn_mf_keybindings_cancel;
+			text = $STR_PARA_KEYBINDINGS_CANCEL;
 			x = UIX(20.9);
 			y = UIY(21.4);
 			w = UIW(9);

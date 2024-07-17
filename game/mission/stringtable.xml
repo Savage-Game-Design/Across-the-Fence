@@ -23,8 +23,14 @@
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
             <Original>Standard Ability</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP">
+            <Original>Standard abilites offer a small benefit and are intended to be used frequently throughout the mission.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT">
             <Original>Ultimate Ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP">
+            <Original>Ultimate abilites offer a large benefit and are intended to be used at critical moments during the mission.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD">
             <Original>Available Standard Abilities</Original>
@@ -58,6 +64,15 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
             <Original>Tier locked\nLearn any skill in previous level to unlock</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_OPEN_SKILL_WHEEL">
+            <Original>Open skill wheel</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_RESPEC">
+            <Original>Reset all skills</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_HUD_ACTIVES">
+            <Original>Active abilities</Original>
         </Key>
     </Package>
     <Package name="Medical UI">
@@ -143,16 +158,28 @@
         <Key ID="STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING">
             <Original>%1&lt;br/&gt;No training</Original>
         </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU">
+            <Original>Open medical menu</Original>
+        </Key>
     </Package>
     <Package name="Mission End UI">
+        <Key ID="STR_VGM_MISSION_END_UI_SUCCESSFUL">
+            <Original>Mission Successful!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_FAILURE">
+            <Original>Mission failed.</Original>
+        </Key>
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
             <Original>Level %1</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_LEVEL_UP">
             <Original>Level Up! +%1 SP</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION">
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_SUCCESS">
             <Original>Mission completion</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
+            <Original>Mission participation</Original>
         </Key>
     </Package>
     <Package name="Skills Tree">
@@ -333,4 +360,64 @@
             <Original>Stay stationary to Listen</Original>
         </Key>
     </Package>
+    <Package name="Paradigm keybinding menu">
+        <Key ID="STR_PARA_KEYBINDINGS_TITLE">
+            <Original>Edit Keybindings</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_ACTION">
+            <Original>Action</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_KEY">
+            <Original>Key</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_RESET">
+            <Original>Restore Defaults</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CONFIRM">
+            <Original>Save</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CANCEL">
+            <Original>Cancel</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_MENU_BUTTON">
+            <Original>Gamemode Keybindings</Original>
+        </Key>
+    </Package>
+    <Package name="Header Bar">
+        <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
+            <Original>Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_MANAGE_EQUIPMENT">
+            <Original>Manage your equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_ABILITIES">
+            <Original>Abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SKILLTREE">
+            <Original>Skill Tree</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SQUAD">
+            <Original>Squad</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SETTINGS">
+            <Original>Settings</Original>
+        </Key>
+    </Package>
+    <Package name="Missions Extraction">
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
+            <Original>Request extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO">
+            <Original>No radio or RTO nearby to call for extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_TITLE">
+            <English>Extract from AO</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_DESCRIPTION">
+            <English>&lt;img image=&quot;\vn\missions_f_vietnam\data\img\m06\ob14.jpg&quot; width=&quot;380&quot; height=&quot;190&quot;/&gt;&lt;br/&gt;Stay alive and wait for extraction.</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
+            <English>Board the helicopter</English>
+        </Key>
+  </Package>
 </Project>
