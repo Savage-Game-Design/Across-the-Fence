@@ -26,7 +26,7 @@ params ["_group"];
 
 [
     _group getVariable "vgm_g_missionId",
-    getPos leader _group,
+    getPosATL leader _group,
     75
 ] call vgm_g_fnc_tracking_nearbyTracks
 
