@@ -29,6 +29,9 @@ params ["_endType", "_levelingDataCopy", "_milestones"];
 
 vgm_mission_onMission = false;
 
+private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
+["vgm_mission_end_local", _currentMission] call para_g_fnc_event_triggerLocal;
+
 // Removes player-specific tracker module handlers.
 // TODO: Remove when switching to full AI system.
 player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandler"];

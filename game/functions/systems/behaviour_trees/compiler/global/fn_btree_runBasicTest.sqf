@@ -4,7 +4,7 @@
     File: fn_btree_runBasicTest.sqf
     Author: Savage Game Design
     Date: 2024-01-26
-    Last Update: 2024-02-03
+    Last Update: 2024-05-03
     Public: Yes
 
     Description:
@@ -68,14 +68,14 @@ private _compiledTree = [_exampleTree] call vgm_g_fnc_btree_compileTree;
 
 private _testGroup = createGroup civilian;
 
-[_testGroup, _compiledTree] call vgm_g_fnc_btree_setTree;
+[_testGroup, _compiledTree] call vgm_g_fnc_btree_setTreeLocal;
 
 [_testGroup] call vgm_g_fnc_btree_tickGroup;
 [_testGroup] call vgm_g_fnc_btree_tickGroup;
 
 // Change the tree so the UnassignTree callbacks get called.
 private _alternateTree = [[ACTION(basic), []]] call vgm_g_fnc_btree_compileTree;
-[_testGroup, _alternateTree] call vgm_g_fnc_btree_setTree;
+[_testGroup, _alternateTree] call vgm_g_fnc_btree_setTreeLocal;
 
 private _result = createHashMap;
 
