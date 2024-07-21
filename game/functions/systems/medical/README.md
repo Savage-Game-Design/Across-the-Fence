@@ -13,3 +13,9 @@
 | ----------------------------------------------------- | -------------------------- |
 | [_unit, _state] call vgm_c_fnc_medical_setUnconscious | Set unit unconscious state |
 | [_unit, _bodyPart] call vgm_c_fnc_medical_getWound    | Get amount of wounds       |
+
+## Bodyparts
+- "head"
+- "torso"
+- "arms"
+- "legs"

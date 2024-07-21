@@ -9,18 +9,19 @@ class VGM_RscAbilityCooldown
     idd = -1;
     onLoad = VGM_UIEH(onLoad,AbilityCooldown);
     onUnload = VGM_UIEH(onUnload,AbilityCooldown);
-    duration = 1e+6;
+    duration = 1e10;
     fadeIn = 0;
     fadeOut = 0;
     class Controls
     {
         class MainLabel: RscText
         {
+            style = 2;
             text = "$STR_VGM_SKILLS_UI_HUD_ACTIVES";
             colorText[] = {1,1,1,0.75};
-            x = DISPLAY_X + (ICON_SIZE * GUI_GRID_W / 3);
+            x = DISPLAY_X;
             y = DISPLAY_Y - 1.3 * GUI_GRID_H;
-            w = DISPLAY_X + DISPLAY_W * GUI_GRID_W;
+            w = DISPLAY_W * GUI_GRID_W;
             h = 1 * GUI_GRID_H;
         };
 

@@ -17,6 +17,7 @@ import RscHealthTextures from RscTitles;
 class RscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
+    #include "VGM_RscMedicalStatus.hpp"
     #include "VGM_RscProgressBar.hpp"
     #include "VGM_RscStaminaBar.hpp"
     class VGM_RscHealthTextures: RscHealthTextures

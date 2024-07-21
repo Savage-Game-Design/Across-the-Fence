@@ -33,6 +33,7 @@ class VGM_DisplayMedical
 {
     idd = -1;
     onLoad = VGM_UIEH(onLoad,Medical);
+    onUnload = VGM_UIEH(onUnload,Medical);
     onMouseButtonDown = VGM_UIEH(mouseDown,Medical);
     class ControlsBackground
     {

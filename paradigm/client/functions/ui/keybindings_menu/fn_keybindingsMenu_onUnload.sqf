@@ -32,3 +32,5 @@ if (_exitCode == 1) then {
     // Ensure changes are persisted to disk.
     saveProfileNamespace;
 };
+
+["para_keybindingMenu_unload"] call para_g_fnc_event_triggerLocal;
