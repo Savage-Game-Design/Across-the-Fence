@@ -2,7 +2,7 @@
     File: fn_btree_callOnTreeUnssignedCallbacks.sqf
     Author: Savage Game Design
     Date: 2024-02-03
-    Last Update: 2024-02-03
+    Last Update: 2024-03-03
     Public: No
 
     Description:
@@ -13,6 +13,7 @@
 
     Parameter(s):
         _group - Group with an assigned tree [GROUP]
+        _blackboard - Blackboard for tree being unassigned [HASHMAP]
 
     Returns:
         Nothing
@@ -21,12 +22,12 @@
         [_myGroup] call vgm_g_fnc_btree_callOnTreeAssignedCallbacks;
  */
 
-params ["_group"];
+params ["_group", "_blackboard"];
 
 private _tree = _group getVariable "vgm_l_btree_current";
 
 {
-    [_group] call _x;
+    [_group, _blackboard] call _x;
 } forEach (_tree get "onTreeUnassignedCallbacks");
 
 _group removeEventHandler ["Deleted", _group getVariable "vgm_l_btree_onTreeUnassignedEventHandler"];

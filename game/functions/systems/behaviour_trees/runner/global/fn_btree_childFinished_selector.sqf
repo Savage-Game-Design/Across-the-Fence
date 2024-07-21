@@ -3,7 +3,7 @@
     File: fn_btree_childFinished_selector.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-02
+    Last Update: 2024-03-09
     Public: No
 
     Description:
@@ -31,9 +31,6 @@ private _children = _node get "children";
 private _lastExecutedChild = _stackFrame get "state" get "executingChildIndex";
 
 if (_childResult isEqualTo RESULT_FAILED && _lastExecutedChild < count _children) exitWith {
-    if (_children # _lastExecutedChild get "abortLowerPriority") then {
-        _stackFrame get "higherPriorityNodes" pushBackUnique _lastExecutedChild;
-    };
     [[_lastExecutedChild + 1], ACTION_RUN_CHILD]
 };
 

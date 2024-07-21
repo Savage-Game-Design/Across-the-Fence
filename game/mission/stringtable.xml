@@ -164,6 +164,15 @@
         <Key ID="STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU">
             <Original>Open medical menu</Original>
         </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU_SELF">
+            <Original>Open medical menu on self</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_HEALTH_STATUS">
+            <Original>Health status</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND">
+            <Original>Press %1 to open</Original>
+        </Key>
     </Package>
     <Package name="Mission End UI">
         <Key ID="STR_VGM_MISSION_END_UI_SUCCESSFUL">

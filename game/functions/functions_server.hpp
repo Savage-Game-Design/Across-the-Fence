@@ -35,6 +35,20 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class ai
+    {
+        VGM_SERVER_PATH(\systems\ai\server);
+
+        class ai_createEnemySquad {};
+    };
+
+    class behaviour_trees_trees
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\trees\server);
+
+        class btree_setTreeByNameGlobal {};
+    };
+
     class carry
     {
         VGM_SERVER_PATH(\systems\carry\server);

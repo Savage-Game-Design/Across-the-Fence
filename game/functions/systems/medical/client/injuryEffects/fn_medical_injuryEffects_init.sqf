@@ -3,7 +3,7 @@
     File: fn_medical_injuryEffects_init.sqf
     Author: Savage Game Design
     Date: 2023-09-02
-    Last Update: 2023-11-25
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -135,4 +135,10 @@ vgm_medical_injuryEffects = createHashMapFromArray [
             ]]
         ]
     ]
+];
+
+vgm_medical_injuryEffectsIcons = createHashMapFromArray [
+    ["bleeding", "assets\medical\bleeding_ca.paa"],
+    ["forceCrawl", "assets\medical\force_crawl_ca.paa"],
+    ["blockADS", "assets\medical\block_ads_ca.paa"]
 ];

@@ -3,7 +3,7 @@
     File: fn_btree_action_basic.sqf
     Author:
     Date: 2024-02-02
-    Last Update: 2024-02-03
+    Last Update: 2024-02-10
     Public: No
 
     Description:
@@ -27,7 +27,7 @@
         Generic action node [HASHMAP]
 
     Example(s):
-        [] call vgm_g_fnc_btree_action_basic;
+        [createHashMap, []] call vgm_g_fnc_btree_action_basic;
  */
 
 params ["_params", "_children"];
