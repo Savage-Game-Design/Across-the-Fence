@@ -48,9 +48,10 @@ class vgm_g
     class ai
     {
         VGM_GLOBAL_PATH(\systems\ai\global);
-        class ai_init {
+        class ai_postInit {
             postInit = 1;
         };
+        class ai_tickAllBehaviourTrees {};
     };
 
     class behaviour_trees_compiler
@@ -71,10 +72,20 @@ class vgm_g
         class btree_decorator_basic {};
         class btree_decorator_basicService {};
 
-        /* Custom nodes */
+        /* General purpose nodes */
         class btree_decorator_alwaysFail {};
         class btree_decorator_alwaysSucceed {};
         class btree_decorator_loopInfinitely {};
+
+        /* Custom nodes */
+        class btree_action_followTracks {};
+        class btree_action_moveToInvestigationPoint {};
+        class btree_action_patrolArea {};
+
+        class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
+        class btree_decorator_hasNearbyTracks {};
+        class btree_decorator_suppressionService {};
+        class btree_decorator_updateKnowledgeService {};
     };
 
     class behaviour_trees_runner
@@ -118,9 +129,53 @@ class vgm_g
         class btree_runCurrentNode_sequence {};
         class btree_runCurrentNode {};
 
-        class btree_setTree {};
+        class btree_setTreeLocal {};
         class btree_tickGroup {};
         class btree_unwindStackUpToindex {};
+    };
+
+    class behaviour_trees_trees
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\trees\global);
+        class btree_preInit_compiledTrees {
+            preInit = 1;
+        };
+
+        class btree_getCompiledTree {};
+        class btree_setTreeByNameFromGroupGlobalVar {};
+        class btree_setTreeByNameLocal {};
+
+        class btree_tree_enemyAI {};
+    };
+
+    class behaviour_trees_utilities
+    {
+        VGM_GLOBAL_PATH(\systems\behaviour_trees\ai_utilities\global);
+        class btree_moveTo_execute {};
+        class btree_moveTo_start {};
+        class btree_moveTo_updateDestination {};
+        class btree_setGroupStance {};
+        class btree_setWaypoint {};
+        class btree_tracking_findNearbyTracks {};
+    };
+
+    class danger_reporting
+    {
+        VGM_GLOBAL_PATH(\systems\danger_reporting\global);
+
+        class dangerReport_getProjectileInfo {};
+        class dangerReport_preInit {
+            preInit = 1;
+        };
+    };
+
+    class groupwide_event_handlers
+    {
+        VGM_GLOBAL_PATH(\systems\groupwide_event_handlers\global);
+        class greh_addEventHandlerToAllUnitsInGroup {};
+        class greh_addEventHandlerToUnit {};
+        class greh_removeEventHandlerFromAllUnitsInGroup {};
+        class greh_removeEventHandlerFromUnit {};
     };
 
     class leveling
@@ -211,6 +266,35 @@ class vgm_g
         class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
+
+    class suppression
+    {
+        VGM_GLOBAL_PATH(\systems\suppression\global);
+
+        class suppression_add {};
+        class suppression_decay {};
+        class suppression_get {};
+        class suppression_setShooterMultiplier {};
+        class suppression_updateEffects {};
+    };
+
+    class tracking
+    {
+        VGM_GLOBAL_PATH(\systems\tracking\global);
+        class tracking_debugHideTracks {};
+        class tracking_debugShowTracks {};
+        class tracking_nearbyTracks {};
+        class tracking_preInit {
+            preInit = 1;
+        };
+        class tracking_postInit {
+            postInit = 1;
+        };
+        class tracking_recordTracks {};
+        class tracking_startRecordingTracks {};
+        class tracking_stopRecordingTracks {};
+        class tracking_trackRecordingJob {};
+    };
 };
 
 class vgm_c
@@ -293,6 +377,17 @@ class vgm_c
 
         class carry_attachResponse {};
         class carry_detachResponse {};
+    };
+
+    class danger_reporting
+    {
+        VGM_CLIENT_PATH(\systems\danger_reporting\client);
+
+        class dangerReport_playerFiredManHandler {};
+        class dangerReport_postInit {
+            postInit = 1;
+        };
+        class dangerReport_sendRecentShotsToServer {};
     };
 
     class equipment
@@ -680,5 +775,15 @@ class vgm_c
             postInit = 1;
         };
         class stamina_unitInit {};
+    };
+
+    class suppression
+    {
+        VGM_CLIENT_PATH(\systems\suppression\client);
+
+        class suppression_preInit
+        {
+            preInit = 1;
+        };
     };
 };

@@ -2,7 +2,7 @@
     File: fn_medical_feedbackInit.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-09-01
+    Last Update: 2024-07-05
     Public: No
 
     Description:
@@ -93,4 +93,9 @@ call {
     _effect ppEffectEnable false;
 
     vgm_c_medical_feedback_ppBlur = _effect;
+};
+
+// setup medical status HUD
+call {
+    "vgm_medical_feedback_hud" cutRsc ["VGM_RscMedicalStatus", "PLAIN", 0, false];
 };
