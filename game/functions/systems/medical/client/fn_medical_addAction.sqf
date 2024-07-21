@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_medical_addAction.sqf
     Author: Savage Game Design
     Date: 2023-11-10
-    Last Update: 2023-12-07
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -24,6 +25,12 @@ private _actionId = _player getVariable "vgm_medical_actionHeal";
 if (!isNil "_actionId") then {
     _player removeAction _actionId;
 };
+
+#ifdef MEDICAL_NO_SELF_HEAL_ACTION
+if (_player == player) exitWith {
+    ["Self heal scrollwheel action is disabled"] call vgm_g_fnc_logInfo;
+};
+#endif
 
 private _text = localize (["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player));
 _actionId = _player addAction [

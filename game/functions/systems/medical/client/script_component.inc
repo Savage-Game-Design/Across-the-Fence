@@ -43,3 +43,6 @@
 
 // frequent hits to the same hitpoint more often than this value will be ignored
 #define MAX_HIT_FREQ 0.75
+
+// disable scrollwheel menu action to heal self
+#define MEDICAL_NO_SELF_HEAL_ACTION

@@ -5,7 +5,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2024-05-11
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -132,5 +132,17 @@ vgm_c_medical_damageModifiers = [];
         ]]
     ]
 ] call para_c_fnc_keyhandler_registerAction;
-
 ["OpenMedicalMenu", vgm_c_fnc_medical_openMedicalMenu] call para_c_fnc_keyhandler_addGeneralActionHandler;
+
+[
+    createHashMapFromArray [
+        ["name", "OpenMedicalMenuSelf"],
+        ["displayName", "STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU_SELF"],
+        ["onRelease", false],
+        ["defaultKey", createHashMapFromArray [
+            ["shift", true],
+            ["dikCode", DIK_H]
+        ]]
+    ]
+] call para_c_fnc_keyhandler_registerAction;
+["OpenMedicalMenuSelf", {[player] call vgm_c_fnc_medical_openMedicalMenu}] call para_c_fnc_keyhandler_addGeneralActionHandler;
