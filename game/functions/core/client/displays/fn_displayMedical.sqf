@@ -236,6 +236,23 @@ switch _mode do {
         if (isNull _ctrlModifierList) exitWith {};
         ctClear _ctrlModifierList;
 
+        private _fnc_addRow = {
+            params ["_title", "_description", "_icon"];
+
+            (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
+            _ctrlIcon ctrlSetText _icon;
+            private _text = format ["%1<br/>%2", _title, _description];
+            _ctrlDescription ctrlSetStructuredText parseText _text;
+        };
+
+        if ([_target, "bleeding"] call vgm_c_fnc_statusEffect_get) then {
+            [
+                localize "STR_VGM_MEDICAL_UI_DEBUFF_BLEEDING",
+                "",
+                format ["#(rgb,1,1,1)color(%1,%2,%3,1)", COLOR_SEVERE]
+            ] call _fnc_addRow;
+        };
+
         {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
@@ -251,6 +268,7 @@ switch _mode do {
                 _coefficients insert (_injuryEffects get "coefficient");
                 _statusEffects insert (_injuryEffects get "statusEffect");
             };
+
 
             private _fnc_addRow = {
                 params ["_title", "_description", "_icon", "_iconColor"];
