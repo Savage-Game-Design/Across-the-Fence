@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2023-11-10
+    Last Update: 2024-07-21
     Public: No
 
     Description:
@@ -42,4 +42,6 @@ private _fnc_addActions = {
     }, nil, -1e10, true, false, "", "true"];
 };
 
-vgm_core_lobbyOfficer call _fnc_addActions;
+{
+    _x call _fnc_addActions;
+} forEach [vgm_skills_1, vgm_skills_2];
