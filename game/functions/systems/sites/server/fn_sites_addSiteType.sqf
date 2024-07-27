@@ -2,7 +2,7 @@
     File: sites_addSiteType.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-06-27
+    Last Update: 2024-07-27
     Public: Yes
 
     Description:
@@ -17,9 +17,8 @@
 
     Example(s):
         private _mySite = [] call vgm_s_fnc_sites_getTemplate;
-        _mySite set ["id", "vgm_bunker"];
         // ...etc...
-        [_mySite] call vgm_s_fnc_sites_addSiteType;
+        ["vgm_bunker", _mySite] call vgm_s_fnc_sites_addSiteType;
  */
 
 params ["_id", "_siteType"];
