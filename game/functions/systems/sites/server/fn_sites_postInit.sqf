@@ -2,7 +2,7 @@
     File: sites_postInit.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-06-28
+    Last Update: 2024-07-27
     Public: Yes
 
     Description:
@@ -18,3 +18,4 @@
         N/A
  */
 
+if (!isServer) exitWith {};
