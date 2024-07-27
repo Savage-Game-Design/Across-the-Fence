@@ -2,7 +2,7 @@
     File: fn_loc_eden_showSiteOverlay.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-07-27
+    Last Update: 2024-08-01
     Public: Yes
 
     Description:
@@ -26,16 +26,24 @@ vgm_s_loc_eden_siteOverlay = createHashMap;
 vgm_s_loc_eden_siteOverlayTargetBoxes = [];
 // This can be refactored to be run once then be event driven, after 2.18 releases with "OnEntityAttributeChanged".
 vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
+    // Get a list of sites sorted by name.
+    private _allSiteTypes = [] call vgm_s_fnc_sites_getAllSiteTypes;
+    private _siteTypeIds = values (_allSiteTypes);
+    private _sortedSites = _siteTypeIds apply {[(_x get "name") call para_c_fnc_localize, _x get "id"]};
+    _sortedSites sort false;
+    private _siteTypes = _sortedSites apply {_allSiteTypes get (_x # 1)};
+    private _siteNamesById = (_sortedSites apply {_x # 1}) createHashMapFromArray (_sortedSites apply {_x # 0});
+
+
     while {!isNil "vgm_s_loc_eden_siteOverlay"} do {
         private _targetBoxLocs = [] call vgm_s_fnc_loc_eden_getLocationsByTargetBox;
-        private _siteTypes = values ([] call vgm_s_fnc_sites_getAllSiteTypes);
 
         {
             private _targetBox = _x;
             private _locs = _y;
             {
                 private _tags = _x get "tags";
-                private _validSites = _siteTypes select {[_x, _tags] call vgm_s_fnc_loc_areSiteRequirementsMet} apply {_x get "id"};
+                private _validSites = _siteTypes select {[_x, _tags] call vgm_s_fnc_loc_areSiteRequirementsMet} apply {_siteNamesById get (_x get "id")};
                 vgm_s_loc_eden_siteOverlay set [_x get "edenId", _validSites];
             } forEach _locs;
         } forEach _targetBoxLocs;

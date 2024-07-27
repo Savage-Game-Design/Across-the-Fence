@@ -219,6 +219,7 @@ class vgm_s
         class loc_eden_getTargetBoxLayers {};
         class loc_eden_getTargetBoxMarkers {};
         class loc_eden_showSiteOverlay {};
+        class loc_eden_showSitesReport {};
         class loc_getTargetBoxLocations {};
         class loc_preInit {
             preInit = 1;

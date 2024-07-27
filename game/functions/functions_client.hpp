@@ -508,6 +508,7 @@ class vgm_c
         VGM_CLIENT_PATH(\core\client\ui);
         class update_loading_screen {};
         class progressBar {};
+        class showTabbedTextDialog {};
         class handle_light_level_loop {};
         class stack_controls {};
         class toggle_controls_group_overlay {};
