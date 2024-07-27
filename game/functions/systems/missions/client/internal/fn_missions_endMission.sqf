@@ -39,9 +39,7 @@ player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandle
 
 moveOut player;
 player setVelocity [0,0,0];
-private _sharedHubRespawn = [] call vgm_g_fnc_missions_getHubSpawnPos;
-private _newPos = _sharedHubRespawn # 0;
-private _newDir = _sharedHubRespawn # 1;
+([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
 player setDir _newDir;
 player setVehiclePosition [_newPos, [], 0, "NONE"];
 [] call vgm_c_fnc_sharedHub_areaLimiterEnable;
