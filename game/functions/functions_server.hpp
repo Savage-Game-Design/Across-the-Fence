@@ -208,6 +208,24 @@ class vgm_s
         };
     };
 
+    class locations
+    {
+        VGM_SERVER_PATH(\systems\locations\server);
+
+        class loc_areSiteRequirementsMet {};
+        class loc_eden_createLocationIndexAllTargetBoxes {};
+        class loc_eden_getLocationsByTargetBox {};
+        class loc_eden_getSiteLocationsByTargetBox {};
+        class loc_eden_getTargetBoxLayers {};
+        class loc_eden_getTargetBoxMarkers {};
+        class loc_eden_showSiteOverlay {};
+        class loc_getTargetBoxLocations {};
+        class loc_preInit {
+            preInit = 1;
+        };
+        class loc_setTargetBoxIndex {};
+    };
+
     class shared_hub
     {
         VGM_SERVER_PATH(\systems\shared_hub\server);
@@ -233,6 +251,7 @@ class vgm_s
 
         class sites_addSiteType {};
         class sites_delete {};
+        class sites_getAllSiteTypes {};
         class sites_getSiteType {};
         class sites_getTemplate {};
         class sites_loadSiteTypesFromConfig {};

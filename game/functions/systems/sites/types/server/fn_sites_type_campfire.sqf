@@ -1,8 +1,10 @@
+#include "../../sites.inc"
+
 /*
     File: fn_sites_types_shelter.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-06-27
+    Last Update: 2024-07-04
     Public: Yes
 
     Description:
@@ -27,6 +29,7 @@
 private _campFire = [] call vgm_s_fnc_sites_getTemplate;
 
 _campFire set ["name", "STR_VGM_SITES_CAMPFIRE"];
+_campFire set ["size", SITE_FOOTPRINT_SMALL];
 _campFire set ["spawnFunction", {
     params ["_pos2D"];
 
