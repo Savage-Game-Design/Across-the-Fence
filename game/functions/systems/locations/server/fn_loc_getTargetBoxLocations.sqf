@@ -1,5 +1,5 @@
 /*
-    File: fn_loc_getTargetBox.sqf
+    File: fn_loc_getTargetBoxLocations.sqf
     Author: Savage Game Design
     Date: 2024-06-01
     Last Update: 2024-07-22

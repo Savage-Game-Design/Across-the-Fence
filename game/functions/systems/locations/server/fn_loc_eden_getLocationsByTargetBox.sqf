@@ -21,8 +21,6 @@
 #define EDEN_ENTITIES_LAYERS 6
 #define EDEN_ENTITIES_COMMENTS 7
 
-params [];
-
 // Use this to check if a given ID is a comment. 3DEN doesn't seem to have a "type" command.
 private _allCommentIds = (all3DENEntities # EDEN_ENTITIES_COMMENTS) createHashMapFromArray [];
 // Final index to be returned.

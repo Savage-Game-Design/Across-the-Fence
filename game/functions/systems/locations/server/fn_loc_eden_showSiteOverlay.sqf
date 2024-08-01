@@ -26,7 +26,7 @@ vgm_s_loc_eden_siteOverlay = createHashMap;
 vgm_s_loc_eden_siteOverlayTargetBoxes = [];
 // This can be refactored to be run once then be event driven, after 2.18 releases with "OnEntityAttributeChanged".
 vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
-    while {! isNil "vgm_s_loc_eden_siteOverlay"} do {
+    while {!isNil "vgm_s_loc_eden_siteOverlay"} do {
         private _targetBoxLocs = [] call vgm_s_fnc_loc_eden_getLocationsByTargetBox;
         private _siteTypes = values ([] call vgm_s_fnc_sites_getAllSiteTypes);
 
