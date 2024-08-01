@@ -218,6 +218,36 @@ class vgm_s
         };
     };
 
+    class sites
+    {
+        VGM_SERVER_PATH(\systems\sites\server);
+
+        class sites_preInit
+        {
+            preInit = 1;
+        };
+        class sites_postInit
+        {
+            postInit = 1;
+        };
+
+        class sites_addSiteType {};
+        class sites_delete {};
+        class sites_getSiteType {};
+        class sites_getTemplate {};
+        class sites_loadSiteTypesFromConfig {};
+        class sites_spawn {};
+        class sites_spawnRandomFortifications {};
+    };
+
+    class site_types
+    {
+        VGM_SERVER_PATH(\systems\sites\types\server);
+
+        class sites_type_campfire {};
+        class sites_type_shelter {};
+    };
+
     class skill
     {
         VGM_SERVER_PATH(\systems\skill\server);
