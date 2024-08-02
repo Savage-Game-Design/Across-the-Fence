@@ -434,6 +434,9 @@
         <Key ID="STR_VGM_SITES_SHELTER">
             <Original>Shelter</Original>
         </Key>
+        <Key ID="STR_VGM_SITES_SUPPLY_DUMP">
+            <Original>Supply dump</Original>
+        </Key>
         <Key ID="STR_VGM_SITES_TRANSMITTER">
             <Original>Transmitter</Original>
         </Key>
@@ -460,5 +463,5 @@
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
         </Key>
-    </Package>
+  </Package>
 </Project>
