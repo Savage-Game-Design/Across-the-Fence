@@ -5,6 +5,7 @@ import RscStructuredText;
 import RscMapControlEmpty;
 import RscControlsGroupNoScrollbars;
 import RscButtonMenu;
+import RscObject;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -686,5 +687,57 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                 };
             };
         };
+    };
+};
+
+class VGM_RscNotepad
+{
+    onObjectMoved = "systemChat str _this";
+
+    idc = -1;
+    type = 82; // https://community.bistudio.com/wiki/CT_OBJECT_CONTAINER
+
+    model = __EVAL(getMissionPath "assets\notepad.p3d");
+    scale = 1;
+    direction[] = {0, 0, 1};
+    up[] = {0, 1, 0};
+
+    x = 0.7; y = 0.5; z = 0.22;
+    xBack = 0.7; yBack = 0.5; zBack = 1;
+
+    inBack = 1;
+    enableZoom = 1;
+    zoomDuration = 0.25;
+
+    class Areas
+    {
+        class Main
+        {
+            selection = "main";
+            class Controls
+            {
+                class test: VGM_ctrlStatic
+                {
+                    text = "TEST2";
+                    x = 0.5;
+                    y = 0.5;
+                    w = 25 * VGM_GRID_W;
+                    h = 10 * VGM_GRID_H;
+                    colorBackground[] = {0,0,0,1};
+                };
+            };
+        };
+    };
+};
+
+class VGM_Test
+{
+    idd = -1;
+    movingEnable = 0;
+    enableSimulation = 1;
+
+    class Objects
+    {
+        class Notepad: VGM_RscNotepad {};
     };
 };
