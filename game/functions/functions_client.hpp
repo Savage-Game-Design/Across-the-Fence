@@ -352,6 +352,7 @@ class vgm_c
         class displayAbilities {};
         class displayMissions {};
         class displayMissionsTargets {};
+        class displayNotepad {};
         class displayAbilityCooldown {};
         class displayMedical {};
         class displayStaminaBar {};
@@ -461,6 +462,16 @@ class vgm_c
         class missions_gameplay_extraction_addAction {};
         class missions_gameplay_extraction_requestExtraction {};
         class missions_gameplay_extraction_getNearbyRadio {};
+    };
+
+    class missions_scouting
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client\scouting);
+
+        class missions_gameplay_scouting_postInit
+        {
+            postInit = 1;
+        };
     };
 
     class missions_zones

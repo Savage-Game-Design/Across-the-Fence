@@ -2,7 +2,7 @@
     File: macros.inc
     Author: Savage Game Design
     Date: 2023-01-31
-    Last Update:
+    Last Update: 2024-08-10
     Public: Yes
 
     Description:
@@ -31,3 +31,9 @@
 // Default text font, monospaced typewriter-style from SOG:PF
 #define VGM_FONT "tt2020base_vn"
 
+#define VGM_NOTEPAD_GRID_W (pixelW * pixelGridBase * 0.375)
+#define VGM_NOTEPAD_GRID_H (pixelH * pixelGridBase * 0.375)
+
+#define VGM_NOTEPAD_W (115 * VGM_NOTEPAD_GRID_W)
+#define VGM_NOTEPAD_H (150 * VGM_NOTEPAD_GRID_H)
+#define VGM_NOTEPAD_LINE_H (8 * VGM_NOTEPAD_GRID_H)
