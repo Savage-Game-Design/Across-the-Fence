@@ -247,6 +247,14 @@ class vgm_g
         };
     };
 
+    class object_grabber
+    {
+        VGM_GLOBAL_PATH(\systems\object_grabber\global);
+
+        class objGrabber_eden_grab {};
+        class objGrabber_map {};
+    };
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
