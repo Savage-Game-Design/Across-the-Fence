@@ -247,6 +247,13 @@ class vgm_g
         };
     };
 
+    class missions_gameplay_scouting
+    {
+        VGM_GLOBAL_PATH(\systems\missions_gameplay\global\scouting);
+
+        class missions_gameplay_scouting_setSpottable {};
+    };
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
@@ -464,7 +471,7 @@ class vgm_c
         class missions_gameplay_extraction_getNearbyRadio {};
     };
 
-    class missions_scouting
+    class missions_gameplay_scouting
     {
         VGM_CLIENT_PATH(\systems\missions_gameplay\client\scouting);
 
