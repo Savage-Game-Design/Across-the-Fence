@@ -21,7 +21,11 @@
  */
 
 
-params [["_ASL", true], ["_grabOrientation", true], ["_alignToSurfaceNormal", false], ["_useTerrainHeight", false]];
+params [
+    ["_grabOrientation", true],
+    ["_alignToSurfaceNormal", false],
+    ["_useTerrainHeight", false]
+];
 
 private _fnc_getObjectsCenter = {
 	params ["_objs"];
@@ -32,7 +36,7 @@ private _fnc_getObjectsCenter = {
 	} forEach _objs;
 
 	private _averageMultiplier = 1 / (count _objs);
-	_center = _center vectorMultiply [_averageMultiplier, _averageMultiplier, _averageMultiplier];
+	_center = _center vectorMultiply _averageMultiplier;
 
 	ATLtoASL [_center # 0, _center # 1, 0]
 };
