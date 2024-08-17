@@ -109,6 +109,8 @@ class vgm_s
         };
         class missions_setPlayerReadiness {};
         class missions_startMission {};
+        class missions_createSystemNetmap {};
+        class missions_getSystemNetmap {};
     };
 
     class missions_remoteExec

@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_registerMission.sqf
     Author: Savage Game Design
     Date: 2024-08-11
-    Last Update: 2024-08-13
+    Last Update: 2024-08-17
     Public: No
 
     Description:
@@ -20,13 +20,5 @@
 
 params ["_missionId"];
 
-private _mission = [_missionId] call vgm_s_fnc_missions_getById;
-if (isNil "_mission") exitWith {};
-
-private _spottingNetmap = [[
-    ["objects", []]
-]] call para_s_fnc_netmap_createNetmapFromArray;
-
-private _missionPublic = _mission get "public";
-_missionPublic set ["spotting", _spottingNetmap];
-[_spottingNetmap, _missionPublic] call para_s_fnc_netmap_setOwningNetmap;
+private _spottingNetmap = [_missionId, "spotting"] call vgm_s_fnc_missions_createSystemNetmap;
+[_spottingNetmap, "objects", []] call para_s_fnc_netmap_set;
