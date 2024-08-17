@@ -2,7 +2,7 @@
     File: sites_spawn.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-05-25
+    Last Update: 2024-08-17
     Public: Yes
 
     Description:
@@ -31,9 +31,13 @@ if (isNil "_siteType") exitWith {
 
 private _spawnResult = [_pos2D] call (_siteType get "spawnFunction");
 
-createHashMapFromArray [
+private _site = createHashMapFromArray [
     ["type", _siteType],
     ["pos", _pos2D],
     ["objects", _spawnResult # 0],
     ["ownedSites", []]
-]
+];
+
+["vgm_sites_siteSpawned", [_site]] call para_g_fnc_event_triggerServer;
+
+_site // return
