@@ -78,6 +78,18 @@ switch _mode do {
         _ctrlHeader ctrlEnable false;
         _ctrlHeader ctrlCommit 0;
 
+        ["refreshUI", _display] call SELF;
+    };
+
+    case "refreshUI": {
+        params ["_display"];
+
+        if (isNil {[] call vgm_c_fnc_missions_getCurrentMission}) exitWith {
+            (_display getVariable "VGM_RscNotepad") ctrlShow false;
+        };
+
+        private _ctrlMain = _display getVariable "VGM_RscNotepad_Main";
+
         {
             private _ctrlHeader = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlGrpMain];
             _ctrlHeader ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
@@ -86,13 +98,6 @@ switch _mode do {
             _ctrlHeader ctrlSetBackgroundColor [0,1,0,0.35];
             _ctrlHeader ctrlCommit 0;
         } forEach [1,2,3,4,5];
-
-        ["refreshUI", _display] call SELF;
-    };
-
-    case "refreshUI": {
-        params ["_display"];
-        private _ctrlMain = _display displayCtrl VGM_IDC_RSCNOTEPAD_MAIN;
     };
 
     default {
