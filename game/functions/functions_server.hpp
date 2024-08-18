@@ -160,11 +160,13 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\missions_gameplay\server\scouting);
 
+        class missions_gameplay_scouting_handleSpotted {};
         class missions_gameplay_scouting_postInit
         {
             postInit = 1;
         };
         class missions_gameplay_scouting_registerMission {};
+        class missions_gameplay_scouting_setSpottable {};
     };
 
     class missions_selection

@@ -15,7 +15,7 @@
         Mission the player is assigned to [HashMap]
 
     Example(s):
-        [getplayerID (allPlayers # 0)] call vgm_s_fnc_missions_getAssignedMission;
+        [getPlayerID (allPlayers # 0)] call vgm_s_fnc_missions_getAssignedMission;
  */
 
 params ["_playerId"];

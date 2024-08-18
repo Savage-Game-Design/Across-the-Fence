@@ -2,7 +2,7 @@
     File: fn_missions_getSystemNetmap.sqf
     Author: Savage Game Design
     Date: 2024-08-13
-    Last Update: 2024-08-17
+    Last Update: 2024-08-18
     Public: Yes
 
     Description:
@@ -25,7 +25,10 @@ params [
 ];
 
 private _mission = [_missionId] call vgm_s_fnc_missions_getById;
-if (isNil "_mission") exitWith {createHashMap};
+if (isNil "_mission") exitWith {
+    format ["Unable to get system ""%2"" netmap for id: %1", _missionId, _systemName];
+    createHashMap // return
+};
 
 private _systemKey = format ["system_%1", _systemName];
 private _missionPublic = _mission get "public";
