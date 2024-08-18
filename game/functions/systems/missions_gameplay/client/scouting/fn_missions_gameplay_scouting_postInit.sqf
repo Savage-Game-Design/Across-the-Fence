@@ -21,5 +21,7 @@ if (!hasInterface) exitWith {};
 
 ["vgm_scouting_spottedSiteClient", {
     (_this#0) params ["_siteId", "_spotter"];
-    systemChat str [_siteId, _spotter];
+    ["VGM_SiteSpotted", [
+        format [localize "STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_DESCRIPTION", name _spotter]
+    ]] call BIS_fnc_showNotification;
 }] call para_g_fnc_event_subscribeServer;

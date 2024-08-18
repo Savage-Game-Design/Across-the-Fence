@@ -8,3 +8,4 @@
 #include "cfg_skills.hpp"
 
 #include "cfg_sounds.hpp"
+#include "cfg_notifications.hpp"
