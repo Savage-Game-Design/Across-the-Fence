@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-10
+    Last Update: 2024-08-18
     Public: No
 
     Description:
@@ -32,12 +32,39 @@ switch _mode do {
     case "onLoad": {
         params ["_ctrlObject"];
         private _display = ctrlParent _ctrlObject;
+        private _mapDisplay = findDisplay 12;
 
-        uiNamespace setVariable ["VGM_RscNotepad", _ctrlObject];
+        _display setVariable ["VGM_RscNotepad", _ctrlObject];
+        private _ctrlGrpMain = _display getVariable "VGM_RscNotepad_Main";
 
-        private _ctrlGrpMain = uiNamespace getVariable "VGM_RscNotepad_Main";
+        // change cursor when dragging is possible
+        if (_display == _mapDisplay) then {
+            _ctrlObject ctrlAddEventHandler ["MouseMoving", {
+                params ["_ctrl"];
+                ctrlParent _ctrl setVariable ["vgm_cursor_arrow", "Move"];
+            }];
 
-        if (true) then {
+            _ctrlGrpMain ctrlAddEventHandler ["MouseMoving", {
+                params ["_ctrl"];
+                ctrlParent _ctrl setVariable ["vgm_cursor_arrow", ""];
+            }];
+
+            // update the cursor via Map control
+            (_display displayCtrl 51) ctrlAddEventHandler ["Draw", {
+                params ["_ctrlMap"];
+                private _display = ctrlParent _ctrlMap;
+                private _ctrlFocused = _display ctrlAt getMousePosition;
+
+                if ((_display getVariable "VGM_RscNotepad") == _ctrlFocused) then {
+                    _ctrlMap ctrlMapCursor ["Arrow", _display getVariable ["vgm_cursor_arrow", ""]];
+                } else {
+                    _ctrlMap ctrlMapCursor ["Arrow", ""];
+                }
+            }];
+        };
+
+        // debug background
+        if (false) then {
             private _ctrlBg = _display ctrlCreate ["VGM_ctrlStatic", -1, _ctrlGrpMain];
             _ctrlBg ctrlSetBackgroundColor [1,0,0,0.35];
             _ctrlBg ctrlSetPosition [0, 0, VGM_NOTEPAD_W, VGM_NOTEPAD_H];
@@ -48,6 +75,7 @@ switch _mode do {
         _ctrlHeader ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 1.8);
         _ctrlHeader ctrlSetText toUpper "Scouting report";
         _ctrlHeader ctrlSetPosition [0, -(2 * VGM_NOTEPAD_GRID_H), VGM_NOTEPAD_W, VGM_NOTEPAD_LINE_H + (1.5 * VGM_NOTEPAD_GRID_H)];
+        _ctrlHeader ctrlEnable false;
         _ctrlHeader ctrlCommit 0;
 
         {

@@ -731,7 +731,7 @@ class VGM_RscNotepad
             {
                 class Main: ctrlControlsGroup
                 {
-                    onLoad = "uiNamespace setVariable ['VGM_RscNotepad_Main', _this#0];";
+                    onLoad = "ctrlParent (_this#0) setVariable ['VGM_RscNotepad_Main', _this#0];";
                     idc = VGM_IDC_RSCNOTEPAD_MAIN;
                     x = 1.75 * VGM_NOTEPAD_GRID_W;
                     y = 11.5 * VGM_NOTEPAD_GRID_H;
