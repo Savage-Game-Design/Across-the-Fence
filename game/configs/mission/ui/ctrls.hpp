@@ -700,10 +700,14 @@ class VGM_ctrlStaticNotepadHeader: VGM_ctrlStaticNotepad
 {
     style = 2;
 };
+class VGM_ctrlButtonNotepad: VGM_ctrlButton
+{
+};
 
 class VGM_RscNotepad
 {
     onLoad = "['onLoad', _this] call vgm_c_fnc_displayNotepad";
+    onUnload = "['onUnload', _this] call vgm_c_fnc_displayNotepad";
 
     idc = -1;
     type = 82; // https://community.bistudio.com/wiki/CT_OBJECT_CONTAINER
