@@ -4,7 +4,7 @@
     File: fn_sites_types_waypoint.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-07-04
+    Last Update: 2024-08-15
     Public: Yes
 
     Description:
@@ -34,7 +34,12 @@ _site set ["locRequirements", []];
 _site set ["spawnFunction", {
     params ["_pos2D"];
 
-    [[ ]]
+    private _composition = [["Land_vn_hut_mont_02",[0,0],0.12949,0.12949,[-0.959622,0.281292,0],[0,0,1],1,0,"",true,true,false]];
+    private _objects = [_pos2D + [0], 0, _composition] call vgm_g_fnc_objGrabber_map;
+
+    createHashMapFromArray [
+        ["objects", _objects]
+    ]
 }];
 
 _site
