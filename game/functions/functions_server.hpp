@@ -212,14 +212,15 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\locations\server);
 
-        class loc_areSiteRequirementsMet {};
+        class loc_areRequirementsMet {};
         class loc_eden_createLocationIndexAllTargetBoxes {};
         class loc_eden_getLocationsByTargetBox {};
-        class loc_eden_getSiteLocationsByTargetBox {};
+        class loc_eden_indexAllTargetBoxLocations {};
         class loc_eden_getTargetBoxLayers {};
         class loc_eden_getTargetBoxMarkers {};
-        class loc_eden_showSiteOverlay {};
-        class loc_eden_showSitesReport {};
+        class loc_eden_showOverlay {};
+        class loc_eden_showReport {};
+        class loc_getLocationTypes {};
         class loc_getTargetBoxLocations {};
         class loc_preInit {
             preInit = 1;
@@ -254,6 +255,7 @@ class vgm_s
         class sites_delete {};
         class sites_getAllSiteTypes {};
         class sites_getSiteType {};
+        class sites_getSiteTypeRequirements {};
         class sites_getTemplate {};
         class sites_loadSiteTypesFromConfig {};
         class sites_spawn {};
