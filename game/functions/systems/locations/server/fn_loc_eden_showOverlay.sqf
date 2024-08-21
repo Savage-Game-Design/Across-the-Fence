@@ -6,7 +6,7 @@
     Public: Yes
 
     Description:
-        Shows an overlay over site locations in 3DEN, with valid sites for that loc.
+        Shows an overlay of locations in 3DEN, with valid location types for that loc.
 
     Parameter(s):
         N/A
@@ -18,13 +18,13 @@
         [] call vgm_s_fnc_loc_eden_showOverlay
  */
 
-if (!isNil "vgm_s_loc_eden_siteOverlayDrawHandler") exitWith {};
+if (!isNil "vgm_s_loc_eden_overlayDrawHandler") exitWith {};
 
-vgm_s_loc_eden_siteOverlay = createHashMap;
-vgm_s_loc_eden_siteOverlayTargetBoxes = [];
+vgm_s_loc_eden_overlay = createHashMap;
+vgm_s_loc_eden_overlayTargetBoxes = [];
 // This can be refactored to be run once then be event driven, after 2.18 releases with "OnEntityAttributeChanged".
-vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
-    // Get a list of sites sorted by name.
+vgm_s_loc_eden_overlayUpdater = [] spawn {
+    // Get a list of location types sorted by name.
     private _locationTypesById = [] call vgm_s_fnc_loc_getLocationTypes;
     private _locationTypes = values _locationTypesById;
     private _sortedLocationTypeIds = _locationTypes apply {[_x get "name", _x get "id"]};
@@ -32,7 +32,7 @@ vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
     private _sortedLocationTypes = _sortedLocationTypeIds apply {_locationTypesById get (_x # 1)};
 
 
-    while {!isNil "vgm_s_loc_eden_siteOverlay"} do {
+    while {!isNil "vgm_s_loc_eden_overlay"} do {
         private _targetBoxLocs = [] call vgm_s_fnc_loc_eden_getLocationsByTargetBox;
 
         {
@@ -40,22 +40,22 @@ vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
             private _locs = _y;
             {
                 private _tags = _x get "tags";
-                private _validSites = _sortedLocationTypes select {[_x get "requirements", _tags] call vgm_s_fnc_loc_areRequirementsMet} apply {_x get "name"};
-                vgm_s_loc_eden_siteOverlay set [_x get "edenId", _validSites];
+                private _validLocationTypes = _sortedLocationTypes select {[_x get "requirements", _tags] call vgm_s_fnc_loc_areRequirementsMet} apply {_x get "name"};
+                vgm_s_loc_eden_overlay set [_x get "edenId", _validLocationTypes];
             } forEach _locs;
         } forEach _targetBoxLocs;
 
-        vgm_s_loc_eden_siteOverlayTargetBoxMarkers = [] call vgm_s_fnc_loc_eden_getTargetBoxMarkers;
+        vgm_s_loc_eden_overlayTargetBoxMarkers = [] call vgm_s_fnc_loc_eden_getTargetBoxMarkers;
 
         uiSleep 5;
     };
 };
 
-vgm_s_loc_eden_siteOverlayDrawHandler = addMissionEventHandler ["Draw3D", {
+vgm_s_loc_eden_overlayDrawHandler = addMissionEventHandler ["Draw3D", {
 	private _maxDistance = 3500;
 	{
 		private _id = _x;
-		private _siteNames = _y;
+		private _locationNames = _y;
 
 		private _pos = ASLToATL (_id get3DENAttribute "Position" select 0);
 		private _textPos = _pos vectorAdd [0, 0, 100];
@@ -64,15 +64,15 @@ vgm_s_loc_eden_siteOverlayDrawHandler = addMissionEventHandler ["Draw3D", {
 
 		{
 			drawIcon3D ["", [1,1,1,_opacity], _textPos, 1, 1, 45, _x, 1, 0.03, "TahomaB", "center", false, 0, -0.03 + -0.015 * _forEachIndex];
-		} forEach _siteNames;
+		} forEach _locationNames;
 
-		if (_siteNames isEqualTo []) then {
+		if (_locationNames isEqualTo []) then {
 			drawIcon3D ["", [1,1,0.3,_opacity], _textPos, 0, 0, 45, "None", 2, 0.05, "TahomaB", "center", false, 0, -0.03];
 		};
 
         drawLine3D [_textPos, _pos, [1,1,1,_opacity]];
 
-	} forEach vgm_s_loc_eden_siteOverlay;
+	} forEach vgm_s_loc_eden_overlay;
 
     {
         private _pos = _x get3DENAttribute "Position" select 0;
@@ -95,5 +95,5 @@ vgm_s_loc_eden_siteOverlayDrawHandler = addMissionEventHandler ["Draw3D", {
         {
             drawLine3D [_x # 0, _x # 1, [1, 1, 1, _opacity]];
         } forEach _lines;
-    } forEach vgm_s_loc_eden_siteOverlayTargetBoxMarkers;
+    } forEach vgm_s_loc_eden_overlayTargetBoxMarkers;
 }];

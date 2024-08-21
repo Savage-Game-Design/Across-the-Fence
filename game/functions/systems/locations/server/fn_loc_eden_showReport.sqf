@@ -19,19 +19,19 @@
  */
 
 private _targetBoxIndexes = [] call vgm_s_fnc_loc_eden_indexAllTargetBoxLocations;
-private _siteTypes = values ([] call vgm_s_fnc_sites_getAllSiteTypes);
+private _locationTypes = values ([] call vgm_s_fnc_loc_getLocationTypes);
 
 private _perTargetBoxReports = [];
 
 {
 	private _targetBoxName = _x;
 	private _siteLocations = _y;
-	private _siteReports = createHashMap;
+	private _reports = createHashMap;
 
 	{
-		private _siteTemplate = _x;
-		private _positions = _siteLocations getOrDefault [_siteTemplate get "id", []];
-		private _siteName = (_siteTemplate get "name") call para_c_fnc_localize;
+		private _locationType = _x;
+		private _positions = _siteLocations getOrDefault [_locationType get "id", []];
+		private _locTypeName = _locationType get "name";
 
         // Get total number of positions and color-code accordingly.
 		private _totalPositions = count _positions;
@@ -39,33 +39,33 @@ private _perTargetBoxReports = [];
 		private _colorConditions = [_totalPositions <= 0, _totalPositions <= 2, true];
 		private _positionCountColor = _colors select (_colorConditions find true);
 
-		private _siteRequirements = str (([_siteTemplate get "size"]) + (_siteTemplate get "locRequirements"));
+		private _siteRequirements = str (_locationType get "requirements");
 
         // Prepare individual report lines for formatting.
         // Splitting it into lines makes it easier to change later, as the format numbers stay low.
-		private _siteReportLines = [
+		private _reportLines = [
 			["<t size='1.3'>%1 - <t color='%3'>%2</t></t>",
-				[_siteName, _totalPositions, _positionCountColor]],
+				[_locTypeName, _totalPositions, _positionCountColor]],
 			["Required tags: %1",
 				[_siteRequirements]]
 		];
 
-		_siteReportLines = _siteReportLines apply { _x params ["_template", "_args"]; format ([_template] + _args) };
+		_reportLines = _reportLines apply { _x params ["_template", "_args"]; format ([_template] + _args) };
 
-		private _siteReport = _siteReportLines joinString "<br/>";
+		private _report = _reportLines joinString "<br/>";
 
-		_siteReports set [_siteName, _siteReport];
-	} forEach _siteTypes;
+		_reports set [_locTypeName, _report];
+	} forEach _locationTypes;
 
     // Sort reports by site name, ensuring consistency across different reports.
-	private _siteNames = keys _siteReports;
-	_siteNames sort true;
+	private _locTypeNames = keys _reports;
+	_locTypeNames sort true;
 	private _targetBoxReportLines = [];
 
     // Join all the individual site reports into one big eport.
 	{
-		_targetBoxReportLines pushBack (_siteReports get _x);
-	} forEach _siteNames;
+		_targetBoxReportLines pushBack (_reports get _x);
+	} forEach _locTypeNames;
 
 	private _targetBoxReport = parseText (_targetBoxReportLines joinString "<br/>");
 
