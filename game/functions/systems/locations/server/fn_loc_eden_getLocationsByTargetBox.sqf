@@ -2,7 +2,7 @@
     File: fn_loc_eden_getLocationsByTargetBox.sqf
     Author:
     Date: 2024-07-03
-    Last Update: 2024-07-27
+    Last Update: 2024-08-21
     Public: No
 
     Description:
@@ -50,7 +50,7 @@ private _targetBoxLayers = [] call vgm_s_fnc_loc_eden_getTargetBoxLayers;
 
         _targetBoxIndex pushBack createHashMapFromArray [
             ["edenId", _commentEntity],
-            ["pos", (_commentEntity get3DENAttribute "Position" select 0)],
+            ["pos", (_commentEntity get3DENAttribute "Position" select 0 select [0, 2])],
             ["tags", _tags]
         ];
     } forEach (_entitiesInLayer select {_x isEqualType 0} select {_x in _allCommentIds});
