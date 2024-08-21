@@ -2,7 +2,7 @@
     File: fn_loc_eden_showSiteOverlay.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-08-01
+    Last Update: 2024-08-21
     Public: Yes
 
     Description:
@@ -20,19 +20,16 @@
 
 if (!isNil "vgm_s_loc_eden_siteOverlayDrawHandler") exitWith {};
 
-[] call vgm_s_fnc_sites_loadSiteTypesFromConfig;
-
 vgm_s_loc_eden_siteOverlay = createHashMap;
 vgm_s_loc_eden_siteOverlayTargetBoxes = [];
 // This can be refactored to be run once then be event driven, after 2.18 releases with "OnEntityAttributeChanged".
 vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
     // Get a list of sites sorted by name.
-    private _allSiteTypes = [] call vgm_s_fnc_sites_getAllSiteTypes;
-    private _siteTypeIds = values (_allSiteTypes);
-    private _sortedSites = _siteTypeIds apply {[(_x get "name") call para_c_fnc_localize, _x get "id"]};
-    _sortedSites sort false;
-    private _siteTypes = _sortedSites apply {_allSiteTypes get (_x # 1)};
-    private _siteNamesById = (_sortedSites apply {_x # 1}) createHashMapFromArray (_sortedSites apply {_x # 0});
+    private _locationTypesById = [] call vgm_s_fnc_loc_getLocationTypes;
+    private _locationTypes = values _locationTypesById;
+    private _sortedLocationTypeIds = _locationTypes apply {[_x get "name", _x get "id"]};
+    _sortedLocationTypeIds sort false;
+    private _sortedLocationTypes = _sortedLocationTypeIds apply {_locationTypesById get (_x # 1)};
 
 
     while {!isNil "vgm_s_loc_eden_siteOverlay"} do {
@@ -43,7 +40,7 @@ vgm_s_loc_eden_siteOverlayUpdater = [] spawn {
             private _locs = _y;
             {
                 private _tags = _x get "tags";
-                private _validSites = _siteTypes select {[_x, _tags] call vgm_s_fnc_loc_areSiteRequirementsMet} apply {_siteNamesById get (_x get "id")};
+                private _validSites = _sortedLocationTypes select {[_x get "requirements", _tags] call vgm_s_fnc_loc_areRequirementsMet} apply {_x get "name"};
                 vgm_s_loc_eden_siteOverlay set [_x get "edenId", _validSites];
             } forEach _locs;
         } forEach _targetBoxLocs;

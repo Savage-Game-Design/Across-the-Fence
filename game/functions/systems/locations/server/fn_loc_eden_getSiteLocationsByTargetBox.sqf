@@ -2,7 +2,7 @@
     File: fn_loc_eden_getSiteLocationsByTargetBox.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-07-22
+    Last Update: 2024-08-21
     Public: Yes
 
     Description:
@@ -22,12 +22,12 @@
         [] call vgm_s_fnc_loc_eden_getSiteLocationsByTargetBox;
  */
 
-[] call vgm_s_fnc_sites_loadSiteTypesFromConfig;
 
 private _locationsByTargetBox = [] call vgm_s_fnc_loc_eden_getLocationsByTargetBox;
 
 private _locationIndex = createHashMap;
-private _siteTypes = values ([] call vgm_s_fnc_sites_getAllSiteTypes);
+
+private _locationTypesWithRequirements = [] call vgm_s_fnc_loc_getLocationTypes;
 
 {
     private _zoneId = _x;
@@ -36,18 +36,18 @@ private _siteTypes = values ([] call vgm_s_fnc_sites_getAllSiteTypes);
     _locationIndex set [_zoneId, _currentZoneIndex];
 
     {
-        private _currentSiteTypeLocationsInZone = [];
-        private _siteType = _x;
-        _currentZoneIndex set [_siteType get "id", _currentSiteTypeLocationsInZone];
+        private _currentLocationTypesInZone = [];
+        private _locationType = _x;
+        _currentZoneIndex set [_locationType get "id", _currentLocationTypesInZone];
 
         {
             private _locData = _x;
 
-            if ([_siteType, _locData get "tags"] call vgm_s_fnc_loc_areSiteRequirementsMet) then {
-                _currentSiteTypeLocationsInZone pushBack _locData;
+            if ([_locationType get "requirements", _locData get "tags"] call vgm_s_fnc_loc_areRequirementsMet) then {
+                _currentLocationTypesInZone pushBack _locData;
             };
         } forEach _locations;
-    } forEach _siteTypes;
+    } forEach values _locationTypesWithRequirements;
 } forEach _locationsByTargetBox;
 
 _locationIndex
