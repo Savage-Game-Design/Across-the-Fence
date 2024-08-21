@@ -221,6 +221,7 @@ class vgm_s
         class loc_eden_showOverlay {};
         class loc_eden_showReport {};
         class loc_getLocationTypes {};
+        class loc_getTargetBoxIds {};
         class loc_getTargetBoxLocations {};
         class loc_preInit {
             preInit = 1;
