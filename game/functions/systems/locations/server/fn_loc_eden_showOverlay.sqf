@@ -1,5 +1,5 @@
 /*
-    File: fn_loc_eden_showSiteOverlay.sqf
+    File: fn_loc_eden_showOverlay.sqf
     Author: Savage Game Design
     Date: 2024-07-04
     Last Update: 2024-08-21
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        [] call vgm_s_fnc_loc_eden_showSiteOverlay
+        [] call vgm_s_fnc_loc_eden_showOverlay
  */
 
 if (!isNil "vgm_s_loc_eden_siteOverlayDrawHandler") exitWith {};

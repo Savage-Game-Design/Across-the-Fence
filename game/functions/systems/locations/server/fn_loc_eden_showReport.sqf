@@ -1,8 +1,8 @@
 /*
-    File: fn_loc_eden_showSitesReport.sqf
+    File: fn_loc_eden_showReport.sqf
     Author: Savage Game Design
     Date: 2024-07-27
-    Last Update: 2024-07-27
+    Last Update: 2024-08-21
     Public: No
 
     Description:
@@ -15,10 +15,10 @@
         N/A
 
     Example(s):
-        [] call vgm_s_fnc_loc_eden_showSitesReport;
+        [] call vgm_s_fnc_loc_eden_showReport;
  */
 
-private _targetBoxIndexes = [] call vgm_s_fnc_loc_eden_getSiteLocationsByTargetBox;
+private _targetBoxIndexes = [] call vgm_s_fnc_loc_eden_indexAllTargetBoxLocations;
 private _siteTypes = values ([] call vgm_s_fnc_sites_getAllSiteTypes);
 
 private _perTargetBoxReports = [];

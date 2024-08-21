@@ -1,5 +1,5 @@
 /*
-    File: fn_loc_eden_getSiteLocationsByTargetBox.sqf
+    File: fn_loc_eden_indexAllTargetBoxLocations.sqf
     Author: Savage Game Design
     Date: 2024-05-25
     Last Update: 2024-08-21
