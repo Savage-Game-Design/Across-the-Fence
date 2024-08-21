@@ -107,6 +107,9 @@ class vgm_s
         class missions_preInit {
             preInit = 1;
         };
+        class missions_postInit {
+            postInit = 1;
+        };
         class missions_setPlayerReadiness {};
         class missions_startMission {};
     };
