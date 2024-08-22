@@ -2,7 +2,7 @@
     File: fn__missions_gameplay_scouting_handleSpotted.sqf
     Author: Savage Game Design
     Date: 2024-08-17
-    Last Update: 2024-08-19
+    Last Update: 2024-08-22
     Public: No
 
     Description:
@@ -37,6 +37,7 @@ private _spottedObjects = _data get "objects";
 if ((_site get "id") in _spottedObjects) exitWith {};
 
 _spottedObjects set [_site get "id", [
+    time, // used for sorting
     _site get "type" get "name", // site display type
     "",      // grid (not confirmed by player yet)
     date    // spot time

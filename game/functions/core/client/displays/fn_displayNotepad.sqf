@@ -117,10 +117,11 @@ switch _mode do {
         private _ctrlMainChildren = [];
         _ctrlMain setVariable ["vgm_children", _ctrlMainChildren];
 
-        private _spottedObjects = _missionPublic get "system_scouting" get "objects";
+        private _spottedObjects = values (_missionPublic get "system_scouting" get "objects");
+        _spottedObjects sort true;
 
         {
-            _y params ["_siteName", "_grid", "_spottedDate"];
+            _x params ["", "_siteName", "_grid", "_spottedDate"];
             private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
 
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
