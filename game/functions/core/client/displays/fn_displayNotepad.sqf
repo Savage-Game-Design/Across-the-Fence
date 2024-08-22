@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-20
+    Last Update: 2024-08-22
     Public: No
 
     Description:
@@ -125,7 +125,7 @@ switch _mode do {
             private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
 
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
-            _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
+            // _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
             _ctrlItem ctrlSetPosition [
                 0,
                 (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
@@ -142,11 +142,11 @@ switch _mode do {
                 VGM_NOTEPAD_CONFIRM_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            _ctrlItemButton ctrlSetBackgroundColor [0,1,1,0.25];
+            // _ctrlItemButton ctrlSetBackgroundColor [0,1,1,0.25];
             _ctrlItemButton ctrlCommit 0;
 
             _ctrlItem ctrlSetText format ["%1. %2, %3", _forEachIndex+1, localize _siteName, _dateText];
-            _ctrlItemButton ctrlSetText "BUTTON";
+            _ctrlItemButton ctrlSetText "NOTE LOCATION";
 
             _ctrlMainChildren pushBack _ctrlItem;
             _ctrlMainChildren pushBack _ctrlItemButton;
