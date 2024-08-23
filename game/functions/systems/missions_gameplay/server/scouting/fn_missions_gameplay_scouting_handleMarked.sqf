@@ -38,7 +38,7 @@ if (_siteId in (_data get "markedSites")) exitWith {
 private _spottedObjects = _data get "objects";
 
 private _spottingData = _spottedObjects get _siteId;
-_spottingData params ["", "", "", "", "", "_sitePos"];
+_spottingData params ["", "", "", "", "_sitePos"];
 
 if (isNil "_spottingData") exitWith {
     format ["Marked site does not exist in spotting data: %1, %2", _siteId, _player] call vgm_g_fnc_logError;
@@ -46,8 +46,12 @@ if (isNil "_spottingData") exitWith {
 
 if (_sitePos distance2d _markedPos > SPOT_DISTANCE_THRESHOLD) exitWith {
     format ["Marked pos too far from site: %1, %2, %3, %4", _siteId, _player, _sitePos, _markedPos] call vgm_g_fnc_logInfo;
+
+    ["vgm_scouting_missedSiteClient", [_siteID, _player], _player] call para_g_fnc_event_triggerTargets;
 };
 
 format ["Marking site: %1, %2, %3, %4", _siteId, _player, _sitePos, _markedPos] call vgm_g_fnc_logInfo;
 
 (_data get "markedSites") pushBack _siteId;
+
+["vgm_scouting_markedSiteClient", [_siteId, _player], values (_mission get "machineIds")] call para_g_fnc_event_triggerTargets;

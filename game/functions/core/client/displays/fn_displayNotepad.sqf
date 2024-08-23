@@ -116,7 +116,10 @@ switch _mode do {
             _refreshHandlersIds pushBack _ehId;
         } forEach [
             "vgm_scouting_spottedSiteClient",
-            "vgm_mission_started"
+            "vgm_scouting_markedSiteClient",
+            "vgm_scouting_missedSiteClient",
+            "vgm_mission_started",
+            "vgm_mission_ended"
         ];
     };
 
@@ -144,11 +147,12 @@ switch _mode do {
         private _ctrlMainChildren = [];
         _ctrlMain setVariable ["vgm_children", _ctrlMainChildren];
 
+        private _markedSites = _missionPublic get "system_scouting" get "markedSites";
         private _spottedObjects = values (_missionPublic get "system_scouting" get "objects");
         _spottedObjects sort true;
 
         {
-            _x params ["", "_siteName", "_grid", "_spottedDate", "_siteId"];
+            _x params ["", "_siteName", "_spottedDate", "_siteId", "_pos"];
             private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
 
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
@@ -174,16 +178,22 @@ switch _mode do {
 
             _ctrlItem ctrlSetText format ["%1. %2, %3", _forEachIndex+1, localize _siteName, _dateText];
             _ctrlItemButton setVariable ["vgm_id", _siteId];
-            _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
-                params ["_ctrlButton"];
-                ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
-            }];
+            _ctrlItemButton setVariable ["vgm_pos", _pos];
 
-            if (_grid == "") then {
-                _ctrlItemButton ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION";
+            if (_siteId in _markedSites) then {
+                _ctrlItemButton ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
+                ctrlItemButton ctrlSetTooltip "Zoom on map";
+                _ctrlItemButton ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
+                _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
+                    params ["_ctrlButton"];
+                    [[500,500], _ctrlButton getVariable "vgm_pos"] call BIS_fnc_zoomOnArea;
+                }];
             } else {
-                _ctrlItemButton ctrlSetText _grid;
-                _ctrlItemButton ctrlEnable false;
+                _ctrlItemButton ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION";
+                _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
+                    params ["_ctrlButton"];
+                    ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                }];
             };
 
             _ctrlMainChildren pushBack _ctrlItem;

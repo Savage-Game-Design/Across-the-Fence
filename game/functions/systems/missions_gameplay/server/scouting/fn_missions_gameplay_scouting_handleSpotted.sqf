@@ -39,7 +39,6 @@ if ((_site get "id") in _spottedObjects) exitWith {};
 _spottedObjects set [_site get "id", [
     time, // used for sorting
     _site get "type" get "name", // site display type
-    "",      // grid (not confirmed by player yet)
     date,    // spot time
     _site get "id",
     _site get "pos"

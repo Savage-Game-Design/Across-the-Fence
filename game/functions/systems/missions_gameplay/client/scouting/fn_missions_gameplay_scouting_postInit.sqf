@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-18
+    Last Update: 2024-08-23
     Public: No
 
     Description:
@@ -24,4 +24,16 @@ if (!hasInterface) exitWith {};
     ["VGM_SiteSpotted", [
         format [localize "STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_DESCRIPTION", name _spotter]
     ]] call BIS_fnc_showNotification;
+}] call para_g_fnc_event_subscribeServer;
+
+["vgm_scouting_markedSiteClient", {
+    (_this#0) params ["_siteId", "_spotter"];
+    ["VGM_SiteMarked", [
+        format [localize "STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_MARKED_DESCRIPTION", name _spotter]
+    ]] call BIS_fnc_showNotification;
+}] call para_g_fnc_event_subscribeServer;
+
+["vgm_scouting_missedSiteClient", {
+    (_this#0) params ["_siteId", "_spotter"];
+    ["VGM_SiteMissed"] call BIS_fnc_showNotification;
 }] call para_g_fnc_event_subscribeServer;
