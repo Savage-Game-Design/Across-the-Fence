@@ -62,6 +62,17 @@ switch _mode do {
                     _ctrlMap ctrlMapCursor ["Track", _display getVariable ["vgm_cursor_track", ""]];
                 }
             }];
+
+            // handle site marking
+            private _ehId = addMissionEventHandler ["MapSingleClick", {
+                _thisArgs params ["_display"];
+                private _siteId = _display getVariable ["vgm_site_id", ""];
+                if (_siteId == "") exitWith {};
+
+                params ["", "_pos"];
+                ["markLocationClick", [_display, _pos]] call SELF;
+            }, [_display]];
+            _display setVariable ["vgm_onMapClickId", _ehId];
         };
 
         // debug background
@@ -101,6 +112,7 @@ switch _mode do {
         params ["_display"];
 
         {[_x] call para_g_fnc_event_unsubscribe} forEach (_display getVariable "vgm_refreshHandlerIds");
+        removeMissionEventHandler ["MapSingleClick", _display getVariable ["vgm_onMapClickId", -1]];
     };
 
     case "refreshUI": {
@@ -167,15 +179,22 @@ switch _mode do {
 
     case "markLocationEnable": {
         params ["_display", "_siteId"];
-
         _display setVariable ["vgm_cursor_track", "HC_overEnemy"];
         _display setVariable ["vgm_site_id", _siteId];
+    };
 
+    case "markLocationDisable": {
+        params ["_display"];
+        _display setVariable ["vgm_cursor_track", nil];
+        _display setVariable ["vgm_site_id", nil];
     };
 
     case "markLocationClick": {
-        params ["_display", "_siteId", "_markedPos"];
-        ["vgm_scouting_markSite", [_siteId, _markedPos]] call para_g_fnc_event_triggerServer;
+        params ["_display", "_markedPos"];
+        private _siteId = _display getVariable ["vgm_site_id", ""];
+        ["vgm_scouting_markSite", [_siteId, _markedPos, player]] call para_g_fnc_event_triggerServer;
+
+        ["markLocationDisable", _display] call SELF;
     };
 
     default {

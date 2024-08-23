@@ -160,6 +160,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\missions_gameplay\server\scouting);
 
+        class missions_gameplay_scouting_handleMarked {};
         class missions_gameplay_scouting_handleSpotted {};
         class missions_gameplay_scouting_postInit
         {

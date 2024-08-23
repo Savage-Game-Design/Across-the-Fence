@@ -41,7 +41,8 @@ _spottedObjects set [_site get "id", [
     _site get "type" get "name", // site display type
     "",      // grid (not confirmed by player yet)
     date,    // spot time
-    _site get "id"
+    _site get "id",
+    _site get "pos"
 ]];
 [_data, "objects", _spottedObjects] call para_s_fnc_netmap_set;
 
