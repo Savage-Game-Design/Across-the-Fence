@@ -432,6 +432,8 @@ class vgm_c
     class missions
     {
         VGM_CLIENT_PATH(\systems\missions\client);
+
+        class missions_coverMap {};
         class missions_getCurrentMission {};
         class missions_getMissions {};
         class missions_makeMissionGiver {};

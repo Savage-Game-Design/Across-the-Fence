@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2023-11-23
+    Last Update: 2024-08-23
     Public: No
 
     Description:
@@ -42,6 +42,17 @@ _this spawn {
     [] call vn_ms_fnc_tracker_tracksLoop;
 
     ["vgm_mission_deploy_local", _currentMission] call para_g_fnc_event_triggerLocal;
+
+    // zoom map on the mission area
+    [] call vgm_c_fnc_missions_coverMap;
+    vgm_missions_zoomOnMapScript = (_currentMission get "targetZone") spawn {
+        waitUntil {visibleMap}; // can't animate hidden map
+        [
+            markerSize _this vectorMultiply 2.5,
+            markerPos _this,
+            0
+        ] call BIS_fnc_zoomOnArea;
+    };
 
     // - Unfades the screen
     sleep 1;
