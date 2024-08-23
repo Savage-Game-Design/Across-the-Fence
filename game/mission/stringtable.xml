@@ -474,5 +474,8 @@
         <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION">
             <Original>Mark Location</Original>
         </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP">
+            <Original>Mark site location on the map</Original>
+        </Key>
     </Package>
 </Project>

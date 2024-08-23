@@ -21,12 +21,14 @@
 
 #define SELF vgm_c_fnc_displayNotepad
 
-#if __A3_DEBUG__
-    diag_log ["fn_displayNotepad", _this];
-#endif
-
 params ["_mode", "_params"];
 _this = _params;
+
+#if __A3_DEBUG__
+    if (_mode != "renderTooltip") then {
+        diag_log ["fn_displayNotepad", _this];
+    };
+#endif
 
 switch _mode do {
     case "onLoad": {
@@ -60,7 +62,9 @@ switch _mode do {
                 } else {
                     _ctrlMap ctrlMapCursor ["Arrow", ""];
                     _ctrlMap ctrlMapCursor ["Track", _display getVariable ["vgm_cursor_track", ""]];
-                }
+                };
+
+                ["renderTooltip", _display] call SELF;
             }];
 
             // handle site marking
@@ -73,6 +77,14 @@ switch _mode do {
                 ["markLocationClick", [_display, _pos]] call SELF;
             }, [_display]];
             _display setVariable ["vgm_onMapClickId", _ehId];
+
+            private _ehId = addMissionEventHandler ["Map", {
+                _thisArgs params ["_display"];
+                params ["_mapOpen"];
+                if (_mapOpen) exitWith {};
+                ["markLocationDisable", _display] call SELF;
+            }, [_display]];
+            _display setVariable ["vgm_onMapId", _ehId];
         };
 
         // debug background
@@ -112,6 +124,8 @@ switch _mode do {
         params ["_display"];
 
         {[_x] call para_g_fnc_event_unsubscribe} forEach (_display getVariable "vgm_refreshHandlerIds");
+
+        removeMissionEventHandler ["Map", _display getVariable ["vgm_onMapId", -1]];
         removeMissionEventHandler ["MapSingleClick", _display getVariable ["vgm_onMapClickId", -1]];
     };
 
@@ -195,6 +209,39 @@ switch _mode do {
         ["vgm_scouting_markSite", [_siteId, _markedPos, player]] call para_g_fnc_event_triggerServer;
 
         ["markLocationDisable", _display] call SELF;
+    };
+
+    case "renderTooltip": {
+        params ["_display"];
+        private _siteId = _display getVariable ["vgm_site_id", ""];
+        private _ctrlTooltip = _display getVariable ["vgm_ctrlTooltip", controlNull];
+        if (_siteId == "") exitWith {
+            _ctrlTooltip ctrlShow false;
+        };
+
+        if (isNull _ctrlTooltip) then {
+            _ctrlTooltip = _display ctrlCreate ["RscText", -1];
+            _display setVariable ["vgm_ctrlTooltip", _ctrlTooltip];
+
+            _ctrlTooltip ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP";
+            _ctrlTooltip ctrlSetBackgroundColor [0, 0, 0, 0.35];
+        };
+
+        getMousePosition params ["_x", "_y"];
+        _offset = VGM_GRID_W * 2;
+        _x = _x + _offset;
+        _y = _y + _offset;
+        _w = ctrlTextWidth _ctrlTooltip;
+        _h = VGM_GRID_H * 5;
+
+        _ctrlTooltip ctrlSetPosition [
+            _x min (safeZoneX + safeZoneW - _w),
+            _y min (safeZoneY + safeZoneH - _h),
+            _w,
+            _h
+        ];
+        _ctrlTooltip ctrlShow true;
+        _ctrlTooltip ctrlCommit 0;
     };
 
     default {
