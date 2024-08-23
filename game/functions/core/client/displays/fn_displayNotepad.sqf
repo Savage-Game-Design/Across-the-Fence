@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-22
+    Last Update: 2024-08-23
     Public: No
 
     Description:
@@ -59,6 +59,7 @@ switch _mode do {
                     _ctrlMap ctrlMapCursor ["Arrow", _display getVariable ["vgm_cursor_arrow", ""]];
                 } else {
                     _ctrlMap ctrlMapCursor ["Arrow", ""];
+                    _ctrlMap ctrlMapCursor ["Track", _display getVariable ["vgm_cursor_track", ""]];
                 }
             }];
         };
@@ -121,7 +122,7 @@ switch _mode do {
         _spottedObjects sort true;
 
         {
-            _x params ["", "_siteName", "_grid", "_spottedDate"];
+            _x params ["", "_siteName", "_grid", "_spottedDate", "_siteId"];
             private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
 
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
@@ -146,11 +147,35 @@ switch _mode do {
             _ctrlItemButton ctrlCommit 0;
 
             _ctrlItem ctrlSetText format ["%1. %2, %3", _forEachIndex+1, localize _siteName, _dateText];
-            _ctrlItemButton ctrlSetText "NOTE LOCATION";
+            _ctrlItemButton setVariable ["vgm_id", _siteId];
+            _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
+                params ["_ctrlButton"];
+                ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+            }];
+
+            if (_grid == "") then {
+                _ctrlItemButton ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION";
+            } else {
+                _ctrlItemButton ctrlSetText _grid;
+                _ctrlItemButton ctrlEnable false;
+            };
 
             _ctrlMainChildren pushBack _ctrlItem;
             _ctrlMainChildren pushBack _ctrlItemButton;
         } forEach _spottedObjects;
+    };
+
+    case "markLocationEnable": {
+        params ["_display", "_siteId"];
+
+        _display setVariable ["vgm_cursor_track", "HC_overEnemy"];
+        _display setVariable ["vgm_site_id", _siteId];
+
+    };
+
+    case "markLocationClick": {
+        params ["_display", "_siteId", "_markedPos"];
+        ["vgm_scouting_markSite", [_siteId, _markedPos]] call para_g_fnc_event_triggerServer;
     };
 
     default {

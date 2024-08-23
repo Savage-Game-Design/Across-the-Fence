@@ -463,13 +463,16 @@
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
         </Key>
-  </Package>
+    </Package>
     <Package name="Missions Scouting">
-    <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_TITLE">
-        <Original>SITE SPOTTED</Original>
-    </Key>
-    <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_DESCRIPTION">
-        <Original>%1 has reported new site.&lt;br/&gt;Fill the details in the scouting notepad.</Original>
-    </Key>
-  </Package>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_TITLE">
+            <Original>SITE SPOTTED</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_DESCRIPTION">
+            <Original>%1 has reported new site.&lt;br/&gt;Fill the details in the scouting notepad.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION">
+            <Original>Mark Location</Original>
+        </Key>
+    </Package>
 </Project>
