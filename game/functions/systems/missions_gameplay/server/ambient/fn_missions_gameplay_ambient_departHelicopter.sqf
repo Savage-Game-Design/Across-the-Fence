@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_ambient_departHelicopter.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2023-11-24
+    Last Update: 2024-08-19
     Public: Yes
 
     Description:
@@ -25,7 +25,7 @@ private _inAirPos = +_position;
 _inAirPos set [2, 5];
 
 private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
-_helicopter setPosATL _inAirPos;
+_helicopter setPos _inAirPos;
 _helicopter setDir random 360;
 
 private _flyToPos = markerPos "vgm_mission_heli_despawn";
