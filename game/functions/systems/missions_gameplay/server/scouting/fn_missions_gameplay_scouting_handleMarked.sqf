@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_handleMarked.sqf
     Author: Savage Game Design
     Date: 2024-08-23
-    Last Update: 2024-08-23
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -53,5 +53,6 @@ if (_sitePos distance2d _markedPos > SPOT_DISTANCE_THRESHOLD) exitWith {
 format ["Marking site: %1, %2, %3, %4", _siteId, _player, _sitePos, _markedPos] call vgm_g_fnc_logInfo;
 
 (_data get "markedSites") pushBack _siteId;
+[_data, "markedSites", _data get "markedSites"] call para_s_fnc_netmap_set;
 
 ["vgm_scouting_markedSiteClient", [_siteId, _player], values (_mission get "machineIds")] call para_g_fnc_event_triggerTargets;

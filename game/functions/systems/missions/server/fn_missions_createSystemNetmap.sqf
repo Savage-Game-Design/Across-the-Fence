@@ -2,7 +2,7 @@
     File: fn_missions_createSystemNetmap.sqf
     Author: Savage Game Design
     Date: 2024-08-13
-    Last Update: 2024-08-17
+    Last Update: 2024-08-24
     Public: Yes
 
     Description:
@@ -37,7 +37,8 @@ if (_systemKey in _missionPublic) exitWith {
 };
 
 private _systemNetmap = [] call para_s_fnc_netmap_createNetmap;
-_missionPublic set [_systemKey, _systemNetmap];
 [_systemNetmap, _missionPublic] call para_s_fnc_netmap_setOwningNetmap;
+
+[_missionPublic, _systemKey, _systemNetmap] call para_s_fnc_netmap_set;
 
 _systemNetmap // return
