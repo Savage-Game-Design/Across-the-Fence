@@ -2,12 +2,14 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-03-01
+    Last Update: 2024-08-24
     Public: No
 
     Description:
         Post init for Skill Investigate component.
  */
+
+if (!hasInterface) exitWith {};
 
 // setup desaturation
 call {
