@@ -163,6 +163,7 @@ class vgm_s
 
         class missions_zones_clearSites {};
         class missions_zones_freeZone {};
+        class missions_zones_getSites {};
         class missions_zones_getStartPos {};
         class missions_zones_preInit
         {

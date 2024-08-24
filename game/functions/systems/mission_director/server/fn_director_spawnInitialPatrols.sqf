@@ -2,7 +2,7 @@
     File: fn_director_spawnInitialPatrols.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-03-09
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -20,25 +20,19 @@
 
 params ["_mission"];
 
-private _insertionLocation = _mission get "public" get "startPosASL";
-private _objective = markerPos "marker_47";
-
-private _desiredSquads = vgm_s_director_patrol_max_groups;
-
-private _angleToObjective = _insertionLocation getDir _objective;
-private _spawnAngles = [_angleToObjective + 90, _angleToObjective - 90];
-private _spawnIntervalDistance = (_insertionLocation distance2D _objective) /_desiredSquads;
+private _missionPublic = _mission get "public";
+private _targetZone = _missionPublic get "targetZone";
+private _sites = [_targetZone] call vgm_s_fnc_missions_zones_getSites;
 
 private _squads = [];
 
-for "_i" from 1 to _desiredSquads do {
-    private _spawnCenterlinePos = _insertionLocation getPos [_spawnIntervalDistance * _i, _angleToObjective];
-    private _spawnPos = _spawnCenterlinePos getPos [100 + random 100, selectRandom _spawnAngles];
-
-    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _mission get "public" get "id"] call vgm_s_fnc_ai_createEnemySquad;
+{
+    private _spawnPos = _x get "pos" getPos [10 + random 100, random 360];
+    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _missionPublic get "id"] call vgm_s_fnc_ai_createEnemySquad;
     _group setVariable ["vgm_s_director_command", "patrol"];
     _squads pushBack _group;
-};
+} forEach _sites;
 
 [_mission, _squads] call vgm_s_fnc_director_registerGroups;
 _mission get "director" set ["initialAiGroups", _squads];
+
