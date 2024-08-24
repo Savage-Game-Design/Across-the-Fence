@@ -2,7 +2,7 @@
     File: sites_delete.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-05-25
+    Last Update: 2024-08-24
     Public: Yes
 
     Description:
@@ -21,6 +21,7 @@
 
 params ["_site"];
 
+[_site] call (_site get "type" getOrDefault ["cleanupFunction", {}]);
 
 {
     [_x] call vgm_s_fnc_sites_delete;

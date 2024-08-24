@@ -38,6 +38,11 @@ createHashMapFromArray [
             ["objects", []]
         ]
     }],
+    // Called to cleanup the site, before objects are despawned.
+    ["cleanupFunction", {
+        // params ["_site"];
+        // Do things
+    }],
     ["fortifications", [
         /*
         createHashMapFromArray [
