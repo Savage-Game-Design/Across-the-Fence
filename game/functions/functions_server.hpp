@@ -161,6 +161,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\missions_zones\server);
 
+        class missions_zones_clearSites {};
         class missions_zones_freeZone {};
         class missions_zones_getStartPos {};
         class missions_zones_preInit
@@ -168,6 +169,7 @@ class vgm_s
             preInit = 1;
         };
         class missions_zones_reserveZone {};
+        class missions_zones_spawnRandomSites {};
     };
     class missions_zones_remoteExec
     {
