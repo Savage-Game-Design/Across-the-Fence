@@ -193,6 +193,12 @@
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
             <Original>Mission participation</Original>
         </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_MARKED">
+            <Original>Site marked</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED">
+            <Original>Site spotted</Original>
+        </Key>
     </Package>
     <Package name="Skills Tree">
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
