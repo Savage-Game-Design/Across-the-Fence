@@ -4,7 +4,7 @@
     File: fn_sites_types_shelter.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-07-04
+    Last Update: 2024-08-22
     Public: Yes
 
     Description:
@@ -35,7 +35,9 @@ _shelter set ["spawnFunction", {
 
     private _shelter = createVehicle ["Land_vn_o_shelter_03", [_pos2D # 0, _pos2D # 1, 0], [], 0, "NONE"];
 
-    [[ _shelter ]]
+    createHashMapFromArray [
+        ["objects", [ _shelter ]]
+    ]
 }];
 
 _shelter

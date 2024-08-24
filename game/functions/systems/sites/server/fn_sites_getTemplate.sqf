@@ -4,7 +4,7 @@
     File: sites_getTemplate.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-07-04
+    Last Update: 2024-08-22
     Public: Yes
 
     Description:
@@ -32,7 +32,9 @@ createHashMapFromArray [
         params ["_pos2D"];
 
         // Format: [ [ All Objects Created ] ]
-        [[]]
+        createHashMapFromArray [
+            ["objects", []]
+        ]
     }],
     ["fortifications", [
         /*
