@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-23
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -41,4 +41,8 @@ vgm_scouting_locations = createHashMap;
 ["vgm_scouting_missedSiteClient", {
     (_this#0) params ["_siteId", "_spotter"];
     ["VGM_SiteMissed"] call BIS_fnc_showNotification;
+}] call para_g_fnc_event_subscribeServer;
+
+["vgm_mission_started", {
+    {deleteLocation (vgm_scouting_locations deleteAt _x)} forEach vgm_scouting_locations;
 }] call para_g_fnc_event_subscribeServer;
