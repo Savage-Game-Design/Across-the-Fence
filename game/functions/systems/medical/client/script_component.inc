@@ -17,7 +17,7 @@
 
 #define WOUNDS_BLEED_THRESHOLD 3
 
-#define BLEED_OUT_TIME 30
+#define BLEED_OUT_TIME 60
 
 #define HEAL_MEDIKIT "medikit"
 #define HEAL_FAK "fak"
