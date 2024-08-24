@@ -468,6 +468,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\missions_gameplay\client\scouting);
 
+        class missions_gameplay_scouting_createLocation {};
         class missions_gameplay_scouting_postInit
         {
             postInit = 1;

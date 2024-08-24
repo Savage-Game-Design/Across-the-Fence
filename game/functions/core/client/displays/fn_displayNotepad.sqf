@@ -182,7 +182,7 @@ switch _mode do {
 
             if (_siteId in _markedSites) then {
                 _ctrlItemButton ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
-                ctrlItemButton ctrlSetTooltip "Zoom on map";
+                _ctrlItemButton ctrlSetTooltip "Locate on map";
                 _ctrlItemButton ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
                 _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];

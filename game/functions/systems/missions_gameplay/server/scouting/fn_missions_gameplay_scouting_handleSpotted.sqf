@@ -2,7 +2,7 @@
     File: fn__missions_gameplay_scouting_handleSpotted.sqf
     Author: Savage Game Design
     Date: 2024-08-17
-    Last Update: 2024-08-23
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -41,7 +41,8 @@ _spottedObjects set [_site get "id", [
     _site get "type" get "name", // site display type
     date,    // spot time
     _site get "id",
-    _site get "pos"
+    _site get "pos",
+    _site get "type" get "locationClass"
 ]];
 [_data, "objects", _spottedObjects] call para_s_fnc_netmap_set;
 

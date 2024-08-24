@@ -2,7 +2,7 @@
     File: fn_sites_loadSiteTypesFromConfig.sqf
     Author:
     Date: 2024-06-28
-    Last Update: 2024-06-28
+    Last Update: 2024-08-23
     Public: No
 
     Description:
@@ -36,6 +36,8 @@ private _rootConfigs = [
         if !(_site isEqualType createHashMap) then {
             continue;
         };
+
+        _site set ["locationClass", getText (_x >> "locationClass")];
 
         [configName _x, _site] call vgm_s_fnc_sites_addSiteType;
     } forEach _siteTypeConfigs;

@@ -11,6 +11,8 @@
 
 if (!hasInterface) exitWith {};
 
+vgm_scouting_locations = createHashMap;
+
 [true, "vn_photoCamera_pictureTaken", {
     params ["_cursorTarget"];
     if !(_cursorTarget getVariable ["vgm_missions_gameplay_scouting_spottable", false]) exitWith {};
@@ -31,6 +33,9 @@ if (!hasInterface) exitWith {};
     ["VGM_SiteMarked", [
         format [localize "STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_MARKED_DESCRIPTION", name _spotter]
     ]] call BIS_fnc_showNotification;
+
+    [_siteId] call vgm_c_fnc_missions_gameplay_scouting_createLocation;
+
 }] call para_g_fnc_event_subscribeServer;
 
 ["vgm_scouting_missedSiteClient", {
