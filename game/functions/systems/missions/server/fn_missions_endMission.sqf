@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2024-04-24
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -51,6 +51,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id", _endType]
 ] call para_g_fnc_event_triggerGlobal;
 
+{deleteVehicle _x} forEach (allMines inAreaArray (_missionPublic get "targetZone"));
 [_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_freeZone;
 [_mission] call vgm_s_fnc_director_stopMission;
 
