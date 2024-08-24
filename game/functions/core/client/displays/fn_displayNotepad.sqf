@@ -111,7 +111,7 @@ switch _mode do {
             private _ehId = [_x, [_display, {
                 params ["", "_display"];
                 ["refreshUI", _display] call SELF;
-            }]] call para_g_fnc_event_subscribeLocal;
+            }]] call para_g_fnc_event_subscribe;
 
             _refreshHandlersIds pushBack _ehId;
         } forEach [
