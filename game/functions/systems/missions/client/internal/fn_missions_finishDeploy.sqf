@@ -2,7 +2,7 @@
     File: fn_missions_finishDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2024-08-23
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -46,10 +46,11 @@ _this spawn {
     // zoom map on the mission area
     [] call vgm_c_fnc_missions_coverMap;
     vgm_missions_zoomOnMapScript = (_currentMission get "targetZone") spawn {
+        [_this] call vgm_g_fnc_loc_getTargetBoxBounds params ["_pos", "_size"];
         waitUntil {visibleMap}; // can't animate hidden map
         [
-            markerSize _this vectorMultiply 2.5,
-            markerPos _this,
+            _size vectorMultiply 2.5,
+            _pos,
             0
         ] call BIS_fnc_zoomOnArea;
     };

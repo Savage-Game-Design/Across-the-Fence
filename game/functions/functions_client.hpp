@@ -204,6 +204,13 @@ class vgm_g
         class locEvents_triggerEvent {};
     };
 
+    class locations
+    {
+        VGM_GLOBAL_PATH(\systems\locations\global);
+
+        class loc_getTargetBoxBounds {};
+    };
+
     class medical
     {
         VGM_GLOBAL_PATH(\systems\medical\global);

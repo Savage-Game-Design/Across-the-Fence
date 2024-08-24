@@ -2,7 +2,7 @@
     File: fn_missions_coverMap.sqf
     Author: Bohemia Interactive, Savage Game Design
     Date: 2024-08-23
-    Last Update: 2024-08-23
+    Last Update: 2024-08-24
     Public: Yes
 
     Description:
@@ -32,9 +32,9 @@ if (isNil "_currentMission") exitWith {
 };
 
 private _zone = _currentMission get "targetZone";
-markerPos _zone params ["_posX", "_posY"];
-markerSize _zone params ["_sizeX", "_sizeY"];
-private _dir = markerDir _zone;
+([_zone] call vgm_g_fnc_loc_getTargetBoxBounds) params ["_zonePos", "_zoneSize", "_dir"];
+_zonePos params ["_posX", "_posY"];
+_zoneSize params ["_sizeX", "_sizeY"];
 
 _sizeOut = 50000;
 
@@ -75,8 +75,8 @@ for "_i" from 0 to 270 step 90 do {
 
 //--- Frame
 private _marker = "vgm_fnc_coverMap_border";
-createMarkerLocal [_marker, markerPos _zone];
-_marker setMarkerPosLocal markerPos _zone;
+createMarkerLocal [_marker, _zonePos];
+_marker setMarkerPosLocal _zonePos;
 _marker setMarkerSizeLocal [_sizeX,_sizeY];
 _marker setMarkerDirLocal _dir;
 _marker setMarkerShapeLocal "rectangle";
