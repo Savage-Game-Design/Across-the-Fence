@@ -4,7 +4,7 @@
     File: fn_sites_types_ammoCache.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-08-15
+    Last Update: 2024-08-24
     Public: Yes
 
     Description:

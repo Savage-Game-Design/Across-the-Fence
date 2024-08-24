@@ -4,7 +4,7 @@
     File: sites_getTemplate.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-08-22
+    Last Update: 2024-08-24
     Public: Yes
 
     Description:
@@ -27,6 +27,8 @@ createHashMapFromArray [
     ["size", SITE_FOOTPRINT_SMALL],
     // Location requirements. List of tags that need to be met for a spawn location to be valid.
     ["locRequirements", []],
+    // Whether to hide nearby trees and rocks
+    ["hideNearbyTerrain", true],
     // Called to spawn the site.
     ["spawnFunction", {
         params ["_pos2D"];
