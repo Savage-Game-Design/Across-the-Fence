@@ -2,7 +2,7 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2024-04-24
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -27,6 +27,21 @@ private _milestones = [
 
 if (_endType == "SUCCESS") then {
     _milestones pushBack ["mission_success", 375];
+};
+
+// add XP for spotting
+call {
+    private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;
+    private _scoutingData = [_mission get "public" get "id", "scouting"] call vgm_s_fnc_missions_getSystemNetmap;
+
+    private _markedSites = _scoutingData get "markedSites";
+    {
+        if (_x in _markedSites) then {
+            _milestones pushBack ["site_marked", 125];
+        } else {
+            _milestones pushBack ["site_spotted", 75];
+        };
+    } forEach (_scoutingData get "objects");
 };
 
 _milestones // return

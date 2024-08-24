@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-23
+    Last Update: 2024-08-24
     Public: No
 
     Description:
@@ -136,7 +136,7 @@ switch _mode do {
         params ["_display"];
 
         private _missionPublic = [] call vgm_c_fnc_missions_getCurrentMission;
-        if (isNil {_missionPublic}) exitWith {
+        if (isNil "_missionPublic") exitWith {
             (_display getVariable "VGM_RscNotepad") ctrlShow false;
         };
 
