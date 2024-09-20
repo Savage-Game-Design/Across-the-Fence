@@ -2,7 +2,7 @@
     File: sites_spawn.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-08-18
+    Last Update: 2024-09-20
     Public: Yes
 
     Description:
@@ -35,7 +35,7 @@ private _site = createHashMapFromArray [
     ["id", hashValue _pos2D],
     ["type", _siteType],
     ["pos", _pos2D],
-    ["objects", _spawnResult get "objects"],
+    ["objects", _spawnResult select 0],
     ["ownedSites", []]
 ];
 
