@@ -51,7 +51,8 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id", _endType]
 ] call para_g_fnc_event_triggerGlobal;
 
-{deleteVehicle _x} forEach (allMines inAreaArray (_missionPublic get "targetZone"));
+private _marker = format ["tbox_%1", (_missionPublic get "targetZone")];
+{deleteVehicle _x} forEach (allMines inAreaArray _marker);
 [_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_freeZone;
 [_mission] call vgm_s_fnc_director_stopMission;
 
