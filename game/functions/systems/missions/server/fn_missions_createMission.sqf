@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-08-11
+    Last Update: 2024-08-21
     Public: Yes
 
     Description:

@@ -35,7 +35,7 @@ private _site = createHashMapFromArray [
     ["id", hashValue _pos2D],
     ["type", _siteType],
     ["pos", _pos2D],
-    ["objects", _spawnResult # 0],
+    ["objects", _spawnResult get "objects"],
     ["ownedSites", []]
 ];
 

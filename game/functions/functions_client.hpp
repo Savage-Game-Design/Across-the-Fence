@@ -204,6 +204,13 @@ class vgm_g
         class locEvents_triggerEvent {};
     };
 
+    class locations
+    {
+        VGM_GLOBAL_PATH(\systems\locations\global);
+
+        class loc_getTargetBoxBounds {};
+    };
+
     class medical
     {
         VGM_GLOBAL_PATH(\systems\medical\global);
@@ -245,6 +252,14 @@ class vgm_g
         {
             postInit = 1;
         };
+    };
+
+    class object_grabber
+    {
+        VGM_GLOBAL_PATH(\systems\object_grabber\global);
+
+        class objGrabber_eden_grab {};
+        class objGrabber_map {};
     };
 
     class skills
@@ -425,6 +440,8 @@ class vgm_c
     class missions
     {
         VGM_CLIENT_PATH(\systems\missions\client);
+
+        class missions_coverMap {};
         class missions_getCurrentMission {};
         class missions_getMissions {};
         class missions_makeMissionGiver {};

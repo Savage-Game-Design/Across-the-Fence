@@ -2,13 +2,13 @@
     File: fn_loc_eden_createLocationIndexAllTargetBoxes.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-07-27
+    Last Update: 2024-08-21
     Public: Yes
 
     Description:
         Creates an index of all marked locations in 3DEN, and writes it to the mission.sqm as Logic entities.
 
-        See vgm_s_fnc_loc_eden_getSiteLocationsByTargetBox for more information on the indexing process.
+        See vgm_s_fnc_loc_eden_indexAllTargetBoxLocations for more information on the indexing process.
 
     Parameter(s):
         None
@@ -20,7 +20,7 @@
         [] call vgm_s_fnc_loc_eden_createLocationIndexAllTargetBoxes;
  */
 
-private _siteLocationsByTargetBox = [] call vgm_s_fnc_loc_eden_getSiteLocationsByTargetBox;
+private _siteLocationsByTargetBox = [] call vgm_s_fnc_loc_eden_indexAllTargetBoxLocations;
 private _targetBoxLayers = [] call vgm_s_fnc_loc_eden_getTargetBoxLayers;
 
 {

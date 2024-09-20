@@ -2,7 +2,7 @@
     File: fn_missions_zones_getStartPos.sqf
     Author: Savage Game Design
     Date: 2024-04-04
-    Last Update: 2024-04-04
+    Last Update: 2024-08-21
     Public: Yes
 
     Description:
@@ -20,4 +20,7 @@
 
 params ["_zone"];
 
-getPosASL (allMissionObjects "vn_flag_sog" inAreaArray _zone param [0, objNull]) // return
+private _startPos = selectRandom ([_zone] call vgm_s_fnc_loc_getTargetBoxLocations get "lz");
+_startPos set [2, 0];
+
+AGLToASL _startPos

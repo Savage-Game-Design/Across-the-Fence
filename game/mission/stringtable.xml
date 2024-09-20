@@ -421,6 +421,11 @@
             <Original>Settings</Original>
         </Key>
     </Package>
+    <Package name="Locations">
+        <Key ID="STR_VGM_LOCATIONS_LZ">
+            <Original>LZ</Original>
+        </Key>
+    </Package>
     <Package name="Sites">
         <Key ID="STR_VGM_SITES_AA">
             <Original>Anti-aircraft gun</Original>
