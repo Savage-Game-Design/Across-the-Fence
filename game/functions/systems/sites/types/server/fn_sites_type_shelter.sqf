@@ -4,7 +4,7 @@
     File: fn_sites_types_shelter.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-07-04
+    Last Update: 2024-09-21
     Public: Yes
 
     Description:
@@ -28,7 +28,6 @@
 
 private _shelter = [] call vgm_s_fnc_sites_getTemplate;
 
-_shelter set ["name", "STR_VGM_SITES_SHELTER"];
 _shelter set ["size", SITE_FOOTPRINT_SMALL];
 _shelter set ["spawnFunction", {
     params ["_pos2D"];

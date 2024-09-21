@@ -4,7 +4,7 @@
     File: fn_sites_types_truckPark.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-08-15
+    Last Update: 2024-09-21
     Public: Yes
 
     Description:
@@ -28,7 +28,6 @@
 
 private _site = [] call vgm_s_fnc_sites_getTemplate;
 
-_site set ["name", "STR_VGM_SITES_TRUCK_PARK"];
 _site set ["size", SITE_FOOTPRINT_LARGE];
 _site set ["locRequirements", ["covered", "near_road"]];
 _site set ["spawnFunction", {

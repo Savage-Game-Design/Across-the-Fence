@@ -4,7 +4,7 @@
     File: fn_sites_types_supplyDump.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-08-15
+    Last Update: 2024-09-21
     Public: Yes
 
     Description:
@@ -28,7 +28,6 @@
 
 private _site = [] call vgm_s_fnc_sites_getTemplate;
 
-_site set ["name", "STR_VGM_SITES_SUPPLY_DUMP"];
 _site set ["size", SITE_FOOTPRINT_MEDIUM];
 _site set ["locRequirements", ["covered"]];
 _site set ["spawnFunction", {

@@ -2,7 +2,7 @@
     File: fn_sites_loadSiteTypesFromConfig.sqf
     Author:
     Date: 2024-06-28
-    Last Update: 2024-08-23
+    Last Update: 2024-09-21
     Public: No
 
     Description:
@@ -37,6 +37,7 @@ private _rootConfigs = [
             continue;
         };
 
+        _site set ["name", getText (_x >> "displayNameKey")];
         _site set ["locationClass", getText (_x >> "locationClass")];
 
         [configName _x, _site] call vgm_s_fnc_sites_addSiteType;
