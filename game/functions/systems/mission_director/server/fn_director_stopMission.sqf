@@ -2,7 +2,7 @@
     File: fn_director_stopMonitoringMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-03-01
+    Last Update: 2024-09-20
     Public: Yes
 
     Description:
@@ -30,6 +30,7 @@ params ["_mission"];
 [] remoteExec ["vgm_c_fnc_director_stopClientsideMonitoring", values (_mission get "machineIds")];
 
 private _directorData = _mission get "director";
+if (isNil "_directorData") exitWith {}; // mission was not started, no data
 
 {
     {
