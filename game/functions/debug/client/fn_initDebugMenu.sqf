@@ -286,23 +286,26 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
 
         _ctrlButton setVariable ["vgm_position", [_xBase, _yBase + _hTabs, _wTotal, _hContent]];
         _ctrlButton setVariable ["vgm_handler", _fnc_handler];
+        _ctrlButton setVariable ["vgm_index", _forEachIndex];
 
         private _fnc_buttonHandler = {
             params ["_ctrlButton"];
             private _display = ctrlParent _ctrlButton;
             private _position = _ctrlButton getVariable "vgm_position";
             private _fnc_handler = _ctrlButton getVariable "vgm_handler";
+            private _menuIndex = _ctrlButton getVariable "vgm_index";
 
             ctrlDelete (_display getVariable ["vgm_currentTab", controlNull]);
             private _ctrlContainer = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1];
             _ctrlContainer ctrlSetPosition _position;
             _ctrlContainer ctrlCommit 0;
             _display setVariable ["vgm_currentTab", _ctrlContainer];
+            uiNamespace setVariable ["vgm_debugMenu_lastIndex", _menuIndex];
 
             [_display, _ctrlContainer, _position] call _fnc_handler;
         };
 
         _ctrlButton ctrlAddEventHandler ["ButtonClick", _fnc_buttonHandler];
-        if (_forEachIndex == 0) then {_ctrlButton call _fnc_buttonHandler};
+        if (_forEachIndex == (uiNamespace getVariable ["vgm_debugMenu_lastIndex", 0])) then {_ctrlButton call _fnc_buttonHandler};
     } forEach _tabs;
 }] call BIS_fnc_addScriptedEventHandler;
