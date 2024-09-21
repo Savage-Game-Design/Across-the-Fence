@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-24
+    Last Update: 2024-09-22
     Public: No
 
     Description:
@@ -16,7 +16,7 @@
         N/A
 
     Example(s):
-        [parameter] call vgm_c_fnc_displayNotepad
+        ["refreshUI", findDisplay 12] call vgm_c_fnc_displayNotepad
  */
 
 #define SELF vgm_c_fnc_displayNotepad
@@ -137,7 +137,7 @@ switch _mode do {
 
         private _missionPublic = [] call vgm_c_fnc_missions_getCurrentMission;
         if (isNil "_missionPublic") exitWith {
-            (_display getVariable "VGM_RscNotepad") ctrlShow false;
+            (_display getVariable "VGM_RscNotepad") ctrlShow is3DENPreview;
         };
 
         (_display getVariable "VGM_RscNotepad") ctrlShow true;
@@ -151,53 +151,78 @@ switch _mode do {
         private _spottedObjects = values (_missionPublic get "system_scouting" get "objects");
         _spottedObjects sort true;
 
+        #define BUTTON_ITEM_X_OFFSET (VGM_NOTEPAD_LINE_H + pixelW*5)
         {
             _x params ["", "_siteName", "_spottedDate", "_siteId", "_pos"];
             private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
 
+            //------------------- Add site type text
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlItem;
             // _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
             _ctrlItem ctrlSetPosition [
                 0,
                 (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W,
+                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W - BUTTON_ITEM_X_OFFSET,
                 VGM_NOTEPAD_LINE_H
             ];
             // _ctrlItem ctrlSetBackgroundColor [0,1,0,0.25];
             _ctrlItem ctrlCommit 0;
 
-            private _ctrlItemButton = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];
-            _ctrlItemButton ctrlSetPosition [
+            //------------------- Add button to edit site type
+            private _ctrlItemButtonType = _display ctrlCreate ["VGM_ctrlButtonPictureKeepAspect", -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlItemButtonType;
+            _ctrlItemButtonType ctrlSetPosition [
+                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W - BUTTON_ITEM_X_OFFSET,
+                (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_LINE_H
+            ];
+            _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
+            _ctrlItemButtonType ctrlSetTooltip "Change site type";
+            _ctrlItemButtonType ctrlSetTextColor [0,0,0,1];
+            _ctrlItemButtonType ctrlSetBackgroundColor [1,1,1,0.25];
+            _ctrlItemButtonType ctrlCommit 0;
+
+            _ctrlItemButtonType setVariable ["vgm_id", _siteId];
+            _ctrlItemButtonType setVariable ["vgm_index", _forEachIndex];
+            _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
+                params ["_ctrlButton"];
+                ["setLocationTypeEnable", [_ctrlButton]] call SELF;
+            }];
+
+            //------------------- Add button to edit site position
+            private _ctrlItemButtonGrid = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlItemButtonGrid;
+            _ctrlItemButtonGrid ctrlSetPosition [
                 VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W,
                 (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
                 VGM_NOTEPAD_CONFIRM_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            // _ctrlItemButton ctrlSetBackgroundColor [0,1,1,0.25];
-            _ctrlItemButton ctrlCommit 0;
+            _ctrlItemButtonGrid ctrlSetBackgroundColor [1,1,1,0.25];
+            _ctrlItemButtonGrid ctrlCommit 0;
 
+            //-------------------
             _ctrlItem ctrlSetText format ["%1. %2, %3", _forEachIndex+1, localize _siteName, _dateText];
-            _ctrlItemButton setVariable ["vgm_id", _siteId];
-            _ctrlItemButton setVariable ["vgm_pos", _pos];
+            _ctrlItemButtonGrid setVariable ["vgm_id", _siteId];
+            _ctrlItemButtonGrid setVariable ["vgm_pos", _pos];
 
             if (_siteId in _markedSites) then {
-                _ctrlItemButton ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
-                _ctrlItemButton ctrlSetTooltip "Locate on map";
-                _ctrlItemButton ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
-                _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
+                _ctrlItemButtonGrid ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
+                _ctrlItemButtonGrid ctrlSetTooltip "Locate on map";
+                _ctrlItemButtonGrid ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
+                _ctrlItemButtonGrid ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];
                     [[500,500], _ctrlButton getVariable "vgm_pos"] call BIS_fnc_zoomOnArea;
                 }];
             } else {
-                _ctrlItemButton ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION";
-                _ctrlItemButton ctrlAddEventHandler ["ButtonClick", {
+                _ctrlItemButtonGrid ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION";
+                _ctrlItemButtonGrid ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];
                     ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
                 }];
             };
-
-            _ctrlMainChildren pushBack _ctrlItem;
-            _ctrlMainChildren pushBack _ctrlItemButton;
         } forEach _spottedObjects;
     };
 
@@ -219,6 +244,63 @@ switch _mode do {
         ["vgm_scouting_markSite", [_siteId, _markedPos, player]] call para_g_fnc_event_triggerServer;
 
         ["markLocationDisable", _display] call SELF;
+    };
+
+    case "setLocationTypeEnable": {
+        params ["_ctrlButton", "_siteId"];
+        private _display = ctrlParent _ctrlButton;
+        private _ctrlObject = _display getVariable "VGM_RscNotepad";
+
+        ctrlPosition _ctrlObject params ["", "_z", ""];
+        private _scale = 1 - _z;
+
+        private _index = _ctrlObject getVariable "vgm_index";
+
+        /*
+
+        // convert button position into absolute screen position
+        ctrlPosition _ctrlObject params ["_xRoot", "_z", "_yRoot"];
+        ctrlPosition _ctrlMain params ["_x1", "_y1"];
+        ctrlPosition _ctrlButton params ["", "_y2"];
+        private _scale = 1 - _z;
+        private _x = _xRoot + _x1 * _scale;
+        private _y = _yRoot + (_y1 + _y2) * _scale;
+        private _w = (VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W) * _scale;
+        private _h = (VGM_NOTEPAD_LINE_H) * _scale;
+        */
+
+        getMousePosition params ["_x", "_y"];
+        private _w = (VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W * 1.4) * _scale;
+        private _h = (VGM_NOTEPAD_LINE_H) * _scale;
+
+        private _ctrlCombo = _display ctrlCreate ["ctrlListbox", -1];
+        _ctrlCombo ctrlSetPosition [
+            _x - _w + VGM_NOTEPAD_LINE_H/2,
+            _y - VGM_NOTEPAD_LINE_H/3,
+            _w,
+            _h
+        ];
+        _ctrlCombo ctrlCommit 0;
+
+        ctrlSetFocus _ctrlCombo;
+        _ctrlCombo ctrlAddEventHandler ["KillFocus", {
+            params ["_ctrlCombo"];
+            ctrlDelete _ctrlCombo;
+        }];
+
+        //----- fill list with data
+        {
+            _x params ["_siteName", "_siteType", "_locationClass"];
+            private _icon = getText (configFile >> "CfgLocationTypes" >> _locationClass >> "texture");
+            private _iconColor = getArray (configFile >> "CfgLocationTypes" >> _locationClass >> "color");
+            _iconColor = _iconColor apply {if (_x isEqualType "") then {call compile _x} else {_x}}; // convert profile namespace colors to numbers
+
+            private _idx = _ctrlCombo lbAdd _siteName;
+            c lbSetData [_idx, _siteType];
+
+            _ctrlCombo lbSetPictureRight [_idx, _icon];
+            if (_iconColor isNotEqualTo []) then {_ctrlCombo lbSetPictureRightColor [_idx, _iconColor]};
+        } forEach vgm_scouting_siteTypes;
     };
 
     case "renderTooltip": {

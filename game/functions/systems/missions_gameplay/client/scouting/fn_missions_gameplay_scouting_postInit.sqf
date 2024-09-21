@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-08-24
+    Last Update: 2024-09-21
     Public: No
 
     Description:
@@ -12,6 +12,15 @@
 if (!hasInterface) exitWith {};
 
 vgm_scouting_locations = createHashMap;
+
+vgm_scouting_siteTypes = "getNumber (_x >> 'disabled') == 0" configClasses (missionConfigFile >> "vgm_site_types") apply {
+    [
+        localize getText (_x >> "displayNameKey"), // name first, for sorting
+        configName _x,
+        getText (_x >> "locationClass")
+    ]
+};
+vgm_scouting_siteTypes sort true;
 
 [true, "vn_photoCamera_pictureTaken", {
     params ["_cursorTarget"];
