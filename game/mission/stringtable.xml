@@ -428,7 +428,7 @@
     </Package>
     <Package name="Sites">
         <Key ID="STR_VGM_SITES_AA">
-            <Original>Anti-aircraft gun</Original>
+            <Original>AA gun</Original>
         </Key>
         <Key ID="STR_VGM_SITES_AMMO_CACHE">
             <Original>Ammo Cache</Original>
