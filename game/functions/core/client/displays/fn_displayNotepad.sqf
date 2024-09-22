@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-22
+    Last Update: 2024-09-23
     Public: No
 
     Description:
@@ -151,37 +151,37 @@ switch _mode do {
         private _spottedObjects = values (_missionPublic get "system_scouting" get "objects");
         _spottedObjects sort true;
 
-        #define BUTTON_ITEM_X_OFFSET (VGM_NOTEPAD_LINE_H + pixelW*5)
+        private _lastIndex = 0;
         {
             _x params ["", "_siteName", "_spottedDate", "_siteId", "_pos"];
             private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
+            private _lineIndex = _forEachIndex+1; // header takes line 0
 
-            //------------------- Add site type text
-            private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
-            _ctrlMainChildren pushBack _ctrlItem;
+        //------------------- Add index text
+            private _ctrlIndex = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlIndex;
             // _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
-            _ctrlItem ctrlSetPosition [
+            _ctrlIndex ctrlSetPosition [
                 0,
-                (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W - BUTTON_ITEM_X_OFFSET,
+                _lineIndex * VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_INDEX_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            // _ctrlItem ctrlSetBackgroundColor [0,1,0,0.25];
-            _ctrlItem ctrlCommit 0;
+            _ctrlIndex ctrlCommit 0;
+            _ctrlIndex ctrlSetText format ["%1.", _lineIndex];
 
-            //------------------- Add button to edit site type
+        //------------------- Add button to edit site type
             private _ctrlItemButtonType = _display ctrlCreate ["VGM_ctrlButtonPictureKeepAspect", -1, _ctrlMain];
             _ctrlMainChildren pushBack _ctrlItemButtonType;
             _ctrlItemButtonType ctrlSetPosition [
-                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W - BUTTON_ITEM_X_OFFSET,
-                (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_INDEX_W,
+                _lineIndex * VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_EDIT_TYPE_W,
                 VGM_NOTEPAD_LINE_H
             ];
             _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
-            _ctrlItemButtonType ctrlSetTooltip "Change site type";
             _ctrlItemButtonType ctrlSetTextColor [0,0,0,1];
-            _ctrlItemButtonType ctrlSetBackgroundColor [1,1,1,0.25];
+            _ctrlItemButtonType ctrlSetBackgroundColor [0,0,0,0.05];
             _ctrlItemButtonType ctrlCommit 0;
 
             _ctrlItemButtonType setVariable ["vgm_id", _siteId];
@@ -191,20 +191,33 @@ switch _mode do {
                 ["setLocationTypeEnable", [_ctrlButton]] call SELF;
             }];
 
-            //------------------- Add button to edit site position
+
+        //------------------- Add site type text
+            private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlItem;
+            // _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
+            _ctrlItem ctrlSetPosition [
+                VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_EDIT_TYPE_W,
+                _lineIndex * VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_W - VGM_NOTEPAD_INDEX_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_EDIT_TYPE_W_PADDED,
+                VGM_NOTEPAD_LINE_H
+            ];
+            // _ctrlItem ctrlSetBackgroundColor [0,1,0,0.25];
+            _ctrlItem ctrlCommit 0;
+            _ctrlItem ctrlSetText format ["%1, %2", localize _siteName, _dateText];
+
+        //------------------- Add button to edit site position
             private _ctrlItemButtonGrid = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];
             _ctrlMainChildren pushBack _ctrlItemButtonGrid;
             _ctrlItemButtonGrid ctrlSetPosition [
                 VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W,
-                (_forEachIndex+1) * VGM_NOTEPAD_LINE_H,
+                _lineIndex * VGM_NOTEPAD_LINE_H,
                 VGM_NOTEPAD_CONFIRM_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            _ctrlItemButtonGrid ctrlSetBackgroundColor [1,1,1,0.25];
+            _ctrlItemButtonGrid ctrlSetBackgroundColor [0,0,0,0.05];
             _ctrlItemButtonGrid ctrlCommit 0;
 
-            //-------------------
-            _ctrlItem ctrlSetText format ["%1. %2, %3", _forEachIndex+1, localize _siteName, _dateText];
             _ctrlItemButtonGrid setVariable ["vgm_id", _siteId];
             _ctrlItemButtonGrid setVariable ["vgm_pos", _pos];
 
@@ -223,7 +236,15 @@ switch _mode do {
                     ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
                 }];
             };
-        } forEach _spottedObjects;
+            _lastIndex = _forEachIndex;
+        } forEach (_missionPublic get "system_scouting" get "guessedSites");
+
+
+        ["adjustAddSiteRow", [_display, _lastIndex]] call SELF;
+    };
+
+    case "adjustAddSiteRow": {
+        params ["_display", "_lastIndex"];
     };
 
     case "markLocationEnable": {
@@ -254,33 +275,19 @@ switch _mode do {
         ctrlPosition _ctrlObject params ["", "_z", ""];
         private _scale = 1 - _z;
 
-        private _index = _ctrlObject getVariable "vgm_index";
-
-        /*
-
-        // convert button position into absolute screen position
-        ctrlPosition _ctrlObject params ["_xRoot", "_z", "_yRoot"];
-        ctrlPosition _ctrlMain params ["_x1", "_y1"];
-        ctrlPosition _ctrlButton params ["", "_y2"];
-        private _scale = 1 - _z;
-        private _x = _xRoot + _x1 * _scale;
-        private _y = _yRoot + (_y1 + _y2) * _scale;
-        private _w = (VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W) * _scale;
-        private _h = (VGM_NOTEPAD_LINE_H) * _scale;
-        */
-
         getMousePosition params ["_x", "_y"];
         private _w = (VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W * 1.4) * _scale;
         private _h = (VGM_NOTEPAD_LINE_H) * _scale;
 
-        private _ctrlCombo = _display ctrlCreate ["ctrlListbox", -1];
+        private _ctrlCombo = _display ctrlCreate ["VGM_ctrlListBoxNotepad", -1];
         _ctrlCombo ctrlSetPosition [
-            _x - _w + VGM_NOTEPAD_LINE_H/2,
-            _y - VGM_NOTEPAD_LINE_H/3,
+            _x,
+            _y,
             _w,
-            _h
+            _h * 10
         ];
         _ctrlCombo ctrlCommit 0;
+        _ctrlCombo ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.52 * _scale);
 
         ctrlSetFocus _ctrlCombo;
         _ctrlCombo ctrlAddEventHandler ["KillFocus", {

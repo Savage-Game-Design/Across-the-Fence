@@ -6,7 +6,6 @@ import RscMapControlEmpty;
 import RscControlsGroupNoScrollbars;
 import RscButtonMenu;
 import RscObject;
-import RscCombo;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;
@@ -708,18 +707,9 @@ class VGM_ctrlButtonNotepad: VGM_ctrlButton
     // colorBackground[] = {0,0,0,0.25};
     sizeEx = VGM_NOTEPAD_LINE_H * 0.52;
 };
-class VGM_RscComboNotepad: RscCombo
+class VGM_ctrlListBoxNotepad: VGM_ctrlListBox
 {
-    colorText[] = COLOR_BLACK; // color of item "in" the combo box
-    //colorScrollbar[] = COLOR_BLACK;
-
-    colorBackground[] = {VGM_UI_COLOR_BACKGROUND};
-    colorSelectBackground[] = {1,1,1,1}; // currently focused item
-
-    shadow = 0;
-    sizeEx = VGM_NOTEPAD_LINE_H * 0.75;
-
-    wholeHeight = 2;
+    rowHeight = VGM_NOTEPAD_LINE_H * 0.52;
 };
 
 class VGM_RscNotepad
