@@ -156,7 +156,9 @@ switch _mode do {
         private _lastIndex = 0;
         {
             _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId"];
+            // TODO refactor into function
             private _siteName = (vgm_scouting_siteTypes param [vgm_scouting_siteTypes findIf {(_x#1) == _siteType}]) param [0, _siteType];
+
             private _minutes = if (_spottedDate#4 < 10) then {format ["0%1", _spottedDate#4]} else {_spottedDate#4};
             private _dateText = format ["%1:%2", _spottedDate#3, _minutes];
             private _lineIndex = _forEachIndex+1; // header takes line 0

@@ -29,6 +29,7 @@ private _data = [_mission get "public" get "id", "scouting"] call vgm_s_fnc_miss
 
 private _guessedSites = _data get "guessedSites";
 
+// TODO move to shared function
 private _itemIdx = _guessedSites findIf {_x#4 == _siteId};
 if (_itemIdx == -1) exitWith {
     format ["Unable to set site type, site does not exist: %1", _siteId] call vgm_g_fnc_logError;

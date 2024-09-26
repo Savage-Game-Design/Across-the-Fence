@@ -67,5 +67,6 @@ class vgm_site_types {
     class vgm_waypoint {
         displayNameKey = "STR_VGM_SITES_WAYPOINT";
         generatorFunction = "vgm_s_fnc_sites_type_waypoint";
+        locationClass = "o_unknown";
     };
 };

@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_createLocation.sqf
     Author: Savage Game Design
     Date: 2024-08-23
-    Last Update: 2024-08-24
+    Last Update: 2024-09-26
     Public: No
 
     Description:
@@ -25,18 +25,24 @@ if (isNil "_missionPublic") exitWith {
     format ["Unable to create location for site, no mission: %1", _siteId] call vgm_g_fnc_logError;
 };
 
-private _spottedObjects = _missionPublic get "system_scouting" get "objects";
-private _spottedSite = _spottedObjects get _siteId;
+private _guessedSites = _missionPublic get "system_scouting" get "guessedSites";
 
-if (isNil "_spottedSite") exitWith {
-    format ["Unable to create location, site does not exist: %1", _siteId] call vgm_g_fnc_logError;
+// TODO move to shared function
+private _itemIdx = _guessedSites findIf {_x#4 == _siteId};
+if (_itemIdx == -1) exitWith {
+    format ["Unable to create location for site, site does not exist: %1", _siteId] call vgm_g_fnc_logError;
 };
 
-_spottedSite params ["", "_name", "", "", "_pos", "_locationClass"];
+private _entry = _guessedSites select _itemIdx;
 
-private _location = createLocation [_locationClass, _pos, 50, 50];
-_location setText localize _name;
+_entry params ["", "_siteType", "", "_position"];
 
+(vgm_scouting_siteTypes param [vgm_scouting_siteTypes findIf {(_x#1) == _siteType}]) params ["_siteName", "", "_siteLocationClass"];
+
+private _location = createLocation [_siteLocationClass, _position, 50, 50];
+_location setText _siteName;
+
+deleteLocation (vgm_scouting_locations getOrDefault [_siteId, locationNull]);
 vgm_scouting_locations set [_siteId, _location];
 
 _location // return

@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-21
+    Last Update: 2024-09-26
     Public: No
 
     Description:
