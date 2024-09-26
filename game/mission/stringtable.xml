@@ -500,5 +500,11 @@
         <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP">
             <Original>Mark site location on the map</Original>
         </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_ADD_ITEM">
+            <Original>Add item</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_SITE_TYPE_UNKNOWN">
+            <Original>-</Original>
+        </Key>
     </Package>
 </Project>

@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-23
+    Last Update: 2024-09-26
     Public: No
 
     Description:
@@ -115,7 +115,9 @@ switch _mode do {
 
             _refreshHandlersIds pushBack _ehId;
         } forEach [
+            "vgm_scouting_addedSiteClient",
             "vgm_scouting_spottedSiteClient",
+            "vgm_scouting_siteTypeChangedClient",
             "vgm_scouting_markedSiteClient",
             "vgm_scouting_missedSiteClient",
             "vgm_mission_started",
@@ -153,8 +155,10 @@ switch _mode do {
 
         private _lastIndex = 0;
         {
-            _x params ["", "_siteName", "_spottedDate", "_siteId", "_pos"];
-            private _dateText = format ["%1:%2", _spottedDate#3, _spottedDate#4];
+            _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId"];
+            private _siteName = (vgm_scouting_siteTypes param [vgm_scouting_siteTypes findIf {(_x#1) == _siteType}]) param [0, _siteType];
+            private _minutes = if (_spottedDate#4 < 10) then {format ["0%1", _spottedDate#4]} else {_spottedDate#4};
+            private _dateText = format ["%1:%2", _spottedDate#3, _minutes];
             private _lineIndex = _forEachIndex+1; // header takes line 0
 
         //------------------- Add index text
@@ -188,9 +192,8 @@ switch _mode do {
             _ctrlItemButtonType setVariable ["vgm_index", _forEachIndex];
             _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
                 params ["_ctrlButton"];
-                ["setLocationTypeEnable", [_ctrlButton]] call SELF;
+                ["setLocationTypeEnable", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
             }];
-
 
         //------------------- Add site type text
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
@@ -204,7 +207,11 @@ switch _mode do {
             ];
             // _ctrlItem ctrlSetBackgroundColor [0,1,0,0.25];
             _ctrlItem ctrlCommit 0;
-            _ctrlItem ctrlSetText format ["%1, %2", localize _siteName, _dateText];
+            if (_siteType isEqualTo "") then {
+                _ctrlItem ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_SITE_TYPE_UNKNOWN";
+            } else {
+                _ctrlItem ctrlSetText format ["%1, %2", _siteName, _dateText];
+            };
 
         //------------------- Add button to edit site position
             private _ctrlItemButtonGrid = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];
@@ -221,30 +228,50 @@ switch _mode do {
             _ctrlItemButtonGrid setVariable ["vgm_id", _siteId];
             _ctrlItemButtonGrid setVariable ["vgm_pos", _pos];
 
-            if (_siteId in _markedSites) then {
-                _ctrlItemButtonGrid ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
-                _ctrlItemButtonGrid ctrlSetTooltip "Locate on map";
-                _ctrlItemButtonGrid ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
-                _ctrlItemButtonGrid ctrlAddEventHandler ["ButtonClick", {
-                    params ["_ctrlButton"];
-                    [[500,500], _ctrlButton getVariable "vgm_pos"] call BIS_fnc_zoomOnArea;
-                }];
-            } else {
+            if (_pos isEqualTo []) then {
+                // no location set
                 _ctrlItemButtonGrid ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION";
                 _ctrlItemButtonGrid ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];
                     ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
                 }];
+            } else {
+                // location set
+                _ctrlItemButtonGrid ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
+                _ctrlItemButtonGrid ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
+                _ctrlItemButtonGrid ctrlAddEventHandler ["MouseButtonClick", {
+                    params ["_ctrlButton", "_mouseButton"];
+                    if (_mouseButton == 1) exitWith {
+                        ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                    };
+                    [[500,500], _ctrlButton getVariable "vgm_pos"] call BIS_fnc_zoomOnArea;
+                }];
             };
             _lastIndex = _forEachIndex;
         } forEach (_missionPublic get "system_scouting" get "guessedSites");
-
 
         ["adjustAddSiteRow", [_display, _lastIndex]] call SELF;
     };
 
     case "adjustAddSiteRow": {
         params ["_display", "_lastIndex"];
+        private _lineIndex = _lastIndex + 2;
+
+        private _ctrlAddItem = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];
+        _ctrlMainChildren pushBack _ctrlAddItem;
+        _ctrlAddItem ctrlSetPosition [
+            0,
+            _lineIndex * VGM_NOTEPAD_LINE_H,
+            VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_EDIT_TYPE_W,
+            VGM_NOTEPAD_LINE_H
+        ];
+        _ctrlAddItem ctrlCommit 0;
+        _ctrlAddItem ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_ADD_ITEM";
+
+        _ctrlAddItem ctrlAddEventHandler ["ButtonClick", {
+            params ["_ctrlButton"];
+            ["vgm_scouting_addSite", [player]] call para_g_fnc_event_triggerServer;
+        }];
     };
 
     case "markLocationEnable": {
@@ -280,12 +307,7 @@ switch _mode do {
         private _h = (VGM_NOTEPAD_LINE_H) * _scale;
 
         private _ctrlCombo = _display ctrlCreate ["VGM_ctrlListBoxNotepad", -1];
-        _ctrlCombo ctrlSetPosition [
-            _x,
-            _y,
-            _w,
-            _h * 10
-        ];
+        _ctrlCombo ctrlSetPosition [_x, _y, _w, (_h * 10)];
         _ctrlCombo ctrlCommit 0;
         _ctrlCombo ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.52 * _scale);
 
@@ -293,6 +315,14 @@ switch _mode do {
         _ctrlCombo ctrlAddEventHandler ["KillFocus", {
             params ["_ctrlCombo"];
             ctrlDelete _ctrlCombo;
+        }];
+
+        _ctrlCombo setVariable ["vgm_id", _siteId];
+        _ctrlCombo ctrlAddEventHandler ["LbSelChanged", {
+            params ["_ctrlCombo", "_lbCurSel"];
+            private _siteId = _ctrlCombo getVariable "vgm_id";
+            ["vgm_scouting_setSiteType", [_siteId, _ctrlCombo lbData _lbCurSel, player]] call para_g_fnc_event_triggerServer;
+            _ctrlCombo spawn {uiSleep 0.1; ctrlDelete _this};
         }];
 
         //----- fill list with data
@@ -303,7 +333,7 @@ switch _mode do {
             _iconColor = _iconColor apply {if (_x isEqualType "") then {call compile _x} else {_x}}; // convert profile namespace colors to numbers
 
             private _idx = _ctrlCombo lbAdd _siteName;
-            c lbSetData [_idx, _siteType];
+            _ctrlCombo lbSetData [_idx, _siteType];
 
             _ctrlCombo lbSetPictureRight [_idx, _icon];
             if (_iconColor isNotEqualTo []) then {_ctrlCombo lbSetPictureRightColor [_idx, _iconColor]};

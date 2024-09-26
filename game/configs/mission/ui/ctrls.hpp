@@ -704,7 +704,7 @@ class VGM_ctrlStaticNotepadHeader: VGM_ctrlStaticNotepad
 class VGM_ctrlButtonNotepad: VGM_ctrlButton
 {
     colorText[] = COLOR_BLACK;
-    // colorBackground[] = {0,0,0,0.25};
+    colorBackground[] = {0,0,0,0.05};
     sizeEx = VGM_NOTEPAD_LINE_H * 0.52;
 };
 class VGM_ctrlListBoxNotepad: VGM_ctrlListBox
