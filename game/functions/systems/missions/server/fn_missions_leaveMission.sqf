@@ -2,7 +2,7 @@
     File: fn_missions_leaveMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-22
+    Last Update: 2024-09-20
     Public: Yes
 
     Description:
@@ -37,6 +37,8 @@ if (!_removeSuccessful) exitWith {
     false
 };
 
-// TODO - How to handle the last player leaving the mission?
+if (count (_mission get "machineIds") == 0) then {
+    [_missionId, "EMPTY"] call vgm_s_fnc_missions_endMission;
+};
 
 true

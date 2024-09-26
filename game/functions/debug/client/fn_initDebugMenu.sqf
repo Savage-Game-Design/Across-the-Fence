@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2023-11-26
+    Last Update: 2024-09-21
     Public: No
 
     Description:
@@ -19,7 +19,7 @@
         [] call vgm_c_fnc_initDebugMenu
  */
 
-// internal function,
+// internal functions
 // should be only executed in the context of debug menu tab handlers
 vgm_c_debugMenu_addSection = {
     params ["_title", "_fnc_addData"];
@@ -38,6 +38,44 @@ vgm_c_debugMenu_addSection = {
 
     _ctrlList call _fnc_addData;
     _sections = _sections + 1;
+};
+
+vgm_c_debugMenu_receiveMissionData = {
+    params ["_missions"];
+    private _ctrlTree = uiNamespace getVariable ["vgm_debugMenu_ctrlMissionTree", controlNull];
+
+    private _pServer = _ctrlTree getVariable ["vgm_pServer", []];
+    for "_i" from (_ctrlTree tvCount _pServer) to 1 step -1 do {
+        _ctrlTree tvDelete (_pServer + [_i-1]);
+    };
+
+    {
+        [_pServer, _x, _y] call vgm_c_debugMenu_missionTvAdd;
+    } forEach _missions;
+
+    _ctrlTree tvSortAll [_pServer];
+};
+
+vgm_c_debugMenu_missionTvAdd = {
+    params ["_index", "_key", "_val"];
+    if (_key isEqualTo "_netmap") exitWith {};
+    _key = format ["%1", _key];
+
+    if (_val isEqualType []) exitWith {
+        private _pItem = [_ctrlTree tvAdd [_index, _key]];
+        {
+            [_index + _pItem, _forEachIndex, _x] call vgm_c_debugMenu_missionTvAdd;
+        } forEach _val;
+    };
+
+    if (_val isEqualType createHashMap) exitWith {
+        private _pItem = [_ctrlTree tvAdd [_index, _key]];
+        {
+            [_index + _pItem, _x, _y] call vgm_c_debugMenu_missionTvAdd;
+        } forEach _val;
+    };
+
+    _ctrlTree tvAdd [_index, format ["%1 - %2", _key, _val]];
 };
 
 vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
@@ -181,11 +219,58 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         }] call vgm_c_debugMenu_addSection;
     };
 
+    private _fnc_tabMission = {
+        params ["_display", "_ctrlContainer", "_containerPosition"];
+        _containerPosition params ["", "", "_w", "_h"];
+        private _hSearch = 1 * GUI_GRID_H;
+
+        private _ctrlSearch = _display ctrlCreate ["RscEdit", getNumber (configFile >> "RscTreeSearch" >> "idcSearch"), _ctrlContainer];
+        _ctrlSearch ctrlSetPosition [0, 0, _w, _hSearch];
+        _ctrlSearch ctrlCommit 0;
+
+        private _ctrlTree =_display ctrlCreate ["RscTreeSearch", -1, _ctrlContainer];
+        _ctrlTree ctrlSetPosition [0, _hSearch, _w, _h - _hSearch];
+        _ctrlTree ctrlCommit 0;
+        uiNamespace setVariable ["vgm_debugMenu_ctrlMissionTree", _ctrlTree];
+
+        private _pPublic = [_ctrlTree tvAdd [[], "Client"]];
+        {
+            [_pPublic, _x, _y] call vgm_c_debugMenu_missionTvAdd;
+        } forEach ([] call VGM_C_fnc_missions_getCurrentMission);
+
+        private _pServer = [_ctrlTree tvAdd [[], "Server"]];
+        _ctrlTree tvAdd [_pServer, "Loading..."];
+
+        // Load all missions data from server on demand
+        _ctrlTree setVariable ["vgm_pServer", _pServer];
+        _ctrlTree ctrlAddEventHandler ["TreeExpanded", {
+            params ["_ctrlTree", "_selectionPath"];
+            if (count _selectionPath > 1) exitWith {};
+            if ((_ctrlTree tvText _selectionPath) != "Server") exitWith {};
+
+            // clear all current entries
+            for "_i" from (_ctrlTree tvCount _selectionPath) to 1 step -1 do {
+                _ctrlTree tvDelete (_selectionPath + [_i-1]);
+            };
+            _ctrlTree tvAdd [_selectionPath, "Loading..."];
+            // request missions data from server
+            [{
+                private _missions = localNamespace getVariable "vgm_missions";
+
+                [_missions] remoteExecCall ["vgm_c_debugMenu_receiveMissionData", remoteExecutedOwner];
+            }] remoteExec ["call", 2];
+        }];
+
+        _ctrlTree tvExpand _pPublic;
+        _ctrlTree tvSortAll [_pPublic];
+    };
+
     //----- add tabs
     private _tabs = [
         ["Player state", _fnc_tabPlayer],
         ["Persistence", _fnc_tabPersistence],
-        ["Medical state", _fnc_tabMedical]
+        ["Medical state", _fnc_tabMedical],
+        ["Mission", _fnc_tabMission]
     ];
 
     {
@@ -201,23 +286,26 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
 
         _ctrlButton setVariable ["vgm_position", [_xBase, _yBase + _hTabs, _wTotal, _hContent]];
         _ctrlButton setVariable ["vgm_handler", _fnc_handler];
+        _ctrlButton setVariable ["vgm_index", _forEachIndex];
 
         private _fnc_buttonHandler = {
             params ["_ctrlButton"];
             private _display = ctrlParent _ctrlButton;
             private _position = _ctrlButton getVariable "vgm_position";
             private _fnc_handler = _ctrlButton getVariable "vgm_handler";
+            private _menuIndex = _ctrlButton getVariable "vgm_index";
 
             ctrlDelete (_display getVariable ["vgm_currentTab", controlNull]);
             private _ctrlContainer = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1];
             _ctrlContainer ctrlSetPosition _position;
             _ctrlContainer ctrlCommit 0;
             _display setVariable ["vgm_currentTab", _ctrlContainer];
+            uiNamespace setVariable ["vgm_debugMenu_lastIndex", _menuIndex];
 
             [_display, _ctrlContainer, _position] call _fnc_handler;
         };
 
         _ctrlButton ctrlAddEventHandler ["ButtonClick", _fnc_buttonHandler];
-        if (_forEachIndex == 0) then {_ctrlButton call _fnc_buttonHandler};
+        if (_forEachIndex == (uiNamespace getVariable ["vgm_debugMenu_lastIndex", 0])) then {_ctrlButton call _fnc_buttonHandler};
     } forEach _tabs;
 }] call BIS_fnc_addScriptedEventHandler;
