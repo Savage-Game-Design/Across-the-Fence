@@ -4,7 +4,7 @@
     File: fn_sites_types_shelter.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-07-04
+    Last Update: 2024-08-24
     Public: Yes
 
     Description:
@@ -30,12 +30,15 @@ private _shelter = [] call vgm_s_fnc_sites_getTemplate;
 
 _shelter set ["name", "STR_VGM_SITES_SHELTER"];
 _shelter set ["size", SITE_FOOTPRINT_SMALL];
+_shelter set ["hideNearbyTerrain", false];
 _shelter set ["spawnFunction", {
     params ["_pos2D"];
 
     private _shelter = createVehicle ["Land_vn_o_shelter_03", [_pos2D # 0, _pos2D # 1, 0], [], 0, "NONE"];
 
-    [[ _shelter ]]
+    createHashMapFromArray [
+        ["objects", [ _shelter ]]
+    ]
 }];
 
 _shelter

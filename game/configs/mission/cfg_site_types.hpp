@@ -21,6 +21,8 @@ class vgm_site_types {
     };
 
     class vgm_campfire {
+        /* Intended for debug only */
+        disabled = 1;
         generatorFunction = "vgm_s_fnc_sites_type_campfire";
     };
 
@@ -29,6 +31,8 @@ class vgm_site_types {
     };
 
     class vgm_shelter {
+        /* Intended for debug only */
+        disabled = 1;
         generatorFunction = "vgm_s_fnc_sites_type_shelter";
     };
 

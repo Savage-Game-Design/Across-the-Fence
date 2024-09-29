@@ -53,6 +53,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
 
 private _marker = format ["tbox_%1", (_missionPublic get "targetZone")];
 {deleteVehicle _x} forEach (allMines inAreaArray _marker);
+[_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_clearSites;
 [_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_freeZone;
 [_mission] call vgm_s_fnc_director_stopMission;
 
