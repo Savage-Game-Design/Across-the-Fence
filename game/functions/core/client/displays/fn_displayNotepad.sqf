@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-26
+    Last Update: 2024-09-29
     Public: No
 
     Description:
@@ -149,11 +149,10 @@ switch _mode do {
         private _ctrlMainChildren = [];
         _ctrlMain setVariable ["vgm_children", _ctrlMainChildren];
 
-        private _markedSites = _missionPublic get "system_scouting" get "markedSites";
-        private _spottedObjects = values (_missionPublic get "system_scouting" get "objects");
-        _spottedObjects sort true;
+        private _data = _missionPublic get "system_scouting";
+        private _guessedSites = _data get "guessedSites";
 
-        private _lastIndex = 0;
+        private _lastIndex = -1;
         {
             _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId"];
             // TODO refactor into function
@@ -250,13 +249,15 @@ switch _mode do {
                 }];
             };
             _lastIndex = _forEachIndex;
-        } forEach (_missionPublic get "system_scouting" get "guessedSites");
+        } forEach _guessedSites;
 
-        ["adjustAddSiteRow", [_display, _lastIndex]] call SELF;
+        if (count _guessedSites < (_data get "guessedSitesMax")) then {
+            ["adjustAddSiteRow", [_display, _lastIndex, _showAdd]] call SELF;
+        };
     };
 
     case "adjustAddSiteRow": {
-        params ["_display", "_lastIndex"];
+        params ["_display", "_lastIndex", "_show"];
         private _lineIndex = _lastIndex + 2;
 
         private _ctrlAddItem = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];
