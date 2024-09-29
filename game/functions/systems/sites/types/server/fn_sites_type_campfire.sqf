@@ -34,7 +34,9 @@ _campFire set ["spawnFunction", {
 
     private _campFire = createVehicle ["Land_Campfire_F", [_pos2D # 0, _pos2D # 1, 0], [], 0, "NONE"];
 
-    [[ _campFire ]]
+    createHashMapFromArray [
+        ["objects", [ _campFire ]]
+    ]
 }];
 
 _campFire get "fortifications" pushBack createHashMapFromArray [

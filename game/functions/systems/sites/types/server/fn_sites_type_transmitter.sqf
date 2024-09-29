@@ -30,6 +30,7 @@ private _site = [] call vgm_s_fnc_sites_getTemplate;
 
 _site set ["size", SITE_FOOTPRINT_SMALL];
 _site set ["locRequirements", []];
+_site set ["hideNearbyTerrain", false];
 _site set ["spawnFunction", {
     params ["_pos2D"];
 

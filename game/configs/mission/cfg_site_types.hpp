@@ -29,6 +29,8 @@ class vgm_site_types {
     };
 
     class vgm_campfire {
+        /* Intended for debug only */
+        disabled = 1;
         displayNameKey = "STR_VGM_SITES_CAMPFIRE";
         generatorFunction = "vgm_s_fnc_sites_type_campfire";
         locationClass = "o_recon";
@@ -41,6 +43,8 @@ class vgm_site_types {
     };
 
     class vgm_shelter {
+        /* Intended for debug only */
+        disabled = 1;
         displayNameKey = "STR_VGM_SITES_SHELTER";
         generatorFunction = "vgm_s_fnc_sites_type_shelter";
         locationClass = "o_installation";

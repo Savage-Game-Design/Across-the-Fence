@@ -1,3 +1,5 @@
+#include "../sites.inc"
+
 /*
     File: sites_spawn.sqf
     Author: Savage Game Design
@@ -27,6 +29,20 @@ private _siteType = localNamespace getVariable "vgm_s_sites_siteTypes" get _type
 
 if (isNil "_siteType") exitWith {
     [format ["Failed to spawn unknown site '%1'", _typeId]] call vgm_g_fnc_logError;
+};
+
+if (_siteType getOrDefault ["hideNearbyTerrain", false]) then {
+    private _radius = (vgm_s_sites_siteRadii getOrDefault [_siteType get "size", SITE_FOOTPRINT_LARGE_RADIUS]);
+    private _nearbyTerrain = nearestTerrainObjects [
+        _pos2D,
+        ["SMALL TREE", "TREE", "HIDE"],
+        _radius,
+        false,
+        true
+    ];
+    {
+        _x hideObjectGlobal true;
+    } forEach _nearbyTerrain;
 };
 
 private _spawnResult = [_pos2D] call (_siteType get "spawnFunction");
