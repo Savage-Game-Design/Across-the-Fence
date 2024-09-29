@@ -2,7 +2,7 @@
     File: fn_missions_startMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2024-08-24
+    Last Update: 2024-09-29
     Public: Yes
 
     Description:
@@ -37,7 +37,8 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
 
 [] remoteExecCall ["vgm_c_fnc_missions_startDeploy", values (_mission get "machineIds")];
 
-[_missionPublic get "targetZone", 25] call vgm_s_fnc_missions_zones_spawnRandomSites;
+private _sites = [_missionPublic get "targetZone", 25] call vgm_s_fnc_missions_zones_spawnRandomSites;
+(_mission get "sites") insert _sites;
 
 [_mission] call vgm_s_fnc_director_startMission;
 [_missionPublic get "startPosASL"] call vgm_s_fnc_missions_gameplay_ambient_departHelicopter; // TODO by what and where should this be fired?
