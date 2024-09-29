@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-29
+    Last Update: 2024-09-30
     Public: No
 
     Description:
@@ -251,12 +251,12 @@ switch _mode do {
         } forEach _guessedSites;
 
         if (count _guessedSites < (_data get "guessedSitesMax")) then {
-            ["adjustAddSiteRow", [_display, _lastIndex, _showAdd]] call SELF;
+            ["adjustAddSiteRow", [_display, _lastIndex]] call SELF;
         };
     };
 
     case "adjustAddSiteRow": {
-        params ["_display", "_lastIndex", "_show"];
+        params ["_display", "_lastIndex"];
         private _lineIndex = _lastIndex + 2;
 
         private _ctrlAddItem = _display ctrlCreate ["VGM_ctrlButtonNotepad", -1, _ctrlMain];

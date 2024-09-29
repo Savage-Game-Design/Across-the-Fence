@@ -503,5 +503,12 @@
         <Key ID="STR_VGM_MISSIONS_SCOUTING_SITE_TYPE_UNKNOWN">
             <Original>-</Original>
         </Key>
+        <!-- Tasks -->
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_TASK_TITLE">
+            <English>Scout the area</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION">
+            <English>Scout the area for enemy sites and note them in your "Scouting Report".&lt;br/&gt;&lt;br/&gt;HQ suggests checking following grids:&lt;br/&gt;%1</English>
+        </Key>
     </Package>
 </Project>
