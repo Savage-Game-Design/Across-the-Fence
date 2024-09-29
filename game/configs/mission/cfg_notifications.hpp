@@ -12,29 +12,18 @@ class CfgNotifications
         difficulty[] = {};		// Required difficulty settings. All listed difficulties has to be enabled
     };
 
-    class VGM_SiteSpotted: VGM_Default
+    class VGM_SiteAdded: VGM_Default
     {
-        title = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_SPOTTED_TITLE";
+        title = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_ADDED_TITLE";
         iconPicture = "\a3\ui_f\data\Map\Diary\Icons\diaryLocateTask_ca.paa";
-        description = "%1";
-        priority = 10;
+        description = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_ADDED_DESCRIPTION";
     };
 
-    class VGM_SiteMarked: VGM_Default
+    class VGM_SiteTypeChanged: VGM_Default
     {
-        title = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_MARKED_TITLE";
+        title = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_EDITED_TITLE";
         iconPicture = "\a3\ui_f\data\Map\Diary\Icons\diaryLocateTask_ca.paa";
-        description = "%1";
-        color[] = {0,0.7,0,1};
-        priority = 11;
+        description = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_TYPE_DESCRIPTION";
     };
 
-    class VGM_SiteMissed: VGM_Default
-    {
-        title = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_MISSED_TITLE";
-        iconPicture = "\a3\ui_f\data\Map\Diary\Icons\diaryLocateTask_ca.paa";
-        description = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_MISSED_DESCRIPTION";
-        color[] = {0.7,0,0,1};
-        priority = 11;
-    };
 };

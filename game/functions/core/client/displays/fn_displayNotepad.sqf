@@ -119,7 +119,6 @@ switch _mode do {
             "vgm_scouting_spottedSiteClient",
             "vgm_scouting_siteTypeChangedClient",
             "vgm_scouting_markedSiteClient",
-            "vgm_scouting_missedSiteClient",
             "vgm_mission_started",
             "vgm_mission_ended"
         ];
