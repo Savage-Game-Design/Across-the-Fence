@@ -66,6 +66,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\behaviour_trees\nodes\global);
 
         /* Template nodes / base nodes */
+        class btree_nodeBase {};
         class btree_action_basic {};
         class btree_composite_selector {};
         class btree_composite_sequence {};
@@ -118,6 +119,7 @@ class vgm_g
         class btree_exitNode_selector {};
         class btree_exitNode_sequence {};
 
+        class btree_getNodeParams {};
         class btree_log {};
         class btree_panic {};
         class btree_returnToParent {};
