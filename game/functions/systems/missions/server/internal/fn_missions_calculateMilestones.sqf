@@ -51,11 +51,11 @@ call {
         private _perfectMatch = _nearSites findIf {(_x get "class") == _guessedClass};
 
         if (_perfectMatch > -1) then {
-            _milestones pushBack ["site_spotted_perfect", 200, _guessIdText];
+            _milestones pushBack ["site_spotted_perfect", 200, [_guessIdText]];
 
             _missionSites deleteAt _perfectMatch;
         } else {
-            _milestones pushBack ["site_spotted_good", 100, _guessIdText];
+            _milestones pushBack ["site_spotted_good", 100, [_guessIdText]];
 
             _nearSites apply {[SITE_DIST, _x]};
             _nearSites sort false;

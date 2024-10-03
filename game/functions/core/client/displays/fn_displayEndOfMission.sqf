@@ -71,6 +71,8 @@ switch _mode do {
             {
                 uiSleep 0.5;
                 _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+
+                _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
                 private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
                 _milestoneText = format ([_milestoneText] + _formatData);
 
