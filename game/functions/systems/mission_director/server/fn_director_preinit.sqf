@@ -2,7 +2,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-10-02
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -31,12 +31,12 @@ vgm_s_director_dynamic_max_groups = 8;
 // TODO - Replace these with Mike Force's squad generator
 vgm_s_director_patrol_classes = [
     'vn_o_men_nva_02',
-    'vn_o_men_nva_05',
+    'vn_o_men_nva_05'
     //'vn_o_men_nva_09',
     //'vn_o_men_nva_10'
 ];
 
-vgm_s_directotr_tracker_classes = [
+vgm_s_director_tracker_classes = [
     'vn_o_men_nva_10',
     'vn_o_men_nva_05',
     'vn_o_men_nva_05',
