@@ -3,7 +3,7 @@
     File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
     Author: Savage Game Design
     Date: 2023-09-25
-    Last Update: 2024-04-24
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -70,9 +70,11 @@ switch _mode do {
             // Update XP every Milestone
             {
                 uiSleep 0.5;
-                _x params ["_milestoneName", "_milestoneXp"];
+                _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
+                _milestoneText = format ([_milestoneText] + _formatData);
 
-                _text pushBack format ["%1 - %2", localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName], _milestoneXp];
+                _text pushBack format ["%1 - %2", _milestoneText, _milestoneXp];
                 _ctrlBreakdown ctrlSetStructuredText parseText (_text joinString "<br/>");
                 playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
 
