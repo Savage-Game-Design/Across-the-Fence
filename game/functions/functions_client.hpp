@@ -85,6 +85,7 @@ class vgm_g
 
         class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
         class btree_decorator_hasNearbyTracks {};
+        class btree_decorator_hasOrders {};
         class btree_decorator_suppressionService {};
         class btree_decorator_updateKnowledgeService {};
     };
