@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-12-19
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -34,7 +34,7 @@ if (
     // PlayerId must be a valid user
     || getUserInfo _playerId isEqualTo []
     // Mission must not be at max players
-    || count (_missionPublic get "players") >= (_missionPublic get "maxPlayers")
+    || (_missionPublic get "players" call para_g_fnc_netmap_count) >= (_missionPublic get "maxPlayers")
     // Mission can't have already started when a player is joining
     || _missionPublic get "status" isNotEqualTo "CREATED"
 ) exitWith { false };
@@ -63,7 +63,7 @@ if (isNull (_missionPublic get "group")) then {
     [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-private _missionIsFull = count (_missionPublic get "players") >= _missionPublic get "maxPlayers";
+private _missionIsFull = ((_missionPublic get "players") call para_g_fnc_netmap_count) >= _missionPublic get "maxPlayers";
 [_mission, "mission full", _missionIsFull] call vgm_s_fnc_missions_preventJoining;
 
 true
