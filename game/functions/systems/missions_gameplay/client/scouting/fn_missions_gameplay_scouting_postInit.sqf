@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-29
+    Last Update: 2024-09-30
     Public: No
 
     Description:
@@ -23,11 +23,7 @@ vgm_scouting_siteTypes = "getNumber (_x >> 'disabled') == 0" configClasses (miss
 vgm_scouting_siteTypes sort true;
 
 [true, "vn_photoCamera_pictureTaken", {
-    params ["_cursorTarget"];
-    if !(_cursorTarget getVariable ["vgm_missions_gameplay_scouting_spottable", false]) exitWith {};
-
-    ["vgm_scouting_spottedTargetLocal", [player, _cursorTarget]] call para_g_fnc_event_triggerLocal;
-
+    call vgm_c_fnc_missions_gameplay_scouting_onPhoto;
 }] call BIS_fnc_addScriptedEventHandler;
 
 ["vgm_scouting_spottedSiteClient", {

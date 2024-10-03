@@ -2,7 +2,7 @@
     File: fn__missions_gameplay_scouting_handleSpotted.sqf
     Author: Savage Game Design
     Date: 2024-08-17
-    Last Update: 2024-08-24
+    Last Update: 2024-10-02
     Public: No
 
     Description:
@@ -18,7 +18,10 @@
         [player, cursorObject] call vgm_s_fnc_missions_gameplay_scouting_handleSpotted;
  */
 
-params ["_spotter", "_target"];
+params [
+    ["_spotter", objNull],
+    ["_target", objNull]
+];
 
 private _site = _target getVariable "vgm_missions_gameplay_scouting_site";
 if (isNil "_site") exitWith {

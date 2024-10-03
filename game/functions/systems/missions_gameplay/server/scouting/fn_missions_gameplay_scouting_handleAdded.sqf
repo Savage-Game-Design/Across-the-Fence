@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_handleAdded.sqf.sqf
     Author: Savage Game Design
     Date: 2024-09-26
-    Last Update: 2024-09-29
+    Last Update: 2024-10-02
     Public: No
 
     Description:
@@ -18,7 +18,9 @@
         [_siteId, _markedPos, _player] call vgm_s_fnc_missions_gameplay_scouting_handleMarked
  */
 
-params ["_player"];
+params [
+    ["_player", objNull]
+];
 
 private _mission = [getPlayerID _player] call vgm_s_fnc_missions_getAssignedMission;
 if (isNil "_mission") exitWith {

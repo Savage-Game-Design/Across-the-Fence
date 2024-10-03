@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-30
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -151,6 +151,8 @@ switch _mode do {
         private _data = _missionPublic get "system_scouting";
         private _guessedSites = _data get "guessedSites";
 
+        private _isPhotoMode = createHashMap isNotEqualTo (_display getVariable ["vgm_site_photo", createHashMap]);
+
         private _lastIndex = -1;
         {
             _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId"];
@@ -183,17 +185,26 @@ switch _mode do {
                 VGM_NOTEPAD_EDIT_TYPE_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
             _ctrlItemButtonType ctrlSetTextColor [0,0,0,1];
             _ctrlItemButtonType ctrlSetBackgroundColor [0,0,0,0.05];
             _ctrlItemButtonType ctrlCommit 0;
 
             _ctrlItemButtonType setVariable ["vgm_id", _siteId];
             _ctrlItemButtonType setVariable ["vgm_index", _forEachIndex];
-            _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
-                params ["_ctrlButton"];
-                ["setLocationTypeEnable", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
-            }];
+
+            if (_isPhotoMode) then {
+                _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\Free.paa";
+                _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
+                    params ["_ctrlButton"];
+                    ["setLocationTypePhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                }];
+            } else {
+                _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
+                _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
+                    params ["_ctrlButton"];
+                    ["setLocationTypeEnable", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                }];
+            };
 
         //------------------- Add site type text
             private _ctrlItem = _display ctrlCreate ["VGM_ctrlStaticNotepad", -1, _ctrlMain];
@@ -235,17 +246,28 @@ switch _mode do {
                     params ["_ctrlButton"];
                     ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
                 }];
+
+                _ctrlItemButtonGrid ctrlEnable !_isPhotoMode;
             } else {
                 // location set
                 _ctrlItemButtonGrid ctrlSetText ((_pos call BIS_fnc_posToGrid) joinString " ");
                 _ctrlItemButtonGrid ctrlSetFontHeight VGM_NOTEPAD_LINE_H;
+
+                // left mouse to focus
                 _ctrlItemButtonGrid ctrlAddEventHandler ["MouseButtonClick", {
                     params ["_ctrlButton", "_mouseButton"];
-                    if (_mouseButton == 1) exitWith {
-                        ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
-                    };
+                    if (_mouseButton != 0) exitWith {};
                     [[500,500], _ctrlButton getVariable "vgm_pos"] call BIS_fnc_zoomOnArea;
                 }];
+
+                if (!_isPhotoMode) then {
+                    // right mouse to change location
+                    _ctrlItemButtonGrid ctrlAddEventHandler ["MouseButtonClick", {
+                        params ["_ctrlButton", "_mouseButton"];
+                        if (_mouseButton != 1) exitWith {};
+                        ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                    }];
+                };
             };
             _lastIndex = _forEachIndex;
         } forEach _guessedSites;
@@ -342,21 +364,52 @@ switch _mode do {
         } forEach vgm_scouting_siteTypes;
     };
 
+    case "setLocationTypePhoto": {
+        params ["_ctrlButton", "_siteId"];
+        private _display = ctrlParent _ctrlButton;
+
+        private _site = _display getVariable "vgm_site_photo";
+        if (isNil "_site") exitWith {
+            "Site not specified for photo" call vgm_g_fnc_logError;
+        };
+
+        // disable "photo mode"
+        _display setVariable ["vgm_site_photo", nil];
+        openMap [false, false];
+
+        ["vgm_scouting_setSiteType", [_siteId, _site get "class", player]] call para_g_fnc_event_triggerServer;
+    };
+
     case "renderTooltip": {
         params ["_display"];
-        private _siteId = _display getVariable ["vgm_site_id", ""];
         private _ctrlTooltip = _display getVariable ["vgm_ctrlTooltip", controlNull];
-        if (_siteId == "") exitWith {
+
+        private _siteId = _display getVariable ["vgm_site_id", ""];
+        private _sitePhoto = _display getVariable ["vgm_site_photo", createHashMap];
+
+        if (
+            _siteId isEqualTo ""
+            && (_sitePhoto isEqualTo createHashMap)
+        ) exitWith {
             _ctrlTooltip ctrlShow false;
         };
 
         if (isNull _ctrlTooltip) then {
             _ctrlTooltip = _display ctrlCreate ["RscText", -1];
             _display setVariable ["vgm_ctrlTooltip", _ctrlTooltip];
-
-            _ctrlTooltip ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP";
             _ctrlTooltip ctrlSetBackgroundColor [0, 0, 0, 0.35];
         };
+
+        private _text = call {
+            if (_siteId isNotEqualTo "") exitWith {
+                localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP";
+            };
+            if (_sitePhoto isNotEqualTo createHashMap) exitWith {
+                "Select site from the list to set its type from a photo";
+            };
+        };
+
+        _ctrlTooltip ctrlSetText _text;
 
         getMousePosition params ["_x", "_y"];
         _offset = VGM_GRID_W * 2;
