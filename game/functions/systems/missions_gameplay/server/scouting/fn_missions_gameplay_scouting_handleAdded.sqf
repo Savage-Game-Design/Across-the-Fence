@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_handleAdded.sqf.sqf
     Author: Savage Game Design
     Date: 2024-09-26
-    Last Update: 2024-10-02
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -58,6 +58,6 @@ _guessedSites pushBack ([
     [], // guessed position
     _siteId
 ]);
-[_data, "markedSites", _guessedSites] call para_s_fnc_netmap_set;
+[_data, "guessedSites", _guessedSites] call para_s_fnc_netmap_set;
 
 ["vgm_scouting_addedSiteClient", [_siteId, _player], values (_mission get "machineIds")] call para_g_fnc_event_triggerTargets;

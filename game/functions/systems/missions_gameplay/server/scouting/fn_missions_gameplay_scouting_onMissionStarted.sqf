@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_onMissionStarted.sqf
     Author: Savage Game Design
     Date: 2024-09-29
-    Last Update: 2024-09-30
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -39,7 +39,7 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
     private _sites = +(_mission get "sites");
 
     private _intelSites = [];
-    for "_" from 0 to (floor random 5) do {
+    for "_" from 0 to (1 + floor random 4) do {
         _intelSites pushBack selectRandom _sites;
         _sites = _sites - _intelSites;
     };

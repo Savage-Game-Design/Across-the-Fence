@@ -193,11 +193,14 @@
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
             <Original>Mission participation</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_MARKED">
-            <Original>Site marked</Original>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_PERFECT">
+            <Original>%1. Perfect spot</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED">
-            <Original>Site spotted</Original>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_GOOD">
+            <Original>%1. Good spot</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_BAD">
+            <Original>%1. Invalid spot</Original>
         </Key>
     </Package>
     <Package name="Skills Tree">
