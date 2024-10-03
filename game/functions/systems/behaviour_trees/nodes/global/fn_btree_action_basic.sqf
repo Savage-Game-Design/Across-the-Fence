@@ -3,7 +3,7 @@
     File: fn_btree_action_basic.sqf
     Author:
     Date: 2024-02-02
-    Last Update: 2024-02-10
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -32,9 +32,13 @@
 
 params ["_params", "_children"];
 
-createHashMapFromArray [
-    ["type", NODE_TYPE_ACTION],
-    ["name", _params getOrDefault ["name", "generic action"]],
+private _node = [
+    NODE_TYPE_ACTION,
+    "generic action",
+    _params
+] call vgm_g_fnc_btree_nodeBase;
+
+private _actionProperties = createHashMapFromArray [
     ["onEnter", {
         params ["_node", "_state"];
         [ RESULT_RUNNING ]
@@ -47,4 +51,8 @@ createHashMapFromArray [
         params ["_node", "_state", "_result"];
         // Cleanup only, no return value.
     }]
-]
+];
+
+_node merge [_actionProperties, true];
+
+_node

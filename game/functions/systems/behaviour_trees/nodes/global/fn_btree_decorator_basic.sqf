@@ -3,7 +3,7 @@
     File: fn_btree_decorator_basic.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-03
+    Last Update: 2024-10-03
     Public: Yes
 
     Description:
@@ -58,9 +58,13 @@
 
 params ["_params", "_children"];
 
-createHashMapFromArray [
-    ["type", NODE_TYPE_DECORATOR],
-    ["name", _params getOrDefault ["name", "basic decorator"]],
+private _node = [
+    NODE_TYPE_DECORATOR,
+    "basic decorator",
+    _params
+] call vgm_g_fnc_btree_nodeBase;
+
+private _decoratorProperties = createHashMapFromArray [
     ["abortLowerPriority", _params getOrDefault ["abortLowerPriority", false]],
     ["abortChildrenOnConditionFailure", _params getOrDefault ["abortChildrenOnConditionFailure", false]],
     ["isService", false],
@@ -86,4 +90,8 @@ createHashMapFromArray [
     }],
     // Ensure we only ever have one child
     ["children", [ _children # 0 ]]
-]
+];
+
+_node merge [_decoratorProperties, true];
+
+_node
