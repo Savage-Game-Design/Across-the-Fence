@@ -3,7 +3,7 @@
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-05-03
+    Last Update: 2024-10-03
     Public: Yes
 
     Description:
@@ -62,7 +62,7 @@ if (count _extern_stack == 0) then {
     // Check if there's any higher priority nodes registered, that need us to abort and switch to them.
     private _newChildToRunIndex = _frame getOrDefault ["higherPriorityNodes", []] findIf {
         private _child = _node get "children" select _x;
-        [_child get "node"] call (_child get "condition")
+        [_child, createHashMap] call (_child get "condition")
     };
 
     if (_newChildToRunIndex > -1) exitWith {
