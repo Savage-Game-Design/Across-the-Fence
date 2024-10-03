@@ -2,7 +2,7 @@
     File: fn_btree_compileTree.sqf
     Author: Savage Game Design
     Date: 2024-01-26
-    Last Update: 2024-02-03
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -27,6 +27,7 @@ private _extern_onTreeUnassignedCallbacks = createHashMap;
 private _fnc_compileNode = {
     params ["_constructor", "_params", "_children"];
 
+    // TODO - Add a warning if the constructor doesn't exist.
     private _childNodes = _children apply {_x call _fnc_compileNode};
 
     // By passing built children to the constructor, we enable the constructor to modify them as needed.
