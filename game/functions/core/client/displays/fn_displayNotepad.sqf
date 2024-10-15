@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-10-03
+    Last Update: 2024-10-15
     Public: No
 
     Description:
@@ -151,7 +151,7 @@ switch _mode do {
         private _data = _missionPublic get "system_scouting";
         private _guessedSites = _data get "guessedSites";
 
-        private _isPhotoMode = createHashMap isNotEqualTo (_display getVariable ["vgm_site_photo", createHashMap]);
+        private _isPhotoMode = !isNull (_display getVariable ["vgm_site_photoObject", objNull]);
 
         private _lastIndex = -1;
         {
@@ -368,16 +368,16 @@ switch _mode do {
         params ["_ctrlButton", "_siteId"];
         private _display = ctrlParent _ctrlButton;
 
-        private _site = _display getVariable "vgm_site_photo";
-        if (isNil "_site") exitWith {
-            "Site not specified for photo" call vgm_g_fnc_logError;
+        private _siteObject = _display getVariable "vgm_site_photoObject";
+        if (isNil "_siteObject") exitWith {
+            "Object not specified for photo" call vgm_g_fnc_logError;
         };
 
         // disable "photo mode"
-        _display setVariable ["vgm_site_photo", nil];
-        openMap [false, false];
+        _display setVariable ["vgm_site_photoObject", nil];
+        // openMap [false, false];
 
-        ["vgm_scouting_setSiteType", [_siteId, _site get "class", player]] call para_g_fnc_event_triggerServer;
+        ["vgm_scouting_setSiteTypeFromObject", [_siteId, _siteObject, player]] call para_g_fnc_event_triggerServer;
     };
 
     case "renderTooltip": {
@@ -385,7 +385,7 @@ switch _mode do {
         private _ctrlTooltip = _display getVariable ["vgm_ctrlTooltip", controlNull];
 
         private _siteId = _display getVariable ["vgm_site_id", ""];
-        private _sitePhoto = _display getVariable ["vgm_site_photo", createHashMap];
+        private _sitePhoto = _display getVariable ["vgm_site_photoObject", createHashMap];
 
         if (
             _siteId isEqualTo ""

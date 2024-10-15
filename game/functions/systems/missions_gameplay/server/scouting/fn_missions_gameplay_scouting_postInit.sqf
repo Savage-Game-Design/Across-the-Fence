@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-29
+    Last Update: 2024-10-15
     Public: No
 
     Description:
@@ -50,5 +50,13 @@ call {
     ["vgm_scouting_setSiteType", {
         (_this#0) params ["_siteId", "_siteType", "_player"];
         [_siteId, _siteType, _player] call vgm_s_fnc_missions_gameplay_scouting_handleSetSiteType;
+    }] call para_g_fnc_event_subscribe;
+
+    ["vgm_scouting_setSiteTypeFromObject", {
+        (_this#0) params ["_siteId", "_siteObject", "_player"];
+        private _site = _siteObject getVariable "vgm_missions_gameplay_scouting_site";
+        format ["Set site type from object: %1", _siteObject] call vgm_g_fnc_logInfo;
+
+        [_siteId, _site get "class", _player] call vgm_s_fnc_missions_gameplay_scouting_handleSetSiteType;
     }] call para_g_fnc_event_subscribe;
 };

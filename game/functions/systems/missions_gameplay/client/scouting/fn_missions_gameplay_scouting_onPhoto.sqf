@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2024-10-03
+    Last Update: 2024-10-15
     Public: No
 
     Description:
@@ -24,9 +24,7 @@ params ["_cursorTarget"];
 
 if !(_cursorTarget getVariable ["vgm_missions_gameplay_scouting_spottable", false]) exitWith {};
 
-private _site = _cursorTarget getVariable "vgm_missions_gameplay_scouting_site";
-
-GET_DISPLAY_MAP setVariable ["vgm_site_photo", _site];
+GET_DISPLAY_MAP setVariable ["vgm_site_photoObject", _cursorTarget];
 ["refreshUI", GET_DISPLAY_MAP] call vgm_c_fnc_displayNotepad;
 
 // TODO check if this can be event based
@@ -35,9 +33,9 @@ GET_DISPLAY_MAP setVariable ["vgm_site_photo", _site];
     openMap [true, false];
     waitUntil {!visibleMap};
 
-    if (!isNil {GET_DISPLAY_MAP getVariable "vgm_site_photo"}) then {
+    if (!isNil {GET_DISPLAY_MAP getVariable "vgm_site_photoObject"}) then {
         playSoundUI ["hint"];
     };
-    GET_DISPLAY_MAP setVariable ["vgm_site_photo", nil];
+    GET_DISPLAY_MAP setVariable ["vgm_site_photoObject", nil];
     ["refreshUI", GET_DISPLAY_MAP] call vgm_c_fnc_displayNotepad;
 };
