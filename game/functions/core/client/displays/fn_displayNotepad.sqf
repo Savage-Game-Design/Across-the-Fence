@@ -267,6 +267,7 @@ switch _mode do {
                         if (_mouseButton != 1) exitWith {};
                         ["markLocationEnable", [ctrlParent _ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
                     }];
+                    ["setTooltip", [_ctrlItemButtonGrid, "Left click to focus, right click to edit"]] call SELF;
                 };
             };
             _lastIndex = _forEachIndex;
@@ -380,15 +381,45 @@ switch _mode do {
         ["vgm_scouting_setSiteTypeFromObject", [_siteId, _siteObject, player]] call para_g_fnc_event_triggerServer;
     };
 
+    /*
+        Setups scripted tooltip on a control.
+        Native engine tooltips do not work in 3D object controls.
+    */
+    case "setTooltip": {
+        params ["_ctrl", "_tooltip"];
+
+        _ctrl setVariable ["vgm_tooltip", _tooltip];
+        _ctrl ctrlAddEventHandler ["MouseMoving", {
+            params ["_ctrl", "", "", "_isOver"];
+            private _setScript = _ctrl getVariable ["vgm_tooltipScript", scriptNull];
+
+            if (_isOver && isNull _setScript) exitWith {
+                _ctrl setVariable ["vgm_tooltipScript", _ctrl spawn {
+                    uiSleep 0.5;
+                    ctrlParent _this setVariable ["vgm_tooltip", _this getVariable "vgm_tooltip"];
+                }];
+            };
+            if (!_isOver) then {
+                terminate _setScript;
+                ctrlParent _ctrl setVariable ["vgm_tooltip", nil];
+            };
+        }];
+    };
+
+    /*
+        Handle rendering of custom scripted tooltips.
+    */
     case "renderTooltip": {
         params ["_display"];
         private _ctrlTooltip = _display getVariable ["vgm_ctrlTooltip", controlNull];
 
         private _siteId = _display getVariable ["vgm_site_id", ""];
         private _sitePhoto = _display getVariable ["vgm_site_photoObject", createHashMap];
+        private _hoverTooltip = _display getVariable ["vgm_tooltip", ""];
 
         if (
             _siteId isEqualTo ""
+            && (_hoverTooltip isEqualTo "")
             && (_sitePhoto isEqualTo createHashMap)
         ) exitWith {
             _ctrlTooltip ctrlShow false;
@@ -402,11 +433,13 @@ switch _mode do {
 
         private _text = call {
             if (_siteId isNotEqualTo "") exitWith {
-                localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP";
+                localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP" // return
             };
             if (_sitePhoto isNotEqualTo createHashMap) exitWith {
-                "Select site from the list to set its type from a photo";
+                "Select site from the list to set its type from a photo" // return
             };
+
+            _hoverTooltip // return
         };
 
         _ctrlTooltip ctrlSetText _text;
