@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-10-15
+    Last Update: 2024-10-22
     Public: No
 
     Description:
@@ -313,6 +313,12 @@ switch _mode do {
 
     case "markLocationClick": {
         params ["_display", "_markedPos"];
+
+        private _mission = [] call vgm_c_fnc_missions_getCurrentMission;
+        if !(_markedPos inArea (_mission call vgm_g_fnc_missions_getZoneMarker)) exitWith {
+            playSoundUI ["3DEN_notificationWarning", 0.5];
+        };
+
         private _siteId = _display getVariable ["vgm_site_id", ""];
         ["vgm_scouting_markSite", [_siteId, _markedPos, player]] call para_g_fnc_event_triggerServer;
 
