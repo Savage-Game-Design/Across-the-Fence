@@ -493,6 +493,9 @@
         <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_ADDED_DESCRIPTION">
             <Original>%1 added new site %2.</Original>
         </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_POSITION_DESCRIPTION">
+            <Original>%1 has changed position of site %2.</Original>
+        </Key>
         <!-- -->
         <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION">
             <Original>Mark Location</Original>
