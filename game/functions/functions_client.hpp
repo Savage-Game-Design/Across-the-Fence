@@ -20,6 +20,7 @@ class vgm_g
         {
             preInit = 1;
         };
+        class randomPosInRing {};
         class startScheduler {
             postInit = 1;
         };
