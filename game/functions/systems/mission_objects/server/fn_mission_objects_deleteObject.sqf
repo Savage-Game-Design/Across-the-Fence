@@ -2,7 +2,7 @@
     File: fn_mission_objects_deleteObject.sqf
     Author: Savage Game Design
     Date: 2023-12-20
-    Last Update: 2024-01-04
+    Last Update: 2024-10-25
     Public: Yes
 
     Description:
@@ -30,7 +30,7 @@ private _missionObjects = vgm_s_mission_objects_data getOrDefault [_missionId, c
 
 _missionObjects deleteAt _objectId;
 
-// spawn on all clients in mission and server
+// delete on all clients in mission and server
 private _machines = values (_mission get "machineIds") + [2];
 [_missionId, _objectId] remoteExecCall ["vgm_g_fnc_mission_objects_deleteObject", _machines];
 
