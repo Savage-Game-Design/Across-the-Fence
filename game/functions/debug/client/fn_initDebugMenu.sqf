@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2024-09-21
+    Last Update: 2024-10-25
     Public: No
 
     Description:
@@ -75,7 +75,7 @@ vgm_c_debugMenu_missionTvAdd = {
         } forEach _val;
     };
 
-    _ctrlTree tvAdd [_index, format ["%1 - %2", _key, _val]];
+    _ctrlTree tvAdd [_index, format ["%1 - %2", _key, str _val]];
 };
 
 vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
