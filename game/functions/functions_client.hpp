@@ -83,6 +83,7 @@ class vgm_g
         class btree_action_moveToInvestigationPoint {};
         class btree_action_patrolArea {};
 
+        class btree_decorator_disableAI {};
         class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
         class btree_decorator_hasNearbyTracks {};
         class btree_decorator_hasOrders {};
