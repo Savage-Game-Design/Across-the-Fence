@@ -29,7 +29,7 @@ private _action = _this call vgm_g_fnc_btree_action_basic;
 _action set ["getNextPoint", {
     params ["_node", "_state"];
 
-    private _nodeParams = [_node, _state] call vgm_g_fnc_btree_getNodeParams;
+    private _nodeParams = [_node] call vgm_g_fnc_btree_getNodeParams;
     // Potential bug here if the blackboard data carries over from earlier. Should it be wiped when the node exits?
     private _patrolCenter = _nodeParams getOrDefaultCall ["center", { getPosATL leader _group }, true];
     private _patrolRadius = _nodeParams getOrDefaultCall ["radius", { 50 + random 100 }, true];

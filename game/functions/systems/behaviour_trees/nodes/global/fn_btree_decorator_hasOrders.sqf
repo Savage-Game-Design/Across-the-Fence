@@ -3,7 +3,7 @@
     File: fn_btree_decorator_hasOrders.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-10-03
+    Last Update: 2024-10-25
     Public: Yes
 
     Description:
@@ -37,7 +37,7 @@ _decorator set ["condition", {
 
     if (isNil "_order") exitWith { false };
 
-    private _currentParams = [_node, _state] call vgm_g_fnc_btree_getNodeParams;
+    private _currentParams = [_node] call vgm_g_fnc_btree_getNodeParams;
     private _desiredOrder = _currentParams getOrDefault ["order", "NO ORDER SET"];
 
     if (_order getOrDefault ["type", ""] isEqualTo  _desiredOrder) exitWith {
