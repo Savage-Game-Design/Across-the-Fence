@@ -2173,7 +2173,7 @@ class Mission
 						position[]={20058.248,6.8720641,6467.4746};
 					};
 					name="vgm_curator_admin";
-					init="if (isServer) then {" \n "  [] spawn {" \n "    while {isNil ""stopCuratorLoop""} do {" \n "      { _x addCuratorEditableObjects [vehicles + allUnits]} forEach allCurators;" \n "      uisleep 10;" \n "    };" \n "  };" \n "};";
+					init="if (isServer) then { " \n "  [] spawn { " \n "    while {isNil ""stopCuratorLoop""} do { " \n "      private _items = (vehicles + allUnits) select {!(netId _x in [""1:0"", ""0:0""])}; " \n "      { _x addCuratorEditableObjects [_items]} forEach allCurators; " \n "      uisleep 10; " \n "    }; " \n "  }; " \n "};";
 					id=556;
 					type="ModuleCurator_F";
 					atlOffset=1.0080152;
