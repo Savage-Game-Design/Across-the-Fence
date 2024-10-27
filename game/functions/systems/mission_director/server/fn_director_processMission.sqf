@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-03-08
+    Last Update: 2024-10-25
     Public: No
 
     Description:
@@ -159,14 +159,6 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
 
 // TODO - Spawn in attack units if engaged in combat, and not enough nearby patrols.
 
-// Clean up any AI groups that need deleting.
-{
-    {
-        deleteVehicle _x;
-    } forEach units _x;
-
-    deleteGroup _x;
-} forEach _groupsToDelete;
 
 _directorData set ["aiGroups", (_directorData get "aiGroups") - _groupsToDelete];
 _directorData set ["dynamicAiGroups", (_directorData get "dynamicAiGroups") - _groupsToDelete];
