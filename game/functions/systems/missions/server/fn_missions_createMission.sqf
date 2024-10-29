@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-09-29
+    Last Update: 2024-10-29
     Public: Yes
 
     Description:
@@ -53,9 +53,7 @@ private _mission = createHashMapFromArray [
     // Copy the parameters hashmap to prevent it being accidentally modified elsewhere.
     ["parameters", +_parameters],
     // Maps player ID to their client ID for easy remoteExec'ing
-    ["machineIds", createHashMap],
-    // Other
-    ["sites", []]
+    ["machineIds", createHashMap]
 ];
 
 private _missionPublic = _mission get "public";

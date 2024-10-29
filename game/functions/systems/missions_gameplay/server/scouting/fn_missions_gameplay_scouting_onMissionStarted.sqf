@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_onMissionStarted.sqf
     Author: Savage Game Design
     Date: 2024-09-29
-    Last Update: 2024-10-03
+    Last Update: 2024-10-29
     Public: No
 
     Description:
@@ -28,7 +28,7 @@ if (isNil "_mission") exitWith {
 
 private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap;
 
-[_data, "guessedSitesMax", count (_mission get "sites")] call para_s_fnc_netmap_set;
+[_data, "guessedSitesMax", count ((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites)] call para_s_fnc_netmap_set;
 
 // add task for the players
 [_mission] spawn {
@@ -36,7 +36,7 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
     sleep 10;
 
     private _playerGroup = _mission get "public" get "group";
-    private _sites = +(_mission get "sites");
+    private _sites = +((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites);
 
     private _intelSites = [];
     for "_" from 1 to (2 + floor random 4) do {

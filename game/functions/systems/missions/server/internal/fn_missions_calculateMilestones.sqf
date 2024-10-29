@@ -2,7 +2,7 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2024-10-03
+    Last Update: 2024-10-29
     Public: No
 
     Description:
@@ -34,7 +34,7 @@ call {
     private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;
     private _scoutingData = [_mission get "public" get "id", "scouting"] call vgm_s_fnc_missions_getSystemNetmap;
 
-    private _missionSites = +(_mission get "sites");
+    private _missionSites = +((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites);
     private _guessedSites = _scoutingData get "guessedSites";
     {
         #define SITE_DIST ((_x get "pos") distance2d _guessedPos)
