@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-10-22
+    Last Update: 2024-10-29
     Public: No
 
     Description:
@@ -88,16 +88,16 @@ switch _mode do {
         };
 
         // debug background
-        if (false) then {
-            private _ctrlBg = _display ctrlCreate ["VGM_ctrlStatic", -1, _ctrlGrpMain];
-            _ctrlBg ctrlSetBackgroundColor [1,0,0,0.35];
-            _ctrlBg ctrlSetPosition [0, 0, VGM_NOTEPAD_W, VGM_NOTEPAD_H];
-            _ctrlBg ctrlCommit 0;
-        };
+        /*
+        private _ctrlBg = _display ctrlCreate ["VGM_ctrlStatic", -1, _ctrlGrpMain];
+        _ctrlBg ctrlSetBackgroundColor [1,0,0,0.35];
+        _ctrlBg ctrlSetPosition [0, 0, VGM_NOTEPAD_W, VGM_NOTEPAD_H];
+        _ctrlBg ctrlCommit 0;
+        */
 
         private _ctrlHeader = _display ctrlCreate ["VGM_ctrlStaticNotepadHeader", -1, _ctrlGrpMain];
         _ctrlHeader ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 1.8);
-        _ctrlHeader ctrlSetText toUpper "Scouting report";
+        _ctrlHeader ctrlSetText toUpper localize "STR_VGM_MISSIONS_SCOUTING_REPORT";
         _ctrlHeader ctrlSetPosition [0, -(2 * VGM_NOTEPAD_GRID_H), VGM_NOTEPAD_W, VGM_NOTEPAD_LINE_H + (1.5 * VGM_NOTEPAD_GRID_H)];
         _ctrlHeader ctrlEnable false;
         _ctrlHeader ctrlCommit 0;

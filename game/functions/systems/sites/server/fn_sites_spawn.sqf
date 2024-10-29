@@ -4,7 +4,7 @@
     File: sites_spawn.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-10-02
+    Last Update: 2024-10-29
     Public: Yes
 
     Description:
@@ -56,6 +56,6 @@ private _site = createHashMapFromArray [
     ["ownedSites", []]
 ];
 
-["vgm_sites_siteSpawned", [_site]] call para_g_fnc_event_triggerServer;
+["vgm_sites_siteSpawned", [_site]] call para_g_fnc_event_triggerLocal;
 
 _site // return

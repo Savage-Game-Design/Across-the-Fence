@@ -2,14 +2,14 @@
     File: fn_missions_createSystemNetmap.sqf
     Author: Savage Game Design
     Date: 2024-08-13
-    Last Update: 2024-08-24
+    Last Update: 2024-10-29
     Public: Yes
 
     Description:
         Create system netmap in specified mission id.
 
     Parameter(s):
-        _missionId - Id of the missin to get the netmap from [NUMBER]
+        _missionId - Id of the mission to get the netmap from [NUMBER]
         _systemName - Name of the system [STRING]
 
     Returns:
