@@ -2,17 +2,17 @@
     File: fn_missions_gameplay_scouting_onMissionStarted.sqf
     Author: Savage Game Design
     Date: 2024-09-29
-    Last Update: 2024-10-29
+    Last Update: 2024-10-30
     Public: No
 
     Description:
-        No description added yet.
+        Handle mission start, updates hashmap values and creates scouting task.
 
     Parameter(s):
-        _missionId -
+        _missionId - Id of the mission [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [_missionId] call vgm_s_fnc_missions_gameplay_scouting_onMissionStarted

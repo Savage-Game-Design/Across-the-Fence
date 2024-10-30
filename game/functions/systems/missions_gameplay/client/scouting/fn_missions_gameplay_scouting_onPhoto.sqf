@@ -2,20 +2,20 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2024-10-15
+    Last Update: 2024-10-30
     Public: No
 
     Description:
-        No description added yet.
+        Handle player snapping a photo of site object.
 
     Parameter(s):
-        N/A
+        _cursorTarget - Object that was photographed [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_c_fnc_missions_gameplay_scouting_onPhoto
+        [cursorTarget] call vgm_c_fnc_missions_gameplay_scouting_onPhoto
  */
 
 #define GET_DISPLAY_MAP (findDisplay 12)
