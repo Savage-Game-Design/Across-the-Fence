@@ -166,7 +166,6 @@ class vgm_s
         class missions_gameplay_scouting_handleAdded {};
         class missions_gameplay_scouting_handleMarked {};
         class missions_gameplay_scouting_handleSetSiteType {};
-        class missions_gameplay_scouting_handleSpotted {};
         class missions_gameplay_scouting_onMissionStarted {};
         class missions_gameplay_scouting_postInit
         {
