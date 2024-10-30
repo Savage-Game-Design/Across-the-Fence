@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_handleAdded.sqf.sqf
     Author: Savage Game Design
     Date: 2024-09-26
-    Last Update: 2024-10-03
+    Last Update: 2024-10-30
     Public: No
 
     Description:
@@ -46,8 +46,9 @@ if (count _guessedSites >= _limit) exitWith {
 
 format ["Adding site: %1", _player] call vgm_g_fnc_logInfo;
 
-private _id = missionNamespace getVariable ["vgm_scouting_siteId", 0];
-missionNamespace setVariable ["vgm_scouting_siteId", _id+1];
+private _idKey = format ["vgm_scouting_siteId_%1", _missionId];
+private _id = missionNamespace getVariable [_idKey, 0];
+missionNamespace setVariable [_idKey, _id+1];
 
 private _siteId = str _id;
 
