@@ -51,6 +51,12 @@ call {
 
         private _perfectMatch = _nearSites findIf {(_x get "class") == _guessedClass};
 
+        /*
+            TODO place for improvment.
+            Current algorithm is imperfect, if good spot is before a perfect spot very close to eachother,
+            it might be counted first and invalidate the perfect one due to removal of the site from the list.
+            It should be a very rare case which is likely to happen only if player spams sites in the same area trying to abuse the system.
+        */
         if (_perfectMatch > -1) then {
             _milestones pushBack ["site_spotted_perfect", 200, [_guessIdText]];
 
