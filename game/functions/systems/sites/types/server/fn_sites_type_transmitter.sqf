@@ -4,7 +4,7 @@
     File: fn_sites_types_transmitter.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-08-24
+    Last Update: 2024-10-30
     Public: Yes
 
     Description:
@@ -31,7 +31,7 @@ private _site = [] call vgm_s_fnc_sites_getTemplate;
 _site set ["name", "STR_VGM_SITES_TRANSMITTER"];
 _site set ["size", SITE_FOOTPRINT_SMALL];
 _site set ["locRequirements", []];
-_site set ["hideNearbyTerrain", false];
+_site set ["nearbyTerrainTypesToHide", []];
 _site set ["spawnFunction", {
     params ["_pos2D"];
 
