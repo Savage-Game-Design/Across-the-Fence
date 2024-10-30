@@ -2,7 +2,7 @@
     File: sites_delete.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-08-24
+    Last Update: 2024-10-30
     Public: Yes
 
     Description:
@@ -30,3 +30,8 @@ params ["_site"];
 {
     deleteVehicle _x;
 } forEach (_site get "objects");
+
+private _hiddenTerrain = _site get "hiddenTerrain";
+if (!isNil "_hiddenTerrain") then {
+    [_hiddenTerrain] call vgm_s_fnc_unhideTerrainObjects;
+};
