@@ -567,6 +567,23 @@ class vgm_c
         class sharedHub_teleportPlayerToHub {};
     };
 
+    class sites_hints
+    {
+        VGM_CLIENT_PATH(\systems\sites_hints\client);
+
+        class sites_hints_glint {};
+        class sites_hints_glintJob {};
+        class sites_hints_initObject {};
+        class sites_hints_postInit
+        {
+            postInit = 1;
+        };
+        class sites_hints_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class leveling
     {
         VGM_CLIENT_PATH(\systems\leveling\client);

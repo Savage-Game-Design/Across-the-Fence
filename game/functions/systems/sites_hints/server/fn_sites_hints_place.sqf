@@ -2,7 +2,7 @@
     File: fn_sites_hints_place.sqf
     Author: Savage Game Design
     Date: 2024-10-25
-    Last Update: 2024-10-25
+    Last Update: 2024-10-27
     Public: No
 
     Description:
@@ -45,7 +45,7 @@ for "_i" from 0 to _amount do {
 
     _objects pushBack ([
         _mission,
-        ["Land_vn_canisterfuel_f", _spawnPos, random 360, {"0"}, []]
+        ["Land_vn_canisterfuel_f", _spawnPos, random 360, {call vgm_c_fnc_sites_hints_initObject}, [_center]]
     ] call vgm_s_fnc_mission_objects_createObject);
 
 #ifdef DEBUG
