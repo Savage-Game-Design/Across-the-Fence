@@ -41,6 +41,9 @@ class vgm_g
         class logInfo {
             headerType = -1;
         };
+        class logStackTrace {
+            headerType = -1;
+        };
         class logWarning {
             headerType = -1;
         };
