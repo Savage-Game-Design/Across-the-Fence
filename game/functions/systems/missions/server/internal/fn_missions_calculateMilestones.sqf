@@ -40,6 +40,7 @@ call {
         #define SITE_DIST ((_x get "pos") distance2d _guessedPos)
 
         _x params ["", "_guessedClass", "", "_guessedPos", "_guessId"];
+        if (_guessedPos isEqualTo []) then {continue};
         private _guessIdText = parseNumber _guessId + 1;
 
         private _nearSites = _missionSites select {SITE_DIST <= 200};
