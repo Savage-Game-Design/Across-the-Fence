@@ -12,6 +12,7 @@
 		_pos - Position of the template in AGL/ATL [ARRAY]
 		_azi - Rotation to apply to the template in degrees (clockwise) [NUMBER]
 		_objs - Array of objects produced by vgm_g_fnc_objGrabber_eden_grab [ARRAY]
+        _options - Additional options (VEGETATION_FRACTION)[HASHMAP]
 
 	Returns:
 		Spawned objects [ARRAY]
@@ -20,7 +21,11 @@
 		[[0, 0, 0], 0, []] call vgm_g_fnc_sites_objectsMapper;
  */
 
-params ["_pos", ["_azi", 0], ["_objs", []]];
+params ["_pos", ["_azi", 0], ["_objs", []], ["_options", []]];
+
+private _parsedOptions = createHashMapFromArray _options;
+// How much the vegetation should randomly be reduced by
+private _vegetationFraction = _parsedOptions getOrDefault ["VEGETATION_FRACTION", 1];
 
 _pos params ["_posX", "_posY"];
 private _posASL = AGLtoASL _pos;
@@ -41,6 +46,10 @@ private _newObjs = [];
         "_allowDamage",
 		"_useObjectTerrainHeight"
 	];
+
+    if (_type isKindOf "Land_vn_vegetation_base" && random 1 > _vegetationFraction) then {
+        continue
+    };
 
 
 	//Rotate the relative position using a rotation matrix
