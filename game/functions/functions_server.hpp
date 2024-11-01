@@ -294,6 +294,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\sites_hints\server);
 
+        class sites_hints_getConfig {};
         class sites_hints_place {};
         class sites_hints_preInit
         {

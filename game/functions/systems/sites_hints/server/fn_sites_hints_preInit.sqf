@@ -2,7 +2,7 @@
     File: fn_sites_hints_preInit.sqf
     Author: Savage Game Design
     Date: 2024-10-25
-    Last Update: 2024-10-25
+    Last Update: 2024-11-01
     Public: No
 
     Description:
@@ -11,6 +11,7 @@
 
 if (!isServer) exitWith {};
 
+vgm_sites_hints_placementConfigs = createHashMap;
 vgm_sites_hints_placeHandlers = createHashMap;
 vgm_sites_hints_objects = createHashMap;
 

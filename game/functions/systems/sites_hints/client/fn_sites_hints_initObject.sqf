@@ -2,7 +2,7 @@
     File: fn_sites_hints_initObject.sqf
     Author: Savage Game Design
     Date: 2024-10-27
-    Last Update: 2024-11-01
+    Last Update: 2024-11-02
     Public: No
 
     Description:
@@ -40,6 +40,6 @@ _object addAction [
     true,
     "",
     toString {true},
-    3
+    2
 ];
 
