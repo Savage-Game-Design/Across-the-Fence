@@ -21,6 +21,7 @@ class vgm_g
             preInit = 1;
         };
         class randomPosInRing {};
+        class spokenDirection {};
         class startScheduler {
             postInit = 1;
         };
