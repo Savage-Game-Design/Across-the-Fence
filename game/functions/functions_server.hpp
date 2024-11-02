@@ -13,6 +13,9 @@ class vgm_s
     {
         VGM_SERVER_PATH(\core\server);
 
+        class hideTerrainObjects {};
+        class unhideTerrainObjects {};
+
         class postInit
         {
             postInit = 1;

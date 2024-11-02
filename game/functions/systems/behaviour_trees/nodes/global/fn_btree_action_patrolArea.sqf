@@ -27,10 +27,13 @@ private _action = _this call vgm_g_fnc_btree_action_basic;
 
 // Custom function - not a normal part of the node.
 _action set ["getNextPoint", {
+    params ["_node", "_state"];
+
+    private _nodeParams = [_node] call vgm_g_fnc_btree_getNodeParams;
     // Potential bug here if the blackboard data carries over from earlier. Should it be wiped when the node exits?
-    private _patrolCenter = _extern_blackboard getOrDefaultCall ["patrolAreaCenter", { getPosATL leader _group }, true];
-    private _patrolRadius = _extern_blackboard getOrDefaultCall ["patrolAreaRadius", { 50 + random 100 }, true];
-    private _patrolAngleChange = _extern_blackboard getOrDefaultCall ["patrolAngleChange", { 30 * (selectRandom [1, -1]) }, true];
+    private _patrolCenter = _nodeParams getOrDefaultCall ["center", { getPosATL leader _group }, true];
+    private _patrolRadius = _nodeParams getOrDefaultCall ["radius", { 50 + random 100 }, true];
+    private _patrolAngleChange = _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true];
 
     //Too far away, we should move quickly to reach the patrol area.
     private _desiredSpeedMode =
@@ -53,7 +56,7 @@ _action set ["onEnter", {
     _extern_group setFormation "COLUMN";
     [_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 
-    private _nextPoint = [] call (_node get "getNextPoint");
+    private _nextPoint = [_node, _state] call (_node get "getNextPoint");
     [_extern_group, _nextPoint # 0, _nextPoint # 1, 15] call vgm_g_fnc_btree_moveTo_start;
 
     [ RESULT_RUNNING ]
@@ -65,7 +68,7 @@ _action set ["onTick", {
     private _isAtDestination = [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
 
     if (_isAtDestination) then {
-        private _nextPoint = [] call (_node get "getNextPoint");
+        private _nextPoint = [_node, _state] call (_node get "getNextPoint");
         [_extern_group, _nextPoint # 0, _nextPoint # 1, 15] call vgm_g_fnc_btree_moveTo_start;
         [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
     };

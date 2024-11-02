@@ -3,7 +3,7 @@
     File: fn_btree_enterNode_decorator.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-02-02
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ params ["_stackFrame"];
 private _node = _stackFrame get "node";
 private _state = _stackFrame get "state";
 
-private _conditionResult = [_node] call (_node get "condition");
+private _conditionResult = [_node, _state] call (_node get "condition");
 if (!_conditionResult) exitWith {
     [[RESULT_FAILED], ACTION_RETURN_TO_PARENT]
 };

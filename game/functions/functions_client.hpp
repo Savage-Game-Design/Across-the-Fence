@@ -41,6 +41,9 @@ class vgm_g
         class logInfo {
             headerType = -1;
         };
+        class logStackTrace {
+            headerType = -1;
+        };
         class logWarning {
             headerType = -1;
         };
@@ -66,6 +69,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\behaviour_trees\nodes\global);
 
         /* Template nodes / base nodes */
+        class btree_nodeBase {};
         class btree_action_basic {};
         class btree_composite_selector {};
         class btree_composite_sequence {};
@@ -82,8 +86,10 @@ class vgm_g
         class btree_action_moveToInvestigationPoint {};
         class btree_action_patrolArea {};
 
+        class btree_decorator_disableAI {};
         class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
         class btree_decorator_hasNearbyTracks {};
+        class btree_decorator_hasOrders {};
         class btree_decorator_suppressionService {};
         class btree_decorator_updateKnowledgeService {};
     };
@@ -118,6 +124,7 @@ class vgm_g
         class btree_exitNode_selector {};
         class btree_exitNode_sequence {};
 
+        class btree_getNodeParams {};
         class btree_log {};
         class btree_panic {};
         class btree_returnToParent {};

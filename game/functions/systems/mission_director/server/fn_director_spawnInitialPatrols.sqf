@@ -2,7 +2,7 @@
     File: fn_director_spawnInitialPatrols.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-08-24
+    Last Update: 2024-10-03
     Public: No
 
     Description:
@@ -28,9 +28,16 @@ private _squads = [];
 
 {
     private _spawnPos = _x get "pos" getPos [10 + random 100, random 360];
-    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _missionPublic get "id"] call vgm_s_fnc_ai_createEnemySquad;
-    _group setVariable ["vgm_s_director_command", "patrol"];
-    _squads pushBack _group;
+    private _group1 = [vgm_s_director_patrol_classes, east, _spawnPos, _missionPublic get "id"] call vgm_s_fnc_ai_createEnemySquad;
+    private _group2 = [vgm_s_director_patrol_classes, east, _spawnPos, _missionPublic get "id"] call vgm_s_fnc_ai_createEnemySquad;
+    _group1 setVariable ["vgm_s_director_command", "patrol"];
+    _group2 setVariable ["vgm_s_director_command", "patrol"];
+    _group2 setVariable ["vgm_g_order", createHashMapFromArray [
+        ["type", "DEFEND"],
+        ["pos", _x get "pos"]
+    ]];
+    _squads pushBack _group1;
+    _squads pushBack _group2;
 } forEach _sites;
 
 [_mission, _squads] call vgm_s_fnc_director_registerGroups;

@@ -3,7 +3,7 @@
     File: fn_btree_composite_sequence.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-02
+    Last Update: 2024-10-03
     Public: Yes
 
     Description:
@@ -22,8 +22,13 @@
 
 params ["_params", "_children"];
 
-createHashMapFromArray [
-    ["type", NODE_TYPE_SEQUENCE],
-    ["name", _params getOrDefault ["name", "sequence"]],
-    ["children", _children]
-]
+private _node = [
+    NODE_TYPE_SEQUENCE,
+    "sequence",
+    _params
+] call vgm_g_fnc_btree_nodeBase;
+
+_node set ["children", _children];
+
+_node
+

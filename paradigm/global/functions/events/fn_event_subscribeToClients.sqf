@@ -2,7 +2,7 @@
     File: fn_event_subscribeToClients.sqf
     Author: Savage Game Design
     Date: 2022-11-20
-    Last Update: 2024-08-08
+    Last Update: 2024-10-30
     Public: Yes
 
     Description:
@@ -53,7 +53,7 @@ if !(_clients isEqualTypeAll 0) then {
     _clients = _clients select {_x isEqualType 0};
 };
 
-["DEBUG", format ["New subscription to %1 on %2, with topic %3.", _event # 0, _clients, _event # 1]] call para_g_fnc_log;
+["DEBUG", format ["New subscription to %1 on %2, with topic %3", _event # 0, _clients, _event # 1]] call para_g_fnc_log;
 
 private _handlerId = [_clients, _event, _handler] call para_g_fnc_event_attachHandler;
 

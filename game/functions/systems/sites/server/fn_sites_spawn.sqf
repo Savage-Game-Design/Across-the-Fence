@@ -4,7 +4,7 @@
     File: sites_spawn.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-10-29
+    Last Update: 2024-10-30
     Public: Yes
 
     Description:
@@ -31,19 +31,9 @@ if (isNil "_siteType") exitWith {
     [format ["Failed to spawn unknown site '%1'", _typeId]] call vgm_g_fnc_logError;
 };
 
-if (_siteType getOrDefault ["hideNearbyTerrain", false]) then {
-    private _radius = (vgm_s_sites_siteRadii getOrDefault [_siteType get "size", SITE_FOOTPRINT_LARGE_RADIUS]);
-    private _nearbyTerrain = nearestTerrainObjects [
-        _pos2D,
-        ["SMALL TREE", "TREE", "HIDE"],
-        _radius,
-        false,
-        true
-    ];
-    {
-        _x hideObjectGlobal true;
-    } forEach _nearbyTerrain;
-};
+private _nearbyTerrainTypesToHide = _siteType getOrDefault ["nearbyTerrainTypesToHide", []];
+private _radius = (vgm_s_sites_siteRadii getOrDefault [_siteType get "size", SITE_FOOTPRINT_LARGE_RADIUS]) * 1.3;
+private _hideResult = [_pos2D, _radius, _nearbyTerrainTypesToHide] call vgm_s_fnc_hideTerrainObjects;
 
 private _spawnResult = [_pos2D] call (_siteType get "spawnFunction");
 
@@ -53,7 +43,8 @@ private _site = createHashMapFromArray [
     ["type", _siteType],
     ["pos", _pos2D],
     ["objects", _spawnResult get "objects"],
-    ["ownedSites", []]
+    ["ownedSites", []],
+    ["hiddenTerrain", _hideResult]
 ];
 
 ["vgm_sites_siteSpawned", [_site]] call para_g_fnc_event_triggerLocal;
