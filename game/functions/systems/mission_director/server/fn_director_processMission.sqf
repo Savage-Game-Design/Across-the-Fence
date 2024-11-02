@@ -42,21 +42,13 @@ private _randomExtraTime = random 120;
 
 // Spawn a new tracker!
 if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dynamicGroups < vgm_s_director_dynamic_max_groups) then {
-    private _target = selectRandom _missionPlayers;
-    if (isNil "_target" || {isNull _target}) exitWith {};
-    private _spawnPos = [getPos _target] call para_g_fnc_spawning_find_valid_position_tracer select 0;
-    private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _publicMission get "id"] call vgm_s_fnc_ai_createEnemySquad;
+    private _newTrackerGroup = [_mission, _missionPlayers] call vgm_s_fnc_director_spawnTracker;
 
-    _group setVariable ["orders", ["pursue", _publicMission get "group"], true];
-    _group setVariable ["vgm_s_director_command", "track"];
+    if (isNull _newTrackerGroup) exitWith {};
 
-
-    [_mission, [_group]] call vgm_s_fnc_director_registerGroups;
-    _directorData get "dynamicAiGroups" pushBack _group;
-
+    _directorData get "dynamicAiGroups" pushBack _newTrackerGroup;
     _directorData set ["lastTrackerSent", serverTime];
 };
-
 
 // TODO - Spawn in attack units if engaged in combat, and not enough nearby patrols.
 

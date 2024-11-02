@@ -316,6 +316,8 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\tracking\global);
         class tracking_debugHideTracks {};
         class tracking_debugShowTracks {};
+        class tracking_deleteTrackingGroup {};
+        class tracking_getTrackPositions {};
         class tracking_nearbyTracks {};
         class tracking_preInit {
             preInit = 1;
