@@ -80,6 +80,7 @@ class vgm_s
         class director_processMission {};
         class director_registerGroups {};
         class director_spawnInitialPatrols {};
+        class director_spawnTracker {};
         class director_startMission {};
         class director_stopMission {};
     };
