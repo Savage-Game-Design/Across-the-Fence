@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-03-01
+    Last Update: 2024-11-02
     Public: Yes
 
     Description:
@@ -30,10 +30,6 @@ params ["_mission"];
 
 private _directorData = _mission getOrDefault ["director", createHashMap, true];
 
-// Explosions reported by other systems / clients. Processed during the main loop.
-_directorData set ["explosionIngestionQueue", []];
-// Shots reported by other systems / clients. Processed during the main loop.
-_directorData set ["shotsIngestionQueue", []];
 // Overall "alertness" level of enemy forces. Changes scale of the enemy response.
 _directorData set ["alertness", 0];
 // AI groups that currently exist on this mission
@@ -44,7 +40,6 @@ _directorData set ["initialAiGroups", []];
 _directorData set ["dynamicAiGroups", []];
 // Tracks when the last tracker squad was sent at the players
 _directorData set ["lastTrackerSent", serverTime];
-
 
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 
