@@ -2,17 +2,17 @@
 	File: fn_spawning_find_valid_position_tracer.sqf
 	Author:  Savage Game Design
 	Public: Yes
-	
+
 	Description:
 		Calculates a valid location to spawn at
 		Works by firing a 'tracer' from some distance away from a specific direction, which stops when it gets near to the target pos, or gets too close to a blocking unit.
-	
+
 	Parameter(s):
 		_tracerEndPos - End position [Position]
 		_blockingUnits - Units that prevent spawning near them [Array, defaults to <playableUnits>]
 		_attackDir - Attack direction [Number, defaults to <random 360>]
 		_minDistance - Minimum spawn distance [Number, defaults to 0]
-	
+
 	Returns: nothing
 
 	Example(s): none
@@ -58,22 +58,9 @@ while {true} do {
 		tracerMarkers pushBack _mark;
 	};
 
-	private _positionIsValid = true;
-	private _unitsNearNewPosition = _blockingUnits inAreaArray [_tracerPosition, _softBlockRadius, _softBlockRadius, 0, false];
-
-	if !(_unitsNearNewPosition isEqualTo []) then {
-		//Check if any units are within the hard block radius - squads should *never* spawn in this radius
-		private _hardBlockUnits = _blockingUnits inAreaArray [_tracerPosition, _hardBlockRadius, _hardBlockRadius, 0, false];
-		if !(_hardBlockUnits isEqualTo []) exitWith {
-			_positionIsValid = false;
-			_stoppedOnTarget = _hardBlockUnits select 0;
-		};
-		private _unitWithVisibilityIndex = _unitsNearNewPosition findIf {lineIntersectsSurfaces [eyePos _x, AGLtoASL _tracerPosition, _x] isEqualTo []};
-		if (_unitWithVisibilityIndex > -1) then { 
-			_positionIsValid = false; 
-			_stoppedOnTarget = _unitsNearNewPosition select _unitWithVisibilityIndex;
-		};
-	};
+    private _validityCheckResult = [AGLtoASL _tracerPosition, _blockingUnits, _softBlockRadius, _hardBlockRadius, true] call para_g_fnc_spawning_is_valid_position;
+	private _positionIsValid = _validityCheckResult # 0;
+    _stoppedOnTarget = _validityCheckResult # 1;
 
 	//If we find a unit, we exit and set the last valid position + which target stopped us.
 	if (!_positionIsValid) exitWith {

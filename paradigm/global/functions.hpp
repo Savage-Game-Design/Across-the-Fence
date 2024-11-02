@@ -245,6 +245,7 @@ class para_g
 		PARA_GLOBAL_PATH(\spawning);
 		class spawning_find_valid_position_tracer {};
 		class spawning_get_squad_composition {};
+        class spawning_is_valid_position {};
 		class spawning_valid_attack_angles {};
 	};
 
