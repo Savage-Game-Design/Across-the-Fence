@@ -225,6 +225,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\locations\global);
 
         class loc_getTargetBoxBounds {};
+        class loc_getTargetBoxMarker {};
     };
 
     class medical
