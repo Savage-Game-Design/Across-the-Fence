@@ -28,7 +28,6 @@
 
 private _site = [] call vgm_s_fnc_sites_getTemplate;
 
-_site set ["name", "STR_VGM_SITES_TRUCK_PARK"];
 _site set ["size", SITE_FOOTPRINT_LARGE];
 _site set ["locRequirements", ["covered", "near_road"]];
 _site set ["spawnFunction", {

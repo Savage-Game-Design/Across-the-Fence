@@ -37,10 +37,16 @@ private _hideResult = [_pos2D, _radius, _nearbyTerrainTypesToHide] call vgm_s_fn
 
 private _spawnResult = [_pos2D] call (_siteType get "spawnFunction");
 
-createHashMapFromArray [
+private _site = createHashMapFromArray [
+    ["id", hashValue _pos2D],
+    ["class", _typeId],
     ["type", _siteType],
     ["pos", _pos2D],
     ["objects", _spawnResult get "objects"],
     ["ownedSites", []],
     ["hiddenTerrain", _hideResult]
-]
+];
+
+["vgm_sites_siteSpawned", [_site]] call para_g_fnc_event_triggerLocal;
+
+_site // return

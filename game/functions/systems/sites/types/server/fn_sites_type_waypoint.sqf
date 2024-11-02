@@ -28,7 +28,6 @@
 
 private _site = [] call vgm_s_fnc_sites_getTemplate;
 
-_site set ["name", "STR_VGM_SITES_WAYPOINT"];
 _site set ["size", SITE_FOOTPRINT_MEDIUM];
 _site set ["locRequirements", []];
 _site set ["spawnFunction", {

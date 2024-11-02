@@ -245,6 +245,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\missions\global);
 
         class missions_getHubSpawnPos {};
+        class missions_getZoneMarker {};
         class missions_preInit
         {
             preInit = 1;
@@ -374,6 +375,7 @@ class vgm_c
         class displayAbilities {};
         class displayMissions {};
         class displayMissionsTargets {};
+        class displayNotepad {};
         class displayAbilityCooldown {};
         class displayMedical {};
         class displayStaminaBar {};
@@ -485,6 +487,19 @@ class vgm_c
         class missions_gameplay_extraction_addAction {};
         class missions_gameplay_extraction_requestExtraction {};
         class missions_gameplay_extraction_getNearbyRadio {};
+    };
+
+    class missions_gameplay_scouting
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client\scouting);
+
+        class missions_gameplay_scouting_onPhoto {};
+        class missions_gameplay_scouting_createUpdateLocation {};
+        class missions_gameplay_scouting_getSiteById {};
+        class missions_gameplay_scouting_postInit
+        {
+            postInit = 1;
+        };
     };
 
     class missions_zones

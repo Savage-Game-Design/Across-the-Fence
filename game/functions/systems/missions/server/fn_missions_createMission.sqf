@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-08-21
+    Last Update: 2024-10-29
     Public: Yes
 
     Description:
@@ -85,4 +85,3 @@ if !(_creatorId isEqualTo "") then {
 };
 
 _mission
-

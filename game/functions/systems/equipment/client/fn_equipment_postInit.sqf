@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2024-03-24
+    Last Update: 2024-08-11
     Public: No
 
     Description:
@@ -37,3 +37,6 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
 private _cfgEquipment = missionConfigFile >> "vgm_equipment";
 player addUniform getText (_cfgEquipment >> "startingUniform");
 {player linkItem _x} forEach getArray (_cfgEquipment >> "startingItems");
+// binocular
+player addWeapon (getArray (_cfgEquipment >> "startingBinocular")#0);
+player addBinocularItem (getArray (_cfgEquipment >> "startingBinocular")#1);

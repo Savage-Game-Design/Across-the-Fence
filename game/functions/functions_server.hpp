@@ -115,6 +115,8 @@ class vgm_s
         };
         class missions_setPlayerReadiness {};
         class missions_startMission {};
+        class missions_createSystemNetmap {};
+        class missions_getSystemNetmap {};
     };
 
     class missions_remoteExec
@@ -158,6 +160,22 @@ class vgm_s
         VGM_SERVER_PATH(\systems\missions_gameplay\server\extraction);
 
         class missions_gameplay_extraction_startExtract {};
+    };
+
+    class missions_gameplay_scouting
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\scouting);
+
+        class missions_gameplay_scouting_handleAdded {};
+        class missions_gameplay_scouting_handleMarked {};
+        class missions_gameplay_scouting_handleSetSiteType {};
+        class missions_gameplay_scouting_onMissionStarted {};
+        class missions_gameplay_scouting_postInit
+        {
+            postInit = 1;
+        };
+        class missions_gameplay_scouting_registerMission {};
+        class missions_gameplay_scouting_setSpottable {};
     };
 
     class missions_selection

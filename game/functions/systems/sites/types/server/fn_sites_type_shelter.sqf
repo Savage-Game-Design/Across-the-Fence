@@ -28,7 +28,6 @@
 
 private _shelter = [] call vgm_s_fnc_sites_getTemplate;
 
-_shelter set ["name", "STR_VGM_SITES_SHELTER"];
 _shelter set ["size", SITE_FOOTPRINT_SMALL];
 _shelter set ["nearbyTerrainTypesToHide", []];
 _shelter set ["spawnFunction", {

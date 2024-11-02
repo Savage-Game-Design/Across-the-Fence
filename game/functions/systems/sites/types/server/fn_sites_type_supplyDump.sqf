@@ -28,7 +28,6 @@
 
 private _site = [] call vgm_s_fnc_sites_getTemplate;
 
-_site set ["name", "STR_VGM_SITES_SUPPLY_DUMP"];
 _site set ["size", SITE_FOOTPRINT_MEDIUM];
 _site set ["locRequirements", ["covered"]];
 _site set ["spawnFunction", {
