@@ -19,7 +19,7 @@
         [_mission, _site] call vgm_s_fnc_sites_hints_place
  */
 
-#define DEBUG
+// #define DEBUG
 
 params ["_mission", "_site"];
 
