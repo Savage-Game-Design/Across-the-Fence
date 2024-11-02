@@ -2,11 +2,18 @@
     File: fn_locEvents_callHandlers.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-03-08
+    Last Update: 2024-11-02
     Public: No
 
     Description:
         Calls handlers for a given event
+
+        Parameters passed to the handler are:
+            _pos - Position of the event
+            _type - Event type
+            _listener - The listening entity (or position),
+            _details - Details of the specific event
+            _args - Arguments provided when the handler was registered
 
     Parameter(s):
         _eventGroup - The event group ID to send the event to [STRING]

@@ -18,10 +18,16 @@
         [] call vgm_s_fnc_director_preinit;
  */
 
-vgm_s_director_max_alertness = 30;
+vgm_s_director_max_alertness = 100;
 vgm_s_director_min_time_between_trackers_secs = 90;
 vgm_s_director_max_time_between_trackers_secs = 300;
 vgm_s_director_dynamic_max_groups = 8;
+vgm_s_director_noiseEventAlertness = createHashMapFromArray [
+    ["player_explosion", 1],
+    ["player_flare", 5],
+    ["unsuppressedShots", 0.2],
+    ["suppressedShots", 0.05]
+];
 
 // TODO - Replace these with Mike Force's squad generator
 vgm_s_director_patrol_classes = [
