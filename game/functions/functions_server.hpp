@@ -73,8 +73,6 @@ class vgm_s
     class mission_director
     {
         VGM_SERVER_PATH(\systems\mission_director\server);
-        class director_handlePlayerExplosion {};
-        class director_handlePlayerShots {};
         class director_preInit {
             preInit = 1;
         };

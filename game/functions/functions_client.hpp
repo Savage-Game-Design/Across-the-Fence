@@ -468,7 +468,6 @@ class vgm_c
     class mission_director
     {
         VGM_CLIENT_PATH(\systems\mission_director\client);
-        class director_sendRecentShotsToServer {};
         class director_startClientsideMonitoring {};
         class director_stopClientsideMonitoring {};
     };
