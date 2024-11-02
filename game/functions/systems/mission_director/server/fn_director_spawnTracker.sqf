@@ -38,7 +38,9 @@ private _spawnPos = {
 
 if (isNil "_spawnPos") exitWith { grpNull };
 
-private _group = [vgm_s_director_patrol_classes, east, _spawnPos, _missionId] call vgm_s_fnc_ai_createEnemySquad;
+private _unitCount = count _players * 2 min 8;
+
+private _group = [vgm_s_director_tracker_classes select [0, _unitCount], east, _spawnPos, _missionId] call vgm_s_fnc_ai_createEnemySquad;
 [_mission, [_group]] call vgm_s_fnc_director_registerGroups;
 
 _directorData get "dynamicAiGroups" pushBack _group;
