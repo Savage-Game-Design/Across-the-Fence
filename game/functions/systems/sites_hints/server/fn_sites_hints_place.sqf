@@ -52,8 +52,8 @@ for "_i" from 0 to _amount do {
     ] call vgm_s_fnc_mission_objects_createObject);
 
 #ifdef DEBUG
-    _m = createMarker [format ["%1_%2", _center, _i], _spawnPos];
-    _m setMarkerType "hd_dot";
+    _m = createMarkerLocal [format ["%1_%2", _center, _i], _spawnPos];
+    _m setMarkerTypeLocal "hd_dot";
     _m setMarkerColor "ColorRed";
 #endif
 };

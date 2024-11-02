@@ -43,3 +43,5 @@ _object addAction [
     2
 ];
 
+private _fnc_modifierDefault = {_this setVectorUp surfaceNormal getPosATL _this};
+_object call (vgm_sites_hints_placementModifiers getOrDefault [typeOf _object, _fnc_modifierDefault]);
