@@ -76,6 +76,7 @@ class vgm_s
         class director_preInit {
             preInit = 1;
         };
+        class director_onPlayerNoiseEvent {};
         class director_processMission {};
         class director_registerGroups {};
         class director_spawnInitialPatrols {};

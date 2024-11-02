@@ -27,12 +27,9 @@ if (_publicMission get "status" == "FINISHED") exitWith {};
 
 private _missionPlayers = keys (_mission get "machineIds") apply { getUserInfo _x # 10 };
 
-private _alertness =
-    (_directorData get "alertness");
-
-_directorData set ["alertness", _alertness];
-
 private _dynamicGroups = _directorData get "dynamicAiGroups";
+
+private _alertness = _directorData get "alertness";
 
 private _timeSinceLastTracker = serverTime - (_directorData get "lastTrackerSent");
 private _currentTrackerDelay = linearConversion [
@@ -64,7 +61,7 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
 // TODO - Spawn in attack units if engaged in combat, and not enough nearby patrols.
 
 // Remove any invalid groups that don't need to be monitored.
-private _invalidGroups = (_directorData get "aiGroups") select {isNull _x || {alive _x} count units _group == 0};
+private _invalidGroups = (_directorData get "aiGroups") select {isNull _x || {alive _x} count units _x == 0};
 _directorData set ["aiGroups", (_directorData get "aiGroups") - _invalidGroups];
 _directorData set ["dynamicAiGroups", (_directorData get "dynamicAiGroups") - _invalidGroups];
 

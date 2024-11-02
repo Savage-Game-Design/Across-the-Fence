@@ -45,7 +45,24 @@ _directorData set ["lastTrackerSent", serverTime];
 
 [_mission] call vgm_s_fnc_director_spawnInitialPatrols;
 
-private _jobId = format ["missionDirector%1", _mission get "public" get "id"];
+private _missionId = _mission get "public" get "id";
+private _jobId = format ["missionDirector%1", _missionId];
 [_jobId, { _this call vgm_s_fnc_director_processMission }, [_mission], 10] call para_g_fnc_scheduler_add_job;
 
 _directorData set ["schedulerJob", _jobId];
+
+private _locEventHandler = [
+    // Event group for players on a mission is the mission id
+    _missionId,
+    // Listen globally - no location restriction, the event group already filters it to this mission.
+    "",
+    ["player_gunshots_aggregate", "player_explosion", "player_flare"],
+    [_missionId, _directorData],
+    {
+        params ["_pos", "_type", "_listener", "_details", "_args"];
+        // Filter out listener, as it's irrelevant
+        [_pos, _type, _details, _args] call vgm_s_fnc_director_onPlayerNoiseEvent
+    }
+] call vgm_g_fnc_locEvents_onNearbyEvent;
+
+_directorData set ["locEventHandlers", [_locEventHandler]];
