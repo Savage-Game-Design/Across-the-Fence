@@ -42,9 +42,12 @@ private _randomExtraTime = random 120;
 
 // Spawn a new tracker!
 if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dynamicGroups < vgm_s_director_dynamic_max_groups) then {
+    [format ["Attempting to send new tracker on mission %1", _publicMission get "id"]] call vgm_g_fnc_logInfo;
     private _newTrackerGroup = [_mission, _missionPlayers] call vgm_s_fnc_director_spawnTracker;
 
-    if (isNull _newTrackerGroup) exitWith {};
+    if (isNull _newTrackerGroup) exitWith {
+        [format ["Failed to spawn tracker on mission %1", _publicMission get "id"]] call vgm_g_fnc_logInfo;
+    };
 
     _directorData get "dynamicAiGroups" pushBack _newTrackerGroup;
     _directorData set ["lastTrackerSent", serverTime];
