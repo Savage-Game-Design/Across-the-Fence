@@ -52,6 +52,4 @@ if (_type isEqualTo "player_gunshots_aggregate") then {
     };
 };
 
-hint format ["Player noise event: %1. New alertness: %2", _type, _alertness];
-
 _directorData set ["alertness", _alertness];
