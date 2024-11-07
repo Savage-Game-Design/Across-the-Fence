@@ -11,7 +11,7 @@ class vn_artillery_settings {
     // Distance from the edge of a blacklisted marker that a artillery/aircraft cannot be called in.
     danger_distance = 150;
     // Maximum delay for the support to arrive, regardless of the time calculated from distance to support module.
-    delay_max = 20;
+    delay_max = 0;
     // Determines if the support planes/helicopters will be set to captive.
     captive = 1;
 
