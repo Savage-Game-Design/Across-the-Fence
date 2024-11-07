@@ -48,6 +48,7 @@ class vgm_g
             headerType = -1;
         };
     };
+
     class ai
     {
         VGM_GLOBAL_PATH(\systems\ai\global);
@@ -55,6 +56,14 @@ class vgm_g
             postInit = 1;
         };
         class ai_tickAllBehaviourTrees {};
+    };
+
+    class artillery
+    {
+        VGM_GLOBAL_PATH(\systems\artillery\global);
+        class artillery_postInit {
+            postInit = 1;
+        };
     };
 
     class behaviour_trees_compiler
@@ -381,6 +390,15 @@ class vgm_c
         class displayStaminaBar {};
         class displayEndOfMission {};
         class displayMenuBase {};
+    };
+
+    class artillery
+    {
+        VGM_CLIENT_PATH(\systems\artillery\client);
+
+        class artillery_addActions {};
+        class artillery_menu {};
+        class artillery_removeActions {};
     };
 
     class carry
@@ -796,6 +814,8 @@ class vgm_c
         {
             postInit = 1;
         };
+
+        class squad_ui_drawPlayersOnMapEventHandler {};
     };
 
     class stamina
