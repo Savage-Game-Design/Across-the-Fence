@@ -2,7 +2,7 @@
     File: fn_dangerReport_playerFiredManHandler.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-04-03
+    Last Update: 2024-11-11
     Public: No
 
     Description:
@@ -60,6 +60,32 @@ _projectile addEventHandler ["Explode", {
 // Throwing grenades and placing charges shouldn't count as shooting.
 if (_weapon in ["Put", "Throw"]) exitWith {};
 
+private _muzzleAttachment = _unit weaponAccessories _weapon select 0;
+
+private _isSuppressed = vgm_c_dangerReport_shotSuppressionCache getOrDefaultCall [
+    [_weapon, _muzzleAttachment, _ammo],
+    {
+        private _return = false;
+        // Weapons with an integral suppressor use an ammo type with a audibleFire < 1
+        private _ammoVolume = getNumber (configFile >> "CfgAmmo" >> _ammo >> "audibleFire");
+        if (_ammoVolume < 1) then {
+            _return = true;
+        };
+
+        // Check if muzzle is a silencer.
+        if (!_return && _muzzleAttachment isNotEqualTo "") then {
+            // Check the muzzle attachment's audibleFire coef.
+            private _audibleFire = getNumber (configFile >> "CfgWeapons" >> _muzzleAttachment >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
+            // Technically, silencers could have different effectiveness. In reality, everything in VN and vanilla is basically the same.
+            // Need to check if _audibleFire < 1, as it looks like a loundener also exists with audibleFire 1.1.
+            _return = _audibleFire > 0 && _audibleFire < 1;
+        };
+
+        _return
+    },
+    true
+];
+
 private _recentShots = vgm_c_dangerReport_recentShots;
 private _previousTotalShots = _recentShots get "totalShots";
 
@@ -70,7 +96,7 @@ _recentShots set ["averagePosition",
     vectorMultiply (1 / (_previousTotalShots + 1))
 ];
 
-_recentShots set ["totalShots", _previousTotalShots + 1];
-_recentShots set ["unsuppressedShots", _previousTotalShots + 1];
-// TODO - Track whether shots are suppressed or not.
-_recentShots set ["suppressedShots",  0];
+_recentShots set ["totalShots", (_recentShots get "totalShots") + 1];
+
+private _key = ["unsuppressedShots", "suppressedShots"] select _isSuppressed;
+_recentShots set [_key, (_recentShots get _key) + 1];
