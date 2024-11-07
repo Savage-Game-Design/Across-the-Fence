@@ -2,7 +2,7 @@
     File: fn_squad_ui_postInit.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-07-04
+    Last Update: 2024-11-09
     Public: No
 
     Description:
@@ -96,25 +96,15 @@ call {
     [] spawn {
         waitUntil {!isNull CTRL_MAP};
 
-        vgm_squad_ui_drawMapEH = CTRL_MAP ctrlAddEventHandler ["Draw", {
-            params ["_ctrlMap"];
-
-            private _leader = leader player;
-            private _units = if (vgm_squad_ui_mapDrawEveryone) then {units player} else {[_leader]};
-
-            {
-                _ctrlMap drawIcon [
-                    ["iconMan", "iconManLeader"] select (_x isEqualTo _leader),
-                    vgm_squad_ui_playerColor,
-                    getPosASLVisual _x,
-                    24,
-                    24,
-                    getDirVisual _x,
-                    name _x,
-                    1, // shadow
-                    [FONT_SIZE, 0] select (ctrlMapScale _ctrlMap > 0.01)
-                ];
-            } forEach _units;
-        }];
+        vgm_squad_ui_drawMapEH = CTRL_MAP ctrlAddEventHandler ["Draw", vgm_c_fnc_squad_ui_drawPlayersOnMapEventHandler];
     };
+
+    ["vgm_artillery_displayOpened", {
+        params ["_eventParams"];
+        _eventParams params ["_artilleryDisplay"];
+
+        private _artilleryMap = _artilleryDisplay displayCtrl 7001;
+        private _drawPlayersEH = _artilleryMap ctrlAddEventHandler ["Draw", vgm_c_fnc_squad_ui_drawPlayersOnMapEventHandler];
+        _artilleryDisplay setVariable ["vgm_c_squad_ui_drawPlayersEH", _drawPlayersEH];
+    }] call para_g_fnc_event_subscribeLocal;
 };
