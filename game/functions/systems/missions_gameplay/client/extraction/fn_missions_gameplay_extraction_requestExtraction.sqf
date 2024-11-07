@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_requestExtraction.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-06-09
+    Last Update: 2024-11-07
     Public: No
 
     Description:
@@ -20,23 +20,7 @@
 
 params ["_player", ["_radio", objNull]];
 
-private _fnc_getLzPos = {
-    params ["_player", ["_attempts", 0]];
-
-    private _expression = "(3*meadow) + (1-trees) + (1-houses)";
-    private _places = selectBestPlaces [_player, 200, _expression, 25, 10];
-
-    if (_places isEqualTo [] && _attempts < 3) exitWith {
-        [_player, _attempts + 1] call _fnc_getLzPos // return
-    };
-
-    _places param [0, [getPosATL _player, -1]] select 0 // return
-};
-
-private _lzPosATL = _player call _fnc_getLzPos;
-_lzPosATL set [2, 0];
-
-[call vgm_c_fnc_missions_getCurrentMission get "id", _lzPosATL] remoteExecCall ["vgm_s_fnc_missions_gameplay_extraction_startExtract", 2];
+[call vgm_c_fnc_missions_getCurrentMission get "id"] remoteExecCall ["vgm_s_fnc_missions_gameplay_extraction_startExtract", 2];
 
 // dialog
 [_player, _radio] spawn {
