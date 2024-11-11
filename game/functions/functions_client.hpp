@@ -337,6 +337,15 @@ class vgm_c
         };
     };
 
+    class ai
+    {
+        VGM_CLIENT_PATH(\systems\ai\client);
+        class ai_postInit
+        {
+            postInit = 1;
+        };
+    };
+
     class coefficient
     {
         VGM_CLIENT_PATH(\core\client\coefficient);
