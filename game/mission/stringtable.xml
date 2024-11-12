@@ -375,10 +375,10 @@
     </Package>
     <Package name="Skill Investigaste">
         <Key ID="STR_VGM_SKILL_INVESTIGATE_ACTION">
-            <Original>Stop, Listen</Original>
+            <Original>Stop, Focus</Original>
         </Key>
         <Key ID="STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY">
-            <Original>Stay stationary to Listen</Original>
+            <Original>Stay stationary to Focus</Original>
         </Key>
     </Package>
     <Package name="Paradigm keybinding menu">
