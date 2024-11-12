@@ -1,3 +1,4 @@
+#include "script_component.inc"
 /*
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
@@ -6,7 +7,7 @@
     Public: No
 
     Description:
-        No description added yet.
+        Periodically checks for nearby hint objects to play glint animation on them.
 
     Parameter(s):
         None
@@ -15,16 +16,23 @@
         Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        call vgm_c_fnc_sites_hints_glintJob;
  */
 
-#define RADIUS 200
+#define RADIUS_MAX 200
+#define RADIUS_MIN 100
 #define OBJECTS_MAX 50
+
+private _interval = linearConversion [0, 1, vgm_c_skill_investigate_intensity, GLINT_JOB_INT_MAX, GLINT_JOB_INT_MIN];
+private _radius = linearConversion [0, 1, vgm_c_skill_investigate_intensity, RADIUS_MAX, RADIUS_MIN];
+
+if ((time - vgm_c_sites_hints_lastGlint) < _interval) exitWith {};
+vgm_c_sites_hints_lastGlint = time;
 
 ["Playing glint animation"] call vgm_g_fnc_logDebug;
 
 private _fnc_getNearbyHints = {
-    private _objects = (vgm_sites_hints_objectsList inAreaArray [player, RADIUS, RADIUS]) select [0, OBJECTS_MAX];
+    private _objects = (vgm_sites_hints_objectsList inAreaArray [player, _radius, _radius]) select [0, OBJECTS_MAX];
 
     _objects select {
         worldToScreen getPosATL _x isNotEqualTo []
