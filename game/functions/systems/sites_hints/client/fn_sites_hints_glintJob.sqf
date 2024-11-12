@@ -27,8 +27,8 @@ private _fnc_getNearbyHints = {
     private _objects = (vgm_sites_hints_objectsList inAreaArray [player, RADIUS, RADIUS]) select [0, OBJECTS_MAX];
 
     _objects select {
-        [focusOn, "FIRE", _x] checkVisibility [eyePos focusOn, getPosWorld _x] > 0
-        && {worldToScreen getPosATL _x isNotEqualTo []}
+        worldToScreen getPosATL _x isNotEqualTo []
+        && {[focusOn, "FIRE", _x] checkVisibility [eyePos focusOn, getPosWorld _x] > 0}
     };
 };
 
