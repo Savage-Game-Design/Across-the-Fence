@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_sites_hints_preInit.sqf
     Author: Savage Game Design
     Date: 2024-10-27
-    Last Update: 2024-11-02
+    Last Update: 2024-11-12
     Public: No
 
     Description:
@@ -12,6 +13,15 @@
 if (!hasInterface) exitWith {};
 
 vgm_sites_hints_objectsList = [];
+
+vgm_sites_hints_glintTextures = [];
+vgm_sites_hints_glintTextures resize (GLINT_FRAMES+1);
+{
+    vgm_sites_hints_glintTextures set [
+        _forEachIndex,
+        getMissionPath format ["assets\glint\vnx_atf_glint_0%1_ca", _forEachIndex]
+    ]
+} forEach vgm_sites_hints_glintTextures;
 
 vgm_sites_hints_placementModifiers = createHashMapFromArray [
     ["Land_vn_canisterfuel_f", {

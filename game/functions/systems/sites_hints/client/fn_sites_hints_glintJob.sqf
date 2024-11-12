@@ -2,7 +2,7 @@
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-10-31
+    Last Update: 2024-11-12
     Public: No
 
     Description:
@@ -37,4 +37,4 @@ if (isNil "_glintObject") exitWith {
     ["No glint objects around"] call vgm_g_fnc_logDebug;
 };
 
-_glintObject call vgm_c_fnc_sites_hints_glint;
+[_glintObject, 2] call vgm_c_fnc_sites_hints_glint;

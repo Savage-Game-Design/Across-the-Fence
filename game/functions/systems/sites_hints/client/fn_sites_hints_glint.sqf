@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_sites_hints_glint.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-10-30
+    Last Update: 2024-11-12
     Public: Yes
 
     Description:
@@ -10,6 +11,7 @@
 
     Parameter(s):
         _object - Effect source [OBJECT]
+        _iterations - How many times to loop the effect [NUMBER, defaults to 1]
 
     Returns:
         Nothing
@@ -18,33 +20,41 @@
         [cursorTarget] call vgm_c_fnc_sites_hints_glint
  */
 
-// animation speed in frames per second
-#define FPS 7
 #define ICON_COLOR [1, 1, 1, 0.5]
 
-params ["_object"];
+params [
+    "_object",
+    ["_iterations", 1]
+];
 
 addMissionEventHandler ["Draw3d", {
-    _thisArgs params ["_object", "_animTime", "_frame", "_framesNo"];
-    private _frameTime = 1 / FPS;
+    _thisArgs params ["_object", "_animTime", "_frame", "_curIteration", "_iterations"];
+    private _frameTime = 1 / GLINT_FPS;
 
-    drawIcon3D [
-        getMissionPath format ["assets\glint\vnx_atf_glint_0%1_ca", _frame],
-        ICON_COLOR,
-        ASLtoATL getPosWorld _object,
-        1, 1, 0
-    ];
+    if (_animTime > 0) then {
+        drawIcon3D [
+            vgm_sites_hints_glintTextures select _frame,
+            ICON_COLOR,
+            ASLtoATL getPosWorld _object,
+            1, 1, 0
+        ];
+    };
 
     _animTime = _animTime + diag_deltaTime;
-    _frame = ceil ((_animTime / _frameTime) % (_framesNo+1));
+    _frame = ceil ((_animTime / _frameTime) % (GLINT_FRAMES+1));
+
+    if (_frame > GLINT_FRAMES) then {
+        if (_curIteration >= _iterations) exitWith {
+            removeMissionEventHandler ["Draw3d", _thisEventHandler];
+        };
+        _thisArgs set [3, _curIteration + 1];
+        _animTime = -GLINT_ITER_DELAY;
+    };
+
     _thisArgs set [1, _animTime];
     _thisArgs set [2, _frame];
 
-    if (_frame > _framesNo) then {
-        removeMissionEventHandler ["Draw3d", _thisEventHandler];
-    };
-
-}, [_object, 0, 1, 5]];
+}, [_object, 0, 1, 1, _iterations]];
 
 /*
     Alternative, spawning a day visible light with big flare:
