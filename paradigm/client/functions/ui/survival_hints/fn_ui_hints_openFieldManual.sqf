@@ -27,11 +27,11 @@ _filter = _this param [3, "", [""]];
 private _hintConfig = configfile >> "CfgHints" >> _topic >> _hint;
 private _missionHintConfig = missionConfigFile >> "CfgHints" >> _topic >> _hint;
 private _selectedConfig = if (isClass _missionHintConfig) then { _missionHintConfig } else { _hintConfig };
- 
+
 
 uiNamespace setVariable ["RscDisplayFieldManual_selected", str _selectedConfig];
 
-_parentDisplay = switch true do 
+_parentDisplay = switch true do
 {
 	case !(isnull _parentDisplay): {_parentDisplay}; // Custom display (has priority)
 	case !isnull(findDisplay 129): {findDisplay 129}; // Tasks after J key in game (RscDisplayDiary)
@@ -43,7 +43,13 @@ _parentDisplay = switch true do
 };
 private _display = _parentDisplay createDisplay "RscDisplayFieldManual";
 
-if (_filter != "") then 
+private _list = _display displayCtrl 1500;
+for "_i" from 1 to (_list tvCount []) do {
+    systemChat str _i;
+    _list tvCollapse [_i];
+};
+
+if (_filter != "") then
 {
 	private _search = _display displayCtrl 1400;
 	_search ctrlSetText _filter;
