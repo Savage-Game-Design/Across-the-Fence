@@ -520,4 +520,9 @@
             <English>Scout the area for enemy sites and note them in your "Scouting Report".&lt;br/&gt;&lt;br/&gt;HQ suggests checking following grids:&lt;br/&gt;%1</English>
         </Key>
     </Package>
+    <Package name="Field Manual">
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED">
+            <Original>Getting started</Original>
+        </Key>
+    </Package>
 </Project>
