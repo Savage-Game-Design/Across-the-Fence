@@ -25,6 +25,15 @@ class vgm_g
         };
     };
 
+    class area
+    {
+        VGM_GLOBAL_PATH(\core\global\area);
+
+        class area_getGradient {};
+        class area_getLocalObjects {};
+        class area_isNearWater {};
+    };
+
     class debug
     {
         VGM_GLOBAL_PATH(\debug\global);

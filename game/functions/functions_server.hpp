@@ -343,4 +343,22 @@ class vgm_s
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
     };
+
+    class terrainIndex
+    {
+        VGM_SERVER_PATH(\core\server\terrain_index);
+
+        class terrainIndex_addPoints {};
+        class terrainIndex_generate {};
+        class terrainIndex_getArea {};
+        class terrainIndex_getGridSquareContents {};
+        class terrainIndex_loadIndex {};
+    };
+
+    class terrainIndex_pointsGenerators
+    {
+        VGM_SERVER_PATH(\core\server\terrain_index\points_generators);
+
+        class terrainIndex_generator_flatEmpty {};
+    }
 };
