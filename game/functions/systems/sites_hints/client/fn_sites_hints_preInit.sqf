@@ -41,3 +41,5 @@ vgm_sites_hints_placementModifiers = createHashMapFromArray [
 ["vgm_mission_ended", {
     vgm_sites_hints_objectsList = [];
 }] call para_g_fnc_event_subscribeServer;
+
+["glintFrequency"] call vgm_c_fnc_coefficient_create;

@@ -268,8 +268,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
             <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_ATHLETIC">
-            <Original>20% less stamina drain</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE">
+            <Original>Increase intel glint frequency</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE_DESC">
+            <Original>Makes intel glints appear 30% more frequently</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE">
             <Original>Keen Eye</Original>
