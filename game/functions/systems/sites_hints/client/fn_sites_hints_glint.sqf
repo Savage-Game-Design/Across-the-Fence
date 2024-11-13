@@ -3,7 +3,7 @@
     File: fn_sites_hints_glint.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-12
+    Last Update: 2024-11-13
     Public: Yes
 
     Description:
@@ -55,20 +55,3 @@ addMissionEventHandler ["Draw3d", {
     _thisArgs set [2, _frame];
 
 }, [_object, 0, 1, 1, _iterations]];
-
-/*
-    Alternative, spawning a day visible light with big flare:
-        src_light = createVehicleLocal ["#lightpoint", _pos];
-        src_light setLightUseFlare true;
-        src_light setLightFlareSize 16;
-        src_light setLightFlareMaxDistance 2000;
-        src_light setLightDayLight true;
-
-        src_light setLightIntensity 10;
-
-        src_light setLightFlareSize 0.5;
-        src_light setLightColor [1, 1, 1];
-        src_light setLightAmbient [0,0,0];
-
-        src_light setLightAttenuation  [1, 10, 0, 0, 0.001];
-*/
