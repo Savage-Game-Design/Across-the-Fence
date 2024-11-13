@@ -140,7 +140,7 @@ class vgm_skillTrees {
 
                 class betterAim: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM";
-                    description = "";
+                    description = "STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC";
 
                     codeApply = "true call vgm_c_fnc_skill_passives_recon_betterAim";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_recon_betterAim";
