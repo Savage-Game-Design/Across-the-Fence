@@ -3,7 +3,7 @@
     File: fn_sites_hints_glint.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-13
+    Last Update: 2024-11-15
     Public: Yes
 
     Description:
@@ -27,11 +27,12 @@ params [
     ["_iterations", 1]
 ];
 
-addMissionEventHandler ["Draw3d", {
+addMissionEventHandler ["EachFrame", {
     _thisArgs params ["_object", "_animTime", "_frame", "_curIteration", "_iterations"];
     private _frameTime = 1 / GLINT_FPS;
 
     if (_animTime > 0) then {
+        systemChat str _frame;
         drawIcon3D [
             vgm_sites_hints_glintTextures select _frame,
             ICON_COLOR,
@@ -45,7 +46,7 @@ addMissionEventHandler ["Draw3d", {
 
     if (_frame > GLINT_FRAMES) then {
         if (_curIteration >= _iterations) exitWith {
-            removeMissionEventHandler ["Draw3d", _thisEventHandler];
+            removeMissionEventHandler [_thisEvent, _thisEventHandler];
         };
         _thisArgs set [3, _curIteration + 1];
         _animTime = -GLINT_ITER_DELAY;
