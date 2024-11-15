@@ -266,6 +266,9 @@
         </Key>
         <!-- Recon -->
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
+            <Original>Better Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC">
             <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_ATHLETIC">
