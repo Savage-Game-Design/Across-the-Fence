@@ -58,9 +58,9 @@ while {true} do {
 		tracerMarkers pushBack _mark;
 	};
 
-    private _validityCheckResult = [AGLtoASL _tracerPosition, _blockingUnits, _softBlockRadius, _hardBlockRadius, true] call para_g_fnc_spawning_is_valid_position;
+	private _validityCheckResult = [AGLtoASL _tracerPosition, _blockingUnits, _softBlockRadius, _hardBlockRadius, true] call para_g_fnc_spawning_is_valid_position;
 	private _positionIsValid = _validityCheckResult # 0;
-    _stoppedOnTarget = _validityCheckResult # 1;
+	_stoppedOnTarget = _validityCheckResult # 1;
 
 	//If we find a unit, we exit and set the last valid position + which target stopped us.
 	if (!_positionIsValid) exitWith {
