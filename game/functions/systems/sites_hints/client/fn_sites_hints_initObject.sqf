@@ -12,10 +12,10 @@
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_c_fnc_sites_hints_initObject
+        [allSitesObjects # 0, [[0, 0, 0]]] call vgm_c_fnc_sites_hints_initObject
  */
 
 params ["_object", "_args"];
