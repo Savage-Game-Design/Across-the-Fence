@@ -27,7 +27,7 @@ private _sites = [_targetZone] call vgm_s_fnc_missions_zones_getSites;
 private _squads = [];
 
 {
-    private _defenseUnitCount = vgm_s_director_defenseSquadSizes getOrDefault [_x get "type" get "size"];
+    private _defenseUnitCount = vgm_s_director_defenseSquadSizes get (_x get "type" get "size");
     private _spawnPos = _x get "pos" getPos [10 + random 100, random 360];
     private _group1 = [vgm_s_director_patrol_classes select [0, 2 + ceil random 2], east, _spawnPos, _missionPublic get "id"] call vgm_s_fnc_ai_createEnemySquad;
     private _group2 = [vgm_s_director_defense_classes select [0, _defenseUnitCount], east, _spawnPos, _missionPublic get "id"] call vgm_s_fnc_ai_createEnemySquad;
