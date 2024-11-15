@@ -13,7 +13,7 @@
         _site - Site data [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [_mission, _site] call vgm_s_fnc_sites_hints_place
