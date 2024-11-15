@@ -19,12 +19,11 @@
         call vgm_c_fnc_sites_hints_glintJob;
  */
 
-#define RADIUS_MAX 200
-#define RADIUS_MIN 100
+#define RADIUS 200
 #define OBJECTS_MAX 50
 
 private _interval = linearConversion [0, 1, vgm_c_skill_investigate_intensity, GLINT_JOB_INT_MAX, GLINT_JOB_INT_MIN];
-private _radius = linearConversion [0, 1, vgm_c_skill_investigate_intensity, RADIUS_MAX, RADIUS_MIN];
+private _radius = RADIUS;
 
 _interval = _interval * ([focusOn, "glintFrequency"] call vgm_c_fnc_coefficient_get);
 
