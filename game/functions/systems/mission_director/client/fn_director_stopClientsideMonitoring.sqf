@@ -19,6 +19,6 @@
  */
 
 
-if (!vgm_c_director_monitoring) exitWith {};
+if !(missionNamespace getVariable ["vgm_c_director_monitoring", false]) exitWith {};
 
 vgm_c_director_monitoring = false;

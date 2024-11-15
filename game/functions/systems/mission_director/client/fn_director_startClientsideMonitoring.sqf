@@ -19,6 +19,6 @@
         [] call vgm_c_fnc_director_startClientsideMonitoring
  */
 
-if (player getVariable ["vgm_c_director_monitoring", false]) exitWith {};
+if (missionNamespace getVariable ["vgm_c_director_monitoring", false]) exitWith {};
 
 vgm_c_director_monitoring = true;

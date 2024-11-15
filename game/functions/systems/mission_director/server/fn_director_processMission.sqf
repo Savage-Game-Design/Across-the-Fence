@@ -56,7 +56,7 @@ if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dy
 // TODO - Spawn in attack units if engaged in combat, and not enough nearby patrols.
 
 // Remove any invalid groups that don't need to be monitored.
-private _invalidGroups = (_directorData get "aiGroups") select {isNull _x || {alive _x} count units _x == 0};
+private _invalidGroups = (_directorData get "aiGroups") select {isNull _x || units _x findIf {alive _x} == -1};
 _directorData set ["aiGroups", (_directorData get "aiGroups") - _invalidGroups];
 _directorData set ["dynamicAiGroups", (_directorData get "dynamicAiGroups") - _invalidGroups];
 
