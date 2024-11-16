@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_onMissionStarted.sqf
     Author: Savage Game Design
     Date: 2024-09-29
-    Last Update: 2024-10-30
+    Last Update: 2024-11-16
     Public: No
 
     Description:
@@ -54,7 +54,14 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
         _playerGroup,
         format ["vgm_scout_%1", _mission get "id"],
         [
-            ["STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION", _intelSites],
+            [
+                "STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION",
+                _intelSites,
+                format [
+                    "<execute expression='[""vgm_missions"", ""scouting""] call para_c_fnc_ui_hints_openFieldManual'>%1</execute>",
+                    localize "str_a3_rscdisplayinterrupt_buttontutorialhints"
+                ]
+            ],
             "STR_VGM_MISSIONS_SCOUTING_TASK_TITLE"
         ],
         objNull,
