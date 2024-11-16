@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2024-09-20
+    Last Update: 2024-11-15
     Public: Yes
 
     Description:
@@ -25,6 +25,7 @@
 
 params ["_object"];
 
+vgm_mission_givers pushBack _object;
 _object setVariable ["vgm_c_missions_joinActions", createHashMap];
 
 // Add action to create mission

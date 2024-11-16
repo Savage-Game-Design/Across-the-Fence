@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1112;
+		nextID=1162;
 	};
 	class Camera
 	{
 		pos[]={2791.3633,350.39349,14831.585};
-		dir[]={-0.29873294,-0.48132512,0.82406712};
-		up[]={-0.16403992,0.87654185,0.45251009};
-		aside[]={0.94013351,-1.0896474e-07,0.34080845};
+		dir[]={-0.46573529,-0.68541902,0.55972445};
+		up[]={-0.43840462,0.72814882,0.52687824};
+		aside[]={0.76869506,0,0.63961542};
 	};
 };
 binarizationWanted=0;
@@ -2451,6 +2451,7 @@ class Mission
 					flags=5;
 					class Attributes
 					{
+						name="vgm_sharedHub_hq_1";
 						disableSimulation=1;
 					};
 					id=1391;
@@ -3001,6 +3002,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
+				init="this setVariable [""vgm_skills_manager"", true];";
 				name="vgm_skills_1";
 				disableSimulation=1;
 			};
@@ -3064,12 +3066,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={20107.375,5.5182872,6606.6704};
+				position[]={20107.375,5.5182872,6606.6699};
 				angles[]={0,5.9662857,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="this setVariable [""vgm_skills_manager"", true];";
 				name="vgm_skills_2";
 				disableSimulation=1;
 			};

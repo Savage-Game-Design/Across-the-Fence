@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2024-08-11
+    Last Update: 2024-11-16
     Public: No
 
     Description:
@@ -15,7 +15,7 @@ if (entities "vn_module_whitelistedarsenal" isNotEqualTo []) then {
     "S.O.G. Whitelisted Arsenal module detected in the mission. VGM Equipment will NOT function corectly!" call vgm_g_fnc_logError;
 };
 
-private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal", false]};
+vgm_equipment_arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal", false]};
 
 {
     _x addAction [
@@ -29,7 +29,7 @@ private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal",
         "true",
         7
     ]
-} forEach _arsenals;
+} forEach vgm_equipment_arsenals;
 
 [] call vgm_c_fnc_equipment_arsenalInit;
 
