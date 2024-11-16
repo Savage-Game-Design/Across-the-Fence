@@ -73,16 +73,16 @@ vgm_sharedHub_areaLimiterDraw3D = addMissionEventHandler ["Draw3D", {
     // draw plaques of interactive objects
     {
         private _drawPos = _x modelToWorld [0, 0, 1.3];
-        [_drawPos, ["Tactical map", "Mission management"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+        [_drawPos, [localize "STR_VGM_SHARED_HUB_ICON_MISSIONS", localize "STR_VGM_SHARED_HUB_ICON_MISSIONS_SUB"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
     } forEach (vgm_mission_givers select {player distance _x < 5});
 
     {
         private _drawPos = _x modelToWorld [0, 0, 1];
-        [_drawPos, ["Armory", "Change equipment"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+        [_drawPos, [localize "STR_VGM_SHARED_HUB_ICON_ARSENAL", localize "STR_VGM_SHARED_HUB_ICON_ARSENAL_SUB"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
     } forEach (vgm_equipment_arsenals select {player distance _x < 5});
 
     {
         private _drawPos = _x modelToWorld [0, 0, 0.5];
-        [_drawPos, ["Radio", "Select skills and assign active abilities"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+        [_drawPos, [localize "STR_VGM_SHARED_HUB_ICON_SKILLS", localize "STR_VGM_SHARED_HUB_ICON_SKILLS_SUB"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
     } forEach (vgm_skills_managers select {player distance _x < 5});
 }];
