@@ -2,7 +2,7 @@
     File: fn_areaLimiterEnable.sqf
     Author: veteran29
     Date: 2022-12-03
-    Last Update: 2022-12-06
+    Last Update: 2024-11-16
     Public: Yes
 
     Description:
@@ -55,3 +55,34 @@ vgm_sharedHub_areaLimiterScript = [] spawn {
         sleep 0.5;
     };
 };
+
+vgm_sharedHub_areaLimiterDraw3D = addMissionEventHandler ["Draw3D", {
+    private _currentArea = vgm_sharedHub_hqAreas findIf {player inArea _x};
+    // draw plaques of nearby HQs
+    if (_currentArea == -1) exitWith {
+        {
+            _x params ["_hq"];
+
+            private _drawPos = getPosATL _hq;
+            _drawPos set [2, _drawPos # 2 + linearConversion [20, 50, player distance _hq, 5, 10, true]];
+
+            [_drawPos, ["HQ", "Join the battle"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+        } forEach vgm_sharedHub_hqAreas;
+    };
+
+    // draw plaques of interactive objects
+    {
+        private _drawPos = _x modelToWorld [0, 0, 1.3];
+        [_drawPos, ["Tactical map", "Mission management"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+    } forEach (vgm_mission_givers select {player distance _x < 5});
+
+    {
+        private _drawPos = _x modelToWorld [0, 0, 1];
+        [_drawPos, ["Armory", "Change equipment"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+    } forEach (vgm_equipment_arsenals select {player distance _x < 5});
+
+    {
+        private _drawPos = _x modelToWorld [0, 0, 0.5];
+        [_drawPos, ["Radio", "Select skills and assign active abilities"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+    } forEach (vgm_skills_managers select {player distance _x < 5});
+}];

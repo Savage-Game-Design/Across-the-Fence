@@ -15,7 +15,7 @@
         Area [ARRAY]
 
     Example(s):
-        [vgm_sharedHub_hq_1] call vgm_g_fnc_objectArea
+        vgm_sharedHub_hq_1 call vgm_g_fnc_objectArea
  */
 
 params ["_object"];
