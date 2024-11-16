@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2024-08-23
+    Last Update: 2024-11-16
     Public: No
 
     Description:
@@ -42,7 +42,7 @@ player setVelocity [0,0,0];
 ([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
 player setDir _newDir;
 player setVehiclePosition [_newPos, [], 0, "NONE"];
-[] call vgm_c_fnc_sharedHub_areaLimiterEnable;
+[] call vgm_c_fnc_sharedHub_enableHub;
 
 player call vgm_c_fnc_medical_fullHeal;
 

@@ -585,8 +585,8 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\shared_hub\client);
 
-        class sharedHub_areaLimiterDisable {};
-        class sharedHub_areaLimiterEnable {};
+        class sharedHub_disableHub {};
+        class sharedHub_enableHub {};
         class sharedHub_drawPlaque3d {};
         class sharedHub_postInit
         {

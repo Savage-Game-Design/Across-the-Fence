@@ -13,4 +13,4 @@ vgm_sharedHub_hqAreas = [
     vgm_sharedHub_hq_1
 ] apply {_x call vgm_g_fnc_objectArea};
 
-[] call vgm_c_fnc_sharedHub_areaLimiterEnable;
+[] call vgm_c_fnc_sharedHub_enableHub;

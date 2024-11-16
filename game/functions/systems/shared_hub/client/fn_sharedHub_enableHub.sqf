@@ -1,5 +1,5 @@
 /*
-    File: fn_areaLimiterEnable.sqf
+    File: fn_enableHub.sqf
     Author: veteran29
     Date: 2022-12-03
     Last Update: 2024-11-16
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        [] call vgm_c_fnc_sharedHub_areaLimiterEnable
+        [] call vgm_c_fnc_sharedHub_enableHub
  */
 
 #define STATE_IN_AREA "in_hub"
@@ -56,7 +56,7 @@ vgm_sharedHub_areaLimiterScript = [] spawn {
     };
 };
 
-vgm_sharedHub_areaLimiterDraw3D = addMissionEventHandler ["Draw3D", {
+vgm_sharedHub_iconsDraw3D = addMissionEventHandler ["Draw3D", {
     private _currentArea = vgm_sharedHub_hqAreas findIf {player inArea _x};
     // draw plaques of nearby HQs
     if (_currentArea == -1) exitWith {
