@@ -226,6 +226,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\locations\global);
 
         class loc_getTargetBoxBounds {};
+        class loc_getTargetBoxMarker {};
     };
 
     class medical
@@ -316,6 +317,8 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\tracking\global);
         class tracking_debugHideTracks {};
         class tracking_debugShowTracks {};
+        class tracking_deleteTrackingGroup {};
+        class tracking_getTrackPositions {};
         class tracking_nearbyTracks {};
         class tracking_preInit {
             preInit = 1;
@@ -468,7 +471,6 @@ class vgm_c
     class mission_director
     {
         VGM_CLIENT_PATH(\systems\mission_director\client);
-        class director_sendRecentShotsToServer {};
         class director_startClientsideMonitoring {};
         class director_stopClientsideMonitoring {};
     };

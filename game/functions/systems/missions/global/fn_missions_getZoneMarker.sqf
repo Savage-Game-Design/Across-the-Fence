@@ -2,7 +2,7 @@
     File: fn_missions_getZoneMarker.sqf
     Author: Savage Game Design
     Date: 2024-10-22
-    Last Update: 2024-10-22
+    Last Update: 2024-11-15
     Public: Yes
 
     Description:
@@ -31,4 +31,4 @@ if (_zone isEqualType createHashMap) then {
     _zone = _zone get "targetZone";
 };
 
-format ["tbox_%1", _zone] // return
+[_zone] call vgm_g_fnc_loc_getTargetBoxMarker // return

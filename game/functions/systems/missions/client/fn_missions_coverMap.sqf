@@ -2,7 +2,7 @@
     File: fn_missions_coverMap.sqf
     Author: Bohemia Interactive, Savage Game Design
     Date: 2024-08-23
-    Last Update: 2024-08-24
+    Last Update: 2024-11-02
     Public: Yes
 
     Description:
@@ -29,6 +29,7 @@ if (isNil "_currentMission") exitWith {
         deleteMarkerLocal _marker;
     };
     deleteMarkerLocal "vgm_fnc_coverMap_border";
+    { _x setMarkerAlphaLocal 0.3 } forEach (allMapMarkers select {"tbox_" in _x});
 };
 
 private _zone = _currentMission get "targetZone";
@@ -82,3 +83,6 @@ _marker setMarkerDirLocal _dir;
 _marker setMarkerShapeLocal "rectangle";
 _marker setMarkerBrushLocal "border";
 _marker setMarkerColorLocal "colorblack";
+
+//--- Hide the target box overlay
+[_zone] call vgm_g_fnc_loc_getTargetBoxMarker setMarkerAlphaLocal 0;

@@ -127,42 +127,42 @@ class para_g
 		class serialize_struct {};
 	};
 
-    class events
-    {
-        PARA_GLOBAL_PATH(\events);
-        class event_subscribe {};
-        class event_subscribeLocal {};
-        class event_subscribeServer {};
-        class event_subscribeToClients {};
-        class event_system_init {};
-        class event_triggerGlobal {};
-        class event_triggerLocal {};
-        class event_triggerServer {};
-        class event_triggerServerAndLocal {};
-        class event_triggerTargets {};
-        class event_unsubscribe {};
-    };
+	class events
+	{
+		PARA_GLOBAL_PATH(\events);
+		class event_subscribe {};
+		class event_subscribeLocal {};
+		class event_subscribeServer {};
+		class event_subscribeToClients {};
+		class event_system_init {};
+		class event_triggerGlobal {};
+		class event_triggerLocal {};
+		class event_triggerServer {};
+		class event_triggerServerAndLocal {};
+		class event_triggerTargets {};
+		class event_unsubscribe {};
+	};
 
-    class events_internal
-    {
-        PARA_GLOBAL_PATH(\events\internal);
-        class event_attachHandler {};
-        class event_callHandlersById {};
-        class event_callRegisteredHandlers {};
-        class event_convertEventToHashableEvent {};
-        class event_handlePlayerDisconnected {};
-    };
+	class events_internal
+	{
+		PARA_GLOBAL_PATH(\events\internal);
+		class event_attachHandler {};
+		class event_callHandlersById {};
+		class event_callRegisteredHandlers {};
+		class event_convertEventToHashableEvent {};
+		class event_handlePlayerDisconnected {};
+	};
 
-    class events_network
-    {
-        PARA_GLOBAL_PATH(\events\network);
-        class event_remoteExec_trigger {};
-    };
+	class events_network
+	{
+		PARA_GLOBAL_PATH(\events\network);
+		class event_remoteExec_trigger {};
+	};
 
 	class events_local_legacy
 	{
 		PARA_GLOBAL_PATH(\events_local_legacy);
-        class event_add_handler {};
+		class event_add_handler {};
 		class event_dispatch_immediate {};
 		class event_dispatch {};
 		class event_dispatcher_job {};
@@ -198,17 +198,17 @@ class para_g
 		class load_interop_functions { postInit = 1; };
 	};
 
-    class netmap
-    {
-        PARA_GLOBAL_PATH(\netmap);
-        class netmap_count {};
-        class netmap_forEach {};
-        class netmap_get {};
-        class netmap_getOrDefault {};
-        class netmap_keys {};
-        class netmap_onReady {};
-        class netmap_values {};
-    };
+	class netmap
+	{
+		PARA_GLOBAL_PATH(\netmap);
+		class netmap_count {};
+		class netmap_forEach {};
+		class netmap_get {};
+		class netmap_getOrDefault {};
+		class netmap_keys {};
+		class netmap_onReady {};
+		class netmap_values {};
+	};
 
 	class networked_actions
 	{
@@ -245,6 +245,7 @@ class para_g
 		PARA_GLOBAL_PATH(\spawning);
 		class spawning_find_valid_position_tracer {};
 		class spawning_get_squad_composition {};
+		class spawning_is_valid_position {};
 		class spawning_valid_attack_angles {};
 	};
 
@@ -265,7 +266,7 @@ class para_g
 		class parse_pos_config {};
 		class vehicle_will_collide_at_pos {};
 		class unit_is_incapacitated {};
-        class get_group_majority_position {};
+		class get_group_majority_position {};
 	};
 	class tools
 	{
@@ -273,16 +274,16 @@ class para_g
 		class is_valid_axe_target {};
 	};
 
-    class tracked_state
-    {
-        PARA_GLOBAL_PATH(\tracked_state);
-        class trackedState_callHandlers {};
-        class trackedState_getData {};
-        class trackedState_getValue {};
-        class trackedState_setLocal {};
-        class trackedState_whenChanged {};
-        class trackedState_whenEqual {};
-    };
+	class tracked_state
+	{
+		PARA_GLOBAL_PATH(\tracked_state);
+		class trackedState_callHandlers {};
+		class trackedState_getData {};
+		class trackedState_getValue {};
+		class trackedState_setLocal {};
+		class trackedState_whenChanged {};
+		class trackedState_whenEqual {};
+	};
 };
 
 #endif

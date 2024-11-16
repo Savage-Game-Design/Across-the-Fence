@@ -2,7 +2,7 @@
     File: fn_dangerReport_getProjectileInfo.sqf
     Author: Savage Game Design
     Date: 2024-04-03
-    Last Update: 2024-04-03
+    Last Update: 2024-11-02
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 params ["_ammoConfig"];
 
 vgm_g_dangerReport_projectileInfoCache getOrDefaultCall [_ammoConfig, {
-    private _result = createtHashMap;
+    private _result = createHashMap;
 
     _result set ["brightness", getNumber (_ammoConfig >> "brightness")];
     _result set ["indirectHit", getNumber (_ammoConfig >> "indirectHit")];
