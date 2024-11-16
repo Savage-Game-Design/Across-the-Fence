@@ -28,7 +28,6 @@ private _hintConfig = configfile >> "CfgHints" >> _topic >> _hint;
 private _missionHintConfig = missionConfigFile >> "CfgHints" >> _topic >> _hint;
 private _selectedConfig = if (isClass _missionHintConfig) then { _missionHintConfig } else { _hintConfig };
 
-
 uiNamespace setVariable ["RscDisplayFieldManual_selected", str _selectedConfig];
 
 _parentDisplay = switch true do
@@ -39,14 +38,14 @@ _parentDisplay = switch true do
 	case !isnull(findDisplay 52): {findDisplay 52}; // MP Server Briefing (RscDisplayServerGetReady)
 	case !isnull(findDisplay 53): {findDisplay 53}; // MP Client Briefing (RscDisplayClientGetReady)
 	case (visibleMap && !isnull(findDisplay 12)): {findDisplay 12}; // Map (RscDisplayMainMap)
-	case !isnull(findDisplay 46): {findDisplay 46}; //Main mission display (RscDisplayMission)
+	case !isnull(findDisplay 46): {findDisplay 46}; // Main mission display (RscDisplayMission)
+	case !isnull(findDisplay 313): {findDisplay 313}; // 3DEN display (Display3DEN)
 };
 private _display = _parentDisplay createDisplay "RscDisplayFieldManual";
 
 private _list = _display displayCtrl 1500;
 for "_i" from 1 to (_list tvCount []) do {
-    systemChat str _i;
-    _list tvCollapse [_i];
+	_list tvCollapse [_i];
 };
 
 if (_filter != "") then
