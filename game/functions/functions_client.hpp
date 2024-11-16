@@ -587,6 +587,7 @@ class vgm_c
 
         class sharedHub_areaLimiterDisable {};
         class sharedHub_areaLimiterEnable {};
+        class sharedHub_drawPlaque3d {};
         class sharedHub_postInit
         {
             postInit = 1;
