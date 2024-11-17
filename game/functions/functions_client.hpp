@@ -857,4 +857,20 @@ class vgm_c
             preInit = 1;
         };
     };
+
+    class tutorial
+    {
+        VGM_CLIENT_PATH(\systems\tutorial\client);
+
+        class tutorial_preInit
+        {
+            preInit = 1;
+        };
+        class tutorial_postInit
+        {
+            postInit = 1;
+        };
+
+        class tutorial_trigger {};
+    };
 };
