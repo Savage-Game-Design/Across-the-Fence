@@ -524,5 +524,23 @@
         <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED">
             <Original>Getting started</Original>
         </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC">
+            <English>%3%11%4 brings together role-playing elements and player specialisations to create thrilling behind enemy lines recon gamemode.%1You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.%1Completing missions earns XP and grows your abilities as you mature into a MACV SOG 1-0.%1%1%2 Start by going into nearby TOC%1%2 Grab your favorite gear from the %3Armory%4%1%2 Adjust your skills at the %3Radio%4%1%2 Create or join a mission from the %3Tactical map%4%1%2 Once your team is ready, start the mission from the %3Tactical map%4</English>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS">
+            <Original>Missions</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_DESC">
+            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3Tactical map%4, select your Area of Operations (WIP) and %3start mission%4.%1You'll be inserted deep behind enemy lines, with a objective varying on a type of the mission you've choosen.%1Once you will finish the mission whole team will be awared experience, with the amount dependent on your team performance and objective completion.%1%1Currently available mission types:%1%2 Scouting</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS">
+            <Original>Skills</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_DESC">
+            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix them, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, you will earn them for leveling up, to level up you need to gather experience which can be achieved by running the recon missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - have lower cooldown, able to use frequently%1    %2 Ultimate Abilities - have higher cooldown, can be used rarely, often as a "get out of jail card"%1%1%11</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_WHEEL_DESC">
+            <Original>&lt;t size=&quot;1.2&quot;&gt;Skill wheel&lt;/t&gt;%1Skills equiped in the %3Abilities%4 menu can be activated in the %3Skill wheel%4.%1To open it press %3"%11"%4%1</Original>
+        </Key>
     </Package>
 </Project>
