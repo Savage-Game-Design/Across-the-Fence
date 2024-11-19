@@ -8,11 +8,11 @@ class CfgHints {
             logicalOrder = 1;
 
             displayName = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED";
-            tip = __EVAL(format ['<br/>"%1"', selectRandom getArray (configFile >> 'CfgWorlds' >> 'cam_lao_nam' >> 'loadingTexts')]);
             description = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC";
             arguments[] = {
                 "localize 'STR_VGM_MISSION_NAME'"
             };
+            tip = __EVAL(format ['<br/>"%1"', selectRandom getArray (configFile >> 'CfgWorlds' >> 'cam_lao_nam' >> 'loadingTexts')]);
 
             image = "\a3\ui_f\data\gui\cfg\hints\miss_icon_ca.paa";
         };
@@ -42,11 +42,11 @@ class CfgHints {
                     true\
                 ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind');\
                 _key = [_key];\
-                diag_log _key;\
                 \
                 format ([localize 'STR_VGM_FIELD_MANUAL_SKILLS_WHEEL_DESC'] + ([[_key]] call BIS_fnc_advHintArg))\
                 "
             };
+            tip = "$STR_VGM_FIELD_MANUAL_SKILLS_TIP";
 
             image = "\a3\ui_f\data\gui\cfg\hints\rules_ca.paa";
         };
@@ -54,8 +54,21 @@ class CfgHints {
         class medical {
             logicalOrder = 4;
 
-            displayName = "Medical system";
-            description = "Medical...";
+            displayName = "$STR_VGM_FIELD_MANUAL_MEDICAL";
+            description = "$STR_VGM_FIELD_MANUAL_MEDICAL_DESC";
+            arguments[] = {
+                "localize 'STR_VGM_MISSION_NAME'",
+                "[\
+                    ['OpenMedicalMenu'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),\
+                    true\
+                ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')",
+                "[\
+                    ['OpenMedicalMenuSelf'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),\
+                    true\
+                ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')",
+                "localize 'STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL'"
+            };
+            tip = "$STR_VGM_FIELD_MANUAL_MEDICAL_TIP";
 
             image = "\a3\ui_f\data\gui\cfg\hints\injury_ca.paa"
         };
@@ -68,7 +81,10 @@ class CfgHints {
         class scouting {
             logicalOrder = 1;
 
-            displayName = "Scouting";
+            displayName = "$STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING";
+            description = "$STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_DESC";
+            tip = "$STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_TIP";
+
             image = "\a3\ui_f\data\gui\cfg\hints\head_ca.paa";
         };
     };
