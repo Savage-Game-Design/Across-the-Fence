@@ -16,10 +16,13 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class objectArea {};
         class preInit
         {
             preInit = 1;
         };
+        class randomPosInRing {};
+        class spokenDirection {};
         class startScheduler {
             postInit = 1;
         };
@@ -225,6 +228,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\locations\global);
 
         class loc_getTargetBoxBounds {};
+        class loc_getTargetBoxMarker {};
     };
 
     class medical
@@ -315,6 +319,8 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\tracking\global);
         class tracking_debugHideTracks {};
         class tracking_debugShowTracks {};
+        class tracking_deleteTrackingGroup {};
+        class tracking_getTrackPositions {};
         class tracking_nearbyTracks {};
         class tracking_preInit {
             preInit = 1;
@@ -341,6 +347,15 @@ class vgm_c
         VGM_CLIENT_PATH(\debug\client);
 
         class initDebugMenu
+        {
+            postInit = 1;
+        };
+    };
+
+    class ai
+    {
+        VGM_CLIENT_PATH(\systems\ai\client);
+        class ai_postInit
         {
             postInit = 1;
         };
@@ -458,7 +473,6 @@ class vgm_c
     class mission_director
     {
         VGM_CLIENT_PATH(\systems\mission_director\client);
-        class director_sendRecentShotsToServer {};
         class director_startClientsideMonitoring {};
         class director_stopClientsideMonitoring {};
     };
@@ -575,13 +589,31 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\shared_hub\client);
 
-        class sharedHub_areaLimiterDisable {};
-        class sharedHub_areaLimiterEnable {};
+        class sharedHub_disableHub {};
+        class sharedHub_enableHub {};
+        class sharedHub_drawPlaque3d {};
         class sharedHub_postInit
         {
             postInit = 1;
         };
         class sharedHub_teleportPlayerToHub {};
+    };
+
+    class sites_hints
+    {
+        VGM_CLIENT_PATH(\systems\sites_hints\client);
+
+        class sites_hints_glint {};
+        class sites_hints_glintJob {};
+        class sites_hints_initObject {};
+        class sites_hints_postInit
+        {
+            postInit = 1;
+        };
+        class sites_hints_preInit
+        {
+            preInit = 1;
+        };
     };
 
     class leveling

@@ -3,7 +3,7 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-03-01
+    Last Update: 2024-11-12
     Public: No
 
     Description:
@@ -26,13 +26,15 @@ if (!_enable) exitWith {
     removeMissionEventHandler ["Draw3D", _eh];
     vgm_c_skill_investigate_drawEh = -1;
     vgm_c_skill_investigate_noises = nil;
+    vgm_c_skill_investigate_intensity = 0;
 };
 
 if (_eh > -1) exitWith {};
 
 vgm_c_skill_investigate_noises = [];
+vgm_c_skill_investigate_intensity = 0;
 vgm_c_skill_investigate_drawEh = addMissionEventHandler ["Draw3D", {
-    _thisArgs params ["_nextPingTime"];
+    _thisArgs params ["_nextPingTime", "_startTime"];
 
     if (time >= _nextPingTime) then {
 
@@ -49,8 +51,19 @@ vgm_c_skill_investigate_drawEh = addMissionEventHandler ["Draw3D", {
         _thisArgs set [0, time + PING_TICK];
     };
 
+    if (vgm_c_skill_investigate_intensity < 1) then {
+        vgm_c_skill_investigate_intensity = linearConversion [
+            _startTime,
+            _startTime + FULL_FOCUS_TIME,
+            time,
+            0,
+            1,
+            true
+        ];
+    };
+
     //----- draw sound sources
     vgm_c_skill_investigate_noises = vgm_c_skill_investigate_noises select {
         !(_x call vgm_c_fnc_skill_investigate_drawSoundWaves) // return, discard completed
     };
-}, [time]];
+}, [time, time]];

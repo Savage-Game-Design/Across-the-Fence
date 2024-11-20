@@ -2,7 +2,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-08-24
+    Last Update: 2024-11-12
     Public: No
 
     Description:
@@ -10,6 +10,8 @@
  */
 
 if (!hasInterface) exitWith {};
+
+vgm_c_skill_investigate_intensity = 0;
 
 // setup desaturation
 call {

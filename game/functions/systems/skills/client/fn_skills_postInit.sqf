@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2024-07-21
+    Last Update: 2024-11-16
     Public: No
 
     Description:
@@ -42,6 +42,8 @@ private _fnc_addActions = {
     }, nil, -1e10, true, false, "", "true"];
 };
 
+vgm_skills_managers = entities "" select {_x getVariable ["vgm_skills_manager", false]};
+
 {
     _x call _fnc_addActions;
-} forEach [vgm_skills_1, vgm_skills_2];
+} forEach vgm_skills_managers;
