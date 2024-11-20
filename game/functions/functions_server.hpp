@@ -292,6 +292,18 @@ class vgm_s
         class sites_spawnRandomFortifications {};
     };
 
+    class sites_hints
+    {
+        VGM_SERVER_PATH(\systems\sites_hints\server);
+
+        class sites_hints_getConfig {};
+        class sites_hints_place {};
+        class sites_hints_preInit
+        {
+            preInit = 1;
+        };
+    };
+
     class site_types
     {
         VGM_SERVER_PATH(\systems\sites\types\server);

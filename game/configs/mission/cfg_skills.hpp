@@ -124,11 +124,12 @@ class vgm_skillTrees {
                     codeUnapply = "false call vgm_c_fnc_skill_passives_recon_keenEye";
                 };
 
-                class athletic: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_ATHLETIC";
+                class detective: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_DETECTIVE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_DETECTIVE_DESC";
 
-                    codeApply = "[player, 'staminaDrain', 'skill_recon_athletic', -0.3, true] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'staminaDrain', 'skill_recon_athletic'] call vgm_c_fnc_coefficient_remove";
+                    codeApply = "[player, 'glintFrequency', 'skill_recon_detective', -0.3, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'glintFrequency', 'skill_recon_detective'] call vgm_c_fnc_coefficient_remove";
                 };
             };
 

@@ -289,8 +289,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC">
             <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_ATHLETIC">
-            <Original>20% less stamina drain</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE">
+            <Original>Increase intel glint frequency</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE_DESC">
+            <Original>Makes intel glints appear 30% more frequently</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE">
             <Original>Keen Eye</Original>
@@ -396,10 +399,10 @@
     </Package>
     <Package name="Skill Investigaste">
         <Key ID="STR_VGM_SKILL_INVESTIGATE_ACTION">
-            <Original>Stop, Listen</Original>
+            <Original>Stop, Focus</Original>
         </Key>
         <Key ID="STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY">
-            <Original>Stay stationary to Listen</Original>
+            <Original>Stay stationary to Focus</Original>
         </Key>
     </Package>
     <Package name="Paradigm keybinding menu">

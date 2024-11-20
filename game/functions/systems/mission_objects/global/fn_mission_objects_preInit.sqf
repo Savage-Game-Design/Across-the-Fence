@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: Savage Game Design
     Date: 2023-12-18
-    Last Update: 2024-01-04
+    Last Update: 2024-10-25
     Public: No
 
     Description:
@@ -19,7 +19,6 @@ vgm_g_mission_objects = createHashMap;
 
     {
         deleteVehicle _y;
-        _localObjectsData deleteAt _x;
     } forEach _localObjectsData;
     vgm_g_mission_objects deleteAt _missionId;
 }] call para_g_fnc_event_subscribeServer;
