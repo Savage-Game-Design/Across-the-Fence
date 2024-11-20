@@ -1,6 +1,28 @@
 class Tutorial {
     displayName = "Tutorial";
 
+    /*
+    class Example {
+        displayName = "Example";
+        displayNameShort = "E.g.";
+        description = "This is an example of a triggerable tutorial.";
+        // image = "";
+
+        // Triggers cause the card hint to appear on-screen.
+        // A tutorial will only ever show a hint once, no matter how many times its triggered.
+        class Triggers {
+            // Fires when this marker in the mission.sqm is entered by the player.
+            markerEntered = "";
+            // Fires when this event is triggered on the client, from any source.
+            eventFired = "vgm_tutorial_test";
+            // Objects with a `vgm_c_tutorial` variable set can trigger a tutorial.
+            // E.g for this tutorial entry:
+            //     cursorObject setVariable ["vgm_c_tutorial", ["Tutorial", "Example"]];
+        };
+    };
+    */
+
+
     class Tutorial1 {
         displayName = "Tutorial 1";
         displayNameShort = "Tutorial 1";
