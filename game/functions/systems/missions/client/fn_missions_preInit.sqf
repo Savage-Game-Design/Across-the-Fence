@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-06-09
+    Last Update: 2024-11-15
     Public: No
 
     Description:
@@ -12,6 +12,7 @@
 if (!hasInterface) exitWith {};
 
 vgm_mission_onMission = false;
+vgm_mission_givers = [];
 
 ["vgm_mission_creationFailed", {
     params ["_args"];

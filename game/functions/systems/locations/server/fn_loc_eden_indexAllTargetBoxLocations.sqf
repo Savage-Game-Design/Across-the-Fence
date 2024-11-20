@@ -2,7 +2,7 @@
     File: fn_loc_eden_indexAllTargetBoxLocations.sqf
     Author: Savage Game Design
     Date: 2024-05-25
-    Last Update: 2024-08-21
+    Last Update: 2024-11-01
     Public: Yes
 
     Description:
@@ -19,7 +19,7 @@
         Newly created index [HashMap]
 
     Example(s):
-        [] call vgm_s_fnc_loc_eden_getSiteLocationsByTargetBox;
+        [] call vgm_s_fnc_loc_eden_indexAllTargetBoxLocations;
  */
 
 

@@ -136,11 +136,9 @@ class vgm_equipment {
             "vn_o_4x_m16",
             "vn_o_1x_sp_m16",
             "vn_bipod_m16",
-            "vn_s_m16",
             "vn_b_m16",
             "vn_o_anpvs2_m16",
             "vn_b_type56",
-            "vn_s_mk22",
             "vn_s_hp"
         };
     };
@@ -315,8 +313,8 @@ class vgm_equipment {
             "vn_m45_t_mag",
             "vn_sten_mag",
             "vn_sten_t_mag",
-            "vn_f1_smg_mag",
-            "vn_f1_smg_t_mag",
+            "vn_l34a1_smg_mag",
+            "vn_l34a1_smg_t_mag",
             "vn_izh54_so_mag",
             "vn_izh54_mag",
             "vn_hd_mag",

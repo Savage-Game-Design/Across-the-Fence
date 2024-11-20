@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2024-08-23
+    Last Update: 2024-11-16
     Public: No
 
     Description:
@@ -32,17 +32,12 @@ vgm_mission_onMission = false;
 private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 ["vgm_mission_end_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
-// Removes player-specific tracker module handlers.
-// TODO: Remove when switching to full AI system.
-player removeEventHandler ["Fired", player getVariable "vgm_c_trackerFiredHandler"];
-["ItemRemove", ["vn_tracksLoop"]] call BIS_fnc_loop;
-
 moveOut player;
 player setVelocity [0,0,0];
 ([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
 player setDir _newDir;
 player setVehiclePosition [_newPos, [], 0, "NONE"];
-[] call vgm_c_fnc_sharedHub_areaLimiterEnable;
+[] call vgm_c_fnc_sharedHub_enableHub;
 
 player call vgm_c_fnc_medical_fullHeal;
 

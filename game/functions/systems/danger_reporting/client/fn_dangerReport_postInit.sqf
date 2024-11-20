@@ -2,7 +2,7 @@
     File: fn_dangerReport_postInit.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-04-02
+    Last Update: 2024-11-09
     Public: Yes
 
     Description:
@@ -40,6 +40,8 @@ vgm_c_dangerReport_recentShots = +vgm_c_dangerReport_shotsAggregateTemplate;
 
 vgm_c_dangerReport_sendRecentShotsJobId = nil;
 vgm_c_dangerReport_playerFiredManHandler = nil;
+// Caches if a gunshot is suppressed or not, using the gunshot's characteristics as a key (ammo, muzzle attachment)
+vgm_c_dangerReport_shotSuppressionCache = createHashMap;
 
 [
     "vgm_mission_deploy_local",

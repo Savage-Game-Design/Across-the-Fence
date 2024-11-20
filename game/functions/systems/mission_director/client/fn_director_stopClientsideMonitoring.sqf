@@ -2,7 +2,7 @@
     File: fn_missions_stopClientsideMonitoring.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-24
+    Last Update: 2024-11-02
     Public: No
 
     Description:
@@ -19,10 +19,6 @@
  */
 
 
-if (!vgm_c_director_monitoring) exitWith {};
-
-player removeEventHandler ["FiredMan", vgm_c_director_firedHandler];
-
-["vgm_director_sendRecentShotsToServer"] call para_g_fnc_scheduler_remove_job;
+if !(missionNamespace getVariable ["vgm_c_director_monitoring", false]) exitWith {};
 
 vgm_c_director_monitoring = false;

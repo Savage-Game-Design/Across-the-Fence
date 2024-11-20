@@ -2,7 +2,7 @@
     File: fn_director_stopMonitoringMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-09-20
+    Last Update: 2024-11-02
     Public: Yes
 
     Description:
@@ -41,3 +41,7 @@ if (isNil "_directorData") exitWith {}; // mission was not started, no data
 
 // Removes the job from the scheduler after it next runs.
 [_directorData get "schedulerJob"] call para_g_fnc_scheduler_remove_job;
+
+{
+    [_x] call vgm_g_fnc_locEvents_removeHandlers;
+} forEach (_directorData get "locEventHandlers");

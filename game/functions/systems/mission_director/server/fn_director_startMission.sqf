@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-03-01
+    Last Update: 2024-11-02
     Public: Yes
 
     Description:
@@ -30,10 +30,6 @@ params ["_mission"];
 
 private _directorData = _mission getOrDefault ["director", createHashMap, true];
 
-// Explosions reported by other systems / clients. Processed during the main loop.
-_directorData set ["explosionIngestionQueue", []];
-// Shots reported by other systems / clients. Processed during the main loop.
-_directorData set ["shotsIngestionQueue", []];
 // Overall "alertness" level of enemy forces. Changes scale of the enemy response.
 _directorData set ["alertness", 0];
 // AI groups that currently exist on this mission
@@ -45,12 +41,28 @@ _directorData set ["dynamicAiGroups", []];
 // Tracks when the last tracker squad was sent at the players
 _directorData set ["lastTrackerSent", serverTime];
 
-
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 
 [_mission] call vgm_s_fnc_director_spawnInitialPatrols;
 
-private _jobId = format ["missionDirector%1", _mission get "public" get "id"];
+private _missionId = _mission get "public" get "id";
+private _jobId = format ["missionDirector%1", _missionId];
 [_jobId, { _this call vgm_s_fnc_director_processMission }, [_mission], 10] call para_g_fnc_scheduler_add_job;
 
 _directorData set ["schedulerJob", _jobId];
+
+private _locEventHandler = [
+    // Event group for players on a mission is the mission id
+    _missionId,
+    // Listen globally - no location restriction, the event group already filters it to this mission.
+    "",
+    ["player_gunshots_aggregate", "player_explosion", "player_flare"],
+    [_missionId, _directorData],
+    {
+        params ["_pos", "_type", "_listener", "_details", "_args"];
+        // Filter out listener, as it's irrelevant
+        [_pos, _type, _details, _args] call vgm_s_fnc_director_onPlayerNoiseEvent
+    }
+] call vgm_g_fnc_locEvents_onNearbyEvent;
+
+_directorData set ["locEventHandlers", [_locEventHandler]];

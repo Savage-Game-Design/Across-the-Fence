@@ -16,6 +16,7 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class objectArea {};
         class preInit
         {
             preInit = 1;
@@ -50,6 +51,7 @@ class vgm_g
             headerType = -1;
         };
     };
+
     class ai
     {
         VGM_GLOBAL_PATH(\systems\ai\global);
@@ -57,6 +59,14 @@ class vgm_g
             postInit = 1;
         };
         class ai_tickAllBehaviourTrees {};
+    };
+
+    class artillery
+    {
+        VGM_GLOBAL_PATH(\systems\artillery\global);
+        class artillery_postInit {
+            postInit = 1;
+        };
     };
 
     class behaviour_trees_compiler
@@ -218,6 +228,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\locations\global);
 
         class loc_getTargetBoxBounds {};
+        class loc_getTargetBoxMarker {};
     };
 
     class medical
@@ -308,6 +319,8 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\tracking\global);
         class tracking_debugHideTracks {};
         class tracking_debugShowTracks {};
+        class tracking_deleteTrackingGroup {};
+        class tracking_getTrackPositions {};
         class tracking_nearbyTracks {};
         class tracking_preInit {
             preInit = 1;
@@ -334,6 +347,15 @@ class vgm_c
         VGM_CLIENT_PATH(\debug\client);
 
         class initDebugMenu
+        {
+            postInit = 1;
+        };
+    };
+
+    class ai
+    {
+        VGM_CLIENT_PATH(\systems\ai\client);
+        class ai_postInit
         {
             postInit = 1;
         };
@@ -383,6 +405,15 @@ class vgm_c
         class displayStaminaBar {};
         class displayEndOfMission {};
         class displayMenuBase {};
+    };
+
+    class artillery
+    {
+        VGM_CLIENT_PATH(\systems\artillery\client);
+
+        class artillery_addActions {};
+        class artillery_menu {};
+        class artillery_removeActions {};
     };
 
     class carry
@@ -442,7 +473,6 @@ class vgm_c
     class mission_director
     {
         VGM_CLIENT_PATH(\systems\mission_director\client);
-        class director_sendRecentShotsToServer {};
         class director_startClientsideMonitoring {};
         class director_stopClientsideMonitoring {};
     };
@@ -559,8 +589,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\shared_hub\client);
 
-        class sharedHub_areaLimiterDisable {};
-        class sharedHub_areaLimiterEnable {};
+        class sharedHub_disableHub {};
+        class sharedHub_enableHub {};
+        class sharedHub_drawPlaque3d {};
         class sharedHub_postInit
         {
             postInit = 1;
@@ -815,6 +846,8 @@ class vgm_c
         {
             postInit = 1;
         };
+
+        class squad_ui_drawPlayersOnMapEventHandler {};
     };
 
     class stamina

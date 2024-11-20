@@ -73,14 +73,14 @@ class vgm_s
     class mission_director
     {
         VGM_SERVER_PATH(\systems\mission_director\server);
-        class director_handlePlayerExplosion {};
-        class director_handlePlayerShots {};
         class director_preInit {
             preInit = 1;
         };
+        class director_onPlayerNoiseEvent {};
         class director_processMission {};
         class director_registerGroups {};
         class director_spawnInitialPatrols {};
+        class director_spawnTracker {};
         class director_startMission {};
         class director_stopMission {};
     };
@@ -240,6 +240,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\locations\server);
 
         class loc_areRequirementsMet {};
+        class loc_eden_allLocationEntities {};
         class loc_eden_createLocationIndexAllTargetBoxes {};
         class loc_eden_getLocationsByTargetBox {};
         class loc_eden_indexAllTargetBoxLocations {};
@@ -247,6 +248,7 @@ class vgm_s
         class loc_eden_getTargetBoxMarkers {};
         class loc_eden_showOverlay {};
         class loc_eden_showReport {};
+        class loc_eden_transformLocationNames {};
         class loc_getLocationTypes {};
         class loc_getTargetBoxIds {};
         class loc_getTargetBoxLocations {};

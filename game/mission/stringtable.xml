@@ -18,6 +18,24 @@
         <Key ID="STR_VGM_SHARED_HUB_TELEPORT_NOTIFICATION">
             <Original>You've wandered too far...</Original>
         </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_ARSENAL">
+            <Original>Armory</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_ARSENAL_SUB">
+            <Original>Change equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_SKILLS">
+            <Original>Radio</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_SKILLS_SUB">
+            <Original>Select skills and assign active abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_MISSIONS">
+            <Original>Tactical map</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_MISSIONS_SUB">
+            <Original>Select skills and assign active abilities</Original>
+        </Key>
     </Package>
     <Package name="Skills UI">
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
@@ -266,6 +284,9 @@
         </Key>
         <!-- Recon -->
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
+            <Original>Better Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC">
             <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE">

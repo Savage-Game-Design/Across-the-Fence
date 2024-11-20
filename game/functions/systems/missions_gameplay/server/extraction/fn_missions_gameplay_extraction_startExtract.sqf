@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2024-05-24
+    Last Update: 2024-11-07
     Public: No
 
     Description:
@@ -21,7 +21,8 @@
 
 params [
     "_missionId",
-    "_lzPosition",
+    ["_lzPosition", []],
+    ["_useExactLzPosition", false],
     ["_class", "vn_b_air_uh1d_02_07"],
     ["_distance", 3000],
     ["_originPos", markerPos "vgm_shared_hub"]
@@ -39,6 +40,25 @@ if (!(_playerGroup getVariable ["vgm_missions_extraction_canRequest", true])) ex
 };
 _playerGroup setVariable ["vgm_missions_extraction_canRequest", false, true];
 
+// Only doing this calculation serverside, as the client doesn't have target box location data.
+if (_lzPosition isEqualTo []) then {
+    private _targetBox = _mission get "public" get "targetZone";
+    private _lzs = ([_targetBox] call vgm_s_fnc_loc_getTargetBoxLocations) get "lz";
+    private _playerToExtract = leader _playerGroup;
+    if (isNull _playerToExtract) then {
+        _playerToExtract = selectRandom units _playerGroup;
+    };
+    private _lzsByDistance = _lzs apply {[_x distance2D _playerToExtract, _x]};
+    _lzsByDistance sort true;
+
+    _lzPosition = _lzsByDistance # 0 # 1;
+    _useExactLzPosition = true;
+};
+
+if (_lzPosition isEqualTo []) exitWith {
+    format ["Unable to extract, no LZ position found: %1", _missionId] call vgm_g_fnc_logError;
+};
+
 // spawn the helicopter, coming from the direction of the origin pos
 private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
 
@@ -50,7 +70,7 @@ _helicopter setDir random 360;
 private _group = group _helicopter;
 
 private _safeLzPosition = _lzPosition findEmptyPosition [0, 100, _class];
-if (_safeLzPosition isEqualTo []) then {
+if (_useExactLzPosition || _safeLzPosition isEqualTo []) then {
     _safeLzPosition = _lzPosition;
 };
 
