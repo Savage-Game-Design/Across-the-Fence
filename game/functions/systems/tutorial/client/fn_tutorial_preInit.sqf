@@ -12,6 +12,7 @@
 
 */
 
+if (!hasInterface) exitWith {};
 [] call para_c_fnc_ui_hints_setup;
 
 [

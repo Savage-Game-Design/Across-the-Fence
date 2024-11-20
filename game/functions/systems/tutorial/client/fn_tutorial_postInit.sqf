@@ -28,7 +28,7 @@ private _categories = configProperties [missionConfigFile >> "CfgHints", "isClas
             private _markerSize = markerSize _marker;
             _trigger setTriggerArea [_markerSize # 0, _markerSize # 1, markerDir _marker, markerShape _marker isEqualTo "RECTANGLE"];
             _trigger setTriggerStatements [
-                "this && player in thisList",
+                "player in thisList",
                 format ["['%1', '%2'] call vgm_c_fnc_tutorial_trigger;", configName _categoryConfig, configName _hintConfig],
                 ""
             ];
