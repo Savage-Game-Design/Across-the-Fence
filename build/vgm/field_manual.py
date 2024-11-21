@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 
 import tomllib
-from typing import Optional, TypedDict, cast
+from typing import Any, Optional, TypedDict, cast
 
 import sgd.arma_config as arma_config
 import sgd.arma_stringtable as arma_stringtable
@@ -60,6 +60,7 @@ class _PageDefinition(TypedDict):
     tip: Optional[StrDef]
     arguments: Optional[list[str]]
     image: Optional[str]
+    Triggers: Optional[dict[str, Any]]
 
 
 class FieldManualConfigBuilder:
@@ -159,6 +160,13 @@ class FieldManualConfigBuilder:
                 "arguments",
                 arma_config.Array([arma_config.String(arg) for arg in arguments])
             )
+
+        triggers = page_def.get("Triggers", None)
+        if triggers and len(triggers) > 0:
+            print(triggers)
+            trigger_entry = arma_config.python_type_to_config_entry("Triggers", triggers)
+            if trigger_entry:
+                page.add(trigger_entry)
 
         return page
 
