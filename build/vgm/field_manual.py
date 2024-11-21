@@ -20,7 +20,7 @@ def _replace_text_between_positions(original: str, new: str, start: int, end: in
     return original[0:start] + new + original[end:]
 
 # Matches whitespace at start of line, followed by `- ` or `* ``
-bullet_regex = re.compile(r"^\s+(-|\*) ")
+bullet_regex = re.compile(r"^\s*(-|\*) ")
 # Matches args, in format {1} {21}, etc. Unless preceeded by a backslash, such as \{1}
 arg_regex = re.compile(r"(?<!\\)\{(\d+)\}")
 def format_description_line(original_text: str) -> str:
@@ -86,13 +86,19 @@ class FieldManualConfigBuilder:
                 new_text = [f"localize '{stringtable_key}'"] + text[1:]
                 return arma_config.EvalFormattedString(new_text)
 
-            return arma_config.String("".join(text))
+            joined_text = "".join(text)
 
-        return arma_config.String(text)
+            return arma_config.String("$" + self.add_to_stringtable(key_segments, joined_text))
 
-    def _prepare_description(self, segments: list[str], text: str) -> str:
+        # Already a stringtable entry - don't add again.
+        if "$STR" in text:
+            return arma_config.String(text)
+
+        return arma_config.String("$" + self.add_to_stringtable(key_segments, text))
+
+    def _prepare_description(self, key_segments: list[str], text: str) -> str:
         description = format_description(text)
-        return self.add_to_stringtable(segments, description)
+        return arma_config.String("$" + self.add_to_stringtable(key_segments, description))
 
     def add_category(
         self,
@@ -131,6 +137,11 @@ class FieldManualConfigBuilder:
 
         page.addProperty("displayName", self.add_formattable_text([page_name], page_def["displayName"]))
 
+        page.addProperty(
+            "description",
+            self._prepare_description([page_name, "DESC"], page_def["description"])
+        )
+
         tip = page_def.get("tip", None)
         if tip:
             page.addProperty("tip", self.add_formattable_text([page_name, "TIP"], tip))
@@ -141,12 +152,10 @@ class FieldManualConfigBuilder:
 
         arguments = page_def.get("arguments", None)
         if arguments:
-            page.addProperty("arguments", arma_config.Array(arguments))
-
-        page.addProperty(
-            "description",
-            arma_config.String(self._prepare_description([page_name, "DESC"], page_def["description"]))
-        )
+            page.addProperty(
+                "arguments",
+                arma_config.Array([arma_config.String(arg) for arg in arguments])
+            )
 
         return page
 
@@ -175,12 +184,10 @@ def parse_field_manual_entries(files_root: Path) -> tuple[list[arma_config.Class
 
     return builder.categories, builder.stringtable_entries
 
-        # TODO Merge them when done
+def update_field_manual(files_root: Path):
+    category_configs, stringtable_entries = parse_field_manual_entries(files_root / "field_manual")
 
-# Read in TOML field manual entries
+    config = arma_config.Config(category_configs)
 
-# Generate stringtable descriptions
-
-# Generate field manual config
-
-# Write to files
+    with open(files_root / "game" / "configs" / "mission" / "cfg_field_manual.hpp", "w") as field_manual_file:
+        field_manual_file.write(config.to_string())

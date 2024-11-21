@@ -2,7 +2,7 @@ logicalOrder = 4
 
 displayName = "Medical system"
 description = """
-[h]%11[/h] introduces simple yet impactful medical system featuring:
+[h]{1}[/h] introduces simple yet impactful medical system featuring:
 - Increased player durability
 - Location-aware injuries that impact gameplay
 - Slow bleed-out, if left untreated
@@ -10,13 +10,13 @@ description = """
 <t size="1.25">Medical menu</t>
 [h]Medical menu[/h] allows treatment of the injuries suffered by player characters.
 To treat an injury you need to select an injured body part from the character [h]silhouette[/h] and apply [h]medication[/h] on it.
-Press [h]"[/h]%12[h]"[/h] to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.
-Alternatively press [h]"[/h]%13[h]"[/h] to open the medical menu of your character.
+Press [h]"[/h]{2}[h]"[/h] to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.
+Alternatively press [h]"[/h]{3}[h]"[/h] to open the medical menu of your character.
 
 <t size="1.1">Medication</t>
 Available medication items:
 - First Aid Kit - Heals single wound level, single use, can be used by anybody
-- Medikit - Heals single wound level, infinite uses, can be used by players with "%14" skill from the [h]Support[/h] tree
+- Medikit - Heals single wound level, infinite uses, can be used by players with "{4}" skill from the [h]Support[/h] tree
 
 <t size="1.1">Debuffs</t>
 Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts:
@@ -35,20 +35,20 @@ Once all players in the mission are [h]unconscious[/h], the mission fails.
 tip = "Bullets. Shrapnel. Recon teams rarely made it out unscathed."
 
 arguments = [
-    "localize 'STR_VGM_MISSION_NAME'",
-    """
-    [
-        ['OpenMedicalMenu'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
-        true
-    ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')
-    """,
-    """
-    [
-        ['OpenMedicalMenuSelf'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
-        true
-    ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')
-    """,
-    "localize 'STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL'",
+"localize 'STR_VGM_MISSION_NAME'",
+"""
+[
+    ['OpenMedicalMenu'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
+    true
+] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')
+""",
+"""
+[
+    ['OpenMedicalMenuSelf'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
+    true
+] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')
+""",
+"localize 'STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL'",
 ]
 
 # Note that this is a literal string with ', so backslashes don't need escaping.

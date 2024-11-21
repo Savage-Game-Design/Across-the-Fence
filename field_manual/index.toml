@@ -11,7 +11,7 @@ pages = [
 
 [vgm_missions]
 
-displayName = ["$STR_VGM_MISSION_NAME", " - ", "Missions"]
+displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
 
 pages = [
     "scouting"
