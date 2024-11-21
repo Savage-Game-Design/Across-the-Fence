@@ -18,6 +18,10 @@
         // sqf:
         _ctrlMyControl = _display displayCtrl VGM_IDC_DISPLAYSEXAMPLE_MYCONTROL;
 */
+
+#define IDC_OK 1
+#define IDC_CANCEL 2
+
 // VGM_ctrlFrame, special frame control
 #define VGM_IDC_CTRLFRAME_T 900
 #define VGM_IDC_CTRLFRAME_L 901
