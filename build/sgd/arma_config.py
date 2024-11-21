@@ -1,6 +1,8 @@
 from abc import abstractmethod
+import builtins
 import re
 from typing import Generic, Optional, Protocol, TypeVar
+import typing
 
 def escape_string(text: str) -> str:
     return text.replace('"', '""')
@@ -140,6 +142,9 @@ class String(Value):
 
     def to_config_lines(self) -> list[str]:
         lines = self.source.splitlines()
+        if len(lines) <= 0:
+            return ['""']
+
         if len(lines) == 1:
             return ['"' + escape_string(lines[0]) + '"']
 
@@ -154,9 +159,9 @@ class String(Value):
         ]
 
 class Number(Value):
-    source: int
+    source: int | float
 
-    def __init__(self, source: int):
+    def __init__(self, source: int | float):
         self.source = source
 
     def to_config_lines(self) -> list[str]:
@@ -179,3 +184,37 @@ class Array(Value, Generic[ArrayMember]):
             all_member_lines.extend(member_lines)
 
         return ['{', *(indent(all_member_lines)), '}']
+
+def python_type_to_config_value(python_val: typing.Any) -> Value | None:
+    match type(python_val):
+        case builtins.int | builtins.float:
+            return Number(python_val)
+        case builtins.str:
+            return String(python_val)
+        case builtins.list:
+            members = [item for item in (python_type_to_config_value(item) for item in python_val) if item is not None]
+            return Array[Value](members)
+
+    return None
+
+def python_type_to_config_entry(name: str, python_val: typing.Any) -> ConfigEntry | None:
+    match type(python_val):
+        case builtins.dict:
+            class_entries = [
+                item
+                for item in (
+                    python_type_to_config_entry(property_name, property_value)
+                    for (property_name, property_value) in python_val.items()
+                )
+                if item is not None
+            ]
+            return Class(name, class_entries)
+
+    value = python_type_to_config_value(python_val)
+    if value:
+        return Property(name, value)
+
+    return None
+
+
+
