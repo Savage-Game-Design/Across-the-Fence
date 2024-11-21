@@ -232,5 +232,17 @@ class VGM_DisplayMedical
             };
         };
 
+        class Help: VGM_ctrlButton
+        {
+            idc = -1;
+            text = "?";
+            colorBackground[] = {0,0,0,0};
+            x = DISPLAY_X + DISPLAY_W * VGM_GRID_W - 4.5 * VGM_GRID_W;
+            y = DISPLAY_Y - (3.5 * VGM_GRID_H);
+            w = 4 * VGM_GRID_W;
+            h = 4 * VGM_GRID_H;
+
+            onButtonClick = "['vgm', 'medical', uiNamespace getVariable 'VGM_DisplayMedical'] call para_c_fnc_ui_hints_openFieldManual";
+        };
     };
 };
