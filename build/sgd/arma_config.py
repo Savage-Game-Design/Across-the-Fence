@@ -130,7 +130,7 @@ class EvalFormattedString(Value):
         if len(self.source) <= 0:
             return [""]
 
-        return [rf"_EVAL(format [" + ", ".join(self.source) + "])"]
+        return [rf"__EVAL(format [" + ", ".join(self.source) + "])"]
 
 class String(Value):
     source: str

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Project name="VGM">
     <Package name="General">
         <Key ID="STR_VGM_MISSION_NAME_VERSION">
@@ -496,7 +496,7 @@
             <English>Extract from AO</English>
         </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_DESCRIPTION">
-            <English>&lt;img image=&quot;\vn\missions_f_vietnam\data\img\m06\ob14.jpg&quot; width=&quot;380&quot; height=&quot;190&quot;/&gt;&lt;br/&gt;Stay alive and wait for extraction.</English>
+            <English>&lt;img image="\vn\missions_f_vietnam\data\img\m06\ob14.jpg" width="380" height="190"/&gt;&lt;br/&gt;Stay alive and wait for extraction.</English>
         </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
@@ -567,13 +567,13 @@
             <Original>Recon teams were skilled warriors, training for the next mission.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_WHEEL_DESC">
-            <Original>&lt;t size=&quot;1.25&quot;&gt;Skill wheel&lt;/t&gt;%1To use one of the skill assigned in the %3Abilities%4 menu, press %3"%11"%4 and select it from the %3Skill wheel%4%1</Original>
+            <Original>&lt;t size="1.25"&gt;Skill wheel&lt;/t&gt;%1To use one of the skill assigned in the %3Abilities%4 menu, press %3"%11"%4 and select it from the %3Skill wheel%4%1</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL">
             <Original>Medical system</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_DESC">
-            <Original>%3%11%4 introduces simple yet impactful medical system featuring:%1%2 Increased player durability%1%2 Location-aware injuries that impact gameplay%1%2 Slow bleed-out, if left untreated%1%1&lt;t size=&quot;1.25&quot;&gt;Medical menu&lt;/t&gt;%1%3Medical menu%4 allows treatment of the injuries suffered by player characters.%1To treat an injury you need to select an injured body part from the character %3silhouette%4 and apply %3medication%4 on it.%1%1Press %3"%4%12%3"%4 to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.%1Alternatively press %3"%4%13%3"%4 to open the medical menu of your character.%1%1&lt;t size=&quot;1.1&quot;&gt;Medication&lt;/t&gt;%1Available medication items:%1%2 First Aid Kit - Heals single wound level, single use, can be used by anybody%1%2 Medikit - Heals single wound level, infinite uses, can be used by players with "%14" skill from the %3Support%4 tree%1%1&lt;t size=&quot;1.1&quot;&gt;Debuffs&lt;/t&gt;%1Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts:%1%2 Head - TODO%1%2 Torso - TODO%1%2 Arms%1%2 Legs - TODO%1Multiple untreaded wounds will cause %3bleeding%4, which if not stopped will cause the character to fall %3unconscious%4.%1%1&lt;t size=&quot;1.1&quot;&gt;Unconsciousnes&lt;/t&gt;%1After receiving critical amount of damage to vital body parts (head, torso) or bleeding out, the player character will fall %3unconscious%4, characters in this state need help of other players to wake up.%1If the player will be abandoned and left alone by other players, he'll %3respawn%4.%1Once all players in the mission are %3unconscious%4, the mission fails.</Original>
+            <Original>%3%11%4 introduces simple yet impactful medical system featuring:%1%2 Increased player durability%1%2 Location-aware injuries that impact gameplay%1%2 Slow bleed-out, if left untreated%1%1&lt;t size="1.25"&gt;Medical menu&lt;/t&gt;%1%3Medical menu%4 allows treatment of the injuries suffered by player characters.%1To treat an injury you need to select an injured body part from the character %3silhouette%4 and apply %3medication%4 on it.%1Press %3"%4%12%3"%4 to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.%1Alternatively press %3"%4%13%3"%4 to open the medical menu of your character.%1%1&lt;t size="1.1"&gt;Medication&lt;/t&gt;%1Available medication items:%1%2 First Aid Kit - Heals single wound level, single use, can be used by anybody%1%2 Medikit - Heals single wound level, infinite uses, can be used by players with "%14" skill from the %3Support%4 tree%1%1&lt;t size="1.1"&gt;Debuffs&lt;/t&gt;%1Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts:%1%2 Head - TODO%1%2 Torso - TODO%1%2 Arms%1%2 Legs - TODO%1Multiple untreaded wounds will cause %3bleeding%4 which if not stopped will cause the character to fall %3unconscious%4.%1%1&lt;t size="1.1"&gt;Unconsciousnes&lt;/t&gt;%1After receiving critical amount of damage to vital body parts (head, torso) or bleeding out, the player character will fall %3unconscious%4, characters in this state need help of other players to wake up.%1If the player will be abandoned and left alone by other players, he'll %3respawn%4.%1Once all players in the mission are %3unconscious%4, the mission fails.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_TIP">
             <Original>Bullets. Shrapnel. Recon teams rarely made it out unscathed.</Original>
@@ -586,6 +586,9 @@
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_TIP">
             <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_MISSIONS">
+            <Original>%1 - Missions</Original>
         </Key>
     </Package>
 </Project>

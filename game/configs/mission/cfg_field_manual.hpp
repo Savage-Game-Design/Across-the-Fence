@@ -23,5 +23,5 @@ class vgm {
 };
 
 class vgm_missions {
-    displayName = _EVAL(format [localize 'STR_VGM_FIELD_MANUAL_VGM_MISSIONS', localize 'STR_VGM_MISSION_NAME']);
+    displayName = __EVAL(format [localize 'STR_VGM_FIELD_MANUAL_VGM_MISSIONS', localize 'STR_VGM_MISSION_NAME']);
 };
