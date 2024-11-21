@@ -19,6 +19,7 @@ def cli():
 @click.command
 @click.option('--overwrite', default=False, is_flag=True)
 def build(overwrite):
+    vgm.field_manual.update_field_manual(root)
     try:
         vgm.build.build_anarchy_as_mission(root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite)
     except OutputFolderExistsError as e:
