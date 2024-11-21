@@ -582,7 +582,7 @@
             <Original>Scouting</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_DESC">
-            <Original>...</Original>
+            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1&lt;t size=&quot;1.25&quot;&gt;Scouting report&lt;/t&gt;%1...</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_TIP">
             <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
