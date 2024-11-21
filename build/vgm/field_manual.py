@@ -1,0 +1,186 @@
+
+from collections import defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+import re
+import string
+
+import tomllib
+from typing import Optional, TypedDict, cast
+
+import sgd.arma_config as arma_config
+
+FieldManualStringtableEntry = tuple[str, str]
+
+def to_stringtable_key(segments: list[str]) -> str:
+    suffix = "_".join(segments).upper()
+    return f"STR_VGM_FIELD_MANUAL_{suffix}"
+
+def _replace_text_between_positions(original: str, new: str, start: int, end: int) -> str:
+    return original[0:start] + new + original[end:]
+
+# Matches whitespace at start of line, followed by `- ` or `* ``
+bullet_regex = re.compile(r"^\s+(-|\*) ")
+# Matches args, in format {1} {21}, etc. Unless preceeded by a backslash, such as \{1}
+arg_regex = re.compile(r"(?<!\\)\{(\d+)\}")
+def format_description_line(original_text: str) -> str:
+    text = original_text
+    bullet_match = bullet_regex.match(text)
+    # Replace - or * with bullet, if it's starting a line (after whitespace)
+    if bullet_match:
+        text = _replace_text_between_positions(text, "%2", bullet_match.start(1), bullet_match.end(1))
+
+    text = text.replace("[h]", "%3")
+    text = text.replace("[/h]", "%4")
+
+    while arg_match := arg_regex.search(text):
+        arg_index = int(arg_match.group(1), 10)
+        arg_code = 10 + arg_index
+        text = _replace_text_between_positions(text, f"%{arg_code}", arg_match.start(), arg_match.end())
+
+    return text
+
+
+def format_description(text: str) -> str:
+    lines = text.splitlines()
+    return "%1".join(map(format_description_line, lines))
+
+# Normal string, or an _EVAL formatted string
+StrDef = str | list[str]
+
+class _CategoryDefinition(TypedDict):
+    displayName: StrDef
+    pages: list[str]
+    logicalOrder: Optional[int]
+
+class _PageDefinition(TypedDict):
+    logicalOrder: Optional[int]
+    displayName: StrDef
+    # This is heavily processed, so needs to strictly be a string.
+    description: str
+    tip: Optional[StrDef]
+    arguments: Optional[list[str]]
+    image: Optional[str]
+
+
+class FieldManualConfigBuilder:
+    stringtable_entries: list[FieldManualStringtableEntry]
+    categories: list[arma_config.Class]
+
+    def __init__(self):
+        self.stringtable_entries = []
+        self.categories = []
+
+    def add_to_stringtable(self, key_segments: list[str], text: str) -> str:
+        key = to_stringtable_key(key_segments)
+        self.stringtable_entries.append((key, text))
+        return key
+
+    def add_formattable_text(self, key_segments: list[str], text: StrDef) -> arma_config.Value:
+        if isinstance(text, list):
+            if len(text) == 0:
+                return arma_config.String("")
+
+            if "%" in text[0]:
+                stringtable_key = self.add_to_stringtable(key_segments, text[0])
+                new_text = [f"localize '{stringtable_key}'"] + text[1:]
+                return arma_config.EvalFormattedString(new_text)
+
+            return arma_config.String("".join(text))
+
+        return arma_config.String(text)
+
+    def _prepare_description(self, segments: list[str], text: str) -> str:
+        description = format_description(text)
+        return self.add_to_stringtable(segments, description)
+
+    def add_category(
+        self,
+        category_name: str,
+        category_def: _CategoryDefinition,
+        page_defs: dict[str, _PageDefinition]
+    ) -> arma_config.Class:
+        category = arma_config.Class(category_name)
+
+        logicalOrder = category_def.get("logicalOrder", None)
+        if logicalOrder:
+            category.addProperty("logicalOrder", arma_config.Number(logicalOrder))
+
+        category.addProperty(
+            "displayName",
+            self.add_formattable_text([category_name], category_def["displayName"])
+        )
+
+        for page_name in category_def["pages"]:
+            page_def = page_defs.get(page_name, None)
+            if not page_def:
+                print(f"No page found for '{category_name}' -> '{page_name}'")
+                continue
+            category.add(self._make_page(page_name, page_def))
+
+        self.categories.append(category)
+
+        return category
+
+    def _make_page(self, page_name: str, page_def: _PageDefinition) -> arma_config.Class:
+        page = arma_config.Class(page_name)
+
+        logicalOrder = page_def.get("logicalOrder", None)
+        if logicalOrder:
+            page.addProperty("logicalOrder", arma_config.Number(logicalOrder))
+
+        page.addProperty("displayName", self.add_formattable_text([page_name], page_def["displayName"]))
+
+        tip = page_def.get("tip", None)
+        if tip:
+            page.addProperty("tip", self.add_formattable_text([page_name, "TIP"], tip))
+
+        image = page_def.get("image", None)
+        if image:
+            page.addProperty("image", arma_config.String(image))
+
+        arguments = page_def.get("arguments", None)
+        if arguments:
+            page.addProperty("arguments", arma_config.Array(arguments))
+
+        page.addProperty(
+            "description",
+            arma_config.String(self._prepare_description([page_name, "DESC"], page_def["description"]))
+        )
+
+        return page
+
+
+def _read_toml_file(file_path: Path) -> dict:
+    with open(file_path, "rb") as toml_file:
+        return tomllib.load(toml_file)
+
+def parse_field_manual_entries(files_root: Path) -> tuple[list[arma_config.Class], list[FieldManualStringtableEntry]]:
+    builder = FieldManualConfigBuilder()
+
+    category_defs: dict[str, _CategoryDefinition] = _read_toml_file(files_root / "index.toml")
+
+    for (category_name, category_definition) in category_defs.items():
+        page_definitions = {}
+        for page_name in category_definition["pages"]:
+            page_file_name = f"{page_name}.toml"
+            page_path = files_root / page_file_name
+            if not page_path.exists():
+                print(f"Cannot build field manual entry '{category_name} -> {page_name}', source file '{page_file_name}' found.")
+                continue
+            page_definition = cast(_PageDefinition, _read_toml_file(page_path))
+            page_definitions[page_name] = page_definition
+
+        builder.add_category(category_name, category_definition, page_definitions)
+
+    return builder.categories, builder.stringtable_entries
+
+        # TODO Merge them when done
+
+# Read in TOML field manual entries
+
+# Generate stringtable descriptions
+
+# Generate field manual config
+
+# Write to files

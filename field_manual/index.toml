@@ -1,0 +1,18 @@
+[vgm]
+displayName = "$STR_VGM_MISSION_NAME"
+
+# Pages require a matching {pagename}.toml file.
+pages = [
+    "getting_started",
+    "missions",
+    "skills",
+    "medical",
+]
+
+[vgm_missions]
+
+displayName = ["$STR_VGM_MISSION_NAME", " - ", "Missions"]
+
+pages = [
+    "scouting"
+]
