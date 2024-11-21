@@ -1,14 +1,13 @@
-
-from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 import re
-import string
 
 import tomllib
 from typing import Optional, TypedDict, cast
 
 import sgd.arma_config as arma_config
+import sgd.arma_stringtable as arma_stringtable
+from sgd.arma_stringtable import StringtableEntry, Stringtable
 
 FieldManualStringtableEntry = tuple[str, str]
 
@@ -64,7 +63,7 @@ class _PageDefinition(TypedDict):
 
 
 class FieldManualConfigBuilder:
-    stringtable_entries: list[FieldManualStringtableEntry]
+    stringtable_entries: list[StringtableEntry]
     categories: list[arma_config.Class]
 
     def __init__(self):
@@ -73,7 +72,11 @@ class FieldManualConfigBuilder:
 
     def add_to_stringtable(self, key_segments: list[str], text: str) -> str:
         key = to_stringtable_key(key_segments)
-        self.stringtable_entries.append((key, text))
+        entry = StringtableEntry(key, {
+            "Original": text,
+            "English": text,
+        })
+        self.stringtable_entries.append(entry)
         return key
 
     def add_formattable_text(self, key_segments: list[str], text: StrDef) -> arma_config.Value:
@@ -96,7 +99,7 @@ class FieldManualConfigBuilder:
 
         return arma_config.String("$" + self.add_to_stringtable(key_segments, text))
 
-    def _prepare_description(self, key_segments: list[str], text: str) -> str:
+    def _prepare_description(self, key_segments: list[str], text: str) -> arma_config.String:
         description = format_description(text)
         return arma_config.String("$" + self.add_to_stringtable(key_segments, description))
 
@@ -164,7 +167,12 @@ def _read_toml_file(file_path: Path) -> dict:
     with open(file_path, "rb") as toml_file:
         return tomllib.load(toml_file)
 
-def parse_field_manual_entries(files_root: Path) -> tuple[list[arma_config.Class], list[FieldManualStringtableEntry]]:
+@dataclass
+class ParseResult:
+    categories: list[arma_config.Class]
+    stringtable_entries: list[StringtableEntry]
+
+def parse_field_manual_entries(files_root: Path) -> ParseResult:
     builder = FieldManualConfigBuilder()
 
     category_defs: dict[str, _CategoryDefinition] = _read_toml_file(files_root / "index.toml")
@@ -182,12 +190,23 @@ def parse_field_manual_entries(files_root: Path) -> tuple[list[arma_config.Class
 
         builder.add_category(category_name, category_definition, page_definitions)
 
-    return builder.categories, builder.stringtable_entries
+    return ParseResult(builder.categories, builder.stringtable_entries)
 
 def update_field_manual(files_root: Path):
-    category_configs, stringtable_entries = parse_field_manual_entries(files_root / "field_manual")
+    result: ParseResult = parse_field_manual_entries(files_root / "field_manual")
 
-    config = arma_config.Config(category_configs)
+    # Additional `list` call here fixes a weird type error
+    config = arma_config.Config(list(result.categories))
 
     with open(files_root / "game" / "configs" / "mission" / "cfg_field_manual.hpp", "w") as field_manual_file:
         field_manual_file.write(config.to_string())
+
+    patch_stringtable = Stringtable()
+    field_manual_package = patch_stringtable.get_or_create_package("Field Manual")
+    for entry in result.stringtable_entries:
+        field_manual_package.add_entry(entry)
+
+    arma_stringtable.patch_file(
+        files_root / "game" / "mission" / "stringtable.xml",
+        patch_stringtable
+    )

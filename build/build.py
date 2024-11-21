@@ -2,6 +2,7 @@ import click
 import config
 from pathlib import Path
 import sgd.arma_config
+import sgd.arma_stringtable
 import sgd.file_tree
 import vgm.build
 from vgm.build import OutputFolderExistsError

@@ -1,6 +1,5 @@
 from abc import abstractmethod
 import re
-import types
 from typing import Generic, Optional, Protocol, TypeVar
 
 def escape_string(text: str) -> str:
@@ -83,7 +82,9 @@ class ConfigEntryCollection:
     def entries(self):
         return self._children
 
-class Class(ConfigEntryCollection, ConfigEntry):
+class Class(ConfigEntryCollection):
+    name: str
+
     def __init__(self, name: str, members: list[ConfigEntry] = []):
         super().__init__(members)
         self.name = name
@@ -172,13 +173,9 @@ class Array(Value, Generic[ArrayMember]):
         all_member_lines = []
         for member in self.source:
             member_lines= member.to_config_lines()
-            print(member_lines)
             if len(member_lines) <= 0:
                 continue
             member_lines[-1] = member_lines[-1] + ","
             all_member_lines.extend(member_lines)
 
         return ['{', *(indent(all_member_lines)), '}']
-
-
-
