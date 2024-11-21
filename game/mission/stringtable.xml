@@ -544,4 +544,9 @@
             <English>Scout the area for enemy sites and note them in your "Scouting Report".&lt;br/&gt;&lt;br/&gt;HQ suggests checking following grids:&lt;br/&gt;%1</English>
         </Key>
     </Package>
+    <Package name="Tutorial">
+        <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">
+            <English>Acknowledge Hint</English>
+        </Key>
+    </Package>
 </Project>
