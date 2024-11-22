@@ -1,4 +1,5 @@
 [vgm]
+order = 1
 displayName = "$STR_VGM_MISSION_NAME"
 
 # Pages require a matching {pagename}.toml file.
@@ -10,7 +11,7 @@ pages = [
 ]
 
 [vgm_missions]
-
+order = 2
 displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
 
 pages = [

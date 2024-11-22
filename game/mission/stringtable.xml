@@ -549,25 +549,25 @@
             <Original>Getting started</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC">
-            <English>%3%11%4 brings together role-playing elements and player specialisations to create thrilling behind enemy lines recon gamemode.%1You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.%1Completing missions earns XP and grows your abilities as you mature into a MACV SOG 1-0.%1%1%2 Start by going into nearby TOC%1%2 Grab your favorite gear from the %3Armory%4%1%2 Adjust your skills at the %3Radio%4%1%2 Create or join a mission from the %3Tactical map%4%1%2 Once your team is ready, start the mission from the %3Tactical map%4</English>
+            <Original>%3%11%4 brings together role-playing elements and player specialisations to create a thrilling behind enemy lines recon gamemode.%1You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.%1Completing missions earns XP and grows your abilities as you mature into a MACV SOG 1-0.%1%1%2 Start by going into nearby TOC%1%2 Grab your favorite gear from the %3Armory%4%1%2 Adjust your skills at the %3Radio%4%1%2 Create or join a mission from the %3Tactical map%4%1%2 Once your team is ready, start the mission from the %3Tactical map%4</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_TIP">
+            <Original>&lt;br/&gt;"%1"</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS">
             <Original>Missions</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_DESC">
-            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3Tactical map%4, select your Area of Operations (WIP) and %3start mission%4.%1You'll be inserted deep behind enemy lines, with a objective varying on a type of the mission you've choosen.%1Once you will finish the mission whole team will be awared experience, with the amount dependent on your team performance and objective completion.%1%1Currently available mission types:%1%2 Scouting</Original>
+            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS">
             <Original>Skills</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_DESC">
-            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix them, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, you will earn them for leveling up, to level up you need to gather experience which can be achieved by running the recon missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1%11</Original>
+            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix skills from all archetypes, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, which are gained by leveling up. To level up, you need to gather experience by running missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1%11</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_TIP">
             <Original>Recon teams were skilled warriors, training for the next mission.</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_WHEEL_DESC">
-            <Original>&lt;t size="1.25"&gt;Skill wheel&lt;/t&gt;%1To use one of the skill assigned in the %3Abilities%4 menu, press %3"%11"%4 and select it from the %3Skill wheel%4%1</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL">
             <Original>Medical system</Original>
@@ -578,17 +578,17 @@
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_TIP">
             <Original>Bullets. Shrapnel. Recon teams rarely made it out unscathed.</Original>
         </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING">
-            <Original>Scouting</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_DESC">
-            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1&lt;t size=&quot;1.25&quot;&gt;Scouting report&lt;/t&gt;%1...</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_SCOUTING_TIP">
-            <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
-        </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_VGM_MISSIONS">
             <Original>%1 - Missions</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING">
+            <Original>Scouting</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_DESC">
+            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1&lt;t size="1.25"&gt;Scouting report&lt;/t&gt;%1...</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_TIP">
+            <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
         </Key>
     </Package>
     <Package name="Tutorial">

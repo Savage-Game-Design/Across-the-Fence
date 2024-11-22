@@ -1,0 +1,22 @@
+displayName = "Getting started"
+description = """
+[h]{1}[/h] brings together role-playing elements and player specialisations to create a thrilling behind enemy lines recon gamemode.
+You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.
+Completing missions earns XP and grows your abilities as you mature into a MACV SOG 1-0.
+
+- Start by going into nearby TOC
+- Grab your favorite gear from the [h]Armory[/h]
+- Adjust your skills at the [h]Radio[/h]
+- Create or join a mission from the [h]Tactical map[/h]
+- Once your team is ready, start the mission from the [h]Tactical map[/h]
+"""
+
+tip = [
+    '<br/>"%1"',
+    "selectRandom getArray (configFile >> 'CfgWorlds' >> 'cam_lao_nam' >> 'loadingTexts')"
+]
+
+arguments = ["localize 'STR_VGM_MISSION_NAME'"]
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\miss_icon_ca.paa'
