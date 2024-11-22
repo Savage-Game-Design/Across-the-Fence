@@ -45,4 +45,6 @@ call para_c_fnc_tool_controller_init;
 
 call vgm_c_fnc_handle_light_level_loop;
 
+["init_player_ready", []] call para_g_fnc_event_triggerLocal;
+
 diag_log "VGM client init finished";

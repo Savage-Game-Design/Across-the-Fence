@@ -11,7 +11,8 @@ There's two types of skills:
     - Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission
     - Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission
 
-{1}
+<size="1.25">Skill wheel</t>
+To use one of the skills assigned in the [h]Abilities[/h] menu, press [h]"{1}"[/h] and select it from the [h]Skill wheel[/h]
 """
 
 tip = "Recon teams were skilled warriors, training for the next mission."
@@ -21,10 +22,7 @@ arguments = [
 private _key = [
     ['OpenActiveSkillWheel'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
     true
-] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind');
-_key = [_key];
-
-format ([localize 'STR_VGM_FIELD_MANUAL_SKILLS_WHEEL_DESC'] + ([[_key]] call BIS_fnc_advHintArg))
+] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')
 """,
 ]
 

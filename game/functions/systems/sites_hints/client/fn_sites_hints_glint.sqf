@@ -3,7 +3,7 @@
     File: fn_sites_hints_glint.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-15
+    Last Update: 2024-11-23
     Public: Yes
 
     Description:
@@ -56,3 +56,5 @@ addMissionEventHandler ["EachFrame", {
     _thisArgs set [2, _frame];
 
 }, [_object, 0, 1, 1, _iterations]];
+
+["vgm_sites_hints_glint", [_object]] call para_g_fnc_event_triggerLocal;

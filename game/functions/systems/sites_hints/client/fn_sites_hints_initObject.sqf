@@ -2,7 +2,7 @@
     File: fn_sites_hints_initObject.sqf
     Author: Savage Game Design
     Date: 2024-10-27
-    Last Update: 2024-11-02
+    Last Update: 2024-11-23
     Public: No
 
     Description:
