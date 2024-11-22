@@ -405,6 +405,7 @@ class vgm_c
         class displayStaminaBar {};
         class displayEndOfMission {};
         class displayMenuBase {};
+        class displayLoading {};
     };
 
     class artillery

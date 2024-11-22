@@ -1,12 +1,12 @@
 #define _PICTURE_H (safeZoneH * 0.70)
 #define _PICTURE_W (_PICTURE_H)
 #define _PROGRESS_BAR_W (_PICTURE_H * 0.98)
-#define _PROGRESS_BAR_H (0.007 * safeZoneH)
+#define _PROGRESS_BAR_H (0.01 * safeZoneH)
 #define _TEXT_H (0.03 * safeZoneH)
 
 class VGM_DisplayLoading {
     idd = -1;
-    onLoad = "uiNamespace setVariable ['vgm_displayLoading', _this select 0]";
+    onLoad = VGM_UIEH(onLoad,Loading);
     duration = 1e39;
     fadeIn = 0;
     fadeOut = 0;
@@ -22,8 +22,6 @@ class VGM_DisplayLoading {
             w = "safezoneWAbs";
             h = "safezoneH";
         };
-        // based on:
-        // configFile >> "RscDisplayLoading" >> "Variants" >> "Loading" >> "controlsBackground" >> "Map"
         class Table: RscPictureKeepAspect
         {
             // 2048 x 1024
@@ -54,14 +52,35 @@ class VGM_DisplayLoading {
 
     class Controls {
         class Header: RscControlsGroupNoScrollbars {
+            x = "safeZoneX";
+            y = "safeZoneY";
+            w = "safeZoneW";
+            h = "safeZoneH * 0.07";
+
             class Controls {
-                class Title: RscText {
+                class Title: RscStructuredText {
+                    idc = 5003;
+                    w = "safeZoneW";
+                    h = "safeZoneH * 0.07";
+
+                    text = "-";
+
+                    colorBackground[] = {0,0,0,0.45};
+                };
+
+                class SGD: RscPictureKeepAspect {
+                    x = "safeZoneW - safeZoneH * 0.07";
+                    w = "safeZoneH * 0.07";
+                    h = "safeZoneH * 0.07";
+
+                    pixelPrecise = 0;
+                    text = "\vn\ui_f_vietnam\data\logo\savage_ca.paa";
                 };
             };
         };
         class LoadingPicture: RscText {
             idc = 5002;
-            style = ST_PICTURE + ST_KEEP_ASPECT_RATIO;
+            style = QUOTE(ST_PICTURE + ST_KEEP_ASPECT_RATIO);
             text = __EVAL(\
                 selectRandom [\
                     "\vn\objects_f_vietnam\civ\signs\data\billboards\vn_ui_billboard_01_ca.paa",\
@@ -83,6 +102,8 @@ class VGM_DisplayLoading {
             x = safeZoneX + safezoneW/2 - _PICTURE_W/2;
             y = safeZoneY + safeZoneH/2 - _PICTURE_H*2/2;
             w = _PICTURE_W;
+            // the images are squares with 25% of top and bottom being empty space,
+            // we expand the image vertically to offset that
             h = _PICTURE_H*2;
         };
         class LoadingProgress: RscProgress {
@@ -97,10 +118,10 @@ class VGM_DisplayLoading {
             colorFrame[] = {1,1,1,0.7};
             texture = "#(argb,8,8,3)color(1,1,1,1)";
 
-            x = safeZoneX + safezoneW/2 - _PROGRESS_BAR_W/2;
-            y = safeZoneY + safeZoneH/2 + _PICTURE_H/2 + 1.7*_PROGRESS_BAR_H;
-            w = _PROGRESS_BAR_W;
-            h = _PROGRESS_BAR_H;
+            x = QUOTE(safeZoneX + safezoneW/2 - _PROGRESS_BAR_W/2);
+            y = QUOTE(safeZoneY + safeZoneH/2 + _PICTURE_H/2 + _PROGRESS_BAR_H);
+            w = QUOTE(_PROGRESS_BAR_W);
+            h = QUOTE(_PROGRESS_BAR_H);
         };
         class LoadingText: RscStructuredText {
             idc = 5050;
@@ -113,7 +134,7 @@ class VGM_DisplayLoading {
             };
 
             x = safeZoneX;
-            y = safeZoneY + safeZoneH/2 + _PICTURE_H/2 + 1.7*_PROGRESS_BAR_H*2 + _PROGRESS_BAR_H;
+            y = safeZoneY + safeZoneH/2 + _PICTURE_H/2 + _PROGRESS_BAR_H*2 + _PROGRESS_BAR_H;
             w = safeZoneW;
             h = _TEXT_H;
         };
