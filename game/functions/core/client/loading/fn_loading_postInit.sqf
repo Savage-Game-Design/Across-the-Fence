@@ -2,17 +2,11 @@
     File: fn_loading_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-08
-    Last Update: 2023-09-15
+    Last Update: 2024-11-22
     Public: No
 
     Description:
         Client postInit function for loading system.
-
-    Parameter(s):
-        N/A
-
-    Returns:
-        Nothing
  */
 
 #define TIMEOUT 30
