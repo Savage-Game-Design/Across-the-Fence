@@ -591,4 +591,9 @@
             <Original>%1 - Missions</Original>
         </Key>
     </Package>
+    <Package name="Tutorial">
+        <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">
+            <Original>Acknowledge Hint</Original>
+        </Key>
+    </Package>
 </Project>

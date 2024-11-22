@@ -14,7 +14,7 @@
 #include "VGM_DisplayEndOfMission.hpp"
 
 import RscHealthTextures from RscTitles;
-class RscTitles
+class RscTitles : ParadigmRscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
     #include "VGM_RscMedicalStatus.hpp"
