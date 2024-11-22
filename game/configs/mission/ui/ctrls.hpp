@@ -1,5 +1,6 @@
 import RscText;
 import RscPicture;
+import RscPictureKeepAspect;
 import RscProgress;
 import RscStructuredText;
 import RscMapControlEmpty;
