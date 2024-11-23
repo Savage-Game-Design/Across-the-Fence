@@ -2,7 +2,7 @@
     File: fn_disableHub.sqf
     Author: veteran29
     Date: 2022-12-03
-    Last Update: 2024-11-16
+    Last Update: 2024-11-23
     Public: Yes
 
     Description:
@@ -20,4 +20,4 @@
 
 terminate (missionNamespace getVariable ["vgm_sharedHub_areaLimiterScript", scriptNull]);
 
-removeMissionEventHandler (missionNamespace getVariable ["vgm_sharedHub_iconsDraw3D", -1]);
+removeMissionEventHandler ["Draw3D", missionNamespace getVariable ["vgm_sharedHub_iconsDraw3D", -1]];
