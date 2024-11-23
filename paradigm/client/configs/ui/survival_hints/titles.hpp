@@ -1,6 +1,7 @@
 #define _W 10
 #define _H 14
 #define _YTOP 7
+#define _ARR_2(ARG1, ARG2) ARG1, ARG2
 class para_RscSurvivalHints
 {
 	idd = -1;
@@ -16,22 +17,23 @@ class para_RscSurvivalHints
 			// Hide this by default, we manually create cards
 			show = 0;
 			idc = PARA_RSCSURVIVALHINTS_CARD1_IDC;
-			x = UIX_RL((_W + 0.1));
-			y = UIY_TD((_YTOP + 2));
+			x = QUOTE(profileNamespace getVariable _ARR_2(['IGUI_GRID_HINT_X', UIX_RL(_W + 0.1)]));
+			y = QUOTE((profileNamespace getVariable _ARR_2(['IGUI_GRID_HINT_Y', UIY_TD(_YTOP)])) + (UIH(2)));
 		};
 		//--- This is for some reason the right order...
 		class SurvivalCardBottom: SurvivalCardTop
 		{
 			idc = PARA_RSCSURVIVALHINTS_CARD3_IDC;
-			y = UIY_TD(_YTOP);
+			y = QUOTE((profileNamespace getVariable _ARR_2(['IGUI_GRID_HINT_Y', UIY_TD(_YTOP)])) + (UIH(0)));
 		};
 		class SurvivalCardMiddle: SurvivalCardTop
 		{
 			idc = PARA_RSCSURVIVALHINTS_CARD2_IDC;
-			y = UIY_TD((_YTOP + 1));
+			y = QUOTE((profileNamespace getVariable _ARR_2(['IGUI_GRID_HINT_Y', UIY_TD(_YTOP)])) + (UIH(1)));
 		};
 	};
 };
 #undef _W
 #undef _H
 #undef _YTOP
+#undef _ARR_2
