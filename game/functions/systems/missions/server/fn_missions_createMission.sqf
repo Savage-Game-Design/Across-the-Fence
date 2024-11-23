@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-10-29
+    Last Update: 2024-11-23
     Public: Yes
 
     Description:
@@ -72,7 +72,7 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
 
 [
     "vgm_mission_available",
-    [[_missionPublic get "id"]]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 [
