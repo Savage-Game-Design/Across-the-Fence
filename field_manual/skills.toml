@@ -19,7 +19,7 @@ tip = "Recon teams were skilled warriors, training for the next mission."
 
 arguments = [
 """
-private _key = [
+[
     ['OpenActiveSkillWheel'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
     true
 ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')

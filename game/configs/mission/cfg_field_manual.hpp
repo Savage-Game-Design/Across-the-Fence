@@ -86,7 +86,7 @@ class vgm {
         image = "\a3\ui_f\data\gui\cfg\hints\rules_ca.paa";
         arguments[] = 
             {
-                "private _key = [\
+                "[\
                     ['OpenActiveSkillWheel'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),\
                     true\
                 ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')",
