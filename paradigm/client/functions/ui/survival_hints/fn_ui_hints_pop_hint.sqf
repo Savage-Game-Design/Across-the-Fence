@@ -31,7 +31,7 @@ private _cardControl = _hintToRemove get "control";
 _cardControl ctrlSetPositionX (safeZoneW - safeZoneX);
 _cardControl ctrlCommit 0.2;
 _cardControl spawn {
-	uiSleep 0.2;
+	waitUntil {ctrlCommitted _this};
 	ctrlDelete _this;
 };
 
