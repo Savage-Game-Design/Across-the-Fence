@@ -3,7 +3,7 @@
     File: fn_sites_hints_glint.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-15
+    Last Update: 2024-11-23
     Public: Yes
 
     Description:
@@ -32,7 +32,6 @@ addMissionEventHandler ["EachFrame", {
     private _frameTime = 1 / GLINT_FPS;
 
     if (_animTime > 0) then {
-        systemChat str _frame;
         drawIcon3D [
             vgm_sites_hints_glintTextures select _frame,
             ICON_COLOR,
