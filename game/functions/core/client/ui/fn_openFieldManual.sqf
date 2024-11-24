@@ -2,7 +2,7 @@
     File: fn_openFieldManual.sqf
     Author: Savage Game Design
     Date: 2024-11-23
-    Last Update: 2024-11-23
+    Last Update: 2024-11-24
     Public: Yes
 
     Description:
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        ["vgm_tutorial", "getting_started"] call vgm_fnc_openFieldManual
+        ["vgm_tutorial", "getting_started"] call vgm_c_fnc_openFieldManual
  */
 
 _this call para_c_fnc_ui_hints_openFieldManual;

@@ -242,7 +242,7 @@ class VGM_DisplayMedical
             w = 4 * VGM_GRID_W;
             h = 4 * VGM_GRID_H;
 
-            onButtonClick = "['vgm', 'medical', uiNamespace getVariable 'VGM_DisplayMedical'] call para_c_fnc_ui_hints_openFieldManual";
+            onButtonClick = "['vgm', 'medical', uiNamespace getVariable 'VGM_DisplayMedical'] call vgm_c_fnc_openFieldManual";
         };
     };
 };

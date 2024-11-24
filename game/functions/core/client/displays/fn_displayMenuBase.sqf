@@ -3,7 +3,7 @@
     File: fn_displayMenuBase.sqf
     Author: Savage Game Design
     Date: 2024-04-06
-    Last Update: 2024-11-21
+    Last Update: 2024-11-24
     Public: No
 
     Description:
@@ -83,7 +83,7 @@ switch _mode do {
             default {""};
         };
 
-        ["vgm", _entry, _display] call para_c_fnc_ui_hints_openFieldManual;
+        ["vgm", _entry, _display] call vgm_c_fnc_openFieldManual;
     };
 
     case "switchMenu": {
