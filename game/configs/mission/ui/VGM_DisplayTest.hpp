@@ -32,3 +32,15 @@ class VGM_DisplayTest
         };
     };
 };
+
+class VGM_DisplayTestNotepad
+{
+    idd = -1;
+    movingEnable = 0;
+    enableSimulation = 1;
+
+    class Objects
+    {
+        class Notepad: VGM_RscNotepad {};
+    };
+};
