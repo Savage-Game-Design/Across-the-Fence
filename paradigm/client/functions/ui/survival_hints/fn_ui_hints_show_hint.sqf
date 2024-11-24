@@ -18,10 +18,11 @@
 // These are defined in MF ./mission/config/hints.hpp
 params ["_category", "_hintTitle"];
 
-private _title = getText (missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "displayNameShort");
-private _body = getText (missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "description");
-private _image = getText (missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "image");
-private _arguments = getArray (missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "arguments");
+private _cfgHint = missionConfigFile >> "CfgHints" >> _category >> _hintTitle;
+private _title = getText (_cfgHint >> "displayNameShort");
+private _body = getText (_cfgHint >> "description");
+private _image = getText (_cfgHint >> "image");
+private _arguments = getArray (_cfgHint >> "arguments");
 
 // Need to do very similar formatting to the field manual to prevent weird rendering.
 private _keyColor = "#000000";

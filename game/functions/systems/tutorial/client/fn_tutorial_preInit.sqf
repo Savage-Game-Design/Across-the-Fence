@@ -82,7 +82,7 @@ vgm_c_tutorial_seenTutorials = missionProfileNamespace getVariable ["vgm_tutoria
 }] call para_g_fnc_event_subscribeLocal;
 
 addMissionEventHandler ["Map", {
-	params ["_mapIsOpened", "_mapIsForced"];
+    params ["_mapIsOpened"];
     if (_mapIsOpened && !isNil {[] call vgm_c_fnc_missions_getCurrentMission}) then {
         ["vgm_missions", "scouting"] call vgm_c_fnc_tutorial_trigger;
     };
