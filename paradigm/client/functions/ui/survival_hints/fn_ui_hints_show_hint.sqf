@@ -75,7 +75,8 @@ private _newCardStartPosition = [
     // instead of playing get in anim during the get out anim of the dismissed card.
     // Makes it look better when the cards are not glued to screen edge
     [safeZoneW - safeZoneX, _newCardEndPosition # 0] select (count _hintQueue > 0),
-    _newCardEndPosition # 1];
+    _newCardEndPosition # 1
+];
 
 _cardsToCreate pushBack [_structuredText, _newCardStartPosition, _newCardEndPosition];
 
