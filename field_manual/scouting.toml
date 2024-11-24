@@ -1,0 +1,13 @@
+displayName = "Scouting"
+description = """
+Scouting missions require players to survey the AO for enemy installations, mark them in their [h]Scouting report[/h] and extract.
+<t size="1.25">Scouting report</t>
+...
+"""
+
+tip = "Area recon was a common task, with recon teams hunting for enemy fortifications or units."
+
+arguments = []
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\head_ca.paa'

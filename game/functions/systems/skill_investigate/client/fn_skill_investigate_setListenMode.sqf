@@ -3,7 +3,7 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-11-12
+    Last Update: 2024-11-23
     Public: No
 
     Description:
@@ -20,6 +20,12 @@
  */
 
 params ["_enable"];
+
+if (_enable) then {
+    ["vgm_listen_mode_enabled", []] call para_g_fnc_event_triggerLocal;
+} else {
+    ["vgm_listen_mode_disabled", []] call para_g_fnc_event_triggerLocal;
+};
 
 private _eh = missionNamespace getVariable ["vgm_c_skill_investigate_drawEh", -1];
 if (!_enable) exitWith {

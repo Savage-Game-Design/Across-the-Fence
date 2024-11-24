@@ -50,10 +50,9 @@ StrDef = str | list[str]
 class _CategoryDefinition(TypedDict):
     displayName: StrDef
     pages: list[str]
-    logicalOrder: Optional[int]
+    order: Optional[int]
 
 class _PageDefinition(TypedDict):
-    logicalOrder: Optional[int]
     displayName: StrDef
     # This is heavily processed, so needs to strictly be a string.
     description: str
@@ -112,7 +111,7 @@ class FieldManualConfigBuilder:
     ) -> arma_config.Class:
         category = arma_config.Class(category_name)
 
-        logicalOrder = category_def.get("logicalOrder", None)
+        logicalOrder = category_def.get("order", None)
         if logicalOrder:
             category.addProperty("logicalOrder", arma_config.Number(logicalOrder))
 
@@ -121,12 +120,14 @@ class FieldManualConfigBuilder:
             self.add_formattable_text([category_name], category_def["displayName"])
         )
 
-        for page_name in category_def["pages"]:
+        for (index, page_name) in enumerate(category_def["pages"], 1):
             page_def = page_defs.get(page_name, None)
             if not page_def:
                 print(f"No page found for '{category_name}' -> '{page_name}'")
                 continue
-            category.add(self._make_page(page_name, page_def))
+            page = self._make_page(page_name, page_def)
+            page.addProperty("logicalOrder", arma_config.Number(index))
+            category.add(page)
 
         self.categories.append(category)
 
@@ -134,10 +135,6 @@ class FieldManualConfigBuilder:
 
     def _make_page(self, page_name: str, page_def: _PageDefinition) -> arma_config.Class:
         page = arma_config.Class(page_name)
-
-        logicalOrder = page_def.get("logicalOrder", None)
-        if logicalOrder:
-            page.addProperty("logicalOrder", arma_config.Number(logicalOrder))
 
         page.addProperty("displayName", self.add_formattable_text([page_name], page_def["displayName"]))
 
@@ -163,7 +160,6 @@ class FieldManualConfigBuilder:
 
         triggers = page_def.get("Triggers", None)
         if triggers and len(triggers) > 0:
-            print(triggers)
             trigger_entry = arma_config.python_type_to_config_entry("Triggers", triggers)
             if trigger_entry:
                 page.add(trigger_entry)
