@@ -72,7 +72,7 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
 
 [
     "vgm_mission_available",
-    [[_missionPublic get "id"]]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 [

@@ -2,7 +2,7 @@
     File: fn_enableHub.sqf
     Author: veteran29
     Date: 2022-12-03
-    Last Update: 2024-11-16
+    Last Update: 2024-11-20
     Public: Yes
 
     Description:
@@ -66,7 +66,7 @@ vgm_sharedHub_iconsDraw3D = addMissionEventHandler ["Draw3D", {
             private _drawPos = getPosATL _hq;
             _drawPos set [2, _drawPos # 2 + linearConversion [20, 50, player distance _hq, 5, 10, true]];
 
-            [_drawPos, ["HQ", "Join the battle"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
+            [_drawPos, [localize "STR_VGM_SHARED_HUB_ICON_HQ", localize "STR_VGM_SHARED_HUB_ICON_HQ_SUB"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
         } forEach vgm_sharedHub_hqAreas;
     };
 

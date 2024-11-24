@@ -32,7 +32,6 @@ addMissionEventHandler ["EachFrame", {
     private _frameTime = 1 / GLINT_FPS;
 
     if (_animTime > 0) then {
-        systemChat str _frame;
         drawIcon3D [
             vgm_sites_hints_glintTextures select _frame,
             ICON_COLOR,

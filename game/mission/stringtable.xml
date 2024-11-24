@@ -18,6 +18,12 @@
         <Key ID="STR_VGM_SHARED_HUB_TELEPORT_NOTIFICATION">
             <Original>You've wandered too far...</Original>
         </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_HQ">
+            <Original>HQ</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_HQ_SUB">
+            <Original>Join the battle</Original>
+        </Key>
         <Key ID="STR_VGM_SHARED_HUB_ICON_ARSENAL">
             <Original>Armory</Original>
         </Key>
@@ -34,7 +40,7 @@
             <Original>Tactical map</Original>
         </Key>
         <Key ID="STR_VGM_SHARED_HUB_ICON_MISSIONS_SUB">
-            <Original>Select skills and assign active abilities</Original>
+            <Original>Start or join missions</Original>
         </Key>
     </Package>
     <Package name="Skills UI">

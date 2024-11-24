@@ -1,8 +1,8 @@
 /*
     File: fn_ui_hints_show_hint.sqf
     Author:  Savage Game Design
-    Public: No
-
+    Public: Yes
+    
     Description:
         Shows a particularly hint.
 
@@ -13,7 +13,7 @@
         Function reached the end [BOOL]
 
     Example(s):
-        [parameter] call vn_fnc_myFunction
+        ["vgm", "getting_started"] call para_c_fnc_ui_hints_show_hint;
 */
 // These are defined in MF ./mission/config/hints.hpp
 params ["_category", "_hintTitle"];
@@ -81,7 +81,13 @@ private _structuredText = parseText _newCardText;
 
 
 private _newCardEndPosition = _cardPositionFuncs select (count _cardsToCreate) apply {call _x};
-private _newCardStartPosition = [safeZoneW - safeZoneX, _newCardEndPosition # 1];
+private _newCardStartPosition = [
+    // Already queued cards will appear as if they were already on bottom of the deck,
+    // instead of playing get in anim during the get out anim of the dismissed card.
+    // Makes it look better when the cards are not glued to screen edge
+    [safeZoneW - safeZoneX, _newCardEndPosition # 0] select (count _hintQueue > 0),
+    _newCardEndPosition # 1
+];
 
 _cardsToCreate pushBack [_structuredText, _newCardStartPosition, _newCardEndPosition];
 
