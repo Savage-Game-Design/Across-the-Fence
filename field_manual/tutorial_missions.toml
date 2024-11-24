@@ -1,0 +1,11 @@
+displayName = "Missions"
+description = """
+Once you're geared up, you'll be ready to create a new mission, or join a team that's already preparing to depart.
+Missions are accessed using the [h]tactical map board[/h].
+
+See the [h]Missions[/h] field manual entry for more info.
+"""
+
+arguments = []
+
+image = 'assets\atf_logo.paa'

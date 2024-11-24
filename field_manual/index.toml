@@ -1,5 +1,26 @@
-[vgm]
+[vgm_welcome]
 order = 1
+displayName = "Welcome"
+
+pages = [
+    "welcome"
+]
+
+[vgm_tutorial]
+displayName = "Tutorial Hints"
+order = 2
+
+pages = [
+    "tutorial_gearing_up",
+    "tutorial_equipping_skills",
+    "tutorial_missions",
+    "tutorial_creating_missions",
+    "tutorial_joining_missions",
+    "tutorial_extraction",
+]
+
+[vgm]
+order = 3
 displayName = "$STR_VGM_MISSION_NAME"
 
 # Pages require a matching {pagename}.toml file.
@@ -11,9 +32,11 @@ pages = [
 ]
 
 [vgm_missions]
-order = 2
+order = 4
 displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
 
 pages = [
-    "scouting"
+    "scouting",
+    "hints",
+    "stop_and_focus"
 ]

@@ -564,7 +564,7 @@
             <Original>Skills</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_DESC">
-            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix skills from all archetypes, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, which are gained by leveling up. To level up, you need to gather experience by running missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1%11</Original>
+            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix skills from all archetypes, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, which are gained by leveling up. To level up, you need to gather experience by running missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1&lt;size="1.25"&gt;Skill wheel&lt;/t&gt;%1To use one of the skills assigned in the %3Abilities%4 menu, press %3"%11"%4 and select it from the %3Skill wheel%4</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_TIP">
             <Original>Recon teams were skilled warriors, training for the next mission.</Original>
@@ -589,6 +589,81 @@
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_TIP">
             <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_TUTORIAL_HINTS">
+            <Original>Tutorial Hints</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_GEARING_UP">
+            <Original>Gearing up</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_GEARING_UP_DESC">
+            <Original>Head into the nearby hootch to prepare for your first mission. There, you'll be able to select your equipment and weapons using the provided arsenal boxes.%1New gear can be unlocked by learning new equipment %3skills%4.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_MISSIONS">
+            <Original>Missions</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_MISSIONS_DESC">
+            <Original>Once you're geared up, you'll be ready to create a new mission, or join a team that's already preparing to depart.%1Missions are accessed using the %3tactical map board%4.%1%1See the %3Missions%4 field manual entry for more info.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_CREATING_MISSIONS">
+            <Original>You created a mission</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_CREATING_MISSIONS_DESC">
+            <Original>You've just created a new mission! Other players will be able to join your mission until you depart. You can abort the mission by leaving the team, using the actions on the map board.%1%1Make sure to check with your team before starting the mission, otherwise you might find them unprepared.%1%1See the %3Missions%4 field manual entry for more info.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_JOINING_MISSIONS">
+            <Original>You joined a mission</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_JOINING_MISSIONS_DESC">
+            <Original>You've joined another player's mission.%1The leader can start the mission at any time. In the meantime, you're free to manage your gear and skills. You can leave the mission using the actions on the map board.%1%1See the %3Missions%4 field manual entry for more info.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EXTRACTION">
+            <Original>Extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EXTRACTION_DESC">
+            <Original>As the mission leader, you can call for extraction at any point during the mission.%1This will call for a helicopter that will land a a nearby LZ. The mission will finish successfully once all non-incapacitated players are on-board.%1%1See the %3Missions%4 field manual entry for more info.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS">
+            <Original>Clues</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS_DESC">
+            <Original>Occasionally, you'll see a glint reflecting off of an object lying on the ground.%1These clues are often found near enemy sites, and can help you locate enemy positions.%1Interacting with a clue will give you an approximate bearing to an enemy site.%1%1Different enemy sites sometimes have different clues (WIP), so taking the time to learn the different clue types%1can help you be a more effective tracker.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS_TIP">
+            <Original>Recon teams frequently deployed into the jungle with only a rough idea of what they might find.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_LISTEN">
+            <Original>Stop &amp; Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_LISTEN_DESC">
+            <Original>You can stop and focus on your surroundings, to help you locate enemy activities.%1%1Nearby sounds from enemies such as footsteps, gunshots and speech will be shown visually, until you move or stop focusing.%1%1Additionally, when you're focusing, you'll more frequently see the light glinting off of clues. See %3Clues%4 for more information.%1%1It's strongly recommended that you stop and focus frequently, to prevent your team getting caught unawares.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS">
+            <Original>Stop and Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_DESC">
+            <Original>You can stop and focus on your surroundings, to help you locate enemy activities.%1%1Nearby sounds from enemies such as footsteps, gunshots and speech will be shown visually, until you move or stop focusing.%1%1Additionally, when you're focusing, you'll more frequently see the light glinting off of clues. See %3Clues%4 for more information.%1%1It's strongly recommended that you stop and focus frequently, to prevent your team getting caught unawares.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_WELCOME">
+            <Original>Welcome</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME">
+            <Original>Welcome</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_DESC">
+            <Original>Welcome to the %3Alpha%4 version of %3%11%4!%1%1As a Patreon subscriber, you've got exclusive access the early versions of the gamemode, and the ability to influence its ongoing development.%1%1As we progress from Alpha onwards to a full release, we'd love to hear your feedback in Discord, and for you to join the development team as we test and experiment with new features.%1%1The initial %3Alpha%4 version of %3%11%4 has most of the gamemode's core mission gameplay in place, but other aspects of the gamemode are still in development, including:%1%2 Non-recon mission types%1%2 A persistent campaign%1%2 Additional points of interest to interact with and explore while on missions%1%2 Many quality of life features (e.g a shooting range)%1%1%3%11%4 is currently designed for 1 to 6 players on a mission, with up to 4 simultaneous missions running on (a sufficiently powerful) server.%1Please try playing solo, duo and in larger groups, so we build a gamemode everyone can enjoy!%1%1Thanks for reading, and enjoy the game!%1&gt; The %3%11%4 development team.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_TIP">
+            <Original>Thanks for helping us preserve S.O.G history through your Patreon support!</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_TUTORIAL">
+            <Original>Tutorial Hints</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EQUIPPING_SKILLS">
+            <Original>Equipping skills</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EQUIPPING_SKILLS_DESC">
+            <Original>You just acquired an active skill! Before you can use it, you need to equip it in the skill assignment menu.%1%1See the %3Skills%4 field manual entry for more info.</Original>
         </Key>
     </Package>
     <Package name="Tutorial">
