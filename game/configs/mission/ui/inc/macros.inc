@@ -2,7 +2,7 @@
     File: macros.inc
     Author: Savage Game Design
     Date: 2023-01-31
-    Last Update: 2024-09-22
+    Last Update: 2024-11-25
     Public: Yes
 
     Description:
@@ -35,7 +35,7 @@
 #define VGM_NOTEPAD_GRID_H (pixelH * pixelGridBase * 0.375)
 
 #define VGM_NOTEPAD_W (115 * VGM_NOTEPAD_GRID_W)
-#define VGM_NOTEPAD_H (150 * VGM_NOTEPAD_GRID_H)
+#define VGM_NOTEPAD_H (151 * VGM_NOTEPAD_GRID_H)
 
 #define VGM_NOTEPAD_LINE_H (8 * VGM_NOTEPAD_GRID_H)
 #define VGM_NOTEPAD_CONFIRM_W (30 * VGM_NOTEPAD_GRID_W)

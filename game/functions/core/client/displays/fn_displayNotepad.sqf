@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-10-29
+    Last Update: 2024-11-24
     Public: No
 
     Description:
@@ -98,9 +98,24 @@ switch _mode do {
         private _ctrlHeader = _display ctrlCreate ["VGM_ctrlStaticNotepadHeader", -1, _ctrlGrpMain];
         _ctrlHeader ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 1.8);
         _ctrlHeader ctrlSetText toUpper localize "STR_VGM_MISSIONS_SCOUTING_REPORT";
-        _ctrlHeader ctrlSetPosition [0, -(2 * VGM_NOTEPAD_GRID_H), VGM_NOTEPAD_W, VGM_NOTEPAD_LINE_H + (1.5 * VGM_NOTEPAD_GRID_H)];
+        _ctrlHeader ctrlSetPosition [
+            0,
+            -(2 * VGM_NOTEPAD_GRID_H),
+            VGM_NOTEPAD_W,
+            VGM_NOTEPAD_LINE_H + (1.5 * VGM_NOTEPAD_GRID_H)
+        ];
         _ctrlHeader ctrlEnable false;
         _ctrlHeader ctrlCommit 0;
+
+        private _ctrlHelp = _display ctrlCreate ["VGM_ctrlButtonNotepadHelp", -1, _ctrlGrpMain];
+        _ctrlHelp ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 1);
+        _ctrlHelp ctrlSetPosition [
+            VGM_NOTEPAD_W - (4 * VGM_NOTEPAD_GRID_H),
+            2 * VGM_NOTEPAD_GRID_H,
+            4 * VGM_NOTEPAD_GRID_H,
+            4 * VGM_NOTEPAD_GRID_H
+        ];
+        _ctrlHelp ctrlCommit 0;
 
         ["refreshUI", _display] call SELF;
 

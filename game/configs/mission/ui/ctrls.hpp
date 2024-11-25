@@ -707,6 +707,12 @@ class VGM_ctrlButtonNotepad: VGM_ctrlButton
     colorBackground[] = {0,0,0,0.05};
     sizeEx = VGM_NOTEPAD_LINE_H * 0.52;
 };
+class VGM_ctrlButtonNotepadHelp: VGM_ctrlButtonNotepad
+{
+    text = "?";
+    colorBackground[] = {0,0,0,0};
+    onButtonClick = "['vgm_missions', 'scouting'] call vgm_c_fnc_openFieldManual";
+};
 class VGM_ctrlListBoxNotepad: VGM_ctrlListBox
 {
     rowHeight = VGM_NOTEPAD_LINE_H * 0.52;
