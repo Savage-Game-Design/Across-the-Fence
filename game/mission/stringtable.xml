@@ -591,7 +591,7 @@
             <Original>Scouting</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_DESC">
-            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1&lt;t size="1.25"&gt;Scouting report&lt;/t&gt;%1...</Original>
+            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1%1&lt;t size="1.25"&gt;Mission overview&lt;/t&gt;%1You'll be inserted deep behind enemy lines, you're outnumbered so it's expected to avoid enemy contact as much as possible.%1Move slowly, %3Stop and Focus%4 frequently to spot any threats before they spot you, gather as much intel as you can and extract alive.%1If you will lose your team, all intel will be lost and no experience will be awarded.%1%1&lt;t size="1.1"&gt;Scouting report&lt;/t&gt;%1%3Scouting report%4 is available in your map view, it is shared between your whole team.%1%1Filling in a new report entry:%1%2 Click %3Add item%4 button, new row will be added%1%2 Select site type with &lt;img size='1' %5 image='%11' /&gt; button%1%2 Mark the site position with %3Mark site%4 button%1%1&lt;t size="1.1"&gt;Photo camera&lt;/t&gt;%1Instead of setting the site type manually you can try snapping a photo of it, after photographing a site, map screen with the report will be shown.%1Assign the photo to a site with &lt;img size='1' %5 image='%12' /&gt; button.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_TIP">
             <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>

@@ -123,6 +123,11 @@ class vgm_missions {
         description = "$STR_VGM_FIELD_MANUAL_SCOUTING_DESC";
         tip = "$STR_VGM_FIELD_MANUAL_SCOUTING_TIP";
         image = "\a3\ui_f\data\gui\cfg\hints\head_ca.paa";
+        arguments[] = 
+            {
+                """a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa""",
+                """a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\free.paa""",
+            };
         logicalOrder = 1;
     };
     class hints {

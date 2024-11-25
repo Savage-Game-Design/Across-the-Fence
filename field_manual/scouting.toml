@@ -1,13 +1,31 @@
 displayName = "Scouting"
 description = """
 Scouting missions require players to survey the AO for enemy installations, mark them in their [h]Scouting report[/h] and extract.
-<t size="1.25">Scouting report</t>
-...
+
+<t size="1.25">Mission overview</t>
+You'll be inserted deep behind enemy lines, you're outnumbered so it's expected to avoid enemy contact as much as possible.
+Move slowly, [h]Stop and Focus[/h] frequently to spot any threats before they spot you, gather as much intel as you can and extract alive.
+If you will lose your team, all intel will be lost and no experience will be awarded.
+
+<t size="1.1">Scouting report</t>
+[h]Scouting report[/h] is available in your map view, it is shared between your whole team.
+
+Filling in a new report entry:
+- Click [h]Add item[/h] button, new row will be added
+- Select site type with <img size='1' %5 image='{1}' /> button
+- Mark the site position with [h]Mark site[/h] button
+
+<t size="1.1">Photo camera</t>
+Instead of setting the site type manually you can try snapping a photo of it, after photographing a site, map screen with the report will be shown.
+Assign the photo to a site with <img size='1' %5 image='{2}' /> button.
 """
 
 tip = "Area recon was a common task, with recon teams hunting for enemy fortifications or units."
 
-arguments = []
+arguments = [
+    '"a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa"',
+    '"a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\free.paa"',
+]
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = '\a3\ui_f\data\gui\cfg\hints\head_ca.paa'
