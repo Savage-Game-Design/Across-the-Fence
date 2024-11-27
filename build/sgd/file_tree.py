@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
+from functools import partial
 from pathlib import Path
 from typing import Callable, Generator, List, Protocol, Union
 
-from .file_utils import all_files, all_files_relative
+from .file_utils import all_files, all_files_relative, Omit
 from .file_sources import FileGenerator, FileSource, CopyFile, GenerateFile, HardlinkFile, SymlinkFile
 from .protocols import Explainable
 
@@ -122,14 +123,16 @@ def print_file_tree(file_tree: Folder, indentation=0, explain=False):
         print(f"{indent_spaces}- {file.name} {explanation if explain else ''}")
 
 def __include_file_tree_entries_func(include_action=Callable[[Path], FileSource]):
-    def perform_include(file_tree: Folder, source: Union[Path, str], dest: Union[Path, str]):
+    def perform_include(
+        file_tree: Folder,
+        source: Union[Path, str],
+        dest: Union[Path, str],
+        omit: Omit = Omit(),
+    ):
         source_path = Path(source)
         dest_path = Path(dest)
         if source_path.is_dir():
-            for file_path in all_files_relative(source_path, recursive=True):
-                # TODO - Approach removing files in a better way.
-                if ".git" in file_path.parts:
-                    continue
+            for file_path in all_files_relative(source_path, recursive=True, omit=omit):
                 add_file_to_tree(file_tree, dest_path / file_path, include_action(source_path / file_path))
         else:
             add_file_to_tree(file_tree, dest_path, include_action(source_path))

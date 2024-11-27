@@ -1,4 +1,4 @@
-// common_includes.hpp will be automagically included.
+// common_includes.hpp is included in description.ext, so available here.
 #include "ui\ui_main.hpp"
 
 #include "cfg_artillery.hpp"

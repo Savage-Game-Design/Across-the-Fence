@@ -12,3 +12,10 @@ def concatenate_files(files: Iterable[Union[Path, str]]):
                     shutil.copyfileobj(input_fd, output_fd)
 
     return generate_concatenated_file
+
+def from_text(content: str):
+    def write_text_to_file(dest_path: Path):
+        with open(dest_path, "w", encoding="utf8") as output_fd:
+            output_fd.write(content)
+
+    return write_text_to_file

@@ -13,8 +13,8 @@ mission_output_path = rf"C:\Users\{username}\Documents\Arma 3 - Other Profiles\{
 output_paths = {
     "default": {
         PBO.MISSION: Path(mission_output_path),
-        PBO.CLIENT: None,
-        PBO.SERVER: None,
+        PBO.CLIENT: Path(config_dir) / "built_pbos" / "vgm_client",
+        PBO.SERVER: Path(config_dir) / "built_pbos" / "vgm_server",
     }
 }
 

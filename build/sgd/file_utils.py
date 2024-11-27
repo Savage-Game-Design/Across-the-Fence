@@ -3,22 +3,60 @@ from pathlib import Path
 from typing import Generator, Callable
 from .logger import logger
 
+def _normalize_name(name: str) -> str:
+    return name.strip().lower()
+
 @dataclass
 class Omit:
     dirs: set[str] = field(default_factory=set)
     files: set[str] = field(default_factory=set)
     funcs: list[Callable[[Path], bool]] = field(default_factory=list)
 
-def _filter_entries(root: Path, dirs: list[str], files: list[str], omissions) -> Generator[Path, None, None]:
+    def __post_init__(self):
+        self.dirs = set(map(_normalize_name, self.dirs))
+        self.files = set(map(_normalize_name, self.files))
+
+    def join(self, other: 'Omit') -> 'Omit':
+        return Omit(
+            dirs=self.dirs | other.dirs,
+            files=self.files | other.files,
+            funcs=self.funcs + other.funcs,
+        )
+
+    def __or__(self, other: 'Omit') -> 'Omit':
+        return self.join(other)
+
+    def should_omit_dir(self, path: Path) -> bool:
+        normal_name = _normalize_name(path.name)
+        return normal_name in self.dirs or self._any_predicate_true(path)
+
+    def should_omit_file(self, path: Path) -> bool:
+        normal_name = _normalize_name(path.name)
+        return normal_name in self.files or self._any_predicate_true(path)
+
+    def should_omit(self, path: Path) -> bool:
+        if path.is_dir():
+            return self.should_omit_dir(path)
+        if path.is_dir():
+            return self.should_omit_file(path)
+        return self._any_predicate_true(path)
+
+    def _any_predicate_true(self, path: Path) -> bool:
+        return any(f(path) for f in self.funcs)
+
+def _filter_entries(root: Path, dirs: list[str], files: list[str], omit) -> Generator[Path, None, None]:
+    dirs_to_remove = []
     for dir_name in dirs:
-        if dir_name in omissions.dirs:
-            dirs.remove(dir_name)
+        if omit.should_omit_dir(root / dir_name):
+            dirs_to_remove.append(dir_name)
+    for dir_name in dirs_to_remove:
+        dirs.remove(dir_name)
     for file_name in files:
-        if file_name in omissions.files:
+        if omit.should_omit_file(root / file_name):
             continue
         yield root / file_name
 
-def all_files(folder_path: Path, recursive=False, omissions=Omit()) -> Generator[Path, None, None]:
+def all_files(folder_path: Path, recursive=False, omit=Omit()) -> Generator[Path, None, None]:
     if not recursive:
         dirs = []
         files = []
@@ -26,16 +64,16 @@ def all_files(folder_path: Path, recursive=False, omissions=Omit()) -> Generator
             if entry.is_dir():
                 dirs.append(entry.name)
             elif entry.is_file():
-                dirs.append(entry.name)
+                files.append(entry.name)
 
-        yield from _filter_entries(folder_path, dirs, files, omissions)
+        yield from _filter_entries(folder_path, dirs, files, omit)
         return
 
     for root, dirs, files in folder_path.walk():
-        yield from _filter_entries(root, dirs, files, omissions)
+        yield from _filter_entries(root, dirs, files, omit)
 
-def all_files_relative(folder_path: Path, recursive=False, omissions=Omit()) -> Generator[Path, None, None]:
-    for file_path in all_files(folder_path, recursive, omissions):
+def all_files_relative(folder_path: Path, recursive=False, omit=Omit()) -> Generator[Path, None, None]:
+    for file_path in all_files(folder_path, recursive, omit):
         yield file_path.relative_to(folder_path)
 
 def create_folder_if_not_exists(folder_path):
