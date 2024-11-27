@@ -1,15 +1,42 @@
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Callable
 from .logger import logger
 
-def all_files(folder_path: Path, recursive=False):
-    search_func = Path.glob if not recursive else Path.rglob
+@dataclass
+class Omit:
+    dirs: set[str] = field(default_factory=set)
+    files: set[str] = field(default_factory=set)
+    funcs: list[Callable[[Path], bool]] = field(default_factory=list)
 
-    return filter(lambda path: path.is_file(), search_func(folder_path, "*"))
+def _filter_entries(root: Path, dirs: list[str], files: list[str], omissions) -> Generator[Path, None, None]:
+    for dir_name in dirs:
+        if dir_name in omissions.dirs:
+            dirs.remove(dir_name)
+    for file_name in files:
+        if file_name in omissions.files:
+            continue
+        yield root / file_name
 
-def all_files_relative(folder_path: Path, recursive=False) -> Generator[Path, None, None]:
-    file_paths = all_files(folder_path, recursive)
-    return (file_path.relative_to(folder_path) for file_path in file_paths)
+def all_files(folder_path: Path, recursive=False, omissions=Omit()) -> Generator[Path, None, None]:
+    if not recursive:
+        dirs = []
+        files = []
+        for entry in folder_path.iterdir():
+            if entry.is_dir():
+                dirs.append(entry.name)
+            elif entry.is_file():
+                dirs.append(entry.name)
+
+        yield from _filter_entries(folder_path, dirs, files, omissions)
+        return
+
+    for root, dirs, files in folder_path.walk():
+        yield from _filter_entries(root, dirs, files, omissions)
+
+def all_files_relative(folder_path: Path, recursive=False, omissions=Omit()) -> Generator[Path, None, None]:
+    for file_path in all_files(folder_path, recursive, omissions):
+        yield file_path.relative_to(folder_path)
 
 def create_folder_if_not_exists(folder_path):
     if folder_path.exists():
