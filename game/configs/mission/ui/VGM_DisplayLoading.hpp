@@ -115,7 +115,7 @@ class VGM_DisplayLoading {
                 "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",
                 "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"
             };
-            colorFrame[] = {1,1,1,0.7};
+            colorFrame[] = {1,1,1,0.9};
             texture = "#(argb,8,8,3)color(1,1,1,1)";
 
             x = QUOTE(safeZoneX + safezoneW/2 - _PROGRESS_BAR_W/2);
