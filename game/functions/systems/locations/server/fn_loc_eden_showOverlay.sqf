@@ -2,7 +2,7 @@
     File: fn_loc_eden_showOverlay.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-08-22
+    Last Update: 2024-11-28
     Public: Yes
 
     Description:
@@ -81,7 +81,7 @@ vgm_s_loc_eden_overlayDrawHandler = addMissionEventHandler ["Draw3D", {
 
     {
         // Catches markers being deleted before overlay can update.
-        if (get3DENEntityId _x isEqualTo -1) then {
+        if (get3DENEntityID _x isEqualTo -1) then {
             continue
         };
         private _pos = _x get3DENAttribute "Position" select 0;

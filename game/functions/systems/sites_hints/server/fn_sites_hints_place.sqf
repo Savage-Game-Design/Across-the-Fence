@@ -2,7 +2,7 @@
     File: fn_sites_hints_place.sqf
     Author: Savage Game Design
     Date: 2024-10-25
-    Last Update: 2024-11-02
+    Last Update: 2024-11-28
     Public: No
 
     Description:
@@ -34,8 +34,8 @@ private _config = (_site get "class") call vgm_s_fnc_sites_hints_getConfig;
 private _r1 = _config get "radius";
 private _r2 = _config get "radiusSafezone";
 
-private _circleAreaOuter = Pi * _r1^2;
-private _circleAreaInner = Pi * _r2^2;
+private _circleAreaOuter = pi * _r1^2;
+private _circleAreaInner = pi * _r2^2;
 // objects per 1 km^2
 private _density = _config get "density";
 

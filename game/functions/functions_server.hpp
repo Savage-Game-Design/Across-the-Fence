@@ -47,7 +47,7 @@ class vgm_s
 
     class behaviour_trees_trees
     {
-        VGM_GLOBAL_PATH(\systems\behaviour_trees\trees\server);
+        VGM_SERVER_PATH(\systems\behaviour_trees\trees\server);
 
         class btree_setTreeByNameGlobal {};
     };

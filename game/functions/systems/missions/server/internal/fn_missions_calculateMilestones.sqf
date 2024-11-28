@@ -2,7 +2,7 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2024-10-30
+    Last Update: 2024-11-28
     Public: No
 
     Description:
@@ -65,7 +65,7 @@ call {
         } else {
             _milestones pushBack ["site_spotted_good", 100, [_guessIdText]];
 
-            private _nearSitesIndexesByDist = _nearSitesIndexes apply {[((_missionSites select _x) get "pos") distance2d _guessedPos, _x]};
+            private _nearSitesIndexesByDist = _nearSitesIndexes apply {[((_missionSites select _x) get "pos") distance2D _guessedPos, _x]};
             _nearSitesIndexesByDist sort true;
 
             private _goodMatchIndex = _nearSitesIndexesByDist select 0 select 1;

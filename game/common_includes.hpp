@@ -4,7 +4,7 @@
 #ifndef VGM_COMMON_INCLUDES
 #define VGM_COMMON_INCLUDES
 
-#define AUTHORSAVAGE author = $STR_VN_AUTHORSAVAGE
+#define AUTHORSAVAGE author = "$STR_VN_AUTHORSAVAGE"
 
 #define CONCAT_2(a,b) a##b
 #define CONCAT_3(a,b,c) a##b##c

@@ -14,11 +14,12 @@ def cli():
 
 @click.command
 @click.option('--overwrite', default=False, is_flag=True)
+@click.option('--clean', default=False, is_flag=True)
 @click.option('--mod', default=False, is_flag=True,
               help="Builds VGM to run as a client / server mod pair")
-def build(overwrite, mod):
+def build(overwrite, mod, clean):
     try:
-        vgm.build.build(source_root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite, as_mod=mod)
+        vgm.build.build(source_root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite, as_mod=mod, clean=clean)
     except OutputFolderExistsError as e:
         print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
 

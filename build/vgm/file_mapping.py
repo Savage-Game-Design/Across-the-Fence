@@ -71,16 +71,17 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, as_mod=False) ->
         server_mod=server_mod
     )
 
+    # Copy mod-specific files - primarily config.cpp
+    copy(client_mod.files, mod_root / "client", "")
+    copy(server_mod.files, mod_root / "server", "")
+
     mission_tree = mission.files
-    client_tree = client_mod.files / "addons" / "vgm_client"
-    server_tree = server_mod.files / "addons" / "vgm_server"
+    client_tree = client_mod.files / "addons" / "client"
+    server_tree = server_mod.files / "addons" / "server"
 
     # Maps all files from "mission" folder to the mission PBO - they should always be included.
     copy(mission_tree, game_root / "mission", "")
 
-    # Copy addon-specific files - primarily config.cpp
-    copy(client_tree, mod_root / "client" / "addons" / "vgm_client", "")
-    copy(server_tree, mod_root / "server" /"addons" / "vgm_server", "")
 
     # Maps all functions to their appropriate PBO, depending on the build target.
     for function_folder in function_folders(game_root):
@@ -101,10 +102,11 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, as_mod=False) ->
         ]))
 
     # Prepare CfgFunctions for the server PBO
+    server_functions_file_name = "built_functions.hpp"
     if as_mod:
-        copy(server_tree, game_root / "functions" / "functions_server.hpp", "CfgFunctions.hpp")
+        copy(server_tree, game_root / "functions" / "functions_server.hpp", server_functions_file_name)
     else:
-        generate_file(server_tree, "CfgFunctions.hpp", from_text(""))
+        generate_file(server_tree, server_functions_file_name, from_text(""))
 
     # Maps the map-specific config and mission.sqm to the mission PBO
     copy(mission_tree, game_root / "maps" / "cam_lao_nam", "")

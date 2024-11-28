@@ -2,7 +2,7 @@
     File: fn_leveling_addExperience.sqf
     Author: Savage Game Design
     Date: 2023-06-01
-    Last Update: 2024-02-10
+    Last Update: 2024-11-28
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ private _levelingData = _player call vgm_s_fnc_leveling_dataGetCached;
 private _currentLevel = _levelingData get "level";
 // early exit if already at max level (ignore if adding 0 xp as that's used for data broadcast)
 if (_currentLevel >= vgm_g_leveling_maxLvl && {_experience > 0}) exitWith {
-    (format ["Player at max level %1 (%2)", name _player, getPlayerUID _player, _experience]) call vgm_g_fnc_logInfo;
+    (format ["Player at max level %1 (%2)", name _player, getPlayerUID _player]) call vgm_g_fnc_logInfo;
     false
 };
 
