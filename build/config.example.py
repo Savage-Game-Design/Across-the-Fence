@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
-from vgm.pbo import PBO
+from vgm.artifacts import BuildArtifact
 
 config_dir = Path(__file__).parent
+repo_root = config_dir.parent
 
 username = os.getlogin()
 arma_profile = r"dev_vgm"
@@ -12,9 +13,9 @@ mission_output_path = rf"C:\Users\{username}\Documents\Arma 3 - Other Profiles\{
 
 output_paths = {
     "default": {
-        PBO.MISSION: Path(mission_output_path),
-        PBO.CLIENT: Path(config_dir) / "built_pbos" / "vgm_client",
-        PBO.SERVER: Path(config_dir) / "built_pbos" / "vgm_server",
+        BuildArtifact.MISSION: Path(mission_output_path),
+        BuildArtifact.CLIENT_MOD: repo_root / "output" / "mods" / "@vgm_client",
+        BuildArtifact.SERVER_MOD: repo_root / "output" / "mods" / "@vgm_server",
     }
 }
 

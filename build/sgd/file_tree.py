@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
-from functools import partial
 from pathlib import Path
 from typing import Callable, Generator, List, Protocol, Union
 
-from .file_utils import all_files, all_files_relative, Omit
+from .file_utils import all_files_relative, Omit
 from .file_sources import FileGenerator, FileSource, CopyFile, GenerateFile, HardlinkFile, SymlinkFile
 from .protocols import Explainable
 
@@ -89,7 +88,10 @@ class Folder(FileTreeEntry):
         return (entry for entry in self.children if isinstance(entry, File))
 
     def __truediv__(self, other: str):
-        return self.get(other)
+        value = self.get(other)
+        if value:
+            return value
+        return self.get_or_create_subfolder(other)
 
     def create_tree_at(self, path):
         path.mkdir(parents=True,exist_ok=True)

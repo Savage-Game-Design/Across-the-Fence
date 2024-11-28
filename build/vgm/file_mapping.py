@@ -1,11 +1,11 @@
-from collections import defaultdict
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Union
+from typing import Union
 
 import sgd.file_tree
 from sgd.file_generators import concatenate_files, from_text
 from sgd.file_utils import Omit
-from .pbo import PBO
+from .artifacts import Mod, Mission, Gamemode
 
 """
 When built as a mission, the following applies:
@@ -33,8 +33,6 @@ When built as a mod, the above is still almost correct, except:
 
 """
 
-PBOFileTrees = Dict[PBO, sgd.file_tree.Folder]
-
 OMIT_ALWAYS = Omit(dirs={'.git'}, files={'.gitignore'})
 
 # These will omit any directory with the matching (normalized) name
@@ -52,80 +50,101 @@ remove = sgd.file_tree.remove
 def function_folders(source_root: Path):
     return (folder_path for folder_path in (source_root / "functions").iterdir() if folder_path.is_dir())
 
-def map_pbo_file_trees(source_root: Path, paradigm_path: Path, as_mod=False) -> PBOFileTrees:
-    # Maps the VGM source folder into virtual file trees for each output PBO
-    pbo_file_trees = defaultdict(lambda: sgd.file_tree.FileTreeRoot())
+@dataclass
+class GenerateFileTreeResult:
+    mission: Mission | None
+    client_mod: Mod | None
+    server_mod: Mod | None
 
-    mission_pbo = pbo_file_trees[PBO.MISSION]
-    client_pbo = pbo_file_trees[PBO.CLIENT]
-    server_pbo = pbo_file_trees[PBO.SERVER]
+def generate_file_trees(source_root: Path, paradigm_path: Path, as_mod=False) -> Gamemode:
+    game_root = source_root / "game"
+    mod_root = source_root / "mod"
 
-    # Maps all files from "mission" folder to the mission PBO
-    copy(mission_pbo, source_root / "mission", "")
+    mission = Mission(name="vgm", map="cam_lao_nam")
+
+    client_mod = Mod()
+    server_mod = Mod()
+
+    gamemode = Gamemode(
+        missions=[mission],
+        client_mod=client_mod,
+        server_mod=server_mod
+    )
+
+    mission_tree = mission.files
+    client_tree = client_mod.files / "addons" / "vgm_client"
+    server_tree = server_mod.files / "addons" / "vgm_server"
+
+    # Maps all files from "mission" folder to the mission PBO - they should always be included.
+    copy(mission_tree, game_root / "mission", "")
+
+    # Copy addon-specific files - primarily config.cpp
+    copy(client_tree, mod_root / "client" / "addons" / "vgm_client", "")
+    copy(server_tree, mod_root / "server" /"addons" / "vgm_server", "")
 
     # Maps all functions to their appropriate PBO, depending on the build target.
-    for function_folder in function_folders(source_root):
+    for function_folder in function_folders(game_root):
         if as_mod:
-            copy(mission_pbo, function_folder, Path("functions") / function_folder.name, OMIT_SERVER)
-            copy(server_pbo, function_folder, Path("functions") / function_folder.name, OMIT_CLIENT | OMIT_GLOBAL)
+            copy(mission_tree, function_folder, Path("functions") / function_folder.name, OMIT_SERVER)
+            copy(server_tree, function_folder, Path("functions") / function_folder.name, OMIT_CLIENT | OMIT_GLOBAL)
         else:
-            copy(mission_pbo, function_folder, Path("functions") / function_folder.name)
+            copy(mission_tree, function_folder, Path("functions") / function_folder.name)
 
     # Prepare CfgFunctions for the mission PBO
-    remove(mission_pbo, "built_functions.hpp")
+    remove(mission_tree, "built_functions.hpp")
     if as_mod:
-        copy(mission_pbo, "configs/built_functions.hpp", source_root / "functions" / "functions_client.hpp")
+        copy(mission_tree, game_root / "functions" / "functions_client.hpp", "configs/built_functions.hpp",)
     else:
-        generate_file(mission_pbo, "configs/built_functions.hpp", concatenate_files([
-            source_root / "functions" / "functions_client.hpp",
-            source_root / "functions" / "functions_server.hpp"
+        generate_file(mission_tree, "configs/built_functions.hpp", concatenate_files([
+            game_root / "functions" / "functions_client.hpp",
+            game_root / "functions" / "functions_server.hpp"
         ]))
 
     # Prepare CfgFunctions for the server PBO
     if as_mod:
-        copy(server_pbo, source_root / "functions" / "functions_server.hpp", "CfgFunctions.hpp")
+        copy(server_tree, game_root / "functions" / "functions_server.hpp", "CfgFunctions.hpp")
     else:
-        generate_file(server_pbo, "CfgFunctions.hpp", from_text(""))
+        generate_file(server_tree, "CfgFunctions.hpp", from_text(""))
 
     # Maps the map-specific config and mission.sqm to the mission PBO
-    copy(mission_pbo, source_root / "maps" / "cam_lao_nam", "")
+    copy(mission_tree, game_root / "maps" / "cam_lao_nam", "")
 
     # Maps any mission-specific config to the mission PBO
-    copy(mission_pbo, source_root / "configs" / "mission", "configs")
-    remove(mission_pbo, "configs/built_config.hpp")
+    copy(mission_tree, game_root / "configs" / "mission", "configs")
+    remove(mission_tree, "configs/built_config.hpp")
     copy(
-        mission_pbo,
-        source_root / "configs" / "config_mission.hpp",
+        mission_tree,
+        game_root / "configs" / "config_mission.hpp",
         Path("configs/built_config.hpp")
     )
 
     # Maps any client config to the client PBO
-    copy(client_pbo, source_root / "configs" / "client", "")
-    copy(client_pbo, source_root / "configs" / "config_client.hpp", "config.hpp")
+    copy(client_tree, game_root / "configs" / "client", "")
+    copy(client_tree, game_root / "configs" / "config_client.hpp", "built_config.hpp")
 
     # Maps any server config to the server PBO
-    copy(server_pbo, source_root / "configs" / "server", "")
-    copy(server_pbo, source_root / "configs" / "config_server.hpp", "config.hpp")
+    copy(server_tree, game_root / "configs" / "server", "")
+    copy(server_tree, game_root / "configs" / "config_server.hpp", "built_config.hpp")
 
     # Include the common includes into the mission
     def copy_common_includes(pbo: sgd.file_tree.Folder):
         copy(
             pbo,
-            source_root / "common_includes.hpp",
+            game_root / "common_includes.hpp",
             "common_includes.hpp"
         )
 
-    remove(mission_pbo, "common_includes.hpp")
-    copy_common_includes(mission_pbo)
-    copy_common_includes(client_pbo)
-    copy_common_includes(server_pbo)
+    remove(mission_tree, "common_includes.hpp")
+    copy_common_includes(mission_tree)
+    copy_common_includes(client_tree)
+    copy_common_includes(server_tree)
 
     # Copy paradigm
     copy(
-        mission_pbo,
+        mission_tree,
         paradigm_path,
         "paradigm"
     )
 
-    return pbo_file_trees
+    return gamemode
 

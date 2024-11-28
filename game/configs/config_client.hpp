@@ -1,18 +1,2 @@
-// This is automatically added to the client PBO
-#include "common_includes.hpp"
+// common_includes.hpp is automatically included.
 
-class CfgPatches
-{
-    class vgm_client
-    {
-        AUTHORSAVAGE;
-        name = "vgm_client";
-        url = "https://www.sogpf.com";
-        units[] = {};
-        weapons[] = {};
-        requiredVersion = 2.18;
-        requiredAddons[] =
-        {
-        };
-    };
-};
