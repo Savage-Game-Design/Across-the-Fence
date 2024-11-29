@@ -44,11 +44,14 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
         _sites = _sites - _intelSites;
     };
 
-    _intelSites = _intelSites apply {format [
-        "<execute expression='%2'>%1</execute>",
-        ((_x get "pos") call BIS_fnc_posToGrid) joinString " ",
-        format ["[[750,750], %1] call BIS_fnc_zoomOnArea", _x get "pos"]
-    ]} joinString "<br/>";
+    _intelSites = _intelSites apply {
+        private _pos = (_x get "pos") getPos [50 + random 150, random 360];
+        format [
+            "<execute expression='%2'>%1</execute>",
+            (_pos call BIS_fnc_posToGrid) joinString " ",
+            format ["[[750,750], %1] call BIS_fnc_zoomOnArea", _pos]
+        ]
+    } joinString "<br/>";
 
     [
         _playerGroup,
