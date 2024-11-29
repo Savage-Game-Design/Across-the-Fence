@@ -826,6 +826,10 @@ class vgm_c
         {
             postInit = 1;
         };
+        class skill_investigate_preInit
+        {
+            preInit = 1;
+        };
         class skill_investigate_queueNoise
         {
             headerType = -1;
