@@ -74,13 +74,19 @@ switch _mode do {
         private _ctrlDescription = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_STDULT_DESCRIPTION;
 
         // no skill in the slot
+        private _idcEmpty = [VGM_IDC_DISPLAYABILITIES_STDEMPTY, VGM_IDC_DISPLAYABILITIES_ULTEMPTY] select (_slotName == SLOT_ULTIMATE);
+        private _ctrlEmpty = _display displayCtrl _idcEmpty;
         if (_skill isEqualTo createHashMap) exitWith {
+            _ctrlSkilStack ctrlShow false;
+            _ctrlEmpty ctrlShow true;
             _ctrlTitle ctrlSetText "-";
             _ctrlIcon ctrlSetText "#(rgb,1,1,1)color(1,0,0,0.5)";
             _ctrlCategory ctrlSetText "-";
             _ctrlCooldown ctrlSetText "-";
             _ctrlDescription ctrlSetText "-";
         };
+        _ctrlSkillStack ctrlShow true;
+        _ctrlEmpty ctrlShow false;
 
         private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 

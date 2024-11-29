@@ -134,15 +134,48 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
             w = 0.75 * COLUMN_W * VGM_GRID_W;
             h = VGM_Y_H(5);
         };
+#define _ABILITY_H (0.5 * DISPLAY_H - 9)
+        class StdEmpty: VGM_ctrlControlsGroup
+        {
+            idc = VGM_IDC_DISPLAYABILITIES_STDEMPTY;
+            x = DISPLAY_X + 1 * VGM_GRID_W;
+            y = VGM_Y_Y(DISPLAY_Y,0);
+            w = COLUMN_W * VGM_GRID_W;
+            h = _ABILITY_H * VGM_GRID_H;
+            class Controls
+            {
+                class TopText: VGM_ctrlStructuredText
+                {
+                    text = "No Ability Selected";
+                    x = 0;
+                    y = 5 * VGM_GRID_H;
+                    w = COLUMN_W * VGM_GRID_W;
+                    h = 5 * VGM_GRID_H;
+                    class Attributes
+                    {
+                        font = VGM_FONT;
+                        color = "#ffffff";
+                        colorLink = "#D09B43";
+                        align = "center";
+                        shadow = 0;
+                    };
+                };
+                class BottomText: TopText
+                {
+                    text = "Click here to choose an ability";
+                    y = (_ABILITY_H - 10) * VGM_GRID_H;
+                };
+            };
+        };
 #define _ICON_W 18
         class StdStack: VGM_ctrlStack
         {
             idc = VGM_IDC_DISPLAYABILITIES_STDSTACK;
             x = DISPLAY_X + 1 * VGM_GRID_W;
-            y = VGM_Y_Y(DISPLAY_Y,0.5);
+            y = VGM_Y_Y(DISPLAY_Y,0);
             w = COLUMN_W * VGM_GRID_W;
             h = VGM_Y_H(0.5 * DISPLAY_H - 9);
-
+            show = 0;
 #define _W (COLUMN_W - 2)
             class Controls
             {
@@ -165,7 +198,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
                     w = (_ICON_W - 1) * VGM_GRID_W;
                     h = (_ICON_W - 1) * VGM_GRID_H;
                 };
-#define _W (COLUMN_W - _ICON_W - 3)
+                #define _W (COLUMN_W - _ICON_W - 3)
                 class StdName: VGM_ctrlStructuredText
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_NAME;
@@ -213,10 +246,15 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
             tooltip = "$STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP";
             y = VGM_Y_Y(DISPLAY_Y,5.5);
         };
+        class UltEmpty: StdEmpty
+        {
+            idc = VGM_IDC_DISPLAYABILITIES_ULTEMPTY;
+            y = VGM_Y_Y(DISPLAY_Y,5.5);
+        };
         class UltStack: StdStack
         {
             idc = VGM_IDC_DISPLAYABILITIES_ULTSTACK;
-            y = VGM_Y_Y(DISPLAY_Y,5.5);
+            y = VGM_Y_Y(DISPLAY_Y,0);
         };
 
         VGM_SET_Y(5)
