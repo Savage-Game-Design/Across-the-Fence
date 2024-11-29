@@ -52,7 +52,7 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
 
     [
         _playerGroup,
-        format ["vgm_scout_%1", _mission get "id"],
+        format ["vgm_scout_%1", _mission get "public" get "id"],
         [
             ["STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION", _intelSites],
             "STR_VGM_MISSIONS_SCOUTING_TASK_TITLE"
