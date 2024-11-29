@@ -1,9 +1,9 @@
 class vgm_site_hints_default {
-    radius = 250;
+    radius = 400;
     radiusSafezone = 100;
 
     // objects per 1 km^2
-    density = 100;
+    density = 45;
 
     classes[] = {
         "vn_o_item_bedroll_01",
