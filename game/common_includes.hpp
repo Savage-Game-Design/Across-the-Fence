@@ -6,6 +6,8 @@
 
 #define AUTHORSAVAGE author = "$STR_VN_AUTHORSAVAGE"
 
+// Prevents a final backslash from causing a multi-line string
+#define PATH_LITERAL(a) a
 #define CONCAT_2(a,b) a##b
 #define CONCAT_3(a,b,c) a##b##c
 #define QUOTE(s) #s
