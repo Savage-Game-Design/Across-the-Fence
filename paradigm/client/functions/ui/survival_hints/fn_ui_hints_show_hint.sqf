@@ -2,7 +2,7 @@
     File: fn_ui_hints_show_hint.sqf
     Author:  Savage Game Design
     Public: Yes
-    
+
     Description:
         Shows a particularly hint.
 
@@ -71,7 +71,7 @@ if (count str parseText _body > 330) then {
 };
 
 private _newCardText = format [
-    "<t size='1.3' align='center' font='RobotoCondensedBold'>%1<br/><t size='4' color='FFFFFF'>%2</t></t><br/>%3",
+    "<t size='1.3' align='center' font='RobotoCondensedBold'>%1<br/><t size='4' color='#FFFFFF'>%2</t></t><br/>%3",
     _title,
     _image,
     _body
