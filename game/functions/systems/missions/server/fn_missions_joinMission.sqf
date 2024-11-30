@@ -2,7 +2,7 @@
     File: fn_missions_joinMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-11-23
+    Last Update: 2024-11-30
     Public: Yes
 
     Description:
@@ -44,7 +44,7 @@ if (!_joinSuccessful) exitWith {
 // This only fires on the local client when that players joins the mission (i.e, not on creation)
 [
     "vgm_mission_joined",
-    [_playerId, _missionPublic get "id"],
+    [_playerId, _mission get "public" get "id"],
     [(getUserInfo _playerId) # 1]
 ] call para_g_fnc_event_triggerTargets;
 
