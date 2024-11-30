@@ -125,3 +125,16 @@ def remove_if_symlink_inside_location(link_path, location):
             logger.info(f"Unlinking {link_path}")
             link_path.unlink()
 
+def search_all_parents(start_loc: Path, predicate: Callable[[Path], bool]) -> Path | None:
+    if predicate(start_loc):
+        return start_loc
+
+    search_path = start_loc if start_loc.is_dir() else start_loc.parent
+    # While not at the root of the filesystem
+    while search_path.parent != search_path:
+        result = next((child for child in search_path.iterdir() if predicate(child)), None)
+        if result:
+            return result
+        search_path = search_path.parent
+
+    return None

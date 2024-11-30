@@ -1,6 +1,6 @@
 name = "Across the Fence (Client)"
 prefix = "vgm"
-mainPrefix = "v"
+mainprefix = "v"
 
 [properties]
 author = "Savage Game Design"

@@ -1,0 +1,16 @@
+[server]
+workshop = [
+    "1649778181" # VN testing build
+]
+dlc = []
+optionals = []
+parameters = [
+    "-skipIntro",
+    "-noSplash",
+    "-showScriptErrors",
+    "-debug",
+]
+executable = "arma3server_x64" # Default: "arma3_x64"
+file_patching = true
+binarize = false
+rapify = false

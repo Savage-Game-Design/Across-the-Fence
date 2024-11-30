@@ -50,6 +50,13 @@ remove = sgd.file_tree.remove
 def function_folders(source_root: Path):
     return (folder_path for folder_path in (source_root / "functions").iterdir() if folder_path.is_dir())
 
+def get_missions(source_root: Path) -> list[str]:
+    maps = [entry.name for entry in (source_root / "game" / "maps").iterdir()]
+    return [
+        Mission(name="vgm", map=map_name)
+        for map_name in maps
+    ]
+
 @dataclass
 class GenerateFileTreeResult:
     mission: Mission | None
@@ -60,7 +67,8 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, as_mod=False) ->
     game_root = source_root / "game"
     mod_root = source_root / "mod"
 
-    mission = Mission(name="vgm", map="cam_lao_nam")
+    missions = get_missions(source_root)
+    mission = missions[0]
 
     client_mod = Mod()
     server_mod = Mod()

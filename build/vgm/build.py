@@ -1,4 +1,3 @@
-from os import remove
 import shutil
 
 from pathlib import Path
@@ -7,7 +6,7 @@ from typing import Dict
 from sgd.file_tree import Folder
 
 from .artifacts import BuildArtifact, Mission, Mod
-from .file_mapping import generate_file_trees
+from .file_mapping import generate_file_trees, get_missions
 
 class OutputFolderExistsError(Exception):
     def __init__(self, path):
@@ -23,8 +22,15 @@ def write_file_tree(file_tree: Folder, target_path: Path, overwrite=False):
         raise OutputFolderExistsError(target_path)
     file_tree.create_tree_at(target_path)
 
+def calculate_mission_output_path(mission: Mission, containing_folder_path: Path) -> list[Path]:
+    return containing_folder_path / mission.folder_name
+
+def calculate_mission_output_paths(source_path: Path, containing_folder_path: Path) -> list[Path]:
+    missions = get_missions(source_path)
+    return [calculate_mission_output_path(mission, containing_folder_path) for mission in missions]
+
 def create_mission_in(mission: Mission, target_path: Path, overwrite=False, clean=False):
-    mission_path = target_path / mission.folder_name
+    mission_path = calculate_mission_output_path(mission, target_path)
 
     if overwrite and clean:
         remove_dir(mission_path)
