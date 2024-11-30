@@ -2,16 +2,16 @@
     File: fn_ui_hints_acknowledgeHintKeypress.sqf
     Author:  Savage Game Design
     Public: No
-    
+
     Description:
 		Handles the "acknowledge hint" key being pressed, including double presses.
-    
+
     Parameter(s):
         None
-    
+
     Returns:
 		Hint [HashMap]
-    
+
     Example(s):
 		[] call para_c_fnc_ui_hints_acknowledgeHint
 */
@@ -24,13 +24,18 @@ private _lastKeypress = localNamespace getVariable ["para_c_ui_hints_last_acknow
 if (time < _lastKeypress + _doublePressTime) exitWith {
   private _lastHint = localNamespace getVariable "para_c_ui_hints_last_acknowledged_hint";
   if (isNil "_lastHint") exitWith {};
-  [_lastHint get "category", _lastHint get "hint"] call para_c_fnc_ui_hints_openFieldManual; 
+  [_lastHint get "category", _lastHint get "hint"] call para_c_fnc_ui_hints_openFieldManual;
 };
 
 // Single press behaviour - fires on the first press of a double press.
 
 private _activeHints = uiNamespace getVariable ["para_c_activeHints", []];
-if (count _activeHints <= 0) exitWith {};
+// recall last acknowledged hint if nothing is displayed
+if (count _activeHints <= 0) exitWith {
+    private _lastHint = localNamespace getVariable "para_c_ui_hints_last_acknowledged_hint";
+    if (isNil "_lastHint") exitWith {};
+    [_lastHint get "category", _lastHint get "hint"] call para_c_fnc_ui_hints_show_hint;
+};
 
 localnamespace setVariable ["para_c_ui_hints_last_acknowledged_hint", _activeHints select 0];
 localNamespace setVariable ["para_c_ui_hints_last_acknowledge_keypress", time];
