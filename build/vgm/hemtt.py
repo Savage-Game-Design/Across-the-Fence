@@ -38,6 +38,6 @@ def build(path: Path, args=[]):
         *args,
     ]
 
-    print(f"Building with HEMTT: {list(map(str(command)))}")
+    print(f"Building with HEMTT: {list(map(str, command))}")
 
     return subprocess.run(command, cwd=path)

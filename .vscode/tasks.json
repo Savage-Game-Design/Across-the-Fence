@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build",
+            "label": "Build (Mission)",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\build.py' build --overwrite",
+            "command": "py '${workspaceFolder}\\build\\run.py' build --overwrite",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -14,9 +14,19 @@
             }
         },
         {
-            "label": "Build as client / server",
+            "label": "Build (Server mod)",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\build.py' build --overwrite --mod",
+            "command": "py '${workspaceFolder}\\build\\run.py' build --overwrite --mod",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+       {
+            "label": "Build (Mods with PBO packing)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' build --overwrite --mod --pack",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -24,9 +34,18 @@
             }
         },
         {
+            "label": "Launch dev (build, client, server)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch dev",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
             "label": "Launch arma client",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' client",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch client --mission",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
@@ -35,7 +54,7 @@
         {
             "label": "Launch arma server",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' server",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch server",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
