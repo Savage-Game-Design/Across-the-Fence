@@ -32,11 +32,19 @@ vgm_c_sites_hints_lastGlint = time;
 
 ["Playing glint animation"] call vgm_g_fnc_logDebug;
 
+// https://community.bistudio.com/wikidata/images/a/ac/safezone.jpg
+private _fnc_isOnScreenCenter = {
+    private _objectPos = worldToScreen getPosATL _this;
+    _objectPos params [["_x", -1], ["_y", -1]];
+
+    (_x >= 0 && _x <= 1) && (_y >= 0 && _y <= 1)
+};
+
 private _fnc_getNearbyHints = {
     private _objects = (vgm_sites_hints_objectsList inAreaArray [focusOn, _radius, _radius]) select [0, OBJECTS_MAX];
 
     _objects select {
-        worldToScreen getPosATL _x isNotEqualTo []
+        _x call _fnc_isOnScreenCenter
         && {[focusOn, "FIRE", _x] checkVisibility [eyePos focusOn, getPosWorld _x] > 0}
     };
 };
