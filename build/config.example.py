@@ -9,7 +9,6 @@ username = os.getlogin()
 arma_profile = r"dev_vgm"
 
 paradigm_path = config_dir.parent /  "paradigm"
-mission_folder_name = "vgm"
 
 output_paths = {
     "default": {
@@ -30,8 +29,7 @@ arma_args = [
     "-noPause",
     "-window",
     "-showScriptErrors",
-    "-debug",
-    rf"{output_paths['default']}\mission.sqm", # open mission in editor
+    "-debug"
 ]
 
 arma_server_config_path = config_dir / "arma_server.hpp"

@@ -2,24 +2,7 @@ import subprocess
 import sgd.file_utils
 from pathlib import Path
 
-def flag(should_use: bool, flag: str) -> str:
-    return flag if should_use else ""
-
-def hemtt_dev_path(mod_path: Path) -> Path:
-    return mod_path / ".hemttout" / "dev"
-
-def hemtt_launch(path: Path, args=[], arma_args=[]):
-    command = [
-        "hemtt",
-        "launch",
-        *args,
-        "--",
-        *arma_args,
-    ]
-
-    print(f"Launching HEMTT: {command}")
-
-    subprocess.run(command, cwd=path)
+from . import hemtt
 
 def find_mpmissions(search_start: Path) -> Path | None:
     def is_mpmissions(path: Path) -> bool:
@@ -52,27 +35,28 @@ def build_mod_list(mods: list) -> list[str]:
         for mod in mods
     ]
 
-def launch_arma(arma_exe_path, mods=[], args=[], connect=False):
+def launch(arma_exe_path, mods=[], args=[], connect=False, editor_mission_path: Path=None):
     command_args = [
         *(build_mod_list(mods)),
         f"-connect={connect}" if connect else "",
         *args,
+        editor_mission_path or "",
     ]
 
     command = [arma_exe_path] + command_args
 
-    print(f"Launching Arma: {command}")
+    print(f"Launching Arma: {list(map(str, command))}")
 
     # start arma
     subprocess.Popen(command)
 
-def launch_arma_server(mission_path: Path, arma_server_exe: Path, config: Path, servermod_path=None, mods=[]):
+def launch_server(mission_path: Path, arma_server_exe: Path, config: Path, servermod_path=None, mods=[]):
     try_symlink_arma_server_mission_dir(mission_path, arma_server_exe)
 
     server_config_path = setup_temporary_arma_server_config(config, mission_path.name)
 
     if servermod_path:
-        hemtt_launch(
+        hemtt.launch(
             servermod_path,
             arma_args=[
                 f"-config={server_config_path}"
@@ -80,7 +64,8 @@ def launch_arma_server(mission_path: Path, arma_server_exe: Path, config: Path, 
         )
         return
 
-    launch_arma(
+    launch(
+        arma_exe_path=arma_server_exe,
         mods=mods,
         args=[
             "-server",

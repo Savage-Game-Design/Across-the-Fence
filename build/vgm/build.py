@@ -5,6 +5,7 @@ from typing import Dict
 
 from sgd.file_tree import Folder
 
+from . import hemtt
 from .artifacts import BuildArtifact, Mission, Mod
 from .file_mapping import generate_file_trees, get_missions
 
@@ -64,3 +65,24 @@ def build(source_path, paradigm_path, output_paths=Dict[BuildArtifact,Path], ove
         create_mission_in(mission, output_paths[BuildArtifact.MISSION], overwrite, clean)
         # Only supports one mission right now in the config
         break
+
+def pack(source_path: Path, output_paths=Dict[BuildArtifact,Path], dev=False) -> bool:
+    hemtt_build_command = hemtt.dev if dev else hemtt.build
+
+    is_success = True
+
+    for (artifact, path) in output_paths.items():
+        if artifact == BuildArtifact.CLIENT_MOD or artifact == BuildArtifact.SERVER_MOD and path.exists():
+            result = hemtt_build_command(path)
+            if result.returncode > 0:
+                is_success = False
+
+    missions_output_path = output_paths.get(BuildArtifact.MISSION, None)
+    if missions_output_path:
+        for mission_path in calculate_mission_output_paths(source_path, missions_output_path):
+            # TODO - Build with armake2
+            pass
+
+    return is_success
+
+
