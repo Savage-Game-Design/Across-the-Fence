@@ -1,0 +1,10 @@
+displayName = "Equipping skills"
+description = """
+You just acquired an active skill! Before you can use it, you need to equip it in the skill assignment menu.
+
+See the [h]Skills[/h] field manual entry for more info.
+"""
+
+arguments = []
+
+image = 'assets\atf_logo.paa'

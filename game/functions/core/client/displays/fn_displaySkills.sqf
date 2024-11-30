@@ -8,6 +8,8 @@ switch _mode do {
     case "onLoad": {
         params ["_display"];
 
+        uiNamespace setVariable ["VGM_DisplaySkills", _display];
+
         _display setVariable ["vgm_currentSkillTree", createHashMap];
         _display setVariable ["vgm_currentSkill", createHashMap];
 

@@ -1,4 +1,6 @@
-#define _BTN_W ((VGM_MENU_W - 6) / 5)
+#define _BTN_CNT 5
+#define _BTN_W_HELP 8
+#define _BTN_W ((VGM_MENU_W - 6 - _BTN_W_HELP) / _BTN_CNT)
 #define _BTN_X(I) (I * _BTN_W + (I + 1)) * VGM_GRID_W
 #define _STRTABLE(KEY) #$STR_VGM_HEADERBAR_##KEY
 #define _DISPLAY(NAME) QUOTE(CONCAT_2(VGM_Display,NAME))
@@ -86,11 +88,24 @@ class VGM_DisplayMenuBase
                     onButtonClick = VGM_UIEH(onClickSettings,MenuBase);
                     x = _BTN_X(4);
                 };
+
+                class Help: VGM_ctrlButton
+                {
+                    text = "?";
+                    tooltip = "$STR_A3_RscDisplayInterrupt_ButtonTutorialHints";
+                    onButtonClick = VGM_UIEH(onClickHelp,MenuBase);
+                    x = _BTN_X(5);
+                    y = 1 * VGM_GRID_H;
+                    w = (_BTN_W_HELP - 1) * VGM_GRID_W;
+                    h = (VGM_MENUHEADER_H - 2) * VGM_GRID_H;
+                };
+
             };
         };
     };
 };
 
+#undef _BTN_CNT
 #undef _BTN_X
 #undef _BTN_W
 #undef _STRTABLE

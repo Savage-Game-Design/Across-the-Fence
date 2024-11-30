@@ -1,0 +1,16 @@
+displayName = "Missions"
+description = """
+Running recon missions is the core element of the [h]{1}[/h] gamemode.
+
+Once you and your team is ready to go on a mission, go to the [h]tactical map[/h], [h]create a new mission[/h] and select your area of operations (WIP).
+When the team has [h]joined the mission[/h], geared up and mentally prepared themselves, [h]start the mission[/h].
+
+You'll be inserted deep behind enemy lines, tasked with performing recon and [h]scouting[/h] multiple enemy sites.
+
+You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.
+"""
+
+arguments = ["localize 'STR_VGM_MISSION_NAME'"]
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa'

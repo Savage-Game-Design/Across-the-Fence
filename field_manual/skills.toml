@@ -1,0 +1,30 @@
+displayName = "Skills"
+description = """
+Skills are grouped into four main archetypes, [h]Rifleman[/h], [h]Recon[/h], [h]Fire Support[/h] and [h]Support[/h].
+You can mix skills from all archetypes, creating your own specialized MACV-SOG character.
+
+You can access [h]Skills menu[/h] at the [h]Radio[/h]. To learn skills you need [h]Skill Points (SP)[/h], which are gained by leveling up. To level up, you need to gather experience by running missions.
+
+There's two types of skills:
+- Passives - have passive effect on your character, affecting you all the time, do not need an activation
+- Abilities - need to be equipped in [h]Abilities[/h] menu at the [h]Radio[/h], they have short term effects once activated via [h]Skill Wheel[/h]. There's two subtypes of abilities:
+    - Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission
+    - Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission
+
+<size="1.25">Skill wheel</t>
+To use one of the skills assigned in the [h]Abilities[/h] menu, press [h]"{1}"[/h] and select it from the [h]Skill wheel[/h]
+"""
+
+tip = "Recon teams were skilled warriors, training for the next mission."
+
+arguments = [
+"""
+[
+    ['OpenActiveSkillWheel'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),
+    true
+] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')
+""",
+]
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\rules_ca.paa'

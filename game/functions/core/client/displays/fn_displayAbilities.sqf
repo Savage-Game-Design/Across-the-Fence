@@ -33,6 +33,8 @@ switch _mode do {
     case "onLoad":{
         params ["_display"];
 
+        uiNamespace setVariable ["VGM_DisplayAbilities", _display];
+
         ["refreshUI", _display] call SELF;
     };
 
