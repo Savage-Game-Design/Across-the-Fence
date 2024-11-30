@@ -2,7 +2,7 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-10-08
+    Last Update: 2024-11-29
     Public: No
 
     Description:
@@ -28,7 +28,7 @@
 
 ["audible", {
     params ["_unit", "_value"];
-    _unit setUnitTrait ["audibleCoef", _value max 0.15 min 1];
+    _unit setUnitTrait ["audibleCoef", _value max 0.1 min 1];
 }] call vgm_c_fnc_coefficient_create;
 
 ["recoil", {

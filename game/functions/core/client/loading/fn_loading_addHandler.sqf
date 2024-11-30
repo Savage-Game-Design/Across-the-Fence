@@ -1,8 +1,8 @@
 /*
-    File: fn_loading_addLoader.sqf
+    File: fn_loading_addHandler.sqf
     Author: Savage Game Design
     Date: 2023-09-08
-    Last Update: 2023-09-09
+    Last Update: 2024-11-21
     Public: No
 
     Description:
