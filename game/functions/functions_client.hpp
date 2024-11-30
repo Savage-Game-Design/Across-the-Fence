@@ -405,6 +405,7 @@ class vgm_c
         class displayStaminaBar {};
         class displayEndOfMission {};
         class displayMenuBase {};
+        class displayLoading {};
     };
 
     class artillery
@@ -555,6 +556,10 @@ class vgm_c
         class loading_postInit
         {
             postInit = 1;
+        };
+        class loading_preInit
+        {
+            preInit = 1;
         };
         class loading_setText {};
         class loading_tickerDots {};
