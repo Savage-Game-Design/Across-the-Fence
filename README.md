@@ -55,6 +55,7 @@ The server mod build files, including .hemtt config mod.cpp and the base config.
 ### Build Setup
 
 Copy `build/config.example.py` to `build/config.py`, and edit the settings to point to folders on your local system. 
+Copy `build/arma_server.example.hpp` to `build/arma_server.hpp`, and add your Steam64 ID to the `admins` section.
 
 It's recommended to set the mission output folder to your Arma 3 profile's `mpmissions` folder.
 
