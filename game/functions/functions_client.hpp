@@ -283,6 +283,14 @@ class vgm_g
         class objGrabber_map {};
     };
 
+    class respawn
+    {
+        VGM_GLOBAL_PATH(\systems\respawn\global);
+
+        class respawn_findSafeSpawnTransformNearTeam {};
+        class respawn_findFallbackSpawnTransform {};
+    };
+
     class skills
     {
         VGM_GLOBAL_PATH(\systems\skills\global);
@@ -691,6 +699,9 @@ class vgm_c
     class respawn
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
+
+        class respawn_onPlayerKilled {};
+        class respawn_onPlayerRespawn {};
         class respawn_preInit
         {
             preInit = 1;

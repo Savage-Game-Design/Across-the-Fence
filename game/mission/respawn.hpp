@@ -2,8 +2,8 @@ class CfgRespawnTemplates
 {
     class vgm_respawn
     {
-        onPlayerKilled = "functions\systems\respawn\server\fn_respawn_onPlayerKilled.sqf";
-        onPlayerRespawn = "functions\systems\respawn\server\fn_respawn_onPlayerRespawn.sqf";
+        onPlayerKilled = "functions\systems\respawn\client\fn_respawn_onPlayerKilled.sqf";
+        onPlayerRespawn = "functions\systems\respawn\client\fn_respawn_onPlayerRespawn.sqf";
     };
 };
 

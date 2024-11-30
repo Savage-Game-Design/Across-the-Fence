@@ -209,16 +209,6 @@ class vgm_s
         class player_save {};
     };
 
-    class respawn
-    {
-        VGM_SERVER_PATH(\systems\respawn\server);
-
-        class respawn_onPlayerKilled {};
-        class respawn_onPlayerRespawn {};
-        class respawn_findSafeSpawnTransformNearTeam {};
-        class respawn_findFallbackSpawnTransform {};
-    };
-
     class leveling
     {
         VGM_SERVER_PATH(\systems\leveling\server);
