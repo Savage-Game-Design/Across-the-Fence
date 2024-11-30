@@ -41,3 +41,14 @@ def build(path: Path, args=[]):
     print(f"Building with HEMTT: {list(map(str, command))}")
 
     return subprocess.run(command, cwd=path)
+
+def release(path: Path, args=[]):
+    command = [
+        "hemtt",
+        "release",
+        *args,
+    ]
+
+    print(f"Building with HEMTT in release mode: {list(map(str, command))}")
+
+    return subprocess.run(command, cwd=path)

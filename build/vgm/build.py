@@ -1,5 +1,6 @@
 import shutil
 
+from enum import Enum, auto
 from pathlib import Path
 from typing import Dict
 
@@ -66,8 +67,19 @@ def build(source_path, paradigm_path, output_paths=Dict[BuildArtifact,Path], ove
         # Only supports one mission right now in the config
         break
 
-def pack(source_path: Path, output_paths=Dict[BuildArtifact,Path], dev=False) -> bool:
-    hemtt_build_command = hemtt.dev if dev else hemtt.build
+class PackType(Enum):
+    Dev = auto()
+    Build = auto()
+    Release = auto()
+
+pack_funcs = {
+    PackType.Dev: hemtt.dev,
+    PackType.Build: hemtt.build,
+    PackType.Release: hemtt.release
+}
+
+def pack(source_path: Path, output_paths=Dict[BuildArtifact,Path], pack_type=PackType) -> bool:
+    hemtt_build_command = pack_funcs[pack_type]
 
     is_success = True
 

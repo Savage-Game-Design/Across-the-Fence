@@ -15,6 +15,11 @@ output_paths = {
         BuildArtifact.MISSION: Path(rf"C:\Users\{username}\Documents\Arma 3 - Other Profiles\{arma_profile}\mpmissions"),
         BuildArtifact.CLIENT_MOD: repo_root / "output" / "mods" / "@vgm_client",
         BuildArtifact.SERVER_MOD: repo_root / "output" / "mods" / "@vgm_server",
+    },
+    "release": {
+        BuildArtifact.MISSION: repo_root / "output" / "missions",
+        BuildArtifact.CLIENT_MOD: repo_root / "output" / "mods" / "@vgm_client",
+        BuildArtifact.SERVER_MOD: repo_root / "output" / "mods" / "@vgm_server",
     }
 }
 

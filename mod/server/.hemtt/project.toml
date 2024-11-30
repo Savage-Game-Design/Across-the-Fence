@@ -1,5 +1,5 @@
 name = "Across the Fence (Server)"
-prefix = "vgm"
+prefix = "vgm_server"
 mainprefix = "v"
 
 [properties]
@@ -8,3 +8,7 @@ url = "https://www.sogpf.com"
 
 [version]
 path = "addons/server/script_version.hpp"
+
+[release]
+sign = false
+archive = true

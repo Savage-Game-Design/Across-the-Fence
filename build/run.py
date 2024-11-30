@@ -4,7 +4,7 @@ from pathlib import Path
 import sgd.file_tree
 from vgm.artifacts import BuildArtifact
 import vgm.build
-from vgm.build import OutputFolderExistsError, calculate_mission_output_paths
+from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, PackType
 import vgm.field_manual
 import vgm.file_mapping
 import vgm.arma
@@ -34,10 +34,10 @@ def launch_arma_server(mod: bool = False):
         mods=config.arma_arg_mods
     )
 
-def build_without_packing(overwrite, mod, clean):
+def build_without_packing(overwrite, mod, clean, output_paths=config.output_paths["default"]):
     vgm.field_manual.update_field_manual(source_root)
     try:
-        vgm.build.build(source_root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite, as_mod=mod, clean=clean)
+        vgm.build.build(source_root, config.paradigm_path, output_paths, overwrite=overwrite, as_mod=mod, clean=clean)
     except OutputFolderExistsError as e:
         print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
         raise
@@ -73,7 +73,7 @@ def build(overwrite, clean, mod, pack):
             for (artifact, value) in config.output_paths["default"].items()
             if not artifact in [BuildArtifact.CLIENT_MOD, BuildArtifact.SERVER_MOD] or mod
         }
-        vgm.build.pack(source_root, pack_paths)
+        vgm.build.pack(source_root, pack_paths, pack_type=PackType.Build)
 
 @click.command("dev")
 @click.option('--overwrite', default=False, is_flag=True)
@@ -92,6 +92,23 @@ def command_launch_dev(overwrite, clean, mod, no_server, no_client):
 
     if not no_client:
         launch_arma(connect="127.0.0.1")
+
+@click.command
+@click.option('--confirm', default=False, is_flag=True)
+@click.option('--mod', default=False, is_flag=True,
+              help="Builds VGM to run as a client / server mod pair")
+def release(confirm, mod):
+    if not confirm:
+        confirm = input("WARNING: This will run --clean and remove all output directories. Proceed? Y/N").lower() == "y"
+
+    if not confirm:
+        print("Aborting.")
+        return
+
+    release_output_paths = config.output_paths["release"]
+
+    build_without_packing(overwrite=True, mod=mod, clean=True, output_paths=release_output_paths)
+    vgm.build.pack(source_root, output_paths=release_output_paths, pack_type=PackType.Release)
 
 @click.command
 def update_field_manual_entries():
@@ -128,6 +145,7 @@ def launch():
     pass
 
 cli.add_command(build)
+cli.add_command(release)
 cli.add_command(print_file_tree)
 launch.add_command(command_launch_arma_client)
 launch.add_command(command_launch_arma_server)
