@@ -5,6 +5,7 @@ import sgd.file_tree
 from vgm.artifacts import BuildArtifact
 import vgm.build
 from vgm.build import OutputFolderExistsError, calculate_mission_output_paths
+import vgm.field_manual
 import vgm.file_mapping
 import vgm.arma
 
@@ -34,6 +35,7 @@ def launch_arma_server(mod: bool = False):
     )
 
 def build_without_packing(overwrite, mod, clean):
+    vgm.field_manual.update_field_manual(source_root)
     try:
         vgm.build.build(source_root, config.paradigm_path, config.output_paths["default"], overwrite=overwrite, as_mod=mod, clean=clean)
     except OutputFolderExistsError as e:
@@ -90,6 +92,10 @@ def command_launch_dev(overwrite, clean, mod, no_server, no_client):
 
     if not no_client:
         launch_arma(connect="127.0.0.1")
+
+@click.command
+def update_field_manual_entries():
+    vgm.field_manual.update_field_manual(source_root)
 
 @click.command
 @click.option('--mod', default=False, is_flag=True, help="Show the file tree as if building to a mod")

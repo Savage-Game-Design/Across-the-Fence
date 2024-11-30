@@ -5,22 +5,33 @@
     
     Description:
         Shows a particularly hint.
-    
+
     Parameter(s):
 		None
-    
+
     Returns:
         Function reached the end [BOOL]
-    
+
     Example(s):
         ["vgm", "getting_started"] call para_c_fnc_ui_hints_show_hint;
 */
 // These are defined in MF ./mission/config/hints.hpp
-params ["_category", "_hintTitle"]; 
+params ["_category", "_hintTitle"];
 
-private _title = getText(missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "displayNameShort");
-private _body = getText(missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "description");
-private _image = getText(missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "image");
+private _cfgHint = missionConfigFile >> "CfgHints" >> _category >> _hintTitle;
+private _title = getText (_cfgHint >> "displayNameShort");
+private _body = getText (_cfgHint >> "description");
+private _image = getText (_cfgHint >> "image");
+private _arguments = getArray (_cfgHint >> "arguments");
+
+// Need to do very similar formatting to the field manual to prevent weird rendering.
+private _keyColor = "#000000";
+private _argumentsArray = [_arguments,_keyColor] call BIS_fnc_advHintArg;
+// Apply arguments (every text is processed twice, because of possible '%number' variables used in arguments)
+_title = format ([_title] + _argumentsArray);
+_title = toupper (format ([_title] + _argumentsArray));
+_body = format ([_body] + _argumentsArray);
+_body = format ([_body] + _argumentsArray);
 
 private _activeHints = uiNamespace getVariable ["para_c_activeHints", []];
 private _hintQueue = localNamespace getVariable ["para_c_hintQueue", []];
@@ -52,7 +63,7 @@ if (!isNil "_image") then {
     _image = format ["<img image='%1'/>", _image];
 };
 
-// Character count 330 is calculated by eyeballing the card. 
+// Character count 330 is calculated by eyeballing the card.
 // Could be better, but will work most of the time.
 // Stops the body overflowing the card and looking weird.
 if (count str parseText _body > 330) then {

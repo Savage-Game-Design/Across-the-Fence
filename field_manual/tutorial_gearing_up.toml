@@ -1,0 +1,9 @@
+displayName = "Gearing up"
+description = """
+Head into the nearby hootch to prepare for your first mission. There, you'll be able to select your equipment and weapons using the provided arsenal boxes.
+New gear can be unlocked by learning new equipment [h]skills[/h].
+"""
+
+arguments = []
+
+image = 'assets\atf_logo.paa'

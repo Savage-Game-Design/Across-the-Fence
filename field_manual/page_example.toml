@@ -1,0 +1,65 @@
+# Display name for the page. This will automatically be added to the stringtable.
+displayName = "Example page"
+
+# Page contents. This is automatically formatted and escaped, then added/updated in the stringtable.
+# The following syntax exists:
+#    {1}      | Replaced by the given argument, equivalent to %11. Indexing starts at 1.
+#    - or *   | Replaced by a bullet point. Must be the first non-whitespace character on the line.
+#    [h] [/h] | Highlights the text between the markers.
+# Arma's structured text markup can be used, and is interpreted in-game.
+description = """
+[h]This is highlighted[/h]
+
+The first argument's value goes here: {1}
+
+This is a bullet-point list:
+- One
+- Two
+- Three
+
+This is an equivalent list:
+* One
+* Two
+* Three
+
+[h]{1}[/h] introduces simple yet impactful medical system featuring:
+- Increased player durability
+- Location-aware injuries that impact gameplay
+- Slow bleed-out, if left untreated
+"""
+
+# Tip. This can either be a conventional string:
+# tip = "Bullets. Shrapnel. Recon teams rarely made it out unscathed."
+
+# or a format string, which is evaluated when the config is loaded:
+# In a format string, the first array item is the string, all other items are valid SQF statements.
+tip = ["This is a formatted string: %1", "localize 'My content'"]
+
+# Arguments are substituted at runtime into the page by Arma.
+# Multi-line strings can be used. Every entry should be valid SQF code.
+# It's recommended to avoid any indentation of the array entries, as this makes the generated
+# config harder to read.
+
+arguments = [
+"localize 'STR_VGM_MISSION_NAME'",
+"""
+[
+    east
+] call vgm_g_fnc_enemySides;
+""",
+"localize 'STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL'",
+]
+
+# This image accompanying the entry.
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\injury_ca.paa'
+
+# Triggers are optional, and are used to show a hint card when their conditions are met.
+[Triggers]
+# This fires when the given marker in the mission.sqm is entered by the player.
+markerEntered = ""
+# This fires when the client receives the given event from any source.
+eventFired = ""
+#  Objects with a `vgm_c_tutorial` variable set can trigger a tutorial.
+# E.g for this tutorial entry:
+#     cursorObject setVariable ["vgm_c_tutorial", ["Tutorial", "Example"]];

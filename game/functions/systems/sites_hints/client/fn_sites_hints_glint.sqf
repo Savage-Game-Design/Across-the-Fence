@@ -55,3 +55,5 @@ addMissionEventHandler ["EachFrame", {
     _thisArgs set [2, _frame];
 
 }, [_object, 0, 1, 1, _iterations]];
+
+["vgm_sites_hints_glint", [_object]] call para_g_fnc_event_triggerLocal;

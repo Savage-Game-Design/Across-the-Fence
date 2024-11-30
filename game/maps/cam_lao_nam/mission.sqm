@@ -8,7 +8,7 @@ class EditorData
 	toggles=1545;
 	class ItemIDProvider
 	{
-		nextID=2493;
+		nextID=2498;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1162;
+		nextID=1212;
 	};
 	class Camera
 	{
-		pos[]={2791.3633,350.39349,14831.585};
-		dir[]={-0.46573529,-0.68541902,0.55972445};
-		up[]={-0.43840462,0.72814882,0.52687824};
-		aside[]={0.76869506,0,0.63961542};
+		pos[]={20110.941,7.044672,6605.7593};
+		dir[]={-0.85671878,-0.46180359,0.22978428};
+		up[]={-0.44605157,0.88697582,0.11963803};
+		aside[]={0.25906226,4.0518353e-07,0.96587688};
 	};
 };
 binarizationWanted=0;
@@ -310,7 +310,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=46;
+		items=50;
 		class Item0
 		{
 			dataType="Logic";
@@ -3143,7 +3143,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
 				disableSimulation=1;
 			};
 			id=1447;
@@ -3179,7 +3179,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
 				disableSimulation=1;
 			};
 			id=1448;
@@ -3215,7 +3215,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
 				disableSimulation=1;
 			};
 			id=1449;
@@ -3251,7 +3251,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
 				disableSimulation=1;
 			};
 			id=1450;
@@ -13892,6 +13892,72 @@ class Mission
 			description="The gamemode overrides bits of the artillery module, including init." \n "" \n "However, the artillery module expects a physical module entity - so we feed it this logic instead.";
 			id=1973;
 			atlOffset=-4.7683716e-07;
+		};
+		class Item46
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20129.014,5.191865,6613.8037};
+				angles[]={0.011995304,4.2193594,6.2711902};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=2494;
+			type="Land_vn_cncbarrier_stripes_f";
+		};
+		class Item47
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20130.398,5.1877513,6611.1826};
+				angles[]={0.011995304,4.2193594,6.223258};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=2495;
+			type="Land_vn_cncbarrier_stripes_f";
+			atlOffset=0.00022268295;
+		};
+		class Item48
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20130.426,5.2026677,6607.8359};
+				angles[]={-0,1.8948538,6.2292376};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=2496;
+			type="Land_vn_cncbarrier_stripes_f";
+		};
+		class Item49
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20126.645,5.2134833,6615.6274};
+				angles[]={6.2711902,3.4075682,6.2711902};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=2497;
+			type="Land_vn_cncbarrier_stripes_f";
+			atlOffset=1.2397766e-05;
 		};
 	};
 };

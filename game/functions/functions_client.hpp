@@ -405,6 +405,7 @@ class vgm_c
         class displayStaminaBar {};
         class displayEndOfMission {};
         class displayMenuBase {};
+        class displayLoading {};
     };
 
     class artillery
@@ -556,6 +557,10 @@ class vgm_c
         {
             postInit = 1;
         };
+        class loading_preInit
+        {
+            preInit = 1;
+        };
         class loading_setText {};
         class loading_tickerDots {};
     };
@@ -577,10 +582,11 @@ class vgm_c
     class ui
     {
         VGM_CLIENT_PATH(\core\client\ui);
+        class handle_light_level_loop {};
+        class openFieldManual {};
         class update_loading_screen {};
         class progressBar {};
         class showTabbedTextDialog {};
-        class handle_light_level_loop {};
         class stack_controls {};
         class toggle_controls_group_overlay {};
     };
@@ -896,6 +902,7 @@ class vgm_c
             postInit = 1;
         };
 
+        class tutorial_resetAll {};
         class tutorial_trigger {};
     };
 };

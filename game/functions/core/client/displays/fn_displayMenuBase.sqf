@@ -3,7 +3,7 @@
     File: fn_displayMenuBase.sqf
     Author: Savage Game Design
     Date: 2024-04-06
-    Last Update: 2024-03-24
+    Last Update: 2024-11-24
     Public: No
 
     Description:
@@ -71,6 +71,19 @@ switch _mode do {
     case "onClickSkillTree": {
         params ["_ctrl"];
         ["switchMenu", [_ctrl]] call SELF;
+    };
+
+    case "onClickHelp": {
+        params ["_ctrl"];
+        private _display = ctrlParent _ctrl;
+
+        private _entry = switch (_display getVariable "vgm_currentDisplay") do {
+            case "VGM_DisplaySkills";
+            case "VGM_DisplayAbilities": {"skills"};
+            default {""};
+        };
+
+        ["vgm", _entry, _display] call vgm_c_fnc_openFieldManual;
     };
 
     case "switchMenu": {
