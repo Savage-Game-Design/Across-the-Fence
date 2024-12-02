@@ -176,6 +176,12 @@ switch _mode do {
         private _ctrlAvailable = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLE;
         private _skillPathsHashMap = createHashMap;
         _ctrlAvailable setVariable ["vgm_skills", _skillPathsHashMap];
+        private _available = (values vgm_c_skills_active_list select {_x get "isUltimate" == (_slot == SLOT_ULTIMATE)});
+        private _ctrlAvailableEmpty = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLEEMPTY;
+        if (isNil "_available" || {count _available == 0}) exitWith {
+            _ctrlAvailable ctrlShow false;
+            _ctrlAvailableEmpty ctrlShow true;
+        };
 
         ctClear _ctrlAvailable;
         {
@@ -208,9 +214,11 @@ switch _mode do {
             private _skillSlot = _skill call VGM_C_fnc_skills_active_getSlot;
             _ctrlRowEquip ctrlSetText localize (["STR_VGM_SKILLS_UI_EQUIPPED", "STR_VGM_SKILLS_UI_EQUIP"] select (_skillSlot == ""));
             _ctrlRowEquip ctrlEnable (_skillSlot == "");
-        } forEach (values vgm_c_skills_active_list select {_x get "isUltimate" == (_slot == SLOT_ULTIMATE)});
+        } forEach _available;
 
         _ctrlAvailable ctSetCurSel 0;
+        _ctrlAvailable ctrlShow true;
+        _ctrlAvailableEmpty ctrlShow false;
     };
 
     // put the skill into currently selected slot

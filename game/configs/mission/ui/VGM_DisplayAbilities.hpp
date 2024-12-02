@@ -293,6 +293,7 @@ VGM_SET_Y(0);
             w = _W * VGM_GRID_W;
             h = (DISPLAY_H - 8) * VGM_GRID_H;
             onLBSelChanged = VGM_UIEH(skillSelected,Abilities);
+            colorBackground[] = {1,0,0,1};
 VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
             class RowTemplate
             {
@@ -340,16 +341,25 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 };
             };
         };
+        class AvailableEmpty: VGM_ctrlStructuredTextCentered
+        {
+            idc = VGM_IDC_DISPLAYABILITIES_AVAILABLEEMPTY;
+            text = "Select an ability slot on the left to show a list of available abilities.<br/><br/>Only abilites unlocked in the skill trees will be shown.";
+            x = _X;
+            y = VGM_Y_Y(DISPLAY_Y, 0);
+            w = _W * VGM_GRID_W;
+            h = (DISPLAY_H - 8) * VGM_GRID_H;
+        };
 
 #define _X DISPLAY_X + 2 * (COLUMN_W + 5) * VGM_GRID_W
         class AbilityTitle: AvailableTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYTITLE;
-            text = "Focused Ability";
+            text = "No ability selected";
             x = _X;
         };
 #define _W (COLUMN_W - 2)
-        class AbilityStack: VGM_ctrlStack// VGM_ctrlStructuredText //
+        class AbilityStack: VGM_ctrlStack
         {
             colorBackground[] = {1,0,0,0.2};
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYSTACK;
@@ -362,7 +372,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 class AbilityDescription: VGM_ctrlStructuredText
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_ABILITYDESCRIPTION;
-                    text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+                    text = "";
                     stackFill = 1;
                     x = 1 * VGM_GRID_W;
                     w = _W * VGM_GRID_W;
