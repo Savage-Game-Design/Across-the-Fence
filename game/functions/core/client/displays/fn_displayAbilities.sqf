@@ -76,17 +76,10 @@ switch _mode do {
         // no skill in the slot
         private _idcEmpty = [VGM_IDC_DISPLAYABILITIES_STDEMPTY, VGM_IDC_DISPLAYABILITIES_ULTEMPTY] select (_slotName == SLOT_ULTIMATE);
         private _ctrlEmpty = _display displayCtrl _idcEmpty;
-        if (_skill isEqualTo createHashMap) exitWith {
-            _ctrlSkilStack ctrlShow false;
+        if (isNil "_skill" || { _skill isEqualTo createHashMap }) exitWith {
+            _ctrlSkillStack ctrlShow false;
             _ctrlEmpty ctrlShow true;
-            _ctrlTitle ctrlSetText "-";
-            _ctrlIcon ctrlSetText "#(rgb,1,1,1)color(1,0,0,0.5)";
-            _ctrlCategory ctrlSetText "-";
-            _ctrlCooldown ctrlSetText "-";
-            _ctrlDescription ctrlSetText "-";
         };
-        _ctrlSkillStack ctrlShow true;
-        _ctrlEmpty ctrlShow false;
 
         private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 
@@ -95,6 +88,9 @@ switch _mode do {
         _ctrlCategory ctrlSetText (_skillTree get "displayName");
         _ctrlCooldown ctrlSetText format [localize "STR_VGM_SKILLS_UI_COOLDOWN_LONG", _skill get "cooldown"];
         _ctrlDescription ctrlSetText (_skill get "description");
+
+        _ctrlSkillStack ctrlShow true;
+        _ctrlEmpty ctrlShow false;
     };
 
     // player wants to assign his standard ability
@@ -149,7 +145,7 @@ switch _mode do {
         _ctrlEquip ctrlEnable (_skillSlot == "");
 
         if (_focusedSkill isEqualTo createHashMap) exitWith {
-            _ctrlTitle ctrlSetText "-";
+            _ctrlTitle ctrlSetText "X";
             _ctrlIcon ctrlSetText "#(rgb,1,1,1)color(1,0,0,0.5)";
             _ctrlCategory ctrlSetText "-";
             _ctrlCooldown ctrlSetText "-";
