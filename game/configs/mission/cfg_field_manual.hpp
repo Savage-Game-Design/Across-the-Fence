@@ -12,6 +12,17 @@ class vgm_welcome {
             };
         logicalOrder = 1;
     };
+    class getting_started {
+        displayName = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED";
+        description = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC";
+        tip = __EVAL(format [localize 'STR_VGM_FIELD_MANUAL_GETTING_STARTED_TIP', selectRandom getArray (configFile >> 'CfgWorlds' >> 'cam_lao_nam' >> 'loadingTexts')]);
+        image = "\a3\ui_f\data\gui\cfg\hints\miss_icon_ca.paa";
+        arguments[] = 
+            {
+                "localize 'STR_VGM_MISSION_NAME'",
+            };
+        logicalOrder = 2;
+    };
 };
 
 class vgm_tutorial {
@@ -58,17 +69,6 @@ class vgm_tutorial {
 class vgm {
     logicalOrder = 3;
     displayName = "$STR_VGM_MISSION_NAME";
-    class getting_started {
-        displayName = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED";
-        description = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC";
-        tip = __EVAL(format [localize 'STR_VGM_FIELD_MANUAL_GETTING_STARTED_TIP', selectRandom getArray (configFile >> 'CfgWorlds' >> 'cam_lao_nam' >> 'loadingTexts')]);
-        image = "\a3\ui_f\data\gui\cfg\hints\miss_icon_ca.paa";
-        arguments[] = 
-            {
-                "localize 'STR_VGM_MISSION_NAME'",
-            };
-        logicalOrder = 1;
-    };
     class missions {
         displayName = "$STR_VGM_FIELD_MANUAL_MISSIONS";
         description = "$STR_VGM_FIELD_MANUAL_MISSIONS_DESC";
@@ -77,7 +77,7 @@ class vgm {
             {
                 "localize 'STR_VGM_MISSION_NAME'",
             };
-        logicalOrder = 2;
+        logicalOrder = 1;
     };
     class skills {
         displayName = "$STR_VGM_FIELD_MANUAL_SKILLS";
@@ -91,7 +91,7 @@ class vgm {
                     true\
                 ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')",
             };
-        logicalOrder = 3;
+        logicalOrder = 2;
     };
     class medical {
         displayName = "$STR_VGM_FIELD_MANUAL_MEDICAL";
@@ -111,7 +111,7 @@ class vgm {
                 ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')",
                 "localize 'STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL'",
             };
-        logicalOrder = 4;
+        logicalOrder = 3;
     };
 };
 
