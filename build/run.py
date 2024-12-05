@@ -81,10 +81,13 @@ def command_launch_arma_server(mod):
 @option_clean
 @option_mod
 @option_version
+@click.option('--dev', default=False, is_flag=True)
 @click.option('--pack', default=False, is_flag=True,
               help="Packs mission and mods (if --mod is specified) using Armake2 and HEMTT")
-def build(overwrite, clean, mod, pack, version):
+def build(overwrite, clean, mod, dev, pack, version):
     perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod, version=version))
+
+    pack_type = PackType.Dev if dev else PackType.Build
 
     if pack:
         # Only pack the mods if --mod is specified
@@ -93,7 +96,7 @@ def build(overwrite, clean, mod, pack, version):
             for (artifact, value) in config.output_paths["default"].items()
             if not artifact in [BuildArtifact.CLIENT_MOD, BuildArtifact.SERVER_MOD] or mod
         }
-        vgm.build.pack(source_root, pack_paths, pack_type=PackType.Build)
+        vgm.build.pack(source_root, pack_paths, pack_type=pack_type)
 
 @click.command("dev")
 @option_overwrite
