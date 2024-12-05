@@ -280,6 +280,7 @@ VGM_SET_Y(0);
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
             text = "Available Skills";
+            tooltip = "";
             x = _X;
             w = _W * VGM_GRID_W;
         };
