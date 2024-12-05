@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-11-02
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -21,13 +21,13 @@
 
 vgm_s_director_max_alertness = 100;
 vgm_s_director_min_time_between_trackers_secs = 90;
-vgm_s_director_max_time_between_trackers_secs = 300;
+vgm_s_director_max_time_between_trackers_secs = 600;
 vgm_s_director_dynamic_max_groups = 8;
 vgm_s_director_noiseEventAlertness = createHashMapFromArray [
-    ["player_explosion", 1],
+    ["player_explosion", 2],
     ["player_flare", 5],
-    ["unsuppressedShots", 0.2],
-    ["suppressedShots", 0.05]
+    ["unsuppressedShots", 1.0],
+    ["suppressedShots", 0.5]
 ];
 
 vgm_s_director_defenseSquadSizes = createHashMapFromArray [
