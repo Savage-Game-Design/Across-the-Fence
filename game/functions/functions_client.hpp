@@ -467,6 +467,7 @@ class vgm_c
         {
             postInit = 1;
         };
+        class equipment_setDefaultLoadout {};
     };
 
     class keyhandler
