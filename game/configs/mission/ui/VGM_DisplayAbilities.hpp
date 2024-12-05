@@ -146,7 +146,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
             {
                 class TopText: VGM_ctrlStructuredText
                 {
-                    text = "No Ability Selected";
+                    text = "$STR_VGM_SKILLS_UI_STDEMPTY_TOPTEXT_TEXT";
                     x = 0;
                     y = 5 * VGM_GRID_H;
                     w = COLUMN_W * VGM_GRID_W;
@@ -162,7 +162,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
                 };
                 class BottomText: TopText
                 {
-                    text = "Click here to choose an ability";
+                    text = "$STR_VGM_SKILLS_UI_STDEMPTY_BOTTOMTEXT_TEXT";
                     y = (_ABILITY_H - 10) * VGM_GRID_H;
                 };
             };
@@ -202,7 +202,6 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
                 class StdName: VGM_ctrlStructuredText
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_NAME;
-                    text = "Ability Name";
                     size = VGM_FONT_M;
                     x = 1 * VGM_GRID_W;
                     w = _W * VGM_GRID_W;
@@ -218,7 +217,6 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
                 class StdCategory: StdName
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_CATEGORY;
-                    text = "Ability Category";
                     size = VGM_FONT_M;
                     stackOffset = 0;
                     h = 5 * VGM_GRID_H;
@@ -226,14 +224,12 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
                 class StdCooldown: StdCategory
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_COOLDOWN;
-                    text = "X second cooldown";
                     h = 5 * VGM_GRID_H;
                     stackOffset = 0;
                 };
                 class StdDescription: StdCategory
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_DESCRIPTION;
-                    text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
                     stackFill = 1;
                     w = (COLUMN_W - 2) * VGM_GRID_W;
                 };
@@ -279,7 +275,6 @@ VGM_SET_Y(0);
         class AvailableTitle: StdTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
-            text = "Available Skills";
             tooltip = "";
             x = _X;
             w = _W * VGM_GRID_W;
@@ -345,7 +340,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
         class AvailableEmpty: VGM_ctrlStructuredTextCentered
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLEEMPTY;
-            text = "You currently have no skills unlocked in this category.<br/><br/>New skills can be unlocked via the skill tree.";
+            text = "$STR_VGM_SKILLS_UI_AVAILABLEEMPTY_TEXT";
             x = _X;
             y = VGM_Y_Y(DISPLAY_Y, 0);
             w = _W * VGM_GRID_W;
@@ -356,7 +351,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
         class AbilityTitle: AvailableTitle
         {
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYTITLE;
-            text = "No ability selected";
             x = _X;
         };
 #define _W (COLUMN_W - 2)
@@ -373,7 +367,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 class AbilityDescription: VGM_ctrlStructuredText
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_ABILITYDESCRIPTION;
-                    text = "";
                     stackFill = 1;
                     x = 1 * VGM_GRID_W;
                     w = _W * VGM_GRID_W;
@@ -388,7 +381,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                         class AbilityCategory: VGM_ctrlStructuredText
                         {
                             idc = VGM_IDC_DISPLAYABILITIES_ABILITYCATEGORY;
-                            text = "Service Essentials Ability";
                             x = 0;
                             y = 0;
                             w = (_W - 10) * VGM_GRID_W;
@@ -397,7 +389,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                         class AbilityCooldown: AbilityCategory
                         {
                             idc = VGM_IDC_DISPLAYABILITIES_ABILITYCOOLDOWN;
-                            text = "X second cooldown";
                             y = 5 * VGM_GRID_H;
                         };
                         class AbilityIconFrame: VGM_ctrlFrame
@@ -461,7 +452,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
         class AbilityEmpty: VGM_ctrlStructuredTextCentered
         {
             idc = VGM_IDC_DISPLAYABILITIES_ABILITYEMPTY;
-            text = "Details of the selected ability will be shown here.";
+            text = "$STR_VGM_SKILLS_UI_ABILITYEMPTY_TEXT";
             x = _X;
             y = VGM_Y_Y(DISPLAY_Y, 0);
             w = COLUMN_W * VGM_GRID_W;
