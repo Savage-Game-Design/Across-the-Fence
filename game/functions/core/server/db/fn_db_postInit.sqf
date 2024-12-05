@@ -9,6 +9,8 @@
         PostInit for database and persistence.
  */
 
+if (!isServer) exitWith {};
+
 ["db_save_mission_namespace", { [] call vgm_s_fnc_db_persist }, [], 120] call para_g_fnc_scheduler_add_job;
 
 // Should fire *after* levelling rewards are given, so progress is persisted.
