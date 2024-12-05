@@ -457,6 +457,15 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 };
             };
         };
+        class AbilityEmpty: VGM_ctrlStructuredTextCentered
+        {
+            idc = VGM_IDC_DISPLAYABILITIES_ABILITYEMPTY;
+            text = "Details of the selected ability will be shown here.";
+            x = _X;
+            y = VGM_Y_Y(DISPLAY_Y, 0);
+            w = COLUMN_W * VGM_GRID_W;
+            h = 10 * VGM_GRID_H;
+        };
     };
 };
 

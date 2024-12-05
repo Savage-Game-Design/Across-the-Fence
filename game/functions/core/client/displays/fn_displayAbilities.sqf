@@ -42,6 +42,7 @@ switch _mode do {
         ["fillSkillsList", _display] call SELF;
         ["updateStandardSkillStack", _display] call SELF;
         ["updateUltimateSkillStack", _display] call SELF;
+        ["updateFocusedSkillStack", _display] call SELF;
     };
 
     // update standard skill panel on the left
@@ -144,14 +145,14 @@ switch _mode do {
         _ctrlEquip ctrlSetText localize (["STR_VGM_SKILLS_UI_EQUIPPED", "STR_VGM_SKILLS_UI_EQUIP"] select (_skillSlot == ""));
         _ctrlEquip ctrlEnable (_skillSlot == "");
 
-        if (_focusedSkill isEqualTo createHashMap) exitWith {
-            _ctrlTitle ctrlSetText "X";
-            _ctrlIcon ctrlSetText "#(rgb,1,1,1)color(1,0,0,0.5)";
-            _ctrlCategory ctrlSetText "-";
-            _ctrlCooldown ctrlSetText "-";
-            _ctrlDescription ctrlSetText "-";
-            _ctrlEquip setVariable ["vgm_skill", createHashMap];
+        _ctrlAbilityEmpty = _display displayCtrl VGM_IDC_DISPLAYABILITIES_ABILITYEMPTY;
+        if (isNil "_focusedSkill" || {_focusedSkill isEqualTo createHashMap}) exitWith {
+            _ctrlAbilityEmpty ctrlShow true;
+            _ctrlSkillStack ctrlShow false;
+            _ctrlTitle ctrlSetText "No Skill Selected";
         };
+        _ctrlAbilityEmpty ctrlShow false;
+        _ctrlSkillStack ctrlShow true;
 
         private _skillTree = _focusedSkill call vgm_g_fnc_skills_getSkillTreeFromSkill;
 
