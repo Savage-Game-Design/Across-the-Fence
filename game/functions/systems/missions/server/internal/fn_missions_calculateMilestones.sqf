@@ -23,6 +23,10 @@ params ["_endType", "_playerId"];
 
 private _milestones = [];
 
+if (_endType == "SUCCESS") then {
+    _milestones pushBack ["mission_success", 50];
+};
+
 // add XP for spotting
 call {
     #define SEARCH_RADIUS 200
