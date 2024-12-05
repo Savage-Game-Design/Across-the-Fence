@@ -28,3 +28,13 @@ arguments = [
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = '\a3\ui_f\data\gui\cfg\hints\rules_ca.paa'
+
+[hints.levelling_up]
+description = """
+You just levelled up and gained a skill point. Use them to learn new skills at the radio in the TOC.
+"""
+
+[hints.equipping_skills]
+description = """
+You just acquired an active skill! Before you can use it, you need to equip it in the skill assignment menu at the radio.
+"""

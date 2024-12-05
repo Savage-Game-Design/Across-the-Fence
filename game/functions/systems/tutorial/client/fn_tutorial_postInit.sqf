@@ -60,5 +60,5 @@ addMissionEventHandler ["EachFrame", {
     private _target = cursorObject;
     private _tutorial = cursorObject getVariable "vgm_c_tutorial";
     if (isNil "_tutorial" || { _target distance2D player > 4 }) exitWith {};
-    [_tutorial # 0, _tutorial # 1] call vgm_c_fnc_tutorial_trigger;
+    _tutorial call vgm_c_fnc_tutorial_trigger;
 }];

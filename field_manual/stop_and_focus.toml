@@ -15,3 +15,8 @@ arguments = []
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = 'assets\atf_logo.paa'
+
+[hints.stop_and_focus]
+description = """
+You just focused on your surroundings. While focusing, you can visualise the sounds of nearby enemies and spot hints more quickly. Moving will exit this state.
+"""

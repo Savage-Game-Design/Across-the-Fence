@@ -20,3 +20,8 @@ arguments = ["localize 'STR_VGM_MISSION_NAME'"]
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = '\a3\ui_f\data\gui\cfg\hints\miss_icon_ca.paa'
+
+[hints.getting_started]
+description = """
+To get started, head into the nearby TOC and look around.
+"""

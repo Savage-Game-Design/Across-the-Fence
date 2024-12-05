@@ -1,0 +1,30 @@
+displayName = "Equipment"
+description = """
+Having the right equipment is essential to both surviving and succeeding as a recon team member.
+
+Currently, [h]{1}[/h] uses the standard Arma 3 Arsenal to manage your gear. You can find these in the TOC building, at the main base.
+
+You'll also start the game with a typical recon team loadout, suitable for running a mission straight away.
+
+<t size="1.1">Key equipment</t>
+
+Certain pieces of equipment are particularly helpful in [h]{1}[/h]:
+- [h]Cameras[/h] can be used to photograph enemy sites. See [h]Scouting[/h] for more information.
+- [h]Silenced weapons[/h] make it easier to eliminate NVA forces without being noticed. However, they will still attract some attention!
+- [h]Radio backpacks[/h] can be used to call in air support, if you have the right [h]Skills[/h].
+
+<t size="1.1">Unlocking equipment</t>
+
+New equipment can be unlocked by unlocking the right [h]Skills[/h]. All skills that unlock equipment have [h]Equipment[/h] in their name.
+"""
+
+arguments = [
+"localize 'STR_VGM_MISSION_NAME'",
+]
+
+image = 'assets\atf_logo.paa'
+
+[hints.gearing_up]
+description = """
+You can change your equipment using the nearby ammo boxes. See the field manual for recommended key equipment.
+"""
