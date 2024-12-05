@@ -3,7 +3,7 @@
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-29
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -22,8 +22,7 @@
 #define RADIUS 200
 #define OBJECTS_MAX 50
 
-private _intensity = missionNamespace getVariable ["vgm_c_skill_investigate_intensity", 0];
-private _interval = linearConversion [0, 1, _intensity, GLINT_JOB_INT_MAX, GLINT_JOB_INT_MIN];
+private _interval = linearConversion [0, 1, vgm_c_skill_investigate_intensity, GLINT_JOB_INT_MAX, GLINT_JOB_INT_MIN];
 private _radius = RADIUS;
 
 _interval = _interval * ([focusOn, "glintFrequency"] call vgm_c_fnc_coefficient_get);
