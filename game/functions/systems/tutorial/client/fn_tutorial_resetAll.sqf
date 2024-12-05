@@ -2,7 +2,7 @@
     File: fn_tutorial_resetAll.sqf
     Author: Savage Game Design
     Date: 2024-11-17
-    Last Update: 2024-11-23
+    Last Update: 2024-12-05
     Public: Yes
 
     Description:
@@ -20,3 +20,4 @@
 
 vgm_c_tutorial_seenTutorials = createHashMap;
 missionProfileNamespace setVariable ["vgm_tutorial_seenTutorials", vgm_c_tutorial_seenTutorials];
+saveMissionProfileNamespace;
