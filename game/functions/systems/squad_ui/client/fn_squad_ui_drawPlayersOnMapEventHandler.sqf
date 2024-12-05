@@ -2,7 +2,7 @@
     File: fn_squad_ui_drawPlayersOnMapEventHandler.sqf
     Author: Savage Game Design
     Date: 2024-11-06
-    Last Update: 2024-11-06
+    Last Update: 2024-11-30
     Public: No
 
     Description:
@@ -17,6 +17,8 @@
     Example(s):
         _ctrlMap addEventHandler ["Draw", vgm_c_fnc_squad_ui_drawPlayersOnMapEventHander];
  */
+
+#define FONT_SIZE 0.042
 
 params ["_ctrlMap"];
 
