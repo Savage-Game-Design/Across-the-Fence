@@ -1,4 +1,4 @@
-[server]
+[default]
 workshop = [
     "1649778181" # VN testing build
 ]
