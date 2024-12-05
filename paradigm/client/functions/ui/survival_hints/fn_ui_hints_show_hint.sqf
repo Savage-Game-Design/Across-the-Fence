@@ -16,13 +16,28 @@
         ["vgm", "getting_started"] call para_c_fnc_ui_hints_show_hint;
 */
 // These are defined in MF ./mission/config/hints.hpp
-params ["_category", "_hintTitle"];
+params ["_category", "_page", ["_hint", ""]];
 
-private _cfgHint = missionConfigFile >> "CfgHints" >> _category >> _hintTitle;
-private _title = getText (_cfgHint >> "displayNameShort");
-private _body = getText (_cfgHint >> "description");
-private _image = getText (_cfgHint >> "image");
-private _arguments = getArray (_cfgHint >> "arguments");
+private _cfgPage = missionConfigFile >> "CfgHints" >> _category >> _page;
+private _title = getText (_cfgPage >> "displayNameShort");
+private _body = getText (_cfgPage >> "description");
+private _image = getText (_cfgPage >> "image");
+private _arguments = getArray (_cfgPage >> "arguments");
+
+if (_title isEqualTo "") then { _title = getText(_cfgPage >> "displayName") };
+
+private _cfgHint = _cfgPage >> "Hints" >> _hint;
+if (isClass(_cfgHint)) then {
+    private _hintTitle = getText(_cfgHint >> "displayName");
+    if (_hintTitle isNotEqualTo "") then {
+        _title = _hintTitle;
+    };
+    private _hintBody = getText(_cfgHint >> "description");
+    if (_hintBody isNotEqualTo "") then {
+        _body = _hintBody;
+    };
+};
+
 
 // Need to do very similar formatting to the field manual to prevent weird rendering.
 private _keyColor = "#000000";
@@ -61,13 +76,6 @@ private _cardsToCreate = [];
 
 if (!isNil "_image") then {
     _image = format ["<img image='%1'/>", _image];
-};
-
-// Character count 330 is calculated by eyeballing the card.
-// Could be better, but will work most of the time.
-// Stops the body overflowing the card and looking weird.
-if (count str parseText _body > 330) then {
-    _body = (_body select [0, 330]) + "...";
 };
 
 private _newCardText = format [
@@ -114,7 +122,8 @@ private _cardInfo = createHashMapFromArray [
     ["control", controlNull],
     ["structuredText", _structuredText],
     ["category", _category],
-    ["hint", _hintTitle]
+    ["hint", _page
+]
 ];
 _activeHints pushBack _cardInfo;
 

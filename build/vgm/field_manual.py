@@ -47,6 +47,11 @@ def format_description(text: str) -> str:
 # Normal string, or an _EVAL formatted string
 StrDef = str | list[str]
 
+class _HintDefinition(TypedDict):
+    displayName: Optional[StrDef]
+    content: str
+    triggers: Optional[dict[str, Any]]
+
 class _CategoryDefinition(TypedDict):
     displayName: StrDef
     pages: list[str]
@@ -59,7 +64,7 @@ class _PageDefinition(TypedDict):
     tip: Optional[StrDef]
     arguments: Optional[list[str]]
     image: Optional[str]
-    Triggers: Optional[dict[str, Any]]
+    hints: Optional[dict[str, _HintDefinition]]
 
 
 class FieldManualConfigBuilder:
@@ -158,13 +163,35 @@ class FieldManualConfigBuilder:
                 arma_config.Array([arma_config.String(arg) for arg in arguments])
             )
 
-        triggers = page_def.get("Triggers", None)
+        hints = page_def.get("hints", None) or {}
+        if len(hints) > 0:
+            hints_container = arma_config.Class("Hints")
+            for (hint_name, hint) in hints.items():
+                hints_container.add(self._make_hint(hint_name, hint, page_key_prefix=[page_name]))
+
+            page.add(hints_container)
+
+        return page
+
+    def _make_hint(self, hint_name: str, hint_def: _HintDefinition, page_key_prefix: list[str]) -> arma_config.Class:
+        prefix = page_key_prefix + ["hint", hint_name]
+        hint = arma_config.Class(hint_name)
+
+        display_name = hint_def.get('displayName', None)
+        if display_name:
+            hint.addProperty('displayName', self.add_formattable_text(prefix + ["name"], display_name))
+
+        description = hint_def.get('description', None)
+        if description:
+            hint.addProperty('description', self._prepare_description(prefix + ["description"], description))
+
+        triggers = hint_def.get("triggers", None)
         if triggers and len(triggers) > 0:
             trigger_entry = arma_config.python_type_to_config_entry("Triggers", triggers)
             if trigger_entry:
-                page.add(trigger_entry)
+                hint.add(trigger_entry)
 
-        return page
+        return hint
 
 
 def _read_toml_file(file_path: Path) -> dict:
