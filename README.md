@@ -76,6 +76,7 @@ The mission (in the output directory) can then be opened in the Arma editor, e.g
 Most build commands accept the following options:
 - `--overwrite` - Overwrites any existing files.
 - `--clean` - Removes the existing folder (e.g mod output folders, mission folder)
+- `--version` - Accepts a version in the format: `v<version>@<hash> <text>`, e.g `v1.2.3@abcd indev`. All components are optional, so `@abcd indev` is valid, as is `v1.2.3` or just `indev`.
 
 
 #### Mod
