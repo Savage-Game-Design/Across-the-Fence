@@ -22,7 +22,7 @@ class para_RscSurvivalCard: para_RscControlsGroupNoScrollbarHV
 		class Content: para_RscStructuredText
 		{
 			idc = PARA_RSCSURVIVALHINTS_CONTENT_IDC;
-			text = "<t size='1.3' align='center' font='RobotoCondensedBold'>TITLE<br/><t size='4' color='FFFFFF'><img image='\a3\ui_f\data\IGUI\RscTitles\HealthTextures\test_texture_2-1.paa'/></t></t><br/>Deserunt ullamco deserunt proident ex tempor cupidatat commodo labore duis officia voluptate officia. Consectetur laborum ex dolore adipisicing officia labore culpa elit in culpa dolore. Esse excepteur qui proident cillum officia velit anim aute incididunt ipsum est cillum nostrud ex. Dolor consectetur elit mollit ad enim nulla eiusmod. Amet est aute commodo amet dolor ut nulla officia velit. Non quis minim Lorem aliqua est. Excepteur eiusmod velit anim tempor occaecat dolore sint tempor cillum occaecat et magna Lorem esse.";
+			text = "<t size='1.3' align='center' font='RobotoCondensedBold'>TITLE<br/><t size='4' color='#FFFFFF'><img image='\a3\ui_f\data\IGUI\RscTitles\HealthTextures\test_texture_2-1.paa'/></t></t><br/>Deserunt ullamco deserunt proident ex tempor cupidatat commodo labore duis officia voluptate officia. Consectetur laborum ex dolore adipisicing officia labore culpa elit in culpa dolore. Esse excepteur qui proident cillum officia velit anim aute incididunt ipsum est cillum nostrud ex. Dolor consectetur elit mollit ad enim nulla eiusmod. Amet est aute commodo amet dolor ut nulla officia velit. Non quis minim Lorem aliqua est. Excepteur eiusmod velit anim tempor occaecat dolore sint tempor cillum occaecat et magna Lorem esse.";
 			x = UIW(0.1);
 			y = UIH(0.1);
 			w = UIW((_W - 0.2));

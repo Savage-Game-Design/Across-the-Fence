@@ -104,9 +104,9 @@ class vgm_site_types {
         class hints: vgm_site_hints_default {};
     };
 
-    class vgm_waypoint {
-        displayNameKey = "STR_VGM_SITES_WAYPOINT";
-        generatorFunction = "vgm_s_fnc_sites_type_waypoint";
+    class vgm_waystation {
+        displayNameKey = "STR_VGM_SITES_WAYSTATION";
+        generatorFunction = "vgm_s_fnc_sites_type_waystation";
         locationClass = "o_unknown";
 
         class hints: vgm_site_hints_default {};

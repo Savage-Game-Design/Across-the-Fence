@@ -317,7 +317,7 @@ class vgm_s
         class sites_type_supplyDump {};
         class sites_type_transmitter {};
         class sites_type_truckPark {};
-        class sites_type_waypoint {};
+        class sites_type_waystation {};
     };
 
     class skill
