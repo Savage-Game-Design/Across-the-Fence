@@ -2,7 +2,7 @@
     File: fn_tutorial_trigger.sqf
     Author: Savage Game Design
     Date: 2024-11-17
-    Last Update: 2024-11-17
+    Last Update: 2024-12-05
     Public: Yes
 
     Description:
@@ -28,3 +28,6 @@ if (_key in vgm_c_tutorial_seenTutorials) exitWith {};
 [_category, _tutorialName] call para_c_fnc_ui_hints_show_hint;
 
 vgm_c_tutorial_seenTutorials set [_key, true];
+
+missionProfileNamespace setVariable ["vgm_tutorial_seenTutorials", vgm_c_tutorial_seenTutorials];
+saveMissionProfileNamespace;
