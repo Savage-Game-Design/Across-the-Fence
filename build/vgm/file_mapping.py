@@ -1,11 +1,12 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Union
 
 import sgd.file_tree
-from sgd.file_generators import concatenate_files, from_text, replace
+from sgd.file_tree import generate_file, hardlink, symlink, remove
+from sgd.file_generators import concatenate_files, from_text, replace_text, FileGenerator
 from sgd.file_utils import Omit
-from .artifacts import Mod, Mission, Gamemode
+from .artifacts import Mod, Mission, Gamemode, Version
 
 """
 When built as a mission, the following applies:
@@ -57,9 +58,20 @@ def get_missions(source_root: Path) -> list[Mission]:
         for map_name in maps
     ]
 
+def generate_script_version_hpp(version: Version) -> FileGenerator:
+    contents = (
+        f"#define MAJOR {version.major}\n"
+        f"#define MINOR {version.minor}\n"
+        f"#define PATCH {version.patch}\n"
+        f"#define HASH \"{version.hash}\"\n"
+        f"#define VERSION \"{str(version)}\"\n"
+    )
+    return from_text(contents)
+
 @dataclass
 class GenerateFileTreeParams:
-    as_mod = False
+    as_mod: bool = False
+    version: Version = field(default_factory=Version)
 
 _default_file_tree_params = GenerateFileTreeParams()
 
@@ -69,10 +81,19 @@ class GenerateFileTreeResult:
     client_mod: Mod | None
     server_mod: Mod | None
 
+
+# Two possible improvements:
+# - Add "Transformers" that can do replacing, etc
+# - Split up the copy, generate etc functions into a source / destination pair. Something like `tree.add(<path>, <source>)`.
+# Goal is to get rid of "remove / add" pairs
 def generate_file_trees(source_root: Path, paradigm_path: Path, params: GenerateFileTreeParams = _default_file_tree_params) -> Gamemode:
+    version = params.version
+    version_str = str(version)
     as_mod = params.as_mod
     game_root = source_root / "game"
     mod_root = source_root / "mod"
+
+    replace_version = lambda file: replace_text(file, "#VERSION#", version_str)
 
     missions = get_missions(source_root)
     mission = missions[0]
@@ -91,11 +112,19 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, params: Generate
     copy(server_mod.files, mod_root / "server", "")
 
     mission_tree = mission.files
-    client_tree = client_mod.files / "addons" / "client"
-    server_tree = server_mod.files / "addons" / "server"
+    # >> syntax gets a subfolder, or creates it if it doesn't exist.
+    client_tree = client_mod.files >> "addons" >> "client"
+    server_tree = server_mod.files >> "addons" >> "server"
+
+    generate_file(mission_tree, "script_version.hpp", generate_script_version_hpp(version))
+    generate_file(client_tree, "script_version.hpp", generate_script_version_hpp(version))
+    generate_file(server_tree, "script_version.hpp", generate_script_version_hpp(version))
 
     # Maps all files from "mission" folder to the mission PBO - they should always be included.
     copy(mission_tree, game_root / "mission", "")
+    # TODO: Clean this. This remove then generate is pretty ugly, but it works for now.
+    remove(mission_tree, "stringtable.xml")
+    generate_file(mission_tree, "stringtable.xml", replace_version(game_root / "mission" / "stringtable.xml"))
 
 
     # Maps all functions to their appropriate PBO, depending on the build target.
@@ -124,7 +153,12 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, params: Generate
         generate_file(server_tree, server_functions_file_name, from_text(""))
 
     # Maps the map-specific config and mission.sqm to the mission PBO
-    copy(mission_tree, game_root / "maps" / "cam_lao_nam", "")
+    map_path = game_root / "maps" / "cam_lao_nam"
+    copy(mission_tree, map_path, "")
+    # TODO: Clean this. This remove then generate is pretty ugly, but it works for now.
+    remove(mission_tree, "mission.sqm")
+    generate_file(mission_tree, "mission.sqm", replace_version(map_path / "mission.sqm"))
+
 
     # Maps any mission-specific config to the mission PBO
     copy(mission_tree, game_root / "configs" / "mission", "configs")

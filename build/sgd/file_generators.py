@@ -39,14 +39,14 @@ def from_text(content: str):
         generate=write_text_to_file
     )
 
-def replace(file: Union[Path, str], old: str, new: str):
+def replace_text(file: Union[Path, str], old: str, new: str):
     file_path = Path(file)
     def replace_text_in_file(dest_path: Path):
         with open(file_path, "r", encoding="utf8") as source_fd:
             contents = source_fd.read()
-        contents.replace(old, new)
+        new_contents = contents.replace(old, new)
         with open(dest_path, "w", encoding="utf8") as output_fd:
-            output_fd.write(contents)
+            output_fd.write(new_contents)
 
     old_preview = old[0:20] + ("..." if len(old) >= 20 else "")
     new_preview = new[0:20] + ("..." if len(new) >= 20 else "")

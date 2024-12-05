@@ -2,7 +2,7 @@ import click
 import config
 from pathlib import Path
 import sgd.file_tree
-from vgm.artifacts import BuildArtifact
+from vgm.artifacts import BuildArtifact, Version
 import vgm.build
 from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, PackType, BuildParams
 import vgm.field_manual
@@ -16,7 +16,7 @@ servermod_path = Path(output_paths[BuildArtifact.SERVER_MOD])
 
 mission_paths = calculate_mission_output_paths(source_root, output_paths[BuildArtifact.MISSION])
 
-def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False) -> BuildParams:
+def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False, version=None) -> BuildParams:
     params = BuildParams(
         output_paths=output_paths,
         overwrite=overwrite,
@@ -24,6 +24,8 @@ def default_build_params(output_paths=output_paths, overwrite: bool = False, cle
     )
 
     params.mapping_params.as_mod = as_mod
+    if version:
+        params.mapping_params.version = Version.parse(version)
 
     return params
 
@@ -53,6 +55,13 @@ def perform_build(params: BuildParams = default_build_params()):
         print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
         raise
 
+option_overwrite = click.option('--overwrite', default=False, is_flag=True)
+option_clean = click.option('--clean', default=False, is_flag=True)
+option_mod = click.option('--mod', default=False, is_flag=True, help="Builds VGM to run as a client / server mod pair")
+option_version = click.option('--version', default=None,
+                              help="Version in the format: 'v1.2.3@hash something', where each part (1.2.3, hash, something) is optional")
+
+
 @click.command("client")
 @click.option('--connect', default=None)
 @click.option('--editor', is_flag=True)
@@ -68,14 +77,14 @@ def command_launch_arma_server(mod):
 
 
 @click.command
-@click.option('--overwrite', default=False, is_flag=True)
-@click.option('--clean', default=False, is_flag=True)
-@click.option('--mod', default=False, is_flag=True,
-              help="Builds VGM to run as a client / server mod pair")
+@option_overwrite
+@option_clean
+@option_mod
+@option_version
 @click.option('--pack', default=False, is_flag=True,
               help="Packs mission and mods (if --mod is specified) using Armake2 and HEMTT")
-def build(overwrite, clean, mod, pack):
-    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod))
+def build(overwrite, clean, mod, pack, version):
+    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod, version=version))
 
     if pack:
         # Only pack the mods if --mod is specified
@@ -87,16 +96,16 @@ def build(overwrite, clean, mod, pack):
         vgm.build.pack(source_root, pack_paths, pack_type=PackType.Build)
 
 @click.command("dev")
-@click.option('--overwrite', default=False, is_flag=True)
-@click.option('--clean', default=False, is_flag=True)
-@click.option('--mod', default=False, is_flag=True,
-              help="Builds VGM to run as a client / server mod pair")
+@option_overwrite
+@option_clean
+@option_mod
+@option_version
 @click.option('--no-server', default=False, is_flag=True,
               help="Doesn't start an arma server")
 @click.option('--no-client', default=False, is_flag=True,
               help="Doesn't start an arma client")
-def command_launch_dev(overwrite, clean, mod, no_server, no_client):
-    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod))
+def command_launch_dev(overwrite, clean, mod, version, no_server, no_client):
+    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod, version=version))
 
     if not no_server:
         launch_arma_server(mod)
@@ -106,8 +115,8 @@ def command_launch_dev(overwrite, clean, mod, no_server, no_client):
 
 @click.command
 @click.option('--confirm', default=False, is_flag=True)
-@click.option('--mod', default=False, is_flag=True,
-              help="Builds VGM to run as a client / server mod pair")
+@option_mod
+@option_version
 def release(confirm, mod):
     if not confirm:
         confirm = input("WARNING: This will run --clean and remove all output directories. Proceed? Y/N").lower() == "y"
