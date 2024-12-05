@@ -16,10 +16,12 @@
 		[] call para_c_fnc_ui_hints_acknowledgeHint
 */
 
+
 // Double press behaviour
 
 private _doublePressTime = 0.2;
 private _lastKeypress = localNamespace getVariable ["para_c_ui_hints_last_acknowledge_keypress", 0];
+localNamespace setVariable ["para_c_ui_hints_last_acknowledge_keypress", time];
 
 if (time < _lastKeypress + _doublePressTime) exitWith {
   private _lastHint = localNamespace getVariable "para_c_ui_hints_last_acknowledged_hint";
@@ -38,7 +40,6 @@ if (count _activeHints <= 0) exitWith {
 };
 
 localnamespace setVariable ["para_c_ui_hints_last_acknowledged_hint", _activeHints select 0];
-localNamespace setVariable ["para_c_ui_hints_last_acknowledge_keypress", time];
 
 [] call para_c_fnc_ui_hints_pop_hint;
 
