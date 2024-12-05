@@ -2,8 +2,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Generator, List, Protocol, Union
 
+from .file_generators import FileGenerator
 from .file_utils import all_files_relative, Omit
-from .file_sources import FileGenerator, FileSource, CopyFile, GenerateFile, HardlinkFile, SymlinkFile
+from .file_sources import FileSource, CopyFile, GenerateFile, HardlinkFile, SymlinkFile
 from .protocols import Explainable
 
 

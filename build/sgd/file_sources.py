@@ -3,6 +3,8 @@ from pathlib import Path
 import shutil
 from typing import Any, Protocol, Callable
 
+from .file_generators import FileGenerator
+
 class FileSource(Protocol):
     def create_file(self, path):
         pass
@@ -37,16 +39,16 @@ class HardlinkFile(FileSource):
     def create_file(self, path):
         self.source.link_to(path)
 
-FileGenerator = Callable[[Path], Any]
 
 @dataclass
 class GenerateFile(FileSource):
-    generate: FileGenerator
+    generator: FileGenerator
 
     def explain(self):
-        return f"generates file using '{self.generate.__name__}'"
+        print(self.generator)
+        return f"generated file: {self.generator.description}"
 
     def create_file(self, path):
-        self.generate(path)
+        self.generator.generate(path)
 
 
