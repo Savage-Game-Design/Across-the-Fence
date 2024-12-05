@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1237;
+		nextID=1262;
 	};
 	class Camera
 	{
-		pos[]={1703.5708,351.96671,16585.963};
-		dir[]={-0.53541631,-0.70396143,0.46665823};
-		up[]={-0.53068447,0.71023774,0.46253422};
-		aside[]={0.65704441,-2.5163172e-07,0.75385433};
+		pos[]={20104.893,6.4548287,6603.7759};
+		dir[]={0.40535197,-0.3910352,-0.82631099};
+		up[]={0.17221978,0.92037356,-0.35107014};
+		aside[]={-0.89779496,1.36788e-09,-0.44041961};
 	};
 };
 binarizationWanted=0;
@@ -202,14 +202,14 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="ReviveRequiredItems";
-			expression="false";
+			property="SharedObjectives";
+			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=2;
+					value=0;
 				};
 			};
 		};
@@ -253,14 +253,14 @@ class CustomAttributes
 		};
 		class Attribute4
 		{
-			property="SharedObjectives";
-			expression="if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+			property="ReviveRequiredItems";
+			expression="false";
 			class Value
 			{
 				class data
 				{
 					singleType="SCALAR";
-					value=0;
+					value=2;
 				};
 			};
 		};
@@ -2503,7 +2503,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this setVariable [""vgm_equipment_arsenal"", true];";
+				init="this setVariable [""vgm_equipment_arsenal"", true];" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""equipment"", ""gearing_up""]];";
 				disableSimulation=1;
 			};
 			id=1421;
@@ -2520,7 +2520,7 @@ class Mission
 						class data
 						{
 							singleType="STRING";
-							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],false]";
 						};
 					};
 				};
@@ -2552,7 +2552,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this setVariable [""vgm_equipment_arsenal"", true];";
+				init="this setVariable [""vgm_equipment_arsenal"", true];" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""equipment"", ""gearing_up""]];";
 				disableSimulation=1;
 			};
 			id=1422;
@@ -2569,7 +2569,7 @@ class Mission
 						class data
 						{
 							singleType="STRING";
-							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],false]";
 						};
 					};
 				};
@@ -2600,7 +2600,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this setVariable [""vgm_equipment_arsenal"", true];";
+				init="this setVariable [""vgm_equipment_arsenal"", true];" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""equipment"", ""gearing_up""]];";
 				disableSimulation=1;
 			};
 			id=1423;
@@ -2617,7 +2617,7 @@ class Mission
 						class data
 						{
 							singleType="STRING";
-							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],false]";
 						};
 					};
 				};
@@ -2649,7 +2649,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this setVariable [""vgm_equipment_arsenal"", true];";
+				init="this setVariable [""vgm_equipment_arsenal"", true];" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""equipment"", ""gearing_up""]];";
 				disableSimulation=1;
 			};
 			id=1424;
@@ -2666,7 +2666,7 @@ class Mission
 						class data
 						{
 							singleType="STRING";
-							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],false]";
 						};
 					};
 				};
@@ -3143,7 +3143,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""missions"", ""map_board""]];";
 				disableSimulation=1;
 			};
 			id=1447;
@@ -3179,7 +3179,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""missions"", ""map_board""]];";
 				disableSimulation=1;
 			};
 			id=1448;
@@ -3215,7 +3215,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""missions"", ""map_board""]];";
 				disableSimulation=1;
 			};
 			id=1449;
@@ -3251,7 +3251,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm_tutorial"", ""tutorial_missions""]];";
+				init="[""missions system postinit"", [this, { [_this # 1] call vgm_c_fnc_missions_makeMissionGiver }]] call para_g_fnc_event_subscribeLocal;" \n "" \n "this setVariable [""vgm_c_tutorial"", [""vgm"", ""missions"", ""map_board""]];";
 				disableSimulation=1;
 			};
 			id=1450;
@@ -8790,7 +8790,7 @@ class Mission
 							init="" \n "        private _index = createHashMapFromArray [[""vgm_supply_dump"",[[10692.1,12389.8],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9163.89,12459.1],[10193.3,13629.3],[10622.1,14024.1],[10679.4,10687.5]]],[""vgm_aa"",[[9152.53,12254.2],[8570.79,12656.6],[9901.71,12513.4],[9401,12594.7],[9470.15,12433.6],[9937.77,12249.4],[9712.29,11803.2],[11085.6,12168.6],[10692.1,12389.8],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9163.89,12459.1],[10193.3,13629.3],[10622.1,14024.1],[10679.4,10687.5]]],[""vgm_bulldozer"",[[10692.1,12389.8],[8288.56,11627.8],[8565.76,11677.3],[8783.48,11485],[8991.86,11825.2],[8819.37,11988.6],[8444.75,12275],[8285.97,12677.4],[8816.05,12685.3],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9596.67,11388.6],[9268.69,11489.2],[10493.5,11525.4],[10417.8,11475.4],[10774.7,11491.3],[11096.7,11426.3],[10478.9,12755],[10255.3,12811.4],[9973.85,13005.7],[9487.41,13008.2],[9163.89,12459.1],[10193.3,13629.3],[10622.1,14024.1],[10947.7,9638.47],[11395.1,10032.1],[10796,9640.36],[11119.5,10449.1],[10909.3,10597.3],[10679.4,10687.5]]],[""vgm_truck_park"",[[10692.1,12389.8],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9163.89,12459.1],[10193.3,13629.3],[10622.1,14024.1],[10679.4,10687.5]]],[""vgm_waystation"",[[10692.1,12389.8],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9163.89,12459.1],[10193.3,13629.3],[10622.1,14024.1],[10679.4,10687.5]]],[""lz"",[[8632.38,14101],[9636.9,13762.4],[9770.58,13641.2],[10635.8,13612.5],[10595.6,11383.1],[8201.84,13003.2],[9186.76,14132.7],[10970.7,12716.2],[8203.48,11537.8],[8232.12,12222.8],[8966.93,11437.1]]],[""vgm_ammo_cache"",[[9152.53,12254.2],[8570.79,12656.6],[9901.71,12513.4],[9401,12594.7],[9470.15,12433.6],[9937.77,12249.4],[9712.29,11803.2],[11085.6,12168.6],[10692.1,12389.8],[9284.66,12395.6],[8288.56,11627.8],[8445.75,11742.6],[8565.76,11677.3],[8625.38,11568.2],[8783.48,11485],[8982.3,11668.2],[8991.86,11825.2],[8819.37,11988.6],[8783.08,12026.3],[8566.67,12188.4],[8444.75,12275],[8365.48,12354.7],[8285.02,12592.3],[8285.97,12677.4],[8640.47,12849.2],[8816.05,12685.3],[8856.16,12572.5],[8979.58,12452.6],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9596.67,11388.6],[9268.69,11489.2],[10493.5,11525.4],[10417.8,11475.4],[10774.7,11491.3],[11096.7,11426.3],[10963.2,11979.2],[10921.4,11989.3],[10435.9,12203.2],[10196.9,12155.3],[10134.1,12131.4],[10402.3,12252.8],[10440.3,12475],[10671.7,12454.1],[10478.9,12755],[10400.1,12787.5],[10255.3,12811.4],[10184.4,12905.2],[10085.5,12987.5],[9973.85,13005.7],[9659.95,12914.6],[9487.41,13008.2],[9384.46,12977.9],[9351.86,12783.4],[9319.45,12728.3],[9284.55,12647.8],[9163.89,12459.1],[8531.5,13079.6],[8612.76,13206.5],[8826.98,13529],[8600.91,13594.4],[8568.93,13617.9],[8742.04,13929.7],[8566.26,13924.2],[8427.14,13958.3],[10193.3,13629.3],[10351.5,13319],[10562,13207.4],[10272.6,13035.3],[9126.27,14034.7],[9321,13734],[9427.89,14010.4],[9655.24,13337.5],[10622.1,14024.1],[10784.4,14042.4],[10705.9,14103.9],[10849,13860.3],[10979.8,13393],[10814.8,13318],[10947.7,9638.47],[11068.2,9623.46],[11256.9,9566.14],[11395.1,10032.1],[11074.8,9844.88],[11023.7,9839.67],[10796.9,9833.52],[10714.8,9838.8],[10755.6,9691.25],[10796,9640.36],[10663.9,9631.95],[11139.6,10383.9],[11119.5,10449.1],[11029.2,10518.5],[10909.3,10597.3],[10814.4,10626.8],[10773.3,10631.8],[10679.4,10687.5]]],[""vgm_transmitter"",[[9152.53,12254.2],[8570.79,12656.6],[9901.71,12513.4],[9401,12594.7],[9470.15,12433.6],[9937.77,12249.4],[9712.29,11803.2],[11085.6,12168.6],[10692.1,12389.8],[9284.66,12395.6],[8288.56,11627.8],[8445.75,11742.6],[8565.76,11677.3],[8625.38,11568.2],[8783.48,11485],[8982.3,11668.2],[8991.86,11825.2],[8819.37,11988.6],[8783.08,12026.3],[8566.67,12188.4],[8444.75,12275],[8365.48,12354.7],[8285.02,12592.3],[8285.97,12677.4],[8640.47,12849.2],[8816.05,12685.3],[8856.16,12572.5],[8979.58,12452.6],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9596.67,11388.6],[9268.69,11489.2],[10493.5,11525.4],[10417.8,11475.4],[10774.7,11491.3],[11096.7,11426.3],[10963.2,11979.2],[10921.4,11989.3],[10435.9,12203.2],[10196.9,12155.3],[10134.1,12131.4],[10402.3,12252.8],[10440.3,12475],[10671.7,12454.1],[10478.9,12755],[10400.1,12787.5],[10255.3,12811.4],[10184.4,12905.2],[10085.5,12987.5],[9973.85,13005.7],[9659.95,12914.6],[9487.41,13008.2],[9384.46,12977.9],[9351.86,12783.4],[9319.45,12728.3],[9284.55,12647.8],[9163.89,12459.1],[8531.5,13079.6],[8612.76,13206.5],[8826.98,13529],[8600.91,13594.4],[8568.93,13617.9],[8742.04,13929.7],[8566.26,13924.2],[8427.14,13958.3],[10193.3,13629.3],[10351.5,13319],[10562,13207.4],[10272.6,13035.3],[9126.27,14034.7],[9321,13734],[9427.89,14010.4],[9655.24,13337.5],[10622.1,14024.1],[10784.4,14042.4],[10705.9,14103.9],[10849,13860.3],[10979.8,13393],[10814.8,13318],[10947.7,9638.47],[11068.2,9623.46],[11256.9,9566.14],[11395.1,10032.1],[11074.8,9844.88],[11023.7,9839.67],[10796.9,9833.52],[10714.8,9838.8],[10755.6,9691.25],[10796,9640.36],[10663.9,9631.95],[11139.6,10383.9],[11119.5,10449.1],[11029.2,10518.5],[10909.3,10597.3],[10814.4,10626.8],[10773.3,10631.8],[10679.4,10687.5]]],[""vgm_encampment"",[[10692.1,12389.8],[8700.48,13746.7],[9706.51,11415.2],[10907.1,12082.1],[9804.06,12076.7],[9163.89,12459.1],[10193.3,13629.3],[10622.1,14024.1],[10679.4,10687.5]]]];" \n "        if (isServer && !is3DEN) then {" \n "            ['4', _index] call vgm_s_fnc_loc_setTargetBoxIndex;" \n "        };" \n "        _index" \n "        ";
 							id=2332;
 							type="Logic";
-							atlOffset=753.86609;
+							atlOffset=753.86597;
 						};
 					};
 					id=2205;
