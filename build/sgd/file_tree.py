@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Callable, Generator, List, Protocol, Union
+from typing import Callable, Generator, List, Optional, Protocol, Union
 
 from .file_generators import FileGenerator
 from .file_utils import all_files_relative, Omit
@@ -20,7 +20,7 @@ class FileConflictError(Exception):
 
 class FileTreeEntry(Explainable, Protocol):
     name: str
-    parent: 'Folder' = None
+    parent: Optional['Folder'] = None
 
     def resolve_path(self):
         path_entries = [self.name]
@@ -38,7 +38,7 @@ class FileTreeEntry(Explainable, Protocol):
 class File(FileTreeEntry):
     name: str
     source: FileSource
-    parent: 'Folder' = None
+    parent: Optional['Folder'] = None
 
     def explain(self) -> str:
         return f"File source '{self.resolve_path()}' [{self.source.explain()}]"
@@ -49,7 +49,7 @@ class File(FileTreeEntry):
 @dataclass
 class Folder(FileTreeEntry):
     name: str
-    parent: 'Folder' = None
+    parent: Optional['Folder'] = None
     children: List[FileTreeEntry] = field(default_factory=list)
 
     def explain(self) -> str:
@@ -66,10 +66,10 @@ class Folder(FileTreeEntry):
     def contains(self, name: str) -> bool:
         return True if self.get(name) else False
 
-    def get(self, name: str) -> FileTreeEntry:
+    def get(self, name: str) -> FileTreeEntry | None:
         return next((child for child in self.children if child.name == name), None)
 
-    def get_or_create_subfolder(self, name: str) -> FileTreeEntry:
+    def get_or_create_subfolder(self, name: str) -> Folder:
         existing_entry = self.get(name)
 
         if not existing_entry:

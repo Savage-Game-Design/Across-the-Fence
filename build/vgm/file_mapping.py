@@ -50,7 +50,7 @@ remove = sgd.file_tree.remove
 def function_folders(source_root: Path):
     return (folder_path for folder_path in (source_root / "functions").iterdir() if folder_path.is_dir())
 
-def get_missions(source_root: Path) -> list[str]:
+def get_missions(source_root: Path) -> list[Mission]:
     maps = [entry.name for entry in (source_root / "game" / "maps").iterdir()]
     return [
         Mission(name="vgm", map=map_name)

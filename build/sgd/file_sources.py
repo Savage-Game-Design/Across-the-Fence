@@ -1,12 +1,15 @@
 from dataclasses import dataclass
 from pathlib import Path
 import shutil
-from typing import Any, Protocol, Callable
+from typing import Any, Protocol
 
 from .file_generators import FileGenerator
 
 class FileSource(Protocol):
     def create_file(self, path):
+        pass
+
+    def explain(self) -> str:
         pass
 
 @dataclass

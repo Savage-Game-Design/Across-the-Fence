@@ -26,7 +26,7 @@ def write_file_tree(file_tree: Folder, target_path: Path, overwrite=False):
         raise OutputFolderExistsError(target_path)
     file_tree.create_tree_at(target_path)
 
-def calculate_mission_output_path(mission: Mission, containing_folder_path: Path) -> list[Path]:
+def calculate_mission_output_path(mission: Mission, containing_folder_path: Path) -> Path:
     return containing_folder_path / mission.folder_name
 
 def calculate_mission_output_paths(source_path: Path, containing_folder_path: Path) -> list[Path]:

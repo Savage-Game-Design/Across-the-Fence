@@ -12,7 +12,7 @@ class FileGenerator:
 
 
 def concatenate_files(files: Iterable[Union[Path, str]]):
-    file_paths = (Path(file) for file in files)
+    file_paths = [Path(file) for file in files]
 
     def generate_concatenated_file(dest_path: Path):
         with open(dest_path, "wb") as output_fd:
@@ -24,7 +24,7 @@ def concatenate_files(files: Iterable[Union[Path, str]]):
     file_names_desc = ", ".join(str(path.relative_to(path.parent.parent.parent.parent)) for path in file_paths)
 
     return FileGenerator(
-        description=f"combines {len(files)} files - {file_names_desc}",
+        description=f"combines {len(file_paths)} files - {file_names_desc}",
         generate=generate_concatenated_file
     )
 
