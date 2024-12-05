@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2024-07-09
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -132,6 +132,8 @@ switch _mode do {
 
     // handle selection of body part for treatment
     case "selectPart": {
+        if (lifeState player == "INCAPACITATED") exitWith {};
+
         params ["_ctrlPartIcon"];
         private _display = ctrlParent _ctrlPartIcon;
         private _visualPart = ["head", "torso", "left_arm", "right_arm", "left_leg", "right_leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
