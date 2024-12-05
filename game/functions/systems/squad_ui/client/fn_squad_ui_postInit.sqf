@@ -2,7 +2,7 @@
     File: fn_squad_ui_postInit.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-11-09
+    Last Update: 2024-11-30
     Public: No
 
     Description:
@@ -88,7 +88,6 @@ call {
 
 // map indicators
 call {
-    #define FONT_SIZE 0.042
     #define CTRL_MAP (findDisplay 12 displayCtrl 51)
 
     vgm_squad_ui_playerColor = playerSide call BIS_fnc_sideColor;
