@@ -122,8 +122,7 @@ private _cardInfo = createHashMapFromArray [
     ["control", controlNull],
     ["structuredText", _structuredText],
     ["category", _category],
-    ["hint", _page
-]
+    ["hint", _page]
 ];
 _activeHints pushBack _cardInfo;
 
