@@ -3,7 +3,7 @@
     File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
     Author: Savage Game Design
     Date: 2023-09-25
-    Last Update: 2024-10-03
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -76,7 +76,7 @@ switch _mode do {
                 private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
                 _milestoneText = format ([_milestoneText] + _formatData);
 
-                _text pushBack format ["%1 - %2", _milestoneText, _milestoneXp];
+                _text pushBack format ["%1: %2", _milestoneText, _milestoneXp];
                 _ctrlBreakdown ctrlSetStructuredText parseText (_text joinString "<br/>");
                 playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
 
@@ -90,7 +90,9 @@ switch _mode do {
 
                     _newExperience = linearConversion [_animDuration, 0, _animTime - _time, _currentExperience, _currentExperience + _milestoneXp, true];
                     _newExperience = _newExperience min vgm_g_leveling_maxExperience;
-                    ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
+                    if (_milestones findIf {_x param [0, ""] == "mission_failure"} == -1) then {
+                        ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
+                    };
 
                     // level up
                     if (_newExperience >= _experienceThreshold) then {

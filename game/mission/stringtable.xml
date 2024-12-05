@@ -214,6 +214,9 @@
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_SUCCESS">
             <Original>Mission completion</Original>
         </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_FAILURE">
+            <Original>Mission failure</Original>
+        </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
             <Original>Mission participation</Original>
         </Key>

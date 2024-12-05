@@ -2,13 +2,14 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2024-11-28
+    Last Update: 2024-12-05
     Public: No
 
     Description:
         Calculate amount of XP player should gain. Returns an array of "milestones" each awarding an amount of XP.
 
     Parameter(s):
+        _endType - Mission end type, SUCCESS or FAILURE [STRING]
         _playerId - Id of the player that is being awareded the XP [STRING]
 
     Returns:
@@ -20,14 +21,7 @@
 
 params ["_endType", "_playerId"];
 
-private _milestones = [
-    ["mission_participation", 125]
-    // ["invincible", 100] // We could give bonus XP for certain things, not being downed at all during the mission etc.
-];
-
-if (_endType == "SUCCESS") then {
-    _milestones pushBack ["mission_success", 375];
-};
+private _milestones = [];
 
 // add XP for spotting
 call {
@@ -74,6 +68,16 @@ call {
         };
 
     } forEach _guessedSites;
+};
+
+// zero it out for failure
+if (_endType == "FAILURE") then {
+    private _xp = 0;
+    {
+        _xp = _xp + (_x param [1, 0]);
+    } forEach _milestones;
+
+    _milestones pushBack ["mission_failure", -_xp];
 };
 
 _milestones // return
