@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-11-02
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -31,6 +31,8 @@ private _dynamicGroups = _directorData get "dynamicAiGroups";
 
 private _alertness = _directorData get "alertness";
 
+[format ["Mission=%1, Alertness=%2", _publicMission get "id", _alertness]] call vgm_g_fnc_logInfo;
+
 private _timeSinceLastTracker = serverTime - (_directorData get "lastTrackerSent");
 private _currentTrackerDelay = linearConversion [
         0, vgm_s_director_max_alertness,
@@ -41,7 +43,11 @@ private _currentTrackerDelay = linearConversion [
 private _randomExtraTime = random 120;
 
 // Spawn a new tracker!
-if (_timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay && count _dynamicGroups < vgm_s_director_dynamic_max_groups) then {
+if (
+       _alertness > vgm_s_director_tracker_spawn_alertness_threshold
+    && _timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay
+    && count _dynamicGroups < vgm_s_director_dynamic_max_groups
+) then {
     [format ["Attempting to send new tracker on mission %1", _publicMission get "id"]] call vgm_g_fnc_logInfo;
     private _newTrackerGroup = [_mission, _missionPlayers] call vgm_s_fnc_director_spawnTracker;
 

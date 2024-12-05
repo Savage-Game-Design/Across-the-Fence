@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-11-02
+    Last Update: 2024-12-05
     Public: Yes
 
     Description:
@@ -39,7 +39,7 @@ _directorData set ["initialAiGroups", []];
 // AI spawned by the director over the course of the mission.
 _directorData set ["dynamicAiGroups", []];
 // Tracks when the last tracker squad was sent at the players
-_directorData set ["lastTrackerSent", serverTime];
+_directorData set ["lastTrackerSent", -9999];
 
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 
