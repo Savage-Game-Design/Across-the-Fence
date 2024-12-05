@@ -551,20 +551,56 @@
         </Key>
     </Package>
     <Package name="Field Manual">
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_WELCOME">
+            <Original>Welcome</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME">
+            <Original>Welcome</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_DESC">
+            <Original>Welcome to the %3Alpha%4 version of %3%11%4!%1%1As a Patreon subscriber, you've got exclusive access the early versions of the gamemode, and the ability to influence its ongoing development.%1%1Before playing, %3it's strongly recommended you read 'Getting started'%4 in the field manual.%1%1As we progress from Alpha onwards to a full release, we'd love to hear your feedback in Discord, and for you to join the development team as we test and experiment with new features.%1%1The initial %3Alpha%4 version of %3%11%4 has most of the gamemode's core mission gameplay in place, but other aspects of the gamemode are still in development, including:%1%2 Non-recon mission types%1%2 A persistent campaign%1%2 Additional points of interest to interact with and explore while on missions%1%2 Many quality of life features (e.g a shooting range)%1%1%3%11%4 is currently designed for 1 to 6 players on a mission, with up to 4 simultaneous missions running on (a sufficiently powerful) server.%1Please try playing solo, duo and in larger groups, so we build a gamemode everyone can enjoy!%1%1Thanks for reading, and enjoy the game!%1&gt; The %3%11%4 development team.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_TIP">
+            <Original>Thanks for helping us preserve S.O.G history through your Patreon support!</Original>
+        </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED">
             <Original>Getting started</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC">
-            <Original>%3%11%4 brings together role-playing elements and player specialisations to create a thrilling behind enemy lines recon gamemode.%1You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.%1Completing missions earns XP and grows your abilities as you mature into a MACV SOG 1-0.%1%1%2 Start by going into nearby TOC%1%2 Grab your favorite gear from the %3Armory%4%1%2 Adjust your skills at the %3Radio%4%1%2 Create or join a mission from the %3Tactical map%4%1%2 Once your team is ready, start the mission from the %3Tactical map%4</Original>
+            <Original>%3%11%4 brings together role-playing elements and player specialisations to create a thrilling behind enemy lines recon gamemode.%1You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.%1Completing missions earns you XP and enables you to grow your abilities and mature into a MACV SOG 1-0.%1%1%2 Start by going into the nearby Tactical Operation Center (TOC)%1%2 Grab your favorite gear from the %3Armory%4%1%2 Adjust your skills at the %3Radio%4%1%2 Create or join a mission from the %3Tactical map%4%1%2 Once your team is ready, the leader can start the mission from the %3Tactical map%4</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_TIP">
             <Original>&lt;br/&gt;"%1"</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_HINT_GETTING_STARTED_DESCRIPTION">
+            <Original>To get started, head into the nearby TOC and look around.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS">
             <Original>Missions</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_DESC">
             <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_AFTER_ARSENAL_DESCRIPTION">
+            <Original>Now you've customised your gear, create or join a mission using the %3tactical map board%4.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_CREATED_NAME">
+            <Original>Mission created</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_CREATED_DESCRIPTION">
+            <Original>You are now leading a mission. Other players will be able to join your mission until you depart. Make sure everyone is ready first!</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_JOINED_NAME">
+            <Original>Mission joined</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_JOINED_DESCRIPTION">
+            <Original>You've joined another player's mission. The leader can start the mission at any time. You can leave the mission using the actions on the map board.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_EXTRACTION_NAME">
+            <Original>Extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_EXTRACTION_DESCRIPTION">
+            <Original>As the mission leader, you can call for extraction at any time.%1This will request a helicopter that will land at a nearby LZ. The mission will end once all non-incapacitated players are on-board.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS">
             <Original>Skills</Original>
@@ -575,6 +611,12 @@
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_TIP">
             <Original>Recon teams were skilled warriors, training for the next mission.</Original>
         </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_HINT_LEVELLING_UP_DESCRIPTION">
+            <Original>You just levelled up and gained a skill point. Use them to learn new skills at the radio in the TOC.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_HINT_EQUIPPING_SKILLS_DESCRIPTION">
+            <Original>You just acquired an active skill! Before you can use it, you need to equip it in the skill assignment menu at the radio.</Original>
+        </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL">
             <Original>Medical system</Original>
         </Key>
@@ -583,6 +625,15 @@
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_TIP">
             <Original>Bullets. Shrapnel. Recon teams rarely made it out unscathed.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT">
+            <Original>Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT_DESC">
+            <Original>Having the right equipment is essential to both surviving and succeeding as a recon team member.%1%1Currently, %3%11%4 uses the standard Arma 3 Arsenal to manage your gear. You can find these in the TOC building, at the main base.%1%1You'll also start the game with a typical recon team loadout, suitable for running a mission straight away.%1%1&lt;t size="1.1"&gt;Key equipment&lt;/t&gt;%1%1Certain pieces of equipment are particularly helpful in %3%11%4:%1%2 %3Cameras%4 can be used to photograph enemy sites. See %3Scouting%4 for more information.%1%2 %3Silenced weapons%4 make it easier to eliminate NVA forces without being noticed. However, they will still attract some attention!%1%2 %3Radio backpacks%4 can be used to call in air support, if you have the right %3Skills%4.%1%1&lt;t size="1.1"&gt;Unlocking equipment&lt;/t&gt;%1%1New equipment can be unlocked by unlocking the right %3Skills%4. All skills that unlock equipment have %3Equipment%4 in their name.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT_HINT_GEARING_UP_DESCRIPTION">
+            <Original>You can change your equipment using the nearby ammo boxes. See the field manual for recommended key equipment.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_VGM_MISSIONS">
             <Original>%1 - Missions</Original>
@@ -596,38 +647,8 @@
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_TIP">
             <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
         </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_VGM_TUTORIAL_HINTS">
-            <Original>Tutorial Hints</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_GEARING_UP">
-            <Original>Gearing up</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_GEARING_UP_DESC">
-            <Original>Head into the nearby hootch to prepare for your first mission. There, you'll be able to select your equipment and weapons using the provided arsenal boxes.%1New gear can be unlocked by learning new equipment %3skills%4.</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_MISSIONS">
-            <Original>Missions</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_MISSIONS_DESC">
-            <Original>Once you're geared up, you'll be ready to create a new mission, or join a team that's already preparing to depart.%1Missions are accessed using the %3tactical map board%4.%1%1See the %3Missions%4 field manual entry for more info.</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_CREATING_MISSIONS">
-            <Original>You created a mission</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_CREATING_MISSIONS_DESC">
-            <Original>You've just created a new mission! Other players will be able to join your mission until you depart. You can abort the mission by leaving the team, using the actions on the map board.%1%1Make sure to check with your team before starting the mission, otherwise you might find them unprepared.%1%1See the %3Missions%4 field manual entry for more info.</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_JOINING_MISSIONS">
-            <Original>You joined a mission</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_JOINING_MISSIONS_DESC">
-            <Original>You've joined another player's mission.%1The leader can start the mission at any time. In the meantime, you're free to manage your gear and skills. You can leave the mission using the actions on the map board.%1%1See the %3Missions%4 field manual entry for more info.</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EXTRACTION">
-            <Original>Extraction</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EXTRACTION_DESC">
-            <Original>As the mission leader, you can call for extraction at any point during the mission.%1This will call for a helicopter that will land a a nearby LZ. The mission will finish successfully once all non-incapacitated players are on-board.%1%1See the %3Missions%4 field manual entry for more info.</Original>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_HINT_SCOUTING_DESCRIPTION">
+            <Original>The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to identify the site type if you're unsure.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_HINTS">
             <Original>Clues</Original>
@@ -638,11 +659,8 @@
         <Key ID="STR_VGM_FIELD_MANUAL_HINTS_TIP">
             <Original>Recon teams frequently deployed into the jungle with only a rough idea of what they might find.</Original>
         </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_LISTEN">
-            <Original>Stop &amp; Focus</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_LISTEN_DESC">
-            <Original>You can stop and focus on your surroundings, to help you locate enemy activities.%1%1Nearby sounds from enemies such as footsteps, gunshots and speech will be shown visually, until you move or stop focusing.%1%1Additionally, when you're focusing, you'll more frequently see the light glinting off of clues. See %3Clues%4 for more information.%1%1It's strongly recommended that you stop and focus frequently, to prevent your team getting caught unawares.</Original>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS_HINT_GLINT_SEEN_DESCRIPTION">
+            <Original>You just saw light glinting off a nearby object! Find and inspect the object to help locate nearby sites.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS">
             <Original>Stop and Focus</Original>
@@ -650,26 +668,11 @@
         <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_DESC">
             <Original>You can stop and focus on your surroundings, to help you locate enemy activities.%1%1Nearby sounds from enemies such as footsteps, gunshots and speech will be shown visually, until you move or stop focusing.%1%1Additionally, when you're focusing, you'll more frequently see the light glinting off of clues. See %3Clues%4 for more information.%1%1It's strongly recommended that you stop and focus frequently, to prevent your team getting caught unawares.</Original>
         </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_VGM_WELCOME">
-            <Original>Welcome</Original>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_HINT_STOP_AND_FOCUS_DESCRIPTION">
+            <Original>You just focused on your surroundings. While focusing, you can visualise the sounds of nearby enemies and spot hints more quickly. Moving will exit this state.</Original>
         </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME">
-            <Original>Welcome</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_DESC">
-            <Original>Welcome to the %3Alpha%4 version of %3%11%4!%1%1As a Patreon subscriber, you've got exclusive access the early versions of the gamemode, and the ability to influence its ongoing development.%1%1As we progress from Alpha onwards to a full release, we'd love to hear your feedback in Discord, and for you to join the development team as we test and experiment with new features.%1%1The initial %3Alpha%4 version of %3%11%4 has most of the gamemode's core mission gameplay in place, but other aspects of the gamemode are still in development, including:%1%2 Non-recon mission types%1%2 A persistent campaign%1%2 Additional points of interest to interact with and explore while on missions%1%2 Many quality of life features (e.g a shooting range)%1%1%3%11%4 is currently designed for 1 to 6 players on a mission, with up to 4 simultaneous missions running on (a sufficiently powerful) server.%1Please try playing solo, duo and in larger groups, so we build a gamemode everyone can enjoy!%1%1Thanks for reading, and enjoy the game!%1&gt; The %3%11%4 development team.</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_TIP">
-            <Original>Thanks for helping us preserve S.O.G history through your Patreon support!</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_VGM_TUTORIAL">
-            <Original>Tutorial Hints</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EQUIPPING_SKILLS">
-            <Original>Equipping skills</Original>
-        </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_TUTORIAL_EQUIPPING_SKILLS_DESC">
-            <Original>You just acquired an active skill! Before you can use it, you need to equip it in the skill assignment menu.%1%1See the %3Skills%4 field manual entry for more info.</Original>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MAP_BOARD_DESCRIPTION">
+            <Original>The tactical map board allows you to create, join and leave missions.</Original>
         </Key>
     </Package>
     <Package name="Tutorial">

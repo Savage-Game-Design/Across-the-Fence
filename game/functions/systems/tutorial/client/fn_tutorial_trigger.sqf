@@ -10,22 +10,23 @@
 
     Parameter(s):
         _category - Tutorial category [STRING]
-        _tutorialName - Name of the tutorial [STRING]
+        _pageName - Name of the tutorial [STRING]
 
     Returns:
         Nothing
 
     Example(s):
         ["Tutorial", "Tutorial1"] call vgm_c_fnc_tutorial_trigger;
+        ["vgm", "missions", "create_mission"] call vgm_c_fnc_tutorial_trigger;
  */
 
-params ["_category", "_tutorialName"];
+params ["_category", "_pageName", ["_hintName", ""]];
 
-private _key = [_category, _tutorialName];
+private _key = [_category, _pageName, _hintName];
 
 if (_key in vgm_c_tutorial_seenTutorials) exitWith {};
 
-[_category, _tutorialName] call para_c_fnc_ui_hints_show_hint;
+[_category, _pageName, _hintName] call para_c_fnc_ui_hints_show_hint;
 
 vgm_c_tutorial_seenTutorials set [_key, true];
 

@@ -29,3 +29,8 @@ arguments = [
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = '\a3\ui_f\data\gui\cfg\hints\head_ca.paa'
+
+[hints.scouting]
+description = """
+The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to identify the site type if you're unsure.
+"""

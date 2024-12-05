@@ -14,3 +14,8 @@ arguments = []
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = 'assets\glint\vnx_atf_glint_03_ca.paa'
+
+[hints.glint_seen]
+description = """
+You just saw light glinting off a nearby object! Find and inspect the object to help locate nearby sites.
+"""
