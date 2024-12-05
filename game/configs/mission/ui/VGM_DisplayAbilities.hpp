@@ -240,7 +240,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
             idc = VGM_IDC_DISPLAYABILITIES_ULTTITLE;
             text = "$STR_VGM_SKILLS_UI_ABILITY_ULT";
             tooltip = "$STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP";
-            y = VGM_Y_Y(DISPLAY_Y,5.5);
+            y = VGM_Y_Y(DISPLAY_Y,6);
         };
         class UltEmpty: StdEmpty
         {
