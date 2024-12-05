@@ -32,4 +32,8 @@ vgm_equipment_arsenals = entities "" select {_x getVariable ["vgm_equipment_arse
 } forEach vgm_equipment_arsenals;
 
 [] call vgm_c_fnc_equipment_arsenalInit;
+
 player call vgm_c_fnc_equipment_setDefaultLoadout;
+["vgm_skills_respecLocal", {
+    player call vgm_c_fnc_equipment_setDefaultLoadout;
+}] call para_g_fnc_event_subscribeLocal;

@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillLearn.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-11-04
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -30,3 +30,5 @@ uiNamespace setVariable ["BIS_fnc_guiMessage_status", _result];
 player setUnitLoadout EMPTY_LOADOUT;
 
 hint "Skill respec done";
+
+["vgm_skills_respecLocal"] call para_g_fnc_event_triggerLocal;
