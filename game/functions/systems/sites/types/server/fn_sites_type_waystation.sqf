@@ -1,14 +1,14 @@
 #include "../../sites.inc"
 
 /*
-    File: fn_sites_types_waypoint.sqf
+    File: fn_sites_types_waystation.sqf
     Author: Savage Game Design
     Date: 2024-06-27
-    Last Update: 2024-10-24
+    Last Update: 2024-12-05
     Public: Yes
 
     Description:
-        Creates a new "Waypoint" site type
+        Creates a new "Waystation" site type
 
         Registered in cfg_site_types.hpp
 
@@ -22,7 +22,7 @@
         # See cfg_site_types.hpp
         # Alternatively:
         [
-            []  call vgm_s_fnc_sites_type_waypoint;
+            []  call vgm_s_fnc_sites_type_waystation;
         ] call vgm_s_fnc_site_addSiteType;
  */
 

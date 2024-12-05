@@ -487,8 +487,8 @@
         <Key ID="STR_VGM_SITES_TRUCK_PARK">
             <Original>Truck park</Original>
         </Key>
-        <Key ID="STR_VGM_SITES_WAYPOINT">
-            <Original>Waypoint</Original>
+        <Key ID="STR_VGM_SITES_WAYSTATION">
+            <Original>Waystation</Original>
         </Key>
     </Package>
     <Package name="Missions Extraction">
