@@ -20,7 +20,7 @@
         ]
 
     Example(s):
-        _fallbackSpawnTransform = [_unit, 300, 500] call vgm_s_fnc_respawn_findFallbackSpawnTransform;
+        _fallbackSpawnTransform = [_unit, 300, 500] call vgm_g_fnc_respawn_findFallbackSpawnTransform;
 */
 
 params [

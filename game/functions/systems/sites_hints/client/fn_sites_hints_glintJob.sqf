@@ -3,7 +3,7 @@
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-29
+    Last Update: 2024-12-05
     Public: No
 
     Description:

@@ -21,7 +21,7 @@
 
 params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
 
-_safeSpawnTransform = [_newUnit, 300, 500, 100] call vgm_s_fnc_respawn_findSafeSpawnTransformNearTeam;
+_safeSpawnTransform = [_newUnit, 300, 500, 100] call vgm_g_fnc_respawn_findSafeSpawnTransformNearTeam;
 _newUnit setPosASL _safeSpawnTransform#0;
 _newUnit setDir _safeSpawnTransform#1;
 

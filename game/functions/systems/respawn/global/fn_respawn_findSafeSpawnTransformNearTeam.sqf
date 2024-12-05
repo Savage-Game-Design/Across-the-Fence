@@ -20,7 +20,7 @@
         ]
 
     Example(s):
-        _safeSpawnTransform = [_unit, 300, 500, 100] call vgm_s_fnc_respawn_findSafeSpawnTransformNearTeam;
+        _safeSpawnTransform = [_unit, 300, 500, 100] call vgm_g_fnc_respawn_findSafeSpawnTransformNearTeam;
 */
 
 #define MAX_SEARCH_ATTEMPTS 5
@@ -51,7 +51,7 @@ if (_enemyAvoidanceDistance < 0) exitWith {
     ["ERROR", format ["Expected _enemyAvoidanceDistance to be greater than 0. Received _enemyAvoidanceDistance: %1", _enemyAvoidanceDistance]] call para_g_fnc_log;
 };
 
-private _safeSpawnTransform = [_unit, _minDistanceFromTeam, _maxDistanceFromTeam, _minDistanceFromTeam, _maxDistanceFromTeam] call vgm_s_fnc_respawn_findFallbackSpawnTransform;
+private _safeSpawnTransform = [_unit, _minDistanceFromTeam, _maxDistanceFromTeam, _minDistanceFromTeam, _maxDistanceFromTeam] call vgm_g_fnc_respawn_findFallbackSpawnTransform;
 private _unitGroup = group _unit;
 private _groupPositionAGL = [
     _unitGroup,

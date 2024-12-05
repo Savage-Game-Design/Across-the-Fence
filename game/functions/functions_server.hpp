@@ -51,7 +51,7 @@ class vgm_s
 
     class behaviour_trees_trees
     {
-        VGM_GLOBAL_PATH(\systems\behaviour_trees\trees\server);
+        VGM_SERVER_PATH(\systems\behaviour_trees\trees\server);
 
         class btree_setTreeByNameGlobal {};
     };
@@ -211,16 +211,6 @@ class vgm_s
         class player_fetch {};
         class player_fromId {};
         class player_save {};
-    };
-
-    class respawn
-    {
-        VGM_SERVER_PATH(\systems\respawn\server);
-
-        class respawn_onPlayerKilled {};
-        class respawn_onPlayerRespawn {};
-        class respawn_findSafeSpawnTransformNearTeam {};
-        class respawn_findFallbackSpawnTransform {};
     };
 
     class leveling

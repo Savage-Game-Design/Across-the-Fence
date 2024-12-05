@@ -35,8 +35,8 @@ private _config = (_site get "class") call vgm_s_fnc_sites_hints_getConfig;
 private _r1 = _config get "radius";
 private _r2 = _config get "radiusSafezone";
 
-private _circleAreaOuter = Pi * _r1^2;
-private _circleAreaInner = Pi * _r2^2;
+private _circleAreaOuter = pi * _r1^2;
+private _circleAreaInner = pi * _r2^2;
 // objects per 1 km^2
 private _density = _config get "density";
 
