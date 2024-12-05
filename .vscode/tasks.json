@@ -54,7 +54,7 @@
         {
             "label": "Launch arma client",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' launch client --mission",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch client --editor",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
