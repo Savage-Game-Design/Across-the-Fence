@@ -22,7 +22,7 @@ verifySignatures = 0;
 
 class Missions {
     class vgm {
-        template = "vgm\MISSION_NAME";
+        template = "MISSION_NAME";
         difficulty = "regular";
         class Params {};
     };
