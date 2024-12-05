@@ -1,14 +1,16 @@
 import shutil
 
 from enum import Enum, auto
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict
+from xmlrpc.client import Boolean
 
 from sgd.file_tree import Folder
 
 from . import hemtt
 from .artifacts import BuildArtifact, Mission, Mod
-from .file_mapping import generate_file_trees, get_missions
+from .file_mapping import generate_file_trees, get_missions, GenerateFileTreeParams
 
 class OutputFolderExistsError(Exception):
     def __init__(self, path):
@@ -47,14 +49,25 @@ def create_mod(mod: Mod, target_path: Path,  overwrite=False, clean=False):
     print(f"Creating files for mod {target_path.name} at '{target_path}")
     write_file_tree(mod.files, target_path, overwrite)
 
+@dataclass
+class BuildParams:
+    output_paths: dict[BuildArtifact, Path]
+    overwrite: bool = False
+    clean: bool = False
+    mapping_params: GenerateFileTreeParams = field(default_factory=lambda: GenerateFileTreeParams())
 
-def build(source_path, paradigm_path, output_paths=Dict[BuildArtifact,Path], overwrite=False, as_mod=False, clean=False):
+def build(source_path, paradigm_path, params: BuildParams):
+    output_paths = params.output_paths
+    as_mod = params.mapping_params.as_mod
+    overwrite = params.overwrite
+    clean = params.clean
+
     if as_mod:
         print(f"Building gamemode as mods (intended for release)")
     else:
         print(f"Building gamemode as mission (intended for development)")
 
-    gamemode = generate_file_trees(source_path, paradigm_path, as_mod=as_mod)
+    gamemode = generate_file_trees(source_path, paradigm_path, params.mapping_params)
 
     if gamemode.client_mod:
         create_mod(gamemode.client_mod, output_paths[BuildArtifact.CLIENT_MOD], overwrite, clean)

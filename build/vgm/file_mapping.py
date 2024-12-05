@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Union
 
 import sgd.file_tree
-from sgd.file_generators import concatenate_files, from_text
+from sgd.file_generators import concatenate_files, from_text, replace
 from sgd.file_utils import Omit
 from .artifacts import Mod, Mission, Gamemode
 
@@ -58,12 +58,19 @@ def get_missions(source_root: Path) -> list[str]:
     ]
 
 @dataclass
+class GenerateFileTreeParams:
+    as_mod = False
+
+_default_file_tree_params = GenerateFileTreeParams()
+
+@dataclass
 class GenerateFileTreeResult:
     mission: Mission | None
     client_mod: Mod | None
     server_mod: Mod | None
 
-def generate_file_trees(source_root: Path, paradigm_path: Path, as_mod=False) -> Gamemode:
+def generate_file_trees(source_root: Path, paradigm_path: Path, params: GenerateFileTreeParams = _default_file_tree_params) -> Gamemode:
+    as_mod = params.as_mod
     game_root = source_root / "game"
     mod_root = source_root / "mod"
 

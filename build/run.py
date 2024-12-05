@@ -4,7 +4,7 @@ from pathlib import Path
 import sgd.file_tree
 from vgm.artifacts import BuildArtifact
 import vgm.build
-from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, PackType
+from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, PackType, BuildParams
 import vgm.field_manual
 import vgm.file_mapping
 import vgm.arma
@@ -15,6 +15,17 @@ output_paths = config.output_paths["default"]
 servermod_path = Path(output_paths[BuildArtifact.SERVER_MOD])
 
 mission_paths = calculate_mission_output_paths(source_root, output_paths[BuildArtifact.MISSION])
+
+def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False) -> BuildParams:
+    params = BuildParams(
+        output_paths=output_paths,
+        overwrite=overwrite,
+        clean=clean
+    )
+
+    params.mapping_params.as_mod = as_mod
+
+    return params
 
 def launch_arma(connect: str = "", editor_mission_path: Path = None):
     vgm.arma.launch(
@@ -34,10 +45,10 @@ def launch_arma_server(mod: bool = False):
         mods=config.arma_arg_mods
     )
 
-def build_without_packing(overwrite, mod, clean, output_paths=config.output_paths["default"]):
+def perform_build(params: BuildParams = default_build_params()):
     vgm.field_manual.update_field_manual(source_root)
     try:
-        vgm.build.build(source_root, config.paradigm_path, output_paths, overwrite=overwrite, as_mod=mod, clean=clean)
+        vgm.build.build(source_root, config.paradigm_path, params)
     except OutputFolderExistsError as e:
         print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
         raise
@@ -64,7 +75,7 @@ def command_launch_arma_server(mod):
 @click.option('--pack', default=False, is_flag=True,
               help="Packs mission and mods (if --mod is specified) using Armake2 and HEMTT")
 def build(overwrite, clean, mod, pack):
-    build_without_packing(overwrite, mod, clean)
+    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod))
 
     if pack:
         # Only pack the mods if --mod is specified
@@ -85,7 +96,7 @@ def build(overwrite, clean, mod, pack):
 @click.option('--no-client', default=False, is_flag=True,
               help="Doesn't start an arma client")
 def command_launch_dev(overwrite, clean, mod, no_server, no_client):
-    build_without_packing(overwrite=overwrite, clean=clean, mod=mod)
+    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod))
 
     if not no_server:
         launch_arma_server(mod)
@@ -107,7 +118,7 @@ def release(confirm, mod):
 
     release_output_paths = config.output_paths["release"]
 
-    build_without_packing(overwrite=True, mod=mod, clean=True, output_paths=release_output_paths)
+    perform_build(default_build_params(overwrite=True, as_mod=mod, clean=True, output_paths=release_output_paths))
     vgm.build.pack(source_root, output_paths=release_output_paths, pack_type=PackType.Release)
 
 @click.command
@@ -117,7 +128,7 @@ def update_field_manual_entries():
 @click.command
 @click.option('--mod', default=False, is_flag=True, help="Show the file tree as if building to a mod")
 def print_file_tree(mod):
-    gamemode = vgm.file_mapping.generate_file_trees(source_root, config.paradigm_path, as_mod=mod)
+    gamemode = vgm.file_mapping.generate_file_trees(source_root, config.paradigm_path, vgm.file_mapping.GenerateFileTreeParams(as_mod=mod))
     for mission in gamemode.missions:
         print("=================")
         print("MISSION FILE TREE")
