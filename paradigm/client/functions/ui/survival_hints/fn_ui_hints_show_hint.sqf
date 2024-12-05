@@ -27,12 +27,12 @@ private _arguments = getArray (_cfgPage >> "arguments");
 if (_title isEqualTo "") then { _title = getText (_cfgPage >> "displayName") };
 
 private _cfgHint = _cfgPage >> "Hints" >> _hint;
-if (isClass(_cfgHint)) then {
+if (isClass _cfgHint) then {
     private _hintTitle = getText(_cfgHint >> "displayName");
     if (_hintTitle isNotEqualTo "") then {
         _title = _hintTitle;
     };
-    private _hintBody = getText(_cfgHint >> "description");
+    private _hintBody = getText (_cfgHint >> "description");
     if (_hintBody isNotEqualTo "") then {
         _body = _hintBody;
     };
