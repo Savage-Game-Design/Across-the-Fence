@@ -117,7 +117,7 @@ def command_launch_dev(overwrite, clean, mod, version, no_server, no_client):
 @click.option('--confirm', default=False, is_flag=True)
 @option_mod
 @option_version
-def release(confirm, mod):
+def release(confirm, mod, version):
     if not confirm:
         confirm = input("WARNING: This will run --clean and remove all output directories. Proceed? Y/N").lower() == "y"
 
@@ -127,7 +127,7 @@ def release(confirm, mod):
 
     release_output_paths = config.output_paths["release"]
 
-    perform_build(default_build_params(overwrite=True, as_mod=mod, clean=True, output_paths=release_output_paths))
+    perform_build(default_build_params(overwrite=True, as_mod=mod, clean=True, version=version, output_paths=release_output_paths))
     vgm.build.pack(source_root, output_paths=release_output_paths, pack_type=PackType.Release)
 
 @click.command
