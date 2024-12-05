@@ -344,7 +344,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
         class AvailableEmpty: VGM_ctrlStructuredTextCentered
         {
             idc = VGM_IDC_DISPLAYABILITIES_AVAILABLEEMPTY;
-            text = "Select an ability slot on the left to show a list of available abilities.<br/><br/>Only abilites unlocked in the skill trees will be shown.";
+            text = "You currently have no skills unlocked in this category.<br/><br/>New skills can be unlocked via the skill tree.";
             x = _X;
             y = VGM_Y_Y(DISPLAY_Y, 0);
             w = _W * VGM_GRID_W;
