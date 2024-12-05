@@ -24,7 +24,7 @@ private _body = getText (_cfgPage >> "description");
 private _image = getText (_cfgPage >> "image");
 private _arguments = getArray (_cfgPage >> "arguments");
 
-if (_title isEqualTo "") then { _title = getText(_cfgPage >> "displayName") };
+if (_title isEqualTo "") then { _title = getText (_cfgPage >> "displayName") };
 
 private _cfgHint = _cfgPage >> "Hints" >> _hint;
 if (isClass(_cfgHint)) then {
