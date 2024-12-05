@@ -34,9 +34,18 @@
             }
         },
         {
-            "label": "Launch dev (build, client, server)",
+            "label": "Launch mission dev (build, client, server)",
             "type": "shell",
             "command": "py '${workspaceFolder}\\build\\run.py' launch dev --overwrite",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
+            "label": "Launch mod dev (build, client, server)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch dev --overwrite --mod",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
@@ -55,6 +64,15 @@
             "label": "Launch arma server",
             "type": "shell",
             "command": "py '${workspaceFolder}\\build\\run.py' launch server",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
+            "label": "Launch arma server (mod)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch server --mod",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
