@@ -313,14 +313,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                 {
                     controlOffsetY = (0.5 * _ICON_W + 5) * VGM_GRID_H;
                 };
-                class FrameRight
-                {
-                    controlBaseClassPath[] = {"VGM_ctrlFrame"};
-                    columnX = (COLUMN_W - _ICON_W - 5) * VGM_GRID_W;
-                    controlOffsetY = 1 * VGM_GRID_H;
-                    columnW = (_ICON_W + 2) * VGM_GRID_W;
-                    controlH = (_ICON_W + 7) * VGM_GRID_H;
-                };
                 class Icon
                 {
                     controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};

@@ -196,7 +196,6 @@ switch _mode do {
                 "", // Frame
                 "_ctrlRowName",
                 "_ctrlRowCategory",
-                "", // Icon frame
                 "_ctrlRowIcon",
                 "_ctrlRowEquip"
             ];
