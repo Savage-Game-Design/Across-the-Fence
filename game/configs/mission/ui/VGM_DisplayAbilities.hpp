@@ -181,15 +181,6 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
 #define _W (COLUMN_W - 2)
             class Controls
             {
-                class StdIconFrame: VGM_ctrlFrame
-                {
-                    stackDisable = 1;
-                    x = (_W - _ICON_W + 1) * VGM_GRID_W;
-                    y = 1 * VGM_GRID_H;
-                    w = (_ICON_W - 1) * VGM_GRID_W + pixelW;
-                    h = (_ICON_W - 1) * VGM_GRID_H + pixelH;
-                    style = ST_WITH_RECT;
-                };
                 class StdIcon: VGM_ctrlStaticPicture
                 {
                     idc = VGM_IDC_DISPLAYABILITIES_STDULT_ICON;
