@@ -136,7 +136,6 @@ switch _mode do {
         private _ctrlCategory = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYCATEGORY;
         private _ctrlCooldown = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYCOOLDOWN;
         private _ctrlDescription = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYDESCRIPTION;
-        private _ctrlEquip = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
 
         private _focusedSkill = _display getVariable "vgm_focusedSkill";
 
@@ -161,7 +160,7 @@ switch _mode do {
         _ctrlCategory ctrlSetText (_skillTree get "displayName");
         _ctrlCooldown ctrlSetText format [localize "STR_VGM_SKILLS_UI_COOLDOWN_LONG", _focusedSkill get "cooldown"];
         _ctrlDescription ctrlSetText (_focusedSkill get "description");
-        _ctrlEquip setVariable ["vgm_skill", _focusedSkill];
+        _display setVariable ["vgm_skill", _focusedSkill];
     };
 
     // fill central panel with skills
@@ -210,7 +209,9 @@ switch _mode do {
 
             _ctrlRowEquip setVariable ["vgm_skill", _skill];
             _ctrlRowEquip ctrlSetText localize "STR_VGM_SKILLS_UI_EQUIP";
-            _ctrlRowEquip ctrlAddEventHandler ["ButtonClick", {["equipSkill", _this] call SELF}];
+            _ctrlRowEquip ctrlAddEventHandler ["ButtonClick", {
+                ["equipSkill", [ctrlParent (_this#0)]] call SELF
+            }];
             // disable the button if skill already equipped
             private _skillSlot = _skill call VGM_C_fnc_skills_active_getSlot;
             _ctrlRowEquip ctrlSetText localize (["STR_VGM_SKILLS_UI_EQUIPPED", "STR_VGM_SKILLS_UI_EQUIP"] select (_skillSlot == ""));
@@ -224,9 +225,9 @@ switch _mode do {
 
     // put the skill into currently selected slot
     case "equipSkill": {
-        params ["_ctrlEquip"];
+        params ["_display"];
 
-        private _skill = _ctrlEquip getVariable "vgm_skill";
+        private _skill = _display getVariable "vgm_skill";
         private _slot = [SLOT_STANDARD, SLOT_ULTIMATE] select (_skill get "isUltimate");
 
         private _result = [_slot, _skill] call vgm_c_fnc_skills_active_assignSkillToSlot;
@@ -234,7 +235,7 @@ switch _mode do {
         if (!_result) then {hint "Failed to assign skill to slot"};
 
         // delay by frame to prevent crash, current control will be deleted on UI refresh
-        [SELF, ["refreshUI", ctrlParent _ctrlEquip]] call vgm_g_fnc_execNextFrame;
+        [SELF, ["refreshUI", _display]] call vgm_g_fnc_execNextFrame;
     };
 
     default {

@@ -391,13 +391,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                             idc = VGM_IDC_DISPLAYABILITIES_ABILITYCOOLDOWN;
                             y = 5 * VGM_GRID_H;
                         };
-                        class AbilityIconFrame: VGM_ctrlFrame
-                        {
-                            x = (_W - 10) * VGM_GRID_W;
-                            y = 0.5 * VGM_GRID_H;
-                            w = 9 * VGM_GRID_W + pixelW;
-                            h = 9 * VGM_GRID_H + pixelH;
-                        };
                         class AbilityIcon: VGM_ctrlStaticPicture
                         {
                             idc = VGM_IDC_DISPLAYABILITIES_ABILITYICON;
@@ -408,44 +401,6 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                             h = 9 * VGM_GRID_H;
                         };
                     };
-                };
-                class _Spacer: VGM_ctrlStatic
-                {
-                    x = 0;
-                    y = 0;
-                    w = 0;
-                    h = 0.5 * VGM_GRID_H;
-                };
-                class FrameAbilityImage: VGM_ctrlFrame
-                {
-                    stackDisable = 1;
-                    x = 1.5 * VGM_GRID_W;
-                    y = 64.5 * VGM_GRID_H;
-                    w = (_W - 1) * VGM_GRID_W + pixelW;
-                    h = ((9/16) * _W - 1) * VGM_GRID_H + pixelH;
-                };
-                class AbilityImage: VGM_ctrlStaticPicture
-                {
-                    idc = VGM_IDC_DISPLAYABILITIES_ABILITYIMAGE;
-                    text = "#(rgb,1,1,1)color(0,1,0,0.5)";
-                    x = 1.5 * VGM_GRID_W;
-                    w = (_W - 1) * VGM_GRID_W;
-                    h = ((9/16) * _W - 1) * VGM_GRID_H;
-                };
-                class _Spacer1: _Spacer
-                {
-                };
-                class AbilityEquip: VGM_ctrlButton
-                {
-                    idc = VGM_IDC_DISPLAYABILITIES_ABILITYEQUIP;
-                    onButtonClick = VGM_UIEH(equipSkill,Abilities);
-                    text = "$STR_VGM_SKILLS_UI_EQUIP";
-                    x = (0.25 * _W + 0.5) * VGM_GRID_W;
-                    w = (0.5 * _W - 1) * VGM_GRID_W;
-                    h = 9 * VGM_GRID_H;
-                };
-                class _Spacer2: _Spacer
-                {
                 };
             };
         };
