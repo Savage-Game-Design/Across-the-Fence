@@ -163,9 +163,31 @@ switch _mode do {
         _display setVariable ["vgm_skill", _focusedSkill];
     };
 
+    // Highlight the selected ability on the left panel
+    case "abilityChanged": {
+        params ["_display", ["_slot", SLOT_STANDARD]];
+        private _params = [
+            // Standard, Ultimate
+            [VGM_IDC_DISPLAYABILITIES_STDTITLE, VGM_IDC_DISPLAYABILITIES_ULTTITLE] apply {_display displayCtrl _x}, // Title controls
+            ["STD", "ULT"] apply {localize format ["STR_VGM_SKILLS_UI_ABILITY_%1", _x]} // Title
+        ];
+        if (_slot == SLOT_ULTIMATE) then {
+            _params apply {reverse _x};
+        };
+        diag_log _params;
+        flatten _params params [
+            "_ctrlTitleActive", "_ctrlTitleInactive",
+            "_activeText", "_inactiveText"
+        ];
+
+        _ctrlTitleActive ctrlSetText format ["[ %1 ]", _activeText];
+        _ctrlTitleInactive ctrlSetText _inactiveText;
+    };
+
     // fill central panel with skills
     case "fillSkillsList": {
         params ["_display", ["_slot", SLOT_STANDARD]];
+        ["abilityChanged", [_display, _slot]] call SELF;
 
         _display setVariable ["vgm_focusedSkill", createHashMap];
 
