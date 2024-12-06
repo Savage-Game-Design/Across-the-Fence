@@ -6,16 +6,16 @@
     Public: No
 
     Description:
-        No description added yet.
+        Removes items from inventory upons respawn, simulating them getting lost upon the desperate run-away from capture.
 
     Parameter(s):
-        N/A
+        _unit - Unit to decay the inventory of [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        player call vgm_c_fnc_respawn_decayInventory
  */
 
 params ["_unit"];

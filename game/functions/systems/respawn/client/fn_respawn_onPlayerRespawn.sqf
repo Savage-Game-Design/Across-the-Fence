@@ -28,6 +28,10 @@ _newUnit setDir _safeSpawnTransform#1;
 _newUnit setUnitLoadout (_newUnit getVariable ["vgm_respawn_loadout", getUnitLoadout typeOf _newUnit]);
 deleteVehicle _oldUnit;
 
+if (!isNil {[] call vgm_c_fnc_missions_getCurrentMission}) then {
+    _newUnit call vgm_c_fnc_respawn_decayInventory;
+};
+
 sleep 3;
 [1, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
 
