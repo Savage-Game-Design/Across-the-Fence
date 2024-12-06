@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2024-12-05
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -45,7 +45,7 @@ private _randomExtraTime = random 120;
 // Spawn a new tracker!
 if (
        _alertness > vgm_s_director_tracker_spawn_alertness_threshold
-    && _timeSinceLastTracker + _randomExtraTime > _currentTrackerDelay
+    && _timeSinceLastTracker > (_currentTrackerDelay + _randomExtraTime)
     && count _dynamicGroups < vgm_s_director_dynamic_max_groups
 ) then {
     [format ["Attempting to send new tracker on mission %1", _publicMission get "id"]] call vgm_g_fnc_logInfo;
