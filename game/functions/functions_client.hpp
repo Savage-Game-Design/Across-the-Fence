@@ -16,6 +16,7 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class itemType {};
         class objectArea {};
         class preInit
         {
