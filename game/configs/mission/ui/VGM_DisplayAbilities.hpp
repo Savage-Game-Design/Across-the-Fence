@@ -31,6 +31,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
         };
         class BackgroundStd: VGM_ctrlBackground
         {
+            idc = VGM_IDC_DISPLAYABILITIES_BACKGROUNDSTD;
             x = DISPLAY_X + 1 * VGM_GRID_W;
             y = DISPLAY_Y + 6 * VGM_GRID_H;
             w = COLUMN_W * VGM_GRID_W;
@@ -53,6 +54,7 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
         };
         class BackgroundUlt: BackgroundStd
         {
+            idc = VGM_IDC_DISPLAYABILITIES_BACKGROUNDULT;
             y = DISPLAY_Y + (0.5 * DISPLAY_H + 8) * VGM_GRID_H;
         };
         class FrameUlt: FrameStd

@@ -169,7 +169,8 @@ switch _mode do {
         private _params = [
             // Standard, Ultimate
             [VGM_IDC_DISPLAYABILITIES_STDTITLE, VGM_IDC_DISPLAYABILITIES_ULTTITLE] apply {_display displayCtrl _x}, // Title controls
-            ["STD", "ULT"] apply {localize format ["STR_VGM_SKILLS_UI_ABILITY_%1", _x]} // Title
+            ["STD", "ULT"] apply {localize format ["STR_VGM_SKILLS_UI_ABILITY_%1", _x]}, // Title
+            [VGM_IDC_DISPLAYABILITIES_BACKGROUNDSTD, VGM_IDC_DISPLAYABILITIES_BACKGROUNDULT] apply {_display displayCtrl _x} // Background controls
         ];
         if (_slot == SLOT_ULTIMATE) then {
             _params apply {reverse _x};
@@ -177,11 +178,14 @@ switch _mode do {
         diag_log _params;
         flatten _params params [
             "_ctrlTitleActive", "_ctrlTitleInactive",
-            "_activeText", "_inactiveText"
+            "_activeText", "_inactiveText",
+            "_ctrlBackgroundActive", "_ctrlBackgroundInactive"
         ];
 
         _ctrlTitleActive ctrlSetText format ["[ %1 ]", _activeText];
         _ctrlTitleInactive ctrlSetText _inactiveText;
+        _ctrlBackgroundActive ctrlSetBackgroundColor [VGM_UI_COLOR_ACTIVE];
+        _ctrlBackgroundInactive ctrlSetBackgroundColor [VGM_UI_COLOR_BACKGROUND];
     };
 
     // fill central panel with skills
