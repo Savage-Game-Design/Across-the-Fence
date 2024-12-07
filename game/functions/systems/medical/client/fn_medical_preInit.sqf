@@ -5,7 +5,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2024-07-09
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -31,6 +31,10 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
 
 ["vgm_medical_heal", {
     (_this#0) params ["_healer", "_patient", "_itemType", "_bodyPart"];
+
+    if (!local _patient) then {
+        format ["Heal on non local unit: %1, %2", _healer, _patient] call vgm_g_fnc_logWarning;
+    };
 
     private _canHeal = true;
     private _consumeItem = "";

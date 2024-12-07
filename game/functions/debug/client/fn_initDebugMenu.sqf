@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2024-10-25
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -214,7 +214,7 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
             private _woundVarPrefix = "vgm_g_medical_wound";
             {
                 private _bodyPart = _x select [count _woundVarPrefix + 1];
-                _this lnbAddRow [_bodyPart, str (_unit getVariable [_x, -1])];
+                _this lnbAddRow [_bodyPart, str (_unit getVariable [_x, text "nil"])];
             } forEach (allVariables _unit select {_x find _woundVarPrefix == 0});
         }] call vgm_c_debugMenu_addSection;
     };
