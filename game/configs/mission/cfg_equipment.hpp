@@ -484,7 +484,8 @@ class vgm_equipment {
             "vn_m20a1b1_01",
             "vn_m72",
             "vn_rpg7",
-            "vn_rpg2"
+            "vn_rpg2",
+            "vn_m79_p"
         };
 
         magazines[] = {
