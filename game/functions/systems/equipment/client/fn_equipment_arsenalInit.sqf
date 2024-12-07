@@ -3,7 +3,7 @@
     File: fn_equipment_arsenalInit.sqf
     Author: Savage Game Design
     Date: 2023-11-19
-    Last Update: 2023-11-20
+    Last Update: 2024-12-07
     Public: No
 
     Description:
@@ -20,8 +20,12 @@
  */
 
 [true, "arsenalPreOpen", {
-    // Add our special Medical items to "Misc" tab
-    {BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach ["vn_helper_item_firstaidkit", "vn_helper_item_medikit"];
+    // Add our special Medical items and weightless toolkit to "Misc" tab
+    {BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach [
+        "vn_helper_item_firstaidkit",
+        "vn_helper_item_medikit",
+        "vn_b_item_toolkit_weightless"
+    ];
 }] call BIS_fnc_addScriptedEventHandler;
 
 
