@@ -213,12 +213,10 @@ class vgm_equipment {
 
         items[] = {
             // Accessories
-            "vn_s_m3a1",
             "vn_bipod_m1918",
             "vn_o_8x_m1903",
             "vn_b_m1903",
             "vn_b_camo_m1903",
-            "vn_s_sten",
             "vn_s_ppk"
             // Uniforms
             // Vests
