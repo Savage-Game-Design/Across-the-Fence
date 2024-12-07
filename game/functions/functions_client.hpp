@@ -16,6 +16,7 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class itemType {};
         class objectArea {};
         class preInit
         {
@@ -701,6 +702,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
 
+        class respawn_decayInventory {};
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
         class respawn_preInit
