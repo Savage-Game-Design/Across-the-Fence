@@ -8,6 +8,8 @@ When the team has [h]joined the mission[/h], geared up and mentally prepared the
 You'll be inserted deep behind enemy lines, tasked with performing recon and [h]scouting[/h] multiple enemy sites.
 
 You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.
+
+[h]If nobody on your team survives, you will not receive any experience or rewards for your mission.[/h]
 """
 
 arguments = ["localize 'STR_VGM_MISSION_NAME'"]
