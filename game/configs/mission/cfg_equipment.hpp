@@ -9,6 +9,7 @@ class vgm_equipment {
     startingWeaponItems[] = {
         // mags/explosives/FAKs
         {"", {
+            {"vn_b_item_toolkit_weightless", 1},
             {"vn_helper_item_firstaidkit", 15},
             {"vn_m18_white_mag", 3},
             {"vn_m18_red_mag", 3},
@@ -76,6 +77,7 @@ class vgm_equipment {
             "vn_s_ppk",
             "vn_s_m1911",
             "vn_helper_item_firstaidkit",
+            "vn_b_item_toolkit_weightless",
             // Uniforms
             "vn_b_uniform_sog_01_01",
             "vn_b_uniform_sog_01_02",
@@ -111,6 +113,7 @@ class vgm_equipment {
             "vn_b_item_map",
             "vn_b_item_radio_urc10",
             "vn_b_item_compass",
+            "vn_b_item_compass_sog",
             "vn_b_item_watch"
         };
     };

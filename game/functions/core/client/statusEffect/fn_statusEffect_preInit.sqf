@@ -2,7 +2,7 @@
     File: fnc_preInit.sqf
     Author: Savage Game Design
     Date: 2023-07-02
-    Last Update: 2023-08-28
+    Last Update: 2024-12-07
     Public: No
 
     Description:
@@ -62,4 +62,9 @@ if (!hasInterface) exitWith {};
         _unit setVariable ["vgm_c_statusEffect_adsEh", nil];
         _unit removeEventHandler ["OpticsSwitch", _eh];
     };
+}] call vgm_c_fnc_statusEffect_create;
+
+["explosiveSpecialist", {
+    params ["_unit", "_inEffect"];
+    _unit setUnitTrait ["explosiveSpecialist", _inEffect];
 }] call vgm_c_fnc_statusEffect_create;

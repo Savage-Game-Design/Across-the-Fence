@@ -581,6 +581,10 @@ class vgm_c
 
         class statusEffect_create {};
         class statusEffect_get {};
+        class statusEffect_postInit
+        {
+            postInit = 1;
+        };
         class statusEffect_preInit
         {
             preInit = 1;
