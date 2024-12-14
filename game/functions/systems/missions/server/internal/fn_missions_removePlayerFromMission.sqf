@@ -2,7 +2,7 @@
     File: fn_missions_removePlayerFromMission.sqf
     Author: Savage Game Design
     Date: 2023-03-20
-    Last Update: 2023-09-21
+    Last Update: 2024-12-14
     Public: No
 
     Description:
@@ -30,9 +30,6 @@ private _currentMissionAssignments = ["vgm_mission_assignments"] call para_g_fnc
 private _playerCurrentMissionId = _currentMissionAssignments get _playerId;
 
 if (isNil "_playerCurrentMissionId" || {_playerCurrentMissionId isNotEqualTo (_missionPublic get "id")}) exitWith {};
-
-// Save machine ID so we can remoteExec things later
-private _playerMachineId = _mission get "machineIds" get _playerId;
 
 [_currentMissionAssignments, _playerId] call para_s_fnc_netmap_deleteAt;
 [_missionPublic get "players", _playerId] call para_s_fnc_netmap_deleteAt;
