@@ -81,7 +81,7 @@ class VGM_ctrlStaticPictureKeepAspect: ctrlStaticPictureKeepAspect
 {
 };
 
-class VGM_ctrlStructuredText : ctrlStructuredText
+class VGM_ctrlStructuredText: ctrlStructuredText
 {
 #ifdef __A3_DEBUG__
     // colorBackground[] = {1,0,0,0.2};
@@ -98,9 +98,8 @@ class VGM_ctrlStructuredText : ctrlStructuredText
     };
 };
 
-class VGM_ctrlTitle: VGM_ctrlStructuredText
+class VGM_ctrlStructuredTextCentered: VGM_ctrlStructuredText
 {
-    size = VGM_FONT_M;
     class Attributes
     {
         font = VGM_FONT;
@@ -109,6 +108,11 @@ class VGM_ctrlTitle: VGM_ctrlStructuredText
         align = "center";
         shadow = 0;
     };
+};
+
+class VGM_ctrlTitle: VGM_ctrlStructuredTextCentered
+{
+    size = VGM_FONT_M;
 };
 
 class VGM_ctrlTree: ctrlTree

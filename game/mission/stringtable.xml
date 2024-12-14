@@ -98,6 +98,18 @@
         <Key ID="STR_VGM_SKILLS_UI_HUD_ACTIVES">
             <Original>Active abilities</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_STDEMPTY_TOPTEXT_TEXT">
+            <Original>No ability selected</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_STDEMPTY_BOTTOMTEXT_TEXT">
+            <Original>Click here to choose an ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_AVAILABLEEMPTY_TEXT">
+            <Original>You currently have no skills unlocked in this category.&lt;br/&gt;&lt;br/&gt;New skills can be unlocked via the skill tree.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITYEMPTY_TEXT">
+            <Original>Details of the selected ability will be shown here.</Original>
+        </Key>
     </Package>
     <Package name="Medical UI">
         <Key ID="STR_VGM_MEDICAL_UI_APPLY_FAK">
