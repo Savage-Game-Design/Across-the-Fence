@@ -2,7 +2,7 @@
     File: fn_skill_investigate_addAction.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-01-21
+    Last Update: 2024-12-14
     Public: No
 
     Description:
@@ -51,7 +51,7 @@ params ["_player"];
     },
     [],
     1e38,
-    -50,
+    10000,
     false,
     false,
     true
