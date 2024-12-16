@@ -247,6 +247,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\mission_objects\global);
 
+        class mission_objects_call {};
         class mission_objects_deleteObject {};
         class mission_objects_spawnObjects {};
         class mission_objects_preInit {
@@ -626,6 +627,7 @@ class vgm_c
         class sites_hints_glint {};
         class sites_hints_glintJob {};
         class sites_hints_initObject {};
+        class sites_hints_markOnMap {};
         class sites_hints_postInit
         {
             postInit = 1;

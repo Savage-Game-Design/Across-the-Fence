@@ -23,6 +23,8 @@ _args params ["_sitePos"];
 
 vgm_sites_hints_objectsList pushBack _object;
 
+_object setVariable ["vgm_sites_hints_sitePos", _sitePos];
+
 _object addAction [
     "Inspect",
     {

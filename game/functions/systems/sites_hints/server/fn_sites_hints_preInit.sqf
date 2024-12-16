@@ -45,10 +45,16 @@ vgm_sites_hints_objects = createHashMap;
 ["vgm_sites_hints_inspected", {
     (_this#0) params ["_missionId", "_objectId"];
 
+    private _mission = _missionId call vgm_s_fnc_missions_getById;
+
     private _data = [_missionId, "sites_hints"] call vgm_s_fnc_missions_getSystemNetmap;
     private _hintsNetmap = _data get "inspectedHints";
 
     [_hintsNetmap, _objectId, true] call para_s_fnc_netmap_set;
 
-    // todo create marker locally on the client
+    [_mission, [_objectId], {
+        if (!hasInterface) exitWith {};
+        _this call vgm_c_fnc_sites_hints_markOnMap;
+    }] call vgm_s_fnc_mission_objects_call;
+
 }] call para_g_fnc_event_subscribeServer;
