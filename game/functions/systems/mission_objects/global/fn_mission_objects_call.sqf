@@ -9,13 +9,15 @@
         Execute given code on local instances of the objects.
 
     Parameter(s):
-        N/A
+        _missionId - Id of the mission [NUMBER]
+        _objectIds - Ids of the objects to execute code on [ARRAY]
+        _fnc_callback - Code to execute, where objects are local [CODE]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_g_fnc_mission_objects_call
+        [1, "objectId123", {hint str _this}] call vgm_g_fnc_mission_objects_call
  */
 
 params [

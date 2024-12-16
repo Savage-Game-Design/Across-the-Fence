@@ -6,16 +6,18 @@
     Public: No
 
     Description:
-        Execute given code on local instances of the objects.
+        Propagate code execution on local mission objects to all machines participating in the mission.
 
     Parameter(s):
-        N/A
+        _mission - Mission data [HASHMAP]
+        _objectIds - Ids of the objects to execute code on [ARRAY]
+        _fnc_callback - Code to execute, where objects are local [CODE]
 
     Returns:
         Something [BOOL]
 
     Example(s):
-        [parameter] call vgm_s_fnc_mission_objects_call
+        [1, "objectId123", {hint str _this}] call vgm_s_fnc_mission_objects_call
  */
 
 params [
