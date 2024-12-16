@@ -297,6 +297,7 @@ class vgm_s
         {
             preInit = 1;
         };
+        class sites_hints_registerMission {};
     };
 
     class site_types
