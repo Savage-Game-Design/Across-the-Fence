@@ -3,7 +3,7 @@
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-12-05
+    Last Update: 2024-12-16
     Public: No
 
     Description:
@@ -49,7 +49,11 @@ private _fnc_getNearbyHints = {
     };
 };
 
-private _glintObject = selectRandom call _fnc_getNearbyHints;
+// sort by nearest object
+private _nearbyHints = call _fnc_getNearbyHints apply {[_x distance focusOn, _x]};
+_nearbyHints sort true;
+
+private _glintObject = _nearbyHints select 0 select 1;
 if (isNil "_glintObject") exitWith {
     ["No glint objects around"] call vgm_g_fnc_logDebug;
 };
