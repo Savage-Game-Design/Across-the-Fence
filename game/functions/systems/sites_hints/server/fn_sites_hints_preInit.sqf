@@ -2,7 +2,7 @@
     File: fn_sites_hints_preInit.sqf
     Author: Savage Game Design
     Date: 2024-10-25
-    Last Update: 2024-11-01
+    Last Update: 2024-12-16
     Public: No
 
     Description:
@@ -37,4 +37,10 @@ vgm_sites_hints_objects = createHashMap;
 
     private _id = vgm_sites_hints_placeHandlers deleteAt _missionId;
     [_id] call para_g_fnc_event_unsubscribe;
+}] call para_g_fnc_event_subscribeServer;
+
+["vgm_sites_hints_inspected", {
+    (_this#0) params ["_missionId", "_objectId"];
+
+    diag_log ["hint inspected", _missionId, _objectId];
 }] call para_g_fnc_event_subscribeServer;
