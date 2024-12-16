@@ -54,7 +54,9 @@ vgm_sites_hints_objects = createHashMap;
 
     [_mission, [_objectId], {
         if (!hasInterface) exitWith {};
-        _this call vgm_c_fnc_sites_hints_markOnMap;
+        params ["_object"];
+        _object call vgm_c_fnc_sites_hints_markOnMap;
+        _object setVariable ["vgm_sites_hints_inspected", true];
     }] call vgm_s_fnc_mission_objects_call;
 
 }] call para_g_fnc_event_subscribeServer;

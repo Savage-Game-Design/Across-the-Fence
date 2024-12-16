@@ -3,7 +3,7 @@
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-12-05
+    Last Update: 2024-12-16
     Public: No
 
     Description:
@@ -45,6 +45,7 @@ private _fnc_getNearbyHints = {
 
     _objects select {
         _x call _fnc_isOnScreenCenter
+        && !(_x getVariable ["vgm_sites_hints_inspected", false])
         && {[focusOn, "FIRE", _x] checkVisibility [eyePos focusOn, getPosWorld _x] > 0}
     };
 };
