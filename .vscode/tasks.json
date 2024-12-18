@@ -81,7 +81,7 @@
         {
             "label": "Launch arma client and connect to local server",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' client --connect=127.0.0.1",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch client --connect=127.0.0.1",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
