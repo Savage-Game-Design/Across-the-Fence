@@ -2,7 +2,7 @@
     File: fn_mission_objects_call.sqf
     Author: Savage Game Design
     Date: 2024-12-16
-    Last Update: 2024-12-16
+    Last Update: 2024-12-19
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ params [
     ["_fnc_callback", {}, [{}]]
 ];
 
-if (remoteExecutedOwner != 2) then {
+if (remoteExecutedOwner != 2) exitWith {
     format ["Mission object call should be called from server to prevent object desync, expected 2 got %1", remoteExecutedOwner] call vgm_g_fnc_logWarning;
 };
 
