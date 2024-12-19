@@ -8,7 +8,7 @@ version = "$STR_VGM_MISSION_VERSION";
 
 class Header
 {
-    gameType = "secret";
+    gameType = "Coop";
     minPlayers = 1;
     maxPlayers = 24;
 };
@@ -21,6 +21,9 @@ onLoadName = "$STR_VGM_MISSION_NAME";
 onLoadMission = "$STR_VGM_MISSION_VERSION";
 onLoadIntro = "$STR_VGM_MISSION_INTRO";
 briefingName = "$STR_VGM_MISSION_NAME_VERSION";
+// name of the vars file that holds mission specific data
+// uses missionName if not specified (file name)
+missionGroup = "vgm";
 
 loadScreen = "";
 OnLoadIntroTime = 0;
