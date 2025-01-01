@@ -2,7 +2,7 @@
     File: fn_sites_hints_markOnMap.sqf
     Author: Savage Game Design
     Date: 2024-12-16
-    Last Update: 2024-12-16
+    Last Update: 2024-12-19
     Public: No
 
     Description:
@@ -29,3 +29,5 @@ _marker setMarkerColorLocal "ColorBlack";
 private _dir = [_object, _sitePos] call vgm_g_fnc_spokenDirection;
 private _idx = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] find _dir;
 _marker setMarkerDirLocal (45 * _idx);
+
+vgm_sites_hints_markers pushBack _marker;
