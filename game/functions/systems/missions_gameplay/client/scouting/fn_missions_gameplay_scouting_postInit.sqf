@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-09-30
+    Last Update: 2025-01-01
     Public: No
 
     Description:
@@ -53,6 +53,6 @@ vgm_scouting_siteTypes sort true;
 
 }] call para_g_fnc_event_subscribeServer;
 
-["vgm_mission_started", {
+["vgm_mission_deploy_local", {
     {deleteLocation (vgm_scouting_locations deleteAt _x)} forEach vgm_scouting_locations;
-}] call para_g_fnc_event_subscribeServer;
+}] call para_g_fnc_event_subscribeLocal;
