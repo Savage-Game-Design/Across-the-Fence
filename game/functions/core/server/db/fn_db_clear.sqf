@@ -21,4 +21,4 @@
 
 {
 	profileNamespace setVariable [_x, nil];
-} forEach allVariables profileNamespace;
+} forEach (allVariables profileNamespace select {_x find "vgm_" == 0});
