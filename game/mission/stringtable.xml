@@ -594,7 +594,7 @@
             <Original>Missions</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_DESC">
-            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.</Original>
+            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.%1%1%3If nobody on your team survives, you will not receive any experience or rewards for your mission.%4</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_AFTER_ARSENAL_DESCRIPTION">
             <Original>Now you've customised your gear, create or join a mission using the %3tactical map board%4.</Original>
@@ -688,6 +688,15 @@
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MAP_BOARD_DESCRIPTION">
             <Original>The tactical map board allows you to create, join and leave missions.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS">
+            <Original>Alertness</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_DESC">
+            <Original>When you're running a mission, many actions you take will alert the enemy that there's a S.O.G recon team operating in their area.%1%1As the enemy forces become more aware of your presence, they'll start %3actively hunting your team%4, and %3respond quicker to your activities%4.%1%1This means you should be careful when doing anything loud, or that might draw attention to you. %3Gunshots and explosions are a surefire way to compromise your mission%4.%1%1And remember, %3a suppressed weapon is not a silent weapon%4.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION">
+            <Original>Gunshots, explosions and other actions you take on a mission will alert the enemy to your presence, increasing the threat to your team.</Original>
         </Key>
     </Package>
     <Package name="Tutorial">

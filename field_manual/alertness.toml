@@ -1,0 +1,20 @@
+displayName = "Alertness"
+description = """
+When you're running a mission, many actions you take will alert the enemy that there's a S.O.G recon team operating in their area.
+
+As the enemy forces become more aware of your presence, they'll start [h]actively hunting your team[/h], and [h]respond quicker to your activities[/h].
+
+This means you should be careful when doing anything loud, or that might draw attention to you. [h]Gunshots and explosions are a surefire way to compromise your mission[/h].
+
+And remember, [h]a suppressed weapon is not a silent weapon[/h].
+"""
+
+arguments = []
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa'
+
+[hints.alertness]
+description = """
+Gunshots, explosions and other actions you take on a mission will alert the enemy to your presence, increasing the threat to your team.
+"""
