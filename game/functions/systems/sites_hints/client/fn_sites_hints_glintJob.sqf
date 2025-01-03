@@ -42,6 +42,7 @@ private _fnc_getNearbyHints = {
 
     _objects select {
         _x call _fnc_isOnScreenCenter
+        && !(_x getVariable ["vgm_sites_hints_inspected", false])
         && {[focusOn, "FIRE", _x] checkVisibility [eyePos focusOn, getPosWorld _x] > 0}
     };
 };

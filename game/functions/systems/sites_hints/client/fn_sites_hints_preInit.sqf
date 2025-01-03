@@ -3,7 +3,7 @@
     File: fn_sites_hints_preInit.sqf
     Author: Savage Game Design
     Date: 2024-10-27
-    Last Update: 2024-11-12
+    Last Update: 2025-01-01
     Public: No
 
     Description:
@@ -13,6 +13,7 @@
 if (!hasInterface) exitWith {};
 
 vgm_sites_hints_objectsList = [];
+vgm_sites_hints_markers = [];
 
 vgm_sites_hints_glintTextures = [];
 vgm_sites_hints_glintTextures resize (GLINT_FRAMES+1);
@@ -38,7 +39,12 @@ vgm_sites_hints_placementModifiers = createHashMapFromArray [
     }]
 ];
 
-["vgm_mission_ended", {
+["vgm_mission_deploy_local", {
+    {deleteMarkerLocal _x} forEach vgm_sites_hints_markers;
+    vgm_sites_hints_markers = [];
+}] call para_g_fnc_event_subscribeLocal;
+
+["vgm_mission_end_local", {
     vgm_sites_hints_objectsList = [];
 }] call para_g_fnc_event_subscribeServer;
 

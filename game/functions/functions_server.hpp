@@ -93,6 +93,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\mission_objects\server);
 
+        class mission_objects_call {};
         class mission_objects_createObject {};
         class mission_objects_deleteObject {};
         class mission_objects_preInit {
@@ -297,6 +298,7 @@ class vgm_s
         {
             preInit = 1;
         };
+        class sites_hints_registerMission {};
     };
 
     class site_types
