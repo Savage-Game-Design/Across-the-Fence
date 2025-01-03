@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2024-11-15
+    Last Update: 2025-01-02
     Public: Yes
 
     Description:
@@ -47,8 +47,12 @@ _object addAction [
 vgm_c_fnc_addJoinMissionAction = {
     params ["_missionId", "_object"];
 
+    private _publicMission = [] call vgm_c_fnc_missions_getMissions get _missionId;
+    private _leader = leader (_publicMission get "group");
+    private _zone = _publicMission get "targetZone";
+
     private _actionId = _object addAction [
-        format ["Join mission %1", _missionId],
+        format ["Join mission %1 (%2, %3)", _missionId, name _leader, markerText (_zone call vgm_g_fnc_missions_getZoneMarker)],
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
             _arguments params ["_missionId"];

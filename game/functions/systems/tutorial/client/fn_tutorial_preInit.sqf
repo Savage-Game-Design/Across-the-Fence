@@ -4,7 +4,7 @@
     File: fn_tutorial_preInit.sqf
     Author:
     Date: 2024-11-16
-    Last Update: 2024-12-05
+    Last Update: 2024-12-14
     Public: No
 
     Description:
@@ -59,6 +59,11 @@ vgm_c_tutorial_seenTutorials = missionProfileNamespace getVariable ["vgm_tutoria
 
 ["vgm_mission_deploy_local", {
     ["vgm", "missions", "extraction"] call vgm_c_fnc_tutorial_trigger;
+
+    [] spawn {
+        sleep 20;
+        ["vgm_missions", "alertness", "alertness"] call vgm_c_fnc_tutorial_trigger;
+    };
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_leveling_levelGained", {

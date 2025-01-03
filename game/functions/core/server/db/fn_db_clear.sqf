@@ -2,7 +2,7 @@
     File: fn_db_clear.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2022-11-13
+    Last Update: 2024-12-19
     Public: No
 
     Description:
@@ -20,5 +20,5 @@
 */
 
 {
-	missionProfileNamespace setVariable [_x, nil];
-} forEach allVariables missionProfileNamespace;
+	profileNamespace setVariable [_x, nil];
+} forEach (allVariables profileNamespace select {_x find "vgm_" == 0});
