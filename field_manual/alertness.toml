@@ -9,7 +9,7 @@ This means you should be careful when doing anything loud, or that might draw at
 And remember, [h]a suppressed weapon is not a silent weapon[/h].
 """
 
-arguments = ["localize 'STR_VGM_MISSION_NAME'"]
+arguments = []
 
 # Note that this is a literal string with ', so backslashes don't need escaping.
 image = '\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa'
