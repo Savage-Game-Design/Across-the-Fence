@@ -29,11 +29,9 @@ private _action = _this call vgm_g_fnc_btree_action_basic;
 _action set ["getNextPoint", {
     params ["_node", "_state"];
 
-    private _nodeParams = [_node] call vgm_g_fnc_btree_getNodeParams;
-    // Potential bug here if the blackboard data carries over from earlier. Should it be wiped when the node exits?
-    private _patrolCenter = _nodeParams getOrDefaultCall ["center", { getPosATL leader _group }, true];
-    private _patrolRadius = _nodeParams getOrDefaultCall ["radius", { 50 + random 100 }, true];
-    private _patrolAngleChange = _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true];
+    private _patrolCenter = _state get "center";
+    private _patrolRadius = _state get "radius";
+    private _patrolAngleChange = _state get "angleChange";
 
     //Too far away, we should move quickly to reach the patrol area.
     private _desiredSpeedMode =
@@ -50,6 +48,12 @@ _action set ["name", "patrol area"];
 
 _action set ["onEnter", {
     params ["_node", "_state"];
+
+    private _nodeParams = [_node] call vgm_g_fnc_btree_getNodeParams;
+    // Cache these values from nodeParams, so we can use sensible defaults. _state is also cheaper to access regularly.
+    _state set ["center", _nodeParams getOrDefaultCall ["center", { getPosATL leader _group }]];
+    _state set ["radius", _nodeParams getOrDefaultCall ["radius", { 50 + random 100 }]];
+    _state set ["angleChange", _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true]];
 
     _extern_group setCombatMode "RED";
     _extern_group setBehaviour "SAFE";
