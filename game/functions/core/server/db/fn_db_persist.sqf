@@ -2,11 +2,11 @@
     File: fn_db_persist.sqf
     Author: Savage Game Design
     Date: 2024-12-05
-    Last Update: 2024-12-05
+    Last Update: 2024-12-19
     Public: No
 
     Description:
-        Persists the database to disk (i.e calls saveMissionProfileNamespace)
+        Persists the database to disk (i.e calls saveProfileNamespace)
 
     Parameter(s):
         None
@@ -19,6 +19,6 @@
  */
 
 private _currentTime = diag_tickTime;
-saveMissionProfileNamespace;
+saveProfileNamespace;
 // Track the time, to make it easier to identify if the profile namespace saving is causing stutters (which it did in Mike Force).
 [format ["Mission database saved in %1 seconds", diag_tickTime - _currentTime]] call vgm_g_fnc_logInfo;
