@@ -6,7 +6,7 @@
     Public: No
 
     Description:
-        Persists the database to disk (i.e calls saveprofileNamespace)
+        Persists the database to disk (i.e calls saveProfileNamespace)
 
     Parameter(s):
         None
