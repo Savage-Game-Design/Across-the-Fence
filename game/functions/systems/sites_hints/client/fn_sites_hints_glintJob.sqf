@@ -3,7 +3,7 @@
     File: fn_sites_hints_glintJob.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-12-16
+    Last Update: 2025-01-01
     Public: No
 
     Description:
@@ -28,9 +28,6 @@ private _radius = RADIUS;
 _interval = _interval * ([focusOn, "glintFrequency"] call vgm_c_fnc_coefficient_get);
 
 if ((time - vgm_c_sites_hints_lastGlint) < _interval) exitWith {};
-vgm_c_sites_hints_lastGlint = time;
-
-["Playing glint animation"] call vgm_g_fnc_logDebug;
 
 // https://community.bistudio.com/wikidata/images/a/ac/safezone.jpg
 private _fnc_isOnScreenCenter = {
@@ -58,4 +55,7 @@ if (isNil "_glintObject") exitWith {
     ["No glint objects around"] call vgm_g_fnc_logDebug;
 };
 
+vgm_c_sites_hints_lastGlint = time;
+
+["Playing glint animation"] call vgm_g_fnc_logDebug;
 [_glintObject, 3] call vgm_c_fnc_sites_hints_glint;
