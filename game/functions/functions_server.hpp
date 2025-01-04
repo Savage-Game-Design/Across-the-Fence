@@ -164,6 +164,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\missions_gameplay\server\extraction);
 
+        class missions_gameplay_extraction_scriptedLand {};
         class missions_gameplay_extraction_startExtract {};
     };
 

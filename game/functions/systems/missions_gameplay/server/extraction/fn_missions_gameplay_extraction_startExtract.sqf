@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2024-11-07
+    Last Update: 2025-01-05
     Public: No
 
     Description:
@@ -69,20 +69,23 @@ _helicopter setDir random 360;
 
 private _group = group _helicopter;
 
-private _safeLzPosition = _lzPosition findEmptyPosition [0, 100, _class];
-if (_useExactLzPosition || _safeLzPosition isEqualTo []) then {
-    _safeLzPosition = _lzPosition;
+private _safeLzPositionATL = _lzPosition findEmptyPosition [0, 100, _class];
+if (_useExactLzPosition || _safeLzPositionATL isEqualTo []) then {
+    _safeLzPositionATL = _lzPosition;
 };
+_safeLzPositionATL set [2, 0];
 
-// having WP directly above LZ makes LAND more robust
-_group addWaypoint [_safeLzPosition, 0];
+private _helipad = createVehicle [["Land_HelipadEmpty_F", "Land_HelipadCircle_F"] select is3DENPreview, [0,0,0], [], 0, "NONE"];
+_helipad setPosATL _safeLzPositionATL;
 
-private _landWp = _group addWaypoint [_safeLzPosition, 0];
-_landWp setWaypointType "SCRIPTED";
-_landWp setWaypointScript "vn\missions_f_vietnam\functions\waypoint\fn_waypoint_land.sqf";
+private _wpPos = _lzPosition getPos [100 min _distance, _lzPosition getDir _originPos];
+
+private _landWp = _group addWaypoint [_wpPos, 0];
+_helicopter setVariable ["vgm_mission_extraction_helipad", _helipad];
 _landWp setWaypointStatements ["true", toString {
-    group this setVariable ["vgm_missions_extractionLanded", true, true];
-    vehicle this flyInHeight 0;
+    if (!isServer) exitWith {};
+    //_group setVariable ["vgm_missions_extractionLanded", true, true];
+    [vehicle this] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
 }];
 
 private _script = [_missionId, _mission, _helicopter] spawn {
@@ -93,6 +96,7 @@ private _script = [_missionId, _mission, _helicopter] spawn {
         _alivePlayers findIf {!(_x in _helicopter)} == -1 // all alive players are inside the heli
     };
 
+    _helicopter setVariable ["vgm_missions_extractionBoarded", true];
     _helicopter flyInHeight [100, true];
     _helicopter setCaptive false;
 
@@ -102,13 +106,13 @@ private _script = [_missionId, _mission, _helicopter] spawn {
     sleep 25;
     [_missionId] call vgm_s_fnc_missions_endMission;
     waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
-    sleep 5;
+    sleep 25;
     {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
     deleteVehicle _helicopter;
 };
 
 _group setVariable ["vgm_missions_extractionScript", _script];
 
-["vgm_missions_gameplay_extractionStarted", [_missionId, +_safeLzPosition, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
+["vgm_missions_gameplay_extractionStarted", [_missionId, +_safeLzPositionATL, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
 
 _helicopter // return

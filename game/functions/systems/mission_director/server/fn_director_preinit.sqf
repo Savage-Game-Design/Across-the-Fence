@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-11-02
+    Last Update: 2025-01-02
     Public: No
 
     Description:
@@ -164,7 +164,7 @@ call {
                 _playerGroup,
                 [format ["vgm_extract_%1_board", _missionId], format ["vgm_extract_%1", _missionId]],
                 ["", "STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE"],
-                _helicopter,
+                [_helicopter, true],
                 "ASSIGNED",
                 -1,
                 true,
