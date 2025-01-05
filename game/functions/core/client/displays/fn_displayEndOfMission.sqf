@@ -3,7 +3,7 @@
     File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
     Author: Savage Game Design
     Date: 2023-09-25
-    Last Update: 2024-12-05
+    Last Update: 2025-01-05
     Public: No
 
     Description:
@@ -80,19 +80,24 @@ switch _mode do {
                 _ctrlBreakdown ctrlSetStructuredText parseText (_text joinString "<br/>");
                 playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
 
+                // skip XP animation if mission was failed
+                if (_milestones findIf {_x param [0, ""] == "mission_failure"} > -1) then {
+                    uiSleep 1.5;
+                    continue;
+                };
+
                 private _animDuration = 1 + (_milestoneXp / 500);
                 private _time = time;
                 private _animTime = _time + _animDuration;
                 private _newExperience = _currentExperience;
+
                 // XP gain animation
                 while {_time < _animTime} do {
                     uiSleep 0.05; _time = _time + 0.05;
 
                     _newExperience = linearConversion [_animDuration, 0, _animTime - _time, _currentExperience, _currentExperience + _milestoneXp, true];
                     _newExperience = _newExperience min vgm_g_leveling_maxExperience;
-                    if (_milestones findIf {_x param [0, ""] == "mission_failure"} == -1) then {
-                        ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
-                    };
+                    ["updateXpProgress", [_display, _newExperience, nil, _experienceOffset]] call SELF;
 
                     // level up
                     if (_newExperience >= _experienceThreshold) then {
