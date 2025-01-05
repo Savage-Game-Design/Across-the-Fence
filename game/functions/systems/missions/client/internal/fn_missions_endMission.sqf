@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2024-11-16
+    Last Update: 2025-01-05
     Public: No
 
     Description:
@@ -37,7 +37,6 @@ player setVelocity [0,0,0];
 ([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
 player setDir _newDir;
 player setVehiclePosition [_newPos, [], 0, "NONE"];
-[] call vgm_c_fnc_sharedHub_enableHub;
 
 player call vgm_c_fnc_medical_fullHeal;
 
@@ -48,3 +47,9 @@ terminate (missionNamespace getVariable ["vgm_missions_zoomOnMapScript", scriptN
 private _dialog = createDialog ["VGM_DisplayEndOfMission", true];
 ["updateEndStatus", [_dialog, _endType]] call vgm_c_fnc_displayEndOfMission;
 ["renderProgress", [_dialog, [_levelingDataCopy, _milestones]]] call vgm_c_fnc_displayEndOfMission;
+
+vgm_missions_enableHubScript = [] spawn {
+    private _timeout = time + 30;
+    waitUntil {time > _timeout || {player inArea "vgm_shared_hub"}};
+    [] call vgm_c_fnc_sharedHub_enableHub;
+};
