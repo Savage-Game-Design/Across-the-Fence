@@ -18,6 +18,7 @@ import RscHealthTextures from RscTitles;
 class RscTitles : ParadigmRscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
+    #include "VGM_RscLevelIndicator.hpp"
     #include "VGM_RscMedicalStatus.hpp"
     #include "VGM_RscProgressBar.hpp"
     #include "VGM_RscStaminaBar.hpp"
