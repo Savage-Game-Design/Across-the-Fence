@@ -60,11 +60,14 @@ private _dir1 = _pos0 vectorFromTo _pos1;
 private _dir2 = +_dir1;
 
 // compute if heli should land on the ground or hover (on steep slopes)
-private _landZ = -2;
+private _landZ = -1;
 if (([_pos2] call _fnc_slopeSteepness) > 20) then {
     private _surfDir = [_pos2] call _fnc_surfaceVectorDir;
-    private _slopeTop = _pos2 vectorAdd (_surfDir vectorMultiply -4);
-    private _slopeHeight = getTerrainHeightASL _slopeTop;
+    private _slopeExtremes = [1, 2, 4, 6] apply {
+        private _slopeTop = _pos2 vectorAdd (_surfDir vectorMultiply (_x * -1));
+        getTerrainHeightASL _slopeTop // return
+    };
+    private _slopeHeight = selectMax _slopeExtremes;
     // landpos hovering
     _landZ = (_slopeHeight - (getPosASL _helipad#2)) + 1.5;
     _pos2 set [2, _slopeHeight+10];
