@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-01-02
+    Last Update: 2025-01-05
     Public: No
 
     Description:
@@ -158,7 +158,7 @@ call {
                 "heli"
             ] call BIS_fnc_taskCreate;
 
-            waitUntil {group _helicopter getVariable ["vgm_missions_extractionLanded", false]};
+            waitUntil {_helicopter getVariable ["vgm_missions_extractionLanded", false]};
 
             [
                 _playerGroup,

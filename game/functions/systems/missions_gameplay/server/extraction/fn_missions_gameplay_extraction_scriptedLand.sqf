@@ -148,6 +148,10 @@ addMissionEventHandler ["EachFrame", {
         ];
     };
 
+    if !(_helicopter getVariable ["vgm_missions_extractionLanded", false]) then {
+        _helicopter setVariable ["vgm_missions_extractionLanded", true, true];
+    };
+
     private _v1 = velocity _helicopter;
     _v1 set [0, 0];
     _v1 set [1, 0];

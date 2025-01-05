@@ -84,7 +84,6 @@ private _landWp = _group addWaypoint [_wpPos, 0];
 _helicopter setVariable ["vgm_mission_extraction_helipad", _helipad];
 _landWp setWaypointStatements ["true", toString {
     if (!isServer) exitWith {};
-    //_group setVariable ["vgm_missions_extractionLanded", true, true];
     [vehicle this] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
 }];
 
