@@ -152,7 +152,13 @@ addMissionEventHandler ["EachFrame", {
     _v1 set [0, 0];
     _v1 set [1, 0];
     _helicopter setVelocity _v1;
-
     _helicopter flyInHeight [_landZ + (time % 5 / 10), true];
 
+    // unflip the heli if it somehow got flipped
+    if (diag_frameNo % 30 == 0) then {
+        private _pitchBank = _helicopter call BIS_fnc_getPitchBank;
+        if (count (_pitchBank select {abs _x > 15}) > 0) then {
+            _helicopter setVectorUp [0,0,1];
+        };
+    };
 }, _pfhArgs];
