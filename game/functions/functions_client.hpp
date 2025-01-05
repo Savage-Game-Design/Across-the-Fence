@@ -416,6 +416,7 @@ class vgm_c
         class displayEndOfMission {};
         class displayMenuBase {};
         class displayLoading {};
+        class displayLevelIndicator {};
     };
 
     class artillery

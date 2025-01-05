@@ -32,7 +32,7 @@ class VGM_RscLevelIndicator
 
                 class XpProgress: VGM_ctrlProgress
                 {
-                    idc = -1;
+                    idc = VGM_IDC_LEVEL_INDICATOR_BAR;
                     x = 0 * GUI_GRID_W;
                     y = 0;
                     w = 20 * GUI_GRID_W;
@@ -43,7 +43,7 @@ class VGM_RscLevelIndicator
 
                 class LevelCurrent: VGM_ctrlStructuredText
                 {
-                    idc = -1;
+                    idc = VGM_IDC_LEVEL_INDICATOR_LEVEL;
                     text = "Level 00";
                     x = 0;
                     y = 0.65 * GUI_GRID_H;
@@ -61,7 +61,7 @@ class VGM_RscLevelIndicator
 
                 class XpText: VGM_ctrlStructuredText
                 {
-                    idc = -1;
+                    idc = VGM_IDC_LEVEL_INDICATOR_XP;
                     text = "- / - XP";
                     x = 6 * GUI_GRID_W;
                     y = 0.65 * GUI_GRID_H;
