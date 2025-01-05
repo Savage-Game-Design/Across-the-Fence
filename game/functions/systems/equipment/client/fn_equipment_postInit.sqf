@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2024-12-05
+    Last Update: 2025-01-06
     Public: No
 
     Description:
@@ -37,3 +37,13 @@ player call vgm_c_fnc_equipment_setDefaultLoadout;
 ["vgm_skills_respecLocal", {
     player call vgm_c_fnc_equipment_setDefaultLoadout;
 }] call para_g_fnc_event_subscribeLocal;
+
+["vgm_equipment_arsenalOpen", {
+    vgm_equipment_arsenalOpen = true;
+}] call para_g_fnc_event_subscribeLocal;
+
+[true, "arsenalClosed", {
+    if (missionNamespace getVariable ["vgm_equipment_arsenalOpen", false]) then {
+        ["vgm_equipment_arsenalClose", []] call para_g_fnc_event_triggerLocal;
+    };
+}] call BIS_fnc_addScriptedEventHandler;
