@@ -102,8 +102,9 @@ private _pfhArgs = [_helicopter, time, _v0, [_dir0, _dir1, _dir2], [_pos0, _pos1
 addMissionEventHandler ["EachFrame", {
     if (isGamePaused) exitWith {};
     _thisArgs params ["_helicopter", "_t0", "_v0", "_dirs", "_positions", "_landZ"];
-    if (isNull _helicopter) exitWith {removeMissionEventHandler ["EachFrame", _thisEventHandler]};
-
+    if (isNull _helicopter || {_helicopter getVariable ["vgm_missions_extractionBoarded", false]}) exitWith {
+        removeMissionEventHandler ["EachFrame", _thisEventHandler]
+    };
 #if __A3_DEBUG__
     // debug stuff
     {
