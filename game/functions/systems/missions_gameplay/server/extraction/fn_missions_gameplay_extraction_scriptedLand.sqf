@@ -84,10 +84,14 @@ _helicopter flyInHeight [_landZ, true];
     if (is3DENPreview) then {
         private _posLand = +_pos2;
         _posLand set [2, getTerrainHeightASL _posLand + _landZ];
+
         vgm_debug_scriptedLandLines = [
             [_pos0, _pos1] apply {ASLToAGL _x},
             [_pos1, _pos2] apply {ASLToAGL _x},
             [_pos2, _posLand] apply {ASLToAGL _x}
+        ];
+        vgm_debug_scriptedLandIcons = [
+            [ASLToAGL _posLand, "", format ["Land Z: %1", _landZ]]
         ];
     };
 #endif
@@ -100,11 +104,16 @@ addMissionEventHandler ["EachFrame", {
     _thisArgs params ["_helicopter", "_t0", "_v0", "_dirs", "_positions", "_landZ"];
     if (isNull _helicopter) exitWith {removeMissionEventHandler ["EachFrame", _thisEventHandler]};
 
+#if __A3_DEBUG__
     // debug stuff
     {
         private _color = [[1,0,0,1], [0,1,0,1], [0,0,1,1]] select (_forEachIndex % 3);
         drawLine3D [_x#0, _x#1, _color];
     } forEach vgm_debug_scriptedLandLines;
+    {
+        drawIcon3D [_x#1, [1,1,1,1], _x#0, 1, 1, 0, _x#2];
+    } forEach vgm_debug_scriptedLandIcons;
+#endif
 
     _dirs params ["_dir0", "_dir1", "_dir2"];
     _positions params ["_pos0", "_pos1", "_pos2"];
