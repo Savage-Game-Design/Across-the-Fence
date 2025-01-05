@@ -9,13 +9,18 @@
         Scripted helicopter land.
 
     Parameter(s):
-        N/A
+        _helicopter - Helicopter that will be guided to the helipad [OBJECT]
 
     Returns:
         Nothing
 
     Example(s):
-        [_helicopter] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand
+        private _landWp = _group addWaypoint [_wpPos, 0];
+        _helicopter setVariable ["vgm_mission_extraction_helipad", _helipad];
+        _landWp setWaypointStatements ["true", toString {
+            if (!isServer) exitWith {};
+            [vehicle this] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
+        }];
  */
 
 params ["_helicopter"];
@@ -40,7 +45,7 @@ private _fnc_slopeSteepness = {
 
 /*
 Pretty ASCII "picture" to visualize the positions
-(start) 0 ------.
+(start)🚁0 -----.
                  \
                  1 (midpoint)
                  |
