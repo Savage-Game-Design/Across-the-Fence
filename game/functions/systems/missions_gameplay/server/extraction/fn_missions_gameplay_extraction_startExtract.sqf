@@ -87,8 +87,8 @@ _landWp setWaypointStatements ["true", toString {
     [vehicle this] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
 }];
 
-private _script = [_missionId, _mission, _helicopter] spawn {
-    params ["_missionId", "_mission", "_helicopter"];
+private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
+    params ["_missionId", "_mission", "_helicopter", "_helipad"];
     private _playerGroup = _mission get "public" get "group";
     waitUntil {
         private _alivePlayers = units _playerGroup select {alive _x && lifeState _x != "INCAPACITATED"};
@@ -108,6 +108,7 @@ private _script = [_missionId, _mission, _helicopter] spawn {
     sleep 25;
     {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
     deleteVehicle _helicopter;
+    deleteVehicle _helipad;
 };
 
 _group setVariable ["vgm_missions_extractionScript", _script];
