@@ -58,7 +58,8 @@ private _pos2 = getPosASL _helipad;
 _pos1 set [2, (_pos0#2 - 15) max (getTerrainHeightASL _pos1 + 25)];
 _pos2 = _pos2 vectorAdd [0,0,10];
 
-private _v0 = velocity _helicopter;
+// TODO, in future we could figure needed forwards velocity for smoother movement
+private _v0 = [0,0,0];
 
 private _dir0 = vectorDir _helicopter;
 private _dir1 = _pos0 vectorFromTo _pos1;
