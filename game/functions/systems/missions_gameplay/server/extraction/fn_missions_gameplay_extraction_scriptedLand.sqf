@@ -158,11 +158,13 @@ addMissionEventHandler ["EachFrame", {
         _helicopter setVariable ["vgm_missions_extractionLanded", true, true];
     };
 
-    private _v1 = velocity _helicopter;
-    _v1 set [0, 0];
-    _v1 set [1, 0];
-    _helicopter setVelocity _v1;
-    _helicopter flyInHeight [_landZ + (time % 5 / 10), true];
+    if (diag_frameNo % 2 == 0) then {
+        private _v1 = velocity _helicopter;
+        _v1 set [0, 0];
+        _v1 set [1, 0];
+        _helicopter setVelocity _v1;
+        _helicopter flyInHeight [_landZ + (time % 5 / 10), true];
+    };
 
     // unflip the heli if it somehow got flipped
     if (diag_frameNo % 30 == 0) then {
