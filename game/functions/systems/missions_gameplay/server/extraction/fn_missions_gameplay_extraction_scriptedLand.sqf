@@ -45,8 +45,8 @@ private _fnc_slopeSteepness = {
 
 /*
 Pretty ASCII "picture" to visualize the positions
-(start)🚁0 -----.
-                 \
+(start)🚁0 ----.
+                \
                  1 (midpoint)
                  |
                  |
@@ -111,7 +111,6 @@ addMissionEventHandler ["EachFrame", {
         removeMissionEventHandler ["EachFrame", _thisEventHandler]
     };
 #if __A3_DEBUG__
-    // debug stuff
     {
         private _color = [[1,0,0,1], [0,1,0,1], [0,0,1,1]] select (_forEachIndex % 3);
         drawLine3D [_x#0, _x#1, _color];
@@ -144,12 +143,12 @@ addMissionEventHandler ["EachFrame", {
         _helicopter setVelocityTransformation [
             _pos1,
             _pos2,
-            [0,0,-2], // start vel
-            [0,0,0], // end vel
-            _dir1, // start dir
-            _dir2, // end dir
-            [0,0,1], // start up
-            [0,0,1], // end up
+            [0,0,-2],
+            [0,0,0],
+            _dir1,
+            _dir2,
+            [0,0,1],
+            [0,0,1],
             _t
         ];
     };
