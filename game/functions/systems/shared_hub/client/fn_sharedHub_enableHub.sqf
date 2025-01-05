@@ -2,7 +2,7 @@
     File: fn_enableHub.sqf
     Author: veteran29
     Date: 2022-12-03
-    Last Update: 2024-11-20
+    Last Update: 2025-01-06
     Public: Yes
 
     Description:
@@ -86,3 +86,5 @@ vgm_sharedHub_iconsDraw3D = addMissionEventHandler ["Draw3D", {
         [_drawPos, [localize "STR_VGM_SHARED_HUB_ICON_SKILLS", localize "STR_VGM_SHARED_HUB_ICON_SKILLS_SUB"]] call vgm_c_fnc_sharedHub_drawPlaque3d;
     } forEach (vgm_skills_managers select {player distance _x < 5});
 }];
+
+["vgm_shared_hub_enabled", []] call para_g_fnc_event_triggerLocal;
