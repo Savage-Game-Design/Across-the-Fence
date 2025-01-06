@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - development
-      - ci/drafter # for testing edits to this configuration
   pull_request:
     types: [opened, reopened, synchronize]
 
