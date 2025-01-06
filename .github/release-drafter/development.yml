@@ -1,0 +1,35 @@
+branches:
+  - development
+  - ci/drafter # for testing edits to this configuration
+
+name-template: 'Version $RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+sort-by: title # sort alphabetically
+sort-direction: ascending
+
+categories:
+  - title: '**ADDED:**'
+    labels:
+      - 'enhancement'
+  - title: '**FIXED:**'
+    labels:
+      - 'bug'
+  - title: '**CHANGED:**'
+    labels:
+      - 'change'
+
+exclude-labels:
+  - 'ignore-changelog'
+
+change-template: '- $TITLE (#$NUMBER)'
+template: |
+  ## Change Log Summary
+
+  $CHANGES
+
+version-resolver:
+  minor:
+    labels:
+      - 'enhancement'
+  default: patch
