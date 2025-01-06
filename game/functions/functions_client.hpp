@@ -842,6 +842,9 @@ class vgm_c
 
         class skill_investigate_addAction {};
         class skill_investigate_addFiredEh {};
+        class skill_investigate_canFocus {
+            headerType = -1;
+        };
         class skill_investigate_drawSoundWaves
         {
             headerType = -1;
@@ -861,7 +864,9 @@ class vgm_c
             headerType = -1;
         };
         class skill_investigate_setDesaturation {};
+        class skill_investigate_setFocusMode {};
         class skill_investigate_setListenMode {};
+        class skill_investigate_toggleFocusMode {};
     };
 
     class squad_ui
