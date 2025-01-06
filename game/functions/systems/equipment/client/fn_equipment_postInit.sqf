@@ -44,6 +44,7 @@ player call vgm_c_fnc_equipment_setDefaultLoadout;
 
 [true, "arsenalClosed", {
     if (missionNamespace getVariable ["vgm_equipment_arsenalOpen", false]) then {
+        vgm_equipment_arsenalOpen = false;
         ["vgm_equipment_arsenalClose", []] call para_g_fnc_event_triggerLocal;
     };
 }] call BIS_fnc_addScriptedEventHandler;
