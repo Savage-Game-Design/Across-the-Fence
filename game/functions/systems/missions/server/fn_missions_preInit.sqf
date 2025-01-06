@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-11-30
+    Last Update: 2024-12-14
     Public: No
 
     Description:
@@ -39,7 +39,7 @@ localNamespace setVariable ["vgm_missions", createHashMap];
 }] call para_g_fnc_event_subscribeGlobal;
 
 addMissionEventHandler ["PlayerDisconnected", {
-	params ["_id"];
+    params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
-    [_id] call vgm_s_fnc_missions_leaveMission;
+    [_idstr] call vgm_s_fnc_missions_leaveMission;
 }];

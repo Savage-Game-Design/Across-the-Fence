@@ -2,7 +2,7 @@
     File: fn_squad_ui_postInit.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-11-30
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -84,6 +84,10 @@ call {
         _unit setVariable ["vgm_squad_ui_icon", nil, true];
 
     }] call para_g_fnc_event_subscribeLocal;
+
+    player addEventHandler ["Respawn", {
+        player setVariable ["vgm_squad_ui_icon", nil, true];
+    }];
 };
 
 // map indicators

@@ -16,6 +16,7 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class itemType {};
         class objectArea {};
         class nearestPointOnLine {};
         class preInit
@@ -247,6 +248,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\mission_objects\global);
 
+        class mission_objects_call {};
         class mission_objects_deleteObject {};
         class mission_objects_spawnObjects {};
         class mission_objects_preInit {
@@ -582,6 +584,10 @@ class vgm_c
 
         class statusEffect_create {};
         class statusEffect_get {};
+        class statusEffect_postInit
+        {
+            postInit = 1;
+        };
         class statusEffect_preInit
         {
             preInit = 1;
@@ -623,6 +629,7 @@ class vgm_c
         class sites_hints_glint {};
         class sites_hints_glintJob {};
         class sites_hints_initObject {};
+        class sites_hints_markOnMap {};
         class sites_hints_postInit
         {
             postInit = 1;
@@ -703,6 +710,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
 
+        class respawn_decayInventory {};
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
         class respawn_preInit

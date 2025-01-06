@@ -3,7 +3,7 @@
     File: fn_sites_hints_glint.sqf
     Author: Savage Game Design
     Date: 2024-10-28
-    Last Update: 2024-11-23
+    Last Update: 2024-12-16
     Public: Yes
 
     Description:
@@ -23,7 +23,7 @@
 #define ICON_COLOR [1, 1, 1, 0.5]
 
 params [
-    "_object",
+    ["_object", objNull, [objNull]],
     ["_iterations", 1]
 ];
 

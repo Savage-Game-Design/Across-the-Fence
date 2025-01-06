@@ -25,7 +25,7 @@ output_paths = {
 
 arma_exe_path = r"C:\Program Files (x86)\Steam\steamapps\common\Arma 3\arma3_x64.exe"
 arma_arg_mods = [
-    r"!Workshop\@VN (Testing Build)",
+    r"vn",
     r"!Workshop\@Advanced Developer Tools",
 ]
 arma_args = [

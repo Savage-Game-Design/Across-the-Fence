@@ -3,7 +3,7 @@
     File: fn_medical_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-12-03
-    Last Update: 2024-02-10
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -33,7 +33,7 @@ private _handleDamageEH = _unit addEventHandler ["HandleDamage", {call vgm_c_fnc
 private _respawnEH  = _unit addEventHandler ["Respawn", {
     params ["_unit"];
     _unit setCaptive false;
-    {_unit setVariable [_x, nil]} forEach (allVariables _unit select {_x find "vgm_g_medical_wound$" == 0});
+    {_unit setVariable [_x, nil, true]} forEach (allVariables _unit select {_x find "vgm_g_medical_wound$" == 0});
 }];
 
 _unit setVariable ["vgm_c_medical_handleDamageEH", _handleDamageEh];

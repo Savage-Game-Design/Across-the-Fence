@@ -3,7 +3,7 @@
     File: fn_medical_fullHeal.sqf
     Author: Savage Game Design
     Date: 2023-07-01
-    Last Update: 2023-07-23
+    Last Update: 2024-12-06
     Public: Yes
 
     Description:
@@ -22,6 +22,10 @@
 params ["_unit"];
 
 format ["Fully healing: %1", _unit] call vgm_g_fnc_logInfo;
+
+if (!local _unit) then {
+    format ["Full heal on non local unit: %1", _unit] call vgm_g_fnc_logWarning;
+};
 
 {
     [_unit, _x, WOUND_MAX] call vgm_c_fnc_medical_removeWound;

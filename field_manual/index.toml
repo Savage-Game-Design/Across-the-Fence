@@ -26,5 +26,6 @@ displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
 pages = [
     "scouting",
     "hints",
-    "stop_and_focus"
+    "stop_and_focus",
+    "alertness",
 ]
