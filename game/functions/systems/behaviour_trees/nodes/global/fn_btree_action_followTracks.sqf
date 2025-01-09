@@ -41,12 +41,12 @@ _action set ["getNextTrack", {
         _nextTrack
     };
 
-    private _nearbyTracks = [_extern_group] call vgm_g_fnc_btree_tracking_findNearbyTracks;
+    private _nearbyTracks = [_extern_group] call vgm_g_fnc_btree_tracking_findNearbyTrails;
 
     if (_nearbyTracks isEqualTo []) exitWith {};
 
     private _currentTrackTime = _currentTrack getOrDefault ["time", 0];
-    private _latestTrack = _nearbyTracks # -1;
+    private _latestTrack = _nearbyTracks # -1 # 0;
 
     // Don't follow an older track, prevents loops.
     if (_latestTrack get "time" < _currentTrackTime ) exitWith {};

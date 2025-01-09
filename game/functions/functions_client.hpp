@@ -18,6 +18,7 @@ class vgm_g
         class execNextFrame {};
         class itemType {};
         class objectArea {};
+        class nearestPointOnLine {};
         class preInit
         {
             preInit = 1;
@@ -176,7 +177,7 @@ class vgm_g
         class btree_moveTo_updateDestination {};
         class btree_setGroupStance {};
         class btree_setWaypoint {};
-        class btree_tracking_findNearbyTracks {};
+        class btree_tracking_findNearbyTrails {};
     };
 
     class danger_reporting
@@ -332,6 +333,7 @@ class vgm_g
         class tracking_deleteTrackingGroup {};
         class tracking_getTrackPositions {};
         class tracking_nearbyTracks {};
+        class tracking_nearbyTrails {};
         class tracking_preInit {
             preInit = 1;
         };

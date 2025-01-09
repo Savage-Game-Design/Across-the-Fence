@@ -2,7 +2,7 @@
     File: fn_tracking_recordTracks.sqf
     Author: Savage Game Design
     Date: 2024-03-08
-    Last Update: 2024-05-03
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -63,6 +63,8 @@ private _totalUnits = 0;
             ["unit", _x]
             // The next track in the series (we record this later)
             //["nextTrack", HASHMAP]
+            //["nextTrackVector", VECTOR]
+            //["prevTrackVector", VECTOR]
         ];
 
         _trackPositions pushBack _pos;
@@ -71,7 +73,10 @@ private _totalUnits = 0;
 
         // Effectively a one-direction linked list of tracks, so we can easily follow a trail.
         if (_distanceBetweenTracks < vgm_g_tracking_maxDistanceForSameTrail) then {
+            private _prevTrackVector = ATLtoASL (_lastTrack get "pos") vectorDiff ATLtoASL _pos;
+            _details set ["prevTrackVector", _prevTrackVector];
             _lastTrack set ["nextTrack", _details];
+            _lastTrack set ["nextTrackVector", _prevTrackVector vectorMultiply -1];
         };
     } forEach _units;
 } forEach _groups;
