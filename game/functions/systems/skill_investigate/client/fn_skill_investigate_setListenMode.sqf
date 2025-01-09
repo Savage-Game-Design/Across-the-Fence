@@ -3,11 +3,11 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-11-23
+    Last Update: 2025-01-05
     Public: No
 
     Description:
-        Sets "Stop, Listen" mode, showing nearby units movement by sound wave visualization.
+        Sets "Listen" mode, showing nearby units movement by sound wave visualization.
 
     Parameter(s):
         _enable - Mode toggle [BOOL]

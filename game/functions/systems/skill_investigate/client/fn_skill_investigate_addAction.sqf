@@ -2,7 +2,7 @@
     File: fn_skill_investigate_addAction.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2024-12-14
+    Last Update: 2025-01-06
     Public: No
 
     Description:
@@ -20,39 +20,18 @@
 
 params ["_player"];
 
-[
-    _player,
+_player addAction [
     localize "STR_VGM_SKILL_INVESTIGATE_ACTION",
-    "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\listen_ca.paa",
-    "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\listen_ca.paa",
-    "true",
-    "abs speed _this < 1",
-    {
-        params ["_target"];
-        _target playActionNow "Stop";
-        [true] call vgm_c_fnc_skill_investigate_setDesaturation;
-        [true] call vgm_c_fnc_skill_investigate_setListenMode;
-    },
-    {
-        // this uses outer scope variables to prevent the ticker from having one "bar" in it.
-        private _frame = 3;
-        [_target,_actionID,_title,_iconProgress,bis_fnc_holdAction_texturesIn,_frame,"",_orig_iconProgress] call vn_fnc_holdAction_showIcon;
-    },
-    {},
-    {
-        params ["_target"];
-        if (abs speed _target >= 1) then {
-            hint localize "STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY";
-            playSoundUI ["\a3\ui_f_curator\Data\Sound\CfgSound\error02.wss", 0.1];
-        };
-
-        [false] call vgm_c_fnc_skill_investigate_setDesaturation;
-        [false] call vgm_c_fnc_skill_investigate_setListenMode;
-    },
+    vgm_c_fnc_skill_investigate_toggleFocusMode,
     [],
-    1e38,
     10000,
     false,
-    false,
+    true,
+    "",
+    "
+        private _isFocusing = missionNamespace getVariable ['vgm_c_skill_investigate_isFocusing', false];
+        _isFocusing || (call vgm_c_fnc_skill_investigate_canFocus)
+    ",
+    -1,
     true
-] call VN_fnc_holdActionAdd;
+]
