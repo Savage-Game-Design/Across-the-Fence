@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_scriptedLand.sqf
     Author: Savage Game Design
     Date: 2025-01-03
-    Last Update: 2025-01-05
+    Last Update: 2025-01-09
     Public: No
 
     Description:
@@ -86,7 +86,7 @@ if (([_pos2] call _fnc_slopeSteepness) > 20) then {
 
 _helicopter flyInHeight [_landZ, true];
 
-#if __A3_DEBUG__
+#ifdef __A3_DEBUG__
     if (is3DENPreview) then {
         private _posLand = +_pos2;
         _posLand set [2, getTerrainHeightASL _posLand + _landZ];
@@ -111,7 +111,7 @@ addMissionEventHandler ["EachFrame", {
     if (isNull _helicopter || {_helicopter getVariable ["vgm_missions_extractionBoarded", false]}) exitWith {
         removeMissionEventHandler ["EachFrame", _thisEventHandler]
     };
-#if __A3_DEBUG__
+#ifdef __A3_DEBUG__
     {
         private _color = [[1,0,0,1], [0,1,0,1], [0,0,1,1]] select (_forEachIndex % 3);
         drawLine3D [_x#0, _x#1, _color];
