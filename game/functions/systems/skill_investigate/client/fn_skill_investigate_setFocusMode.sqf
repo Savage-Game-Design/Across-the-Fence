@@ -2,7 +2,7 @@
     File: fn_skill_investigate_setFocusMode.sqf
     Author:
     Date: 2025-01-05
-    Last Update: 2025-01-06
+    Last Update: 2025-01-09
     Public: No
 
     Description:
@@ -47,5 +47,11 @@ if (!_enable && _isFocusing) exitWith {
 
     [false] call vgm_c_fnc_skill_investigate_setDesaturation;
     [false] call vgm_c_fnc_skill_investigate_setListenMode;
+
+    if (!isNil "vgm_c_skill_investigate_focusPFEH") then {
+        removeMissionEventHandler ["EachFrame", vgm_c_skill_investigate_focusPFEH];
+        vgm_c_skill_investigate_focusPFEH = nil;
+    };
+
     vgm_c_skill_investigate_isFocusing = false;
 };
