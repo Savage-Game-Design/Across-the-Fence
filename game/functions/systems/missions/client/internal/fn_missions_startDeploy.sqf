@@ -2,7 +2,7 @@
     File: fn_missions_startDeploy.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2024-11-16
+    Last Update: 2025-01-05
     Public: No
 
     Description:
@@ -22,6 +22,7 @@
 
 vgm_mission_onMission = true;
 
+terminate (missionNamespace getVariable ["vgm_missions_enableHubScript", scriptNull]);
 [] call vgm_c_fnc_sharedHub_disableHub;
 
 // - Fades the player screen to black
