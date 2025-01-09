@@ -210,6 +210,14 @@
             <Original>Press %1 to open</Original>
         </Key>
     </Package>
+    <Package name="Level Indicator UI">
+        <Key ID="STR_VGM_LEVEL_INDICATOR_UI_LEVEL">
+            <Original>Level %1</Original>
+        </Key>
+        <Key ID="STR_VGM_LEVEL_INDICATOR_UI_XP">
+            <Original>%1 / %2 XP</Original>
+        </Key>
+    </Package>
     <Package name="Mission End UI">
         <Key ID="STR_VGM_MISSION_END_UI_SUCCESSFUL">
             <Original>Mission Successful!</Original>

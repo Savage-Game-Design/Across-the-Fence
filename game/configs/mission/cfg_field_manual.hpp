@@ -169,10 +169,6 @@ class vgm_missions {
         displayName = "$STR_VGM_FIELD_MANUAL_ALERTNESS";
         description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_DESC";
         image = "\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa";
-        arguments[] = 
-            {
-                "localize 'STR_VGM_MISSION_NAME'",
-            };
         class Hints {
             class alertness {
                 description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION";
