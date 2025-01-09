@@ -33,7 +33,62 @@ class VGM_DisplayEndOfMission
             h = VGM_Y_H(10);
             size = 10 * VGM_GRID_H;
         };
-
+        class LevelCurrent: VGM_ctrlStructuredText
+        {
+            idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELCURRENT;
+            text = "Level -";
+            x = DX + 1 * VGM_GRID_W;
+            y = VGM_Y_Y(DY, SPACING);
+            w = 25 * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+            class Attributes
+            {
+                font = VGM_FONT;
+                color = "#ffffff";
+                colorLink = "#D09B43";
+                align = "right";
+                shadow = 1;
+            };
+        };
+        class LevelProgress: VGM_ctrlProgress
+        {
+            idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELPROGRESS;
+            x = DX + 27 * VGM_GRID_W;
+            y = VGM_Y(DY);
+            w = (DW - 2 * 27) * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+            colorFrame[] = {1,1,1,1};
+        };
+        class XpProgress: VGM_ctrlStructuredText
+        {
+            idc = VGM_IDC_DISPLAYENDOFMISSION_XPPROGRESS;
+            text = "- / -";
+            x = DX + (0.5 * DW - 20) * VGM_GRID_W;
+            y = VGM_Y(DY);
+            w = 40 * VGM_GRID_W;
+            h = VGM_Y_H(5);
+            class Attributes
+            {
+                font = VGM_FONT;
+                color = "#ffffff";
+                colorLink = "#D09B43";
+                align = "center";
+                shadow = 1;
+            };
+        };
+        class LevelNext: LevelCurrent
+        {
+            idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELNEXT;
+            x = DX + (DW - 26) * VGM_GRID_W;
+            class Attributes
+            {
+                font = VGM_FONT;
+                color = "#ffffff";
+                colorLink = "#D09B43";
+                align = "left";
+                shadow = 1;
+            };
+        };
 #define _W 0.5 * DW
         class LevelMessage: VGM_ctrlTitle
         {
