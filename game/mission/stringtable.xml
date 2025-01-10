@@ -426,6 +426,11 @@
             <Original>For 30 seconds, the team has: 50% reduced stamina consumption, 40% hit shrug chance, all actions are 10% faster</Original>
         </Key>
     </Package>
+    <Package name="Sites Hints">
+        <Key ID="STR_VGM_SITES_HINTS_INSPECT_ACTION">
+            <Original>Inspect</Original>
+        </Key>
+    </Package>
     <Package name="Skill Investigaste">
         <Key ID="STR_VGM_SKILL_INVESTIGATE_ACTION">
             <Original>Stop, Focus</Original>
