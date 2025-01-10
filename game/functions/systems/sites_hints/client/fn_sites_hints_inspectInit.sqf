@@ -63,7 +63,8 @@ private _fnc_checkForHints = {
         private _objectPos = worldToScreen _pos;
         _objectPos params [["_x", -1], ["_y", -1]];
 
-        (_x >= 0 && _x <= 1) && (_y >= 0 && _y <= 1) // return
+        // 0.5, 0.5 is center
+        (_x >= 0.3 && _x <= 0.7) && (_y >= 0.3 && _y <= 0.7) // return
     } count _nearHints > 0 // return, shows the action if any object near
 };
 
