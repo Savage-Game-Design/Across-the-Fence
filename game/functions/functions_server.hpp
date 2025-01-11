@@ -355,4 +355,23 @@ class vgm_s
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
     };
+
+    class virtual_squads
+    {
+        VGM_SERVER_PATH(\systems\virtual_squads\server);
+
+        class virtsquad_create {};
+        class virtsquad_delete {};
+        class virtsquad_despawn {};
+        class virtsquad_destroyGroup {};
+        class virtsquad_perFrame {};
+        class virtsquad_postInit {
+            postInit = 1;
+        };
+        class virtsquad_preinit {
+            preInit = 1;
+        };
+        class virtsquad_spawn {};
+        class virtsquad_spawnLoop {};
+    };
 };
