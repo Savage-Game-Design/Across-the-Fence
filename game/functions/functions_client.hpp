@@ -630,6 +630,7 @@ class vgm_c
         class sites_hints_glint {};
         class sites_hints_glintJob {};
         class sites_hints_initObject {};
+        class sites_hints_inspectInit {};
         class sites_hints_markOnMap {};
         class sites_hints_postInit
         {
