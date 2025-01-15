@@ -278,12 +278,14 @@ class vgm_s
             postInit = 1;
         };
 
+        class sites_registerMission {};
         class sites_addSiteType {};
         class sites_delete {};
         class sites_getAllSiteTypes {};
         class sites_getSiteType {};
         class sites_getSiteTypeRequirements {};
         class sites_getTemplate {};
+        class sites_isInMission {};
         class sites_loadSiteTypesFromConfig {};
         class sites_spawn {};
         class sites_spawnRandomFortifications {};
