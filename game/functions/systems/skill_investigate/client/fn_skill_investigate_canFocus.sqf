@@ -2,7 +2,7 @@
     File: fn_skill_investigate_canFocus.sqf
     Author:
     Date: 2025-01-05
-    Last Update: 2025-01-05
+    Last Update: 2025-01-16
     Public: Yes
 
     Description:
@@ -18,4 +18,4 @@
         [] call vgm_c_fnc_skill_investigate_canFocus;
  */
 
-abs speed player < 1
+vectorMagnitudeSqr velocity player < 1

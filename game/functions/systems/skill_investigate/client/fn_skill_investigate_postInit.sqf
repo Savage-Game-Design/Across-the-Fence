@@ -2,7 +2,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2024-11-29
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -40,6 +40,9 @@ call {
 
 player call vgm_c_fnc_skill_investigate_addAction;
 player addEventHandler ["Respawn", {(_this#0) call vgm_c_fnc_skill_investigate_addAction}];
+
+player call vgm_c_fnc_skill_investigate_addPlayerFiredEh;
+player addEventHandler ["Respawn", {(_this#0) call vgm_c_fnc_skill_investigate_addPlayerFiredEh}];
 
 [true, "vn_sam_dynamic_audio_play", {
     if (missionNamespace getVariable ["vgm_c_skill_investigate_drawEh", -1] == -1) exitWith {};
