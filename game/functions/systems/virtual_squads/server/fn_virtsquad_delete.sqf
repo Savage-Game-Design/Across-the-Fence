@@ -2,7 +2,7 @@
     File: fn_virtsquad_delete.sqf
     Author: Savage Game Design
     Date: 2025-01-10
-    Last Update: 2025-01-11
+    Last Update: 2025-01-16
     Public: Yes
 
     Description:
@@ -30,3 +30,5 @@ vgm_s_virtsquad_squads deleteAt (_squad get "id");
 [vgm_s_virtsquad_vSquadIndex, _squad get "vSquadIndexSlot"] call vgm_g_fnc_posindex_deleteAt;
 
 _squad set ["deleted", true];
+
+["vgm_virtsquad_deleted", [_squad]] call para_g_fnc_event_triggerLocal;

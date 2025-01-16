@@ -2,7 +2,7 @@
     File: fn_virtsquad_create.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-11
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -53,5 +53,7 @@ _squad set ["vSquadIndexSlot", _slot];
 
 // Group is only set when the squad spawns
 //_squad set ["group", nil];
+
+["vgm_virtsquad_created", [_squad]] call para_g_fnc_event_triggerLocal;
 
 _squad

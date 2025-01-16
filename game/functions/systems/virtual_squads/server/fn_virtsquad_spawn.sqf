@@ -49,4 +49,7 @@ _group setGroupOwner _selectedClient;
 if ("btreeName" in _squad) then {
     [_group, _squad get "btreeName"] call vgm_s_fnc_btree_setTreeByNameGlobal;
 };
+
+["vgm_virtsquad_spawned", [_squad]] call para_g_fnc_event_triggerLocal;
+
 _group
