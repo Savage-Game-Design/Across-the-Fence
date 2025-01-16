@@ -37,7 +37,7 @@ vgm_sites_siteSpawnedHandlers = createHashMap;
         if !([_site, _mission] call vgm_s_fnc_sites_isInMission) exitWith {};
 
         private _sitesData = [_missionId, "sites"] call vgm_s_fnc_missions_getSystemNetmap;
-        [_sitesData get "sites", _site get "pos", _site get "class"] call para_s_fnc_netmap_set;
+        [_sitesData get "sites", _site get "pos", _site get "objects"] call para_s_fnc_netmap_set;
     }]] call para_g_fnc_event_subscribeServer;
 
     vgm_sites_siteSpawnedHandlers set [_missionId, _id];
