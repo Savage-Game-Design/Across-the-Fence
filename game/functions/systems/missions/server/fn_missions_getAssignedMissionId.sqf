@@ -20,6 +20,4 @@
 
 params ["_playerId"];
 
-private _missionId = [_playerId] call vgm_s_fnc_missions_getAssignedMissionId;
-
-[_missionId] call vgm_s_fnc_missions_getById // return
+(["vgm_mission_assignments"] call para_g_fnc_netmap_get) getOrDefault [_playerId, -1]
