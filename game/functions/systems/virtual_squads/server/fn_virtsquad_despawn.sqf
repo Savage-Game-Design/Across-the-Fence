@@ -2,7 +2,7 @@
     File: fn_virtual_despawn.sqf
     Author:
     Date: 2025-01-10
-    Last Update: 2025-01-11
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -20,11 +20,13 @@
 
 params ["_squad"];
 
+diag_log format ["Depspawning: %1", _squad];
+
 private _group = _squad get "group";
 private _deleteOnDespawn = _squad getOrDefault ["deleteOnDespawn", false] || { alive _x } count units _group <= 0;
 
 if (isNil "_group") exitWith {
-    [format ["Despawn called on squad that isn't spawned: %1", _squad get "id"]] call vgm_g_logWarning;
+    [format ["Despawn called on squad that isn't spawned: %1", _squad get "id"]] call vgm_g_fnc_logWarning;
 };
 
 if (!_deleteOnDespawn) then {

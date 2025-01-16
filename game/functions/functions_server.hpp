@@ -46,7 +46,6 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\ai\server);
 
-        class ai_createEnemySquad {};
     };
 
     class behaviour_trees_trees
@@ -80,9 +79,10 @@ class vgm_s
         class director_preInit {
             preInit = 1;
         };
+        class director_getDirectorForMissionId {};
+        class director_getEnemySquadTemplate {};
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
-        class director_registerGroups {};
         class director_spawnInitialPatrols {};
         class director_spawnTracker {};
         class director_startMission {};

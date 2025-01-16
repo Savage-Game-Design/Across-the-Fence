@@ -24,7 +24,7 @@ if ("group" in _squad) exitWith {
     ["Attempt to spawn a squad that's already spawned in. Squad ID: %1", _squad get "id"] call vgm_g_fnc_logWarning;
 };
 
-private _group = [_squad get "composition", _squad get "side", _squad get "pos"] call para_g_fnc_create_squad;
+private _group = ([_squad get "composition", _squad get "side", _squad get "pos"] call para_g_fnc_create_squad) # 1;
 
 _squad set ["group", _group];
 // Shouldn't be a circular reference memory leak, as the group being deleted should clear this reference

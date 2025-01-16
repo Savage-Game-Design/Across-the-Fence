@@ -2,7 +2,7 @@
     File: fn_virtsquad_spawnLoop.sqf
     Author:
     Date: 2025-01-11
-    Last Update: 2025-01-11
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -41,6 +41,8 @@ if (vgm_s_virtsquad_playerQueue isNotEqualTo []) then {
 // Check for any spawned squads with no players nearby, and schedule them to despawn.
 if (vgm_s_virtsquad_spawnedSquadQueue isNotEqualTo []) then {
     private _squad = vgm_s_virtsquad_spawnedSquadQueue deleteAt (count vgm_s_virtsquad_spawnedSquadQueue - 1);
+    // Need to check if the squad is already cleaned up, as it might be still lingering in this queue.
+    if !("group" in _squad) exitWith {};
     private _playersInRange = allPlayers inAreaArray [getPosATL leader (_squad get "group"), vgm_s_virtsquad_despawnRange, vgm_s_virtsquad_despawnRange];
     if (_playersInRange isEqualTo []) then {
         vgm_s_virtsquad_despawnQueue set [_squad get "id", _squad];

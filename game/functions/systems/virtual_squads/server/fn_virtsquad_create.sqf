@@ -43,7 +43,7 @@ params ["_groupDefinition"];
 private _squad = +_groupDefinition;
 
 _squad set ["id", vgm_s_virtsquad_nextId];
-vgm_s_squad_nextId = vgm_s_virtsquad_nextId + 1;
+vgm_s_virtsquad_nextId = vgm_s_virtsquad_nextId + 1;
 
 _squad getOrDefault ["side", east, true];
 

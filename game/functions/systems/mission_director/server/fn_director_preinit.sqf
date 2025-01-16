@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-01-05
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -136,7 +136,51 @@ vgm_s_director_attack_classes = [
 
     [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", _machineId];
 
-    ["vgm_mission_director_jipData", [_mission get "director" get "aiGroups"], _machineId] call para_g_fnc_event_triggerTargets;
+    ["vgm_mission_director_jipData", [values (_mission get "director" get "virtualSquadGroups")], _machineId] call para_g_fnc_event_triggerTargets;
+}] call para_g_fnc_event_subscribeLocal;
+
+["vgm_virtsquad_created", {
+    (_this # 0) params ["_squad"];
+
+    private _missionId = _squad get "missionId";
+    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
+    if (isNil "_director") then { continue };
+    _director get "virtualSquads" set [_squad get "id", _squad];
+
+}] call para_g_fnc_event_subscribeLocal;
+
+["vgm_virtsquad_deleted", {
+    (_this # 0) params ["_squad"];
+
+    private _missionId = _squad get "missionId";
+    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
+    if (isNil "_director") then { continue };
+    _director get "virtualSquads" deleteAt (_squad get "id");
+
+}] call para_g_fnc_event_subscribeLocal;
+
+["vgm_virtsquad_spawned", {
+    (_this # 0) params ["_squad"];
+
+    private _missionId = _squad get "missionId";
+    private _mission = [_missionId] call vgm_s_fnc_missions_getById;
+    if (isNil "_mission") then { continue };
+    private _director = _mission get "director";
+    private _group = _squad get "group";
+    _director get "virtualSquadGroups" set [_squad get "id", _group];
+
+    ["vgm_mission_director_groupsSpawned", [[_group]], values (_mission get "machineIds")] call para_g_fnc_event_triggerTargets;
+
+}] call para_g_fnc_event_subscribeLocal;
+
+["vgm_virtsquad_despawned", {
+    (_this # 0) params ["_squad"];
+
+    private _missionId = _squad get "missionId";
+    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
+    if (isNil "_director") then { continue };
+    _director get "virtualSquadGroups" deleteAt (_squad get "id");
+
 }] call para_g_fnc_event_subscribeLocal;
 
 // handle extraction
