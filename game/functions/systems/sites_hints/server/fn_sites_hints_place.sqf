@@ -29,6 +29,7 @@ if !([_site, _mission] call vgm_s_fnc_sites_isInMission) exitWith {};
 
 private _missionId = _mission get "public" get "id";
 private _zone = _mission call vgm_g_fnc_missions_getZoneMarker;
+private _center = _site get "pos";
 
 private _config = (_site get "class") call vgm_s_fnc_sites_hints_getConfig;
 
