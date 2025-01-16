@@ -22,6 +22,8 @@
 
 params ["_group"];
 
+if (isNull _group) exitWith {};
+
 private _squad = _group getVariable "vgm_s_virtsquad_squad";
 
 // Send squad in an array to facilitate easy batching as a future optimisation
@@ -33,4 +35,5 @@ private _squad = _group getVariable "vgm_s_virtsquad_squad";
 
 deleteGroup _group;
 
-vgm_s_virtsquad_spawnedSquads deleteAt (_squad get "id");
+private _missionInfo = [_squad get "missionId"] call vgm_s_fnc_virtsquad_getMissionSquadsInfo;
+_missionInfo get "spawnedSquads" deleteAt (_squad get "id");

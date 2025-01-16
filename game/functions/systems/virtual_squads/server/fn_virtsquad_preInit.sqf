@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_virtgroup_preInit.sqf
     Author:
     Date: 2025-01-09
-    Last Update: 2025-01-11
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -13,12 +14,12 @@ vgm_s_virtsquad_spawnRange = 500;
 vgm_s_virtsquad_despawnRange = 700;
 
 vgm_s_virtsquad_nextId = 0;
-// All squads registered with the system.
-vgm_s_virtsquad_squads = createHashMap;
-// Position index for unspawned / virtualised squads only.
-vgm_s_virtsquad_vSquadIndex = [{ _this get "pos" }] call vgm_g_fnc_posindex_create select 0;
-// Spawned groups
-vgm_s_virtsquad_spawnedSquads = createHashMap;
+// Maps mission ID to a hashmap with a vSquadIndex and a hashmap of spawned squads.
+vgm_s_virtsquad_perMissionSquadsInfo = createHashMap;
+vgm_s_virtsquad_perMissionSquadsInfo set [
+    // Global mission is used for any squads not explicitly assigned to a mission
+    GLOBAL_MISSION_ID, [] call vgm_s_fnc_virtsquad_createMissionSquadsInfo
+];
 
 // Both queues are used in splitting work across multiple frames.
 vgm_s_virtsquad_playerQueue = [];

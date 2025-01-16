@@ -20,18 +20,24 @@
 
 params ["_squad"];
 
-diag_log format ["Depspawning: %1", _squad];
+// Safeguard against despawning a squad that's deleted or mid-deletion.
+if ("deleting" in _squad || "deleted" in _squad) exitWith {
+    [format ["Despawn called on deleted squad: %1", _squad get "id"]] call vgm_g_fnc_logWarning;
+};
 
 private _group = _squad get "group";
-private _deleteOnDespawn = _squad getOrDefault ["deleteOnDespawn", false] || { alive _x } count units _group <= 0;
 
 if (isNil "_group") exitWith {
     [format ["Despawn called on squad that isn't spawned: %1", _squad get "id"]] call vgm_g_fnc_logWarning;
 };
 
+private _deleteOnDespawn = _squad getOrDefault ["deleteOnDespawn", false] || { alive _x } count units _group <= 0;
+
+
 if (!_deleteOnDespawn) then {
     _squad set ["pos", getPosATL leader _group];
-    _squad set ["vSquadIndexSlot", [vgm_s_virtsquad_vSquadIndex, _squad] call vgm_g_fnc_posindex_add];
+    private _missionInfo = [_squad get "missionId"] call vgm_s_fnc_virtsquad_getMissionSquadsInfo;
+    _squad set ["vSquadIndexSlot", [_missionInfo get "vSquadIndex", _squad] call vgm_g_fnc_posindex_add];
 
     private _squadVars = _squad getOrDefault ["groupVars", [], true];
 

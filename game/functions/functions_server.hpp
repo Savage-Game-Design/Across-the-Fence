@@ -362,9 +362,11 @@ class vgm_s
         VGM_SERVER_PATH(\systems\virtual_squads\server);
 
         class virtsquad_create {};
+        class virtsquad_createMissionSquadsInfo {};
         class virtsquad_delete {};
         class virtsquad_despawn {};
         class virtsquad_destroyGroup {};
+        class virtsquad_getMissionSquadsInfo {};
         class virtsquad_perFrame {};
         class virtsquad_postInit {
             postInit = 1;

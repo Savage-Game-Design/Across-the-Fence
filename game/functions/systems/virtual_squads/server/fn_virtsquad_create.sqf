@@ -1,3 +1,4 @@
+#include "script_component.inc"
 /*
     File: fn_virtsquad_create.sqf
     Author: Savage Game Design
@@ -42,13 +43,20 @@ params ["_groupDefinition"];
 // Copy, so many groups can be made from one template.
 private _squad = +_groupDefinition;
 
-_squad set ["id", vgm_s_virtsquad_nextId];
+private _squadId = vgm_s_virtsquad_nextId;
 vgm_s_virtsquad_nextId = vgm_s_virtsquad_nextId + 1;
+_squad set ["id", _squadId];
 
 _squad getOrDefault ["side", east, true];
+// Assign the squad to the global mission, if there's no mission specified
+_squad getOrDefault ["missionId", GLOBAL_MISSION_ID, true];
 
-vgm_s_virtsquad_squads set [_squad get "id", _squad];
-private _slot = [vgm_s_virtsquad_vSquadIndex, _squad] call vgm_g_fnc_posindex_add;
+// Create the container for the mission info, if this is the first squad on the mission.
+private _missionInfo = vgm_s_virtsquad_perMissionSquadsInfo getOrDefaultCall [_squad get "missionId", vgm_s_fnc_virtsquad_createMissionSquadsInfo, true];
+// Add to the list of all squads on the mission
+_missionInfo get "squads" set [_squadId, _squad];
+// Add to the list of unspawned squads
+private _slot = [_missionInfo get "vSquadIndex", _squad] call vgm_g_fnc_posindex_add;
 _squad set ["vSquadIndexSlot", _slot];
 
 // Group is only set when the squad spawns

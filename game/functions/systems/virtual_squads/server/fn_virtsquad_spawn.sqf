@@ -24,15 +24,20 @@ if ("group" in _squad) exitWith {
     ["Attempt to spawn a squad that's already spawned in. Squad ID: %1", _squad get "id"] call vgm_g_fnc_logWarning;
 };
 
+// Safeguard against spawning in a deleted squad.
+if ("deleting" in _squad || "deleted" in _squad) exitWith {};
+
 private _group = ([_squad get "composition", _squad get "side", _squad get "pos"] call para_g_fnc_create_squad) # 1;
 
 _squad set ["group", _group];
 // Shouldn't be a circular reference memory leak, as the group being deleted should clear this reference
 _group setVariable ["vgm_s_virtsquad_squad", _squad];
+private _missionInfo = [_squad get "missionId"] call vgm_s_fnc_virtsquad_getMissionSquadsInfo;
 // Add to the spawned groups list, so it's passed to "should despawn" checks.
-vgm_s_virtsquad_spawnedSquads set [_squad get "id", _squad];
+_missionInfo get "spawnedSquads" set [_squad get "id", _squad];
 // Squad can be removed from the virtual squad index, as it's now spawned - we don't want to be running "should spawn" checks on it.
-[vgm_s_virtsquad_vSquadIndex, _squad get "vSquadIndexSlot"] call vgm_g_fnc_posindex_deleteAt;
+[_missionInfo get "vSquadIndex", _squad get "vSquadIndexSlot"] call vgm_g_fnc_posindex_deleteAt;
+_squad deleteAt "vSquadIndexSlot";
 
 {
     _group setVariable (_x select [0, 3]);
