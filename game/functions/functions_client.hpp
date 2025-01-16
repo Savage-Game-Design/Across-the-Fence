@@ -845,6 +845,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill_investigate\client);
 
         class skill_investigate_addAction {};
+        class skill_investigate_addPlayerFiredEh {};
         class skill_investigate_addFiredEh {};
         class skill_investigate_canFocus {
             headerType = -1;
