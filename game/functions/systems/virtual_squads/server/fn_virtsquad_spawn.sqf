@@ -38,4 +38,9 @@ vgm_s_virtsquad_spawnedSquads set [_squad get "id", _squad];
     _group setVariable (_x select [0, 3]);
 } forEach (_squad get "groupVars");
 
+// Start running the behaviour tree, now the group is on the client.
+// Persists tree execution even if locality changes.
+if ("btreeName" in _squad) then {
+    [_group, _squad get "btreeName"] call vgm_s_fnc_btree_setTreeByNameGlobal;
+};
 _group

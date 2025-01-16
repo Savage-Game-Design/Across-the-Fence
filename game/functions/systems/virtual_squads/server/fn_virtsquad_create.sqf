@@ -31,7 +31,9 @@
             ["side", east],
             ["deleteOnDespawn", false],
             // Optional - only needed if the squad is spawned for a mission.
-            ["missionId", _missionPublic get "id"]
+            ["missionId", _missionPublic get "id"],
+            // Optional - behaviour tree to enable on the squad when they're spawned
+            ["btreeName", "enemyAI"]
         ] call vgm_s_fnc_squad_create;
  */
 
