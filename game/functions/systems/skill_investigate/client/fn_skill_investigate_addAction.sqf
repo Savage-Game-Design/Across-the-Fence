@@ -2,7 +2,7 @@
     File: fn_skill_investigate_addAction.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2025-01-06
+    Last Update: 2025-01-16
     Public: No
 
     Description:
@@ -28,10 +28,7 @@ _player addAction [
     false,
     true,
     "",
-    "
-        private _isFocusing = missionNamespace getVariable ['vgm_c_skill_investigate_isFocusing', false];
-        _isFocusing || (call vgm_c_fnc_skill_investigate_canFocus)
-    ",
+    "true",
     -1,
     true
 ]
