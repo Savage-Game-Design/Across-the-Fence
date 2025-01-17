@@ -34,6 +34,37 @@ private _fnc_isInFrame = {
     (_sX >= -0.4 && _sX <= 1.4) && (_sY >= -0.13 && _sY <= 1.13) // return
 };
 
+private _fnc_getObjectPoints = {
+    params ["_object"];
+
+    vgm_scouting_objectPointsCache getOrDefaultCall [typeOf _object, {
+        // [[xmin, ymin, zmin], [xmax, ymax, zmax]]
+        private _bb = 0 boundingBoxReal _object;
+        _bb params ["_bbA", "_bbB"];
+
+        private _points = [];
+        {
+            _points pushBack _x;
+        } forEach [
+            // object center and object center raised to top of BB
+            [0, 0, 0],
+            [0, 0, _bbB select 2],
+            // zmax, higher objects are more likely to be seen
+            [_bbA select 0, _bbA select 1, _bbB select 2],
+            [_bbA select 0, _bbB select 1, _bbB select 2],
+            [_bbB select 0, _bbA select 1, _bbB select 2],
+            [_bbB select 0, _bbB select 1, _bbB select 2],
+            // zmin, lower elements are less likely to be seen
+            [_bbA select 0, _bbA select 1, _bbA select 2],
+            [_bbA select 0, _bbB select 1, _bbA select 2],
+            [_bbB select 0, _bbA select 1, _bbA select 2],
+            [_bbB select 0, _bbB select 1, _bbA select 2]
+        ];
+
+        _points // return
+    }, true] // return
+};
+
 // returns "foreground" site objects,
 // objects that are somewhat clearly visible in the photo
 private _fnc_getForegroundObjects = {
