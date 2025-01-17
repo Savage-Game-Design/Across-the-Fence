@@ -206,7 +206,7 @@ class vgm_skillTrees {
                 class heavySuppression: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION";
 
-                    codeApply = "[player, 'suppress', 'skill_fireSupport_heavySuppression', 0.5, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'suppress', 'skill_fireSupport_heavySuppression', 1, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'suppress', 'skill_fireSupport_heavySuppression'] call vgm_c_fnc_coefficient_remove";
                 };
 
