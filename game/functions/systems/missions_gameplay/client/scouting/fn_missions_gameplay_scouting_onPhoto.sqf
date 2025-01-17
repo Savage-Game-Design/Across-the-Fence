@@ -75,23 +75,34 @@ private _fnc_getForegroundObjects = {
 
     private _objects = [];
     {
+        #ifdef __A3_DEBUG__
+            private _lineColor = [[1,0,0,1], [0,1,0,1], [0,0,1,1]] select (_forEachIndex%3);
+        #endif
+
         private _object = _x;
-        private _bb = 0 boundingBoxReal _object;
+        private _visibleObjectPoints = [];
+        _object setVariable ["vgm_scouting_visiblePoints", _visibleObjectPoints];
         {
             private _posBeg = eyePos _extern_player;
             private _posEnd = _object modelToWorldWorld _x;
             if !(_posEnd call _fnc_isInFrame) then {continue};
 
             private _vis = [_extern_player, "VIEW", _object] checkVisibility [_posBeg, _posEnd];
-            if (_vis < 0.2) then {continue};
+            if (_vis < 0.3) then {continue};
 
             #ifdef __A3_DEBUG__
-            vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posEnd, format ["%2%1%3", endl, _vis, typeOf _object]];
+                vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posEnd, format ["%1: %2", _vis, typeOf _object], _lineColor];
             #endif
 
-            _objects pushBack _object;
-            break; // one point per object is enough
-        } forEach ([[0,0,0.4]] + (_bb select [0, 2]));
+            if (count _visibleObjectPoints == 0) then {
+                _objects pushBack _object
+            };
+
+            _visibleObjectPoints pushBack _posEnd;
+            // we do not care about more than 2 points per object,
+            // abort to save performance
+            if (count _visibleObjectPoints >= 2) then {break};
+        } forEach (_object call _fnc_getObjectPoints);
     } forEach _spottableObjects;
 
     _objects // return
@@ -121,19 +132,19 @@ private _photoData = createHashMap;
 } forEach _visiblePositions;
 
 #ifdef __A3_DEBUG__
-if (is3DENPreview) then {
-    removeMissionEventHandler ["Draw3D", missionNamespace getVariable ["vgm_scouting_debug_drawEh", -1]];
-    private _debugEh = addMissionEventHandler ["Draw3D", {
-        {
-            _x params ["_beg", "_end", "_text"];
-            drawLine3D [_beg, _end, [1,1,1,1]];
-            drawIcon3D ["", [1,1,1,1], _end, 1, 1, 0, _text];
-        } forEach vgm_scouting_debug_photoLines;
-    }];
-    vgm_scouting_debug_drawEh = _debugEh;
-    vgm_scouting_debug_photoData = _photoData;
-};
-#endif
+    if (is3DENPreview) then {
+        removeMissionEventHandler ["Draw3D", missionNamespace getVariable ["vgm_scouting_debug_drawEh", -1]];
+        private _debugEh = addMissionEventHandler ["Draw3D", {
+            {
+                _x params ["_beg", "_end", "_text", "_lineColor"];
+                drawLine3D [_beg, _end, _lineColor, 5];
+                drawIcon3D ["", [1,1,1,1], _end, 1, 1, 0, _text];
+            } forEach vgm_scouting_debug_photoLines;
+        }];
+        vgm_scouting_debug_drawEh = _debugEh;
+        vgm_scouting_debug_photoData = _photoData;
+    };
+    #endif
 
 if (_photoData isEqualTo createHashMap) exitWith {
     if (is3DENPreview) then {hint "Empty photo"};
