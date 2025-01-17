@@ -90,18 +90,20 @@ private _fnc_getForegroundObjects = {
             private _vis = [_extern_player, "VIEW", _object] checkVisibility [_posBeg, _posEnd];
             if (_vis < 0.3) then {continue};
 
-            #ifdef __A3_DEBUG__
-                vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posEnd, format ["%1: %2", _vis, typeOf _object], _lineColor];
-            #endif
-
             if (count _visibleObjectPoints == 0) then {
                 _objects pushBack _object
             };
-
             _visibleObjectPoints pushBack _posEnd;
+
+            #ifdef __A3_DEBUG__
+                private _lineText = [format ["%1: %2 : %3", _vis, count _visibleObjectPoints, getModelInfo _object#0], format ["%1: %2", _vis, _forEachIndex]] select (count _visibleObjectPoints>1);
+                vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posEnd, _lineText, _lineColor];
+            #endif
+
             // we do not care about more than 2 points per object,
             // abort to save performance
             if (count _visibleObjectPoints >= 2) then {break};
+
         } forEach (_object call _fnc_getObjectPoints);
     } forEach _spottableObjects;
 
@@ -146,16 +148,19 @@ private _photoData = createHashMap;
     };
     #endif
 
-if (_photoData isEqualTo createHashMap) exitWith {
-    if (is3DENPreview) then {hint "Empty photo"};
-};
+if (_photoData isEqualTo createHashMap) exitWith {};
 
 // TODO this will get reworked once we will add photo quality/bonus XP
 // right now this is enough and any site object is good for us.
-// (server stores site reference on it's spottable objects)
+// (server stores site reference on its spottable objects)
 
-// get first object of first site in a photo (there can be multiple)
-private _cursorTarget = _photoData get (keys _photoData#0) select 0;
+// get objects of any site in a photo (there can be multiple)
+private _siteObjects = values _photoData # 0;
+
+// require at least one object with two visible points
+if (_siteObjects findIf {count (_x getVariable "vgm_scouting_visiblePoints") >= 2} == -1) exitWith {};
+
+private _cursorTarget = _siteObjects # 0;
 
 GET_DISPLAY_MAP setVariable ["vgm_site_photoObject", _cursorTarget];
 ["refreshUI", GET_DISPLAY_MAP] call vgm_c_fnc_displayNotepad;
