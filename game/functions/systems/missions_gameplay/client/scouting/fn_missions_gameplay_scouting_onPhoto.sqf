@@ -91,7 +91,7 @@ private _photoData = createHashMap;
 
 #ifdef __A3_DEBUG__
 if (is3DENPreview) then {
-    missionNamespace getVariable ["vgm_scouting_debug_drawEh", -1];
+    removeMissionEventHandler ["Draw3D", missionNamespace getVariable ["vgm_scouting_debug_drawEh", -1]];
     private _debugEh = addMissionEventHandler ["Draw3D", {
         {
             _x params ["_beg", "_end", "_text"];
