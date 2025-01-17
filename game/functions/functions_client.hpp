@@ -609,6 +609,10 @@ class vgm_c
         class showTabbedTextDialog {};
         class stack_controls {};
         class toggle_controls_group_overlay {};
+        class watermark
+        {
+            postInit = 1;
+        };
     };
 
     class shared_hub
