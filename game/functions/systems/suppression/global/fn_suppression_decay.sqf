@@ -2,7 +2,7 @@
     File: fn_suppression_decay.sqf
     Author: Savage Game Design
     Date: 2024-02-09
-    Last Update: 2024-04-02
+    Last Update: 2025-01-17
     Public: Yes
 
     Description:
@@ -33,6 +33,7 @@ private _decayWindowStart = _unit getVariable ["vgm_l_suppression_decayWindowSta
 private _timePassed = time - (_lastDecay max _decayWindowStart);
 private _newSuppression = ((_unit getVariable ["vgm_l_suppression_value", 0]) - _timePassed * _decayRatePerSecond) max 0;
 
+_unit setSuppression _newSuppression;
 _unit setVariable ["vgm_l_suppression_value", _newSuppression];
 _unit setVariable ["vgm_l_suppression_lastDecay", time];
 [_unit, _newSuppression] call vgm_g_fnc_suppression_updateEffects;

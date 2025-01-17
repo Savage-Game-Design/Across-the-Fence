@@ -29,7 +29,8 @@ _unit setSkill ["general", 1];
 _unit setSkill ["aimingSpeed", 0.75];
 _unit setSkill ["aimingShake", 0.9];
 _unit setSkill ["commanding", 1];
-_unit setSkill ["courage", 1];
+//Makes suppression decay much, much slower. At courage 1, suppression return to 0 in a fraction of a second.
+_unit setSkill ["courage", 0];
 _unit setSkill ["reloadSpeed", 1];
 //Compensated for by camouflage, in theory
 _unit setSkill ["spotDistance", 1];
