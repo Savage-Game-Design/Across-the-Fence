@@ -320,7 +320,9 @@ class vgm_g
 
         class suppression_add {};
         class suppression_decay {};
-        class suppression_get {};
+        class suppression_get {
+            headerType = -1;
+        };
         class suppression_setShooterMultiplier {};
         class suppression_updateEffects {};
     };
