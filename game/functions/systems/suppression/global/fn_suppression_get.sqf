@@ -2,7 +2,7 @@
     File: fn_suppression_get.sqf
     Author: Savage Game Design
     Date: 2024-02-09
-    Last Update: 2024-02-09
+    Last Update: 2025-01-17
     Public: Yes
 
     Description:
@@ -22,4 +22,4 @@
 
 params ["_unit"];
 
-_unit getVariable ["vgm_l_suppression", 0]
+_unit getVariable ["vgm_l_suppression_value", 0]
