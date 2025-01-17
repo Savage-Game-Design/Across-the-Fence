@@ -2,7 +2,7 @@
     File: fn_btree_decorator_updateKnowledgeService.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-02-10
+    Last Update: 2025-01-17
     Public: Yes
 
     Description:
@@ -33,7 +33,7 @@ _decorator set ["onTreeAssigned", {
     private _suppressionCode = {
         params ["_unit", "_distance", "_shooter"];
         // TODO - replace with weapon's suppression value
-        [_unit, 0.25, _shooter] call vgm_g_fnc_suppression_add;
+        [_unit, 0.10, _shooter] call vgm_g_fnc_suppression_add;
     };
 
     _group setVariable [

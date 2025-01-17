@@ -356,7 +356,7 @@
         </Key>
         <!-- Fire Support -->
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
-            <Original>50% increased suppression strength</Original>
+            <Original>100% increased suppression strength</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
             <Original>Carry 30% more weight and consume 20% less stamina</Original>
