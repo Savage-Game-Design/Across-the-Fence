@@ -2,15 +2,15 @@
     File: fn_sites_isInMission.sqf
     Author: Savage Game Design
     Date: 2025-01-15
-    Last Update: 2025-01-15
+    Last Update: 2025-01-17
     Public: Yes
 
     Description:
         Checks if site is in the zone of the mission.
 
     Parameter(s):
-        _site -
-        _mission -
+        _site - Site to check [HASHMAP]
+        _mission - Mission [HASHMAP]
 
     Returns:
         In mission zone? [BOOL]
