@@ -3,7 +3,7 @@
     File: fn_stamina_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-08-18
-    Last Update: 2023-08-27
+    Last Update: 2025-01-17
     Public: No
 
     Description:
@@ -44,7 +44,7 @@ private _idx = addMissionEventHandler ["EachFrame", {
     };
 
     // unit speed in m/s,
-    private _speed = (vectorMagnitude velocity _unit);
+    private _speed = [0, vectorMagnitude velocity _unit] select (_unit in _unit);
 
     // crouched, prone and swimming movement are slower so we need to adjust current speed
     // this will make the stamina costs roughly the same for all stances
