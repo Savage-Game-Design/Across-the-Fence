@@ -42,7 +42,7 @@ vgm_s_skill_relaySuppression = {
         // TODO make this unscheduled
         [_threats, _unit] spawn {
             params ["_threats", "_unit"];
-            waitUntil {[_unit] call vgm_g_fnc_suppression_get <= 0};
+            waitUntil {[_unit] call vgm_g_fnc_suppression_get <= 0.75 || !alive _unit};
             isNil { // make array clear and event send atomic
                 _unit setVariable ["vgm_s_skill_threats", nil];
                 // send event to all players that suppressed the unit
