@@ -717,7 +717,7 @@
             <Original>Acknowledge Hint</Original>
         </Key>
     </Package>
-    <Package name="Res[awm]">
+    <Package name="Respawn">
         <Key ID="STR_VGM_RESPAWN_UI_RESPAWN_BUTTON_TOOLTIP">
             <Original>You'll respawn when unconscious and abandoned by the team.</Original>
         </Key>
