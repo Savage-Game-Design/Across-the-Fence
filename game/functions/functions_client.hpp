@@ -931,6 +931,7 @@ class vgm_c
             preInit = 1;
         };
         class stealth_setVisible {};
+        class stealth_setVisibleForDuration {};
     };
 
     class suppression

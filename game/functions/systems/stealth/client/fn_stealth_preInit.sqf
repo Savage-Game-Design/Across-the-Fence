@@ -23,3 +23,8 @@ vgm_c_stealth_entityCheckQueue = [];
 
 vgm_c_stealth_looking = createHashMap;
 vgm_c_stealth_lookingQueue = [];
+
+vgm_c_stealth_isVisible = false;
+vgm_c_stealth_visibleUntil = nil;
+
+vgm_c_stealth_visibleDurationWhenSeen = 15;

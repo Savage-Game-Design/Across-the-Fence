@@ -19,15 +19,15 @@
  */
 
 // Human cone of vision is roughly 135 degrees - the values below match that.
-#define REL_DIR_MIN 292.5
-#define REL_DIR_MAX 67.5
+#define VISION_CONE_ANGLE 45
 
 params ["_unit"];
 
-private _relPos = _unit getRelDir player;
+// Returns an absolute angle (i.e positive) between the unit's eye direction and position of the player.
+private _angleFromEyeline = acos ((getPosASL _unit vectorFromTo getPosASL player) vectorCos eyeDirection _unit);
 
 // Player isn't in the unit's cone of vision
-if !(REL_DIR_MIN < _relPos || _relPos < REL_DIR_MAX) exitWith {0};
+if !(_angleFromEyeline < VISION_CONE_ANGLE) exitWith {0};
 
 // These selections seem to give a good balance when in bushes, peeking behind trees, etc.
 private _selections = ["righthand", "pelvis", "leftlegroll", "rightlegroll"];

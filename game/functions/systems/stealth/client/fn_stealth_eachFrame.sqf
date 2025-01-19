@@ -20,12 +20,16 @@
 
 #define MAX_DETECTION_DISTANCE 400
 #define MIN_SPOT_TIME 1
-#define SPOT_TIME_MULTIPLIER_DISTANCE 10
+#define SPOT_TIME_MULTIPLIER_DISTANCE 50
 
 // This assumes the player is on west, and the enemy is east.
 // Saves us frames using this, instead of checking in SQF.
 #define ENEMY_SOLDIER_BASE_CLASS "SoldierEB"
 #define ENEMY_SIDE east
+
+if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }) then {
+    [false] call vgm_c_fnc_stealth_setVisible;
+};
 
 [] call {
     // Could repeatedly check if nobody is nearby, but that's fine - nearEntities is very fast (0.007ms on Spoffy's PC)
@@ -78,14 +82,12 @@ call {
     //1 * (1/x) * max((y+1)/10, 1)
 
     // Equation for Deimos graphic calc - x is visibility, y is distance in meters.
-    // 1 * (1/x) * max((y+1)/10, 1)
-    // Maximum spot time with this equation is: MIN_SPOT_TIME * 10 *
+    // f(x, y) = 1 * min((1/x), 5) * (1 + (y+1)/SPOT_TIME_MULTIPLIER_DISTANCE )
     private _distance = player distance _lookingUnit;
-    private _spotTime = MIN_SPOT_TIME * ((1 / _visibility) min 10) * ((_distance / SPOT_TIME_MULTIPLIER_DISTANCE) max 1);
+    private _spotTime = MIN_SPOT_TIME * ((1 / _visibility) min 10) * (1 + ((_distance + 1) / SPOT_TIME_MULTIPLIER_DISTANCE));
 
     if (_seenAt + _spotTime < time) then {
-        // TODO - set duration of visibility
         hint format ["Enemy alerted: %1", _lookingUnit];
-        [true] call vgm_c_fnc_stealth_setVisible;
+        [vgm_c_stealth_visibleDurationWhenSeen] call vgm_c_fnc_stealth_setVisibleForDuration;
     };
 };
