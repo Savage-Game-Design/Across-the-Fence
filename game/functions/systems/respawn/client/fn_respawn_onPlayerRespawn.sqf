@@ -29,10 +29,11 @@ _newUnit setUnitLoadout (_newUnit getVariable ["vgm_respawn_loadout", getUnitLoa
 deleteVehicle _oldUnit;
 
 if (!isNil {[] call vgm_c_fnc_missions_getCurrentMission}) then {
-    _newUnit call vgm_c_fnc_respawn_decayInventory;
+    private _lostItems = _newUnit call vgm_c_fnc_respawn_decayInventory;
+    [_lostItems] spawn vgm_c_fnc_respawn_showRespawnInfo;
 };
 
-sleep 3;
+sleep 4;
 [1, "WHITE", 3, 1] spawn BIS_fnc_fadeEffect;
 
 ["vgm_player_respawn", [], [_newUnit]] call para_g_fnc_event_triggerTargets;

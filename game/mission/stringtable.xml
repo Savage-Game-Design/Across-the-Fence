@@ -717,4 +717,12 @@
             <Original>Acknowledge Hint</Original>
         </Key>
     </Package>
+    <Package name="Respawn">
+        <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_HEADER">
+            <Original>You've managed to escape capture by the NVA</Original>
+        </Key>
+        <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_ITEMS_HEADER">
+            <Original>During your getaway you've lost some parts of your equipment:</Original>
+        </Key>
+    </Package>
 </Project>

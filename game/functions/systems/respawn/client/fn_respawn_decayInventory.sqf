@@ -45,7 +45,7 @@ private _removedItems = [];
 
     format ["Decaying item amount: %1, from %2 to %3", _item, _count, _remaining] call vgm_g_fnc_logInfo;
 
-    _removedItems pushBack [_item, _countToRemove];
+    _removedItems pushBack [_countToRemove, _item];
 
     for "_i" from 1 to _countToRemove do {
         _unit removeItem _item;

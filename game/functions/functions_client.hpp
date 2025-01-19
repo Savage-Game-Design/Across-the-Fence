@@ -726,6 +726,7 @@ class vgm_c
         {
             preInit = 1;
         };
+        class respawn_showRespawnInfo {};
     };
 
     class skills
