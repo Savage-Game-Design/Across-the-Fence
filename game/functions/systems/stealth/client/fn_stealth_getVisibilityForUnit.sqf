@@ -2,7 +2,7 @@
     File: fn_stealth_getVisibilityForUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-19
+    Last Update: 2025-01-20
     Public: Yes
 
     Description:
@@ -42,6 +42,7 @@ private _totalHiddenPoints = 0;
 // Convert hidden positions to visible positions for the calculation.
 private _visibility = (count _positions - _totalHiddenPoints) / count _positions;
 
+private _peripheralAdjustmentFactor = linearConversion [0, VISION_CONE_ANGLE, _angleFromEyeline, 1, 0.5, true];
 
 // Adjust for the player being prone / crouched, and therefore having a smaller cross section.
-_visibility * (vgm_c_stealth_stanceMultipliers get stance player);
+_visibility * (vgm_c_stealth_stanceMultipliers get stance player) * _peripheralAdjustmentFactor;

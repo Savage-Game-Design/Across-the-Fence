@@ -2,7 +2,7 @@
     File: fn_stealth_isVisibleToUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-19
-    Last Update: 2025-01-19
+    Last Update: 2025-01-20
     Public: Yes
 
     Description:
@@ -21,7 +21,7 @@
 // The range at which you need to be fully visible to be spotted
 #define MAX_VISIBILITY_NEEDED_DISTANCE 200
 // The absolute minimum visibility to be seen. Should be tested in-game to find the best feeling value.
-#define MINIMUM_SPOT_VISIBILITY 0.15
+#define MINIMUM_SPOT_VISIBILITY 0.17
 
 params ["_unit"];
 

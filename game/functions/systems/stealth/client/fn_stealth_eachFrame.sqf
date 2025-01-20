@@ -57,7 +57,7 @@ if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }
 
     // Player is visible to unit - mark the unit as having started looking for the player at this time.
     // DON'T REPLACE EARLIER SEEN VALUES.
-    hint format ["Player spotted by %1", _unitToCheck];
+    hint format ["%2 - Player spotted by %1", _unitToCheck, time];
     vgm_c_stealth_looking getOrDefault [hashValue _unitToCheck, [_unitToCheck, time], true];
 };
 

@@ -58,7 +58,7 @@
 
     params ["_unit", "_value"];
 
-    _unit setUnitTrait ["audibleCoef", _value max 0.1 min 1];
+    _unit setUnitTrait ["audibleCoef", _value max 0 min 1];
 
 }] call vgm_c_fnc_coefficient_create;
 
