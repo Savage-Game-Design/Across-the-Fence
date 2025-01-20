@@ -12,8 +12,8 @@
 
 vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
     ["STAND", 1],
-    ["CROUCH", 0.65],
-    ["PRONE", 0.35],
+    ["CROUCH", 2],
+    ["PRONE", 4.5],
     ["UNDEFINED", 1],
     ["", 1]
 ];

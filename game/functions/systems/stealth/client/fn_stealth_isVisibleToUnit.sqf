@@ -1,3 +1,4 @@
+#include "script_component.inc"
 /*
     File: fn_stealth_isVisibleToUnit.sqf
     Author: Savage Game Design
@@ -21,16 +22,28 @@
 // The range at which you need to be fully visible to be spotted
 #define MAX_VISIBILITY_NEEDED_DISTANCE 200
 // The absolute minimum visibility to be seen. Should be tested in-game to find the best feeling value.
-#define MINIMUM_SPOT_VISIBILITY 0.17
+// 0.333 is two points (e.g head + hand) visible, so should be the minimum
+#define MINIMUM_SPOT_VISIBILITY 0.3
 
 params ["_unit"];
 
-private _visibility = [_unit] call vgm_c_fnc_stealth_getVisibilityForUnit;
+[_unit] call vgm_c_fnc_stealth_getVisibilityForUnit params ["_visibility", "_angleFromEyeline"];
+
 
 // It gets harder to spot the player based on distance. This scales the minimum visibility needed with distance.
 private _distance = player distance _unit;
-private _minSpotVisibility = (MINIMUM_SPOT_VISIBILITY + (_distance / MAX_VISIBILITY_NEEDED_DISTANCE)) min 1;
-
+// Alters the minimum spot visibility to account for players being prone/crouched being harder to see from far away
+private _stanceFactor = vgm_c_stealth_stanceMultipliers get stance player;
+// Adjust for people being less observant at their peripherals.
+private _peripheralAdjustmentFactor = linearConversion [0, VISION_CONE_ANGLE, _angleFromEyeline, 1, 1.2, true];
+private _minSpotVisibility = ((MINIMUM_SPOT_VISIBILITY + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)) * _peripheralAdjustmentFactor) min 1;
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
-[_minSpotVisibility <= _visibility, _visibility]
+private _isVisible = _minSpotVisibility <= _visibility;
+private _result = [_isVisible, _visibility];
+
+#ifdef __A3_DEBUG__
+    _unit setVariable ["vgm_c_stealth_visibleResults", _result];
+#endif
+
+_result

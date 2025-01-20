@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-19
+    Last Update: 2025-01-20
     Public: No
 
     Description:
@@ -18,14 +19,8 @@
         addMissionEventHandler ["EachFrame", vgm_c_fnc_stealth_eachFrame];
  */
 
-#define MAX_DETECTION_DISTANCE 400
 #define MIN_SPOT_TIME 1
 #define SPOT_TIME_MULTIPLIER_DISTANCE 50
-
-// This assumes the player is on west, and the enemy is east.
-// Saves us frames using this, instead of checking in SQF.
-#define ENEMY_SOLDIER_BASE_CLASS "SoldierEB"
-#define ENEMY_SIDE east
 
 if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }) then {
     [false] call vgm_c_fnc_stealth_setVisible;
@@ -57,7 +52,7 @@ if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }
 
     // Player is visible to unit - mark the unit as having started looking for the player at this time.
     // DON'T REPLACE EARLIER SEEN VALUES.
-    hint format ["%2 - Player spotted by %1", _unitToCheck, time];
+    hint format ["%2 - Player spotted by %1 - %3", _unitToCheck, time, _visibility];
     vgm_c_stealth_looking getOrDefault [hashValue _unitToCheck, [_unitToCheck, time], true];
 };
 
@@ -76,6 +71,7 @@ call {
     private _visibility = _visibilityCheck # 1;
 
     if !(alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible) exitWith {
+        // TODO - Fix this not working on null units due to key being from alive unit.
         vgm_c_stealth_looking deleteAt hashValue _lookingUnit;
     };
 
@@ -84,10 +80,10 @@ call {
     // Equation for Deimos graphic calc - x is visibility, y is distance in meters.
     // f(x, y) = 1 * min((1/x), 5) * (1 + (y+1)/SPOT_TIME_MULTIPLIER_DISTANCE )
     private _distance = player distance _lookingUnit;
-    private _spotTime = MIN_SPOT_TIME * ((1 / _visibility) min 10) * (1 + ((_distance + 1) / SPOT_TIME_MULTIPLIER_DISTANCE));
+    private _spotTime = MIN_SPOT_TIME * (1 / _visibility) * (1 + ((_distance + 1) / SPOT_TIME_MULTIPLIER_DISTANCE));
 
     if (_seenAt + _spotTime < time) then {
-        hint format ["Enemy alerted: %1", _lookingUnit];
+        hint format ["%2 - Enemy alerted: %1 - %3", _lookingUnit, time, _spotTime];
         [vgm_c_stealth_visibleDurationWhenSeen] call vgm_c_fnc_stealth_setVisibleForDuration;
     };
 };
