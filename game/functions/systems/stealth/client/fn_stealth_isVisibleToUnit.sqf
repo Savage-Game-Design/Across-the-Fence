@@ -36,7 +36,7 @@ private _distance = player distance _unit;
 private _stanceFactor = vgm_c_stealth_stanceMultipliers get stance player;
 // Adjust for people being less observant at their peripherals.
 private _peripheralAdjustmentFactor = linearConversion [0, VISION_CONE_ANGLE, _angleFromEyeline, 1, 1.2, true];
-private _minSpotVisibility = ((MINIMUM_SPOT_VISIBILITY + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)) * _peripheralAdjustmentFactor) min 1;
+private _minSpotVisibility = ((MINIMUM_SPOT_VISIBILITY + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)) * _peripheralAdjustmentFactor);
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
 private _isVisible = _minSpotVisibility <= _visibility;
