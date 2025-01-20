@@ -39,7 +39,7 @@ vgm_c_stealth_visibleDurationWhenSeen = 15;
             private _canSee1 = lineIntersectsSurfaces [eyePos player, aimPos _x, player, _x, true, 1, "FIRE"] isEqualTo [];
             private _canSee2 = lineIntersectsSurfaces [eyePos player, eyePos _x, player, _x, true, 1, "FIRE"] isEqualTo [];
             if !(_canSee1 || _canSee2) then {continue};
-            _x getVariable ["vgm_c_stealth_visibleResults", [false, -1]] params ["_isVisible", "_visibility"];
+            _x getVariable ["vgm_c_stealth_visibleResults", [false, -1]] params ["_isVisible", "_visibility", "_spotThreshold"];
             private _color = [[0,1,0,1],[1,0,0,1]] select _isVisible;
             drawIcon3D [
                 "",
@@ -48,7 +48,7 @@ vgm_c_stealth_visibleDurationWhenSeen = 15;
                 0,
                 0,
                 0,
-                format ["V:%1 - %2", _isVisible, _visibility]
+                format ["V:%1 - %2 / %3", _isVisible, _visibility, _spotThreshold]
             ]
         } forEach (player nearEntities ["CAManBase", 300]);
     }];

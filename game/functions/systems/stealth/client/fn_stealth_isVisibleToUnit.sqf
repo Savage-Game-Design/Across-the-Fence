@@ -13,7 +13,7 @@
         _unit - Unit to run visibility checks on [UNIT]
 
     Returns:
-        [_isVisible, _visibility] [BOOLEAN, NUMBER] [ARRAY]
+        [_isVisible, _visibility, _spotThreshold] [BOOLEAN, NUMBER, NUMBER] [ARRAY]
 
     Example(s):
         [allUnits # 0] call vgm_c_fnc_stealth_isVisibleToUnit;
@@ -42,7 +42,7 @@ private _minSpotVisibility = ((MINIMUM_SPOT_VISIBILITY + (_distance * _stanceFac
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
 private _isVisible = _minSpotVisibility <= _visibility;
-private _result = [_isVisible, _visibility];
+private _result = [_isVisible, _visibility, _minSpotVisibility];
 
 #ifdef __A3_DEBUG__
     _unit setVariable ["vgm_c_stealth_visibleResults", _result];
