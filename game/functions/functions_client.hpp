@@ -719,6 +719,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\respawn\client);
 
         class respawn_decayInventory {};
+        class respawn_onPauseMenu {};
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
         class respawn_preInit
