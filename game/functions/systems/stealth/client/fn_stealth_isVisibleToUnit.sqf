@@ -23,8 +23,8 @@
 #define MAX_VISIBILITY_NEEDED_DISTANCE 200
 // The absolute minimum visibility to be seen. Should be tested in-game to find the best feeling value.
 // 0.333 is two points (e.g head + hand) visible, so should be the minimum
-#define MINIMUM_SPOT_VISIBILITY 0.3
-#define PERIPHERAL_START_ANGLE 30
+#define BASE_MIN_SPOT_VISIBILITY 0.3
+#define MOVEMENT_SPEED_MODIFIER 0.4
 #define PERIPHERAL_MAX_PENALTY 0.7
 
 params ["_unit"];
@@ -38,7 +38,25 @@ private _distance = player distance _unit;
 private _stanceFactor = vgm_c_stealth_stanceMultipliers get stance player;
 // Adjust for people being less observant at their peripherals.
 private _peripheralAdjustmentFactor = linearConversion [PERIPHERAL_START_ANGLE, VISION_CONE_ANGLE, _angleFromEyeline, 0, PERIPHERAL_MAX_PENALTY, true];
-private _minSpotVisibility = ((MINIMUM_SPOT_VISIBILITY + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)) + _peripheralAdjustmentFactor);
+// Adjust for player's movement speed
+// 0.5 - Crawl
+// 1 - Fast crawl
+// 1 - Crouch walk
+// 1 - Normal walk
+// 2 - Gun up, crouched
+// 2.5 - Gun down, crouched
+// 3.0 - Jog, gun up
+// 3.8 - Jog, gun down
+// 4.3 - All sprinting
+private _playerSpeed = vectorMagnitude velocity player;
+// Speed > 0 will include rotation too - only get full stealth if you're perfectly still.
+private _movementSpeedFactor = if (_playerSpeed <= 0.0001) then {0} else { linearConversion [0, 4, _playerSpeed, 0.5, 1, true] };
+private _minSpotVisibility = (
+    BASE_MIN_SPOT_VISIBILITY
+    + MOVEMENT_SPEED_MODIFIER * (1 - _movementSpeedFactor)
+    + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)
+    + _peripheralAdjustmentFactor
+);
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
 private _isVisible = 0 < _visibility && _minSpotVisibility <= _visibility;
