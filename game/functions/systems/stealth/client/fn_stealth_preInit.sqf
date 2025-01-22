@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-20
+    Last Update: 2025-01-22
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
 vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
     ["STAND", 1],
     ["CROUCH", 1.2],
-    ["PRONE", 1.5],
+    ["PRONE", 2],
     ["UNDEFINED", 1],
     ["", 1]
 ];
