@@ -3,17 +3,17 @@
     File: fn_respawn_showRespawnInfo.sqf
     Author: Savage Game Design
     Date: 2025-01-17
-    Last Update: 2025-01-19
+    Last Update: 2025-01-22
     Public: No
 
     Description:
         Script responsible for showing the respawn summary screen.
 
     Parameter(s):
-        None
+        _lostItems - Array with item counts and classnames [ARRAY]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [[]] call vgm_c_fnc_respawn_showRespawnInfo
