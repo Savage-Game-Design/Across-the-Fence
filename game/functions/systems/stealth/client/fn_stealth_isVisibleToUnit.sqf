@@ -24,7 +24,7 @@
 // The absolute minimum visibility to be seen. Should be tested in-game to find the best feeling value.
 // 0.333 is two points (e.g head + hand) visible, so should be the minimum
 #define MINIMUM_SPOT_VISIBILITY 0.3
-#define PERIPHERAL_START_ANGLE 35
+#define PERIPHERAL_START_ANGLE 30
 #define PERIPHERAL_MAX_PENALTY 0.7
 
 params ["_unit"];
@@ -41,7 +41,7 @@ private _peripheralAdjustmentFactor = linearConversion [PERIPHERAL_START_ANGLE, 
 private _minSpotVisibility = ((MINIMUM_SPOT_VISIBILITY + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)) + _peripheralAdjustmentFactor);
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
-private _isVisible = _minSpotVisibility <= _visibility;
+private _isVisible = 0 < _visibility && _minSpotVisibility <= _visibility;
 private _result = [_isVisible, _visibility, _minSpotVisibility];
 
 #ifdef __A3_DEBUG__
