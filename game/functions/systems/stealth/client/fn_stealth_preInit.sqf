@@ -48,7 +48,7 @@ vgm_c_stealth_visibleDurationWhenSeen = 15;
                 0,
                 0,
                 0,
-                format ["V:%1 - %2 / %3", _isVisible, _visibility, _spotThreshold]
+                format ["V:%1 - %2 / %3 - %4s", _isVisible, _visibility, _spotThreshold, _x getVariable ["vgm_c_stealth_spotTimeDebug", -1]]
             ]
         } forEach (player nearEntities ["CAManBase", 300]);
     }];
