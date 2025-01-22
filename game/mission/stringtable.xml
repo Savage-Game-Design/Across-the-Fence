@@ -718,6 +718,12 @@
         </Key>
     </Package>
     <Package name="Respawn">
+        <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_HEADER">
+            <Original>Despite being injured, you manage to evade capture</Original>
+        </Key>
+        <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_ITEMS_HEADER">
+            <Original>Some of your supplies and equipment were lost in your fight to escape:</Original>
+        </Key>
         <Key ID="STR_VGM_RESPAWN_UI_RESPAWN_BUTTON_TOOLTIP">
             <Original>You'll respawn when unconscious and abandoned by the team.</Original>
         </Key>
