@@ -919,6 +919,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\stealth\client);
 
+        class stealth_addPlayerFiredEH {};
         class stealth_eachFrame {};
         class stealth_getVisibilityForUnit {
             headerType = -1;
@@ -932,6 +933,7 @@ class vgm_c
         };
         class stealth_setVisible {};
         class stealth_setVisibleForDuration {};
+        class stealth_setVisibleForDurationAfterDelay {};
     };
 
     class suppression

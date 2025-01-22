@@ -10,6 +10,15 @@
 
 */
 
+/////////////////
+// CONFIG VARS //
+/////////////////
+
+vgm_c_stealth_visibleDurationWhenSeen = 60;
+
+vgm_c_stealth_visibleOnFiredDelay = 3;
+vgm_c_stealth_visibleDurationOnFired = 30;
+
 vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
     ["STAND", 1],
     ["CROUCH", 1.2],
@@ -18,16 +27,26 @@ vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
     ["", 1]
 ];
 
-vgm_c_stealth_lastEntityScanPos = [-9999, -9999, -9999];
-vgm_c_stealth_entityCheckQueue = [];
+/////////////////
 
-vgm_c_stealth_looking = createHashMap;
-vgm_c_stealth_lookingQueue = [];
-
+// True when the player is visible.
 vgm_c_stealth_isVisible = false;
+// Schedule when the player will become visible
+// Format: [when to make the player visible, duration of visibility]
+vgm_c_stealth_visibleIn = nil;
+// Schedule when the player will stop being visible
 vgm_c_stealth_visibleUntil = nil;
 
-vgm_c_stealth_visibleDurationWhenSeen = 15;
+// Tracks where the player was when the entity check queue was last refreshed.
+vgm_c_stealth_lastEntityQueueScanPos = [-9999, -9999, -9999];
+// Queue of AI to be processed in the per frame handler
+vgm_c_stealth_entityCheckQueue = [];
+
+// AI that can currently see the player
+vgm_c_stealth_looking = createHashMap;
+// Queue of AI to be processed in the per frame handler
+vgm_c_stealth_lookingQueue = [];
+
 
 #ifdef __A3_DEBUG__
     vgm_c_stealth_drawDebug = false;

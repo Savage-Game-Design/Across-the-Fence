@@ -26,13 +26,21 @@ if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }
     [false] call vgm_c_fnc_stealth_setVisible;
 };
 
+// Make the player visible *after* we make them hidden, if necessary.
+// Delayed visibility takes priority over re-hiding the player, otherwise they
+// might get away with doing something that should make them visible.
+if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) then {
+    [vgm_c_stealth_visibleIn # 1] call vgm_c_fnc_stealth_setVisibleForDuration;
+    vgm_c_stealth_visibleIn = nil;
+};
+
 [] call {
     // Could repeatedly check if nobody is nearby, but that's fine - nearEntities is very fast (0.007ms on Spoffy's PC)
-    if (vgm_c_stealth_entityCheckQueue isEqualTo [] || vgm_c_stealth_lastEntityScanPos distance2D player > 10) then {
+    if (vgm_c_stealth_entityCheckQueue isEqualTo [] || vgm_c_stealth_lastEntityQueueScanPos distance2D player > 40) then {
         // Another syntax allows us to do an "alive" check, but it might be stale by the time we process it.
         // Therefore use faster syntax instead.
         vgm_c_stealth_entityCheckQueue = player nearEntities [ENEMY_SOLDIER_BASE_CLASS, MAX_DETECTION_DISTANCE];
-        vgm_c_stealth_lastEntityScanPos = getPosATL player;
+        vgm_c_stealth_lastEntityQueueScanPos = getPosATL player;
     };
 
     if (vgm_c_stealth_entityCheckQueue isEqualTo []) exitWith {};
@@ -66,9 +74,7 @@ call {
     (vgm_c_stealth_lookingQueue deleteAt (count vgm_c_stealth_lookingQueue - 1)) params ["_lookingUnit", "_seenAt"];
 
 
-    private _visibilityCheck = [_lookingUnit] call vgm_c_fnc_stealth_isVisibleToUnit;
-    private _isVisible = _visibilityCheck # 0;
-    private _visibility = _visibilityCheck # 1;
+    [_lookingUnit] call vgm_c_fnc_stealth_isVisibleToUnit params ["_isVisible", "_visibility"];
 
     if !(alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible) exitWith {
         // TODO - audio
