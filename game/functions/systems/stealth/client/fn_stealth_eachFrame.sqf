@@ -60,7 +60,6 @@ if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) 
 
     // Player is visible to unit - mark the unit as having started looking for the player at this time.
     // DON'T REPLACE EARLIER SEEN VALUES.
-    hint format ["%2 - Player spotted by %1 - %3", _unitToCheck, time, _visibility];
     vgm_c_stealth_looking getOrDefault [hashValue _unitToCheck, [_unitToCheck, time], true];
 };
 
@@ -94,7 +93,6 @@ call {
     #endif
 
     if (_seenAt + _spotTime < time) then {
-        hint format ["%2 - Enemy alerted: %1 - %3", _lookingUnit, time, _spotTime];
         [vgm_c_stealth_visibleDurationWhenSeen] call vgm_c_fnc_stealth_setVisibleForDuration;
     };
 };
