@@ -3,7 +3,7 @@
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-22
+    Last Update: 2025-01-23
     Public: No
 
     Description:
@@ -19,7 +19,7 @@
         addMissionEventHandler ["EachFrame", vgm_c_fnc_stealth_eachFrame];
  */
 
-#define MIN_SPOT_TIME 0.5
+#define MIN_SPOT_TIME 0.3
 #define SPOT_TIME_MULTIPLIER_DISTANCE 60
 
 if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }) then {
@@ -79,6 +79,9 @@ call {
         // TODO - audio
         // TODO - Fix this not working on null units due to key being from alive unit.
         vgm_c_stealth_looking deleteAt hashValue _lookingUnit;
+        #ifdef __A3_DEBUG__
+            _lookingUnit setVariable ["vgm_c_stealth_spotTimeDebug", nil];
+        #endif
     };
 
     //1 * (1/x) * max((y+1)/10, 1)
@@ -86,7 +89,7 @@ call {
     // Equation for Deimos graphic calc - x is visibility, y is distance in meters.
     // f(x, y) = 1 * min((1/x), 5) * (1 + (y+1)/SPOT_TIME_MULTIPLIER_DISTANCE )
     private _distance = player distance _lookingUnit;
-    private _spotTime = MIN_SPOT_TIME + 2 * (1 - _visibility) + (_distance / SPOT_TIME_MULTIPLIER_DISTANCE);
+    private _spotTime = MIN_SPOT_TIME + 2 * (1 - _visibility) + (((_distance - 10) / SPOT_TIME_MULTIPLIER_DISTANCE) max 0);
 
     #ifdef __A3_DEBUG__
         _lookingUnit setVariable ["vgm_c_stealth_spotTimeDebug", _spotTime];
