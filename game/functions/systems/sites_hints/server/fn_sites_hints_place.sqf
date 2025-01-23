@@ -2,7 +2,7 @@
     File: fn_sites_hints_place.sqf
     Author: Savage Game Design
     Date: 2024-10-25
-    Last Update: 2024-11-29
+    Last Update: 2025-01-15
     Public: No
 
     Description:
@@ -23,12 +23,13 @@
 
 params ["_mission", "_site"];
 
+// ignore sites outside of our mission zone
+// sites do not keep track of what mission they're spawned in
+if !([_site, _mission] call vgm_s_fnc_sites_isInMission) exitWith {};
+
 private _missionId = _mission get "public" get "id";
 private _zone = _mission call vgm_g_fnc_missions_getZoneMarker;
 private _center = _site get "pos";
-// ignore sites outside of our mission zone
-// sites do not keep track of what mission they're spawned in
-if !(_center inArea _zone) exitWith {};
 
 private _config = (_site get "class") call vgm_s_fnc_sites_hints_getConfig;
 

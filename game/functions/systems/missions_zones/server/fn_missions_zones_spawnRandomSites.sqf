@@ -2,7 +2,7 @@
     File: fn_missions_zones_spawnRandomSites.sqf
     Author: Savage Game Design
     Date: 2024-08-22
-    Last Update: 2024-08-29
+    Last Update: 2025-01-23
     Public: Yes
 
     Description:
@@ -65,5 +65,9 @@ for "_i" from 1 to _quantity do {
     _zoneSites pushBack _createdSite;
     _createdSites pushBack _createdSite;
 };
+
+// propagate sites to clients
+private _sitesNetmap = "vgm_missions_zones_spawnedSitesPublic" call para_g_fnc_netmap_get;
+[_sitesNetmap, _targetZone, _createdSites] call para_s_fnc_netmap_set;
 
 _createdSites

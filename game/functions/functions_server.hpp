@@ -284,6 +284,7 @@ class vgm_s
         class sites_getSiteType {};
         class sites_getSiteTypeRequirements {};
         class sites_getTemplate {};
+        class sites_isInMission {};
         class sites_loadSiteTypesFromConfig {};
         class sites_spawn {};
         class sites_spawnRandomFortifications {};
