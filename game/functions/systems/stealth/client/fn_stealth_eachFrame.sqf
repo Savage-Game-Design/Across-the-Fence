@@ -103,6 +103,8 @@ call {
 
     if (_newSuspicion >= MAX_SUSPICION) then {
         [vgm_c_stealth_visibleDurationWhenSeen] call vgm_c_fnc_stealth_setVisibleForDuration;
+        // Avoid delays in being shot - particularly bad at night, where AI might miss the play, even when visible.
+        _lookingUnit reveal [player, 2];
     };
 };
 
