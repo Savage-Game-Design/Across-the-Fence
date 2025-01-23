@@ -47,16 +47,12 @@ if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) 
 
     private _unitToCheck = vgm_c_stealth_entityCheckQueue deleteAt (count vgm_c_stealth_entityCheckQueue - 1);
     // Unit can't see player, as they're not in a valid state.
-    if (!alive _unitToCheck || side _unitToCheck != ENEMY_SIDE) exitWith {
-        vgm_c_stealth_looking deleteAt hashValue _unitToCheck;
-    };
+    if (!alive _unitToCheck || side _unitToCheck != ENEMY_SIDE) exitWith {};
 
     ([_unitToCheck] call vgm_c_fnc_stealth_isVisibleToUnit) params ["_isVisible", "_visibility"];
 
     // Player isn't visible enough to the unit, they can't be seen.
-    if !(_isVisible) exitWith {
-        vgm_c_stealth_looking deleteAt hashValue _unitToCheck;
-    };
+    if !(_isVisible) exitWith {};
 
     // Player is visible to unit - mark the unit as having started looking for the player at this time.
     // DON'T REPLACE EARLIER SEEN VALUES.
@@ -65,20 +61,20 @@ if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) 
 
 call {
     if (vgm_c_stealth_lookingQueue isEqualTo []) then {
-        vgm_c_stealth_lookingQueue = values vgm_c_stealth_looking;
+        // Need the key for deletion, as dead units have their hashValue changed.
+        vgm_c_stealth_lookingQueue = vgm_c_stealth_looking toArray false;
     };
 
     if (vgm_c_stealth_lookingQueue isEqualTo []) exitWith {};
 
-    (vgm_c_stealth_lookingQueue deleteAt (count vgm_c_stealth_lookingQueue - 1)) params ["_lookingUnit", "_seenAt"];
+    (vgm_c_stealth_lookingQueue deleteAt (count vgm_c_stealth_lookingQueue - 1)) params ["_lookingKey", "_lookingValue"];
+    _lookingValue params ["_lookingUnit", "_seenAt"];
 
 
     [_lookingUnit] call vgm_c_fnc_stealth_isVisibleToUnit params ["_isVisible", "_visibility"];
 
     if !(alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible) exitWith {
-        // TODO - audio
-        // TODO - Fix this not working on null units due to key being from alive unit.
-        vgm_c_stealth_looking deleteAt hashValue _lookingUnit;
+        vgm_c_stealth_looking deleteAt _lookingKey;
         #ifdef __A3_DEBUG__
             _lookingUnit setVariable ["vgm_c_stealth_spotTimeDebug", nil];
         #endif
