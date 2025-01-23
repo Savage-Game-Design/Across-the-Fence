@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-22
+    Last Update: 2025-01-23
     Public: No
 
     Description:
@@ -67,7 +67,7 @@ vgm_c_stealth_lookingQueue = [];
                 0,
                 0,
                 0,
-                format ["V:%1 - %2 / %3 - %4s", _isVisible, _visibility, _spotThreshold, _x getVariable ["vgm_c_stealth_spotTimeDebug", "N/A"] toFixed 1]
+                format ["V:%1 - %2 / %3 - %4s", _isVisible, _visibility, _spotThreshold, _x getVariable ["vgm_c_stealth_spotTimeDebug", 999] toFixed 1]
             ]
         } forEach (player nearEntities ["CAManBase", 300]);
     }];
