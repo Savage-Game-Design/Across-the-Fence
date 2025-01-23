@@ -4,7 +4,7 @@
     File: fn_tutorial_preInit.sqf
     Author:
     Date: 2024-11-16
-    Last Update: 2024-12-14
+    Last Update: 2025-01-23
     Public: No
 
     Description:
@@ -32,6 +32,20 @@ vgm_c_tutorial_seenTutorials = missionProfileNamespace getVariable ["vgm_tutoria
 
 ["init_player_ready", {
     ["vgm_welcome", "welcome"] call vgm_c_fnc_openFieldManual;
+
+    private _fnc_addAlertnessTutorial = {
+        params ["_unit"];
+        private _ehId = _unit getVariable ["vgm_c_tutorial_alertnessFiredEh", -1];
+        if (_ehId > -1) exitWith {_ehId};
+
+        _ehId = _unit addEventHandler ["Fired", {
+            ["vgm_missions", "alertness", "alertness"] call vgm_c_fnc_tutorial_trigger;
+        }];
+
+        _unit setVariable ["vgm_c_tutorial_alertnessFiredEh", _ehId];
+    };
+    [player] call _fnc_addAlertnessTutorial;
+    player addEventHandler ["Respawn", {(this # 0) call _fnc_addAlertnessTutorial}];
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_field_manual_closed", {
@@ -57,12 +71,12 @@ vgm_c_tutorial_seenTutorials = missionProfileNamespace getVariable ["vgm_tutoria
     ["vgm_missions", "stop_and_focus", "stop_and_focus"] call vgm_c_fnc_tutorial_trigger;
 }] call para_g_fnc_event_subscribeLocal;
 
-["vgm_mission_deploy_local", {
-    ["vgm", "missions", "extraction"] call vgm_c_fnc_tutorial_trigger;
 
+["vgm_mission_deploy_local", {
+    ["vgm_missions", "stealth", "stealth"] call vgm_c_fnc_tutorial_trigger;
     [] spawn {
-        sleep 20;
-        ["vgm_missions", "alertness", "alertness"] call vgm_c_fnc_tutorial_trigger;
+        sleep 60;
+        ["vgm", "missions", "extraction"] call vgm_c_fnc_tutorial_trigger;
     };
 }] call para_g_fnc_event_subscribeLocal;
 

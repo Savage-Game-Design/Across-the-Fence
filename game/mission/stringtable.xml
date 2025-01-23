@@ -711,6 +711,21 @@
         <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION">
             <Original>Gunshots, explosions and other actions you take on a mission will alert the enemy to your presence, increasing the threat to your team.</Original>
         </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH">
+            <Original>Stealth</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_DESC">
+            <Original>When deployed on a mission, you and your team will be outnumbered and likely outgunned.%1%1%3%11%4 adds a unique stealth system to help you avoid enemies and break contact if neccessary.%1%1Enemies will notice you based on:%1%2 How much of you they can see (consider your stance and cover)%1%2 How fast you're moving%1%2 How directly they're looking at you%1%2 How illuminated you are%1%2 How often you're engaging with the enemy (gunshots, grenades, etc)%1%1Here are some tips that will help you move around the jungle effectively and quietly:%1%2 Use cover as much as possible%1%2 If you need to sneak a look at the enemy, show as little of yourself as possible%1%2 Avoid moving when enemies are looking directly at you%1%2 Avoid flares, fires or any sources of man-made light at night%1%2 Avoid shooting or grenades until you're ready to be detected%1%2 If the enemy engages you, evade them for a while to break contact. Be aware that trackers may still hunt you!</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_TIP">
+            <Original>Recon teams were heavily outnumbered by the NVA, and tried to avoid contact when possible.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_SCOUTING_DESCRIPTION">
+            <Original>The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to identify the site type if you're unsure.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION">
+            <Original>Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.</Original>
+        </Key>
     </Package>
     <Package name="Tutorial">
         <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">

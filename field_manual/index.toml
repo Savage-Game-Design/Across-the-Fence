@@ -24,6 +24,7 @@ order = 3
 displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
 
 pages = [
+    "stealth",
     "scouting",
     "hints",
     "stop_and_focus",

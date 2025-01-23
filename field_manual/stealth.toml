@@ -1,0 +1,35 @@
+displayName = "Stealth"
+description = """
+When deployed on a mission, you and your team will be outnumbered and likely outgunned.
+
+[h]{1}[/h] adds a unique stealth system to help you avoid enemies and break contact if neccessary.
+
+Enemies will notice you based on:
+- How much of you they can see (consider your stance and cover)
+- How fast you're moving
+- How directly they're looking at you
+- How illuminated you are
+- How often you're engaging with the enemy (gunshots, grenades, etc)
+
+Here are some tips that will help you move around the jungle effectively and quietly:
+- Use cover as much as possible
+- If you need to sneak a look at the enemy, show as little of yourself as possible
+- Avoid moving when enemies are looking directly at you
+- Avoid flares, fires or any sources of man-made light at night
+- Avoid shooting or grenades until you're ready to be detected
+- If the enemy engages you, evade them for a while to break contact. Be aware that trackers may still hunt you!
+"""
+
+
+tip = "Recon teams were heavily outnumbered by the NVA, and tried to avoid contact when possible."
+
+arguments = ["localize 'STR_VGM_MISSION_NAME'"]
+
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\Pheripheal_vision_ca.paa'
+
+[hints.stealth]
+description = """
+Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.
+"""
