@@ -49,6 +49,9 @@ vgm_c_stealth_lookingQueue = [];
 
 vgm_c_stealth_rotationalVelocity = 0;
 
+// Track the suspicion of every looking unit.
+vgm_c_stealth_suspicion = createHashMap;
+
 
 #ifdef __A3_DEBUG__
     vgm_c_stealth_drawDebug = false;
@@ -62,6 +65,8 @@ vgm_c_stealth_rotationalVelocity = 0;
             if !(_canSee1 || _canSee2) then {continue};
             _x getVariable ["vgm_c_stealth_visibleResults", [false, -1]] params ["_isVisible", "_visibility", "_spotThreshold"];
             private _color = [[0,1,0,1],[1,0,0,1]] select _isVisible;
+            private _suspicion = (vgm_c_stealth_suspicion getOrDefault [hashValue _x, [0, time]]) # 0 toFixed 2;
+            private _spotTime = _x getVariable ["vgm_c_stealth_spotTimeDebug", 999] toFixed 1;
             drawIcon3D [
                 "",
                 [[0,0,0,0],_color],
@@ -69,7 +74,7 @@ vgm_c_stealth_rotationalVelocity = 0;
                 0,
                 0,
                 0,
-                format ["V:%1 - %2 / %3 - %4s", _isVisible, _visibility, _spotThreshold, _x getVariable ["vgm_c_stealth_spotTimeDebug", 999] toFixed 1]
+                format ["V:%1 - %2 / %3 - %4s - %5 sus", _isVisible, _visibility, _spotThreshold, _spotTime, _suspicion]
             ]
         } forEach (player nearEntities ["CAManBase", 300]);
     }];

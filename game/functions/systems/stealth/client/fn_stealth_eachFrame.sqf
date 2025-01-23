@@ -21,6 +21,8 @@
 
 #define MIN_SPOT_TIME 0.3
 #define SPOT_TIME_MULTIPLIER_DISTANCE 60
+#define MAX_SUSPICION 1
+#define SUSPICION_DECAY_PER_SECOND 0.2
 
 // Manually calculate the player's rotatonal velocity
 private _changeInAngle = abs (getDir player - vgm_c_stealth_lastDir);
@@ -85,18 +87,33 @@ call {
         #endif
     };
 
-    //1 * (1/x) * max((y+1)/10, 1)
-
-    // Equation for Deimos graphic calc - x is visibility, y is distance in meters.
-    // f(x, y) = 1 * min((1/x), 5) * (1 + (y+1)/SPOT_TIME_MULTIPLIER_DISTANCE )
     private _distance = player distance _lookingUnit;
+    // How long it should take the AI to spot the player, if they were looking at them continously.
     private _spotTime = MIN_SPOT_TIME + 2 * (1 - _visibility) + (((_distance - 10) / SPOT_TIME_MULTIPLIER_DISTANCE) max 0);
+    // This is converted into "suspicion", to account for AI not looking at the player continuously.
+    (vgm_c_stealth_suspicion getOrDefault [hashValue _lookingUnit, [0, _seenAt], true]) params ["_currentSuspicion", "_suspicionLastTicked"];
+    private _deltaTime = time - _suspicionLastTicked;
+    private _newSuspicion = (_currentSuspicion + (MAX_SUSPICION * (_deltaTime / _spotTime))) min MAX_SUSPICION;
+    vgm_c_stealth_suspicion set [hashValue _lookingUnit, [_newSuspicion, time]];
+
 
     #ifdef __A3_DEBUG__
         _lookingUnit setVariable ["vgm_c_stealth_spotTimeDebug", _spotTime];
     #endif
 
-    if (_seenAt + _spotTime < time) then {
+    if (_newSuspicion >= MAX_SUSPICION) then {
         [vgm_c_stealth_visibleDurationWhenSeen] call vgm_c_fnc_stealth_setVisibleForDuration;
     };
 };
+
+// Decay suspicions every frame. This should never have enough units in it for performance to matter.
+{
+    private _values = vgm_c_stealth_suspicion get _x;
+    private _newSuspicion = (_values # 0) - SUSPICION_DECAY_PER_SECOND * diag_deltaTime;
+    if (_newSuspicion <= 0) then {
+        // Keeps the size of this map small, and clears out dead units too.
+        vgm_c_stealth_suspicion deleteAt _x;
+    } else {
+        _values set [0, _newSuspicion];
+    };
+} forEach keys vgm_c_stealth_suspicion;
