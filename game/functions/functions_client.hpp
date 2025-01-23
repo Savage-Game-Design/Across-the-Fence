@@ -553,6 +553,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\missions_zones\client);
 
+        class missions_zones_getSites {};
         class missions_zones_openMissionsDialog {};
     };
     class missions_zones_remoteExec

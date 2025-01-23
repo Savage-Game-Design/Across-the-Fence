@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2025-01-17
+    Last Update: 2025-01-23
     Public: No
 
     Description:
@@ -68,9 +68,9 @@ private _fnc_getObjectPoints = {
 // returns "foreground" site objects,
 // objects that are somewhat clearly visible in the photo
 private _fnc_getForegroundObjects = {
-    params ["_posASL"];
+    params ["_site"];
 
-    private _siteObjects = _extern_sites get (_posASL select [0, 2]);
+    private _siteObjects = _site get "objects";
     private _spottableObjects = _siteObjects select {_x getVariable ["vgm_missions_gameplay_scouting_spottable", false]};
 
     private _objects = [];
@@ -111,18 +111,21 @@ private _fnc_getForegroundObjects = {
 };
 
 private _mission = call vgm_c_fnc_missions_getCurrentMission;
-private _extern_sites = (_mission get "system_sites" get "sites");
+private _sites = (_mission get "targetZone") call vgm_c_fnc_missions_zones_getSites;
 private _extern_player = focusOn;
 
 // gather sites that are on a screen
-private _sitesPositions = (_extern_sites call para_g_fnc_netmap_keys) apply {_x + [getTerrainHeightASL _x + 1.5]};
-private _visiblePositions = _sitesPositions select {_x call _fnc_isInFrame};
+private _visitbleSites = _sites select {
+    private _pos = +(_x get "pos");
+    _pos set [2, getTerrainHeightASL _pos + 1.5];
+    _pos call _fnc_isInFrame // return
+};
 
 private _zoom = (getResolution#6) / getObjectFOV _extern_player;
 
 private _photoData = createHashMap;
 {
-    private _perceivedDistance = (_x distance2d _extern_player) / _zoom;
+    private _perceivedDistance = ((_x get "pos") distance2d _extern_player) / _zoom;
     if (_perceivedDistance > 100) then {continue};
 
     private _foregroundObjects = [_x] call _fnc_getForegroundObjects;
@@ -130,8 +133,8 @@ private _photoData = createHashMap;
     // and count them too, also add photo quality scoring
     if (count _foregroundObjects < 1) then {continue};
 
-    _photoData set [_x select [0, 2], _foregroundObjects];
-} forEach _visiblePositions;
+    _photoData set [_x get "id", _foregroundObjects];
+} forEach _visitbleSites;
 
 #ifdef __A3_DEBUG__
     if (is3DENPreview) then {
@@ -145,8 +148,11 @@ private _photoData = createHashMap;
         }];
         vgm_scouting_debug_drawEh = _debugEh;
         vgm_scouting_debug_photoData = _photoData;
+
+        ["Photo taken"] call vgm_g_fnc_logDebug;
+        [_photoData] call vgm_g_fnc_logDebug;
     };
-    #endif
+#endif
 
 if (_photoData isEqualTo createHashMap) exitWith {};
 
