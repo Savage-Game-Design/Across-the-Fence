@@ -18,6 +18,7 @@
         [] call vgm_c_fnc_missions_gameplay_scouting_onPhoto
  */
 
+#define VIS_THRESHOLD 0.7
 #define GET_DISPLAY_MAP (findDisplay 12)
 
 #ifdef __A3_DEBUG__
@@ -88,7 +89,7 @@ private _fnc_getForegroundObjects = {
             if !(_posEnd call _fnc_isInFrame) then {continue};
 
             private _vis = [_extern_player, "VIEW", _object] checkVisibility [_posBeg, _posEnd];
-            if (_vis < 0.3) then {continue};
+            if (_vis < VIS_THRESHOLD) then {continue};
 
             if (count _visibleObjectPoints == 0) then {
                 _objects pushBack _object
