@@ -921,6 +921,7 @@ class vgm_c
 
         class stealth_addPlayerFiredEH {};
         class stealth_eachFrame {};
+        class stealth_getLighting {};
         class stealth_getVisibilityForUnit {
             headerType = -1;
         };

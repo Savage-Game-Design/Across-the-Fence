@@ -3,7 +3,7 @@
     File: fn_stealth_isVisibleToUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-19
-    Last Update: 2025-01-22
+    Last Update: 2025-01-23
     Public: Yes
 
     Description:
@@ -26,6 +26,8 @@
 #define BASE_MIN_SPOT_VISIBILITY 0.3
 #define MOVEMENT_SPEED_MODIFIER 0.4
 #define PERIPHERAL_MAX_PENALTY 0.7
+#define DARKNESS_CONSTANT 0.15
+#define DARKNESS_SCALING 1
 
 params ["_unit"];
 
@@ -50,13 +52,18 @@ private _peripheralAdjustmentFactor = linearConversion [PERIPHERAL_START_ANGLE, 
 // 4.3 - All sprinting
 private _playerSpeed = vectorMagnitude velocity player;
 // Speed > 0 will include rotation too - only get full stealth if you're perfectly still.
-private _movementSpeedFactor = if (_playerSpeed <= 0.0001) then {0} else { linearConversion [0, 4, _playerSpeed, 0.5, 1, true] };
+private _movementSpeedFactor = if (_playerSpeed <= 0.0001 && vgm_c_stealth_rotationalVelocity == 0) then {0} else { linearConversion [0, 4, _playerSpeed, 0.5, 1, true] };
+// Lighting influence is inverted - as want to increase minimum required visibility when it's dark.
+private _darkness = 1 - ([] call vgm_c_fnc_stealth_getLighting);
+
 private _minSpotVisibility = (
     BASE_MIN_SPOT_VISIBILITY
     + MOVEMENT_SPEED_MODIFIER * (1 - _movementSpeedFactor)
-    + (_distance * _stanceFactor / MAX_VISIBILITY_NEEDED_DISTANCE)
     + _peripheralAdjustmentFactor
+    + DARKNESS_CONSTANT * _darkness
+    + (_distance * _stanceFactor * (1 + DARKNESS_SCALING * _darkness) / MAX_VISIBILITY_NEEDED_DISTANCE)
 );
+
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
 private _isVisible = 0 < _visibility && _minSpotVisibility <= _visibility;

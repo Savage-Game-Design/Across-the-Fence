@@ -47,6 +47,8 @@ vgm_c_stealth_looking = createHashMap;
 // Queue of AI to be processed in the per frame handler
 vgm_c_stealth_lookingQueue = [];
 
+vgm_c_stealth_rotationalVelocity = 0;
+
 
 #ifdef __A3_DEBUG__
     vgm_c_stealth_drawDebug = false;
