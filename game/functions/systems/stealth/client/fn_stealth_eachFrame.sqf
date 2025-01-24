@@ -3,7 +3,7 @@
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-23
+    Last Update: 2025-01-24
     Public: No
 
     Description:
@@ -27,7 +27,10 @@
 // Manually calculate the player's rotatonal velocity
 private _changeInAngle = abs (getDir player - vgm_c_stealth_lastDir);
 vgm_c_stealth_lastDir = getDir player;
-vgm_c_stealth_rotationalVelocity = _changeInAngle / diag_deltaTime;
+// This can happen early on, when the handler is first attached.
+if (diag_deltaTime > 0) then {
+    vgm_c_stealth_rotationalVelocity = _changeInAngle / diag_deltaTime;
+};
 
 if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }) then {
     [false] call vgm_c_fnc_stealth_setVisible;
