@@ -55,7 +55,7 @@ if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) 
 
     if (vgm_c_stealth_entityCheckQueue isEqualTo []) exitWith {};
 
-    private _unitToCheck = vgm_c_stealth_entityCheckQueue deleteAt (count vgm_c_stealth_entityCheckQueue - 1);
+    private _unitToCheck = vgm_c_stealth_entityCheckQueue deleteAt 0;
     // Unit can't see player, as they're not in a valid state.
     if (!alive _unitToCheck || side _unitToCheck != ENEMY_SIDE) exitWith {};
 
@@ -77,7 +77,7 @@ call {
 
     if (vgm_c_stealth_lookingQueue isEqualTo []) exitWith {};
 
-    (vgm_c_stealth_lookingQueue deleteAt (count vgm_c_stealth_lookingQueue - 1)) params ["_lookingKey", "_lookingValue"];
+    (vgm_c_stealth_lookingQueue deleteAt 0) params ["_lookingKey", "_lookingValue"];
     _lookingValue params ["_lookingUnit", "_seenAt"];
 
 

@@ -920,7 +920,9 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\stealth\client);
 
         class stealth_addPlayerFiredEH {};
-        class stealth_eachFrame {};
+        class stealth_eachFrame {
+            headerType = -1;
+        };
         class stealth_getLighting {};
         class stealth_getVisibilityForUnit {
             headerType = -1;
