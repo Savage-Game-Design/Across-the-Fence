@@ -1,21 +1,21 @@
 /*
-    File: fn_virtsquad_spawnLoop.sqf
-    Author:
+    File: fn_virtsquad_perFrame.sqf
+    Author: Savage Game Design
     Date: 2025-01-11
-    Last Update: 2025-01-16
+    Last Update: 2025-01-24
     Public: No
 
     Description:
-        No description added yet.
+        Schedules virtual squads to be spawed or despawned based on the presence of players.
 
     Parameter(s):
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        addMissionEventHandler ["EachFrame", vgm_c_fnc_virtsquad_perFrame]
  */
 
 if (vgm_s_virtsquad_playerQueue isEqualTo []) then {
@@ -28,7 +28,7 @@ if (vgm_s_virtsquad_spawnedSquadQueue isEqualTo []) then {
 
 // Check for any unspawned squads in range of players, and set them to spawn in.
 if (vgm_s_virtsquad_playerQueue isNotEqualTo []) then {
-    private _player = vgm_s_virtsquad_playerQueue deleteAt (count vgm_s_virtsquad_playerQueue - 1);
+    private _player = vgm_s_virtsquad_playerQueue deleteAt 0;
     if (!isNull _player) then {
         // This will always default to the global index if the mission doesn't exist, or virtsquads doesn't know about the mission.
         private _vSquadIndex = [[getPlayerID _player] call vgm_s_fnc_missions_getAssignedMissionId] call vgm_s_fnc_virtsquad_getMissionSquadsInfo get "vSquadIndex";
@@ -42,7 +42,7 @@ if (vgm_s_virtsquad_playerQueue isNotEqualTo []) then {
 
 // Check for any spawned squads with no players nearby, and schedule them to despawn.
 if (vgm_s_virtsquad_spawnedSquadQueue isNotEqualTo []) then {
-    private _squad = vgm_s_virtsquad_spawnedSquadQueue deleteAt (count vgm_s_virtsquad_spawnedSquadQueue - 1);
+    private _squad = vgm_s_virtsquad_spawnedSquadQueue deleteAt 0;
     // Need to check if it can be deleted - Make sure it isn't already deleted, or already despawned
     // This can happen because the queue isn't cleaned when things are despawned.
     if (!("group" in _squad) || "deleting" in _squad || "deleted" in _squad) exitWith {};

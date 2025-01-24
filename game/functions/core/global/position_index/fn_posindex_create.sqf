@@ -2,7 +2,7 @@
     File: fn_posindex_create.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-11
+    Last Update: 2025-01-24
     Public: Yes
 
     Description:
@@ -24,7 +24,7 @@
         - Simplify working with mapped types (e.g - a hashmap with a position key)
 
     Parameter(s):
-        _getItemPos - Converts an item into a position [CODE]
+        _fnc_getItemPos - Converts an item into a position [CODE]
         _items - Initial items to seed the index with [ARRAY]
 
     Returns:
@@ -38,7 +38,7 @@
 
  */
 
-params ["_getItemPos", ["_items", []]];
+params ["_fnc_getItemPos", ["_items", []]];
 
 private _positions = [];
 private _indexes = [];
@@ -46,7 +46,7 @@ private _indexes = [];
 private _itemsCopy = [] + _items;
 
 {
-    _positions pushBack (_x call _getItemPos);
+    _positions pushBack (_x call _fnc_getItemPos);
     _indexes pushBack _forEachIndex;
 } forEach _itemsCopy;
 
@@ -54,7 +54,7 @@ private _posIndex = createHashMapFromArray [
     ["positions", _positions],
     ["items", _itemsCopy],
     ["vacantSlots", []],
-    ["getItemPos", _getItemPos]
+    ["getItemPos", _fnc_getItemPos]
 ];
 
 // Return the indexes of all added items for the caller to use

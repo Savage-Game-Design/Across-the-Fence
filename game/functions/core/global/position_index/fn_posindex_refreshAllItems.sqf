@@ -2,7 +2,7 @@
     File: fn_posindex_refreshAllItems.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-10
+    Last Update: 2025-01-24
     Public: Yes
 
     Description:
@@ -22,11 +22,11 @@
 
 params ["_index"];
 
-private _getItemPos = _index get "getItemPos";
+private _fnc_getItemPos = _index get "getItemPos";
 private _positions = _index get "positions";
 
 {
     if (!isNil "_x") then {
-        _positions set [_forEachIndex, _x call _getItemPos];
+        _positions set [_forEachIndex, _x call _fnc_getItemPos];
     };
 } forEach (_index get "items");

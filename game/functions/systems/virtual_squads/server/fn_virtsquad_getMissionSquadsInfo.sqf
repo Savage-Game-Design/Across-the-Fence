@@ -3,7 +3,7 @@
     File: fn_virtsquad_getMissionSquadsInfo.sqf
     Author: Savage Game Design
     Date: 2025-01-16
-    Last Update: 2025-01-16
+    Last Update: 2025-01-24
     Public: No
 
     Description:
@@ -21,7 +21,7 @@
         [[_playerId] call vgm_s_fnc_missions_getAssignedMissionId] call vgm_s_fnc_virtsquad_getMissionSquadsInfo
  */
 
-params ["_missionId"];
+params [["_missionId", GLOBAL_MISSION_ID]];
 
 // With the various loops that monitor spawning, it's possible to be trying to get info on a mission which hasn't been
 // instantiated yet. Until that's ready, we use the global mission info to ensure there's always a valid object.

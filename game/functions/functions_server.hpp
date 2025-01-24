@@ -357,7 +357,7 @@ class vgm_s
         class skills_handle_skillsDataRequest {};
     };
 
-    class virtual_squads
+    class virtsquad
     {
         VGM_SERVER_PATH(\systems\virtual_squads\server);
 
@@ -367,7 +367,9 @@ class vgm_s
         class virtsquad_despawn {};
         class virtsquad_destroyGroup {};
         class virtsquad_getMissionSquadsInfo {};
-        class virtsquad_perFrame {};
+        class virtsquad_perFrame {
+            headerType = -1;
+        };
         class virtsquad_postInit {
             postInit = 1;
         };
