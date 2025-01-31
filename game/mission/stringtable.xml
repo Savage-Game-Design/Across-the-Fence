@@ -720,9 +720,6 @@
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_TIP">
             <Original>Recon teams were heavily outnumbered by the NVA, and tried to avoid contact when possible.</Original>
         </Key>
-        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_SCOUTING_DESCRIPTION">
-            <Original>The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to identify the site type if you're unsure.</Original>
-        </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION">
             <Original>Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.</Original>
         </Key>

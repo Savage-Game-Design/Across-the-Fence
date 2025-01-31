@@ -2,11 +2,11 @@
     File: fn_setVisibleForDuration.sqf
     Author: Savage Game Design
     Date: 2025-01-19
-    Last Update: 2025-01-19
+    Last Update: 2025-01-31
     Public: Yes
 
     Description:
-        Sets the player visible for a specified length of time.
+        Sets the player visible for at most the specified length of time.
 
         Uses the longest time possible. E.g - If a player is set as visible for 30 seconds, another
         call to set them visible for 3 seconds won't override that.

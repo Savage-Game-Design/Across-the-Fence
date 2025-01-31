@@ -2,7 +2,7 @@
     File: fn_stealth_addPlayerFiredEH.sqf
     Author: Savage Game Design
     Date: 2025-01-22
-    Last Update: 2025-01-22
+    Last Update: 2025-01-31
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ if (_ehId > -1) exitWith {_ehId};
 
 // Use "FiredMan" instead of "Fired" in case they're in a static weapon.
 _ehId = _unit addEventHandler ["FiredMan", {
-    params ["_unit", "_weapon", "", "", "", "", ""];
+    params ["_unit", "_weapon"];
 
     if (_weapon in ["Put"]) exitWith {};
 

@@ -2,7 +2,7 @@
     File: fn_stealth_setVisible.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-20
+    Last Update: 2025-01-31
     Public: No
 
     Description:
@@ -20,13 +20,14 @@
 
 params ["_isVisible"];
 
-if (_isVisible) then {
+if (_isVisible) exitWith {
     // Not persistent on respawn, as status effect will clear on respawn.
     [player, "camouflage", "stealth_visible", 1, false] call vgm_c_fnc_coefficient_set;
     vgm_c_stealth_isVisible = true;
-} else {
-    [player, "camouflage", "stealth_visible"] call vgm_c_fnc_coefficient_remove;
-    vgm_c_stealth_visibleUntil = nil;
-    vgm_c_stealth_isVisible = false;
-}
+};
+
+[player, "camouflage", "stealth_visible"] call vgm_c_fnc_coefficient_remove;
+// Clear this as it's a maximum duration, and visibility has ended.
+vgm_c_stealth_visibleUntil = nil;
+vgm_c_stealth_isVisible = false;
 

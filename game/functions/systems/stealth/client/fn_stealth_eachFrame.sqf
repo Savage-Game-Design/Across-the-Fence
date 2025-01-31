@@ -3,7 +3,7 @@
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-24
+    Last Update: 2025-01-31
     Public: No
 
     Description:
@@ -39,12 +39,12 @@ if (!isNil "vgm_c_stealth_visibleUntil" && { vgm_c_stealth_visibleUntil < time }
 // Make the player visible *after* we make them hidden, if necessary.
 // Delayed visibility takes priority over re-hiding the player, otherwise they
 // might get away with doing something that should make them visible.
-if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) then {
-    [vgm_c_stealth_visibleIn # 1] call vgm_c_fnc_stealth_setVisibleForDuration;
-    vgm_c_stealth_visibleIn = nil;
+if (!isNil "vgm_c_stealth_visibleAt" && { vgm_c_stealth_visibleAt # 0 < time }) then {
+    [vgm_c_stealth_visibleAt # 1] call vgm_c_fnc_stealth_setVisibleForDuration;
+    vgm_c_stealth_visibleAt = nil;
 };
 
-[] call {
+call {
     // Could repeatedly check if nobody is nearby, but that's fine - nearEntities is very fast (0.007ms on Spoffy's PC)
     if (vgm_c_stealth_entityCheckQueue isEqualTo [] || vgm_c_stealth_lastEntityQueueScanPos distance2D player > 40) then {
         // Another syntax allows us to do an "alive" check, but it might be stale by the time we process it.
@@ -71,7 +71,7 @@ if (!isNil "vgm_c_stealth_visibleIn" && { vgm_c_stealth_visibleIn # 0 < time }) 
 
 call {
     if (vgm_c_stealth_lookingQueue isEqualTo []) then {
-        // Need the key for deletion, as dead units have their hashValue changed.
+        // Need the key for deletion, as deleted units have their hashValue changed.
         vgm_c_stealth_lookingQueue = vgm_c_stealth_looking toArray false;
     };
 

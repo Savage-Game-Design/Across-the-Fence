@@ -2,13 +2,15 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-23
+    Last Update: 2025-01-31
     Public: No
 
     Description:
         Preinit for the stealth system.
 
 */
+
+if (!hasInterface) exitWith {};
 
 /////////////////
 // CONFIG VARS //
@@ -31,10 +33,15 @@ vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
 
 // True when the player is visible.
 vgm_c_stealth_isVisible = false;
-// Schedule when the player will become visible
+// Set a time when the player will become visible.
+// This is effectively a countdown timer.
+// It doesn't matter if the player becomes visible in the meantime, then goes back into stealth.
+// At this time - the player becomes visible.
 // Format: [when to make the player visible, duration of visibility]
-vgm_c_stealth_visibleIn = nil;
-// Schedule when the player will stop being visible
+vgm_c_stealth_visibleAt = nil;
+// Schedule when the player will stop being visible.
+// This is effectively a duration.
+// If the player stops being visible for any other reason, this should be cancelled.
 vgm_c_stealth_visibleUntil = nil;
 
 // Tracks where the player was when the entity check queue was last refreshed.

@@ -2,11 +2,13 @@
     File: fn_stealth_setVisibleForDurationAfterDelay.sqf
     Author: Savage Game Design
     Date: 2025-01-22
-    Last Update: 2025-01-22
+    Last Update: 2025-01-31
     Public: Yes
 
     Description:
         Sets the player visible for a specified length of time, after a delay.
+        The player will become visible after this delay, even if they become visible earlier
+        and go back to stealth.
 
         Subsequent calls will use the shortest delay, and the longest duration.
         The idea behind this is the player can get less stealthy, but not more.
@@ -27,13 +29,13 @@ params ["_delaySeconds", "_durationSeconds"];
 
 private _startTime = time + _delaySeconds;
 
-if (isNil "vgm_c_stealth_visibleIn") exitWith {
-    vgm_c_stealth_visibleIn = [_startTime, _durationSeconds];
+if (isNil "vgm_c_stealth_visibleAt") exitWith {
+    vgm_c_stealth_visibleAt = [_startTime, _durationSeconds];
 };
 
-vgm_c_stealth_visibleIn params ["_existingStartTime", "_existingDuration"];
+vgm_c_stealth_visibleAt params ["_existingStartTime", "_existingDuration"];
 
-vgm_c_stealth_visibleIn = [
+vgm_c_stealth_visibleAt = [
     _startTime min _existingStartTime,
     _durationSeconds max _existingDuration
 ];
