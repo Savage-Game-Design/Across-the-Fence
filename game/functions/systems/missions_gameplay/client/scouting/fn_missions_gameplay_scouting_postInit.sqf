@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2025-01-01
+    Last Update: 2025-01-17
     Public: No
 
     Description:
@@ -12,6 +12,7 @@
 if (!hasInterface) exitWith {};
 
 vgm_scouting_locations = createHashMap;
+vgm_scouting_objectPointsCache = createHashMap;
 
 vgm_scouting_siteTypes = "getNumber (_x >> 'disabled') == 0" configClasses (missionConfigFile >> "vgm_site_types") apply {
     [

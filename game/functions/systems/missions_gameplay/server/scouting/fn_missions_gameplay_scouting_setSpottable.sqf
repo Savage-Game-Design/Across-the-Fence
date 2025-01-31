@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_setSpottable.sqf
     Author: Savage Game Design
     Date: 2024-08-11
-    Last Update: 2024-08-17
+    Last Update: 2025-01-10
     Public: No
 
     Description:
@@ -16,7 +16,7 @@
         Something [BOOL]
 
     Example(s):
-        _object call vgm_g_fnc_missions_gameplay_scouting_setSpottable
+        _object call vgm_s_fnc_missions_gameplay_scouting_setSpottable
  */
 
 params [

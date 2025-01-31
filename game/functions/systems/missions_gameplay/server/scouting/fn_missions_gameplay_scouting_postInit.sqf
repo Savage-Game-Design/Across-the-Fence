@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_postInit.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-12-06
+    Last Update: 2025-01-15
     Public: No
 
     Description:
@@ -26,12 +26,15 @@ if (!isServer) exitWith {};
     _missionId call vgm_s_fnc_missions_gameplay_scouting_onMissionEnded;
 }] call para_g_fnc_event_subscribeServer;
 
+vgm_scouting_spottableBlacklist = ["Land_vn_o_wallfoliage_01", "Land_vn_vegetation_base"];
+
 ["vgm_sites_siteSpawned", {
     (_this#0) params ["_site"];
 
     {
-        if (_x isKindOf "Land_vn_vegetation_base") then {continue};
-        [_x, _site] call vgm_s_fnc_missions_gameplay_scouting_setSpottable;
+        private _object = _x;
+        if (vgm_scouting_spottableBlacklist findIf {_object isKindOf _x} > -1) then {continue};
+        [_object, _site] call vgm_s_fnc_missions_gameplay_scouting_setSpottable;
     } forEach (_site get "objects");
 }] call para_g_fnc_event_subscribeServer;
 

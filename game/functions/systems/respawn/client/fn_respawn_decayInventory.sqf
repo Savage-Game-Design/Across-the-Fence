@@ -2,7 +2,7 @@
     File: fn_respawn_decayInventory.sqf
     Author: Savage Game Design
     Date: 2024-12-06
-    Last Update: 2024-12-06
+    Last Update: 2025-01-19
     Public: No
 
     Description:
@@ -12,7 +12,7 @@
         _unit - Unit to decay the inventory of [OBJECT]
 
     Returns:
-        Nothing
+        Removed item counts [ARRAY]
 
     Example(s):
         player call vgm_c_fnc_respawn_decayInventory
@@ -32,6 +32,7 @@ private _minCounts = createHashMapFromArray [
     ["Magazine", 1]
 ];
 
+private _removedItems = [];
 {
     _x params ["_item", "_count"];
     private _itemType = _item call vgm_g_fnc_itemType;
@@ -39,13 +40,17 @@ private _minCounts = createHashMapFromArray [
 
     private _toRemove = (_count * 0.25) max 1;
     private _remaining = floor (_count - _toRemove) max _minAmount;
+    private _countToRemove = _count - _remaining;
+    if (_countToRemove < 1) then {continue};
 
     format ["Decaying item amount: %1, from %2 to %3", _item, _count, _remaining] call vgm_g_fnc_logInfo;
 
-    for "_i" from 1 to (_count - _remaining) do {
+    _removedItems pushBack [_countToRemove, _item];
+
+    for "_i" from 1 to _countToRemove do {
         _unit removeItem _item;
     };
 
 } forEach _itemCounts;
 
-
+_removedItems // return

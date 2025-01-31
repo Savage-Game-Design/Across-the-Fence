@@ -16,6 +16,7 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class itemConfig {};
         class itemType {};
         class objectArea {};
         class nearestPointOnLine {};
@@ -555,6 +556,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\missions_zones\client);
 
+        class missions_zones_getSites {};
         class missions_zones_openMissionsDialog {};
     };
     class missions_zones_remoteExec
@@ -719,12 +721,14 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\respawn\client);
 
         class respawn_decayInventory {};
+        class respawn_onPauseMenu {};
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
         class respawn_preInit
         {
             preInit = 1;
         };
+        class respawn_showRespawnInfo {};
     };
 
     class skills
