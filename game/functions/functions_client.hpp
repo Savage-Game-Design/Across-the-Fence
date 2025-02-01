@@ -31,6 +31,21 @@ class vgm_g
         };
     };
 
+    class core_position_index
+    {
+        VGM_GLOBAL_PATH(\core\global\position_index);
+
+        class posindex_add {};
+        class posindex_create {};
+        class posindex_delete {};
+        class posindex_deleteAt {};
+        class posindex_get {};
+        class posindex_inAreaArray {};
+        class posindex_inAreaArrayIndexes {};
+        class posindex_refreshAllItems {};
+        class posindex_refreshItemInSlot {};
+    };
+
     class debug
     {
         VGM_GLOBAL_PATH(\debug\global);

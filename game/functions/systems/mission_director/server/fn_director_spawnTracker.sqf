@@ -2,7 +2,7 @@
     File: fn_director_spawnTracker.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2024-12-05
+    Last Update: 2025-01-16
     Public: Yes
 
     Description:
@@ -12,7 +12,7 @@
 
 
     Returns:
-        The group created, or grpNull if nothing could be spawned. [GROUP]
+        The squad created, or nil if a squad couldn't be spawned. [GROUP]
 
     Example(s):
         [parameter] call vgm_X_fnc_component_myFunction
@@ -36,14 +36,11 @@ private _spawnPos = {
     };
 } forEachReversed _trackPositions;
 
-if (isNil "_spawnPos") exitWith { grpNull };
+if (isNil "_spawnPos") exitWith { nil };
 
 private _unitCount = count _players + 2;
 
-private _group = [vgm_s_director_tracker_classes select [0, _unitCount], east, _spawnPos, _missionId] call vgm_s_fnc_ai_createEnemySquad;
-[_mission, [_group]] call vgm_s_fnc_director_registerGroups;
+private _template = [vgm_s_director_tracker_classes select [0, _unitCount], _spawnPos, _missionId] call vgm_s_fnc_director_getEnemySquadTemplate;
+private _squad = [_template] call vgm_s_fnc_virtsquad_create;
 
-_directorData get "dynamicAiGroups" pushBack _group;
-
-_group
-
+_squad

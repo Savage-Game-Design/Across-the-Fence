@@ -46,7 +46,6 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\ai\server);
 
-        class ai_createEnemySquad {};
     };
 
     class behaviour_trees_trees
@@ -80,9 +79,10 @@ class vgm_s
         class director_preInit {
             preInit = 1;
         };
+        class director_getDirectorForMissionId {};
+        class director_getEnemySquadTemplate {};
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
-        class director_registerGroups {};
         class director_spawnInitialPatrols {};
         class director_spawnTracker {};
         class director_startMission {};
@@ -109,6 +109,7 @@ class vgm_s
         class missions_createMission {};
         class missions_endMission {};
         class missions_getAssignedMission {};
+        class missions_getAssignedMissionId {};
         class missions_getById {};
         class missions_joinMission {};
         class missions_leaveMission {};
@@ -355,5 +356,28 @@ class vgm_s
         class skills_handle_skillLearnRequest {};
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
+    };
+
+    class virtsquad
+    {
+        VGM_SERVER_PATH(\systems\virtual_squads\server);
+
+        class virtsquad_create {};
+        class virtsquad_createMissionSquadsInfo {};
+        class virtsquad_delete {};
+        class virtsquad_despawn {};
+        class virtsquad_destroyGroup {};
+        class virtsquad_getMissionSquadsInfo {};
+        class virtsquad_perFrame {
+            headerType = -1;
+        };
+        class virtsquad_postInit {
+            postInit = 1;
+        };
+        class virtsquad_preinit {
+            preInit = 1;
+        };
+        class virtsquad_spawn {};
+        class virtsquad_spawnLoop {};
     };
 };

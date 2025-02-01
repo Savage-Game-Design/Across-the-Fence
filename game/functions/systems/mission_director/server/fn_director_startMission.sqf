@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-12-05
+    Last Update: 2025-01-16
     Public: Yes
 
     Description:
@@ -32,12 +32,10 @@ private _directorData = _mission getOrDefault ["director", createHashMap, true];
 
 // Overall "alertness" level of enemy forces. Changes scale of the enemy response.
 _directorData set ["alertness", 0];
-// AI groups that currently exist on this mission
-_directorData set ["aiGroups", []];
-// AI that are initially spawned, e.g patrols or static gunners.
-_directorData set ["initialAiGroups", []];
-// AI spawned by the director over the course of the mission.
-_directorData set ["dynamicAiGroups", []];
+// Virtual squads assigned to this mission
+_directorData set ["virtualSquads", createHashMap];
+// Spawned groups for each virtual squad. Helps with JIP and event handling.
+_directorData set ["virtualSquadGroups", createHashMap];
 // Tracks when the last tracker squad was sent at the players
 _directorData set ["lastTrackerSent", -9999];
 

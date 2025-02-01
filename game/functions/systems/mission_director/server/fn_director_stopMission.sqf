@@ -2,7 +2,7 @@
     File: fn_director_stopMonitoringMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2024-12-14
+    Last Update: 2025-01-16
     Public: Yes
 
     Description:
@@ -37,11 +37,8 @@ private _directorData = _mission get "director";
 if (isNil "_directorData") exitWith {}; // mission was not started, no data
 
 {
-    {
-        deleteVehicle _x;
-    } forEach units _x;
-    deleteGroup _x;
-} forEach (_directorData getOrDefault ["aiGroups", []]);
+    [_x] call vgm_s_fnc_virtsquad_delete;
+} forEach values (_directorData getOrDefault ["virtualSquads", createHashMap]);
 
 // Removes the job from the scheduler after it next runs.
 [_directorData get "schedulerJob"] call para_g_fnc_scheduler_remove_job;
