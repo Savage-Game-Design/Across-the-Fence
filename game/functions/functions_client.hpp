@@ -919,6 +919,30 @@ class vgm_c
         class stamina_unitInit {};
     };
 
+    class stealth
+    {
+        VGM_CLIENT_PATH(\systems\stealth\client);
+
+        class stealth_addPlayerFiredEH {};
+        class stealth_eachFrame {
+            headerType = -1;
+        };
+        class stealth_getLighting {};
+        class stealth_getVisibilityForUnit {
+            headerType = -1;
+        };
+        class stealth_isVisibleToUnit {};
+        class stealth_postInit {
+            postInit = 1;
+        };
+        class stealth_preInit {
+            preInit = 1;
+        };
+        class stealth_setVisible {};
+        class stealth_setVisibleForDuration {};
+        class stealth_setVisibleForDurationAfterDelay {};
+    };
+
     class suppression
     {
         VGM_CLIENT_PATH(\systems\suppression\client);

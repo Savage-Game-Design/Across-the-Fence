@@ -2,7 +2,7 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2025-01-17
+    Last Update: 2025-01-19
     Public: No
 
     Description:
@@ -23,12 +23,12 @@
 
 ["camouflage", {
     params ["_unit", "_value"];
-    _unit setUnitTrait ["camouflageCoef", _value max 0.1 min 1];
+    _unit setUnitTrait ["camouflageCoef", _value max 0 min 1];
 }] call vgm_c_fnc_coefficient_create;
 
 ["audible", {
     params ["_unit", "_value"];
-    _unit setUnitTrait ["audibleCoef", _value max 0.1 min 1];
+    _unit setUnitTrait ["audibleCoef", _value max 0 min 1];
 }] call vgm_c_fnc_coefficient_create;
 
 ["recoil", {

@@ -125,6 +125,22 @@ class vgm {
 class vgm_missions {
     logicalOrder = 3;
     displayName = __EVAL(format [localize 'STR_VGM_FIELD_MANUAL_VGM_MISSIONS', localize 'STR_VGM_MISSION_NAME']);
+    class stealth {
+        displayName = "$STR_VGM_FIELD_MANUAL_STEALTH";
+        description = "$STR_VGM_FIELD_MANUAL_STEALTH_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_STEALTH_TIP";
+        image = "\a3\ui_f\data\gui\cfg\hints\Pheripheal_vision_ca.paa";
+        arguments[] = 
+            {
+                "localize 'STR_VGM_MISSION_NAME'",
+            };
+        class Hints {
+            class stealth {
+                description = "$STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION";
+            };
+        };
+        logicalOrder = 1;
+    };
     class scouting {
         displayName = "$STR_VGM_FIELD_MANUAL_SCOUTING";
         description = "$STR_VGM_FIELD_MANUAL_SCOUTING_DESC";
@@ -140,7 +156,7 @@ class vgm_missions {
                 description = "$STR_VGM_FIELD_MANUAL_SCOUTING_HINT_SCOUTING_DESCRIPTION";
             };
         };
-        logicalOrder = 1;
+        logicalOrder = 2;
     };
     class hints {
         displayName = "$STR_VGM_FIELD_MANUAL_HINTS";
@@ -152,7 +168,7 @@ class vgm_missions {
                 description = "$STR_VGM_FIELD_MANUAL_HINTS_HINT_GLINT_SEEN_DESCRIPTION";
             };
         };
-        logicalOrder = 2;
+        logicalOrder = 3;
     };
     class stop_and_focus {
         displayName = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS";
@@ -163,7 +179,7 @@ class vgm_missions {
                 description = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_HINT_STOP_AND_FOCUS_DESCRIPTION";
             };
         };
-        logicalOrder = 3;
+        logicalOrder = 4;
     };
     class alertness {
         displayName = "$STR_VGM_FIELD_MANUAL_ALERTNESS";
@@ -174,6 +190,6 @@ class vgm_missions {
                 description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION";
             };
         };
-        logicalOrder = 4;
+        logicalOrder = 5;
     };
 };
