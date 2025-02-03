@@ -3,19 +3,29 @@
     Author: Savage Game Design
     Date: 2025-02-02
     Last Update: 2025-02-03
-    Public: No
+    Public: Yes
 
     Description:
-        No description added yet.
+        Executes provided code unscheduled once the condition is true, optionally can have a timeout and code executed upon the timeout.
 
     Parameter(s):
-        N/A
+        _condition - Callback to call for condition check [CODE]
+        _code - Callback to execute once condition is true [CODE]
+        _args - Arguments to pass to all callbacks [ANY]
+        _timeoutDelay - How long to wait for the timeout [NUMBER]
+        _timeoutCode - Callback to call on timeout [CODE]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [
+            {speed (_this#0) < 1},
+            {systemChat "standing still"},
+            [player],
+            5,
+            {systemChat "please stand still!"}
+        ] call vgm_g_fnc_waitUntilAndExecute;
  */
 
 #define REMOVE_ITEM vgm_core_waitUntilAndExecute_array deleteAt _forEachIndex;
@@ -59,3 +69,5 @@ if (vgm_core_waitUntilAndExecute_eh == -1) then {
 };
 
 vgm_core_waitUntilAndExecute_array pushBack [_condition, _code, _args, time + _timeoutDelay, _timeoutCode];
+
+nil
