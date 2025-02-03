@@ -4,7 +4,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2025-01-06
+    Last Update: 2025-02-03
     Public: No
 
     Description:
@@ -14,6 +14,7 @@
 if (!hasInterface) exitWith {};
 
 vgm_c_skill_investigate_intensity = 0;
+vgm_c_skill_investigate_isFocusing = false;
 
 [
     createHashMapFromArray [

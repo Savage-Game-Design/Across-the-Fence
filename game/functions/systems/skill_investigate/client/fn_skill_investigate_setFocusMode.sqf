@@ -1,8 +1,8 @@
 /*
     File: fn_skill_investigate_setFocusMode.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2025-01-05
-    Last Update: 2025-01-09
+    Last Update: 2025-02-04
     Public: No
 
     Description:
@@ -23,35 +23,39 @@
 
 params ["_enable"];
 
-private _isFocusing = missionNamespace getVariable ["vgm_c_skill_investigate_isFocusing", false];
-
-if (_enable && !_isFocusing && (call vgm_c_fnc_skill_investigate_canFocus)) exitWith {
-    player playActionNow "Stop";
-    [true] call vgm_c_fnc_skill_investigate_setDesaturation;
-    [true] call vgm_c_fnc_skill_investigate_setListenMode;
-    vgm_c_skill_investigate_isFocusing = true;
-    vgm_c_skill_investigate_focusPFEH = addMissionEventHandler ["EachFrame", {
-        if (call vgm_c_fnc_skill_investigate_canFocus) exitWith {};
-
-        // This should remove the event handler.
-        [false] call vgm_c_fnc_skill_investigate_setFocusMode;
-    }];
-};
-
-
-if (!_enable && _isFocusing) exitWith {
-    if (!(call vgm_c_fnc_skill_investigate_canFocus)) then {
-        hint localize "STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY";
-        playSoundUI ["\a3\ui_f_curator\Data\Sound\CfgSound\error02.wss", 0.1];
-    };
-
-    [false] call vgm_c_fnc_skill_investigate_setDesaturation;
-    [false] call vgm_c_fnc_skill_investigate_setListenMode;
-
-    if (!isNil "vgm_c_skill_investigate_focusPFEH") then {
-        removeMissionEventHandler ["EachFrame", vgm_c_skill_investigate_focusPFEH];
-        vgm_c_skill_investigate_focusPFEH = nil;
-    };
-
+if (!_enable) exitWith {
     vgm_c_skill_investigate_isFocusing = false;
 };
+
+if (vgm_c_skill_investigate_isFocusing) exitWith {};
+vgm_c_skill_investigate_isFocusing = true;
+
+[
+    {call vgm_c_fnc_skill_investigate_canFocus},
+    {
+        [true] call vgm_c_fnc_skill_investigate_setDesaturation;
+        [true] call vgm_c_fnc_skill_investigate_setListenMode;
+
+        // check if player can remain focused
+        [
+            {
+                !vgm_c_skill_investigate_isFocusing
+                || !(call vgm_c_fnc_skill_investigate_canFocus)
+            },
+            {
+                vgm_c_skill_investigate_isFocusing = false;
+                [false] call vgm_c_fnc_skill_investigate_setDesaturation;
+                [false] call vgm_c_fnc_skill_investigate_setListenMode;
+            },
+            _this
+        ] call vgm_g_fnc_waitUntilAndExecute;
+    },
+    nil,
+    0.4,
+    {
+        if (!vgm_c_skill_investigate_isFocusing) exitWith {};
+        vgm_c_skill_investigate_isFocusing = false;
+        hint localize "STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY";
+        playSoundUI ["\a3\ui_f_curator\Data\Sound\CfgSound\error02.wss", 0.1];
+    }
+] call vgm_g_fnc_waitUntilAndExecute;
