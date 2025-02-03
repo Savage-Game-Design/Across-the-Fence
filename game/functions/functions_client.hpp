@@ -29,6 +29,7 @@ class vgm_g
         class startScheduler {
             postInit = 1;
         };
+        class waitUntilAndExecute {};
     };
 
     class debug
