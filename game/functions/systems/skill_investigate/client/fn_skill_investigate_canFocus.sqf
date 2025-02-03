@@ -2,7 +2,7 @@
     File: fn_skill_investigate_canFocus.sqf
     Author:
     Date: 2025-01-05
-    Last Update: 2025-01-16
+    Last Update: 2025-02-04
     Public: Yes
 
     Description:
@@ -18,4 +18,10 @@
         [] call vgm_c_fnc_skill_investigate_canFocus;
  */
 
-vectorMagnitudeSqr velocity player < 1
+// bipod anims have varying names so simply check if it's deployed
+isWeaponDeployed player
+|| {
+    animationState player select [9, 3] isEqualTo "stp"
+    // checking animation "step" allows us to catch "odd" ones like rolling while prone
+    && vectorMagnitude (player getUnitMovesInfo 4) < 1 // return
+} // return
