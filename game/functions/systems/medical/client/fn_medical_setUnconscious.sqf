@@ -2,7 +2,7 @@
     File: fn_medical_setUnconscious.sqf
     Author: Savage Game Design
     Date: 2023-07-23
-    Last Update: 2024-08-24
+    Last Update: 2025-02-06
     Public: Yes
 
     Description:
@@ -21,18 +21,19 @@
 
 params ["_unit", ["_state", true]];
 
-private _previousLifeState = lifeState _unit;
-
 _unit setUnconscious _state;
 _unit setCaptive _state;
 
-if (lifeState _unit != _previousLifeState) then {
+private _previousLifeState = _unit getVariable "vgm_g_medical_isUnconscious";
+
+if (_previousLifeState != _state) then {
+    _unit setVariable ["vgm_g_medical_isUnconscious", _state, true];
+
     ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerServerAndLocal;
     // prevent being stuck in unconscious animation if no weapon
     if (!_state && {currentWeapon _unit == "" || (currentWeapon _unit == binocular _unit)}) then {
         _unit playMoveNow "UnconsciousOutProne";
     };
-    ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerServerAndcLocal;
 };
 
 nil

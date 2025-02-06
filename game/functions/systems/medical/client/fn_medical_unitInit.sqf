@@ -3,7 +3,7 @@
     File: fn_medical_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-12-03
-    Last Update: 2024-12-06
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -46,3 +46,5 @@ private _respawnActionsEH = _unit addEventHandler ["Respawn", {
 }];
 
 _unit setVariable ["vgm_c_medical_respawnActionsEH", _respawnActionsEH];
+
+_unit setVariable ["vgm_g_medical_isUnconscious", false, true];
