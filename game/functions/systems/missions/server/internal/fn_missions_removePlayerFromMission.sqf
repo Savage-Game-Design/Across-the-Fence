@@ -38,7 +38,7 @@ _mission get "machineIds" deleteAt _playerId;
 
 private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
 // joinSilent seems to sometimes mysteriously fail. RemoteExec'ing is an attempt to solve that.
-[_playerUnit, vgm_core_lobbyGroup] remoteExec ["joinSilent", _playerUnit];
+[[_playerUnit], vgm_core_lobbyGroup] remoteExec ["joinSilent", _playerUnit];
 
 [
     "player removed from mission",
