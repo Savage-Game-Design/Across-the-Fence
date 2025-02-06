@@ -3,7 +3,7 @@
     File: fn_medical_removeWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2024-11-30
+    Last Update: 2025-02-06
     Public: Yes
 
     Description:
@@ -32,7 +32,7 @@ private _woundIntensity = (_previousWoundIntensity - _removeWoundIntensity) max 
 
 _unit setVariable [_varDamage, _woundIntensity, true];
 
-if (lifeState _unit == "INCAPACITATED") then {
+if (_unit call vgm_g_fnc_medical_isUnconscious) then {
     private _severelyWounded = WOUND_MAX in (BODY_PARTS_ARR apply {[_unit, _x] call vgm_c_fnc_medical_getWound});
     if (!_severelyWounded) then {
         [_unit, false] call vgm_c_fnc_medical_setUnconscious;

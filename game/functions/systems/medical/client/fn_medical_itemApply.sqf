@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2024-02-10
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -37,7 +37,7 @@ private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_c
     params ["_args", "_startedAt", "_duration"];
     _args params ["_healer", "_patient", "", "_itemData"];
 
-    if (lifeState _healer == "INCAPACITATED") exitWith {
+    if (_healer call vgm_g_fnc_medical_isUnconscious) exitWith {
         false // return
     };
 
@@ -75,7 +75,7 @@ private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_c
 }, {
     (_this#0) params ["_healer", "_patient"];
 
-    if (lifeState _healer != "INCAPACITATED") then {
+    if !(_healer call vgm_g_fnc_medical_isUnconscious) then {
         [_patient] spawn vgm_c_fnc_medical_openMedicalMenu;
         _healer switchMove (_healer getVariable "vgm_c_medical_itemDoneAnim");
     } else {

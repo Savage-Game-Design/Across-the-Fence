@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-01-16
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -120,7 +120,7 @@ vgm_s_director_attack_classes = [
         if (isNil "_mission") exitWith {};
 
         private _playersOnMission = units _unit;
-        private _alivePlayers = _playersOnMission select {alive _x && {lifeState _x != "INCAPACITATED"}};
+        private _alivePlayers = _playersOnMission select {alive _x && {!(_x call vgm_g_fnc_medical_isUnconscious)}};
 
         if (_alivePlayers isNotEqualTo []) exitWith {};
 

@@ -24,9 +24,9 @@ params ["_unit", ["_state", true]];
 _unit setUnconscious _state;
 _unit setCaptive _state;
 
-private _previousLifeState = _unit getVariable "vgm_g_medical_isUnconscious";
+private _previousState = _unit getVariable "vgm_g_medical_isUnconscious";
 
-if (_previousLifeState != _state) then {
+if (_previousState != _state) then {
     _unit setVariable ["vgm_g_medical_isUnconscious", _state, true];
 
     ["vgm_medical_unconscious", [_unit, _state]] call para_g_fnc_event_triggerServerAndLocal;

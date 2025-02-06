@@ -2,7 +2,7 @@
     File: fn_carry_detachRequest.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2023-12-06
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ format ["Detaching: %1 | %2", _unit, _target] call vgm_g_fnc_logInfo;
 [_target, ([
     "AmovPpneMstpSnonWnonDnon",
     "UnconsciousReviveDefault"
-] select (lifeState _target == "INCAPACITATED"))] remoteExec ["switchMove"];
+] select (_target call vgm_g_fnc_medical_isUnconscious))] remoteExec ["switchMove"];
 
 private _detachPos = _unit modelToWorldWorld (_unit selectionPosition "RightShoulder" vectorAdd [0,0.1,0]);
 private _detachDir = getDir _target - 90;
@@ -34,7 +34,7 @@ detach _target;
 _target setPosWorld _detachPos;
 _target setDir _detachDir;
 
-if (lifeState _unit != "INCAPACITATED") then {
+if !(_unit call vgm_g_fnc_medical_isUnconscious) then {
     [_unit, ""] remoteExec ["switchMove"];
 };
 
