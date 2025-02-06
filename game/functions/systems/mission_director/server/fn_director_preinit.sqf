@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-01-16
+    Last Update: 2025-02-03
     Public: No
 
     Description:
@@ -109,22 +109,33 @@ vgm_s_director_attack_classes = [
     {
         (_this # 0) params ["_unit", "_state"];
 
+        private _playerId = getPlayerID _unit;
+        private _logPrefix = format ["Director: Player %1 (ID: %2) unconscious", name _unit, _playerId];
+
         if (!_state) exitWith {};
 
-        private _playerId = getPlayerID _unit;
-
-        if !([getPlayerID _unit] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {};
+        if !([getPlayerID _unit] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {
+            [format ["%1 - Failed remoteExecOwner check", _logPrefix]] call vgm_g_fnc_logWarn;
+        };
 
         private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;
 
-        if (isNil "_mission") exitWith {};
+        if (isNil "_mission") exitWith {
+            [format ["%1 - Not on a mission", _logPrefix]] call vgm_g_fnc_logDebug;
+        };
 
+        private _missionId = _mission get "public" get "id";
+        _logPrefix = format ["%1 (Mission: %2)", _logPrefix, _missionId];
         private _playersOnMission = units _unit;
         private _alivePlayers = _playersOnMission select {alive _x && {lifeState _x != "INCAPACITATED"}};
 
-        if (_alivePlayers isNotEqualTo []) exitWith {};
+        if (_alivePlayers isNotEqualTo []) exitWith {
+            [format ["%1 - Mission continues - %2 out of %3 players are alive", _logPrefix, count _alivePlayers, count _playersOnMission]] call vgm_g_fnc_logDebug;
+        };
 
-        [_mission get "public" get "id", "FAILURE"] call vgm_s_fnc_missions_endMission;
+        [format ["%1 - No players alive, ending mission", _logPrefix]] call vgm_g_fnc_logDebug;
+
+        [_missionId, "FAILURE"] call vgm_s_fnc_missions_endMission;
     }
 ] call para_g_fnc_event_subscribe;
 
