@@ -34,6 +34,7 @@ private _respawnEH  = _unit addEventHandler ["Respawn", {
     params ["_unit"];
     _unit setCaptive false;
     {_unit setVariable [_x, nil, true]} forEach (allVariables _unit select {_x find "vgm_g_medical_wound$" == 0});
+    _unit setVariable ["vgm_g_medical_isUnconscious", false, true];
 }];
 
 _unit setVariable ["vgm_c_medical_handleDamageEH", _handleDamageEh];
