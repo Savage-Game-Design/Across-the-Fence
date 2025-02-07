@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2024-10-03
+    Last Update: 2025-02-03
     Public: No
 
     Description:
@@ -56,7 +56,9 @@ if (isNull (_missionPublic get "group")) then {
     [_missionPublic, "group", createGroup side vgm_core_lobbyGroup] call para_s_fnc_netmap_set;
 };
 
-[_playerId call vgm_s_fnc_player_fromId] joinSilent (_missionPublic get "group");
+// joinSilent seems to sometimes mysteriously fail. RemoteExec'ing is an attempt to solve that.
+private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
+[_playerUnit, _missionPublic get "group"] remoteExec ["joinSilent", _playerUnit];
 
 [
     "vgm_mission_attached",
