@@ -2,7 +2,7 @@
     File: fn_respawn_onPauseMenu.sqf
     Author: Savage Game Design
     Date: 2025-01-17
-    Last Update: 2025-01-17
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -19,6 +19,8 @@
  */
 
 #define IDC_BUTTON_RESPAWN 1010
+
+if (isNil {call vgm_c_fnc_missions_getCurrentMission}) exitWith {};
 
 params ["_display"];
 
