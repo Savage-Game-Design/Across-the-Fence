@@ -24,6 +24,7 @@ params ["_unit", ["_state", true]];
 _unit setUnconscious _state;
 _unit setCaptive _state;
 
+// Check "vgm_c_fnc_medical_isUnconscious" for why `lifeState` can't be used
 private _previousState = _unit getVariable "vgm_g_medical_isUnconscious";
 
 if (_previousState != _state) then {
