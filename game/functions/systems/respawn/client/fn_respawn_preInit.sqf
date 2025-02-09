@@ -2,7 +2,7 @@
     File: fn_respawn_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2025-01-17
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -18,7 +18,7 @@
     ["itemAdd", [
         "vgm_respawn_isAlone",
         {
-            private _units = (units player - [player]) select {alive _x && {lifeState _x != "INCAPACITATED"}};
+            private _units = (units player - [player]) select {alive _x && {!(_x call vgm_g_fnc_medical_isUnconscious)}};
             if (_units isEqualTo []) exitWith {}; // prevent respawn if everyone is down (mission fail)
             if ((_units inAreaArray [player, ALONE_DIST, ALONE_DIST]) isEqualTo []) then {
                 format ["Player %1 is downed and alone, respawning", player] call vgm_g_fnc_logInfo;
@@ -28,7 +28,7 @@
         3,
         "seconds",
         {true}, // execute condition
-        {lifeState player != "INCAPACITATED"} // abort condition, checked only if code ran
+        {!(player call vgm_g_fnc_medical_isUnconscious)} // abort condition, checked only if code ran
     ]] call BIS_fnc_loop;
 }] call para_g_fnc_event_subscribeLocal;
 

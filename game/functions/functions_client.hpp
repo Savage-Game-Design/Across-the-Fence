@@ -253,6 +253,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\medical\global);
 
+        class medical_isUnconscious {};
         class medical_postInit
         {
             postInit = 1;

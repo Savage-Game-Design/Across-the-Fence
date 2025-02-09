@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-01-05
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -91,7 +91,7 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
     params ["_missionId", "_mission", "_helicopter", "_helipad"];
     private _playerGroup = _mission get "public" get "group";
     waitUntil {
-        private _alivePlayers = units _playerGroup select {alive _x && lifeState _x != "INCAPACITATED"};
+        private _alivePlayers = units _playerGroup select {alive _x && !(_x call vgm_g_fnc_medical_isUnconscious)};
         _alivePlayers findIf {!(_x in _helicopter)} == -1 // all alive players are inside the heli
     };
 
