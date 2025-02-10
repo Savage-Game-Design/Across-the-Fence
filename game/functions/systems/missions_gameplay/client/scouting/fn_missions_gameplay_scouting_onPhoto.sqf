@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2025-01-23
+    Last Update: 2025-02-10
     Public: No
 
     Description:
@@ -66,14 +66,19 @@ private _fnc_getObjectPoints = {
     }, true] // return
 };
 
-// returns "foreground" site objects,
-// objects that are somewhat clearly visible in the photo
-private _fnc_getForegroundObjects = {
+private _fnc_getSpottableObjects = {
     params ["_site"];
 
     private _siteObjects = _site get "objects";
-    private _spottableObjects = _siteObjects select {_x getVariable ["vgm_missions_gameplay_scouting_spottable", false]};
+    _siteObjects select {_x getVariable ["vgm_missions_gameplay_scouting_spottable", false]} // return;
+};
 
+// returns "foreground" site objects,
+// objects that are somewhat clearly visible in the photo
+private _fnc_getForegroundObjects = {
+    params ["_spottableObjects"];
+
+    private _posBeg = eyePos _extern_player;
     private _objects = [];
     {
         #ifdef __A3_DEBUG__
@@ -84,7 +89,6 @@ private _fnc_getForegroundObjects = {
         private _visibleObjectPoints = [];
         _object setVariable ["vgm_scouting_visiblePoints", _visibleObjectPoints];
         {
-            private _posBeg = eyePos _extern_player;
             private _posEnd = _object modelToWorldWorld _x;
             if !(_posEnd call _fnc_isInFrame) then {continue};
 
@@ -111,12 +115,63 @@ private _fnc_getForegroundObjects = {
     _objects // return
 };
 
+private _fnc_getBackgroundObjects = {
+    params ["_spottableObjects", "_foregroundObjects"];
+
+    private _unspottedObjects = _spottableObjects - _foregroundObjects;
+
+    private _posEnd = eyePos _extern_player;
+    private _objects = [];
+    {
+        #ifdef __A3_DEBUG__
+            private _lineColor = [[1,0,0,1], [0,1,0,1], [0,0,1,1]] select (_forEachIndex%3);
+        #endif
+
+        private _object = _x;
+
+        {
+            private _posBeg = _object modelToWorldWorld _x;
+            if !(_posBeg call _fnc_isInFrame) then {continue};
+
+
+            private _intersects = lineIntersectsSurfaces [_posBeg, _posEnd, _object, _extern_player];
+            // this should not happen, if nothing occludes the object it should be in foreground objects,
+            // failsafe.
+            if (_intersects isEqualTo []) then {
+                _objects pushBack _object;
+                break;
+            };
+
+            (_intersects#0) params ["_intersectPosASL", "", "", "_intersectObject"];
+
+            // object is occluded by something not spottable, we consider it hidden
+            if !(_intersectObject getVariable ["vgm_missions_gameplay_scouting_spottable", false]) then {
+                #ifdef __A3_DEBUG__
+                    // private _lineText = format ["bg: %1", getModelInfo _object#0, getModelInfo _intersectObject#0];
+                    // vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posBeg, _lineText, _lineColor];
+                #endif
+                break;
+            };
+
+            #ifdef __A3_DEBUG__
+                private _lineText = format ["bg: %1 > %2", getModelInfo _object#0, getModelInfo _intersectObject#0];
+                vgm_scouting_debug_photoLines pushBack [ASLtoAGL _intersectPosASL, ASLtoAGL _posBeg, _lineText, _lineColor];
+            #endif
+
+            _objects pushBack _object;
+            break;
+        } forEach [[0,0,0.5]];
+    } forEach _unspottedObjects;
+
+    _objects // return
+};
+
 private _mission = call vgm_c_fnc_missions_getCurrentMission;
 private _sites = (_mission get "targetZone") call vgm_c_fnc_missions_zones_getSites;
 private _extern_player = focusOn;
 
 // gather sites that are on a screen
-private _visitbleSites = _sites select {
+private _visibleSites = _sites select {
     private _pos = +(_x get "pos");
     _pos set [2, getTerrainHeightASL _pos + 1.5];
     _pos call _fnc_isInFrame // return
@@ -129,13 +184,18 @@ private _photoData = createHashMap;
     private _perceivedDistance = ((_x get "pos") distance2d _extern_player) / _zoom;
     if (_perceivedDistance > 100) then {continue};
 
-    private _foregroundObjects = [_x] call _fnc_getForegroundObjects;
+    private _site = _x;
+    private _spottableObjects = _site call _fnc_getSpottableObjects;
+
+    private _foregroundObjects = [_spottableObjects] call _fnc_getForegroundObjects;
     // TODO in separate PR, check for "background" objects (objects which intersect one of the "foreground" ones)
     // and count them too, also add photo quality scoring
     if (count _foregroundObjects < 1) then {continue};
 
-    _photoData set [_x get "id", _foregroundObjects];
-} forEach _visitbleSites;
+    private _backgroundObjects = [_spottableObjects, _foregroundObjects] call _fnc_getBackgroundObjects;
+
+    _photoData set [_x get "id", [_foregroundObjects, _backgroundObjects, _spottableObjects]];
+} forEach _visibleSites;
 
 #ifdef __A3_DEBUG__
     if (is3DENPreview) then {
@@ -165,6 +225,7 @@ if (_photoData isEqualTo createHashMap) exitWith {};
 private _siteObjects = values _photoData # 0;
 
 // require at least one object with two visible points
+_siteObjects = _siteObjects#0;
 if (_siteObjects findIf {count (_x getVariable "vgm_scouting_visiblePoints") >= 2} == -1) exitWith {};
 
 private _cursorTarget = _siteObjects # 0;
