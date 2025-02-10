@@ -119,6 +119,10 @@ private _fnc_getBackgroundObjects = {
     params ["_spottableObjects", "_foregroundObjects"];
 
     private _unspottedObjects = _spottableObjects - _foregroundObjects;
+    {
+        _x setVariable ["vgm_missions_gameplay_scouting_occluded", nil];
+        _x setVariable ["vgm_missions_gameplay_scouting_dependents", nil];
+    } forEach _unspottedObjects;
 
     private _posEnd = eyePos _extern_player;
     private _objects = [];
@@ -144,22 +148,49 @@ private _fnc_getBackgroundObjects = {
 
             (_intersects#0) params ["_intersectPosASL", "", "", "_intersectObject"];
 
-            // object is occluded by something not spottable, we consider it hidden
-            if !(_intersectObject getVariable ["vgm_missions_gameplay_scouting_spottable", false]) then {
+            // object is occluded by something not spottable or occluded,
+            // we consider it hidden
+            if (
+                !(_intersectObject getVariable ["vgm_missions_gameplay_scouting_spottable", false])
+                || (_intersectObject getVariable ["vgm_missions_gameplay_scouting_occluded", false])
+            ) then {
                 #ifdef __A3_DEBUG__
                     // private _lineText = format ["bg: %1", getModelInfo _object#0, getModelInfo _intersectObject#0];
                     // vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posBeg, _lineText, _lineColor];
                 #endif
+
+                _object setVariable ["vgm_missions_gameplay_scouting_occluded", true];
+                {
+                    _x setVariable ["vgm_missions_gameplay_scouting_occluded", true];
+                } forEach (_object getVariable ["vgm_missions_gameplay_scouting_dependents", []]);
                 break;
             };
 
-            #ifdef __A3_DEBUG__
-                private _lineText = format ["bg: %1 > %2", getModelInfo _object#0, getModelInfo _intersectObject#0];
-                vgm_scouting_debug_photoLines pushBack [ASLtoAGL _intersectPosASL, ASLtoAGL _posBeg, _lineText, _lineColor];
-            #endif
+            // object is occluded by foreground object, we mark it and all its dependents as visible
+            if (_intersectObject in _foregroundObjects) then {
+                #ifdef __A3_DEBUG__
+                    private _lineText = format ["bg: %1 ==> %2", getModelInfo _object#0, getModelInfo _intersectObject#0];
+                    vgm_scouting_debug_photoLines pushBack [ASLtoAGL _intersectPosASL, ASLtoAGL _posBeg, _lineText, _lineColor];
 
-            _objects pushBack _object;
-            break;
+                    {
+                        private _lineText = format ["bg: %1 > %2", getModelInfo _x#0, getModelInfo _object#0];
+                        vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, getPosATL _x, _lineText, _lineColor];
+                    } forEach (_object getVariable ["vgm_missions_gameplay_scouting_dependents", []]);
+                #endif
+
+                _objects pushBack _object;
+                _objects append (_object getVariable ["vgm_missions_gameplay_scouting_dependents", []]);
+                _object setVariable ["vgm_missions_gameplay_scouting_dependents", []];
+                break;
+            };
+
+            // object is occluded by other "background" object that we've not checked yet
+            // mark it as dependent on the intersectObject
+            private _intersectDependents = _intersectObject getVariable ["vgm_missions_gameplay_scouting_dependents", []];
+            _intersectDependents pushBackUnique _object;
+            _intersectDependents insert [0, _object getVariable ["vgm_missions_gameplay_scouting_dependents", []], true];
+            _intersectObject setVariable ["vgm_missions_gameplay_scouting_dependents", _intersectDependents];
+
         } forEach [[0,0,0.5]];
     } forEach _unspottedObjects;
 
