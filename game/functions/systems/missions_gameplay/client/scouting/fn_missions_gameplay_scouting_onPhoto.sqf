@@ -248,20 +248,15 @@ private _photoData = createHashMap;
 
 if (_photoData isEqualTo createHashMap) exitWith {};
 
-// TODO this will get reworked once we will add photo quality/bonus XP
-// right now this is enough and any site object is good for us.
-// (server stores site reference on its spottable objects)
+// discard photo if it does not contain at least one site with at least one object with two clearly visible points
+if (
+    values _photoData findIf {
+        _x params ["_foregroundObjects"];
+        _foregroundObjects findIf {count (_x getVariable "vgm_scouting_visiblePoints") >= 2} > -1
+    } == -1
+) exitwith {};
 
-// get objects of any site in a photo (there can be multiple)
-private _siteObjects = values _photoData # 0;
-
-// require at least one object with two visible points
-_siteObjects = _siteObjects#0;
-if (_siteObjects findIf {count (_x getVariable "vgm_scouting_visiblePoints") >= 2} == -1) exitWith {};
-
-private _cursorTarget = _siteObjects # 0;
-
-GET_DISPLAY_MAP setVariable ["vgm_site_photoObject", _cursorTarget];
+GET_DISPLAY_MAP setVariable ["vgm_site_photoData", _photoData];
 ["refreshUI", GET_DISPLAY_MAP] call vgm_c_fnc_displayNotepad;
 
 [_cursorTarget] spawn {
@@ -269,9 +264,9 @@ GET_DISPLAY_MAP setVariable ["vgm_site_photoObject", _cursorTarget];
     openMap [true, false];
     waitUntil {!visibleMap};
 
-    if (!isNil {GET_DISPLAY_MAP getVariable "vgm_site_photoObject"}) then {
+    if (!isNil {GET_DISPLAY_MAP getVariable "vgm_site_photoData"}) then {
         playSoundUI ["hint"];
     };
-    GET_DISPLAY_MAP setVariable ["vgm_site_photoObject", nil];
+    GET_DISPLAY_MAP setVariable ["vgm_site_photoData", nil];
     ["refreshUI", GET_DISPLAY_MAP] call vgm_c_fnc_displayNotepad;
 };
