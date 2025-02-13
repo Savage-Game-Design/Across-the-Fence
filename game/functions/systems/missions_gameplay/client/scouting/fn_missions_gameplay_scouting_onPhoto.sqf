@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2025-02-10
+    Last Update: 2025-02-13
     Public: No
 
     Description:
@@ -22,6 +22,10 @@
 #define GET_DISPLAY_MAP (findDisplay 12)
 
 #ifdef __A3_DEBUG__
+
+#define DEBUG_FOREGROUND
+#define DEBUG_BACKGROUND
+
 if (is3DENPreview) then {
     vgm_scouting_debug_photoLines = [];
 };
@@ -100,7 +104,7 @@ private _fnc_getForegroundObjects = {
             };
             _visibleObjectPoints pushBack _posEnd;
 
-            #ifdef __A3_DEBUG__
+            #ifdef DEBUG_FOREGROUND
                 private _lineText = [format ["%1: %2 : %3", _vis, count _visibleObjectPoints, getModelInfo _object#0], format ["%1: %2", _vis, _forEachIndex]] select (count _visibleObjectPoints>1);
                 vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posEnd, _lineText, _lineColor];
             #endif
@@ -116,13 +120,9 @@ private _fnc_getForegroundObjects = {
 };
 
 private _fnc_getBackgroundObjects = {
-    params ["_spottableObjects", "_foregroundObjects"];
+    params ["_spottableObjects", "_foregroundObjects", "_siteObjects"];
 
     private _unspottedObjects = _spottableObjects - _foregroundObjects;
-    {
-        _x setVariable ["vgm_missions_gameplay_scouting_occluded", nil];
-        _x setVariable ["vgm_missions_gameplay_scouting_dependents", nil];
-    } forEach _unspottedObjects;
 
     private _posEnd = eyePos _extern_player;
     private _objects = [];
@@ -137,8 +137,7 @@ private _fnc_getBackgroundObjects = {
             private _posBeg = _object modelToWorldWorld _x;
             if !(_posBeg call _fnc_isInFrame) then {continue};
 
-
-            private _intersects = lineIntersectsSurfaces [_posBeg, _posEnd, _object, _extern_player];
+            private _intersects = lineIntersectsSurfaces [_posBeg, _posEnd, _object, _extern_player, false, 5];
             // this should not happen, if nothing occludes the object it should be in foreground objects,
             // failsafe.
             if (_intersects isEqualTo []) then {
@@ -148,50 +147,25 @@ private _fnc_getBackgroundObjects = {
 
             (_intersects#0) params ["_intersectPosASL", "", "", "_intersectObject"];
 
-            // object is occluded by something not spottable or occluded,
-            // we consider it hidden
-            if (
-                !(_intersectObject getVariable ["vgm_missions_gameplay_scouting_spottable", false])
-                || (_intersectObject getVariable ["vgm_missions_gameplay_scouting_occluded", false])
-            ) then {
-                #ifdef __A3_DEBUG__
-                    // private _lineText = format ["bg: %1", getModelInfo _object#0, getModelInfo _intersectObject#0];
-                    // vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, ASLtoAGL _posBeg, _lineText, _lineColor];
+            // object is occluded by something that's not a part of the site
+            if (isNull _intersectObject || !(_intersectObject in _siteObjects)) then {
+                #ifdef DEBUG_BACKGROUND
+                    private _lineText = format ["bg invalid: %1 - %2", getModelInfo _object#0, str _intersectObject];
+                    vgm_scouting_debug_photoLines pushBack [ASLToAGL _intersectPosASL, ASLtoAGL _posBeg, _lineText, _lineColor];
                 #endif
 
-                _object setVariable ["vgm_missions_gameplay_scouting_occluded", true];
-                {
-                    _x setVariable ["vgm_missions_gameplay_scouting_occluded", true];
-                } forEach (_object getVariable ["vgm_missions_gameplay_scouting_dependents", []]);
-                break;
+                continue;
             };
 
-            // object is occluded by foreground object, we mark it and all its dependents as visible
-            if (_intersectObject in _foregroundObjects) then {
-                #ifdef __A3_DEBUG__
-                    private _lineText = format ["bg: %1 ==> %2", getModelInfo _object#0, getModelInfo _intersectObject#0];
-                    vgm_scouting_debug_photoLines pushBack [ASLtoAGL _intersectPosASL, ASLtoAGL _posBeg, _lineText, _lineColor];
+            #ifdef DEBUG_BACKGROUND
+                private _lineText = format ["bg: %1", getModelInfo _object#0, getModelInfo _intersectObject#0];
+                vgm_scouting_debug_photoLines pushBack [ASLtoAGL _intersectPosASL, ASLtoAGL _posBeg, _lineText, _lineColor];
+            #endif
 
-                    {
-                        private _lineText = format ["bg: %1 > %2", getModelInfo _x#0, getModelInfo _object#0];
-                        vgm_scouting_debug_photoLines pushBack [ASLtoAGL _posBeg, getPosATL _x, _lineText, _lineColor];
-                    } forEach (_object getVariable ["vgm_missions_gameplay_scouting_dependents", []]);
-                #endif
+            _objects pushBack _object;
+            break;
 
-                _objects pushBack _object;
-                _objects append (_object getVariable ["vgm_missions_gameplay_scouting_dependents", []]);
-                _object setVariable ["vgm_missions_gameplay_scouting_dependents", []];
-                break;
-            };
-
-            // object is occluded by other "background" object that we've not checked yet
-            // mark it as dependent on the intersectObject
-            private _intersectDependents = _intersectObject getVariable ["vgm_missions_gameplay_scouting_dependents", []];
-            _intersectDependents pushBackUnique _object;
-            _intersectDependents insert [0, _object getVariable ["vgm_missions_gameplay_scouting_dependents", []], true];
-            _intersectObject setVariable ["vgm_missions_gameplay_scouting_dependents", _intersectDependents];
-
-        } forEach [[0,0,0.5]];
+        } forEach (_object call _fnc_getObjectPoints select [0, 2]);
     } forEach _unspottedObjects;
 
     _objects // return
@@ -223,7 +197,7 @@ private _photoData = createHashMap;
     // and count them too, also add photo quality scoring
     if (count _foregroundObjects < 1) then {continue};
 
-    private _backgroundObjects = [_spottableObjects, _foregroundObjects] call _fnc_getBackgroundObjects;
+    private _backgroundObjects = [_spottableObjects, _foregroundObjects, _x get "objects"] call _fnc_getBackgroundObjects;
 
     _photoData set [_x get "id", [_foregroundObjects, _backgroundObjects, _spottableObjects]];
 } forEach _visibleSites;
