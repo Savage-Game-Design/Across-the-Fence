@@ -2,7 +2,7 @@
     File: macros.inc
     Author: Savage Game Design
     Date: 2023-01-31
-    Last Update: 2024-11-25
+    Last Update: 2025-02-13
     Public: Yes
 
     Description:
@@ -31,8 +31,12 @@
 // Default text font, monospaced typewriter-style from SOG:PF
 #define VGM_FONT "tt2020base_vn"
 
-#define VGM_NOTEPAD_GRID_W (pixelW * pixelGridBase * 0.375)
-#define VGM_NOTEPAD_GRID_H (pixelH * pixelGridBase * 0.375)
+// UI was designed at "small" interface size, hence 0.55
+// https://community.bistudio.com/wiki/getResolution
+#define VGM_NOTEPAD_SIZE_FACTOR ((getResolution select 5) / 0.55)
+
+#define VGM_NOTEPAD_GRID_W ((pixelW * pixelGridBase * 0.375) * VGM_NOTEPAD_SIZE_FACTOR)
+#define VGM_NOTEPAD_GRID_H ((pixelH * pixelGridBase * 0.375) * VGM_NOTEPAD_SIZE_FACTOR)
 
 #define VGM_NOTEPAD_W (115 * VGM_NOTEPAD_GRID_W)
 #define VGM_NOTEPAD_H (151 * VGM_NOTEPAD_GRID_H)
