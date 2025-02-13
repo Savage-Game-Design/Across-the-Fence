@@ -438,6 +438,7 @@ class vgm_c
         class displayMenuBase {};
         class displayLoading {};
         class displayLevelIndicator {};
+        class displaySquad {};
     };
 
     class artillery

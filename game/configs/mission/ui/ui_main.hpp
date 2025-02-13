@@ -26,5 +26,6 @@ class RscTitles : ParadigmRscTitles
     {
         onLoad = "uiNamespace setVariable ['vgm_RscHealthTextures', _this select 0]";
     };
+    #include "VGM_RscSquad.hpp"
 };
 #include "VGM_DisplayTest.hpp"
