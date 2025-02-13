@@ -2,7 +2,7 @@
     File: fn_squad_ui_postInit.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2024-12-06
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -51,7 +51,7 @@ call {
 
     ["vgm_medical_woundAdded", {
         (_this#0) params ["_unit"];
-        if (lifeState _unit == "INCAPACITATED") exitWith {};
+        if (_unit call vgm_g_fnc_medical_isUnconscious) exitWith {};
 
         if ([_unit, "bleeding"] call vgm_c_fnc_statusEffect_get) exitWith {
             _unit setVariable ["vgm_squad_ui_icon", ICON_BLEEDING, true];
@@ -69,7 +69,7 @@ call {
 
     ["vgm_medical_woundRemoved", {
         (_this#0) params ["_unit"];
-        if (lifeState _unit == "INCAPACITATED") exitWith {};
+        if (_unit call vgm_g_fnc_medical_isUnconscious) exitWith {};
 
         if ([_unit, "bleeding"] call vgm_c_fnc_statusEffect_get) exitWith {};
 

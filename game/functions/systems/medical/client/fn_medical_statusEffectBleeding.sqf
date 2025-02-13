@@ -3,7 +3,7 @@
     File: fn_medical_statusEffectBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2023-10-08
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -48,7 +48,7 @@ format ["Starting bleed out loop: %1", _unit] call vgm_g_fnc_logInfo;
 private _eh = addMissionEventHandler ["EachFrame", {
     _thisArgs params ["_deltaT", "_unit"];
 
-    if (lifeState _unit == "INCAPACITATED") exitWith {
+    if (_unit call vgm_g_fnc_medical_isUnconscious) exitWith {
         if (isPlayer _unit) then {"vgm_medical_bleeding" cutText ["", "PLAIN"]};
         [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
     };

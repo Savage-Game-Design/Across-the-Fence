@@ -7,7 +7,7 @@ class VGM_RscNotepad
     type = 82; // https://community.bistudio.com/wiki/CT_OBJECT_CONTAINER
 
     model = __EVAL(getMissionPath "assets\notepad.p3d");
-    scale = 1;
+    scale = 1/VGM_NOTEPAD_SIZE_FACTOR;
     direction[] = {0, 0, 1};
     up[] = {0, 1, 0};
 

@@ -2,7 +2,7 @@
     File: fn_carry_attachLocal.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2023-12-06
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ if (!isNull (_target getVariable ["vgm_carry_carriedBy", objNull])) exitWith {
     [_unit, objNull] remoteExec ["vgm_c_fnc_carry_attachResponse", _unit];
 };
 
-if (!alive _unit || lifeState _unit == "INCAPACITATED") exitWith {
+if (!alive _unit || (_unit call vgm_g_fnc_medical_isUnconscious)) exitWith {
     format ["Carrier is downed, unable to carry: %1", _target] call vgm_g_fnc_logError;
     [_unit, objNull] remoteExec ["vgm_c_fnc_carry_attachResponse", _unit];
 };
