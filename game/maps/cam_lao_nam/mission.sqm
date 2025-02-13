@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=521;
+	toggles=649;
 	class ItemIDProvider
 	{
 		nextID=2523;
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={20132.881,14.970096,6618.4692};
-		dir[]={-0.7870791,-0.48545864,0.3806617};
-		up[]={-0.43703875,0.87425208,0.21136862};
-		aside[]={0.43540043,-7.4505806e-08,0.90026283};
+		pos[]={20073.338,12.925376,6611.0552};
+		dir[]={0.60508507,-0.69739801,0.38407192};
+		up[]={0.58880275,0.71668082,0.37373668};
+		aside[]={0.53590071,-1.2060627e-07,-0.84428364};
 	};
 };
 binarizationWanted=0;
@@ -2263,16 +2263,16 @@ class Mission
 				class Item1
 				{
 					dataType="Marker";
-					position[]={20084.699,4.9807343,6615.9434};
+					position[]={20072.027,4.9000244,6610.957};
 					name="vgm_shared_hub_respawn";
 					type="Empty";
 					angle=72.679558;
 					id=1331;
-					atlOffset=-4.7683716e-07;
+					atlOffset=2.4318695e-05;
 				};
 			};
 			id=1325;
-			atlOffset=-0.42228174;
+			atlOffset=-0.45077181;
 		};
 		class Item6
 		{
