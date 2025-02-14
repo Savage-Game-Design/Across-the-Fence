@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-11-24
+    Last Update: 2025-02-14
     Public: No
 
     Description:
@@ -166,7 +166,7 @@ switch _mode do {
         private _data = _missionPublic get "system_scouting";
         private _guessedSites = _data get "guessedSites";
 
-        private _isPhotoMode = !isNull (_display getVariable ["vgm_site_photoObject", objNull]);
+        private _isPhotoMode = createHashMap isNotEqualTo (_display getVariable ["vgm_site_photoData", createHashMap]);
 
         private _lastIndex = -1;
         {
@@ -192,29 +192,24 @@ switch _mode do {
             _ctrlIndex ctrlSetText format ["%1.", _lineIndex];
 
         //------------------- Add button to edit site type
-            private _ctrlItemButtonType = _display ctrlCreate ["VGM_ctrlButtonPictureKeepAspect", -1, _ctrlMain];
+            private _buttonClass = ["VGM_ctrlButtonPictureKeepAspectNotepad", "VGM_ctrlButtonPictureKeepAspectNotepadDisabled"] select _isPhotoMode;
+            private _ctrlItemButtonType = _display ctrlCreate [_buttonClass, -1, _ctrlMain];
             _ctrlMainChildren pushBack _ctrlItemButtonType;
             _ctrlItemButtonType ctrlSetPosition [
                 VGM_NOTEPAD_INDEX_W,
                 _lineIndex * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_EDIT_TYPE_W,
+                VGM_NOTEPAD_BTN_SMALL_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            _ctrlItemButtonType ctrlSetTextColor [0,0,0,1];
-            _ctrlItemButtonType ctrlSetBackgroundColor [0,0,0,0.05];
             _ctrlItemButtonType ctrlCommit 0;
 
             _ctrlItemButtonType setVariable ["vgm_id", _siteId];
             _ctrlItemButtonType setVariable ["vgm_index", _forEachIndex];
 
+            _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
+
             if (_isPhotoMode) then {
-                _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\Free.paa";
-                _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
-                    params ["_ctrlButton"];
-                    ["setLocationTypePhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
-                }];
             } else {
-                _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
                 _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];
                     ["setLocationTypeEnable", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
@@ -226,9 +221,9 @@ switch _mode do {
             _ctrlMainChildren pushBack _ctrlItem;
             // _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
             _ctrlItem ctrlSetPosition [
-                VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_EDIT_TYPE_W,
+                VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_BTN_SMALL_W,
                 _lineIndex * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_W - VGM_NOTEPAD_INDEX_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_EDIT_TYPE_W_PADDED,
+                VGM_NOTEPAD_W - VGM_NOTEPAD_INDEX_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_BTN_SMALL_W_PADDED - VGM_NOTEPAD_BTN_SMALL_W_PADDED,
                 VGM_NOTEPAD_LINE_H
             ];
             // _ctrlItem ctrlSetBackgroundColor [0,1,0,0.25];
@@ -237,6 +232,34 @@ switch _mode do {
                 _ctrlItem ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_SITE_TYPE_UNKNOWN";
             } else {
                 _ctrlItem ctrlSetText format ["%1, %2", _siteName, _dateText];
+            };
+
+        //------------------- Add button to assign a photo
+            private _buttonClass = ["VGM_ctrlButtonPictureKeepAspectNotepadDisabled", "VGM_ctrlButtonPictureKeepAspectNotepad"] select _isPhotoMode;
+            private _ctrlItemButtonPhoto = _display ctrlCreate [_buttonClass, -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlItemButtonPhoto;
+
+            _ctrlItemButtonPhoto ctrlSetPosition [
+                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_BTN_SMALL_W_PADDED,
+                _lineIndex * VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_BTN_SMALL_W,
+                VGM_NOTEPAD_LINE_H
+            ];
+            _ctrlItemButtonPhoto ctrlCommit 0;
+
+            _ctrlItemButtonPhoto setVariable ["vgm_id", _siteId];
+            _ctrlItemButtonPhoto setVariable ["vgm_index", _forEachIndex];
+
+            if (_isPhotoMode) then {
+                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_ca.paa";
+                _ctrlItemButtonPhoto ctrlAddEventHandler ["ButtonClick", {
+                    params ["_ctrlButton"];
+                    ["setLocationTypePhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                }];
+            } else {
+                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_empty_ca.paa";
+
+                ["setTooltip", [_ctrlItemButtonPhoto, "No photo"]] call SELF;
             };
 
         //------------------- Add button to edit site position
@@ -302,7 +325,7 @@ switch _mode do {
         _ctrlAddItem ctrlSetPosition [
             0,
             _lineIndex * VGM_NOTEPAD_LINE_H,
-            VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_EDIT_TYPE_W,
+            VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_BTN_SMALL_W,
             VGM_NOTEPAD_LINE_H
         ];
         _ctrlAddItem ctrlCommit 0;
