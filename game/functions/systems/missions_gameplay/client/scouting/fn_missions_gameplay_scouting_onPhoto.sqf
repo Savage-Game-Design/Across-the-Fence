@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2025-02-13
+    Last Update: 2025-02-14
     Public: No
 
     Description:
@@ -233,7 +233,7 @@ if (
 GET_DISPLAY_MAP setVariable ["vgm_site_photoData", _photoData];
 ["refreshUI", GET_DISPLAY_MAP] call vgm_c_fnc_displayNotepad;
 
-[_cursorTarget] spawn {
+[] spawn {
     sleep 0.3;
     openMap [true, false];
     waitUntil {!visibleMap};

@@ -26,7 +26,7 @@ _this = _params;
 
 #if __A3_DEBUG__
     if (_mode != "renderTooltip") then {
-        diag_log ["fn_displayNotepad", _this];
+        diag_log ["fn_displayNotepad", _mode, _this];
     };
 #endif
 
@@ -133,6 +133,7 @@ switch _mode do {
             "vgm_scouting_addedSiteClient",
             "vgm_scouting_spottedSiteClient",
             "vgm_scouting_siteTypeChangedClient",
+            "vgm_scouting_sitePhotoChangedClient",
             "vgm_scouting_markedSiteClient",
             "vgm_mission_started",
             "vgm_mission_ended"
@@ -170,7 +171,7 @@ switch _mode do {
 
         private _lastIndex = -1;
         {
-            _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId"];
+            _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId", "_photoData"];
             // TODO refactor into function
             private _siteName = (vgm_scouting_siteTypes param [vgm_scouting_siteTypes findIf {(_x#1) == _siteType}]) param [0, _siteType];
 
@@ -235,7 +236,10 @@ switch _mode do {
             };
 
         //------------------- Add button to assign a photo
-            private _buttonClass = ["VGM_ctrlButtonPictureKeepAspectNotepadDisabled", "VGM_ctrlButtonPictureKeepAspectNotepad"] select _isPhotoMode;
+            private _buttonClass = [
+                "VGM_ctrlButtonPictureKeepAspectNotepadDisabled",
+                "VGM_ctrlButtonPictureKeepAspectNotepad"
+            ] select (_isPhotoMode || _photoData isNotEqualTo createHashMap);
             private _ctrlItemButtonPhoto = _display ctrlCreate [_buttonClass, -1, _ctrlMain];
             _ctrlMainChildren pushBack _ctrlItemButtonPhoto;
 
@@ -251,15 +255,19 @@ switch _mode do {
             _ctrlItemButtonPhoto setVariable ["vgm_index", _forEachIndex];
 
             if (_isPhotoMode) then {
-                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_ca.paa";
+                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_add_ca.paa";
                 _ctrlItemButtonPhoto ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];
-                    ["setLocationTypePhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                    ["assignPhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
                 }];
             } else {
-                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_empty_ca.paa";
+                if (_photoData isEqualTo createHashMap) exitWith {
+                    _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_empty_ca.paa";
+                    ["setTooltip", [_ctrlItemButtonPhoto, "No photo"]] call SELF;
+                };
 
-                ["setTooltip", [_ctrlItemButtonPhoto, "No photo"]] call SELF;
+                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_ca.paa";
+                ["setTooltip", [_ctrlItemButtonPhoto, "Has photo"]] call SELF;
             };
 
         //------------------- Add button to edit site position
@@ -409,20 +417,19 @@ switch _mode do {
         } forEach vgm_scouting_siteTypes;
     };
 
-    case "setLocationTypePhoto": {
+    case "assignPhoto": {
         params ["_ctrlButton", "_siteId"];
         private _display = ctrlParent _ctrlButton;
 
-        private _siteObject = _display getVariable "vgm_site_photoObject";
-        if (isNil "_siteObject") exitWith {
-            "Object not specified for photo" call vgm_g_fnc_logError;
+        private _photoData = _display getVariable "vgm_site_photoData";
+        if (isNil "_photoData") exitWith {
+            "Invalid photo data" call vgm_g_fnc_logError;
         };
 
         // disable "photo mode"
-        _display setVariable ["vgm_site_photoObject", nil];
-        // openMap [false, false];
+        _display setVariable ["vgm_site_photoData", nil];
 
-        ["vgm_scouting_setSiteTypeFromObject", [_siteId, _siteObject, player]] call para_g_fnc_event_triggerServer;
+        ["vgm_scouting_setSitePhoto", [_siteId, _photoData, player]] call para_g_fnc_event_triggerServer;
     };
 
     /*
@@ -458,7 +465,7 @@ switch _mode do {
         private _ctrlTooltip = _display getVariable ["vgm_ctrlTooltip", controlNull];
 
         private _siteId = _display getVariable ["vgm_site_id", ""];
-        private _sitePhoto = _display getVariable ["vgm_site_photoObject", createHashMap];
+        private _sitePhoto = _display getVariable ["vgm_site_photoData", createHashMap];
         private _hoverTooltip = _display getVariable ["vgm_tooltip", ""];
 
         if (

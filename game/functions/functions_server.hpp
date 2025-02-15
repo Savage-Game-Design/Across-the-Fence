@@ -175,6 +175,7 @@ class vgm_s
 
         class missions_gameplay_scouting_handleAdded {};
         class missions_gameplay_scouting_handleMarked {};
+        class missions_gameplay_scouting_handleSetSitePhoto {};
         class missions_gameplay_scouting_handleSetSiteType {};
         class missions_gameplay_scouting_onMissionEnded {};
         class missions_gameplay_scouting_onMissionStarted {};

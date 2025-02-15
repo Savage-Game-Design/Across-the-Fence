@@ -33,4 +33,11 @@ class CfgNotifications
         description = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_POSITION_DESCRIPTION";
     };
 
+    class VGM_SitePhotoChanged: VGM_Default
+    {
+        title = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_EDITED_TITLE";
+        iconPicture = "\a3\ui_f\data\Map\Diary\Icons\diaryLocateTask_ca.paa";
+        description = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_PHOTO_DESCRIPTION";
+    };
+
 };

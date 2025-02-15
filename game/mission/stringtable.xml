@@ -554,6 +554,9 @@
         <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_POSITION_DESCRIPTION">
             <Original>%1 has changed position of site %2.</Original>
         </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_PHOTO_DESCRIPTION">
+            <Original>%1 has added photo of site %2.</Original>
+        </Key>
         <!-- -->
         <Key ID="STR_VGM_MISSIONS_SCOUTING_REPORT">
             <Original>Scouting report</Original>
