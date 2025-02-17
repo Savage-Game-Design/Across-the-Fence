@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2025-02-14
+    Last Update: 2025-02-17
     Public: No
 
     Description:
@@ -487,7 +487,7 @@ switch _mode do {
                 localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP" // return
             };
             if (_sitePhoto isNotEqualTo createHashMap) exitWith {
-                "Select site from the list to set its type from a photo" // return
+                "Select site from the list to assign a photo" // return
             };
 
             _hoverTooltip // return
