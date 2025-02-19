@@ -2,7 +2,7 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2025-02-17
+    Last Update: 2025-02-19
     Public: No
 
     Description:
@@ -74,11 +74,15 @@ call {
 
         // calculate XP for photos
         if (_guessPhoto isNotEqualTo createHashMap) then {
+            private _indent = [];
+            _indent resize 5;
+            _indent = _indent apply {"&#160;"} joinString "";
+
             private _photoObjects = _guessPhoto get (_matchedSite get "id");
             if (isNil "_photoObjects") exitWith {
                 format ["Photo does not contain site it is assigned too: %1", _guessId] call vgm_g_fnc_logInfo;
 
-                _milestones pushBack ["site_photo_invalid", 0];
+                _milestones pushBack ["site_photo_invalid", 0, [_indent]];
             };
 
             _photoObjects params ["_foregroundObjects", "_backgroundObjects", "_allSpottableObjects"];
@@ -87,7 +91,7 @@ call {
             if (_photoQuality < 15) exitWith {
                 format ["Photo quality too low: %1, %2", _guessId, _photoQuality] call vgm_g_fnc_logInfo;
 
-                _milestones pushBack ["site_photo_unusable", 0];
+                _milestones pushBack ["site_photo_unusable", 0, [_indent]];
             };
 
             format ["Photo usable: %1, %2", _guessId, _photoQuality] call vgm_g_fnc_logInfo;
@@ -95,16 +99,16 @@ call {
             // give XP dependend on photo quality
             _milestones pushBack ([] call {
                 if (_photoQuality < 35) exitWith {
-                    ["site_photo_blurry", 25];
+                    ["site_photo_blurry", 25, [_indent]];
                 };
                 if (_photoQuality <= 55) exitWith {
-                    ["site_photo_grainy", 50];
+                    ["site_photo_grainy", 50, [_indent]];
                 };
                 if (_photoQuality <= 85) exitWith {
-                    ["site_photo_detailed", 75];
+                    ["site_photo_detailed", 75, [_indent]];
                 };
 
-                ["site_photo_perfecet", 100];
+                ["site_photo_perfect", 100, [_indent]];
             });
         };
 

@@ -249,6 +249,24 @@
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_BAD">
             <Original>%1. No enemy site at marked location</Original>
         </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_INVALID">
+            <Original>%1Photo does not contain the site</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_UNUSABLE">
+            <Original>%1Photo quality too low</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_BLURRY">
+            <Original>%1Photo is blurry</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_GRAINY">
+            <Original>%1Photo is grainy</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_DETAILED">
+            <Original>%1Photo is detailed</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_PERFECT">
+            <Original>%1Photo is perfectly clear</Original>
+        </Key>
     </Package>
     <Package name="Skills Tree">
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
