@@ -38,7 +38,7 @@ _action set ["getNextPoint", {
         ["LIMITED", "FULL"] select (leader _extern_group distance2D _patrolCenter > _patrolRadius * 1.25);
 
     private _nextDistance = _patrolRadius * (0.8 + random 0.2);
-    private _nextAngle = (_patrolCenter getDir getPos leader _group) + _patrolAngleChange;
+    private _nextAngle = (_patrolCenter getDir getPos leader _extern_group) + _patrolAngleChange;
     private _nextPosition = _patrolCenter getPos [_nextDistance, _nextAngle];
 
     [_nextPosition, _desiredSpeedMode]
@@ -56,9 +56,9 @@ _action set ["onEnter", {
     _state set ["angleChange", _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true]];
 
     _extern_group setCombatMode "RED";
-    _extern_group setBehaviour "SAFE";
+    _extern_group setBehaviourStrong "SAFE";
     _extern_group setFormation "COLUMN";
-    [_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
+    [_extern_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 
     private _nextPoint = [_node, _state] call (_node get "getNextPoint");
     [_extern_group, _nextPoint # 0, _nextPoint # 1, 15] call vgm_g_fnc_btree_moveTo_start;
