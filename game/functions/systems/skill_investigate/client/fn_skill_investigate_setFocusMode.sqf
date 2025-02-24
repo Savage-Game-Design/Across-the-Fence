@@ -31,7 +31,9 @@ if (vgm_c_skill_investigate_isFocusing) exitWith {};
 vgm_c_skill_investigate_isFocusing = true;
 
 [
+    // Condition to wait for
     {call vgm_c_fnc_skill_investigate_canFocus},
+    // Code to execute
     {
         [true] call vgm_c_fnc_skill_investigate_setDesaturation;
         [true] call vgm_c_fnc_skill_investigate_setListenMode;
@@ -50,8 +52,11 @@ vgm_c_skill_investigate_isFocusing = true;
             _this
         ] call vgm_g_fnc_waitUntilAndExecute;
     },
+    // Arguments
     nil,
+    // Timeout
     0.4,
+    // Code executed on timeout
     {
         if (!vgm_c_skill_investigate_isFocusing) exitWith {};
         vgm_c_skill_investigate_isFocusing = false;
