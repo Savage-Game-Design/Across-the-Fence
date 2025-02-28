@@ -37,7 +37,8 @@ private _guessedSites = _scoutingData get "guessedSites";
     _x params ["", "_guessedClass", "", "_guessedPos", "_guessId", "_guessPhoto"];
 
     private _siteMilestone = createHashMapFromArray [["index", parseNumber _guessId + 1]];
-    _milestones pushBack _siteMilestone;
+    private _milestoneEntry = [_siteMilestone, 0];
+    _milestones pushBack _milestoneEntry;
 
     // if the guess has no position, it is not useful
     if (_guessedPos isEqualTo []) then {
@@ -121,4 +122,10 @@ private _guessedSites = _scoutingData get "guessedSites";
         };
     }];
 
+    _milestoneEntry set [
+        1,
+        (_siteMilestone get "position" select 1)
+        + (_siteMilestone get "type" select 1)
+        + (_siteMilestone get "photo" select 1)
+    ];
 } forEach _guessedSites;

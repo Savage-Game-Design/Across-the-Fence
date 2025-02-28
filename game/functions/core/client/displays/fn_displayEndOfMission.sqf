@@ -43,14 +43,14 @@ switch _mode do {
 
     case "renderProgress": {
         params ["_display", "_args"];
-        _args params ["_levelingData", "_milestones"];
+        _args params ["_levelingData", "_milestonesData"];
 
         private _currentLevel = _levelingData get "level";
         private _experienceOffset = vgm_g_leveling_levelsHashMap get (_currentLevel - 1) get "experienceThreshold";
 
         ["updateLevelsHeader", [_display, _levelingData, _experienceOffset]] call SELF;
 
-        private _script = [_display, [_levelingData, _milestones]] spawn {
+        private _script = [_display, [_levelingData, _milestonesData select 0]] spawn {
             params ["_display", "_args"];
             _args params ["_levelingData", "_milestones"];
 

@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2024-10-22
+    Last Update: 2025-02-28
     Public: No
 
     Description:
@@ -41,8 +41,7 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
 
     [_endType, _levelingDataCopy, _milestones] remoteExecCall ["vgm_c_fnc_missions_endMission", _player];
 
-    private _totalExperience = 0;
-    {_totalExperience = _totalExperience + _x#1} forEach _milestones;
+    _milestones params ["", "_totalExperience"];
     [_player, _totalExperience] call vgm_s_fnc_leveling_addExperience;
 } forEach _missionMemberPlayerIds;
 

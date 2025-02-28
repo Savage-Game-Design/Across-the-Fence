@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2025-01-05
+    Last Update: 2025-02-28
     Public: No
 
     Description:
@@ -11,14 +11,14 @@
     Parameter(s):
         _endType - Mission ending type [STRING]
         _levelingDataCopy - Copy of the player leveling data [HASHMAP]
-        _milestones - Mission milestones array [ARRAY]
+        _milestones - Mission milestones data [ARRAY]
 
     Returns:
         Nothing
 
     Example(s):
         _levelingDataCopy = +(player getVariable "vgm_g_levelingData");
-        _milestones = [["mission", 250]];
+        _milestones = createHashmapFromArray [["simple", [["mission_success", 250]] ]];
         ["SUCCESS", _levelingDataCopy, _milestones] call vgm_c_fnc_missions_endMission;
 
         // Should be triggered by ending the mission on the server.
