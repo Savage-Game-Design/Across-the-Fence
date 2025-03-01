@@ -279,6 +279,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
 
+        class missions_getAssignedMissionId {};
         class missions_getHubSpawnPos {};
         class missions_getZoneMarker {};
         class missions_preInit

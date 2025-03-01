@@ -2,7 +2,7 @@
     File: fn_virtsquad_perFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-11
-    Last Update: 2025-02-01
+    Last Update: 2025-03-01
     Public: No
 
     Description:
@@ -31,7 +31,7 @@ if (vgm_s_virtsquad_playerQueue isNotEqualTo []) then {
     private _player = vgm_s_virtsquad_playerQueue deleteAt 0;
     // The player can be objNull here if they've died and their body was deleted. This needs be handled by the code below.
     // This will always default to the global index if the mission doesn't exist, or virtsquads doesn't know about the mission.
-    private _vSquadIndex = [[getPlayerID _player] call vgm_s_fnc_missions_getAssignedMissionId] call vgm_s_fnc_virtsquad_getMissionSquadsInfo get "vSquadIndex";
+    private _vSquadIndex = [[getPlayerID _player] call vgm_g_fnc_missions_getAssignedMissionId] call vgm_s_fnc_virtsquad_getMissionSquadsInfo get "vSquadIndex";
     private _inRange = [_vSquadIndex, [getPosATL _player, vgm_s_virtsquad_spawnRange, vgm_s_virtsquad_spawnRange]] call vgm_g_fnc_posindex_inAreaArray;
     {
         // Using a hash and separate spawing loop avoids us scheduling many spawns of the same squad, if the scheduler is running slow.
