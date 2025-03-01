@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-10-25
+    Last Update: 2025-03-01
     Public: No
 
     Description:
@@ -23,6 +23,8 @@
         [_group, _tree] call vgm_g_fnc_btree_setTreeLocal;
  */
 
+#define CURRENT_ORDER ( _extern_blackboard get "currentOrder" )
+
 [DECORATOR(updateKnowledgeService), [], [
 [DECORATOR(suppressionService), [], [
 [DECORATOR(disableAi), [["features", ["AUTOCOMBAT"]]], [
@@ -32,7 +34,7 @@
             [ACTION(moveToInvestigationPoint), []]
         ]],
         [DECORATOR(hasOrders), [["order", "DEFEND"], ["abortLowerPriority", true]], [
-            [ACTION(patrolArea), [["center", { _extern_blackboard get "currentOrderPosition" }], ["radius", 10]]]
+            [ACTION(patrolArea), [["center", { CURRENT_ORDER get "pos" }], ["radius", 10]]]
         ]],
         [DECORATOR(hasNearbyTracks), [["abortLowerPriority", true]], [
             [ACTION(followTracks), []]
