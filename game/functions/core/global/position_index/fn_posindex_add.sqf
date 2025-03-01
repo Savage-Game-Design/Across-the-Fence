@@ -2,7 +2,7 @@
     File: fn_posindex_add.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-24
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -28,9 +28,11 @@ if (count _vacantSlots > 0) exitWith {
     private _slot = _vacantSlots deleteAt 0;
     _index get "positions" set [_slot, _pos];
     _index get "items" set [_slot, _item];
+    _index get "itemsMap" set [_slot, _item];
     _slot
 };
 private _slot = _index get "positions" pushBack _pos;
 _index get "items" set [_slot, _item];
+_index get "itemsMap" set [_slot, _item];
 
 _slot
