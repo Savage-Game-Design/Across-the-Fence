@@ -39,6 +39,9 @@
         [DECORATOR(hasNearbyTracks), [["abortLowerPriority", true]], [
             [ACTION(followTracks), []]
         ]],
+        [DECORATOR(hasOrders), [["order", "PATROL-ROUTE"], ["abortLowerPriority", true]], [
+            [ACTION(patrolRoute), [["route", { CURRENT_ORDER get "route" }], ["isCircuit", { CURRENT_ORDER getOrDefault ["isCircuit", false] }]]]
+        ]],
         [ACTION(patrolArea), []]
     ]]
 ]]

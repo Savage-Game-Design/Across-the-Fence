@@ -92,7 +92,7 @@ _action set ["onEnter", {
     params ["_node", "_state"];
 
     private _nodeParams = [_node] call vgm_g_fnc_btree_getNodeParams;
-    private _route = _nodeParams getOrDefault ["routePositions", []];
+    private _route = _nodeParams getOrDefault ["route", []];
     private _speedMode = _nodeParams getOrDefault ["speedMode", "LIMITED"];
     private _isCircuit = _nodeParams getOrDefault ["isCircuit", false];
     private _repeat = _nodeParams getOrDefault ["repeat", true];
