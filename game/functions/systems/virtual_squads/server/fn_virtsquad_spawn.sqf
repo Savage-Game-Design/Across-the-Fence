@@ -2,7 +2,7 @@
     File: fn_virtsquad_spawn.sqf
     Author: Savage Game Design
     Date: 2025-01-11
-    Last Update: 2025-01-16
+    Last Update: 2025-03-01
     Public: No
 
     Description:
@@ -40,7 +40,7 @@ _missionInfo get "spawnedSquads" set [_squad get "id", _squad];
 _squad deleteAt "vSquadIndexSlot";
 
 {
-    _group setVariable (_x select [0, 3]);
+    _group setVariable ([_x] + _y);
 } forEach (_squad get "groupVars");
 
 _group setVariable ["vgm_g_missionId", _squad get "missionId", true];
