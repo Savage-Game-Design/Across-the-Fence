@@ -18,6 +18,7 @@
 | vgm_mission_attached                 | [_missionId]                      | Global          |
 | vgm_mission_joined                   | [_missionId]                      | Player joining  |
 | vgm_mission_status_changed           | [_missionId, _status]             | Server          |
+| vgm_mission_playerRemoved            | [_missionId, _playerId]           | Global          |
 | vgm_mission_player_readiness_changed | [_playerId, _isReady, _missionId] | Global          |
 
 

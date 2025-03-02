@@ -2,7 +2,7 @@
     File: fn_medical_setUnconscious.sqf
     Author: Savage Game Design
     Date: 2023-07-23
-    Last Update: 2025-02-06
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -24,7 +24,7 @@ params ["_unit", ["_state", true]];
 _unit setUnconscious _state;
 _unit setCaptive _state;
 
-// Check "vgm_c_fnc_medical_isUnconscious" for why `lifeState` can't be used
+// Check "vgm_g_fnc_medical_isUnconscious" for why `lifeState` can't be used
 private _previousState = _unit getVariable "vgm_g_medical_isUnconscious";
 
 if (_previousState != _state) then {

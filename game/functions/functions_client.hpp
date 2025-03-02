@@ -312,6 +312,10 @@ class vgm_g
 
         class respawn_findSafeSpawnTransformNearTeam {};
         class respawn_findFallbackSpawnTransform {};
+        class respawn_preInit {
+            preInit = 1;
+        };
+        class respawn_remainingRespawns {};
     };
 
     class skills
@@ -739,10 +743,15 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
 
+        class respawn_addHoldAction {};
         class respawn_decayInventory {};
         class respawn_onPauseMenu {};
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
+        class respawn_postInit
+        {
+            postInit = 1;
+        };
         class respawn_preInit
         {
             preInit = 1;

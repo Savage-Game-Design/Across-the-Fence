@@ -2,7 +2,7 @@
     File: fn_missions_removePlayerFromMission.sqf
     Author: Savage Game Design
     Date: 2023-03-20
-    Last Update: 2025-02-03
+    Last Update: 2025-03-02
     Public: No
 
     Description:
@@ -41,7 +41,7 @@ private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
 [[_playerUnit], vgm_core_lobbyGroup] remoteExec ["joinSilent", _playerUnit];
 
 [
-    "player removed from mission",
+    "vgm_mission_playerRemoved",
     [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
