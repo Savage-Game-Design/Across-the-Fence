@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_missions_gameplay_scouting_handleMarked.sqf
     Author: Savage Game Design
     Date: 2024-08-23
-    Last Update: 2024-10-02
+    Last Update: 2025-02-14
     Public: No
 
     Description:
@@ -36,14 +37,14 @@ private _data = [_mission get "public" get "id", "scouting"] call vgm_s_fnc_miss
 private _guessedSites = _data get "guessedSites";
 
 // TODO move to shared function
-private _itemIdx = _guessedSites findIf {_x#4 == _siteId};
+private _itemIdx = _guessedSites findIf {_x#IDX_ID == _siteId};
 if (_itemIdx == -1) exitWith {
     format ["Unable to mark site, site does not exist: %1", _siteId] call vgm_g_fnc_logError;
 };
 
 format ["Marking site: %1, %2, %3", _siteId, _player, _markedPos] call vgm_g_fnc_logInfo;
 
-(_guessedSites select _itemIdx) set [3, _markedPos];
+(_guessedSites select _itemIdx) set [IDX_POS, _markedPos];
 
 [_data, "guessedSites", _guessedSites] call para_s_fnc_netmap_set;
 

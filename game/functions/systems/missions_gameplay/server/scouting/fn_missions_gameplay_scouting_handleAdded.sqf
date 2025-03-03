@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_handleAdded.sqf.sqf
     Author: Savage Game Design
     Date: 2024-09-26
-    Last Update: 2024-10-30
+    Last Update: 2025-02-14
     Public: No
 
     Description:
@@ -55,9 +55,10 @@ private _siteId = str _id;
 _guessedSites pushBack ([
     time, // used for sorting
     "", // site type
-    date, // add time time, for display
+    date, // add time, for display
     [], // guessed position
-    _siteId
+    _siteId,
+    createHashMap // photo data
 ]);
 [_data, "guessedSites", _guessedSites] call para_s_fnc_netmap_set;
 

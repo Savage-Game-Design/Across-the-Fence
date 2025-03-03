@@ -706,6 +706,20 @@ class VGM_ctrlStaticNotepadHeader: VGM_ctrlStaticNotepad
 {
     style = 2;
 };
+class VGM_ctrlButtonPictureKeepAspectNotepad: VGM_ctrlButtonPictureKeepAspect
+{
+    colorText[] = COLOR_BLACK;
+    colorDisabled[] = COLOR_BLACK;
+    colorBackground[] = {0,0,0,0.05};
+    colorBackgroundDisabled[] = {0,0,0,0};
+};
+class VGM_ctrlButtonPictureKeepAspectNotepadDisabled: VGM_ctrlButtonPictureKeepAspectNotepad
+{
+    colorText[] = {0,0,0,0.25};
+    colorBackground[] = {0,0,0,0};
+    colorBackgroundActive[] = {0,0,0,0};
+    soundClick[] = {};
+};
 class VGM_ctrlButtonNotepad: VGM_ctrlButton
 {
     colorText[] = COLOR_BLACK;

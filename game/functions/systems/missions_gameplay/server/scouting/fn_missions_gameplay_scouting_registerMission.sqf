@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_registerMission.sqf
     Author: Savage Game Design
     Date: 2024-08-11
-    Last Update: 2024-10-03
+    Last Update: 2025-02-14
     Public: No
 
     Description:
@@ -22,5 +22,6 @@ params ["_missionId"];
 
 private _scoutingNetmap = [_missionId, "scouting"] call vgm_s_fnc_missions_createSystemNetmap;
 
+// see "scouting_handleAdded" for entries format
 [_scoutingNetmap, "guessedSites", []] call para_s_fnc_netmap_set;
 [_scoutingNetmap, "guessedSitesMax", 1] call para_s_fnc_netmap_set;

@@ -3,7 +3,7 @@
     File: fn_displayNotepad.sqf
     Author: Savage Game Design
     Date: 2024-08-09
-    Last Update: 2024-11-24
+    Last Update: 2025-02-17
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ _this = _params;
 
 #if __A3_DEBUG__
     if (_mode != "renderTooltip") then {
-        diag_log ["fn_displayNotepad", _this];
+        diag_log ["fn_displayNotepad", _mode, _this];
     };
 #endif
 
@@ -133,6 +133,7 @@ switch _mode do {
             "vgm_scouting_addedSiteClient",
             "vgm_scouting_spottedSiteClient",
             "vgm_scouting_siteTypeChangedClient",
+            "vgm_scouting_sitePhotoChangedClient",
             "vgm_scouting_markedSiteClient",
             "vgm_mission_started",
             "vgm_mission_ended"
@@ -166,11 +167,11 @@ switch _mode do {
         private _data = _missionPublic get "system_scouting";
         private _guessedSites = _data get "guessedSites";
 
-        private _isPhotoMode = !isNull (_display getVariable ["vgm_site_photoObject", objNull]);
+        private _isPhotoMode = createHashMap isNotEqualTo (_display getVariable ["vgm_site_photoData", createHashMap]);
 
         private _lastIndex = -1;
         {
-            _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId"];
+            _x params ["", "_siteType", "_spottedDate", "_pos", "_siteId", "_photoData"];
             // TODO refactor into function
             private _siteName = (vgm_scouting_siteTypes param [vgm_scouting_siteTypes findIf {(_x#1) == _siteType}]) param [0, _siteType];
 
@@ -192,29 +193,24 @@ switch _mode do {
             _ctrlIndex ctrlSetText format ["%1.", _lineIndex];
 
         //------------------- Add button to edit site type
-            private _ctrlItemButtonType = _display ctrlCreate ["VGM_ctrlButtonPictureKeepAspect", -1, _ctrlMain];
+            private _buttonClass = ["VGM_ctrlButtonPictureKeepAspectNotepad", "VGM_ctrlButtonPictureKeepAspectNotepadDisabled"] select _isPhotoMode;
+            private _ctrlItemButtonType = _display ctrlCreate [_buttonClass, -1, _ctrlMain];
             _ctrlMainChildren pushBack _ctrlItemButtonType;
             _ctrlItemButtonType ctrlSetPosition [
                 VGM_NOTEPAD_INDEX_W,
                 _lineIndex * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_EDIT_TYPE_W,
+                VGM_NOTEPAD_BTN_SMALL_W,
                 VGM_NOTEPAD_LINE_H
             ];
-            _ctrlItemButtonType ctrlSetTextColor [0,0,0,1];
-            _ctrlItemButtonType ctrlSetBackgroundColor [0,0,0,0.05];
             _ctrlItemButtonType ctrlCommit 0;
 
             _ctrlItemButtonType setVariable ["vgm_id", _siteId];
             _ctrlItemButtonType setVariable ["vgm_index", _forEachIndex];
 
+            _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
+
             if (_isPhotoMode) then {
-                _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\Free.paa";
-                _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
-                    params ["_ctrlButton"];
-                    ["setLocationTypePhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
-                }];
             } else {
-                _ctrlItemButtonType ctrlSetText "\a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa";
                 _ctrlItemButtonType ctrlAddEventHandler ["ButtonClick", {
                     params ["_ctrlButton"];
                     ["setLocationTypeEnable", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
@@ -226,9 +222,9 @@ switch _mode do {
             _ctrlMainChildren pushBack _ctrlItem;
             // _ctrlItem ctrlSetFontHeight (VGM_NOTEPAD_LINE_H * 0.75);
             _ctrlItem ctrlSetPosition [
-                VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_EDIT_TYPE_W,
+                VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_BTN_SMALL_W,
                 _lineIndex * VGM_NOTEPAD_LINE_H,
-                VGM_NOTEPAD_W - VGM_NOTEPAD_INDEX_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_EDIT_TYPE_W_PADDED,
+                VGM_NOTEPAD_W - VGM_NOTEPAD_INDEX_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_BTN_SMALL_W_PADDED - VGM_NOTEPAD_BTN_SMALL_W_PADDED,
                 VGM_NOTEPAD_LINE_H
             ];
             // _ctrlItem ctrlSetBackgroundColor [0,1,0,0.25];
@@ -237,6 +233,41 @@ switch _mode do {
                 _ctrlItem ctrlSetText localize "STR_VGM_MISSIONS_SCOUTING_SITE_TYPE_UNKNOWN";
             } else {
                 _ctrlItem ctrlSetText format ["%1, %2", _siteName, _dateText];
+            };
+
+        //------------------- Add button to assign a photo
+            private _buttonClass = [
+                "VGM_ctrlButtonPictureKeepAspectNotepadDisabled",
+                "VGM_ctrlButtonPictureKeepAspectNotepad"
+            ] select (_isPhotoMode || _photoData isNotEqualTo createHashMap);
+            private _ctrlItemButtonPhoto = _display ctrlCreate [_buttonClass, -1, _ctrlMain];
+            _ctrlMainChildren pushBack _ctrlItemButtonPhoto;
+
+            _ctrlItemButtonPhoto ctrlSetPosition [
+                VGM_NOTEPAD_W - VGM_NOTEPAD_CONFIRM_W - VGM_NOTEPAD_BTN_SMALL_W_PADDED,
+                _lineIndex * VGM_NOTEPAD_LINE_H,
+                VGM_NOTEPAD_BTN_SMALL_W,
+                VGM_NOTEPAD_LINE_H
+            ];
+            _ctrlItemButtonPhoto ctrlCommit 0;
+
+            _ctrlItemButtonPhoto setVariable ["vgm_id", _siteId];
+            _ctrlItemButtonPhoto setVariable ["vgm_index", _forEachIndex];
+
+            if (_isPhotoMode) then {
+                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_add_ca.paa";
+                _ctrlItemButtonPhoto ctrlAddEventHandler ["ButtonClick", {
+                    params ["_ctrlButton"];
+                    ["assignPhoto", [_ctrlButton, _ctrlButton getVariable "vgm_id"]] call SELF;
+                }];
+            } else {
+                if (_photoData isEqualTo createHashMap) exitWith {
+                    _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_empty_ca.paa";
+                    ["setTooltip", [_ctrlItemButtonPhoto, "No photo"]] call SELF;
+                };
+
+                _ctrlItemButtonPhoto ctrlSetText getMissionPath "assets\notepad\cam_ca.paa";
+                ["setTooltip", [_ctrlItemButtonPhoto, "Has photo"]] call SELF;
             };
 
         //------------------- Add button to edit site position
@@ -302,7 +333,7 @@ switch _mode do {
         _ctrlAddItem ctrlSetPosition [
             0,
             _lineIndex * VGM_NOTEPAD_LINE_H,
-            VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_EDIT_TYPE_W,
+            VGM_NOTEPAD_INDEX_W + VGM_NOTEPAD_BTN_SMALL_W,
             VGM_NOTEPAD_LINE_H
         ];
         _ctrlAddItem ctrlCommit 0;
@@ -386,20 +417,19 @@ switch _mode do {
         } forEach vgm_scouting_siteTypes;
     };
 
-    case "setLocationTypePhoto": {
+    case "assignPhoto": {
         params ["_ctrlButton", "_siteId"];
         private _display = ctrlParent _ctrlButton;
 
-        private _siteObject = _display getVariable "vgm_site_photoObject";
-        if (isNil "_siteObject") exitWith {
-            "Object not specified for photo" call vgm_g_fnc_logError;
+        private _photoData = _display getVariable "vgm_site_photoData";
+        if (isNil "_photoData") exitWith {
+            "Invalid photo data" call vgm_g_fnc_logError;
         };
 
         // disable "photo mode"
-        _display setVariable ["vgm_site_photoObject", nil];
-        // openMap [false, false];
+        _display setVariable ["vgm_site_photoData", nil];
 
-        ["vgm_scouting_setSiteTypeFromObject", [_siteId, _siteObject, player]] call para_g_fnc_event_triggerServer;
+        ["vgm_scouting_setSitePhoto", [_siteId, _photoData, player]] call para_g_fnc_event_triggerServer;
     };
 
     /*
@@ -435,7 +465,7 @@ switch _mode do {
         private _ctrlTooltip = _display getVariable ["vgm_ctrlTooltip", controlNull];
 
         private _siteId = _display getVariable ["vgm_site_id", ""];
-        private _sitePhoto = _display getVariable ["vgm_site_photoObject", createHashMap];
+        private _sitePhoto = _display getVariable ["vgm_site_photoData", createHashMap];
         private _hoverTooltip = _display getVariable ["vgm_tooltip", ""];
 
         if (
@@ -457,7 +487,7 @@ switch _mode do {
                 localize "STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP" // return
             };
             if (_sitePhoto isNotEqualTo createHashMap) exitWith {
-                "Select site from the list to set its type from a photo" // return
+                "Select site from the list to assign a photo" // return
             };
 
             _hoverTooltip // return
