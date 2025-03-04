@@ -3,7 +3,7 @@
     File: game/functions/core/client/displays/fn_displayEndOfMission.sqf
     Author: Savage Game Design
     Date: 2023-09-25
-    Last Update: 2025-02-28
+    Last Update: 2025-03-05
     Public: No
 
     Description:
@@ -85,14 +85,13 @@ switch _mode do {
                         };
 
                         _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                        _milestoneAnimXp = _milestoneXp;
 
                         _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
                         private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
                         _milestoneText = format ([_milestoneText] + _formatData);
 
                         _text pushBack format ["%1: %2XP", _milestoneText, _milestoneXp];
-
-                        _milestoneAnimXp = _milestoneXp;
                     };
 
                     if (_milestoneType == "scouting") then {
@@ -101,23 +100,23 @@ switch _mode do {
                             _text pushBack '<t size="1.2">Sites</t>';
                         };
 
-                        private _scoutingMilestone = _x;
-                        private _milestoneXp = 0;
-                        {
-                            _milestoneXp = _milestoneXp + (_scoutingMilestone getOrDefault [_x, []] param [1, 0]);
-                        } forEach ["type", "position", "photo"];
+                        _x params ["_scoutingMilestone", "_milestoneXp"];
                         _milestoneAnimXp = _milestoneXp;
 
-
                         private _milestoneText = format ["%1. ", _scoutingMilestone get "index"];
-                        private _rowTemplate = '<t>
-                            Position: <t size="0.75">%1 </t>  Photo: <t size="0.75">%2 </t>  Type: <t size="0.75">%3 </t> - %4XP
-                        </t>';
+                        private _rowTemplate = format ['
+                            <t>
+                                Position: <t size="0.75">%%1</t><br/>
+                                %1Photo: <t size="0.75">%%2</t><br/>
+                                %1Type: <t size="0.75">%%3</t><br/>
+                                %1Total: %%4XP
+                            </t><br/>
+                        ', '&#160;&#160;&#160;&#160;&#160;'];
 
                         private _positionLabel = _scoutingMilestone get "position" param [0, "not_complete"];
                         if (_positionLabel == "not_complete") then {
                             _milestoneText = _milestoneText + format [_rowTemplate,
-                                localize "STR_VGM_MISSION_END_UI_MILESTONE_SITE_NOT_COMPLETE",
+                                localize "STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_NOT_COMPLETE",
                                 "N/A",
                                 "N/A",
                                 _milestoneXp
@@ -125,7 +124,7 @@ switch _mode do {
                         } else {
                             if (_positionLabel == "not_usable") exitWith {
                                 _milestoneText = _milestoneText + format [_rowTemplate,
-                                    localize "STR_VGM_MISSION_END_UI_MILESTONE_SITE_NOT_USABLE",
+                                    localize "STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_NOT_USABLE",
                                     "N/A",
                                     "N/A",
                                     _milestoneXp

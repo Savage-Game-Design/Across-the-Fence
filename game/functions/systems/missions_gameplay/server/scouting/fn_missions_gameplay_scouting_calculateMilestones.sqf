@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2025-02-25
-    Last Update: 2025-02-28
+    Last Update: 2025-03-03
     Public: No
 
     Description:
@@ -72,7 +72,7 @@ private _guessedSites = _scoutingData get "guessedSites";
             ["close", 50]
         };
 
-        ["usable", 25]
+        ["far", 25]
     }];
 
     _siteMilestone set ["type", call {
@@ -90,7 +90,7 @@ private _guessedSites = _scoutingData get "guessedSites";
 
         private _photoObjects = _guessPhoto get (_closestSite get "id");
         if (isNil "_photoObjects") exitWith {
-            format ["Photo does not contain site it is assigned too: %1", _guessId] call vgm_g_fnc_logInfo;
+            format ["Photo does not contain site it is assigned to: %1", _guessId] call vgm_g_fnc_logInfo;
 
             ["invalid", 0]
         };
