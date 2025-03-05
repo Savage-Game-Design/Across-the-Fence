@@ -2,7 +2,7 @@
     File: fn_respawn_addHoldAction.sqf
     Author: Savage Game Design
     Date: 2025-03-01
-    Last Update: 2025-03-01
+    Last Update: 2025-03-05
     Public: No
 
     Description:
@@ -22,7 +22,10 @@
 
 params [["_player", player]];
 
-if (_player getVariable [HOLD_ACTION_VAR, -1] > -1) exitWith {};
+private _existingActionId = _player getVariable [HOLD_ACTION_VAR, -1];
+if (_existingActionId > -1) then {
+    [_player, _existingActionId] call BIS_fnc_holdActionRemove;
+};
 
 // Call vgm_g_fnc_respawn_remainingRespawns only if needed, as it's computed dynamically.
 private _condition = "[_target] call vgm_g_fnc_medical_isUnconscious && { [_target] call vgm_g_fnc_respawn_remainingRespawns > 0 }";
@@ -30,8 +33,8 @@ private _condition = "[_target] call vgm_g_fnc_medical_isUnconscious && { [_targ
 private _holdActionId = [
     _player,
     localize "STR_VGM_RESPAWN_ACTION",
-    "\A3\Ui_f\data\IGUI\Cfg\HoldActions\holdAction_revive_ca.paa",
-    "\A3\Ui_f\data\IGUI\Cfg\HoldActions\holdAction_revive_ca.paa",
+    "\A3\Ui_f\data\IGUI\Cfg\HoldActions\holdAction_unbind_ca.paa",
+    "\A3\Ui_f\data\IGUI\Cfg\HoldActions\holdAction_unbind_ca.paa",
     // Condition to show
     _condition,
     // Condition to progress
