@@ -75,6 +75,7 @@ switch _mode do {
 
                 private _milestoneType = _x;
                 private _milestoneValues = _y;
+                private _milestoneValuesCount = count _milestoneValues;
                 {
                     uiSleep 0.5;
 
@@ -144,13 +145,16 @@ switch _mode do {
                     _ctrlBreakdown ctrlSetStructuredText parseText (_text joinString "<br/>");
                     playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
 
+                    // speed up the animation if there are a lot of milestones
+                    private _animCoef = 1 / ((_milestoneValuesCount / 5) max 1);
+
                     // skip XP animation if mission was failed
                     if (_isFailure) then {
-                        uiSleep 1.5;
+                        uiSleep (1.5 * _animCoef);
                         continue;
                     };
 
-                    private _animDuration = 1 + (_milestoneAnimXp / 500);
+                    private _animDuration = (1 + (_milestoneAnimXp / 500)) * _animCoef;
                     private _time = time;
                     private _animTime = _time + _animDuration;
                     private _newExperience = _currentExperience;
@@ -190,7 +194,7 @@ switch _mode do {
 
                     _currentExperience = _newExperience;
 
-                    uiSleep 0.2;
+                    uiSleep (0.2 * _animCoef);
                 } forEach _milestoneValues;
             } forEach _milestones;
         };
