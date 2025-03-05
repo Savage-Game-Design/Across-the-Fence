@@ -143,7 +143,14 @@ switch _mode do {
                     };
 
                     _ctrlBreakdown ctrlSetStructuredText parseText (_text joinString "<br/>");
-                    playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
+                    _ctrlBreakdown ctrlSetPositionH (ctrlTextHeight _ctrlBreakdown);
+                    _ctrlBreakdown ctrlCommit 0;
+                    uiSleep 0.001; // we need a frame delay for the ctrlSetScrollValues to work
+                    ctrlParentControlsGroup _ctrlBreakdown ctrlSetScrollValues [1, -1];
+
+                    if (isGameFocused) then {
+                        playSoundUI ["\a3\sounds_f\sfx\blip1.wss", 0.2];
+                    };
 
                     // speed up the animation if there are a lot of milestones
                     private _animCoef = 1 / ((_milestoneValuesCount / 5) max 1);

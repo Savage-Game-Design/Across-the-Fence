@@ -100,14 +100,25 @@ class VGM_DisplayEndOfMission
             h = VGM_Y_H(5);
             colorBackground[] = {0,0.7,0,0.8};
         };
-        class XpBreakdown: VGM_ctrlStructuredText
+        class XpBreakdownContainer: VGM_ctrlControlsGroup
         {
-            idc = VGM_IDC_DISPLAYENDOFMISSION_XPBREAKDOWN;
-            text = "XP Breakdown text";
+            idc = -1;
             x = DX + 1 * VGM_GRID_W;
             y = VGM_Y_Y(DY, SPACING);
             w = (DW - 2) * VGM_GRID_W;
             h = VGM_Y_H(DH - 25 - (4 * SPACING));
+
+            class Controls
+            {
+                class XpBreakdown: VGM_ctrlStructuredText
+                {
+                    idc = VGM_IDC_DISPLAYENDOFMISSION_XPBREAKDOWN;
+                    text = "XP Breakdown text";
+                    x = 0; y = 0;
+                    w = (DW - 2) * VGM_GRID_W;
+                    h = VGM_Y_H(5); // will be set dynamically
+                };
+            };
         };
         class Continue: VGM_ctrlButton
         {
