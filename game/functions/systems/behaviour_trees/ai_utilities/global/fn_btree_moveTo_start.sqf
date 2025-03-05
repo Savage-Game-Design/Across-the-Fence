@@ -26,9 +26,9 @@ _group setVariable ["vgm_l_btree_moveTo_completionDistance", _completionDistance
 _group setVariable ["vgm_l_btree_moveTo_repairAttempts", nil];
 _group setVariable ["vgm_l_btree_moveTo_forceRepath", true];
 
-//Set behaviour to AWARE, otherwise they might enter combat and grind to a halt.
-//Maybe worth checking if speed is 'FULL'.
-if (behaviour leader _group != "AWARE") then {
+// Switch out of combat mode to ensure the AI does the move.
+// AI in COMBAT tends to get stuck, or take a long time due to using cover.
+if (combatBehaviour _group isEqualTo "COMBAT") then {
     _group setBehaviourStrong "AWARE";
 };
 

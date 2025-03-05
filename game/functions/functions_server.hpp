@@ -233,6 +233,8 @@ class vgm_s
         {
             preInit = 1;
         };
+
+        class leveling_skipToLevel {};
     };
 
     class locations

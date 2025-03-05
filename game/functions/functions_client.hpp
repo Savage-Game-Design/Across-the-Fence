@@ -29,6 +29,7 @@ class vgm_g
         class startScheduler {
             postInit = 1;
         };
+        class waitUntilAndExecute {};
     };
 
     class core_position_index
@@ -115,6 +116,7 @@ class vgm_g
         class btree_action_followTracks {};
         class btree_action_moveToInvestigationPoint {};
         class btree_action_patrolArea {};
+        class btree_action_patrolRoute {};
 
         class btree_decorator_disableAI {};
         class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
