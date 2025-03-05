@@ -18,6 +18,22 @@
 
     Example(s):
             ["onLoad", [_display]] call vgm_c_fnc_displayEndOfMission;
+
+            _milestones = [
+                createHashMapFromArray [
+                    ["simple",[ ["mission_success",50] ]],
+                    ["scouting", [
+                        [createHashMapFromArray [["index",1],["position",["not_complete",0]]], 0],
+                        [createHashMapFromArray [["index",2],["type", ["correct",0]], ["photo",["detailed",25]],["position",["close",100]]], 125],
+                        [createHashMapFromArray [["index",3],["position",["not_usable",0]]], 0]
+                    ]]
+                ],
+                175
+            ];
+            _dialog = createDialog ["VGM_DisplayEndOfMission", true];
+            _levelingDataCopy = +(player getVariable "vgm_g_levelingData");
+            ["renderProgress", [_dialog, [_levelingDataCopy, _milestones]]] call vgm_c_fnc_displayEndOfMission;
+
 */
 
 #define SELF vgm_c_fnc_displayEndOfMission

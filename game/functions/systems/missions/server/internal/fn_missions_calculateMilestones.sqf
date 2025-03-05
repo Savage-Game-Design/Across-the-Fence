@@ -2,11 +2,11 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2025-02-28
+    Last Update: 2025-03-05
     Public: No
 
     Description:
-        Calculate amount of XP player should gain. Returns an array of "milestones" each awarding an amount of XP.
+        Calculate amount of XP player should gain.
 
     Parameter(s):
         _endType - Mission end type, SUCCESS or FAILURE [STRING]
