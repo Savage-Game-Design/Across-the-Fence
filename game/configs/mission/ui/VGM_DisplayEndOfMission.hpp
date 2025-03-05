@@ -4,7 +4,6 @@
 #define DY VGM_GRID_MIN_Y
 #define SPACING 5
 
-VGM_SET_Y(0)
 class VGM_DisplayEndOfMission
 {
     idd = VGM_IDD_DISPLAYENDOFMISSION;
@@ -12,17 +11,56 @@ class VGM_DisplayEndOfMission
     onUnload = VGM_UIEH(onUnload,EndOfMission);
     class ControlsBackground
     {
-        class Background: VGM_ctrlBackground
+VGM_SET_Y(0)
+        class Black: RscText
         {
-            x = safeZoneX;
-            y = safeZoneY;
-            w = safeZoneW;
-            h = safeZoneH;
+            idc = 5001;
             colorBackground[] = {0,0,0,1};
+            x = "safezoneXAbs";
+            y = "safezoneY";
+            w = "safezoneWAbs";
+            h = "safezoneH";
+        };
+        class Table: RscPictureKeepAspect
+        {
+            // 2048 x 1024
+            text = __EVAL(\
+                selectRandom [\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_01.paa",\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_02.paa",\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_03.paa",\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_04.paa",\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_05.paa",\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_06.paa",\
+                    "\vn\missions_f_vietnam\data\img\debrief\debrief_07.paa"\
+                ]\
+            );
+
+            x = "safezoneX + safeZoneW/2 - safeZoneH*2/2";
+            y = "safezoneY";
+            w = "safeZoneH*2";
+            h = "safezoneH";
+        };
+        class TableOverlay: Table
+        {
+            style = ST_PICTURE;
+            text = "#(argb,2048,1024,3)color(0,0,0,1)";
+            colorText[] = {1,1,1,0.42};
+        };
+
+        class BlackCenter: RscText
+        {
+            idc = 5001;
+            colorBackground[] = {0,0,0,0.55};
+            x = DX + 1 * VGM_GRID_W;
+            y = VGM_Y(DY);
+            w = (DW - 2) * VGM_GRID_W;
+            h = VGM_Y_H(DH - SPACING);
         };
     };
     class Controls
     {
+VGM_SET_Y(0)
         class Status: VGM_ctrlTitle
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_STATUS;
@@ -127,7 +165,7 @@ class VGM_DisplayEndOfMission
             x = DX + (0.5 * DW - 25) * VGM_GRID_W;
             y = VGM_Y_Y(DY, SPACING);
             w = 50 * VGM_GRID_W;
-            h = VGM_Y_H(5);
+            h = VGM_Y_H(5.5);
             colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
         };
     };
