@@ -3,7 +3,7 @@
     File: fn_btree_tickGroup.sqf
     Author: Savage Game Design
     Date: 2023-12-17
-    Last Update: 2024-10-03
+    Last Update: 2025-03-06
     Public: Yes
 
     Description:
@@ -52,7 +52,7 @@ if (count _extern_stack == 0) then {
     private _node = _frame get "node";
     private _state = _frame get "state";
 
-    if (_frame get "isInterruptNode" && {[_node, _state] call (_node get "condition") isEqualTo RESULT_FAILED} ) exitWith {
+    if (_frame get "isInterruptNode" && {!([_node, _state] call (_node get "condition"))} ) exitWith {
         [format ["Interrupting node %1 (%2) (depth %3) due to failed condition", _node get "name", _node get "type", _forEachIndex]] call vgm_g_fnc_btree_log;
         [_forEachIndex] call vgm_g_fnc_btree_unwindStackUpToIndex;
         _nextAction = ACTION_RETURN_TO_PARENT;
