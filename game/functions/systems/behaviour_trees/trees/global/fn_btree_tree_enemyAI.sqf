@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-10-25
+    Last Update: 2025-03-06
     Public: No
 
     Description:
@@ -34,8 +34,15 @@
         [DECORATOR(hasOrders), [["order", "DEFEND"], ["abortLowerPriority", true]], [
             [ACTION(patrolArea), [["center", { _extern_blackboard get "currentOrderPosition" }], ["radius", 10]]]
         ]],
-        [DECORATOR(hasNearbyTracks), [["abortLowerPriority", true]], [
-            [ACTION(followTracks), []]
+        [DECORATOR(tracking_hasFollowableNearbyTracks), [["abortLowerPriority", true]], [
+            [SEQUENCE, [], [
+                [ACTION(tracking_followTracks), []],
+                [ACTION(tracking_followInferredTrail), []],
+                [DECORATOR(timeLimit), [["maxDuration", 30]], [
+                    // Angle change needs to be high, due to a 15m tolerance on area patrol waypoints.
+                    [ACTION(patrolArea), [["radius", 35], ["angleChange", 90]]]
+                ]]
+            ]]
         ]],
         [ACTION(patrolArea), []]
     ]]

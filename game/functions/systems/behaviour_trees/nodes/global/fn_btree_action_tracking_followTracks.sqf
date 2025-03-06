@@ -1,14 +1,14 @@
 #include "..\..\behaviour_trees.inc"
 
 /*
-	File: fn_btree_action_followTracks.sqf
-	Author:  Savage Game Design
-	Public: No
+    File: fn_btree_action_tracking_followTracks.sqf
+    Author: Savage Game Design
+    Public: Yes
 
-	Description:
+    Description:
         Action node.
 
-		Makes the group patrol around a point.
+        Follows a trail left by the tracking system until it ends.
 
     Parameter(s):
         _params - Any parameters accepted by the node. [HASHMAP]
@@ -18,7 +18,7 @@
         Action node [HASHMAP]
 
     Example(s):
-        [createHashMap, []] call vgm_g_fnc_btree_action_patrolArea;
+        [createHashMap, []] call vgm_g_fnc_btree_action_tracking_followTracks;
  */
 
 params ["_params", "_children"];
@@ -48,10 +48,13 @@ _action set ["getNextTrack", {
     private _currentTrackTime = _currentTrack getOrDefault ["time", 0];
     private _latestTrack = _nearbyTracks # -1 # 0;
 
-    // Don't follow an older track, prevents loops.
-    if (_latestTrack get "time" < _currentTrackTime ) exitWith {};
+    // Don't follow an older track, prevents loops, also prevents chasing the current track infinitely.
+    if (_latestTrack get "time" > _currentTrackTime ) exitWith {
+        _latestTrack
+    };
 
-    _latestTrack
+    // Base case - there's nothing nearby to follow
+    nil
 }];
 
 _action set ["onEnter", {
@@ -61,8 +64,11 @@ _action set ["onEnter", {
         [ RESULT_FAILED ]
     };
 
-	private _currentTrack = _extern_blackboard get "tracking_currentTrack";
+    private _currentTrack = _extern_blackboard get "tracking_currentTrack";
+    _extern_blackboard deleteAt "tracking_lastTrack";
 
+    // Aware allows the squad to move at normal speeds, and causes them to raise their weapons.
+    _extern_group setBehaviourStrong "AWARE";
     [_extern_group, _currentTrack get "pos", "NORMAL", 5] call vgm_g_fnc_btree_moveTo_start;
 
     [ RESULT_RUNNING ]
@@ -73,15 +79,23 @@ _action set ["onTick", {
 
     private _isAtDestination = [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
 
-    private _currentTrackPos = _extern_blackboard getorDefault ["tracking_currentTrack", createHashMap] get "pos";
+    private _currentTrack = _extern_blackboard get "tracking_currentTrack";
+    private _currentTrackPos = _currentTrack get "pos";
 
     if !(_isAtDestination || (leader _extern_group distance2D _currentTrackPos < 30)) exitWith { [ RESULT_RUNNING ] };
 
     private _nextTrack = [] call (_node get "getNextTrack");
 
+    _extern_blackboard set ["tracking_lastTrack", _currentTrack];
+
     // The _isAtDestination check deliberately omitted, as it makes this script much more resilient.
     // Can potentially exit a little early, as we're not necessarily at the destination yet.
-    if (isNil "_nextTrack") exitWith { [ RESULT_SUCCEEDED ] };
+    if (isNil "_nextTrack") exitWith {
+        // currentTrack should be unset when a trail is successfully followed to the end.
+        // It prevents other btree nodes thinking there's still a track that needs visiting, and infinitely chasing it.
+        _extern_blackboard deleteAt "tracking_currentTrack";
+        [ RESULT_SUCCEEDED ]
+    };
 
     _extern_blackboard set ["tracking_currentTrack", _nextTrack];
     [_extern_group, _nextTrack get "pos"] call vgm_g_fnc_btree_moveTo_updateDestination;

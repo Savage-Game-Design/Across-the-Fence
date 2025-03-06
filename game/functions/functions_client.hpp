@@ -114,17 +114,19 @@ class vgm_g
         class btree_decorator_loopInfinitely {};
 
         /* Custom nodes */
-        class btree_action_followTracks {};
         class btree_action_moveToInvestigationPoint {};
         class btree_action_patrolArea {};
         class btree_action_patrolRoute {};
+        class btree_action_tracking_findNearbyTracks {};
+        class btree_action_tracking_followInferredTrail {};
+        class btree_action_tracking_followTracks {};
 
         class btree_decorator_disableAI {};
         class btree_decorator_fetchNearbyDangerReportAsInvestigationPoint {};
-        class btree_decorator_hasNearbyTracks {};
         class btree_decorator_hasOrders {};
         class btree_decorator_suppressionService {};
         class btree_decorator_timeLimit {};
+        class btree_decorator_tracking_hasFollowableNearbyTracks {};
         class btree_decorator_updateKnowledgeService {};
     };
 
