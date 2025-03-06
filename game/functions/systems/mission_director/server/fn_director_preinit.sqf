@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-02-06
+    Last Update: 2025-03-01
     Public: No
 
     Description:
@@ -128,9 +128,13 @@ vgm_s_director_attack_classes = [
         _logPrefix = format ["%1 (Mission: %2)", _logPrefix, _missionId];
         private _playersOnMission = units _unit;
         private _alivePlayers = _playersOnMission select {alive _x && {!(_x call vgm_g_fnc_medical_isUnconscious)}};
+        private _playersAbleToRespawn = (_playersOnMission - _alivePlayers) select { [_x] call vgm_g_fnc_respawn_remainingRespawns > 0 };
 
-        if (_alivePlayers isNotEqualTo []) exitWith {
-            [format ["%1 - Mission continues - %2 out of %3 players are alive", _logPrefix, count _alivePlayers, count _playersOnMission]] call vgm_g_fnc_logDebug;
+        if (_alivePlayers isNotEqualTo [] || _playersAbleToRespawn isNotEqualTo []) exitWith {
+            [format [
+                "%1 - Mission continues - %2 out of %3 players are alive, %4 out of %3 can respawn",
+                _logPrefix, count _alivePlayers, count _playersOnMission, count _playersAbleToRespawn
+            ]] call vgm_g_fnc_logDebug;
         };
 
         [format ["%1 - No players alive, ending mission", _logPrefix]] call vgm_g_fnc_logDebug;

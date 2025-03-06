@@ -751,6 +751,9 @@
         </Key>
     </Package>
     <Package name="Respawn">
+        <Key ID="STR_VGM_RESPAWN_ACTION">
+            <Original>Attempt a desperate escape</Original>
+        </Key>
         <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_HEADER">
             <Original>Despite being injured, you manage to evade capture</Original>
         </Key>

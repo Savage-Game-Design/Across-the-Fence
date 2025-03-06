@@ -109,7 +109,6 @@ class vgm_s
         class missions_createMission {};
         class missions_endMission {};
         class missions_getAssignedMission {};
-        class missions_getAssignedMissionId {};
         class missions_getById {};
         class missions_joinMission {};
         class missions_leaveMission {};

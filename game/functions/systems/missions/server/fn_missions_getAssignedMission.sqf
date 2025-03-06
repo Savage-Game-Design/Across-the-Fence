@@ -2,7 +2,7 @@
     File: fn_missions_getAssignedMission.sqf
     Author: Savage Game Design
     Date: 2023-09-29
-    Last Update: 2025-01-16
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -20,6 +20,6 @@
 
 params ["_playerId"];
 
-private _missionId = [_playerId] call vgm_s_fnc_missions_getAssignedMissionId;
+private _missionId = [_playerId] call vgm_g_fnc_missions_getAssignedMissionId;
 
 [_missionId] call vgm_s_fnc_missions_getById // return
