@@ -35,7 +35,7 @@ _action set ["getNextPoint", {
 
     //Too far away, we should move quickly to reach the patrol area.
     private _desiredSpeedMode =
-        ["LIMITED", "FULL"] select (leader _extern_group distance2D _patrolCenter > _patrolRadius * 1.25);
+        [_state get "speedMode", "FULL"] select (leader _extern_group distance2D _patrolCenter > _patrolRadius * 1.25);
 
     private _nextDistance = _patrolRadius * (0.8 + random 0.2);
     private _nextAngle = (_patrolCenter getDir getPos leader _extern_group) + _patrolAngleChange;
@@ -54,6 +54,7 @@ _action set ["onEnter", {
     _state set ["center", _nodeParams getOrDefaultCall ["center", { getPosATL leader _group }]];
     _state set ["radius", _nodeParams getOrDefaultCall ["radius", { 50 + random 100 }]];
     _state set ["angleChange", _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true]];
+    _state set ["speedMode", _nodeParams getOrDefault ["speedMode", "LIMITED"]];
 
     _extern_group setCombatMode "RED";
     _extern_group setBehaviourStrong "SAFE";
