@@ -10,18 +10,17 @@
 
     Parameter(s):
         _playerId - Id of the player that is being awarded the XP [STRING]
-        _milestones - Array of milestones to be updated [ARRAY]
 
     Returns:
         Nothing
 
     Example(s):
-        [_playerId, _milestones get "scouting"] call vgm_s_fnc_missions_gameplay_scouting_calculateMilestones;
+        [_playerId] call vgm_s_fnc_missions_gameplay_scouting_calculateMilestones;
  */
 
 #define SEARCH_RADIUS 90
 
-params ["_playerId", "_milestones"];
+params ["_playerId"];
 
 private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;
 private _scoutingData = [_mission get "public" get "id", "scouting"] call vgm_s_fnc_missions_getSystemNetmap;
@@ -33,6 +32,7 @@ private _guessedSites = _scoutingData get "guessedSites";
 // 0-100 for photos
 // 0-25 for type
 // up to 225 XP total
+private _milestones = [];
 {
     _x params ["", "_guessedClass", "", "_guessedPos", "_guessId", "_guessPhoto"];
 
@@ -129,3 +129,5 @@ private _guessedSites = _scoutingData get "guessedSites";
         + (_siteMilestone get "photo" select 1)
     ];
 } forEach _guessedSites;
+
+_milestones // return

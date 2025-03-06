@@ -24,15 +24,12 @@ params ["_endType", "_playerId"];
 // milestone entries - <Type specific data, XP to gain> - <ANY, NUMBER>
 private _milestones = createHashMapFromArray [
     ["simple", []],
-    ["scouting", []]
+    ["scouting", [_playerId] call vgm_s_fnc_missions_gameplay_scouting_calculateMilestones]
 ];
 
 if (_endType == "SUCCESS") then {
     (_milestones get "simple") pushBack ["mission_success", 50];
 };
-
-// add XP for spotting and photos
-[_playerId, _milestones get "scouting"] call vgm_s_fnc_missions_gameplay_scouting_calculateMilestones;
 
 private _xp = 0;
 {
