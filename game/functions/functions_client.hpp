@@ -18,6 +18,7 @@ class vgm_g
         class execNextFrame {};
         class itemConfig {};
         class itemType {};
+        class manWouldCollideAtPosition {};
         class objectArea {};
         class nearestPointOnLine {};
         class preInit
