@@ -55,9 +55,10 @@ _action set ["onEnter", {
     _state set ["radius", _nodeParams getOrDefaultCall ["radius", { 50 + random 100 }]];
     _state set ["angleChange", _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true]];
     _state set ["speedMode", _nodeParams getOrDefault ["speedMode", "LIMITED"]];
+    private _behaviour = _nodeParams getOrDefault ["behaviour", "SAFE"];
 
     _extern_group setCombatMode "RED";
-    _extern_group setBehaviourStrong "SAFE";
+    _extern_group setBehaviourStrong _behaviour;
     _extern_group setFormation "COLUMN";
     [_extern_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 

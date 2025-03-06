@@ -38,9 +38,9 @@
             [SEQUENCE, [], [
                 [ACTION(tracking_followTracks), []],
                 [ACTION(tracking_followInferredTrail), []],
-                [DECORATOR(timeLimit), [["maxDuration", 30]], [
+                [DECORATOR(timeLimit), [["maxDuration", 60]], [
                     // Angle change needs to be high, due to a 15m tolerance on area patrol waypoints.
-                    [ACTION(patrolArea), [["radius", 35], ["angleChange", 90]]]
+                    [ACTION(patrolArea), [["radius", 35], ["angleChange", 90], ["speedMode", "NORMAL"], ["behaviour", "AWARE"]]]
                 ]]
             ]]
         ]],
