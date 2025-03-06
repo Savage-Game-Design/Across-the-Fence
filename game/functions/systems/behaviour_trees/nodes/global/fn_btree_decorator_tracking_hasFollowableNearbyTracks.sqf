@@ -46,7 +46,7 @@ _decorator set ["condition", {
 
     private _nextTrack = _nearbyTracks # -1 # 0;
 
-	// Only accept newer tracks as interesting, to prevent getting stuck going in circles or infinitely tracking.
+    // Only accept newer tracks as interesting, to prevent getting stuck going in circles or infinitely tracking.
     if (_nextTrack get "time" <= _currentTrack getOrDefault ["time", 0]) exitWith {
         false
     };
