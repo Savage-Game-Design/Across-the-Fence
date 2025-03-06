@@ -11,7 +11,7 @@ class VGM_DisplayEndOfMission
     onUnload = VGM_UIEH(onUnload,EndOfMission);
     class ControlsBackground
     {
-VGM_SET_Y(0)
+        VGM_SET_Y(0)
         class Black: RscText
         {
             idc = 5001;
@@ -60,7 +60,7 @@ VGM_SET_Y(0)
     };
     class Controls
     {
-VGM_SET_Y(0)
+        VGM_SET_Y(0)
         class Status: VGM_ctrlTitle
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_STATUS;

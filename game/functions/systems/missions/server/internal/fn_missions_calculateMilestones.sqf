@@ -2,7 +2,7 @@
     File: fn_missions_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2023-10-15
-    Last Update: 2025-03-05
+    Last Update: 2025-03-06
     Public: No
 
     Description:
@@ -10,7 +10,7 @@
 
     Parameter(s):
         _endType - Mission end type, SUCCESS or FAILURE [STRING]
-        _playerId - Id of the player that is being awareded the XP [STRING]
+        _playerId - Id of the player that is being awarded the XP [STRING]
 
     Returns:
         Milestones details, Total experience to gain [ARRAY]

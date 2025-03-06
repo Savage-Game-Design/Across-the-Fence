@@ -2,14 +2,14 @@
     File: fn_missions_gameplay_scouting_calculateMilestones.sqf
     Author: Savage Game Design
     Date: 2025-02-25
-    Last Update: 2025-03-05
+    Last Update: 2025-03-06
     Public: No
 
     Description:
         Calculate amount of XP player should gain for guessing sites in a mission.
 
     Parameter(s):
-        _playerId - Id of the player that is being awareded the XP [STRING]
+        _playerId - Id of the player that is being awarded the XP [STRING]
         _milestones - Array of milestones to be updated [ARRAY]
 
     Returns:
