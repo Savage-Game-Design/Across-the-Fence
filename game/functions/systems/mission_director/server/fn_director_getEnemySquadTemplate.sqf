@@ -2,7 +2,7 @@
     File: fn_ai_getEnemySquadTemplate.sqf
     Author: Savage Game Design
     Date: 2024-02-10
-    Last Update: 2025-01-24
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -25,7 +25,7 @@ params [["_unitClasses", []], "_position", "_missionId"];
 createHashMapFromArray [
     ["pos", _position],
     ["composition", _unitClasses],
-    ["groupVars", []],
+    ["groupVars", createHashMap],
     ["side", east],
     ["deleteOnDespawn", false],
     ["missionId", _missionId],

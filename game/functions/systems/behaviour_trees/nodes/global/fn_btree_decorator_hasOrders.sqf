@@ -3,7 +3,7 @@
     File: fn_btree_decorator_hasOrders.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-10-25
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -52,12 +52,9 @@ _decorator set ["onEnter", {
     params ["_node", "_state"];
 
     _state set ["oldOrder", _extern_blackboard get "currentOrder"];
-    _state set ["oldOrderPosition", _extern_blackboard get "currentOrderPosition"];
 
 	// This should always be set, else we can't enter the node.
-    private _currentOrder = _state get "currentOrder";
-    _extern_blackboard set ["currentOrder", _currentOrder];
-    _extern_blackboard set ["currentOrderPosition", _currentOrder get "pos"];
+    _extern_blackboard set ["currentOrder", _state get "currentOrder"];
 
     // Execute the child
     [RESULT_RUNNING]
@@ -67,7 +64,6 @@ _decorator set ["onExit", {
     params ["_node", "_state", "_result"];
 
     _extern_blackboard set ["currentOrder", _state get "oldOrder"];
-    _extern_blackboard set ["currentOrderPosition", _state get "oldOrderPosition"];
 }];
 
 

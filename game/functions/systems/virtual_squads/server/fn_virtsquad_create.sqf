@@ -3,7 +3,7 @@
     File: fn_virtsquad_create.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-16
+    Last Update: 2025-03-01
     Public: No
 
     Description:
@@ -24,9 +24,10 @@
             ["composition", [
                 "vn_b_rifleman"
             ]],
-            // Format: [name, value, isGlobal]
-            ["groupVars", [
-                ["vgm_g_order", "patrol", true]
+            // Set on the machine the AI is spawned on
+            ["groupVars", createHashMapFromArray [
+                // Var name       Value    Global
+                ["vgm_g_order", ["patrol",  true  ]]
             ]],
             // Optional - defaults to east
             ["side", east],
