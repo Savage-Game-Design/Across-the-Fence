@@ -36,7 +36,13 @@ private _milestones = [];
 {
     _x params ["", "_guessedClass", "", "_guessedPos", "_guessId", "_guessPhoto"];
 
-    private _siteMilestone = createHashMapFromArray [["index", parseNumber _guessId + 1]];
+    private _siteMilestone = createHashMapFromArray [
+        ["index", parseNumber _guessId + 1],
+        // fallback values
+        ["position", ["not_complete", 0]],
+        ["type", ["incorrect", 0]],
+        ["photo", ["missing", 0]]
+    ];
     private _milestoneEntry = [_siteMilestone, 0];
     _milestones pushBack _milestoneEntry;
 
