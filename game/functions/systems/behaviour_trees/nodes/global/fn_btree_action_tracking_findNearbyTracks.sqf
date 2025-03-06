@@ -10,7 +10,7 @@
     Description:
         Action node.
 
-        Checks for nearby tracks from the tracking system, and stores them in the backboard.
+        Checks for nearby tracks from the tracking system, and stores them in the blackboard.
 
         Succeeds if nearby tracks are found.
         Fails if there's no nearby tracks.
