@@ -9,6 +9,8 @@
         Client postInit for respawn component.
  */
 
+if (!hasInterface) exitWith {};
+
 [player] call vgm_c_fnc_respawn_addHoldAction;
 player addEventHandler ["Respawn", { (_this#0) call vgm_c_fnc_respawn_addHoldAction }];
 player setVariable ["vgm_g_respawn_respawnsUsed", 0, true];

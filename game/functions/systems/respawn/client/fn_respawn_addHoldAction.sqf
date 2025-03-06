@@ -28,7 +28,7 @@ if (_existingActionId > -1) then {
 };
 
 // Call vgm_g_fnc_respawn_remainingRespawns only if needed, as it's computed dynamically.
-private _condition = "[_target] call vgm_g_fnc_medical_isUnconscious && { [_target] call vgm_g_fnc_respawn_remainingRespawns > 0 }";
+private _condition = toString {[_target] call vgm_g_fnc_medical_isUnconscious && { [_target] call vgm_g_fnc_respawn_remainingRespawns > 0 }};
 
 private _holdActionId = [
     _player,
