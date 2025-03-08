@@ -1,8 +1,8 @@
 /*
-    File: fn_btree_decorator_hasNearbyTracks.sqf
+    File: fn_btree_decorator_hasFollowableNearbyTracks.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-12-06
+    Last Update: 2025-03-06
     Public: Yes
 
     Description:
@@ -28,7 +28,7 @@ params ["_params", "_children"];
 
 private _decorator = _this call vgm_g_fnc_btree_decorator_basic;
 
-_decorator set ["name", "Has nearby tracks?"];
+_decorator set ["name", "has followable nearby tracks?"];
 _decorator set ["condition", {
     params ["_node", "_state"];
 
@@ -44,7 +44,14 @@ _decorator set ["condition", {
 
     if (_nearbyTracks isEqualTo []) exitWith { false };
 
-    _extern_blackboard set ["tracking_currentTrack", _nearbyTracks # -1 # 0];
+    private _nextTrack = _nearbyTracks # -1 # 0;
+
+    // Only accept newer tracks as interesting, to prevent getting stuck going in circles or infinitely tracking.
+    if (_nextTrack get "time" <= _currentTrack getOrDefault ["time", 0]) exitWith {
+        false
+    };
+
+    _extern_blackboard set ["tracking_currentTrack", _nextTrack];
 
     true
 }];
