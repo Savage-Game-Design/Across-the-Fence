@@ -41,6 +41,7 @@ class vgm_g
         class posindex_delete {};
         class posindex_deleteAt {};
         class posindex_get {};
+        class posindex_getItems {};
         class posindex_inAreaArray {};
         class posindex_inAreaArrayIndexes {};
         class posindex_refreshAllItems {};
