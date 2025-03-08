@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2025-01-02
+    Last Update: 2025-03-02
     Public: Yes
 
     Description:
@@ -231,7 +231,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 ] call para_g_fnc_event_subscribeServer;
 
 [
-    "player removed from mission",
+    "vgm_mission_playerRemoved",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_playerId", "_missionId"];

@@ -240,32 +240,50 @@
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
             <Original>Mission participation</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_PERFECT">
-            <Original>%1. Enemy site marked [Perfect]</Original>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_NOT_COMPLETE">
+            <Original>Not specified</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_GOOD">
-            <Original>%1. Enemy site marked [Good]</Original>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_NOT_USABLE">
+            <Original>Nothing in vicinity</Original>
         </Key>
-        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_SPOTTED_BAD">
-            <Original>%1. No enemy site at marked location</Original>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_FAR">
+            <Original>Far from the target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_CLOSE">
+            <Original>Close to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_VERY_CLOSE">
+            <Original>Very close to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_SPOT_ON">
+            <Original>Perfectly on target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_MISSING">
+            <Original>N/A</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_INVALID">
-            <Original>%1Photo does not contain the site</Original>
+            <Original>The photo does not contain the site</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_UNUSABLE">
-            <Original>%1Photo quality too low</Original>
+            <Original>The site is barely visible in the photo</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_BLURRY">
-            <Original>%1Photo is blurry</Original>
+            <Original>The photo shows some of the site</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_GRAINY">
-            <Original>%1Photo is grainy</Original>
+            <Original>The photo shows enough of the site</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_DETAILED">
-            <Original>%1Photo is detailed</Original>
+            <Original>The photo shows most of the site</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_PERFECT">
-            <Original>%1Photo is perfectly clear</Original>
+            <Original>The photo is perfectly clear</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_TYPE_INCORRECT">
+            <Original>Incorrect site type</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_TYPE_CORRECT">
+            <Original>Correct site type</Original>
         </Key>
     </Package>
     <Package name="Skills Tree">
@@ -573,7 +591,7 @@
             <Original>%1 has changed position of site %2.</Original>
         </Key>
         <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_PHOTO_DESCRIPTION">
-            <Original>%1 has added photo of site %2.</Original>
+            <Original>%1 has added a photo to site %2.</Original>
         </Key>
         <!-- -->
         <Key ID="STR_VGM_MISSIONS_SCOUTING_REPORT">
@@ -751,6 +769,9 @@
         </Key>
     </Package>
     <Package name="Respawn">
+        <Key ID="STR_VGM_RESPAWN_ACTION">
+            <Original>Attempt a desperate escape</Original>
+        </Key>
         <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_HEADER">
             <Original>Despite being injured, you manage to evade capture</Original>
         </Key>

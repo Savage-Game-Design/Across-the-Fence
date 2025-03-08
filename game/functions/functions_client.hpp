@@ -42,6 +42,7 @@ class vgm_g
         class posindex_delete {};
         class posindex_deleteAt {};
         class posindex_get {};
+        class posindex_getItems {};
         class posindex_inAreaArray {};
         class posindex_inAreaArrayIndexes {};
         class posindex_refreshAllItems {};
@@ -283,6 +284,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\missions\global);
 
+        class missions_getAssignedMissionId {};
         class missions_getHubSpawnPos {};
         class missions_getZoneMarker {};
         class missions_preInit
@@ -315,6 +317,10 @@ class vgm_g
 
         class respawn_findSafeSpawnTransformNearTeam {};
         class respawn_findFallbackSpawnTransform {};
+        class respawn_preInit {
+            preInit = 1;
+        };
+        class respawn_remainingRespawns {};
     };
 
     class skills
@@ -742,10 +748,15 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
 
+        class respawn_addHoldAction {};
         class respawn_decayInventory {};
         class respawn_onPauseMenu {};
         class respawn_onPlayerKilled {};
         class respawn_onPlayerRespawn {};
+        class respawn_postInit
+        {
+            postInit = 1;
+        };
         class respawn_preInit
         {
             preInit = 1;

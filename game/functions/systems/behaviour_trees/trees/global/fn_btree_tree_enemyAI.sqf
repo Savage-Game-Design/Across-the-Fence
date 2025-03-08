@@ -23,6 +23,8 @@
         [_group, _tree] call vgm_g_fnc_btree_setTreeLocal;
  */
 
+#define CURRENT_ORDER ( _extern_blackboard get "currentOrder" )
+
 [DECORATOR(updateKnowledgeService), [], [
 [DECORATOR(suppressionService), [], [
 [DECORATOR(disableAi), [["features", ["AUTOCOMBAT"]]], [
@@ -32,7 +34,7 @@
             [ACTION(moveToInvestigationPoint), []]
         ]],
         [DECORATOR(hasOrders), [["order", "DEFEND"], ["abortLowerPriority", true]], [
-            [ACTION(patrolArea), [["center", { _extern_blackboard get "currentOrderPosition" }], ["radius", 10]]]
+            [ACTION(patrolArea), [["center", { CURRENT_ORDER get "pos" }], ["radius", 10]]]
         ]],
         [DECORATOR(tracking_hasFollowableNearbyTracks), [["abortLowerPriority", true]], [
             [SEQUENCE, [], [
@@ -43,6 +45,9 @@
                     [ACTION(patrolArea), [["radius", 35], ["angleChange", 90], ["speedMode", "NORMAL"], ["behaviour", "AWARE"]]]
                 ]]
             ]]
+        ]],
+        [DECORATOR(hasOrders), [["order", "PATROL-ROUTE"], ["abortLowerPriority", true]], [
+            [ACTION(patrolRoute), [["route", { CURRENT_ORDER get "route" }], ["isCircuit", { CURRENT_ORDER getOrDefault ["isCircuit", false] }]]]
         ]],
         [ACTION(patrolArea), []]
     ]]

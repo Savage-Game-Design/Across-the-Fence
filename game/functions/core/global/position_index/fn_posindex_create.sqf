@@ -2,7 +2,7 @@
     File: fn_posindex_create.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-24
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -44,15 +44,19 @@ private _positions = [];
 private _indexes = [];
 // Shallow copy to avoid external systems interfering with our array
 private _itemsCopy = [] + _items;
+private _itemsMap = createHashMap;
 
 {
     _positions pushBack (_x call _fnc_getItemPos);
     _indexes pushBack _forEachIndex;
+    _itemsMap set [_forEachIndex, _x];
 } forEach _itemsCopy;
 
 private _posIndex = createHashMapFromArray [
     ["positions", _positions],
     ["items", _itemsCopy],
+    // HashMaps can be sparse. Enables us to get all items without any nils.
+    ["itemsMap", _itemsMap],
     ["vacantSlots", []],
     ["getItemPos", _fnc_getItemPos]
 ];

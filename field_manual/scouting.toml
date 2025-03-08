@@ -16,7 +16,7 @@ Filling in a new report entry:
 - Mark the site position with [h]Mark site[/h] button
 
 <t size="1.1">Photo camera</t>
-Instead of setting the site type manually you can try snapping a photo of it. After photographing a site, the map screen with the report will be shown.
+You can photograph a site to gain experience for its data. After photographing a site, the map screen with the report will be shown.
 Assign the photo to a site with the <img size='1' %5 image='{2}' /> button.
 """
 
@@ -32,5 +32,5 @@ image = '\a3\ui_f\data\gui\cfg\hints\head_ca.paa'
 
 [hints.scouting]
 description = """
-The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to identify the site type if you're unsure.
+The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to capture photos of the sites.
 """

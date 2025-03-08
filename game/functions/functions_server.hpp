@@ -109,7 +109,6 @@ class vgm_s
         class missions_createMission {};
         class missions_endMission {};
         class missions_getAssignedMission {};
-        class missions_getAssignedMissionId {};
         class missions_getById {};
         class missions_joinMission {};
         class missions_leaveMission {};
@@ -173,6 +172,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\missions_gameplay\server\scouting);
 
+        class missions_gameplay_scouting_calculateMilestones {};
         class missions_gameplay_scouting_handleAdded {};
         class missions_gameplay_scouting_handleMarked {};
         class missions_gameplay_scouting_handleSetSitePhoto {};

@@ -2,7 +2,7 @@
     File: fn_posindex_deleteAt.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-10
+    Last Update: 2025-03-01
     Public: Yes
 
     Description:
@@ -23,6 +23,7 @@ params ["_index", "_slot"];
 
 _index get "positions" set [_slot, nil];
 _index get "items" set [_slot, nil];
+_index get "itemsMap" deleteAt _slot;
 _index get "vacantSlots" pushBack _slot;
 
 nil

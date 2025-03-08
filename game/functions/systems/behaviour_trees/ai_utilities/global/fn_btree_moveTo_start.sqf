@@ -21,6 +21,9 @@
 
 params ["_group", "_destination", ["_speedMode", ""], ["_completionDistance", 10]];
 
+// Cheap and safe 2D -> 3D conversion
+_destination = _destination vectorAdd [0,0,0];
+
 _group setVariable ["vgm_l_btree_moveTo_destination", _destination];
 _group setVariable ["vgm_l_btree_moveTo_completionDistance", _completionDistance];
 _group setVariable ["vgm_l_btree_moveTo_repairAttempts", nil];
