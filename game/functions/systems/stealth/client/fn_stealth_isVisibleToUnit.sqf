@@ -3,7 +3,7 @@
     File: fn_stealth_isVisibleToUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-19
-    Last Update: 2025-01-23
+    Last Update: 2025-03-16
     Public: Yes
 
     Description:
@@ -19,27 +19,28 @@
         [allUnits # 0] call vgm_c_fnc_stealth_isVisibleToUnit;
  */
 
+// Gives an exponential curve that passes through 1,1
+#define EXP(steepness, value) (exp ( steepness * value - steepness ))
 // The range at which you need to be fully visible to be spotted
-#define MAX_VISIBILITY_NEEDED_DISTANCE 200
+#define MAX_VISIBILITY_NEEDED_DISTANCE 300
 // The absolute minimum visibility to be seen. Should be tested in-game to find the best feeling value.
 // 0.333 is two points (e.g head + hand) visible, so should be the minimum
 #define BASE_MIN_SPOT_VISIBILITY 0.3
-#define MOVEMENT_SPEED_MODIFIER 0.4
+#define MOVEMENT_SPEED_MODIFIER 0.5
 #define PERIPHERAL_MAX_PENALTY 0.7
-#define DARKNESS_CONSTANT 0.15
 #define DARKNESS_SCALING 1
 
 params ["_unit"];
 
 [_unit] call vgm_c_fnc_stealth_getVisibilityForUnit params ["_visibility", "_angleFromEyeline"];
 
-
 // It gets harder to spot the player based on distance. This scales the minimum visibility needed with distance.
 private _distance = player distance _unit;
+private _stanceValue = linearConversion ([0, MAX_VISIBILITY_NEEDED_DISTANCE, _distance] + (vgm_c_stealth_stanceLerp get stance player));
 // Alters the minimum spot visibility to account for players being prone/crouched being harder to see from far away
 private _stanceFactor = vgm_c_stealth_stanceMultipliers get stance player;
 // Adjust for people being less observant at their peripherals.
-private _peripheralAdjustmentFactor = linearConversion [PERIPHERAL_START_ANGLE, VISION_CONE_ANGLE, _angleFromEyeline, 0, PERIPHERAL_MAX_PENALTY, true];
+private _peripheralAdjustmentValue = linearConversion [PERIPHERAL_START_ANGLE, VISION_CONE_ANGLE, _angleFromEyeline, 0, PERIPHERAL_MAX_PENALTY, true];
 // Adjust for player's movement speed
 // 0.5 - Crawl
 // 1 - Fast crawl
@@ -51,18 +52,24 @@ private _peripheralAdjustmentFactor = linearConversion [PERIPHERAL_START_ANGLE, 
 // 3.8 - Jog, gun down
 // 4.3 - All sprinting
 private _playerSpeed = vectorMagnitude velocity player;
-// Speed > 0 will include rotation too - only get full stealth if you're perfectly still.
-private _movementSpeedFactor = if (_playerSpeed <= 0.0001 && vgm_c_stealth_rotationalVelocity == 0) then {0} else { linearConversion [0, 4, _playerSpeed, 0.5, 1, true] };
+// Player must be stationary, and barely moving. The rotational velocity permits small, slow movements to be a bit more forgiving.
+private _movementValue = if (_playerSpeed <= 0.0001 && vgm_c_stealth_rotationalVelocity < 10) then {
+    0
+} else {
+    // This means higher speeds have greater impacts.
+    private _normalizedSpeed = linearConversion [0, 4, _playerSpeed, 0, 1];
+    private _exponentialSpeed = EXP(2, _normalizedSpeed);
+    linearConversion [0, 1, _exponentialSpeed, 0, 0.7, true]
+};
 // Lighting influence is inverted - as want to increase minimum required visibility when it's dark.
 private _darkness = 1 - ([] call vgm_c_fnc_stealth_getLighting);
 
 private _minSpotVisibility = (
     BASE_MIN_SPOT_VISIBILITY
-    + MOVEMENT_SPEED_MODIFIER * (1 - _movementSpeedFactor)
-    + _peripheralAdjustmentFactor
-    + DARKNESS_CONSTANT * _darkness
-    + (_distance * _stanceFactor * (1 + DARKNESS_SCALING * _darkness) / MAX_VISIBILITY_NEEDED_DISTANCE)
-);
+    + _stanceValue
+    - (linearConversion [0, MAX_VISIBILITY_NEEDED_DISTANCE, _distance, _movementValue, 0])
+    + _peripheralAdjustmentValue
+) * (1 + DARKNESS_SCALING * _darkness);
 
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1

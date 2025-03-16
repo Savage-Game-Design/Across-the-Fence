@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-31
+    Last Update: 2025-03-16
     Public: No
 
     Description:
@@ -21,12 +21,12 @@ vgm_c_stealth_visibleDurationWhenSeen = 60;
 vgm_c_stealth_visibleOnFiredDelay = 3;
 vgm_c_stealth_visibleDurationOnFired = 30;
 
-vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
-    ["STAND", 1],
-    ["CROUCH", 1.2],
-    ["PRONE", 2],
-    ["UNDEFINED", 1],
-    ["", 1]
+vgm_c_stealth_stanceLerp = createHashMapFromArray [
+    ["STAND", [0, 1]],
+    ["CROUCH", [0, 2]],
+    ["PRONE", [0, 4]],
+    ["UNDEFINED", [0, 1]],
+    ["", [0, 1]]
 ];
 
 /////////////////
