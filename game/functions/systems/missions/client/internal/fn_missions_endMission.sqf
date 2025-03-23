@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author: Savage Game Design
     Date: 2023-02-26
-    Last Update: 2025-02-28
+    Last Update: 2025-03-23
     Public: No
 
     Description:
@@ -32,13 +32,16 @@ vgm_mission_onMission = false;
 private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 ["vgm_mission_end_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
-moveOut player;
-player setVelocity [0,0,0];
-([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
-player setDir _newDir;
-player setVehiclePosition [_newPos, [], 0, "NONE"];
+[] spawn {
+    waitUntil {vehicle player == player};
 
-player call vgm_c_fnc_medical_fullHeal;
+    player setVelocity [0,0,0];
+    ([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
+    player setDir _newDir;
+    player setVehiclePosition [_newPos, [], 0, "NONE"];
+    player call vgm_c_fnc_medical_fullHeal;
+};
+moveOut player;
 
 terminate (missionNamespace getVariable ["vgm_missions_zoomOnMapScript", scriptNull]);
 [] call vgm_c_fnc_missions_coverMap;
