@@ -30,7 +30,8 @@ class VGM_RscSquad {
                             y = 0;
                             w = 3 * GUI_GRID_W;
                             h = 4.5 * GUI_GRID_H;
-                            colorBackground[] = {0.5,0.5,0.5,1};
+                            colorBackground[] = { VGM_UI_COLOR_GREY,0.4 };
+                            colorText[] = { VGM_UI_COLOR_GREY,0.8 };
                         };
                         class Notifications: RscControlsGroupNoScrollbars
                         {
@@ -44,7 +45,7 @@ class VGM_RscSquad {
                                 {
                                     text = "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa";
                                     /*text = "#(argb,8,8,3)color(1,1,1,1)";*/
-                                    colorText[] = {0,0,0,1};
+                                    colorText[] = {1,1,1,1};
                                     x = 0.3 * GUI_GRID_W;
                                     y = 0.3 * GUI_GRID_H;
                                     w = 2.4 * GUI_GRID_W;
@@ -60,7 +61,7 @@ class VGM_RscSquad {
                             y = 4.5 * GUI_GRID_H;
                             w = 3 * GUI_GRID_W;
                             h = 2.6 * GUI_GRID_H;
-                            colorBackground[] = {0.3, 0.3, 0.3, 1};
+                            colorBackground[] = {0.3, 0.3, 0.3, 0};
                         };
                         class Name: RscStructuredText
                         {
