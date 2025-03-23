@@ -2,7 +2,7 @@
     File: fn_respawn_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2025-03-02
+    Last Update: 2025-03-23
     Public: No
 
     Description:
@@ -19,4 +19,4 @@
     {
         player setVariable ["vgm_g_respawn_respawnsUsed", 0, true];
     }
-] call para_g_fnc_event_subscribeServer;
+] call para_g_fnc_event_subscribeLocal;
