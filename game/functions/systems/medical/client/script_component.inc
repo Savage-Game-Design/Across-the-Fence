@@ -15,9 +15,9 @@
 #define WOUND_SEVERE 3
 #define WOUND_MAX WOUND_SEVERE
 
-#define WOUNDS_BLEED_THRESHOLD 6
+#define WOUNDS_BLEED_THRESHOLD 3
 
-#define BLEED_OUT_TIME 30
+#define BLEED_OUT_TIME 60
 
 #define HEAL_MEDIKIT "medikit"
 #define HEAL_FAK "fak"
@@ -40,3 +40,9 @@
 
 #define DEBUFF_BLURRYVISION_MINOR 0.35
 #define DEBUFF_BLURRYVISION_MAJOR 1
+
+// frequent hits to the same hitpoint more often than this value will be ignored
+#define MAX_HIT_FREQ 0.75
+
+// disable scrollwheel menu action to heal self
+#define MEDICAL_NO_SELF_HEAL_ACTION

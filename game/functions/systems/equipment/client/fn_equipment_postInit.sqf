@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-09-19
+    Last Update: 2025-01-06
     Public: No
 
     Description:
@@ -15,11 +15,36 @@ if (entities "vn_module_whitelistedarsenal" isNotEqualTo []) then {
     "S.O.G. Whitelisted Arsenal module detected in the mission. VGM Equipment will NOT function corectly!" call vgm_g_fnc_logError;
 };
 
-private _arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal", false]};
+vgm_equipment_arsenals = entities "" select {_x getVariable ["vgm_equipment_arsenal", false]};
 
 {
     _x addAction [
         "Open Arsenal",
-        {call vgm_c_equipment_openArsenal}
+        {call vgm_c_fnc_equipment_openArsenal},
+        nil,
+        1.5,
+        false,
+        true,
+        "",
+        "true",
+        7
     ]
-} forEach _arsenals;
+} forEach vgm_equipment_arsenals;
+
+[] call vgm_c_fnc_equipment_arsenalInit;
+
+player call vgm_c_fnc_equipment_setDefaultLoadout;
+["vgm_skills_respecLocal", {
+    player call vgm_c_fnc_equipment_setDefaultLoadout;
+}] call para_g_fnc_event_subscribeLocal;
+
+["vgm_equipment_arsenalOpen", {
+    vgm_equipment_arsenalOpen = true;
+}] call para_g_fnc_event_subscribeLocal;
+
+[true, "arsenalClosed", {
+    if (missionNamespace getVariable ["vgm_equipment_arsenalOpen", false]) then {
+        vgm_equipment_arsenalOpen = false;
+        ["vgm_equipment_arsenalClose", []] call para_g_fnc_event_triggerLocal;
+    };
+}] call BIS_fnc_addScriptedEventHandler;

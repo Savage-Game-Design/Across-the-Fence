@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillLearn.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2024-12-05
     Public: No
 
     Description:
@@ -18,6 +18,8 @@
         [] remoteExecCall ["vgm_c_fnc_skills_receiveSkillRespec", _player];
  */
 
+#define EMPTY_LOADOUT [[],[],[],[],[],[],"","",[],["","","","","",""]]
+
 ["DEBUG", "Received skills respec"] call vgm_g_fnc_log;
 
 // close the popup
@@ -25,4 +27,8 @@
 private _result = true;
 uiNamespace setVariable ["BIS_fnc_guiMessage_status", _result];
 
+player setUnitLoadout EMPTY_LOADOUT;
+
 hint "Skill respec done";
+
+["vgm_skills_respecLocal"] call para_g_fnc_event_triggerLocal;

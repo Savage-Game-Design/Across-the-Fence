@@ -4,6 +4,8 @@
 #include "inc\macroExecs.inc"
 
 #include "ctrls.hpp"
+#include "VGM_RscNotepad.hpp"
+#include "VGM_DisplayMenuBase.hpp"
 #include "VGM_DisplaySkills.hpp"
 #include "VGM_DisplayAbilities.hpp"
 #include "VGM_DisplayMissions.hpp"
@@ -11,11 +13,14 @@
 #include "VGM_DisplayMedical.hpp"
 #include "VGM_DisplayLoading.hpp"
 #include "VGM_DisplayMissionManagement.hpp"
+#include "VGM_DisplayEndOfMission.hpp"
 
 import RscHealthTextures from RscTitles;
-class RscTitles
+class RscTitles : ParadigmRscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
+    #include "VGM_RscLevelIndicator.hpp"
+    #include "VGM_RscMedicalStatus.hpp"
     #include "VGM_RscProgressBar.hpp"
     #include "VGM_RscStaminaBar.hpp"
     class VGM_RscHealthTextures: RscHealthTextures

@@ -2,17 +2,11 @@
     File: fn_loading_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-08
-    Last Update: 2023-09-15
+    Last Update: 2024-11-27
     Public: No
 
     Description:
         Client postInit function for loading system.
-
-    Parameter(s):
-        N/A
-
-    Returns:
-        Nothing
  */
 
 #define TIMEOUT 30
@@ -40,12 +34,10 @@ private _handlers = missionNamespace getVariable ["vgm_loading_handlers", []];
         } forEachReversed _handlers;
 
         // Loading... ticker text
-        format [
-            "%1%2 %3",
-            localize "STR_LOADING",
-            [] call vgm_c_fnc_loading_tickerDots,
-            (_handlers apply {_x get "name"}) joinString endl
-        ] call vgm_c_fnc_loading_setText;
+        (uiNamespace getVariable ["VGM_DisplayLoading", displayNull]) setVariable [
+            "VGM_Texts",
+            _handlers apply {_x get "name"}
+        ];
 
         (1 - (count _handlers / _total)) call BIS_fnc_progressLoadingScreen;
 

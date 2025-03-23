@@ -2,16 +2,16 @@
     File: fn_operate_shovel.sqf
     Author:  Savage Game Design
     Public: Yes
-    
+
     Description:
         Executes "Shovel" behaviour for building.
-    
+
     Parameter(s):
         _hitObject object to be built
-    
+
     Returns:
-        None
-    
+        Should bypass melee damage [BOOL]
+
     Example(s):
         [_thingToWhack] call para_c_fnc_operate_shovel
 */

@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Callable, Generator, List, Protocol, Union
+from typing import Callable, Generator, List, Optional, Protocol, Union
 
-from .file_utils import all_files, all_files_relative
-from .file_sources import FileGenerator, FileSource, CopyFile, GenerateFile, HardlinkFile, SymlinkFile
+from .file_generators import FileGenerator
+from .file_utils import all_files_relative, Omit
+from .file_sources import FileSource, CopyFile, GenerateFile, HardlinkFile, SymlinkFile
 from .protocols import Explainable
 
 
@@ -13,13 +14,14 @@ Takes a list of mappings, and builds a file tree.
 This file tree can then be either symlinked or copied into existence.
 """
 
+
 class FileConflictError(Exception):
     def __init__(self, file1_desc, file2_desc):
         super().__init__(f"({file1_desc}) conflicts with ({file2_desc})")
 
 class FileTreeEntry(Explainable, Protocol):
     name: str
-    parent: 'Folder' = None
+    parent: Optional['Folder'] = None
 
     def resolve_path(self):
         path_entries = [self.name]
@@ -33,11 +35,18 @@ class FileTreeEntry(Explainable, Protocol):
         self.parent.children.remove(self)
         self.parent = None
 
+    def __truediv__(self, other: str) -> 'FileTreeEntry':
+       raise NotImplementedError()
+
+class NoTreeEntryError(Exception):
+    def __init__(self, parent: FileTreeEntry, child: str):
+        super().__init__(f"Child '{child}' of '{parent.resolve_path()}' does not exist")
+
 @dataclass
 class File(FileTreeEntry):
     name: str
     source: FileSource
-    parent: 'Folder' = None
+    parent: Optional['Folder'] = None
 
     def explain(self) -> str:
         return f"File source '{self.resolve_path()}' [{self.source.explain()}]"
@@ -45,10 +54,13 @@ class File(FileTreeEntry):
     def create_at(self, path):
         return self.source.create_file(path)
 
+    def __truediv__(self, other: str) -> FileTreeEntry:
+        raise Exception("Cannot access the child of a file node")
+
 @dataclass
 class Folder(FileTreeEntry):
     name: str
-    parent: 'Folder' = None
+    parent: Optional['Folder'] = None
     children: List[FileTreeEntry] = field(default_factory=list)
 
     def explain(self) -> str:
@@ -62,19 +74,22 @@ class Folder(FileTreeEntry):
         self.children.append(new_entry)
         new_entry.parent = self
 
+    def add_folder(self, folder_name: str):
+        folder = Folder(name=folder_name)
+        self.add(folder)
+        return folder
+
     def contains(self, name: str) -> bool:
         return True if self.get(name) else False
 
-    def get(self, name: str) -> FileTreeEntry:
+    def get(self, name: str) -> FileTreeEntry | None:
         return next((child for child in self.children if child.name == name), None)
 
-    def get_or_create_subfolder(self, name: str) -> FileTreeEntry:
+    def get_or_create_subfolder(self, name: str) -> 'Folder':
         existing_entry = self.get(name)
 
         if not existing_entry:
-            new_folder = Folder(name=name)
-            self.add(new_folder)
-            return new_folder
+            return self.add_folder(name)
 
         if not isinstance(existing_entry, type(self)):
             raise FileConflictError(f"Subfolder '{name}' in {self.explain()}", existing_entry.explain())
@@ -87,8 +102,14 @@ class Folder(FileTreeEntry):
     def files(self) -> Generator[File, None, None]:
         return (entry for entry in self.children if isinstance(entry, File))
 
-    def __truediv__(self, other: str):
-        return self.get(other)
+    def __truediv__(self, other: str) -> FileTreeEntry:
+        entry = self.get(other)
+        if not entry:
+            raise NoTreeEntryError(self, other)
+        return entry
+
+    def __rshift__(self, other: str) -> 'Folder':
+        return self.get_or_create_subfolder(other)
 
     def create_tree_at(self, path):
         path.mkdir(parents=True,exist_ok=True)
@@ -99,7 +120,7 @@ class Folder(FileTreeEntry):
 
 FileTreeRoot = lambda: Folder(name="")
 
-def add_file_to_tree(root: Folder, path: Union[Path, str], file_source: FileSource):
+def add_file_to_tree(root: Folder, path: Union[Path, str], file_source: FileSource, replace_existing=False):
     destination_path = Path(path)
 
     parents = destination_path.parts[:-1]
@@ -109,6 +130,11 @@ def add_file_to_tree(root: Folder, path: Union[Path, str], file_source: FileSour
     # Start with the topmost parent, and descends down the tree, making sure each folder exists.
     for parent_name in parents:
         current_root = current_root.get_or_create_subfolder(parent_name)
+
+    if replace_existing:
+        existing = current_root.get(name)
+        if existing:
+            existing.remove()
 
     current_root.add(File(name = name, source=file_source))
 
@@ -122,14 +148,16 @@ def print_file_tree(file_tree: Folder, indentation=0, explain=False):
         print(f"{indent_spaces}- {file.name} {explanation if explain else ''}")
 
 def __include_file_tree_entries_func(include_action=Callable[[Path], FileSource]):
-    def perform_include(file_tree: Folder, source: Union[Path, str], dest: Union[Path, str]):
+    def perform_include(
+        file_tree: Folder,
+        source: Union[Path, str],
+        dest: Union[Path, str],
+        omit: Omit = Omit(),
+    ):
         source_path = Path(source)
         dest_path = Path(dest)
         if source_path.is_dir():
-            for file_path in all_files_relative(source_path, recursive=True):
-                # TODO - Approach removing files in a better way.
-                if ".git" in file_path.parts:
-                    continue
+            for file_path in all_files_relative(source_path, recursive=True, omit=omit):
                 add_file_to_tree(file_tree, dest_path / file_path, include_action(source_path / file_path))
         else:
             add_file_to_tree(file_tree, dest_path, include_action(source_path))
@@ -155,14 +183,10 @@ def remove(file_tree: Folder, path: Union[Path, str]):
 
     parents = path_to_remove.parts[:-1]
     name = path_to_remove.parts[-1]
-    current_root = file_tree
+    current_root: FileTreeEntry = file_tree
 
     # Start with the topmost parent, and descends down the tree, making sure each folder exists.
     for parent_name in parents:
         current_root = current_root / parent_name
-        if not current_root:
-            return
 
-    to_remove = current_root / name
-    if to_remove:
-        to_remove.remove()
+    (current_root / name).remove()

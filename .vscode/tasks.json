@@ -4,18 +4,57 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build",
+            "label": "Build (Mission)",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\build.py' build --overwrite",
+            "command": "py '${workspaceFolder}\\build\\run.py' build --overwrite",
             "problemMatcher": [],
             "group": {
-                "kind": "build"
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build (Server mod)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' build --overwrite --mod",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+       {
+            "label": "Build (Mods with PBO packing)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' build --overwrite --mod --pack",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Launch mission dev (build, client, server)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch dev --overwrite",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
+            "label": "Launch mod dev (build, client, server)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch dev --overwrite --mod",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
             }
         },
         {
             "label": "Launch arma client",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' client",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch client --editor",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
@@ -24,7 +63,16 @@
         {
             "label": "Launch arma server",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' server",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch server",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none"
+            }
+        },
+        {
+            "label": "Launch arma server (mod)",
+            "type": "shell",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch server --mod",
             "problemMatcher": [],
             "group": {
                 "kind": "none"
@@ -33,7 +81,7 @@
         {
             "label": "Launch arma client and connect to local server",
             "type": "shell",
-            "command": "py '${workspaceFolder}\\build\\run.py' client --connect=127.0.0.1",
+            "command": "py '${workspaceFolder}\\build\\run.py' launch client --connect=127.0.0.1",
             "problemMatcher": [],
             "group": {
                 "kind": "none"

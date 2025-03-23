@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: Savage Game Design
     Date: 2023-09-19
-    Last Update: 2023-09-19
+    Last Update: 2023-11-10
     Public: No
 
     Description:
@@ -21,7 +21,10 @@ if (isNull _lobbyOfficer || {!(_lobbyOfficer in units _lobbyGroup)}) then {
     "'vgm_core_lobbyOfficer' not in 'vgm_core_lobbyGroup', adding Logic to prevent group deletion" call vgm_g_fnc_logWarning;
 
     private _logic = _lobbyGroup createUnit ["Logic", [0,0,0], [], 0, "CAN_COLLIDE"];
-    _logic enableSimulation false;
-    _logic disableAI "ALL";
-    vgm_core_lobbyGroup selectLeader _logic;
+    _logic enableSimulationGlobal false;
+    [_logic, "ALL"] remoteExec ["disableAI", 0, true];
+
+    [vgm_core_lobbyGroup, _logic] remoteExec ["selectLeader", vgm_core_lobbyGroup];
+} else {
+    [vgm_core_lobbyGroup, _lobbyOfficer] remoteExec ["selectLeader", vgm_core_lobbyGroup];
 };

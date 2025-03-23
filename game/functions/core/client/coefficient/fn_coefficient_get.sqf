@@ -2,14 +2,14 @@
     File: fn_coefficient_get.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2023-08-21
+    Last Update: 2024-11-12
     Public: Yes
 
     Description:
         Get calculated coefficient value from an unit.
 
     Parameter(s):
-        _unit - Unit to remove the coefficient reason from [OBJECT]
+        _unit - Unit to get the coefficient value from [OBJECT]
         _coefficient - Coefficient name [STRING]
 
     Returns:

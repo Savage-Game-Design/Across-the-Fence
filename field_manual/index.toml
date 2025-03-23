@@ -1,0 +1,32 @@
+[vgm_welcome]
+order = 1
+displayName = "Welcome"
+
+pages = [
+    "welcome",
+    "getting_started"
+]
+
+[vgm]
+order = 2
+displayName = "$STR_VGM_MISSION_NAME"
+
+# Pages require a matching {pagename}.toml file.
+pages = [
+    "missions",
+    "skills",
+    "medical",
+    "equipment",
+]
+
+[vgm_missions]
+order = 3
+displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
+
+pages = [
+    "stealth",
+    "scouting",
+    "hints",
+    "stop_and_focus",
+    "alertness",
+]

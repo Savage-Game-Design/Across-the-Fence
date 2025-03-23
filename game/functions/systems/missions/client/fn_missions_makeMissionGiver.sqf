@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2023-09-20
+    Last Update: 2025-03-02
     Public: Yes
 
     Description:
@@ -25,15 +25,15 @@
 
 params ["_object"];
 
+vgm_mission_givers pushBack _object;
 _object setVariable ["vgm_c_missions_joinActions", createHashMap];
 
 // Add action to create mission
 _object addAction [
     "Create mission",
     {
-        params ["_target", "_caller", "_actionId", "_arguments"];
-
-        [getPlayerID player] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
+        private _targetZone = selectRandom vgm_missions_zones_targetBoxes ;
+        [getPlayerID player, _targetZone] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
     },
     [],
     100,
@@ -47,8 +47,12 @@ _object addAction [
 vgm_c_fnc_addJoinMissionAction = {
     params ["_missionId", "_object"];
 
+    private _publicMission = [] call vgm_c_fnc_missions_getMissions get _missionId;
+    private _leader = leader (_publicMission get "group");
+    private _zone = _publicMission get "targetZone";
+
     private _actionId = _object addAction [
-        format ["Join mission %1", _missionId],
+        format ["Join mission %1 (%2, %3)", _missionId, name _leader, markerText (_zone call vgm_g_fnc_missions_getZoneMarker)],
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
             _arguments params ["_missionId"];
@@ -171,20 +175,25 @@ vgm_c_fnc_removeAllJoinMissionActions = {
     } forEach (keys _joinActions);
 };
 
-[
+{
+    [
+        _x,
+        [[_object], {
+            params ["_eventData", "_savedParameters"];
+            _eventData params ["_missionId"];
+            _savedParameters params ["_object"];
+
+            if (isNull _object) exitWith {
+                // TODO - Remove handler if object no longer exists.
+            };
+
+            [_missionId, _object] call vgm_c_fnc_removeJoinMissionAction;
+        }]
+    ] call para_g_fnc_event_subscribeServer;
+} forEach [
     "vgm_mission_notJoinable",
-    [[_object], {
-        params ["_eventData", "_savedParameters"];
-        _eventData params ["_missionId"];
-        _savedParameters params ["_object"];
-
-        if (isNull _object) exitWith {
-            // TODO - Remove handler if object no longer exists.
-        };
-
-        [_missionId, _object] call vgm_c_fnc_removeJoinMissionAction;
-    }]
-] call para_g_fnc_event_subscribeServer;
+    "vgm_mission_ended"
+];
 
 [
     "vgm_mission_joinable",
@@ -202,7 +211,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 ] call para_g_fnc_event_subscribeServer;
 
 [
-    "player attached to mission",
+    "vgm_mission_attached",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_playerId", "_missionId"];
@@ -222,7 +231,7 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 ] call para_g_fnc_event_subscribeServer;
 
 [
-    "player removed from mission",
+    "vgm_mission_playerRemoved",
     [[_object], {
         params ["_eventData", "_savedParameters"];
         _eventData params ["_playerId", "_missionId"];

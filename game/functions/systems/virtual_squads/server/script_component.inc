@@ -1,0 +1,1 @@
+#define GLOBAL_MISSION_ID -1

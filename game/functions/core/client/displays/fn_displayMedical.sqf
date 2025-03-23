@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2023-09-03
+    Last Update: 2025-02-06
     Public: No
 
     Description:
@@ -30,6 +30,9 @@
 #define COLOR_MAJOR 0.9,0.1,0
 #define COLOR_SEVERE 0.58,0,0
 #define COLOR_ARR [[COLOR_NONE], [COLOR_MINOR], [COLOR_MAJOR], [COLOR_SEVERE]]
+// 1 - HUD_ALPHA + HUD_ALPHA_WOUND
+#define HUD_ALPHA 0.8
+#define HUD_ALPHA_WOUND 0.4
 
 #if __A3_DEBUG__
     diag_log ["fn_displayMedical", _this];
@@ -41,8 +44,13 @@ switch _mode do {
     case "onLoad": {
         params ["_display"];
 
+        uiNamespace setVariable ["VGM_DisplayMedical", _display];
+
         private _ctrlTreatment = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_TREATMENT;
         _ctrlTreatment ctrlShow false;
+
+        private _ctrlTitlePatient = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_PATIENT_TITLE;
+        _ctrlTitlePatient ctrlSetText name MENU_TARGET;
 
         ["refreshUI", _display] call SELF;
         _display spawn {
@@ -52,10 +60,71 @@ switch _mode do {
                 isNull _this // return
             };
         };
+
+        if (MENU_TARGET == player) then {
+            {
+                _x ctrlSetFade 1;
+                _x ctrlCommit 1;
+            } forEach allControls (uiNamespace getVariable ["VGM_RscMedicalStatus", displayNull]);
+        };
+    };
+
+    case "onUnload": {
+        params ["_display"];
+
+        if (MENU_TARGET == player) then {
+            {
+                _x ctrlSetFade 0;
+                _x ctrlCommit 1;
+            } forEach allControls (uiNamespace getVariable ["VGM_RscMedicalStatus", displayNull]);
+        };
+    };
+
+    // onLoad for HUD variant of the medical UI
+    case "onLoadHud": {
+        params ["_display"];
+
+        uiNamespace setVariable ["VGM_RscMedicalStatus", _display];
+
+        private _refreshHandlersIds = [];
+        _display setVariable ["vgm_medical_refreshHandlerIds", _refreshHandlersIds];
+        {
+            private _ehId = [_x, [_display, {
+                params ["", "_display"];
+                ["refreshUI", [_display, player, HUD_ALPHA]] call SELF;
+            }]] call para_g_fnc_event_subscribeLocal;
+
+            _refreshHandlersIds pushBack _ehId;
+        } forEach [
+            "vgm_medical_woundAdded",
+            "vgm_medical_woundRemoved",
+            "vgm_player_respawn",
+            "para_keybindingMenu_unload"
+        ];
+
+        ["refreshUI", [_display, player, HUD_ALPHA]] call SELF;
+    };
+
+    // onUnload for HUD variant of the medical UI
+    case "onUnloadHud": {
+        params ["_display"];
+
+        {[_x] call para_g_fnc_event_unsubscribe} forEach (_display getVariable "vgm_medical_refreshHandlerIds");
     };
 
     case "refreshUI": {
-        params ["_display"];
+        params ["_display", "_target", "_alphaModifier"];
+
+        private _ctrlControlsHint = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_CONTROLSHINT;
+        if (!isNull _ctrlControlsHint) then {
+            _ctrlControlsHint ctrlSetText format [
+                localize "STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND",
+                [
+                    ["OpenMedicalMenuSelf"] call para_c_fnc_keyhandler_getKeyBind,
+                    true
+                ] call para_c_fnc_keyhandler_stringifyKeybind
+            ];
+        };
 
         ["colorBodyParts", _this] call SELF;
         ["updateDebuffsList", _this] call SELF;
@@ -63,6 +132,8 @@ switch _mode do {
 
     // handle selection of body part for treatment
     case "selectPart": {
+        if (player call vgm_g_fnc_medical_isUnconscious) exitWith {};
+
         params ["_ctrlPartIcon"];
         private _display = ctrlParent _ctrlPartIcon;
         private _visualPart = ["head", "torso", "left_arm", "right_arm", "left_leg", "right_leg"] select (ctrlIDC _ctrlPartIcon - VGM_IDC_DISPLAYMEDICAL_HEAD);
@@ -93,7 +164,7 @@ switch _mode do {
 
         private _healerItemCount = uniqueUnitItems [HEALER, 0, 2, 2, 2, false];
         {
-            _x params ["_treatment", "_itemCfg", "_function"];
+            _x params ["_treatment", "_itemCfg", "_function", ["_condition", {true}]];
 
             private _optionItems = vgm_medical_healItems get _treatment;
             private _requiredItemCount = 0;
@@ -101,8 +172,12 @@ switch _mode do {
 
             (ctAddRow _ctrlOptions select 1) params ["_ctrlOptionIcon", "_ctrlOptionName", "_ctrlOptionButton"];
             _ctrlOptionIcon ctrlSetText getText (_itemCfg >> "picture");
-            _ctrlOptionName ctrlSetStructuredText parseText format [localize "STR_VGM_MEDICAL_UI_OWNED", getText (_itemCfg >> "displayName"), _requiredItemCount];
-            _ctrlOptionButton ctrlEnable (_requiredItemCount > 0);
+            _ctrlOptionName ctrlSetStructuredText parseText format [
+                localize (["STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING", "STR_VGM_MEDICAL_UI_OWNED"] select (call _condition)),
+                getText (_itemCfg >> "displayName"),
+                _requiredItemCount
+            ];
+            _ctrlOptionButton ctrlEnable ((_requiredItemCount > 0) && _condition);
 
             // setup on click action
             _ctrlOptionButton setVariable ["vgm_params", [HEALER, MENU_TARGET, _bodyPart]];
@@ -114,7 +189,7 @@ switch _mode do {
             }];
         } forEach [
             [HEAL_FAK, configFile >> "CfgWeapons" >> "vn_helper_item_firstaidkit", vgm_c_fnc_medical_itemApplyFAK],
-            [HEAL_MEDIKIT, configFile >> "CfgWeapons" >> "vn_helper_item_medikit", vgm_c_fnc_medical_itemApplyMedikit]
+            [HEAL_MEDIKIT, configFile >> "CfgWeapons" >> "vn_helper_item_medikit", vgm_c_fnc_medical_itemApplyMedikit, {HEALER getUnitTrait "Medic"}]
         ];
 
         // Activate the treatment options
@@ -133,14 +208,19 @@ switch _mode do {
 
     // handle colorization of body parts
     case "colorBodyParts": {
-        params ["_display"];
+        params ["_display", ["_target", MENU_TARGET], ["_alphaModifier", 0]];
 
         {
             _x params ["_idc", "_bodyPart"];
             private _ctrl = _display displayCtrl _idc;
 
-            private _color = COLOR_ARR select ([MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound);
-            _ctrl ctrlSetTextColor (_color + [1]);
+            private _wound = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
+
+            private _color = COLOR_ARR select _wound;
+            _ctrl ctrlSetTextColor (_color + [1 - _alphaModifier + (_wound min HUD_ALPHA_WOUND)]);
+
+            private _levelText = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _wound];
+            _ctrl ctrlSetTooltip format [localize "STR_VGM_MEDICAL_UI_INJURIES", _levelText];
         } forEach [
             [VGM_IDC_DISPLAYMEDICAL_HEAD, BODY_PART_HEAD],
             [VGM_IDC_DISPLAYMEDICAL_ARMLEFT, BODY_PART_ARMS],
@@ -152,16 +232,34 @@ switch _mode do {
     };
 
     case "updateDebuffsList": {
-        params ["_display"];
+        params ["_display", ["_target", MENU_TARGET]];
 
         private _ctrlModifierList = _display displayCtrl VGM_IDC_DISPLAYMEDICAL_MODIFIERLIST;
+        if (isNull _ctrlModifierList) exitWith {};
         ctClear _ctrlModifierList;
+
+        private _fnc_addRow = {
+            params ["_title", "_description", "_icon"];
+
+            (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
+            _ctrlIcon ctrlSetText _icon;
+            private _text = format ["%1<br/>%2", _title, _description];
+            _ctrlDescription ctrlSetStructuredText parseText _text;
+        };
+
+        if ([_target, "bleeding"] call vgm_c_fnc_statusEffect_get) then {
+            [
+                localize "STR_VGM_MEDICAL_UI_DEBUFF_BLEEDING",
+                "",
+                format ["#(rgb,1,1,1)color(%1,%2,%3,1)", COLOR_SEVERE]
+            ] call _fnc_addRow;
+        };
 
         {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
 
-            private _currentWoundLevel = [MENU_TARGET, _bodyPart] call vgm_c_fnc_medical_getWound;
+            private _currentWoundLevel = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
             private _coefficients = createHashMap;
             private _statusEffects = createHashMap;
 
@@ -173,16 +271,19 @@ switch _mode do {
                 _statusEffects insert (_injuryEffects get "statusEffect");
             };
 
+
             private _fnc_addRow = {
-                params ["_title", "_description", "_icon"];
+                params ["_title", "_description", "_icon", "_iconColor"];
 
                 (ctAddRow _ctrlModifierList select 1) params ["", "_ctrlIcon", "_ctrlDescription"];
                 _ctrlIcon ctrlSetText _icon;
+                _ctrlIcon ctrlSetTextColor _iconColor + [1];
                 private _text = format ["%1<br/>%2", _title, _description];
                 _ctrlDescription ctrlSetStructuredText parseText _text;
             };
 
-            private _icon = format (["#(rgb,1,1,1)color(%1,%2,%3,1)"] + (COLOR_ARR select _currentWoundLevel));
+            private _iconFallback = "#(rgb,1,1,1)color(1,1,1,1)";
+            private _iconColor = COLOR_ARR select _currentWoundLevel;
             private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
             private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
             private _title = format ["%1 %2 Trauma", _level, _bodyPart];
@@ -192,14 +293,16 @@ switch _mode do {
             {
                 if (!_y) then {continue};
                 private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
-                [_title, _statusDescription, _icon] call _fnc_addRow;
+                private _statusIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
+                [_title, _statusDescription, _statusIcon, _iconColor] call _fnc_addRow;
             } forEach _statusEffects;
 
             {
                 if (_y == 0) then {continue};
                 private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
-                [_title, _coefDescription, _icon] call _fnc_addRow;
+                private _coefIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
+                [_title, _coefDescription, _coefIcon, _iconColor] call _fnc_addRow;
             } forEach _coefficients;
 
         } forEach BODY_PARTS_ARR;

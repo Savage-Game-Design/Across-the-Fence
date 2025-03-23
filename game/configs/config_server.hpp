@@ -1,1 +1,1 @@
-// common_includes.hpp will be automagically included.
+// common_includes.hpp is automatically included.

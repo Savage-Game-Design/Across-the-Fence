@@ -2,7 +2,7 @@
     File: fn_missions_joinMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-06-22
+    Last Update: 2024-11-30
     Public: Yes
 
     Description:
@@ -16,7 +16,7 @@
         Whether or not the assignment was successful [BOOLEAN]
 
     Example(s):
-        [32, getPlayerId player] call vgm_s_fnc_missions_joinMission;
+        [getPlayerId player, 32] call vgm_s_fnc_missions_joinMission;
  */
 
 params ["_playerId", "_missionId"];
@@ -39,5 +39,15 @@ if (!_joinSuccessful) exitWith {
     [format ["Unable to join player %1 to mission %2", _playerId, _missionId]] call vgm_g_fnc_logWarning;
     false
 };
+
+// Differs from vgm_mission_attached, which is fired when any player attaches to any mission.
+// This only fires on the local client when that players joins the mission (i.e, not on creation)
+[
+    "vgm_mission_joined",
+    [_playerId, _mission get "public" get "id"],
+    [(getUserInfo _playerId) # 1]
+] call para_g_fnc_event_triggerTargets;
+
+
 
 true

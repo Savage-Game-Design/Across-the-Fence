@@ -2,16 +2,16 @@
     File: fn_tool_controller_init.sqf
     Author:  Savage Game Design
     Public: Yes
-    
+
     Description:
         Initalises the tool system
-    
+
     Parameter(s):
         None
-    
+
     Returns:
         None
-    
+
     Example(s):
         [] call para_c_fnc_tool_controller_init
 */
@@ -44,12 +44,14 @@
         {
             [_hitObject] call para_c_fnc_operate_hammer;
         };
-        
+
         case "vn_m_wrench_01":
         {
         	[_hitObject] call para_c_fnc_operate_wrench;
         };
+        default {
+            // Don't bypass projectile checks in VN_melee
+            false
+        }
     };
-
-// }] remoteExec ["BIS_fnc_addScriptedEventHandler", 0, true];
 }] call BIS_fnc_addScriptedEventHandler;

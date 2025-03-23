@@ -3,7 +3,7 @@
     File: fn_medical_shouldBleed.sqf
     Author: Savage Game Design
     Date: 2023-07-23
-    Last Update: 2023-07-23
+    Last Update: 2024-07-09
     Public: No
 
     Description:
@@ -21,6 +21,6 @@
 
 params ["_unit"];
 
-// start bleeding when Arms or Legs are severly damaged or all body parts total damage is >= 6
-WOUND_MAX in ([BODY_PART_ARMS, BODY_PART_LEGS] apply {[_unit, _x] call vgm_c_fnc_medical_getWound})
+// start bleeding when any body part suffered major damage or all body parts total damage is >= 3
+(BODY_PARTS_ARR findIf {[_unit, _x] call vgm_c_fnc_medical_getWound >= WOUND_MAJOR} != -1)
 || {([_unit, "total"] call vgm_c_fnc_medical_getWound) >= WOUNDS_BLEED_THRESHOLD}

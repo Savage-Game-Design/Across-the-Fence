@@ -2,16 +2,16 @@
 	File: fn_create_unit.sqf
 	Author:  Savage Game Design
 	Public: No
-	
+
 	Description:
 		Wrapper around scripting command 'createUnit'.
 
 	Parameter(s):
 		// Same as 'createUnit'
-	
+
 	Returns:
 		Unit created [Object]
-	
+
 	Example(s):
 		[createGroup east, myClass", [0,0,0], [], 10, "NONE"] call para_g_fnc_create_unit;
 */
@@ -29,13 +29,14 @@ _unit setSkill ["general", 1];
 _unit setSkill ["aimingSpeed", 0.75];
 _unit setSkill ["aimingShake", 0.9];
 _unit setSkill ["commanding", 1];
-_unit setSkill ["courage", 1];
+//Makes suppression decay much, much slower. At courage 1, suppression return to 0 in a fraction of a second.
+_unit setSkill ["courage", 0];
 _unit setSkill ["reloadSpeed", 1];
 //Compensated for by camouflage, in theory
 _unit setSkill ["spotDistance", 1];
 //Any less and the AI feels sluggish
 _unit setSkill ["spotTime", 1];
-_unit setSkill ["aimingAccuracy", 0.10];
+_unit setSkill ["aimingAccuracy", 0.30];
 
 _unit addEventHandler ["Killed", {
 	params ["_unit"];

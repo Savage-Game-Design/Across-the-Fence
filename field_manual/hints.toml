@@ -1,0 +1,21 @@
+displayName = "Clues"
+description = """
+Occasionally, you'll see a glint reflecting off of an object lying on the ground.
+These clues are often found near enemy sites, and can help you locate enemy positions.
+Interacting with a clue will give you an approximate bearing to an enemy site.
+
+Different enemy sites sometimes have different clues (WIP), so taking the time to learn the different clue types
+can help you be a more effective tracker.
+"""
+
+tip = "Recon teams frequently deployed into the jungle with only a rough idea of what they might find."
+
+arguments = []
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = 'assets\glint\vnx_atf_glint_03_ca.paa'
+
+[hints.glint_seen]
+description = """
+You just saw light glinting off a nearby object! Find and inspect the object to help locate nearby sites.
+"""

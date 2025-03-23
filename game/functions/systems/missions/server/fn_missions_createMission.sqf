@@ -2,7 +2,7 @@
     File: fn_missions_createMission.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2023-09-20
+    Last Update: 2024-11-23
     Public: Yes
 
     Description:
@@ -25,7 +25,8 @@
 
 params [
     ["_parameters", nil, [createHashMap]],
-    ["_creatorId", "", [""]]
+    ["_creatorId", "", [""]],
+    ["_targetZone", "", [""]]
 ];
 
 // This method of creating IDs assumes missions aren't persistent across restarts/servers
@@ -42,12 +43,11 @@ private _mission = createHashMapFromArray [
         ["maxPlayers", 6],
         // Each player on the mission should have a netmap in here for storing player data
         ["players", [] call para_s_fnc_netmap_createNetmap],
-        // Maps player ID to their client ID for easy remoteExec'ing
-        ["machineIds", createHashMap],
         // Whether or not players can join the mission. Players can join if no values are "false"
         ["preventJoining", [] call para_s_fnc_netmap_createNetmap],
         // TODO - Use an actual position for the mission
-        ["startPosASL", AGLtoASL getMarkerPos "vgm_test_mission_start_pos"],
+        ["startPosASL", _targetZone call vgm_s_fnc_missions_zones_getStartPos],
+        ["targetZone", _targetZone],
         ["group", createGroup side vgm_core_lobbyGroup]
     ]] call para_s_fnc_netmap_createNetmapFromArray],
     // Copy the parameters hashmap to prevent it being accidentally modified elsewhere.
@@ -56,28 +56,38 @@ private _mission = createHashMapFromArray [
     ["machineIds", createHashMap]
 ];
 
+private _missionPublic = _mission get "public";
+
+// Cleanup the child netmaps when the mission is deleted.
+[_missionPublic get "players", _missionPublic] call para_s_fnc_netmap_setOwningNetmap;
+[_missionPublic get "preventJoining", _missionPublic] call para_s_fnc_netmap_setOwningNetmap;
+
 // Register the mission on the server.
 private _missions = localNamespace getVariable "vgm_missions";
 _missions set [_newMissionId, _mission];
 
 // Registers the mission's public variables in a netmap, so the client can access them.
 private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc_netmap_get;
-[_missionsPublicInfo, _newMissionId, _mission get "public"] call para_s_fnc_netmap_set;
+[_missionsPublicInfo, _newMissionId, _missionPublic] call para_s_fnc_netmap_set;
 
 [
     "vgm_mission_available",
-    [[_mission get "public" get "id"]]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 [
     "vgm_mission_joinable",
-    [_mission get "public" get "id"]
+    [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
 if !(_creatorId isEqualTo "") then {
-    // Use this instead of fn_missions_joinMission to prevent two updates on the client.
     [_creatorId, _mission] call vgm_s_fnc_missions_attachPlayerToMission;
+    private _creatorMachineId = (getUserInfo _creatorId) # 1;
+    [
+        "vgm_mission_created",
+        [_missionPublic get "id"],
+        [_creatorMachineId]
+    ] call para_g_fnc_event_triggerTargets;
 };
 
 _mission
-

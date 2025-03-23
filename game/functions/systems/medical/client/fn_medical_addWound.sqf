@@ -3,7 +3,7 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2023-09-02
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -12,16 +12,18 @@
     Parameter(s):
         _unit - Unit to add the wound to [OBJECT]
         _bodyPart - Target body part [STRING]
-        _removeWoundIntensity - How many levels of intensity to add [NUMBER]
+        _addWoundIntensity - How many levels of intensity to add [NUMBER]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
         [_unit, "torso", 2] call vgm_c_fnc_medical_addWound;
  */
 
 params ["_unit", "_bodyPart", "_addWoundIntensity"];
+
+if (_addWoundIntensity < 1) exitWith {};
 
 private _varDamage = format ["vgm_g_medical_wound$%1", _bodyPart];
 private _previousWoundIntensity = _unit getVariable [_varDamage, WOUND_NONE];

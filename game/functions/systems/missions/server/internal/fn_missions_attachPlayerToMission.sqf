@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2023-09-21
+    Last Update: 2025-02-13
     Public: No
 
     Description:
@@ -34,28 +34,38 @@ if (
     // PlayerId must be a valid user
     || getUserInfo _playerId isEqualTo []
     // Mission must not be at max players
-    || count (_missionPublic get "players") >= (_missionPublic get "maxPlayers")
+    || (_missionPublic get "players" call para_g_fnc_netmap_count) >= (_missionPublic get "maxPlayers")
     // Mission can't have already started when a player is joining
     || _missionPublic get "status" isNotEqualTo "CREATED"
 ) exitWith { false };
 
 [_currentMissionAssignments, _playerId, _missionPublic get "id"] call para_s_fnc_netmap_set;
+
+private _playerInfoNetmap = [] call para_s_fnc_netmap_createNetmap;
+[_playerInfoNetmap, _missionPublic get "players"] call para_s_fnc_netmap_setOwningNetmap;
+
 [
     _missionPublic get "players",
     _playerId,
-    [] call para_s_fnc_netmap_createNetmap
+    _playerInfoNetmap
 ] call para_s_fnc_netmap_set;
 
 (_mission get "machineIds") set [_playerId, getUserInfo _playerId select 1];
 
-[_playerId call vgm_s_fnc_player_fromId] joinSilent (_missionPublic get "group");
+if (isNull (_missionPublic get "group")) then {
+    [_missionPublic, "group", createGroup side vgm_core_lobbyGroup] call para_s_fnc_netmap_set;
+};
+
+// joinSilent seems to sometimes mysteriously fail. RemoteExec'ing is an attempt to solve that.
+private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
+[[_playerUnit], _missionPublic get "group"] remoteExec ["joinSilent", _playerUnit];
 
 [
-    "player attached to mission",
+    "vgm_mission_attached",
     [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-private _missionIsFull = count (_missionPublic get "players") >= _missionPublic get "maxPlayers";
+private _missionIsFull = ((_missionPublic get "players") call para_g_fnc_netmap_count) >= _missionPublic get "maxPlayers";
 [_mission, "mission full", _missionIsFull] call vgm_s_fnc_missions_preventJoining;
 
 true

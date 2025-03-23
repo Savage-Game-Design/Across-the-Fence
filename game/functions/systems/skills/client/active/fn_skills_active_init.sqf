@@ -1,8 +1,10 @@
+#include "\a3\ui_f\hpp\defineDikCodes.inc"
+
 /*
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2023-05-13
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -39,6 +41,10 @@ vgm_c_skills_active_slots = createHashMapFromArray [
 
     vgm_c_skills_active_list set [_path, _skill];
 
+    private _slot = ["ability1", "ultimate"] select (_skill get "isUltimate");
+    if ((vgm_c_skills_active_slots get _slot get "skill") isNotEqualTo createHashMap) exitWith {};
+    [_slot, _skill] call vgm_c_fnc_skills_active_assignSkillToSlot;
+
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_skills_forgotten", {
@@ -55,16 +61,39 @@ vgm_c_skills_active_slots = createHashMapFromArray [
 
 }] call para_g_fnc_event_subscribeLocal;
 
-// intercept select all units in group bind for skill wheel
-// (grave/tilde `/~ by default)
-addUserActionEventHandler ["selectAll", "Activate", {
-    [] spawn {
-        private _timeout = time + 1;
-        waitUntil {commandingMenu != "" || time > _timeout};
-        showCommandingMenu "";
+// Register "OpenActiveSkillWheel" keybinding action
+[
+    createHashMapFromArray [
+        ["name", "OpenActiveSkillWheel"],
+        ["displayName", "STR_VGM_SKILLS_UI_OPEN_SKILL_WHEEL"],
+        ["onRelease", false],
+        ["defaultKey", createHashMapFromArray [
+            ["dikCode", DIK_GRAVE]
+        ]]
+    ]
+] call para_c_fnc_keyhandler_registerAction;
+
+// Toggle the skill wheel when the "OpenActiveSkillWheel" action fires.
+["OpenActiveSkillWheel", {
+    // the keybind creates its own display which can cause issues if topmost display is not the "mission display"
+    if (dialog || {!isNull (uiNamespace getVariable "RscDisplayArsenal")}) exitWith {};
+
+    // Close skill wheel if pressed when already open.
+    private _existingWheelMenu = uiNamespace getVariable ["vn_wheelmenu", displayNull];
+    if !(isNull _existingWheelMenu) exitWith {
+        _existingWheelMenu closeDisplay 1;
     };
 
     [] call vgm_c_fnc_skills_active_openSkillWheel;
-}];
+}] call para_c_fnc_keyhandler_addGeneralActionHandler;
+
+
+// close skills menu when unconscious
+["vgm_medical_unconscious", {
+    (_this#0) params ["_unit", "_state"];
+    if (!_state || (_unit != player)) exitWith {};
+
+    (uiNamespace getVariable ["vn_wheelmenu", displayNull]) closeDisplay 1;
+}] call para_g_fnc_event_subscribeLocal;
 
 [] spawn VGM_C_fnc_skills_active_toggleHud;

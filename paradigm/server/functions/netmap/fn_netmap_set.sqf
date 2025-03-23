@@ -2,8 +2,8 @@
     File: fn_netmap_set.sqf
     Author: Savage Game Design
     Date: 2023-06-22
-    Last Update: 2023-06-30
-    Public: No
+    Last Update: 2024-04-01
+    Public: Yes
 
     Description:
         Sets a key in a hashmap to a particular value, and then sends that over the network to all clients.

@@ -2,7 +2,7 @@
     File: fn_player_set_var.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-28
+    Last Update: 2024-12-19
     Public: No
 
     Description:
@@ -33,6 +33,6 @@ _profile set ["name", name _player];
 _profile set ["uid", getPlayerUID _player];
 
 private _savedData = ["player", getPlayerUID _player, _profile] call vgm_s_fnc_db_typed_save;
-saveMissionProfileNamespace;
+saveProfileNamespace;
 
 _savedData //result

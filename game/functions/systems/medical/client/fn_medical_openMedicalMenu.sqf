@@ -3,14 +3,14 @@
     File: fn_medical_openMedicalMenu.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-03
+    Last Update: 2025-02-01
     Public: No
 
     Description:
         Open medical menu on a target unit.
 
     Parameter(s):
-        _unit - The target unit [OBJECT, defaults to cursorTarget]
+        _target - The target unit [OBJECT, defaults to cursorTarget]
 
     Returns:
         Nothing
@@ -19,8 +19,16 @@
         [] call vgm_c_fnc_medical_openMedicalMenu;
  */
 
-private _target = param [0, cursorTarget];
-if (!(_target isKindOf "CAManBase") || {player distance _target > 15}) then {
+params [["_target", cursorTarget]];
+
+private _currentMedicalMenu = uiNamespace getVariable ["VGM_DisplayMedical", displayNull];
+_currentMedicalMenu closeDisplay 2;
+
+if (
+    !isPlayer _target
+    || !(_target isKindOf "CAManBase")
+    || {player distance _target > 15}
+) then {
     _target = player;
 };
 

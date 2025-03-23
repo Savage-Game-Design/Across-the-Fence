@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Project name="VGM">
     <Package name="General">
         <Key ID="STR_VGM_MISSION_NAME_VERSION">
@@ -18,13 +18,43 @@
         <Key ID="STR_VGM_SHARED_HUB_TELEPORT_NOTIFICATION">
             <Original>You've wandered too far...</Original>
         </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_HQ">
+            <Original>HQ</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_HQ_SUB">
+            <Original>Join the battle</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_ARSENAL">
+            <Original>Armory</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_ARSENAL_SUB">
+            <Original>Change equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_SKILLS">
+            <Original>Radio</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_SKILLS_SUB">
+            <Original>Select skills and assign active abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_MISSIONS">
+            <Original>Tactical map</Original>
+        </Key>
+        <Key ID="STR_VGM_SHARED_HUB_ICON_MISSIONS_SUB">
+            <Original>Start or join missions</Original>
+        </Key>
     </Package>
     <Package name="Skills UI">
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
             <Original>Standard Ability</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP">
+            <Original>Standard abilites offer a small benefit and are intended to be used frequently throughout the mission.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT">
             <Original>Ultimate Ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP">
+            <Original>Ultimate abilites offer a large benefit and are intended to be used at critical moments during the mission.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD">
             <Original>Available Standard Abilities</Original>
@@ -57,7 +87,28 @@
             <Original>Not enough skill points</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
-            <Original>Tier locked</Original>
+            <Original>Tier locked\nLearn any skill in previous level to unlock</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_OPEN_SKILL_WHEEL">
+            <Original>Open skill wheel</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_RESPEC">
+            <Original>Reset all skills</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_HUD_ACTIVES">
+            <Original>Active abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_STDEMPTY_TOPTEXT_TEXT">
+            <Original>No ability selected</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_STDEMPTY_BOTTOMTEXT_TEXT">
+            <Original>Click here to choose an ability</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_AVAILABLEEMPTY_TEXT">
+            <Original>You currently have no skills unlocked in this category.&lt;br/&gt;&lt;br/&gt;New skills can be unlocked via the skill tree.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ABILITYEMPTY_TEXT">
+            <Original>Details of the selected ability will be shown here.</Original>
         </Key>
     </Package>
     <Package name="Medical UI">
@@ -69,6 +120,9 @@
         </Key>
         <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_TOO_FAR">
             <Original>Patient is too far!</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_PATIENT_HEALTHY">
+            <Original>Patient is healthy</Original>
         </Key>
         <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS">
             <Original>Missing required items!</Original>
@@ -87,6 +141,9 @@
             <Original>Legs</Original>
         </Key>
         <!-- Debuffs -->
+        <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLEEDING">
+            <Original>Bleeding out</Original>
+        </Key>
         <Key ID="STR_VGM_MEDICAL_UI_DEBUFF_BLURRYVISION">
             <Original>Occasional Blurred Vision</Original>
         </Key>
@@ -136,6 +193,593 @@
         </Key>
         <Key ID="STR_VGM_MEDICAL_UI_OWNED">
             <Original>%1&lt;br/&gt;Owned: %2</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OWNED_NO_TRAINING">
+            <Original>%1&lt;br/&gt;No training</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU">
+            <Original>Open medical menu</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU_SELF">
+            <Original>Open medical menu on self</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_HEALTH_STATUS">
+            <Original>Health status</Original>
+        </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND">
+            <Original>Press %1 to open</Original>
+        </Key>
+    </Package>
+    <Package name="Level Indicator UI">
+        <Key ID="STR_VGM_LEVEL_INDICATOR_UI_LEVEL">
+            <Original>Level %1</Original>
+        </Key>
+        <Key ID="STR_VGM_LEVEL_INDICATOR_UI_XP">
+            <Original>%1 / %2 XP</Original>
+        </Key>
+    </Package>
+    <Package name="Mission End UI">
+        <Key ID="STR_VGM_MISSION_END_UI_SUCCESSFUL">
+            <Original>Mission Successful!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_FAILURE">
+            <Original>Mission failed.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_LEVEL">
+            <Original>Level %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_LEVEL_UP">
+            <Original>Level Up! +%1 SP</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_SUCCESS">
+            <Original>Mission completion</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_FAILURE">
+            <Original>Mission failure</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_MISSION_PARTICIPATION">
+            <Original>Mission participation</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_NOT_COMPLETE">
+            <Original>Not specified</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_NOT_USABLE">
+            <Original>Nothing in vicinity</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_FAR">
+            <Original>Far from the target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_CLOSE">
+            <Original>Close to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_VERY_CLOSE">
+            <Original>Very close to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_POSITION_SPOT_ON">
+            <Original>Perfectly on target</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_MISSING">
+            <Original>N/A</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_INVALID">
+            <Original>The photo does not contain the site</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_UNUSABLE">
+            <Original>The site is barely visible in the photo</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_BLURRY">
+            <Original>The photo shows some of the site</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_GRAINY">
+            <Original>The photo shows enough of the site</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_DETAILED">
+            <Original>The photo shows most of the site</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_PHOTO_PERFECT">
+            <Original>The photo is perfectly clear</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_TYPE_INCORRECT">
+            <Original>Incorrect site type</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_TYPE_CORRECT">
+            <Original>Correct site type</Original>
+        </Key>
+    </Package>
+    <Package name="Skills Tree">
+        <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
+            <Original>Rifleman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_RECON">
+            <Original>Recon</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_SUPPORT">
+            <Original>Support</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
+            <Original>Fire Support</Original>
+        </Key>
+    </Package>
+    <Package name="Skills Skill">
+        <!-- Rifleman -->
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
+            <Original>-25% Weapon recoil</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
+            <Original>20% Slower bleedout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL">
+            <Original>Historical Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC">
+            <Original>Unlocks "Historical Equipment"</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT">
+            <Original>Rifleman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
+            <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED">
+            <Original>Overprepared</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC">
+            <Original>The first time you run out of ammo for your primary weapon, receive two more magazines</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_ACTIVATED">
+            <Original>Overprepared activated</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
+            <Original>Steady Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC">
+            <Original>For the next 30 seconds, your weapon sway is reduced by 100%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER">
+            <Original>Born Leader</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC">
+            <Original>Reduce the cooldown time of all ally abilities by 20% (Global cap at 50%)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON">
+            <Original>Lucky-Son-Of-A-Bitch</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC">
+            <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
+        </Key>
+        <!-- Recon -->
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
+            <Original>Better Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC">
+            <Original>50% less weapon sway when crouched or prone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE">
+            <Original>Increase intel glint frequency</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE_DESC">
+            <Original>Makes intel glints appear 30% more frequently</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE">
+            <Original>Keen Eye</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC">
+            <Original>When looking through binoculars, you can press 'Reveal Target' to get an approximate distance to the target</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN">
+            <Original>Marksman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN">
+            <Original>Pointman Loadout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS">
+            <Original>Follow the Tracers</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
+            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when their suppression return to zero naturally.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
+            <Original>6th Sense</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE_DESC">
+            <Original>Briefly add a 3D marker to all enemies in within 150m, and add an approximate marker of their locations to your map.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH">
+            <Original>Thick Brush</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_THICK_BRUSH_DESC">
+            <Original>For 60 seconds, enemies are much less likely to see you and hear you.</Original>
+        </Key>
+        <!-- Fire Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
+            <Original>100% increased suppression strength</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
+            <Original>Carry 30% more weight and consume 20% less stamina</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER">
+            <Original>Machine Gunner Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_EXPLOSIVES">
+            <Original>Explosives Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
+            <Original>Grenadier and AT Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM">
+            <Original>Learn the Rhythm</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC">
+            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
+            <Original>Grenades case</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
+            <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE">
+            <Original>Overwhelming Fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
+            <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 50% more.</Original>
+        </Key>
+        <!-- Support -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">
+            <Original>25% increased medical actions speed</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD">
+            <Original>Team members are visible on the map</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL">
+            <Original>Advanced Medical Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO">
+            <Original>RTO Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL">
+            <Original>Efficient and Resourceful</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL_DESC">
+            <Original>You have a 30% chance to not consume a utility item when using one.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_HEAVY_SUPPORT">
+            <Original>Heavy Support</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE">
+            <Original>Quick Bandage</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_DESC">
+            <Original>Add 60 seconds to a player's bleedout timer.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_QUICK_BANDAGE_UNABLE_TO_APPLY">
+            <Original>Target is not bleeding!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ">
+            <Original>Get To The LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC">
+            <Original>For 30 seconds, the team has: 50% reduced stamina consumption, 40% hit shrug chance, all actions are 10% faster</Original>
+        </Key>
+    </Package>
+    <Package name="Sites Hints">
+        <Key ID="STR_VGM_SITES_HINTS_INSPECT_ACTION">
+            <Original>Inspect</Original>
+        </Key>
+    </Package>
+    <Package name="Skill Investigaste">
+        <Key ID="STR_VGM_SKILL_INVESTIGATE_ACTION">
+            <Original>Stop, Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY">
+            <Original>Stay stationary to Focus</Original>
+        </Key>
+    </Package>
+    <Package name="Paradigm keybinding menu">
+        <Key ID="STR_PARA_KEYBINDINGS_TITLE">
+            <Original>Edit Keybindings</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_ACTION">
+            <Original>Action</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_HEADER_KEY">
+            <Original>Key</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_RESET">
+            <Original>Restore Defaults</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CONFIRM">
+            <Original>Save</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_CANCEL">
+            <Original>Cancel</Original>
+        </Key>
+        <Key ID="STR_PARA_KEYBINDINGS_MENU_BUTTON">
+            <Original>Gamemode Keybindings</Original>
+        </Key>
+    </Package>
+    <Package name="Header Bar">
+        <Key ID="STR_VGM_HEADERBAR_EQUIPMENT">
+            <Original>Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_MANAGE_EQUIPMENT">
+            <Original>Manage your equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_ABILITIES">
+            <Original>Abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SKILLTREE">
+            <Original>Skill Tree</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SQUAD">
+            <Original>Squad</Original>
+        </Key>
+        <Key ID="STR_VGM_HEADERBAR_SETTINGS">
+            <Original>Settings</Original>
+        </Key>
+    </Package>
+    <Package name="Locations">
+        <Key ID="STR_VGM_LOCATIONS_LZ">
+            <Original>LZ</Original>
+        </Key>
+    </Package>
+    <Package name="Sites">
+        <Key ID="STR_VGM_SITES_AA">
+            <Original>AA gun</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_AMMO_CACHE">
+            <Original>Ammo Cache</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_BULLDOZER">
+            <Original>Bulldozer</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_CAMPFIRE">
+            <Original>Campfire</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_ENCAMPMENT">
+            <Original>Encampment</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_SHELTER">
+            <Original>Shelter</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_SUPPLY_DUMP">
+            <Original>Supply dump</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_TRANSMITTER">
+            <Original>Transmitter</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_TRUCK_PARK">
+            <Original>Truck park</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_WAYSTATION">
+            <Original>Waystation</Original>
+        </Key>
+    </Package>
+    <Package name="Missions Extraction">
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
+            <Original>Request extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO">
+            <Original>No radio or RTO nearby to call for extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_TITLE">
+            <English>Extract from AO</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_DESCRIPTION">
+            <English>&lt;img image="\vn\missions_f_vietnam\data\img\m06\ob14.jpg" width="380" height="190"/&gt;&lt;br/&gt;Stay alive and wait for extraction.</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
+            <English>Board the helicopter</English>
+        </Key>
+    </Package>
+    <Package name="Missions Scouting">
+        <!-- Notification titles -->
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_EDITED_TITLE">
+            <Original>SITE EDITED</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_ADDED_TITLE">
+            <Original>SITE ADDED</Original>
+        </Key>
+        <!-- Notification descriptions -->
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_TYPE_DESCRIPTION">
+            <Original>%1 has changed type of site %2.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_ADDED_DESCRIPTION">
+            <Original>%1 added new site %2.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_POSITION_DESCRIPTION">
+            <Original>%1 has changed position of site %2.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_PHOTO_DESCRIPTION">
+            <Original>%1 has added a photo to site %2.</Original>
+        </Key>
+        <!-- -->
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_REPORT">
+            <Original>Scouting report</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION">
+            <Original>Mark Location</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_MARK_LOCATION_TOOLTIP">
+            <Original>Mark site location on the map</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_ADD_ITEM">
+            <Original>Add item</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_SITE_TYPE_UNKNOWN">
+            <Original>-</Original>
+        </Key>
+        <!-- Tasks -->
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_TASK_TITLE">
+            <English>Scout the area</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION">
+            <English>Scout the area for enemy sites and note them in your "Scouting Report".&lt;br/&gt;&lt;br/&gt;HQ suggests checking following grids:&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;%2</English>
+        </Key>
+    </Package>
+    <Package name="Field Manual">
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_WELCOME">
+            <Original>Welcome</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME">
+            <Original>Welcome</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_DESC">
+            <Original>Welcome to the %3Alpha%4 version of %3%11%4!%1%1As a Patreon subscriber, you've got exclusive access the early versions of the gamemode, and the ability to influence its ongoing development.%1%1Before playing, %3it's strongly recommended you read 'Getting started'%4 in the field manual.%1%1As we progress from Alpha onwards to a full release, we'd love to hear your feedback in Discord, and for you to join the development team as we test and experiment with new features.%1%1The initial %3Alpha%4 version of %3%11%4 has most of the gamemode's core mission gameplay in place, but other aspects of the gamemode are still in development, including:%1%2 Non-recon mission types%1%2 A persistent campaign%1%2 Additional points of interest to interact with and explore while on missions%1%2 Many quality of life features (e.g a shooting range)%1%1%3%11%4 is currently designed for 1 to 6 players on a mission, with up to 4 simultaneous missions running on (a sufficiently powerful) server.%1Please try playing solo, duo and in larger groups, so we build a gamemode everyone can enjoy!%1%1Thanks for reading, and enjoy the game!%1&gt; The %3%11%4 development team.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_TIP">
+            <Original>Thanks for helping us preserve S.O.G history through your Patreon support!</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED">
+            <Original>Getting started</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC">
+            <Original>%3%11%4 brings together role-playing elements and player specialisations to create a thrilling behind enemy lines recon gamemode.%1You will be able to develop your custom character class and enlist for missions in the Prairie Fire, Daniel Boone and Nickel Steel AO's.%1Completing missions earns you XP and enables you to grow your abilities and mature into a MACV SOG 1-0.%1%1%2 Start by going into the nearby Tactical Operation Center (TOC)%1%2 Grab your favorite gear from the %3Armory%4%1%2 Adjust your skills at the %3Radio%4%1%2 Create or join a mission from the %3Tactical map%4%1%2 Once your team is ready, the leader can start the mission from the %3Tactical map%4</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_TIP">
+            <Original>&lt;br/&gt;"%1"</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_GETTING_STARTED_HINT_GETTING_STARTED_DESCRIPTION">
+            <Original>To get started, head into the nearby TOC and look around.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS">
+            <Original>Missions</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_DESC">
+            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.%1%1%3If nobody on your team survives, you will not receive any experience or rewards for your mission.%4</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_AFTER_ARSENAL_DESCRIPTION">
+            <Original>Now you've customised your gear, create or join a mission using the %3tactical map board%4.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_CREATED_NAME">
+            <Original>Mission created</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_CREATED_DESCRIPTION">
+            <Original>You are now leading a mission. Other players will be able to join your mission until you depart. Make sure everyone is ready first!</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_JOINED_NAME">
+            <Original>Mission joined</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MISSION_JOINED_DESCRIPTION">
+            <Original>You've joined another player's mission. The leader can start the mission at any time. You can leave the mission using the actions on the map board.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_EXTRACTION_NAME">
+            <Original>Extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_EXTRACTION_DESCRIPTION">
+            <Original>As the mission leader, you can call for extraction at any time.%1This will request a helicopter that will land at a nearby LZ. The mission will end once all non-incapacitated players are on-board.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS">
+            <Original>Skills</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_DESC">
+            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix skills from all archetypes, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, which are gained by leveling up. To level up, you need to gather experience by running missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1&lt;t size="1.25"&gt;Skill wheel&lt;/t&gt;%1To use one of the skills assigned in the %3Abilities%4 menu, press %3"%11"%4 and select it from the %3Skill wheel%4</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_TIP">
+            <Original>Recon teams were skilled warriors, training for the next mission.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_HINT_LEVELLING_UP_DESCRIPTION">
+            <Original>You just levelled up and gained a skill point. Use them to learn new skills at the radio in the TOC.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_HINT_EQUIPPING_SKILLS_DESCRIPTION">
+            <Original>You just acquired an active skill! Before you can use it, you need to equip it in the skill assignment menu at the radio.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL">
+            <Original>Medical system</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_DESC">
+            <Original>%3%11%4 introduces simple yet impactful medical system featuring:%1%2 Increased player durability%1%2 Location-aware injuries that impact gameplay%1%2 Slow bleed-out, if left untreated%1%1&lt;t size="1.25"&gt;Medical menu&lt;/t&gt;%1%3Medical menu%4 allows treatment of the injuries suffered by player characters.%1To treat an injury you need to select an injured body part from the character %3silhouette%4 and apply %3medication%4 on it.%1Press %3"%4%12%3"%4 to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.%1Alternatively press %3"%4%13%3"%4 to open the medical menu of your character.%1%1&lt;t size="1.1"&gt;Medication&lt;/t&gt;%1Available medication items:%1%2 First Aid Kit - Heals single wound level, single use, can be used by anybody%1%2 Medikit - Heals single wound level, infinite uses, can be used by players with "%14" skill from the %3Support%4 tree%1%1&lt;t size="1.1"&gt;Debuffs&lt;/t&gt;%1Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts:%1%2 Head - TODO%1%2 Torso - TODO%1%2 Arms%1%2 Legs - TODO%1Multiple untreaded wounds will cause %3bleeding%4 which if not stopped will cause the character to fall %3unconscious%4.%1%1&lt;t size="1.1"&gt;Unconsciousnes&lt;/t&gt;%1After receiving critical amount of damage to vital body parts (head, torso) or bleeding out, the player character will fall %3unconscious%4, characters in this state need help of other players to wake up.%1If the player will be abandoned and left alone by other players, he'll %3respawn%4.%1Once all players in the mission are %3unconscious%4, the mission fails.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_TIP">
+            <Original>Bullets. Shrapnel. Recon teams rarely made it out unscathed.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT">
+            <Original>Equipment</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT_DESC">
+            <Original>Having the right equipment is essential to both surviving and succeeding as a recon team member.%1%1Currently, %3%11%4 uses the standard Arma 3 Arsenal to manage your gear. You can find these in the TOC building, at the main base.%1%1You'll also start the game with a typical recon team loadout, suitable for running a mission straight away.%1%1&lt;t size="1.1"&gt;Key equipment&lt;/t&gt;%1%1Certain pieces of equipment are particularly helpful in %3%11%4:%1%2 %3Cameras%4 can be used to photograph enemy sites. See %3Scouting%4 for more information.%1%2 %3Silenced weapons%4 make it easier to eliminate NVA forces without being noticed. However, they will still attract some attention!%1%2 %3Radio backpacks%4 can be used to call in air support, if you have the right %3Skills%4.%1%1&lt;t size="1.1"&gt;Unlocking equipment&lt;/t&gt;%1%1New equipment can be unlocked by unlocking the right %3Skills%4. All skills that unlock equipment have %3Equipment%4 in their name.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT_HINT_GEARING_UP_DESCRIPTION">
+            <Original>You can change your equipment using the nearby ammo boxes. See the field manual for recommended key equipment.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_MISSIONS">
+            <Original>%1 - Missions</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING">
+            <Original>Scouting</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_DESC">
+            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1%1&lt;t size="1.25"&gt;Mission overview&lt;/t&gt;%1You'll be inserted deep behind enemy lines, where you'll be outnumbered. You should avoid enemy contact as much as possible to avoid being overwhelmed.%1Move slowly, %3Stop and Focus%4 frequently to spot any threats before they spot you, gather as much intel as you can and extract alive.%1If the whole team is killed or incapacitated, all intel will be lost and no experience will be awarded.%1%1&lt;t size="1.1"&gt;Scouting report&lt;/t&gt;%1%3Scouting report%4 is available in your map view, it is shared between your whole team.%1%1Filling in a new report entry:%1%2 Click %3Add item%4 button: a new row will be added%1%2 Select site type with &lt;img size='1' %5 image='%11' /&gt; button%1%2 Mark the site position with %3Mark site%4 button%1%1&lt;t size="1.1"&gt;Photo camera&lt;/t&gt;%1You can photograph a site to gain experience for its data. After photographing a site, the map screen with the report will be shown.%1Assign the photo to a site with the &lt;img size='1' %5 image='%12' /&gt; button.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_TIP">
+            <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_HINT_SCOUTING_DESCRIPTION">
+            <Original>The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to capture photos of the sites.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS">
+            <Original>Clues</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS_DESC">
+            <Original>Occasionally, you'll see a glint reflecting off of an object lying on the ground.%1These clues are often found near enemy sites, and can help you locate enemy positions.%1Interacting with a clue will give you an approximate bearing to an enemy site.%1%1Different enemy sites sometimes have different clues (WIP), so taking the time to learn the different clue types%1can help you be a more effective tracker.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS_TIP">
+            <Original>Recon teams frequently deployed into the jungle with only a rough idea of what they might find.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_HINTS_HINT_GLINT_SEEN_DESCRIPTION">
+            <Original>You just saw light glinting off a nearby object! Find and inspect the object to help locate nearby sites.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS">
+            <Original>Stop and Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_DESC">
+            <Original>You can stop and focus on your surroundings, to help you locate enemy activities.%1%1Nearby sounds from enemies such as footsteps, gunshots and speech will be shown visually, until you move or stop focusing.%1%1Additionally, when you're focusing, you'll more frequently see the light glinting off of clues. See %3Clues%4 for more information.%1%1It's strongly recommended that you stop and focus frequently, to prevent your team getting caught unawares.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_HINT_STOP_AND_FOCUS_DESCRIPTION">
+            <Original>You just focused on your surroundings. While focusing, you can visualise the sounds of nearby enemies and spot hints more quickly. Moving will exit this state.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_MAP_BOARD_DESCRIPTION">
+            <Original>The tactical map board allows you to create, join and leave missions.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS">
+            <Original>Alertness</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_DESC">
+            <Original>When you're running a mission, many actions you take will alert the enemy that there's a S.O.G recon team operating in their area.%1%1As the enemy forces become more aware of your presence, they'll start %3actively hunting your team%4, and %3respond quicker to your activities%4.%1%1This means you should be careful when doing anything loud, or that might draw attention to you. %3Gunshots and explosions are a surefire way to compromise your mission%4.%1%1And remember, %3a suppressed weapon is not a silent weapon%4.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION">
+            <Original>Gunshots, explosions and other actions you take on a mission will alert the enemy to your presence, increasing the threat to your team.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH">
+            <Original>Stealth</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_DESC">
+            <Original>When deployed on a mission, you and your team will be outnumbered and likely outgunned.%1%1%3%11%4 adds a unique stealth system to help you avoid enemies and break contact if neccessary.%1%1Enemies will notice you based on:%1%2 How much of you they can see (consider your stance and cover)%1%2 How fast you're moving%1%2 How directly they're looking at you%1%2 How illuminated you are%1%2 How often you're engaging with the enemy (gunshots, grenades, etc)%1%1Here are some tips that will help you move around the jungle effectively and quietly:%1%2 Use cover as much as possible%1%2 If you need to sneak a look at the enemy, show as little of yourself as possible%1%2 Avoid moving when enemies are looking directly at you%1%2 Avoid flares, fires or any sources of man-made light at night%1%2 Avoid shooting or grenades until you're ready to be detected%1%2 If the enemy engages you, evade them for a while to break contact. Be aware that trackers may still hunt you!</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_TIP">
+            <Original>Recon teams were heavily outnumbered by the NVA, and tried to avoid contact when possible.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION">
+            <Original>Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.</Original>
+        </Key>
+    </Package>
+    <Package name="Tutorial">
+        <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">
+            <Original>Acknowledge Hint</Original>
+        </Key>
+    </Package>
+    <Package name="Respawn">
+        <Key ID="STR_VGM_RESPAWN_ACTION">
+            <Original>Attempt a desperate escape</Original>
+        </Key>
+        <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_HEADER">
+            <Original>Despite being injured, you manage to evade capture</Original>
+        </Key>
+        <Key ID="STR_VGM_RESPAWN_UI_SUMMARY_ITEMS_HEADER">
+            <Original>Some of your supplies and equipment were lost in your fight to escape:</Original>
+        </Key>
+        <Key ID="STR_VGM_RESPAWN_UI_RESPAWN_BUTTON_TOOLTIP">
+            <Original>You'll respawn when unconscious and abandoned by the team.</Original>
         </Key>
     </Package>
 </Project>

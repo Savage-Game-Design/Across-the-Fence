@@ -1,0 +1,36 @@
+displayName = "Welcome"
+
+description = """
+Welcome to the [h]Alpha[/h] version of [h]{1}[/h]!
+
+As a Patreon subscriber, you've got exclusive access the early versions of the gamemode, \
+and the ability to influence its ongoing development.
+
+Before playing, [h]it's strongly recommended you read 'Getting started'[/h] in the field manual.
+
+As we progress from Alpha onwards to a full release, we'd love to hear your feedback in Discord, \
+and for you to join the development team as we test and experiment with new features.
+
+The initial [h]Alpha[/h] version of [h]{1}[/h] has most of the gamemode's core mission gameplay in place, \
+but other aspects of the gamemode are still in development, including:
+- Non-recon mission types
+- A persistent campaign
+- Additional points of interest to interact with and explore while on missions
+- Many quality of life features (e.g a shooting range)
+
+[h]{1}[/h] is currently designed for 1 to 6 players on a mission, with up to 4 simultaneous missions running on (a sufficiently powerful) server.
+Please try playing solo, duo and in larger groups, so we build a gamemode everyone can enjoy!
+
+Thanks for reading, and enjoy the game!
+> The [h]{1}[/h] development team.
+"""
+
+tip = "Thanks for helping us preserve S.O.G history through your Patreon support!"
+
+arguments = ["localize 'STR_VGM_MISSION_NAME'"]
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+
+image = 'assets\atf_logo.paa'
+
+

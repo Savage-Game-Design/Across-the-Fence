@@ -1,26 +1,52 @@
 /*
     File: fn_ui_hints_show_hint.sqf
     Author:  Savage Game Design
-    Public: No
-    
+    Public: Yes
+
     Description:
         Shows a particularly hint.
-    
+
     Parameter(s):
 		None
-    
+
     Returns:
         Function reached the end [BOOL]
-    
+
     Example(s):
-        [parameter] call vn_fnc_myFunction
+        ["vgm", "getting_started"] call para_c_fnc_ui_hints_show_hint;
 */
 // These are defined in MF ./mission/config/hints.hpp
-params ["_category", "_hintTitle"]; 
+params ["_category", "_page", ["_hint", ""]];
 
-private _title = getText(missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "displayNameShort");
-private _body = getText(missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "description");
-private _image = getText(missionConfigFile >> "CfgHints" >> _category >> _hintTitle >> "image");
+private _cfgPage = missionConfigFile >> "CfgHints" >> _category >> _page;
+private _title = getText (_cfgPage >> "displayNameShort");
+private _body = getText (_cfgPage >> "description");
+private _image = getText (_cfgPage >> "image");
+private _arguments = getArray (_cfgPage >> "arguments");
+
+if (_title isEqualTo "") then { _title = getText (_cfgPage >> "displayName") };
+
+private _cfgHint = _cfgPage >> "Hints" >> _hint;
+if (isClass _cfgHint) then {
+    private _hintTitle = getText(_cfgHint >> "displayName");
+    if (_hintTitle isNotEqualTo "") then {
+        _title = _hintTitle;
+    };
+    private _hintBody = getText (_cfgHint >> "description");
+    if (_hintBody isNotEqualTo "") then {
+        _body = _hintBody;
+    };
+};
+
+
+// Need to do very similar formatting to the field manual to prevent weird rendering.
+private _keyColor = "#000000";
+private _argumentsArray = [_arguments,_keyColor] call BIS_fnc_advHintArg;
+// Apply arguments (every text is processed twice, because of possible '%number' variables used in arguments)
+_title = format ([_title] + _argumentsArray);
+_title = toupper (format ([_title] + _argumentsArray));
+_body = format ([_body] + _argumentsArray);
+_body = format ([_body] + _argumentsArray);
 
 private _activeHints = uiNamespace getVariable ["para_c_activeHints", []];
 private _hintQueue = localNamespace getVariable ["para_c_hintQueue", []];
@@ -52,15 +78,8 @@ if (!isNil "_image") then {
     _image = format ["<img image='%1'/>", _image];
 };
 
-// Character count 330 is calculated by eyeballing the card. 
-// Could be better, but will work most of the time.
-// Stops the body overflowing the card and looking weird.
-if (count str parseText _body > 330) then {
-    _body = (_body select [0, 330]) + "...";
-};
-
 private _newCardText = format [
-    "<t size='1.3' align='center' font='RobotoCondensedBold'>%1<br/><t size='4' color='FFFFFF'>%2</t></t><br/>%3",
+    "<t size='1.3' align='center' font='RobotoCondensedBold'>%1<br/><t size='4' color='#FFFFFF'>%2</t></t><br/>%3",
     _title,
     _image,
     _body
@@ -70,7 +89,13 @@ private _structuredText = parseText _newCardText;
 
 
 private _newCardEndPosition = _cardPositionFuncs select (count _cardsToCreate) apply {call _x};
-private _newCardStartPosition = [safeZoneW - safeZoneX, _newCardEndPosition # 1];
+private _newCardStartPosition = [
+    // Already queued cards will appear as if they were already on bottom of the deck,
+    // instead of playing get in anim during the get out anim of the dismissed card.
+    // Makes it look better when the cards are not glued to screen edge
+    [safeZoneW - safeZoneX, _newCardEndPosition # 0] select (count _hintQueue > 0),
+    _newCardEndPosition # 1
+];
 
 _cardsToCreate pushBack [_structuredText, _newCardStartPosition, _newCardEndPosition];
 
@@ -97,7 +122,7 @@ private _cardInfo = createHashMapFromArray [
     ["control", controlNull],
     ["structuredText", _structuredText],
     ["category", _category],
-    ["hint", _hintTitle]
+    ["hint", _page]
 ];
 _activeHints pushBack _cardInfo;
 

@@ -9,11 +9,22 @@ class VGM_RscAbilityCooldown
     idd = -1;
     onLoad = VGM_UIEH(onLoad,AbilityCooldown);
     onUnload = VGM_UIEH(onUnload,AbilityCooldown);
-    duration = 1e+6;
+    duration = 1e10;
     fadeIn = 0;
     fadeOut = 0;
     class Controls
     {
+        class MainLabel: RscText
+        {
+            style = 2;
+            text = "$STR_VGM_SKILLS_UI_HUD_ACTIVES";
+            colorText[] = {1,1,1,0.75};
+            x = DISPLAY_X;
+            y = DISPLAY_Y - 1.3 * GUI_GRID_H;
+            w = DISPLAY_W * GUI_GRID_W;
+            h = 1 * GUI_GRID_H;
+        };
+
         class IconPrimary: RscPicture
         {
             idc = VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY;
@@ -27,7 +38,17 @@ class VGM_RscAbilityCooldown
         {
             idc = VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY;
             style = ST_VERTICAL;
-            colorBar[] = {1,1,1,0.5};
+            colorBar[] = {1,0.8,0.8,0.5};
+            x = DISPLAY_X;
+            y = DISPLAY_Y;
+            w = ICON_SIZE * GUI_GRID_W;
+            h = ICON_SIZE * GUI_GRID_H;
+        };
+        class DurationPrimary: RscProgress
+        {
+            idc = VGM_IDC_RSCABILITYCOOLDOWN_DURATIONPRIMARY;
+            style = ST_VERTICAL;
+            colorBar[] = {0,1,0,0.3};
             x = DISPLAY_X;
             y = DISPLAY_Y;
             w = ICON_SIZE * GUI_GRID_W;
@@ -58,6 +79,11 @@ class VGM_RscAbilityCooldown
         class CooldownUlimate: CooldownPrimary
         {
             idc = VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE;
+            x = DISPLAY_X + (ICON_SIZE + 0.5) * GUI_GRID_W;
+        };
+        class DurationUlimate: DurationPrimary
+        {
+            idc = VGM_IDC_RSCABILITYCOOLDOWN_DURATIONULTIMATE;
             x = DISPLAY_X + (ICON_SIZE + 0.5) * GUI_GRID_W;
         };
         class SecondsUltimate: SecondsPrimary

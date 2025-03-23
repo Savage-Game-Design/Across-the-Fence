@@ -2,7 +2,7 @@
     File: fn_missions_removePlayerFromMission.sqf
     Author: Savage Game Design
     Date: 2023-03-20
-    Last Update: 2023-09-21
+    Last Update: 2025-03-02
     Public: No
 
     Description:
@@ -31,17 +31,17 @@ private _playerCurrentMissionId = _currentMissionAssignments get _playerId;
 
 if (isNil "_playerCurrentMissionId" || {_playerCurrentMissionId isNotEqualTo (_missionPublic get "id")}) exitWith {};
 
-// Save machine ID so we can remoteExec things later
-private _playerMachineId = _mission get "machineIds" get _playerId;
-
 [_currentMissionAssignments, _playerId] call para_s_fnc_netmap_deleteAt;
 [_missionPublic get "players", _playerId] call para_s_fnc_netmap_deleteAt;
 _mission get "machineIds" deleteAt _playerId;
 
-[_playerId call vgm_s_fnc_player_fromId] joinSilent vgm_core_lobbyGroup;
+
+private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
+// joinSilent seems to sometimes mysteriously fail. RemoteExec'ing is an attempt to solve that.
+[[_playerUnit], vgm_core_lobbyGroup] remoteExec ["joinSilent", _playerUnit];
 
 [
-    "player removed from mission",
+    "vgm_mission_playerRemoved",
     [_playerId, _missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 

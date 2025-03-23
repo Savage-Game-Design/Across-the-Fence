@@ -1,0 +1,22 @@
+displayName = "Stop and Focus"
+description = """
+You can stop and focus on your surroundings, to help you locate enemy activities.
+
+Nearby sounds from enemies such as footsteps, gunshots and speech will be shown visually, until you move or stop focusing.
+
+Additionally, when you're focusing, you'll more frequently see the light glinting off of clues. See [h]Clues[/h] for more information.
+
+It's strongly recommended that you stop and focus frequently, to prevent your team getting caught unawares.
+"""
+
+tip = ""
+
+arguments = []
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = 'assets\atf_logo.paa'
+
+[hints.stop_and_focus]
+description = """
+You just focused on your surroundings. While focusing, you can visualise the sounds of nearby enemies and spot hints more quickly. Moving will exit this state.
+"""

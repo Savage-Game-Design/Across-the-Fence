@@ -2,7 +2,7 @@
     File: fn_equipment_openArsenal.sqf
     Author: Savage Game Design
     Date: 2023-09-16
-    Last Update: 2023-09-19
+    Last Update: 2025-01-06
     Public: No
 
     Description:
@@ -40,4 +40,7 @@ private _arsenal = player;
     [_arsenal, getArray (_x >> "items"), GLOBAL, ACTION] call BIS_fnc_addVirtualItemCargo;
 } forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
 
+["Preload"] call BIS_fnc_arsenal;
 ["Open", [FULL, _arsenal, player]] call BIS_fnc_arsenal;
+
+["vgm_equipment_arsenalOpen", []] call para_g_fnc_event_triggerLocal;

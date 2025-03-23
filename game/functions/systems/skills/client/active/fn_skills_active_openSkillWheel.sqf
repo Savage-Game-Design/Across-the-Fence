@@ -2,7 +2,7 @@
     File: fn_skills_active_openSkillWheel.sqf
     Author: veteran29
     Date: 2023-02-01
-    Last Update: 2023-02-01
+    Last Update: 2025-02-06
     Public: Yes
 
     Description:
@@ -17,6 +17,8 @@
     Example(s):
         [] call vgm_c_fnc_skills_active_openSkillWheel
  */
+
+if (player call vgm_g_fnc_medical_isUnconscious) exitWith {};
 
 private _iconsArray = [];
 {
@@ -42,3 +44,6 @@ private _iconsArray = [];
 ];
 
 [_iconsArray] call vn_fnc_wm_init;
+private _display = uiNamespace getVariable ["vn_wheelmenu", displayNull];
+
+[_display] call para_c_fnc_keyhandler_enableGeneralActionTriggeringOnDisplay;

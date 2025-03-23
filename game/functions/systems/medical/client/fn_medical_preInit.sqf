@@ -1,9 +1,11 @@
 #include "script_component.inc"
+#include "\a3\ui_f\hpp\defineDIKCodes.inc"
+
 /*
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-09-01
+    Last Update: 2024-12-06
     Public: No
 
     Description:
@@ -14,29 +16,7 @@ if (!hasInterface) exitWith {};
 
 ["vgm_medical_addAction", {
     params ["_player"];
-    if (_player getVariable ["vgm_c_medical_actions", false]) exitWith {};
-    _player setVariable ["vgm_c_medical_actions", true];
-
-    private _fnc_addAction = {
-        params ["_player"];
-
-        private _text = ["str_a3_cfgactions_healsoldierauto0", "str_a3_cfgactions_healsoldierself0"] select (player == _player);
-        private _actionId = _player addAction [localize _text, {
-            params ["_target"];
-            _target call vgm_c_fnc_medical_openMedicalMenu;
-        }, nil, 1, false];
-
-        _player setVariable ["vgm_medical_actionHeal", _actionId];
-    };
-
-    _player call _fnc_addAction;
-    _player addEventHandler ["Respawn", _fnc_addAction];
-    _player addEventHandler ["Killed", {
-        params ["_player"];
-        _player removeAction (_player getVariable ["vgm_medical_actionHeal", -1]);
-        _player setVariable ["vgm_medical_actionHeal", nil];
-    }]
-
+    _player call vgm_c_fnc_medical_addAction;
 }] call para_g_fnc_event_subscribe;
 
 vgm_medical_healItems = createHashMapFromArray [
@@ -44,8 +24,17 @@ vgm_medical_healItems = createHashMapFromArray [
     [HEAL_MEDIKIT, ["vn_helper_item_medikit"]]
 ];
 
+vgm_medical_healItemsTreatmentData = createHashMapFromArray [
+    [HEAL_FAK, 1],
+    [HEAL_MEDIKIT, 1]
+];
+
 ["vgm_medical_heal", {
     (_this#0) params ["_healer", "_patient", "_itemType", "_bodyPart"];
+
+    if (!local _patient) then {
+        format ["Heal on non local unit: %1, %2", _healer, _patient] call vgm_g_fnc_logWarning;
+    };
 
     private _canHeal = true;
     private _consumeItem = "";
@@ -61,6 +50,11 @@ vgm_medical_healItems = createHashMapFromArray [
         };
 
         if (_itemType == HEAL_FAK) then {
+            if (
+                (_healer getVariable ["vgm_c_skill_passives_support_resourceful", false]) // TODO consider coefficient?
+                && {random 1 < 0.3}
+            ) exitWith {format ["Not consuming item due to skill: %1 | %2 | %3", _healer, _patient, str _itemType] call vgm_g_fnc_logInfo};
+
             _consumeItem = _foundItems select 0;
         };
     };
@@ -72,7 +66,21 @@ vgm_medical_healItems = createHashMapFromArray [
 
     _healer removeItem _consumeItem;
 
-    [_patient, _bodyPart, [2, 1] select (_itemType == HEAL_MEDIKIT)] call vgm_c_fnc_medical_removeWound;
+    [_patient, _bodyPart, vgm_medical_healItemsTreatmentData get _itemType] call vgm_c_fnc_medical_removeWound;
+
+}] call para_g_fnc_event_subscribe;
+
+["vgm_medical_adjustBleedOutAt", {
+    (_this#0) params ["_unit", ["_adjust", nil, [0]]];
+
+    if (!(_unit getVariable ["vgm_g_medical_bleeding", false])) exitWith {};
+
+    format ["Adjusting bleed out time: %1 | %2", _unit, _adjust] call vgm_g_fnc_logInfo;
+
+    private _bleedOutAt = _unit getVariable "vgm_c_medical_bleedOutAt";
+    _unit setVariable ["vgm_c_medical_bleedOutAt", _bleedOutAt + _adjust];
+    // visual bleeding effect, stops when `damage _unit` < 0.1
+    _unit setBleedingRemaining (_bleedOutAt - time);
 
 }] call para_g_fnc_event_subscribe;
 
@@ -96,3 +104,49 @@ vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
 
 vgm_c_medical_armorCache = createHashMap;
 vgm_c_medical_damageModifiers = [];
+
+["bleedOut", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_bleedout", _value max 0.5 min 3];
+}] call vgm_c_fnc_coefficient_create;
+
+["hitShrug", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_hitShrug", _value max 0 min 1];
+}, 0] call vgm_c_fnc_coefficient_create;
+
+[{
+    params ["_unit"];
+
+    private _chance = _unit getVariable ["vgm_c_medical_coefficient_hitShrug", 0];
+    if (random 1 < _chance) then {
+        "Shrugging hit" call vgm_g_fnc_logDebug;
+        _this set [2, 0];
+        true // stop processing
+    };
+}] call vgm_c_fnc_medical_addDamageModifier;
+
+[
+    createHashMapFromArray [
+        ["name", "OpenMedicalMenu"],
+        ["displayName", "STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU"],
+        ["onRelease", false],
+        ["defaultKey", createHashMapFromArray [
+            ["dikCode", DIK_H]
+        ]]
+    ]
+] call para_c_fnc_keyhandler_registerAction;
+["OpenMedicalMenu", vgm_c_fnc_medical_openMedicalMenu] call para_c_fnc_keyhandler_addGeneralActionHandler;
+
+[
+    createHashMapFromArray [
+        ["name", "OpenMedicalMenuSelf"],
+        ["displayName", "STR_VGM_MEDICAL_UI_OPEN_MEDICAL_MENU_SELF"],
+        ["onRelease", false],
+        ["defaultKey", createHashMapFromArray [
+            ["shift", true],
+            ["dikCode", DIK_H]
+        ]]
+    ]
+] call para_c_fnc_keyhandler_registerAction;
+["OpenMedicalMenuSelf", {[player] call vgm_c_fnc_medical_openMedicalMenu}] call para_c_fnc_keyhandler_addGeneralActionHandler;

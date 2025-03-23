@@ -1,0 +1,47 @@
+displayName = "Missions"
+description = """
+Running recon missions is the core element of the [h]{1}[/h] gamemode.
+
+Once you and your team is ready to go on a mission, go to the [h]tactical map[/h], [h]create a new mission[/h] and select your area of operations (WIP).
+When the team has [h]joined the mission[/h], geared up and mentally prepared themselves, [h]start the mission[/h].
+
+You'll be inserted deep behind enemy lines, tasked with performing recon and [h]scouting[/h] multiple enemy sites.
+
+You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.
+
+[h]If nobody on your team survives, you will not receive any experience or rewards for your mission.[/h]
+"""
+
+arguments = ["localize 'STR_VGM_MISSION_NAME'"]
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+image = '\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa'
+
+[hints.after_arsenal]
+description = """
+Now you've customised your gear, create or join a mission using the [h]tactical map board[/h].
+"""
+
+[hints.map_board]
+description = """
+The tactical map board allows you to create, join and leave missions.
+"""
+
+[hints.mission_created]
+displayName = "Mission created"
+description = """
+You are now leading a mission. Other players will be able to join your mission until you depart. Make sure everyone is ready first!
+"""
+
+[hints.mission_joined]
+displayName = "Mission joined"
+description = """
+You've joined another player's mission. The leader can start the mission at any time. You can leave the mission using the actions on the map board.
+"""
+
+[hints.extraction]
+displayName = "Extraction"
+description = """
+As the mission leader, you can call for extraction at any time.
+This will request a helicopter that will land at a nearby LZ. The mission will end once all non-incapacitated players are on-board.
+"""
