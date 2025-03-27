@@ -3,7 +3,7 @@
     File: fn_stealth_getVisibilityForUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-20
+    Last Update: 2025-03-27
     Public: Yes
 
     Description:
@@ -48,6 +48,18 @@ private _totalHiddenPoints = 0;
 // Take the average (efficiently).
 // Convert hidden positions to visible positions for the calculation.
 private _visibility = (count _positions - _totalHiddenPoints) / count _positions;
+
+if (stance player == "PRONE" && !isOnRoad player && (getPosATL player # 2) < 0.05) then {
+    // Remove the '#' from the result of surfaceType
+    private _surfaceType = surfaceType getPosASL player select [1];
+    private _maxVisibility = vgm_c_stealth_surfaceTypeProneMaxVisibilityCache getOrDefaultCall [_surfaceType, {
+        private _surfaceCharacter = getText (configFile >> "CfgSurfaces" >> _surfaceType >> "character");
+        private _configMaxVisibility = getNumber (missionConfigFile >> "MapConfig" >> "Stealth_Prone_GroundClutterVisibilityMax" >> _surfaceCharacter);
+        [_configMaxVisibility, 1] select (_configMaxVisibility isEqualTo 0)
+    }];
+    _visibility = _visibility min _maxVisibility;
+};
+
 
 [_visibility, _angleFromEyeline]
 

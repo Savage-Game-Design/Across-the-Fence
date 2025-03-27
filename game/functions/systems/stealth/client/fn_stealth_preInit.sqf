@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-31
+    Last Update: 2025-03-27
     Public: No
 
     Description:
@@ -21,12 +21,12 @@ vgm_c_stealth_visibleDurationWhenSeen = 60;
 vgm_c_stealth_visibleOnFiredDelay = 3;
 vgm_c_stealth_visibleDurationOnFired = 30;
 
-vgm_c_stealth_stanceMultipliers = createHashMapFromArray [
-    ["STAND", 1],
-    ["CROUCH", 1.2],
-    ["PRONE", 2],
-    ["UNDEFINED", 1],
-    ["", 1]
+vgm_c_stealth_stanceLerp = createHashMapFromArray [
+    ["STAND", [0, 1]],
+    ["CROUCH", [0, 1.5]],
+    ["PRONE", [0, 3]],
+    ["UNDEFINED", [0, 1]],
+    ["", [0, 1]]
 ];
 
 /////////////////
@@ -59,6 +59,8 @@ vgm_c_stealth_rotationalVelocity = 0;
 // Track the suspicion of every looking unit.
 vgm_c_stealth_suspicion = createHashMap;
 
+// Cache for the player's maximum visibility while prone on a specific surface type.
+vgm_c_stealth_surfaceTypeProneMaxVisibilityCache = createHashMap;
 
 #ifdef __A3_DEBUG__
     vgm_c_stealth_drawDebug = false;
@@ -72,7 +74,8 @@ vgm_c_stealth_suspicion = createHashMap;
             if !(_canSee1 || _canSee2) then {continue};
             _x getVariable ["vgm_c_stealth_visibleResults", [false, -1]] params ["_isVisible", "_visibility", "_spotThreshold"];
             private _color = [[0,1,0,1],[1,0,0,1]] select _isVisible;
-            private _suspicion = (vgm_c_stealth_suspicion getOrDefault [hashValue _x, [0, time]]) # 0 toFixed 2;
+            private _suspicionDetails = vgm_c_stealth_suspicion getOrDefault [hashValue _x, [0, 0, time]] params ["_currentSuddenSuspicion", "_currentLingeringSuspicion"];
+            private _suspicion = _currentLingeringSuspicion + _currentSuddenSuspicion;
             private _spotTime = _x getVariable ["vgm_c_stealth_spotTimeDebug", 999] toFixed 1;
             drawIcon3D [
                 "",

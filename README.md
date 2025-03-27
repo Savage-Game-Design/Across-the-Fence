@@ -37,7 +37,7 @@ The way the build tool *will eventually* work when building as an addon is to se
 When building as a mission, all folders are simply copied into the mission.
 
 #### `maps`
-One folder for each map the gamemode will be on. Each folder includes the `mission.sqm`, as well as `description_map.inc` which is included into `description.ext` and `map_config`, which contains map-specific config stored at `missionConfigFile >> "map_config"`.
+One folder for each map the gamemode will be on. Each folder includes the `mission.sqm`, as well as `description_map.inc` which is included into `description.ext` and `MapConfig`, which contains map-specific config stored at `missionConfigFile >> "MapConfig"`.
 
 One PBO is produced per map.
 
