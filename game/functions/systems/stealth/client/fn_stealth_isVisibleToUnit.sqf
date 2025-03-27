@@ -74,7 +74,7 @@ private _minSpotVisibility = ((
     + _stanceValue
     - _movementValue
     + _peripheralAdjustmentValue
-) * (1 + DARKNESS_SCALING * _darkness)) max BASE_MIN_SPOT_VISIBILITTY;
+) * (1 + DARKNESS_SCALING * _darkness)) max BASE_MIN_SPOT_VISIBILITY;
 
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1

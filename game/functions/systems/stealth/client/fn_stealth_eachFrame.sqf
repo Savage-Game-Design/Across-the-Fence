@@ -3,7 +3,7 @@
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-01-31
+    Last Update: 2025-03-27
     Public: No
 
     Description:
@@ -95,7 +95,7 @@ call {
     private _spotTime = MIN_SPOT_TIME + 2 * (1 - _visibility) + (((_distance - 10) / SPOT_TIME_MULTIPLIER_DISTANCE) max 0);
     // This is converted into "suspicion", to account for AI not looking at the player continuously.
     (vgm_c_stealth_suspicion getOrDefault [hashValue _lookingUnit, [0, _seenAt], true]) params ["_currentSuspicion", "_suspicionLastTicked"];
-    private _deltaTime = time - _suspicionLastTicked;
+    private _deltaTime = time - (_suspicionLastTicked max _seenAt);
     private _newSuspicion = (_currentSuspicion + (MAX_SUSPICION * (_deltaTime / _spotTime))) min MAX_SUSPICION;
     vgm_c_stealth_suspicion set [hashValue _lookingUnit, [_newSuspicion, time]];
 
