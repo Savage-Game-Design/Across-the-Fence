@@ -23,8 +23,8 @@ vgm_c_stealth_visibleDurationOnFired = 30;
 
 vgm_c_stealth_stanceLerp = createHashMapFromArray [
     ["STAND", [0, 1]],
-    ["CROUCH", [0, 2]],
-    ["PRONE", [0, 4]],
+    ["CROUCH", [0, 1.5]],
+    ["PRONE", [0, 3]],
     ["UNDEFINED", [0, 1]],
     ["", [0, 1]]
 ];

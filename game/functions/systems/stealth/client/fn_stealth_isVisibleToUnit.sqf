@@ -3,7 +3,7 @@
     File: fn_stealth_isVisibleToUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-19
-    Last Update: 2025-03-16
+    Last Update: 2025-03-27
     Public: Yes
 
     Description:
@@ -22,13 +22,19 @@
 // Gives an exponential curve that passes through 1,1
 #define EXP(steepness, value) (exp ( steepness * value - steepness ))
 // The range at which you need to be fully visible to be spotted
-#define MAX_VISIBILITY_NEEDED_DISTANCE 300
+#define MAX_VISIBILITY_NEEDED_DISTANCE 100
 // The absolute minimum visibility to be seen. Should be tested in-game to find the best feeling value.
 // 0.333 is two points (e.g head + hand) visible, so should be the minimum
 #define BASE_MIN_SPOT_VISIBILITY 0.3
 #define MOVEMENT_SPEED_MODIFIER 0.5
 #define PERIPHERAL_MAX_PENALTY 0.7
 #define DARKNESS_SCALING 1
+
+// TODO - Slow down spotting more as distance increases.
+// TODO - Make movement have more of an impact - they're too good at spotting you while static right now. This probably needs to consider distance too.
+// TODO - The goal is to have them be able to spot you at a distance (eventually), but not be able to instantly spot you close up.
+// TODO - Peripheral *was* dominating at 20 degrees.
+// TODO - Consider "fast sus" and "slow sus", to mitigate small movements being "free"
 
 params ["_unit"];
 
@@ -53,23 +59,22 @@ private _peripheralAdjustmentValue = linearConversion [PERIPHERAL_START_ANGLE, V
 // 4.3 - All sprinting
 private _playerSpeed = vectorMagnitude velocity player;
 // Player must be stationary, and barely moving. The rotational velocity permits small, slow movements to be a bit more forgiving.
-private _movementValue = if (_playerSpeed <= 0.0001 && vgm_c_stealth_rotationalVelocity < 10) then {
+private _movementValue = if (_playerSpeed <= 0.0001 && vgm_c_stealth_rotationalVelocity < 12) then {
     0
 } else {
     // This means higher speeds have greater impacts.
-    private _normalizedSpeed = linearConversion [0, 4, _playerSpeed, 0, 1];
-    private _exponentialSpeed = EXP(2, _normalizedSpeed);
-    linearConversion [0, 1, _exponentialSpeed, 0, 0.7, true]
+    private _normalizedSpeed = linearConversion [0, 3, _playerSpeed, 0, 1];
+    linearConversion [0, 1, _normalizedSpeed, 0, MOVEMENT_SPEED_MODIFIER, true]
 };
 // Lighting influence is inverted - as want to increase minimum required visibility when it's dark.
 private _darkness = 1 - ([] call vgm_c_fnc_stealth_getLighting);
 
-private _minSpotVisibility = (
+private _minSpotVisibility = ((
     BASE_MIN_SPOT_VISIBILITY
     + _stanceValue
-    - (linearConversion [0, MAX_VISIBILITY_NEEDED_DISTANCE, _distance, _movementValue, 0])
+    - _movementValue
     + _peripheralAdjustmentValue
-) * (1 + DARKNESS_SCALING * _darkness);
+) * (1 + DARKNESS_SCALING * _darkness)) max BASE_MIN_SPOT_VISIBILITTY;
 
 // Player isn't visible enough to the unit, they can't be seen.
 // < is important, as minSpotVisibility could be 1, and _visibility could be 1
