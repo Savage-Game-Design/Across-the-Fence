@@ -74,7 +74,8 @@ vgm_c_stealth_surfaceTypeProneMaxVisibilityCache = createHashMap;
             if !(_canSee1 || _canSee2) then {continue};
             _x getVariable ["vgm_c_stealth_visibleResults", [false, -1]] params ["_isVisible", "_visibility", "_spotThreshold"];
             private _color = [[0,1,0,1],[1,0,0,1]] select _isVisible;
-            private _suspicion = (vgm_c_stealth_suspicion getOrDefault [hashValue _x, [0, time]]) # 0 toFixed 2;
+            private _suspicionDetails = vgm_c_stealth_suspicion getOrDefault [hashValue _x, [0, 0, time]] params ["_currentSuddenSuspicion", "_currentLingeringSuspicion"];
+            private _suspicion = _currentLingeringSuspicion + _currentSuddenSuspicion;
             private _spotTime = _x getVariable ["vgm_c_stealth_spotTimeDebug", 999] toFixed 1;
             drawIcon3D [
                 "",
