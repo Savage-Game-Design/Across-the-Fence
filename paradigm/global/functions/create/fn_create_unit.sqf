@@ -36,7 +36,7 @@ _unit setSkill ["reloadSpeed", 1];
 _unit setSkill ["spotDistance", 1];
 //Any less and the AI feels sluggish
 _unit setSkill ["spotTime", 1];
-_unit setSkill ["aimingAccuracy", 0.30];
+_unit setSkill ["aimingAccuracy", 0.55];
 
 _unit addEventHandler ["Killed", {
 	params ["_unit"];
