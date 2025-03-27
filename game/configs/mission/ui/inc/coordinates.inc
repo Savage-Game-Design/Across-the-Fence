@@ -12,6 +12,7 @@
 */
 
 #include "\a3\3den\UI\macros.inc" // imports CENTER_X/Y
+#include "\a3\ui_f\hpp\definecommongrids.inc"
 
 //// Define the width and height of a single column/row
 // 3 * VGM_GRID_H is the default height of a control

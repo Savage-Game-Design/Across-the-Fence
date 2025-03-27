@@ -9,14 +9,16 @@ class VGM_RscSquad {
     {
         class Bar: RscControlsGroupNoScrollbars
         {
+            idc = VGM_IDC_RSCSQUAD_BAR;
             x = safeZoneX + 1 * GUI_GRID_W;
             y = safeZoneY + safeZoneH - 8.2 * GUI_GRID_H;
-            w = 3 * GUI_GRID_W;
+            w = safeZoneW - 2 * GUI_GRID_W;
             h = 7.1 * GUI_GRID_H;
             class Controls
             {
                 class SquadMember: RscControlsGroupNoScrollbars
                 {
+                    idc = -1;
                     x = 0;
                     y = 0;
                     w = 3 * GUI_GRID_W;
@@ -65,6 +67,7 @@ class VGM_RscSquad {
                         };
                         class Name: RscStructuredText
                         {
+                            idc = VGM_IDC_RSCSQUAD_MEMBER_NAME;
                             text = "Terra";
                             x = 0;
                             y = 6 * GUI_GRID_H;
