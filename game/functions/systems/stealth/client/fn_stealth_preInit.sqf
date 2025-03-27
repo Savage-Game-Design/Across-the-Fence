@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-03-16
+    Last Update: 2025-03-27
     Public: No
 
     Description:
@@ -59,6 +59,8 @@ vgm_c_stealth_rotationalVelocity = 0;
 // Track the suspicion of every looking unit.
 vgm_c_stealth_suspicion = createHashMap;
 
+// Cache for the player's maximum visibility while prone on a specific surface type.
+vgm_c_stealth_surfaceTypeProneMaxVisibilityCache = createHashMap;
 
 #ifdef __A3_DEBUG__
     vgm_c_stealth_drawDebug = false;
