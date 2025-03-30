@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-01-16
+    Last Update: 2025-03-29
     Public: Yes
 
     Description:
@@ -38,6 +38,8 @@ _directorData set ["virtualSquads", createHashMap];
 _directorData set ["virtualSquadGroups", createHashMap];
 // Tracks when the last tracker squad was sent at the players
 _directorData set ["lastTrackerSent", -9999];
+// Tracks ongoing engagements, based on the AI reporting combat events
+_directorData set ["engagementsIndex", [{ _this get "pos" }] call vgm_g_fnc_posindex_create select 0];
 
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 

@@ -81,6 +81,7 @@ class vgm_s
         };
         class director_getDirectorForMissionId {};
         class director_getEnemySquadTemplate {};
+        class director_onCombatDetected {};
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
         class director_spawnInitialPatrols {};

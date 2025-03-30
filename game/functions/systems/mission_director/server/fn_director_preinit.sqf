@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-03-01
+    Last Update: 2025-03-30
     Public: No
 
     Description:
@@ -31,6 +31,7 @@ vgm_s_director_noiseEventAlertness = createHashMapFromArray [
     ["unsuppressedShots", 1.0],
     ["suppressedShots", 0.5]
 ];
+vgm_s_director_engagementRadius = 200;
 
 vgm_s_director_defenseSquadSizes = createHashMapFromArray [
     [SITE_FOOTPRINT_SMALL, 3],
@@ -159,7 +160,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") then { continue };
+    if (isNil "_director") exitWith {};
     _director get "virtualSquads" set [_squad get "id", _squad];
 
 }] call para_g_fnc_event_subscribeLocal;
@@ -169,7 +170,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") then { continue };
+    if (isNil "_director") exitWith {};
     _director get "virtualSquads" deleteAt (_squad get "id");
 
 }] call para_g_fnc_event_subscribeLocal;
@@ -179,7 +180,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _mission = [_missionId] call vgm_s_fnc_missions_getById;
-    if (isNil "_mission") then { continue };
+    if (isNil "_mission") exitWith {};
     private _director = _mission get "director";
     private _group = _squad get "group";
     _director get "virtualSquadGroups" set [_squad get "id", _group];
@@ -193,10 +194,17 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") then { continue };
+    if (isNil "_director") exitWith {};
     _director get "virtualSquadGroups" deleteAt (_squad get "id");
 
 }] call para_g_fnc_event_subscribeLocal;
+
+["vgm_ai_groupEnteredCombat", {
+    (_this # 0) params ["_group", "_targets"];
+
+    [_group, _targets] call vgm_s_fnc_director_onCombatDetected;
+
+}] call para_g_fnc_event_subscribe;
 
 // handle extraction
 call {
