@@ -43,6 +43,8 @@ if (_nearbyEngagements isNotEqualTo []) exitWith {
     // Really we should combine multiple nearby engagements. But this is quick and cheap, and it should rarely happen anyway.
     private _selectedEngagement = selectRandom _nearbyEngagements;
     _selectedEngagement get "groups" set [_groupHash, _groupsEntry];
+    _selectedEngagement set ["pos", _engagementPos];
+    [_engagementsIndex, _selectedEngagement get "indexSlot"] call vgm_g_fnc_posIndex_refreshItemInSlot;
 };
 
 private _newEngagement = createHashMapFromArray [
@@ -50,7 +52,8 @@ private _newEngagement = createHashMapFromArray [
     // Use a hashmap as an array would require pushBackUnique.
     // That would be fine for most missions, but would become a performance issue if custom mission makers increase max group count.
     ["groups", createHashMapFromArray [[_groupHash, _groupsEntry]]],
-    ["startedAt", serverTime]
+    ["startedAt", serverTime],
 ];
 
-[_engagementsIndex, _newEngagement] call vgm_g_fnc_posindex_add;
+private _indexSlot = [_engagementsIndex, _newEngagement] call vgm_g_fnc_posindex_add;
+_newEngagement set ["indexSlot", _indexSlot];
