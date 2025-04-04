@@ -380,6 +380,7 @@ class vgm_s
         class virtsquad_preinit {
             preInit = 1;
         };
+        class virtsquad_scaleComposition {};
         class virtsquad_spawn {};
         class virtsquad_spawnLoop {};
     };
