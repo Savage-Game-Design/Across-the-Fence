@@ -3,7 +3,7 @@
     File: fn_virtsquad_create.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-03-01
+    Last Update: 2025-04-04
     Public: No
 
     Description:
@@ -24,6 +24,8 @@
             ["composition", [
                 "vn_b_rifleman"
             ]],
+            // Set how squad size changes with player count on each mission.
+            ["sizeRange", [5, 10]],
             // Set on the machine the AI is spawned on
             ["groupVars", createHashMapFromArray [
                 // Var name       Value    Global

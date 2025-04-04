@@ -2,7 +2,7 @@
     File: fn_missions_getCurrentMission.sqf
     Author: Savage Game Design
     Date: 2023-04-24
-    Last Update: 2023-09-19
+    Last Update: 2025-04-04
     Public: Yes
 
     Description:
@@ -19,6 +19,5 @@
  */
 
 private _assignments = ["vgm_mission_assignments", createHashMap] call para_g_fnc_netmap_getOrDefault;
-private _missions = ["vgm_missions_publicMissionInfo", createHashMap] call para_g_fnc_netmap_getOrDefault;
 
-_missions get (_assignments get (getPlayerID player))
+[_assignments get (getPlayerID player)] call vgm_g_fnc_missions_getPublicInfoById

@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-03-01
+    Last Update: 2025-04-04
     Public: No
 
     Description:
@@ -32,10 +32,11 @@ vgm_s_director_noiseEventAlertness = createHashMapFromArray [
     ["suppressedShots", 0.5]
 ];
 
-vgm_s_director_defenseSquadSizes = createHashMapFromArray [
-    [SITE_FOOTPRINT_SMALL, 3],
-    [SITE_FOOTPRINT_MEDIUM, 6],
-    [SITE_FOOTPRINT_LARGE, 9]
+vgm_s_director_defenseSquadSizeRanges = createHashMapFromArray [
+    //[Site size, [ Min, Max ]]
+    [SITE_FOOTPRINT_SMALL, [2, 4]],
+    [SITE_FOOTPRINT_MEDIUM, [3, 6]],
+    [SITE_FOOTPRINT_LARGE, [5, 10]]
 ];
 
 // TODO - Replace these with Mike Force's squad generator

@@ -2,7 +2,7 @@
     File: fn_director_spawnInitialPatrols.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-03-01
+    Last Update: 2025-04-04
     Public: No
 
     Description:
@@ -37,11 +37,12 @@ private _defenseTemplate = [[], [0,0,0], _missionPublic get "id"] call vgm_s_fnc
     private _sitePos = _x get "pos";
     private _siteRadius = vgm_s_sites_siteRadii get (_x get "type" get "size");
 
-    private _defenseUnitCount = vgm_s_director_defenseSquadSizes get (_x get "type" get "size");
+    private _defenseUnitSizeRange = vgm_s_director_defenseSquadSizeRanges get (_x get "type" get "size");
     private _spawnPos = _sitePos getPos [_siteRadius + random 30, random 360];
 
     _patrolTemplate set ["pos", _spawnPos];
-    _patrolTemplate set ["composition", vgm_s_director_patrol_classes select [0, 2 + ceil random 2]];
+    _patrolTemplate set ["composition", vgm_s_director_patrol_classes];
+    _patrolTemplate set ["sizeRange", [2, 3 + ceil random 3]];
     private _patrolSquad = [_patrolTemplate] call vgm_s_fnc_virtsquad_create;
     _squads pushBack _patrolSquad;
 
@@ -50,7 +51,8 @@ private _defenseTemplate = [[], [0,0,0], _missionPublic get "id"] call vgm_s_fnc
         // Try to spawn the intersite patrol just outside of the site.
         private _targetSite = _sites select (selectRandom _nearbySiteIndexes);
         _intersitePatrolTemplate set ["pos", _sitePos getPos [_siteRadius + 15, random 360]];
-        _intersitePatrolTemplate set ["composition", vgm_s_director_patrol_classes select [0, 2 + ceil random 2]];
+        _intersitePatrolTemplate set ["composition", vgm_s_director_patrol_classes];
+        _intersitePatrolTemplate set ["sizeRange", [2, 4 + ceil random 2]];
         _intersitePatrolTemplate get "groupVars" set ["vgm_g_order", [
             createHashMapFromArray [
                 ["type", "PATROL-ROUTE"],
@@ -62,7 +64,8 @@ private _defenseTemplate = [[], [0,0,0], _missionPublic get "id"] call vgm_s_fnc
     };
 
     _defenseTemplate set ["pos", _x get "pos"];
-    _defenseTemplate set ["composition", vgm_s_director_defense_classes select [0, _defenseUnitCount]];
+    _defenseTemplate set ["composition", vgm_s_director_defense_classes];
+    _defenseTemplate set ["sizeRange", _defenseUnitSizeRange];
     _defenseTemplate get "groupVars" set ["vgm_g_order", [
         createHashMapFromArray [
             ["type", "DEFEND"],
