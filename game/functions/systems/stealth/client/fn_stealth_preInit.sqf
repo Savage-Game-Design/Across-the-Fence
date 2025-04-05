@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-03-27
+    Last Update: 2025-04-05
     Public: No
 
     Description:
@@ -31,8 +31,6 @@ vgm_c_stealth_stanceLerp = createHashMapFromArray [
 
 /////////////////
 
-// True when the player is visible.
-vgm_c_stealth_isVisible = false;
 // Set a time when the player will become visible.
 // This is effectively a countdown timer.
 // It doesn't matter if the player becomes visible in the meantime, then goes back into stealth.
