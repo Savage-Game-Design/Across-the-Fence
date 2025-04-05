@@ -2,7 +2,7 @@
     File: fn_btree_decorator_updateKnowledgeService.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2025-03-29
+    Last Update: 2025-04-05
     Public: Yes
 
     Description:
@@ -53,6 +53,14 @@ _decorator set ["onTreeAssigned", {
 _decorator set ["onTreeUnassigned", {
     params ["_group", "_blackboard"];
 
+    private _targets = _blackboard getOrDefault ["targets", []];
+    if (_targets isNotEqualTo []) then {
+        [
+            "vgm_ai_groupTargetsLost",
+            [_group, _targets]
+        ] call para_g_fnc_event_triggerServer;
+    };
+
     [
         _group,
         _group getVariable "vgm_l_btree_updateKnowledge_suppressedHandler"
@@ -72,10 +80,11 @@ _decorator set ["onTreeUnassigned", {
 _decorator set ["onTick", {
     params ["_node", "_state"];
 
-    private _combatDuration = _extern_group getVariable ["vgm_l_btree_combatDuration", 60];
+    private _combatDuration = _extern_group getVariable ["vgm_l_btree_combatDuration", 15];
     private _combatTimeThreshold = time - _combatDuration;
     private _isInCombat = false;
-    private _targets = _extern_group targets [true, 0, [], _combatDuration];
+    private _lastTargets = _extern_blackboard getOrDefault ["targets", []];
+    private _targets = _extern_group targets [true, 0, [], _combatDuration] select {!isPlayer _x || _x getVariable ["vgm_g_stealth_isVisible", false]};
 
     private _isInCombat =
         (
@@ -83,6 +92,10 @@ _decorator set ["onTick", {
             || _combatTimeThreshold < _extern_group getVariable ["vgm_l_btree_lastFired", time]
         )
         && _targets isNotEqualTo [];
+
+    // It's not permitted to have targets when the squad isn't in combat.
+    // This also ensures the 'lostTarget' event fires correctly when the squad leaves combat.
+    if (!_isInCombat) then { _targets = []; };
 
     private _wasInCombat = _extern_group getVariable ["vgm_g_ai_inCombat", false];
     if (_isInCombat isNotEqualTo _wasInCombat) then {
@@ -97,6 +110,23 @@ _decorator set ["onTick", {
         // For example, the squad being deleted or having its tree unassigned would prevent it firing
         // We can try to handle those situations, but only if it's necessary, as it would be easy to have missed edge cases.
     };
+
+    private _newTargets = _targets - _lastTargets;
+    if (_newTargets isNotEqualTo []) then {
+        [
+            "vgm_ai_groupTargetsEngaged",
+            [_extern_group, _newTargets]
+        ] call para_g_fnc_event_triggerServer;
+    };
+    private _lostTargets = _lastTargets - _targets;
+    if (_lostTargets isNotEqualTo []) then {
+        [
+            "vgm_ai_groupTargetsLost",
+            [_extern_group, _lostTargets]
+        ] call para_g_fnc_event_triggerServer;
+    };
+
+    _extern_blackboard set ["targets", _targets];
 }];
 
 _decorator
