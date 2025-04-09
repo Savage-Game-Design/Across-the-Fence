@@ -16,6 +16,10 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class initMissionOptions
+        {
+            postInit = 1;
+        };
         class itemConfig {};
         class itemType {};
         class manWouldCollideAtPosition {};
