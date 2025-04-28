@@ -2,7 +2,7 @@
     File: fn_btree_decorator_updateKnowledgeService.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2025-04-05
+    Last Update: 2025-04-28
     Public: Yes
 
     Description:
@@ -53,7 +53,7 @@ _decorator set ["onTreeAssigned", {
 _decorator set ["onTreeUnassigned", {
     params ["_group", "_blackboard"];
 
-    private _targets = _blackboard getOrDefault ["targets", []];
+    private _targets = _group getVariable ["vgm_g_ai_targets", []];
     if (_targets isNotEqualTo []) then {
         [
             "vgm_ai_groupTargetsLost",
@@ -83,7 +83,7 @@ _decorator set ["onTick", {
     private _combatDuration = _extern_group getVariable ["vgm_l_btree_combatDuration", 15];
     private _combatTimeThreshold = time - _combatDuration;
     private _isInCombat = false;
-    private _lastTargets = _extern_blackboard getOrDefault ["targets", []];
+    private _lastTargets = _extern_group getVariable ["vgm_g_ai_targets", []];
     private _targets = _extern_group targets [true, 0, [], _combatDuration] select {!isPlayer _x || _x getVariable ["vgm_g_stealth_isVisible", false]};
 
     private _isInCombat =
@@ -126,7 +126,7 @@ _decorator set ["onTick", {
         ] call para_g_fnc_event_triggerServer;
     };
 
-    _extern_blackboard set ["targets", _targets];
+    _extern_group setVariable ["vgm_g_ai_targets", _targets, true];
 }];
 
 _decorator

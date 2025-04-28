@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-01-16
+    Last Update: 2025-04-28
     Public: No
 
     Description:
@@ -55,4 +55,7 @@ if (
     _directorData set ["lastTrackerSent", serverTime];
 };
 
-// TODO - Spawn in attack units if engaged in combat, and not enough nearby patrols.
+{
+    private _engagement = _x;
+    [_directorData, _engagement] call vgm_s_fnc_director_tickEngagement;
+} forEach values (_directorData get "playerEngagements");

@@ -81,13 +81,22 @@ class vgm_s
         };
         class director_getDirectorForMissionId {};
         class director_getEnemySquadTemplate {};
-        class director_onCombatDetected {};
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
         class director_spawnInitialPatrols {};
         class director_spawnTracker {};
         class director_startMission {};
         class director_stopMission {};
+    };
+
+    class mission_director_engagements
+    {
+        VGM_SERVER_PATH(\systems\mission_director\server\engagements);
+        class director_addEnemyGroupToPlayerEngagement {};
+        class director_createEngagement {};
+        class director_deleteEngagement {};
+        class director_removeEnemyGroupFromPlayerEngagement {};
+        class director_tickEngagement {};
     };
 
     class missions_objects

@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-03-30
+    Last Update: 2025-04-28
     Public: No
 
     Description:
@@ -199,11 +199,26 @@ vgm_s_director_attack_classes = [
 
 }] call para_g_fnc_event_subscribeLocal;
 
-["vgm_ai_groupEnteredCombat", {
+["vgm_ai_groupTargetsEngaged", {
     (_this # 0) params ["_group", "_targets"];
 
-    [_group, _targets] call vgm_s_fnc_director_onCombatDetected;
+    private _missionId = _group getVariable "vgm_g_missionId";
+    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
+    if (isNil "_director") exitWith {};
+    {
+        [_director, _group, _x] call vgm_s_fnc_director_addEnemyGroupToPlayerEngagement;
+    } forEach _targets;
+}] call para_g_fnc_event_subscribe;
 
+["vgm_ai_groupTargetsLost", {
+    (_this # 0) params ["_group", "_targets"];
+
+    private _missionId = _group getVariable "vgm_g_missionId";
+    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
+    if (isNil "_director") exitWith {};
+    {
+        [_director, _group, _x] call vgm_s_fnc_director_removeEnemyGroupFromPlayerEngagement;
+    } forEach _targets;
 }] call para_g_fnc_event_subscribe;
 
 // handle extraction
