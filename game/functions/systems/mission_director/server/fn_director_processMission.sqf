@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-04-28
+    Last Update: 2025-05-12
     Public: No
 
     Description:
@@ -31,6 +31,10 @@ private _alertness = _directorData get "alertness";
 
 [format ["Mission=%1, Alertness=%2", _publicMission get "id", _alertness]] call vgm_g_fnc_logInfo;
 
+//////////////
+// Trackers //
+//////////////
+
 private _timeSinceLastTracker = serverTime - (_directorData get "lastTrackerSent");
 private _currentTrackerDelay = linearConversion [
         0, vgm_s_director_max_alertness,
@@ -55,7 +59,47 @@ if (
     _directorData set ["lastTrackerSent", serverTime];
 };
 
+////////////////////
+// Reinforcements //
+////////////////////
+
+{
+    [_directorData, _x] call vgm_s_fnc_director_deleteEngagementIfEnded;
+} forEach values (_directorData get "playerEngagements");
+
 {
     private _engagement = _x;
-    [_directorData, _engagement] call vgm_s_fnc_director_tickEngagement;
+    // Run the reinforcment check less often than the director ticks.
+    // Importantly, this controls the initial reinforcment delay for new engagements!
+    hint format ["Running reinforcement check for %1 - %2", _engagement get "player", serverTime - (_engagement get "lastReinforcementCheck")];
+    private _checkedRecently = serverTime - (_engagement get "lastReinforcementCheck") < (_directorData get "reinforcementCheckFrequencySecs");
+    if (_checkedRecently) then {
+        continue;
+    };
+
+    _engagement set ["lastReinforcementCheck", serverTime];
+    // Technically this always grows (nothing removes players from here), but shouldn't be a problem as directorData is deleted on mission end.
+    private _lastReinforcementSent = _directorData get "lastReinforcementSentPerPlayer" getOrDefault [hashValue (_engagement get "player"), -9999];
+    private _reinforcementsSentRecently = (serverTime - _lastReinforcementSent) < (_directorData get "minTimeBetweenReinforcementsSecs");
+
+    // Avoid spamming players with squads, no matter what.
+    if (_reinforcementsSentRecently) then {
+        hint format ["Avoiding reinforcements due to recency"];
+        continue;
+    };
+
+    // Roll the dice on spawning reinforcements. Adds a little variation, and provides an extra tuning option.
+    if (random 1 > (_directorData get "reinforcementChance")) then {
+        hint format ["Failed the reinforcement roll"];
+        continue;
+    };
+
+    private _squad = [_mission, _engagement get "player"] call vgm_s_fnc_director_spawnReinforcements;
+
+    if (isNil "_squad") then {
+        hint format ["Failed to spawn reinforcements"];
+        continue;
+    };
+
+    hint format ["Reinforcements created!"];
 } forEach values (_directorData get "playerEngagements");

@@ -84,6 +84,7 @@ class vgm_s
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
         class director_spawnInitialPatrols {};
+        class director_spawnReinforcements {};
         class director_spawnTracker {};
         class director_startMission {};
         class director_stopMission {};
@@ -96,7 +97,7 @@ class vgm_s
         class director_createEngagement {};
         class director_deleteEngagement {};
         class director_removeEnemyGroupFromPlayerEngagement {};
-        class director_tickEngagement {};
+        class director_deleteEngagementIfEnded {};
     };
 
     class missions_objects

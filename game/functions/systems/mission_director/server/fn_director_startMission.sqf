@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-04-28
+    Last Update: 2025-05-11
     Public: Yes
 
     Description:
@@ -40,6 +40,10 @@ _directorData set ["virtualSquadGroups", createHashMap];
 _directorData set ["lastTrackerSent", -9999];
 // Tracks engagements players are in
 _directorData set ["playerEngagements", createHashMap];
+_directorData set ["reinforcementChance", 0.5];
+_directorData set ["reinforcementCheckFrequencySecs", 30];
+_directorData set ["lastReinforcementSentPerPlayer", createHashMap];
+_directorData set ["minTimeBetweenReinforcementsSecs", 150];
 
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 

@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-04-28
+    Last Update: 2025-05-12
     Public: No
 
     Description:
@@ -98,6 +98,11 @@ vgm_s_director_defense_classes = [
 ];
 
 vgm_s_director_attack_classes = [
+    'vn_o_men_nva_11',
+    'vn_o_men_nva_49',
+    'vn_o_men_nva_11',
+    'vn_o_men_nva_07',
+    'vn_o_men_nva_49',
     'vn_o_men_nva_11',
     'vn_o_men_nva_49',
     'vn_o_men_nva_11',

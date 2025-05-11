@@ -2,7 +2,7 @@
     File: fn_director_createEngagement.sqf
     Author: Savage Game Design
     Date: 2025-04-28
-    Last Update: 2025-04-28
+    Last Update: 2025-05-11
     Public: No
 
     Description:
@@ -32,6 +32,7 @@ private _engagement = createHashMapFromArray [
     // That would be fine for most missions, but would become a performance issue if custom mission makers increase max group count.
     ["groups", createHashMap],
     ["startedAt", serverTime],
+    ["lastReinforcementCheck", serverTime],
     ["ended", false]
 ];
 
