@@ -115,7 +115,7 @@ class vgm_g
         class btree_decorator_loopInfinitely {};
 
         /* Custom nodes */
-        class btree_action_moveToInvestigationPoint {};
+        class btree_action_moveTo {};
         class btree_action_patrolArea {};
         class btree_action_patrolRoute {};
         class btree_action_tracking_findNearbyTracks {};

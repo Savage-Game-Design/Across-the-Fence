@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2025-03-06
+    Last Update: 2025-05-14
     Public: No
 
     Description:
@@ -24,6 +24,7 @@
  */
 
 #define CURRENT_ORDER ( _extern_blackboard get "currentOrder" )
+#define BLACKBOARD(var) { _extern_blackboard get var }
 
 [DECORATOR(updateKnowledgeService), [], [
 [DECORATOR(suppressionService), [], [
@@ -31,7 +32,7 @@
 [DECORATOR(loopInfinitely), [], [
     [SELECTOR, [], [
         [DECORATOR(fetchNearbyDangerReportAsInvestigationPoint), [["abortLowerPriority", true]], [
-            [ACTION(moveToInvestigationPoint), []]
+            [ACTION(moveTo), [["dest", BLACKBOARD("investigationPoint")]]]
         ]],
         [DECORATOR(hasOrders), [["order", "DEFEND"], ["abortLowerPriority", true]], [
             [ACTION(patrolArea), [["center", { CURRENT_ORDER get "pos" }], ["radius", 10]]]
