@@ -71,7 +71,6 @@ if (
     private _engagement = _x;
     // Run the reinforcment check less often than the director ticks.
     // Importantly, this controls the initial reinforcment delay for new engagements!
-    hint format ["Running reinforcement check for %1 - %2", _engagement get "player", serverTime - (_engagement get "lastReinforcementCheck")];
     private _checkedRecently = serverTime - (_engagement get "lastReinforcementCheck") < (_directorData get "reinforcementCheckFrequencySecs");
     if (_checkedRecently) then {
         continue;
@@ -85,20 +84,21 @@ if (
 
     // Avoid spamming players with squads, no matter what.
     if (_reinforcementsSentRecently) then {
-        hint format ["Avoiding reinforcements due to recency"];
+        [format ["[Reinforcements - Mission: %1, Player: %2] Skipping reinforce - squad spawned recently", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logDebug;
         continue;
     };
 
     // Roll the dice on spawning reinforcements. Adds a little variation, and provides an extra tuning option.
     if (random 1 > (_directorData get "reinforcementChance")) then {
-        hint format ["Failed the reinforcement roll"];
+        [format ["[Reinforcements - Mission: %1, Player: %2] Skipping reinforce - random roll failed", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logDebug;
         continue;
     };
 
+    [format ["[Reinforcements - Mission: %1, Player: %2] Attempting to create squad", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logInfo;
     private _squad = [_mission, _engagement get "player"] call vgm_s_fnc_director_spawnReinforcements;
 
     if (isNil "_squad") then {
-        hint format ["Failed to spawn reinforcements"];
+        [format ["[Reinforcements - Mission: %1, Player: %2] Failed to create squad", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logInfo;
         continue;
     };
 

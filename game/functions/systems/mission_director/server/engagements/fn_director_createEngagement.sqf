@@ -2,7 +2,7 @@
     File: fn_director_createEngagement.sqf
     Author: Savage Game Design
     Date: 2025-04-28
-    Last Update: 2025-05-11
+    Last Update: 2025-05-15
     Public: No
 
     Description:
@@ -38,4 +38,5 @@ private _engagement = createHashMapFromArray [
 
 _director get "playerEngagements" set [_engagement get "playerHash", _engagement];
 
+[format ["[Engagement - Player %1] Player engaged by enemy", _engagement get "player"]] call vgm_g_fnc_logDebug;
 _engagement
