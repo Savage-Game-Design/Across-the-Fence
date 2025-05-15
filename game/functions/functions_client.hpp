@@ -287,6 +287,7 @@ class vgm_g
 
         class missions_getAssignedMissionId {};
         class missions_getHubSpawnPos {};
+        class missions_getPublicInfoById {};
         class missions_getZoneMarker {};
         class missions_preInit
         {

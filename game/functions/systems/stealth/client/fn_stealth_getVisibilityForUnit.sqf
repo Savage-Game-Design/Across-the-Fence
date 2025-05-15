@@ -3,7 +3,7 @@
     File: fn_stealth_getVisibilityForUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-03-27
+    Last Update: 2025-04-03
     Public: Yes
 
     Description:
@@ -30,6 +30,7 @@
 
 params ["_unit"];
 
+private _distance = _unit distance player;
 // Returns an absolute angle (i.e positive) between the unit's eye direction and position of the player.
 private _angleFromEyeline = acos ((getPosASL _unit vectorFromTo getPosASL player) vectorCos eyeDirection _unit);
 
@@ -41,8 +42,13 @@ private _selections = ["righthand", "pelvis", "leftlegroll", "rightlegroll"];
 private _positions = [aimPos player, eyePos player] + (_selections apply {player modelToWorldWorld (player selectionPosition _x)});
 // Track hidden points - a line intersection means that something was hit *before* the player was.
 private _totalHiddenPoints = 0;
+// Use GEOM LOD instead of VIEW when enemies are really close, allowing enemies to see through bushes, but not trees or walls.
+private _lods = [
+    ["VIEW", "FIRE"],
+    ["GEOM", "NONE"]
+] select (_distance < 2);
 {
-	_totalHiddenPoints = _totalHiddenPoints + count (lineIntersectsSurfaces [eyePos _unit, _x, _unit, player, true, 1, "VIEW"]);
+	_totalHiddenPoints = _totalHiddenPoints + count (lineIntersectsSurfaces [eyePos _unit, _x, _unit, player, true, 1, _lods # 0, _lods # 1]);
 } forEach _positions;
 
 // Take the average (efficiently).
