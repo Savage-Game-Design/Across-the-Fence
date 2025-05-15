@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2025-05-14
+    Last Update: 2025-05-15
     Public: No
 
     Description:
@@ -45,6 +45,12 @@
                     // Angle change needs to be high, due to a 15m tolerance on area patrol waypoints.
                     [ACTION(patrolArea), [["radius", 35], ["angleChange", 90], ["speedMode", "NORMAL"], ["behaviour", "AWARE"]]]
                 ]]
+            ]]
+        ]],
+        [DECORATOR(hasOrders), [["order", "ASSAULT"], ["abortLowerPriority", true]], [
+            [SEQUENCE, [], [
+                [ACTION(moveTo), [["dest", { CURRENT_ORDER get "pos" }], ["speedMode", "FULL"]]],
+                [ACTION(clearOrders), []]
             ]]
         ]],
         [DECORATOR(hasOrders), [["order", "PATROL-ROUTE"], ["abortLowerPriority", true]], [

@@ -2,7 +2,7 @@
     File: fn_director_spawnReinforcements.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-05-12
+    Last Update: 2025-05-15
     Public: Yes
 
     Description:
@@ -34,5 +34,11 @@ if (_spawnPos isEqualTo []) exitWith { nil };
 
 private _template = [vgm_s_director_attack_classes select [0, 5], _spawnPos, _missionId] call vgm_s_fnc_director_getEnemySquadTemplate;
 _template set ["deleteOnDespawn", true];
+_template get "groupVars" set ["vgm_g_order", [
+    createHashMapFromArray [
+        ["type", "ASSAULT"],
+        ["pos", getPosATL _player]
+    ]
+]];
 
 [_template] call vgm_s_fnc_virtsquad_create
