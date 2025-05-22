@@ -683,6 +683,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\leveling\client);
 
+        class leveling_getLevel {};
         class leveling_preInit
         {
             preInit = 1;
