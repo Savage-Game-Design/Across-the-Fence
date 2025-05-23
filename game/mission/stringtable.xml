@@ -287,6 +287,9 @@
         </Key>
     </Package>
     <Package name="Skills Tree">
+        <Key ID="STR_VGM_SKILLS_TREE_COMBAT">
+            <Original>Combat</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
             <Original>Rifleman</Original>
         </Key>
@@ -301,6 +304,22 @@
         </Key>
     </Package>
     <Package name="Skills Skill">
+        <!-- Combat -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN">
+            <Original>Specialisation: Rifleman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT">
+            <Original>Specialisation: Scout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN">
+            <Original>Specialisation: Marksman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER">
+            <Original>Specialisation: Grenadier</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER">
+            <Original>Specialisation: Machinegunner</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>

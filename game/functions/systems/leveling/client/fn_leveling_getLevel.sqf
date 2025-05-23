@@ -18,4 +18,4 @@
         call vgm_c_fnc_leveling_getLevel;
  */
 
-player getVariable ["leveling_data", createHashMap] getOrDefault ["level", -1]
+player getVariable ["vgm_g_levelingData", createHashMap] getOrDefault ["level", -1]

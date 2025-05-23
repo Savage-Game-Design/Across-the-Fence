@@ -23,7 +23,43 @@ class vgm_skillTemplate {
     codeUnableToActivate = "";
 };
 
+class vgm_weaponSpecialisationTemplate: vgm_skillTemplate {
+    conditionUnlock = "!(missionNamespace getVariable ['vgm_c_skill_hasSpecialisation', false])";
+    codeApply = "vgm_c_skill_hasSpecialisation = true";
+    codeUnapply  = "vgm_c_skill_hasSpecialisation = false";
+};
+
 class vgm_skillTrees {
+    class combat {
+        displayName = "$STR_VGM_SKILLS_TREE_COMBAT";
+        description = "";
+        icon = "assets\skills\rifleman_ca.paa";
+
+        class skills {
+            class tier_1 {
+                class specialisation_rifleman: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN";
+                };
+
+                class specialisation_scout: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT";
+                };
+
+                class specialisation_marksman: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN";
+                };
+
+                class specialisation_grenadier: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER";
+                };
+
+                class specialisation_machinegunner: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER";
+                };
+            };
+        };
+    };
+
     class rifleman {
         displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
         description = "";
