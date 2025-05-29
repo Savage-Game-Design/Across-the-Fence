@@ -286,20 +286,17 @@ class VGM_ctrlPicture: VGM_ctrlStatic
 };
 
 // Controls for VGM_DisplaySkills
-class VGM_ctrlSkillTreeBranchV: VGM_ctrlStatic
+class VGM_ctrlTierText: VGM_ctrlStatic
 {
-    x = 0;
-    y = 0;
-    w = 1 * VGM_GRID_W;
-    h = 3 * VGM_GRID_H;
-    colorBackground[] = {0.8,0.8,0.8,1};
+    style = ST_CENTER;
 };
-class VGM_ctrlSkillTreeBranchH: VGM_ctrlSkillTreeBranchV
+class VGM_ctrlTierSeparator: VGM_ctrlStatic
 {
     x = 0;
     y = 0;
     w = 1 * VGM_GRID_W;
-    h = 1 * VGM_GRID_H;
+    h = 0.2 * VGM_GRID_H;
+    colorBackground[] = {0.8,0.8,0.8,1};
 };
 class VGM_ctrlBranchName: VGM_ctrlControlsGroup
 {

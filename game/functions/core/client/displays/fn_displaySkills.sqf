@@ -149,41 +149,63 @@ switch _mode do {
         ctrlPosition _ctrlSkillTree params ["", "", "_wSkillTree"];
         private _wSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "w");
         private _hSkill = getNumber (missionConfigFile >> "VGM_ctrlSkill" >> "h");
-        private _hBranchV = getNumber (missionConfigFile >> "VGM_ctrlSkillTreeBranchV" >> "h");
-        private _hBranchH = getNumber (missionConfigFile >> "VGM_ctrlSkillTreeBranchH" >> "h");
+
+        private _topMargin = 1 * VGM_GRID_H;
+        private _rightMargin = 1 * VGM_GRID_W;
+        private _bottomMargin = 1 * VGM_GRID_H;
+        private _leftMargin = 1 * VGM_GRID_W;
+
+        private _fnc_calcLayout = {
+            params ["_skillSectionWidth", "_tiersYAndHeight"];
+
+            private _layout = createHashMap;
+            _layout set ["tiersYAndHeight", _tiersYAndHeight];
+
+            private _tierInfoColumn = createHashMapFromArray [
+                ["x", _leftMargin],
+                ["width", 25 * VGM_GRID_W]
+            ];
+            _layout set ["tierInfo", _tierInfoColumn];
+
+            _skillSectionColumn = createHashMapFromArray [
+                ["x", (_tierInfoColumn get "x") + (_tierInfoColumn get "width")],
+                ["width", _skillSectionWidth]
+            ];
+            _layout set ["skillSection", _skillSectionColumn];
+
+            _layout set ["width", (_skillSectionColumn get "x") + (_skillSectionColumn get "width") + _rightMargin];
+
+            _layout set ["tierSeparator", createHashMapFromArray [
+                ["x", _leftMargin],
+                ["width", (_layout get "width") - _rightMargin]
+            ]];
+
+            _layout
+        };
+
+        private _skillTreeLayout = [0, []] call _fnc_calcLayout;
+
+        // Track the maximum width of the skill section, so we know where to start drawing things after it.
+        private _skillSectionWidth = 0;
+        private _skillTiersYAndHeight = [];
 
         // Start adding from Ultimate to Lowest Level skill
-        private _skills = +(_skillTree get "skills");
-        reverse _skills;
+        private _skillTiers = +(_skillTree get "skills");
+        reverse _skillTiers;
 
-        private _xPos = 0;
+
         private _yPos = 0;
-        private _previousSkillCount = -1;
         {
             private _tierSkills = _x;
             private _currentTier = _tierSkills#0 get "tier";
             private _currentTierUnlocked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierUnlocked;
             private _currentSkillCount = count _tierSkills;
+            private _tierStartYPos = _yPos;
 
-            if (_forEachIndex > 0) then {
-                // Draw a horizontal line connecting the skills from the
-                // previous level to the skills of the current level
-                private _ctrlSkillLineH = _display ctrlCreate ["VGM_ctrlSkillTreeBranchH", -1, _ctrlSkillTree];
-                private _hlineW = (_previousSkillCount max _currentSkillCount - 1) max 1;
-                _hlineW = _hlineW * _wSkill + _hlineW * VGM_GRID_W;
-                _ctrlSkillLineH ctrlSetPosition [
-                    // Middle of tree, go back half the width of the line and a bit
-                    0.5 * _wSkillTree - 0.5 * _hlineW,
-                    _yPos,
-                    _hlineW,
-                    _hBranchH
-                ];
-                _ctrlSkillLineH ctrlCommit 0;
-                _previousSkillCount = _currentSkillCount;
-                // spacing below horizontal line
-                _yPos = _yPos + 3 * VGM_GRID_H;
-            };
+            // Top padding above skills
+            _yPos = _yPos + 2 * VGM_GRID_H;
 
+            /*
             // show padlock on the right side of the tier row if it's not unlocked
             if (!_currentTierUnlocked) then {
                 private _ctrlTierLocked = _display ctrlCreate ["VGM_ctrlStaticPicture", -1, _ctrlSkillTree];
@@ -199,33 +221,19 @@ switch _mode do {
                 _ctrlTierLocked ctrlSetTooltip localize "STR_VGM_SKILLS_UI_TIER_LOCKED";
                 _ctrlTierLocked ctrlCommit 0;
             };
+            */
 
             // Center the controls
             private _tierCount = count _tierSkills;
-            // Go to the middle of the skill tree control, then go back half the width of the controls of the tier which is the sum of the buttons and the space between them
-            _xPos = 0.5 * _wSkillTree - 0.5 * (_tierCount * _wSkill + (_tierCount - 1) * VGM_GRID_W);
 
             // Iterate over the skills of the current tier
-            _tierSkills apply {
+            {
                 private _skill = _x;
 
-                private _xLineV = _xPos + 0.5 * _wSkill - 0.5 * VGM_GRID_W;
-                if (_forEachIndex > 0) then {
-                    // Draw a vertical line into the top of the skill connecting
-                    // it to the horizontal line of the previous iteration
-                    private _ctrlSkillLineVTop = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
-                    _ctrlSkillLineVTop ctrlSetPosition [
-                        _xLineV,
-                        _yPos - _hBranchV
-                    ];
-                    _ctrlSkillLineVTop ctrlCommit 0;
-                };
                 // Create controls for skills of this tier
                 private _ctrlSkill = _display ctrlCreate ["VGM_ctrlSkill", -1, _ctrlSkillTree];
                 _ctrlSkill setVariable ["vgm_skill", _skill];
                 if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
-                _ctrlSkill ctrlSetPosition [_xPos, _yPos];
-                _ctrlSkill ctrlCommit 0;
                 _ctrlSkill ctrlSetStructuredText parseText format ["%1 SP<br/>%2", _skill get "cost", _skill get "displayName"];
                 private _tooltip = _skill get "description";
 
@@ -257,39 +265,59 @@ switch _mode do {
                     };
                     #endif
                 };
+
+                private _skillXPos =
+                    (_skillTreeLayout get "skillSection" get "x") + _forEachIndex * (
+                        // Width of skill
+                        _wSkill +
+                        // Spacing after each skill.
+                        1 * VGM_GRID_W
+                );
+                _ctrlSkill ctrlSetPosition [_skillXPos, _yPos];
+                _ctrlSkill ctrlCommit 0;
+
                 _ctrlSkill ctrlSetTooltip _tooltip;
 
-                // Create a vertical line going into the bottom of the skill
-                // and connecting it to the horizontal line below
-                if (_skill call vgm_g_fnc_skills_canSee) then {
-                    private _ctrlSkillLineVBottom = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
-                    _ctrlSkillLineVBottom ctrlSetPosition [_xLineV, _yPos + _hSkill];
-                    _ctrlSkillLineVBottom ctrlCommit 0;
-                };
 
-                _xPos = _xPos + _wSkill + 1 * VGM_GRID_W;
-            };
-            // Space below skill control
+                // Track the maximum width of the skill section.
+                _skillSectionWidth = _skillSectionWidth max (_skillXPos + _wSkill + 1 * VGM_GRID_W);
+            } forEach _tierSkills;
+
+            // Bottom padding below skills
             _yPos = _yPos + _hSkill + 2 * VGM_GRID_H;
-        } forEach _skills;
+            _skillTiersYAndHeight pushBack [_tierStartYPos, _yPos - _tierStartYPos];
+        } forEach _skillTiers;
 
-        // Horizontal line for the root (name of the branch)
-        private _ctrlSkillLineHRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchH", -1, _ctrlSkillTree];
-        private _wRootLine = _previousSkillCount - 1;
-        _wRootLine = _wRootLine * _wSkill + _wRootLine * VGM_GRID_W;
-        _ctrlSkillLineHRoot ctrlSetPositionW _wRootLine;
-        _ctrlSkillLineHRoot ctrlSetPosition [0.5 * _wSkillTree - 0.5 * _wRootLine, _yPos, _wRootLine, 1 * VGM_GRID_H];
-        _ctrlSkillLineHRoot ctrlCommit 0;
+        _skillTreeLayout = [_skillSectionWidth, _skillTiersYAndHeight] call _fnc_calcLayout;
 
-        // Vertical line going into the root
-        private _ctrlSkillLineVRoot = _display ctrlCreate ["VGM_ctrlSkillTreeBranchV", -1, _ctrlSkillTree];
-        _yPos = _yPos + 1 * VGM_GRID_H;
-        _ctrlSkillLineVRoot ctrlSetPosition [
-            0.5 * _wSkillTree - 0.5 * VGM_GRID_W,
-            _yPos
-        ];
-        _ctrlSkillLineVRoot ctrlCommit 0;
-        _yPos = _yPos + _hBranchV;
+        {
+            private _tierSkills = _x;
+            private _currentTier = _tierSkills#0 get "tier";
+            ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
+
+            // Horizontal separators
+            private _tierSeparatorLayout = _skillTreeLayout get "tierSeparator";
+            private _ctrlTierTopSeparator = _display ctrlCreate ["VGM_ctrlTierSeparator", -1, _ctrlSkillTree];
+            _ctrlTierTopSeparator ctrlSetPosition [
+                _tierSeparatorLayout get "x",
+                _tierY,
+                _tierSeparatorLayout get "width",
+                (0.2 * VGM_GRID_H) max pixelH
+            ];
+            _ctrlTierTopSeparator ctrlCommit 0;
+
+            private _tierInfoLayout = _skillTreeLayout get "tierInfo";
+            private _ctrlTierText = _display ctrlCreate ["VGM_ctrlTierText", -1, _ctrlSkillTree];
+            _ctrlTierText ctrlSetText format ["Tier %1", _currentTier];
+            _ctrlTierText ctrlSetPosition [
+                _tierInfoLayout get "x",
+                _tierY,
+                _tierInfoLayout get "width",
+                _tierH
+            ];
+            _ctrlTierText ctrlCommit 0;
+
+        } forEach _skillTiers;
 
         // Add root with name of branch
         private _ctrlBranchName = _display ctrlCreate ["VGM_ctrlBranchName", -1, _ctrlSkillTree];

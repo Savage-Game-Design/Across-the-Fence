@@ -85,7 +85,7 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             w = _PAGE_W * VGM_GRID_W;
             h = 16 * VGM_GRID_H;
         };
-        class SkillTree: VGM_ctrlControlsGroupNoScrollbars
+        class SkillTree: VGM_ctrlControlsGroup
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLTREE;
             x = _DISPLAY_X + (_SKILLS_W + 2) * VGM_GRID_W;
