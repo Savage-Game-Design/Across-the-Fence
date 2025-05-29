@@ -34,7 +34,7 @@
 // Width of the folder's page in the skill tree UI
 #define VGM_DISPLAYSKILLS_PAGE_W (0.5 * VGM_GRID_MAX_W - 2)
 // Width of a ctrlSkill used in the skill tree UI
-#define VGM_CTRLSKILL_W (1/3 * (VGM_DISPLAYSKILLS_PAGE_W - 2))
+#define VGM_CTRLSKILL_W (4/15 * (VGM_DISPLAYSKILLS_PAGE_W - 2))
 // Mission Selection UI
 #define VGM_DISPLAYMISSIONS_COLUMN_W 0.25 * VGM_GRID_MAX_W
 #define VGM_DISPLAYMISSIONS_COLUMN_CTRL_W (VGM_DISPLAYMISSIONS_COLUMN_W - 1)

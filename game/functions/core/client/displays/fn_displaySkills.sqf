@@ -83,6 +83,9 @@ switch _mode do {
         // Update header
         ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTree", _display] call vgm_c_fnc_displaySkills;
+
+        private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
+        _ctrlSkillTree spawn {_this ctrlSetScrollValues [1, 0]};
     };
 
     // update labels of skilltrees in tree control in left panel
@@ -137,6 +140,7 @@ switch _mode do {
         params ["_display"];
 
         private _ctrlSkillTree = _display displayCtrl VGM_IDC_DISPLAYSKILLS_SKILLTREE;
+
         private _skillTree = _display getVariable ["vgm_currentSkillTree", createHashMap];
 
         // Remove all old controls
