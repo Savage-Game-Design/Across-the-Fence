@@ -56,6 +56,9 @@ class vgm_skillTrees {
                 class specialisation_machinegunner: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER";
                 };
+                class specialisation_placeholder: vgm_weaponSpecialisationTemplate {
+                    displayName = "Debug";
+                };
             };
 
             class tier_1 {

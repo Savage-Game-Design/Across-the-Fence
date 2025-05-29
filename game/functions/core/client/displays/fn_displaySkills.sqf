@@ -270,13 +270,13 @@ switch _mode do {
                     #endif
                 };
 
-                private _skillXPos =
-                    (_skillTreeLayout get "skillSection" get "x") + _forEachIndex * (
+                private _skillXOffset = _forEachIndex * (
                         // Width of skill
                         _wSkill +
                         // Spacing after each skill.
                         1 * VGM_GRID_W
                 );
+                private _skillXPos = (_skillTreeLayout get "skillSection" get "x") + _skillXOffset;
                 _ctrlSkill ctrlSetPosition [_skillXPos, _yPos];
                 _ctrlSkill ctrlCommit 0;
 
@@ -284,7 +284,7 @@ switch _mode do {
 
 
                 // Track the maximum width of the skill section.
-                _skillSectionWidth = _skillSectionWidth max (_skillXPos + _wSkill + 1 * VGM_GRID_W);
+                _skillSectionWidth = _skillSectionWidth max (_skillXOffset + _wSkill + 1 * VGM_GRID_W);
             } forEach _tierSkills;
 
             // Bottom padding below skills
