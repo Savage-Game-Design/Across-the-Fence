@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2024-06-21
+    Last Update: 2025-05-29
     Public: Yes
 
     Description:
@@ -29,7 +29,7 @@ if (isNull _cfgSkillTrees) exitWith {
     createHashMap
 };
 
-#define SKILL_TIERS ["tier_1", "tier_2", "tier_3", "tier_4"]
+#define SKILL_TIERS ["tier_0", "tier_1", "tier_2", "tier_3", "tier_4"]
 
 private _fnc_parseSkillTree = {
     params ["_cfgSkillTree", ["_path", []]];

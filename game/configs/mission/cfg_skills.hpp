@@ -36,8 +36,8 @@ class vgm_skillTrees {
         icon = "assets\skills\rifleman_ca.paa";
 
         class skills {
-            class tier_1 {
-                class specialisation_rifleman: vgm_weaponSpecialisationTemplate {
+            class tier_0 {
+               class specialisation_rifleman: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN";
                 };
 
@@ -57,6 +57,40 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER";
                 };
             };
+
+            class tier_1 {
+                class field_modification_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1_DESC";
+                };
+            };
+
+            class tier_2 {
+                class field_modification_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
+                };
+            };
+
+            class tier_3 {
+                class field_modification_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";
+                };
+                class chemical_grenades: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC";
+                };
+            };
+
+            class tier_4 {
+                class field_modification_4: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
+                };
+            };
+
+
         };
     };
 
@@ -67,6 +101,8 @@ class vgm_skillTrees {
 
         // rifleman skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class steadyHand: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
@@ -151,6 +187,8 @@ class vgm_skillTrees {
 
         // recon skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class keenEye: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE";
@@ -238,6 +276,8 @@ class vgm_skillTrees {
 
         // fire support skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class heavySuppression: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION";
@@ -327,6 +367,8 @@ class vgm_skillTrees {
 
         // support skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class nimbleHands: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS";

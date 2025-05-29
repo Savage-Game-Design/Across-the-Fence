@@ -320,6 +320,36 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER">
             <Original>Specialisation: Machinegunner</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1">
+            <Original>Field Modifications 1</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1_DESC">
+            <Original>Unlocks basic pistols and melee weapons, proximity claymores, M67 grenades, and NVG binoculars</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2">
+            <Original>Field Modifications 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC">
+            <Original>Unlocks better pistols and melee weapons, timed claymores, and V40 grenades</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3">
+            <Original>Field Modifications 3</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC">
+            <Original>Unlocks the sawn-off M79 grenade launcher, WP proximity claymores, and bayonets</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4">
+            <Original>Field Modifications 4</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC">
+            <Original>Unlocks enemy sidearms and melee weapons</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES">
+            <Original>Chemical grenades</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC">
+            <Original>Unlocks WP, CS gas and incendiary grenades.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
