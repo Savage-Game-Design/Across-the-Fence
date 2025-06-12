@@ -819,12 +819,17 @@ class vgm_c
             preInit = 1;
         };
     };
+    class skill_passives_combat
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\combat);
+
+        class skill_passives_ammoPouch {};
+    };
     class skill_passives_infantryman
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\infantryman);
 
         class skill_passives_infantryman_bornLeader {};
-        class skill_passives_infantryman_overprepared {};
     };
     class skill_passives_recon
     {

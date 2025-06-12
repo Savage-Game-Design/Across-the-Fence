@@ -69,6 +69,23 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1_DESC";
                     column = 2;
                 };
+
+                class strongHands: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
+                    column = 3;
+
+                    codeApply = "[player, 'recoil', 'skill_passives_strongHands', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'recoil', 'skill_passives_strongHands'] call vgm_c_fnc_coefficient_remove";
+                };
+
+                class ammoPouch: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_AMMOPOUCH";
+                    description = "$STR_VGM_SKILLS_SKILL_AMMOPOUCH_DESC";
+                    column = 4;
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_ammoPouch";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_ammoPouch";
+                };
             };
 
             class tier_2 {
@@ -133,14 +150,6 @@ class vgm_skillTrees {
                 class loadout_historical: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC";
-                };
-
-                class overprepared: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_infantryman_overprepared";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_overprepared";
                 };
 
                 class loadout: vgm_skillTemplate {
