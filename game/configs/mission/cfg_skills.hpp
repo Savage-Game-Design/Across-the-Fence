@@ -39,25 +39,27 @@ class vgm_skillTrees {
             class tier_0 {
                class specialisation_rifleman: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN";
+                    column = 1;
                 };
 
                 class specialisation_scout: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT";
+                    column = 2;
                 };
 
                 class specialisation_marksman: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN";
+                    column = 3;
                 };
 
                 class specialisation_grenadier: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER";
+                    column = 4;
                 };
 
                 class specialisation_machinegunner: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER";
-                };
-                class specialisation_placeholder: vgm_weaponSpecialisationTemplate {
-                    displayName = "Debug";
+                    column = 5;
                 };
             };
 
@@ -65,6 +67,7 @@ class vgm_skillTrees {
                 class field_modification_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1_DESC";
+                    column = 2;
                 };
             };
 
@@ -72,6 +75,7 @@ class vgm_skillTrees {
                 class field_modification_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
+                    column = 2;
                 };
             };
 
@@ -79,10 +83,12 @@ class vgm_skillTrees {
                 class field_modification_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";
+                    column = 2;
                 };
                 class chemical_grenades: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC";
+                    column = 4;
                 };
             };
 
@@ -90,6 +96,7 @@ class vgm_skillTrees {
                 class field_modification_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
+                    column = 2;
                 };
             };
 

@@ -229,6 +229,8 @@ switch _mode do {
 
             // Center the controls
             private _tierCount = count _tierSkills;
+            // Fallback for old skill trees. Can be removed when they are.
+            private _isManualLayout = _tierSkills findIf {_x get "column" > 0} > -1;
 
             // Iterate over the skills of the current tier
             {
@@ -270,7 +272,8 @@ switch _mode do {
                     #endif
                 };
 
-                private _skillXOffset = _forEachIndex * (
+                private _column = [_forEachIndex, _skill get "column"] select _isManualLayout;
+                private _skillXOffset = _column * (
                         // Width of skill
                         _wSkill +
                         // Spacing after each skill.
@@ -296,7 +299,7 @@ switch _mode do {
 
         {
             private _tierSkills = _x;
-            private _currentTier = _tierSkills#0 get "tier";
+            private _currentTier = (count _skillTiers - _forEachIndex - 1);
             ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
 
             // Horizontal separators
@@ -312,6 +315,7 @@ switch _mode do {
 
             private _tierInfoLayout = _skillTreeLayout get "tierInfo";
             private _ctrlTierText = _display ctrlCreate ["VGM_ctrlTierText", -1, _ctrlSkillTree];
+            // TODO - Localise
             _ctrlTierText ctrlSetText format ["Tier %1", _currentTier];
             _ctrlTierText ctrlSetPosition [
                 _tierInfoLayout get "x",
