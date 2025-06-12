@@ -824,6 +824,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\passives\combat);
 
         class skill_passives_ammoPouch {};
+        class skill_passives_noRestraint {};
     };
     class skill_passives_infantryman
     {
@@ -843,7 +844,6 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
 
-        class skill_passives_fireSupport_learnTheRhythm {};
     };
     class skill_passives_support
     {

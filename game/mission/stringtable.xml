@@ -359,6 +359,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_AMMOPOUCH_ACTIVATED">
             <Original>Ammo pouch activated</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_NO_RESTRAINT">
+            <Original>No Restraint</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_NO_RESTRAINT_DESC">
+            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -454,12 +460,6 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
             <Original>Grenadier and AT Equipment</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM">
-            <Original>Learn the Rhythm</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC">
-            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
             <Original>Grenades case</Original>

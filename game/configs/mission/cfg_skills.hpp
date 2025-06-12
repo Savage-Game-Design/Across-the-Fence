@@ -86,6 +86,15 @@ class vgm_skillTrees {
                     codeApply = "true call vgm_c_fnc_skill_passives_ammoPouch";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_ammoPouch";
                 };
+
+                class noRestraint: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_NO_RESTRAINT";
+                    description = "$STR_VGM_SKILLS_SKILL_NO_RESTRAINT_DESC";
+                    column = 5;
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_noRestraint";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_noRestraint";
+                };
             };
 
             class tier_2 {
@@ -337,16 +346,6 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
-                class learnTheRhythm: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
-
-                    cost = 2;
-                };
-
                 class grenadesCase: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE";
                     description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC";
