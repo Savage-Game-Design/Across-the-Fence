@@ -98,6 +98,19 @@ class vgm_skillTrees {
             };
 
             class tier_2 {
+                class bulletHose: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BULLET_HOSE";
+                    description = "$STR_VGM_SKILLS_SKILL_BULLET_HOSE_DESC";
+                    column = 0;
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_bulletHose";
+
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 600;
+                    duration = 120;
+                };
+
                 class field_modification_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
@@ -360,17 +373,6 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
-                class overwhelmingFire: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC";
-
-                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_overwhelmingFire";
-
-                    skillType = 2;
-                    cost = 2;
-                    cooldown = 240;
-                    duration = 120;
-                };
             };
         };
 
