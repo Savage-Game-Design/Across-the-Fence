@@ -129,6 +129,24 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
                     column = 2;
                 };
+
+                class jungleWarrior: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR";
+                    description = "$STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC";
+                    column = 3;
+                    // TODO - Implement this skill
+                    conditionUnlock = "false";
+                };
+
+                class stablePlatform: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STABLE_PLATFORM";
+                    description = "$STR_VGM_SKILLS_SKILL_STABLE_PLATFORM_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_stablePlatform";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_stablePlatform";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
             };
 
             class tier_3 {
@@ -256,15 +274,6 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN_DESC";
                 };
 
-                class betterAim: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_recon_betterAim";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_betterAim";
-                    skillType = 0;
-                    applyOnRespawn = 1;
-                };
 
                 class loadout_pointman: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN";
