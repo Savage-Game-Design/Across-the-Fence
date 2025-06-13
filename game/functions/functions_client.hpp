@@ -866,6 +866,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\combat);
 
         class skill_actives_bulletHose {};
+        class skill_actives_shootAndScoot {};
     };
     class skill_actives_fireSupport
     {
@@ -878,7 +879,6 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
 
         class skill_actives_infantryman_luckySon {};
-        class skill_actives_infantryman_steadyAim {};
     };
     class skill_actives_recon
     {

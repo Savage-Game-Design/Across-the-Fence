@@ -111,6 +111,19 @@ class vgm_skillTrees {
                     duration = 120;
                 };
 
+                class shootAndScoot: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT";
+                    description = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC";
+                    column = 1;
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_shootAndScoot";
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 150;
+                    duration = 60;
+                };
+
+
                 class field_modification_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
@@ -188,17 +201,6 @@ class vgm_skillTrees {
                     codeApply = "true call vgm_c_fnc_skill_passives_infantryman_bornLeader";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_bornLeader";
                     cost = 2;
-                };
-
-                class steadyAim: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC";
-
-                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_steadyAim";
-                    skillType = 1;
-                    cost = 2;
-                    cooldown = 120;
-                    duration = 30;
                 };
             };
 

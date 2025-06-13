@@ -371,6 +371,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_BULLET_HOSE_DESC">
             <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 100% more.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT">
+            <Original>Steady Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC">
+            <Original>For the next 60 seconds, your weapon sway is reduced by 100%</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -390,12 +396,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
             <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
-            <Original>Steady Aim</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC">
-            <Original>For the next 30 seconds, your weapon sway is reduced by 100%</Original>
-        </Key>
+
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER">
             <Original>Born Leader</Original>
         </Key>
