@@ -141,11 +141,22 @@ class vgm_skillTrees {
                 class stablePlatform: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STABLE_PLATFORM";
                     description = "$STR_VGM_SKILLS_SKILL_STABLE_PLATFORM_DESC";
+                    column = 4;
 
                     codeApply = "true call vgm_c_fnc_skill_passives_stablePlatform";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_stablePlatform";
                     skillType = 0;
                     applyOnRespawn = 1;
+                };
+
+
+                class grassCutter: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GRASS_CUTTER";
+                    description = "$STR_VGM_SKILLS_SKILL_GRASS_CUTTER_DESC";
+                    column = 5;
+
+                    codeApply = "[player, 'suppress', 'skill_grassCutter', 1, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'suppress', 'skill_grassCutter'] call vgm_c_fnc_coefficient_remove";
                 };
             };
 
@@ -331,12 +342,6 @@ class vgm_skillTrees {
             class tier_0 {};
 
             class tier_1 {
-                class heavySuppression: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION";
-
-                    codeApply = "[player, 'suppress', 'skill_fireSupport_heavySuppression', 1, true] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'suppress', 'skill_fireSupport_heavySuppression'] call vgm_c_fnc_coefficient_remove";
-                };
 
                 class packMule: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE";

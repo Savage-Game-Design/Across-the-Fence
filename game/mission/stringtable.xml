@@ -389,6 +389,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM">
             <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GRASS_CUTTER">
+            <Original>Grass cutter</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GRASS_CUTTER_DESC">
+            <Original>100% increased suppression strength</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -459,9 +465,6 @@
             <Original>For 60 seconds, enemies are much less likely to see you and hear you.</Original>
         </Key>
         <!-- Fire Support -->
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
-            <Original>100% increased suppression strength</Original>
-        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
             <Original>Carry 30% more weight and consume 20% less stamina</Original>
         </Key>
