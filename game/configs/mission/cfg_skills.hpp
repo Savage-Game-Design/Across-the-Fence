@@ -213,6 +213,15 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC";
                     column = 4;
                 };
+
+                class reconByFire: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_BY_FIRE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_BY_FIRE_DESC";
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_reconByFire";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_reconByFire";
+                    cost = 3;
+                };
             };
 
             class tier_4 {
@@ -335,14 +344,6 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
-                class followTheTracers: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_recon_followTheTracers";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_followTheTracers";
-                    cost = 2;
-                };
 
                 class sixthSense: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE";

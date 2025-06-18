@@ -413,6 +413,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR_DESC">
             <Original>Carry 30% more weight and consume 20% less stamina</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BY_FIRE">
+            <Original>Recon by fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BY_FIRE_DESC">
+            <Original>Suppressed enemies will be marked for you. This mark disappears when their suppression returns to zero naturally.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -462,12 +468,6 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN">
             <Original>Pointman Loadout</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS">
-            <Original>Follow the Tracers</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
-            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when their suppression return to zero naturally.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
             <Original>6th Sense</Original>

@@ -2,7 +2,7 @@
     File: fn_skill_passives_preInit.sqf
     Author: Savage Game Design
     Date: 2023-09-24
-    Last Update: 2025-01-17
+    Last Update: 2025-06-18
     Public: No
 
     Description:
@@ -31,7 +31,7 @@ vgm_s_skill_relaySuppression = {
 
     private _threats = _unit getVariable "vgm_s_skill_threats";
     if (
-        !(_shooter getVariable ["vgm_g_skill_passives_recon_followTheTracers", false])
+        !(_shooter getVariable ["vgm_g_skill_passives_reconByFire", false])
         || {_shooter in _threats}
     ) exitWith {};
 
