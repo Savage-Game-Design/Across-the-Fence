@@ -411,6 +411,7 @@ class vgm_c
 
         class coefficient_create {};
         class coefficient_get {};
+        class coefficient_hasReason {};
         class coefficient_override {};
         class coefficient_postInit
         {
