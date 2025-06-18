@@ -378,7 +378,7 @@
             <Original>For the next 60 seconds, your weapon sway is reduced by 100%</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR">
-            <Original>Jungle warrior</Original>
+            <Original>Jungle warrior [Disabled]</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC">
             <Original>Canteens restore stamina. Machetes clear brush.</Original>
