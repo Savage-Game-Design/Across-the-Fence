@@ -425,6 +425,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN">
             <Original>You do not consume grenades when throwing/firing them</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE">
+            <Original>War-face [Disabled]</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE_DESC">
+            <Original>When you are detected, stamina consumption is reduced by 30% for the next 30 seconds.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>

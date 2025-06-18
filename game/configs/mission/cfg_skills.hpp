@@ -258,6 +258,18 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
                     column = 2;
                 };
+
+                class warFace: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_WAR_FACE";
+                    description = "$STR_VGM_SKILLS_SKILL_WAR_FACE_DESC";
+                    column = 3;
+
+                    conditionUnlock = "false";
+                    codeApply = "";
+                    codeUnapply = "";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
             };
         };
     };
