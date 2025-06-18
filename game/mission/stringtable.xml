@@ -401,6 +401,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
             <Original>300% increased suppression strength</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BATTLE_FOCUS">
+            <Original>Battle focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
+            <Original>Firing your weapon does not break Stop, Focus</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>

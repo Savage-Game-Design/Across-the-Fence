@@ -4,7 +4,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2025-02-03
+    Last Update: 2025-06-18
     Public: No
 
     Description:
@@ -26,5 +26,11 @@ vgm_c_skill_investigate_isFocusing = false;
         ]]
     ]
 ] call para_c_fnc_keyhandler_registerAction;
+
+["canFireWhileInvestigating", {
+    params ["_unit", "_inEffect"];
+
+    _unit setVariable ["vgm_c_skill_investigate_canFireWhileInvestigating", _inEffect];
+}] call vgm_c_fnc_statusEffect_create;
 
 ["ToggleFocus", vgm_c_fnc_skill_investigate_toggleFocusMode] call para_c_fnc_keyhandler_addGeneralActionHandler;

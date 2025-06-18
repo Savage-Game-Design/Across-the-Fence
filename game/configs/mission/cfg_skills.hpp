@@ -173,6 +173,18 @@ class vgm_skillTrees {
                     duration = 240;
                 };
 
+                class battleFocus: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BATTLE_FOCUS";
+                    description = "$STR_VGM_SKILLS_SKILL_BATTLE_FOCUS_DESC";
+                    column = 1;
+
+                    codeActivate = "(_this + ['canFireWhileInvestigating']) call vgm_c_fnc_skill_actives_setStatusForDuration";
+                    skillType = 1;
+                    cost = 3;
+                    cooldown = 420;
+                    duration = 20;
+                };
+
                 class field_modification_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";
