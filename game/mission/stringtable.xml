@@ -425,6 +425,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN_DESC">
             <Original>You do not consume grenades when throwing/firing them</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH">
+            <Original>Just a scratch</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH_DESC">
+            <Original>Gain temporary hit shrug.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE">
             <Original>War-face [Disabled]</Original>
         </Key>
