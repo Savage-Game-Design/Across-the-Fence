@@ -190,6 +190,24 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";
                     column = 2;
                 };
+
+                class loadedForBear: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR";
+                    description = "$STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR_DESC";
+                    column = 3;
+
+                    codeApply = "\
+                        [player, 'load', 'skill_loadedForBear', -0.3, true] call vgm_c_fnc_coefficient_set;\
+                        [player, 'staminaDrain', 'skill_loadedForBear', -0.2, true] call vgm_c_fnc_coefficient_set;\
+                    ";
+                    codeUnapply = "\
+                        [player, 'load', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
+                        [player, 'staminaDrain', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
+                    ";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+
                 class chemical_grenades: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC";
@@ -367,18 +385,6 @@ class vgm_skillTrees {
 
             class tier_1 {
 
-                class packMule: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE";
-
-                    codeApply = "\
-                        [player, 'load', 'skill_fireSupport_packMule', -0.3, true] call vgm_c_fnc_coefficient_set;\
-                        [player, 'staminaDrain', 'skill_fireSupport_packMule', -0.2, true] call vgm_c_fnc_coefficient_set;\
-                    ";
-                    codeUnapply = "\
-                        [player, 'load', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
-                        [player, 'staminaDrain', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
-                    ";
-                };
             };
 
             class tier_2 {

@@ -407,6 +407,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
             <Original>Firing your weapon does not break Stop, Focus</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR">
+            <Original>Loaded for bear</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR_DESC">
+            <Original>Carry 30% more weight and consume 20% less stamina</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -476,9 +482,6 @@
             <Original>For 60 seconds, enemies are much less likely to see you and hear you.</Original>
         </Key>
         <!-- Fire Support -->
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
-            <Original>Carry 30% more weight and consume 20% less stamina</Original>
-        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER">
             <Original>Machine Gunner Equipment</Original>
         </Key>
