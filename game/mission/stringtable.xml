@@ -395,6 +395,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_GRASS_CUTTER_DESC">
             <Original>100% increased suppression strength</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER">
+            <Original>Tree cutter</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
+            <Original>300% increased suppression strength</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -414,7 +420,6 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
             <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
         </Key>
-
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER">
             <Original>Born Leader</Original>
         </Key>
@@ -483,7 +488,6 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
             <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
         </Key>
-
         <!-- Support -->
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">
             <Original>25% increased medical actions speed</Original>

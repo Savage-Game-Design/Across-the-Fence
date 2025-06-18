@@ -116,7 +116,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC";
                     column = 1;
 
-                    codeActivate = "call vgm_c_fnc_skill_actives_shootAndScoot";
+                    codeActivate = "(_this + ['aim', -1]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
                     skillType = 1;
                     cost = 2;
                     cooldown = 150;
@@ -161,6 +161,18 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
+                class treeCutter: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TREE_CUTTER";
+                    description = "$STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC";
+                    column = 0;
+
+                    codeActivate = "(_this + ['suppress', 3]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+                    skillType = 1;
+                    cost = 3;
+                    cooldown = 120;
+                    duration = 240;
+                };
+
                 class field_modification_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";

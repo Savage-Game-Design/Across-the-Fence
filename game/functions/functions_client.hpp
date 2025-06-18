@@ -860,13 +860,15 @@ class vgm_c
         {
             preInit = 1;
         };
+
+        class skill_actives_setCoefficientForDuration {};
+        class skill_actives_setStatusForDuration {};
     };
     class skill_actives_combat
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\combat);
 
         class skill_actives_bulletHose {};
-        class skill_actives_shootAndScoot {};
     };
     class skill_actives_fireSupport
     {
