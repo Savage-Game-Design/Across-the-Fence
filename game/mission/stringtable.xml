@@ -419,6 +419,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_BY_FIRE_DESC">
             <Original>Suppressed enemies will be marked for you. This mark disappears when their suppression returns to zero naturally.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN">
+            <Original>Steel rain</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN">
+            <Original>You do not consume grenades when throwing/firing them</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -490,12 +496,6 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
             <Original>Grenadier and AT Equipment</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
-            <Original>Grenades case</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
-            <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
         </Key>
         <!-- Support -->
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">

@@ -225,14 +225,24 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
+                class steelRain: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STEEL_RAIN";
+                    description = "$STR_VGM_SKILLS_SKILL_STEEL_RAIN_DESC";
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_steelRain";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 180;
+                    duration = 30;
+                };
+
                 class field_modification_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
                     column = 2;
                 };
             };
-
-
         };
     };
 
@@ -406,17 +416,7 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
-                class grenadesCase: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC";
 
-                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_grenadesCase";
-
-                    skillType = 1;
-                    cost = 2;
-                    cooldown = 180;
-                    duration = 10;
-                };
             };
 
             class tier_4 {
