@@ -431,6 +431,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE_DESC">
             <Original>When you are detected, stamina consumption is reduced by 30% for the next 30 seconds.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT">
+            <Original>Knockout [Disabled]</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC">
+            <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>

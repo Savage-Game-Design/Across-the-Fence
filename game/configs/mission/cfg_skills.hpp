@@ -270,6 +270,18 @@ class vgm_skillTrees {
                     skillType = 0;
                     applyOnRespawn = 1;
                 };
+
+                class knockout: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_KNOCKOUT";
+                    description = "$STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC";
+                    column = 4;
+
+                    conditionUnlock = "false";
+                    codeApply = "";
+                    codeUnapply = "";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
             };
         };
     };
