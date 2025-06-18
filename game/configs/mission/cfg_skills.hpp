@@ -242,6 +242,19 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
                     column = 2;
                 };
+
+                class justAScratch: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH";
+                    description = "$STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH_DESC";
+                    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
+
+                    codeActivate = "(_this + ['hitShrug', 0.95]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 600;
+                    duration = 60;
+                };
             };
         };
     };
@@ -295,17 +308,7 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
-                class luckySon: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
-                    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
 
-                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_luckySon";
-                    skillType = 2;
-                    cost = 4;
-                    cooldown = 120;
-                    duration = 20;
-                };
             };
         };
 

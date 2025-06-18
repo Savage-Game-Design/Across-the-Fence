@@ -879,8 +879,6 @@ class vgm_c
     class skill_actives_infantryman
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
-
-        class skill_actives_infantryman_luckySon {};
     };
     class skill_actives_recon
     {
