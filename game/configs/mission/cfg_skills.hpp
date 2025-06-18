@@ -217,6 +217,7 @@ class vgm_skillTrees {
                 class reconByFire: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_BY_FIRE";
                     description = "$STR_VGM_SKILLS_SKILL_RECON_BY_FIRE_DESC";
+                    column = 5;
 
                     codeApply = "true call vgm_c_fnc_skill_passives_reconByFire";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_reconByFire";
@@ -228,6 +229,7 @@ class vgm_skillTrees {
                 class steelRain: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STEEL_RAIN";
                     description = "$STR_VGM_SKILLS_SKILL_STEEL_RAIN_DESC";
+                    column = 0;
 
                     codeActivate = "call vgm_c_fnc_skill_actives_steelRain";
 
@@ -237,16 +239,11 @@ class vgm_skillTrees {
                     duration = 30;
                 };
 
-                class field_modification_4: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4";
-                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
-                    column = 2;
-                };
-
                 class justAScratch: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH";
                     description = "$STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH_DESC";
                     icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
+                    column = 1;
 
                     codeActivate = "(_this + ['hitShrug', 0.95]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
 
@@ -254,6 +251,12 @@ class vgm_skillTrees {
                     cost = 2;
                     cooldown = 600;
                     duration = 60;
+                };
+
+                class field_modification_4: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
+                    column = 2;
                 };
             };
         };
