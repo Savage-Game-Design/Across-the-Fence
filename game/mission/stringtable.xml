@@ -422,7 +422,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN">
             <Original>Steel rain</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN">
+        <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN_DESC">
             <Original>You do not consume grenades when throwing/firing them</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE">
@@ -455,12 +455,6 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC">
             <Original>Reduce the cooldown time of all ally abilities by 20% (Global cap at 50%)</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON">
-            <Original>Lucky-Son-Of-A-Bitch</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC">
-            <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
         </Key>
         <!-- Recon -->
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE">
