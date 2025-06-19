@@ -24,7 +24,4 @@ params ["_director"];
 
 // Tracks engagements players are in
 _director set ["playerEngagements", createHashMap];
-_director set ["reinforcementChance", 0.5];
-_director set ["reinforcementCheckFrequencySecs", 20];
-_director set ["lastReinforcementSentPerPlayer", createHashMap];
-_director set ["minTimeBetweenReinforcementsSecs", 150];
+
