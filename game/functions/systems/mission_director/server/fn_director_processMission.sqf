@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-05-15
+    Last Update: 2025-06-19
     Public: No
 
     Description:
@@ -77,7 +77,7 @@ if (
     };
 
     _engagement set ["lastReinforcementCheck", serverTime];
-    private _engagementPlayerHash = hashValue (_engagement get "player");
+    private _engagementPlayerHash = _engagement get "playerHash";
     // Technically this always grows (nothing removes players from here), but shouldn't be a problem as directorData is deleted on mission end.
     private _lastReinforcementSent = _directorData get "lastReinforcementSentPerPlayer" getOrDefault [_engagementPlayerHash, -9999];
     private _reinforcementsSentRecently = (serverTime - _lastReinforcementSent) < (_directorData get "minTimeBetweenReinforcementsSecs");
