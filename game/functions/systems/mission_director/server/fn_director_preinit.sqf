@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-05-12
+    Last Update: 2025-06-19
     Public: No
 
     Description:
@@ -31,7 +31,6 @@ vgm_s_director_noiseEventAlertness = createHashMapFromArray [
     ["unsuppressedShots", 1.0],
     ["suppressedShots", 0.5]
 ];
-vgm_s_director_engagementRadius = 200;
 
 vgm_s_director_defenseSquadSizeRanges = createHashMapFromArray [
     //[Site size, [ Min, Max ]]
@@ -205,28 +204,6 @@ vgm_s_director_attack_classes = [
 
 }] call para_g_fnc_event_subscribeLocal;
 
-["vgm_ai_groupTargetsEngaged", {
-    (_this # 0) params ["_group", "_targets"];
-
-    private _missionId = _group getVariable "vgm_g_missionId";
-    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") exitWith {};
-    {
-        [_director, _group, _x] call vgm_s_fnc_director_addEnemyGroupToPlayerEngagement;
-    } forEach _targets;
-}] call para_g_fnc_event_subscribe;
-
-["vgm_ai_groupTargetsLost", {
-    (_this # 0) params ["_group", "_targets"];
-
-    private _missionId = _group getVariable "vgm_g_missionId";
-    private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") exitWith {};
-    {
-        [_director, _group, _x] call vgm_s_fnc_director_removeEnemyGroupFromPlayerEngagement;
-    } forEach _targets;
-}] call para_g_fnc_event_subscribe;
-
 // handle extraction
 call {
     ["vgm_missions_gameplay_extractionStarted", {
@@ -275,3 +252,5 @@ call {
         [format ["vgm_extract_%1", _missionId], true, true] call BIS_fnc_deleteTask;
     }] call para_g_fnc_event_subscribeLocal;
 };
+
+[] call vgm_s_fnc_director_preinitEngagements;

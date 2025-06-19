@@ -96,8 +96,10 @@ class vgm_s
         class director_addEnemyGroupToPlayerEngagement {};
         class director_createEngagement {};
         class director_deleteEngagement {};
-        class director_removeEnemyGroupFromPlayerEngagement {};
         class director_deleteEngagementIfEnded {};
+        class director_preinitEngagements {};
+        class director_removeEnemyGroupFromPlayerEngagement {};
+        class director_setupEngagements {};
     };
 
     class missions_objects
