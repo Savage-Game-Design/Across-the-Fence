@@ -2,14 +2,15 @@
     File: fn_director_spawnReinforcements.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-05-15
+    Last Update: 2025-06-19
     Public: Yes
 
     Description:
         Spawn enemy reinforcements to attack an engaged player.
 
     Parameter(s):
-
+        _mission - Mission the player is on [HASHMAP]
+        _player - Player to attack with the reinforcements [OBJECT]
 
     Returns:
         The squad created, or nil if a squad couldn't be spawned. [GROUP]
