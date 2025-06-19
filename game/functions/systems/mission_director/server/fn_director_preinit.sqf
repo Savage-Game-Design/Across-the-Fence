@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-04-04
+    Last Update: 2025-06-19
     Public: No
 
     Description:
@@ -102,6 +102,11 @@ vgm_s_director_attack_classes = [
     'vn_o_men_nva_49',
     'vn_o_men_nva_11',
     'vn_o_men_nva_07',
+    'vn_o_men_nva_49',
+    'vn_o_men_nva_11',
+    'vn_o_men_nva_49',
+    'vn_o_men_nva_11',
+    'vn_o_men_nva_07',
     'vn_o_men_nva_49'
 ];
 
@@ -160,7 +165,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") then { continue };
+    if (isNil "_director") exitWith {};
     _director get "virtualSquads" set [_squad get "id", _squad];
 
 }] call para_g_fnc_event_subscribeLocal;
@@ -170,7 +175,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") then { continue };
+    if (isNil "_director") exitWith {};
     _director get "virtualSquads" deleteAt (_squad get "id");
 
 }] call para_g_fnc_event_subscribeLocal;
@@ -180,7 +185,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _mission = [_missionId] call vgm_s_fnc_missions_getById;
-    if (isNil "_mission") then { continue };
+    if (isNil "_mission") exitWith {};
     private _director = _mission get "director";
     private _group = _squad get "group";
     _director get "virtualSquadGroups" set [_squad get "id", _group];
@@ -194,7 +199,7 @@ vgm_s_director_attack_classes = [
 
     private _missionId = _squad get "missionId";
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
-    if (isNil "_director") then { continue };
+    if (isNil "_director") exitWith {};
     _director get "virtualSquadGroups" deleteAt (_squad get "id");
 
 }] call para_g_fnc_event_subscribeLocal;
@@ -247,3 +252,5 @@ call {
         [format ["vgm_extract_%1", _missionId], true, true] call BIS_fnc_deleteTask;
     }] call para_g_fnc_event_subscribeLocal;
 };
+
+[] call vgm_s_fnc_director_preinitEngagements;

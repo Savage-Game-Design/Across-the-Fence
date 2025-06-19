@@ -4,7 +4,7 @@
     File: fn_btree_tree_enemyAI.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2025-03-06
+    Last Update: 2025-05-15
     Public: No
 
     Description:
@@ -24,6 +24,7 @@
  */
 
 #define CURRENT_ORDER ( _extern_blackboard get "currentOrder" )
+#define BLACKBOARD(var) { _extern_blackboard get var }
 
 [DECORATOR(updateKnowledgeService), [], [
 [DECORATOR(suppressionService), [], [
@@ -31,7 +32,7 @@
 [DECORATOR(loopInfinitely), [], [
     [SELECTOR, [], [
         [DECORATOR(fetchNearbyDangerReportAsInvestigationPoint), [["abortLowerPriority", true]], [
-            [ACTION(moveToInvestigationPoint), []]
+            [ACTION(moveTo), [["dest", BLACKBOARD("investigationPoint")]]]
         ]],
         [DECORATOR(hasOrders), [["order", "DEFEND"], ["abortLowerPriority", true]], [
             [ACTION(patrolArea), [["center", { CURRENT_ORDER get "pos" }], ["radius", 10]]]
@@ -44,6 +45,12 @@
                     // Angle change needs to be high, due to a 15m tolerance on area patrol waypoints.
                     [ACTION(patrolArea), [["radius", 35], ["angleChange", 90], ["speedMode", "NORMAL"], ["behaviour", "AWARE"]]]
                 ]]
+            ]]
+        ]],
+        [DECORATOR(hasOrders), [["order", "ASSAULT"], ["abortLowerPriority", true]], [
+            [SEQUENCE, [], [
+                [ACTION(moveTo), [["dest", { CURRENT_ORDER get "pos" }], ["speedMode", "FULL"]]],
+                [ACTION(clearOrders), []]
             ]]
         ]],
         [DECORATOR(hasOrders), [["order", "PATROL-ROUTE"], ["abortLowerPriority", true]], [

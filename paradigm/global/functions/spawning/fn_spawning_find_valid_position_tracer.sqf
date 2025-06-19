@@ -19,7 +19,7 @@
 */
 
 
-params ["_tracerEndPos", ["_blockingUnits", playableUnits], ["_attackDir", random 360], ["_minDistance", 0]];
+params ["_tracerEndPos", ["_blockingUnits", playableUnits], ["_attackDir", random 360], ["_minDistance", 0], ["_maxDistance", 1500]];
 
 //How far around each unit blocking happens for.
 //Soft block is when visibility checks begin
@@ -29,7 +29,7 @@ private _hardBlockRadius = 200;
 
 //Adjust the tracer to end _minDistance away.
 _tracerEndPos = _tracerEndPos getPos [_minDistance, _attackDir + 180];
-private _tracerStart = _tracerEndPos getPos [1500, _attackDir + 180];
+private _tracerStart = _tracerEndPos getPos [_maxDistance, _attackDir + 180];
 private _lastTracerPosition = _tracerStart;
 private _tracerPosition = _tracerStart;
 
