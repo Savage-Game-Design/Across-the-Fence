@@ -1,21 +1,30 @@
 /*
     File: fn_director_deleteEngagementIfEnded.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2025-04-28
-    Last Update: 2025-05-11
+    Last Update: 2025-06-19
     Public: No
 
     Description:
-        No description added yet.
+        Updates the groups involved in an engagement, and deletes an engagement if it has ended.
+
+        An group is in an engagement if:
+            - It has living units
+            - It is targeting the engaged player
+
+        An engagement is ended when:
+            - The player is dead
+            - No groups are engaged with the player
 
     Parameter(s):
-        N/A
+        _director - Mission director for the current mission [HASHMAP]
+        _engagement - Engagement to check [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_director, _engagement] call vgm_s_fnc_director_deleteEngagementIfEnded;
  */
 
 params ["_director", "_engagement"];

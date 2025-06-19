@@ -1,21 +1,22 @@
 /*
     File: fn_director_deleteEngagement.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2025-04-28
-    Last Update: 2025-05-15
-    Public: No
+    Last Update: 2025-06-19
+    Public: Yes
 
     Description:
-        No description added yet.
+        Deletes an existing engagement, forcibly ending it.
 
     Parameter(s):
-        N/A
+        _director - Mission director for the current mission [HASHMAP]
+        _engagement - Engagement to remove [HASHMAP]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_director, _engagement] call vgm_s_fnc_director_deleteEngagement;
  */
 
 params ["_director", "_engagement"];

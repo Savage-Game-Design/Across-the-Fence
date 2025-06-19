@@ -1,21 +1,23 @@
 /*
     File: fn_director_removeEnemyGroupFromPlayerEngagement.sqf
-    Author:
+    Author: Savage Game Design
     Date: 2025-04-28
-    Last Update: 2025-04-28
+    Last Update: 2025-06-19
     Public: No
 
     Description:
-        No description added yet.
+        Removes a group from a player engagement.
 
     Parameter(s):
-        N/A
+        _director - Mission director for the current mission [HASHMAP]
+        _group - AI group to remove [GROUP]
+        _player - Player whose engagement the group should be removed from [OBJECT]
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [_director, _group, _player] call vgm_s_fnc_director_removeEnemyGroupFromPlayerEngagement;
  */
 
 params ["_director", "_group", "_player"];
