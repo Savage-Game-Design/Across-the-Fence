@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-01-16
+    Last Update: 2025-06-19
     Public: No
 
     Description:
@@ -31,6 +31,10 @@ private _alertness = _directorData get "alertness";
 
 [format ["Mission=%1, Alertness=%2", _publicMission get "id", _alertness]] call vgm_g_fnc_logInfo;
 
+//////////////
+// Trackers //
+//////////////
+
 private _timeSinceLastTracker = serverTime - (_directorData get "lastTrackerSent");
 private _currentTrackerDelay = linearConversion [
         0, vgm_s_director_max_alertness,
@@ -55,4 +59,49 @@ if (
     _directorData set ["lastTrackerSent", serverTime];
 };
 
-// TODO - Spawn in attack units if engaged in combat, and not enough nearby patrols.
+////////////////////
+// Reinforcements //
+////////////////////
+
+{
+    [_directorData, _x] call vgm_s_fnc_director_deleteEngagementIfEnded;
+} forEach values (_directorData get "playerEngagements");
+
+{
+    private _engagement = _x;
+    // Run the reinforcment check less often than the director ticks.
+    // Importantly, this controls the initial reinforcment delay for new engagements!
+    private _checkedRecently = serverTime - (_engagement get "lastReinforcementCheck") < (_directorData get "reinforcementCheckFrequencySecs");
+    if (_checkedRecently) then {
+        continue;
+    };
+
+    _engagement set ["lastReinforcementCheck", serverTime];
+    private _engagementPlayerHash = _engagement get "playerHash";
+    // Technically this always grows (nothing removes players from here), but shouldn't be a problem as directorData is deleted on mission end.
+    private _lastReinforcementSent = _directorData get "lastReinforcementSentPerPlayer" getOrDefault [_engagementPlayerHash, -9999];
+    private _reinforcementsSentRecently = (serverTime - _lastReinforcementSent) < (_directorData get "minTimeBetweenReinforcementsSecs");
+
+    // Avoid spamming players with squads, no matter what.
+    if (_reinforcementsSentRecently) then {
+        [format ["[Reinforcements - Mission: %1, Player: %2] Skipping reinforce - squad spawned recently", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logDebug;
+        continue;
+    };
+
+    // Roll the dice on spawning reinforcements. Adds a little variation, and provides an extra tuning option.
+    if (random 1 > (_directorData get "reinforcementChance")) then {
+        [format ["[Reinforcements - Mission: %1, Player: %2] Skipping reinforce - random roll failed", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logDebug;
+        continue;
+    };
+
+    [format ["[Reinforcements - Mission: %1, Player: %2] Attempting to create squad", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logInfo;
+    private _squad = [_mission, _engagement get "player"] call vgm_s_fnc_director_spawnReinforcements;
+
+    if (isNil "_squad") then {
+        [format ["[Reinforcements - Mission: %1, Player: %2] Failed to create squad", _publicMission get "id", _engagement get "player"]] call vgm_g_fnc_logInfo;
+        continue;
+    };
+
+    _directorData get "lastReinforcementSentPerPlayer" set [_engagementPlayerHash, serverTime];
+
+} forEach values (_directorData get "playerEngagements");

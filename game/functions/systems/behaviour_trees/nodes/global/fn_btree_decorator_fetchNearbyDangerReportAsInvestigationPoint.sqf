@@ -2,7 +2,7 @@
     File: fn_btree_decorator_fetchNearbyDangerReportAsInvestigationPoint.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2024-03-09
+    Last Update: 2025-05-14
     Public: Yes
 
     Description:
@@ -32,6 +32,13 @@ _decorator set ["condition", {
     params ["_node", "_state"];
 
     "investigationPoint" in _extern_blackboard
+}];
+
+_decorator set ["onExit", {
+    params ["_node", "_state", "_result"];
+    // This isn't ideal to have in this decorator - it's a bit of a side effect.
+    // Ideally should be in another decorator.
+    _extern_blackboard deleteAt "investigationPoint";
 }];
 
 _decorator set ["onTreeAssigned", {
