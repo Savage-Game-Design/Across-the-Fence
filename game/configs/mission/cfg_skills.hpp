@@ -23,7 +23,269 @@ class vgm_skillTemplate {
     codeUnableToActivate = "";
 };
 
+class vgm_weaponSpecialisationTemplate: vgm_skillTemplate {
+    conditionUnlock = "!(missionNamespace getVariable ['vgm_c_skill_hasSpecialisation', false])";
+    codeApply = "vgm_c_skill_hasSpecialisation = true";
+    codeUnapply  = "vgm_c_skill_hasSpecialisation = false";
+};
+
 class vgm_skillTrees {
+    class combat {
+        displayName = "$STR_VGM_SKILLS_TREE_COMBAT";
+        description = "";
+        icon = "assets\skills\rifleman_ca.paa";
+
+        class skills {
+            class tier_0 {
+               class specialisation_rifleman: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN";
+                    column = 1;
+                };
+
+                class specialisation_scout: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT";
+                    column = 2;
+                };
+
+                class specialisation_marksman: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN";
+                    column = 3;
+                };
+
+                class specialisation_grenadier: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER";
+                    column = 4;
+                };
+
+                class specialisation_machinegunner: vgm_weaponSpecialisationTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER";
+                    column = 5;
+                };
+            };
+
+            class tier_1 {
+                class field_modification_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1_DESC";
+                    column = 2;
+                };
+
+                class strongHands: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
+                    column = 3;
+
+                    codeApply = "[player, 'recoil', 'skill_passives_strongHands', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'recoil', 'skill_passives_strongHands'] call vgm_c_fnc_coefficient_remove";
+                };
+
+                class ammoPouch: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_AMMOPOUCH";
+                    description = "$STR_VGM_SKILLS_SKILL_AMMOPOUCH_DESC";
+                    column = 4;
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_ammoPouch";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_ammoPouch";
+                };
+
+                class noRestraint: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_NO_RESTRAINT";
+                    description = "$STR_VGM_SKILLS_SKILL_NO_RESTRAINT_DESC";
+                    column = 5;
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_noRestraint";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_noRestraint";
+                };
+            };
+
+            class tier_2 {
+                class bulletHose: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BULLET_HOSE";
+                    description = "$STR_VGM_SKILLS_SKILL_BULLET_HOSE_DESC";
+                    column = 0;
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_bulletHose";
+
+                    skillType = 2;
+                    cost = 2;
+                    cooldown = 600;
+                    duration = 120;
+                };
+
+                class shootAndScoot: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT";
+                    description = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC";
+                    column = 1;
+
+                    codeActivate = "(_this + ['aim', -1]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 150;
+                    duration = 60;
+                };
+
+
+                class field_modification_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
+                    column = 2;
+                };
+
+                class jungleWarrior: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR";
+                    description = "$STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC";
+                    column = 3;
+                    // TODO - Implement this skill
+                    conditionUnlock = "false";
+                };
+
+                class stablePlatform: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STABLE_PLATFORM";
+                    description = "$STR_VGM_SKILLS_SKILL_STABLE_PLATFORM_DESC";
+                    column = 4;
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_stablePlatform";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_stablePlatform";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+
+
+                class grassCutter: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GRASS_CUTTER";
+                    description = "$STR_VGM_SKILLS_SKILL_GRASS_CUTTER_DESC";
+                    column = 5;
+
+                    codeApply = "[player, 'suppress', 'skill_grassCutter', 1, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'suppress', 'skill_grassCutter'] call vgm_c_fnc_coefficient_remove";
+                };
+            };
+
+            class tier_3 {
+                class treeCutter: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TREE_CUTTER";
+                    description = "$STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC";
+                    column = 0;
+
+                    codeActivate = "(_this + ['suppress', 3]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+                    skillType = 1;
+                    cost = 3;
+                    cooldown = 120;
+                    duration = 240;
+                };
+
+                class battleFocus: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BATTLE_FOCUS";
+                    description = "$STR_VGM_SKILLS_SKILL_BATTLE_FOCUS_DESC";
+                    column = 1;
+
+                    codeActivate = "(_this + ['canFireWhileInvestigating']) call vgm_c_fnc_skill_actives_setStatusForDuration";
+                    skillType = 1;
+                    cost = 3;
+                    cooldown = 420;
+                    duration = 20;
+                };
+
+                class field_modification_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";
+                    column = 2;
+                };
+
+                class loadedForBear: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR";
+                    description = "$STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR_DESC";
+                    column = 3;
+
+                    codeApply = "\
+                        [player, 'load', 'skill_loadedForBear', -0.3, true] call vgm_c_fnc_coefficient_set;\
+                        [player, 'staminaDrain', 'skill_loadedForBear', -0.2, true] call vgm_c_fnc_coefficient_set;\
+                    ";
+                    codeUnapply = "\
+                        [player, 'load', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
+                        [player, 'staminaDrain', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
+                    ";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+
+                class chemical_grenades: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC";
+                    column = 4;
+                };
+
+                class reconByFire: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_BY_FIRE";
+                    description = "$STR_VGM_SKILLS_SKILL_RECON_BY_FIRE_DESC";
+                    column = 5;
+
+                    codeApply = "true call vgm_c_fnc_skill_passives_reconByFire";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_reconByFire";
+                    cost = 3;
+                };
+            };
+
+            class tier_4 {
+                class steelRain: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STEEL_RAIN";
+                    description = "$STR_VGM_SKILLS_SKILL_STEEL_RAIN_DESC";
+                    column = 0;
+
+                    codeActivate = "call vgm_c_fnc_skill_actives_steelRain";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 180;
+                    duration = 30;
+                };
+
+                class justAScratch: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH";
+                    description = "$STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH_DESC";
+                    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
+                    column = 1;
+
+                    codeActivate = "(_this + ['hitShrug', 0.95]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+
+                    skillType = 1;
+                    cost = 2;
+                    cooldown = 600;
+                    duration = 60;
+                };
+
+                class field_modification_4: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC";
+                    column = 2;
+                };
+
+                class warFace: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_WAR_FACE";
+                    description = "$STR_VGM_SKILLS_SKILL_WAR_FACE_DESC";
+                    column = 3;
+
+                    conditionUnlock = "false";
+                    codeApply = "";
+                    codeUnapply = "";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+
+                class knockout: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_KNOCKOUT";
+                    description = "$STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC";
+                    column = 4;
+
+                    conditionUnlock = "false";
+                    codeApply = "";
+                    codeUnapply = "";
+                    skillType = 0;
+                    applyOnRespawn = 1;
+                };
+            };
+        };
+    };
+
     class rifleman {
         displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
         description = "";
@@ -31,6 +293,8 @@ class vgm_skillTrees {
 
         // rifleman skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class steadyHand: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
@@ -53,14 +317,6 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_HISTORICAL_DESC";
                 };
 
-                class overprepared: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_infantryman_overprepared";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_overprepared";
-                };
-
                 class loadout: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT";
                     description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LOADOUT_DESC";
@@ -76,31 +332,10 @@ class vgm_skillTrees {
                     codeUnapply = "false call vgm_c_fnc_skill_passives_infantryman_bornLeader";
                     cost = 2;
                 };
-
-                class steadyAim: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC";
-
-                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_steadyAim";
-                    skillType = 1;
-                    cost = 2;
-                    cooldown = 120;
-                    duration = 30;
-                };
             };
 
             class tier_4 {
-                class luckySon: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON";
-                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC";
-                    icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_b_ca.paa";
 
-                    codeActivate = "call vgm_c_fnc_skill_actives_infantryman_luckySon";
-                    skillType = 2;
-                    cost = 4;
-                    cooldown = 120;
-                    duration = 20;
-                };
             };
         };
 
@@ -115,6 +350,8 @@ class vgm_skillTrees {
 
         // recon skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class keenEye: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE";
@@ -139,15 +376,6 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_MARKSMAN_DESC";
                 };
 
-                class betterAim: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_recon_betterAim";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_betterAim";
-                    skillType = 0;
-                    applyOnRespawn = 1;
-                };
 
                 class loadout_pointman: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN";
@@ -156,14 +384,6 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
-                class followTheTracers: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_recon_followTheTracers";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_followTheTracers";
-                    cost = 2;
-                };
 
                 class sixthSense: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE";
@@ -202,26 +422,10 @@ class vgm_skillTrees {
 
         // fire support skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
-                class heavySuppression: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION";
 
-                    codeApply = "[player, 'suppress', 'skill_fireSupport_heavySuppression', 1, true] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'suppress', 'skill_fireSupport_heavySuppression'] call vgm_c_fnc_coefficient_remove";
-                };
-
-                class packMule: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE";
-
-                    codeApply = "\
-                        [player, 'load', 'skill_fireSupport_packMule', -0.3, true] call vgm_c_fnc_coefficient_set;\
-                        [player, 'staminaDrain', 'skill_fireSupport_packMule', -0.2, true] call vgm_c_fnc_coefficient_set;\
-                    ";
-                    codeUnapply = "\
-                        [player, 'load', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
-                        [player, 'staminaDrain', 'skill_fireSupport_packMule'] call vgm_c_fnc_coefficient_remove;\
-                    ";
-                };
             };
 
             class tier_2 {
@@ -242,41 +446,10 @@ class vgm_skillTrees {
             };
 
             class tier_3 {
-                class learnTheRhythm: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC";
 
-                    codeApply = "true call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_fireSupport_learnTheRhythm";
-
-                    cost = 2;
-                };
-
-                class grenadesCase: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC";
-
-                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_grenadesCase";
-
-                    skillType = 1;
-                    cost = 2;
-                    cooldown = 180;
-                    duration = 10;
-                };
             };
 
             class tier_4 {
-                class overwhelmingFire: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE";
-                    description = "$STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC";
-
-                    codeActivate = "call vgm_c_fnc_skill_actives_fireSupport_overwhelmingFire";
-
-                    skillType = 2;
-                    cost = 2;
-                    cooldown = 240;
-                    duration = 120;
-                };
             };
         };
 
@@ -291,6 +464,8 @@ class vgm_skillTrees {
 
         // support skills
         class skills {
+            class tier_0 {};
+
             class tier_1 {
                 class nimbleHands: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS";

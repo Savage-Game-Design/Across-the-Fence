@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-04-05
+    Last Update: 2025-06-18
     Public: No
 
     Description:

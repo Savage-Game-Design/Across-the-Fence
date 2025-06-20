@@ -2,7 +2,7 @@
     File: fn_skill_investigate_addPlayerFiredEh.sqf
     Author: Savage Game Design
     Date: 2024-03-01
-    Last Update: 2025-01-16
+    Last Update: 2025-06-18
     Public: No
 
     Description:
@@ -24,6 +24,8 @@ private _ehId = _unit getVariable ["vgm_c_skill_investigate_playerFiredEh", -1];
 if (_ehId > -1) exitWith {_ehId};
 
 _ehId = _unit addEventHandler ["Fired", {
+    params ["_unit"];
+    if (_unit getVariable ["vgm_c_skill_investigate_canFireWhileInvestigating", false]) exitWith {};
     [false] call vgm_c_fnc_skill_investigate_setFocusMode;
 }];
 

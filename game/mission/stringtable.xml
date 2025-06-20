@@ -287,6 +287,9 @@
         </Key>
     </Package>
     <Package name="Skills Tree">
+        <Key ID="STR_VGM_SKILLS_TREE_COMBAT">
+            <Original>Combat</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
             <Original>Rifleman</Original>
         </Key>
@@ -301,6 +304,145 @@
         </Key>
     </Package>
     <Package name="Skills Skill">
+        <!-- Combat -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN">
+            <Original>Specialisation: Rifleman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT">
+            <Original>Specialisation: Scout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN">
+            <Original>Specialisation: Marksman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER">
+            <Original>Specialisation: Grenadier</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER">
+            <Original>Specialisation: Machinegunner</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1">
+            <Original>Field Modifications 1</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1_DESC">
+            <Original>Unlocks basic pistols and melee weapons, proximity claymores, M67 grenades, and NVG binoculars</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2">
+            <Original>Field Modifications 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC">
+            <Original>Unlocks better pistols and melee weapons, timed claymores, and V40 grenades</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3">
+            <Original>Field Modifications 3</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC">
+            <Original>Unlocks the sawn-off M79 grenade launcher, WP proximity claymores, and bayonets</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4">
+            <Original>Field Modifications 4</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC">
+            <Original>Unlocks enemy sidearms and melee weapons</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES">
+            <Original>Chemical grenades</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC">
+            <Original>Unlocks WP, CS gas and incendiary grenades.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AMMOPOUCH">
+            <Original>Ammo pouch</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AMMOPOUCH_DESC">
+            <Original>The first time you run out of ammo for your primary weapon, receive bonus magazines</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AMMOPOUCH_ACTIVATED">
+            <Original>Ammo pouch activated</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_NO_RESTRAINT">
+            <Original>No Restraint</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_NO_RESTRAINT_DESC">
+            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BULLET_HOSE">
+            <Original>Bullet hose</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BULLET_HOSE_DESC">
+            <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 100% more.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT">
+            <Original>Steady Aim</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC">
+            <Original>For the next 60 seconds, your weapon sway is reduced by 100%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR">
+            <Original>Jungle warrior [Disabled]</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC">
+            <Original>Canteens restore stamina. Machetes clear brush.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM">
+            <Original>Stable platform</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM">
+            <Original>50% less weapon sway when crouched or prone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GRASS_CUTTER">
+            <Original>Grass cutter</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GRASS_CUTTER_DESC">
+            <Original>100% increased suppression strength</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER">
+            <Original>Tree cutter</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
+            <Original>300% increased suppression strength</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BATTLE_FOCUS">
+            <Original>Battle focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
+            <Original>Firing your weapon does not break Stop, Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR">
+            <Original>Loaded for bear</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR_DESC">
+            <Original>Carry 30% more weight and consume 20% less stamina</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BY_FIRE">
+            <Original>Recon by fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BY_FIRE_DESC">
+            <Original>Suppressed enemies will be marked for you. This mark disappears when their suppression returns to zero naturally.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN">
+            <Original>Steel rain</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STEEL_RAIN_DESC">
+            <Original>You do not consume grenades when throwing/firing them</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH">
+            <Original>Just a scratch</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUST_A_SCRATCH_DESC">
+            <Original>Gain temporary hit shrug.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE">
+            <Original>War-face [Disabled]</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE_DESC">
+            <Original>When you are detected, stamina consumption is reduced by 30% for the next 30 seconds.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT">
+            <Original>Knockout [Disabled]</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC">
+            <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
             <Original>-25% Weapon recoil</Original>
@@ -320,40 +462,13 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_ADVANCED_LOADOUT_DESC">
             <Original>M1 Garand&lt;br/&gt;M16A1 (20rnd Magazines)&lt;br/&gt;XM177 (20rnd Magazines)</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED">
-            <Original>Overprepared</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_DESC">
-            <Original>The first time you run out of ammo for your primary weapon, receive two more magazines</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_ACTIVATED">
-            <Original>Overprepared activated</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM">
-            <Original>Steady Aim</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STEADY_AIM_DESC">
-            <Original>For the next 30 seconds, your weapon sway is reduced by 100%</Original>
-        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER">
             <Original>Born Leader</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_BORN_LEADER_DESC">
             <Original>Reduce the cooldown time of all ally abilities by 20% (Global cap at 50%)</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON">
-            <Original>Lucky-Son-Of-A-Bitch</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_LUCKY_SON_DESC">
-            <Original>Gain an 80% Hit Shrug chance for 20 seconds</Original>
-        </Key>
         <!-- Recon -->
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM">
-            <Original>Better Aim</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_BETTER_AIM_DESC">
-            <Original>50% less weapon sway when crouched or prone</Original>
-        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_DETECTIVE">
             <Original>Increase intel glint frequency</Original>
         </Key>
@@ -372,12 +487,6 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_LOADOUT_POINTMAN">
             <Original>Pointman Loadout</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS">
-            <Original>Follow the Tracers</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_RECON_FOLLOW_THE_TRACERS_DESC">
-            <Original>When firing tracers, any enemy that receives suppression will be marked in 3D space. This mark disappears when their suppression return to zero naturally.</Original>
-        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RECON_SIXTH_SENSE">
             <Original>6th Sense</Original>
         </Key>
@@ -391,12 +500,6 @@
             <Original>For 60 seconds, enemies are much less likely to see you and hear you.</Original>
         </Key>
         <!-- Fire Support -->
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_HEAVY_SUPPRESSION">
-            <Original>100% increased suppression strength</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_PACK_MULE">
-            <Original>Carry 30% more weight and consume 20% less stamina</Original>
-        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_MACHINE_GUNNER">
             <Original>Machine Gunner Equipment</Original>
         </Key>
@@ -405,24 +508,6 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LOADOUT_GRENADIER">
             <Original>Grenadier and AT Equipment</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM">
-            <Original>Learn the Rhythm</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_LEARN_THE_RHYTHM_DESC">
-            <Original>Maintaining automatic fire will slowly reduce your recoil (up to 50%). This reduction is reset when you release the trigger or reload.</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE">
-            <Original>Grenades case</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_GRENADES_CASE_DESC">
-            <Original>For the next 10 seconds, you do not consume grenades when throwing them.</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE">
-            <Original>Overwhelming Fire</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_SUPPORT_OVERWHELMING_FIRE_DESC">
-            <Original>For the next 120 seconds, you have 50% chance to not consume ammo and you suppress enemies 50% more.</Original>
         </Key>
         <!-- Support -->
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_NIMBLE_HANDS">

@@ -1,8 +1,8 @@
 /*
-    File: fn_skill_passive_infantryman_overprepared.sqf
+    File: fn_skill_passives_ammoPouch.sqf
     Author: Savage Game Design
     Date: 2023-09-13
-    Last Update: 2023-09-23
+    Last Update: 2025-06-12
     Public: No
 
     Description:
@@ -15,13 +15,13 @@
         Nothing
 
     Example(s):
-        true call vgm_c_fnc_skill_passives_infantryman_overprepared
+        true call vgm_c_fnc_skill_passives_ammoPouch
  */
 
 params ["_known"];
 
 if (!_known) exitWith {
-    player removeEventHandler ["Fired", player getVariable "vgm_c_skill_passives_overpreparedEH"];
+    player removeEventHandler ["Fired", player getVariable "vgm_c_skill_passives_ammoPouchEH"];
 };
 
 private _eh = player addEventHandler ["Fired", {
@@ -35,15 +35,15 @@ private _eh = player addEventHandler ["Fired", {
     ) exitWith {};
 
     // fire only once per mission
-    private _usedInMission = _unit getVariable ["vgm_c_skill_passives_overpreparedMission", createHashMap];
+    private _usedInMission = _unit getVariable ["vgm_c_skill_passives_ammoPouchMission", createHashMap];
     private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
     if (_usedInMission isEqualTo _currentMission) exitWith {};
-    _unit setVariable ["vgm_c_skill_passives_overpreparedMission", _currentMission];
+    _unit setVariable ["vgm_c_skill_passives_ammoPouchMission", _currentMission];
 
-    ["Rifleman/Overprepared skill triggered"] call vgm_g_fnc_logInfo;
-    hint localize "STR_VGM_SKILLS_SKILL_RIFLEMAN_OVERPREPARED_ACTIVATED";
+    ["Combat/Ammo pouch skill triggered"] call vgm_g_fnc_logInfo;
+    hint localize "STR_VGM_SKILLS_SKILL_AMMOPOUCH_ACTIVATED";
 
     _unit addMagazines [_magazine, 2];
 }];
 
-player setVariable [ "vgm_c_skill_passives_overpreparedEH", _eh];
+player setVariable [ "vgm_c_skill_passives_ammoPouchEH", _eh];

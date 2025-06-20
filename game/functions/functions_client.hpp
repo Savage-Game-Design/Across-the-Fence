@@ -412,6 +412,7 @@ class vgm_c
 
         class coefficient_create {};
         class coefficient_get {};
+        class coefficient_hasReason {};
         class coefficient_override {};
         class coefficient_postInit
         {
@@ -684,6 +685,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\leveling\client);
 
+        class leveling_getLevel {};
         class leveling_preInit
         {
             preInit = 1;
@@ -819,26 +821,31 @@ class vgm_c
             preInit = 1;
         };
     };
+    class skill_passives_combat
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\combat);
+
+        class skill_passives_ammoPouch {};
+        class skill_passives_noRestraint {};
+        class skill_passives_reconByFire {};
+        class skill_passives_stablePlatform {};
+    };
     class skill_passives_infantryman
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\infantryman);
 
         class skill_passives_infantryman_bornLeader {};
-        class skill_passives_infantryman_overprepared {};
     };
     class skill_passives_recon
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\recon);
 
-        class skill_passives_recon_betterAim {};
-        class skill_passives_recon_followTheTracers {};
         class skill_passives_recon_keenEye {};
     };
     class skill_passives_fireSupport
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
 
-        class skill_passives_fireSupport_learnTheRhythm {};
     };
     class skill_passives_support
     {
@@ -855,20 +862,25 @@ class vgm_c
         {
             preInit = 1;
         };
+
+        class skill_actives_setCoefficientForDuration {};
+        class skill_actives_setStatusForDuration {};
+    };
+    class skill_actives_combat
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\combat);
+
+        class skill_actives_bulletHose {};
+        class skill_actives_steelRain {};
     };
     class skill_actives_fireSupport
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
 
-        class skill_actives_fireSupport_grenadesCase {};
-        class skill_actives_fireSupport_overwhelmingFire {};
     };
     class skill_actives_infantryman
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
-
-        class skill_actives_infantryman_luckySon {};
-        class skill_actives_infantryman_steadyAim {};
     };
     class skill_actives_recon
     {
