@@ -2,7 +2,7 @@
     File: fn_skills_getTreeSkillPoints.sqf
     Author: Savage Game Design
     Date: 2023-05-13
-    Last Update: 2023-05-21
+    Last Update: 2025-06-25
     Public: No
 
     Description:
@@ -11,6 +11,7 @@
     Parameter(s):
         _skillTree - The skilltree to get the skill points from [STRING]
         _player - Player to check [OBJECT, defaults to player]
+        _belowTier - Only include skills that are below this tier [NUMBER]
 
     Returns:
         Amount of skillpoints [NUMBER]
@@ -19,10 +20,11 @@
         [_tree, player] call vgm_g_fnc_skills_getTreeSkillPoints;
  */
 
-params ["_skillTree", ["_player", player]];
+params ["_skillTree", ["_player", player], ["_belowTier", 99999, [0]]];
 
 private _skillPoints = 0;
 {
+    if (_forEachIndex >= _belowTier) exitWith {};
     private _skillTier = _x;
     {
         if ([_x, _player] call vgm_g_fnc_skills_isKnown) then {

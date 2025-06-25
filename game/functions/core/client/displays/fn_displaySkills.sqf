@@ -265,7 +265,7 @@ switch _mode do {
                     // show the padlock icon over first tier skills which were not choosen
                     if (_currentTier < 1) exitWith {
                         private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
-                        private _locked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierInvested;
+                        private _locked = ([player, _skillTree, _currentTier] call vgm_g_fnc_skills_knownSkillsInTier) isNotEqualTo [];
                         _ctrlPadlock ctrlShow _locked;
                         _ctrlUnlock ctrlShow (ctrlShown _ctrlUnlock && !_locked);
                     };
@@ -300,6 +300,8 @@ switch _mode do {
         {
             private _tierSkills = _x;
             private _currentTier = (count _skillTiers - _forEachIndex - 1);
+            private _currentSkillPointsSpent = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTreeSkillPoints;
+            private _requiredSkillPointsToUnlock = vgm_skills_tierUnlockCosts # _currentTier;
             ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
 
             // Horizontal separators
@@ -316,10 +318,16 @@ switch _mode do {
             private _tierInfoLayout = _skillTreeLayout get "tierInfo";
             private _ctrlTierText = _display ctrlCreate ["VGM_ctrlTierText", -1, _ctrlSkillTree];
             // TODO - Localise
-            _ctrlTierText ctrlSetText format ["Tier %1", _currentTier];
+            private _padlock = parseText "<img align='center' image='\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa' />";
+            private _tierText = format ["Tier %1", _currentTier];
+            if (_requiredSkillPointsToUnlock > 0) then {
+                _tierText = _tierText + "\n" + format ["%1/%2", _currentSkillPointsSpent, _requiredSkillPointsToUnlock];
+            };
+            _ctrlTierText ctrlSetText _tierText;
+            private _yOffset = (_tierH - ctrlTextHeight _ctrlTierText) / 2;
             _ctrlTierText ctrlSetPosition [
                 _tierInfoLayout get "x",
-                _tierY,
+                _tierY + _yOffset,
                 _tierInfoLayout get "width",
                 _tierH
             ];

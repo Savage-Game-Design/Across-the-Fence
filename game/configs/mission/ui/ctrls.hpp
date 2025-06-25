@@ -1,4 +1,5 @@
 import RscText;
+import RscTextMulti;
 import RscPicture;
 import RscPictureKeepAspect;
 import RscProgress;
@@ -285,11 +286,18 @@ class VGM_ctrlPicture: VGM_ctrlStatic
     style = ST_PICTURE;
 };
 
-// Controls for VGM_DisplaySkills
-class VGM_ctrlTierText: VGM_ctrlStatic
+class VGM_ctrlTextMulti: RscTextMulti
 {
-    style = ST_CENTER;
+    font = VGM_FONT;
+    sizeEx = VGM_FONT_M;
+    style = QUOTE(ST_MULTI + ST_CENTER + ST_NO_RECT);
 };
+
+// Controls for VGM_DisplaySkills
+class VGM_ctrlTierText: VGM_ctrlTextMulti
+{
+};
+
 class VGM_ctrlTierSeparator: VGM_ctrlStatic
 {
     x = 0;

@@ -335,12 +335,12 @@ class vgm_g
         class skills_getSkillTreeFromSkill {};
         class skills_getTreeSkillPoints {};
         class skills_isKnown {};
+        class skills_knownSkillsInTier {};
         class skills_parseTreeCfg {};
         class skills_preInit
         {
             preInit = 1;
         };
-        class skills_tierInvested {};
         class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
