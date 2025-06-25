@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2024-06-23
+    Last Update: 2025-06-25
     Public: No
 
     Description:
@@ -21,8 +21,8 @@
 */
 
 #define SELF vgm_c_fnc_displayAbilityCooldown
-#define SLOT_STANDARD "ability1"
-#define SLOT_ULTIMATE "ultimate"
+#define SLOT_ABILITY_1 "ability1"
+#define SLOT_ABILITY_2 "ability2"
 
 #if __A3_DEBUG__
     diag_log ["fn_displayAbilityCooldown", _this];
@@ -76,8 +76,8 @@ switch _mode do {
                 "\a3\ui_f\data\Map\VehicleIcons\iconVehicle_ca.paa"
             ]);
         } forEach [
-            [VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY, SLOT_STANDARD],
-            [VGM_IDC_RSCABILITYCOOLDOWN_ICONULTIMATE, SLOT_ULTIMATE]
+            [VGM_IDC_RSCABILITYCOOLDOWN_ICONPRIMARY, SLOT_ABILITY_1],
+            [VGM_IDC_RSCABILITYCOOLDOWN_ICONULTIMATE, SLOT_ABILITY_2]
         ];
     };
 
@@ -89,7 +89,7 @@ switch _mode do {
         private _idcs = [
             [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSPRIMARY, VGM_IDC_RSCABILITYCOOLDOWN_DURATIONPRIMARY],
             [VGM_IDC_RSCABILITYCOOLDOWN_COOLDOWNULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_SECONDSULTIMATE, VGM_IDC_RSCABILITYCOOLDOWN_DURATIONULTIMATE]
-        ] select (_slotName == SLOT_ULTIMATE);
+        ] select (_slotName == SLOT_ABILITY_2);
 
         (_idcs apply {_display displayCtrl _x}) params ["_ctrlCooldown", "_ctrlSeconds", "_ctrlDuration"];
         _ctrlSeconds ctrlSetFade 0;

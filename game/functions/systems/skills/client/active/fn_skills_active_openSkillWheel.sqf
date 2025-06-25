@@ -2,7 +2,7 @@
     File: fn_skills_active_openSkillWheel.sqf
     Author: veteran29
     Date: 2023-02-01
-    Last Update: 2025-02-06
+    Last Update: 2025-06-25
     Public: Yes
 
     Description:
@@ -38,9 +38,8 @@ private _iconsArray = [];
         ]
     ];
 } forEach [
-    "ultimate",
-    "ability1"
-    // ,"ability2"
+    "ability1",
+    "ability2"
 ];
 
 [_iconsArray] call vn_fnc_wm_init;

@@ -45,22 +45,16 @@
     </Package>
     <Package name="Skills UI">
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD">
-            <Original>Standard Ability</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP">
-            <Original>Standard abilites offer a small benefit and are intended to be used frequently throughout the mission.</Original>
+            <Original>Ability 1</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT">
-            <Original>Ultimate Ability</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP">
-            <Original>Ultimate abilites offer a large benefit and are intended to be used at critical moments during the mission.</Original>
+            <Original>Ability 2</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD">
-            <Original>Available Standard Abilities</Original>
+            <Original>Available Abilities</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_ULT">
-            <Original>Available Ultimate Abilities</Original>
+            <Original>Available Abilities</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_SKILL_TREE">
             <Original>%1 Skill Tree</Original>
