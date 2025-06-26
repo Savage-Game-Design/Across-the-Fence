@@ -2,7 +2,7 @@
     File: fn_skills_tierUnlocked.sqf
     Author: Savage Game Design
     Date: 2023-05-20
-    Last Update: 2025-06-25
+    Last Update: 2025-06-26
     Public: Yes
 
     Description:
@@ -26,7 +26,7 @@ params [
     ["_tier", 0, [0]]
 ];
 
-private _spentPointsInTreeBelowTier = [_skillTree, _player, _tier] call vgm_g_fnc_skills_getTreeSkillPoints;
+private _spentPointsInTreeBelowTier = [_skillTree, _player, _tier] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
 private _requiredPoints = vgm_skills_tierUnlockCosts # _tier;
 
 _requiredPoints <= _spentPointsInTreeBelowTier

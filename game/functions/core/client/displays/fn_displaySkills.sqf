@@ -305,7 +305,7 @@ switch _mode do {
             private _tierSkills = _x;
             private _currentTier = (count _skillTiers - _forEachIndex - 1);
             private _currentTierUnlocked = _tierUnlockStatuses # _currentTier;
-            private _currentSkillPointsSpent = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTreeSkillPoints;
+            private _currentSkillPointsSpent = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
             private _requiredSkillPointsToUnlock = vgm_skills_tierUnlockCosts # _currentTier;
             ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
 
