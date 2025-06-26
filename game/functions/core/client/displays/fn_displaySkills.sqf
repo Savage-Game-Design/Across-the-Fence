@@ -197,12 +197,16 @@ switch _mode do {
         private _skillTiers = +(_skillTree get "skills");
         reverse _skillTiers;
 
+        private _tierUnlockStatuses = [];
+        {
+            _tierUnlockStatuses pushBack ([player, _skillTree, _forEachIndex] call vgm_g_fnc_skills_tierUnlocked);
+        } forEach _skillTiers;
 
         private _yPos = 0;
         {
             private _tierSkills = _x;
             private _currentTier = _tierSkills#0 get "tier";
-            private _currentTierUnlocked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierUnlocked;
+            private _currentTierUnlocked = _tierUnlockStatuses # _currentTier;
             private _currentSkillCount = count _tierSkills;
             private _tierStartYPos = _yPos;
 
@@ -300,6 +304,7 @@ switch _mode do {
         {
             private _tierSkills = _x;
             private _currentTier = (count _skillTiers - _forEachIndex - 1);
+            private _currentTierUnlocked = _tierUnlockStatuses # _currentTier;
             private _currentSkillPointsSpent = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTreeSkillPoints;
             private _requiredSkillPointsToUnlock = vgm_skills_tierUnlockCosts # _currentTier;
             ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
@@ -318,7 +323,6 @@ switch _mode do {
             private _tierInfoLayout = _skillTreeLayout get "tierInfo";
             private _ctrlTierText = _display ctrlCreate ["VGM_ctrlTierText", -1, _ctrlSkillTree];
             // TODO - Localise
-            private _padlock = parseText "<img align='center' image='\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa' />";
             private _tierText = format ["Tier %1", _currentTier];
             if (_requiredSkillPointsToUnlock > 0) then {
                 _tierText = _tierText + "\n" + format ["%1/%2", _currentSkillPointsSpent, _requiredSkillPointsToUnlock];
@@ -333,6 +337,19 @@ switch _mode do {
             ];
             _ctrlTierText ctrlCommit 0;
 
+
+            if (!_currentTierUnlocked) then {
+                private _ctrlPadlock = _display ctrlCreate ["VGM_ctrlPicture", -1, _ctrlSkillTree];
+                _ctrlPadlock ctrlSetText '\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa';
+                private _ctrlPadlockHeight = 5 * VGM_GRID_H;
+                _ctrlPadlock ctrlSetPosition [
+                    _tierInfoLayout get "x",
+                    _tierY + (_tierH - _ctrlPadlockHeight) / 2,
+                    5 * VGM_GRID_W,
+                    5 * VGM_GRID_H
+                ];
+                _ctrlPadlock ctrlCommit 0;
+            };
         } forEach _skillTiers;
 
         // Add root with name of branch
