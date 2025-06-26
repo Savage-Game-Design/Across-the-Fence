@@ -339,14 +339,11 @@ switch _mode do {
 
 
             if (!_currentTierUnlocked) then {
-                private _ctrlPadlock = _display ctrlCreate ["VGM_ctrlPicture", -1, _ctrlSkillTree];
-                _ctrlPadlock ctrlSetText '\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa';
-                private _ctrlPadlockHeight = 5 * VGM_GRID_H;
+                private _ctrlPadlock = _display ctrlCreate ["VGM_ctrlTierLockedIcon", -1, _ctrlSkillTree];
+                private _ctrlPadlockHeight = ctrlPosition _ctrlPadlock # 3;
                 _ctrlPadlock ctrlSetPosition [
                     _tierInfoLayout get "x",
-                    _tierY + (_tierH - _ctrlPadlockHeight) / 2,
-                    5 * VGM_GRID_W,
-                    5 * VGM_GRID_H
+                    _tierY + (_tierH - _ctrlPadlockHeight) / 2
                 ];
                 _ctrlPadlock ctrlCommit 0;
             };

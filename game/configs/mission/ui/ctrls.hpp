@@ -298,6 +298,12 @@ class VGM_ctrlTierText: VGM_ctrlTextMulti
 {
 };
 
+class VGM_ctrlTierLockedIcon: VGM_ctrlPicture {
+    text = "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa";
+    w = 5 * VGM_GRID_W;
+    h = 5 * VGM_GRID_H;
+};
+
 class VGM_ctrlTierSeparator: VGM_ctrlStatic
 {
     x = 0;
