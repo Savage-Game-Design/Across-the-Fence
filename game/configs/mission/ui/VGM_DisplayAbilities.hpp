@@ -251,14 +251,12 @@ class VGM_DisplayAbilities: VGM_DisplayMenuBase
             y = VGM_Y_Y(DISPLAY_Y,1);
             w = COLUMN_W * VGM_GRID_W;
             h = VGM_Y_H(0.5 * DISPLAY_H - 9);
-            tooltip = "$STR_VGM_SKILLS_UI_ABILITY_STD_TOOLTIP";
             colorBackgroundActive[] = {VGM_UI_COLOR_ACTIVE_RGB, 0.1};
             onButtonClick = VGM_UIEH(slotSelectStandard,Abilities);
         };
         class UltStackButton: StdStackButton
         {
             y = VGM_Y_Y(DISPLAY_Y,10.5);
-            tooltip = "$STR_VGM_SKILLS_UI_ABILITY_ULT_TOOLTIP";
             onButtonClick = VGM_UIEH(slotSelectUltimate,Abilities);
         };
 

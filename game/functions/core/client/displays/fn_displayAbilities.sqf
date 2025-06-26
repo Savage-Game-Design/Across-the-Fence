@@ -19,8 +19,8 @@
 */
 
 #define SELF vgm_c_fnc_displayAbilities
-#define SLOT_STANDARD "ability1"
-#define SLOT_ULTIMATE "ultimate"
+#define SLOT_ABILITY_1 "ability1"
+#define SLOT_ABILITY_2 "ability2"
 
 #if __A3_DEBUG__
     diag_log ["fn_displayAbilities", _this];
@@ -51,14 +51,14 @@ switch _mode do {
     case "updateStandardSkillStack": {
         params ["_display"];
 
-        ["setSlotSkillStackData", [_display, VGM_IDC_DISPLAYABILITIES_STDSTACK, SLOT_STANDARD]] call SELF;
+        ["setSlotSkillStackData", [_display, VGM_IDC_DISPLAYABILITIES_STDSTACK, SLOT_ABILITY_1]] call SELF;
     };
 
     // update ultimate skill panel on the left
     case "updateUltimateSkillStack": {
         params ["_display"];
 
-        ["setSlotSkillStackData", [_display, VGM_IDC_DISPLAYABILITIES_ULTSTACK, SLOT_ULTIMATE]] call SELF;
+        ["setSlotSkillStackData", [_display, VGM_IDC_DISPLAYABILITIES_ULTSTACK, SLOT_ABILITY_2]] call SELF;
     };
 
     // fill skill stack with data based on the current skill in the slot
@@ -77,7 +77,7 @@ switch _mode do {
         private _ctrlDescription = _ctrlSkillStack controlsGroupCtrl VGM_IDC_DISPLAYABILITIES_STDULT_DESCRIPTION;
 
         // no skill in the slot
-        private _idcEmpty = [VGM_IDC_DISPLAYABILITIES_STDEMPTY, VGM_IDC_DISPLAYABILITIES_ULTEMPTY] select (_slotName == SLOT_ULTIMATE);
+        private _idcEmpty = [VGM_IDC_DISPLAYABILITIES_STDEMPTY, VGM_IDC_DISPLAYABILITIES_ULTEMPTY] select (_slotName == SLOT_ABILITY_2);
         private _ctrlEmpty = _display displayCtrl _idcEmpty;
         if (isNil "_skill" || { _skill isEqualTo createHashMap }) exitWith {
             _ctrlSkillStack ctrlShow false;
@@ -101,7 +101,7 @@ switch _mode do {
         params ["_ctrlSlotSelect"];
         private _display = ctrlParent _ctrlSlotSelect;
 
-        ["fillSkillsList", [_display, SLOT_STANDARD]] call SELF;
+        ["fillSkillsList", [_display, SLOT_ABILITY_1]] call SELF;
     };
 
     // player wants to assign his ultimate ability
@@ -109,7 +109,7 @@ switch _mode do {
         params ["_ctrlSlotSelect"];
         private _display = ctrlParent _ctrlSlotSelect;
 
-        ["fillSkillsList", [_display, SLOT_ULTIMATE]] call SELF;
+        ["fillSkillsList", [_display, SLOT_ABILITY_2]] call SELF;
     };
 
     // skill was selected on available skills list
@@ -167,14 +167,14 @@ switch _mode do {
 
     // Highlight the selected ability on the left panel
     case "abilityChanged": {
-        params ["_display", ["_slot", SLOT_STANDARD]];
+        params ["_display", ["_slot", SLOT_ABILITY_1]];
         private _params = [
             // Standard, Ultimate
             [VGM_IDC_DISPLAYABILITIES_STDTITLE, VGM_IDC_DISPLAYABILITIES_ULTTITLE] apply {_display displayCtrl _x}, // Title controls
             ["STD", "ULT"] apply {localize format ["STR_VGM_SKILLS_UI_ABILITY_%1", _x]}, // Title
             [VGM_IDC_DISPLAYABILITIES_BACKGROUNDSTD, VGM_IDC_DISPLAYABILITIES_BACKGROUNDULT] apply {_display displayCtrl _x} // Background controls
         ];
-        if (_slot == SLOT_ULTIMATE) then {
+        if (_slot == SLOT_ABILITY_2) then {
             _params apply {reverse _x};
         };
         diag_log _params;
@@ -192,19 +192,20 @@ switch _mode do {
 
     // fill central panel with skills
     case "fillSkillsList": {
-        params ["_display", ["_slot", SLOT_STANDARD]];
+        params ["_display", ["_slot", SLOT_ABILITY_1]];
         ["abilityChanged", [_display, _slot]] call SELF;
 
+        _display setVariable ["vgm_focusedSlot", _slot];
         _display setVariable ["vgm_focusedSkill", createHashMap];
 
         private _ctrlTitle = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLETITLE;
-        private _title = ["STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD", "STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_ULT"] select (_slot == SLOT_ULTIMATE);
+        private _title = ["STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_STD", "STR_VGM_SKILLS_UI_ABILITY_AVAILABLE_ULT"] select (_slot == SLOT_ABILITY_2);
         _ctrlTitle ctrlSetText localize _title;
 
         private _ctrlAvailable = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLE;
         private _skillPathsHashMap = createHashMap;
         _ctrlAvailable setVariable ["vgm_skills", _skillPathsHashMap];
-        private _available = (values vgm_c_skills_active_list select {_x get "isUltimate" == (_slot == SLOT_ULTIMATE)});
+        private _available = values vgm_c_skills_active_list;
         private _ctrlAvailableEmpty = _display displayCtrl VGM_IDC_DISPLAYABILITIES_AVAILABLEEMPTY;
         if (isNil "_available" || {count _available == 0}) exitWith {
             _ctrlAvailable ctrlShow false;
@@ -254,8 +255,8 @@ switch _mode do {
     case "equipSkill": {
         params ["_display"];
 
+        private _slot = _display getVariable ["vgm_focusedSlot", SLOT_ABILITY_1];
         private _skill = _display getVariable "vgm_skill";
-        private _slot = [SLOT_STANDARD, SLOT_ULTIMATE] select (_skill get "isUltimate");
 
         private _result = [_slot, _skill] call vgm_c_fnc_skills_active_assignSkillToSlot;
         // this should not really happen, does not need translation
