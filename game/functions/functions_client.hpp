@@ -334,6 +334,7 @@ class vgm_g
         class skills_getByPath {};
         class skills_getSkillTreeFromSkill {};
         class skills_getTreeSkillPoints {};
+        class skills_getTreeSkillPointsBelowTier {};
         class skills_isKnown {};
         class skills_knownSkillsInTier {};
         class skills_parseTreeCfg {};
