@@ -2,7 +2,7 @@
     File: fn_skills_tierUnlocked.sqf
     Author: Savage Game Design
     Date: 2023-05-20
-    Last Update: 2023-05-21
+    Last Update: 2025-06-26
     Public: Yes
 
     Description:
@@ -23,23 +23,10 @@
 params [
     ["_player", objNull],
     ["_skillTree", createHashMap],
-    ["_tier", -1, [0]]
+    ["_tier", 0, [0]]
 ];
 
-if (_tier < 1) exitWith {
-    private _path = _skillTree get "path";
+private _spentPointsInTreeBelowTier = [_skillTree, _player, _tier] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
+private _requiredPoints = vgm_skills_tierUnlockCosts # _tier;
 
-    // root level skill tree is always unlocked
-    if (count _path <= 1) exitWith {true};
-
-    // check if last tier of previous tree is unlocked
-    _path = _path select [0, count _path - 1];
-    private _parentSkillTree = _path call vgm_g_fnc_skills_getByPath;
-    private _tiersCount = count (_parentSkillTree get "skills");
-
-    // check if last tier of previous tree is unlocked
-    private _lastTierPrevTree = _tiersCount - 1;
-    [_player, _parentSkillTree, _lastTierPrevTree] call vgm_g_fnc_skills_tierInvested // return
-};
-
-[_player, _skillTree, _tier - 1] call vgm_g_fnc_skills_tierInvested // return
+_requiredPoints <= _spentPointsInTreeBelowTier

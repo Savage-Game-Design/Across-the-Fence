@@ -197,12 +197,16 @@ switch _mode do {
         private _skillTiers = +(_skillTree get "skills");
         reverse _skillTiers;
 
+        private _tierUnlockStatuses = [];
+        {
+            _tierUnlockStatuses pushBack ([player, _skillTree, _forEachIndex] call vgm_g_fnc_skills_tierUnlocked);
+        } forEach _skillTiers;
 
         private _yPos = 0;
         {
             private _tierSkills = _x;
             private _currentTier = _tierSkills#0 get "tier";
-            private _currentTierUnlocked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierUnlocked;
+            private _currentTierUnlocked = _tierUnlockStatuses # _currentTier;
             private _currentSkillCount = count _tierSkills;
             private _tierStartYPos = _yPos;
 
@@ -265,7 +269,7 @@ switch _mode do {
                     // show the padlock icon over first tier skills which were not choosen
                     if (_currentTier < 1) exitWith {
                         private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
-                        private _locked = [player, _skillTree, _currentTier] call vgm_g_fnc_skills_tierInvested;
+                        private _locked = ([player, _skillTree, _currentTier] call vgm_g_fnc_skills_knownSkillsInTier) isNotEqualTo [];
                         _ctrlPadlock ctrlShow _locked;
                         _ctrlUnlock ctrlShow (ctrlShown _ctrlUnlock && !_locked);
                     };
@@ -300,6 +304,9 @@ switch _mode do {
         {
             private _tierSkills = _x;
             private _currentTier = (count _skillTiers - _forEachIndex - 1);
+            private _currentTierUnlocked = _tierUnlockStatuses # _currentTier;
+            private _currentSkillPointsSpent = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
+            private _requiredSkillPointsToUnlock = vgm_skills_tierUnlockCosts # _currentTier;
             ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
 
             // Horizontal separators
@@ -316,15 +323,30 @@ switch _mode do {
             private _tierInfoLayout = _skillTreeLayout get "tierInfo";
             private _ctrlTierText = _display ctrlCreate ["VGM_ctrlTierText", -1, _ctrlSkillTree];
             // TODO - Localise
-            _ctrlTierText ctrlSetText format ["Tier %1", _currentTier];
+            private _tierText = format ["Tier %1", _currentTier];
+            if (_requiredSkillPointsToUnlock > 0) then {
+                _tierText = _tierText + "\n" + format ["%1/%2", _currentSkillPointsSpent, _requiredSkillPointsToUnlock];
+            };
+            _ctrlTierText ctrlSetText _tierText;
+            private _yOffset = (_tierH - ctrlTextHeight _ctrlTierText) / 2;
             _ctrlTierText ctrlSetPosition [
                 _tierInfoLayout get "x",
-                _tierY,
+                _tierY + _yOffset,
                 _tierInfoLayout get "width",
                 _tierH
             ];
             _ctrlTierText ctrlCommit 0;
 
+
+            if (!_currentTierUnlocked) then {
+                private _ctrlPadlock = _display ctrlCreate ["VGM_ctrlTierLockedIcon", -1, _ctrlSkillTree];
+                private _ctrlPadlockHeight = ctrlPosition _ctrlPadlock # 3;
+                _ctrlPadlock ctrlSetPosition [
+                    _tierInfoLayout get "x",
+                    _tierY + (_tierH - _ctrlPadlockHeight) / 2
+                ];
+                _ctrlPadlock ctrlCommit 0;
+            };
         } forEach _skillTiers;
 
         // Add root with name of branch

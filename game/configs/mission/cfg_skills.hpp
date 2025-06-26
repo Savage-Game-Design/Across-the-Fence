@@ -128,6 +128,8 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_2_DESC";
                     column = 2;
+
+                    cost = 2;
                 };
 
                 class jungleWarrior: vgm_skillTemplate {
@@ -136,6 +138,7 @@ class vgm_skillTrees {
                     column = 3;
                     // TODO - Implement this skill
                     conditionUnlock = "false";
+                    cost = 2;
                 };
 
                 class stablePlatform: vgm_skillTemplate {
@@ -146,6 +149,7 @@ class vgm_skillTrees {
                     codeApply = "true call vgm_c_fnc_skill_passives_stablePlatform";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_stablePlatform";
                     skillType = 0;
+                    cost = 2;
                     applyOnRespawn = 1;
                 };
 
@@ -157,6 +161,7 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'suppress', 'skill_grassCutter', 1, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'suppress', 'skill_grassCutter'] call vgm_c_fnc_coefficient_remove";
+                    cost = 2;
                 };
             };
 
@@ -189,6 +194,8 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_3_DESC";
                     column = 2;
+
+                    cost = 3;
                 };
 
                 class loadedForBear: vgm_skillTemplate {
@@ -205,6 +212,7 @@ class vgm_skillTrees {
                         [player, 'staminaDrain', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
                     ";
                     skillType = 0;
+                    cost = 3;
                     applyOnRespawn = 1;
                 };
 
@@ -212,6 +220,8 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC";
                     column = 4;
+
+                    cost = 3;
                 };
 
                 class reconByFire: vgm_skillTemplate {
@@ -234,7 +244,7 @@ class vgm_skillTrees {
                     codeActivate = "call vgm_c_fnc_skill_actives_steelRain";
 
                     skillType = 1;
-                    cost = 2;
+                    cost = 4;
                     cooldown = 180;
                     duration = 30;
                 };
@@ -248,7 +258,7 @@ class vgm_skillTrees {
                     codeActivate = "(_this + ['hitShrug', 0.95]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
 
                     skillType = 1;
-                    cost = 2;
+                    cost = 4;
                     cooldown = 600;
                     duration = 60;
                 };
@@ -268,6 +278,7 @@ class vgm_skillTrees {
                     codeApply = "";
                     codeUnapply = "";
                     skillType = 0;
+                    cost = 4;
                     applyOnRespawn = 1;
                 };
 
@@ -280,6 +291,7 @@ class vgm_skillTrees {
                     codeApply = "";
                     codeUnapply = "";
                     skillType = 0;
+                    cost = 4;
                     applyOnRespawn = 1;
                 };
             };
