@@ -13,3 +13,9 @@ path = "addons/server/script_version.hpp"
 [release]
 sign = false
 archive = true
+
+[files]
+include = [
+    "mod.cpp",
+    "atf_backend_x64.dll",
+]
