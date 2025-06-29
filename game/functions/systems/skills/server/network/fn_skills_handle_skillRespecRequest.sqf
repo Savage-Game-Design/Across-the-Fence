@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2025-06-28
     Public: No
 
     Description:
@@ -26,6 +26,8 @@ if (owner _player isNotEqualTo remoteExecutedOwner) exitWith {
 private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;
 private _skillPoints = _skillsData get "skillPoints";
 private _skillPointsSpent = _skillsData get "skillPointsSpent";
+
+private _level = [_player] call vgm_s_fnc_leveling_dataGetCached get "level";
 
 _skillsData set ["skillPoints", _skillPoints + _skillPointsSpent];
 _skillsData set ["skillPointsSpent", 0];

@@ -2,7 +2,7 @@
     File: fn_leveling_parseLevelsCfg.sqf
     Author: Savage Game Design
     Date: 2023-01-15
-    Last Update: 2023-06-23
+    Last Update: 2025-06-29
     Public: Yes
 
     Description:
@@ -27,6 +27,10 @@ if (isNull _cfgLevels) exitWith {
     createHashMap
 };
 
+private _levels = createHashMap;
+private _experienceThreshold = 0;
+private _totalSkillPoints = 0;
+
 private _fnc_parseLevel = {
     params ["_cfgLevel", "_index", "_experienceThreshold"];
 
@@ -34,16 +38,16 @@ private _fnc_parseLevel = {
         ["displayName", str _index],
         ["experience", getNumber (_cfgLevel >> "experience")],
         ["experienceThreshold", _experienceThreshold + getNumber (_cfgLevel >> "experience")],
-        ["skillPoints", getNumber (_cfgLevel >> "skillPoints")]
+        ["skillPoints", getNumber (_cfgLevel >> "skillPoints")],
+        ["totalSkillPoints", _totalSkillPoints + getNumber (_cfgLevel >> "skillPoints")]
     ] // return
 };
 
-private _levels = createHashMap;
-private _experienceThreshold = 0;
 {
     private _level = [_x, _forEachIndex, _experienceThreshold] call _fnc_parseLevel;
 
     _experienceThreshold = _experienceThreshold + (_level get "experience");
+    _totalSkillPoints = _level get "totalSkillPoints";
     _levels set [_forEachIndex, _level];
 } forEach ("true" configClasses _cfgLevels);
 
