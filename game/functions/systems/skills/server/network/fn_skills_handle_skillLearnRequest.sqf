@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -45,7 +45,8 @@ private _skillPointsSpent = _skillsData get "skillPointsSpent";
 _skillsData set ["skillPoints", _skillPoints - _skillCost];
 _skillsData set ["skillPointsSpent", _skillPointsSpent + _skillCost];
 
-[_player, _skillPath] call vgm_s_fnc_skills_teachSkill;
-
-// inform the player that he succeded to learn the skill
-[_canLearn, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
+[_player, _skillPath, [{
+    params ["_player", "_skillsData", "_arguments"];
+    // inform the player that he succeded to learn the skill
+    _arguments remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
+}, [_canLearn, _skillPath]]] call vgm_s_fnc_skills_teachSkill;

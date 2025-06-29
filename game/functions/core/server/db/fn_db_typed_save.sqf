@@ -26,7 +26,7 @@
         ["player", _playerUID, _playerProfile] call vgm_s_fnc_db_typed_save;
 */
 
-params ["_key", "_id", "_data"];
+params ["_key", "_id", "_data", "_fnc_handler", "_arguments"];
 
 if !(_data isEqualType createHashMap) exitWith {
     ["ERROR", format ["VGM: Failure to save %1. Data is not a hashmap: %2", _id, _data]] call para_g_fnc_log;
@@ -41,6 +41,4 @@ _data set ["id", _vgmID, true];
 
 _data set ["version", vgm_version];
 
-private _formattedID = format ["%1_%2", _key, _id];
-
-[_key, _id, _data] call vgm_s_fnc_db_save //result
+[_key, _id, _data, _fnc_handler, _arguments] call vgm_s_fnc_db_save //result

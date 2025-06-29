@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -30,7 +30,7 @@ private _skillPointsSpent = _skillsData get "skillPointsSpent";
 _skillsData set ["skillPoints", _skillPoints + _skillPointsSpent];
 _skillsData set ["skillPointsSpent", 0];
 
-[_player, +(_skillsData get "skillPaths")] call vgm_s_fnc_skills_forgetSkills;
-
-// inform the player that respec succeded
-[] remoteExecCall ["vgm_c_fnc_skills_receiveSkillRespec", _player];
+[_player, +(_skillsData get "skillPaths"), {
+    // inform the player that respec succeded
+    [] remoteExecCall ["vgm_c_fnc_skills_receiveSkillRespec", _player];
+}] call vgm_s_fnc_skills_forgetSkills;
