@@ -39,7 +39,7 @@ if !(isNil "_initialised") exitWith {};
 [_player] call para_s_fnc_cleanup_register_player;
 
 // Ensure player has a profile.
-[_player] call vgm_s_fnc_player_fetch;
+// [_player] call vgm_s_fnc_player_fetch;
 
 // send all variables to player
 _local_vars = [];
