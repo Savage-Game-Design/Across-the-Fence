@@ -2,7 +2,7 @@
     File: fn_db_typed_save.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2023-01-05
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -43,4 +43,4 @@ _data set ["version", vgm_version];
 
 private _formattedID = format ["%1_%2", _key, _id];
 
-[_formattedID, _data] call vgm_s_fnc_db_save //result
+[_key, _id, _data] call vgm_s_fnc_db_save //result

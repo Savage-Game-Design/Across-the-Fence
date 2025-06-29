@@ -2,7 +2,7 @@
     File: fn_db_persist.sqf
     Author: Savage Game Design
     Date: 2024-12-05
-    Last Update: 2024-12-19
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -15,10 +15,8 @@
         Nothing
 
     Example(s):
-        [] call vgm_s_fnc_db_flush;
+        [] call vgm_s_fnc_db_persist;
  */
 
-private _currentTime = diag_tickTime;
-saveProfileNamespace;
-// Track the time, to make it easier to identify if the profile namespace saving is causing stutters (which it did in Mike Force).
-[format ["Mission database saved in %1 seconds", diag_tickTime - _currentTime]] call vgm_g_fnc_logInfo;
+private _fnc = format ["vgm_s_fnc_db_%1_persist", missionNamespace getVariable "vgm_g_dbBackendType"];
+[] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]) // return

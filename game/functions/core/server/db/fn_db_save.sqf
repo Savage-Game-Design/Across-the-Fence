@@ -2,7 +2,7 @@
     File: fn_db_save.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2024-12-19
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -13,7 +13,7 @@
         1: Data - Data for the entry [HASHMAP]
 
     Returns:
-        0: Data saved to the database [HASHMAP]
+        Nothing
 
     Example:
         private _playerUID = getPlayerUID player;
@@ -26,14 +26,13 @@
         [_vgmUID, _playerProfile] call vgm_s_fnc_db_save;
 */
 
-params ["_id", "_data"];
+params ["_key", "_id", "_data", "_fnc_handler"];
 
 if !(_data isEqualType createHashMap) exitWith {
     ["ERROR", format ["VGM: Failure to save %1. Data is not a hashmap: %2", _id, _data]] call para_g_fnc_log;
 };
 
-profileNamespace setVariable [format ["vgm_%1", _id], _data];
+private _fnc = format ["vgm_s_fnc_db_%1_set", missionNamespace getVariable "vgm_g_dbBackendType"];
+[_key, _id, _fnc_handler] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]);
 
-["SUCCESS", format ["VGM: Saved %1 with data: %2", _id, _data]] call para_g_fnc_log;
-
-+_data // result
+nil

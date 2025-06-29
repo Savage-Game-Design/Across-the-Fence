@@ -396,6 +396,15 @@ class vgm_c
         };
     };
 
+    class db
+    {
+        VGM_CLIENT_PATH(\core\client\db);
+
+        class db_preInit {
+            preInit = 1;
+        };
+    };
+
     class ai
     {
         VGM_CLIENT_PATH(\systems\ai\client);
