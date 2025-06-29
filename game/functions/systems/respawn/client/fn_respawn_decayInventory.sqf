@@ -41,7 +41,7 @@ if (backpack _unit != "") then {
     _removedItems pushBack [1, backpack _unit];
     {
         _x params ["_item", "_count"];
-        _removeItems pushBack [_count, _item];
+        _removedItems pushBack [_count, _item];
     } forEach _backpackItems;
     removeBackpack _unit;
 };
