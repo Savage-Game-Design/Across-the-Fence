@@ -205,7 +205,10 @@ class field_modification_4 {
     };
 
     magazines[] = {
-
+        "vn_izh54_so_mag",
+        "vn_m712_mag",
+        "vn_type64_mag",
+        "vn_m1895_mag"
     };
 
     backpacks[] = {
