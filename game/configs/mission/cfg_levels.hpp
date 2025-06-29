@@ -1,7 +1,7 @@
 class vgm_levels {
     class level_0 {
         experience = 0;
-        skillPoints = 0;
+        skillPoints = 2;
     };
     class level_1 {
         experience = 500; // amount of XP needed to advance to next level
@@ -9,7 +9,7 @@ class vgm_levels {
     };
     class level_2 {
         experience = 575;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_3 {
         experience = 646;
@@ -17,7 +17,7 @@ class vgm_levels {
     };
     class level_4 {
         experience = 713;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_5 {
         experience = 778;
@@ -25,7 +25,7 @@ class vgm_levels {
     };
     class level_6 {
         experience = 839;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_7 {
         experience = 897;
@@ -33,7 +33,7 @@ class vgm_levels {
     };
     class level_8 {
         experience = 952;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_9 {
         experience = 1004;
@@ -41,7 +41,7 @@ class vgm_levels {
     };
     class level_10 {
         experience = 1054;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_11 {
         experience = 1101;
@@ -49,7 +49,7 @@ class vgm_levels {
     };
     class level_12 {
         experience = 1146;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_13 {
         experience = 1189;
@@ -57,7 +57,7 @@ class vgm_levels {
     };
     class level_14 {
         experience = 1229;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_15 {
         experience = 1268;
