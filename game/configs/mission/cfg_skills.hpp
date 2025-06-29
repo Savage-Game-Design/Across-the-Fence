@@ -298,6 +298,7 @@ class vgm_skillTrees {
         };
     };
 
+    /*
     class rifleman {
         displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
         description = "";
@@ -571,4 +572,5 @@ class vgm_skillTrees {
         // support specializations
         class subtrees {};
     };
+    */
 };
