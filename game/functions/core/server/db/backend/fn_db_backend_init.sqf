@@ -46,12 +46,24 @@ vgm_db_backend_callbackHandlers = createHashMapFromArray [
 
         [format ["%1:%2", _schema, _action], {
             params ["_resultStr", "_data", "_args"];
-            _data params ["_requestId", "_data"];
+            format ["DB callback: %1, %2", _resultStr, _data] call vgm_g_fnc_logDebug;
+
+            _data = parseSimpleArray _data;
+            _data params ["_requestId", ["_data", createHashMap]];
             _args params ["_schema"];
 
             if (_resultStr == "empty") then {
                 format ["Empty data for %2 request: %1", _requestId, _schema] call vgm_g_fnc_logWarning;
                 _data = createHashMap;
+            };
+
+            if (_resultStr == "error") exitWith {
+                // TODO this might keep the player hanging on a loading screen
+                format ["Extension callback error: %1, %2", _requestId, _data] call vgm_g_fnc_logError;
+            };
+
+            if (_data isEqualType []) then {
+                _data = createHashMapFromArray _data;
             };
 
             (vgm_db_backend_callbackHandlers get _schema deleteAt _requestId) params ["_handler", "_arguments"];

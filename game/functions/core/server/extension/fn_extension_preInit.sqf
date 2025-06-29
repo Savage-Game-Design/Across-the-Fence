@@ -14,5 +14,5 @@ if (!isServer) exitWith {};
 addMissionEventHandler ["ExtensionCallback", {
     params ["_function", "_result", "_data"];
     (vgm_s_extension_handlers get _function) params ["_handler", "_arguments"];
-    [_function, parseSimpleArray _data, _arguments] call _handler;
+    [_result, _data, _arguments] call _handler;
 }];
