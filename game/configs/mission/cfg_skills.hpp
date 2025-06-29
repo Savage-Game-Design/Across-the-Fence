@@ -39,26 +39,31 @@ class vgm_skillTrees {
             class tier_0 {
                class specialisation_rifleman: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN_DESC";
                     column = 1;
                 };
 
                 class specialisation_scout: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT_DESC";
                     column = 2;
                 };
 
                 class specialisation_marksman: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN_DESC";
                     column = 3;
                 };
 
                 class specialisation_grenadier: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER_DESC";
                     column = 4;
                 };
 
                 class specialisation_machinegunner: vgm_weaponSpecialisationTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER_DESC";
                     column = 5;
                 };
             };
@@ -71,7 +76,8 @@ class vgm_skillTrees {
                 };
 
                 class strongHands: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY";
+                    displayName = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS";
+                    description = "$STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS_DESC";
                     column = 3;
 
                     codeApply = "[player, 'recoil', 'skill_passives_strongHands', -0.25, true] call vgm_c_fnc_coefficient_set";

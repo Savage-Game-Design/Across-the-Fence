@@ -81,7 +81,7 @@
             <Original>Not enough skill points</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
-            <Original>Tier locked\nLearn any skill in previous level to unlock</Original>
+            <Original>Tier locked\nUnlock this tier by spending enough points in the previous tiers</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_OPEN_SKILL_WHEEL">
             <Original>Open skill wheel</Original>
@@ -302,17 +302,32 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN">
             <Original>Specialisation: Rifleman</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN_DESC">
+            <Original>Unlocks weapons and equipment suitable for a rifleman when you level up.\nRiflemen are well-suited to mid-range and precision engagements, having access to a selection of rifles and some scopes.\nNew gear is unlocked every other level.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT">
             <Original>Specialisation: Scout</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT_DESC">
+            <Original>Unlocks weapons and equipment suitable for a scout when you level up.\nScouts prioritise quiet, close-range engagements, having access to a selection of suppressed SMGs.\nNew gear is unlocked every other level.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN">
             <Original>Specialisation: Marksman</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN_DESC">
+            <Original>Unlocks weapons and equipment suitable for a marksman when you level up.\nMarksmen excel at mid and long range, with access to precise, semi-automatic weapons and a range of scopes.\nNew gear is unlocked every other level.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER">
             <Original>Specialisation: Grenadier</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER_DESC">
+            <Original>Unlocks weapons and equipment suitable for a grenadier when you level up.\nGrenadiers can deal with groups of NVA quickly, having access to a variety of weapon types and grenade launcher attachments.\nNew gear is unlocked every other level.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER">
             <Original>Specialisation: Machinegunner</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER_DESC">
+            <Original>Unlocks weapons and equipment suitable for a machinegunner when you level up.\nMachinegunners can easily suppress and subdue the NVA, with access to a range to light machineguns.\nNew gear is unlocked every other level.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_1">
             <Original>Field Modifications 1</Original>
@@ -398,7 +413,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_BATTLE_FOCUS">
             <Original>Battle focus</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_TREE_CUTTER_DESC">
+        <Key ID="STR_VGM_SKILLS_SKILL_BATTLE_FOCUS_DESC">
             <Original>Firing your weapon does not break Stop, Focus</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LOADED_FOR_BEAR">
@@ -438,7 +453,10 @@
             <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
         </Key>
         <!-- Rifleman -->
-        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_INCREASED_ACCURACY">
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS">
+            <Original>Strong Hands</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS_DESC">
             <Original>-25% Weapon recoil</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_TOUGH">
