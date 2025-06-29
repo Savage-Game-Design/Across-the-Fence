@@ -20,4 +20,9 @@
 
 params ["_player"];
 
-_player getVariable "vgm_g_levelingData"; // return
+private _hashMap = _player getVariable "vgm_g_levelingData";
+if (isNil "_hashMap") then {
+    format ["Leveling cached data is nil: %1", _player] call vgm_g_fnc_logError;
+};
+
+_hashMap // return
