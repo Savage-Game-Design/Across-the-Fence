@@ -2,7 +2,7 @@
     File: fn_leveling_dbGet.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2023-06-01
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -12,20 +12,26 @@
         _player - Player to get data for [OBJECT]
 
     Returns:
-        Leveling data [HASHMAP]
+        Nothing
 
     Example(s):
-        _player call vgm_s_fnc_leveling_dbGet
+        [_player, {
+            params ["_player", "_data"];
+        }] call vgm_s_fnc_leveling_dbGet
  */
 
-params ["_player"];
+params ["_player", "_callback"];
 
 private _uid = getPlayerUID _player;
 
 ["DEBUG", format ["Loading leveling data - %1", _uid]] call vgm_g_fnc_log;
 
-private _playerLevelingData = ["player_leveling", _uid] call vgm_s_fnc_db_get;
-_playerLevelingData set ["level", 0, true];
-_playerLevelingData set ["experience", 0, true];
+["leveling", _uid, {
+    params ["_data", "_arguments"];
 
-_playerLevelingData // return
+    _data set ["level", 0, true];
+    _data set ["experience", 0, true];
+
+    _arguments params ["_player", "_callback"];
+    [_player, _data] call _callback;
+}, [_player, _callback]] call vgm_s_fnc_db_get;

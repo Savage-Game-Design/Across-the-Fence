@@ -2,7 +2,7 @@
     File: fn_leveling_dbGetCached.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2023-06-01
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -20,10 +20,4 @@
 
 params ["_player"];
 
-private _hashMap = _player getVariable "vgm_g_levelingData";
-if (isNil "_hashMap") then {
-    _hashMap = _player call vgm_s_fnc_leveling_dbGet;
-    _player setVariable ["vgm_g_levelingData", _hashMap];
-};
-
-_hashMap // return
+_player getVariable "vgm_g_levelingData"; // return
