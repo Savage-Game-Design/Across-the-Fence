@@ -300,31 +300,31 @@
     <Package name="Skills Skill">
         <!-- Combat -->
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN">
-            <Original>Specialisation: Rifleman</Original>
+            <Original>&lt;t size='0.8'&gt;[Specialisation]&lt;/t&gt;&lt;br /&gt;Rifleman</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN_DESC">
             <Original>Unlocks weapons and equipment suitable for a rifleman when you level up.\nRiflemen are well-suited to mid-range and precision engagements, having access to a selection of rifles and some scopes.\nNew gear is unlocked every other level.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT">
-            <Original>Specialisation: Scout</Original>
+            <Original>&lt;t size='0.8'&gt;[Specialisation]&lt;/t&gt;&lt;br /&gt;Scout</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_SCOUT_DESC">
             <Original>Unlocks weapons and equipment suitable for a scout when you level up.\nScouts prioritise quiet, close-range engagements, having access to a selection of suppressed SMGs.\nNew gear is unlocked every other level.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN">
-            <Original>Specialisation: Marksman</Original>
+            <Original>&lt;t size='0.8'&gt;[Specialisation]&lt;/t&gt;&lt;br /&gt;Marksman</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MARKSMAN_DESC">
             <Original>Unlocks weapons and equipment suitable for a marksman when you level up.\nMarksmen excel at mid and long range, with access to precise, semi-automatic weapons and a range of scopes.\nNew gear is unlocked every other level.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER">
-            <Original>Specialisation: Grenadier</Original>
+            <Original>&lt;t size='0.8'&gt;[Specialisation]&lt;/t&gt;&lt;br /&gt;Grenadier</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_GRENADIER_DESC">
             <Original>Unlocks weapons and equipment suitable for a grenadier when you level up.\nGrenadiers can deal with groups of NVA quickly, having access to a variety of weapon types and grenade launcher attachments.\nNew gear is unlocked every other level.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER">
-            <Original>Specialisation: Machinegunner</Original>
+            <Original>&lt;t size='0.8'&gt;[Specialisation]&lt;/t&gt;&lt;br /&gt;Machinegunner</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_MACHINEGUNNER_DESC">
             <Original>Unlocks weapons and equipment suitable for a machinegunner when you level up.\nMachinegunners can easily suppress and subdue the NVA, with access to a range to light machineguns.\nNew gear is unlocked every other level.</Original>

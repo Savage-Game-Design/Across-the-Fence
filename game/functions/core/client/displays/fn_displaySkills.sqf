@@ -244,7 +244,23 @@ switch _mode do {
                 private _ctrlSkill = _display ctrlCreate ["VGM_ctrlSkill", -1, _ctrlSkillTree];
                 _ctrlSkill setVariable ["vgm_skill", _skill];
                 if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
-                _ctrlSkill ctrlSetStructuredText parseText format ["%1 SP<br/>%2", _skill get "cost", _skill get "displayName"];
+
+                private _skillText = [
+                    parseText (_skill get "displayName"),
+                    lineBreak,
+                    format ["%1 SP", _skill get "cost"]
+                ];
+
+                if (_skill get "isActive") then {
+                    _skillText = _skillText + [
+                        lineBreak,
+                        parseText format ["<t size='0.8'>Duration: %1s", _skill get "duration"],
+                        lineBreak,
+                        parseText format ["<t size='0.8'>Cooldown: %1s", _skill get "cooldown"]
+                    ];
+                };
+
+                _ctrlSkill ctrlSetStructuredText composeText _skillText;
                 private _tooltip = _skill get "description";
 
                 if (_skill call vgm_g_fnc_skills_isKnown) then {
