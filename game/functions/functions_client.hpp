@@ -227,6 +227,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\leveling\global);
 
+        class leveling_getLevelInfo {};
         class leveling_parseLevelsCfg {};
         class leveling_preInit
         {
