@@ -29,7 +29,7 @@ class default {
         "vn_m45",
         "vn_m1carbine",
         "vn_m1a1_tommy",
-        "vn_m1911_sd",
+        "vn_m1911",
         "vn_m127"
     };
 
@@ -587,7 +587,7 @@ class marksman_01 {
     condition="(['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
 
     weapons[] = {
-        "vn_m2carbine_sniper"
+        "vn_m2carbine"
     };
 
     magazines[] = {
@@ -649,7 +649,7 @@ class marksman_07 {
     condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 7"
 
     weapons[] = {
-        "vn_xm177_mrk"
+        "vn_xm177"
     };
 
     magazines[] = {
@@ -670,7 +670,7 @@ class marksman_09 {
     condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
 
     weapons[] = {
-        "vn_m40a1_sniper"
+        "vn_m40a1"
     };
 
     magazines[] = {
@@ -692,7 +692,7 @@ class marksman_11 {
     condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 11"
 
     weapons[] = {
-        "vn_l1a1_01_mrk"
+        "vn_l1a1_01"
     };
 
     magazines[] = {
@@ -715,7 +715,7 @@ class marksman_13 {
     condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 13"
 
     weapons[] = {
-        "vn_m16_usaf_sniper"
+        "vn_m16_usaf"
     };
 
     magazines[] = {
@@ -801,7 +801,7 @@ class rifleman_05 {
     condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
 
     weapons[] = {
-        "vn_m16_sd"
+        "vn_m16"
     };
 
     magazines[] = {
@@ -842,7 +842,7 @@ class rifleman_09 {
     condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
 
     weapons[] = {
-        "vn_m1carbine_sniper"
+        "vn_m1carbine"
     };
 
     magazines[] = {
@@ -936,7 +936,7 @@ class scout_01 {
     condition="(['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
 
     weapons[] = {
-        "vn_mpu_sd"
+        "vn_mpu"
     };
 
     magazines[] = {
@@ -957,7 +957,7 @@ class scout_03 {
     condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 3"
 
     weapons[] = {
-        "vn_m3sd"
+        "vn_m3a1"
     };
 
     magazines[] = {
@@ -978,7 +978,7 @@ class scout_05 {
     condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
 
     weapons[] = {
-        "vn_sten_sd"
+        "vn_sten"
     };
 
     magazines[] = {
@@ -1020,7 +1020,7 @@ class scout_09 {
     condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
 
     weapons[] = {
-        "vn_m45_sd"
+        "vn_m45"
     };
 
     magazines[] = {
@@ -1084,7 +1084,7 @@ class scout_15 {
     condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 15"
 
     weapons[] = {
-        "vn_mc10_sd"
+        "vn_mc10"
     };
 
     magazines[] = {
