@@ -32,12 +32,9 @@ if !(_data isEqualType createHashMap) exitWith {
     ["ERROR", format ["VGM: Failure to save %1. Data is not a hashmap: %2", _id, _data]] call para_g_fnc_log;
 };
 
-// don't overwrite existing key
-private _vgmID = format ["vgm_%1_%2", _key, _id];
-
 // set key and id only if not present in data already
 _data set ["key", _key, true];
-_data set ["id", _vgmID, true];
+_data set ["id", _id, true];
 
 _data set ["version", vgm_version];
 
