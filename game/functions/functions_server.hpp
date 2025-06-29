@@ -51,6 +51,16 @@ class vgm_s
         class db_backend_persist {};
         class db_backend_set {};
     };
+    class db_profile
+    {
+        VGM_SERVER_PATH(\core\server\db\profile);
+
+        class db_profile_clear {};
+        class db_profile_get {};
+        class db_profile_persist {};
+        class db_profile_set {};
+    };
+
     class extension
     {
         VGM_SERVER_PATH(\core\server\extension);

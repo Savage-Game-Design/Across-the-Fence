@@ -13,7 +13,7 @@
         1: Data - Data for the entry [HASHMAP]
 
     Returns:
-        Nothing
+        0: Request was accepted - BOOL
 
     Example:
         private _playerUID = getPlayerUID player;
@@ -30,9 +30,8 @@ params ["_key", "_id", "_data", "_fnc_handler", "_arguments"];
 
 if !(_data isEqualType createHashMap) exitWith {
     ["ERROR", format ["VGM: Failure to save %1. Data is not a hashmap: %2", _id, _data]] call para_g_fnc_log;
+    false
 };
 
 private _fnc = format ["vgm_s_fnc_db_%1_set", missionNamespace getVariable "vgm_g_dbBackendType"];
-[_key, _id, _fnc_handler, _arguments] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]);
-
-nil
+[_key, _id, _data, _fnc_handler, _arguments] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]) // return

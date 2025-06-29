@@ -12,7 +12,7 @@
 if (!isServer) exitWith {};
 
 if (
-    true // TODO check if backend should be enabled
+    isDedicated // TODO check if backend should be enabled
 ) then {
     [] call vgm_s_fnc_db_backend_init;
 } else {
