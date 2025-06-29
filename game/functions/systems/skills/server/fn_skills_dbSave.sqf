@@ -2,7 +2,7 @@
     File: fn_skills_dbSave.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -15,16 +15,24 @@
         Nothing
 
     Example(s):
-        _player call vgm_s_fnc_skills_dbSave
+        [_player, _skillsData, {
+            params ["_player", "_data"];
+        }] call vgm_s_fnc_skills_dbSave
  */
 
-params ["_player"];
+params ["_player", "_skillsData", "_callback", "_arguments"];
 
 private _uid = getPlayerUID _player;
-private _hashMap = _player call vgm_s_fnc_skills_dataGetCached;
-if (isNil "_hashMap") exitWith {
+
+if (isNil "_skillsData") exitWith {
     (format ["No skills data for player %1 (%2)", name _player, _uid]) call vgm_g_fnc_logError;
     false // return
 };
 
-["player_skills", _uid, _hashMap] call vgm_s_fnc_db_typed_save;
+["skills", _uid, _skillsData, {
+    params ["_data", "_arguments"];
+
+    _arguments params ["_player", "_skillsData", "_callback"];
+    _callback params ["_callback", "_arguments"];
+    [_player, _data, _skillsData, _arguments] call _callback;
+}, [_player, _skillsData, _callback]] call vgm_s_fnc_db_typed_save;
