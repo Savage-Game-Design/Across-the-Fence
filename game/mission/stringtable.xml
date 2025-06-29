@@ -395,7 +395,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM">
             <Original>Stable platform</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM">
+        <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM_DESC">
             <Original>50% less weapon sway when crouched or prone</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_GRASS_CUTTER">
