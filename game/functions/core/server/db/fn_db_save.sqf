@@ -26,13 +26,13 @@
         [_vgmUID, _playerProfile] call vgm_s_fnc_db_save;
 */
 
-params ["_key", "_id", "_data", "_fnc_handler"];
+params ["_key", "_id", "_data", "_fnc_handler", "_arguments"];
 
 if !(_data isEqualType createHashMap) exitWith {
     ["ERROR", format ["VGM: Failure to save %1. Data is not a hashmap: %2", _id, _data]] call para_g_fnc_log;
 };
 
 private _fnc = format ["vgm_s_fnc_db_%1_set", missionNamespace getVariable "vgm_g_dbBackendType"];
-[_key, _id, _fnc_handler] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]);
+[_key, _id, _fnc_handler, _arguments] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]);
 
 nil

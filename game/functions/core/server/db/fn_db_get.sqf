@@ -17,12 +17,12 @@
         0: Value -  HASHMAP
 
     Example(s):
-        ["player", getPlayerUID player] call vgm_s_fnc_db_get;
+        ["leveling", getPlayerUID player, {}] call vgm_s_fnc_db_get;
 */
 
-params ["_key", "_id", "_fnc_handler"];
+params ["_key", "_id", "_fnc_handler", "_arguments"];
 
 private _fnc = format ["vgm_s_fnc_db_%1_get", missionNamespace getVariable "vgm_g_dbBackendType"];
-[_key, _id, _fnc_handler] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]);
+[_key, _id, _fnc_handler, _arguments] call (missionNamespace getVariable [_fnc, {format ["Invalid DB function: %1", _fnc]}]);
 
 nil

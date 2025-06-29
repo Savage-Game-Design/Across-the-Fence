@@ -10,7 +10,7 @@
 
     Parameter(s):
         _function - Function of the extension to call [STRING]
-        _args - Arguments to pass to the function [ANY]
+        _args - Arguments to pass to the function [ARRAY]
 
     Returns:
         Extension result data [ARRAY]
@@ -20,7 +20,7 @@
  */
 
 
-params ["_function", "_args"];
+params [["_function", "", [""]], ["_args", [], [[]]]];
 
 format ["Extension function call: %1", _function] call vgm_g_fnc_logDebug;
 

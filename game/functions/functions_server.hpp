@@ -41,7 +41,16 @@ class vgm_s
         class db_save {};
         class db_typed_save {};
     };
+    class db_backend
+    {
+        VGM_SERVER_PATH(\core\server\db\backend);
 
+        class db_backend_clear {};
+        class db_backend_get {};
+        class db_backend_init {};
+        class db_backend_persist {};
+        class db_backend_set {};
+    };
     class extension
     {
         VGM_SERVER_PATH(\core\server\extension);
