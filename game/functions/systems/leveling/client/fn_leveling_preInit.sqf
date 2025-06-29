@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2025-01-23
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -28,7 +28,10 @@ if (!hasInterface) exitWith {};
 }] call vgm_c_fnc_loading_addHandler;
 
 ["vgm_shared_hub_enabled", {
-    "VGM_LevelIndicator" cutRsc ["VGM_RscLevelIndicator", "PLAIN", -1, false];
+    [] spawn {
+        waitUntil {!isNil {player getVariable "vgm_g_levelingData"}};
+        "VGM_LevelIndicator" cutRsc ["VGM_RscLevelIndicator", "PLAIN", -1, false];
+    };
 }] call para_g_fnc_event_subscribeLocal;
 
 ["vgm_shared_hub_disabled", {
