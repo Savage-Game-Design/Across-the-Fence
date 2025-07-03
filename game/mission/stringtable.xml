@@ -81,7 +81,7 @@
             <Original>Not enough skill points</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_TIER_LOCKED">
-            <Original>Tier locked\nUnlock this tier by spending enough points in the previous tiers</Original>
+            <Original>Unlock this skill/tier by spending enough points in the previous tiers</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_OPEN_SKILL_WHEEL">
             <Original>Open skill wheel</Original>
@@ -103,6 +103,18 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_ABILITYEMPTY_TEXT">
             <Original>Details of the selected ability will be shown here.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_SKILL_LOCKED">
+            <Original>Skill locked</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_DISABLED_SKILL">
+            <Original>This skill has been temporarily disabled so that it can be improved.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT">
+            <Original>You already have advanced training in another area.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_UI_WEAPON_SPECIALISATION_LIMIT">
+            <Original>You already have another weapon specialisation.</Original>
         </Key>
     </Package>
     <Package name="Medical UI">
@@ -293,8 +305,8 @@
         <Key ID="STR_VGM_SKILLS_TREE_RTO">
             <Original>Radio operator (RTO)</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
-            <Original>Fire Support</Original>
+        <Key ID="STR_VGM_SKILLS_TREE_MEDIC">
+            <Original>Medic</Original>
         </Key>
     </Package>
     <Package name="Skills Skill">
@@ -453,11 +465,18 @@
             <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
         </Key>
         <!-- Radio operator (RTO) -->
-        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALIST_RTO">
-            <Original>&lt;t size='0.8'&gt;[Specialist]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO">
+            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALIST_RTO_DESC">
-            <Original>Specialise as a radio telephone operator.\nUnlocks radio backpacks and the ability to call in air support.\nReduced skill costs in the RTO tree.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC">
+            <Original>Gain advanced training as a radio telephone operator.\nYou can only have one advanced training.\nUnlocks radio backpacks and the ability to call in air support.\nReduced skill costs in the RTO tree.</Original>
+        </Key>
+        <!-- Medic -->
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_MEDIC">
+            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC">
+            <Original>Gain advanced training as a medic.\nYou can only have one advanced training.\nUnlocks reusable medical kits.\nReduced skill costs in the medic tree.</Original>
         </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS">
@@ -537,9 +556,6 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL">
             <Original>Advanced Medical Equipment</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALIST_RTO">
-            <Original>RTO Equipment</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL">
             <Original>Efficient and Resourceful</Original>

@@ -331,6 +331,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\skills\global);
 
         class skills_canLearn {};
+        class skills_canLearnWithReason {};
         class skills_canSee {};
         class skills_getByPath {};
         class skills_getSkillTreeFromSkill {};
