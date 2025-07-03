@@ -1,4 +1,4 @@
-#define CONDITION_HEAVY_SUPPORT condition = "(['support', 'heavySupport'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
+#define CONDITION_HEAVY_SUPPORT condition = "player getUnitTrait 'vgm_artillery_heavySupport'"
 
 class vn_artillery_settings {
     // Add your NUMBER variable that will be used as a cost variable - leave empty if you don't want the cost to matter.
@@ -15,7 +15,7 @@ class vn_artillery_settings {
     // Determines if the support planes/helicopters will be set to captive.
     captive = 1;
 
-    radio_backpacks[] = {"vn_b_pack_03", "vn_b_pack_prc77_01", "vn_b_pack_lw_06"};
+    radio_backpacks[] = {"vn_b_pack_m41_05", "vn_b_pack_trp_04", "vn_b_pack_trp_04_02", "vn_b_pack_03", "vn_b_pack_03_02", "vn_b_pack_lw_06", "vn_b_pack_prc77_01"};
     radio_vehicles[] = {};
     player_types[] = {};
 

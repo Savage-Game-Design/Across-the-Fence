@@ -290,8 +290,8 @@
         <Key ID="STR_VGM_SKILLS_TREE_RECON">
             <Original>Recon</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_SUPPORT">
-            <Original>Support</Original>
+        <Key ID="STR_VGM_SKILLS_TREE_RTO">
+            <Original>Radio operator (RTO)</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_TREE_FIRE_SUPPORT">
             <Original>Fire Support</Original>
@@ -452,6 +452,13 @@
         <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC">
             <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
         </Key>
+        <!-- Radio operator (RTO) -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALIST_RTO">
+            <Original>&lt;t size='0.8'&gt;[Specialist]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALIST_RTO_DESC">
+            <Original>Specialise as a radio telephone operator.\nUnlocks radio backpacks and the ability to call in air support.\nReduced skill costs in the RTO tree.</Original>
+        </Key>
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS">
             <Original>Strong Hands</Original>
@@ -531,7 +538,7 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL">
             <Original>Advanced Medical Equipment</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO">
+        <Key ID="STR_VGM_SKILLS_SKILL_SPECIALIST_RTO">
             <Original>RTO Equipment</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SUPPORT_RESOURCEFUL">

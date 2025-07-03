@@ -758,6 +758,29 @@ class marksman_15 {
     };
 }
 
+class rto_backpacks {
+    condition="(['rto', 'loadout_rto'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
+
+    weapons[] = {
+
+    };
+
+    magazines[] = {
+
+    };
+
+    backpacks[] = {
+        "vn_b_pack_03_02",
+        "vn_b_pack_prc77_01",
+        "vn_b_pack_lw_06",
+        "vn_b_pack_03"
+    };
+
+    items[] = {
+
+    };
+}
+
 class rifleman_01 {
     condition="(['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
 
