@@ -56,8 +56,9 @@ private _fnc_filterContainer = {
     };
 
     {
-        if (count _x == 7) then {
-            [_x] call _fnc_filterWeapon;
+        // Nested arrays should always be weapons
+        if ((_x # 0) isEqualType []) then {
+            [_x # 0] call _fnc_filterWeapon;
             continue;
         };
 
