@@ -2,7 +2,7 @@
     File: fn_skills_canLearn.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2025-06-25
+    Last Update: 2025-07-03
     Public: Yes
 
     Description:
@@ -19,29 +19,4 @@
         [player, _skill] call vgm_g_fnc_skills_canLearn
  */
 
-// #define FIRST_TIER_EXCLUSIVE
-
-params [
-    ["_player", objNull],
-    ["_skill", createHashMap]
-];
-
-private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
-
-((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
-&& {
-    private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
-    private _tier = _skill get "tier";
-    (
-        _tier >= 1
-        #ifdef FIRST_TIER_EXCLUSIVE
-        // we allow only one skill in first tier (0 idx)
-        || {[_player, _skillTree, _tier] call vgm_g_fnc_skills_knownSkillsInTier isEqualTo []}
-        #else
-        || {true}
-        #endif
-    )
-    // check if the tier is unlocked
-    && {[_player, _skillTree, _tier] call vgm_g_fnc_skills_tierUnlocked} // return
-}
-&& {_player call (_skill get "conditionUnlock")} // return
+_this call vgm_g_fnc_skills_canLearnWithReason select 0

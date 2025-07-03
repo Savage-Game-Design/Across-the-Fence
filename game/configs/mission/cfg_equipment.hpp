@@ -112,30 +112,4 @@ class vgm_equipment {
             // Equipment
         };
     };
-
-    class advanced_medical {
-        condition = "(['support', 'loadout_medical'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
-
-        weapons[] = {
-        };
-
-        magazines[] = {
-            // Weapon magazines
-            // Flare launcher flares
-            // Grenades and explosives
-        };
-
-        backpacks[] = {
-
-        };
-
-        items[] = {
-            // Accessories
-            "vn_helper_item_medikit"
-            // Uniforms
-            // Vests
-            // Headgear
-            // Equipment
-        };
-    };
 };

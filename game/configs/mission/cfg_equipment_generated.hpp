@@ -1,3 +1,23 @@
+class advanced_medical_equipment {
+    condition="(['medic', 'training_medic'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
+
+    weapons[] = {
+
+    };
+
+    magazines[] = {
+
+    };
+
+    backpacks[] = {
+
+    };
+
+    items[] = {
+        "vn_helper_item_medikit"
+    };
+}
+
 class chemical_grenades {
     condition="(['combat', 'chemical_grenades'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
 
@@ -767,7 +787,7 @@ class marksman_15 {
 }
 
 class rto_backpacks {
-    condition="(['rto', 'loadout_rto'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
+    condition="(['rto', 'training_rto'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
 
     weapons[] = {
 

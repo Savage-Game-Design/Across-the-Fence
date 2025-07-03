@@ -1,6 +1,5 @@
 #include "macros.inc"
 
-// #define FIRST_TIER_EXCLUSIVE
 params ["_mode", "_params"];
 _this = _params;
 
@@ -271,25 +270,15 @@ switch _mode do {
                     _ctrlSkill ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
                     _ctrlSkill setVariable ["vgm_skill", _skill];
 
-                    private _canLearn = [player, _skill] call vgm_g_fnc_skills_canLearn;
+                    [player, _skill] call vgm_g_fnc_skills_canLearnWithReason params ["_canLearn", "_cantLearnReason"];
                     _ctrlSkill ctrlEnable _canLearn;
                     if (!_canLearn) then {
                         if (_tooltip != "") then {
-                            _tooltip = endl + endl + _tooltip;
+                            _tooltip = [localize "STR_VGM_SKILLS_UI_SKILL_LOCKED", endl, _cantLearnReason call para_c_fnc_localize, endl, endl, _tooltip] joinString "";
+                        } else {
+                            _tooltip = [localize "STR_VGM_SKILLS_UI_SKILL_LOCKED", endl, _cantLearnReason call para_c_fnc_localize] joinString "";
                         };
-                        private _lockedTooltip = ["STR_VGM_SKILLS_UI_TIER_LOCKED", "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS"] select _currentTierUnlocked;
-                        _tooltip = localize _lockedTooltip + _tooltip;
                     };
-
-                    #ifdef FIRST_TIER_EXCLUSIVE
-                    // show the padlock icon over first tier skills which were not choosen
-                    if (_currentTier < 1) exitWith {
-                        private _ctrlPadlock = _ctrlSkill controlsGroupCtrl VGM_IDC_DISPLAYSKILLS_SKILLLOCKED;
-                        private _locked = ([player, _skillTree, _currentTier] call vgm_g_fnc_skills_knownSkillsInTier) isNotEqualTo [];
-                        _ctrlPadlock ctrlShow _locked;
-                        _ctrlUnlock ctrlShow (ctrlShown _ctrlUnlock && !_locked);
-                    };
-                    #endif
                 };
 
                 private _column = [_forEachIndex, _skill get "column"] select _isManualLayout;

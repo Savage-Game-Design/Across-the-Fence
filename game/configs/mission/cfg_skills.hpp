@@ -12,7 +12,7 @@ class vgm_skillTemplate {
     cooldown = 10;
     duration = 0;
 
-    conditionUnlock = "true";
+    conditionUnlock[] = {};
     conditionShow = "true";
     conditionActivate = "true";
 
@@ -24,9 +24,11 @@ class vgm_skillTemplate {
 };
 
 class vgm_weaponSpecialisationTemplate: vgm_skillTemplate {
-    conditionUnlock = "!(missionNamespace getVariable ['vgm_c_skill_hasSpecialisation', false])";
-    codeApply = "vgm_c_skill_hasSpecialisation = true";
-    codeUnapply  = "vgm_c_skill_hasSpecialisation = false";
+    conditionUnlock[] = {
+        { "!(missionNamespace getVariable ['vgm_c_skill_hasWeaponSpecialisation', false])", "STR_VGM_SKILLS_UI_WEAPON_SPECIALISATION_LIMIT" }
+    };
+    codeApply = "vgm_c_skill_hasWeaponSpecialisation = true";
+    codeUnapply  = "vgm_c_skill_hasWeaponSpecialisation = false";
 };
 
 class vgm_skillTrees {
@@ -143,7 +145,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC";
                     column = 3;
                     // TODO - Implement this skill
-                    conditionUnlock = "false";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     cost = 2;
                 };
 
@@ -280,7 +282,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_WAR_FACE_DESC";
                     column = 3;
 
-                    conditionUnlock = "false";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     codeApply = "";
                     codeUnapply = "";
                     skillType = 0;
@@ -293,7 +295,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC";
                     column = 4;
 
-                    conditionUnlock = "false";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     codeApply = "";
                     codeUnapply = "";
                     skillType = 0;
@@ -311,14 +313,49 @@ class vgm_skillTrees {
 
         class skills {
             class tier_0 {
-                class loadout_rto: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO";
-                    description = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO_DESC";
+                class training_rto: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
+                    conditionUnlock[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]";
-                    codeUnapply = "player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]";
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]";
                     cost = 10;
+                    applyOnRespawn = 1;
+                };
+            };
+
+            class tier_1 {
+            };
+
+            class tier_2 {
+            };
+
+            class tier_3 {
+            };
+
+            class tier_4 {
+            };
+        };
+    };
+
+    class medic {
+        displayName = "$STR_VGM_SKILLS_TREE_MEDIC";
+        description = "";
+        icon = "assets\skills\support_ca.paa";
+
+        class skills {
+            class tier_0 {
+                class training_medic: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC";
+                    conditionUnlock[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
+                    column = 0;
+
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['Medic', true]";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['Medic', false]";
+                    cost = 8;
                     applyOnRespawn = 1;
                 };
             };
@@ -554,8 +591,8 @@ class vgm_skillTrees {
                 };
 
                 class loadout_rto: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO";
-                    description = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO_DESC";
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
 
                     codeApply = "player setUnitTrait ['vn_artillery', true, true]";
                     codeUnapply = "player setUnitTrait ['vn_artillery', false, true]";
