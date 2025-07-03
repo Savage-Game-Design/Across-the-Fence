@@ -10,6 +10,7 @@
 
     Parameter(s):
         _removedItems - Classes removed [ARRAY]
+        _display - Display to add the message to. Defaults to a new display if nil [DISPLAY]
 
     Returns:
         Nothing
