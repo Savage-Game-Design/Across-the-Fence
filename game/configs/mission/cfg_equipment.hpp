@@ -3,7 +3,7 @@ class vgm_equipment {
     startingVest = "vn_b_vest_sog_04";
     startingBackpack = "vn_b_pack_01";
 
-    startingItems[] = {"vn_b_item_map", "vn_b_item_compass", "vn_b_item_watch", "vn_b_item_radio_urc10"};
+    startingItems[] = {"vn_b_item_map", "vn_b_item_compass", "vn_b_item_watch"};
     startingBinocular[] = {"vn_camera_01", ""};
 
     startingWeaponItems[] = {
