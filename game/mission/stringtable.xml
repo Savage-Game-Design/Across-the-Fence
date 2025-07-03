@@ -879,4 +879,9 @@
             <Original>You'll respawn when unconscious and abandoned by the team.</Original>
         </Key>
     </Package>
+    <Package name="Equipment">
+        <Key ID="STR_VGM_EQUIPMENT_REMOVED_ITEM_MESSAGE">
+            <Original>The following items are not available to you, and have been removed:</Original>
+        </Key>
+    </Package>
 </Project>
