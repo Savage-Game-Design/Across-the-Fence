@@ -3,7 +3,7 @@
     File: fn_equipment_arsenalInit.sqf
     Author: Savage Game Design
     Date: 2023-11-19
-    Last Update: 2024-12-07
+    Last Update: 2025-07-03
     Public: No
 
     Description:
@@ -43,9 +43,10 @@
 
         _display spawn {
             private _loadout = getUnitLoadout player;
-            private _filteredLoadout = [_loadout] call vgm_c_fnc_equipment_filterLoadout;
+            [_loadout] call vgm_c_fnc_equipment_filterLoadout params ["_filteredLoadout", "_removedItems"];
             if (_filteredLoadout isNotEqualTo _loadout) then {
-                ["showMessage", [_this, localize "STR_A3_RscDisplayArsenal_message_unavailable"]] call BIS_fnc_arsenal;
+                //["showMessage", [_this, "A\nB\nC"]] call BIS_fnc_arsenal;
+                [_removedItems, _this] call vgm_c_fnc_equipment_showRemovedEquipmentMessage;
                 player setUnitLoadout _filteredLoadout;
 
                 ["ListSelectCurrent", _this] call BIS_fnc_arsenal;
@@ -59,9 +60,9 @@
 
 [true, "arsenalClosed", {
     private _loadout = getUnitLoadout player;
-    private _filteredLoadout = [_loadout] call vgm_c_fnc_equipment_filterLoadout;
+    [_loadout] call vgm_c_fnc_equipment_filterLoadout params ["_filteredLoadout", "_removedItems"];
     if (_filteredLoadout isNotEqualTo _loadout) then {
-        localize "STR_A3_RscDisplayArsenal_message_unavailable" spawn BIS_fnc_guiMessage;
+        [_removedItems] call vgm_c_fnc_equipment_showRemovedEquipmentMessage;
         player setUnitLoadout _filteredLoadout;
     };
 }] call BIS_fnc_addScriptedEventHandler;

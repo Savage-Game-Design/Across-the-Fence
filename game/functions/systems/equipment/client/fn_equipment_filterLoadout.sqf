@@ -2,7 +2,7 @@
     File: fn_equipment_filterLoadout.sqf
     Author: Savage Game Design
     Date: 2023-11-17
-    Last Update: 2025-06-29
+    Last Update: 2025-07-03
     Public: Yes
 
     Description:
@@ -33,6 +33,7 @@ private _allowedItems = createHashMapFromArray [["", nil]];
     _allowedItems insert [true, _baseWeapons, []];
 } forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
 
+private _removedItems = createHashMap;
 
 private _fnc_filterWeapon = {
     params ["_weaponData"];
@@ -41,6 +42,7 @@ private _fnc_filterWeapon = {
         if (!(_className in _allowedItems)) then {
             private _replacement = ["", []] select (_x isEqualType []);
             _weaponData set [_forEachIndex, _replacement];
+            _removedItems set [_className, []];
         };
     } forEach _weaponData;
 };
@@ -65,12 +67,14 @@ private _fnc_filterContainer = {
             // `getUnitLoadout` does not return content of nested containers
             // outright remove them for sake of simplicity
             _items set [_forEachIndex, []];
+            _removedItems set [_itemClass, []];
             continue;
         };
 
         private _itemClass = _x select 0;
         if (!(_itemClass in _allowedItems)) then {
             _items set [_forEachIndex, []];
+            _removedItems set [_itemClass, []];
         };
     } forEach _items;
 };
@@ -107,6 +111,7 @@ _loadout = +_loadout;
     private _itemClass = _loadout select _x;
     if (!(_itemClass in _allowedItems)) then {
         _loadout set [_x, ""];
+        _removedItems set [_itemClass, []];
     };
 } forEach [IDX_HEADWEAR, IDX_FACEWEAR];
 
@@ -114,7 +119,8 @@ private _assignedItems = _loadout select IDX_ASSIGNED_ITEMS;
 {
     if (!(_x in _allowedItems)) then {
         _assignedItems set [_forEachIndex, ""];
+        _removedItems set [_x, []];
     };
 } forEach _assignedItems;
 
-_loadout
+[_loadout, keys _removedItems]

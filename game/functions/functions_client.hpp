@@ -509,6 +509,7 @@ class vgm_c
             postInit = 1;
         };
         class equipment_setDefaultLoadout {};
+        class equipment_showRemovedEquipmentMessage {};
     };
 
     class keyhandler
