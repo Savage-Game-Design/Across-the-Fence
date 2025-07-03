@@ -138,26 +138,4 @@ class vgm_equipment {
             // Equipment
         };
     };
-
-    class rto {
-        condition = "(['support', 'loadout_rto'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
-
-        weapons[] = {};
-
-        magazines[] = {};
-
-        backpacks[] = {
-            "vn_b_pack_03",
-            "vn_b_pack_prc77_01",
-            "vn_b_pack_lw_06"
-        };
-
-        items[] = {
-            // Accessories
-            // Uniforms
-            // Vests
-            // Headgear
-            // Equipment
-        };
-    };
 };

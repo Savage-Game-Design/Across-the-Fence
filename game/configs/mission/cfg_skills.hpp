@@ -304,6 +304,39 @@ class vgm_skillTrees {
         };
     };
 
+    class rto {
+        displayName = "$STR_VGM_SKILLS_TREE_RTO";
+        description = "";
+        icon = "assets\skills\fire_support_ca.paa";
+
+        class skills {
+            class tier_0 {
+                class loadout_rto: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO_DESC";
+                    column = 0;
+
+                    codeApply = "player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]";
+                    codeUnapply = "player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]";
+                    cost = 10;
+                    applyOnRespawn = 1;
+                };
+            };
+
+            class tier_1 {
+            };
+
+            class tier_2 {
+            };
+
+            class tier_3 {
+            };
+
+            class tier_4 {
+            };
+        };
+    };
+
     /*
     class rifleman {
         displayName = "$STR_VGM_SKILLS_TREE_RIFLEMAN";
@@ -521,8 +554,8 @@ class vgm_skillTrees {
                 };
 
                 class loadout_rto: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO";
-                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_RTO_DESC";
+                    displayName = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO";
+                    description = "$STR_VGM_SKILLS_SKILL_SPECIALIST_RTO_DESC";
 
                     codeApply = "player setUnitTrait ['vn_artillery', true, true]";
                     codeUnapply = "player setUnitTrait ['vn_artillery', false, true]";
