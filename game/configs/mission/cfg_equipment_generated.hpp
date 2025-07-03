@@ -42,6 +42,8 @@ class default {
         "vn_carbine_15_t_mag",
         "vn_m1a1_30_mag",
         "vn_m1a1_30_t_mag",
+        "vn_m1a1_20_mag",
+        "vn_m1a1_20_t_mag",
         "vn_m1911_mag",
         "vn_m61_grenade_mag",
         "vn_m18_red_mag",
@@ -119,6 +121,8 @@ class field_modification_1 {
     };
 
     magazines[] = {
+        "vn_welrod_mag",
+        "vn_m10_mag",
         "vn_m67_grenade_mag",
         "vn_mine_m18_range_mag"
     };
@@ -146,6 +150,10 @@ class field_modification_2 {
     };
 
     magazines[] = {
+        "vn_vz61_mag",
+        "vn_vz61_t_mag",
+        "vn_hd_mag",
+        "vn_mk22_mag",
         "vn_v40_grenade_mag",
         "vn_mine_m18_fuze10_mag"
     };
