@@ -296,11 +296,11 @@
         <Key ID="STR_VGM_SKILLS_TREE_COMBAT">
             <Original>Combat</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_POINTMAN">
+            <Original>Pointman</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
             <Original>Rifleman</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_RECON">
-            <Original>Recon</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_TREE_RTO">
             <Original>Radio operator (RTO)</Original>
@@ -464,6 +464,133 @@
         <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC">
             <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
         </Key>
+        <!-- Pointman -->
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN">
+            <Original>[Training] Pointman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC">
+            <Original>Gain advanced training as a pointman.\nYou can only have one advanced training.\nUnlocks the trapkit for detecting traps.\nReduced skill costs in the pointman tree.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ELDEST_SON">
+            <Original>Eldest son</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ELDEST_SON_DESC">
+            <Original>Enables encountering an ammo dump where booby-trapped ammo can be planted for bonus rewards.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GROUND_SIGN">
+            <Original>Ground sign</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC">
+            <Original>Intel glints appear 30% more frequently.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_IN_THE_ZONE">
+            <Original>In the zone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_IN_THE_ZONE_DESC">
+            <Original>Speed up the activation time of “Stop, Focus” by 50%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLENDING_IN">
+            <Original>Blending in</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLENDING_IN_DESC">
+            <Original>When moving by yourself, trackers are less likely to search for you</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT">
+            <Original>Jungle instinct</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT_DESC">
+            <Original>Gain one extra task hint on the map at the beginning of a mission</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CUTTHROAT">
+            <Original>Cutthroat</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CUTTHROAT_DESC">
+            <Original>Melee kills will not raise alertness</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE">
+            <Original>Sense of scale</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE_DESC">
+            <Original>When looking through binoculars, pressing 'Reveal Target' gives an approximate distance</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TAKING_NOTES">
+            <Original>Taking notes</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TAKING_NOTES_DESC">
+            <Original>Inspected glints are marked on the map for the team</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HANDRAIL">
+            <Original>Handrail</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HANDRAIL_DESC">
+            <Original>Inspecting a trail reveals the direction to the nearest site within 300m</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STONES_THROW">
+            <Original>Stone's throw</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STONES_THROW_DESC">
+            <Original>Attracts enemies to a position 20m in the direction you’re facing</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KEEN_EYE">
+            <Original>Keen eye</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC">
+            <Original>Inspects the nearest glint in the direction you're facing, up to 50m away</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EAVESDROPPING">
+            <Original>Eavesdropping</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EAVESDROPPING_DESC">
+            <Original>Trailing an enemy squad may reveal site information</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CLEAR_LENS">
+            <Original>Clear lens</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC">
+            <Original>Increases camera range from 200m to 400m</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE">
+            <Original>Friend or foe</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC">
+            <Original>Wearing enemy helmets increases the time it takes for them to spot you (unlocks recon pith helmet)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DEEP_FOCUS">
+            <Original>Deep focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DEEP_FOCUS_DESC">
+            <Original>Range of "Stop, Focus" is extended by 100%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ONE_OF_THEM">
+            <Original>One of them</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC">
+            <Original>Enemy won’t detect you as long as you walk naturally (requires enemy helmet)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES">
+            <Original>Pile of leaves</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_DESC">
+            <Original>Hiding bodies delays enemy alert</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ON_THE_PROWL">
+            <Original>On the prowl</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC">
+            <Original>Move freely while using Stop, Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TACTICAL_SENSE">
+            <Original>Tactical sense</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC">
+            <Original>Briefly mark all enemies within 150m in 3D and on the map</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_THROWING_KNIFE">
+            <Original>Throwing knife</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_THROWING_KNIFE_DESC">
+            <Original>Throw knives for a silent ranged kill</Original>
+        </Key>
         <!-- Radio operator (RTO) -->
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO">
             <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
@@ -473,7 +600,7 @@
         </Key>
         <!-- Medic -->
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_MEDIC">
-            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
+            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Medic</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC">
             <Original>Gain advanced training as a medic.\nYou can only have one advanced training.\nUnlocks reusable medical kits.\nReduced skill costs in the medic tree.</Original>

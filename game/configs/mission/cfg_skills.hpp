@@ -306,6 +306,237 @@ class vgm_skillTrees {
         };
     };
 
+    class pointman {
+        displayName = "$STR_VGM_SKILLS_TREE_POINTMAN";
+        description = "";
+        icon = "assets\skills\recon_ca.paa";
+
+        class skills {
+            class tier_0 {
+                class training_pointman: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC";
+                    conditionUnlock[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
+                    column = 0;
+
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
+                    // TODO - Implementation
+                    cost = 2;
+                    applyOnRespawn = 1;
+                };
+
+                class eldest_son: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ELDEST_SON";
+                    description = "$STR_VGM_SKILLS_SKILL_ELDEST_SON_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+
+            class tier_1 {
+                class ground_sign: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN";
+                    description = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class blending_in: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BLENDING_IN";
+                    description = "$STR_VGM_SKILLS_SKILL_BLENDING_IN_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class jungle_instinct: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT";
+                    description = "$STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class in_the_zone: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE";
+                    description = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+            };
+
+            class tier_2 {
+                class stones_throw: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STONES_THROW";
+                    description = "$STR_VGM_SKILLS_SKILL_STONES_THROW_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class keen_eye: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_KEEN_EYE";
+                    description = "$STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class taking_notes: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES";
+                    description = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class cutthroat: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CUTTHROAT";
+                    description = "$STR_VGM_SKILLS_SKILL_CUTTHROAT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class sense_of_scale: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE";
+                    description = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class handrail: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_HANDRAIL";
+                    description = "$STR_VGM_SKILLS_SKILL_HANDRAIL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+            };
+
+            class tier_3 {
+                class one_of_them: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM";
+                    description = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class deep_focus: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS";
+                    description = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class eavesdropping: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_EAVESDROPPING";
+                    description = "$STR_VGM_SKILLS_SKILL_EAVESDROPPING_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class friend_or_foe: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE";
+                    description = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class clear_lens: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS";
+                    description = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+            };
+
+            class tier_4 {
+                class tactical_sense: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE";
+                    description = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class on_the_prowl: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL";
+                    description = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class pile_of_leaves: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES";
+                    description = "$STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class throwing_knife: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_THROWING_KNIFE";
+                    description = "$STR_VGM_SKILLS_SKILL_THROWING_KNIFE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+        };
+    };
+
     class rto {
         displayName = "$STR_VGM_SKILLS_TREE_RTO";
         description = "";
