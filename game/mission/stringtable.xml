@@ -296,11 +296,11 @@
         <Key ID="STR_VGM_SKILLS_TREE_COMBAT">
             <Original>Combat</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_RIFLEMAN">
-            <Original>Rifleman</Original>
+        <Key ID="STR_VGM_SKILLS_TREE_POINTMAN">
+            <Original>Pointman</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_TREE_RECON">
-            <Original>Recon</Original>
+        <Key ID="STR_VGM_SKILLS_TREE_TEAM_LEADER">
+            <Original>Team Leader</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_TREE_RTO">
             <Original>Radio operator (RTO)</Original>
@@ -308,9 +308,11 @@
         <Key ID="STR_VGM_SKILLS_TREE_MEDIC">
             <Original>Medic</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_TREE_TAIL">
+            <Original>Tail</Original>
+        </Key>
     </Package>
-    <Package name="Skills Skill">
-        <!-- Combat -->
+    <Package name="Skills - Combat skills">
         <Key ID="STR_VGM_SKILLS_SKILL_SPECIALISATION_RIFLEMAN">
             <Original>&lt;t size='0.8'&gt;[Specialisation]&lt;/t&gt;&lt;br /&gt;Rifleman</Original>
         </Key>
@@ -464,6 +466,264 @@
         <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC">
             <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
         </Key>
+        <!-- Pointman -->
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN">
+            <Original>[Training] Pointman</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC">
+            <Original>Gain advanced training as a pointman.\nYou can only have one advanced training.\nUnlocks the trapkit for detecting traps.\nReduced skill costs in the pointman tree.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ELDEST_SON">
+            <Original>Eldest son</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ELDEST_SON_DESC">
+            <Original>Enables encountering an ammo dump where booby-trapped ammo can be planted for bonus rewards.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GROUND_SIGN">
+            <Original>Ground sign</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC">
+            <Original>Intel glints appear 30% more frequently.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_IN_THE_ZONE">
+            <Original>In the zone</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_IN_THE_ZONE_DESC">
+            <Original>Speed up the activation time of “Stop, Focus” by 50%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLENDING_IN">
+            <Original>Blending in</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLENDING_IN_DESC">
+            <Original>When moving by yourself, trackers are less likely to search for you</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT">
+            <Original>Jungle instinct</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT_DESC">
+            <Original>Gain one extra task hint on the map at the beginning of a mission</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CUTTHROAT">
+            <Original>Cutthroat</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CUTTHROAT_DESC">
+            <Original>Melee kills will not raise alertness</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE">
+            <Original>Sense of scale</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE_DESC">
+            <Original>When looking through binoculars, pressing 'Reveal Target' gives an approximate distance</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TAKING_NOTES">
+            <Original>Taking notes</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TAKING_NOTES_DESC">
+            <Original>Inspected glints are marked on the map for the team</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HANDRAIL">
+            <Original>Handrail</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HANDRAIL_DESC">
+            <Original>Inspecting a trail reveals the direction to the nearest site within 300m</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STONES_THROW">
+            <Original>Stone's throw</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STONES_THROW_DESC">
+            <Original>Attracts enemies to a position 20m in the direction you’re facing</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KEEN_EYE">
+            <Original>Keen eye</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC">
+            <Original>Inspects the nearest glint in the direction you're facing, up to 50m away</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EAVESDROPPING">
+            <Original>Eavesdropping</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EAVESDROPPING_DESC">
+            <Original>Trailing an enemy squad may reveal site information</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CLEAR_LENS">
+            <Original>Clear lens</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC">
+            <Original>Increases camera range from 200m to 400m</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE">
+            <Original>Friend or foe</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC">
+            <Original>Wearing enemy helmets increases the time it takes for them to spot you (unlocks recon pith helmet)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DEEP_FOCUS">
+            <Original>Deep focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DEEP_FOCUS_DESC">
+            <Original>Range of "Stop, Focus" is extended by 100%</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ONE_OF_THEM">
+            <Original>One of them</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC">
+            <Original>Enemy won’t detect you as long as you walk naturally (requires enemy helmet)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES">
+            <Original>Pile of leaves</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_DESC">
+            <Original>Hiding bodies delays enemy alert</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ON_THE_PROWL">
+            <Original>On the prowl</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC">
+            <Original>Move freely while using Stop, Focus</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TACTICAL_SENSE">
+            <Original>Tactical sense</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC">
+            <Original>Briefly mark all enemies within 150m in 3D and on the map</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_THROWING_KNIFE">
+            <Original>Throwing knife</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_THROWING_KNIFE_DESC">
+            <Original>Throw knives for a silent ranged kill</Original>
+        </Key>
+    </Package>
+    <Package name="Skills - Team leader skills">
+        <!-- Team leader -->
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER">
+            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Team leader</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER_DESC">
+            <Original>Gain advanced training as a team leader.\nYou can only have one advanced training.\nUnlocks a placeable ammo can with 1 use per team member.\nReduced skill costs in the team leader tree.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_MA_BELL">
+            <Original>Ma Bell</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_MA_BELL_DESC">
+            <Original>Unlocks a 414 wiretap kit that can intercept and record enemy communications for bonus rewards.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1">
+            <Original>Target folder 1</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1_DESC">
+            <Original>The map reveals some potential sources of water.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_DIRECTION">
+            <Original>Fire direction</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_DIRECTION_DESC">
+            <Original>Enables marking a location for other team mates in the HUD.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AMMO_CHECK">
+            <Original>Ammo check</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_AMMO_CHECK_DESC">
+            <Original>Shows team members ammo state on the HUD.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KICKOFF_TIME">
+            <Original>Kick-off time</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KICKOFF_TIME_DESC">
+            <Original>If no teams are deployed, call a vote on time-of-day (all players):\n- DAY(0800)\n- NIGHT(1800)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROLL_CALL">
+            <Original>Roll call</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROLL_CALL_DESC">
+            <Original>All team members show up on each team member's map.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_MAD_MINUTE">
+            <Original>Mad minute</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_MAD_MINUTE_DESC">
+            <Original>All team members consume no ammo.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2">
+            <Original>Target folder 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2_DESC">
+            <Original>During mission creation, reveal potential side-missions (e.g. wiretap).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY">
+            <Original>Sanctuary</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_DESC">
+            <Original>Request covey give you the azimuth and distance to your nearest LZ, and adds a marker on the map.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DITCH_RUCKS">
+            <Original>Ditch rucks</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DITCH_RUCKS_DESC">
+            <Original>Team members without rucksacks don't consume stamina.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RON_CALL">
+            <Original>RON call</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RON_CALL_DESC">
+            <Original>Call other Team Leaders for a limited Remain Overnight vote.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BREAK_CONTACT">
+            <Original>Break contact</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BREAK_CONTACT_DESC">
+            <Original>Briefly distracts the enemy from all team members.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ">
+            <Original>Get to the LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ_DESC">
+            <Original>Gives the team: 50% reduced stamina consumption, hit shrug, 10% faster actions.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TEAM_AWARENESS">
+            <Original>Team awareness</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TEAM_AWARENESS_DESC">
+            <Original>Team members are visible on your map.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ALTERNATE_LZ">
+            <Original>Alternate LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ALTERNATE_LZ_DESC">
+            <Original>After calling for extraction, request an alternate LZ from Covey (max 3 times).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER">
+            <Original>Get it together</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER_DESC">
+            <Original>Reduces the cooldown time of all ally abilities by 20% (maximum 35%).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ONE_TEAM">
+            <Original>One team!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ONE_TEAM_DESC">
+            <Original>Resets all team members' ability cooldowns.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PRAIRIE_FIRE">
+            <Original>Prairie Fire</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PRAIRIE_FIRE_DESC">
+            <Original>A random aircraft arrives on station immediately with 480 seconds loiter time. Call airstrikes using your handheld radio.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_3">
+            <Original>Target folder 3</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_3_DESC">
+            <Original>The map reveals location hints for potential side-missions.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT">
+            <Original>Rally point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT_DESC">
+            <Original>Enables setting a nearby team rally point on the map. Team members engaging in a desperate escape start within 250m of it.</Original>
+        </Key>
+    </Package>
+    <Package name="Skills - RTO skills">
         <!-- Radio operator (RTO) -->
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO">
             <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
@@ -471,13 +731,385 @@
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC">
             <Original>Gain advanced training as a radio telephone operator.\nYou can only have one advanced training.\nUnlocks radio backpacks and the ability to call in air support.\nReduced skill costs in the RTO tree.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO">
+            <Original>Emergency radio</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO_DESC">
+            <Original>Unlocks limited air support using the handheld radio with 50% longer arrival time, 50% slower strike time.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1">
+            <Original>CAS: Fast mover (Level 1)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1_DESC">
+            <Original>F100D with Mk82.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1">
+            <Original>CAS: Gunship (Level 1)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1_DESC">
+            <Original>UH-1C Gunship.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRESHIP">
+            <Original>Fireship</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRESHIP_DESC">
+            <Original>Fireship illumination.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STROBE_MARKER">
+            <Original>Strobe marker</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STROBE_MARKER_DESC">
+            <Original>Reduces air support penalties from night by 75%.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SITREP">
+            <Original>Sitrep</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SITREP_DESC">
+            <Original>Covey advises the team on enemy intensity and location of nearest forces.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STINGER">
+            <Original>Stinger</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STINGER_DESC">
+            <Original>While active, an AC-119K works your perimeter (1 use).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2">
+            <Original>CAS: Fast mover (Level 2)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2_DESC">
+            <Original>F100D with Napalm.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2">
+            <Original>CAS: Gunship (Level 2)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2_DESC">
+            <Original>UH-1C Heavy Hog.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHADOW">
+            <Original>Shadow</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHADOW_DESC">
+            <Original>Illumination continues until dawn.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LONG_ANTENNA">
+            <Original>Long Antenna</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LONG_ANTENNA_DESC">
+            <Original>Reduces air support penalties from bad weather by 75%.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL">
+            <Original>Guardian angel</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL_DESC">
+            <Original>The current aircraft arrives immediately, and has its loiter time extended by 50%.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ARCLIGHT">
+            <Original>Arclight</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ARCLIGHT_DESC">
+            <Original>While active an Arclight is available (1 use).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3">
+            <Original>CAS: Fast mover (Level 3)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3_DESC">
+            <Original>F-4C with CBUs.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3">
+            <Original>CAS: Gunship (Level 3)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3_DESC">
+            <Original>UH-1C ARA.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_COVEY">
+            <Original>CAS: Covey</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_COVEY_DESC">
+            <Original>OV-10.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_REPEAT_LAST">
+            <Original>Repeat last</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_REPEAT_LAST_DESC">
+            <Original>Covey repeats your last airstrike automatically after 30 secs.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BIG_BLUE">
+            <Original>Big blue</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BIG_BLUE_DESC">
+            <Original>While active a BLU-82 is available, which will add an LZ where it lands. (1 use).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4">
+            <Original>CAS: Fast mover (Level 4)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4_DESC">
+            <Original>F-4B Heavy.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4">
+            <Original>CAS: Gunship (Level 4)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4_DESC">
+            <Original>AH-1G.</Original>
+        </Key>
+    </Package>
+    <Package name="Skills - Medic">
         <!-- Medic -->
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_MEDIC">
-            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
+            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Medic</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC">
             <Original>Gain advanced training as a medic.\nYou can only have one advanced training.\nUnlocks reusable medical kits.\nReduced skill costs in the medic tree.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIND_THE_BICYCLE">
+            <Original>Find the bicycle</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIND_THE_BICYCLE_DESC">
+            <Original>Enables encountering high value enemies that can be killed or captured for bonus rewards.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_1">
+            <Original>Combat doc 1</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_1_DESC">
+            <Original>+25% increased medical actions speed.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KEEP_CALM">
+            <Original>Keep calm</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KEEP_CALM_DESC">
+            <Original>20% slower bleedout (for yourself).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS">
+            <Original>Leg pockets</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC">
+            <Original>When the last first aid kit is used, gain 2 more.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_NOT_DEAD_YET">
+            <Original>Not dead yet</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_NOT_DEAD_YET_DESC">
+            <Original>+1 desperate escape attempts.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET">
+            <Original>Tourniquet</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC">
+            <Original>Instantly stops bleeding on a player. Any new injuries will restart the bleeding.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLACK_KNIGHT">
+            <Original>Black knight</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLACK_KNIGHT_DESC">
+            <Original>Temporarily disable all injury effects on the team.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_2">
+            <Original>Combat doc 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_2_DESC">
+            <Original>+25% increased medical actions speed.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY">
+            <Original>He ain't heavy</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC">
+            <Original>Enable sprinting while carrying a downed teammate.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GREEN_HORNET">
+            <Original>Green hornet</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GREEN_HORNET_DESC">
+            <Original>Reduce personal stamina consumption by 20% (maximum 50%).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PACK_THE_WOUND">
+            <Original>Pack the wound</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PACK_THE_WOUND_DESC">
+            <Original>Heals up to 2 wounds for each interaction.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SALT_TABLETS">
+            <Original>Salt tablets</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SALT_TABLETS_DESC">
+            <Original>Restore team stamina by 50%.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_3">
+            <Original>Combat doc 3</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_3_DESC">
+            <Original>+25% increased medical actions speed.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LAST_RITES">
+            <Original>Last rites</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LAST_RITES_DESC">
+            <Original>Chance to learn additional info from dying enemies.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE">
+            <Original>I've seen worse</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE_DESC">
+            <Original>Reduces the effects of limb injuries on yourself.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND">
+            <Original>It's only a flesh wound</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC">
+            <Original>Completely heal the person you're looking at.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SWEET_DREAMS">
+            <Original>Sweet dreams</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SWEET_DREAMS_DESC">
+            <Original>Instantly take down an enemy soldier in melee range. They are then a POW and can be carried to the helicopter for bonus rewards.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_4">
+            <Original>Combat doc 4</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_4_DESC">+25% increased medical actions speed.
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK">
+            <Original>Green hornet pack</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK_DESC">
+            <Original>Reduce team stamina consumption by 20% (maximum 50%).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM">
+            <Original>Playing possum</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC">
+            <Original>Immediately get back up when the whole team is downed. Once per mission.</Original>
+        </Key>
+    </Package>
+    <Package name="Skills - Tail">
+        <!-- Tail -->
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_TAIL">
+            <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Tail</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_TAIL_DESC">
+            <Original>Gain advanced training as a tailgunner.\nYou can only have one advanced training.\nUnlocks the toolkit and trapkit to detect and disarm traps. Unlocs standard claymores.\nReduced skill costs in the tail tree.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM">
+            <Original>SLAM</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_DESC">
+            <Original>Enables encountering high-value enemy assets and infrastructure that can be destroyed for bonus rewards.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EYES_DOWN">
+            <Original>Eyes down</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_EYES_DOWN_DESC">
+            <Original>Automatically mark traps detected by your trapkit (within 4m).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN_1">
+            <Original>Rocketman 1</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN_1_DESC">
+            <Original>Unlocks AT rocket launchers.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LIGHTFOOTED">
+            <Original>Lightfooted</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LIGHTFOOTED_DESC">
+            <Original>When moving by yourself, your trail is less likely to be discovered.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOEPOPPER">
+            <Original>Toe-popper</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOEPOPPER_DESC">
+            <Original>The first time you run out of M14 "toe-popper" mines, receive 6 more M14 mines.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_TIME_2">
+            <Original>SLAM time 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_TIME_2_DESC">
+            <Original>Rearm a recoilless rifle in your backpack.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LETHAL_GIFTS">
+            <Original>Lethal gifts</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_DESC">
+            <Original>Automatically place M14 toe-poppers behind you every 5m.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GONE_NATIVE">
+            <Original>Gone native</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_GONE_NATIVE_DESC">
+            <Original>Unlocks enemy mines and quiet punji traps.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN_2">
+            <Original>Rocketman 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN_2_DESC">
+            <Original>Loaded for elephant: When you consume your last rocket, receive another (max 2 uses).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_EYES">
+            <Original>Jungle eyes</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_EYES_DESC">
+            <Original>Unlocks Mk II Trapkit with increased mine detection range (within 8m).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_TIME">
+            <Original>SLAM time</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_TIME_DESC">
+            <Original>Use 75% of your ruck to carry a recoilless rifle with a single magazine (self assembly, 8 rounds HE).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN_3">
+            <Original>Rocketman 3</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN_3_DESC">
+            <Original>4th July: You do not consume rockets when firing them.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DYNAMITE">
+            <Original>Dynamite</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DYNAMITE_DESC">
+            <Original>Places 7 remote claymores in front of you.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLACKJACK">
+            <Original>Blackjack</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_BLACKJACK_DESC">
+            <Original>Unlock advanced mines, explosives and throwable satchels.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FUZEMASTER">
+            <Original>Fuze-master</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FUZEMASTER_DESC">
+            <Original>Adds an action to cycle carried mines between proximity detonation, remote detonation and a timer.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DEEP_PLACEMENT">
+            <Original>Deep placement</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_DEEP_PLACEMENT_DESC">
+            <Original>Your placed explosives increase enemy alertness by a smaller amount.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CLEAN_SWEEP">
+            <Original>Clean sweep</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_CLEAN_SWEEP_DESC">
+            <Original>The team leaves no trail.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_2">
+            <Original>Lethal gifts 2</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_2_DESC">
+            <Original>Automatically place a selection of timed 40s claymores behind you every 15m</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS">
+            <Original>Heart of Darkness</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS_DESC">
+            <Original>Craft punji traps and tripwires in the field.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SABOTEUR">
+            <Original>Saboteur</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SABOTEUR_DESC">
+            <Original>Use silent sabotage actions on enemy infrastructure for reduced alertness and bonus rewards.</Original>
+        </Key>
+    </Package>
+    <Package name="Skills - Deprecated">
         <!-- Rifleman -->
         <Key ID="STR_VGM_SKILLS_SKILL_RIFLEMAN_STRONG_HANDS">
             <Original>Strong Hands</Original>
