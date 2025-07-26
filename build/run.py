@@ -8,6 +8,8 @@ from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, P
 import vgm.field_manual
 import vgm.file_mapping
 import vgm.arma
+from time import sleep
+
 
 source_root = Path(__file__).parent.parent
 
@@ -30,7 +32,7 @@ def default_build_params(output_paths=output_paths, overwrite: bool = False, cle
     return params
 
 def launch_arma(connect: str = "", editor_mission_path: Path = None):
-    vgm.arma.launch(
+    return vgm.arma.launch(
         arma_exe_path=Path(config.arma_exe_path),
         mods=config.arma_arg_mods,
         args=config.arma_args,
@@ -39,7 +41,7 @@ def launch_arma(connect: str = "", editor_mission_path: Path = None):
     )
 
 def launch_arma_server(mod: bool = False):
-    vgm.arma.launch_server(
+    return vgm.arma.launch_server(
         arma_server_exe=Path(config.arma_exe_path),
         mission_path=Path(mission_paths[0]),
         config=Path(config.arma_server_config_path),
@@ -76,6 +78,15 @@ def command_launch_arma_server(mod):
     launch_arma_server(mod)
 
 
+def check_terminate_process(process):
+    returncode = process.poll()
+    if returncode is None:
+        process.terminate()
+
+    returncode = process.wait(15)
+    if returncode is None:
+        process.kill()
+
 @click.command
 @option_overwrite
 @option_clean
@@ -111,10 +122,29 @@ def command_launch_dev(overwrite, clean, mod, version, no_server, no_client):
     perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod, version=version))
 
     if not no_server:
-        launch_arma_server(mod)
+        server_process = launch_arma_server(mod)
 
     if not no_client:
-        launch_arma(connect="127.0.0.1")
+        client_process = launch_arma(connect="127.0.0.1")
+
+    try:
+        while (
+            server_process.returncode is None
+            and client_process.returncode is None
+        ):
+            sleep(5)
+
+    except KeyboardInterrupt:
+        check_terminate_process(server_process)
+        check_terminate_process(client_process)
+
+    except BaseException as err:
+        print(f"An unknown error occured: {err}")
+
+    else:
+        print("An Arma process terminated outside of build. Killing any remaining processes.")
+        check_terminate_process(server_process)
+        check_terminate_process(client_process)
 
 @click.command
 @click.option('--confirm', default=False, is_flag=True)
