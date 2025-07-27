@@ -15,6 +15,8 @@ def check_terminate_process(process: Popen, timeout: int = 15):
         - process: a `subprocess.Popen` process
         - timeout: number of seconds to wait for process termination before
           sending a SIGKILL
+
+    Returns: None
     """
     if process.returncode is not None:
         print(f"Process already exited: {process.returncode}")
@@ -34,6 +36,11 @@ def check_terminate_process(process: Popen, timeout: int = 15):
 def check_alive(process: Popen):
     """
     Check if a process is still alive.
+
+    Args:
+    	- process: a `subprocess.Popen` object
+
+    Returns: `True` when process is alive, `False` when process has exited
     """
     return process.poll() is None
 
@@ -49,6 +56,7 @@ def process_handler(processes: List[Popen], polling_seconds: int = 1):
 
     Args:
         - processes: list of subprocess.Popen objects
+        - polling_seconds: check alive-ness of all processes every X seconds
 
     Notes:
         capturing SIGINT annoyingly needs try-except for branch logic :/
@@ -56,6 +64,8 @@ def process_handler(processes: List[Popen], polling_seconds: int = 1):
         could use `signal.signal()`, but means mutating some process tracking
         object/variable in global namespace (more complicated script state etc)
         https://stackoverflow.com/a/4205386/5945794
+
+    Returns: None
     """
 
     try:
