@@ -7,8 +7,8 @@ import vgm.build
 from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, PackType, BuildParams
 import vgm.field_manual
 import vgm.file_mapping
+from vgm.processes import process_handler
 import vgm.arma
-from time import sleep
 
 
 source_root = Path(__file__).parent.parent
@@ -57,6 +57,10 @@ def perform_build(params: BuildParams = default_build_params()):
         print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
         raise
 
+option_interrupt = click.option('--interrupt', default=False, is_flag=True,
+                                help="Interruption of launched Arma client/server processes managed by CLI")
+option_interrupt_polling = click.option('--polling', default=1, is_flag=False, type=int,
+                                help="Process interruption polling duration (seconds)")
 option_overwrite = click.option('--overwrite', default=False, is_flag=True)
 option_clean = click.option('--clean', default=False, is_flag=True)
 option_mod = click.option('--mod', default=False, is_flag=True, help="Builds VGM to run as a client / server mod pair")
@@ -67,25 +71,23 @@ option_version = click.option('--version', default=None,
 @click.command("client")
 @click.option('--connect', default=None)
 @click.option('--editor', is_flag=True)
-def command_launch_arma_client(connect, editor):
+@option_interrupt
+@option_interrupt_polling
+def command_launch_arma_client(connect, editor, interrupt, polling):
     editor_mission_path = mission_paths[0] if editor else None
-    launch_arma(connect, editor_mission_path=editor_mission_path)
+    process = launch_arma(connect, editor_mission_path=editor_mission_path)
+    if interrupt:
+        process_handler([process], polling_seconds=polling)
 
 
 @click.command("server")
 @click.option('--mod', default=False, is_flag=True)
-def command_launch_arma_server(mod):
-    launch_arma_server(mod)
-
-
-def check_terminate_process(process):
-    returncode = process.poll()
-    if returncode is None:
-        process.terminate()
-
-    returncode = process.wait(15)
-    if returncode is None:
-        process.kill()
+@option_interrupt
+@option_interrupt_polling
+def command_launch_arma_server(mod, interrupt, polling):
+    process = launch_arma_server(mod)
+    if interrupt:
+        process_handler([process], polling_seconds=polling)
 
 @click.command
 @option_overwrite
@@ -118,7 +120,9 @@ def build(overwrite, clean, mod, dev, pack, version):
               help="Doesn't start an arma server")
 @click.option('--no-client', default=False, is_flag=True,
               help="Doesn't start an arma client")
-def command_launch_dev(overwrite, clean, mod, version, no_server, no_client):
+@option_interrupt
+@option_interrupt_polling
+def command_launch_dev(overwrite, clean, mod, version, no_server, no_client, interrupt, polling):
     perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod, version=version))
 
     if not no_server:
@@ -127,24 +131,8 @@ def command_launch_dev(overwrite, clean, mod, version, no_server, no_client):
     if not no_client:
         client_process = launch_arma(connect="127.0.0.1")
 
-    try:
-        while (
-            server_process.returncode is None
-            and client_process.returncode is None
-        ):
-            sleep(5)
-
-    except KeyboardInterrupt:
-        check_terminate_process(server_process)
-        check_terminate_process(client_process)
-
-    except BaseException as err:
-        print(f"An unknown error occured: {err}")
-
-    else:
-        print("An Arma process terminated outside of build. Killing any remaining processes.")
-        check_terminate_process(server_process)
-        check_terminate_process(client_process)
+    if interrupt:
+        process_handler([server_process, client_process], polling_seconds=polling)
 
 @click.command
 @click.option('--confirm', default=False, is_flag=True)
