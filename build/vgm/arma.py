@@ -1,8 +1,28 @@
 import subprocess
 import sgd.file_utils
 from pathlib import Path
+from sys import platform
 
 from . import hemtt
+
+
+def maybe_fix_win_path(path: Path):
+    """
+    Fix path borkage for Arma CLI args on Windows
+
+    Notes:
+        Arma requires file path CLI arguments look exactly like this:
+        `DRIVE:\DIR\DIR\DIR\FILENAME.EXT`
+
+        `pathlib.Path` reprs to `DRIVE:/DIR/DIR/FIR/FILENAME.EXT`, which
+        Arma's CLI won't recognise as a valid Windows path. Escaped paths
+        a la `DRIVE:\\DIR\\DIR\\DIR\\FILENAME.EXT` also do not work.
+
+        If you're tweaking the arma_server.hpp configuration file and the
+        builder CLI is not updating your server with new configuration options,
+        this is probably your exact problem.
+    """
+    return f"{path}".replace("/", "\\") if platform in ["win32", "cygwin"] else path
 
 def find_mpmissions(search_start: Path) -> Path | None:
     def is_mpmissions(path: Path) -> bool:
@@ -53,7 +73,9 @@ def launch(arma_exe_path, mods=[], args=[], connect=False, editor_mission_path: 
 def launch_server(mission_path: Path, arma_server_exe: Path, config: Path, servermod_path=None, mods=[], profile="vgm_server"):
     try_symlink_arma_server_mission_dir(mission_path, arma_server_exe)
 
-    server_config_path = setup_temporary_arma_server_config(config, mission_path.name)
+    server_config_path = maybe_fix_win_path(
+        setup_temporary_arma_server_config(config, mission_path.name)
+    )
 
     if servermod_path:
         hemtt.launch(
