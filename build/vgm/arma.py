@@ -7,7 +7,7 @@ from . import hemtt
 
 
 def maybe_fix_win_path(path: Path):
-    """
+    r"""
     Fix path borkage for Arma CLI args on Windows
 
     Notes:
@@ -15,8 +15,7 @@ def maybe_fix_win_path(path: Path):
         `DRIVE:\DIR\DIR\DIR\FILENAME.EXT`
 
         `pathlib.Path` reprs to `DRIVE:/DIR/DIR/FIR/FILENAME.EXT`, which
-        Arma's CLI won't recognise as a valid Windows path. Escaped paths
-        a la `DRIVE:\\DIR\\DIR\\DIR\\FILENAME.EXT` also do not work.
+        Arma's CLI won't recognise as a valid Windows path.
 
         If you're tweaking the arma_server.hpp configuration file and the
         builder CLI is not updating your server with new configuration options,
