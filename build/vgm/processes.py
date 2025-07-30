@@ -7,7 +7,19 @@ from time import sleep
 from typing import List
 
 
-def check_terminate_process(process: Popen, timeout: int = 15):
+def check_alive(process: Popen):
+    """
+    Check if a process is still alive.
+
+    Args:
+    	- process: a `subprocess.Popen` object
+
+    Returns: `True` when process is alive, `False` when process has exited
+    """
+    return process.poll() is None
+
+
+def terminate_process(process: Popen, timeout: int = 15):
     """
     Terminate/kill a process. Kills if not exited after specified timeout.
 
@@ -31,18 +43,6 @@ def check_terminate_process(process: Popen, timeout: int = 15):
     if returncode is None:
         print(f"Process still alive after {timeout} seconds, SIGKILL: pid={process.pid}")
         process.kill()
-
-
-def check_alive(process: Popen):
-    """
-    Check if a process is still alive.
-
-    Args:
-    	- process: a `subprocess.Popen` object
-
-    Returns: `True` when process is alive, `False` when process has exited
-    """
-    return process.poll() is None
 
 
 def process_handler(processes: List[Popen], polling_seconds: int = 1):
@@ -83,4 +83,4 @@ def process_handler(processes: List[Popen], polling_seconds: int = 1):
 
     finally:
         for p in processes:
-            check_terminate_process(p)
+            terminate_process(p)
