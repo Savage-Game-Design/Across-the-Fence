@@ -45,4 +45,4 @@ private _rootConfigs = [
 } forEach _rootConfigs;
 
 
-["%1 site types loaded", count (localNamespace getVariable "vgm_s_sites_siteTypes")] call vgm_g_fnc_logInfo;
+format ["%1 site types loaded", count (localNamespace getVariable "vgm_s_sites_siteTypes")] call vgm_g_fnc_logInfo;
