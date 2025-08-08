@@ -306,6 +306,498 @@ class vgm_skillTrees {
         };
     };
 
+    class pointman {
+        displayName = "$STR_VGM_SKILLS_TREE_POINTMAN";
+        description = "";
+        icon = "assets\skills\recon_ca.paa";
+
+        class skills {
+            class tier_0 {
+                class training_pointman: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC";
+                    conditionUnlock[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
+                    column = 0;
+
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
+                    // TODO - Implementation
+                    cost = 2;
+                    applyOnRespawn = 1;
+                };
+
+                class eldest_son: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ELDEST_SON";
+                    description = "$STR_VGM_SKILLS_SKILL_ELDEST_SON_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+
+            class tier_1 {
+                class ground_sign: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN";
+                    description = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class blending_in: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BLENDING_IN";
+                    description = "$STR_VGM_SKILLS_SKILL_BLENDING_IN_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class jungle_instinct: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT";
+                    description = "$STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class in_the_zone: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE";
+                    description = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+            };
+
+            class tier_2 {
+                class stones_throw: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STONES_THROW";
+                    description = "$STR_VGM_SKILLS_SKILL_STONES_THROW_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 300;
+                };
+
+                class keen_eye: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_KEEN_EYE";
+                    description = "$STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 180;
+                    duration = 30;
+                };
+
+                class taking_notes: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES";
+                    description = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class cutthroat: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CUTTHROAT";
+                    description = "$STR_VGM_SKILLS_SKILL_CUTTHROAT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class sense_of_scale: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE";
+                    description = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class handrail: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_HANDRAIL";
+                    description = "$STR_VGM_SKILLS_SKILL_HANDRAIL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+            };
+
+            class tier_3 {
+                class one_of_them: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM";
+                    description = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 600;
+                    duration = 20;
+                };
+
+                class deep_focus: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS";
+                    description = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 30;
+                    duration = 180;
+                };
+
+                class eavesdropping: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_EAVESDROPPING";
+                    description = "$STR_VGM_SKILLS_SKILL_EAVESDROPPING_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class friend_or_foe: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE";
+                    description = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class clear_lens: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS";
+                    description = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+            };
+
+            class tier_4 {
+                class tactical_sense: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE";
+                    description = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 360;
+                    duration = 30;
+                };
+
+                class on_the_prowl: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL";
+                    description = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 460;
+                    duration = 120;
+                };
+
+                class pile_of_leaves: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES";
+                    description = "$STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class throwing_knife: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_THROWING_KNIFE";
+                    description = "$STR_VGM_SKILLS_SKILL_THROWING_KNIFE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+        };
+    };
+
+    class teamLeader {
+        displayName = "$STR_VGM_SKILLS_TREE_TEAM_LEADER";
+        description = "";
+        icon = "assets\skills\support_ca.paa";
+
+        class skills {
+            class tier_0 {
+                class training_team_leader: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class ma_bell: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_MA_BELL";
+                    description = "$STR_VGM_SKILLS_SKILL_MA_BELL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+
+            class tier_1 {
+                class target_folder_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1";
+                    description = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class fire_direction: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRE_DIRECTION";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRE_DIRECTION_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class ammo_check: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_AMMO_CHECK";
+                    description = "$STR_VGM_SKILLS_SKILL_AMMO_CHECK_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class kickoff_time: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_KICKOFF_TIME";
+                    description = "$STR_VGM_SKILLS_SKILL_KICKOFF_TIME_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+            };
+
+            class tier_2 {
+                class roll_call: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ROLL_CALL";
+                    description = "$STR_VGM_SKILLS_SKILL_ROLL_CALL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 240;
+                    duration = 60;
+                };
+
+                class mad_minute: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_MAD_MINUTE";
+                    description = "$STR_VGM_SKILLS_SKILL_MAD_MINUTE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 240;
+                    duration = 20;
+                };
+
+                class target_folder_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2";
+                    description = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class sanctuary: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SANCTUARY";
+                    description = "$STR_VGM_SKILLS_SKILL_SANCTUARY_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class ditch_rucks: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_DITCH_RUCKS";
+                    description = "$STR_VGM_SKILLS_SKILL_DITCH_RUCKS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class ron_call: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RON_CALL";
+                    description = "$STR_VGM_SKILLS_SKILL_RON_CALL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+            };
+
+            class tier_3 {
+                class break_contact: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BREAK_CONTACT";
+                    description = "$STR_VGM_SKILLS_SKILL_BREAK_CONTACT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 560;
+                };
+
+                class get_to_the_lz: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ";
+                    description = "$STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 600;
+                    duration = 90;
+                };
+
+                class team_awareness: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS";
+                    description = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class alternate_lz: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ALTERNATE_LZ";
+                    description = "$STR_VGM_SKILLS_SKILL_ALTERNATE_LZ_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class get_it_together: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER";
+                    description = "$STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+            };
+
+            class tier_4 {
+                class one_team: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ONE_TEAM";
+                    description = "$STR_VGM_SKILLS_SKILL_ONE_TEAM_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 900;
+                };
+
+                class prairie_fire: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_PRAIRIE_FIRE";
+                    description = "$STR_VGM_SKILLS_SKILL_PRAIRIE_FIRE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 600;
+                    duration = 480;
+                };
+
+                class target_folder_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_3";
+                    description = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_3_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class rally_point: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_RALLY_POINT";
+                    description = "$STR_VGM_SKILLS_SKILL_RALLY_POINT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+        };
+    };
+
     class rto {
         displayName = "$STR_VGM_SKILLS_TREE_RTO";
         description = "";
@@ -324,18 +816,242 @@ class vgm_skillTrees {
                     cost = 10;
                     applyOnRespawn = 1;
                 };
+
+                class emergency_radio: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO";
+                    description = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
             };
 
             class tier_1 {
+                class cas_fast_mover_level_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+
+                class cas_gunship_level_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+
+                class fireship: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIRESHIP";
+                    description = "$STR_VGM_SKILLS_SKILL_FIRESHIP_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+
+                class strobe_marker: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER";
+                    description = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
             };
 
             class tier_2 {
+                class sitrep: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SITREP";
+                    description = "$STR_VGM_SKILLS_SKILL_SITREP_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 180;
+                };
+
+
+                class stinger: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_STINGER";
+                    description = "$STR_VGM_SKILLS_SKILL_STINGER_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 7200;
+                };
+
+
+                class cas_fast_mover_level_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+
+                class cas_gunship_level_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+
+                class shadow: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SHADOW";
+                    description = "$STR_VGM_SKILLS_SKILL_SHADOW_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+
+                class long_antenna: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA";
+                    description = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
             };
 
             class tier_3 {
+                class guardian_angel: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL";
+                    description = "$STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 300;
+                };
+
+
+                class arclight: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ARCLIGHT";
+                    description = "$STR_VGM_SKILLS_SKILL_ARCLIGHT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 7200;
+                };
+
+
+                class cas_fast_mover_level_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+
+                class cas_gunship_level_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+
+                class cas_covey: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_COVEY";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_COVEY_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
             };
 
             class tier_4 {
+                class repeat_last: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_REPEAT_LAST";
+                    description = "$STR_VGM_SKILLS_SKILL_REPEAT_LAST_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 600;
+                    duration = 180;
+                };
+
+
+                class big_blue: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BIG_BLUE";
+                    description = "$STR_VGM_SKILLS_SKILL_BIG_BLUE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 7200;
+                };
+
+
+                class cas_fast_mover_level_4: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+
+                class cas_gunship_level_4: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4";
+                    description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
             };
         };
     };
@@ -358,18 +1074,472 @@ class vgm_skillTrees {
                     cost = 8;
                     applyOnRespawn = 1;
                 };
+
+                class find_the_bicycle: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FIND_THE_BICYCLE";
+                    description = "$STR_VGM_SKILLS_SKILL_FIND_THE_BICYCLE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
             };
 
             class tier_1 {
+                class combat_doc_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_1";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_1_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class keep_calm: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_KEEP_CALM";
+                    description = "$STR_VGM_SKILLS_SKILL_KEEP_CALM_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class leg_pockets: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LEG_POCKETS";
+                    description = "$STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class not_dead_yet: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_NOT_DEAD_YET";
+                    description = "$STR_VGM_SKILLS_SKILL_NOT_DEAD_YET_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
             };
 
             class tier_2 {
+                class tourniquet: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TOURNIQUET";
+                    description = "$STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 60;
+                };
+
+                class black_knight: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT";
+                    description = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 480;
+                    duration = 120;
+                };
+
+                class combat_doc_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_2";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class he_aint_heavy: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY";
+                    description = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class green_hornet: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET";
+                    description = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
             };
 
             class tier_3 {
+                class pack_the_wound: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND";
+                    description = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 300;
+                    duration = 30;
+                };
+
+                class salt_tablets: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SALT_TABLETS";
+                    description = "$STR_VGM_SKILLS_SKILL_SALT_TABLETS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 300;
+                };
+
+                class combat_doc_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_3";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_3_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class last_rites: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LAST_RITES";
+                    description = "$STR_VGM_SKILLS_SKILL_LAST_RITES_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class ive_seen_worse: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE";
+                    description = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
             };
 
             class tier_4 {
+                class its_only_a_flesh_wound: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND";
+                    description = "$STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 480;
+                };
+
+                class sweet_dreams: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SWEET_DREAMS";
+                    description = "$STR_VGM_SKILLS_SKILL_SWEET_DREAMS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 180;
+                };
+
+                class combat_doc_4: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4";
+                    description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class green_hornet_pack: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK";
+                    description = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class playing_possum: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM";
+                    description = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+        };
+    };
+
+    class tail {
+        displayName = "$STR_VGM_SKILLS_TREE_TAIL";
+        description = "";
+        icon = "assets\skills\support_ca.paa";
+
+        class skills {
+            class tier_0 {
+                class training_tail: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_TAIL";
+                    description = "$STR_VGM_SKILLS_SKILL_TRAINING_TAIL_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class slam: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SLAM";
+                    description = "$STR_VGM_SKILLS_SKILL_SLAM_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+            };
+
+            class tier_1 {
+                class eyes_down: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_EYES_DOWN";
+                    description = "$STR_VGM_SKILLS_SKILL_EYES_DOWN_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class rocketman_1: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_1";
+                    description = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_1_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class lightfooted: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LIGHTFOOTED";
+                    description = "$STR_VGM_SKILLS_SKILL_LIGHTFOOTED_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+
+                class toepopper: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_TOEPOPPER";
+                    description = "$STR_VGM_SKILLS_SKILL_TOEPOPPER_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 2;
+                };
+            };
+
+            class tier_2 {
+                class slam_time_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SLAM_TIME_2";
+                    description = "$STR_VGM_SKILLS_SKILL_SLAM_TIME_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 300;
+                };
+
+                class lethal_gifts: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS";
+                    description = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 4;
+                    cooldown = 300;
+                    duration = 30;
+                };
+
+                class gone_native: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_GONE_NATIVE";
+                    description = "$STR_VGM_SKILLS_SKILL_GONE_NATIVE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class rocketman_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_2";
+                    description = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class jungle_eyes: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_EYES";
+                    description = "$STR_VGM_SKILLS_SKILL_JUNGLE_EYES_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+
+                class slam_time: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SLAM_TIME";
+                    description = "$STR_VGM_SKILLS_SKILL_SLAM_TIME_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 5;
+
+                    // TODO - Implementation
+                    cost = 4;
+                };
+            };
+
+            class tier_3 {
+                class rocketman_3: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_3";
+                    description = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_3_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 300;
+                    duration = 30;
+                };
+
+                class dynamite: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_DYNAMITE";
+                    description = "$STR_VGM_SKILLS_SKILL_DYNAMITE_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 6;
+                    cooldown = 480;
+                };
+
+                class blackjack: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_BLACKJACK";
+                    description = "$STR_VGM_SKILLS_SKILL_BLACKJACK_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class fuzemaster: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_FUZEMASTER";
+                    description = "$STR_VGM_SKILLS_SKILL_FUZEMASTER_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+
+                class deep_placement: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_DEEP_PLACEMENT";
+                    description = "$STR_VGM_SKILLS_SKILL_DEEP_PLACEMENT_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 4;
+
+                    // TODO - Implementation
+                    cost = 6;
+                };
+            };
+
+            class tier_4 {
+                class clean_sweep: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_CLEAN_SWEEP";
+                    description = "$STR_VGM_SKILLS_SKILL_CLEAN_SWEEP_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 0;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 300;
+                    duration = 30;
+                };
+
+                class lethal_gifts_2: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_2";
+                    description = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_2_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 1;
+
+                    // TODO - Implementation
+                    skillType = 2;
+                    cost = 8;
+                    cooldown = 600;
+                    duration = 30;
+                };
+
+                class heart_of_darkness: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS";
+                    description = "$STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 2;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
+
+                class saboteur: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_SABOTEUR";
+                    description = "$STR_VGM_SKILLS_SKILL_SABOTEUR_DESC";
+                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    column = 3;
+
+                    // TODO - Implementation
+                    cost = 8;
+                };
             };
         };
     };
