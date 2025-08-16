@@ -61,6 +61,9 @@ if (_lzPosition isEqualTo []) exitWith {
 
 // spawn the helicopter, coming from the direction of the origin pos
 private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
+// NOTE: For team leader dustOff hold action.
+// @dijksterhuis: if group leader dies then we'll need to pass this onto other group members, right?
+_playerGroup setVariable ["vgm_missions_extraction_helicopter", _helicopter, true];
 
 private _spawnPos = _lzPosition getPos [_distance, _lzPosition getDir _originPos];
 _spawnPos set [2, 50];
@@ -92,8 +95,11 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
     private _playerGroup = _mission get "public" get "group";
     waitUntil {
         private _alivePlayers = units _playerGroup select {alive _x && !(_x call vgm_g_fnc_medical_isUnconscious)};
-        // all alive players are inside the heli, and there's at least one player alive.
-        _alivePlayers findIf {!(_x in _helicopter)} == -1 && _alivePlayers isNotEqualTo [];
+        private _everyoneBoarded = _alivePlayers findIf {!(_x in _helicopter)} == -1 && _alivePlayers isNotEqualTo [];
+        private _leaveNow = _helicopter getVariable ["vgm_missions_extraction_evacNow", false];
+        private _leaveAtTime = _helicopter getVariable ["vgm_missions_extraction_evacAt", -1];
+
+        _everyoneBoarded || _leaveNow || (_leaveAtTime isNotEqualTo -1 && serverTime > _leaveAtTime);
     };
 
     _helicopter setVariable ["vgm_missions_extractionBoarded", true];

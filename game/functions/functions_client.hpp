@@ -569,7 +569,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\missions_gameplay\client\extraction);
 
-        class missions_gameplay_extraction_addAction {};
+        class missions_gameplay_extraction_addAction_requestExtract {};
+        class missions_gameplay_extraction_addAction_evacNow {};
+        class missions_gameplay_extraction_addAction_evacAt {};
         class missions_gameplay_extraction_requestExtraction {};
         class missions_gameplay_extraction_getNearbyRadio {};
     };
