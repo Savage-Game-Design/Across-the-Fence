@@ -396,7 +396,7 @@ class vgm_skillTrees {
                     conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "call vgm_c_fnc_skill_actives_keenEye";
                     skillType = 2;
                     cost = 4;
                     cooldown = 180;

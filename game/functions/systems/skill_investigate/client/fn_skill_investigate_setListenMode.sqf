@@ -37,7 +37,6 @@ if (!_enable) exitWith {
 
 if (_eh > -1) exitWith {};
 
-private _investigateTimeCoef = player getVariable ["vgm_c_skill_investigate_investigateTimeCoef", 1];
 
 vgm_c_skill_investigate_noises = [];
 vgm_c_skill_investigate_intensity = 0;
@@ -60,6 +59,7 @@ vgm_c_skill_investigate_drawEh = addMissionEventHandler ["Draw3D", {
     };
 
     if (vgm_c_skill_investigate_intensity < 1) then {
+        private _investigateTimeCoef = player getVariable ["vgm_c_skill_investigate_investigateTimeCoef", 1];
         vgm_c_skill_investigate_intensity = linearConversion [
             _startTime,
             _startTime + (FULL_FOCUS_TIME * _investigateTimeCoef),

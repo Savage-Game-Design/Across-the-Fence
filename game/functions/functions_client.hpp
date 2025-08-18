@@ -670,9 +670,11 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\sites_hints\client);
 
+        class sites_hints_getHintsInRange {};
         class sites_hints_glint {};
         class sites_hints_glintJob {};
         class sites_hints_initObject {};
+        class sites_hints_inspect {};
         class sites_hints_inspectInit {};
         class sites_hints_markOnMap {};
         class sites_hints_postInit
@@ -888,6 +890,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\pointman);
 
+        class skill_actives_keenEye {};
         class skill_actives_stonesThrow {};
     };
     class skill_actives_support

@@ -2,7 +2,7 @@
     File: fn_sites_hints_addInspectAction.sqf
     Author: Savage Game Design
     Date: 2025-01-09
-    Last Update: 2025-01-10
+    Last Update: 2025-08-18
     Public: No
 
     Description:
@@ -23,22 +23,11 @@
 vgm_sites_hints_actionCheckTime = 0;
 
 private _fnc_inspect = {
-    private _nearHints = vgm_sites_hints_objectsList inAreaArray [player, DETECT_RADIUS, DETECT_RADIUS, 0, false, DETECT_RADIUS];
+    private _nearHints = [getPosATL player, DETECT_RADIUS] call vgm_c_fnc_sites_hints_getHintsInRange;
     private _object = _nearHints select -1;
     if (isNil "_object") exitWith {};
 
-    hint format [
-        "Near the object you see tracks leading towards %1",
-        [_object, _object getVariable "vgm_sites_hints_sitePos"] call vgm_g_fnc_spokenDirection
-    ];
-
-    [
-        "vgm_sites_hints_inspected",
-        [
-            ([] call vgm_c_fnc_missions_getCurrentMission) get "id",
-            _object getVariable "vgm_mission_objects_id"
-        ]
-    ] call para_g_fnc_event_triggerServer;
+    [_object] call vgm_c_fnc_sites_hints_inspect;
 };
 
 // checks for hints near the player and renders 3d icon for them
@@ -46,7 +35,7 @@ private _fnc_checkForHints = {
     if (time < vgm_sites_hints_actionCheckTime) exitWith {false};
     vgm_sites_hints_actionCheckTime = time + 1.5;
 
-    private _nearHints = vgm_sites_hints_objectsList inAreaArray [player, DETECT_RADIUS, DETECT_RADIUS, 0, false, DETECT_RADIUS];
+    private _nearHints = [getPosATL player, DETECT_RADIUS] call vgm_c_fnc_sites_hints_getHintsInRange;
     {
         // force to run the code each frame until no hint objects around
         vgm_sites_hints_actionCheckTime = -1;
