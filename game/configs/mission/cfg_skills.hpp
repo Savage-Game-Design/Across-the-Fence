@@ -382,10 +382,9 @@ class vgm_skillTrees {
                 class stones_throw: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STONES_THROW";
                     description = "$STR_VGM_SKILLS_SKILL_STONES_THROW_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "call vgm_c_fnc_skill_actives_stonesThrow";
                     skillType = 2;
                     cost = 4;
                     cooldown = 300;
