@@ -387,7 +387,7 @@ class vgm_skillTrees {
                     codeActivate = "call vgm_c_fnc_skill_actives_stonesThrow";
                     skillType = 2;
                     cost = 4;
-                    cooldown = 300;
+                    cooldown = 60;
                 };
 
                 class keen_eye: vgm_skillTemplate {
