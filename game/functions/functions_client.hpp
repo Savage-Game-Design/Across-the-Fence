@@ -878,21 +878,18 @@ class vgm_c
         class skill_actives_bulletHose {};
         class skill_actives_steelRain {};
     };
-    class skill_actives_fireSupport
-    {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
-
-    };
-    class skill_actives_infantryman
-    {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
-    };
     class skill_actives_recon
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
 
         class skill_actives_recon_sixthSense {};
         class skill_actives_recon_thickBrush {};
+    };
+    class skill_actives_pointman
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\pointman);
+
+        class skill_actives_stonesThrow {};
     };
     class skill_actives_support
     {
