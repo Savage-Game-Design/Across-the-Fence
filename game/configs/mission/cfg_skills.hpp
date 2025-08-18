@@ -371,10 +371,10 @@ class vgm_skillTrees {
                 class in_the_zone: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE";
                     description = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'investigateTimeCoef', 'skill_in_the_zone', -0.5, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'investigateTimeCoef', 'skill_in_the_zone'] call vgm_c_fnc_coefficient_remove";
                     cost = 2;
                 };
             };
