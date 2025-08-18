@@ -321,7 +321,6 @@ class vgm_skillTrees {
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
                     codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
-                    // TODO - Implementation
                     cost = 2;
                     applyOnRespawn = 1;
                 };
@@ -341,10 +340,10 @@ class vgm_skillTrees {
                 class ground_sign: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN";
                     description = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'glintFrequency', 'skill_ground_sign', -0.3, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'glintFrequency', 'skill_ground_sign'] call vgm_c_fnc_coefficient_remove";
                     cost = 2;
                 };
 
@@ -1618,14 +1617,6 @@ class vgm_skillTrees {
 
                     codeApply = "true call vgm_c_fnc_skill_passives_recon_keenEye";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_recon_keenEye";
-                };
-
-                class detective: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_DETECTIVE";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_DETECTIVE_DESC";
-
-                    codeApply = "[player, 'glintFrequency', 'skill_recon_detective', -0.3, true] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'glintFrequency', 'skill_recon_detective'] call vgm_c_fnc_coefficient_remove";
                 };
             };
 
