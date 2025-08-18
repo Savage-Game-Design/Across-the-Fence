@@ -316,8 +316,8 @@ class grenadier_05 {
     };
 
     magazines[] = {
-        "vn_f1_smg_mag",
-        "vn_f1_smg_t_mag",
+        "vn_l34a1_smg_t_mag",
+        "vn_l34a1_smg_mag",
         "vn_22mm_m19_wp_mag",
         "vn_22mm_cs_mag"
     };
@@ -403,7 +403,8 @@ class grenadier_13 {
         "vn_l1a1_10_mag",
         "vn_l1a1_10_t_mag",
         "vn_l1a1_20_mag",
-        "vn_l1a1_20_t_mag"
+        "vn_l1a1_20_t_mag",
+        "vn_l1a1_30_mag"
     };
 
     backpacks[] = {
@@ -784,6 +785,26 @@ class marksman_15 {
     items[] = {
         "vn_o_9x_m14",
         "vn_o_anpvs2_m14"
+    };
+};
+
+class pointman {
+    condition="(['pointman', 'training_pointman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
+
+    weapons[] = {
+
+    };
+
+    magazines[] = {
+
+    };
+
+    backpacks[] = {
+
+    };
+
+    items[] = {
+        "vn_b_item_trapkit"
     };
 };
 
