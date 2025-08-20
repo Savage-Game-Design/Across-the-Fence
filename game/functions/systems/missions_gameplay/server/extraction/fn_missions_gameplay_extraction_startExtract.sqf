@@ -87,30 +87,7 @@ _landWp setWaypointStatements ["true", toString {
     [vehicle this] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
 }];
 
-private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
-    params ["_missionId", "_mission", "_helicopter", "_helipad"];
-    private _playerGroup = _mission get "public" get "group";
-    waitUntil {
-        private _alivePlayers = units _playerGroup select {alive _x && !(_x call vgm_g_fnc_medical_isUnconscious)};
-        // all alive players are inside the heli, and there's at least one player alive.
-        _alivePlayers findIf {!(_x in _helicopter)} == -1 && _alivePlayers isNotEqualTo [];
-    };
-
-    _helicopter setVariable ["vgm_missions_extractionBoarded", true];
-    _helicopter flyInHeight [100, true];
-    _helicopter setCaptive false;
-
-    ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
-
-    private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
-    sleep 25;
-    [_missionId] call vgm_s_fnc_missions_endMission;
-    waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
-    sleep 25;
-    {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
-    deleteVehicle _helicopter;
-    deleteVehicle _helipad;
-};
+private _script = [_missionId, _playerGroup, _helicopter, _helipad] spawn vgm_s_fnc_missions_gameplay_extraction_doExtract;
 
 _group setVariable ["vgm_missions_extractionScript", _script];
 

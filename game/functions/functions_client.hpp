@@ -296,6 +296,14 @@ class vgm_g
         };
     };
 
+    class missions_gameplay_extraction
+    {
+        VGM_GLOBAL_PATH(\systems\missions_gameplay\global\extraction);
+
+        class missions_gameplay_extraction_fadeInOrOut {};
+    };
+
+
     class missions_zones
     {
         VGM_GLOBAL_PATH(\systems\missions_zones\global);

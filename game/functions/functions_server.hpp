@@ -179,6 +179,7 @@ class vgm_s
 
         class missions_gameplay_extraction_scriptedLand {};
         class missions_gameplay_extraction_startExtract {};
+        class missions_gameplay_extraction_doExtract {};
     };
 
     class missions_gameplay_scouting
