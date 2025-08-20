@@ -430,6 +430,9 @@ switch _mode do {
         _display setVariable ["vgm_site_photoData", nil];
 
         ["vgm_scouting_setSitePhoto", [_siteId, _photoData, player]] call para_g_fnc_event_triggerServer;
+
+        private _siteType = (values _photoData) select 0 select 3;
+        ["vgm_scouting_setSiteType", [_siteId, _siteType, player]] call para_g_fnc_event_triggerServer;
     };
 
     /*
