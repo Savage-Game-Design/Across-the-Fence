@@ -38,28 +38,35 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
     private _playerGroup = _mission get "public" get "group";
     private _sites = +((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites);
 
+    // TODO: Cleanup the _intelSites processing
+
     private _intelSites = [];
     for "_" from 1 to (1 + floor random 3) do {
         _intelSites pushBack selectRandom _sites;
         _sites = _sites - _intelSites;
     };
 
-    _intelSites = _intelSites apply {
-        private _pos = (_x get "pos") getPos [50 + random 150, random 360];
+    private _intelSitesPos = _intelSites apply {
+        (_x get "pos") getPos [50 + random 150, random 360]
+    };
+
+    private _intelSitesStr = _intelSitesPos apply {
         format [
             "<execute expression='%2'>%1</execute>",
-            (_pos call BIS_fnc_posToGrid) joinString " ",
-            format ["[[750,750], %1] call BIS_fnc_zoomOnArea", _pos]
+            (_x call BIS_fnc_posToGrid) joinString " ",
+            format ["[[750,750], %1] call BIS_fnc_zoomOnArea", _X]
         ]
     } joinString "<br/>";
 
+    private _parentTaskId = format ["vgm_scout_%1", _mission get "public" get "id"];
+
     [
         _playerGroup,
-        format ["vgm_scout_%1", _mission get "public" get "id"],
+        _parentTaskId,
         [
             [
                 "STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION",
-                _intelSites,
+                _intelSitesStr,
                 format [
                     "<execute expression='[""vgm_missions"", ""scouting""] call vgm_c_fnc_openFieldManual'>%1</execute>",
                     localize "str_a3_rscdisplayinterrupt_buttontutorialhints"
@@ -73,4 +80,31 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
         true,
         "scout"
     ] call BIS_fnc_taskCreate;
+
+    {
+        // task ID, these are subtasks so li8nk to the parent task
+        private _subTaskID = format ["%1-%2", _parentTaskId, _forEachIndex + 1];
+        // ["description", "title"] where each entry is a `format` array
+        private _subTaskDesc = [
+            ["Possible enemy site located in this area."],
+            ["Possible Enemy Site"]
+        ];
+        private _subTaskPos = _x vectorMultiply [1, 1, 0];
+        private _subTaskState = ["ASSIGNED", "CREATED"] select (_forEachIndex isEqualTo 0);
+        private _subTaskPriority = -1;
+        private _subTaskNotify = false;
+        private _subTaskType = "scout";
+
+        [
+            _playerGroup,
+            [_subTaskID, _parentTaskId],
+            _subTaskDesc,
+            _subTaskPos,
+            _subTaskState,
+            _subTaskPriority,
+            _subTaskNotify,
+            _subTaskType
+        ] call BIS_fnc_taskCreate;
+    } forEach _intelSitesPos;
+
 };
