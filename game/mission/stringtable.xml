@@ -1514,6 +1514,18 @@
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION">
             <Original>Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.</Original>
         </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE">
+            <Original>Desperate Escape</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC">
+            <Original>TODO: Not a respawn function. Can only use once per life. Lose your backback and other gear.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP">
+            <Original>TODO: Recon teams</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION">
+            <Original>TODO: Not a respawn function. Can only use once per life. Lose your backback and other gear.</Original>
+        </Key>
     </Package>
     <Package name="Tutorial">
         <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">

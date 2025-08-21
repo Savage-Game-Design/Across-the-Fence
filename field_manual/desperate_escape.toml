@@ -1,0 +1,12 @@
+displayName = "Desperate Escape"
+
+description = "TODO: Not a respawn function. Can only use once per life. Lose your backback and other gear."
+
+tip = "TODO: Not a respawn function. Can only use once per life. Lose your backback and other gear."
+
+# Note that this is a literal string with ', so backslashes don't need escaping.
+
+image = 'assets\atf_logo.paa'
+
+[hints.desperate_escape]
+description = "TODO: Not a respawn function. Can only use once per life. Lose your backback and other gear."
