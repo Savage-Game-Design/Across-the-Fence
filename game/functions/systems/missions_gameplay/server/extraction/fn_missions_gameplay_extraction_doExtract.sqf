@@ -35,7 +35,7 @@
 params ["_missionId", "_playerGroup", "_helicopter", "_helipadLz"];
 
 if (!canSuspend) exitWith {
-    format ["Attempted to execute scheduled code in unscheduled environment: script=%1", _scriptName] call vgm_g_fnc_logError;
+    "Attempted to execute scheduled code in unscheduled environment" call vgm_g_fnc_logError;
     nil // return
 };
 
@@ -50,8 +50,7 @@ waitUntil {
     private _leaveNow = _helicopter getVariable ["vgm_missions_extraction_evacNow", false];
     private _leaveAtTime = _helicopter getVariable ["vgm_missions_extraction_evacAt", -1];
 
-    // _everyoneBoarded ||
-    _leaveNow || (_leaveAtTime isNotEqualTo -1 && serverTime > _leaveAtTime);
+    _everyoneBoarded || _leaveNow || (_leaveAtTime isNotEqualTo -1 && serverTime > _leaveAtTime);
 };
 
 private _group = group _helicopter;
@@ -70,30 +69,28 @@ _helicopter setVariable ["vgm_mission_extraction_helipad", nil];
 ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
 _group addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
 
-// post exfil travel time for imerrrshhhion
-sleep 25;
+sleep 25;  // post exfil travel time
+
 private _playersInHelo = (units _playerGroup) select {isPlayer _x} select {_helicopter isEqualTo objectParent _x};
 private _playersNotInHelo = (units _playerGroup) select {isPlayer _x} select {IsNull objectParent _x};
 
 ["OUT", FADE_DURATION, _playersInHelo] call vgm_g_fnc_missions_gameplay_extraction_fadeInOrOut;
 
-// wait for fade out to complete before teleporting helo etc.
-sleep FADE_DURATION + 5;
+sleep FADE_DURATION + 5;  // guarantee fade out is completed before teleporting helo
 
 //////////////////////////////////////////////////////////////////
 // 2. TELEPORT HELO
 //////////////////////////////////////////////////////////////////
 
-// TODO: multiple missions could end at the same time
-// TODO: Is 3 enough? Can have like 5 missions running concurrently, right?
-// [NORTHERN INGRESS + HELIPAD, WESTERN INGRESS + HELIPAD, SOUTHERN INGRESS + HELIPAD]
-// TODO: EDITOR MARKERS
+// TODO: USE EDITOR MARKERS
 private _heloTeleportPositions = [
     [18950, 7650, 50],  // NORTH
     [18160, 7495, 50],  // MID 1
     [18180, 6260, 50],  // MID 2
     [20010, 4755, 50]   // SOUTH
 ];
+
+// TODO: USE EDITOR MARKERS
 private _baseLandingPositions = [
     [20000, 6582, 0],  // NORTH
     [20005, 6566, 0],  // MID 1
@@ -101,7 +98,7 @@ private _baseLandingPositions = [
     [20015, 6535, 0]   // SOUTH
 ];
 
-// TODO: Is there a variable for "Maximum number of missons"?
+// TODO: Is there a global variable for "Maximum number of missons"?
 private _startIngressPos = _heloTeleportPositions select (_missionId mod 4);
 private _baseLandingPos = _baseLandingPositions select (_missionId mod 4);
 
@@ -129,22 +126,21 @@ _landWp setWaypointStatements ["true", toString {
 }];
 
 // give helo a few seconds to start flying properly to avoid any jank
+// once it is proceeding, fade in for players in helo and fade out abandoned players in the mission area.
+// abandoned players will be faded back in during missionEnd,
+// disable sim and stick abandoned players in debug to make sure they don't take damage
+
 sleep FADE_DURATION;
-// bird should be flying by this point
 ["IN", FADE_DURATION, _playersInHelo] call vgm_g_fnc_missions_gameplay_extraction_fadeInOrOut;
-// fade out abandoned players not in helo now
-// we'll fade them back in during mission end
 ["OUT", FADE_DURATION, _playersNotInHelo] call vgm_g_fnc_missions_gameplay_extraction_fadeInOrOut;
 sleep FADE_DURATION;
-
-// force disable simulation on abandoned players until we bring them back
 _playersNotInHelo apply {
     _x enableSimulationGlobal true;
     _x setPosATL [0, 0, 0];
 };
 
-// dismount players once velocity is low enough (on ground)
-// OR players have ejected from the helo, continue
+// dismount players once helo is on the invisible helipad or players have ejected from the helo.
+// (all players ejecting here will cause a hardlocked and unrecoverable mission outcome!)
 waitUntil {sleep 1; (_helicopter distance _helipadBase) < 1 || crew _helicopter findIf {isPlayer _x} == -1};
 units _playerGroup select {vehicle _x isNotEqualTo _x} apply {moveOut _x};
 
@@ -152,12 +148,9 @@ units _playerGroup select {vehicle _x isNotEqualTo _x} apply {moveOut _x};
 // 4. PLAYER DEBRIEF & HELO / HELIPAD DESPAWN
 //////////////////////////////////////////////////////////////////
 
-// Once players are no longer in helo:
-// * debrief players via `missionEnd` screen
-// * make chopper fly away to despawn out of sight
-//
-// NOTE: Players could decide to ceremoniously yeet/eject themselves because reasons.
-// This should cover that case too -- missionEnd will run and helo heads to pleiku for despawn.
+// Once players are no longer in helo debrief players via `missionEnd` screen and 
+// make chopper fly away to despawn out of sight
+
 waitUntil {sleep 1; crew _helicopter findIf {isPlayer _x} == -1};
 _playersNotInHelo apply {_x enableSimulationGlobal true};
 [_missionId] call vgm_s_fnc_missions_endMission;
@@ -170,11 +163,9 @@ _helicopter setCaptive true;
 for "_i" from (count waypoints _group - 1) to 0 step -1 do {deleteWaypoint [_group, _i];};
 _group addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
 
-// time until safely out of view / earshot
-sleep 45;
+sleep 45;  // time until safely out of view / earshot
 
 {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
 deleteVehicle _helicopter;
 deleteVehicle _helipadBase;
 
-nil;
