@@ -86,8 +86,8 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
             _playerGroup,
             [format ["%1-%2", _parentTaskId, _forEachIndex + 1], _parentTaskId],
             [
-                ["Possible enemy site located in this area."],
-                ["Possible Enemy Site"]
+                ["STR_VGM_MISSIONS_SCOUTING_SUBTASK_DESCRIPTION"],
+                ["STR_VGM_MISSIONS_SCOUTING_SUBTASK_TITLE"]
             ],
             _x vectorMultiply [1, 1, 0],
             ["ASSIGNED", "CREATED"] select (_forEachIndex isEqualTo 0),
