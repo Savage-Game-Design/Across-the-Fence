@@ -38,19 +38,15 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
     private _playerGroup = _mission get "public" get "group";
     private _sites = +((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites);
 
-    // TODO: Cleanup the _intelSites processing
-
-    private _intelSites = [];
+    private _intelSitePositions = [];
     for "_" from 1 to (1 + floor random 3) do {
-        _intelSites pushBack selectRandom _sites;
-        _sites = _sites - _intelSites;
+        private _intelSite = selectRandom _sites;
+        private _sitePosMarker = (_intelSite get "pos") getPos [50 + random 150, random 360];
+        _intelSitePositions pushBack _sitePosMarker;
+        _sites = _sites - [_intelSite];
     };
 
-    private _intelSitesPos = _intelSites apply {
-        (_x get "pos") getPos [50 + random 150, random 360]
-    };
-
-    private _intelSitesStr = _intelSitesPos apply {
+    private _intelSitesStr = _intelSitePositions apply {
         format [
             "<execute expression='%2'>%1</execute>",
             (_x call BIS_fnc_posToGrid) joinString " ",
@@ -95,5 +91,5 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
             false,
             "scout"
         ] call BIS_fnc_taskCreate;
-    } forEach _intelSitesPos;
+    } forEach _intelSitePositions;
 };
