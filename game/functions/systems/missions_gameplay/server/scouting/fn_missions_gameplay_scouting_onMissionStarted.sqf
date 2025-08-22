@@ -82,29 +82,18 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
     ] call BIS_fnc_taskCreate;
 
     {
-        // task ID, these are subtasks so li8nk to the parent task
-        private _subTaskID = format ["%1-%2", _parentTaskId, _forEachIndex + 1];
-        // ["description", "title"] where each entry is a `format` array
-        private _subTaskDesc = [
-            ["Possible enemy site located in this area."],
-            ["Possible Enemy Site"]
-        ];
-        private _subTaskPos = _x vectorMultiply [1, 1, 0];
-        private _subTaskState = ["ASSIGNED", "CREATED"] select (_forEachIndex isEqualTo 0);
-        private _subTaskPriority = -1;
-        private _subTaskNotify = false;
-        private _subTaskType = "scout";
-
         [
             _playerGroup,
-            [_subTaskID, _parentTaskId],
-            _subTaskDesc,
-            _subTaskPos,
-            _subTaskState,
-            _subTaskPriority,
-            _subTaskNotify,
-            _subTaskType
+            [format ["%1-%2", _parentTaskId, _forEachIndex + 1], _parentTaskId],
+            [
+                ["Possible enemy site located in this area."],
+                ["Possible Enemy Site"]
+            ],
+            _x vectorMultiply [1, 1, 0],
+            ["ASSIGNED", "CREATED"] select (_forEachIndex isEqualTo 0),
+            -1,
+            false,
+            "scout"
         ] call BIS_fnc_taskCreate;
     } forEach _intelSitesPos;
-
 };
