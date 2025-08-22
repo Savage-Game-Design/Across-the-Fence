@@ -8,8 +8,6 @@
     Description:
         Add action to request early extraction -- abandoning any players left on the ground.
 
-        TODO: Penalty for each player left behind.
-
     Parameter(s):
         _player - Player to add the action to [OBJECT]
 
@@ -23,7 +21,6 @@
 params ["_player"];
 
 
-// TODO: Check explicitly for extract helicopter?
 private _fnc_timedLeave = {
     params ["_target"];
 
