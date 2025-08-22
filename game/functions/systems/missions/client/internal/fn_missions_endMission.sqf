@@ -32,12 +32,6 @@ vgm_mission_onMission = false;
 private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 ["vgm_mission_end_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
-// TODO: Should no longer need to spawn and check here?
-// [] spawn {
-//     waitUntil {vehicle player == player};
-
-// };
-// moveOut player;
 player setVelocity [0,0,0];
 ([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
 player setDir _newDir;
