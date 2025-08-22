@@ -50,7 +50,7 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
         format [
             "<execute expression='%2'>%1</execute>",
             (_x call BIS_fnc_posToGrid) joinString " ",
-            format ["[[750,750], %1] call BIS_fnc_zoomOnArea", _X]
+            format ["[[750,750], %1] call BIS_fnc_zoomOnArea", _x]
         ]
     } joinString "<br/>";
 
