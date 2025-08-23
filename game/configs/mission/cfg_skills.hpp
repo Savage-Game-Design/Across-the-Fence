@@ -484,10 +484,11 @@ class vgm_skillTrees {
                 class friend_or_foe: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE";
                     description = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
+                    codeApply = "true call vgm_c_fnc_skill_passives_friendOrFoe";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_friendOrFoe";
                     cost = 6;
                 };
 

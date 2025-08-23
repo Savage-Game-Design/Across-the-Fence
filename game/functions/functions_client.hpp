@@ -851,6 +851,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\pointman);
 
+        class skill_passives_friendOrFoe {};
         class skill_passives_senseOfScale {};
     };
     class skill_passives_fireSupport
