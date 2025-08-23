@@ -426,10 +426,10 @@ class vgm_skillTrees {
                 class sense_of_scale: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE";
                     description = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "true call vgm_c_fnc_skill_passives_senseOfScale";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_senseOfScale";
                     cost = 4;
                 };
 
@@ -1610,13 +1610,6 @@ class vgm_skillTrees {
             class tier_0 {};
 
             class tier_1 {
-                class keenEye: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_recon_keenEye";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_keenEye";
-                };
             };
 
             class tier_2 {
