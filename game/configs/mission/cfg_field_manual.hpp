@@ -195,6 +195,7 @@ class vgm_missions {
     class desperate_escape {
         displayName = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE";
         description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP";
         image = "assets\atf_logo.paa";
         class Hints {
             class desperate_escape {
@@ -203,5 +204,4 @@ class vgm_missions {
         };
         logicalOrder = 6;
     };
-
 };
