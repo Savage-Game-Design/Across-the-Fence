@@ -102,8 +102,14 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
 
     ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
 
-    private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
+    private _despawnPos = markerPos "vgm_mission_heli_despawn";
+
+    private _landWp = group _helicopter addWaypoint [_despawnPos, 0];
     sleep 25;
+    // force helo on ground, static
+    _helicopter enableSimulationGlobal false;
+    _helicopter setVelocity [0, 0, 0];
+    _helicopter setPosATL [_despawnPos#0, _despawnPos#1, 0];
     [_missionId] call vgm_s_fnc_missions_endMission;
     waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
     sleep 25;
