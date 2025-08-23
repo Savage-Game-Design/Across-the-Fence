@@ -1,8 +1,12 @@
 [default]
 workshop = [
-    "1649778181" # VN testing build
+    # Uncomment the below line to use the VN testing build
+    # (Make sure to disable the 'vn'` option in `dlc` attribute if you do)
+    # "1649778181"
 ]
-dlc = []
+dlc = [
+    "vn"
+]
 optionals = []
 parameters = [
 ]
