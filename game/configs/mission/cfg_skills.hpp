@@ -406,10 +406,10 @@ class vgm_skillTrees {
                 class taking_notes: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES";
                     description = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_sites_hints_markHintsOnMap', true, true]";
+                    codeUnapply = "player setUnitTrait ['vgm_sites_hints_markHintsOnMap', false, true]";
                     cost = 4;
                 };
 

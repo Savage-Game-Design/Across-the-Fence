@@ -2,7 +2,7 @@
     File: fn_sites_hints_preInit.sqf
     Author: Savage Game Design
     Date: 2024-10-25
-    Last Update: 2025-01-24
+    Last Update: 2025-08-23
     Public: No
 
     Description:
@@ -43,7 +43,7 @@ vgm_sites_hints_objects = createHashMap;
 }] call para_g_fnc_event_subscribeServer;
 
 ["vgm_sites_hints_inspected", {
-    (_this#0) params ["_missionId", "_objectId"];
+    (_this#0) params ["_missionId", "_objectId", "_shouldMarkOnMap"];
 
     private _mission = _missionId call vgm_s_fnc_missions_getById;
 
@@ -52,11 +52,15 @@ vgm_sites_hints_objects = createHashMap;
 
     [_hintsNetmap, _objectId, true] call para_s_fnc_netmap_set;
 
-    [_mission, [_objectId], {
+    [_mission, [_objectId], [[_shouldMarkOnMap], {
         if (!hasInterface) exitWith {};
-        params ["_object"];
-        _object call vgm_c_fnc_sites_hints_markOnMap;
+        params ["_object", "_args"];
+        _args params ["_shouldMarkOnMap"];
+
+        if (_shouldMarkOnMap) then {
+            _object call vgm_c_fnc_sites_hints_markOnMap;
+        };
         _object setVariable ["vgm_sites_hints_inspected", true];
-    }] call vgm_s_fnc_mission_objects_call;
+    }]] call vgm_s_fnc_mission_objects_call;
 
 }] call para_g_fnc_event_subscribe;
