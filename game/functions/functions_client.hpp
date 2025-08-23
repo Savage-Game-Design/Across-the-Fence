@@ -477,6 +477,7 @@ class vgm_c
         {
             preInit = 1;
         };
+        class carry_tryMoveIn {};
     };
 
     class carry_remoteExec
