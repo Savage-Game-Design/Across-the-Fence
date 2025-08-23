@@ -842,11 +842,11 @@ class vgm_c
 
         class skill_passives_infantryman_bornLeader {};
     };
-    class skill_passives_recon
+    class skill_passives_pointman
     {
-        VGM_CLIENT_PATH(\systems\skill\client\passives\recon);
+        VGM_CLIENT_PATH(\systems\skill\client\passives\pointman);
 
-        class skill_passives_recon_keenEye {};
+        class skill_passives_senseOfScale {};
     };
     class skill_passives_fireSupport
     {
