@@ -5,11 +5,11 @@ When you're incapacitated due to your injuries, you've got two options available
 - Wait for help from your team
 - Perform a desperate escape
 
-You can only make a desperate escape once per mission, or twice if you're playing alone.
+You can only make a desperate escape [h]once per mission[/h], or [h]twice if you're playing alone[/h].
 
-If you attempt a desperate escape, you'll scramble to get away from the enemy and reappear at a safe area nearby fully recovered.
+If you attempt a desperate escape, you'll scramble to get away from the enemy and [h]reappear at a safe area nearby fully recovered[/h].
 
-In your haste, you'll lose your backpack and several consumable items in the process.
+In your haste, you'll [h]lose your backpack and several consumable items[/h] in the process.
 """
 
 tip = "Recon teams would ditch their rucks in desperate circumstances so they could move faster."
@@ -19,5 +19,5 @@ image = 'assets\atf_logo.paa'
 
 [hints.desperate_escape]
 description = """
-When downed, once per mission you can conduct a desperate escape to get to safety. Lose your backback and some other items.
+When downed, once per mission you can conduct a desperate escape to get to safety. You'll lose your backback and some other items.
 """
