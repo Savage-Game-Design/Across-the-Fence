@@ -198,8 +198,8 @@ private _photoData = createHashMap;
     if (count _foregroundObjects < 1) then {continue};
 
     private _backgroundObjects = [_spottableObjects, _foregroundObjects, _x get "objects"] call _fnc_getBackgroundObjects;
-
-    _photoData set [_x get "id", [_foregroundObjects, _backgroundObjects, _spottableObjects]];
+    private _siteType = _x get "class";
+    _photoData set [_x get "id", [_foregroundObjects, _backgroundObjects, _spottableObjects, _siteType]];
 } forEach _visibleSites;
 
 #ifdef __A3_DEBUG__
