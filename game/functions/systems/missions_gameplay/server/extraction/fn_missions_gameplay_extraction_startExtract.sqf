@@ -106,7 +106,7 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
 
     private _landWp = group _helicopter addWaypoint [_despawnPos, 0];
     sleep 25;
-    // force helo on ground, static
+    // force helo on ground -- otherwise players are in freefall when missionEnd calls moveOut
     _helicopter enableSimulationGlobal false;
     _helicopter setVelocity [0, 0, 0];
     _helicopter setPosATL [_despawnPos#0, _despawnPos#1, 0];
