@@ -2,7 +2,7 @@
     File: fn_sites_hints_inspect.sqf
     Author: Savage Game Design
     Date: 2025-08-18
-    Last Update: 2025-08-18
+    Last Update: 2025-08-23
     Public: No
 
     Description:
@@ -35,7 +35,8 @@ hint format [
     "vgm_sites_hints_inspected",
     [
         ([] call vgm_c_fnc_missions_getCurrentMission) get "id",
-        _object getVariable "vgm_mission_objects_id"
+        _object getVariable "vgm_mission_objects_id",
+        player getUnitTrait "vgm_sites_hints_markHintsOnMap"
     ]
 ] call para_g_fnc_event_triggerServer;
 
