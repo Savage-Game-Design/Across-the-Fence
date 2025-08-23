@@ -494,10 +494,10 @@ class vgm_skillTrees {
                 class clear_lens: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS";
                     description = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'scoutingPhotoRangeBonus', 'skill_passives_clearLens', +100, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'scoutingPhotoRangeBonus', 'skill_passives_clearLens'] call vgm_c_fnc_coefficient_remove";
                     cost = 6;
                 };
             };
