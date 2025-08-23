@@ -65,24 +65,35 @@ private _groupPositionAGL = [
     ]
 ] call para_g_fnc_get_group_majority_position;
 
-if (_groupPositionAGL isEqualTo [0, 0, 0]) exitWith { // couldn't determine group position (maybe they're all dead?), use fallback spawn transform
-    _safeSpawnTransform;
+// couldn't determine group position. maybe all dead, or no other group members (single player)
+// use player's existing position as basis for starting the search
+if (_groupPositionAGL isEqualTo [0, 0, 0]) then {
+    _groupPositionAGL = getPosASL _unit;
 };
 
 private _enemySides = ([side _unit] call BIS_fnc_enemySides) createHashMapFromArray [];
 private _groupPositionASL = AGLToASL _groupPositionAGL;
 
+// [Distance2D, [PositionASL, Direction]]
+private _bestLocation = [0, _safeSpawnTransform];
+
 for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
     private _safePosition = [_groupPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
     if (!(_safePosition isEqualTo [0, 0])) then {
-        _safePosition = AGLToASL [_safePosition#0, _safePosition#1, 0];
-        private _totalNearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["AllVehicles", _enemyAvoidanceDistance]);
-        private _totalNearbyFriendlies = count ((units _unitGroup) inAreaArray [_safePosition, _minDistanceFromTeam, _minDistanceFromTeam]);
-        if (_totalNearbyEnemies == 0 && _totalNearbyFriendlies == 0) then { // TODO: line of sight checks with enemies and unit's group
-            _safeSpawnTransform = [_safePosition, _safePosition getDir _groupPositionASL];
+
+        private _nearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["CAManBase", _enemyAvoidanceDistance]);
+        private _distanceToNearestEnemy = selectMin (_nearbyEnemies apply {_x distance2D _safePosition});
+
+        private _safePositionASL = AGLToASL [_safePosition#0, _safePosition#1, 0];
+
+        if (count _nearbyEnemies isEqualTo 0) then {
+            _bestLocation = [-1, [_safePositionASL, _safePositionASL getDir _groupPositionASL]];
             break;
         };
-    }
+        if ((_bestLocation # 0) < _distanceToNearestEnemy) then {
+            _bestLocation = [_distanceToNearestEnemy, [_safePositionASL, _safePositionASL getDir _groupPositionASL]];
+        };
+    };
 };
 
-_safeSpawnTransform;
+_bestLocation select 1  // return
