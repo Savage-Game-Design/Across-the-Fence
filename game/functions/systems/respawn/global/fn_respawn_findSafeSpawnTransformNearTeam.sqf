@@ -81,7 +81,7 @@ for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
     private _safePosition = [_groupPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
     if (!(_safePosition isEqualTo [0, 0])) then {
 
-        private _nearbyEnemies = { side _x in _enemySides } count (_safePosition nearEntities ["CAManBase", _enemyAvoidanceDistance]);
+        private _nearbyEnemies = (_safePosition nearEntities ["CAManBase", _enemyAvoidanceDistance]) select { side _x in _enemySides };
         private _distanceToNearestEnemy = selectMin (_nearbyEnemies apply {_x distance2D _safePosition});
 
         private _safePositionASL = AGLToASL [_safePosition#0, _safePosition#1, 0];
