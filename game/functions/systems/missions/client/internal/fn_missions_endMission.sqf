@@ -32,14 +32,16 @@ vgm_mission_onMission = false;
 private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 ["vgm_mission_end_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
+player setUnitFreefallHeight 5000;
 [] spawn {
     waitUntil {vehicle player == player};
-
     player setVelocity [0,0,0];
+
     ([] call vgm_g_fnc_missions_getHubSpawnPos) params ["_newPos", "_newDir"];
     player setDir _newDir;
     player setVehiclePosition [_newPos, [], 0, "NONE"];
     player call vgm_c_fnc_medical_fullHeal;
+    player setUnitFreefallHeight -1;
 };
 moveOut player;
 
