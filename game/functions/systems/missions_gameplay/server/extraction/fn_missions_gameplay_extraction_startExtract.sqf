@@ -112,7 +112,6 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
     _helicopter setPosATL [_despawnPos#0, _despawnPos#1, 0];
     [_missionId] call vgm_s_fnc_missions_endMission;
     waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
-    sleep 25;
     {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
     deleteVehicle _helicopter;
     deleteVehicle _helipad;
