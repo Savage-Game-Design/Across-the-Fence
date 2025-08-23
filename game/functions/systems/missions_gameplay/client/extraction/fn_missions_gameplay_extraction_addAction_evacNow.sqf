@@ -1,5 +1,5 @@
 /*
-    File: fn_missions_gameplay_extraction_addAction_evaNow.sqf
+    File: fn_missions_gameplay_extraction_addAction_evacNow.sqf
     Author: Savage Game Design
     Date: 2024-05-23
     Last Update: 2024-06-09
