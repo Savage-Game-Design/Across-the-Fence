@@ -23,11 +23,12 @@ params ["_object"];
 private _sitePos = _object getVariable "vgm_sites_hints_sitePos";
 
 private _marker = createMarkerLocal [format ["vgm_sites_hints_%1", _object], getPosATL _object];
-_marker setMarkerTypeLocal "mil_arrow";
+_marker setMarkerTypeLocal "hd_arrow_noShadow";
 _marker setMarkerColorLocal "ColorBlack";
 
 private _dir = [_object, _sitePos] call vgm_g_fnc_spokenDirection;
 private _idx = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] find _dir;
-_marker setMarkerDirLocal (45 * _idx);
+private _angle = (45 * _idx);
+_marker setMarkerDirLocal (round (random [_angle - 15, _angle, _angle + 15]));
 
 vgm_sites_hints_markers pushBack _marker;
