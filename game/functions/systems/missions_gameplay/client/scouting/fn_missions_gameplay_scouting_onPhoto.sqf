@@ -2,7 +2,7 @@
     File: fn_mission_gameplay_scouting_onPhoto.sqf
     Author: Savage Game Design
     Date: 2024-09-30
-    Last Update: 2025-02-14
+    Last Update: 2025-08-23
     Public: No
 
     Description:
@@ -18,6 +18,7 @@
         [] call vgm_c_fnc_missions_gameplay_scouting_onPhoto
  */
 
+#define DEFAULT_PHOTO_RANGE 100
 #define VIS_THRESHOLD 0.7
 #define GET_DISPLAY_MAP (findDisplay 12)
 
@@ -183,11 +184,12 @@ private _visibleSites = _sites select {
 };
 
 private _zoom = (getResolution#6) / getObjectFOV _extern_player;
+private _photoRange = (DEFAULT_PHOTO_RANGE + (_extern_player getVariable ["vgm_scouting_photoRangeBonus", 0])) max 0;
 
 private _photoData = createHashMap;
 {
     private _perceivedDistance = ((_x get "pos") distance2d _extern_player) / _zoom;
-    if (_perceivedDistance > 100) then {continue};
+    if (_perceivedDistance > _photoRange) then {continue};
 
     private _site = _x;
     private _spottableObjects = _site call _fnc_getSpottableObjects;

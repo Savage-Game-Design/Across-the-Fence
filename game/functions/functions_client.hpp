@@ -584,6 +584,10 @@ class vgm_c
         class missions_gameplay_scouting_onPhoto {};
         class missions_gameplay_scouting_createUpdateLocation {};
         class missions_gameplay_scouting_getSiteById {};
+        class missions_gameplay_scouting_preInit
+        {
+            preInit = 1;
+        };
         class missions_gameplay_scouting_postInit
         {
             postInit = 1;
