@@ -48,7 +48,7 @@ def launch(arma_exe_path, mods=[], args=[], connect=False, editor_mission_path: 
     print(f"Launching Arma: {list(map(str, command))}")
 
     # start arma
-    subprocess.Popen(command)
+    return subprocess.Popen(command)
 
 def launch_server(mission_path: Path, arma_server_exe: Path, config: Path, servermod_path=None, mods=[], profile="vgm_server"):
     try_symlink_arma_server_mission_dir(mission_path, arma_server_exe)
@@ -56,16 +56,16 @@ def launch_server(mission_path: Path, arma_server_exe: Path, config: Path, serve
     server_config_path = setup_temporary_arma_server_config(config, mission_path.name)
 
     if servermod_path:
-        hemtt.launch(
+        return hemtt.launch(
             servermod_path,
             arma_args=[
                 f"-name={profile}",
                 f"-config={server_config_path}"
             ]
         )
-        return
 
-    launch(
+
+    return launch(
         arma_exe_path=arma_server_exe,
         mods=mods,
         args=[

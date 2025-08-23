@@ -18,7 +18,7 @@ def launch(path: Path, args=[], arma_args=[]):
 
     print(f"Launching HEMTT: {command}")
 
-    return subprocess.run(command, cwd=path)
+    return subprocess.Popen(command, cwd=path)
 
 def dev(path: Path, args=[]):
     command = [
