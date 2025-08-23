@@ -1514,6 +1514,18 @@
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION">
             <Original>Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.</Original>
         </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE">
+            <Original>Desperate Escape</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC">
+            <Original>When you're incapacitated due to your injuries, you've got two options available to you:%1%2 Wait for help from your team%1%2 Perform a desperate escape%1%1You can only make a desperate escape %3once per mission%4, or %3twice if you're playing alone%4.%1%1If you attempt a desperate escape, you'll scramble to get away from the enemy and %3reappear at a safe area nearby fully recovered%4.%1%1In your haste, you'll %3lose your backpack and several consumable items%4 in the process.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP">
+            <Original>Recon teams would ditch their rucks in desperate circumstances so they could move faster.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION">
+            <Original>When downed, once per mission you can conduct a desperate escape to get to safety. You'll lose your backback and some other items.</Original>
+        </Key>
     </Package>
     <Package name="Tutorial">
         <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">

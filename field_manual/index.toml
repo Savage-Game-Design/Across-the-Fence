@@ -29,4 +29,5 @@ pages = [
     "hints",
     "stop_and_focus",
     "alertness",
+    "desperate_escape",
 ]
