@@ -1311,8 +1311,23 @@
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
             <Original>Request extraction</Original>
         </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_EVACNOW_ACTION">
+            <Original>Extract Now!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_EVACTIMER_ACTION">
+            <Original>Extract in 30 seconds!</Original>
+        </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO">
             <Original>No radio or RTO nearby to call for extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_EXTRACT_NO_RADIO">
+            <Original>No radio or RTO nearby, board the helicopter to force extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_CONFIRM_TIMED_EXTRACTION">
+            <Original>Start extraction countdown? Team will be notified and have 30 seconds to board the helicopter.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_CONFIRM_IMMEDIATE_EXTRACTION">
+            <Original>Extract immediately? Remaining team members will be abandoned.</Original>
         </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_TITLE">
             <English>Extract from AO</English>
@@ -1322,6 +1337,15 @@
         </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_TITLE">
+            <English>Extraction</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_EVACNOW_DESCRIPTION">
+            <English>Extract helicopter leaving!</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_EVACAT_DESCRIPTION">
+            <English>Extract helicopter leaving in 30 seconds!</English>
         </Key>
     </Package>
     <Package name="Missions Scouting">
