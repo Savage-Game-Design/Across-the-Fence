@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-03-23
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -61,8 +61,6 @@ if (_lzPosition isEqualTo []) exitWith {
 
 // spawn the helicopter, coming from the direction of the origin pos
 private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
-// NOTE: For team leader dustOff hold action.
-// @dijksterhuis: if group leader dies then we'll need to pass this onto other group members, right?
 _playerGroup setVariable ["vgm_missions_extraction_helicopter", _helicopter, true];
 
 private _spawnPos = _lzPosition getPos [_distance, _lzPosition getDir _originPos];

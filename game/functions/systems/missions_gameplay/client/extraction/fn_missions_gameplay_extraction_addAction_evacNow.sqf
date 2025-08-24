@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_addAction_evacNow.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-06-09
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -24,23 +24,25 @@ params ["_player"];
 private _fnc_forceLeave = {
     params ["_target"];
 
+    private _helicopter = (group _target) getVariable ["vgm_missions_extraction_helicopter", objNull];
     private _radio = _target call vgm_c_fnc_missions_gameplay_extraction_getNearbyRadio;
+    private _inHelicopter = objectParent _target isEqualTo _helicopter;
 
-    if (isNull _radio) exitWith {
-        hint localize "STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO";
+    if (!_inHelicopter && isNull _radio) exitWith {
+        hintSilent localize "STR_VGM_MISSIONS_EXTRACT_NOW_NO_RADIO";
         playSoundUI ["3DEN_notificationWarning", 0.5];
     };
 
     // hide action menu
     showCommandingMenu "RscGroupRootMenu"; showCommandingMenu "";
 
-    [_target, _radio] spawn {
+    [_target, _helicopter] spawn {
+        params ["_target", "_helicopter"];
         sleep 0.5;
-        if (["Start Extraction Now? Remaining team members will be abandoned.", "Confirm", true, true] call BIS_fnc_guiMessage) then {
-            // setting variable on helicopter breaks out of the spawn checking for all group members boarded
-            (objectParent (_this select 0)) setVariable ["vgm_missions_extraction_evacNow", true, true];
-            ["VGM_ExtractionEvacNow", []] remoteExec ["BIS_fnc_showNotification", units (group (_this select 0))];
-
+        if ([localize "STR_VGM_MISSIONS_EXTRACTION_CONFIRM_IMMEDIATE_EXTRACTION", "Confirm", true, true] call BIS_fnc_guiMessage) then {
+            // Forces the extract check to pass immediately.
+            _helicopter setVariable ["vgm_missions_extraction_evacNow", true, true];
+            ["VGM_ExtractionEvacNow", []] remoteExec ["BIS_fnc_showNotification", units (group _target)];
         };
     };
 };
@@ -53,18 +55,19 @@ private _actionId = [
     toString {
         vgm_mission_onMission
         // is group leader
-        && leader _target == _target
+        && {leader _target == _target}
+        && {
+            private _helicopter = (group _target) getVariable ["vgm_missions_extraction_helicopter", objNull];
+            // extraction helicopter exists
+            !isNull _helicopter
+            // helicopter landed
+            && _helicopter getVariable ["vgm_missions_extractionLanded", false]
+            // forced extract action not run yet
+            && {!(_helicopter getVariable ["vgm_missions_extraction_evacNow", false])}
+        }
         // should not be possible to request extraction
-        && {!((group _target) getVariable ["vgm_missions_extraction_canRequest", true])}
-        // group leader is in vehicle
-        && {!isNull (objectParent _target)}
         // see: fn_missions_gameplay_extraction_startExtract.sqf
-        // group leader in extraction helo
-        && {(objectParent _target) == ((group _target) getVariable ["vgm_missions_extraction_helicopter", objNull])}
-        // forced extract action not run yet
-        && {!((objectParent _target) getVariable ["vgm_missions_extraction_evacNow", false])}
-        // forced timer extract action not run
-        && {((objectParent _target) getVariable ["vgm_missions_extraction_evacAt", -1]) isEqualTo -1}
+        && {!((group _target) getVariable ["vgm_missions_extraction_canRequest", true])}
     },
     "true",
     {},
