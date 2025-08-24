@@ -899,6 +899,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\pointman);
 
         class skill_actives_keenEye {};
+        class skill_actives_oneOfThem {};
         class skill_actives_stonesThrow {};
     };
     class skill_actives_support
