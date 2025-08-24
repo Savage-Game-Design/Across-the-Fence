@@ -461,10 +461,9 @@ class vgm_skillTrees {
                 class deep_focus: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS";
                     description = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "(_this + ['investigateRangeMultiplier', +1]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
                     skillType = 2;
                     cost = 6;
                     cooldown = 30;

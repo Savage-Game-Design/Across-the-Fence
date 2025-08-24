@@ -4,7 +4,7 @@
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2025-08-18
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -37,6 +37,11 @@ vgm_c_skill_investigate_focusDelay = 3;
 ["investigateTimeCoef", {
     params ["_unit", "_value"];
     _unit setVariable ["vgm_c_skill_investigate_investigateTimeCoef", _value max 0];
+}] call vgm_c_fnc_coefficient_create;
+
+["investigateRangeMultiplier", {
+    params ["_unit", "_value"];
+   _unit setVariable ["vgm_c_skill_investigate_rangeMultiplier", _value max 0.1];
 }] call vgm_c_fnc_coefficient_create;
 
 ["ToggleFocus", vgm_c_fnc_skill_investigate_toggleFocusMode] call para_c_fnc_keyhandler_addGeneralActionHandler;
