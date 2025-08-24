@@ -107,8 +107,7 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
     ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
 
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
-    // TODO - Put this back to 25
-    sleep 5;
+    sleep 25;
     private _endType = ["FAILURE", "SUCCESS"] select (units _playerGroup findIf {_x in _helicopter} > -1);
     [_missionId, _endType] call vgm_s_fnc_missions_endMission;
     waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
