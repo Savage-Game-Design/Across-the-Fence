@@ -81,7 +81,7 @@ private _actionId = [
     1,
     100,
     false,
-    false,
+    true,
     false
 ] call BIS_fnc_holdActionAdd;
 
