@@ -567,7 +567,7 @@
             <Original>One of them</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC">
-            <Original>Enemy won’t detect you as long as you walk naturally (requires enemy helmet)</Original>
+            <Original>Enemy won’t detect you as long as you're undetected, walk and wear an enemy helmet.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES">
             <Original>Pile of leaves</Original>

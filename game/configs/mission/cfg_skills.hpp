@@ -455,10 +455,10 @@ class vgm_skillTrees {
                 class one_of_them: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM";
                     description = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "[true] call vgm_c_fnc_skill_actives_oneOfThem";
+                    codeDeactivate = "[false] call vgm_c_fnc_skill_actives_oneOfThem";
                     skillType = 2;
                     cost = 6;
                     cooldown = 600;

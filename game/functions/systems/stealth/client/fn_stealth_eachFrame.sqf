@@ -61,6 +61,9 @@ call {
     // Unit can't see player, as they're not in a valid state.
     if (!alive _unitToCheck || side _unitToCheck != ENEMY_SIDE) exitWith {};
 
+    // Player can't be seen by anyone, due to being undetectable
+    if (vgm_c_stealth_undetectable) exitWith {};
+
     ([_unitToCheck] call vgm_c_fnc_stealth_isVisibleToUnit) params ["_isVisible", "_visibility"];
 
     // Player isn't visible enough to the unit, they can't be seen.
@@ -85,7 +88,8 @@ call {
 
     [_lookingUnit] call vgm_c_fnc_stealth_isVisibleToUnit params ["_isVisible", "_visibility"];
 
-    if !(alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible) exitWith {
+    private _unitCanDetectPlayer = alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible;
+    if (!_unitCanDetectPlayer || vgm_c_stealth_undetectable) exitWith {
         vgm_c_stealth_looking deleteAt _lookingKey;
         #ifdef __A3_DEBUG__
             _lookingUnit setVariable ["vgm_c_stealth_spotTimeDebug", nil];

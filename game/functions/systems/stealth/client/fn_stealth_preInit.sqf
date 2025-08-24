@@ -31,6 +31,12 @@ vgm_c_stealth_stanceLerp = createHashMapFromArray [
 
 /////////////////
 
+vgm_c_stealth_undetectable = false;
+["stealthUndetectable", {
+    params ["_unit", "_inEffect"];
+    vgm_c_stealth_undetectable = _inEffect;
+}] call vgm_c_fnc_statusEffect_create;
+
 ["stealthSpotTimeMultiplier", {
     params ["_unit", "_value"];
     // Prevent spot time being less than 10% of actual value, so we don't get any weird maths errors from 0.
