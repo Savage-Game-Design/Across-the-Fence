@@ -16,10 +16,16 @@ class vgm_skillTemplate {
     conditionShow = "true";
     conditionActivate = "true";
 
+    // Called when the skill is learned
     codeApply = "";
+    // Called when the skill is unlearned
     codeUnapply = "";
 
+    // Called when an ability is triggered
     codeActivate = "";
+    // Called when an ability has ended
+    codeDeactivate = "";
+    // Called when  an ability is unable to activate
     codeUnableToActivate = "";
 };
 
@@ -124,7 +130,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC";
                     column = 1;
 
-                    codeActivate = "(_this + ['aim', -1]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+                    codeActivate = "[player, 'aim', 'skill_shootAndScoot', -1, true] call vgm_c_fnc_coefficient_set";
+                    codeDeactivate = "[player, 'aim', 'skill_shootAndScoot'] call vgm_c_fnc_coefficient_remove";
                     skillType = 1;
                     cost = 2;
                     cooldown = 150;

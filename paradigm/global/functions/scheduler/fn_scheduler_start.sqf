@@ -2,7 +2,7 @@
 	File: fn_scheduler_start.sqf
 	Author:  Savage Game Design
 	Public: No
-	
+
 	Description:
 		Main scheduler. Handles frequent, repetitive, in-expensive tasks that don't need to be spawn'd.
 		Nothing scheduled here should ever take a long time to run - as it'll block the scheduler doing anything.
@@ -17,11 +17,11 @@
 			lastTickTime - last time the job was run
 			removeFromScheduler - set when the task wants to be removed.
 
-	
+
 	Parameter(s): none
-	
+
 	Returns: nothing
-	
+
 	Example(s):
 		call para_g_fnc_scheduler_start;
 */
@@ -52,7 +52,7 @@ para_l_schedulerHandle = [] spawn {
 			private _lastTickTime = _schedulerCurrentJob getVariable ["lastTickTime", 0];
 			private _remainingIterations = _schedulerCurrentJob getVariable ["remainingIterations", -1];
 
-			if ((_tickTime - _lastTickTime) > _tickDelay && {_remainingIterations != 0}) then
+			if ((_tickTime - _lastTickTime) > _tickDelay && {_remainingIterations != 0 && _tickTime >= _startTime}) then
 			{
 				//If debug scheduler is enabled, dump the jobs to the log file.
 				if (!isNil "debugScheduler") then {
@@ -84,15 +84,13 @@ para_l_schedulerHandle = [] spawn {
 				};
 			};
 		} forEach para_l_schedulerJobs;
-		// reverse array and remove from last to first
-		reverse _toBeRemoved;
 		{
 			//Delete the namespace used by the job, so we don't get a bunch lingering around as the mission runs.
 			private _job = para_l_schedulerJobs select _x select 1;
 			_job call para_g_fnc_delete_namespace;
 			//Now just remove the job entry from the scheduler.
 			para_l_schedulerJobs deleteAt _x;
-		} forEach _toBeRemoved;
+		} forEachReversed _toBeRemoved;
 		uiSleep 0.1;
 	};
 };
