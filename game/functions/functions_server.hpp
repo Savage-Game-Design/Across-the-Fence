@@ -42,6 +42,17 @@ class vgm_s
         class db_typed_save {};
     };
 
+    class extension
+    {
+        VGM_SERVER_PATH(\core\server\extension);
+
+        class extension_call {};
+        class extension_preInit {
+            preInit = 1;
+        };
+        class extension_setHandler {};
+    };
+
     class ai
     {
         VGM_SERVER_PATH(\systems\ai\server);
