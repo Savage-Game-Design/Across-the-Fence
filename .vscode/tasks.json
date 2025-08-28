@@ -52,7 +52,7 @@
             }
         },
         {
-            "label": "Launch arma client",
+            "label": "Launch arma editor",
             "type": "shell",
             "command": "py '${workspaceFolder}\\build\\run.py' launch client --editor",
             "problemMatcher": [],
