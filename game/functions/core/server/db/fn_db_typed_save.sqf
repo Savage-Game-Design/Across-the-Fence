@@ -2,8 +2,8 @@
     File: fn_db_typed_save.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2023-01-05
-    Public: No
+    Last Update: 2025-08-28
+    Public: Yes
 
     Description:
         Saves data to database with a type.

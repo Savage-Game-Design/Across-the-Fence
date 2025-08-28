@@ -239,6 +239,18 @@ class vgm_s
         class missions_zones_remoteExec_getList {};
     };
 
+    class persistence
+    {
+        VGM_SERVER_PATH(\systems\persistence\server);
+
+        class persistence_load {};
+        class persistence_preInit
+        {
+            preInit = 1;
+        };
+        class persistence_registerSchema {};
+    };
+
     class player
     {
         VGM_SERVER_PATH(\core\server\player);
