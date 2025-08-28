@@ -15,7 +15,7 @@
         Something [BOOL]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [] call vgm_s_fnc_persistence_load
  */
 
 params [
