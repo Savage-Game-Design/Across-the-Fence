@@ -3,7 +3,7 @@
     File: fn_watermark.sqf
     Author: Savage Game Design
     Date: 2025-01-17
-    Last Update: 2025-01-17
+    Last Update: 2025-06-29
     Public: No
 
     Description:
@@ -28,7 +28,8 @@
     _ctrlWatermark ctrlSetBackgroundColor [0,0,0,0];
     _ctrlWatermark ctrlSetTextColor [1,1,1,0.9];
 
-    _ctrlWatermark ctrlSetStructuredText parseText format ["<t align='right'>%1</t>", localize "STR_VGM_MISSION_NAME_VERSION"];
+    private _backendType = missionNamespace getVariable ["vgm_g_dbBackendType", "err"];
+    _ctrlWatermark ctrlSetStructuredText parseText format ["<t align='right'>%1</t>", format ["%1 (%2)", localize "STR_VGM_MISSION_NAME_VERSION", _backendType]];
 
     _ctrlWatermark ctrlCommit 0;
 
