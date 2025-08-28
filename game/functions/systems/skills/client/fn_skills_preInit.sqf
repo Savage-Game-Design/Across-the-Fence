@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2025-08-28
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -20,7 +20,7 @@ if (!hasInterface) exitWith {};
 vgm_c_skills_applyOnRespawn = createHashMap;
 vgm_c_skills_appliedSkillsPaths = [];
 
-["leveling"] call vgm_s_fnc_persistence_registerSchema;
+["leveling"] call vgm_c_fnc_persistence_registerSchema;
 
 ["vgm_skills_learnt", {
     _this#0 params ["_path", "_skill"];
