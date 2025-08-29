@@ -2,7 +2,7 @@
     File: fn_persistence_registerSchema.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-28
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -25,6 +25,8 @@ if (_loaded) exitWith {
     "Schema load already requested. Schemas must be registered in preInit!" call vgm_g_fnc_logError;
     false
 };
+
+format ["Registering persistence schema: %1", _schema] call vgm_g_fnc_logDebug;
 
 if (isNil "vgm_persistence_schemas") then {
     vgm_persistence_schemas = [];

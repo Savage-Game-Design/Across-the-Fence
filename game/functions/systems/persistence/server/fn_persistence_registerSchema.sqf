@@ -2,7 +2,7 @@
     File: fn_persistence_registerSchema.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-28
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -15,12 +15,12 @@
         Something [BOOL]
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        ["leveling"] call vgm_s_fnc_persistence_registerSchema
  */
 
 params ["_schema"];
 
-if (isNil "vgm_persistence_schemaHandlers") then {
+if (isNil "vgm_persistence_registeredSchemas") then {
     vgm_persistence_registeredSchemas = createHashMap;
 };
 
@@ -66,7 +66,7 @@ format ["Registering persistence schema handler: %1", _schema] call vgm_g_fnc_lo
     // cache the data in the profile namespace for fast access
     [_schema, _namespaceKey, _data] call vgm_s_fnc_db_typed_save;
 
-    if (_playerSchemaRequests isEqualTo []) then {
+    if (_playerSchemaRequests isEqualTo createHashMap) then {
         format ["All persistence data loaded for player: %1", _playerUID] call vgm_g_fnc_logInfo;
         vgm_persistence_playerRequests deleteAt _playerUID;
 

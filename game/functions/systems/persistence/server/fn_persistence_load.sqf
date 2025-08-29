@@ -2,7 +2,7 @@
     File: fn_persistence_load.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-28
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -20,7 +20,7 @@
 
 params [
     ["_player", objNull, [objNull]],
-    "_schemas"
+    ["_schemas", [], [[]]]
 ];
 private _playerUID = getPlayerUID _player;
 

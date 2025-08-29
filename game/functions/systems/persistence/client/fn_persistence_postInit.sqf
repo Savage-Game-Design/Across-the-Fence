@@ -2,7 +2,7 @@
     File: fn_persistence_postInit.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-28
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -18,9 +18,13 @@ if (!hasInterface) exitWith {};
     } forEach vgm_persistence_handlers;
 }] call para_g_fnc_event_subscribeServer;
 
-vgm_persistence_loadRequested = true;
+[] spawn {
+    waitUntil {!isNil "vgm_g_dbBackendType"};
 
-private _schemas = missionNamespace getVariable ["vgm_persistence_schemas", []];
-["vgm_persistence_requestLoad", [player, _schemas]] call para_g_fnc_event_triggerServer;
+    vgm_persistence_loadRequested = true;
 
-format ["Requested persistence load for schemas: %1", _schemas] call vgm_g_fnc_logInfo;
+    private _schemas = missionNamespace getVariable ["vgm_persistence_schemas", []];
+    ["vgm_persistence_requestLoad", [player, _schemas]] call para_g_fnc_event_triggerServer;
+
+    format ["Requested persistence load for schemas: %1", _schemas] call vgm_g_fnc_logInfo;
+};
