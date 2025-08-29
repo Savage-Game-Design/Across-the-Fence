@@ -61,10 +61,8 @@ format ["Registering persistence schema handler: %1", _schema] call vgm_g_fnc_lo
     private _playerSchemaRequests = vgm_persistence_playerRequests get _playerUID;
     private _schema = _playerSchemaRequests deleteAt _requestId;
 
-    // prefix the player key to separate the data from no backend saves;
-    private _namespaceKey = format ["persistence_%1", _playerUID];
-    // cache the data in the profile namespace for fast access
-    [_schema, _namespaceKey, _data] call vgm_s_fnc_db_typed_save;
+    // cache the data for fast immediate access in other systems
+    [_schema, _playerUID, _data] call vgm_s_fnc_persistence_dbSet;
 
     if (_playerSchemaRequests isEqualTo createHashMap) then {
         format ["All persistence data loaded for player: %1", _playerUID] call vgm_g_fnc_logInfo;

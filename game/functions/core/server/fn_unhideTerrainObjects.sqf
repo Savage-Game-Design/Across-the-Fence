@@ -22,7 +22,7 @@
 params [["_hideObjectResult", [], [createHashMap]]];
 
 if (_hideObjectResult isEqualType [] or {!("objects" in _hideObjectResult)}) exitWith {
-    ["Invalid parameter passed to unhideTerrainObjects"] call vgm_g_fnc_log_error;
+    ["Invalid parameter passed to unhideTerrainObjects"] call vgm_g_fnc_logError;
     ["ERROR"] call vgm_g_fnc_logStackTrace;
 };
 

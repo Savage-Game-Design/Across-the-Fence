@@ -2,8 +2,8 @@
     File: fn_db_get.sqf
     Author: Cerebral
     Date: 2022-11-11
-    Last Update: 2024-12-19
-    Public: No
+    Last Update: 2025-08-29
+    Public: Yes
 
     Description:
         Returns the value of a database entry.

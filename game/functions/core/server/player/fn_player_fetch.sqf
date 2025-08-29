@@ -2,7 +2,7 @@
     File: fn_player_fetch.sqf
     Author: Cerebral
     Date: 2023-01-03
-    Last Update: 2023-01-28
+    Last Update: 2025-08-29
     Public: No
 
     Description:
