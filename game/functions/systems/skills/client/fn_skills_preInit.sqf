@@ -20,7 +20,7 @@ if (!hasInterface) exitWith {};
 vgm_c_skills_applyOnRespawn = createHashMap;
 vgm_c_skills_appliedSkillsPaths = [];
 
-["leveling"] call vgm_c_fnc_persistence_registerSchema;
+["skills"] call vgm_c_fnc_persistence_registerSchema;
 
 ["vgm_skills_learnt", {
     _this#0 params ["_path", "_skill"];
