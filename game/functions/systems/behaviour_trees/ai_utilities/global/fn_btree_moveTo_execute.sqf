@@ -94,17 +94,23 @@ if (_intermediateDestination distance2D getPosASL _groupLeader < TOLERANCE) exit
 // Route failed - AI is probably stuck, attempt stuck repair.
 
 private _repairStrategies = [
-    //Strategy 0: A short move forward.
+    //Strategy 0: A move halfway to the destination
+    {
+        private _distance = _groupLeader distance2D _destPos;
+        private _newPos = _groupLeader getPos [(_distance / 2) max _completionDistance min _distance, (_groupLeader getDir _destPos)];
+        [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 0] call vgm_g_fnc_btree_setWaypoint;
+    },
+    //Strategy 1: A short move forward.
     {
         private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos)];
         [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 0] call vgm_g_fnc_btree_setWaypoint;
     },
-    //Strategy 1: A short move sideways.
+    //Strategy 2: A short move sideways.
     {
         private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos) + 90];
         [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 0] call vgm_g_fnc_btree_setWaypoint;
     },
-    //Strategy 2: Teleport when no players are nearby. handles AI stuck in objects.
+    //Strategy 3: Teleport when no players are nearby. handles AI stuck in objects.
     {
         if (allPlayers inAreaArray [getPos _groupLeader, 100, 100] isEqualTo []) then {
             [format ["btree moveto: Group %1 is *very* stuck, teleporting them now.", _group]] call vgm_g_fnc_logWarning;
