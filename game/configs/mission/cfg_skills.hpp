@@ -523,10 +523,10 @@ class vgm_skillTrees {
                 class on_the_prowl: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL";
                     description = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "player setUnitTrait ['vgm_skill_investigate_canMoveFreely', true, true]";
+                    codeDeactivate = "player setUnitTrait ['vgm_skill_investigate_canMoveFreely', false, true]";
                     skillType = 2;
                     cost = 8;
                     cooldown = 460;
