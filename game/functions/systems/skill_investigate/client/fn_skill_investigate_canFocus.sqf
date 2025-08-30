@@ -2,7 +2,7 @@
     File: fn_skill_investigate_canFocus.sqf
     Author:
     Date: 2025-01-05
-    Last Update: 2025-02-04
+    Last Update: 2025-08-31
     Public: Yes
 
     Description:
@@ -18,8 +18,9 @@
         [] call vgm_c_fnc_skill_investigate_canFocus;
  */
 
+player getUnitTrait "vgm_skill_investigate_canMoveFreely"
 // bipod anims have varying names so simply check if it's deployed
-isWeaponDeployed player
+|| isWeaponDeployed player
 || {
     animationState player select [9, 3] isEqualTo "stp"
     // checking animation "step" allows us to catch "odd" ones like rolling while prone
