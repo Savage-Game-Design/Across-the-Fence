@@ -549,7 +549,7 @@
             <Original>Clear lens</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC">
-            <Original>Increases camera range from 200m to 400m</Original>
+            <Original>Increases camera range from 100m to 200m</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE">
             <Original>Friend or foe</Original>
