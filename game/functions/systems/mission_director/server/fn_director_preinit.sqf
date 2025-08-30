@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-06-19
+    Last Update: 2025-08-30
     Public: No
 
     Description:
@@ -20,16 +20,16 @@
  */
 
 vgm_s_director_max_alertness = 100;
-vgm_s_director_tracker_spawn_alertness_threshold = 3;
+vgm_s_director_tracker_spawn_alertness_threshold = 6;
 vgm_s_director_min_time_between_trackers_secs = 90;
 vgm_s_director_max_time_between_trackers_secs = 600;
 vgm_s_director_dynamic_max_groups = 8;
 vgm_s_director_noiseEventAlertness = createHashMapFromArray [
-    ["player_explosion", 2],
+    ["player_explosion", 1],
     ["player_flare", 5],
     // These are per reported event, not individual shot. Danger report clumps shots into short windows for each player.
-    ["unsuppressedShots", 1.0],
-    ["suppressedShots", 0.5]
+    ["unsuppressedShots", 0.5],
+    ["suppressedShots", 0.25]
 ];
 
 vgm_s_director_defenseSquadSizeRanges = createHashMapFromArray [
