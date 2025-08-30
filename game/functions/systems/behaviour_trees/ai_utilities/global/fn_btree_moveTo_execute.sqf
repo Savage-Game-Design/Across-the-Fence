@@ -45,13 +45,13 @@ if (!_forceRepath && currentWaypoint _group < count waypoints _group && waypoint
 private _repairStrategies = [
 	//Strategy 0: Create a waypoint to the destination
 	{
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, _completionDistance] call vgm_g_fnc_btree_setWaypoint;
+		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, -1] call vgm_g_fnc_btree_setWaypoint;
 	},
 	//Strategy 1: Move halfway towards the destination
 	{
 		private _distance = _destPos distance2D getPos _groupLeader;
 		private _newPos = _groupLeader getPos [_distance / 2, _groupLeader getDir _destPos];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, (_distance / 20) max _completionDistance] call vgm_g_fnc_btree_setWaypoint;
+		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, -1] call vgm_g_fnc_btree_setWaypoint;
 	},
 	//Strategy 2: A short move forward.
 	{
