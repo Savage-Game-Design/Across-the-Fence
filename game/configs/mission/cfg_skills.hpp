@@ -400,14 +400,12 @@ class vgm_skillTrees {
                 class keen_eye: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KEEN_EYE";
                     description = "$STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     codeActivate = "call vgm_c_fnc_skill_actives_keenEye";
                     skillType = 2;
                     cost = 4;
                     cooldown = 180;
-                    duration = 30;
                 };
 
                 class taking_notes: vgm_skillTemplate {
