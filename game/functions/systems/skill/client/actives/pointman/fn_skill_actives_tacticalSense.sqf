@@ -1,21 +1,21 @@
 /*
-    File: fn_skill_actives_recon_sixthSense.sqf
+    File: fn_skill_actives_tacticalSense.sqf
     Author: Savage Game Design
     Date: 2023-09-29
-    Last Update: 2024-07-09
+    Last Update: 2025-08-31
     Public: No
 
     Description:
-        Adds logic for Recon Tier 3 6th Sense skill.
+        Shows markers on all nearby enemies when active
 
     Parameter(s):
-        None
+
 
     Returns:
         Nothing
 
     Example(s):
-        [] call vgm_c_fnc_skill_actives_recon_sixthSense
+        [] call vgm_c_fnc_skill_actives_tacticalSense
  */
 
 #define FONT_SIZE 0.042
@@ -24,17 +24,16 @@
 #define COLOR_OPACITY(DIST) (linearConversion [30, RADIUS, DIST, 0.9, 0.8, true])
 #define ICON_SIZE(DIST) (linearConversion [20, RADIUS, DIST, 4, 2, true])
 
-params ["", "_skill"];
+params ["_isActive"];
 
-["Recon/6th Sense skill activated"] call vgm_g_fnc_logInfo;
+if (!_isActive) exitWith {
+    ["Tactical sense skill exhausted"] call vgm_g_fnc_logInfo;
 
-["skill_active_sixthSense", {
-    ["Recon/6th Sense skill exhausted"] call vgm_g_fnc_logInfo;
+    removeMissionEventHandler ["Draw3D", vgm_c_skill_actives_tacticalSense_draw3DEh];
+    CTRL_MAP ctrlRemoveEventHandler ["Draw", vgm_c_skill_actives_tacticalSenseDrawEh];
+};
 
-    removeMissionEventHandler ["Draw3D", vgm_c_skill_actives_recon_sixthSense_draw3DEh];
-    CTRL_MAP ctrlRemoveEventHandler ["Draw", vgm_c_skill_actives_recon_sixthSenseDrawEh];
-}, _skill get "duration", "seconds"] call BIS_fnc_runLater;
-
+["Tactical sense skill activated"] call vgm_g_fnc_logInfo;
 
 private _enemySides = playerSide call vgm_g_fnc_enemySides;
 private _enemies = flatten (_enemySides apply {units _x}) inAreaArray [player, RADIUS, RADIUS];
@@ -48,9 +47,9 @@ private _enemies = flatten (_enemySides apply {units _x}) inAreaArray [player, R
     _x setVariable ["vgm_c_objectColor", side _x call BIS_fnc_sideColor];
 } forEach _enemies;
 
-vgm_c_skill_actives_recon_sixthSense_list = _enemies;
+vgm_c_skill_actives_tacticalSense_list = _enemies;
 
-vgm_c_skill_actives_recon_sixthSense_draw3DEh = addMissionEventHandler ["Draw3D", {
+vgm_c_skill_actives_tacticalSense_draw3DEh = addMissionEventHandler ["Draw3D", {
     {
         if (!alive _x) then {continue};
 
@@ -71,10 +70,10 @@ vgm_c_skill_actives_recon_sixthSense_draw3DEh = addMissionEventHandler ["Draw3D"
             "center",
             true // draw side arrows
         ];
-    } forEach vgm_c_skill_actives_recon_sixthSense_list;
+    } forEach vgm_c_skill_actives_tacticalSense_list;
 }];
 
-vgm_c_skill_actives_recon_sixthSenseDrawEh = CTRL_MAP ctrlAddEventHandler ["Draw", {
+vgm_c_skill_actives_tacticalSenseDrawEh = CTRL_MAP ctrlAddEventHandler ["Draw", {
     params ["_ctrlMap"];
 
     {
@@ -89,5 +88,5 @@ vgm_c_skill_actives_recon_sixthSenseDrawEh = CTRL_MAP ctrlAddEventHandler ["Draw
             1, // shadow
             FONT_SIZE
         ];
-    } forEach vgm_c_skill_actives_recon_sixthSense_list;
+    } forEach vgm_c_skill_actives_tacticalSense_list;
 }];

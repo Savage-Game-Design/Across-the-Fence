@@ -510,10 +510,10 @@ class vgm_skillTrees {
                 class tactical_sense: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE";
                     description = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "[true] call vgm_c_fnc_skill_actives_tacticalSense";
+                    codeDeactivate = "[false] call vgm_c_fnc_skill_actives_tacticalSense";
                     skillType = 2;
                     cost = 8;
                     cooldown = 360;
