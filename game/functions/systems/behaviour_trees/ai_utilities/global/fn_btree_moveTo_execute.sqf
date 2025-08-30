@@ -71,6 +71,8 @@ if (isNil "_intermediateDestination") exitWith {
 
 // Intermediate destination has been reached - this might be the final destination. The only way to check is by attempting to repath.
 if (_intermediateDestination distance2D getPosASL _groupLeader < TOLERANCE) exitWith {
+    // Unstuck if we've reached our destination!
+    _group setVariable ["vgm_l_btree_moveTo_nextStrategy", 0];
     private _lastIntermediate = _group getVariable ["vgm_l_btree_moveTo_lastIntermediateDestination", [999999, 999999, 999999]];
     _group setVariable ["vgm_l_btree_moveTo_lastIntermediateDestination", _intermediateDestination];
 
@@ -106,7 +108,7 @@ private _repairStrategies = [
     {
         if (allPlayers inAreaArray [getPos _groupLeader, 100, 100] isEqualTo []) then {
             [format ["btree moveto: Group %1 is *very* stuck, teleporting them now.", _group]] call vgm_g_fnc_logWarning;
-            private _newPos = _groupLeader getPos [20 + random 20, random 360];
+            private _newPos = _groupLeader getPos [10, _groupLeader getDir _destPos];
             {
                 _x setPos _newPos;
             } forEach units _group;
