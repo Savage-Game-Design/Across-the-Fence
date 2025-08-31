@@ -8,6 +8,7 @@
 #include "VGM_DisplayMenuBase.hpp"
 #include "VGM_DisplaySkills.hpp"
 #include "VGM_DisplayAbilities.hpp"
+#include "VGM_DisplayMissionManagement.hpp"
 #include "VGM_DisplayMissions.hpp"
 #include "VGM_DisplayMissionsTargets.hpp"
 #include "VGM_DisplayMedical.hpp"

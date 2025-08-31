@@ -446,6 +446,7 @@ class vgm_c
 
         class displaySkills {};
         class displayAbilities {};
+        class displayMissionManagement {};
         class displayMissions {};
         class displayMissionsTargets {};
         class displayNotepad {};
