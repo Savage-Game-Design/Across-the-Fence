@@ -281,7 +281,7 @@ class grenadier_01 {
 };
 
 class grenadier_03 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 3"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3"
 
     weapons[] = {
         "vn_m2carbine_gl"
@@ -309,7 +309,7 @@ class grenadier_03 {
 };
 
 class grenadier_05 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5"
 
     weapons[] = {
         "vn_l34a1_xm148"
@@ -332,7 +332,7 @@ class grenadier_05 {
 };
 
 class grenadier_07 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 7"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 7"
 
     weapons[] = {
         "vn_m79_p"
@@ -352,7 +352,7 @@ class grenadier_07 {
 };
 
 class grenadier_09 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 9"
 
     weapons[] = {
         "vn_m16_xm148"
@@ -373,7 +373,7 @@ class grenadier_09 {
 };
 
 class grenadier_11 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 11"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 11"
 
     weapons[] = {
         "vn_xm177_xm148"
@@ -393,7 +393,7 @@ class grenadier_11 {
 };
 
 class grenadier_13 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 13"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 13"
 
     weapons[] = {
         "vn_l1a1_xm148"
@@ -417,7 +417,7 @@ class grenadier_13 {
 };
 
 class grenadier_15 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 15"
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 15"
 
     weapons[] = {
         "vn_ak_01"
@@ -463,7 +463,7 @@ class machinegunner_01 {
 };
 
 class machinegunner_03 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 3"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3"
 
     weapons[] = {
         "vn_l4"
@@ -490,7 +490,7 @@ class machinegunner_03 {
 };
 
 class machinegunner_05 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5"
 
     weapons[] = {
         "vn_m14a1"
@@ -514,7 +514,7 @@ class machinegunner_05 {
 };
 
 class machinegunner_07 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 7"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 7"
 
     weapons[] = {
         "vn_m60_shorty"
@@ -534,7 +534,7 @@ class machinegunner_07 {
 };
 
 class machinegunner_09 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 9"
 
     weapons[] = {
         "vn_m60"
@@ -554,7 +554,7 @@ class machinegunner_09 {
 };
 
 class machinegunner_11 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 11"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 11"
 
     weapons[] = {
         "vn_m63a_lmg"
@@ -575,7 +575,7 @@ class machinegunner_11 {
 };
 
 class machinegunner_13 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 13"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 13"
 
     weapons[] = {
         "vn_rpd_shorty_01"
@@ -596,7 +596,7 @@ class machinegunner_13 {
 };
 
 class machinegunner_15 {
-    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 15"
+    condition="((['combat', 'specialisation_machinegunner'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 15"
 
     weapons[] = {
         "vn_m63a_cdo"
@@ -638,7 +638,7 @@ class marksman_01 {
 };
 
 class marksman_03 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 3"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3"
 
     weapons[] = {
         "vn_m1_garand_sniper"
@@ -659,7 +659,7 @@ class marksman_03 {
 };
 
 class marksman_05 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5"
 
     weapons[] = {
         "vn_m1carbine_shorty"
@@ -679,7 +679,7 @@ class marksman_05 {
 };
 
 class marksman_07 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 7"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 7"
 
     weapons[] = {
         "vn_xm177"
@@ -700,7 +700,7 @@ class marksman_07 {
 };
 
 class marksman_09 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 9"
 
     weapons[] = {
         "vn_m40a1"
@@ -722,7 +722,7 @@ class marksman_09 {
 };
 
 class marksman_11 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 11"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 11"
 
     weapons[] = {
         "vn_l1a1_01"
@@ -745,7 +745,7 @@ class marksman_11 {
 };
 
 class marksman_13 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 13"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 13"
 
     weapons[] = {
         "vn_m16_usaf"
@@ -767,7 +767,7 @@ class marksman_13 {
 };
 
 class marksman_15 {
-    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 15"
+    condition="((['combat', 'specialisation_marksman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 15"
 
     weapons[] = {
         "vn_m14"
@@ -853,7 +853,7 @@ class rifleman_01 {
 };
 
 class rifleman_03 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 3"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3"
 
     weapons[] = {
         "vn_m63a"
@@ -874,7 +874,7 @@ class rifleman_03 {
 };
 
 class rifleman_05 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5"
 
     weapons[] = {
         "vn_m16"
@@ -895,7 +895,7 @@ class rifleman_05 {
 };
 
 class rifleman_07 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 7"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 7"
 
     weapons[] = {
         "vnx_l1a1_04"
@@ -915,7 +915,7 @@ class rifleman_07 {
 };
 
 class rifleman_09 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 9"
 
     weapons[] = {
         "vn_m1carbine"
@@ -938,7 +938,7 @@ class rifleman_09 {
 };
 
 class rifleman_11 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 11"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 11"
 
     weapons[] = {
         "vn_xm177"
@@ -963,7 +963,7 @@ class rifleman_11 {
 };
 
 class rifleman_13 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 13"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 13"
 
     weapons[] = {
         "vn_ak_01"
@@ -986,7 +986,7 @@ class rifleman_13 {
 };
 
 class rifleman_15 {
-    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 15"
+    condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 15"
 
     weapons[] = {
         "vn_m14a1_shorty"
@@ -1030,7 +1030,7 @@ class scout_01 {
 };
 
 class scout_03 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 3"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3"
 
     weapons[] = {
         "vn_m3a1"
@@ -1051,7 +1051,7 @@ class scout_03 {
 };
 
 class scout_05 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 5"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5"
 
     weapons[] = {
         "vn_sten"
@@ -1072,7 +1072,7 @@ class scout_05 {
 };
 
 class scout_07 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 7"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 7"
 
     weapons[] = {
         "vn_l34a1"
@@ -1093,7 +1093,7 @@ class scout_07 {
 };
 
 class scout_09 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 9"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 9"
 
     weapons[] = {
         "vn_m45"
@@ -1114,7 +1114,7 @@ class scout_09 {
 };
 
 class scout_11 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 11"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 11"
 
     weapons[] = {
         "vn_m16"
@@ -1136,7 +1136,7 @@ class scout_11 {
 };
 
 class scout_13 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 13"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 13"
 
     weapons[] = {
         "vn_type64_smg"
@@ -1157,7 +1157,7 @@ class scout_13 {
 };
 
 class scout_15 {
-    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel > 15"
+    condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 15"
 
     weapons[] = {
         "vn_mc10"
