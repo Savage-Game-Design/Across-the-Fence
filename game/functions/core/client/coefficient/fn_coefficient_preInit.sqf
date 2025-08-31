@@ -2,12 +2,14 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2025-01-19
+    Last Update: 2025-08-29
     Public: No
 
     Description:
         Coefficient client preInit.
  */
+
+// TODO this executes globally, move to global?
 
 ["aim", {
     params ["_unit", "_value"];
