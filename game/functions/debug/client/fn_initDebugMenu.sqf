@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2025-08-30
+    Last Update: 2025-08-31
     Public: No
 
     Description:
@@ -240,7 +240,8 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
                     [
                         vgm_g_dbBackendType,
                         createHashMapFromArray [
-                            ["requests", vgm_persistence_playerRequests],
+                            ["player request", vgm_persistence_playerRequests],
+                            ["request player", vgm_persistence_requestPlayer],
                             ["dirty schemas", vgm_persistence_dirtySchemas]
                         ]
                     ] remoteExecCall ["vgm_c_debugMenu_receivePersistenceData", remoteExecutedOwner];
