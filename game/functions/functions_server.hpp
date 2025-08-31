@@ -243,6 +243,11 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\persistence\server);
 
+        class persistence_cacheKey {};
+        class persistence_dbCommit {};
+        class persistence_dbGet {};
+        class persistence_dbSet {};
+
         class persistence_load {};
         class persistence_preInit
         {

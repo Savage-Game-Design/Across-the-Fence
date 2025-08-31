@@ -2,7 +2,7 @@
     File: fn_persistence_preInit.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-28
+    Last Update: 2025-08-30
     Public: No
 
     Description:
@@ -13,6 +13,8 @@ if (!isServer) exitWith {};
 
 vgm_persistence_playerRequests = createHashMap;
 vgm_persistence_requestPlayer = createHashMap;
+
+vgm_persistence_dirtySchemas = createHashMap;
 
 ["vgm_persistence_requestLoad", {
     params ["_eventArgs"];

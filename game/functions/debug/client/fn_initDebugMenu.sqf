@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2025-08-29
+    Last Update: 2025-08-30
     Public: No
 
     Description:
@@ -57,7 +57,7 @@ vgm_c_debugMenu_receiveMissionData = {
 };
 
 vgm_c_debugMenu_receivePersistenceData = {
-    params ["_backendType", "_requests"];
+    params ["_backendType", "_data"];
     private _ctrlTree = uiNamespace getVariable ["vgm_debugMenu_ctrlPersistenceTree", controlNull];
 
     private _pServer = _ctrlTree getVariable ["vgm_pServer", []];
@@ -69,7 +69,7 @@ vgm_c_debugMenu_receivePersistenceData = {
 
     {
         [_pServer, _x, _y] call vgm_c_debugMenu_tvAdd;
-    } forEach _requests;
+    } forEach _data;
 
     // _ctrlTree tvSortAll [_pServer];
 };
@@ -239,7 +239,10 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
 
                     [
                         vgm_g_dbBackendType,
-                        vgm_persistence_playerRequests
+                        createHashMapFromArray [
+                            ["requests", vgm_persistence_playerRequests],
+                            ["dirty schemas", vgm_persistence_dirtySchemas]
+                        ]
                     ] remoteExecCall ["vgm_c_debugMenu_receivePersistenceData", remoteExecutedOwner];
                 }] remoteExec ["call", 2];
             }];

@@ -2,7 +2,7 @@
     File: fn_leveling_dbGet.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2023-06-01
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -24,7 +24,7 @@ private _uid = getPlayerUID _player;
 
 ["DEBUG", format ["Loading leveling data - %1", _uid]] call vgm_g_fnc_log;
 
-private _playerLevelingData = ["player_leveling", _uid] call vgm_s_fnc_db_get;
+private _playerLevelingData = ["leveling", _uid] call vgm_s_fnc_persistence_dbGet;
 _playerLevelingData set ["level", 0, true];
 _playerLevelingData set ["experience", 0, true];
 
