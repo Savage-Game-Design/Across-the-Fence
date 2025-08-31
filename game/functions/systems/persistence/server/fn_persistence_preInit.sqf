@@ -22,3 +22,12 @@ vgm_persistence_dirtySchemas = createHashMap;
     [_player, _schemas] call vgm_s_fnc_persistence_load;
 }] call para_g_fnc_event_subscribe;
 
+// TODO move to postInit file
+[] spawn {
+    ["persistence_dbCommit", { [] call vgm_s_fnc_persistence_dbCommit }, [], 120] call para_g_fnc_scheduler_add_job;
+
+    // Should fire *after* levelling rewards are given, so progress is persisted.
+    ["vgm_mission_ended", {
+        [] call vgm_s_fnc_persistence_dbCommit
+    }] call para_g_fnc_event_subscribeServer;
+};

@@ -2,7 +2,7 @@
     File: fn_display_postInit.sqf
     Author: Savage Game Design
     Date: 2024-03-24
-    Last Update: 2025-08-27
+    Last Update: 2025-08-31
     Public: No
 
     Description:
@@ -23,10 +23,3 @@ call {
         missionNamespace setVariable ["vgm_g_dbBackendType", "profile", true];
     };
 };
-
-["db_save_mission_namespace", { [] call vgm_s_fnc_db_persist }, [], 120] call para_g_fnc_scheduler_add_job;
-
-// Should fire *after* levelling rewards are given, so progress is persisted.
-["vgm_mission_ended", {
-    [] call vgm_s_fnc_db_persist
-}] call para_g_fnc_event_subscribeServer;
