@@ -2,7 +2,7 @@
     File: fn_persistence_dbSave.sqf
     Author: Savage Game Design
     Date: 2025-08-29
-    Last Update: 2025-08-30
+    Last Update: 2025-08-31
     Public: No
 
     Description:
@@ -23,7 +23,7 @@ if (vgm_g_dbBackendType == "profile") exitWith {
     {
         private _uid = _x;
         vgm_persistence_dirtySchemas deleteAt _uid;
-        format ["Peristence save for uid %1", _uid] call vgm_s_fnc_logInfo;
+        format ["Peristence save for uid %1", _uid] call vgm_g_fnc_logInfo;
     } forEach vgm_persistence_dirtySchemas;
 
     true
@@ -37,7 +37,7 @@ if (vgm_g_dbBackendType == "profile") exitWith {
         // get cached value
         private _data = [_schema, _uid] call vgm_s_fnc_persistence_dbGet;
 
-        format ["Peristence save for %1, uid %2", _schema, _uid] call vgm_s_fnc_logInfo;
+        format ["Peristence save for %1, uid %2", _schema, _uid] call vgm_g_fnc_logInfo;
 
         private _response = [format ["persistence:%1:set", _schema], [_uid]] call vgm_s_fnc_extension_call;
         _response params ["_requestId", "_success"];
