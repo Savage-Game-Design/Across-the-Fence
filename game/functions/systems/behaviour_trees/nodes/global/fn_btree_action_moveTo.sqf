@@ -68,7 +68,7 @@ _action set ["onTick", {
     [_extern_group, _point] call vgm_g_fnc_btree_moveTo_updateDestination;
     private _isAtDestination = [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
 
-    if (_isAtDestination) then {
+    if (_isAtDestination) exitWith {
         [ RESULT_SUCCEEDED ]
     };
 
