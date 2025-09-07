@@ -1585,5 +1585,8 @@
         <Key ID="STR_VGM_PARAMS_USE_DB_BACKEND">
             <Original>Use external database? (Dedicated server + mod only)</Original>
         </Key>
+        <Key ID="STR_VGM_PARAMS_MAX_TEAM_SIZE">
+            <Original>Maximum number of players that can join a mission</Original>
+        </Key>
     </Package>
 </Project>
