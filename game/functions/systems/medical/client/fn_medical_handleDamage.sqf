@@ -57,7 +57,7 @@ if (
 ) exitWith {
 
     #ifdef DEBUG
-    format ["(%3) MEDICAL: Fire damage detected: damage=%1 hitPoint=%2", _hitDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+    format ["(%3) Fire damage detected: damage=%1 hitPoint=%2", _hitDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
     #endif
 
     // vgm_medical_accumulated:
