@@ -303,7 +303,7 @@ class Mission
 	appId=1227700;
 	class Intel
 	{
-		briefingName="Across the Fence (indev)";
+		briefingName="Across the Fence (#VERSION#)";
 		resistanceWest=0;
 		timeOfChanges=1800.0002;
 		startWeather=0.34999999;
@@ -13964,35 +13964,6 @@ class Mission
 			atlOffset=0.001244545;
 		};
 		class Item59
-		{
-			dataType="Logic";
-			class PositionInfo
-			{
-				position[]={20048.465,6.1218262,6463.479};
-				angles[]={0.38738385,0,0.0060001095};
-			};
-			id=2523;
-			type="vn_module_qol";
-			atlOffset=0.00046634674;
-			class CustomAttributes
-			{
-				class Attribute0
-				{
-					property="vn_module_qol_earplug";
-					expression="_this setVariable ['earplugs',_value,true];";
-					class Value
-					{
-						class data
-						{
-							singleType="BOOL";
-							value=1;
-						};
-					};
-				};
-				nAttributes=1;
-			};
-		};
-		class Item60
 		{
 			dataType="Logic";
 			class PositionInfo
