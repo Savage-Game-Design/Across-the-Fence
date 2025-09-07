@@ -2,7 +2,7 @@
     File: fn_dangerReport_playerFiredManHandler.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2024-11-11
+    Last Update: 2025-09-07
     Public: No
 
     Description:
@@ -100,3 +100,8 @@ _recentShots set ["totalShots", (_recentShots get "totalShots") + 1];
 
 private _key = ["unsuppressedShots", "suppressedShots"] select _isSuppressed;
 _recentShots set [_key, (_recentShots get _key) + 1];
+
+// Queue up recent shots to be sent to the server when the time period ends.
+if (vgm_c_dangerReport_nextRecentShotsTime < time) then {
+    vgm_c_dangerReport_nextRecentShotsTime = time + vgm_c_dangerReport_recentShotsPeriod;
+};

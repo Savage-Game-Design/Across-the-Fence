@@ -38,7 +38,10 @@ vgm_c_dangerReport_shotsAggregateTemplate = createHashMapFromArray [
 // Data structure for this player's recent gunfire
 vgm_c_dangerReport_recentShots = +vgm_c_dangerReport_shotsAggregateTemplate;
 
-vgm_c_dangerReport_sendRecentShotsJobId = nil;
+// How long to aggregate shots before sending them to the server.
+vgm_c_dangerReport_recentShotsPeriod = 5;
+
+vgm_c_dangerReport_sendRecentShots = false;
 vgm_c_dangerReport_playerFiredManHandler = nil;
 // Caches if a gunshot is suppressed or not, using the gunshot's characteristics as a key (ammo, muzzle attachment)
 vgm_c_dangerReport_shotSuppressionCache = createHashMap;
@@ -57,13 +60,7 @@ vgm_c_dangerReport_shotSuppressionCache = createHashMap;
         vgm_c_dangerReport_playerFiredManHandler =
             player addEventHandler ["FiredMan", vgm_c_fnc_dangerReport_playerFiredManHandler];
 
-        vgm_c_dangerReport_sendRecentShotsJobId =
-            [
-                "vgm_dangerReport_sendRecentShotsToServer",
-                vgm_c_fnc_dangerReport_sendRecentShotsToServer,
-                [],
-                5
-            ] call para_g_fnc_scheduler_add_job;
+        vgm_c_dangerReport_sendRecentShots = true;
     }
 ] call para_g_fnc_event_subscribeLocal;
 
@@ -80,8 +77,13 @@ vgm_c_dangerReport_shotSuppressionCache = createHashMap;
 
         player removeEventHandler ["FiredMan", vgm_c_dangerReport_playerFiredManHandler];
         vgm_c_dangerReport_playerFiredManHandler = nil;
-
-        [vgm_c_dangerReport_sendRecentShotsJobId] call para_g_fnc_scheduler_removeJob;
-        vgm_c_dangerReport_sendRecentShotsJobId = nil;
+        vgm_c_dangerReport_sendRecentShots = false;
     }
 ] call para_g_fnc_event_subscribeLocal;
+
+vgm_c_dangerReport_nextRecentShotsTime = 0;
+vgm_c_dangerReport_sendRecentShotsEachFrameHandler = addMissionEventHandler ["EachFrame", {
+    if (!vgm_c_dangerReport_sendRecentShots || vgm_c_dangerReport_nextRecentShotsTime < time) exitWith {};
+
+    [] call vgm_c_fnc_dangerReport_sendRecentShotsToServer;
+}];
