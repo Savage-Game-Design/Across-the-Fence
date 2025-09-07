@@ -40,4 +40,20 @@ class CfgNotifications
         description = "$STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_CHANGED_PHOTO_DESCRIPTION";
     };
 
+    class VGM_ExtractionEvacNow: VGM_Default
+    {
+        title = "$STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_TITLE";
+        iconPicture = "\a3\ui_f\data\Map\Markers\Military\warning_ca.paa";
+        description = "$STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_EVACNOW_DESCRIPTION";
+        color[] = {0.8,0,0,1};
+    };
+
+    class VGM_ExtractionEvacAt: VGM_Default
+    {
+        title = "$STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_TITLE";
+        iconPicture = "\a3\ui_f\data\Map\Markers\Military\warning_ca.paa";
+        description = "$STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_EVACAT_DESCRIPTION";
+        color[] = {0.8,0,0,1};
+    };
+
 };

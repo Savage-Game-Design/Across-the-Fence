@@ -21,6 +21,8 @@
         [allGroups # 0] call vgm_g_fnc_btree_moveTo_execute;
  */
 
+#define TOLERANCE 3
+
 params ["_group"];
 
 private _groupLeader = leader _group;
@@ -31,6 +33,7 @@ private _completionDistance = _group getVariable ["vgm_l_btree_moveTo_completion
 if (_groupLeader distance2D _destPos <= _completionDistance) exitWith {
     // Remove destination, so it doesn't accidentally carry over.
     // This check should still pass due to default values above.
+    _group setVariable ["vgm_l_btree_moveTo_debug", "ARRIVED"];
     _group setVariable ["vgm_l_btree_moveTo_destination", nil];
     true
 };
@@ -40,64 +43,95 @@ private _wp = [_group, currentWaypoint _group];
 
 // Group currently has a valid move waypoint, no action needed.
 if (!_forceRepath && currentWaypoint _group < count waypoints _group && waypointType _wp == "MOVE") exitWith {false};
+// Force repath is only needed to get past the check above on one iteration.
+_group setVariable ["vgm_l_btree_moveTo_forceRepath", false];
 
-// Different types of move, designed to un-stick the AI from their current position.
-private _repairStrategies = [
-	//Strategy 0: Create a waypoint to the destination
-	{
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, _completionDistance] call vgm_g_fnc_btree_setWaypoint;
-	},
-	//Strategy 1: Move halfway towards the destination
-	{
-		private _distance = _destPos distance2D getPos _groupLeader;
-		private _newPos = _groupLeader getPos [_distance / 2, _groupLeader getDir _destPos];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, (_distance / 20) max _completionDistance] call vgm_g_fnc_btree_setWaypoint;
-	},
-	//Strategy 2: A short move forward.
-	{
-		private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos)];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 5] call vgm_g_fnc_btree_setWaypoint;
-	},
-	//Strategy 3: A short move sideways.
-	{
-		private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos) + 90];
-		[_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 5] call vgm_g_fnc_btree_setWaypoint;
-	},
-	//Strategy 4: Teleport when no players are nearby. handles AI stuck in objects.
-	{
-		[format ["btree moveto: Group %1 is *very* stuck, attempting teleport.", _group]] call vgm_g_fnc_logWarning;
-		if (allPlayers inAreaArray [getPos _groupLeader, 200, 200] isEqualTo []) then {
-            [format ["btree moveto: Group %1 is *very* stuck, teleporting them now.", _group]] call vgm_g_fnc_logWarning;
-			private _newPos = _groupLeader getPos [20 + random 20, random 360];
-			{
-				_x setPos _newPos;
-			} forEach units _group;
-            // Set up a direct move after teleporting.
-			call (_repairStrategies # 0);
-		};
-	}
-];
-
-private _waypoints = waypoints _group;
-
-//If we've completed all of our waypoints, and we've not exited this script because we're at our destination
-//We've either: Never set off, or our waypoint broke (no path?)
-//Run the 'repair state machine', a micro state machine with repair strategies.
-private _repairAttempts = _group getVariable ["vgm_l_btree_moveTo_repairAttempts", 0];
-
-if (_repairAttempts > 0 && count _waypoints >= 1) then {
-    private _lastWaypoint = _waypoints select (currentWaypoint _group - 1);
-    private _lastWaypointSuccessful = _groupLeader distance2D waypointPosition _lastWaypoint < waypointCompletionRadius _lastWaypoint;
-    if (_lastWaypointSuccessful) then {
-        _repairAttempts = 0;
-    };
+// Setup a path handler so we can track the route calculated for the group.
+if (_groupLeader getVariable ["vgm_l_btree_moveTo_pathHandler", -1] isEqualTo -1) then {
+    _groupLeader setVariable ["vgm_l_btree_moveTo_pathHandler", _groupLeader addEventHandler ["PathCalculated", {
+        params ["_unit", "_path"];
+        // Path is empty when the AI is stuck. If the destination is unreachable, AI generally paths to the closest point!
+        if (_path isEqualTo []) exitWith {
+            // Setting this to an impossible intermediate should trigger stuck repair.
+            group _unit setVariable ["vgm_l_btree_moveTo_intermediateDestination", [888888, 888888, 888888]];
+        };
+        group _unit setVariable ["vgm_l_btree_moveTo_intermediateDestination", _path select -1];
+    }]];
 };
 
+private _intermediateDestination = _group getVariable "vgm_l_btree_moveTo_intermediateDestination";
+// Not attempted to move yet - attempt a normal move straight to destination.
+if (isNil "_intermediateDestination") exitWith {
+    _group setVariable ["vgm_l_btree_moveTo_debug", "INITIAL_MOVE"];
+    [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, -1] call vgm_g_fnc_btree_setWaypoint;
+    false
+};
 
-private _chosenStrategy = _repairAttempts min (count _repairStrategies - 1);
+// At this point - the group has attempted a move, the waypoint has failed, so some action is needed.
+
+// Intermediate destination has been reached - this might be the final destination. The only way to check is by attempting to repath.
+if (_intermediateDestination distance2D getPosASL _groupLeader < TOLERANCE) exitWith {
+    // Unstuck if we've reached our destination!
+    _group setVariable ["vgm_l_btree_moveTo_nextStrategy", 0];
+    private _lastIntermediate = _group getVariable ["vgm_l_btree_moveTo_lastIntermediateDestination", [999999, 999999, 999999]];
+    _group setVariable ["vgm_l_btree_moveTo_lastIntermediateDestination", _intermediateDestination];
+
+    // Pathfinding hasn't found another route - this is the best we're going to do. Exit.
+    if (_lastIntermediate distance2D _intermediateDestination < TOLERANCE) exitWith {
+        // Remove destination, so it doesn't accidentally carry over.
+        // This check should still pass due to default values above.
+        _group setVariable ["vgm_l_btree_moveTo_debug", "ARRIVED_CLOSEST"];
+        _group setVariable ["vgm_l_btree_moveTo_destination", nil];
+        true
+    };
+
+    // Attempt to path from the current intermediate to the end destination.
+    _group setVariable ["vgm_l_btree_moveTo_debug", "MOVE_AFTER_INTERMEDIATE"];
+    [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _destPos, -1] call vgm_g_fnc_btree_setWaypoint;
+    false
+};
+
+// Route failed - AI is probably stuck, attempt stuck repair.
+
+private _repairStrategies = [
+    //Strategy 0: A move halfway to the destination
+    {
+        private _distance = _groupLeader distance2D _destPos;
+        private _newPos = _groupLeader getPos [(_distance / 2) max _completionDistance min _distance, (_groupLeader getDir _destPos)];
+        [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 0] call vgm_g_fnc_btree_setWaypoint;
+    },
+    //Strategy 1: A short move forward.
+    {
+        private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos)];
+        [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 0] call vgm_g_fnc_btree_setWaypoint;
+    },
+    //Strategy 2: A short move sideways.
+    {
+        private _newPos = _groupLeader getPos [15, (_groupLeader getDir _destPos) + 90];
+        [_group, "BTREE_MOVETO", "MOVE", AGLtoASL _newPos, 0] call vgm_g_fnc_btree_setWaypoint;
+    },
+    //Strategy 3: Teleport when no players are nearby. handles AI stuck in objects.
+    {
+        if (allPlayers inAreaArray [getPos _groupLeader, 100, 100] isEqualTo []) then {
+            [format ["btree moveto: Group %1 is *very* stuck, teleporting them now.", _group]] call vgm_g_fnc_logWarning;
+            private _newPos = _groupLeader getPos [10, _groupLeader getDir _destPos];
+            {
+                _x setPos _newPos;
+            } forEach units _group;
+            // Set up a direct move after teleporting.
+            call (_repairStrategies # 0);
+        } else {
+            [format ["btree moveto: Group %1 is *very* stuck, cannot teleport due to nearby players.", _group]] call vgm_g_fnc_logWarning;
+        };
+    }
+];
+
+_group setVariable ["vgm_l_btree_moveTo_debug", "STUCK_REPAIR"];
+
+private _nextStrategy = _group getVariable ["vgm_l_btree_moveTo_nextStrategy", 0];
+private _chosenStrategy = _nextStrategy min (count _repairStrategies - 1);
 [] call (_repairStrategies # _chosenStrategy);
 
-_group setVariable ["vgm_l_btree_moveTo_repairAttempts", _repairAttempts + 1];
-_group setVariable ["vgm_l_btree_moveTo_forceRepath", false];
+_group setVariable ["vgm_l_btree_moveTo_nextStrategy", _nextStrategy + 1];
 
 false

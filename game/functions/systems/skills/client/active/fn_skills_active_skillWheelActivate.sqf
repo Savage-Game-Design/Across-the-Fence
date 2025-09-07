@@ -2,7 +2,7 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2024-06-21
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -41,3 +41,20 @@ _slot set ["cooldownTime", _cooldownTime];
 _slot set ["cooldownUntil", _cooldownUntil];
 
 ["vgm_skills_active_activated", [_slot get "name", _skill]] call para_g_fnc_event_triggerLocal;
+
+private _jobId = format ["skill_%1", _skill get "path" select -1];
+[
+    _jobId,
+    {
+        params ["_skill"];
+        [format ["Skill %1 ended", (_skill get "displayName") call para_c_fnc_localize]] call vgm_g_fnc_logInfo;
+        [player, _skill] call (_skill get "codeDeactivate");
+    },
+    [_skill],
+    // No tick delay - job only runs once
+    0,
+    // Single iteration
+    1,
+    // Delay before running job
+    _skill get "duration"
+] call para_g_fnc_scheduler_add_job;

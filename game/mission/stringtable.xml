@@ -19,7 +19,7 @@
             <Original>You've wandered too far...</Original>
         </Key>
         <Key ID="STR_VGM_SHARED_HUB_ICON_HQ">
-            <Original>HQ</Original>
+            <Original>Tactical Operations Center</Original>
         </Key>
         <Key ID="STR_VGM_SHARED_HUB_ICON_HQ_SUB">
             <Original>Join the battle</Original>
@@ -549,7 +549,7 @@
             <Original>Clear lens</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC">
-            <Original>Increases camera range from 200m to 400m</Original>
+            <Original>Increases camera range from 100m to 200m</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE">
             <Original>Friend or foe</Original>
@@ -567,7 +567,7 @@
             <Original>One of them</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC">
-            <Original>Enemy won’t detect you as long as you walk naturally (requires enemy helmet)</Original>
+            <Original>Enemy won’t detect you as long as you're undetected, walk and wear an enemy helmet.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES">
             <Original>Pile of leaves</Original>
@@ -1311,8 +1311,23 @@
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
             <Original>Request extraction</Original>
         </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_EVACNOW_ACTION">
+            <Original>Extract Now!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_EVACTIMER_ACTION">
+            <Original>Extract in 30 seconds!</Original>
+        </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_NO_RADIO">
             <Original>No radio or RTO nearby to call for extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_EXTRACT_NO_RADIO">
+            <Original>No radio or RTO nearby, board the helicopter to force extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_CONFIRM_TIMED_EXTRACTION">
+            <Original>Start extraction countdown? Team will be notified and have 30 seconds to board the helicopter.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_CONFIRM_IMMEDIATE_EXTRACTION">
+            <Original>Extract immediately? Remaining team members will be abandoned.</Original>
         </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_MAIN_TITLE">
             <English>Extract from AO</English>
@@ -1322,6 +1337,15 @@
         </Key>
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_TASK_BOARD_TITLE">
             <English>Board the helicopter</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_TITLE">
+            <English>Extraction</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_EVACNOW_DESCRIPTION">
+            <English>Extract helicopter leaving!</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_EXTRACTION_NOTIFICATION_EVACAT_DESCRIPTION">
+            <English>Extract helicopter leaving in 30 seconds!</English>
         </Key>
     </Package>
     <Package name="Missions Scouting">
@@ -1367,6 +1391,12 @@
         </Key>
         <Key ID="STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION">
             <English>Scout the area for enemy sites and note them in your "Scouting Report".&lt;br/&gt;&lt;br/&gt;HQ suggests checking following grids:&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;%2</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_SUBTASK_TITLE">
+            <English>Enemy Site Nearby</English>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SCOUTING_SUBTASK_DESCRIPTION">
+            <English>An enemy site is near this location.</English>
         </Key>
     </Package>
     <Package name="Field Manual">
@@ -1513,6 +1543,18 @@
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION">
             <Original>Avoid enemy contact by hiding in bushes and behind trees, moving slowly and staying out of their line of sight.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE">
+            <Original>Desperate Escape</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC">
+            <Original>When you're incapacitated due to your injuries, you've got two options available to you:%1%2 Wait for help from your team%1%2 Perform a desperate escape%1%1You can only make a desperate escape %3once per mission%4, or %3twice if you're playing alone%4.%1%1If you attempt a desperate escape, you'll scramble to get away from the enemy and %3reappear at a safe area nearby fully recovered%4.%1%1In your haste, you'll %3lose your backpack and several consumable items%4 in the process.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP">
+            <Original>Recon teams would ditch their rucks in desperate circumstances so they could move faster.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION">
+            <Original>When downed, once per mission you can conduct a desperate escape to get to safety. You'll lose your backback and some other items.</Original>
         </Key>
     </Package>
     <Package name="Tutorial">

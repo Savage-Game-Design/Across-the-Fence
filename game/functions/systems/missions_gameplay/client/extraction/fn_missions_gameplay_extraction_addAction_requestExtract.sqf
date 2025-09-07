@@ -1,12 +1,12 @@
 /*
-    File: fn_missions_gameplay_extraction_addAction.sqf
+    File: fn_vgm_c_fnc_missions_gameplay_extraction_addAction_requestExtract.sqf
     Author: Savage Game Design
     Date: 2024-05-23
     Last Update: 2024-06-09
     Public: No
 
     Description:
-        Add action to request early extraction.
+        Add action to request extraction.
 
     Parameter(s):
         _player - Player to add the action to [OBJECT]
@@ -15,7 +15,7 @@
         Action ID [Number]
 
     Example(s):
-        [player] call vgm_c_fnc_missions_gameplay_extraction_addAction
+        [player] call vgm_c_fnc_missions_gameplay_extraction_addAction_requestExtract
  */
 
 params ["_player"];

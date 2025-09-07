@@ -192,4 +192,16 @@ class vgm_missions {
         };
         logicalOrder = 5;
     };
+    class desperate_escape {
+        displayName = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE";
+        description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP";
+        image = "assets\atf_logo.paa";
+        class Hints {
+            class desperate_escape {
+                description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION";
+            };
+        };
+        logicalOrder = 6;
+    };
 };
