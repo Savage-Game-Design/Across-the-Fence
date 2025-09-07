@@ -80,7 +80,7 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-if !(_creatorId isEqualTo "") then {
+if (_creatorId isNotEqualTo "") then {
     [_creatorId, _mission] call vgm_s_fnc_missions_attachPlayerToMission;
     private _creatorMachineId = (getUserInfo _creatorId) # 1;
     [
