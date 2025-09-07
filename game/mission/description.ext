@@ -101,7 +101,7 @@ class Params {
         texts[] = {"False", "True"};
         default = 0;
     };
-    // Use the database backend
+    // sets maxPlayers in missions
     class missions_maxTeamSize
     {
         title = $STR_VGM_PARAMS_MAX_TEAM_SIZE;
