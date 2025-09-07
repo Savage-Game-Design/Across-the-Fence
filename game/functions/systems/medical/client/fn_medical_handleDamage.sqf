@@ -78,17 +78,17 @@ if (
         _unit setVariable ["vgm_medical_accumulated", createHashMap];
     };
 
-    // update the accumulation for next received damage
-    private _hitsData = _unit getVariable "vgm_medical_accumulated";
-    private _hitPointDamages = _hitsData getOrDefault [_hitPoint, []];
-    _hitPointDamages pushBack _hitDamage;
-    _hitsData set [_hitPoint, _hitPointDamages];
-    _unit setVariable ["vgm_medical_accumulated", _hitsData];
-
     // run through the hit point's current damage values on the next frame,
     // applying combined damage if threshold reached and resetting that hitpoint's values
     [{
-        params ["_unit", "_accDamages", "_hitPoint", "_projectile"];
+        params ["_unit", "_damage", "_hitPoint", "_projectile"];
+
+        // update the accumulation for next received damage
+        private _hitsData = _unit getVariable "vgm_medical_accumulated";
+        private _hitPointDamages = _hitsData getOrDefault [_hitPoint, []];
+        _hitPointDamages pushBack _damage;
+        _hitsData set [_hitPoint, _hitPointDamages];
+        _unit setVariable ["vgm_medical_accumulated", _hitsData];
 
         private _accDamage = 0;
         _accDamages apply {_accDamage = _accDamage + _x};
@@ -109,7 +109,7 @@ if (
             _unit setVariable ["vgm_medical_accumulated", _hitsData];
 
         };
-    }, [_unit, _hitPointDamages, _hitPoint, _projectile]] call vgm_g_fnc_execNextFrame;
+    }, [_unit, _hitDamage, _hitPoint, _projectile]] call vgm_g_fnc_execNextFrame;
 
     0 // prevent engine damage handling
 };
