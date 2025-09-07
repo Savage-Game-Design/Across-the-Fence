@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2025-03-02
+    Last Update: 2025-09-07
     Public: Yes
 
     Description:
@@ -52,7 +52,7 @@ vgm_c_fnc_addJoinMissionAction = {
     private _zone = _publicMission get "targetZone";
 
     private _actionId = _object addAction [
-        format ["Join mission %1 (%2, %3)", _missionId, name _leader, markerText (_zone call vgm_g_fnc_missions_getZoneMarker)],
+        format ["Join mission %1", _missionId],
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
             _arguments params ["_missionId"];
@@ -86,11 +86,11 @@ vgm_c_fnc_addAllJoinMissionActions = {
 };
 
 vgm_c_fnc_addLeaveMissionAction = {
-    params ["_object"];
+    params ["_object", "_missionId"];
 
     // Add action to leave mission
     private _leaveMissionActionId = _object addAction [
-        "Leave mission",
+        format ["Leave mission %1", _missionId],
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
 
@@ -119,14 +119,14 @@ vgm_c_fnc_removeLeaveMissionAction = {
 };
 
 vgm_c_fnc_addStartMissionAction = {
-    params ["_object"];
+    params ["_object", "_missionId"];
 
     private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
     if (isNil "_currentMission" || { _currentMission get "creator" isNotEqualTo getPlayerID player }) exitWith {};
 
     // Add action to start mission
     private _startMissionActionId = _object addAction [
-        "Start mission",
+        format ["Start mission %1", _missionId],
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
 
@@ -223,8 +223,8 @@ vgm_c_fnc_removeAllJoinMissionActions = {
 
         if (_playerId isEqualTo getPlayerID player) then {
             [_object] call vgm_c_fnc_removeAllJoinMissionActions;
-            [_object] call vgm_c_fnc_addStartMissionAction;
-            [_object] call vgm_c_fnc_addLeaveMissionAction;
+            [_object, _missionId] call vgm_c_fnc_addStartMissionAction;
+            [_object, _missionId] call vgm_c_fnc_addLeaveMissionAction;
         };
 
     }]
@@ -292,6 +292,6 @@ private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 if (isNil "_currentMission") then {
     [_object] call vgm_c_fnc_addAllJoinMissionActions;
 } else {
-    [_object] call vgm_c_fnc_addStartMissionAction;
-    [_object] call vgm_c_fnc_addLeaveMissionAction;
+    [_object, _currentMission get "id"] call vgm_c_fnc_addStartMissionAction;
+    [_object, _currentMission get "id"] call vgm_c_fnc_addLeaveMissionAction;
 };
