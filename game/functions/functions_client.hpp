@@ -477,6 +477,7 @@ class vgm_c
         {
             preInit = 1;
         };
+        class carry_tryMoveIn {};
     };
 
     class carry_remoteExec
@@ -569,7 +570,9 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\missions_gameplay\client\extraction);
 
-        class missions_gameplay_extraction_addAction {};
+        class missions_gameplay_extraction_addAction_requestExtract {};
+        class missions_gameplay_extraction_addAction_evacNow {};
+        class missions_gameplay_extraction_addAction_evacAt {};
         class missions_gameplay_extraction_requestExtraction {};
         class missions_gameplay_extraction_getNearbyRadio {};
     };
@@ -581,6 +584,10 @@ class vgm_c
         class missions_gameplay_scouting_onPhoto {};
         class missions_gameplay_scouting_createUpdateLocation {};
         class missions_gameplay_scouting_getSiteById {};
+        class missions_gameplay_scouting_preInit
+        {
+            preInit = 1;
+        };
         class missions_gameplay_scouting_postInit
         {
             postInit = 1;
@@ -670,9 +677,11 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\sites_hints\client);
 
+        class sites_hints_getHintsInRange {};
         class sites_hints_glint {};
         class sites_hints_glintJob {};
         class sites_hints_initObject {};
+        class sites_hints_inspect {};
         class sites_hints_inspectInit {};
         class sites_hints_markOnMap {};
         class sites_hints_postInit
@@ -841,11 +850,12 @@ class vgm_c
 
         class skill_passives_infantryman_bornLeader {};
     };
-    class skill_passives_recon
+    class skill_passives_pointman
     {
-        VGM_CLIENT_PATH(\systems\skill\client\passives\recon);
+        VGM_CLIENT_PATH(\systems\skill\client\passives\pointman);
 
-        class skill_passives_recon_keenEye {};
+        class skill_passives_friendOrFoe {};
+        class skill_passives_senseOfScale {};
     };
     class skill_passives_fireSupport
     {
@@ -878,21 +888,20 @@ class vgm_c
         class skill_actives_bulletHose {};
         class skill_actives_steelRain {};
     };
-    class skill_actives_fireSupport
-    {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\fire_support);
-
-    };
-    class skill_actives_infantryman
-    {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\infantryman);
-    };
     class skill_actives_recon
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
 
-        class skill_actives_recon_sixthSense {};
         class skill_actives_recon_thickBrush {};
+    };
+    class skill_actives_pointman
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\pointman);
+
+        class skill_actives_keenEye {};
+        class skill_actives_oneOfThem {};
+        class skill_actives_stonesThrow {};
+        class skill_actives_tacticalSense {};
     };
     class skill_actives_support
     {

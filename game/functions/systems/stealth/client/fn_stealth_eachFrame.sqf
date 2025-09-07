@@ -3,7 +3,7 @@
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-03-27
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -61,6 +61,9 @@ call {
     // Unit can't see player, as they're not in a valid state.
     if (!alive _unitToCheck || side _unitToCheck != ENEMY_SIDE) exitWith {};
 
+    // Player can't be seen by anyone, due to being undetectable
+    if (vgm_c_stealth_undetectable) exitWith {};
+
     ([_unitToCheck] call vgm_c_fnc_stealth_isVisibleToUnit) params ["_isVisible", "_visibility"];
 
     // Player isn't visible enough to the unit, they can't be seen.
@@ -85,7 +88,8 @@ call {
 
     [_lookingUnit] call vgm_c_fnc_stealth_isVisibleToUnit params ["_isVisible", "_visibility"];
 
-    if !(alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible) exitWith {
+    private _unitCanDetectPlayer = alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible;
+    if (!_unitCanDetectPlayer || vgm_c_stealth_undetectable) exitWith {
         vgm_c_stealth_looking deleteAt _lookingKey;
         #ifdef __A3_DEBUG__
             _lookingUnit setVariable ["vgm_c_stealth_spotTimeDebug", nil];
@@ -94,7 +98,7 @@ call {
 
     private _distance = player distance _lookingUnit;
     // How long it should take the AI to spot the player, if they were looking at them continously.
-    private _spotTime = MIN_SPOT_TIME + 2 * (1 - _visibility) + (((_distance - 10) / SPOT_TIME_MULTIPLIER_DISTANCE) max 0);
+    private _spotTime = (MIN_SPOT_TIME + 2 * (1 - _visibility) + (((_distance - 10) / SPOT_TIME_MULTIPLIER_DISTANCE) max 0)) * (player getVariable ["vgm_stealth_spotTimeMultiplier", 1]);
     // This is converted into "suspicion", to account for AI not looking at the player continuously.
     (vgm_c_stealth_suspicion getOrDefault [hashValue _lookingUnit, [0, 0, _seenAt], true]) params ["_currentSuddenSuspicion", "_currentLingeringSuspicion", "_suspicionLastTicked"];
     private _deltaTime = time - (_suspicionLastTicked max _seenAt);

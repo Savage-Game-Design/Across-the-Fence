@@ -60,7 +60,7 @@ Copy `build/arma_server.example.hpp` to `build/arma_server.hpp`, and add your St
 It's recommended to set the mission output folder to your Arma 3 profile's `mpmissions` folder.
 
 #### Required software
-- Python (3.12 or later)
+- Python (3.12 or later, must be windows MSC python[^0])
 - HEMTT (On windows: winget hemtt)
 
 ### Running the build
@@ -103,6 +103,4 @@ The server commands will also:
 
 For further details on build script commands, run `python3 build/run.py --help`. 
 
-
-
-
+[^0]: GCC python builds, such as those distributed by MSYS2's pacman, utilise posix paths and break the build scripts.

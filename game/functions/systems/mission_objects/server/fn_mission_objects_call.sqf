@@ -2,7 +2,7 @@
     File: fn_mission_objects_call.sqf
     Author: Savage Game Design
     Date: 2024-12-16
-    Last Update: 2024-12-16
+    Last Update: 2025-08-23
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 params [
     "_mission",
     "_objectIds",
-    ["_fnc_callback", {}, [{}]]
+    ["_fnc_callback", [[], {}], [[], {}], 2]
 ];
 
 private _missionId = _mission get "public" get "id";

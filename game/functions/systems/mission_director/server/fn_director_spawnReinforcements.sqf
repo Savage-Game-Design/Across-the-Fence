@@ -2,7 +2,7 @@
     File: fn_director_spawnReinforcements.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-06-19
+    Last Update: 2025-08-30
     Public: Yes
 
     Description:
@@ -27,7 +27,7 @@ private _missionId = _missionPublic get "id";
 private _spawnPos = [];
 
 for "_i" from 1 to 3 do {
-    _spawnPos = ([getPos _player, playableUnits, random 360, 0, 400] call para_g_fnc_spawning_find_valid_position_tracer) # 0;
+    _spawnPos = ([getPos _player, playableUnits, random 360, 150, 400] call para_g_fnc_spawning_find_valid_position_tracer) # 0;
     if (_spawnPos isNotEqualTo []) exitWith {};
 };
 

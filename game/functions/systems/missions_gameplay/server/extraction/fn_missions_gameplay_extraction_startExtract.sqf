@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-03-23
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -61,6 +61,7 @@ if (_lzPosition isEqualTo []) exitWith {
 
 // spawn the helicopter, coming from the direction of the origin pos
 private _helicopter = [_class] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter;
+_playerGroup setVariable ["vgm_missions_extraction_helicopter", _helicopter, true];
 
 private _spawnPos = _lzPosition getPos [_distance, _lzPosition getDir _originPos];
 _spawnPos set [2, 50];
@@ -92,8 +93,11 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
     private _playerGroup = _mission get "public" get "group";
     waitUntil {
         private _alivePlayers = units _playerGroup select {alive _x && !(_x call vgm_g_fnc_medical_isUnconscious)};
-        // all alive players are inside the heli, and there's at least one player alive.
-        _alivePlayers findIf {!(_x in _helicopter)} == -1 && _alivePlayers isNotEqualTo [];
+        private _everyoneBoarded = _alivePlayers findIf {!(_x in _helicopter)} == -1 && _alivePlayers isNotEqualTo [];
+        private _leaveNow = _helicopter getVariable ["vgm_missions_extraction_evacNow", false];
+        private _leaveAtTime = _helicopter getVariable ["vgm_missions_extraction_evacAt", -1];
+
+        _everyoneBoarded || _leaveNow || (_leaveAtTime isNotEqualTo -1 && serverTime > _leaveAtTime);
     };
 
     _helicopter setVariable ["vgm_missions_extractionBoarded", true];
@@ -104,7 +108,8 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
 
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 25;
-    [_missionId] call vgm_s_fnc_missions_endMission;
+    private _endType = ["FAILURE", "SUCCESS"] select (units _playerGroup findIf {_x in _helicopter} > -1);
+    [_missionId, _endType] call vgm_s_fnc_missions_endMission;
     waitUntil {crew _helicopter findIf {isPlayer _x} == -1};
     sleep 25;
     {_helicopter deleteVehicleCrew _x} forEach units _helicopter;

@@ -1,18 +1,19 @@
 /*
-	File: fn_ai_scale_to_player_count.sqf
+	File: fn_schedule_add_job.sqf
 	Author:  Savage Game Design
 	Public: No
-	
+
 	Description:
 		Adds a job to the main scheduler.
-	
+
 	Parameter(s):
 		_jobId - Job id [String]
 		_code - Code to run in the scheduler [Code]
 		_parameters - Parameters given to the job [any]
 		_tickDelay - Minimum delay in seconds between runs [Number]
 		_iterationsToRun - How many time do you want to run it [Number, defaults to -1]
-	
+        _startDelay - How long before the first iteration runs [Number, defaults to 0]
+
 	Returns:
 		Job namespace [Location]
 
@@ -21,14 +22,14 @@
 */
 
 
-params ["_jobId", "_code", "_parameters", "_tickDelay", ["_iterationsToRun", -1]];
+params ["_jobId", "_code", "_parameters", "_tickDelay", ["_iterationsToRun", -1], ["_startDelay", 0]];
 
 private _job = false call para_g_fnc_create_namespace;
 
 _job setVariable ["jobId", _jobId];
 _job setVariable ["code", _code];
 _job setVariable ["tickDelay", _tickDelay];
-_job setVariable ["startTime", diag_tickTime];
+_job setVariable ["startTime", diag_tickTime + _startDelay];
 _job setVariable ["parameters", _parameters];
 _job setVariable ["remainingIterations", _iterationsToRun];
 
