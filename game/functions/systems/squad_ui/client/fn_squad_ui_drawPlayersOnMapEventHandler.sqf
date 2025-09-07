@@ -2,7 +2,7 @@
     File: fn_squad_ui_drawPlayersOnMapEventHandler.sqf
     Author: Savage Game Design
     Date: 2024-11-06
-    Last Update: 2024-11-30
+    Last Update: 2025-09-07
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 params ["_ctrlMap"];
 
 private _leader = leader player;
-private _units = if (vgm_squad_ui_mapDrawEveryone) then {units player} else {[_leader]};
+private _units = if (vgm_squad_ui_mapDrawEveryone) then {units player} else {[_leader, player]};
 
 {
     _ctrlMap drawIcon [
