@@ -91,7 +91,7 @@ if (
         _unit setVariable ["vgm_medical_accumulated", _hitsData];
 
         private _accDamage = 0;
-        _accDamages apply {_accDamage = _accDamage + _x};
+        _hitPointDamages apply {_accDamage = _accDamage + _x};
 
         #ifdef DEBUG
         format ["(%3) Current Accumulated damage: damage=%1 hitPoint=%2", _accDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
