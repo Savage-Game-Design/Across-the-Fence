@@ -34,18 +34,6 @@ _this spawn {
 
     ["vgm_mission_deploy_local", _currentMission] call para_g_fnc_event_triggerLocal;
 
-    // zoom map on the mission area
-    [] call vgm_c_fnc_missions_coverMap;
-    vgm_missions_zoomOnMapScript = (_currentMission get "targetZone") spawn {
-        [_this] call vgm_g_fnc_loc_getTargetBoxBounds params ["_pos", "_size"];
-        waitUntil {visibleMap}; // can't animate hidden map
-        [
-            _size vectorMultiply 2.5,
-            _pos,
-            0
-        ] call BIS_fnc_zoomOnArea;
-    };
-
     // - Unfades the screen
     sleep 1;
     [1] spawn BIS_fnc_fadeEffect;

@@ -40,6 +40,9 @@ private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
 // joinSilent seems to sometimes mysteriously fail. RemoteExec'ing is an attempt to solve that.
 [[_playerUnit], vgm_core_lobbyGroup] remoteExec ["joinSilent", _playerUnit];
 
+// removes target box on zone
+[] remoteExecCall ["vgm_c_fnc_missions_highlightOrHideZone", _playerUnit];
+
 [
     "vgm_mission_playerRemoved",
     [_playerId, _missionPublic get "id"]

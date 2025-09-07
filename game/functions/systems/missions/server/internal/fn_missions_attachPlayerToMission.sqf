@@ -60,6 +60,9 @@ if (isNull (_missionPublic get "group")) then {
 private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
 [[_playerUnit], _missionPublic get "group"] remoteExec ["joinSilent", _playerUnit];
 
+// highlights target box and zooms player in with visible map
+[] remoteExecCall ["vgm_c_fnc_missions_highlightOrHideZone", _playerUnit];
+
 [
     "vgm_mission_attached",
     [_playerId, _missionPublic get "id"]
