@@ -14,10 +14,7 @@
 
 // amount of damage a player has to receive to convert "accumulated" damage,
 // i.e. napalm/WP/fire damage, into wounds
-#define ACCUMULATOR_THRESHOLD_WOUND 0.5
-
-// minimum damage value to be accumulated
-#define ACCUMULATOR_THRESHOLD_MIN 0.025
+#define ACCUMULATOR_THRESHOLD_WOUND 0.75
 
 #define WOUND_NONE 0
 #define WOUND_MINOR 1

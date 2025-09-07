@@ -21,20 +21,7 @@
 
 params ["_unit", "_selection", "_damage", "_source", "_projectile", "_hitIndex", "_instigator", "_hitPoint", "_directHit"];
 // HD can rarely fire for non local units, ignore
-if (!local _unit) exitWith {
-    #ifdef DEBUG
-    ["MEDICAL: HANDLE DAMAGE: Non local unit"] call vgm_g_fnc_logInfo;
-    #endif
-    nil
-};
-
-// RESET DAMAGE ACCUMULATED OVER TIME (BURNED BY NAPALM/W.P. ETC)
-// ----
-// remove accumulated damage that hasn't caused a wound after a set period (30 seconds)
-private _lastAdded = _unit getVariable ["accumulated_lastAddedAt", serverTime];
-if ((serverTime - _lastAdded) > ACCUMULATOR_IGNORE_DAMAGE_TIME) then {
-    _unit setVariable ["accumulated_damage", [], true];
-};
+if (!local _unit) exitWith {};
 
 // damage of the unit/hitpoint BEFORE currently processed damage instance
 private _currentDamage = 0;
@@ -46,49 +33,90 @@ if (_hitPoint isEqualTo "") then {
 };
 private _hitDamage = _damage - _currentDamage;
 
+// god mode
 if (!isDamageAllowed _unit) exitWith {_currentDamage};
 
-private _downed = lifeState _unit == "INCAPACITATED";
 // prevent unit from being killed when downed
-// TODO: Should napalm / WP on downed players result in player death?
-//       players can drop nape/WP on downed friends to "save" them,
-//       which smells meta-abuse-able.
-if (_downed) exitWith {
-    #ifdef DEBUG
-    ["MEDICAL: HANDLE DAMAGE: downed"] call vgm_g_fnc_logInfo;
-    #endif
-    _currentDamage
-};
+private _downed = lifeState _unit == "INCAPACITATED";
+if (_downed) exitWith {_currentDamage};
 
 // NAPALM / WILLY PETE DAMAGE
 // ----
 // * not direct hit
-// * very small damage values
+// * small damage values (circa 0.01 ~ 0.02)
 // * null instigator and null source
-// * projectile is empty string
-// * can be most hit parts (including 'incapacitated')
-//
-// NOTE: @Spoffy: largest values from burns are 'hitchest' or 'hitdiaphragm',
-// so just using those for testing just now. but *ideally* should cause
-// damage to all body parts.
+// * projectile is often empty string, but sometimes can be a specific ammo type
+// * can be most hit parts (including 'incapacitated'), but largest values usually 'hitchest' or 'hitdiaphragm'
+
 if (
     !_directHit
     && (isNull _instigator || isNull _source)
     && _projectile isEqualTo ""
-    && _hitPoint in ["hitchest", "hitdiaphragm"]
+    && _hitPoint in (vgm_c_medical_hitPointBodyPartMap)
+    && _hitDamage > 0
 ) exitWith {
-    // NOTE: @Spoffy: Separate script for accumulated damage.
-    //                I'd like to refactor projectile/instantaneous the same way.
-    // NOTE: @Spoffy: Could also do multiple HandleDamage EH's assigned
-    //                to player. Not sure how i feel about that approach.
-    [_unit, _hitDamage, _hitPoint] call vgm_c_fnc_medical_handleDamageAccumulation;
-    0
+
+    #ifdef DEBUG
+    format ["(%3) MEDICAL: Fire damage detected: damage=%1 hitPoint=%2", _hitDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+    #endif
+
+    // vgm_medical_accumulated:
+    // ```
+    // {
+    //      hitpoint_1: [damage, damage, damage],
+    //      hitpoint_2: [damage, damage, damage, damage, damage],
+    // }
+    // ```
+
+    private _accs = _unit getVariable "vgm_medical_accumulated";
+    private _firstAccDamage = isNil "_accs";
+
+    private _lastAdded = _unit getVariable ["vgm_medical_accumulated_lastAddedAt", serverTime];
+    private _accDamageTimedOut = (serverTime - _lastAdded) > ACCUMULATOR_IGNORE_DAMAGE_TIME;
+
+    if (_firstAccDamage || _accDamageTimedOut) then {
+        _unit setVariable ["vgm_medical_accumulated", createHashMap];
+    };
+
+    // update the accumulation for next received damage
+    private _hitsData = _unit getVariable "vgm_medical_accumulated";
+    private _hitPointDamages = _hitsData getOrDefault [_hitPoint, []];
+    _hitPointDamages pushBack _hitDamage;
+    _hitsData set [_hitPoint, _hitPointDamages];
+    _unit setVariable ["vgm_medical_accumulated", _hitsData];
+
+    // run through the hit point's current damage values on the next frame,
+    // applying combined damage if threshold reached and resetting that hitpoint's values
+    [{
+        params ["_unit", "_accDamages", "_hitPoint", "_projectile"];
+
+        private _accDamage = 0;
+        _accDamages apply {_accDamage = _accDamage + _x};
+
+        #ifdef DEBUG
+        format ["(%3) Current Accumulated damage: damage=%1 hitPoint=%2", _accDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+        #endif
+
+        if (_accDamage > ACCUMULATOR_THRESHOLD_WOUND) exitWith {
+            #ifdef DEBUG
+            format ["(%3) Accumulated damage passed threshold: damage=%1 hitpoint=%2", _accDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+            #endif
+
+            [_unit, _accDamage, _hitPoint, objNull, _projectile, false] call vgm_c_fnc_medical_receiveDamage;
+
+            private _hitsData = _unit getVariable "vgm_medical_accumulated";
+            _hitsData set [_hitPoint, []];
+            _unit setVariable ["vgm_medical_accumulated", _hitsData];
+
+        };
+    }, [_unit, _hitPointDamages, _hitPoint, _projectile]] call vgm_g_fnc_execNextFrame;
+
+    0 // prevent engine damage handling
 };
 
-// validate damage
+// validate other damage types
 if (_projectile isEqualTo "" && {isNull _source}) exitWith {
     #ifdef DEBUG
-    ["MEDICAL: HANDLE DAMAGE: Invalid damage type"] call vgm_g_fnc_logInfo;
     format ["(%2) Invalid damage: %1", _hitPoint, diag_frameNo] call vgm_g_fnc_logDebug;
     #endif
     _currentDamage
@@ -96,12 +124,7 @@ if (_projectile isEqualTo "" && {isNull _source}) exitWith {
 
 // filter out tiny amounts of damage
 private _ignoreThreshold = [0.3, 0.001] select _directHit;
-if (_hitDamage < _ignoreThreshold) exitWith {
-    #ifdef DEBUG
-    ["MEDICAL: HANDLE DAMAGE: Below threshold damage"] call vgm_g_fnc_logInfo;
-    #endif
-    _currentDamage
-};
+if (_hitDamage < _ignoreThreshold) exitWith {_currentDamage};
 
 // ignore problematic hitpoints for hitpoint handling
 // #structural - we do not want to handle it for hits
@@ -109,7 +132,6 @@ if (_hitDamage < _ignoreThreshold) exitWith {
 // hitbody - it's redundant as it depends on hitpelvis, hitabdomen, hitdipaghram and hitchest, has 1000 armor and causes issues
 if (_hitPoint in ["#structural", "incapacitated", "hitbody"]) exitWith {
     #ifdef DEBUG
-    ["MEDICAL: HANDLE DAMAGE: Problematic hit point damage"] call vgm_g_fnc_logInfo;
     format ["(%6) Skipped Damage: %1 | %2 | %3 | %4 | %5", _hitPoint, _hitDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logDebug;
     #endif
     _currentDamage
@@ -121,7 +143,6 @@ private _armor = [_unit, _hitPoint] call vgm_c_fnc_medical_getArmorHitPoint;
 private _realDamage = _hitDamage * _armor;
 
 #ifdef DEBUG
-["MEDICAL: HANDLE DAMAGE: Valid damage registered"] call vgm_g_fnc_logInfo;
 format ["(%7) Damage: %1 | %2 | %3 | %4 | %5 | %6", _hitPoint, _hitDamage, _realDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logDebug;
 #endif
 
@@ -164,15 +185,6 @@ _hitsData set [_hitPoint, [_realDamage, _hitPoint, _hitDamage]];
 
 // damage of these hitpoint controls visuals or engine features like limping sway etc.
 // retain the values set by our other functionalities
-if (_hitPoint in ["hithead", "hitbody", "hithands", "hitlegs"]) exitWith {
-    #ifdef DEBUG
-    ["MEDICAL: HANDLE DAMAGE: Visual/engine feature damage"] call vgm_g_fnc_logInfo;
-    #endif
-    _currentDamage
-};
-
-#ifdef DEBUG
-["MEDICAL: HANDLE DAMAGE: Unknown/other damage"] call vgm_g_fnc_logInfo;
-#endif
+if (_hitPoint in ["hithead", "hitbody", "hithands", "hitlegs"]) exitWith {_currentDamage};
 
 0 // prevent engine damage handling for all other hitpoints
