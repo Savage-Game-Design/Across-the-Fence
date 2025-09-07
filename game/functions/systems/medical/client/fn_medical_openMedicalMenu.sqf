@@ -27,7 +27,7 @@ _currentMedicalMenu closeDisplay 2;
 if (
     !isPlayer _target
     || !(_target isKindOf "CAManBase")
-    || {player distance _target > 15}
+    || {player distance _target > 5}
 ) then {
     _target = player;
 };
