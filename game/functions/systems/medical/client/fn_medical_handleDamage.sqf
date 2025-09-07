@@ -60,13 +60,7 @@ if (
     format ["(%3) Fire damage detected: damage=%1 hitPoint=%2", _hitDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
     #endif
 
-    // vgm_medical_accumulated:
-    // ```
-    // {
-    //      hitpoint_1: [damage, damage, damage],
-    //      hitpoint_2: [damage, damage, damage, damage, damage],
-    // }
-    // ```
+    // vgm_medical_accumulated: summed damage per hitpoint
 
     private _accs = _unit getVariable "vgm_medical_accumulated";
     private _firstAccDamage = isNil "_accs";
