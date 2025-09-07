@@ -9,6 +9,13 @@
 #define BODY_PART_LEGS "legs"
 #define BODY_PARTS_ARR [BODY_PART_HEAD, BODY_PART_ARMS, BODY_PART_TORSO, BODY_PART_LEGS]
 
+// time to wait until accumulated, below wound threshold, damage is removed from player.
+#define ACCUMULATOR_IGNORE_DAMAGE_TIME 30
+
+// amount of damage a player has to receive to convert "accumulated" damage,
+// i.e. napalm/WP/fire damage, into wounds
+#define ACCUMULATOR_THRESHOLD_WOUND 0.75
+
 #define WOUND_NONE 0
 #define WOUND_MINOR 1
 #define WOUND_MAJOR 2
