@@ -96,6 +96,9 @@ class vgm_s
         class director_preInit {
             preInit = 1;
         };
+        class director_addAlertness {
+            headerType = -1;
+        };
         class director_getDirectorForMissionId {};
         class director_getEnemySquadTemplate {};
         class director_onPlayerNoiseEvent {};

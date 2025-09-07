@@ -26,7 +26,9 @@ _destination = _destination vectorAdd [0,0,0];
 
 _group setVariable ["vgm_l_btree_moveTo_destination", _destination];
 _group setVariable ["vgm_l_btree_moveTo_completionDistance", _completionDistance];
-_group setVariable ["vgm_l_btree_moveTo_repairAttempts", nil];
+_group setVariable ["vgm_l_btree_moveTo_nextStrategy", nil];
+_group setVariable ["vgm_l_btree_moveTo_debug", nil];
+_group setVariable ["vgm_l_btree_moveTo_intermediateDestination", nil];
 _group setVariable ["vgm_l_btree_moveTo_forceRepath", true];
 
 // Switch out of combat mode to ensure the AI does the move.

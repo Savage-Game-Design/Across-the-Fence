@@ -400,14 +400,12 @@ class vgm_skillTrees {
                 class keen_eye: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KEEN_EYE";
                     description = "$STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     codeActivate = "call vgm_c_fnc_skill_actives_keenEye";
                     skillType = 2;
                     cost = 4;
                     cooldown = 180;
-                    duration = 30;
                 };
 
                 class taking_notes: vgm_skillTemplate {
@@ -492,7 +490,6 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC";
                     column = 3;
 
-                    // TODO - Implementation
                     codeApply = "true call vgm_c_fnc_skill_passives_friendOrFoe";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_friendOrFoe";
                     cost = 6;
@@ -513,10 +510,10 @@ class vgm_skillTrees {
                 class tactical_sense: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE";
                     description = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "[true] call vgm_c_fnc_skill_actives_tacticalSense";
+                    codeDeactivate = "[false] call vgm_c_fnc_skill_actives_tacticalSense";
                     skillType = 2;
                     cost = 8;
                     cooldown = 360;
@@ -526,10 +523,10 @@ class vgm_skillTrees {
                 class on_the_prowl: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL";
                     description = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "player setUnitTrait ['vgm_skill_investigate_canMoveFreely', true, true]";
+                    codeDeactivate = "player setUnitTrait ['vgm_skill_investigate_canMoveFreely', false, true]";
                     skillType = 2;
                     cost = 8;
                     cooldown = 460;

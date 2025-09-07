@@ -912,7 +912,6 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\recon);
 
-        class skill_actives_recon_sixthSense {};
         class skill_actives_recon_thickBrush {};
     };
     class skill_actives_pointman
@@ -922,6 +921,7 @@ class vgm_c
         class skill_actives_keenEye {};
         class skill_actives_oneOfThem {};
         class skill_actives_stonesThrow {};
+        class skill_actives_tacticalSense {};
     };
     class skill_actives_support
     {

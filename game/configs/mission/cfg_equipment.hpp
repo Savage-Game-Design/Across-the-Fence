@@ -7,20 +7,24 @@ class vgm_equipment {
     startingBinocular[] = {"vn_camera_01", ""};
 
     startingWeaponItems[] = {
-        // mags/explosives/FAKs
+        {"vn_m1911", {"vn_s_m1911", {"vn_m1911_mag", 4}}},
+        {"vn_xm177", {{"vn_m16_20_mag", 3}, {"vn_m16_20_t_mag", 2}}},
         {"", {
+            {"vn_helper_item_firstaidkit", 6},
+            {"vn_mine_m14_mag", 3},
+            {"vn_m61_grenade_mag", 3}
+        }},
+        {"", {
+            {"vn_m16_20_mag", 8},
+            {"vn_m16_20_t_mag", 3},
+            {"vn_helper_item_firstaidkit", 9},
             {"vn_b_item_toolkit_weightless", 1},
-            {"vn_helper_item_firstaidkit", 15},
             {"vn_m18_white_mag", 3},
             {"vn_m18_red_mag", 3},
             {"vn_m18_green_mag", 3},
-            {"vn_m61_grenade_mag", 3},
-            {"vn_mine_m14_mag", 20}
+            {"vn_mine_m14_mag", 17}
         }},
-        // weapons
-        {"vn_xm177", {{"vn_m16_20_mag", 11}, {"vn_m16_20_t_mag", 5}}},
-        {"vn_m1911", {"vn_s_m1911", {"vn_m1911_mag", 4}}},
-        {"vn_m127", {{"vn_m127_mag", 4}}},
+        {"vn_m127", {{"vn_m127_mag", 4}}}
     };
 
     #include "cfg_equipment_generated.hpp"
