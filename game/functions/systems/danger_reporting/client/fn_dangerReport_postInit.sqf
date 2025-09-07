@@ -83,7 +83,8 @@ vgm_c_dangerReport_shotSuppressionCache = createHashMap;
 
 vgm_c_dangerReport_nextRecentShotsTime = 0;
 vgm_c_dangerReport_sendRecentShotsEachFrameHandler = addMissionEventHandler ["EachFrame", {
-    if (!vgm_c_dangerReport_sendRecentShots || vgm_c_dangerReport_nextRecentShotsTime < time) exitWith {};
+    if (!vgm_c_dangerReport_sendRecentShots || vgm_c_dangerReport_nextRecentShotsTime < 0 || time < vgm_c_dangerReport_nextRecentShotsTime) exitWith {};
 
     [] call vgm_c_fnc_dangerReport_sendRecentShotsToServer;
+    vgm_c_dangerReport_nextRecentShotsTime = -1;
 }];
