@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=649;
+	toggles=521;
 	class ItemIDProvider
 	{
-		nextID=2523;
+		nextID=2524;
 	};
 	class MarkerIDProvider
 	{
@@ -16,11 +16,11 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1337;
+		nextID=1387;
 	};
 	class Camera
 	{
-		pos[]={20073.338,12.925376,6611.0552};
+		pos[]={19983.135,97.040909,6566.1416};
 		dir[]={0.60508507,-0.69739801,0.38407192};
 		up[]={0.58880275,0.71668082,0.37373668};
 		aside[]={0.53590071,-1.2060627e-07,-0.84428364};
@@ -310,7 +310,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=59;
+		items=60;
 		class Item0
 		{
 			dataType="Logic";
@@ -13949,6 +13949,35 @@ class Mission
 			id=2522;
 			type="vn_b_prop_cabinet_01_01";
 			atlOffset=0.001244545;
+		};
+		class Item59
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={20048.465,6.1218262,6463.479};
+				angles[]={0.38738385,0,0.0060001095};
+			};
+			id=2523;
+			type="vn_module_qol";
+			atlOffset=0.00046634674;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="vn_module_qol_earplug";
+					expression="_this setVariable ['earplugs',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 	};
 };
