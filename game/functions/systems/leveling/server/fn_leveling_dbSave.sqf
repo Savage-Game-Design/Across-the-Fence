@@ -2,7 +2,7 @@
     File: fn_leveling_dbSave.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2023-06-02
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -27,4 +27,4 @@ if (isNil "_hashMap") exitWith {
     false // return
 };
 
-["player_leveling", _uid, _hashMap] call vgm_s_fnc_db_typed_save;
+["leveling", _uid, _hashMap] call vgm_s_fnc_persistence_dbSet;

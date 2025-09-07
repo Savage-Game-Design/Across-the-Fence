@@ -400,6 +400,15 @@ class vgm_c
         };
     };
 
+    class db
+    {
+        VGM_CLIENT_PATH(\core\client\db);
+
+        class db_preInit {
+            preInit = 1;
+        };
+    };
+
     class ai
     {
         VGM_CLIENT_PATH(\systems\ai\client);
@@ -606,6 +615,18 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\missions_zones\client\remoteExec);
 
         class missions_zones_remoteExec_receiveList {};
+    };
+
+    class persistence
+    {
+        VGM_CLIENT_PATH(\systems\persistence\client);
+
+        class persistence_addHandler {};
+        class persistence_postInit
+        {
+            postInit = 1;
+        };
+        class persistence_registerSchema {};
     };
 
     class loading

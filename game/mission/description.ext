@@ -92,7 +92,17 @@ showHUD[] =
 cba_settings_hasSettingsFile = 1;
 
 // No params - settings should be hardcoded.
-class Params {};
+class Params {
+    // Use the database backend
+    class db_useBackend
+    {
+        title = $STR_VGM_PARAMS_USE_DB_BACKEND;
+        values[] = {0, 1};
+        texts[] = {"False", "True"};
+        default = 0;
+    };
+
+};
 
 class CfgDebriefing
 {

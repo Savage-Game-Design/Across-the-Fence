@@ -3,7 +3,7 @@
     File: fn_initDebugMenu.sqf
     Author: Savage Game Design
     Date: 2023-09-07
-    Last Update: 2024-12-06
+    Last Update: 2025-08-31
     Public: No
 
     Description:
@@ -50,13 +50,31 @@ vgm_c_debugMenu_receiveMissionData = {
     };
 
     {
-        [_pServer, _x, _y] call vgm_c_debugMenu_missionTvAdd;
+        [_pServer, _x, _y] call vgm_c_debugMenu_tvAdd;
     } forEach _missions;
 
     _ctrlTree tvSortAll [_pServer];
 };
 
-vgm_c_debugMenu_missionTvAdd = {
+vgm_c_debugMenu_receivePersistenceData = {
+    params ["_backendType", "_data"];
+    private _ctrlTree = uiNamespace getVariable ["vgm_debugMenu_ctrlPersistenceTree", controlNull];
+
+    private _pServer = _ctrlTree getVariable ["vgm_pServer", []];
+    for "_i" from (_ctrlTree tvCount _pServer) to 1 step -1 do {
+        _ctrlTree tvDelete (_pServer + [_i-1]);
+    };
+
+    [_pServer, "Backend type", _backendType] call vgm_c_debugMenu_tvAdd;
+
+    {
+        [_pServer, _x, _y] call vgm_c_debugMenu_tvAdd;
+    } forEach _data;
+
+    // _ctrlTree tvSortAll [_pServer];
+};
+
+vgm_c_debugMenu_tvAdd = {
     params ["_index", "_key", "_val"];
     if (_key isEqualTo "_netmap") exitWith {};
     _key = format ["%1", _key];
@@ -64,14 +82,14 @@ vgm_c_debugMenu_missionTvAdd = {
     if (_val isEqualType []) exitWith {
         private _pItem = [_ctrlTree tvAdd [_index, _key]];
         {
-            [_index + _pItem, _forEachIndex, _x] call vgm_c_debugMenu_missionTvAdd;
+            [_index + _pItem, _forEachIndex, _x] call vgm_c_debugMenu_tvAdd;
         } forEach _val;
     };
 
     if (_val isEqualType createHashMap) exitWith {
         private _pItem = [_ctrlTree tvAdd [_index, _key]];
         {
-            [_index + _pItem, _x, _y] call vgm_c_debugMenu_missionTvAdd;
+            [_index + _pItem, _x, _y] call vgm_c_debugMenu_tvAdd;
         } forEach _val;
     };
 
@@ -192,6 +210,44 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
             _this lnbAddRow ["skill points", str ([] call vgm_c_fnc_skills_getSkillPoints)];
             _this lnbAddRow ["spent skill points", str (_skillsData get "skillPointsSpent")];
         }] call vgm_c_debugMenu_addSection;
+
+        // persistence server data
+        call {
+            private _ctrlTree =_display ctrlCreate ["RscTreeSearch", -1, _ctrlContainer];
+            private _y = _sections * _sectionH + GUI_GRID_H;
+            _ctrlTree ctrlSetPosition [0, _y, _w, _sectionH];
+            _ctrlTree ctrlCommit 0;
+            uiNamespace setVariable ["vgm_debugMenu_ctrlPersistenceTree", _ctrlTree];
+
+            private _pServer = [_ctrlTree tvAdd [[], "Persistence - Server"]];
+            _ctrlTree tvAdd [_pServer, "Loading..."];
+
+            // Load all persistence data from server on demand
+            _ctrlTree setVariable ["vgm_pServer", _pServer];
+            _ctrlTree ctrlAddEventHandler ["TreeExpanded", {
+                params ["_ctrlTree", "_selectionPath"];
+                if (count _selectionPath > 1) exitWith {};
+                if ((_ctrlTree tvText _selectionPath) != "Persistence - Server") exitWith {};
+
+                // clear all current entries
+                for "_i" from (_ctrlTree tvCount _selectionPath) to 1 step -1 do {
+                    _ctrlTree tvDelete (_selectionPath + [_i-1]);
+                };
+                _ctrlTree tvAdd [_selectionPath, "Loading..."];
+                // request persistence data from server
+                [{
+
+                    [
+                        vgm_g_dbBackendType,
+                        createHashMapFromArray [
+                            ["player request", vgm_persistence_playerRequests],
+                            ["request player", vgm_persistence_requestPlayer],
+                            ["dirty schemas", vgm_persistence_dirtySchemas]
+                        ]
+                    ] remoteExecCall ["vgm_c_debugMenu_receivePersistenceData", remoteExecutedOwner];
+                }] remoteExec ["call", 2];
+            }];
+        };
     };
 
     private _fnc_tabMedical = {
@@ -235,7 +291,7 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
 
         private _pPublic = [_ctrlTree tvAdd [[], "Client"]];
         {
-            [_pPublic, _x, _y] call vgm_c_debugMenu_missionTvAdd;
+            [_pPublic, _x, _y] call vgm_c_debugMenu_tvAdd;
         } forEach ([] call VGM_C_fnc_missions_getCurrentMission);
 
         private _pServer = [_ctrlTree tvAdd [[], "Server"]];

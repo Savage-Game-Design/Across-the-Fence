@@ -2,7 +2,7 @@
     File: fn_skills_dbGet.sqf
     Author: veteran29
     Date: 2023-02-28
-    Last Update: 2025-07-03
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ private _uid = getPlayerUID _player;
 
 ["DEBUG", format ["Loading skills data - %1", _uid]] call vgm_g_fnc_log;
 
-private _playerSkillsData = ["player_skills", _uid] call vgm_s_fnc_db_get;
+private _playerSkillsData = ["skills", _uid] call vgm_s_fnc_persistence_dbGet;
 _playerSkillsData set ["skillPoints", 0, true];
 _playerSkillsData set ["skillPointsSpent", 0, true];
 _playerSkillsData set ["skillPaths", [], true];

@@ -1581,4 +1581,9 @@
             <Original>The following items are not available to you, and have been removed:</Original>
         </Key>
     </Package>
+    <Package name="Params">
+        <Key ID="STR_VGM_PARAMS_USE_DB_BACKEND">
+            <Original>Use external database? (Dedicated server + mod only)</Original>
+        </Key>
+    </Package>
 </Project>

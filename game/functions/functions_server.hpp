@@ -41,6 +41,23 @@ class vgm_s
         class db_save {};
         class db_typed_save {};
     };
+    class db_backend
+    {
+        VGM_SERVER_PATH(\core\server\db\backend);
+
+        class db_backend_init {};
+    };
+
+    class extension
+    {
+        VGM_SERVER_PATH(\core\server\extension);
+
+        class extension_call {};
+        class extension_preInit {
+            preInit = 1;
+        };
+        class extension_setHandler {};
+    };
 
     class ai
     {
@@ -223,6 +240,23 @@ class vgm_s
         VGM_SERVER_PATH(\systems\missions_zones\server\remoteExec);
 
         class missions_zones_remoteExec_getList {};
+    };
+
+    class persistence
+    {
+        VGM_SERVER_PATH(\systems\persistence\server);
+
+        class persistence_cacheKey {};
+        class persistence_dbCommit {};
+        class persistence_dbGet {};
+        class persistence_dbSet {};
+
+        class persistence_load {};
+        class persistence_preInit
+        {
+            preInit = 1;
+        };
+        class persistence_registerSchema {};
     };
 
     class player

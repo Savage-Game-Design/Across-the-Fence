@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: Savage Game Design
     Date: 2023-05-30
-    Last Update: 2025-01-23
+    Last Update: 2025-08-29
     Public: No
 
     Description:
@@ -16,6 +16,8 @@
  */
 
 if (!hasInterface) exitWith {};
+
+["leveling"] call vgm_c_fnc_persistence_registerSchema;
 
 ["vgm_leveling_updateData", {
     params ["_levelingData"];
