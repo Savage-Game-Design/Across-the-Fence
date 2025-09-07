@@ -22,7 +22,11 @@
 params [["_target", cursorTarget]];
 
 private _currentMedicalMenu = uiNamespace getVariable ["VGM_DisplayMedical", displayNull];
-_currentMedicalMenu closeDisplay 2;
+
+// close existing menu on repeated key press
+if !(isNull _currentMedicalMenu) exitWith {
+    _currentMedicalMenu closeDisplay 2;
+};
 
 if (
     !isPlayer _target
