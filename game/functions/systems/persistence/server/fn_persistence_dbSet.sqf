@@ -2,7 +2,7 @@
     File: fn_persistence_dbSet.sqf
     Author: Savage Game Design
     Date: 2025-08-29
-    Last Update: 2025-08-30
+    Last Update: 2025-09-07
     Public: Yes
 
     Description:
@@ -25,6 +25,8 @@ params [
     ["_uid", nil, [""]],
     ["_data", nil, [createHashMap]]
 ];
+
+format ["Setting DB value: %1, %2: %3", _schema, _uid, _data] call vgm_g_fnc_logDebug;
 
 if (!(vgm_persistence_registeredSchemas getOrDefault [_schema, false])) then {
     format ["Unknown schema for set: %1", _schema] call vgm_g_fnc_logError;

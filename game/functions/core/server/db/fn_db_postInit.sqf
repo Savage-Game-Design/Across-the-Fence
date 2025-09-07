@@ -2,7 +2,7 @@
     File: fn_display_postInit.sqf
     Author: Savage Game Design
     Date: 2024-03-24
-    Last Update: 2025-08-31
+    Last Update: 2025-09-07
     Public: No
 
     Description:
@@ -13,9 +13,11 @@ if (!isServer) exitWith {};
 
 call {
     if (
-        // TODO check if backend should be enabled
         isDedicated
-        || {profileNamespace getVariable ["vgm_forceBackend", false]}
+        && (
+            missionNamespace getVariable ["vgm_s_db_useBackend", false]
+            || {profileNamespace getVariable ["vgm_forceBackend", false]}
+        )
     ) then {
         [] call vgm_s_fnc_db_backend_init;
     } else {
