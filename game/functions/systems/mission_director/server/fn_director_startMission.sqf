@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-08-30
+    Last Update: 2025-09-07
     Public: Yes
 
     Description:
@@ -32,6 +32,9 @@ private _directorData = _mission getOrDefault ["director", createHashMap, true];
 
 // Overall "alertness" level of enemy forces. Changes scale of the enemy response.
 _directorData set ["alertness", 0];
+// Used to smooth out alertness
+_directorData set ["alertnessPeriodEnd", 0];
+_directorData set ["alertnessAddedThisPeriod", 0];
 // Virtual squads assigned to this mission
 _directorData set ["virtualSquads", createHashMap];
 // Spawned groups for each virtual squad. Helps with JIP and event handling.

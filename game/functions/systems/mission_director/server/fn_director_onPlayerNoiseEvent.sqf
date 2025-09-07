@@ -2,7 +2,7 @@
     File: fn_director_onPlayerNoiseEvent.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-08-30
+    Last Update: 2025-09-07
     Public: False
 
     Description:
@@ -36,20 +36,34 @@ params ["_pos", "_type", "_details", "_args"];
 
 _args params ["_missionId", "_directorData"];
 
-private _alertnessGain = 0;
+private _highestAlertnessThisEvent = 0;
 
 if (_type in ["player_explosion", "player_flare"]) then {
-    _alertnessGain = _alertnessGain + (vgm_s_director_noiseEventAlertness get _type);
+    _highestAlertnessThisEvent = _highestAlertnessThisEvent max (vgm_s_director_noiseEventAlertness get _type);
 };
 
 if (_type isEqualTo "player_gunshots_aggregate") then {
     if (_details getOrDefault ["unsuppressedShots", 0] > 0) exitWith {
-        _alertnessGain = _alertnessGain + (vgm_s_director_noiseEventAlertness get "unsuppressedShots");
+        _highestAlertnessThisEvent = _highestAlertnessThisEvent max (vgm_s_director_noiseEventAlertness get "unsuppressedShots");
     };
 
     if (_details getOrDefault ["suppressedShots", 0] > 0) exitWith {
-        _alertnessGain = _alertnessGain + (vgm_s_director_noiseEventAlertness get "suppressedShots");
+        _highestAlertnessThisEvent = _highestAlertnessThisEvent max (vgm_s_director_noiseEventAlertness get "suppressedShots");
     };
 };
 
-[_directorData, _alertnessGain] call vgm_s_fnc_director_addAlertness;
+private _alertnessPeriodEnd = _directorData get "alertnessPeriodEnd";
+private _alertnessAddedThisPeriod = _directorData get "alertnessAddedThisPeriod";
+
+if (_alertnessPeriodEnd < serverTime) exitWith {
+    [_directorData, _highestAlertnessThisEvent] call vgm_s_fnc_director_addAlertness;
+    _directorData set ["alertnessPeriodEnd", serverTime + vgm_s_director_alertness_period_secs];
+    _directorData set ["alertnessAddedThisPeriod", _highestAlertnessThisEvent];
+};
+
+// Still in an alertness aggregation period, increase alertness if something more dramatic happened.
+if (_alertnessAddedThisPeriod < _highestAlertnessThisEvent) then {
+    [_directorData, _highestAlertnessThisEvent - _alertnessAddedThisPeriod] call vgm_s_fnc_director_addAlertness;
+};
+
+
