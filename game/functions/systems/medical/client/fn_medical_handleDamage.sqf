@@ -85,27 +85,24 @@ if (
 
         // update the accumulation for next received damage
         private _hitsData = _unit getVariable "vgm_medical_accumulated";
-        private _hitPointDamages = _hitsData getOrDefault [_hitPoint, []];
-        _hitPointDamages pushBack _damage;
-        _hitsData set [_hitPoint, _hitPointDamages];
+        private _hitPointDamage = _hitsData getOrDefault [_hitPoint, 0];
+        _hitPointDamage = _hitPointDamage + _damage;
+        _hitsData set [_hitPoint, _hitPointDamage];
         _unit setVariable ["vgm_medical_accumulated", _hitsData];
 
-        private _accDamage = 0;
-        _hitPointDamages apply {_accDamage = _accDamage + _x};
-
         #ifdef DEBUG
-        format ["(%3) Current Accumulated damage: damage=%1 hitPoint=%2", _accDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+        format ["(%3) Current Accumulated damage: damage=%1 hitPoint=%2", _hitPointDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
         #endif
 
-        if (_accDamage > ACCUMULATOR_THRESHOLD_WOUND) exitWith {
+        if (_hitPointDamage > ACCUMULATOR_THRESHOLD_WOUND) exitWith {
             #ifdef DEBUG
-            format ["(%3) Accumulated damage passed threshold: damage=%1 hitpoint=%2", _accDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
+            format ["(%3) Accumulated damage passed threshold: damage=%1 hitpoint=%2", _hitPointDamage, _hitPoint, diag_frameNo] call vgm_g_fnc_logInfo;
             #endif
 
-            [_unit, _accDamage, _hitPoint, objNull, _projectile, false] call vgm_c_fnc_medical_receiveDamage;
+            [_unit, _hitPointDamage, _hitPoint, objNull, _projectile, false] call vgm_c_fnc_medical_receiveDamage;
 
             private _hitsData = _unit getVariable "vgm_medical_accumulated";
-            _hitsData set [_hitPoint, []];
+            _hitsData set [_hitPoint, 0];
             _unit setVariable ["vgm_medical_accumulated", _hitsData];
 
         };
