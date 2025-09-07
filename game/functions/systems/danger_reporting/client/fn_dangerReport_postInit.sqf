@@ -2,7 +2,7 @@
     File: fn_dangerReport_postInit.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2025-08-30
+    Last Update: 2025-09-07
     Public: Yes
 
     Description:
@@ -18,8 +18,8 @@
         N/A
  */
 
-vgm_c_dangerReport_suppressedShotsNotifyDistance = 100;
-vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 200;
+vgm_c_dangerReport_suppressedShotsNotifyDistance = 125;
+vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 250;
 
 vgm_c_dangerReport_explosion_minNotifyDistance = 75;
 vgm_c_dangerReport_explosion_maxNotifyDistance = 400;
