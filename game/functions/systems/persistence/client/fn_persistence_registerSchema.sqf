@@ -6,7 +6,8 @@
     Public: No
 
     Description:
-        No description added yet.
+        Registers a new type of persistence schema for the player, that's saved and loaded with other persistence data.
+        Must be called in preInit.
 
     Parameter(s):
         N/A
