@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-06-29
+    Last Update: 2025-08-30
     Public: Yes
 
     Description:
@@ -38,11 +38,16 @@ _directorData set ["virtualSquads", createHashMap];
 _directorData set ["virtualSquadGroups", createHashMap];
 // Tracks when the last tracker squad was sent at the players
 _directorData set ["lastTrackerSent", -9999];
-// Tracks reinforcement info
+
+// REINFORCEMENTS SYSTEM
+// Chance that a reinforcement check spawns reinforcements
 _directorData set ["reinforcementChance", 0.5];
-_directorData set ["reinforcementCheckFrequencySecs", 20];
+// How often the check runs after the start of an engagement - scales with alertness
+_directorData set ["reinforcementCheckFrequencyRangeSecs", [45, 10]];
+// Delay before more reinforcements can be sent - scales with alertness
+_directorData set ["minTimeBetweenReinforcementsRangeSecs", [240, 90]];
+// When reinforcements were last sent for each player
 _directorData set ["lastReinforcementSentPerPlayer", createHashMap];
-_directorData set ["minTimeBetweenReinforcementsSecs", 150];
 
 [_directorData] call vgm_s_fnc_director_setupEngagements;
 

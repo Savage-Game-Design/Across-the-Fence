@@ -2,7 +2,7 @@
     File: fn_skill_investigate_setDesaturation.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2025-01-06
+    Last Update: 2025-08-18
     Public: No
 
     Description:
@@ -20,6 +20,8 @@
 
 params [["_enable", true, [false]]];
 
+private _commitTime = vgm_c_skill_investigate_focusDelay * (player getVariable ["vgm_c_skill_investigate_investigateTimeCoef", 1]);
+
 if (_enable) exitWith {
     terminate (missionNamespace getVariable ["vgm_c_skill_investigate_ppDisableScript", scriptNull]);
 
@@ -35,7 +37,7 @@ if (_enable) exitWith {
         [0.699, 0.887, 0.314, 0]
     ];
 
-    vgm_c_skill_investigate_ppDesaturate ppEffectCommit 3;
+    vgm_c_skill_investigate_ppDesaturate ppEffectCommit _commitTime;
     vgm_c_skill_investigate_ppDesaturate ppEffectEnable true;
 };
 
@@ -48,7 +50,7 @@ vgm_c_skill_investigate_ppDesaturate ppEffectAdjust [
     [0.299, 0.587, 0.114, 0],
     [-1, -1, 0, 0, 0, 0, 0]
 ];
-vgm_c_skill_investigate_ppDesaturate ppEffectCommit 3;
+vgm_c_skill_investigate_ppDesaturate ppEffectCommit _commitTime;
 vgm_c_skill_investigate_ppDisableScript = [] spawn {
     waitUntil {ppEffectCommitted vgm_c_skill_investigate_ppDesaturate};
     vgm_c_skill_investigate_ppDesaturate ppEffectEnable false;

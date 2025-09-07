@@ -2,7 +2,7 @@
     File: fn_btree_decorator_fetchNearbyDangerReportAsInvestigationPoint.sqf
     Author: Savage Game Design
     Date: 2024-02-02
-    Last Update: 2025-05-14
+    Last Update: 2025-08-18
     Public: Yes
 
     Description:
@@ -49,7 +49,7 @@ _decorator set ["onTreeAssigned", {
     private _locEventHandlers = [
         _eventGroup,
         _group,
-        [ "player_explosion", "player_gunshots_aggregate", "player_flare" ],
+        [ "player_explosion", "player_gunshots_aggregate", "player_flare", "player_distraction" ],
         [ _group, _blackboard ],
         {
             params ["_pos", "_type", "_listener", "_eventData", "_args"];

@@ -1,12 +1,12 @@
 /*
-    File: fn_skill_passives_recon_keenEye.sqf
+    File: fn_skill_passives_senseOfScale.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2023-09-23
+    Last Update: 2025-08-23
     Public: No
 
     Description:
-        Adds logic for Recon Tier 2 Keen Eye skill.
+        Enables using the 'reveal target' key to discover distances when known.
 
     Parameter(s):
         _known - Is skill known [BOOL]
@@ -15,13 +15,13 @@
         Nothing
 
     Example(s):
-        true call vgm_c_fnc_skill_passives_recon_betterAim
+        true call vgm_c_fnc_skill_passives_senseOfScale
  */
 
 params ["_known"];
 
 if (!_known) exitWith {
-    removeUserActionEventHandler ["revealTarget", "Activate", vgm_c_skill_passives_recon_keenEyeEh];
+    removeUserActionEventHandler ["revealTarget", "Activate", vgm_c_skill_passives_senseOfScaleEh];
 };
 
 private _ehId = addUserActionEventHandler ["revealTarget", "Activate", {
@@ -45,7 +45,7 @@ private _ehId = addUserActionEventHandler ["revealTarget", "Activate", {
         _text = format ["%1m", round (_distance / 10) * 10];
     };
 
-    "vgm_skill_recon_keenEye" cutText [_text, "PLAIN DOWN"];
+    "vgm_skill_senseOfScale" cutText [_text, "PLAIN DOWN"];
 }];
 
-vgm_c_skill_passives_recon_keenEyeEh = _ehId;
+vgm_c_skill_passives_senseOfScaleEh = _ehId;

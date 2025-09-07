@@ -11,10 +11,14 @@
 
 if (!hasInterface) exitWith {};
 
-player call vgm_c_fnc_missions_gameplay_extraction_addAction;
+player call vgm_c_fnc_missions_gameplay_extraction_addAction_requestExtract;
+player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacNow;
+player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacAt;
 player addEventHandler ["Respawn", {
     params ["_player"];
-    _player call vgm_c_fnc_missions_gameplay_extraction_addAction;
+    _player call vgm_c_fnc_missions_gameplay_extraction_addAction_requestExtract;
+    _player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacNow;
+    _player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacAt;
 }];
 
 vgm_missions_gameplay_extraction_radioBackpacks = [

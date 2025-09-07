@@ -1,8 +1,38 @@
 import subprocess
 import sgd.file_utils
 from pathlib import Path
+from sys import platform
 
 from . import hemtt
+
+
+class UnixPathException(Exception):
+    r"""
+    Exception when a variable uses a unix `/` delimited path instead of
+    windows `\` delimited.
+    """
+    def __init__(self, path: Path):
+        self.path = path
+
+    def __str__(self):
+        return rf"Possible unix `/` path detected where an explicit windows `\` path required: path={self.path}"
+
+
+def validate_windows_path(path: Path):
+    r"""
+    Require a windows `\` delimited path in windows terminal environments.
+
+    GCC python defaults to `/` paths, while MSC python defaults to `\` paths.
+    Arma requires `\` delimited paths for CLI options like server config etc.
+    i.e. `DRIVE:\DIR\DIR\DIR\FILENAME.EXT`
+
+    Throws an error for an invalid path.
+    """
+    if "/" in str(path) and platform in ["win32", "cygwin"]:
+        raise UnixPathException(path)
+    else:
+        return path
+
 
 def find_mpmissions(search_start: Path) -> Path | None:
     def is_mpmissions(path: Path) -> bool:
@@ -48,24 +78,26 @@ def launch(arma_exe_path, mods=[], args=[], connect=False, editor_mission_path: 
     print(f"Launching Arma: {list(map(str, command))}")
 
     # start arma
-    subprocess.Popen(command)
+    return subprocess.Popen(command)
 
 def launch_server(mission_path: Path, arma_server_exe: Path, config: Path, servermod_path=None, mods=[], profile="vgm_server"):
     try_symlink_arma_server_mission_dir(mission_path, arma_server_exe)
 
-    server_config_path = setup_temporary_arma_server_config(config, mission_path.name)
+    server_config_path = validate_windows_path(
+        setup_temporary_arma_server_config(config, mission_path.name)
+    )
 
     if servermod_path:
-        hemtt.launch(
+        return hemtt.launch(
             servermod_path,
             arma_args=[
                 f"-name={profile}",
                 f"-config={server_config_path}"
             ]
         )
-        return
 
-    launch(
+
+    return launch(
         arma_exe_path=arma_server_exe,
         mods=mods,
         args=[

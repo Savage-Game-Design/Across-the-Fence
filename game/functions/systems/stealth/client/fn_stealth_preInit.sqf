@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-06-18
+    Last Update: 2025-08-24
     Public: No
 
     Description:
@@ -30,6 +30,18 @@ vgm_c_stealth_stanceLerp = createHashMapFromArray [
 ];
 
 /////////////////
+
+vgm_c_stealth_undetectable = false;
+["stealthUndetectable", {
+    params ["_unit", "_inEffect"];
+    vgm_c_stealth_undetectable = _inEffect;
+}] call vgm_c_fnc_statusEffect_create;
+
+["stealthSpotTimeMultiplier", {
+    params ["_unit", "_value"];
+    // Prevent spot time being less than 10% of actual value, so we don't get any weird maths errors from 0.
+    _unit setVariable ["vgm_stealth_spotTimeMultiplier", _value max 0.1];
+}] call vgm_c_fnc_coefficient_create;
 
 // Set a time when the player will become visible.
 // This is effectively a countdown timer.

@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-06-19
+    Last Update: 2025-08-30
     Public: No
 
     Description:
@@ -67,11 +67,36 @@ if (
     [_directorData, _x] call vgm_s_fnc_director_deleteEngagementIfEnded;
 } forEach values (_directorData get "playerEngagements");
 
+private _reinforcementCheckFrequencyRangeSecs = _directorData get "reinforcementCheckFrequencyRangeSecs";
+private _reinforcementCheckFrequencySecs = linearConversion [
+    0, vgm_s_director_max_alertness,
+    _alertness,
+    _reinforcementCheckFrequencyRangeSecs # 0, _reinforcementCheckFrequencyRangeSecs # 1,
+    true
+];
+
+private _minTimeBetweenReinforcementsRangeSecs = (_directorData get "minTimeBetweenReinforcementsRangeSecs");
+private _minTimeBetweenReinforcementsSecs = linearConversion [
+    0, vgm_s_director_max_alertness,
+    _alertness,
+    _minTimeBetweenReinforcementsRangeSecs # 0, _minTimeBetweenReinforcementsRangeSecs # 1,
+    true
+];
+
+if (count (_directorData get "playerEngagements") > 0) then {
+    [format [
+        "[Reinforcements - Mission: %1] Reinforcement checks running | Check frequency = %2 | Min time between reinforcements = %3 |",
+        _publicMission get "id",
+        _reinforcementCheckFrequencySecs,
+        _minTimeBetweenReinforcementsSecs
+    ]] call vgm_g_fnc_logDebug;
+};
+
 {
     private _engagement = _x;
     // Run the reinforcment check less often than the director ticks.
     // Importantly, this controls the initial reinforcment delay for new engagements!
-    private _checkedRecently = serverTime - (_engagement get "lastReinforcementCheck") < (_directorData get "reinforcementCheckFrequencySecs");
+    private _checkedRecently = serverTime - (_engagement get "lastReinforcementCheck") < _reinforcementCheckFrequencySecs;
     if (_checkedRecently) then {
         continue;
     };
@@ -80,7 +105,7 @@ if (
     private _engagementPlayerHash = _engagement get "playerHash";
     // Technically this always grows (nothing removes players from here), but shouldn't be a problem as directorData is deleted on mission end.
     private _lastReinforcementSent = _directorData get "lastReinforcementSentPerPlayer" getOrDefault [_engagementPlayerHash, -9999];
-    private _reinforcementsSentRecently = (serverTime - _lastReinforcementSent) < (_directorData get "minTimeBetweenReinforcementsSecs");
+    private _reinforcementsSentRecently = (serverTime - _lastReinforcementSent) < _minTimeBetweenReinforcementsSecs;
 
     // Avoid spamming players with squads, no matter what.
     if (_reinforcementsSentRecently) then {

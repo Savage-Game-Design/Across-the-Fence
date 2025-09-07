@@ -16,10 +16,16 @@ class vgm_skillTemplate {
     conditionShow = "true";
     conditionActivate = "true";
 
+    // Called when the skill is learned
     codeApply = "";
+    // Called when the skill is unlearned
     codeUnapply = "";
 
+    // Called when an ability is triggered
     codeActivate = "";
+    // Called when an ability has ended
+    codeDeactivate = "";
+    // Called when  an ability is unable to activate
     codeUnableToActivate = "";
 };
 
@@ -124,7 +130,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_SHOOT_AND_SCOOT_DESC";
                     column = 1;
 
-                    codeActivate = "(_this + ['aim', -1]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
+                    codeActivate = "[player, 'aim', 'skill_shootAndScoot', -1, true] call vgm_c_fnc_coefficient_set";
+                    codeDeactivate = "[player, 'aim', 'skill_shootAndScoot'] call vgm_c_fnc_coefficient_remove";
                     skillType = 1;
                     cost = 2;
                     cooldown = 150;
@@ -321,7 +328,6 @@ class vgm_skillTrees {
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
                     codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
-                    // TODO - Implementation
                     cost = 2;
                     applyOnRespawn = 1;
                 };
@@ -341,10 +347,10 @@ class vgm_skillTrees {
                 class ground_sign: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN";
                     description = "$STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'glintFrequency', 'skill_ground_sign', -0.3, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'glintFrequency', 'skill_ground_sign'] call vgm_c_fnc_coefficient_remove";
                     cost = 2;
                 };
 
@@ -371,10 +377,10 @@ class vgm_skillTrees {
                 class in_the_zone: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE";
                     description = "$STR_VGM_SKILLS_SKILL_IN_THE_ZONE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'investigateTimeCoef', 'skill_in_the_zone', -0.5, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'investigateTimeCoef', 'skill_in_the_zone'] call vgm_c_fnc_coefficient_remove";
                     cost = 2;
                 };
             };
@@ -383,35 +389,32 @@ class vgm_skillTrees {
                 class stones_throw: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STONES_THROW";
                     description = "$STR_VGM_SKILLS_SKILL_STONES_THROW_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "call vgm_c_fnc_skill_actives_stonesThrow";
                     skillType = 2;
                     cost = 4;
-                    cooldown = 300;
+                    cooldown = 60;
                 };
 
                 class keen_eye: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KEEN_EYE";
                     description = "$STR_VGM_SKILLS_SKILL_KEEN_EYE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "call vgm_c_fnc_skill_actives_keenEye";
                     skillType = 2;
                     cost = 4;
                     cooldown = 180;
-                    duration = 30;
                 };
 
                 class taking_notes: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES";
                     description = "$STR_VGM_SKILLS_SKILL_TAKING_NOTES_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_sites_hints_markHintsOnMap', true, true]";
+                    codeUnapply = "player setUnitTrait ['vgm_sites_hints_markHintsOnMap', false, true]";
                     cost = 4;
                 };
 
@@ -428,10 +431,10 @@ class vgm_skillTrees {
                 class sense_of_scale: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE";
                     description = "$STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "true call vgm_c_fnc_skill_passives_senseOfScale";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_senseOfScale";
                     cost = 4;
                 };
 
@@ -450,10 +453,10 @@ class vgm_skillTrees {
                 class one_of_them: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM";
                     description = "$STR_VGM_SKILLS_SKILL_ONE_OF_THEM_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "[true] call vgm_c_fnc_skill_actives_oneOfThem";
+                    codeDeactivate = "[false] call vgm_c_fnc_skill_actives_oneOfThem";
                     skillType = 2;
                     cost = 6;
                     cooldown = 600;
@@ -463,10 +466,9 @@ class vgm_skillTrees {
                 class deep_focus: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS";
                     description = "$STR_VGM_SKILLS_SKILL_DEEP_FOCUS_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "(_this + ['investigateRangeMultiplier', +1]) call vgm_c_fnc_skill_actives_setCoefficientForDuration";
                     skillType = 2;
                     cost = 6;
                     cooldown = 30;
@@ -486,20 +488,20 @@ class vgm_skillTrees {
                 class friend_or_foe: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE";
                     description = "$STR_VGM_SKILLS_SKILL_FRIEND_OR_FOE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "true call vgm_c_fnc_skill_passives_friendOrFoe";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_friendOrFoe";
                     cost = 6;
                 };
 
                 class clear_lens: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS";
                     description = "$STR_VGM_SKILLS_SKILL_CLEAR_LENS_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'scoutingPhotoRangeBonus', 'skill_passives_clearLens', +100, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'scoutingPhotoRangeBonus', 'skill_passives_clearLens'] call vgm_c_fnc_coefficient_remove";
                     cost = 6;
                 };
             };
@@ -508,10 +510,10 @@ class vgm_skillTrees {
                 class tactical_sense: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE";
                     description = "$STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivate = "[true] call vgm_c_fnc_skill_actives_tacticalSense";
+                    codeDeactivate = "[false] call vgm_c_fnc_skill_actives_tacticalSense";
                     skillType = 2;
                     cost = 8;
                     cooldown = 360;
@@ -521,10 +523,10 @@ class vgm_skillTrees {
                 class on_the_prowl: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL";
                     description = "$STR_VGM_SKILLS_SKILL_ON_THE_PROWL_DESC";
-                    conditionUnlock[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivate = "player setUnitTrait ['vgm_skill_investigate_canMoveFreely', true, true]";
+                    codeDeactivate = "player setUnitTrait ['vgm_skill_investigate_canMoveFreely', false, true]";
                     skillType = 2;
                     cost = 8;
                     cooldown = 460;
@@ -1612,21 +1614,6 @@ class vgm_skillTrees {
             class tier_0 {};
 
             class tier_1 {
-                class keenEye: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_KEEN_EYE_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_recon_keenEye";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_recon_keenEye";
-                };
-
-                class detective: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_RECON_DETECTIVE";
-                    description = "$STR_VGM_SKILLS_SKILL_RECON_DETECTIVE_DESC";
-
-                    codeApply = "[player, 'glintFrequency', 'skill_recon_detective', -0.3, true] call vgm_c_fnc_coefficient_set";
-                    codeUnapply = "[player, 'glintFrequency', 'skill_recon_detective'] call vgm_c_fnc_coefficient_remove";
-                };
             };
 
             class tier_2 {
