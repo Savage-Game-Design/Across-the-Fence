@@ -26,7 +26,6 @@ private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
 
 if (isNil "_currentMission") exitWith {};
 
-openMap [true, false];
 // zoom map on the mission area if a mission is assigned
 vgm_missions_zoomOnMapScript = (_currentMission get "targetZone") spawn {
     [_this] call vgm_g_fnc_loc_getTargetBoxBounds params ["_pos", "_size"];
