@@ -986,7 +986,7 @@
             <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Tail</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_TAIL_DESC">
-            <Original>Gain advanced training as a tailgunner.\nYou can only have one advanced training.\nUnlocks the toolkit and trapkit to detect and disarm traps. Unlocs standard claymores.\nReduced skill costs in the tail tree.</Original>
+            <Original>Gain advanced training as a tailgunner.\nYou can only have one advanced training.\nUnlocks the toolkit and trapkit to detect and disarm traps. Unlocks standard claymores.\nReduced skill costs in the tail tree.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SLAM">
             <Original>SLAM</Original>
