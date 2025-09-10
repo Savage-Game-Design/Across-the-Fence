@@ -1,4 +1,7 @@
 displayName = "Medical system"
+
+# TODO: Fix arguments showing `anyanyany` for `{2}` (H keybind) and `{3}` (Shift + H keybind)
+
 description = """
 [h]{1}[/h] introduces simple yet impactful medical system featuring:
 - Increased player durability
@@ -8,8 +11,8 @@ description = """
 <t size="1.25">Medical menu</t>
 [h]Medical menu[/h] allows treatment of the injuries suffered by player characters.
 To treat an injury you need to select an injured body part from the character [h]silhouette[/h] and apply [h]medication[/h] on it.
-Press [h]"[/h]{2}[h]"[/h] to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.
-Alternatively press [h]"[/h]{3}[h]"[/h] to open the medical menu of your character.
+Press [h]H[/h] to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.
+Alternatively press [h]Shift + H[/h] to open the medical menu of your character.
 
 <t size="1.1">Medication</t>
 Available medication items:
