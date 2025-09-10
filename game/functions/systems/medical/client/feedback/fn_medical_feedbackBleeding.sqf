@@ -3,7 +3,7 @@
     File: fn_medical_feedbackBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-15
-    Last Update: 2023-07-24
+    Last Update: 2025-09-10
     Public: No
 
     Description:
@@ -39,9 +39,9 @@ if (_remainingTime < 0) exitWith {
 };
 
 // set intensity of the overlay based on remaining bleed out time
-_texLower ctrlSetFade (linearConversion [BLEED_OUT_TIME, 0, _remainingTime, 0.6, 0, true]);
-_texMiddle ctrlSetFade (linearConversion [BLEED_OUT_TIME, 0, _remainingTime, 1, 0, true]);
-_texUpper ctrlSetFade (linearConversion [BLEED_OUT_TIME, 0, _remainingTime, 1, 0.45, true]);
+_texLower ctrlSetFade (linearConversion [BLEED_OUT_TIME, 10, _remainingTime, 0.6, 0, true]);
+_texMiddle ctrlSetFade (linearConversion [BLEED_OUT_TIME, 10, _remainingTime, 1, 0, true]);
+_texUpper ctrlSetFade (linearConversion [BLEED_OUT_TIME, 10, _remainingTime, 1, 0.45, true]);
 
 _texLower ctrlCommit 0;
 _texMiddle ctrlCommit 0;
