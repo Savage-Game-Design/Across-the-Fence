@@ -40,7 +40,7 @@ private _mission = createHashMapFromArray [
         ["id", _newMissionId],
         ["creator", _creatorId],
         ["status", "CREATED"],
-        ["maxPlayers", 6],
+        ["maxPlayers", vgm_s_max_team_size],
         // Each player on the mission should have a netmap in here for storing player data
         ["players", [] call para_s_fnc_netmap_createNetmap],
         // Whether or not players can join the mission. Players can join if no values are "false"
@@ -80,7 +80,7 @@ private _missionsPublicInfo = ["vgm_missions_publicMissionInfo"] call para_g_fnc
     [_missionPublic get "id"]
 ] call para_g_fnc_event_triggerGlobal;
 
-if !(_creatorId isEqualTo "") then {
+if (_creatorId isNotEqualTo "") then {
     [_creatorId, _mission] call vgm_s_fnc_missions_attachPlayerToMission;
     private _creatorMachineId = (getUserInfo _creatorId) # 1;
     [

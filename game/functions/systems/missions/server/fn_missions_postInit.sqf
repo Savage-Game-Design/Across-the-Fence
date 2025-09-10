@@ -11,6 +11,8 @@
 
 if (!isServer) exitWith {};
 
+vgm_s_max_team_size = ["missions_maxTeamSize", 6] call BIS_fnc_getParamValue;
+
 // This is assumed to be static at startup.
 vgm_missions_zones_targetBoxes = [] call vgm_s_fnc_loc_getTargetBoxIds;
 // This is a temporary fix, that disables several un-populated target boxes.
