@@ -19,7 +19,7 @@
  */
 
 if (isNil "vgm_g_dbBackendType") exitWith {
-    ["Unable to run dbCommit, backend type is not initialized (no dbBackendType set)"] call vgm_g_fnc_logWarn;
+    ["Unable to run dbCommit, backend type is not initialized (no dbBackendType set)"] call vgm_g_fnc_logWarning;
 };
 
 if (vgm_g_dbBackendType == "profile") exitWith {
