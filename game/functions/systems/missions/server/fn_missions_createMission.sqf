@@ -40,7 +40,7 @@ private _mission = createHashMapFromArray [
         ["id", _newMissionId],
         ["creator", _creatorId],
         ["status", "CREATED"],
-        ["maxPlayers", 6],
+        ["maxPlayers", vgm_s_max_team_size],
         // Each player on the mission should have a netmap in here for storing player data
         ["players", [] call para_s_fnc_netmap_createNetmap],
         // Whether or not players can join the mission. Players can join if no values are "false"
