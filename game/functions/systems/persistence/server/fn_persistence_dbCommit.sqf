@@ -2,7 +2,7 @@
     File: fn_persistence_dbSave.sqf
     Author: Savage Game Design
     Date: 2025-08-29
-    Last Update: 2025-08-31
+    Last Update: 2025-09-10
     Public: No
 
     Description:
@@ -17,6 +17,10 @@
     Example(s):
         [] call vgm_s_fnc_persistence_dbCommit
  */
+
+if (isNil "vgm_g_dbBackendType") exitWith {
+    ["Unable to run dbCommit, backend type is not initialized (no dbBackendType set)"] call vgm_g_fnc_logWarn;
+};
 
 if (vgm_g_dbBackendType == "profile") exitWith {
     [] call vgm_s_fnc_db_persist;
