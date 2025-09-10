@@ -4,7 +4,6 @@ class vgm_welcome {
     class welcome {
         displayName = "$STR_VGM_FIELD_MANUAL_WELCOME";
         description = "$STR_VGM_FIELD_MANUAL_WELCOME_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_WELCOME_TIP";
         image = "assets\atf_logo.paa";
         arguments[] = 
             {

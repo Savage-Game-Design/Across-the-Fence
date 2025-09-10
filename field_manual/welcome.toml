@@ -1,31 +1,45 @@
 displayName = "Welcome"
 
 description = """
-Welcome to the [h]Alpha[/h] version of [h]{1}[/h]!
+Welcome to the [h]beta[/h] version of [h]{1}[/h], a dynamic recon experience for individuals and teams of up to 6 players.
 
-As a Patreon subscriber, you've got exclusive access the early versions of the gamemode, \
-and the ability to influence its ongoing development.
+Inspired by the namesake book from RT Idaho One-Zero and SOG Prairie Fire adviser John “Tilt” Stryker Meyer, in [h]{1}[/h] \
+you'll explore hostile NVA territory to investigate and locate enemy sites, before you try to extract safely and prepare for \
+the next mission.
+
+As you gain experience fighting the NVA, you'll develop your skills and abilities while gaining access to new weapons and equipment.
 
 Before playing, [h]it's strongly recommended you read 'Getting started'[/h] in the field manual.
 
-As we progress from Alpha onwards to a full release, we'd love to hear your feedback in Discord, \
-and for you to join the development team as we test and experiment with new features.
+The mission is currently in [h]open beta[/h] and not fully complete, with both bugs and unreleased features.
 
-The initial [h]Alpha[/h] version of [h]{1}[/h] has most of the gamemode's core mission gameplay in place, \
-but other aspects of the gamemode are still in development, including:
-- Non-recon mission types
-- A persistent campaign
-- Additional points of interest to interact with and explore while on missions
-- Many quality of life features (e.g a shooting range)
+However, based on the feedback from our Patrons and regular playtesters, we feel it's ready to share with the community, \
+to get your feedback and give you the opportunity to enjoy what we've developed so far.
 
-[h]{1}[/h] is currently designed for 1 to 6 players on a mission, with up to 4 simultaneous missions running on (a sufficiently powerful) server.
-Please try playing solo, duo and in larger groups, so we build a gamemode everyone can enjoy!
+As we progress from onwards to a full release, we'd love for you to [h]share your thoughts in Discord[/h], and help us \
+collaboratively develop the game mode.
+
+The [h]beta[/h] version of [h]{1}[/h] has most of the game mode's core mission gameplay in place, \
+but other aspects of the game mode are still in development. Our immediate feature roadmap includes:
+- Releasing the Team Leader, Medic, RTO and Tail skill trees
+- Adding a new RTO system better suited to the game
+- Expanding points of interest with new interactions
+- Many quality of life improvements (e.g. improved mission UIs)
+
+[h]{1}[/h] is currently designed for 1 to 6 players per mission, with up to 4 simultaneous missions running on a server.
+Please try playing solo, duo and in larger groups, so we can build a game mode everyone can enjoy!
 
 Thanks for reading, and enjoy the game!
-> The [h]{1}[/h] development team.
+> The team at Savage Game Design
+
+[h]Important links:[/h]
+- <a href="https://link.sogpf.com/discord">Discord</a>
+- <a href="https://link.sogpf.com/atf-guide">Online guide</a>
+- <a href="https://link.sogpf.com/atf-steam">{1} on the Steam Workshop</a>
+- <a href="https://link.sogpf.com/atf-source">Source code</a>
 """
 
-tip = "Thanks for helping us preserve S.O.G history through your Patreon support!"
+tip = ""
 
 arguments = ["localize 'STR_VGM_MISSION_NAME'"]
 

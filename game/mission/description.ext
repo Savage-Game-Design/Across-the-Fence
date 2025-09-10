@@ -128,6 +128,20 @@ class CfgDebriefing
 //Show melee weapons in the arsenal
 vn_arsenalShowMelee = 1;
 
+//-----------------------------------------------------------------
+//  Allow links to Savage websites
+//-----------------------------------------------------------------
+class CfgCommands
+{
+	// a list of URIs supported by HTMLLoad
+	// note that in case of clients connected to dedicated server, restrictions defined in its config have priority.
+	allowedHTMLLoadURIs[] +=
+	{
+		"link.sogpf.com/*",
+        "*.savage-game.com",
+        "*.sogpf.com"
+	};
+};
 
 //-----------------------------------------------------------------
 //  MAP SPECIFIC CONFIG
