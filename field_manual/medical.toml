@@ -20,11 +20,12 @@ Available medication items:
 - Medikit - Heals single wound level, infinite uses, can be used by players with "{4}" skill from the [h]Support[/h] tree
 
 <t size="1.1">Debuffs</t>
-Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts:
-- Head - TODO
-- Torso - TODO
-- Arms
-- Legs - TODO
+Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts.
+Here are some example debuffs:
+- Head - increasingly blurred vision
+- Torso - reduced stamina
+- Arms - reduced accuracy and recoil control
+- Legs - reduced movement speed
 Multiple untreaded wounds will cause [h]bleeding[/h] which if not stopped will cause the character to fall [h]unconscious[/h].
 
 <t size="1.1">Unconsciousnes</t>
