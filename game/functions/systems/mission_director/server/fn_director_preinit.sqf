@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-09-07
+    Last Update: 2025-09-10
     Public: No
 
     Description:
@@ -122,7 +122,7 @@ vgm_s_director_attack_classes = [
         if (!_state) exitWith {};
 
         if !([getPlayerID _unit] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {
-            [format ["%1 - Failed remoteExecOwner check", _logPrefix]] call vgm_g_fnc_logWarn;
+            [format ["%1 - Failed remoteExecOwner check", _logPrefix]] call vgm_g_fnc_logWarning;
         };
 
         private _mission = [_playerId] call vgm_s_fnc_missions_getAssignedMission;

@@ -4,7 +4,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2025-06-25
+    Last Update: 2025-09-10
     Public: No
 
     Description:
@@ -42,7 +42,7 @@ vgm_c_skills_active_slots = createHashMapFromArray [
     vgm_c_skills_active_list set [_path, _skill];
 
     private _slotNames = ["ability1", "ability2"];
-    private _slotIndex = _slotNames findIf { vgm_c_skills_active_slots get _x get "skill" isNotEqualTo createHashMap };
+    private _slotIndex = _slotNames findIf { vgm_c_skills_active_slots get _x get "skill" isEqualTo createHashMap };
     if (_slotIndex < 0) exitWith {};
     [_slotNames # _slotIndex, _skill] call vgm_c_fnc_skills_active_assignSkillToSlot;
 
