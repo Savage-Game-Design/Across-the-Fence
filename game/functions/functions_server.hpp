@@ -38,6 +38,9 @@ class vgm_s
         class db_postInit {
             postInit = 1;
         };
+        class db_preInit {
+            preInit = 1;
+        };
         class db_save {};
         class db_typed_save {};
     };
