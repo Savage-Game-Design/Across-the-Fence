@@ -1,3 +1,13 @@
+# Across the Fence - Arma 3 Mission and Mod
+<a rel="license" href="https://www.bohemia.net/community/licenses/arma-public-license-share-alike" target="_blank" ><img src="https://data.bistudio.com/images/license/APL-SA.png" ><br>This work is licensed under the Public License Share Alike</a>
+
+Across the Fence, a dynamic recon experience for individuals and teams of up to 6 players.
+
+Inspired by the namesake book from RT Idaho One-Zero and SOG Prairie Fire adviser John “Tilt” Stryker Meyer, in Across the Fence you'll explore hostile NVA territory to investigate and locate enemy sites, before you try to extract safely and prepare for the next mission.
+
+As you gain experience fighting the NVA, you'll develop your skills and abilities while gaining access to new weapons and equipment.
+
+
 ## Building
 
 ### Overview
