@@ -2,7 +2,7 @@
     File: fn_persistence_preInit.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-31
+    Last Update: 2025-09-11
     Public: No
 
     Description:
@@ -30,4 +30,8 @@ vgm_persistence_dirtySchemas = createHashMap;
     ["vgm_mission_ended", {
         [] call vgm_s_fnc_persistence_dbCommit
     }] call para_g_fnc_event_subscribeServer;
+
+    addMissionEventHandler ["HandleDisconnect", {
+        [] call vgm_s_fnc_persistence_dbCommit;
+    }];
 };
