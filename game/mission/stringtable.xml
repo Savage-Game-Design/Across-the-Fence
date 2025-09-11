@@ -1588,5 +1588,8 @@
         <Key ID="STR_VGM_PARAMS_MAX_TEAM_SIZE">
             <Original>Maximum number of players that can join a mission</Original>
         </Key>
+        <Key ID="STR_VGM_PARAMS_ENABLE_LEVEL_SKIP">
+            <Original>Enables an object near the TOC allowing players to skip to level 5</Original>
+        </Key>
     </Package>
 </Project>
