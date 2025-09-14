@@ -160,9 +160,7 @@ dlcs[]=
 randomSeed=9932433;
 class ScenarioData
 {
-	author="SPOFFY";
-	disabledAI=1;
-	wreckRemovalMaxTime=3600;
+	author="Spoffy";
 };
 class CustomAttributes
 {
@@ -200,6 +198,7 @@ class Mission
 {
 	class Intel
 	{
+		briefingName="Across the Fence (#VERSION#)";
 		timeOfChanges=1800.0002;
 		startWeather=0.2;
 		startWind=0.1;

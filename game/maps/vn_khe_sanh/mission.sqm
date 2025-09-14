@@ -113,7 +113,7 @@ dlcs[]=
 randomSeed=14227568;
 class ScenarioData
 {
-	author="Spoffy";
+	author="Savage Game Design";
 };
 class CustomAttributes
 {
@@ -140,6 +140,7 @@ class Mission
 {
 	class Intel
 	{
+		briefingName="Across the Fence (#VERSION#)";
 		timeOfChanges=1800.0002;
 		startWeather=0.25;
 		startWind=0.1;

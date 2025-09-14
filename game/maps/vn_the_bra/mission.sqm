@@ -169,13 +169,13 @@ dlcs[]=
 randomSeed=13386037;
 class ScenarioData
 {
-	author="Spoffy";
+	author="Savage Game Design";
 };
 class Mission
 {
 	class Intel
 	{
-		briefingName="ACROSS THE FENCE, THE BRA";
+		briefingName="Across the Fence (#VERSION#)";
 		timeOfChanges=1800.0002;
 		startWeather=0.2;
 		startWind=0.1;
