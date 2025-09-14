@@ -69,6 +69,8 @@ def build(source_path, paradigm_path, params: BuildParams):
     gamemode = generate_file_trees(source_path, paradigm_path, params.mapping_params)
 
     for mission in gamemode.missions:
+        if mission.map == "khe_sanh":
+            continue
         create_mission_in(mission, output_paths[BuildArtifact.MISSION], overwrite, clean)
 
     if gamemode.client_mod:
