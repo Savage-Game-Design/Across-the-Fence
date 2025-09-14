@@ -52,7 +52,7 @@ def function_folders(source_root: Path):
     return (folder_path for folder_path in (source_root / "functions").iterdir() if folder_path.is_dir())
 
 def get_missions(source_root: Path) -> list[Mission]:
-    maps = [entry.name for entry in (source_root / "game" / "maps").iterdir()]
+    maps = [entry.name for entry in (source_root / "game" / "maps").iterdir() if entry.is_dir()]
     return [
         Mission(name="vgm", map=map_name)
         for map_name in maps
@@ -96,13 +96,12 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, params: Generate
     replace_version = lambda file: replace_text(file, "#VERSION#", version_str)
 
     missions = get_missions(source_root)
-    mission = missions[0]
 
     client_mod = Mod()
     server_mod = Mod()
 
     gamemode = Gamemode(
-        missions=[mission],
+        missions=missions,
         client_mod=client_mod,
         server_mod=server_mod
     )
@@ -111,39 +110,43 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, params: Generate
     copy(client_mod.files, mod_root / "client", "")
     copy(server_mod.files, mod_root / "server", "")
 
-    mission_tree = mission.files
     # >> syntax gets a subfolder, or creates it if it doesn't exist.
     client_tree = client_mod.files >> "addons" >> "client"
     server_tree = server_mod.files >> "addons" >> "server"
 
-    generate_file(mission_tree, "script_version.hpp", generate_script_version_hpp(version))
     generate_file(client_tree, "script_version.hpp", generate_script_version_hpp(version))
     generate_file(server_tree, "script_version.hpp", generate_script_version_hpp(version))
 
-    # Maps all files from "mission" folder to the mission PBO - they should always be included.
-    copy(mission_tree, game_root / "mission", "")
-    # TODO: Clean this. This remove then generate is pretty ugly, but it works for now.
-    remove(mission_tree, "stringtable.xml")
-    generate_file(mission_tree, "stringtable.xml", replace_version(game_root / "mission" / "stringtable.xml"))
+    for mission in missions:
+        mission_tree = mission.files
+        generate_file(mission_tree, "script_version.hpp", generate_script_version_hpp(version))
+        # Maps all files from "mission" folder to the mission PBO - they should always be included.
+        copy(mission_tree, game_root / "mission", "")
+        # TODO: Clean this. This remove then generate is pretty ugly, but it works for now.
+        remove(mission_tree, "stringtable.xml")
+        generate_file(mission_tree, "stringtable.xml", replace_version(game_root / "mission" / "stringtable.xml"))
 
 
     # Maps all functions to their appropriate PBO, depending on the build target.
     for function_folder in function_folders(game_root):
         if as_mod:
-            copy(mission_tree, function_folder, Path("functions") / function_folder.name, OMIT_SERVER)
+            for mission in missions:
+                copy(mission.files, function_folder, Path("functions") / function_folder.name, OMIT_SERVER)
             copy(server_tree, function_folder, Path("functions") / function_folder.name, OMIT_CLIENT | OMIT_GLOBAL)
         else:
-            copy(mission_tree, function_folder, Path("functions") / function_folder.name)
+            for mission in missions:
+                copy(mission.files, function_folder, Path("functions") / function_folder.name)
 
     # Prepare CfgFunctions for the mission PBO
-    remove(mission_tree, "built_functions.hpp")
-    if as_mod:
-        copy(mission_tree, game_root / "functions" / "functions_client.hpp", "configs/built_functions.hpp",)
-    else:
-        generate_file(mission_tree, "configs/built_functions.hpp", concatenate_files([
-            game_root / "functions" / "functions_client.hpp",
-            game_root / "functions" / "functions_server.hpp"
-        ]))
+    for mission in missions:
+        remove(mission.files, "built_functions.hpp")
+        if as_mod:
+            copy(mission.files, game_root / "functions" / "functions_client.hpp", "configs/built_functions.hpp",)
+        else:
+            generate_file(mission.files, "configs/built_functions.hpp", concatenate_files([
+                game_root / "functions" / "functions_client.hpp",
+                game_root / "functions" / "functions_server.hpp"
+            ]))
 
     # Prepare CfgFunctions for the server PBO
     server_functions_file_name = "built_functions.hpp"
@@ -152,22 +155,22 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, params: Generate
     else:
         generate_file(server_tree, server_functions_file_name, from_text(""))
 
-    # Maps the map-specific config and mission.sqm to the mission PBO
-    map_path = game_root / "maps" / "cam_lao_nam"
-    copy(mission_tree, map_path, "")
-    # TODO: Clean this. This remove then generate is pretty ugly, but it works for now.
-    remove(mission_tree, "mission.sqm")
-    generate_file(mission_tree, "mission.sqm", replace_version(map_path / "mission.sqm"))
+    for mission in missions:
+        # Maps the map-specific config and mission.sqm to the mission PBO
+        map_src_path = game_root / "maps" / mission.map
+        copy(mission.files, map_src_path, "")
+        # TODO: Clean this. This remove then generate is pretty ugly, but it works for now.
+        remove(mission.files, "mission.sqm")
+        generate_file(mission.files, "mission.sqm", replace_version(map_src_path / "mission.sqm"))
 
-
-    # Maps any mission-specific config to the mission PBO
-    copy(mission_tree, game_root / "configs" / "mission", "configs")
-    remove(mission_tree, "configs/built_config.hpp")
-    copy(
-        mission_tree,
-        game_root / "configs" / "config_mission.hpp",
-        Path("configs/built_config.hpp")
-    )
+        # Maps any mission-specific config to the mission PBO
+        copy(mission.files, game_root / "configs" / "mission", "configs")
+        remove(mission.files, "configs/built_config.hpp")
+        copy(
+            mission.files,
+            game_root / "configs" / "config_mission.hpp",
+            Path("configs/built_config.hpp")
+        )
 
     # Maps any client config to the client PBO
     copy(client_tree, game_root / "configs" / "client", "")
@@ -185,17 +188,19 @@ def generate_file_trees(source_root: Path, paradigm_path: Path, params: Generate
             "common_includes.hpp"
         )
 
-    remove(mission_tree, "common_includes.hpp")
-    copy_common_includes(mission_tree)
+    for mission in missions:
+        remove(mission.files, "common_includes.hpp")
+        copy_common_includes(mission.files)
     copy_common_includes(client_tree)
     copy_common_includes(server_tree)
 
     # Copy paradigm
-    copy(
-        mission_tree,
-        paradigm_path,
-        "paradigm"
-    )
+    for mission in missions:
+        copy(
+            mission.files,
+            paradigm_path,
+            "paradigm"
+        )
 
     return gamemode
 

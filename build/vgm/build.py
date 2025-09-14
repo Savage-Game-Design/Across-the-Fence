@@ -4,7 +4,6 @@ from enum import Enum, auto
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict
-from xmlrpc.client import Boolean
 
 from sgd.file_tree import Folder
 
@@ -69,16 +68,14 @@ def build(source_path, paradigm_path, params: BuildParams):
 
     gamemode = generate_file_trees(source_path, paradigm_path, params.mapping_params)
 
+    for mission in gamemode.missions:
+        create_mission_in(mission, output_paths[BuildArtifact.MISSION], overwrite, clean)
+
     if gamemode.client_mod:
         create_mod(gamemode.client_mod, output_paths[BuildArtifact.CLIENT_MOD], overwrite, clean)
 
     if gamemode.server_mod:
         create_mod(gamemode.server_mod, output_paths[BuildArtifact.SERVER_MOD], overwrite, clean)
-
-    for mission in gamemode.missions:
-        create_mission_in(mission, output_paths[BuildArtifact.MISSION], overwrite, clean)
-        # Only supports one mission right now in the config
-        break
 
 class PackType(Enum):
     Dev = auto()
