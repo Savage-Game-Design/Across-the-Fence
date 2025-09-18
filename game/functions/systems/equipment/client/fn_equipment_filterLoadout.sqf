@@ -2,7 +2,7 @@
     File: fn_equipment_filterLoadout.sqf
     Author: Savage Game Design
     Date: 2023-11-17
-    Last Update: 2025-07-03
+    Last Update: 2025-09-18
     Public: Yes
 
     Description:
@@ -24,12 +24,12 @@ private _allowedItems = createHashMapFromArray [["", nil]];
 
     private _equipmentCfg = _x;
     {
-        private _items = getArray (_equipmentCfg >> _x);
+        private _items = getArray (_equipmentCfg >> _x) apply {toLower _x};
         _allowedItems insert [true, _items, []];
     } forEach ["weapons", "magazines", "backpacks", "items"];
 
     // Add the base weapons to the allowed list. Necessary as the arsenal gives players base weapons, not `_sd` variants, etc.
-    private _baseWeapons = getArray (_equipmentCfg >> "weapons") apply {[_x] call BIS_fnc_baseWeapon};
+    private _baseWeapons = getArray (_equipmentCfg >> "weapons") apply {toLower ([_x] call BIS_fnc_baseWeapon)};
     _allowedItems insert [true, _baseWeapons, []];
 } forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
 
