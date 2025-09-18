@@ -39,7 +39,7 @@ private _fnc_filterWeapon = {
     params ["_weaponData"];
     {
         private _className = _x param [0, ""];
-        if (!(_className in _allowedItems)) then {
+        if (!(toLower _className in _allowedItems)) then {
             private _replacement = ["", []] select (_x isEqualType []);
             _weaponData set [_forEachIndex, _replacement];
             _removedItems set [_className, []];
@@ -50,7 +50,7 @@ private _fnc_filterWeapon = {
 private _fnc_filterContainer = {
     params [["_container", ""], ["_items", []]];
 
-    if (!(_container in _allowedItems)) exitWith {
+    if (!(toLower _container in _allowedItems)) exitWith {
         // remove the container from parent array
         _this resize 0;
     };
@@ -73,7 +73,7 @@ private _fnc_filterContainer = {
         };
 
         private _itemClass = _x select 0;
-        if (!(_itemClass in _allowedItems)) then {
+        if (!(toLower _itemClass in _allowedItems)) then {
             _items set [_forEachIndex, []];
             _removedItems set [_itemClass, []];
         };
@@ -110,7 +110,7 @@ _loadout = +_loadout;
 // items
 {
     private _itemClass = _loadout select _x;
-    if (!(_itemClass in _allowedItems)) then {
+    if (!(toLower _itemClass in _allowedItems)) then {
         _loadout set [_x, ""];
         _removedItems set [_itemClass, []];
     };
@@ -118,7 +118,7 @@ _loadout = +_loadout;
 
 private _assignedItems = _loadout select IDX_ASSIGNED_ITEMS;
 {
-    if (!(_x in _allowedItems)) then {
+    if (!(toLower _x in _allowedItems)) then {
         _assignedItems set [_forEachIndex, ""];
         _removedItems set [_x, []];
     };
