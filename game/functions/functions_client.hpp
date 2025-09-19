@@ -16,6 +16,9 @@ class vgm_g
 
         class enemySides {};
         class execNextFrame {};
+        class fastSum {
+            headerType = -1;
+        };
         class itemConfig {};
         class itemType {};
         class manWouldCollideAtPosition {};
