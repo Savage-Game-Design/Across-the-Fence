@@ -2,7 +2,7 @@
     File: fn_director_onPlayerNoiseEvent.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-09-07
+    Last Update: 2025-09-19
     Public: False
 
     Description:
@@ -38,8 +38,21 @@ _args params ["_missionId", "_directorData"];
 
 private _highestAlertnessThisEvent = 0;
 
-if (_type in ["player_explosion", "player_flare"]) then {
+if (_type isEqualTo "player_flare") then {
     _highestAlertnessThisEvent = _highestAlertnessThisEvent max (vgm_s_director_noiseEventAlertness get _type);
+};
+
+if (_type isEqualTo "player_explosion") then {
+    _details params ["_projectileConfig"];
+    private _projectileInfo = [_projectileConfig] call vgm_g_fnc_dangerReport_getProjectileInfo;
+    private _explosionAlertnessValueRange = vgm_s_director_noiseEventAlertness get "player_explosion";
+    _highestAlertnessThisEvent = _highestAlertnessThisEvent max (linearConversion [
+       0,
+       1,
+       _projectileInfo get "explosivePower",
+       _explosionAlertnessValueRange # 0,
+       _explosionAlertnessValueRange # 1
+    ]);
 };
 
 if (_type isEqualTo "player_gunshots_aggregate") then {

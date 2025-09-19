@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-09-10
+    Last Update: 2025-09-19
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ vgm_s_director_max_time_between_trackers_secs = 600;
 vgm_s_director_dynamic_max_groups = 8;
 // Every alertness period will add a fixed amount of alertness based on the most significant event to happen.
 vgm_s_director_noiseEventAlertness = createHashMapFromArray [
-    ["player_explosion", 3],
+    ["player_explosion", [0, 3]],
     ["player_flare", 5],
     ["unsuppressedShots", 1.5],
     ["suppressedShots", 0.75]
