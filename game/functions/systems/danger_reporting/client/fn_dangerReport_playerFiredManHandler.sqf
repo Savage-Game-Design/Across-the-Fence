@@ -2,7 +2,7 @@
     File: fn_dangerReport_playerFiredManHandler.sqf
     Author: Savage Game Design
     Date: 2024-03-02
-    Last Update: 2025-09-07
+    Last Update: 2025-09-19
     Public: No
 
     Description:
@@ -39,12 +39,12 @@ _projectile addEventHandler ["Explode", {
 
     // Explosives
     if ((_projectileInfo get "indirectHit") > 0) exitWith {
-        // TODO: This isn't ideal, but works well enough for alpha/beta.
         private _notifyRadius = linearConversion [
-            1, 20,
-            (_projectileInfo get "indirectHitRadius"),
-            vgm_c_dangerReport_explosion_minNotifyDistance, vgm_c_dangerReport_explosion_maxNotifyDistance,
-            true
+            0,
+            1,
+            _projectileInfo get "explosivePower",
+            vgm_c_dangerReport_explosionNoiseRadiusRange # 0,
+            vgm_c_dangerReport_explosionNoiseRadiusRange # 1
         ];
 
         [
@@ -52,7 +52,7 @@ _projectile addEventHandler ["Explode", {
             _pos,
             _notifyRadius,
             "player_explosion",
-            [typeOf _projectile]
+            [configOf _projectile]
         ] call vgm_g_fnc_locEvents_triggerEvent;
     };
 }];
