@@ -18,4 +18,5 @@ archive = true
 include = [
     "mod.cpp",
     "atf_backend_x64.dll",
+    "atf_backend_x64.so",
 ]
