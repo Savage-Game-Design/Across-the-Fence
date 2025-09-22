@@ -2,7 +2,7 @@
     File: fn_director_spawnReinforcements.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-09-19
+    Last Update: 2025-09-22
     Public: Yes
 
     Description:
@@ -37,16 +37,16 @@ if (_spawnPos isEqualTo []) exitWith { nil };
 // Based on player count and alertness
 private _missionPlayers = (_missionPublic get "players") call para_g_fnc_netmap_count;
 private _alertness = _mission get "director" get "alertness";
-private _baseUnitsPerPlayer = linearConversion [0, 90, _alertness, 2, 6, true];
+private _baseUnits = linearConversion [0, 90, _alertness, 2, 6, true];
 // Scale with mission player count, not target player count (_players).
 // This is to make it more punishing going solo in a group setting.
 private _playerCountScaling = linearConversion [1, 6, _missionPlayers, 1, 4];
-private _unitQuantity = floor (count _players * _baseUnitsPerPlayer * _playerCountScaling);
+private _unitQuantity = floor (_baseUnits * _playerCountScaling);
 private _unitsRemaining = _unitQuantity;
 
 
 [format ["[Reinforcements - Mission: %1, Players: %2] Reinforcing with %3 units (%4 base, %5x player scaling)",
-    _missionId, _players, _unitQuantity, _baseUnitsPerPlayer, _playerCountScaling
+    _missionId, _players, _unitQuantity, _baseUnits, _playerCountScaling
 ]] call vgm_g_fnc_logDebug;
 
 private _squads = [];
