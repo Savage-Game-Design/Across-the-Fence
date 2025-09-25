@@ -33,5 +33,8 @@ vgm_persistence_dirtySchemas = createHashMap;
 
     addMissionEventHandler ["HandleDisconnect", {
         [] call vgm_s_fnc_persistence_dbCommit;
+        // if this EH code returns true... player... becomes AI
+        // https://community.bistudio.com/wiki/Arma_3:_Mission_Event_Handlers#HandleDisconnect
+        false
     }];
 };
