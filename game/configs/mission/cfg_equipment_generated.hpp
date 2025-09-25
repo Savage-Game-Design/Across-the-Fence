@@ -1176,3 +1176,32 @@ class scout_15 {
         "vn_s_mc10"
     };
 };
+
+class friend_or_foe {
+    condition="(['pointman', 'friend_or_foe'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown"
+
+    weapons[] = {
+    };
+
+    magazines[] = {
+    };
+
+    backpacks[] = {
+    };
+
+    items[] = {
+        "vn_o_helmet_nva_01",
+        "vn_o_helmet_nva_02",
+        "vn_o_helmet_nva_03",
+        "vn_o_helmet_nva_04",
+        // skip vn_o_helmet_nva_05 as includes driver goggles
+        "vn_o_helmet_nva_06",
+        "vn_o_helmet_nva_07",
+        "vn_o_helmet_nva_08",
+        "vn_o_helmet_vc_01",
+        "vn_o_helmet_vc_02",
+        "vn_o_helmet_vc_03",
+        "vn_o_helmet_vc_04",
+        "vn_o_helmet_vc_05"
+    };
+};
