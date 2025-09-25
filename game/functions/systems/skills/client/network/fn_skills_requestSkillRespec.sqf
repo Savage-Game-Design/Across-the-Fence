@@ -18,8 +18,17 @@
         [] call vgm_c_fnc_skills_requestSkillRespec
  */
 
-params [["_displayParent", nil]];
+[player] spawn {
+    params ["_player"];
 
-["Waiting for server...", "Please wait", false, false, _displayParent] spawn BIS_fnc_guiMessage;
+    private _result = [
+        "Are you sure you want to reset all your skills? (Spent skill points will be refunded).",
+        "",
+        true,
+        true
+    ] call BIS_fnc_guiMessage;
 
-[player] remoteExecCall ["vgm_s_fnc_skills_handle_skillRespecRequest", 2];
+    if (_result) then {
+        [_player] remoteExecCall ["vgm_s_fnc_skills_handle_skillRespecRequest", 2];
+    };
+};
