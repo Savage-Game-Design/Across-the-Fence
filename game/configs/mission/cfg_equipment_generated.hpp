@@ -902,7 +902,14 @@ class rifleman_07 {
     };
 
     magazines[] = {
-
+        "vn_l1a1_10_mag",
+        "vn_l1a1_10_t_mag",
+        "vn_l1a1_20_mag",
+        "vn_l1a1_20_t_mag",
+        "vn_l1a1_30_mag",
+        "vn_l1a1_30_t_mag",
+        "vn_l1a1_30_02_mag",
+        "vn_l1a1_30_02_t_mag"
     };
 
     backpacks[] = {
