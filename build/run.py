@@ -1,5 +1,7 @@
 import click
 import config
+import shutil
+import re
 from pathlib import Path
 import sgd.file_tree
 from vgm.artifacts import BuildArtifact, Version
@@ -8,10 +10,10 @@ from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, P
 import vgm.field_manual
 import vgm.file_mapping
 from vgm.processes import process_handler
-import shutil
 import vgm.arma
 
 from vgm.hemtt import check as hemtt_check
+
 
 source_root = Path(__file__).parent.parent
 
@@ -176,7 +178,6 @@ def lint():
         item.rename(target)
 
     print("Adding hemtt config files")
-
     shutil.copy(source_root / "mod" / "lint" / "config.cpp", addons_path)
     shutil.copy(source_root / "mod" / "lint" / "$PBOPREFIX$", addons_path)
 
@@ -185,7 +186,15 @@ def lint():
 
     shutil.copytree(hemtt_source, hemtt_destination)
 
-    
+    print("Processing configs for hemtt compatiblity")
+
+    # Process hpp files to replace 'import' with 'class'
+    for hpp_file in Path(lint_output_path).rglob("*.hpp"):
+        with open(hpp_file, 'r') as f:
+            content = f.read()
+        modified_content = re.sub(r'^import (\w+;)', r'class \1', content, flags=re.MULTILINE)
+        with open(hpp_file, 'w') as f:
+            f.write(modified_content)
 
     hemtt_check(lint_output_path)
 
