@@ -18,11 +18,12 @@ servermod_path = Path(output_paths[BuildArtifact.SERVER_MOD])
 
 mission_paths = calculate_mission_output_paths(source_root, output_paths[BuildArtifact.MISSION])
 
-def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False, version=None) -> BuildParams:
+def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False, version=None, map_whitelist=None) -> BuildParams:
     params = BuildParams(
         output_paths=output_paths,
         overwrite=overwrite,
-        clean=clean
+        clean=clean,
+        map_whitelist=map_whitelist,
     )
 
     params.mapping_params.as_mod = as_mod
