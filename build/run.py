@@ -8,6 +8,7 @@ from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, P
 import vgm.field_manual
 import vgm.file_mapping
 from vgm.processes import process_handler
+import shutil
 import vgm.arma
 
 
@@ -153,6 +154,40 @@ def release(confirm, mod, version):
     vgm.build.pack(source_root, output_paths=release_output_paths, pack_type=PackType.Release)
 
 @click.command
+def lint():
+
+    lint_output_paths = config.output_paths["lint"]
+    version_lint = "v0.0.0@lint"
+    map_lint = "cam_lao_nam"
+
+    lint_output_path = lint_output_paths[BuildArtifact.MISSION] / f"vgm.{map_lint}"
+
+    perform_build(default_build_params(overwrite=True, as_mod=False, clean=True, version=version_lint, output_paths=lint_output_paths, map_whitelist=[map_lint]))
+
+    addons_path = Path(lint_output_path) / "addons" / "main"
+    addons_path.mkdir(parents=True)
+    print(f"Moving: {lint_output_path} to {addons_path}")
+
+    for item in Path(lint_output_path).iterdir():
+        if item.name == "addons":
+            continue
+        target = addons_path / item.name
+        item.rename(target)
+
+    print("Adding hemtt config files")
+
+    shutil.copy(source_root / "mod" / "lint" / "config.cpp", addons_path)
+    shutil.copy(source_root / "mod" / "lint" / "$PBOPREFIX$", addons_path)
+
+    hemtt_source = source_root / "mod" / "lint" / ".hemtt"
+    hemtt_destination = lint_output_path / ".hemtt"
+
+    shutil.copytree(hemtt_source, hemtt_destination)
+
+    
+
+
+@click.command
 def update_field_manual_entries():
     vgm.field_manual.update_field_manual(source_root)
 
@@ -188,6 +223,7 @@ def launch():
 
 cli.add_command(build)
 cli.add_command(release)
+cli.add_command(lint)
 cli.add_command(print_file_tree)
 launch.add_command(command_launch_arma_client)
 launch.add_command(command_launch_arma_server)
