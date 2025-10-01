@@ -3,6 +3,9 @@
         "missionProfileNamespace",
         "saveMissionProfileNamespace",
     ],
+    "sqflint.exclude": [
+        "output/**",
+    ],
     //---- START Automatic file headers
     "psi-header.changes-tracking": {
         "isActive": true,
