@@ -1,0 +1,23 @@
+name = "Across the Fence (Lint)"
+prefix = "vgm_lint"
+mainprefix = "v"
+
+[properties]
+author = "Savage Game Design"
+url = "https://www.sogpf.com"
+
+[version]
+major = 0
+minor = 0
+patch = 0
+git_hash = 0
+
+[release]
+sign = false
+archive = true
+
+[files]
+include = [
+    "mod.cpp",
+    "atf_backend_x64.dll",
+]
