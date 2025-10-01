@@ -1,4 +1,4 @@
 **/__pycache__
 
-output/**
-build_logs/**
+output/
+build_logs/
