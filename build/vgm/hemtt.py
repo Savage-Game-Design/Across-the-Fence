@@ -42,6 +42,17 @@ def build(path: Path, args=[]):
 
     return subprocess.run(command, cwd=path)
 
+def check(path: Path, pedantic: bool = True):
+    command = [
+        "hemtt",
+        "check",
+        "-p" if pedantic else "",
+    ]
+
+    print(f"Checking with HEMTT: {list(map(str, command))}")
+
+    return subprocess.run(command, cwd=path)
+
 def release(path: Path, args=[]):
     command = [
         "hemtt",

@@ -11,6 +11,7 @@ from vgm.processes import process_handler
 import shutil
 import vgm.arma
 
+from vgm.hemtt import check as hemtt_check
 
 source_root = Path(__file__).parent.parent
 
@@ -186,6 +187,7 @@ def lint():
 
     
 
+    hemtt_check(lint_output_path)
 
 @click.command
 def update_field_manual_entries():
