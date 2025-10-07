@@ -1,18 +1,13 @@
-// This is automatically added by the build system
-#include "common_includes.hpp"
-
 class CfgPatches
 {
-    class ADDON
+    class vgm_lint
     {
-        AUTHORSAVAGE;
+        author = "$STR_VN_AUTHORSAVAGE";
         name = "server";
         url = "https://www.sogpf.com";
         units[] = {};
         weapons[] = {};
-        requiredVersion = 2.18;
-        requiredAddons[] = {};
+        requiredVersion = 2.20;
+        requiredAddons[] = {"vgm_do_not_load_this_addon"};
     };
 };
-
-#include "description.ext"
