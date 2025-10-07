@@ -304,10 +304,10 @@ class para_InteractionOverlay_state
 		class Icon: para_RscPicture
 		{
 			idc = -1;
-			x = safeZoneX + safeZoneW - (UIH(PARA_IO_STATE_ICON_SIZE) * (3 / 4)) - UIW(0.5);
-			y = ((safeZoneY + safeZoneH) / 2) * 1.15; // Yeah I don't know why I chose to do a multiplication here but whatever
-			w = UIH(PARA_IO_STATE_ICON_SIZE) * (3 / 4);
-			h = UIH(PARA_IO_STATE_ICON_SIZE);
+			x = QUOTE(safeZoneX + safeZoneW - (UIH(PARA_IO_STATE_ICON_SIZE) * (3 / 4)) - UIW(0.5));
+			y = QUOTE(((safeZoneY + safeZoneH) / 2) * 1.15); // Yeah I don't know why I chose to do a multiplication here but whatever
+			w = QUOTE(UIH(PARA_IO_STATE_ICON_SIZE) * (3 / 4));
+			h = QUOTE(UIH(PARA_IO_STATE_ICON_SIZE));
 			colorText[] = { 1, 1, 1, 0.5 };
 			text = "\vn\ui_f_vietnam\ui\interactionOverlay\hud-on.paa";
 			onLoad = "uiNamespace setVariable ['#para_InteractionOverlay_state_Icon', (_this#0)];";

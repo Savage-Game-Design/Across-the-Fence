@@ -50,7 +50,7 @@ class para_WelcomeScreen {
                     x = 0;
                     w = para_WelcomeScreen_WIDTH - UIW(1);
                     y = 0;
-                    h = UIH(25) - UIH(1) - UIH((30 / 4)) - UIH(1);
+                    h = QUOTE(UIH(25) - UIH(1) - UIH((30 / 4)) - UIH(1));
                     text = "";
                     colorBackground[] = {0,0,0,0};
                 };
@@ -59,7 +59,7 @@ class para_WelcomeScreen {
         class BtnLeft: RscButton {
             x = para_WelcomeScreen_X;
             w = para_WelcomeScreen_WIDTH / 2.0075;
-            y = UIH(2) + UIH((30 / 4)) + UIH(25) - UIH(1) - UIH((30 / 4)) - UIH(1) + UIH(0.1);
+            y = QUOTE(UIH(2) + UIH((30 / 4)) + UIH(25) - UIH(1) - UIH((30 / 4)) - UIH(1) + UIH(0.1));
             h = UIH(1);
             text = "Changelog"; // TODO: Localize
             shadow = 0;
@@ -131,7 +131,7 @@ class para_ChangelogScreen {
             action = "closeDialog 0; createDialog 'para_WelcomeScreen';";
         };
         class BtnRight: BtnLeft {
-            x = para_WelcomeScreen_X + para_WelcomeScreen_WIDTH - (para_WelcomeScreen_WIDTH / 2.0075);
+            x = QUOTE(para_WelcomeScreen_X + para_WelcomeScreen_WIDTH - (para_WelcomeScreen_WIDTH / 2.0075));
             text = "Play"; // TODO: Localize
             action = "closeDialog 0";
         };
