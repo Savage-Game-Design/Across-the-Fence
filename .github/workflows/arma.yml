@@ -17,6 +17,9 @@ jobs:
       with:
         python-version: '3.x'
 
+    - uses: arma-actions/hemtt@v1
+      name: Setup HEMTT
+
     - name: Setup config
       run: cp build/config.example.py build/config.py
 
