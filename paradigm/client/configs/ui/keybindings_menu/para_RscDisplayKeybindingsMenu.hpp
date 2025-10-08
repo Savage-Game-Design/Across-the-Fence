@@ -8,20 +8,20 @@ class para_RscDisplayKeybindingsMenu
 	{
 		class Title: para_RscText
 		{
-			text = $STR_PARA_KEYBINDINGS_TITLE;
+			text = "$STR_PARA_KEYBINDINGS_TITLE";
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])","(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"};
-			x = UIX(10);
-			y = UIY(2.5);
-			w = UIW(20);
-			h = UIH(1);
+			x = QUOTE(UIX(10));
+			y = QUOTE(UIY(2.5));
+			w = QUOTE(UIW(20));
+			h = QUOTE(UIH(1));
 		};
 		class BackgroundList: para_RscText
 		{
 			colorBackground[] = {0,0,0,0.8};
-			x = UIX(10);
-			y = UIY(3.6);
-			w = UIW(20);
-			h = UIH(18.9);
+			x = QUOTE(UIX(10));
+			y = QUOTE(UIY(3.6));
+			w = QUOTE(UIW(20));
+			h = QUOTE(UIH(18.9));
 		};
 	};
 	class controls
@@ -40,35 +40,35 @@ class para_RscDisplayKeybindingsMenu
 			{
 				class Action
 				{
-					text = $STR_PARA_KEYBINDINGS_HEADER_ACTION;
+					text = "$STR_PARA_KEYBINDINGS_HEADER_ACTION";
 				};
 				class Keybind
 				{
-					text = $STR_PARA_KEYBINDINGS_HEADER_KEY;
+					text = "$STR_PARA_KEYBINDINGS_HEADER_KEY";
 				};
 			};
-			x = UIX(10.1);
-			y = UIY(3.7);
-			w = UIW(19.8);
-			h = UIH(1);
+			x = QUOTE(UIX(10.1));
+			y = QUOTE(UIY(3.7));
+			w = QUOTE(UIW(19.8));
+			h = QUOTE(UIH(1));
 		};
 		class Keybinds: para_RscListNBox
 		{
 			idc = PARA_KEYBINDINGSMENU_KEYBINDS_IDC;
 			columns[] = {0,0.5};
-			x = UIX(10.1);
-			y = UIY(4.8);
-			w = UIW(19.8);
-			h = UIH(15.4);
+			x = QUOTE(UIX(10.1));
+			y = QUOTE(UIY(4.8));
+			w = QUOTE(UIW(19.8));
+			h = QUOTE(UIH(15.4));
 		};
 		class Reset: para_RscButtonMenu
 		{
 			idc = PARA_KEYBINDINGSMENU_RESET_IDC;
-			text = $STR_PARA_KEYBINDINGS_RESET;
-			x = UIX(10.1);
-			y = UIY(20.2);
-			w = UIW(19.8);
-			h = UIH(1);
+			text = "$STR_PARA_KEYBINDINGS_RESET";
+			x = QUOTE(UIX(10.1));
+			y = QUOTE(UIY(20.2));
+			w = QUOTE(UIW(19.8));
+			h = QUOTE(UIH(1));
 			class Attributes
 			{
 				font = USEDFONT;
@@ -80,17 +80,17 @@ class para_RscDisplayKeybindingsMenu
 		class Confirm: Reset
 		{
 			idc = 1;
-			text = $STR_PARA_KEYBINDINGS_CONFIRM;
-			y = UIY(21.4);
-			w = UIW(9);
+			text = "$STR_PARA_KEYBINDINGS_CONFIRM";
+			y = QUOTE(UIY(21.4));
+			w = QUOTE(UIW(9));
 		};
 		class Cancel: Reset
 		{
 			idc = 2;
-			text = $STR_PARA_KEYBINDINGS_CANCEL;
-			x = UIX(20.9);
-			y = UIY(21.4);
-			w = UIW(9);
+			text = "$STR_PARA_KEYBINDINGS_CANCEL";
+			x = QUOTE(UIX(20.9));
+			y = QUOTE(UIY(21.4));
+			w = QUOTE(UIW(9));
 		};
 	};
 };

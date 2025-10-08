@@ -39,66 +39,66 @@ class para_optionsMenu
 		{
 			text = "Options Menu";
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])","(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"};
-			x = UIX(0);
-			y = UIY(0);
-			w = UIW(40);
-			h = UIH(1);
+			x = QUOTE(UIX(0));
+			y = QUOTE(UIY(0));
+			w = QUOTE(UIW(40));
+			h = QUOTE(UIH(1));
 		};
         class Body: para_RscControlsGroupNoScrollbarHV
         {
-            x = UIX(0);
-            y = UIY(1.1);
-            w = UIW(40);
-            h = UIH(23.9);
+            x = QUOTE(UIX(0));
+            y = QUOTE(UIY(1.1));
+            w = QUOTE(UIW(40));
+            h = QUOTE(UIH(23.9));
             class Controls
             {
                 class Background: para_Overlay_Text_Background
                 {
-                    x = UIW(0);
-                    y = UIH(0);
-                    w = UIW(40);
-                    h = UIH(22.7);
+                    x = QUOTE(UIW(0));
+                    y = QUOTE(UIH(0));
+                    w = QUOTE(UIW(40));
+                    h = QUOTE(UIH(22.7));
                 };
 
                 class TitleOption: para_Overlay_RscText
                 {
                     text = "Option";
                     colorBackground[] = { 0,0,0, 1 };
-                    x = UIW(0.4);
-                    y = UIH(0.4);
-                    w = UIW(28.2);
-                    h = UIH(1);
+                    x = QUOTE(UIW(0.4));
+                    y = QUOTE(UIH(0.4));
+                    w = QUOTE(UIW(28.2));
+                    h = QUOTE(UIH(1));
                 };
                 class TitleValue: TitleOption
                 {
                     text = "Value";
-                    x = UIW(28.6);
-                    w = UIW(11);
+                    x = QUOTE(UIW(28.6));
+                    w = QUOTE(UIW(11));
                 };
                 class OptionsBackground: para_Overlay_Text_Background
                 {
-                    x = UIW(0.4);
-                    y = UIH(1.4);
-                    w = UIW(39.2);
-                    h = UIH(20.9);
+                    x = QUOTE(UIW(0.4));
+                    y = QUOTE(UIH(1.4));
+                    w = QUOTE(UIW(39.2));
+                    h = QUOTE(UIH(20.9));
                 };
 
                 class Options: para_RscControlsGroupNoScrollbarH
                 {
-                    x = UIW(0.4);
-                    y = UIH(1.4);
-                    w = UIW(39.2);
-                    h = UIH(20.9);
+                    x = QUOTE(UIW(0.4));
+                    y = QUOTE(UIH(1.4));
+                    w = QUOTE(UIW(39.2));
+                    h = QUOTE(UIH(20.9));
                     onLoad = "uiNamespace setVariable ['Table', _this#0]";
                 };
 
                 class Cancel: para_RscButton
                 {
                     idc = 2;
-                    x = UIW(0);
-                    y = UIH(22.8);
-                    w = UIW(6);
-                    h = UIH(1);
+                    x = QUOTE(UIW(0));
+                    y = QUOTE(UIH(22.8));
+                    w = QUOTE(UIW(6));
+                    h = QUOTE(UIH(1));
                     text = "Cancel";
                     font = "RobotoCondensed";
 
@@ -115,8 +115,8 @@ class para_optionsMenu
                 class ResetAll: Cancel
                 {
                     idc = 3;
-                    x = UIW(6.1);
-                    y = UIH(22.8);
+                    x = QUOTE(UIW(6.1));
+                    y = QUOTE(UIH(22.8));
                     text = "Reset All";
                     onButtonClick = "closeDialog 3";
                 };
@@ -129,8 +129,8 @@ class para_optionsMenu
                 class Ok: Cancel
                 {
                     idc = 1;
-                    x = UIW(34);
-                    y = UIH(22.8);
+                    x = QUOTE(UIW(34));
+                    y = QUOTE(UIH(22.8));
                     text = "Ok";
                     onButtonClick = "closeDialog 1";
                 };

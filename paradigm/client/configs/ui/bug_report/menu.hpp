@@ -15,8 +15,8 @@ class para_RscBugReport
         {
             x = 0;
             y = 0;
-            w = UIW(40);
-            h = para_RscDisplayBuildingMenu_headerHeight;
+            w = QUOTE(UIW(40));
+            h = QUOTE(para_RscDisplayBuildingMenu_headerHeight);
             text = "Report a bug";
             colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])","(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"};
         };
@@ -24,35 +24,35 @@ class para_RscBugReport
         class Background : para_Overlay_Text_Background
         {
             x = 0;
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight;
-            w = UIW(40);
-            h = para_RscDisplayBuildingMenu_backgroundHeight;
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight);
+            w = QUOTE(UIW(40));
+            h = QUOTE(para_RscDisplayBuildingMenu_backgroundHeight);
             colorBackground[] = { 0,0,0,0.7 };
         };
         class Describe : para_Overlay_RscText
         {
-            x = para_RscDisplayBuildingMenu_paddingWidth;
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight;
-            h = UIH(1);
-            w = UIW(40);
+            x = QUOTE(para_RscDisplayBuildingMenu_paddingWidth);
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight);
+            h = QUOTE(UIH(1));
+            w = QUOTE(UIW(40));
             text = "Describe what happened:";
             colorText[] = { 1,1,1,0.6 };
         };
         class TextBackground : para_RscText
         {
-            x = para_RscDisplayBuildingMenu_paddingWidth;
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1);
-            w = UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth;
-            h = UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1);
+            x = QUOTE(para_RscDisplayBuildingMenu_paddingWidth);
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1));
+            w = QUOTE(UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth);
+            h = QUOTE(UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1));
             colorBackground[] = { 0,0,0,1 };
         };
         class Hint : para_RscText
         {
             idc = 10;
-            x = para_RscDisplayBuildingMenu_paddingWidth + para_RscDisplayBuildingMenu_gutterWidth;
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight;
-            w = UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2;
-            h = UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2;
+            x = QUOTE(para_RscDisplayBuildingMenu_paddingWidth + para_RscDisplayBuildingMenu_gutterWidth);
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight);
+            w = QUOTE(UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2);
+            h = QUOTE(UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2);
             font = "RobotoCondensed";
             sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
             shadow = 0;
@@ -66,10 +66,10 @@ Is there any other information that would help us trigger the bug?";
 
         class DebugTitle : para_Overlay_RscText
         {
-            x = para_RscDisplayBuildingMenu_paddingWidth;
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight + UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(0.8) - para_RscDisplayBuildingMenu_gutterHeight * 2;
-            h = UIH(1);
-            w = UIW(5);
+            x = QUOTE(para_RscDisplayBuildingMenu_paddingWidth);
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight + UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(0.8) - para_RscDisplayBuildingMenu_gutterHeight * 2);
+            h = QUOTE(UIH(1));
+            w = QUOTE(UIW(5));
             text = "Debug Data:";
         };
     };
@@ -80,18 +80,18 @@ Is there any other information that would help us trigger the bug?";
         class Group : para_RscControlsGroup
         {
             idc = 40;
-            x = para_RscDisplayBuildingMenu_paddingWidth + para_RscDisplayBuildingMenu_gutterWidth;
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight;
-            w = UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2;
-            h = UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2;
+            x = QUOTE(para_RscDisplayBuildingMenu_paddingWidth + para_RscDisplayBuildingMenu_gutterWidth);
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight);
+            w = QUOTE(UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2);
+            h = QUOTE(UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2);
             class Controls
             {
                 class Dummy : para_RscText {
                     idc = 50;
                     x = 0;
                     y = 0;
-                    w = UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2;
-                    h = UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2;
+                    w = QUOTE(UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2);
+                    h = QUOTE(UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2);
                     colorText[] = { 0,0,0,0 };
                     colorBackground[] = { 0,0,0,0 };
                     style = ST_MULTI + ST_NO_RECT;
@@ -101,8 +101,8 @@ Is there any other information that would help us trigger the bug?";
                     idc = 20;
                     x = 0;
                     y = 0;
-                    w = UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2;
-                    h = UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2;
+                    w = QUOTE(UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2);
+                    h = QUOTE(UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(1.1) - para_RscDisplayBuildingMenu_gutterHeight * 2);
                     font = "RobotoCondensed";
                     sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
                     shadow = 0;
@@ -116,10 +116,10 @@ Is there any other information that would help us trigger the bug?";
         class Debug : para_RscEdit
         {
             idc = 60;
-            x = para_RscDisplayBuildingMenu_paddingWidth + para_RscDisplayBuildingMenu_gutterWidth + UIW(5);
-            y = para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight + UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(0.8) - para_RscDisplayBuildingMenu_gutterHeight * 2;
-            w = UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2 - UIW(5);
-            h = UIH(1);
+            x = QUOTE(para_RscDisplayBuildingMenu_paddingWidth + para_RscDisplayBuildingMenu_gutterWidth + UIW(5));
+            y = QUOTE(para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight + para_RscDisplayBuildingMenu_paddingHeight + UIH(1) + para_RscDisplayBuildingMenu_gutterHeight + UIH(25) - UIH(2) - 3 * para_RscDisplayBuildingMenu_paddingHeight - para_RscDisplayBuildingMenu_headerHeight + para_RscDisplayBuildingMenu_gutterHeight - UIH(1) - UIH(0.8) - para_RscDisplayBuildingMenu_gutterHeight * 2);
+            w = QUOTE(UIW(40) - 2 * para_RscDisplayBuildingMenu_paddingWidth - para_RscDisplayBuildingMenu_gutterWidth * 2 - UIW(5));
+            h = QUOTE(UIH(1));
             style = ST_NO_RECT;
             colorBackground[] = { 0,0,0,0.75 };
             colorText[] = { 1,1,1,0.6 };
@@ -133,9 +133,9 @@ Is there any other information that would help us trigger the bug?";
         class Submit : para_RscButton
         {
             idc = 30;
-            y = UIH(25) - UIH(2) - para_RscDisplayBuildingMenu_paddingHeight;
-            h = UIH(2);
-            w = UIW(7);
+            y = QUOTE(UIH(25) - UIH(2) - para_RscDisplayBuildingMenu_paddingHeight);
+            h = QUOTE(UIH(2));
+            w = QUOTE(UIW(7));
             // x = UIW(20.5);
             text = "Submit Report";
             font = "RobotoCondensed";

@@ -22,8 +22,8 @@ class para_VoteOverlay
         class Holder: para_RscControlsGroupNoScrollbarHV
         {
             onLoad = "uiNamespace setVariable ['#para_c_VoteoOverlay_Holder', (_this#0)];";
-            x = ITEM_X;
-            y = safeZoneY + QUOTE(UIH(0.5));
+            x = QUOTE(ITEM_X);
+            y = QUOTE(safeZoneY + UIH(0.5));
             w = QUOTE(UIW(ITEM_W));
             h = 0;
             class Controls
@@ -125,7 +125,7 @@ class para_VoteOverlay
                             y = QUOTE(UIH(0.2));
                             w = QUOTE(UIW(ITEM_W));
                             h = QUOTE(UIH(ITEM_TEXT_HEIGHT));
-                            size = TXT_CST(0.8);
+                            size = QUOTE(TXT_CST(0.8));
                             text = "<t color='#0000FF'>Heyoxe</t> has initalized a vote to kick <t color='#0000FF'>Lou Montana</t> from it's role<br/>Do you want to kick him?";
                             onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Text', (_this#0)];";
                         };
@@ -176,7 +176,7 @@ class para_VoteOverlay
                                                     h = QUOTE(UIH(0.8));
                                                     colorText[] = {0,0,0,1};
                                                     text = "F1";
-                                                    sizeEx = TXT_CST(0.7);
+                                                    sizeEx = QUOTE(TXT_CST(0.7));
                                                     onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Primary_Key', (_this#0)];";
                                                 };
                                             };
@@ -212,7 +212,7 @@ class para_VoteOverlay
                                     idc = -1;
                                     x = 0;
                                     y = 0;
-                                    w = QUOTE(UIH(1)) * (3 / 4);
+                                    w = QUOTE(UIH(1) * (3 / 4));
                                     h = QUOTE(UIH(1));
                                     class Controls
                                     {
@@ -245,7 +245,7 @@ class para_VoteOverlay
                                                     colorText[] = {0,0,0,1};
                                                     onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Secondary_Key', (_this#0)];";
                                                     text = "F2";
-                                                    sizeEx = TXT_CST(0.7);
+                                                    sizeEx = QUOTE(TXT_CST(0.7));
                                                 };
                                             };
                                         };
