@@ -7,7 +7,7 @@ import vgm.hemtt
 
 def replace_import_with_class(directory: Path):
 
-    print(f"Replacing \"import \w;\" with \"class \w;\" in {directory}")
+    print(f"Replacing \"import \\w;\" with \"class \\w;\" in {directory}")
 
     # Process hpp files to replace 'import' with 'class'
     for hpp_file in Path(directory).rglob("*.hpp"):
@@ -18,17 +18,23 @@ def replace_import_with_class(directory: Path):
             f.write(modified_content)
 
 
-def parse_annotations(source_root, ci_annotations: Path, strip_path: Path):
+def parse_annotations(source_root: Path, ci_annotations: Path):
     with open(ci_annotations, 'r') as f:
         content = f.readlines()
 
-    # TODO don't hardcode
-    # file_path = file_path.replace("/addons/main/mission.cam_lao_nam", "game")
-    # if file_path.startswith("game/paradigm"):
-    #     file_path = file_path.removeprefix("game/")
     hemttout = source_root / ".hemttout"
-    hemttout.mkdir()
-    shutil.copy(ci_annotations, source_root / ".hemttout" / "ci_annotations.txt")
+    hemttout.mkdir(exist_ok=True)
+
+    annotations_file = hemttout / "ci_annotations.txt"
+    annotations_file.unlink(missing_ok=True)
+
+    # Adjust paths in annotations so they are relative to the project root
+    with open(annotations_file, 'w') as f:
+        for line in content:
+            line = line.replace("/addons/main/mission.cam_lao_nam", "game")
+            line = line.replace("game/paradigm", "paradigm")
+            f.write(line)
+
 
 def run(source_root: Path, work_path: Path):
 
@@ -60,7 +66,6 @@ def run(source_root: Path, work_path: Path):
     parse_annotations(
         source_root,
         work_path / ".hemttout" / "ci_annotations.txt",
-        addons_mission_path
     )
 
 
