@@ -25,7 +25,3 @@ jobs:
 
     - name: Run build script
       run: python build/run.py lint
-
-    - name: Test
-      run: |
-        echo "::error file=paradigm/client/configs/ui/voting_menu/overlay.hpp,line=248,endLine=248,col=62,endColumn=74,title=macro's result could not be parsed::invalid macro result"

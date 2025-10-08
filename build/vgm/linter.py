@@ -18,50 +18,17 @@ def replace_import_with_class(directory: Path):
             f.write(modified_content)
 
 
-# https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands
-def print_annotation(annotation: dict, strip_path: Path):
-
-    match annotation['level']:
-        case 'notice':
-            level = 'notice'
-        case 'warning':
-            level = 'warning'
-        case 'error':
-            level = 'error'
-        case _:
-            level = 'error'
-
-    file_path: str = annotation['path']
-    # TODO don't hardcode
-    file_path = file_path.replace("/addons/main/mission.cam_lao_nam", "game")
-    if file_path.startswith("game/paradigm"):
-        file_path = file_path.removeprefix("game/")
-
-    annotation_str = f'echo "::{level} file={file_path},line={annotation["start_line"]},endLine={annotation["end_line"]},col={annotation["start_column"]},endColumn={annotation["end_column"]},title={annotation["title"]}::{annotation["message"]}"'
-    subprocess.call(["echo", annotation_str])
-
-
-def parse_annotations(ci_annotations: Path, strip_path: Path):
+def parse_annotations(source_root, ci_annotations: Path, strip_path: Path):
     with open(ci_annotations, 'r') as f:
         content = f.readlines()
 
-    # parse CI annotation lines
-    # 15||15||9||18||warning||redefining macro||redefining macro||/addons/main/mission.cam_lao_nam/paradigm/client/configs/ui/ui_def_base.inc
-    # https://github.com/arma-actions/hemtt/blob/f3c3f2d81c9439070b832c9dbbba7b53b743b0a4/src/post.ts#L45
-    for line in content:
-        parts = line.strip().split('||')
-        annotation = {
-            'start_line': int(parts[0]),
-            'end_line': int(parts[1]),
-            'start_column': int(parts[2]),
-            'end_column': int(parts[3]),
-            'level': parts[4],
-            'title': parts[5],
-            'message': parts[6],
-            'path': parts[7]
-        }
-
-        print_annotation(annotation, strip_path)
+    # TODO don't hardcode
+    # file_path = file_path.replace("/addons/main/mission.cam_lao_nam", "game")
+    # if file_path.startswith("game/paradigm"):
+    #     file_path = file_path.removeprefix("game/")
+    hemttout = source_root / ".hemttout"
+    hemttout.mkdir()
+    shutil.copy(ci_annotations, source_root / ".hemttout" / "ci_annotations.txt")
 
 def run(source_root: Path, work_path: Path):
 
@@ -90,7 +57,11 @@ def run(source_root: Path, work_path: Path):
 
     vgm.hemtt.check(work_path)
 
-    parse_annotations(work_path / ".hemttout" / "ci_annotations.txt", addons_mission_path)
+    parse_annotations(
+        source_root,
+        work_path / ".hemttout" / "ci_annotations.txt",
+        addons_mission_path
+    )
 
 
 
