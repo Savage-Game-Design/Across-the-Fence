@@ -2,6 +2,7 @@
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import vgm.hemtt
 
 def replace_import_with_class(directory: Path):
@@ -36,7 +37,9 @@ def print_annotation(annotation: dict, strip_path: Path):
     if file_path.startswith("game/paradigm"):
         file_path = file_path.removeprefix("game/")
 
-    print(f'echo "::{level} file={file_path},line={annotation["start_line"]},endLine={annotation["end_line"]},col={annotation["start_column"]},endColumn={annotation["end_column"]},title={annotation["title"]}::{annotation["message"]}"')
+    annotation_str = f'echo "::{level} file={file_path},line={annotation["start_line"]},endLine={annotation["end_line"]},col={annotation["start_column"]},endColumn={annotation["end_column"]},title={annotation["title"]}::{annotation["message"]}"'
+    subprocess.call(["echo", annotation_str])
+
 
 def parse_annotations(ci_annotations: Path, strip_path: Path):
     with open(ci_annotations, 'r') as f:
