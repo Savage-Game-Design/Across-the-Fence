@@ -32,9 +32,9 @@ def print_annotation(annotation: dict, strip_path: Path):
 
     file_path: str = annotation['path']
     # TODO don't hardcode
-    file_path = file_path.replace("/addons/main/mission.cam_lao_nam", "/game")
-    if file_path.startswith("/game/paradigm"):
-        file_path = file_path.removeprefix("/game")
+    file_path = file_path.replace("/addons/main/mission.cam_lao_nam", "game")
+    if file_path.startswith("game/paradigm"):
+        file_path = file_path.removeprefix("game/")
 
     print(f'echo "::{level} file={file_path},line={annotation["start_line"]},endLine={annotation["end_line"]},col={annotation["start_column"]},endColumn={annotation["end_column"]},title={annotation["title"]}::{annotation["message"]}"')
 
