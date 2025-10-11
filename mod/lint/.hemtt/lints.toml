@@ -19,7 +19,9 @@ enabled = true
 
 [sqf.undefined]
 enabled = true
-options.check_orphan_code = true
+# we could enable this and mark external vars with pragma instead
+# https://hemtt.dev/lints/sqf.html#ignoring-false-positives-2
+options.check_orphan_code = false
 
 [sqf.unused]
 enabled = true #many false positives without DEBUG_MODE_FULL
