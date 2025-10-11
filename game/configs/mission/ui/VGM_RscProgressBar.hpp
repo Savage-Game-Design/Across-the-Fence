@@ -26,20 +26,20 @@ class VGM_RscProgressBar
         {
             colorBackground[] = {0,0,0,0.25};
 
-            x = PROGRESS_BAR_X;
-            y = PROGRESS_BAR_Y;
-            w = PROGRESS_BAR_W;
-            h = PROGRESS_BAR_H;
+            x = QUOTE(PROGRESS_BAR_X);
+            y = QUOTE(PROGRESS_BAR_Y);
+            w = QUOTE(PROGRESS_BAR_W);
+            h = QUOTE(PROGRESS_BAR_H);
         };
 
         class ProgressBar: RscProgress
         {
             idc = VGM_IDC_PROGRESSBAR_PROGRESSBAR;
 
-            x = PROGRESS_BAR_X;
-            y = PROGRESS_BAR_Y;
-            w = PROGRESS_BAR_W;
-            h = PROGRESS_BAR_H;
+            x = QUOTE(PROGRESS_BAR_X);
+            y = QUOTE(PROGRESS_BAR_Y);
+            w = QUOTE(PROGRESS_BAR_W);
+            h = QUOTE(PROGRESS_BAR_H);
         };
 
         class Title: RscText
@@ -49,10 +49,10 @@ class VGM_RscProgressBar
 
             text = "<TEXT>";
 
-            x = PROGRESS_BAR_X;
-            y = PROGRESS_BAR_Y;
-            w = PROGRESS_BAR_W;
-            h = PROGRESS_BAR_H;
+            x = QUOTE(PROGRESS_BAR_X);
+            y = QUOTE(PROGRESS_BAR_Y);
+            w = QUOTE(PROGRESS_BAR_W);
+            h = QUOTE(PROGRESS_BAR_H);
         };
 
         class DrawHandler: RscMapControlEmpty

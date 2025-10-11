@@ -28,11 +28,11 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             idc = VGM_IDC_DISPLAYSKILLS_SKILLS;
             onLoad = VGM_UIEH(initSkillTrees,Skills);
             onLBSelChanged = VGM_UIEH(selectSkillTree,Skills);
-            x = _DISPLAY_X + 1 * VGM_GRID_W;
-            y = _DISPLAY_Y + 1 * VGM_GRID_H;
-            w = (_ICON_H + 3) * VGM_GRID_W;
-            h = (_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H);
-            rowHeight = _ICON_H * VGM_GRID_H;
+            x = QUOTE(_DISPLAY_X + 1 * VGM_GRID_W);
+            y = QUOTE(_DISPLAY_Y + 1 * VGM_GRID_H);
+            w = QUOTE((_ICON_H + 3) * VGM_GRID_W);
+            h = QUOTE((_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H));
+            rowHeight = QUOTE(_ICON_H * VGM_GRID_H);
             style = ST_PICTURE;
         };
         class Respec: VGM_ctrlButtonPictureKeepAspect
@@ -41,20 +41,20 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             text = "\a3\3den\data\attributes\loiterdirection\cw_ca.paa";
             tooltip = "$STR_VGM_SKILLS_UI_RESPEC";
             onButtonClick = VGM_UIEH(respec,Skills);
-            x = _DISPLAY_X + 1 * VGM_GRID_W;
-            y =  (_DISPLAY_Y + 1 * VGM_GRID_H) + ((_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H));
-            w = (_ICON_H + 3) * VGM_GRID_W;
-            h = _ICON_H * VGM_GRID_H;
+            x = QUOTE(_DISPLAY_X + 1 * VGM_GRID_W);
+            y = QUOTE((_DISPLAY_Y + 1 * VGM_GRID_H) + ((_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H)));
+            w = QUOTE((_ICON_H + 3) * VGM_GRID_W);
+            h = QUOTE(_ICON_H * VGM_GRID_H);
         };
 
         class SPAvailable: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYSKILLS_SPAVAILABLE;
             text = "%1 Skill Points Available";
-            x = _DISPLAY_X + (_SKILLS_W + 1) * VGM_GRID_W;
-            y = _DISPLAY_Y + 1 * VGM_GRID_H;
-            w = _DISPLAY_W * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            x = QUOTE(_DISPLAY_X + (_SKILLS_W + 1) * VGM_GRID_W);
+            y = QUOTE(_DISPLAY_Y + 1 * VGM_GRID_H);
+            w = QUOTE(_DISPLAY_W * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
         };
 
         class Title: VGM_ctrlStructuredText
@@ -62,36 +62,36 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             idc = VGM_IDC_DISPLAYSKILLS_TITLE;
             text = "Branch/Skill Title";
             size = VGM_FONT_L;
-            x = _DISPLAY_X + (_SKILLS_W + 1) * VGM_GRID_W;
-            y = _DISPLAY_Y + 6 * VGM_GRID_H;
-            w = (_PAGE_W - 50) * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            x = QUOTE(_DISPLAY_X + (_SKILLS_W + 1) * VGM_GRID_W);
+            y = QUOTE(_DISPLAY_Y + 6 * VGM_GRID_H);
+            w = QUOTE((_PAGE_W - 50) * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
         };
         class Unlock: VGM_ctrlButton
         {
             idc = VGM_IDC_DISPLAYSKILLS_UNLOCK;
             text = "Unlock - 3 SP";
             onButtonClick = VGM_UIEH(unlockSkill,Skills);
-            x = CENTER_X + (_PAGE_W - 49) * VGM_GRID_W;
-            y = _DISPLAY_Y + 1 * VGM_GRID_H;
-            w = 50 * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            x = QUOTE(CENTER_X + (_PAGE_W - 49) * VGM_GRID_W);
+            y = QUOTE(_DISPLAY_Y + 1 * VGM_GRID_H);
+            w = QUOTE(50 * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
         };
         class Description: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYSKILLS_DESCRIPTION;
-            x = CENTER_X + 1 * VGM_GRID_W;
-            y = _DISPLAY_Y + 6 * VGM_GRID_H;
-            w = _PAGE_W * VGM_GRID_W;
-            h = 16 * VGM_GRID_H;
+            x = QUOTE(CENTER_X + 1 * VGM_GRID_W);
+            y = QUOTE(_DISPLAY_Y + 6 * VGM_GRID_H);
+            w = QUOTE(_PAGE_W * VGM_GRID_W);
+            h = QUOTE(16 * VGM_GRID_H);
         };
         class SkillTree: VGM_ctrlControlsGroup
         {
             idc = VGM_IDC_DISPLAYSKILLS_SKILLTREE;
-            x = _DISPLAY_X + (_SKILLS_W + 2) * VGM_GRID_W;
-            y = _DISPLAY_Y + 11 * VGM_GRID_H;
-            w = (_DISPLAY_W - _SKILLS_W - 3) * VGM_GRID_W;
-            h = (_DISPLAY_H - 12) * VGM_GRID_H;
+            x = QUOTE(_DISPLAY_X + (_SKILLS_W + 2) * VGM_GRID_W);
+            y = QUOTE(_DISPLAY_Y + 11 * VGM_GRID_H);
+            w = QUOTE((_DISPLAY_W - _SKILLS_W - 3) * VGM_GRID_W);
+            h = QUOTE((_DISPLAY_H - 12) * VGM_GRID_H);
             colorBackground[] = {1,0,0,0.2};
         };
     };

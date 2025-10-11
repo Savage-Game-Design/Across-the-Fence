@@ -11,5 +11,6 @@
 #define CONCAT_2(a,b) a##b
 #define CONCAT_3(a,b,c) a##b##c
 #define QUOTE(s) #s
+#define ARR_2(A,B) A,B
 
 #endif

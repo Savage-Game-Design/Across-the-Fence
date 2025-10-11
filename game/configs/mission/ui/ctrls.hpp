@@ -214,9 +214,9 @@ class VGM_ctrlControlsTable: VGM_ctrlDefault
     style = ST_LEFT;
     firstIDC = 900;
     lastIDC = 999;
-    headerHeight = 5 * VGM_GRID_H;
-    lineSpacing = 1 * VGM_GRID_H;
-    rowHeight = 5 * VGM_GRID_H;
+    headerHeight = QUOTE(5 * VGM_GRID_H);
+    lineSpacing = QUOTE(1 * VGM_GRID_H);
+    rowHeight = QUOTE(5 * VGM_GRID_H);
     selectedRowAnimLength = 7.5;
     selectedRowColorFrom[] = {VGM_UI_COLOR_ACTIVE};
     selectedRowColorTo[] = {VGM_UI_COLOR_ACTIVE};
@@ -236,7 +236,7 @@ class VGM_ctrlControlsTable: VGM_ctrlDefault
     };
     class VScrollbar: ScrollBar
     {
-        width = 2 * VGM_GRID_W;
+        width = QUOTE(2 * VGM_GRID_W);
     };
     class HScrollbar: ScrollBar
     {
@@ -265,15 +265,15 @@ class VGM_ctrlListBox: ctrlListbox
 class VGM_ctrlStack: VGM_ctrlControlsGroupNoScrollbars
 {
     onLoad = "_this call vgm_c_fnc_stack_controls;";
-    stackMargin = 1 * VGM_GRID_H;
+    stackMargin = QUOTE(1 * VGM_GRID_H);
     stackDisable = 0;
     stackFill = 0;
 };
 
 class VGM_ctrlSeperator: VGM_ctrlStatic
 {
-    h = pixelH;
-    w = pixelW;
+    h = QUOTE(pixelH);
+    w = QUOTE(pixelW);
     colorBackground[] = {0.75,0.75,0.75,1};
 };
 
@@ -300,47 +300,47 @@ class VGM_ctrlTierText: VGM_ctrlTextMulti
 
 class VGM_ctrlTierLockedIcon: VGM_ctrlPicture {
     text = "\a3\ui_f_orange\Data\Displays\RscDisplayAANArticle\lock_ca.paa";
-    w = 5 * VGM_GRID_W;
-    h = 5 * VGM_GRID_H;
+    w = QUOTE(5 * VGM_GRID_W);
+    h = QUOTE(5 * VGM_GRID_H);
 };
 
 class VGM_ctrlTierSeparator: VGM_ctrlStatic
 {
     x = 0;
     y = 0;
-    w = 1 * VGM_GRID_W;
-    h = 0.2 * VGM_GRID_H;
+    w = QUOTE(1 * VGM_GRID_W);
+    h = QUOTE(0.2 * VGM_GRID_H);
     colorBackground[] = {0.8,0.8,0.8,1};
 };
 class VGM_ctrlBranchName: VGM_ctrlControlsGroup
 {
     x = 0;
     y = 0;
-    w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-    h = 7 * VGM_GRID_H;
+    w = QUOTE(0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W);
+    h = QUOTE(7 * VGM_GRID_H);
     class Controls
     {
         class Background: VGM_ctrlBackground
         {
             x = 0;
             y = 0;
-            w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = (5 + 2) * VGM_GRID_H;
+            w = QUOTE(0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W);
+            h = QUOTE((5 + 2) * VGM_GRID_H);
         };
         class BackgroundMiddle: VGM_ctrlBackground
         {
             x = 0;
-            y = 1 * VGM_GRID_H;
-            w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            y = QUOTE(1 * VGM_GRID_H);
+            w = QUOTE(0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
         };
         class Name: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYSKILLS_BRANCHNAME_NAME;
             x = 0;
-            y = 1 * VGM_GRID_H;
-            w = 0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            y = QUOTE(1 * VGM_GRID_H);
+            w = QUOTE(0.5 * VGM_DISPLAYSKILLS_PAGE_W * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
             size = VGM_FONT_L;
             class Attributes
             {
@@ -356,8 +356,8 @@ class VGM_ctrlBranchName: VGM_ctrlControlsGroup
 
 class VGM_ctrlSkill: VGM_ctrlShortcutButton
 {
-    w = VGM_CTRLSKILL_W * VGM_GRID_W;
-    h = 20 * VGM_GRID_H;
+    w = QUOTE(VGM_CTRLSKILL_W * VGM_GRID_W);
+    h = QUOTE(20 * VGM_GRID_H);
     colorBackground2[] = {VGM_UI_COLOR_GREY, 1};
     class Attributes
     {
@@ -372,24 +372,25 @@ class VGM_ctrlSkill: VGM_ctrlShortcutButton
 class VGM_ctrlControlsGroupOverlay: VGM_ctrlControlsGroupNoScrollbars
 {
     /* onLoad = [_this select 0, true] call vgm_c_fnc_toggle_controls_group_overlay; */
-    onKillFocus = diag_log ["kill focus", _this];
+    // onKillFocus = QUOTE(diag_log ['kill focus', _this]);
 };
 
 class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlControlsGroupNoScrollbars
 {
     idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE;
-    x = VGM_DISPLAYMISSIONS_X;
-    y = VGM_DISPLAYMISSIONS_Y;
-    w = VGM_DISPLAYMISSIONS_W;
-    h = VGM_DISPLAYMISSIONS_H;
+    x = QUOTE(VGM_DISPLAYMISSIONS_X);
+    y = QUOTE(VGM_DISPLAYMISSIONS_Y);
+    w = QUOTE(VGM_DISPLAYMISSIONS_W);
+    h = QUOTE(VGM_DISPLAYMISSIONS_H);
+
     class Controls
     {
         class BackgroundFull: VGM_ctrlStatic
         {
             x = 0;
             y = 0;
-            w = VGM_DISPLAYMISSIONS_W * VGM_GRID_W;
-            h = VGM_DISPLAYMISSIONS_H * VGM_GRID_H;
+            w = QUOTE(VGM_DISPLAYMISSIONS_W * VGM_GRID_W);
+            h = QUOTE(VGM_DISPLAYMISSIONS_H * VGM_GRID_H);
             colorBackground[] = {0.3,0.3,0.3,0.8};
         };
 #define _MESSAGE_W 0.5 * VGM_DISPLAYMISSIONS_W
@@ -398,10 +399,10 @@ class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlCon
 #define _MESSAGE_Y 0.5 * safeZoneH - 0.5 * _MESSAGE_H * VGM_GRID_H
         class BackgroundMessage: VGM_ctrlStatic
         {
-            x = _MESSAGE_X;
-            y = _MESSAGE_Y;
-            w = _MESSAGE_W * VGM_GRID_W;
-            h = _MESSAGE_H * VGM_GRID_H;
+            x = QUOTE(_MESSAGE_X);
+            y = QUOTE(_MESSAGE_Y);
+            w = QUOTE(_MESSAGE_W * VGM_GRID_W);
+            h = QUOTE(_MESSAGE_H * VGM_GRID_H);
             colorBackground[] = {0.8,0.8,0.8,1};
         };
         VGM_SET_Y(1)
@@ -410,9 +411,9 @@ class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlCon
             idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_TEXT;
             text = "Generate a Recon mission in targetBoxName?";
             size = VGM_FONT_L;
-            x = _MESSAGE_X + 1 * VGM_GRID_W;
+            x = QUOTE(_MESSAGE_X + 1 * VGM_GRID_W);
             y = VGM_Y(_MESSAGE_Y);
-            w = (_MESSAGE_W - 2) * VGM_GRID_W;
+            w = QUOTE((_MESSAGE_W - 2) * VGM_GRID_W);
             h = VGM_Y_H(5);
             class Attributes
             {
@@ -426,10 +427,10 @@ class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlCon
         };
         class Seperator: VGM_ctrlStatic
         {
-            x = _MESSAGE_X;
+            x = QUOTE(_MESSAGE_X);
             y = VGM_Y_Y(_MESSAGE_Y,1);
-            w = _MESSAGE_W * VGM_GRID_W;
-            h = pixelH;
+            w = QUOTE(_MESSAGE_W * VGM_GRID_W);
+            h = QUOTE(pixelH);
             colorBackground[] = {0.5,0.5,0.5,1};
         };
         class Confirm: VGM_ctrlButton
@@ -437,9 +438,9 @@ class VGM_ctrlDisplayMissionsMessage: VGM_ctrlControlsGroupOverlay //VGM_ctrlCon
             idc = VGM_IDC_DISPLAYMISSIONS_MESSAGE_CONFIRM;
             text = "Confirm";
             onButtonClick = VGM_UIEH(handleMessage,Missions);
-            x = _MESSAGE_X + 40 * VGM_GRID_W;
+            x = QUOTE(_MESSAGE_X + 40 * VGM_GRID_W);
             y = VGM_Y_Y(_MESSAGE_Y,1);
-            w = (_MESSAGE_W - 80) * VGM_GRID_W;
+            w = QUOTE((_MESSAGE_W - 80) * VGM_GRID_W);
             h = VGM_Y_H(5);
         };
         class Cancel: Confirm
@@ -462,17 +463,17 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
         };
         class BackgroundBriefing: VGM_ctrlBackground
         {
-            x = VGM_DISPLAYMISSIONS_COLUMN_CTRL_W * VGM_GRID_W;
-            w = (3 * VGM_DISPLAYMISSIONS_COLUMN_W + 1) * VGM_GRID_W;
-            h = (VGM_DISPLAYMISSIONS_H - 6) * VGM_GRID_H;
+            x = QUOTE(VGM_DISPLAYMISSIONS_COLUMN_CTRL_W * VGM_GRID_W);
+            w = QUOTE((3 * VGM_DISPLAYMISSIONS_COLUMN_W + 1) * VGM_GRID_W);
+            h = QUOTE((VGM_DISPLAYMISSIONS_H - 6) * VGM_GRID_H);
         };
 #define _W (3 * VGM_DISPLAYMISSIONS_COLUMN_W - 1)
         class BriefingStack: VGM_ctrlStack
         {
-            x = (VGM_DISPLAYMISSIONS_COLUMN_CTRL_W + 1) * VGM_GRID_W;
+            x = QUOTE((VGM_DISPLAYMISSIONS_COLUMN_CTRL_W + 1) * VGM_GRID_W);
             y = 0;
-            w = _W * VGM_GRID_W;
-            h = (VGM_DISPLAYMISSIONS_H - 6) * VGM_GRID_H;
+            w = QUOTE(_W * VGM_GRID_W);
+            h = QUOTE((VGM_DISPLAYMISSIONS_H - 6) * VGM_GRID_H);
             class Controls
             {
                 class Title: VGM_ctrlStructuredText
@@ -480,7 +481,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                     idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_TITLE;
                     text = "Standard Mission on targetBoxName";
                     x = 0;
-                    w = _W * VGM_GRID_W;
+                    w = QUOTE(_W * VGM_GRID_W);
                     h = VGM_Y_H(5);
                     size = VGM_FONT_L;
                     class Attributes
@@ -498,7 +499,7 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                     text = "Operation generatedName";
                     size = VGM_FONT_L;
                     x = 0;
-                    w = _W * VGM_GRID_W;
+                    w = QUOTE(_W * VGM_GRID_W);
                     h = VGM_Y_H(5);
                 };
                 class Description: OperationName
@@ -519,39 +520,39 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                     idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_MISSIONPROPERTIES;
                     onLoad = VGM_UIEH(loadProperties,Missions);
                     x = 0;
-                    w = _W * VGM_GRID_W;
+                    w = QUOTE(_W * VGM_GRID_W);
                     h = VGM_Y_H(20);
                     class RowTemplate
                     {
                         class Background
                         {
                             controlBaseClassPath[] = {"VGM_ctrlBackground"};
-                            columnX = 1 * VGM_GRID_W;
+                            columnX = QUOTE(1 * VGM_GRID_W);
                             controlOffsetY = 0;
-                            columnW = (_W - 1) * VGM_GRID_W;
-                            controlH = 5 * VGM_GRID_H;
+                            columnW = QUOTE((_W - 1) * VGM_GRID_W);
+                            controlH = QUOTE(5 * VGM_GRID_H);
                         };
                         class Property
                         {
                             controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
-                            columnX = 2 * VGM_GRID_W;
+                            columnX = QUOTE(2 * VGM_GRID_W);
                             controlOffsetY = 0;
-                            columnW = (_W - 53) * VGM_GRID_W;
-                            controlH = 5 * VGM_GRID_H;
+                            columnW = QUOTE((_W - 53) * VGM_GRID_W);
+                            controlH = QUOTE(5 * VGM_GRID_H);
                         };
                         class Reveal: Property
                         {
                             controlBaseClassPath[] = {"VGM_ctrlButton"};
-                            columnX = (_W - 50) * VGM_GRID_W;
-                            columnW = 47 * VGM_GRID_W;
+                            columnX = QUOTE((_W - 50) * VGM_GRID_W);
+                            columnW = QUOTE(47 * VGM_GRID_W);
                         };
                     };
                 };
                 class Buttons: VGM_ctrlControlsGroupNoScrollbars
                 {
                     x = 0;
-                    w = _W * VGM_GRID_W;
-                    h = 5 * VGM_GRID_H;
+                    w = QUOTE(_W * VGM_GRID_W);
+                    h = QUOTE(5 * VGM_GRID_H);
 #define _W 96
                     class Controls
                     {
@@ -562,15 +563,15 @@ class VGM_ctrlDisplayMissionsBriefing: VGM_ctrlDisplayMissionsMessage
                             onButtonClick = VGM_UIEH(confirmMission,Missions);
                             x = 0;
                             y = 0;
-                            w = _W * VGM_GRID_W;
-                            h = 5 * VGM_GRID_H;
+                            w = QUOTE(_W * VGM_GRID_W);
+                            h = QUOTE(5 * VGM_GRID_H);
                         };
                         class DiscardMission: ConfirmMission
                         {
                             idc = VGM_IDC_DISPLAYMISSIONS_BRIEFING_DISCARDMISSION;
                             text = "Discard Mission [Intel Penalty]";
                             onButtonClick = VGM_UIEH_SPAWN(discardMission,Missions);
-                            x = (_W + 1) * VGM_GRID_W;
+                            x = QUOTE((_W + 1) * VGM_GRID_W);
                         };
                     };
                 };
@@ -593,17 +594,17 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
         };
         class BackgroundContent: VGM_ctrlBackground
         {
-            x = _X;
-            y = _Y;
-            w = _W * VGM_GRID_W;
-            h = _H * VGM_GRID_H;
+            x = QUOTE(_X);
+            y = QUOTE(_Y);
+            w = QUOTE(_W * VGM_GRID_W);
+            h = QUOTE(_H * VGM_GRID_H);
         };
         class Stack: VGM_ctrlStack
         {
-            x = _X;
-            y = _Y;
-            w = _W * VGM_GRID_W;
-            h = _H * VGM_GRID_H;
+            x = QUOTE(_X);
+            y = QUOTE(_Y);
+            w = QUOTE(_W * VGM_GRID_W);
+            h = QUOTE(_H * VGM_GRID_H);
 #define _W2 (_W - 2)
 #define _X2 (1 * VGM_GRID_W)
             class Controls
@@ -612,9 +613,9 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                 {
                     text = "Select a Primary Objective for the Mission";
                     size = VGM_FONT_L;
-                    x = _X2;
-                    w = _W2 * VGM_GRID_W;
-                    h = 5 * VGM_GRID_H;
+                    x = QUOTE(_X2);
+                    w = QUOTE(_W2 * VGM_GRID_W);
+                    h = QUOTE(5 * VGM_GRID_H);
                     class Attributes
                     {
                         font = VGM_FONT;
@@ -627,16 +628,16 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                 class Seperator: VGM_ctrlSeperator
                 {
                     x = 0;
-                    w = _W * VGM_GRID_W;
+                    w = QUOTE(_W * VGM_GRID_W);
                 };
 #define _ROW_H 20
                 class List: VGM_ctrlControlsTable
                 {
                     idc = VGM_IDC_DISPLAYMISSIONS_OBJECTIVES_LIST;
-                    x = _X2;
-                    w = _W2 * VGM_GRID_W;
+                    x = QUOTE(_X2);
+                    w = QUOTE(_W2 * VGM_GRID_W);
                     stackFill = 1;
-                    rowHeight = _ROW_H * VGM_GRID_H;
+                    rowHeight = QUOTE(_ROW_H * VGM_GRID_H);
                     class RowTemplate
                     {
                         class Icon
@@ -644,41 +645,41 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                             controlBaseClassPath[] = {"VGM_ctrlStaticPicture"};
                             columnX = 0;
                             controlOffsetY = 0;
-                            columnW = _ROW_H * VGM_GRID_W;
-                            controlH = _ROW_H * VGM_GRID_H;
+                            columnW = QUOTE(_ROW_H * VGM_GRID_W);
+                            controlH = QUOTE(_ROW_H * VGM_GRID_H);
                         };
                         class Name: Icon
                         {
                             controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
-                            columnX = _ROW_H * VGM_GRID_W;
-                            columnW = (_W2 - _ROW_H - 3) * VGM_GRID_W;
-                            controlH = 5 * VGM_GRID_H;
+                            columnX = QUOTE(_ROW_H * VGM_GRID_W);
+                            columnW = QUOTE((_W2 - _ROW_H - 3) * VGM_GRID_W);
+                            controlH = QUOTE(5 * VGM_GRID_H);
                         };
                         class Description: Name
                         {
-                            controlOffsetY = 5 * VGM_GRID_H;
-                            columnW = (_W2 - _ROW_H - 23) * VGM_GRID_W;
-                            controlH = 15 * VGM_GRID_H;
+                            controlOffsetY = QUOTE(5 * VGM_GRID_H);
+                            columnW = QUOTE((_W2 - _ROW_H - 23) * VGM_GRID_W);
+                            controlH = QUOTE(15 * VGM_GRID_H);
                         };
                         class Level: Name
                         {
-                            columnX = (_W2 - 23) * VGM_GRID_W;
-                            controlOffsetY = (_ROW_H - 10) * VGM_GRID_H;
-                            columnW = 20 * VGM_GRID_W;
-                            controlH = 5 * VGM_GRID_H;
+                            columnX = QUOTE((_W2 - 23) * VGM_GRID_W);
+                            controlOffsetY = QUOTE((_ROW_H - 10) * VGM_GRID_H);
+                            columnW = QUOTE(20 * VGM_GRID_W);
+                            controlH = QUOTE(5 * VGM_GRID_H);
                         };
                         class Select: Level
                         {
                             controlBaseClassPath[] = {"VGM_ctrlButton"};
-                            controlOffsetY = (_ROW_H - 5) * VGM_GRID_H;
+                            controlOffsetY = QUOTE((_ROW_H - 5) * VGM_GRID_H);
                         };
                     };
                 };
                 class Buttons: VGM_ctrlControlsGroupNoScrollbars
                 {
-                    x = _X2;
-                    w = _W2 * VGM_GRID_W;
-                    h = 5 * VGM_GRID_H;
+                    x = QUOTE(_X2);
+                    w = QUOTE(_W2 * VGM_GRID_W);
+                    h = QUOTE(5 * VGM_GRID_H);
 #define _W (0.25 * VGM_DISPLAYMISSIONS_W - 1.5)
                     class Controls
                     {
@@ -688,15 +689,15 @@ class VGM_ctrlDisplayMissionsObjectives: VGM_ctrlDisplayMissionsMessage
                             text = "Reroll Objectives [50 Intel]";
                             x = 0;
                             y = 0;
-                            w = _W * VGM_GRID_W;
-                            h = 5 * VGM_GRID_H;
+                            w = QUOTE(_W * VGM_GRID_W);
+                            h = QUOTE(5 * VGM_GRID_H);
                             onButtonClick = VGM_UIEH(objectivesReroll,Missions);
                         };
                         class Cancel: Reroll
                         {
                             idc = VGM_IDC_DISPLAYMISSIONS_OBJECTIVES_CANCEL;
                             text = "Cancel";
-                            x = (_W + 1) * VGM_GRID_W;
+                            x = QUOTE((_W + 1) * VGM_GRID_W);
                             onButtonClick = VGM_UIEH(objectivesCancel,Missions);
                         };
                     };
@@ -711,7 +712,7 @@ class VGM_ctrlStaticNotepad: VGM_ctrlStatic
     colorText[] = COLOR_BLACK;
     // colorBackground[] = {0,0,0,0.25};
     shadow = 0;
-    sizeEx = VGM_NOTEPAD_LINE_H * 0.75;
+    sizeEx = QUOTE(VGM_NOTEPAD_LINE_H * 0.75);
 };
 class VGM_ctrlStaticNotepadHeader: VGM_ctrlStaticNotepad
 {
@@ -735,7 +736,7 @@ class VGM_ctrlButtonNotepad: VGM_ctrlButton
 {
     colorText[] = COLOR_BLACK;
     colorBackground[] = {0,0,0,0.05};
-    sizeEx = VGM_NOTEPAD_LINE_H * 0.52;
+    sizeEx = QUOTE(VGM_NOTEPAD_LINE_H * 0.52);
 };
 class VGM_ctrlButtonNotepadHelp: VGM_ctrlButtonNotepad
 {
@@ -745,5 +746,5 @@ class VGM_ctrlButtonNotepadHelp: VGM_ctrlButtonNotepad
 };
 class VGM_ctrlListBoxNotepad: VGM_ctrlListBox
 {
-    rowHeight = VGM_NOTEPAD_LINE_H * 0.52;
+    rowHeight = QUOTE(VGM_NOTEPAD_LINE_H * 0.52);
 };
