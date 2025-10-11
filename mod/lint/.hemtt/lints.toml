@@ -11,6 +11,9 @@ options.release = [
     "DEBUG",
 ]
 
+[sqf]
+enabled = true
+
 [sqf.undefined]
 enabled = true
 options.check_orphan_code = true
