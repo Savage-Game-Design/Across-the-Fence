@@ -22,7 +22,7 @@ params ["_building", "_newObjects"];
 //Remove any unnecessary blocking zones (e.g. from vehicle workshops that have decayed)
 private _toDelete = [];
 {
-	if (_building inArea _x) {
+	if (_building inArea _x) then {
 		_toDelete pushBack _foreachindex;
 	};
 } forEach vn_mf_markers_blocked_areas;

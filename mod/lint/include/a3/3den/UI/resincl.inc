@@ -81,7 +81,7 @@
 
 #define SL_TEXTURES       0x10
 
-// progress bar 
+// progress bar
 #define ST_VERTICAL       0x01
 #define ST_HORIZONTAL     0
 
@@ -132,8 +132,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Predefined controls
-#define IDC_OK            1
-#define IDC_CANCEL        2
 #define IDC_AUTOCANCEL    3
 #define IDC_ABORT         4
 #define IDC_RESTART       5
@@ -247,7 +245,7 @@
 #define IDC_DISPLAY3DEN_TOOLBAR_REDO			1011
 #define IDC_DISPLAY3DEN_TOOLBAR_WNONE			1012
 #define IDC_DISPLAY3DEN_TOOLBAR_WTRANSLATION		1013
-#define IDC_DISPLAY3DEN_TOOLBAR_WROTATION		1014	
+#define IDC_DISPLAY3DEN_TOOLBAR_WROTATION		1014
 #define IDC_DISPLAY3DEN_TOOLBAR_WSCALING		1015
 #define IDC_DISPLAY3DEN_TOOLBAR_COORD			1016
 #define IDC_DISPLAY3DEN_TOOLBAR_VERT			1017
@@ -447,7 +445,7 @@
 #define IDC_PUBLISH_BUTTON_SELECT_PREVIEW     		118
 #define IDC_PUBLISH_BUTTON_DEFAULT_PREVIEW    		119
 #define IDC_PUBLISH_STORAGE_SLIDER            		120
-#define IDC_PUBLISH_STEAM_HIDE_NEW_MISSION    		121 
+#define IDC_PUBLISH_STEAM_HIDE_NEW_MISSION    		121
 #define IDC_PUBLISH_STEAM_SHOW_NEW_MISSION    		122
 
 // RscDisplayFileSelectImage

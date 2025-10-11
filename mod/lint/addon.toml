@@ -1,0 +1,5 @@
+[binarize]
+enabled = false
+
+[rapify]
+enabled = false

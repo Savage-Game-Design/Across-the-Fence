@@ -5,6 +5,9 @@ severity = "Warning"
 options.banned = [
     "execVM",
 ]
+options.ignore = [
+    "addPublicVariableEventHandler", # Alternate syntax doesn't work, used in Paradigm
+]
 
 [sqf.banned_macros]
 options.release = [
@@ -36,3 +39,9 @@ enabled = false
 
 [config.config_this_call]
 enabled = true
+
+[sqf.reasign_reserved_variable]
+enabled = false
+
+[sqf.format_args]
+severity = "Warning"

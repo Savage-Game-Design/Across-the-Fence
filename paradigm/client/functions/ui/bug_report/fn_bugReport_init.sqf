@@ -1,14 +1,15 @@
+#pragma hemtt flag pe23_ignore_has_include
 /**
     File: fn_bugReport_init.sqf
     Author:  Savage Game Design
     Public: No
-    
+
     Description: ![See fn_bugReport_show]
-    
+
     Parameter(s): ![fn_bugReport_show]
-    
+
     Returns: ![NOT_DOCUMENTED]
-    
+
     Example(s): ![NOT_DOCUMENTED]
 */
 
@@ -37,6 +38,11 @@ _controls params [ "_ctrlHint", "_ctrlInput", "_ctrlSubmit", "_ctrlGroup", "_ctr
 
 _ctrlSubmit ctrlEnable false;
 
+private _dateTime = systemTimeUTC;
+private _date = (_dateTime select [0, 3]) joinString "-";
+private _time = (_dateTime select [3, 3]) joinString ":";
+private _date_ISO8601 = format ["%1T%2Z", _date, _time];
+
 private _super = createHashMap;
 _super set ["productVersion", productVersion];
 _super set ["language", language];
@@ -58,7 +64,7 @@ _super set ["diag_fps", diag_fps];
 _super set ["isStreamFriendlyUIEnabled", isStreamFriendlyUIEnabled];
 _super set ["#supportInfo", count supportInfo ""];
 _super set ["__A3_DEBUG__", [false, true]#__A3_DEBUG__];
-_super set ["__DATE_STR_ISO8601__", __DATE_STR_ISO8601__];
+_super set ["__DATE_STR_ISO8601__", _date_ISO8601];
 _super set ["cheatsEnabled", cheatsenabled];
 
 // "\vn\vn_versioning\scripts\vn_version.inc"

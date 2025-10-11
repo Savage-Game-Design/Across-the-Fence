@@ -13,7 +13,21 @@ def replace_import_with_class(directory: Path):
     for hpp_file in Path(directory).rglob("*.hpp"):
         with open(hpp_file, 'r') as f:
             content = f.read()
-        modified_content = re.sub(r'^import (\w+;)', r'class \1', content, flags=re.MULTILINE)
+        modified_content = re.sub(r'^import (\w+);', r'class \1;', content, flags=re.MULTILINE)
+        modified_content = re.sub(r'^import (\w+) from \w+;', r'class \1;', modified_content, flags=re.MULTILINE)
+        with open(hpp_file, 'w') as f:
+            f.write(modified_content)
+
+def replace_exec_with_eval(directory: Path):
+
+    print(f"Replacing \"__EXEC\" with \"__EVAL\" in {directory}")
+
+    # Process hpp files to replace 'exec' with 'eval'
+    for hpp_file in Path(directory).rglob("*.inc"):
+        with open(hpp_file, 'r') as f:
+            content = f.read()
+        modified_content = re.sub(r'^__EXEC', r'#define _fake__EXEC ', content, flags=re.MULTILINE)
+        modified_content = re.sub(r' __EXEC\(.*\)', r' /* */', modified_content, flags=re.MULTILINE)
         with open(hpp_file, 'w') as f:
             f.write(modified_content)
 
@@ -53,13 +67,18 @@ def run(source_root: Path, work_path: Path):
     print("Adding hemtt config files")
     shutil.copy(source_root / "mod" / "lint" / "config.cpp", addons_path)
     shutil.copy(source_root / "mod" / "lint" / "$PBOPREFIX$", addons_path)
+    shutil.copy(source_root / "mod" / "lint" / "addon.toml", addons_path)
 
     hemtt_source = source_root / "mod" / "lint" / ".hemtt"
     hemtt_destination = work_path / ".hemtt"
-
     shutil.copytree(hemtt_source, hemtt_destination)
 
+    include_source = source_root / "mod" / "lint" / "include"
+    include_destination = work_path / "include"
+    shutil.copytree(include_source, include_destination)
+
     replace_import_with_class(addons_mission_path)
+    replace_exec_with_eval(addons_mission_path)
 
     vgm.hemtt.check(work_path)
 

@@ -21,3 +21,6 @@ include = [
     "mod.cpp",
     "atf_backend_x64.dll",
 ]
+
+[preprocessor]
+runtime_macros = true

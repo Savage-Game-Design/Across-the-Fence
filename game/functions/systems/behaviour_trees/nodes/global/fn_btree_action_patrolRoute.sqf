@@ -42,7 +42,7 @@ _action set ["calculateBestStartingIndex", {
     private _directionIncrement = [_node, _state] call (_node get "getDirectionIncrement");
 
     // Find nearest point on route
-    private _nearestDistance = 9999999999;
+    private _nearestDistance = 1e10;
     private _nearestIndex = 0;
     private _groupPos = getPosATL leader _extern_group;
     {
