@@ -61,10 +61,10 @@ class VGM_RscMedicalStatus
             style = 2;
             text = "$STR_VGM_MEDICAL_UI_HEALTH_STATUS";
             colorText[] = {1,1,1,0.75};
-            x = DISPLAY_X;
-            y = DISPLAY_Y - ((5.0) * VGM_GRID_H) - (0.65 * GUI_GRID_H);
-            w = DISPLAY_W * VGM_GRID_W;
-            h = 1 * GUI_GRID_H;
+            x = QUOTE(DISPLAY_X);
+            y = QUOTE(DISPLAY_Y - ((5.0) * VGM_GRID_H) - (0.65 * GUI_GRID_H));
+            w = QUOTE(DISPLAY_W * VGM_GRID_W);
+            h = QUOTE(1 * GUI_GRID_H);
         };
         class ControlsHint: RscText
         {
@@ -72,62 +72,62 @@ class VGM_RscMedicalStatus
             style = 2;
             text = "$STR_VGM_MEDICAL_UI_HEALTH_STATUS_KEYBIND";
             colorText[] = {1,1,1,0.75};
-            x = DISPLAY_X;
-            y = DISPLAY_Y - (4.5 * VGM_GRID_H);
-            w = DISPLAY_W * VGM_GRID_W;
-            h = 1 * GUI_GRID_H;
-            sizeEx = 0.66 * GUI_GRID_H;
+            x = QUOTE(DISPLAY_X);
+            y = QUOTE(DISPLAY_Y - (4.5 * VGM_GRID_H));
+            w = QUOTE(DISPLAY_W * VGM_GRID_W);
+            h = QUOTE(1 * GUI_GRID_H);
+            sizeEx = QUOTE(0.66 * GUI_GRID_H);
         };
 
         class HeadIcon: VGM_ctrlPicture
         {
             idc = VGM_IDC_DISPLAYMEDICAL_HEAD;
             text = "soldier_head.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * HEAD_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN) * VGM_GRID_H;
-            w = HEAD_W * VGM_GRID_W;
-            h = HEAD_H * VGM_GRID_H;
+            x = QUOTE(DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * HEAD_W) * VGM_GRID_W);
+            y = QUOTE(DISPLAY_Y + (MARGIN) * VGM_GRID_H);
+            w = QUOTE(HEAD_W * VGM_GRID_W);
+            h = QUOTE(HEAD_H * VGM_GRID_H);
         };
         class TorsoIcon: HeadIcon
         {
             idc = VGM_IDC_DISPLAYMEDICAL_TORSO;
             text = "soldier_torso.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H) * VGM_GRID_H;
-            w = TORSO_W * VGM_GRID_W;
-            h = TORSO_H * VGM_GRID_H;
+            x = QUOTE(DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W) * VGM_GRID_W);
+            y = QUOTE(DISPLAY_Y + (MARGIN + HEAD_H) * VGM_GRID_H);
+            w = QUOTE(TORSO_W * VGM_GRID_W);
+            h = QUOTE(TORSO_H * VGM_GRID_H);
         };
         class ArmLeftIcon: TorsoIcon
         {
             idc = VGM_IDC_DISPLAYMEDICAL_ARMLEFT;
             text = "soldier_arm_l.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - ARMS_W - 0.5 * TORSO_W) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H + (HEAD_W/5.71)) * VGM_GRID_H;
-            w = ARMS_W * VGM_GRID_W;
-            h = ARMS_H * VGM_GRID_H;
+            x = QUOTE(DISPLAY_X + (0.5 * DISPLAY_W - ARMS_W - 0.5 * TORSO_W) * VGM_GRID_W);
+            y = QUOTE(DISPLAY_Y + (MARGIN + HEAD_H + (HEAD_W/5.71)) * VGM_GRID_H);
+            w = QUOTE(ARMS_W * VGM_GRID_W);
+            h = QUOTE(ARMS_H * VGM_GRID_H);
         };
         class ArmRightIcon: ArmLeftIcon
         {
             idc = VGM_IDC_DISPLAYMEDICAL_ARMRIGHT;
             text = "soldier_arm_r.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W + 0.5 * TORSO_W) * VGM_GRID_W;
+            x = QUOTE(DISPLAY_X + (0.5 * DISPLAY_W + 0.5 * TORSO_W) * VGM_GRID_W);
         };
         class LegLeftIcon: TorsoIcon
         {
             idc = VGM_IDC_DISPLAYMEDICAL_LEGLEFT;
             text = "soldier_leg_l.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W - (HEAD_W/10)) * VGM_GRID_W;
-            y = DISPLAY_Y + (MARGIN + HEAD_H + TORSO_H) * VGM_GRID_H;
-            w = LEG_L_W * VGM_GRID_W;
-            h = LEG_L_H * VGM_GRID_H;
+            x = QUOTE(DISPLAY_X + (0.5 * DISPLAY_W - 0.5 * TORSO_W - (HEAD_W/10)) * VGM_GRID_W);
+            y = QUOTE(DISPLAY_Y + (MARGIN + HEAD_H + TORSO_H) * VGM_GRID_H);
+            w = QUOTE(LEG_L_W * VGM_GRID_W);
+            h = QUOTE(LEG_L_H * VGM_GRID_H);
         };
         class LegRightIcon: LegLeftIcon
         {
             idc = VGM_IDC_DISPLAYMEDICAL_LEGRIGHT;
             text = "soldier_leg_r.paa";
-            x = DISPLAY_X + (0.5 * DISPLAY_W + (HEAD_W/66.66)) * VGM_GRID_W;
-            w = LEG_R_W * VGM_GRID_W;
-            h = LEG_R_H * VGM_GRID_H;
+            x = QUOTE(DISPLAY_X + (0.5 * DISPLAY_W + (HEAD_W/66.66)) * VGM_GRID_W);
+            w = QUOTE(LEG_R_W * VGM_GRID_W);
+            h = QUOTE(LEG_R_H * VGM_GRID_H);
         };
     };
 };

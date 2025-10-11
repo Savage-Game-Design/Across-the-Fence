@@ -11,10 +11,10 @@ class VGM_RscLevelIndicator
     {
         class MainGroup: RscControlsGroupNoScrollbars
         {
-            x = GUI_GRID_TOPCENTER_X + 10 * GUI_GRID_W;
-            y = GUI_GRID_TOPCENTER_Y + 0.5 * GUI_GRID_H;
-            w = 20 * GUI_GRID_W;
-            h = 1.5 * GUI_GRID_H;
+            x = QUOTE(GUI_GRID_TOPCENTER_X + 10 * GUI_GRID_W);
+            y = QUOTE(GUI_GRID_TOPCENTER_Y + 0.5 * GUI_GRID_H);
+            w = QUOTE(20 * GUI_GRID_W);
+            h = QUOTE(1.5 * GUI_GRID_H);
 
             class Controls
             {
@@ -24,8 +24,8 @@ class VGM_RscLevelIndicator
                     text = "";
                     x = 0;
                     y = 0;
-                    w = 20 * GUI_GRID_W;
-                    h = 1.5 * GUI_GRID_H;
+                    w = QUOTE(20 * GUI_GRID_W);
+                    h = QUOTE(1.5 * GUI_GRID_H);
 
                     colorBackground[] = {0,0,0,0.4};
                 };
@@ -33,10 +33,10 @@ class VGM_RscLevelIndicator
                 class XpProgress: VGM_ctrlProgress
                 {
                     idc = VGM_IDC_LEVEL_INDICATOR_BAR;
-                    x = 0 * GUI_GRID_W;
-                    y = 0;
-                    w = 20 * GUI_GRID_W;
-                    h = 0.7 * GUI_GRID_H;
+                    x = QUOTE(0 * GUI_GRID_W);
+                    y = QUOTE(0);
+                    w = QUOTE(20 * GUI_GRID_W);
+                    h = QUOTE(0.7 * GUI_GRID_H);
 
                     colorFrame[] = {0,0,0,1};
                 };
@@ -45,12 +45,12 @@ class VGM_RscLevelIndicator
                 {
                     idc = VGM_IDC_LEVEL_INDICATOR_LEVEL;
                     text = "Level 00";
-                    x = 0;
-                    y = 0.65 * GUI_GRID_H;
-                    w = 6 * GUI_GRID_W;
-                    h = 0.8 * GUI_GRID_H;
+                    x = QUOTE(0);
+                    y = QUOTE(0.65 * GUI_GRID_H);
+                    w = QUOTE(6 * GUI_GRID_W);
+                    h = QUOTE(0.8 * GUI_GRID_H);
 
-                    size = 0.8 * GUI_GRID_H;
+                    size = QUOTE(0.8 * GUI_GRID_H);
 
                     class Attributes: Attributes
                     {
@@ -63,12 +63,12 @@ class VGM_RscLevelIndicator
                 {
                     idc = VGM_IDC_LEVEL_INDICATOR_XP;
                     text = "- / - XP";
-                    x = 6 * GUI_GRID_W;
-                    y = 0.65 * GUI_GRID_H;
-                    w = 14 * GUI_GRID_W;
-                    h = 0.8 * GUI_GRID_H;
+                    x = QUOTE(6 * GUI_GRID_W);
+                    y = QUOTE(0.65 * GUI_GRID_H);
+                    w = QUOTE(14 * GUI_GRID_W);
+                    h = QUOTE(0.8 * GUI_GRID_H);
 
-                    size = 0.8 * GUI_GRID_H;
+                    size = QUOTE(0.8 * GUI_GRID_H);
 
                     class Attributes: Attributes
                     {

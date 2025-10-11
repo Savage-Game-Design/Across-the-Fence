@@ -1,5 +1,7 @@
 import click
 import config
+import shutil
+import re
 from pathlib import Path
 import sgd.file_tree
 from vgm.artifacts import BuildArtifact, Version
@@ -7,8 +9,11 @@ import vgm.build
 from vgm.build import OutputFolderExistsError, calculate_mission_output_paths, PackType, BuildParams
 import vgm.field_manual
 import vgm.file_mapping
+import vgm.linter
 from vgm.processes import process_handler
 import vgm.arma
+
+from vgm.hemtt import check as hemtt_check
 
 
 source_root = Path(__file__).parent.parent
@@ -18,11 +23,12 @@ servermod_path = Path(output_paths[BuildArtifact.SERVER_MOD])
 
 mission_paths = calculate_mission_output_paths(source_root, output_paths[BuildArtifact.MISSION])
 
-def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False, version=None) -> BuildParams:
+def default_build_params(output_paths=output_paths, overwrite: bool = False, clean: bool = False, as_mod=False, version=None, map_whitelist=None) -> BuildParams:
     params = BuildParams(
         output_paths=output_paths,
         overwrite=overwrite,
-        clean=clean
+        clean=clean,
+        map_whitelist=map_whitelist,
     )
 
     params.mapping_params.as_mod = as_mod
@@ -152,6 +158,17 @@ def release(confirm, mod, version):
     vgm.build.pack(source_root, output_paths=release_output_paths, pack_type=PackType.Release)
 
 @click.command
+def lint():
+    lint_output_paths = config.output_paths["lint"]
+    version_lint = "v0.0.0@lint"
+    map_lint = "cam_lao_nam"
+
+    perform_build(default_build_params(overwrite=True, as_mod=False, clean=True, version=version_lint, output_paths=lint_output_paths, map_whitelist=[map_lint]))
+
+    lint_run_path = lint_output_paths[BuildArtifact.MISSION] / f"vgm.{map_lint}"
+    vgm.linter.run(source_root, lint_run_path)
+
+@click.command
 def update_field_manual_entries():
     vgm.field_manual.update_field_manual(source_root)
 
@@ -187,6 +204,7 @@ def launch():
 
 cli.add_command(build)
 cli.add_command(release)
+cli.add_command(lint)
 cli.add_command(print_file_tree)
 launch.add_command(command_launch_arma_client)
 launch.add_command(command_launch_arma_server)

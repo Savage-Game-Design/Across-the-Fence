@@ -1,11 +1,11 @@
-import os
+import getpass
 from pathlib import Path
 from vgm.artifacts import BuildArtifact
 
 config_dir = Path(__file__).parent
 repo_root = config_dir.parent
 
-username = os.getlogin()
+username = getpass.getuser()
 arma_profile = r"dev_vgm"
 
 paradigm_path = config_dir.parent /  "paradigm"
@@ -20,7 +20,10 @@ output_paths = {
         BuildArtifact.MISSION: repo_root / "output" / "missions",
         BuildArtifact.CLIENT_MOD: repo_root / "output" / "mods" / "@vgm_client",
         BuildArtifact.SERVER_MOD: repo_root / "output" / "mods" / "@vgm_server",
-    }
+    },
+    "lint": {
+        BuildArtifact.MISSION: repo_root / "output" / "lint",
+    },
 }
 
 arma_exe_path = r"C:\Program Files (x86)\Steam\steamapps\common\Arma 3\arma3_x64.exe"

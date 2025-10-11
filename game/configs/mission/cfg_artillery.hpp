@@ -22,12 +22,12 @@ class vn_artillery_settings {
     // Planes
     class aircraft {
         class he {
-            displayname = $STR_VN_ARTILLERY_AIRCRAFT_HE_HE_NAME;
+            displayname = "$STR_VN_ARTILLERY_AIRCRAFT_HE_HE_NAME";
 
             class rambler {
-                displayname = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_NAME;
+                displayname = "$STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_NAME";
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_433tfs_ca.paa";
-                description = $STR_VN_ARTILLERY_AIRCRAFT_HE_VESPA_DESCRIPTION;
+                description = "$STR_VN_ARTILLERY_AIRCRAFT_HE_VESPA_DESCRIPTION";
                 CONDITION_HEAVY_SUPPORT;
 
                 magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
@@ -35,9 +35,9 @@ class vn_artillery_settings {
                 cooldown = "5 * 60";
             };
             class sundowner {
-                displayname = $STR_VN_ARTILLERY_AIRCRAFT_HE_SUNDOWNER_NAME;
+                displayname = "$STR_VN_ARTILLERY_AIRCRAFT_HE_SUNDOWNER_NAME";
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_vf111_ca.paa";
-                description = $STR_VN_ARTILLERY_AIRCRAFT_HE_SUNDOWNER_DESCRIPTION;
+                description = "$STR_VN_ARTILLERY_AIRCRAFT_HE_SUNDOWNER_DESCRIPTION";
                 CONDITION_HEAVY_SUPPORT;
 
                 magazines[] = {"vn_bomb_500_blu1b_fb_mag_x1", ""};
@@ -46,9 +46,9 @@ class vn_artillery_settings {
                 cooldown = "5 * 60";
             };
             class hobo {
-                displayname = $STR_VN_ARTILLERY_AIRCRAFT_HE_HOBO_NAME;
+                displayname = "$STR_VN_ARTILLERY_AIRCRAFT_HE_HOBO_NAME";
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_1sos_ca.paa";
-                description = $STR_VN_ARTILLERY_AIRCRAFT_HE_HOBO_DESCRIPTION;
+                description = "$STR_VN_ARTILLERY_AIRCRAFT_HE_HOBO_DESCRIPTION";
                 CONDITION_HEAVY_SUPPORT;
 
                 magazines[] = {"vn_m61a1"};
@@ -58,12 +58,12 @@ class vn_artillery_settings {
         };
 
         class cluster {
-            displayname = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_CLUSTER_NAME;
+            displayname = "$STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_CLUSTER_NAME";
 
             class rambler {
-                displayname = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_NAME;
+                displayname = "$STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_NAME";
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_433tfs_ca.paa";
-                description = $STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_DESCRIPTION;
+                description = "$STR_VN_ARTILLERY_AIRCRAFT_CLUSTER_RAMBLER_DESCRIPTION";
                 CONDITION_HEAVY_SUPPORT;
 
                 magazines[] = {"vn_bomb_f4_out_500_mk20_cb_mag_x1", "vn_bomb_f4_out_500_mk20_cb_mag_x1"};
@@ -74,12 +74,12 @@ class vn_artillery_settings {
         };
 
         class illumination {
-            displayname = $STR_VN_ARTILLERY_AIRCRAFT_ILLUMINATION_ILLUMINATION_NAME;
+            displayname = "$STR_VN_ARTILLERY_AIRCRAFT_ILLUMINATION_NAME";
 
             class gnat {
-                displayname = $STR_VN_ARTILLERY_AIRCRAFT_ILLUMINATION_GNAT_NAME;
+                displayname = "$STR_VN_ARTILLERY_AIRCRAFT_ILLUMINATION_GNAT_NAME";
                 icon = "vn\ui_f_vietnam\data\decals\vn_callsign_src_a101_ca.paa";
-                description = $STR_VN_ARTILLERY_AIRCRAFT_ILLUMINATION_GNAT_DESCRIPTION;
+                description = "$STR_VN_ARTILLERY_AIRCRAFT_ILLUMINATION_GNAT_DESCRIPTION";
 
                 magazines[] = {};
                 vehicleclass = "vn_b_air_uh1d_02_03";

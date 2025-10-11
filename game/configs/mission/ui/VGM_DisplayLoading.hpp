@@ -99,12 +99,12 @@ class VGM_DisplayLoading {
             colorText[] = {1,1,1,1};
             colorBackground[] = {1,0,0,1};
 
-            x = safeZoneX + safezoneW/2 - _PICTURE_W/2;
-            y = safeZoneY + safeZoneH/2 - _PICTURE_H*2/2;
-            w = _PICTURE_W;
+            x = QUOTE(safeZoneX + safezoneW/2 - _PICTURE_W/2);
+            y = QUOTE(safeZoneY + safeZoneH/2 - _PICTURE_H*2/2);
+            w = QUOTE(_PICTURE_W);
             // the images are squares with 25% of top and bottom being empty space,
             // we expand the image vertically to offset that
-            h = _PICTURE_H*2;
+            h = QUOTE(_PICTURE_H*2);
         };
         class LoadingProgress: RscProgress {
             idc = 104; // engine looks for IDC 104
@@ -127,16 +127,16 @@ class VGM_DisplayLoading {
             idc = 5050;
             text = "$STR_LOADING";
 
-            size = _TEXT_H;
+            size = QUOTE(_TEXT_H);
             class Attributes
             {
                 align = "center";
             };
 
-            x = safeZoneX;
-            y = safeZoneY + safeZoneH/2 + _PICTURE_H/2 + _PROGRESS_BAR_H*2 + _PROGRESS_BAR_H;
-            w = safeZoneW;
-            h = _TEXT_H;
+            x = QUOTE(safeZoneX);
+            y = QUOTE(safeZoneY + safeZoneH/2 + _PICTURE_H/2 + _PROGRESS_BAR_H*2 + _PROGRESS_BAR_H);
+            w = QUOTE(safeZoneW);
+            h = QUOTE(_TEXT_H);
         };
     };
 };

@@ -2,7 +2,7 @@
     File: fn_skills_getTreeSkillPoints.sqf
     Author: Savage Game Design
     Date: 2023-05-13
-    Last Update: 2025-06-26
+    Last Update: 2025-10-11
     Public: No
 
     Description:
@@ -21,4 +21,4 @@
 
 params ["_skillTree", ["_player", player]];
 
-[_skillTree, _player, 9999999999] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
+[_skillTree, _player, 1e10] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;

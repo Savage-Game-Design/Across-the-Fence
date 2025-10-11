@@ -1,0 +1,49 @@
+[sqf.command_case]
+severity = "Warning"
+
+[sqf.banned_commands]
+options.banned = [
+    "execVM",
+]
+options.ignore = [
+    "addPublicVariableEventHandler", # Alternate syntax doesn't work, used in Paradigm
+]
+
+[sqf.banned_macros]
+options.release = [
+    "DEBUG",
+]
+
+[sqf]
+enabled = true
+
+[sqf.undefined]
+enabled = true
+# we could enable this and mark external vars with pragma instead
+# https://hemtt.dev/lints/sqf.html#ignoring-false-positives-2
+options.check_orphan_code = false
+
+[sqf.unused]
+enabled = true #many false positives without DEBUG_MODE_FULL
+options.check_params = false
+
+[sqf.shadowed]
+enabled = false
+
+[sqf.not_private]
+enabled = true
+
+[sqf.short_circuit_bool_var]
+enabled = true
+
+[sqf.count_array_comp]
+enabled = false
+
+[config.config_this_call]
+enabled = true
+
+[sqf.reasign_reserved_variable]
+enabled = false
+
+[sqf.format_args]
+severity = "Warning"

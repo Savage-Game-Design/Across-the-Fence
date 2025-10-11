@@ -11,7 +11,7 @@
 //#undef PARA_MISSION
 //#endif
 
-class CfgPatches 
+class CfgPatches
 {
 	class sgd_paradigm
 	{
@@ -20,7 +20,7 @@ class CfgPatches
 		url = "https://www.arma3.com";
 		units[] = {};
 		weapons[] = {};
-		requiredVersion = 0.1;
+		requiredVersion = 2.20;
 		requiredAddons[] = {"objects_f_vietnam_c","objects_f_vietnam","ui_f_vietnam","ui_fonts_f_vietnam"};
 	};
 };

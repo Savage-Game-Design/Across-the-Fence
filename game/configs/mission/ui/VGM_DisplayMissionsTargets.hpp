@@ -8,10 +8,10 @@ class VGM_DisplayMissionsTargets
     {
         class BackgroundRight: VGM_ctrlBackground
         {
-            x = _X - 1 * VGM_GRID_W;
-            y = safeZoneY;
-            w = (_W + 2) * VGM_GRID_W;
-            h = safeZoneH;
+            x = QUOTE(_X - 1 * VGM_GRID_W);
+            y = QUOTE(safeZoneY);
+            w = QUOTE((_W + 2) * VGM_GRID_W);
+            h = QUOTE(safeZoneH);
         };
     };
     class Controls
@@ -19,10 +19,10 @@ class VGM_DisplayMissionsTargets
         class Map: VGM_ctrlMap
         {
             idc = VGM_IDC_DISPLAYMISSIONSTARGET_MAP;
-            x = safeZoneX;
-            y = safeZoneY;
-            w = safeZoneW - ((_W + 2) * VGM_GRID_W);
-            h = safeZoneH;
+            x = QUOTE(safeZoneX);
+            y = QUOTE(safeZoneY);
+            w = QUOTE(safeZoneW - ((_W + 2) * VGM_GRID_W));
+            h = QUOTE(safeZoneH);
             class Legend // Disabled
             {
                 x = 0;
@@ -37,10 +37,10 @@ class VGM_DisplayMissionsTargets
         };
         class Stack: VGM_ctrlStack
         {
-            x = _X;
-            y = safeZoneY;
-            w = _W * VGM_GRID_W;
-            h = safeZoneH;
+            x = QUOTE(_X);
+            y = QUOTE(safeZoneY);
+            w = QUOTE(_W * VGM_GRID_W);
+            h = QUOTE(safeZoneH);
             class Controls
             {
                 class Name: VGM_ctrlStructuredText
@@ -48,8 +48,8 @@ class VGM_DisplayMissionsTargets
                     idc = VGM_IDC_DISPLAYMISSIONSTARGET_NAME;
                     text = "dedTargetBoxName";
                     x = 0;
-                    w = _W * VGM_GRID_W;
-                    h = 5 * VGM_GRID_H;
+                    w = QUOTE(_W * VGM_GRID_W);
+                    h = QUOTE(5 * VGM_GRID_H);
                     size = VGM_FONT_L;
                 };
                 class Mods: Name
@@ -64,8 +64,8 @@ class VGM_DisplayMissionsTargets
                     idc = VGM_IDC_DISPLAYMISSIONSTARGET_ACCEPT;
                     text = "Accept";
                     x = 0;
-                    w = _W * VGM_GRID_W;
-                    h = 5 * VGM_GRID_H;
+                    w = QUOTE(_W * VGM_GRID_W);
+                    h = QUOTE(5 * VGM_GRID_H);
                 };
                 class Back: Accept
                 {

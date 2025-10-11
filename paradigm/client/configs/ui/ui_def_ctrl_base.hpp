@@ -11,10 +11,10 @@ class ribbon_##NUM : para_ribbon_base\
 {\
 	idc = PARA_CHARINFO_RIBBON_##NUM##_IDC;\
 	\
-	x = UIW((2.5+((WIDTH+0.2)*INDEXX)));\
-	y = UIH((15.30+((RIBBON_H(WIDTH)+0.2)*INDEXY)));\
-	w = UIW(WIDTH);\
-	h = UIH(RIBBON_H(WIDTH));\
+	x = QUOTE(UIW((2.5+((WIDTH+0.2)*INDEXX))));\
+	y = QUOTE(UIH((15.30+((RIBBON_H(WIDTH)+0.2)*INDEXY))));\
+	w = QUOTE(UIW(WIDTH));\
+	h = QUOTE(UIH(RIBBON_H(WIDTH)));\
 };
 
 class para_RscText
@@ -23,16 +23,16 @@ class para_RscText
 	type = 0;
 	style = 0;
 	shadow = 0;
-	
+
 	x = 0;
 	y = 0;
 	h = 0.037;
 	w = 0.3;
-	
+
 	text = "";
 	font = USEDFONT;
-	SizeEx = TXT_S;
-	
+	SizeEx = QUOTE(TXT_S);
+
 	colorShadow[] = {0,0,0,0.5};
 	colorText[] = {1,1,1,1.0};
 	colorBackground[] = {0,0,0,0};
@@ -56,16 +56,16 @@ class para_RscStructuredText
 	idc = -1;
 	type = 13;
 	style = 0;
-	
-	x = UIW(2);
-	y = UIH(2.5);
-	w = UIW(15.5);
-	h = UIH(0.9);
-	
+
+	x = QUOTE(UIW(2));
+	y = QUOTE(UIH(2.5));
+	w = QUOTE(UIW(15.5));
+	h = QUOTE(UIH(0.9));
+
 	colorText[] = {0.1,0.1,0.1,0.9};
 	colorBackground[] = {0,0,0,0};
 	shadow = 0;
-	size = TXT_M;
+	size = QUOTE(TXT_M);
 	text = "";
 	fade = 0;
 	tooltip = "";
@@ -111,52 +111,52 @@ class para_RscListNBox
 	idc = -1; // Control identification (without it, the control won't be displayed)
 	type = CT_LISTNBOX; // Type 102
 	style = ST_LEFT + LB_TEXTURES; // Style
-	
+
 	selectWithRMB = 1;	//Enable RightClick to select rows
 	text = "";
 	blinkingPeriod = 0; // Time in which control will fade out and back in. Use 0 to disable the effect.
-	
-	x = UIX_CL(1);
-	y = UIY_CU(1);
-	w = UIW(2);
-	h = UIH(2);
-	
+
+	x = QUOTE(UIX_CL(1));
+	y = QUOTE(UIY_CU(1));
+	w = QUOTE(UIW(2));
+	h = QUOTE(UIH(2));
+
 	colorSelectBackground[] = {0.5,0.5,0.5,0.4}; // Selected item fill color
 	colorSelectBackground2[] = {0.5,0.5,0.5,0.4}; // Selected item fill color (oscillates between this and colorSelectBackground)
-	
-	sizeEx = TXT_S; // Text size
+
+	sizeEx = QUOTE(TXT_S); // Text size
 	font = USEDFONT; // Font from CfgFontFamilies
-	rowHeight = UIH(1); // Row height
+	rowHeight = QUOTE(UIH(1)); // Row height
 	borderSize = 0;
 	shadow = 0; // Shadow (0 - none, 1 - directional, color affected by colorShadow, 2 - black outline)
-	
+
 	colorText[] = {PARA_C_DYNAMICGROUPS_COLOR_DEFAULT_CONFIG}; // Text and frame color
 	colorDisabled[] = {0.5, 0.5, 0.5, 1.0}; // Disabled text color
 	colorSelect[] = {0.5, 0.5, 0.5, 1.0}; // Text selection color
 	colorSelect2[] = {0.5, 0.5, 0.5, 0.6}; // Text selection color (oscillates between this and colorSelect)
 	colorShadow[] = {0,0,0,0.5}; // Text shadow color (used only when shadow is 1)
-	
+
 	colorPicture[] = {0.7,0.7,0.7,1};
 	colorPictureSelected[] = {0.2,0.2,0.2,1};
 	colorPictureDisabled[] = {0,0,0,1};
-	
+
 	tooltip = ""; // Tooltip text
 	tooltipColorShade[] = {0,0,0,1}; // Tooltip background color
 	tooltipColorText[] = {1,1,1,1}; // Tooltip text color
 	tooltipColorBox[] = {1,1,1,1}; // Tooltip frame color
-	
+
 	columns[] = {0.0,0.2}; // Horizontal coordinates of columns (relative to list width, in range from 0 to 1)
-	
+
 	drawSideArrows = 0; // 1 to draw buttons linked by idcLeft and idcRight on both sides of selected line. They are resized to line height
 	idcLeft = 1000; // Left button IDC
 	idcRight = 1001; // Right button IDC
-	
+
 	period = 1; // Oscillation time between colorSelect/colorSelectBackground2 and colorSelect2/colorSelectBackground when selected
-	
+
 	maxHistoryDelay = 1; // Time since last keyboard type search to reset it
-	
+
 	soundSelect[] = {"\A3\ui_f\data\sound\RscListbox\soundSelect",0.09,1}; // Sound played when an item is selected
-	
+
 	// disableOverflow = 1; // ToDo: Needs Recheck !!!
 	// Scrollbar configuration (applied only when LB_TEXTURES style is used)
 	class ListScrollBar
@@ -164,15 +164,15 @@ class para_RscListNBox
 		width = 0; // width of ListScrollBar
 		height = 0; // height of ListScrollBar
 		scrollSpeed = 0.01; // scrollSpeed of ListScrollBar
-		
+
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on
 		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically)
 		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa"; // Dragging element (stretched vertically)
-		
+
 		color[] = {1,1,1,1}; // Scrollbar color
 	};
-	
+
 	onCanDestroy = "";
 	onDestroy = "";
 	onSetFocus = "";
@@ -186,7 +186,7 @@ class para_RscListNBox
 	onMouseZChanged = "";
 	onMouseMoving = "";
 	onMouseHolding = "";
-	
+
 	onLBSelChanged = "";
 	onLBDblClick = "";
 };
@@ -201,17 +201,17 @@ class para_RscListBox
 	blinkingPeriod = 0; // Time in which control will fade out and back in. Use 0 to disable the effect.
 
 	selectWithRMB = 1;	//Enable RightClick to select rows
-	
-	x = UIX_CL(1);
-	y = UIY_CU(1);
-	w = UIW(2);
-	h = UIH(2);
+
+	x = QUOTE(UIX_CL(1));
+	y = QUOTE(UIY_CU(1));
+	w = QUOTE(UIW(2));
+	h = QUOTE(UIH(2));
 
 	colorBackground[] = {0.2,0.2,0.2,1}; // Fill color
 	colorSelectBackground[] = {1,0.5,0,1}; // Selected item fill color
 	colorSelectBackground2[] = {0,0,0,1}; // Selected item fill color (oscillates between this and colorSelectBackground)
 
-	sizeEx = TXT_S; // Text size
+	sizeEx = QUOTE(TXT_S); // Text size
 	font = USEDFONT; // Font from CfgFontFamilies
 	shadow = 0; // Shadow (0 - none, 1 - directional, color affected by colorShadow, 2 - black outline)
 	colorText[] = {1,1,1,1}; // Text and frame color
@@ -228,16 +228,16 @@ class para_RscListBox
 	tooltipColorShade[] = {0,0,0,1}; // Tooltip background color
 	tooltipColorText[] = {1,1,1,1}; // Tooltip text color
 	tooltipColorBox[] = {1,1,1,1}; // Tooltip frame color
-	
+
 	period = 1; // Oscillation time between colorSelect/colorSelectBackground2 and colorSelect2/colorSelectBackground when selected
-	
-	rowHeight = UIH(1); // Row height
+
+	rowHeight = QUOTE(UIH(1)); // Row height
 	itemSpacing = 0; // Height of empty space between items
 	maxHistoryDelay = 1; // Time since last keyboard type search to reset it
 	canDrag = 0; // 1 (true) to allow item dragging
-	
+
 	soundSelect[] = {"\A3\ui_f\data\sound\RscListbox\soundSelect",0.09,1}; // Sound played when an item is selected
-	
+
 	// Scrollbar configuration (applied only when LB_TEXTURES style is used)
 	class ListScrollBar //In older games this class is "ScrollBar"
 	{
@@ -296,13 +296,13 @@ class para_RscButton
 	soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape",0.09,1};
 	idc = -1;
 	//style = 2;
-	x = UIX_CL(1);
-	y = UIY_CU(1);
-	w = UIW(2);
-	h = UIH(2);
+	x = QUOTE(UIX_CL(1));
+	y = QUOTE(UIY_CU(1));
+	w = QUOTE(UIW(2));
+	h = QUOTE(UIH(2));
 	shadow = 0;
 	font = USEDFONT;
-	sizeEx = TXT_M;
+	sizeEx = QUOTE(TXT_M);
 	url = "";
 	offsetX = 0;
 	offsetY = 0;
@@ -321,14 +321,14 @@ class para_RscButton_ImgSwitch
 	style = 0x30;
 
 	idc = -1;
-	x = UIX_CL(1);
-	y = UIY_CU(1);
-	w = UIW(2);
-	h = UIH(2);
+	x = QUOTE(UIX_CL(1));
+	y = QUOTE(UIY_CU(1));
+	w = QUOTE(UIW(2));
+	h = QUOTE(UIH(2));
 
 	font = USEDFONT;
 	shadow = 0;
-	sizeEx = TXT_M;
+	sizeEx = QUOTE(TXT_M);
 	url = "";
 
 	text = "";		//Texture Normal
@@ -364,10 +364,10 @@ class para_RscButton_ImgSwitch
 class vn_MyFancyButtonWithChangingTexturesWhenIHoverWithTheMouseOverItCamelCaseIsNice: vn_mf_RscButton_ImgSwitch
 {
 	idc = 123;
-	x = UIX_CL(1);
-	y = UIY_CU(1);
-	w = UIW(2);
-	h = UIH(2);
+	x = QUOTE(UIX_CL(1));
+	y = QUOTE(UIY_CU(1));
+	w = QUOTE(UIW(2));
+	h = QUOTE(UIH(2));
 
 	tooltip = "I am a Button who exchanges images, when you move your mouse over me! WOOT WOOT!";
 
@@ -393,10 +393,10 @@ class para_RscControlsGroup
 	fade = 0;
 	blinkingPeriod = 0;
 	shadow = 0;
-	
+
 	class VScrollbar
 	{
-		width = UIW(0.5);
+		width = QUOTE(UIW(0.5));
 		scrollSpeed = 0.03;
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
@@ -410,7 +410,7 @@ class para_RscControlsGroup
 	};
 	class HScrollbar
 	{
-		width = UIH(0.5);
+		width = QUOTE(UIH(0.5));
 		scrollSpeed = 0.03;
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
@@ -483,54 +483,54 @@ class para_RscControlsGroupNoScrollbarV : para_RscControlsGroup
 class para_RscCombo
 {
 	idc = -1;
-	x = UIX_CL(1);
-	y = UIY_CU(1);
-	w = UIW(2);
-	h = UIH(2);
-	
+	x = QUOTE(UIX_CL(1));
+	y = QUOTE(UIY_CU(1));
+	w = QUOTE(UIW(2));
+	h = QUOTE(UIH(2));
+
 	type = CT_COMBO;
 	//style = ST_LEFT + LB_TEXTURES; // Style
 	style = ST_LEFT + LB_TEXTURES; // Style
 	blinkingPeriod = 0; // Time in which control will fade out and back in. Use 0 to disable the effect.
-	
-	
+
+
 	colorBackground[] = {0.1,0.1,0.1,0.0}; // Fill color
 	colorSelectBackground[] = {0.1,0.1,0.1,0.1}; // Selected item fill color
-	
+
 	tooltip = ""; // Tooltip text
-	sizeEx =  TXT_M;
+	sizeEx =  QUOTE(TXT_M);
 	font = USEDFONT;
 	shadow = 0;
-	
+
 	colorText[] = {0,0,0,0.75}; // Text and frame color
 	colorDisabled[] = {1,1,1,0.5}; // Disabled text color
 	colorSelect[] = {0,0,0,1}; // Text selection color
-	
+
 	pictureColor[] = {0.0,0.5,0.1,1}; // Picture color
 	pictureColorSelect[] = {0.0,0.5,0.1,1}; // Selected picture color
 	pictureColorDisabled[] = {1,1,1,0.5}; // Disabled picture color
-	
+
 	tooltipColorShade[] = {0,0,0,1}; // Tooltip background color
 	tooltipColorText[] = {1,1,1,1}; // Tooltip text color
 	tooltipColorBox[] = {1,1,1,1}; // Tooltip frame color
-	
+
 	arrowEmpty = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_ca.paa"; // Expand arrow									//ToDo?
 	arrowFull = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_active_ca.paa"; // Collapse arrow							//ToDo?
-	
-	wholeHeight = PXH(10); // Maximum height of expanded box (including the control height)
+
+	wholeHeight = QUOTE(PXH(10)); // Maximum height of expanded box (including the control height)
 	maxHistoryDelay = 1; // Time since last keyboard type search to reset it
-	
+
 	soundExpand[] = {"\A3\ui_f\data\sound\RscCombo\soundExpand",0.1,1}; // Sound played when the list is expanded			//ToDo?
 	soundCollapse[] = {"\A3\ui_f\data\sound\RscCombo\soundCollapse",0.1,1}; // Sound played when the list is collapsed		//ToDo?
 	soundSelect[] = {"\A3\ui_f\data\sound\RscCombo\soundSelect",0.1,1}; // Sound played when an item is selected			//ToDo?
-	
+
 	// Scrollbar configuration (applied only when LB_TEXTURES style is used)
 	class ComboScrollBar
 	{
 		width = 0; // width of ComboScrollBar
 		height = 0; // height of ComboScrollBar
 		scrollSpeed = 0.01; // scrollSpeed of ComboScrollBar
-		
+
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow												//ToDo?
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on								//ToDo?
 		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically)					//ToDo?
@@ -538,8 +538,8 @@ class para_RscCombo
 
 		color[] = {1,1,1,1}; // Scrollbar color
 	};
-	
-	
+
+
 	onCanDestroy = "";
 	onDestroy = "";
 	onSetFocus = "";
@@ -553,7 +553,7 @@ class para_RscCombo
 	onMouseZChanged = "";
 	onMouseMoving = "";
 	onMouseHolding = "";
-	
+
 	onLBSelChanged = "";
 };
 
@@ -561,10 +561,10 @@ class para_ribbon_base: para_RscButton_ImgSwitch
 {
 	idc = -1;
 
-	x = UIW(0);
-	y = UIH(0);
-	w = UIW(1);
-	h = UIH((1/3.3333));
+	x = QUOTE(UIW(0));
+	y = QUOTE(UIH(0));
+	w = QUOTE(UIW(1));
+	h = QUOTE(UIH((1/3.3333)));
 
 	text = "";
 	tooltip = "";
@@ -1138,7 +1138,7 @@ class para_RscEdit
 	style = ST_FRAME;
 	font = USEDFONT;
 	shadow = 2;
-	sizeEx = TXT_M;
+	sizeEx = QUOTE(TXT_M);
 	canModify = 1;
 };
 
@@ -1177,7 +1177,7 @@ class para_RscCheckBoxes
 	type = CT_CHECKBOXES;
 	rows = 1;
 	columns = 1;
-	sizeEx = TXT_S;
+	sizeEx = QUOTE(TXT_S);
 	font = USEDFONT;
 	shadow = 1;
 	class ScrollBar: ScrollBar
@@ -1204,8 +1204,8 @@ class para_RscCheckBox
 	checked = 0;
     x = 0;
     y = 0;
-    w = UIW(1);
-    h = UIH(1);
+    w = QUOTE(UIW(1));
+    h = QUOTE(UIH(1));
 	color[]={0.1,0.1,0.1,0.9};
 	colorFocused[]={0.1,0.1,0.1,0.9};
 	colorHover[]={0.1,0.1,0.1,0.9};
@@ -1267,8 +1267,8 @@ class para_ControlsTable
 	style = ST_LEFT + LB_TEXTURES;
 
 	lineSpacing = 0;
-	rowHeight = UIH(1);
-	headerHeight = UIH(1);
+	rowHeight = QUOTE(UIH(1));
+	headerHeight = QUOTE(UIH(1));
 
 	firstIdc = 20000;
 	lastIdc = 30000;
@@ -1279,7 +1279,7 @@ class para_ControlsTable
 
 	class VScrollbar
 	{
-		width = UIW(0.5);
+		width = QUOTE(UIW(0.5));
 		scrollSpeed = 0.03;
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
@@ -1294,7 +1294,7 @@ class para_ControlsTable
 
 	class HScrollbar
 	{
-		height = UIH(0.5);
+		height = QUOTE(UIH(0.5));
 		scrollSpeed = 0.03;
 		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
 		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
@@ -1373,13 +1373,13 @@ class para_wheelMenu_base : para_RscPicture
 {
 	idc = -1;
 	style = "0x30";
-	
-	x = PXX_CL(18);
-	y = PXY_CU(18);
-	w = PXW(36);
-	h = PXH(36);
-	
-	
+
+	x = QUOTE(PXX_CL(18));
+	y = QUOTE(PXY_CU(18));
+	w = QUOTE(PXW(36));
+	h = QUOTE(PXH(36));
+
+
 	text = "";
 	font= "RobotoCondensed";
 	sizeEx = "0.02 * safezoneH";
@@ -1405,10 +1405,10 @@ class para_loadingScreen
 			idc = 104; // progress bar, has to have idc 104
 			colorBar[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])","(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"};
 			texture = "#(argb,8,8,3)color(1,1,1,1)";
-			x = 0.295761 * safezoneW + safezoneX;
-			y = 0.9 * safezoneH + safezoneY;
-			w = 0.408477 * safezoneW;
-			h = 0.0066 * safezoneH;
+			x = QUOTE(0.295761 * safezoneW + safezoneX);
+			y = QUOTE(0.9 * safezoneH + safezoneY);
+			w = QUOTE(0.408477 * safezoneW);
+			h = QUOTE(0.0066 * safezoneH);
 		};
 		class LoadingText: para_RscStructuredText
 		{
@@ -1419,10 +1419,10 @@ class para_loadingScreen
 				size = "0.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 				align = "center";
 			};
-			x = 0.314328 * safezoneW + safezoneX;
-			y = 0.80 * safezoneH + safezoneY;
-			w = 0.350767 * safezoneW;
-			h = 0.0396 * safezoneH;
+			x = QUOTE(0.314328 * safezoneW + safezoneX);
+			y = QUOTE(0.80 * safezoneH + safezoneY);
+			w = QUOTE(0.350767 * safezoneW);
+			h = QUOTE(0.0396 * safezoneH);
 			sizeEx = "0.8 *((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 		};
 	};
@@ -1487,14 +1487,14 @@ class para_RscTree
 	shadow = 0;
 	style = ST_LEFT;
 	font = USEDFONT;
-	sizeEx = TXT_S;
+	sizeEx = QUOTE(TXT_S);
 	expandedTexture = "A3\ui_f\data\gui\rsccommon\rsctree\expandedTexture_ca.paa";
 	hiddenTexture = "A3\ui_f\data\gui\rsccommon\rsctree\hiddenTexture_ca.paa";
 	x = 0;
 	y = 0;
-	w = UIH(1);
-	h = UIH(1);
-	rowHeight = UIH(1);
+	w = QUOTE(UIH(1));
+	h = QUOTE(UIH(1));
+	rowHeight = QUOTE(UIH(1));
 	colorSelectBackground[] = {0,0,0,0.5};
 	colorLines[] = {0,0,0,0};
 	borderSize = 0;

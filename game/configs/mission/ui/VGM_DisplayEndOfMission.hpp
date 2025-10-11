@@ -52,9 +52,9 @@ class VGM_DisplayEndOfMission
         {
             idc = 5001;
             colorBackground[] = {0,0,0,0.55};
-            x = DX + 1 * VGM_GRID_W;
+            x = QUOTE(DX + 1 * VGM_GRID_W);
             y = VGM_Y(DY);
-            w = (DW - 2) * VGM_GRID_W;
+            w = QUOTE((DW - 2) * VGM_GRID_W);
             h = VGM_Y_H(DH - SPACING);
         };
     };
@@ -65,20 +65,20 @@ class VGM_DisplayEndOfMission
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_STATUS;
             text = "Mission Successful!";
-            x = DX + 1 * VGM_GRID_W;
+            x = QUOTE(DX + 1 * VGM_GRID_W);
             y = VGM_Y(DY);
-            w = (DW - 2) * VGM_GRID_W;
+            w = QUOTE((DW - 2) * VGM_GRID_W);
             h = VGM_Y_H(10);
-            size = 10 * VGM_GRID_H;
+            size = QUOTE(10 * VGM_GRID_H);
         };
         class LevelCurrent: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELCURRENT;
             text = "Level -";
-            x = DX + 1 * VGM_GRID_W;
+            x = QUOTE(DX + 1 * VGM_GRID_W);
             y = VGM_Y_Y(DY, SPACING);
-            w = 25 * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            w = QUOTE(25 * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
             class Attributes
             {
                 font = VGM_FONT;
@@ -91,19 +91,19 @@ class VGM_DisplayEndOfMission
         class LevelProgress: VGM_ctrlProgress
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELPROGRESS;
-            x = DX + 27 * VGM_GRID_W;
+            x = QUOTE(DX + 27 * VGM_GRID_W);
             y = VGM_Y(DY);
-            w = (DW - 2 * 27) * VGM_GRID_W;
-            h = 5 * VGM_GRID_H;
+            w = QUOTE((DW - 2 * 27) * VGM_GRID_W);
+            h = QUOTE(5 * VGM_GRID_H);
             colorFrame[] = {1,1,1,1};
         };
         class XpProgress: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_XPPROGRESS;
             text = "- / -";
-            x = DX + (0.5 * DW - 20) * VGM_GRID_W;
+            x = QUOTE(DX + (0.5 * DW - 20) * VGM_GRID_W);
             y = VGM_Y(DY);
-            w = 40 * VGM_GRID_W;
+            w = QUOTE(40 * VGM_GRID_W);
             h = VGM_Y_H(5);
             class Attributes
             {
@@ -117,7 +117,7 @@ class VGM_DisplayEndOfMission
         class LevelNext: LevelCurrent
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELNEXT;
-            x = DX + (DW - 26) * VGM_GRID_W;
+            x = QUOTE(DX + (DW - 26) * VGM_GRID_W);
             class Attributes
             {
                 font = VGM_FONT;
@@ -132,18 +132,18 @@ class VGM_DisplayEndOfMission
         {
             idc = VGM_IDC_DISPLAYENDOFMISSION_LEVELMESSAGE;
             text = "Level Up!";
-            x = DX + (0.5 * DW - 0.5 * _W) * VGM_GRID_W;
+            x = QUOTE(DX + (0.5 * DW - 0.5 * _W) * VGM_GRID_W);
             y = VGM_Y_Y(DY,SPACING);
-            w = _W * VGM_GRID_W;
+            w = QUOTE(_W * VGM_GRID_W);
             h = VGM_Y_H(5);
             colorBackground[] = {0,0.7,0,0.8};
         };
         class XpBreakdownContainer: VGM_ctrlControlsGroup
         {
             idc = -1;
-            x = DX + 1 * VGM_GRID_W;
+            x = QUOTE(DX + 1 * VGM_GRID_W);
             y = VGM_Y_Y(DY, SPACING);
-            w = (DW - 2) * VGM_GRID_W;
+            w = QUOTE((DW - 2) * VGM_GRID_W);
             h = VGM_Y_H(DH - 25 - (4 * SPACING));
 
             class Controls
@@ -153,7 +153,7 @@ class VGM_DisplayEndOfMission
                     idc = VGM_IDC_DISPLAYENDOFMISSION_XPBREAKDOWN;
                     text = "XP Breakdown text";
                     x = 0; y = 0;
-                    w = (DW - 2) * VGM_GRID_W;
+                    w = QUOTE((DW - 2) * VGM_GRID_W);
                     h = VGM_Y_H(5); // will be set dynamically
                 };
             };
@@ -162,9 +162,9 @@ class VGM_DisplayEndOfMission
         {
             idc = IDC_OK;
             text = "Continue";
-            x = DX + (0.5 * DW - 25) * VGM_GRID_W;
+            x = QUOTE(DX + (0.5 * DW - 25) * VGM_GRID_W);
             y = VGM_Y_Y(DY, SPACING);
-            w = 50 * VGM_GRID_W;
+            w = QUOTE(50 * VGM_GRID_W);
             h = VGM_Y_H(5.5);
             colorBackground[] = {VGM_UI_COLOR_BACKGROUND_TITLE};
         };

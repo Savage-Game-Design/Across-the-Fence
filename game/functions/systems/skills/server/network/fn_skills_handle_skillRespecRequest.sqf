@@ -1,8 +1,8 @@
 /*
-    File: fn_skills_handle_skillLearnRequest.sqf
+    File: fn_skills_handle_skillRespecRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2025-06-28
+    Last Update: 2025-09-20
     Public: No
 
     Description:

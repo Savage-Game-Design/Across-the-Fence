@@ -5,30 +5,30 @@ class VGM_DisplayTest
     {
         class Back: VGM_ctrlStaticPicture
         {
-            x = safeZoneX;
-            y = safeZoneY;
-            w = safeZoneW;
-            h = safeZoneH;
+            x = QUOTE(safeZoneX);
+            y = QUOTE(safeZoneY);
+            w = QUOTE(safeZoneW);
+            h = QUOTE(safeZoneH);
         };
     };
     class Controls
     {
         class FramedControl: VGM_ctrlBackground
         {
-            x = VGM_GRID_MIN_X;
-            y = VGM_GRID_MIN_Y;
-            w = VGM_GRID_MAX_W * VGM_GRID_W;
-            h = VGM_GRID_MAX_H * VGM_GRID_H;
+            x = QUOTE(VGM_GRID_MIN_X);
+            y = QUOTE(VGM_GRID_MIN_Y);
+            w = QUOTE(VGM_GRID_MAX_W * VGM_GRID_W);
+            h = QUOTE(VGM_GRID_MAX_H * VGM_GRID_H);
         };
         class TestFrame: VGM_ctrlFrame
         {
             frameColor[] = {1,0,0,1};
-            frameWidth = pixelW;
-            frameHeight = pixelH;
-            x = VGM_GRID_MIN_X;
-            y = VGM_GRID_MIN_Y;
-            w = VGM_GRID_MAX_W * VGM_GRID_W;
-            h = VGM_GRID_MAX_H * VGM_GRID_H;
+            frameWidth = QUOTE(pixelW);
+            frameHeight = QUOTE(pixelH);
+            x = QUOTE(VGM_GRID_MIN_X);
+            y = QUOTE(VGM_GRID_MIN_Y);
+            w = QUOTE(VGM_GRID_MAX_W * VGM_GRID_W);
+            h = QUOTE(VGM_GRID_MAX_H * VGM_GRID_H);
         };
     };
 };

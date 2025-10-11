@@ -1,3 +1,5 @@
+#define IGUI_GRID_STAMINA_X		(profilenamespace getvariable [""IGUI_GRID_STAMINA_X"", IGUI_GRID_STAMINA_XDef])
+#define IGUI_GRID_STAMINA_Y		(profilenamespace getvariable [""IGUI_GRID_STAMINA_Y"", IGUI_GRID_STAMINA_YDef])
 
 class VGM_RscStaminaBar
 {
@@ -12,10 +14,10 @@ class VGM_RscStaminaBar
         class VGM_ctrlStaminaBar: RscControlsGroupNoScrollbars
         {
             idc = VGM_IDC_STAMINABAR_CONTAINER;
-            x = IGUI_GRID_STAMINA_X;
-            y = IGUI_GRID_STAMINA_Y;
-            w = IGUI_GRID_STAMINA_WAbs;
-            h = 0.2 * IGUI_GRID_STAMINA_H;
+            x = QUOTE(IGUI_GRID_STAMINA_X);
+            y = QUOTE(IGUI_GRID_STAMINA_Y);
+            w = QUOTE(IGUI_GRID_STAMINA_WAbs);
+            h = QUOTE(0.2 * IGUI_GRID_STAMINA_H);
 
             class Controls {
                 class StaminaBar: RscPicture {
@@ -23,8 +25,8 @@ class VGM_RscStaminaBar
                     text = "\A3\Ui_f\data\IGUI\RscIngameUI\RscUnitInfo\stamina_ca.paa";
                     x = 0;
                     y = 0;
-                    w = IGUI_GRID_STAMINA_WAbs;
-                    h = 0.2 * IGUI_GRID_STAMINA_H;
+                    w = QUOTE(IGUI_GRID_STAMINA_WAbs);
+                    h = QUOTE(0.2 * IGUI_GRID_STAMINA_H);
                 };
             };
         };

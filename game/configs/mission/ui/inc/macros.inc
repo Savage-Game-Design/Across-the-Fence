@@ -2,7 +2,7 @@
     File: macros.inc
     Author: Savage Game Design
     Date: 2023-01-31
-    Last Update: 2025-02-14
+    Last Update: 2025-10-11
     Public: Yes
 
     Description:
@@ -11,7 +11,8 @@
 // Include Eden macros
 #include "\a3\3den\UI\macros.inc"
 #include "\a3\3den\ui\resincl.inc"
-#define CT_CONTROLS_TABLE 19 // Not defined by Arma
+// Not defined by Arma
+#define CT_CONTROLS_TABLE 19
 
 // Include all other macros
 #include "idcs.inc"
@@ -25,8 +26,8 @@
 // see https://community.bistudio.com/wiki/User_Interface_Event_Handlers
 // e.g. `VGM_UIEH(onLoad,Example)` will expand to
 // `["onLoad", _this] call VGM_UIFNC(Example)`
-#define VGM_UIEH(EVENT,CLASS) [#EVENT, _this] call VGM_UIFNC(CLASS)
-#define VGM_UIEH_SPAWN(EVENT,CLASS) [#EVENT, _this] spawn VGM_UIFNC(CLASS)
+#define VGM_UIEH(EVENT,CLASS) QUOTE(ARR_2([#EVENT, _this]) call VGM_UIFNC(CLASS))
+#define VGM_UIEH_SPAWN(EVENT,CLASS) QUOTE(ARR_2([#EVENT, _this]) spawn VGM_UIFNC(CLASS))
 
 // Default text font, monospaced typewriter-style from SOG:PF
 #define VGM_FONT "tt2020base_vn"

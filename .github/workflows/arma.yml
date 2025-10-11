@@ -1,0 +1,29 @@
+name: ARMA Build
+
+on:
+  push:
+    branches: [development, master]
+  pull_request:
+    branches: [development, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - uses: arma-actions/hemtt@v1
+      name: Setup HEMTT
+
+    - name: Setup config
+      run: cp build/config.example.py build/config.py
+
+    - name: Run build script
+      run: python build/run.py lint

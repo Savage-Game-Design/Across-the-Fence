@@ -54,6 +54,7 @@ class BuildParams:
     overwrite: bool = False
     clean: bool = False
     mapping_params: GenerateFileTreeParams = field(default_factory=lambda: GenerateFileTreeParams())
+    map_whitelist: list[str] = None
 
 def build(source_path, paradigm_path, params: BuildParams):
     output_paths = params.output_paths
@@ -71,12 +72,14 @@ def build(source_path, paradigm_path, params: BuildParams):
     for mission in gamemode.missions:
         if mission.map == "khe_sanh":
             continue
+        if params.map_whitelist is not None and mission.map not in params.map_whitelist:
+            continue
         create_mission_in(mission, output_paths[BuildArtifact.MISSION], overwrite, clean)
 
-    if gamemode.client_mod:
+    if as_mod and gamemode.client_mod:
         create_mod(gamemode.client_mod, output_paths[BuildArtifact.CLIENT_MOD], overwrite, clean)
 
-    if gamemode.server_mod:
+    if as_mod and gamemode.server_mod:
         create_mod(gamemode.server_mod, output_paths[BuildArtifact.SERVER_MOD], overwrite, clean)
 
 class PackType(Enum):

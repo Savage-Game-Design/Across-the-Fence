@@ -4,7 +4,7 @@
 version = "$STR_VGM_MISSION_VERSION";
 
 // Used to find certain paths
-#define VGM_PATH
+#define VGM_PATH /* */
 
 class Header
 {
@@ -35,10 +35,10 @@ disabledAI = 1;
 scriptedPlayer = 0;
 disableChannels[]=  // allow text only on side chat
 {
-    {0,true,true},
-    {1,false,true},
-    {2,true,true},
-    {6,true,true}
+    {0, 1, 1},
+    {1, 0, 1},
+    {2, 1, 1},
+    {6, 1, 1}
 };
 enableItemsDropping = 0;
 briefing = 0;
@@ -77,15 +77,15 @@ disableRandomization[] = {"All"};
 
 showHUD[] =
 {
-    true,    // Scripted HUD (same as showHUD command)
-    true,    // Vehicle + soldier info
-    true,    // Vehicle radar
-    true,    // Vehicle compass
-    true,    // Tank direction indicator
-    true,    // Commanding menu
-    true,    // Group Bar
-    true,    // HUD Weapon Cursors
-    true    // Vehicle display panels
+    1,    // Scripted HUD (same as showHUD command)
+    1,    // Vehicle + soldier info
+    1,    // Vehicle radar
+    1,    // Vehicle compass
+    1,    // Tank direction indicator
+    1,    // Commanding menu
+    1,    // Group Bar
+    1,    // HUD Weapon Cursors
+    1    // Vehicle display panels
 };
 
 // Enable CBA settings loading
@@ -96,7 +96,7 @@ class Params {
     // Use the database backend
     class db_useBackend
     {
-        title = $STR_VGM_PARAMS_USE_DB_BACKEND;
+        title = "$STR_VGM_PARAMS_USE_DB_BACKEND";
         values[] = {0, 1};
         texts[] = {"False", "True"};
         default = 0;
@@ -104,14 +104,14 @@ class Params {
     // sets maxPlayers in missions
     class missions_maxTeamSize
     {
-        title = $STR_VGM_PARAMS_MAX_TEAM_SIZE;
+        title = "$STR_VGM_PARAMS_MAX_TEAM_SIZE";
         values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         texts[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
         default = 6;
     };
     class leveling_enableLevelSkip
     {
-        title = $STR_VGM_PARAMS_ENABLE_LEVEL_SKIP;
+        title = "$STR_VGM_PARAMS_ENABLE_LEVEL_SKIP";
         values[] = {0, 1};
         texts[] = {"False", "True"};
         default = 0;
