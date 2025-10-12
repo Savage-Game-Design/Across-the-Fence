@@ -12,7 +12,7 @@ There's two types of skills:
     - Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission
 
 <t size="1.25">Skill wheel</t>
-To use one of the skills assigned in the [h]Abilities[/h] menu, press [h]"{1}"[/h] and select it from the [h]Skill wheel[/h]
+To use one of the skills assigned in the [h]Abilities[/h] menu, press [h]`[/h] (Grave / Backtick / Backquote) and select it from the [h]Skill wheel[/h]
 """
 
 tip = "Recon teams were skilled warriors, training for the next mission."
