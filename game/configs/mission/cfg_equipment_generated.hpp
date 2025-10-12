@@ -249,6 +249,26 @@ class field_modification_4 {
     };
 };
 
+class friend_or_foe {
+    condition="(['pointman', 'friend_or_foe'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
+
+    weapons[] = {
+
+    };
+
+    magazines[] = {
+
+    };
+
+    backpacks[] = {
+
+    };
+
+    items[] = {
+        "vn_b_helmet_sog_01"
+    };
+};
+
 class grenadier_01 {
     condition="(['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 

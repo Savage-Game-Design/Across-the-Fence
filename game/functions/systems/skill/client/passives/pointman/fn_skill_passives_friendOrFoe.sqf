@@ -2,7 +2,7 @@
     File: fn_skill_passives_friendOrFoe.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-08-24
+    Last Update: 2025-10-12
     Public: No
 
     Description:
@@ -32,7 +32,7 @@ private _ehId = addMissionEventHandler ["EachFrame", {
     if (_headgear isEqualTo vgm_c_skill_passives_friendOrFoe_lastHeadgear) exitWith {};
     vgm_c_skill_passives_friendOrFoe_lastHeadgear = _headgear;
 
-    if !("vn_o_" in _headgear || "vnx_o_" in _headgear) exitWith {
+    if !("vn_o_" in _headgear || "vnx_o_" in _headgear || _headgear isEqualTo "vn_b_helmet_sog_01") exitWith {
         [player, "stealthSpotTimeMultiplier", "skill_passives_friendOrFoe"] call vgm_c_fnc_coefficient_remove;
     };
 
