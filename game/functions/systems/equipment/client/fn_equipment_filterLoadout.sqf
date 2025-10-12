@@ -2,7 +2,7 @@
     File: fn_equipment_filterLoadout.sqf
     Author: Savage Game Design
     Date: 2023-11-17
-    Last Update: 2025-07-03
+    Last Update: 2025-09-18
     Public: Yes
 
     Description:
@@ -24,12 +24,12 @@ private _allowedItems = createHashMapFromArray [["", nil]];
 
     private _equipmentCfg = _x;
     {
-        private _items = getArray (_equipmentCfg >> _x);
+        private _items = getArray (_equipmentCfg >> _x) apply {toLower _x};
         _allowedItems insert [true, _items, []];
     } forEach ["weapons", "magazines", "backpacks", "items"];
 
     // Add the base weapons to the allowed list. Necessary as the arsenal gives players base weapons, not `_sd` variants, etc.
-    private _baseWeapons = getArray (_equipmentCfg >> "weapons") apply {[_x] call BIS_fnc_baseWeapon};
+    private _baseWeapons = getArray (_equipmentCfg >> "weapons") apply {toLower ([_x] call BIS_fnc_baseWeapon)};
     _allowedItems insert [true, _baseWeapons, []];
 } forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
 
@@ -39,7 +39,7 @@ private _fnc_filterWeapon = {
     params ["_weaponData"];
     {
         private _className = _x param [0, ""];
-        if (!(_className in _allowedItems)) then {
+        if (!(toLower _className in _allowedItems)) then {
             private _replacement = ["", []] select (_x isEqualType []);
             _weaponData set [_forEachIndex, _replacement];
             _removedItems set [_className, []];
@@ -50,7 +50,7 @@ private _fnc_filterWeapon = {
 private _fnc_filterContainer = {
     params [["_container", ""], ["_items", []]];
 
-    if (!(_container in _allowedItems)) exitWith {
+    if (!(toLower _container in _allowedItems)) exitWith {
         // remove the container from parent array
         _this resize 0;
     };
@@ -73,7 +73,7 @@ private _fnc_filterContainer = {
         };
 
         private _itemClass = _x select 0;
-        if (!(_itemClass in _allowedItems)) then {
+        if (!(toLower _itemClass in _allowedItems)) then {
             _items set [_forEachIndex, []];
             _removedItems set [_itemClass, []];
         };
@@ -110,7 +110,7 @@ _loadout = +_loadout;
 // items
 {
     private _itemClass = _loadout select _x;
-    if (!(_itemClass in _allowedItems)) then {
+    if (!(toLower _itemClass in _allowedItems)) then {
         _loadout set [_x, ""];
         _removedItems set [_itemClass, []];
     };
@@ -118,7 +118,7 @@ _loadout = +_loadout;
 
 private _assignedItems = _loadout select IDX_ASSIGNED_ITEMS;
 {
-    if (!(_x in _allowedItems)) then {
+    if (!(toLower _x in _allowedItems)) then {
         _assignedItems set [_forEachIndex, ""];
         _removedItems set [_x, []];
     };
