@@ -898,11 +898,18 @@ class rifleman_07 {
     condition="((['combat', 'specialisation_rifleman'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 7";
 
     weapons[] = {
-        "vnx_l1a1_04"
+        "vn_l2a1_01"
     };
 
     magazines[] = {
-
+        "vn_l1a1_30_mag",
+        "vn_l1a1_30_t_mag",
+        "vn_l1a1_30_02_mag",
+        "vn_l1a1_30_02_t_mag",
+        "vn_l1a1_20_mag",
+        "vn_l1a1_20_t_mag",
+        "vn_l1a1_10_mag",
+        "vn_l1a1_10_t_mag"
     };
 
     backpacks[] = {
