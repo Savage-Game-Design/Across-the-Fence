@@ -15,4 +15,8 @@ addMissionEventHandler ["HandleDisconnect", {
     if (_unit inArea "vgm_shared_hub") then {
         deleteVehicle _unit;
     };
+
+    // if this EH code returns true... player... becomes AI
+    // https://community.bistudio.com/wiki/Arma_3:_Mission_Event_Handlers#HandleDisconnect
+    false
 }];
