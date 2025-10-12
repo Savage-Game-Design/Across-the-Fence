@@ -1073,7 +1073,7 @@ class scout_03 {
     };
 
     items[] = {
-        "vn_s_M3a1"
+        "vn_s_m3a1"
     };
 };
 
