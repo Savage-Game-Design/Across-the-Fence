@@ -1124,12 +1124,12 @@ class scout_09 {
     condition="((['combat', 'specialisation_scout'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 9";
 
     weapons[] = {
-        "vn_m45"
+        "vn_m1897"
     };
 
     magazines[] = {
-        "vn_m45_mag",
-        "vn_m45_t_mag"
+        "vn_m1897_buck_mag",
+        "vn_m1897_fl_mag"
     };
 
     backpacks[] = {
@@ -1137,7 +1137,7 @@ class scout_09 {
     };
 
     items[] = {
-        "vn_s_m45"
+        "vn_b_m1897"
     };
 };
 
