@@ -273,6 +273,30 @@ class grenadier_01 {
     condition="(['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown";
 
     weapons[] = {
+        "vn_m1_garand_gl"
+    };
+
+    magazines[] = {
+        "vn_m1_garand_mag",
+        "vn_m1_garand_t_mag",
+        "vn_22mm_m17_frag_mag",
+        "vn_22mm_lume_mag",
+        "vn_22mm_m22_smoke_mag"
+    };
+
+    backpacks[] = {
+
+    };
+
+    items[] = {
+
+    };
+};
+
+class grenadier_03 {
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3";
+
+    weapons[] = {
         "vn_m79"
     };
 
@@ -300,8 +324,8 @@ class grenadier_01 {
     };
 };
 
-class grenadier_03 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 3";
+class grenadier_05 {
+    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5";
 
     weapons[] = {
         "vn_m2carbine_gl"
@@ -316,29 +340,7 @@ class grenadier_03 {
         "vn_22mm_m17_frag_mag",
         "vn_22mm_m1a2_frag_mag",
         "vn_22mm_m22_smoke_mag",
-        "vn_22mm_m9_heat_mag"
-    };
-
-    backpacks[] = {
-
-    };
-
-    items[] = {
-
-    };
-};
-
-class grenadier_05 {
-    condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 5";
-
-    weapons[] = {
-        "vn_l34a1_xm148"
-    };
-
-    magazines[] = {
-        "vn_l34a1_smg_t_mag",
-        "vn_l34a1_smg_mag",
-        "vn_22mm_m19_wp_mag",
+        "vn_22mm_m9_heat_mag",
         "vn_22mm_cs_mag"
     };
 
@@ -440,16 +442,15 @@ class grenadier_15 {
     condition="((['combat', 'specialisation_grenadier'] call vgm_g_fnc_skills_getByPath) call vgm_g_fnc_skills_isKnown) && [] call vgm_c_fnc_leveling_getLevel >= 15";
 
     weapons[] = {
-        "vn_ak_01"
+        "vn_l34a1_xm148"
     };
 
     magazines[] = {
-        "vn_type56_mag",
-        "vn_type56_t_mag",
-        "vn_kbkg_mag",
-        "vn_kbkg_t_mag",
+        "vn_l34a1_smg_t_mag",
+        "vn_l34a1_smg_mag",
         "vn_40mm_m433_hedp_mag",
-        "vn_40mm_m397_ab_mag"
+        "vn_40mm_m397_ab_mag",
+        "vn_22mm_m19_wp_mag"
     };
 
     backpacks[] = {
