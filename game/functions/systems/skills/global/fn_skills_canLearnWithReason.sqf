@@ -29,7 +29,7 @@ params [
 
 private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
-private _unlockConditions = _skill getOrDefault ["conditionsUnlockServer", []];
+private _unlockConditions = _skill getOrDefault ["conditionsUnlockGlobal", []];
 
 private _hasEnoughSkillPoints = [
     {

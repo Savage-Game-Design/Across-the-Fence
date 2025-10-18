@@ -60,7 +60,7 @@ private _fnc_parseSkillTree = {
                 ["cooldown", getNumber (_x >> "cooldown")],
                 ["duration", getNumber (_x >> "duration")],
                 ["cost", getNumber (_x >> "cost")],
-                ["conditionsUnlockServer", getArray (_x >> "conditionsUnlockServer") apply {
+                ["conditionsUnlockGlobal", getArray (_x >> "conditionsUnlockGlobal") apply {
                     _x params [["_code", "true"], ["_reason", ""]];
                     [ compileFinal _code, _reason ]
                 }],

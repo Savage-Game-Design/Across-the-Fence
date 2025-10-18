@@ -12,7 +12,7 @@ class vgm_skillTemplate {
     cooldown = 10;
     duration = 0;
 
-    conditionsUnlockServer[] = {};
+    conditionsUnlockGlobal[] = {};
     conditionShow = "true";
     conditionActivate = "true";
 
@@ -30,14 +30,14 @@ class vgm_skillTemplate {
 };
 
 class vgm_weaponSpecialisationTemplate: vgm_skillTemplate {
-    conditionsUnlockServer[] = {
+    conditionsUnlockGlobal[] = {
         {
             "!((_this#0) getVariable ['vgm_c_skill_hasWeaponSpecialisation', false])",
             "STR_VGM_SKILLS_UI_WEAPON_SPECIALISATION_LIMIT"
         }
     };
-    codeApply = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', true]";
-    codeUnapply  = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', false]";
+    codeApply = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', true, true]";
+    codeUnapply  = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', false, true]";
 };
 
 class vgm_skillTrees {
@@ -155,7 +155,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC";
                     column = 3;
                     // TODO - Implement this skill
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     cost = 2;
                 };
 
@@ -292,7 +292,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_WAR_FACE_DESC";
                     column = 3;
 
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     codeApply = "";
                     codeUnapply = "";
                     skillType = 0;
@@ -305,7 +305,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC";
                     column = 4;
 
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     codeApply = "";
                     codeUnapply = "";
                     skillType = 0;
@@ -326,7 +326,7 @@ class vgm_skillTrees {
                 class training_pointman: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC";
-                    conditionsUnlockServer[] = { { "!((_this#0) getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
+                    conditionsUnlockGlobal[] = { { "!((_this#0) getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
@@ -338,7 +338,7 @@ class vgm_skillTrees {
                 class eldest_son: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ELDEST_SON";
                     description = "$STR_VGM_SKILLS_SKILL_ELDEST_SON_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -360,7 +360,7 @@ class vgm_skillTrees {
                 class blending_in: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BLENDING_IN";
                     description = "$STR_VGM_SKILLS_SKILL_BLENDING_IN_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -370,7 +370,7 @@ class vgm_skillTrees {
                 class jungle_instinct: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT";
                     description = "$STR_VGM_SKILLS_SKILL_JUNGLE_INSTINCT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -424,7 +424,7 @@ class vgm_skillTrees {
                 class cutthroat: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CUTTHROAT";
                     description = "$STR_VGM_SKILLS_SKILL_CUTTHROAT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -444,7 +444,7 @@ class vgm_skillTrees {
                 class handrail: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_HANDRAIL";
                     description = "$STR_VGM_SKILLS_SKILL_HANDRAIL_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -481,7 +481,7 @@ class vgm_skillTrees {
                 class eavesdropping: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_EAVESDROPPING";
                     description = "$STR_VGM_SKILLS_SKILL_EAVESDROPPING_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -539,7 +539,7 @@ class vgm_skillTrees {
                 class pile_of_leaves: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES";
                     description = "$STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -549,7 +549,7 @@ class vgm_skillTrees {
                 class throwing_knife: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_THROWING_KNIFE";
                     description = "$STR_VGM_SKILLS_SKILL_THROWING_KNIFE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -569,7 +569,7 @@ class vgm_skillTrees {
                 class training_team_leader: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -579,7 +579,7 @@ class vgm_skillTrees {
                 class ma_bell: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_MA_BELL";
                     description = "$STR_VGM_SKILLS_SKILL_MA_BELL_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -591,7 +591,7 @@ class vgm_skillTrees {
                 class target_folder_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1";
                     description = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -601,7 +601,7 @@ class vgm_skillTrees {
                 class fire_direction: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRE_DIRECTION";
                     description = "$STR_VGM_SKILLS_SKILL_FIRE_DIRECTION_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -611,7 +611,7 @@ class vgm_skillTrees {
                 class ammo_check: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_AMMO_CHECK";
                     description = "$STR_VGM_SKILLS_SKILL_AMMO_CHECK_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -621,7 +621,7 @@ class vgm_skillTrees {
                 class kickoff_time: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KICKOFF_TIME";
                     description = "$STR_VGM_SKILLS_SKILL_KICKOFF_TIME_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -633,7 +633,7 @@ class vgm_skillTrees {
                 class roll_call: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ROLL_CALL";
                     description = "$STR_VGM_SKILLS_SKILL_ROLL_CALL_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -646,7 +646,7 @@ class vgm_skillTrees {
                 class mad_minute: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_MAD_MINUTE";
                     description = "$STR_VGM_SKILLS_SKILL_MAD_MINUTE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -659,7 +659,7 @@ class vgm_skillTrees {
                 class target_folder_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2";
                     description = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -669,7 +669,7 @@ class vgm_skillTrees {
                 class sanctuary: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SANCTUARY";
                     description = "$STR_VGM_SKILLS_SKILL_SANCTUARY_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -679,7 +679,7 @@ class vgm_skillTrees {
                 class ditch_rucks: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_DITCH_RUCKS";
                     description = "$STR_VGM_SKILLS_SKILL_DITCH_RUCKS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -689,7 +689,7 @@ class vgm_skillTrees {
                 class ron_call: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RON_CALL";
                     description = "$STR_VGM_SKILLS_SKILL_RON_CALL_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -701,7 +701,7 @@ class vgm_skillTrees {
                 class break_contact: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BREAK_CONTACT";
                     description = "$STR_VGM_SKILLS_SKILL_BREAK_CONTACT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -713,7 +713,7 @@ class vgm_skillTrees {
                 class get_to_the_lz: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ";
                     description = "$STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -726,7 +726,7 @@ class vgm_skillTrees {
                 class team_awareness: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS";
                     description = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -736,7 +736,7 @@ class vgm_skillTrees {
                 class alternate_lz: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ALTERNATE_LZ";
                     description = "$STR_VGM_SKILLS_SKILL_ALTERNATE_LZ_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -746,7 +746,7 @@ class vgm_skillTrees {
                 class get_it_together: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER";
                     description = "$STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -758,7 +758,7 @@ class vgm_skillTrees {
                 class one_team: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ONE_TEAM";
                     description = "$STR_VGM_SKILLS_SKILL_ONE_TEAM_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -770,7 +770,7 @@ class vgm_skillTrees {
                 class prairie_fire: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_PRAIRIE_FIRE";
                     description = "$STR_VGM_SKILLS_SKILL_PRAIRIE_FIRE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -783,7 +783,7 @@ class vgm_skillTrees {
                 class target_folder_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_3";
                     description = "$STR_VGM_SKILLS_SKILL_TARGET_FOLDER_3_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -793,7 +793,7 @@ class vgm_skillTrees {
                 class rally_point: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RALLY_POINT";
                     description = "$STR_VGM_SKILLS_SKILL_RALLY_POINT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -813,7 +813,7 @@ class vgm_skillTrees {
                 class training_rto: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
-                    conditionsUnlockServer[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
+                    conditionsUnlockGlobal[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]";
@@ -825,7 +825,7 @@ class vgm_skillTrees {
                 class emergency_radio: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO";
                     description = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -837,7 +837,7 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -848,7 +848,7 @@ class vgm_skillTrees {
                 class cas_gunship_level_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -859,7 +859,7 @@ class vgm_skillTrees {
                 class fireship: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRESHIP";
                     description = "$STR_VGM_SKILLS_SKILL_FIRESHIP_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -870,7 +870,7 @@ class vgm_skillTrees {
                 class strobe_marker: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER";
                     description = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -882,7 +882,7 @@ class vgm_skillTrees {
                 class sitrep: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SITREP";
                     description = "$STR_VGM_SKILLS_SKILL_SITREP_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -895,7 +895,7 @@ class vgm_skillTrees {
                 class stinger: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STINGER";
                     description = "$STR_VGM_SKILLS_SKILL_STINGER_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -908,7 +908,7 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -919,7 +919,7 @@ class vgm_skillTrees {
                 class cas_gunship_level_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -930,7 +930,7 @@ class vgm_skillTrees {
                 class shadow: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SHADOW";
                     description = "$STR_VGM_SKILLS_SKILL_SHADOW_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -941,7 +941,7 @@ class vgm_skillTrees {
                 class long_antenna: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA";
                     description = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -953,7 +953,7 @@ class vgm_skillTrees {
                 class guardian_angel: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL";
                     description = "$STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -966,7 +966,7 @@ class vgm_skillTrees {
                 class arclight: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ARCLIGHT";
                     description = "$STR_VGM_SKILLS_SKILL_ARCLIGHT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -979,7 +979,7 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -990,7 +990,7 @@ class vgm_skillTrees {
                 class cas_gunship_level_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1001,7 +1001,7 @@ class vgm_skillTrees {
                 class cas_covey: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_COVEY";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_COVEY_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1013,7 +1013,7 @@ class vgm_skillTrees {
                 class repeat_last: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_REPEAT_LAST";
                     description = "$STR_VGM_SKILLS_SKILL_REPEAT_LAST_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1027,7 +1027,7 @@ class vgm_skillTrees {
                 class big_blue: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BIG_BLUE";
                     description = "$STR_VGM_SKILLS_SKILL_BIG_BLUE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1040,7 +1040,7 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1051,7 +1051,7 @@ class vgm_skillTrees {
                 class cas_gunship_level_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1071,7 +1071,7 @@ class vgm_skillTrees {
                 class training_medic: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC";
-                    conditionsUnlockServer[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
+                    conditionsUnlockGlobal[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['Medic', true]";
@@ -1083,7 +1083,7 @@ class vgm_skillTrees {
                 class find_the_bicycle: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIND_THE_BICYCLE";
                     description = "$STR_VGM_SKILLS_SKILL_FIND_THE_BICYCLE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1095,7 +1095,7 @@ class vgm_skillTrees {
                 class combat_doc_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_1";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_1_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1105,7 +1105,7 @@ class vgm_skillTrees {
                 class keep_calm: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KEEP_CALM";
                     description = "$STR_VGM_SKILLS_SKILL_KEEP_CALM_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1115,7 +1115,7 @@ class vgm_skillTrees {
                 class leg_pockets: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LEG_POCKETS";
                     description = "$STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1125,7 +1125,7 @@ class vgm_skillTrees {
                 class not_dead_yet: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_NOT_DEAD_YET";
                     description = "$STR_VGM_SKILLS_SKILL_NOT_DEAD_YET_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -1137,7 +1137,7 @@ class vgm_skillTrees {
                 class tourniquet: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TOURNIQUET";
                     description = "$STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1149,7 +1149,7 @@ class vgm_skillTrees {
                 class black_knight: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT";
                     description = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1162,7 +1162,7 @@ class vgm_skillTrees {
                 class combat_doc_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_2";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1172,7 +1172,7 @@ class vgm_skillTrees {
                 class he_aint_heavy: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY";
                     description = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1182,7 +1182,7 @@ class vgm_skillTrees {
                 class green_hornet: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET";
                     description = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1194,7 +1194,7 @@ class vgm_skillTrees {
                 class pack_the_wound: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND";
                     description = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1207,7 +1207,7 @@ class vgm_skillTrees {
                 class salt_tablets: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SALT_TABLETS";
                     description = "$STR_VGM_SKILLS_SKILL_SALT_TABLETS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1219,7 +1219,7 @@ class vgm_skillTrees {
                 class combat_doc_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_3";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_3_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1229,7 +1229,7 @@ class vgm_skillTrees {
                 class last_rites: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LAST_RITES";
                     description = "$STR_VGM_SKILLS_SKILL_LAST_RITES_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1239,7 +1239,7 @@ class vgm_skillTrees {
                 class ive_seen_worse: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE";
                     description = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1251,7 +1251,7 @@ class vgm_skillTrees {
                 class its_only_a_flesh_wound: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND";
                     description = "$STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1263,7 +1263,7 @@ class vgm_skillTrees {
                 class sweet_dreams: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SWEET_DREAMS";
                     description = "$STR_VGM_SKILLS_SKILL_SWEET_DREAMS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1275,7 +1275,7 @@ class vgm_skillTrees {
                 class combat_doc_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1285,7 +1285,7 @@ class vgm_skillTrees {
                 class green_hornet_pack: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK";
                     description = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1295,7 +1295,7 @@ class vgm_skillTrees {
                 class playing_possum: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM";
                     description = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1315,7 +1315,7 @@ class vgm_skillTrees {
                 class training_tail: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_TAIL";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_TAIL_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1325,7 +1325,7 @@ class vgm_skillTrees {
                 class slam: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SLAM";
                     description = "$STR_VGM_SKILLS_SKILL_SLAM_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1337,7 +1337,7 @@ class vgm_skillTrees {
                 class eyes_down: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_EYES_DOWN";
                     description = "$STR_VGM_SKILLS_SKILL_EYES_DOWN_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1347,7 +1347,7 @@ class vgm_skillTrees {
                 class rocketman_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_1";
                     description = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_1_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1357,7 +1357,7 @@ class vgm_skillTrees {
                 class lightfooted: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LIGHTFOOTED";
                     description = "$STR_VGM_SKILLS_SKILL_LIGHTFOOTED_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1367,7 +1367,7 @@ class vgm_skillTrees {
                 class toepopper: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TOEPOPPER";
                     description = "$STR_VGM_SKILLS_SKILL_TOEPOPPER_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -1379,7 +1379,7 @@ class vgm_skillTrees {
                 class slam_time_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SLAM_TIME_2";
                     description = "$STR_VGM_SKILLS_SKILL_SLAM_TIME_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1391,7 +1391,7 @@ class vgm_skillTrees {
                 class lethal_gifts: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS";
                     description = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1404,7 +1404,7 @@ class vgm_skillTrees {
                 class gone_native: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GONE_NATIVE";
                     description = "$STR_VGM_SKILLS_SKILL_GONE_NATIVE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1414,7 +1414,7 @@ class vgm_skillTrees {
                 class rocketman_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_2";
                     description = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1424,7 +1424,7 @@ class vgm_skillTrees {
                 class jungle_eyes: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_JUNGLE_EYES";
                     description = "$STR_VGM_SKILLS_SKILL_JUNGLE_EYES_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1434,7 +1434,7 @@ class vgm_skillTrees {
                 class slam_time: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SLAM_TIME";
                     description = "$STR_VGM_SKILLS_SKILL_SLAM_TIME_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     // TODO - Implementation
@@ -1446,7 +1446,7 @@ class vgm_skillTrees {
                 class rocketman_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_3";
                     description = "$STR_VGM_SKILLS_SKILL_ROCKETMAN_3_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1459,7 +1459,7 @@ class vgm_skillTrees {
                 class dynamite: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_DYNAMITE";
                     description = "$STR_VGM_SKILLS_SKILL_DYNAMITE_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1471,7 +1471,7 @@ class vgm_skillTrees {
                 class blackjack: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BLACKJACK";
                     description = "$STR_VGM_SKILLS_SKILL_BLACKJACK_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1481,7 +1481,7 @@ class vgm_skillTrees {
                 class fuzemaster: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FUZEMASTER";
                     description = "$STR_VGM_SKILLS_SKILL_FUZEMASTER_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
@@ -1491,7 +1491,7 @@ class vgm_skillTrees {
                 class deep_placement: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_DEEP_PLACEMENT";
                     description = "$STR_VGM_SKILLS_SKILL_DEEP_PLACEMENT_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     // TODO - Implementation
@@ -1503,7 +1503,7 @@ class vgm_skillTrees {
                 class clean_sweep: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CLEAN_SWEEP";
                     description = "$STR_VGM_SKILLS_SKILL_CLEAN_SWEEP_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
                     // TODO - Implementation
@@ -1516,7 +1516,7 @@ class vgm_skillTrees {
                 class lethal_gifts_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_2";
                     description = "$STR_VGM_SKILLS_SKILL_LETHAL_GIFTS_2_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
                     // TODO - Implementation
@@ -1529,7 +1529,7 @@ class vgm_skillTrees {
                 class heart_of_darkness: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS";
                     description = "$STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     // TODO - Implementation
@@ -1539,7 +1539,7 @@ class vgm_skillTrees {
                 class saboteur: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SABOTEUR";
                     description = "$STR_VGM_SKILLS_SKILL_SABOTEUR_DESC";
-                    conditionsUnlockServer[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     // TODO - Implementation
