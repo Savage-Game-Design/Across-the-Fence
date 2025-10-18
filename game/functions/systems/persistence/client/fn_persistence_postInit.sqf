@@ -2,7 +2,7 @@
     File: fn_persistence_postInit.sqf
     Author: Savage Game Design
     Date: 2025-08-28
-    Last Update: 2025-08-29
+    Last Update: 2025-09-20
     Public: No
 
     Description:
@@ -16,6 +16,7 @@ if (!hasInterface) exitWith {};
     {
         [] call _x;
     } forEach vgm_persistence_handlers;
+    vgm_persistence_handlersLoaded = true;
 }] call para_g_fnc_event_subscribeServer;
 
 [] spawn {
