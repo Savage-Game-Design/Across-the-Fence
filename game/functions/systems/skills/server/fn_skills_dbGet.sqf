@@ -34,16 +34,15 @@ _playerSkillsData set ["skillsVersion", SKILLS_VERSION, true];
 
 // Temporary hack to allow us to reset skills when we've made major skill tree changes,
 // or changed the total amount of skill points available to players.
-private _isWrongVersion = _playerSkillsData get "skillsVersion" isNotEqualTo SKILLS_VERSION;
-if (
-    _playerSkillsData get "skillPaths" isNotEqualTo []
-    || _isWrongVersion
-) then {
-    private _playerLevel = [_player] call vgm_s_fnc_leveling_dataGetCached get "level";
+private _playerLevel = [_player] call vgm_s_fnc_leveling_dataGetCached get "level";
+if (_playerLevel > 0) then {
     private _levelSkillPoints = [_playerLevel] call vgm_g_fnc_leveling_getLevelInfo get "totalSkillPoints";
+
+    private _isWrongVersion = _playerSkillsData get "skillsVersion" isNotEqualTo SKILLS_VERSION;
 
     private _skillPointsTotal = (_playerSkillsData get "skillPoints") + (_playerSkillsData get "skillPointsSpent");
     private _areSkillPointTotalsInvalid = _skillPointsTotal isNotEqualTo _levelSkillPoints;
+
     if (_isWrongVersion || _areSkillPointTotalsInvalid) then {
         private _reasons = [];
         if (_isWrongVersion) then {
