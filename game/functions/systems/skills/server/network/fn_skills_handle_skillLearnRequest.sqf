@@ -2,7 +2,7 @@
     File: fn_skills_handle_skillLearnRequest.sqf
     Author: Savage Game Design
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2025-10-18
     Public: No
 
     Description:
@@ -22,10 +22,10 @@ if (owner _player isNotEqualTo remoteExecutedOwner) exitWith {
 };
 
 private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
-private _canLearn = [_player, _skill] call vgm_g_fnc_skills_canLearn;
+([_player, _skill] call vgm_g_fnc_skills_canLearnWithReason) params ["_canLearn", "_canNotLearnReason"];
 
 if (!_canLearn) exitWith {
-    (format ["Discarding learn request for %1 (%2), %3", name _player, getPlayerUID _player, _skillPath]) call vgm_g_fnc_logWarning;
+    (format ["Discarding learn request for %1 (%2), %3, %4", name _player, getPlayerUID _player, _skillPath, _canNotLearnReason]) call vgm_g_fnc_logWarning;
 
     // inform the player that he failed to learn the skill
     [_canLearn, _skillPath] remoteExecCall ["vgm_c_fnc_skills_receiveSkillLearn", _player];
