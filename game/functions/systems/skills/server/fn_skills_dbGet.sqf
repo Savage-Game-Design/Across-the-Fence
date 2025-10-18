@@ -2,7 +2,7 @@
     File: fn_skills_dbGet.sqf
     Author: veteran29
     Date: 2023-02-28
-    Last Update: 2025-09-11
+    Last Update: 2025-10-18
     Public: No
 
     Description:
@@ -25,15 +25,15 @@ params ["_player"];
 private _uid = getPlayerUID _player;
 
 ["DEBUG", format ["Loading skills data - %1", _uid]] call vgm_g_fnc_log;
-private _playerLevel = [_player] call vgm_s_fnc_leveling_dataGetCached get "level";
-private _levelSkillPoints = [_playerLevel] call vgm_g_fnc_leveling_getLevelInfo get "totalSkillPoints";
 
 private _playerSkillsData = ["skills", _uid] call vgm_s_fnc_persistence_dbGet;
-_playerSkillsData set ["skillPoints", _levelSkillPoints, true];
+_playerSkillsData set ["skillPoints", 0, true];
 _playerSkillsData set ["skillPointsSpent", 0, true];
 _playerSkillsData set ["skillPaths", [], true];
 _playerSkillsData set ["skillsVersion", SKILLS_VERSION, true];
 
+private _playerLevel = [_player] call vgm_s_fnc_leveling_dataGetCached get "level";
+private _levelSkillPoints = [_playerLevel] call vgm_g_fnc_leveling_getLevelInfo get "totalSkillPoints";
 
 // Temporary hack to allow us to reset skills when we've made major skill tree changes,
 // or changed the total amount of skill points available to players.
