@@ -31,10 +31,10 @@ class vgm_skillTemplate {
 
 class vgm_weaponSpecialisationTemplate: vgm_skillTemplate {
     conditionUnlock[] = {
-        { "!(missionNamespace getVariable ['vgm_c_skill_hasWeaponSpecialisation', false])", "STR_VGM_SKILLS_UI_WEAPON_SPECIALISATION_LIMIT" }
+        { "!(player getVariable ['vgm_c_skill_hasWeaponSpecialisation', false])", "STR_VGM_SKILLS_UI_WEAPON_SPECIALISATION_LIMIT" }
     };
-    codeApply = "vgm_c_skill_hasWeaponSpecialisation = true";
-    codeUnapply  = "vgm_c_skill_hasWeaponSpecialisation = false";
+    codeApply = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', true]";
+    codeUnapply  = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', false]";
 };
 
 class vgm_skillTrees {
