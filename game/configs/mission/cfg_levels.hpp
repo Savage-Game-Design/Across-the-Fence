@@ -1,11 +1,8 @@
 class vgm_levels {
-    class level_0 {
-        experience = 0;
-        skillPoints = 2;
-    };
+    class level_0 {}; // temporary level for new players, should immediately be increased to level_1 during data load
     class level_1 {
         experience = 500; // amount of XP needed to advance to next level
-        skillPoints = 1; // amount of SP gained when reaching the level
+        skillPoints = 3; // amount of SP gained when reaching the level
     };
     class level_2 {
         experience = 575;
