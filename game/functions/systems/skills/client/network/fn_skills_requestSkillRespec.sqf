@@ -2,7 +2,7 @@
     File: fn_skills_requestSkillLearn.sqf
     Author: Savage Game Deisgn
     Date: 2023-02-26
-    Last Update: 2024-07-04
+    Last Update: 2025-10-18
     Public: No
 
     Description:
@@ -20,6 +20,6 @@
 
 params [["_displayParent", nil]];
 
-["Waiting for server...", "Please wait", false, false, _displayParent] spawn BIS_fnc_guiMessage;
+isNil {["Waiting for server...", "Please wait", false, false, _displayParent] spawn BIS_fnc_guiMessage};
 
 [player] remoteExecCall ["vgm_s_fnc_skills_handle_skillRespecRequest", 2];

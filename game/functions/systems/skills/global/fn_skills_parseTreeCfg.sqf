@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2025-08-24
+    Last Update: 2025-10-18
     Public: Yes
 
     Description:
@@ -60,7 +60,7 @@ private _fnc_parseSkillTree = {
                 ["cooldown", getNumber (_x >> "cooldown")],
                 ["duration", getNumber (_x >> "duration")],
                 ["cost", getNumber (_x >> "cost")],
-                ["conditionUnlock", getArray (_x >> "conditionUnlock") apply {
+                ["conditionsUnlockGlobal", getArray (_x >> "conditionsUnlockGlobal") apply {
                     _x params [["_code", "true"], ["_reason", ""]];
                     [ compileFinal _code, _reason ]
                 }],

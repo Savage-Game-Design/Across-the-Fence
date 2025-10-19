@@ -2,7 +2,7 @@
     File: fn_skills_canLearnWithReason.sqf
     Author: veteran29
     Date: 2022-12-22
-    Last Update: 2025-09-10
+    Last Update: 2025-10-18
     Public: Yes
 
     Description:
@@ -29,7 +29,7 @@ params [
 
 private _skillsData = _player getVariable ["vgm_g_skillsData", createHashMap];
 private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
-private _unlockConditions = _skill getOrDefault ["conditionUnlock", []];
+private _unlockConditions = _skill getOrDefault ["conditionsUnlockGlobal", []];
 
 private _hasEnoughSkillPoints = [
     {
@@ -51,7 +51,7 @@ private _checks = _unlockConditions + [
     _hasEnoughSkillPoints
 ];
 
-private _failedCheckIndex = _checks findIf { !([] call (_x # 0)) };
+private _failedCheckIndex = _checks findIf { !([_player] call (_x # 0)) };
 
 if (_failedCheckIndex > -1) exitWith {
     [false, _checks # _failedCheckIndex # 1]
