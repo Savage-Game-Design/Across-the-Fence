@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_scriptedLand.sqf
     Author: Savage Game Design
     Date: 2025-01-03
-    Last Update: 2025-01-09
+    Last Update: 2025-10-19
     Public: No
 
     Description:
@@ -47,7 +47,7 @@ private _fnc_slopeSteepness = {
 Pretty ASCII "picture" to visualize the positions
 (start)🚁0 ----.
                 \
-                 1 (midpoint)
+                 1 (midpoint, 15m below pos0, min 25m above terrain)
                  |
                  |
                  2 (landpos)
@@ -102,12 +102,13 @@ _helicopter flyInHeight [_landZ, true];
     };
 #endif
 
-private _pfhArgs = [_helicopter, time, _v0, [_dir0, _dir1, _dir2], [_pos0, _pos1, _pos2], _landZ];
+private _pfhArgs = [_helicopter, time, _v0, [_dir0, _dir1, _dir2], [_pos0, _pos1, _pos2], _landZ, time, time];
 
 // "jail" the helicopter and guide it towards the landing position
 addMissionEventHandler ["EachFrame", {
     if (isGamePaused) exitWith {};
-    _thisArgs params ["_helicopter", "_t0", "_v0", "_dirs", "_positions", "_landZ"];
+    _thisArgs params ["_helicopter", "_t0", "_v0", "_dirs", "_positions", "_landZ", "_nextZUpdateUpwardsTime", "_nextZUpdateDownwardsTime"];
+
     if (isNull _helicopter || {_helicopter getVariable ["vgm_missions_extractionBoarded", false]}) exitWith {
         removeMissionEventHandler ["EachFrame", _thisEventHandler]
     };
@@ -154,8 +155,9 @@ addMissionEventHandler ["EachFrame", {
         ];
     };
 
-    if !(_helicopter getVariable ["vgm_missions_extractionLanded", false]) then {
+    if !(_helicopter getVariable ["vgm_missions_extractionLanded", false]) exitWith {
         _helicopter setVariable ["vgm_missions_extractionLanded", true, true];
+        _thisArgs set [7, time + 15]; // schedule first lowering attempt
     };
 
     if (diag_frameNo % 2 == 0) then {
@@ -164,6 +166,34 @@ addMissionEventHandler ["EachFrame", {
         _v1 set [1, 0];
         _helicopter setVelocity _v1;
         _helicopter flyInHeight [_landZ + (time % 5 / 10), true];
+    };
+
+    // hover height adjustments
+    if (_landZ > 0) then {
+        private _landZStart = _landZ;
+        // slowly adjust landZ upwards to prevent tipping over on ground contact when landing sideways to slope
+        if (time > _nextZUpdateUpwardsTime && {isTouchingGround _helicopter}) then {
+            _thisArgs set [6, time + 0.5]; // delay next upwards attempt
+
+            _nextZUpdateDownwardsTime = 1e10; // prevent any lowering attempts
+            _thisArgs set [7, _nextZUpdateDownwardsTime];
+
+            _landZ = _landZ + 0.1;
+            _thisArgs set [5, _landZ];
+        };
+
+        if (time > _nextZUpdateDownwardsTime) then {
+            _thisArgs set [7, time + 2]; // delay next lowering attempt
+
+            _landZ = _landZ - 0.05;
+            _thisArgs set [5, _landZ];
+        };
+
+#ifdef __A3_DEBUG__
+        if (_landZStart != _landZ) then {
+            vgm_debug_scriptedLandIcons#0 set [2, format ["Land Z (adjusted): %1", _landZ]];
+        };
+#endif
     };
 
     // unflip the heli if it somehow got flipped
