@@ -29,6 +29,11 @@ uiNamespace setVariable ["BIS_fnc_guiMessage_status", _result];
 
 player setUnitLoadout EMPTY_LOADOUT;
 
-hint "Skill respec done";
-
 ["vgm_skills_respecLocal"] call para_g_fnc_event_triggerLocal;
+
+[
+    "Skills reset. Re-assign your refunded skill points in the skills menu.",
+    "",
+    true,
+    false
+] spawn BIS_fnc_guiMessage;
