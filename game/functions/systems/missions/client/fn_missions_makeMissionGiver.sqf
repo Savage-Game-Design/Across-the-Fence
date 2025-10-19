@@ -2,7 +2,7 @@
     File: fn_missions_makeMissionGiver.sqf
     Author:
     Date: 2023-04-23
-    Last Update: 2025-09-07
+    Last Update: 2025-10-29
     Public: Yes
 
     Description:
@@ -32,7 +32,10 @@ _object setVariable ["vgm_c_missions_joinActions", createHashMap];
 _object addAction [
     "Create mission",
     {
-        private _targetZone = selectRandom vgm_missions_zones_targetBoxes ;
+        private _targetZone = selectRandom ([] call vgm_g_fnc_missions_zones_getUnreservedZones);
+        if (isNil "_targetZone") exitWith {
+            hint localize "STR_VGM_MISSIONS_CREATION_NO_ZONES_FREE";
+        };
         [getPlayerID player, _targetZone] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
     },
     [],

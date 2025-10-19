@@ -2,7 +2,7 @@
     File: fn_missions_zones_reserveZone.sqf
     Author: Savage Game Design
     Date: 2024-03-25
-    Last Update: 2024-06-14
+    Last Update: 2025-10-29
     Public: Yes
 
     Description:

@@ -236,7 +236,7 @@ class vgm_s
         class missions_gameplay_scouting_setSpottable {};
     };
 
-    class missions_selection
+    class missions_zones
     {
         VGM_SERVER_PATH(\systems\missions_zones\server);
 
@@ -244,6 +244,10 @@ class vgm_s
         class missions_zones_freeZone {};
         class missions_zones_getSites {};
         class missions_zones_getStartPos {};
+        class missions_zones_postInit
+        {
+            postInit = 1;
+        };
         class missions_zones_preInit
         {
             preInit = 1;

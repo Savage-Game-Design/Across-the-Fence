@@ -1307,7 +1307,18 @@
             <Original>Waystation</Original>
         </Key>
     </Package>
-    <Package name="Missions Extraction">
+    <Package name="Missions creation">
+        <Key ID="STR_VGM_MISSIONS_CREATION_NO_ZONES_FREE">
+            <Original>Couldn't create a new mission: all target boxes are currently in use</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_CREATION_ZONE_RESERVATION_FAILED">
+            <Original>Couldn't reserve target box %1 for mission - all target boxes are occupied</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_CREATION_UNKNOWN_ERROR">
+            <Original>Mission creation failed for unexpected reason %1</Original>
+        </Key>
+    </Package>
+    <Package name="Missions extraction">
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
             <Original>Request extraction</Original>
         </Key>
@@ -1348,7 +1359,7 @@
             <English>Extract helicopter leaving in 30 seconds!</English>
         </Key>
     </Package>
-    <Package name="Missions Scouting">
+    <Package name="Missions scouting">
         <!-- Notification titles -->
         <Key ID="STR_VGM_MISSIONS_SCOUTING_NOTIFICATION_SITE_EDITED_TITLE">
             <Original>SITE EDITED</Original>
