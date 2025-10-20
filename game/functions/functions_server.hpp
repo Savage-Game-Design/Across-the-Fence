@@ -103,10 +103,13 @@ class vgm_s
             headerType = -1;
         };
         class director_attemptReinforcements {};
+        class director_checkZombiesEnabled {};
         class director_getDirectorForMissionId {};
         class director_getEnemySquadTemplate {};
+        class director_getZombieSquadTemplate {};
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
+        class director_spawnAmbientZombies {};
         class director_spawnInitialPatrols {};
         class director_spawnReinforcements {};
         class director_spawnTracker {};
