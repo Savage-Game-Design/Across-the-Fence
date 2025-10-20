@@ -2,7 +2,7 @@
     File: fn_director_attemptReinforcements.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-10-22
+    Last Update: 2025-10-25
     Public: Yes
 
     Description:
@@ -71,7 +71,9 @@ if (random 1 > (_directorData get "reinforcementChance")) then {
     continue;
 };
 
-private _squad = [_mission, _players] call vgm_s_fnc_director_spawnReinforcements;
+private _reinforcementType = keys (_directorData get "reinforcementTypeChances") selectRandomWeighted values (_directorData get "reinforcementTypeChances");
+
+private _squad = [_mission, _players, _reinforcementType] call vgm_s_fnc_director_spawnReinforcements;
 
 if (isNil "_squad") then {
     [format ["[Reinforcements - Mission: %1, Players: %2] Failed to create squad", _publicMission get "id", _players]] call vgm_g_fnc_logInfo;

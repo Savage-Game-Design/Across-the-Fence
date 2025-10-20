@@ -384,6 +384,29 @@ class vgm_g
         class tracking_stopRecordingTracks {};
         class tracking_trackRecordingJob {};
     };
+
+    class zombie {
+        VGM_GLOBAL_PATH(\systems\zombie\global);
+
+        class zombie_ambientNoise {};
+        class zombie_attack {};
+        class zombie_canAttack {};
+        class zombie_canAttackTarget {};
+        class zombie_canSee {};
+        class zombie_chase {};
+        class zombie_clearChaseTarget {};
+        class zombie_hasChaseTarget {};
+        class zombie_init {};
+        class zombie_isValidTarget {};
+        class zombie_makeNoise {};
+        class zombie_nearestTarget {};
+        class zombie_onAttackEnd {};
+        class zombie_preInit {
+            preInit = 1;
+        };
+        class zombie_screamAlert {};
+        class zombie_setChaseTarget {};
+    };
 };
 
 class vgm_c

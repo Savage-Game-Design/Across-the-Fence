@@ -2,7 +2,7 @@
     File: fn_virtsquad_spawn.sqf
     Author: Savage Game Design
     Date: 2025-01-11
-    Last Update: 2025-04-04
+    Last Update: 2025-10-22
     Public: No
 
     Description:
@@ -32,9 +32,7 @@ private _mission = [_missionId] call vgm_g_fnc_missions_getPublicInfoById;
 // Default to upper bound if we have no mission (which should never happen).
 private _squadScaling = 1;
 if (!isNil "_mission") then {
-    private _playerCount = [_mission get "players"] call para_g_fnc_netmap_count;
-    private _maxPlayers = _mission get "maxPlayers";
-    _squadScaling = _playerCount / _maxPlayers;
+    _squadScaling = ([_mission] call vgm_s_fnc_missions_getFullness) # 2;
 } else {
     [format ["Attempted to spawn a virtual squad without valid mission - mission id (%1)", _missionId]] call vgm_g_fnc_logWarning;
 };
@@ -70,6 +68,11 @@ _group setGroupOwner _selectedClient;
 // Persists tree execution even if locality changes.
 if ("btreeName" in _squad) then {
     [_group, _squad get "btreeName"] call vgm_s_fnc_btree_setTreeByNameGlobal;
+};
+
+// Code to execute when the squad is spawned
+if ("onSpawn" in _squad) then {
+    [_squad] call (_squad get "onSpawn");
 };
 
 ["vgm_virtsquad_spawned", [_squad]] call para_g_fnc_event_triggerLocal;
