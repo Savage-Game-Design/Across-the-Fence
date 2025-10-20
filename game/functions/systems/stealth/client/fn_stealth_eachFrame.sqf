@@ -3,7 +3,7 @@
     File: fn_stealth_eachFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-08-24
+    Last Update: 2025-10-20
     Public: No
 
     Description:
@@ -59,7 +59,7 @@ call {
 
     private _unitToCheck = vgm_c_stealth_entityCheckQueue deleteAt 0;
     // Unit can't see player, as they're not in a valid state.
-    if (!alive _unitToCheck || side _unitToCheck != ENEMY_SIDE) exitWith {};
+    if (!alive _unitToCheck || side _unitToCheck getFriend side player > SIDE_FRIENDSHIP_CONST) exitWith {};
 
     // Player can't be seen by anyone, due to being undetectable
     if (vgm_c_stealth_undetectable) exitWith {};
@@ -88,7 +88,7 @@ call {
 
     [_lookingUnit] call vgm_c_fnc_stealth_isVisibleToUnit params ["_isVisible", "_visibility"];
 
-    private _unitCanDetectPlayer = alive _lookingUnit && side _lookingUnit == ENEMY_SIDE && _isVisible;
+    private _unitCanDetectPlayer = alive _lookingUnit && (side _lookingUnit getFriend side player < SIDE_FRIENDSHIP_CONST) && _isVisible;
     if (!_unitCanDetectPlayer || vgm_c_stealth_undetectable) exitWith {
         vgm_c_stealth_looking deleteAt _lookingKey;
         #ifdef __A3_DEBUG__
