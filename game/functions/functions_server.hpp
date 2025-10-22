@@ -126,6 +126,13 @@ class vgm_s
         class director_setupEngagements {};
     };
 
+    class mission_director_reinforcement_requests
+    {
+        VGM_SERVER_PATH(\systems\mission_director\server\reinforcement_requests);
+        class director_handleReinforcementRequest {};
+        class director_setupReinforcementRequests {};
+    };
+
     class missions_objects
     {
         VGM_SERVER_PATH(\systems\mission_objects\server);

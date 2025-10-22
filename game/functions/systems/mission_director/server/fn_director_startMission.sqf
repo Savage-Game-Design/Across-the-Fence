@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-09-19
+    Last Update: 2025-10-22
     Public: Yes
 
     Description:
@@ -52,7 +52,17 @@ _directorData set ["minTimeBetweenReinforcementsRangeSecs", [180, 120]];
 // When reinforcements were last sent for each player
 _directorData set ["lastReinforcementSentPerPlayer", createHashMap];
 
+// REINFORCEMENT REQUESTS
+// Number of requests in an area required to trigger a reinforcement wave
+_directorData set ["reinforcementRequestsRequired", 3];
+// Size of the catchment area for reinforcement requests.
+// This is currently used for checking players to attack too. If this is made smaller, that code will need updating!
+_directorData set ["reinforcementRequestsArea", 100];
+// How long before requests expire and are deleted.
+_directorData set ["reinforcementRequestsExpirySecs", 60];
+
 [_directorData] call vgm_s_fnc_director_setupEngagements;
+[_directorData] call vgm_s_fnc_director_setupReinforcementRequests;
 
 [] remoteExec ["vgm_c_fnc_director_startClientsideMonitoring", values (_mission get "machineIds")];
 
