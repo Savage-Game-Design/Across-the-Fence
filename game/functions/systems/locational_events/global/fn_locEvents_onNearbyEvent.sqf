@@ -2,7 +2,7 @@
     File: fn_locEvents_onNearbyEvent.sqf
     Author:
     Date: 2024-02-16
-    Last Update: 2024-03-01
+    Last Update: 2025-10-22
     Public: No
 
     Description:
@@ -25,7 +25,7 @@
         Handler IDs to be used for removal [ARRAY]
 
     Example(s):
-        ["mission1", group _enemy, ["gunshots"], [_enemy], { }] call vgm_g_fnc_perception_listenForSound;
+        ["mission1", group _enemy, ["gunshots"], [_enemy], { }] call vgm_g_fnc_locEvents_onNearbyEvent;
  */
 
 params ["_eventGroup", ["_listener", ""], "_types", "_arguments", "_handler"];
