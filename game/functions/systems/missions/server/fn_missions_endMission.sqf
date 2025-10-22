@@ -2,7 +2,7 @@
     File: fn_missions_endMission.sqf
     Author:
     Date: 2023-02-26
-    Last Update: 2025-02-28
+    Last Update: 2025-10-22
     Public: No
 
     Description:
@@ -68,6 +68,10 @@ localNamespace getVariable "vgm_missions" deleteAt (_missionPublic get "id");
 
 // Terminate public netmap, and all owned netmaps (all children should be owned)
 [_missionPublic] call para_s_fnc_netmap_terminate;
+
+// Ensure event groups are cleaned up on mission-end.
+// There's no obvious place to wire these two systems together, so cleanup has to happen here.
+[_missionId] remoteExecCall ["vgm_g_fnc_locEvents_deleteEventGroup", 0];
 
 // TODO
 // Disable damage
