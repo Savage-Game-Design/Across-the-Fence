@@ -2,7 +2,7 @@
     File: fn_equipment_filterLoadout.sqf
     Author: Savage Game Design
     Date: 2023-11-17
-    Last Update: 2025-09-18
+    Last Update: 2025-10-25
     Public: Yes
 
     Description:
@@ -91,6 +91,8 @@ private _fnc_filterContainer = {
 #define IDX_BINOCULAR 8
 #define IDX_ASSIGNED_ITEMS 9
 
+#define IDX_ASSIGNED_ITEMS_RADIO 2
+
 params ["_loadout"];
 
 _loadout = +_loadout;
@@ -118,7 +120,14 @@ _loadout = +_loadout;
 
 private _assignedItems = _loadout select IDX_ASSIGNED_ITEMS;
 {
-    if (!(toLower _x in _allowedItems)) then {
+    private _isAllowed = toLower _x in _allowedItems;
+
+    if (_forEachIndex == IDX_ASSIGNED_ITEMS_RADIO) then {
+        private _parentConfig = inheritsFrom (configFile >> "CfgWeapons" >> _x);
+        _isAllowed = _isAllowed || (configName _parentConfig in _allowedItems)
+    };
+
+    if (!_isAllowed) then {
         _assignedItems set [_forEachIndex, ""];
         _removedItems set [_x, []];
     };
