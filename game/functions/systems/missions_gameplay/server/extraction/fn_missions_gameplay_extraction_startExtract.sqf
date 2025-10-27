@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-10-27
+    Last Update: 2025-10-28
     Public: No
 
     Description:
@@ -129,9 +129,10 @@ call {
         vgm_missions_gameplay_extractionMissionEndedHandlers = createHashMap;
     };
 
-    private _ehEndedId = ["vgm_mission_ended", [[_helicopter, _group], {
+    private _ehEndedId = ["vgm_mission_ended", [[_helicopter, _group, _missionId], {
         (_this#0) params ["_missionId", "_endType"];
-        (_this#1) params ["_helicopter", "_group"];
+        (_this#1) params ["_helicopter", "_group", "_targetMissionId"];
+        if (_missionId != _targetMissionId) exitWith {};
 
         private _ehId = vgm_missions_gameplay_extractionMissionEndedHandlers deleteAt _missionId;
         [_ehId] call para_g_fnc_event_unsubscribe;
