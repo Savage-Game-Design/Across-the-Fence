@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-08-24
+    Last Update: 2025-10-27
     Public: No
 
     Description:
@@ -97,7 +97,7 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
         private _leaveNow = _helicopter getVariable ["vgm_missions_extraction_evacNow", false];
         private _leaveAtTime = _helicopter getVariable ["vgm_missions_extraction_evacAt", -1];
 
-        _everyoneBoarded || _leaveNow || (_leaveAtTime isNotEqualTo -1 && serverTime > _leaveAtTime);
+        _everyoneBoarded || _leaveNow || (_leaveAtTime isNotEqualTo -1 && serverTime > _leaveAtTime)
     };
 
     _helicopter setVariable ["vgm_missions_extractionBoarded", true];
@@ -105,6 +105,8 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
     _helicopter setCaptive false;
 
     ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
+
+    format ["Extraction script successful: %1, %2, %3", _missionId, _helicopter] call vgm_g_fnc_logInfo;
 
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 25;
@@ -120,5 +122,32 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
 _group setVariable ["vgm_missions_extractionScript", _script];
 
 ["vgm_missions_gameplay_extractionStarted", [_missionId, +_safeLzPositionATL, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
+
+// clean up extraction if mission fails
+call {
+    if (isNil "vgm_missions_gameplay_extractionMissionEndedHandlers") then {
+        vgm_missions_gameplay_extractionMissionEndedHandlers = createHashMap;
+    };
+
+    private _ehEndedId = ["vgm_mission_ended", [[_helicopter, _group], {
+        (_this#0) params ["_missionId", "_endType"];
+        (_this#1) params ["_helicopter", "_group"];
+
+        private _ehId = vgm_missions_gameplay_extractionMissionEndedHandlers deleteAt _missionId;
+        [_ehId] call para_g_fnc_event_unsubscribe;
+
+        if (_endType != "FAILURE") exitWith {};
+
+        format ["Extraction script cleanup, mission failed: %1, %2, %3", _missionId, _helicopter, _group] call vgm_g_fnc_logInfo;
+
+        terminate (_group getVariable ["vgm_missions_extractionScript", scriptNull]);
+
+        {_helicopter deleteVehicleCrew _x} forEach units _helicopter;
+        deleteVehicle (_helicopter getVariable ["vgm_mission_extraction_helipad", objNull]);
+        deleteVehicle _helicopter;
+
+    }]] call para_g_fnc_event_subscribeLocal;
+    vgm_missions_gameplay_extractionMissionEndedHandlers set [_missionId, _ehEndedId];
+};
 
 _helicopter // return
