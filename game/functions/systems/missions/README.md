@@ -12,7 +12,7 @@
 | vgm_mission_started                  | [_missionId]                      | Global          |
 | vgm_mission_ended                    | [_missionId, _endType]            | Global          |
 | vgm_mission_created                  | [_missionId]                      | Mission creator |
-| vgm_mission_creationFailed           | [_targetZone]                     | Mission creator |
+| vgm_mission_creationFailed           | [_reason, _reasonDetails]         | Mission creator |
 | vgm_mission_joinable                 | [_missionId]                      | Global          |
 | vgm_mission_notJoinable              | [_missionId]                      | Global          |
 | vgm_mission_attached                 | [_missionId]                      | Global          |

@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-11-15
+    Last Update: 2025-10-29
     Public: No
 
     Description:
@@ -16,7 +16,11 @@ vgm_mission_givers = [];
 
 ["vgm_mission_creationFailed", {
     params ["_args"];
-    _args params ["_targetZone"];
+    _args params ["_reason", "_details"];
 
-    hint format ["Failed to reserve zone %1 for mission.", markerText _targetZone];
+    if (_reason isEqualTo "ZONE_RESERVATION_FAILED") exitWith {
+        hint format [localize "STR_VGM_MISSIONS_CREATION_ZONE_RESERVATION_FAILED", _targetZone];
+    };
+
+    hint format [localize "STR_VGM_MISSIONS_CREATION_UNKNOWN_ERROR", _reason];
 }] call para_g_fnc_event_subscribeServer;
