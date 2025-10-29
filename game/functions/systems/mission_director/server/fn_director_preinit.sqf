@@ -262,7 +262,8 @@ call {
                 "heli"
             ] call BIS_fnc_taskCreate;
 
-            waitUntil {_helicopter getVariable ["vgm_missions_extractionLanded", false]};
+            waitUntil {_helicopter getVariable ["vgm_missions_extractionLanded", false] || isNull _helicopter};
+            if (isNull _helicopter) exitWith {};
 
             [
                 _playerGroup,
@@ -284,7 +285,7 @@ call {
     }] call para_g_fnc_event_subscribeLocal;
 
     ["vgm_mission_ended", {
-        (_this#0) params ["_missionId", "_helicopter"];
+        (_this#0) params ["_missionId", "_endType"];
 
         [format ["vgm_extract_%1", _missionId], true, true] call BIS_fnc_deleteTask;
     }] call para_g_fnc_event_subscribeLocal;
