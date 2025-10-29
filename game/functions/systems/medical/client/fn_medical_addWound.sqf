@@ -3,7 +3,7 @@
     File: fn_medical_addWound.sqf
     Author: Savage Game Design
     Date: 2023-06-28
-    Last Update: 2024-12-06
+    Last Update: 2025-10-22
     Public: No
 
     Description:
@@ -23,7 +23,7 @@
 
 params ["_unit", "_bodyPart", "_addWoundIntensity"];
 
-if (_addWoundIntensity < 1) exitWith {};
+if (!isDamageAllowed _unit || _addWoundIntensity < 1) exitWith {};
 
 private _varDamage = format ["vgm_g_medical_wound$%1", _bodyPart];
 private _previousWoundIntensity = _unit getVariable [_varDamage, WOUND_NONE];

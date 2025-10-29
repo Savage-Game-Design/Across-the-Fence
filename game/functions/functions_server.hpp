@@ -102,10 +102,14 @@ class vgm_s
         class director_addAlertness {
             headerType = -1;
         };
+        class director_attemptReinforcements {};
+        class director_checkZombiesEnabled {};
         class director_getDirectorForMissionId {};
         class director_getEnemySquadTemplate {};
+        class director_getZombieSquadTemplate {};
         class director_onPlayerNoiseEvent {};
         class director_processMission {};
+        class director_spawnAmbientZombies {};
         class director_spawnInitialPatrols {};
         class director_spawnReinforcements {};
         class director_spawnTracker {};
@@ -123,6 +127,13 @@ class vgm_s
         class director_preinitEngagements {};
         class director_removeEnemyGroupFromPlayerEngagement {};
         class director_setupEngagements {};
+    };
+
+    class mission_director_reinforcement_requests
+    {
+        VGM_SERVER_PATH(\systems\mission_director\server\reinforcement_requests);
+        class director_handleReinforcementRequest {};
+        class director_setupReinforcementRequests {};
     };
 
     class missions_objects
@@ -146,6 +157,8 @@ class vgm_s
         class missions_endMission {};
         class missions_getAssignedMission {};
         class missions_getById {};
+        class missions_getFullness {};
+        class missions_getPlayers {};
         class missions_joinMission {};
         class missions_leaveMission {};
         class missions_preInit {

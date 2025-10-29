@@ -2,7 +2,7 @@
     File: fn_locEvents_removeHandlers.sqf
     Author: Savage Game Design
     Date: 2024-02-16
-    Last Update: 2024-03-01
+    Last Update: 2025-10-22
     Public: No
 
     Description:
@@ -15,7 +15,7 @@
         Nothing
 
     Example(s):
-        [group player getVariable "myListenHandler"] call vgm_g_fnc_perception_removeListenHandler
+        [group player getVariable "myListenHandler"] call vgm_g_fnc_locEvents_removeHandlers
  */
 
 params ["_handlerDetails"];

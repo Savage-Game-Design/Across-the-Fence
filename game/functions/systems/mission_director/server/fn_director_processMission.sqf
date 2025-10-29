@@ -2,7 +2,7 @@
     File: fn_director_processMission.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-09-19
+    Last Update: 2025-10-22
     Public: No
 
     Description:
@@ -25,7 +25,7 @@ private _directorData = _mission get "director";
 
 if (_publicMission get "status" == "FINISHED") exitWith {};
 
-private _missionPlayers = keys (_mission get "machineIds") apply { getUserInfo _x # 10 };
+private _missionPlayers = [_mission] call vgm_s_fnc_missions_getPlayers;
 
 private _alertness = _directorData get "alertness";
 
@@ -75,22 +75,13 @@ private _reinforcementCheckFrequencySecs = linearConversion [
     true
 ];
 
-private _minTimeBetweenReinforcementsRangeSecs = (_directorData get "minTimeBetweenReinforcementsRangeSecs");
-private _minTimeBetweenReinforcementsSecs = linearConversion [
-    0, vgm_s_director_max_alertness,
-    _alertness,
-    _minTimeBetweenReinforcementsRangeSecs # 0, _minTimeBetweenReinforcementsRangeSecs # 1,
-    true
-];
-
 private _playerEngagements = _directorData get "playerEngagements";
 
 if (count _playerEngagements > 0) then {
     [format [
-        "[Reinforcements - Mission: %1] Reinforcement checks running | Check frequency = %2 | Min time between reinforcements = %3 |",
+        "[Reinforcements - Mission: %1] Reinforcement checks running | Check frequency = %2 |",
         _publicMission get "id",
-        _reinforcementCheckFrequencySecs,
-        _minTimeBetweenReinforcementsSecs
+        _reinforcementCheckFrequencySecs
     ]] call vgm_g_fnc_logDebug;
 };
 
@@ -112,36 +103,5 @@ private _playerClusters = [_missionPlayers, 50] call para_g_fnc_build_unit_clust
     };
     { _x set ["lastReinforcementCheck", serverTime] } forEach _engagements;
 
-    // Technically this always grows (nothing removes players from here), but shouldn't be a problem as directorData is deleted on mission end.
-    // TODO - Time gating this might not be the best approach now we're clustering. I'm going to gate for now, but we might want to use different data to balance.
-    // E.g. monitoring the intensity of the firefight, or deliberately giving players a break.
-    private _lastReinforcementSentTimes = _players apply {
-        (_directorData get "lastReinforcementSentPerPlayer" getOrDefault [hashValue _x, -9999])
-            // Cap it so averaging provides good values when players join / leave the cluster
-            max (serverTime - 1.5 * _minTimeBetweenReinforcementsSecs)
-    };
-    // Take the average of when the last reinforcements were sent - this means new players in the cluster impact reinforcements, but don't immediately trigger something.
-    private _averageLastReinforcementTime = (_lastReinforcementSentTimes call vgm_g_fnc_fastSum) / count _lastReinforcementSentTimes;
-    private _reinforcementsSentRecently = (serverTime - _averageLastReinforcementTime) < _minTimeBetweenReinforcementsSecs;
-
-    // Avoid spamming players with squads, no matter what.
-    if (_reinforcementsSentRecently) then {
-        [format ["[Reinforcements - Mission: %1, Players: %2] Skipping reinforce - squad spawned recently", _publicMission get "id", _players]] call vgm_g_fnc_logDebug;
-        continue;
-    };
-
-    // Roll the dice on spawning reinforcements. Adds a little variation, and provides an extra tuning option.
-    if (random 1 > (_directorData get "reinforcementChance")) then {
-        [format ["[Reinforcements - Mission: %1, Players: %2] Skipping reinforce - random roll failed", _publicMission get "id", _players]] call vgm_g_fnc_logDebug;
-        continue;
-    };
-
-    private _squad = [_mission, _players] call vgm_s_fnc_director_spawnReinforcements;
-
-    if (isNil "_squad") then {
-        [format ["[Reinforcements - Mission: %1, Players: %2] Failed to create squad", _publicMission get "id", _players]] call vgm_g_fnc_logInfo;
-        continue;
-    };
-
-    { _directorData get "lastReinforcementSentPerPlayer" set [hashValue _x, serverTime] } forEach _players;
+    [_mission, _players, "Ongoing engagements"] call vgm_s_fnc_director_attemptReinforcements;
 } forEach _playerClusters;

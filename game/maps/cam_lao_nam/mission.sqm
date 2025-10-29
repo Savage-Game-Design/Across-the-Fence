@@ -292,6 +292,7 @@ class Mission
 	{
 		briefingName="Across the Fence (#VERSION#)";
 		resistanceWest=0;
+		resistanceEast=0;
 		timeOfChanges=1800.0002;
 		startWeather=0.34999999;
 		startWind=0.1;

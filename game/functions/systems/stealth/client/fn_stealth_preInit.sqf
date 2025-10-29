@@ -2,7 +2,7 @@
     File: fn_stealth_preInit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-08-24
+    Last Update: 2025-10-20
     Public: No
 
     Description:
@@ -78,7 +78,7 @@ vgm_c_stealth_surfaceTypeProneMaxVisibilityCache = createHashMap;
     vgm_c_stealth_debugEH = addMissionEventHandler ["Draw3D", {
         if (vgm_c_stealth_drawDebug == false) exitWith {};
         {
-            if (side _x != east) then {continue};
+            if (side _x getFriend side player > SIDE_FRIENDSHIP_CONST) then {continue};
             private _canSee1 = lineIntersectsSurfaces [eyePos player, aimPos _x, player, _x, true, 1, "FIRE"] isEqualTo [];
             private _canSee2 = lineIntersectsSurfaces [eyePos player, eyePos _x, player, _x, true, 1, "FIRE"] isEqualTo [];
             if !(_canSee1 || _canSee2) then {continue};

@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-10-27
+    Last Update: 2025-10-29
     Public: No
 
     Description:
@@ -19,10 +19,11 @@
         [] call vgm_s_fnc_director_preinit;
  */
 
+
 vgm_s_director_max_alertness = 100;
 vgm_s_director_alertness_period_secs = 5;
 vgm_s_director_tracker_spawn_alertness_threshold = 6;
-vgm_s_director_min_time_between_trackers_secs = 90;
+vgm_s_director_min_time_between_trackers_secs = 120;
 vgm_s_director_max_time_between_trackers_secs = 600;
 vgm_s_director_dynamic_max_groups = 8;
 // Every alertness period will add a fixed amount of alertness based on the most significant event to happen.
@@ -33,6 +34,7 @@ vgm_s_director_noiseEventAlertness = createHashMapFromArray [
     ["suppressedShots", 0.75]
 ];
 
+
 vgm_s_director_defenseSquadSizeRanges = createHashMapFromArray [
     //[Site size, [ Min, Max ]]
     [SITE_FOOTPRINT_SMALL, [2, 4]],
@@ -40,7 +42,41 @@ vgm_s_director_defenseSquadSizeRanges = createHashMapFromArray [
     [SITE_FOOTPRINT_LARGE, [5, 10]]
 ];
 
+vgm_s_director_areZombiesEnabled = [] call vgm_s_fnc_director_checkZombiesEnabled;
+vgm_s_director_spawnAmbientZombies = vgm_s_director_areZombiesEnabled;
+
+vgm_s_director_zombieSiteTypeChances =
+    if (vgm_s_director_areZombiesEnabled) then {
+        createHashMapFromArray [
+            ["ALL_ZOMBIES", 4],
+            ["ALL_OPFOR", 1],
+            ["MIXED", 1]
+        ]
+    } else {
+        createHashMapFromArray [
+            ["ALL_OPFOR", 1]
+        ]
+    };
+
+vgm_s_director_zombieAlertAlertness = 3;
+vgm_s_director_staticZombieWeightings = [
+    "_zombie_medium_nobrain", 4,
+    "_zombie_fast_nobrain", 2,
+    "_zombie_slow_nobrain", 1,
+    "_zombie_slow2_nobrain", 1,
+    "_zombie_crawler_nobrain", 1
+];
+
+vgm_s_director_reinforcementZombieWeightings = [
+    "_zombie_slow_nobrain", 1,
+    "_zombie_slow2_nobrain", 1,
+    "_zombie_medium_nobrain", 4,
+    "_zombie_fast_nobrain", 2
+];
+
+
 // TODO - Replace these with Mike Force's squad generator
+
 vgm_s_director_patrol_classes = [
     'vn_o_men_nva_02',
     'vn_o_men_nva_04',
