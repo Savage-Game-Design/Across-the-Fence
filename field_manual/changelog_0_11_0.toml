@@ -1,0 +1,34 @@
+displayName = "v0.11.0"
+description = """
+[h]ADDED:[/h]
+- Added zombie gamemode variant (requires [Zombies and Demons - S.O.G. Prairie Fire compatibility mod])
+
+[h]CHANGED:[/h]
+- Reworked the grenadier and scout weapon specialisms to better align with other trees
+- Reduced noise radii for gunshots
+- Rebalanced noise radii and alertness for explosions, to better align with the size of the "bang"
+- Overhauled enemy reinforcement scaling to avoid rapid, deadly escalation
+
+[h]FIXED:[/h]
+- Fixed skill and level progress being lost in some instances when using profile storage (default)
+- Fixed skills being unlearnable in some instances when LAN hosting
+- Fixed several items being unavailable in the Arsenal
+- Fixed TFAR radios being filtered out by the Arsenal
+- Fixed skill wheel keybinding showing as 'anyanyany' in the Field Manual
+- Rewords 'Taking Notes' skill description - Thanks @FateTheTitan
+- Players no longer turn into AI on disconnect
+- Deletes helicopter on mission failure
+- Made the extraction helicopter land more intelligently, avoiding it being too high or low
+- Fixed multiple issues with broken equipment unlocks
+- Fixed reinforcements double-scaling with player count
+- Fixed site locations on Dong Giang, The Bra and Khe Sanh
+- Fixed level info not being show when the player first joins
+- Fixed players having 4 skill points (instead of 3) when they first join
+- Prevents mission creation falsely failing with "Zone reservation failed" message
+"""
+
+arguments = []
+
+## Change Log Summary
+
+
