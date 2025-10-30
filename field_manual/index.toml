@@ -7,8 +7,15 @@ pages = [
     "getting_started"
 ]
 
-[vgm]
+[vgm_changelog]
 order = 2
+displayName = "Changelog"
+pages = [
+    "changelog_0_11_0",
+]
+
+[vgm]
+order = 3
 displayName = "$STR_VGM_MISSION_NAME"
 
 # Pages require a matching {pagename}.toml file.
@@ -20,7 +27,7 @@ pages = [
 ]
 
 [vgm_missions]
-order = 3
+order = 4
 displayName = ["%1 - Missions", "localize 'STR_VGM_MISSION_NAME'"]
 
 pages = [

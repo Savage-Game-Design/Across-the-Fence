@@ -1567,6 +1567,15 @@
         <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION">
             <Original>When downed, once per mission you can conduct a desperate escape to get to safety. You'll lose your backback and some other items.</Original>
         </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_VGM_CHANGELOG">
+            <Original>Changelog</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_CHANGELOG_0_11_0">
+            <Original>v0.11.0</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_CHANGELOG_0_11_0_DESC">
+            <Original>%3ADDED:%4%1%2 Added zombie gamemode variant (requires [Zombies and Demons - S.O.G. Prairie Fire compatibility mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3592239718)) (#364)%1%1%3CHANGED:%4%1%2 Reworked the grenadier and scout weapon specialisms to better align with other trees (#359)%1%2 Reduced noise radii for gunshots (#345)%1%2 Rebalanced noise radii and alertness for explosions, to better align with the size of the "bang" (#345)%1%2 Overhauled enemy reinforcement scaling to avoid rapid, deadly escalation  (#344)%1%1%3FIXED:%4%1%2 Fixed skill and level progress being lost in some instances when using profile storage (default) (#350)%1%2 Fixed skills being unlearnable in some instances when LAN hosting (#360)%1%2 Fixed several items being unavailable in the Arsenal (#343)%1%2 Fixed TFAR radios being filtered out by the Arsenal (#364)%1%2 Fixed skill wheel keybinding showing as 'anyanyany' in the Field Manual (#342)%1%2 Rewords 'Taking Notes' skill description (#353) - Thanks @FateTheTitan%1%2 Players no longer turn into AI on disconnect (#350)%1%2 Deletes helicopter on mission failure (#363)%1%2 Made the extraction helicopter land more intelligently, avoiding it being too high or low (#362)%1%2 Fixed multiple issues with broken equipment unlocks (#357)%1%2 Fixed reinforcements double-scaling with player count (#347)%1%2 Fixed site locations on Dong Giang, The Bra and Khe Sanh (#358) (#366)%1%2 Fixed level info not being show when the player first joins (#346)%1%2 Fixed players having 4 skill points (instead of 3) when they first join (#361)%1%2 Prevents mission creation falsely failing with "Zone reservation failed" message (#365)</Original>
+        </Key>
     </Package>
     <Package name="Tutorial">
         <Key ID="STR_VGM_TUTORIAL_UI_ACKNOWLEDGE_HINT">
