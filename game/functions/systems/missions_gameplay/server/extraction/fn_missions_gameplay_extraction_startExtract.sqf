@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-10-28
+    Last Update: 2025-10-30
     Public: No
 
     Description:
@@ -106,7 +106,7 @@ private _script = [_missionId, _mission, _helicopter, _helipad] spawn {
 
     ["vgm_missions_gameplay_extractionLiftOff", [_missionId, _helicopter], [2, _playerGroup]] call para_g_fnc_event_triggerTargets;
 
-    format ["Extraction script successful: %1, %2, %3", _missionId, _helicopter] call vgm_g_fnc_logInfo;
+    format ["Extraction script successful: %1, %2", _missionId, _helicopter] call vgm_g_fnc_logInfo;
 
     private _landWp = group _helicopter addWaypoint [markerPos "vgm_mission_heli_despawn", 0];
     sleep 25;
