@@ -581,11 +581,13 @@ class vgm_skillTrees {
                 class training_team_leader: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                    conditionsUnlockGlobal[] = { { "!((_this#0) getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
                     cost = 2;
+                    applyOnRespawn = 1;
                 };
 
                 class ma_bell: vgm_skillTemplate {
