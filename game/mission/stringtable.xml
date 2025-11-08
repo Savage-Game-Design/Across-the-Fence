@@ -633,7 +633,10 @@
             <Original>Kick-off time</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_KICKOFF_TIME_DESC">
-            <Original>If no teams are deployed, call a vote on time-of-day (all players):\n- DAY(0800)\n- NIGHT(1800)</Original>
+            <Original>If no teams are deployed, call a vote on time of day (all players):\n- DAY(0800)\n- NIGHT(1800)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_KICKOFF_TIME_ACTION">
+            <Original>Vote on time of day</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_ROLL_CALL">
             <Original>Roll call</Original>
@@ -1656,6 +1659,32 @@
         </Key>
         <Key ID="STR_PARA_VOTEMENU_OPTION_3">
             <Original>Open voting menu</Original>
+        </Key>
+    </Package>
+    <Package name="Time of day voting">
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_CANT_START_VOTE">
+            <Original>Couldn't start vote</Original>
+        </Key>
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_FAILURE_CODE_VOTE_CALLED_RECENTLY">
+            <Original>A vote to wait occurred recently, you can vote again in %1 minutes</Original>
+        </Key>
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_FAILURE_CODE_MISSION_IN_PROGRESS">
+            <Original>You can't vote to wait while a team is running a mission</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_START_FAILED_CODE_TIME_OF_DAY_VOTE_IN_PROGRESS">
+            <Original>Missions can't be started until the wait vote has finished.</Original>
+        </Key>
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_PREMISSION_VOTE_TITLE">
+            <Original>Wait vote</Original>
+        </Key>
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_PREMISSION_VOTE_CONTENT">
+            <Original>What time should the teams wait until?</Original>
+        </Key>
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_PREMISSION_VOTE_OPTION_1">
+            <Original>Morning (08:00)</Original>
+        </Key>
+        <Key ID="STR_VGM_TIME_OF_DAY_VOTING_PREMISSION_VOTE_OPTION_2">
+            <Original>Evening (18:00)</Original>
         </Key>
     </Package>
 </Project>

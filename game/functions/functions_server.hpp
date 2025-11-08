@@ -155,6 +155,7 @@ class vgm_s
 
         class missions_createMission {};
         class missions_endMission {};
+        class missions_getAllMissions {};
         class missions_getAssignedMission {};
         class missions_getById {};
         class missions_getFullness {};
@@ -429,6 +430,15 @@ class vgm_s
         class skills_handle_skillLearnRequest {};
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};
+    };
+
+    class time_of_day_voting
+    {
+        VGM_SERVER_PATH(\systems\time_of_day_voting\server);
+        class timeOfDayVote_preInit { preInit = 1; };
+        class timeOfDayVote_remoteExec_startPreMissionVote {};
+        class timeOfDayVote_setTime {};
+        class timeOfDayVote_startPreMissionVote {};
     };
 
     class virtsquad

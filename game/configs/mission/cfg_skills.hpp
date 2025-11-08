@@ -640,7 +640,8 @@ class vgm_skillTrees {
                     conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "true call vgm_c_fnc_skill_passives_kickOffTime";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_kickOffTime";
                     cost = 2;
                 };
             };
