@@ -259,6 +259,7 @@ class para_s
 	{
 		PARA_SERVER_PATH(\voting);
 		class create_vote {};
+        class current_vote {};
 		class finish_vote {};
 		class submit_vote {};
 	};

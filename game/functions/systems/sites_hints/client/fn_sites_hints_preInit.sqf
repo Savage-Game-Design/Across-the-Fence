@@ -3,7 +3,7 @@
     File: fn_sites_hints_preInit.sqf
     Author: Savage Game Design
     Date: 2024-10-27
-    Last Update: 2025-01-01
+    Last Update: 2025-11-08
     Public: No
 
     Description:
@@ -46,6 +46,6 @@ vgm_sites_hints_placementModifiers = createHashMapFromArray [
 
 ["vgm_mission_end_local", {
     vgm_sites_hints_objectsList = [];
-}] call para_g_fnc_event_subscribeServer;
+}] call para_g_fnc_event_subscribeLocal;
 
 ["glintFrequency"] call vgm_c_fnc_coefficient_create;

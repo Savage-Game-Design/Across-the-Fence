@@ -34,7 +34,7 @@ if (_missionPublic get "status" isNotEqualTo "CREATED") exitWith {
     "MISSION_RUNNING"
 };
 
-private _startMissionCheckResults = [localNamespace, "vgm_s_missions_startMissionCheck", [_mission], true] call BIS_fnc_callScriptedEventHandler select { !isNil "_x" };
+private _startMissionCheckResults = [localNamespace, "vgm_s_missions_canStartMissionCheck", [_mission], true] call BIS_fnc_callScriptedEventHandler select { !isNil "_x" };
 private _failureIndex = _startMissionCheckResults findIf { !isNil "_x" };
 
 if (_failureIndex > -1) exitWith {

@@ -946,6 +946,8 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\passives\team_leader);
 
         class skill_passives_fireDirection {};
+        class skill_passives_kickOffTime_enableAction {};
+        class skill_passives_kickOffTime {};
     };
 
     class skill_actives
@@ -1091,6 +1093,16 @@ class vgm_c
         {
             preInit = 1;
         };
+    };
+
+    class time_of_day_voting
+    {
+        VGM_CLIENT_PATH(\systems\time_of_day_voting\client);
+
+        class timeOfDayVote_preInit
+        {
+            preInit = 1;
+        }
     };
 
     class tutorial
