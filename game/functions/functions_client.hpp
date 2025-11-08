@@ -820,6 +820,16 @@ class vgm_c
         class medical_injuryEffectsUpdate {};
     };
 
+    class position_indicators
+    {
+        VGM_CLIENT_PATH(\systems\position_indicators\client);
+
+        class posIndicators_create {};
+        class posIndicators_preInit {
+            preInit = 1;
+        };
+    };
+
     class respawn
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
@@ -929,6 +939,12 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\passives\support);
 
         class skill_passives_support_shepherd {};
+    };
+    class skill_passives_team_leader
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\team_leader);
+
+        class skill_passives_fireDirection {};
     };
 
     class skill_actives
