@@ -617,6 +617,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_DIRECTION">
             <Original>Fire direction</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_DIRECTION_ACTION">
+            <Original>Point at location</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_DIRECTION_DESC">
             <Original>Enables marking a location for other team mates in the HUD.</Original>
         </Key>

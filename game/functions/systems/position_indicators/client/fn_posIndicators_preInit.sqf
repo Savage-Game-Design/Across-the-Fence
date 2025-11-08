@@ -41,7 +41,7 @@ vgm_c_posIndicators_draw3dEh = addMissionEventHandler ["Draw3D", {
             private _pos = _x get "position";
             private _sizeFactor = linearConversion [50, 250, _cameraPos distance _pos, 1, 0.3];
             private _size = (_x get "size") * _sizeFactor;
-            private _fontSize = 0.05 * _sizeFactor;
+            private _fontSize = 0.03 * _sizeFactor;
             private _color = +(_x get "color");
 
             if (_x getOrDefault ["fadeWhenNotVisible", false] && !_isVisible) then {
