@@ -618,8 +618,10 @@ class vgm_skillTrees {
                     conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "true call vgm_c_fnc_skill_passives_fireDirection";
+                    codeUnapply = "false call vgm_c_fnc_skill_passives_fireDirection";
                     cost = 2;
+                    applyOnRespawn = 1;
                 };
 
                 class ammo_check: vgm_skillTemplate {
