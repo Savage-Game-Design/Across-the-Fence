@@ -290,6 +290,9 @@ class para_c
 		class vote_1 {};
 		class vote_2 {};
 		class loadVotingMenu {};
+        class voteMenu_preInit {
+            preInit = 1;
+        };
 	};
 
 	class wheel_menu

@@ -107,8 +107,8 @@ private _keyControls = [
 	[_secondaryKeyControl, _secondaryTextControl, _secondaryControl]
 ];
 
-private _keybind1 = ["para_vote_1"] call para_c_fnc_getKeyBind;
-private _keybind2 = ["para_vote_2"] call para_c_fnc_getKeyBind;
+private _keybind1 = ["para_VoteOption1"] call para_c_fnc_keyhandler_getKeyBind;
+private _keybind2 = ["para_VoteOption2"] call para_c_fnc_keyhandler_getKeyBind;
 private _keys = [
 	[_keybind1 get "dikCode"] call para_c_fnc_getKeyName,
 	[_keybind2 get "dikCode"] call para_c_fnc_getKeyName
@@ -116,7 +116,7 @@ private _keys = [
 
 _titleControl ctrlSetText _title;
 
-private _contentText = if (_useMenu) then {localize "STR_vn_mf_voteMenu_voteInitBody"} else {_content};
+private _contentText = if (_useMenu) then {localize "STR_PARA_VOTEMENU_VOTE_INIT_BODY"} else {_content};
 _contentControl ctrlSetStructuredText (parseText _contentText);
 private _textHeight = ctrlTextHeight _contentControl;
 _contentControl ctrlSetPositionH _textHeight;
@@ -130,9 +130,9 @@ _backgroundControl ctrlSetPositionH _totalHeight;
 _backgroundControl ctrlCommit 0;
 
 if (_useMenu) then {
-	private _keybind3 = ["para_vote_3"] call para_c_fnc_getKeyBind;
+	private _keybind3 = ["para_VoteOption3"] call para_c_fnc_keyhandler_getKeybind;
 	_primaryKeyControl ctrlSetText ([_keybind3 get "dikCode"] call para_c_fnc_getKeyName);
-	_primaryTextControl ctrlSetText localize "STR_vn_mf_voteMenu_open";
+	_primaryTextControl ctrlSetText localize "STR_PARA_VOTEMENU_OPEN";
 
 	_secondaryControl ctrlShow false;
 } else {

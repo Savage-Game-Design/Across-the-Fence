@@ -1615,4 +1615,36 @@
             <Original>Enables an object near the TOC allowing players to skip to level 5</Original>
         </Key>
     </Package>
+    <Package name="Paradigm Voting Menu">
+        <Key ID="STR_PARA_VOTEMENU_SUBMIT_VOTE">
+            <Original>Submit vote</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_SELECT_OPTION">
+            <Original>Please select an option:</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_VOTE_INIT_BODY">
+            <Original>A vote has been initalized. For more details please open the menu.</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_OPEN">
+            <Original>Open</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_CASTED">
+            <Original>Vote cast</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_VOTED_FOR">
+            <Original>You voted:</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_SELECT_OPTION_PROMPT">
+            <Original>You must select an option!</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_OPTION_1">
+            <Original>Vote option 1</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_OPTION_2">
+            <Original>Vote option 2</Original>
+        </Key>
+        <Key ID="STR_PARA_VOTEMENU_OPTION_3">
+            <Original>Open voting menu</Original>
+        </Key>
+    </Package>
 </Project>

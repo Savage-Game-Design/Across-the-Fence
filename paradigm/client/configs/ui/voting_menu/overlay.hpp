@@ -190,7 +190,7 @@ class para_VoteOverlay
                                     onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Primary_Text', (_this#0)];";
                                     x = UIH(1) * (3 / 4) + UIH(0.1);
                                     y = 0;
-                                    w = UIW(3);
+                                    w = UIW(ITEM_W) - (UIH(1) * (3 / 4)) - UIH(0.2);
                                     h = UIH(1);
                                     text = "Yes";
                                     colorText[] = OVERLAY_ACTION_TEXT_COLOR;
@@ -258,7 +258,7 @@ class para_VoteOverlay
                                     onLoad = "uiNamespace setVariable ['#para_c_VoteOverlay_Secondary_Text', (_this#0)];";
                                     x = UIH(1) * (3 / 4) + UIH(0.1);
                                     y = 0;
-                                    w = UIW(3);
+                                    w = UIW(ITEM_W) - (UIH(1) * (3 / 4)) - UIH(0.2);
                                     h = UIH(1);
                                     text = "No";
                                     colorText[] = OVERLAY_ACTION_TEXT_COLOR;

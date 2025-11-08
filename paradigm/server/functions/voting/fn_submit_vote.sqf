@@ -2,16 +2,16 @@
     File: fn_submit_vote.sqf
     Author:  Savage Game Design
     Public: No
-    
+
     Description:
         Submits a vote from a given player.
-    
+
     Parameter(s):
 		_index - Position of option in list [NUMBER]
-    
+
     Returns:
 		None
-    
+
     Example(s):
 		["submit_vote", 3] call para_c_fnc_call_on_server
 */
@@ -29,3 +29,7 @@ private _submittedAnswers = localNamespace getVariable "para_s_vote_submitted_an
 
 _submittedPlayers pushBack _playerId;
 _submittedAnswers pushBack _index;
+
+if (count _submittedPlayers isEqualTo count allPlayers) then {
+    [] call para_s_fnc_finish_vote;
+};

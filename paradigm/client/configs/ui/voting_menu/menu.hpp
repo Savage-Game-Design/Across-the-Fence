@@ -48,7 +48,7 @@ class para_VotingMenu
 		class OptionText: Title
 		{
 			y = UIY(8.6);
-			text = $STR_vn_mf_voteMenu_selectOption;
+			text = $STR_PARA_VOTEMENU_SELECT_OPTION;
 			sizeEx = TXT_S;
 			onLoad = "";
 		};
@@ -74,7 +74,7 @@ class para_VotingMenu
 			y = UIY(16.4);
 			w = UIW(13);
 			h = UIH(1);
-			text = $STR_vn_mf_voteMenu_submitVote;
+			text = $STR_PARA_VOTEMENU_SUBMIT_VOTE;
 			colorText[] = { 1,0,0,1 };
 		};
 	};

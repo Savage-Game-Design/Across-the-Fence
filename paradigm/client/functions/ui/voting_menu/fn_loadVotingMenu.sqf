@@ -2,12 +2,12 @@
 	File: fn_loadVotingMenu.sqf
 	Author:  Savage Game Design
 	Public: No
-	
+
 	Description:
 		Loads the voting menu.
-	
+
 	Parameter(s): none
-	
+
 	Returns: nothing
 
 	Example(s): none
@@ -38,6 +38,6 @@ _optionsCtrl ctrlAddEventHandler ['LBSelChanged', {
 
 _voteCtrl ctrlAddEventHandler ['ButtonClick', {
 	private _sel = lbCurSel (uiNamespace getVariable ['#para_c_VoteMenu_Options', controlNull]);
-	if (_sel isEqualTo -1) exitWith { hint localize "STR_vn_mf_voteMenu_selectOptionPrompt" };
+	if (_sel isEqualTo -1) exitWith { hint localize "STR_PARA_VOTEMENU_SELECT_OPTION_PROMPT" };
 	_sel call para_c_fnc_submitVote;
 }];

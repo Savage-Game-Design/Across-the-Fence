@@ -22,11 +22,14 @@ params ["_display"];
 _ctrlKeybinds = _display displayCtrl PARA_KEYBINDINGSMENU_KEYBINDS_IDC;
 
 // Retrieve the active keybind for each action.
-private _currentKeybinds = +([] call para_c_fnc_keyhandler_getAllKeyBinds);
+private _currentKeybinds = [] call para_c_fnc_keyhandler_getAllKeyBinds;
 
-_currentKeybinds apply {
+private _sortedKeybindActions = keys _currentKeybinds;
+_sortedKeybindActions sort true;
+
+_sortedKeybindActions apply {
     private _actionName = _x;
-    private _bind = _y;
+    private _bind = _currentKeybinds get _actionName;
 	private _actionDisplayName = [_actionName] call para_c_fnc_keyhandler_getAction get "localizedDisplayName";
 	private _keyName = [_bind get "dikCode"] call para_c_fnc_getKeyName;
 
@@ -36,6 +39,7 @@ _currentKeybinds apply {
 	_row = _ctrlKeybinds lnbAddRow [_actionDisplayname, _keyDescription];
 	_ctrlKeybinds lbSetData [_row, _actionName];
 };
+
 _display setVariable ["currentKeybinds", _currentKeybinds];
 
 //--- UIEH for controls:
