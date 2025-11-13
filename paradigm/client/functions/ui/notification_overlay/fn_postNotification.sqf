@@ -70,8 +70,8 @@ if (_data isEqualType createHashMap) then {
 };
 
 _data params [
-	["_title", "", [""]],
-	["_body", "", [""]],
+	["_title", "", ["", []]],
+	["_body", "", ["", []]],
 	["_icon", "", [""]],
 	["_color", [0,0,0], [[]], [3]],
 	["_backgroundColor", [1,1,1], [[]], [3]],
