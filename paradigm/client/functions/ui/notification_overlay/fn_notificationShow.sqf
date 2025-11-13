@@ -19,6 +19,7 @@
 
 
 private _duration = getNumber (missionConfigFile >> "Para_CfgNotifications" >> "animationDuration");
+private _topOffset = getNumber (missionConfigFile >> "Para_CfgNotifications" >> "topOffset");
 private _gap = getNumber (missionConfigFile >> "Para_CfgNotifications" >> "notificationGap");
 
 params ["_meta", "_data"];
@@ -64,7 +65,7 @@ if !(_body isEqualTo "") then {
 private _actives = localNamespace getVariable ["#para_c_var_notificationOverlay_actives", []];
 
 private _actives = localNamespace getVariable ["#para_c_var_notificationOverlay_actives", []];
-private _delta = _gap;
+private _delta = _topOffset;
 {
 	(_x#0) params ["_xid", "_priority", "_minTTL", "_maxTTL", "_registered", "_shown", "_accelerated", "_expires", "_control"];
 	if !(_xid isEqualTo _id) then {

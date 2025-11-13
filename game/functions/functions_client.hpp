@@ -708,6 +708,7 @@ class vgm_c
         class handle_light_level_loop {};
         class openFieldManual {};
         class update_loading_screen {};
+        class postNotification {};
         class progressBar {};
         class showTabbedTextDialog {};
         class stack_controls {};

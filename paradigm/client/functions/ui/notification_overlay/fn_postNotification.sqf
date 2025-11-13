@@ -9,7 +9,7 @@
 		Note: while body lenght is not limited, please do not go above 2 lines for the user's sake
 
 	Parameter(s):
-		_data - Data [ARRAY, defaults to []]
+		_data - Data [ARRAY or HASHMAP, defaults to []]
 			_title - Title of the notification [STRING, defaults to ""]
 			_body - Body of the notification, will be parseText'ed [STRING, defaults to ""]
 			_icon - Icon of the notification [STRING, defaults to ""]
@@ -49,6 +49,25 @@ params [
 	["_data", []],
 	["_meta", []]
 ];
+
+// Allow hashmaps to be used instead of arrays for convenience.
+if (_data isEqualType createHashMap) then {
+    if (_meta isEqualTo []) then {
+        _meta = [
+            _data get "priority",
+            _data get "minTTL",
+            _data get "maxTTL"
+        ];
+    };
+    _data = [
+        _data get "title",
+        _data get "body",
+        _data get "icon",
+        _data get "color",
+        _data get "backgroundColor",
+        _data get "sound"
+    ];
+};
 
 _data params [
 	["_title", "", [""]],
