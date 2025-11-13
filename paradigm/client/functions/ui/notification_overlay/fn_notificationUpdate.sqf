@@ -18,9 +18,10 @@
 private _actives = localNamespace getVariable ["#para_c_var_notificationOverlay_actives", []];
 
 private _duration = getNumber (missionConfigFile >> "Para_CfgNotifications" >> "animationDuration");
+private _topOffset = getNumber (missionConfigFile >> "Para_CfgNotifications" >> "topOffset");
 private _gap = getNumber (missionConfigFile >> "Para_CfgNotifications" >> "notificationGap");
 
-private _delta = _gap;
+private _delta = _topOffset;
 {
 	(_x#0) params ["_id", "_priority", "_minTTL", "_maxTTL", "_registered", "_shown", "_accelerated", "_expires", "_control"];
 	_control ctrlSetPositionY (safeZoneY + _delta);
