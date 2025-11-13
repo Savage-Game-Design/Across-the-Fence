@@ -494,6 +494,15 @@ class vgm_c
         class displayLevelIndicator {};
     };
 
+    class groups
+    {
+        VGM_CLIENT_PATH(\core\client\groups);
+
+        class groups_postInit {
+            postInit = 1;
+        };
+    };
+
     class artillery
     {
         VGM_CLIENT_PATH(\systems\artillery\client);
