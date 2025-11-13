@@ -2,7 +2,7 @@
     File: fn_postInit.sqf
     Author: veteran29
     Date: 2023-01-22
-    Last Update: 2025-10-18
+    Last Update: 2025-11-13
     Public: No
 
     Description:
@@ -26,6 +26,13 @@ player addEventHandler ["Respawn", {
     {
         _player call (_y get "codeApply")
     } forEach vgm_c_skills_applyOnRespawn;
+
+    {
+        private _skillHashmap = _y;
+        {
+            _player call (_y get "codeApplyGroup")
+        } forEach _skillHashmap;
+    } forEach vgm_c_skills_applyOnRespawnGroup;
 }];
 
 // dev action, uses path instead of function so there's no need for recompiling
