@@ -2,7 +2,7 @@
     File: fn_missions_remoteExec_startMission.sqf
     Author: Savage Game Design
     Date: 2023-03-05
-    Last Update: 2023-06-23
+    Last Update: 2025-11-13
     Public: Yes
 
     Description:
@@ -38,6 +38,11 @@ if !(_missionCreator isEqualTo "" || _missionCreator isEqualTo _playerId) exitWi
     [format ["Player %1 cannot start mission %2 as they are not the leader.", _playerId, _mission get "id"]] call vgm_g_fnc_logWarning;
 };
 
-[
-    _mission get "public" get "id"
-] call vgm_s_fnc_missions_startMission;
+private _missionStartFailureCode = [_mission get "public" get "id"] call vgm_s_fnc_missions_startMission;
+
+if (!isNil "_missionStartFailureCode") exitWith {
+    createHashMapFromArray [
+        ["title", "STR_VGM_MISSIONS_START_FAILED"],
+        ["body", format ["STR_VGM_MISSIONS_START_FAILED_CODE_%1", _missionStartFailureCode]]
+    ] remoteExec ["vgm_c_fnc_postNotification", _mission get "machineIds" get _playerId];
+};

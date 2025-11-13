@@ -1321,6 +1321,17 @@
             <Original>Mission creation failed for unexpected reason %1</Original>
         </Key>
     </Package>
+    <Package name="Missions start">
+        <Key ID="STR_VGM_MISSIONS_START_FAILED">
+            <Original>Couldn't start mission</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_START_FAILED_CODE_MISSION_DOES_NOT_EXIST">
+            <Original>Mission does not exist</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_START_FAILED_CODE_MISSION_RUNNING">
+            <Original>Mission has already started</Original>
+        </Key>
+    </Package>
     <Package name="Missions extraction">
         <Key ID="STR_VGM_MISSIONS_EXTRACTION_REQUEST_ACTION">
             <Original>Request extraction</Original>
