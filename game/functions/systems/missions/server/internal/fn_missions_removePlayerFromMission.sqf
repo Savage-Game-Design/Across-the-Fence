@@ -2,7 +2,7 @@
     File: fn_missions_removePlayerFromMission.sqf
     Author: Savage Game Design
     Date: 2023-03-20
-    Last Update: 2025-03-02
+    Last Update: 2025-11-14
     Public: No
 
     Description:
@@ -45,7 +45,7 @@ private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
 
 [
     "vgm_mission_playerRemoved",
-    [_playerId, _missionPublic get "id"]
+    [_playerId, _missionPublic get "id", _playerUnit]
 ] call para_g_fnc_event_triggerGlobal;
 
 // Mission can never be full if someone just left.

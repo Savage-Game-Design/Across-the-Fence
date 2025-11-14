@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2025-10-18
+    Last Update: 2025-11-13
     Public: Yes
 
     Description:
@@ -56,7 +56,6 @@ private _fnc_parseSkillTree = {
                 ["column", getNumber (_x >> "column")],
                 ["icon", getText (_x >> "icon")],
                 ["isActive", getNumber (_x >> "skillType") > 0],
-                ["applyOnRespawn", getNumber (_x >> "applyOnRespawn") > 0],
                 ["cooldown", getNumber (_x >> "cooldown")],
                 ["duration", getNumber (_x >> "duration")],
                 ["cost", getNumber (_x >> "cost")],
@@ -66,8 +65,13 @@ private _fnc_parseSkillTree = {
                 }],
                 ["conditionShow", compileFinal getText (_x >> "conditionShow")],
                 ["conditionActivate", compileFinal getText (_x >> "conditionActivate")],
+                ["applyOnRespawn", getNumber (_x >> "applyOnRespawn") > 0],
                 ["codeApply", compileFinal getText (_x >> "codeApply")],
                 ["codeUnapply", compileFinal getText (_x >> "codeUnapply")],
+                ["isGroupSkill", getText (_x >> "codeApplyGroup") isNotEqualTo "" || getText (_x >> "codeUnapplyGroup") isNotEqualTo ""],
+                ["applyOnRespawnGroup", getNumber (_x >> "applyOnRespawnGroup") > 0],
+                ["codeApplyGroup", compileFinal getText (_x >> "codeApplyGroup")],
+                ["codeUnapplyGroup", compileFinal getText (_x >> "codeUnapplyGroup")],
                 ["codeActivate", compileFinal getText (_x >> "codeActivate")],
                 ["codeDeactivate", compileFinal getText (_x >> "codeDeactivate")],
                 ["codeUnableToActivate", compileFinal getText (_x >> "codeUnableToActivate")]

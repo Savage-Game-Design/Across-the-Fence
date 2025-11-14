@@ -2,7 +2,7 @@
     File: fn_missions_attachPlayerToMission.sqf
     Author: Savage Game Design
     Date: 2023-03-17
-    Last Update: 2025-02-13
+    Last Update: 2025-11-14
     Public: No
 
     Description:
@@ -65,7 +65,7 @@ private _playerUnit = _playerId call vgm_s_fnc_player_fromId;
 
 [
     "vgm_mission_attached",
-    [_playerId, _missionPublic get "id"]
+    [_playerId, _missionPublic get "id", _playerUnit]
 ] call para_g_fnc_event_triggerGlobal;
 
 private _missionIsFull = ((_missionPublic get "players") call para_g_fnc_netmap_count) >= _missionPublic get "maxPlayers";

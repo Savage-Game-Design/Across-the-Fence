@@ -6,7 +6,6 @@ class vgm_skillTemplate {
     icon = "\vn\ui_f_vietnam\ui\wheelmenu\img\ui_icon_a_ca.paa";
 
     skillType = 0; // 0 - passive, 1 - primary, 2 - ultimate
-    applyOnRespawn = 0;
 
     cost = 1;
     cooldown = 10;
@@ -16,10 +15,21 @@ class vgm_skillTemplate {
     conditionShow = "true";
     conditionActivate = "true";
 
+    // If 1, re-runs codeApply on respawn
+    applyOnRespawn = 0;
     // Called when the skill is learned
     codeApply = "";
     // Called when the skill is unlearned
     codeUnapply = "";
+
+    // If 1, re-runs codeApplyGroup locally for the respawning player in the group
+    applyOnRespawnGroup = 0;
+    // Called locally on every player when in a mission with the skill's owner to apply the skill's effect.
+    // Called once for each player that has the skill on the mission.
+    codeApplyGroup = "";
+    // Called locally on every player when no longer in a mission with the skill's owner to remove the skill's effect.
+    // Called once for each player that had the skill on the mission.
+    codeUnapplyGroup = "";
 
     // Called when an ability is triggered
     codeActivate = "";

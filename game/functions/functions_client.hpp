@@ -843,6 +843,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skills\client);
 
+        class skills_applyGroupSkill {};
         class skills_getSkillPoints {};
         class skills_openSkillTree {};
         class skills_postInit
@@ -853,6 +854,8 @@ class vgm_c
         {
             preInit = 1;
         };
+        class skills_unapplyGroupSkill {};
+        class skills_unapplyPlayersGroupSkills {};
     };
 
     class skills_active

@@ -2,7 +2,7 @@
     File: fn_groups_postInit.sqf
     Author: Savage Game Design
     Date: 2025-11-13
-    Last Update: 2025-11-13
+    Last Update: 2025-11-14
     Public: No
 
     Description:
@@ -32,10 +32,12 @@ vgm_c_groups_eachFrameEH = addMissionEventHandler ["EachFrame", {
     };
 
     _currentGroup setVariable ["vgm_c_groups_joinedEH", _currentGroup addEventHandler ["UnitJoined", {
+        // This will not fire when a player joins the group by connecting.
         ["vgm_groups_unitJoined", _this] call para_g_fnc_event_triggerLocal;
     }]];
 
     _currentGroup setVariable ["vgm_c_groups_leftEH", _currentGroup addEventHandler ["UnitLeft", {
+        // This will fire with unit as objNull when a player disconnects.
         ["vgm_groups_unitLeft", _this] call para_g_fnc_event_triggerLocal;
     }]];
 
