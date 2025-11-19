@@ -2,7 +2,7 @@
     File: fn_statusEffect_remove.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2023-09-02
+    Last Update: 2025-11-19
     Public: No
 
     Description:
@@ -43,11 +43,16 @@ private _idx = _reasonList find _reason;
 if (_idx == -1) exitWith {};
 _reasonList deleteAt _idx;
 
+private _effectsEndTimes = _unit getVariable "vgm_c_statusEffect_endTimes";
+_effectsEndTimes getOrDefault [_effect, createHashmap] deleteAt _reason;
+
 // status was in effect but is not anymore, apply the onChange callback
 if (count _reasonList == 0) then {
     format ["Status effect stopped: %1", _effect] call vgm_g_fnc_logInfo;
 
     [_unit, false] call (vgm_c_statusEffect_allEffects get _effect);
+
+    _effectsEndTimes deleteAt _effect;
 };
 
 nil
