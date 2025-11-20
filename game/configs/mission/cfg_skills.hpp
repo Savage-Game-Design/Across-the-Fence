@@ -615,7 +615,6 @@ class vgm_skillTrees {
                 class fire_direction: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRE_DIRECTION";
                     description = "$STR_VGM_SKILLS_SKILL_FIRE_DIRECTION_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     codeApply = "true call vgm_c_fnc_skill_passives_fireDirection";
@@ -637,7 +636,6 @@ class vgm_skillTrees {
                 class kickoff_time: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KICKOFF_TIME";
                     description = "$STR_VGM_SKILLS_SKILL_KICKOFF_TIME_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     codeApply = "true call vgm_c_fnc_skill_passives_kickOffTime";
@@ -696,7 +694,6 @@ class vgm_skillTrees {
                 class ditch_rucks: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_DITCH_RUCKS";
                     description = "$STR_VGM_SKILLS_SKILL_DITCH_RUCKS_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     codeApplyGroup = "true call vgm_c_fnc_skill_passives_ditchRucks";
