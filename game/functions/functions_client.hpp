@@ -951,6 +951,7 @@ class vgm_c
         class skill_passives_fireDirection {};
         class skill_passives_kickOffTime_enableAction {};
         class skill_passives_kickOffTime {};
+        class skill_passives_sanctuary {};
     };
 
     class skill_actives

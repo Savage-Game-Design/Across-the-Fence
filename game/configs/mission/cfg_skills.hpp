@@ -684,10 +684,10 @@ class vgm_skillTrees {
                 class sanctuary: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SANCTUARY";
                     description = "$STR_VGM_SKILLS_SKILL_SANCTUARY_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+					codeApply = "true call vgm_c_fnc_skill_passives_sanctuary";
+					codeUnapply = "false call vgm_c_fnc_skill_passives_sanctuary";
                     cost = 4;
                 };
 
