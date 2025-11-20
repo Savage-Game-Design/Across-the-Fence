@@ -304,6 +304,7 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\missions_zones\global);
 
+        class missions_zones_getLzs {};
         class missions_zones_getUnreservedZones {};
         class missions_zones_postInit
         {

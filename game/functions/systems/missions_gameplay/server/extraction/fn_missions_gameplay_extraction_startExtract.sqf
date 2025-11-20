@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_extraction_callExtract.sqf
     Author: Savage Game Design
     Date: 2023-11-24
-    Last Update: 2025-10-30
+    Last Update: 2025-11-20
     Public: No
 
     Description:
@@ -43,7 +43,7 @@ _playerGroup setVariable ["vgm_missions_extraction_canRequest", false, true];
 // Only doing this calculation serverside, as the client doesn't have target box location data.
 if (_lzPosition isEqualTo []) then {
     private _targetBox = _mission get "public" get "targetZone";
-    private _lzs = ([_targetBox] call vgm_s_fnc_loc_getTargetBoxLocations) get "lz";
+    private _lzs = [_targetBox] call vgm_g_fnc_missions_zones_getLzs;
     private _playerToExtract = leader _playerGroup;
     if (isNull _playerToExtract) then {
         _playerToExtract = selectRandom units _playerGroup;

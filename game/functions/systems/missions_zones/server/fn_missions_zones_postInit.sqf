@@ -24,7 +24,7 @@ private _zoneInfoByIdNetmap = "vgm_missions_zones_zoneInfoById" call para_g_fnc_
     private _zoneNetmap = [[
         ["id", _id],
         ["sites", []],
-        ["lzs", []]
+        ["lzs", ([_id] call vgm_s_fnc_loc_getTargetBoxLocations) get "lz"]
     ]] call para_s_fnc_netmap_createNetmapFromArray;
 
     [_zoneNetmap, _zoneInfoByIdNetmap] call para_s_fnc_netmap_setOwningNetmap;
