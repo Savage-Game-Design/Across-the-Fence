@@ -662,6 +662,36 @@
         <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_DESC">
             <Original>Request covey give you the azimuth and distance to your nearest LZ, and adds a marker on the map.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_ACTION">
+            <Original>Locate nearest LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_NEARBY">
+            <Original>You're right on top of it, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_N">
+            <Original>The nearest LZ looks to be roughly %1 metres north of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_NE">
+            <Original>The nearest LZ looks to be roughly %1 metres north-east of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_E">
+            <Original>The nearest LZ looks to be roughly %1 metres east of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_SE">
+            <Original>The nearest LZ looks to be roughly %1 metres south-east of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_S">
+            <Original>The nearest LZ looks to be roughly %1 metres south of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_SW">
+            <Original>The nearest LZ looks to be roughly %1 metres south-west of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_W">
+            <Original>The nearest LZ looks to be roughly %1 metres west of your position, covey out.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SANCTUARY_RESPONSE_NW">
+            <Original>The nearest LZ looks to be roughly %1 metres north-west of your position, covey out.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_DITCH_RUCKS">
             <Original>Ditch rucks</Original>
         </Key>
