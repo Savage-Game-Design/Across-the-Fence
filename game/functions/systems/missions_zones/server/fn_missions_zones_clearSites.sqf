@@ -2,7 +2,7 @@
     File: fn_missions_zones_clearSites.sqf
     Author: Savage Game Design
     Date: 2024-08-22
-    Last Update: 2025-01-23
+    Last Update: 2025-11-20
     Public: Yes
 
     Description:
@@ -38,5 +38,7 @@ while { _deleteIndex > 0 } do {
 };
 
 // clear sites on clients
-private _sitesNetmap = "vgm_missions_zones_spawnedSitesPublic" call para_g_fnc_netmap_get;
-[_sitesNetmap, _targetZone] call para_s_fnc_netmap_deleteAt;
+private _zoneInfo = (["vgm_missions_zones_zoneInfoById"] call para_g_fnc_netmap_get) get _targetZone;
+if (!isNil "_zoneInfo") then {
+    [_zoneInfo, "sites", []] call para_s_fnc_netmap_set;
+};
