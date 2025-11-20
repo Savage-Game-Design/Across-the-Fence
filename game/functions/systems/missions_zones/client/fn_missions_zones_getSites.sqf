@@ -2,7 +2,7 @@
     File: fn_missions_zones_getSites.sqf
     Author: Savage Game Design
     Date: 2025-01-23
-    Last Update: 2025-01-23
+    Last Update: 2025-11-20
     Public: No
 
     Description:
@@ -20,6 +20,4 @@
 
 params ["_zoneName"];
 
-private _sitesNetmap = "vgm_missions_zones_spawnedSitesPublic" call para_g_fnc_netmap_get;
-
-_sitesNetmap getOrDefault [_zoneName, []] // return
+(["vgm_missions_zones_zoneInfoById"] call para_g_fnc_netmap_get) get _zoneName getOrDefault ["sites", []]
