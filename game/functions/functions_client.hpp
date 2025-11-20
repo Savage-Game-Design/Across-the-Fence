@@ -945,6 +945,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\team_leader);
 
+        class skill_passives_ditchRucks {};
         class skill_passives_fireDirection {};
         class skill_passives_kickOffTime_enableAction {};
         class skill_passives_kickOffTime {};
