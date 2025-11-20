@@ -24,6 +24,7 @@ class vgm_g
         class manWouldCollideAtPosition {};
         class objectArea {};
         class nearestPointOnLine {};
+        class nearestPosition {};
         class preInit
         {
             preInit = 1;
