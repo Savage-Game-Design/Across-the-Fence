@@ -2,7 +2,7 @@
     File: fn_skills_unapplyPlayersGroupSkills.sqf
     Author: Savage Game Design
     Date: 2025-11-13
-    Last Update: 2025-11-13
+    Last Update: 2025-11-19
     Public: No
 
     Description:
@@ -24,7 +24,7 @@ params ["_owningPlayerId"];
 private _skills = values (vgm_c_skills_appliedGroupSkills getOrDefault [_owningPlayerId, createHashMap]);
 
 {
-    player call (_x get "codeUnapplyGroup");
+    [_x, _owningPlayerId] call vgm_c_fnc_skills_unapplyGroupSkill;
 } forEach _skills;
 
 vgm_c_skills_appliedGroupSkills deleteAt _owningPlayerId;
