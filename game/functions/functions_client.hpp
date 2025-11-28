@@ -30,6 +30,7 @@ class vgm_g
             preInit = 1;
         };
         class randomPosInRing {};
+        class removeMagazineAmmo {};
         class spokenDirection {};
         class startScheduler {
             postInit = 1;
