@@ -644,11 +644,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_ROLL_CALL_DESC">
             <Original>All team members show up on each team member's map.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_MAD_MINUTE">
-            <Original>Mad minute</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_EMERGENCY_STASH">
+            <Original>Emergency stash</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_MAD_MINUTE_DESC">
-            <Original>All team members consume no ammo.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_EMERGENCY_STASH_DESC">
+            <Original>All team members can reload without consuming ammo from their inventory.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_2">
             <Original>Target folder 2</Original>
