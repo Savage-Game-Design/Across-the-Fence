@@ -759,7 +759,6 @@ class vgm_skillTrees {
                 class get_it_together: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER";
                     description = "$STR_VGM_SKILLS_SKILL_GET_IT_TOGETHER_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
                     codeApplyGroup = "[player, 'skillCooldown', 'skill_getItTogether', -0.2, true] call vgm_c_fnc_coefficient_set";
