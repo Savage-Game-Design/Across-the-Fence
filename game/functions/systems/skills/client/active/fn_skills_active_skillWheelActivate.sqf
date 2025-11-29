@@ -23,8 +23,13 @@
 if (_skill isEqualTo createHashMap) exitWith {};
 
 if (_slot call vgm_c_fnc_skills_active_isSlotOnCooldown) exitWith {
-    (format ["Skill on cooldown", _skill get "path"]) call vgm_g_fnc_logWarning;
+    (format ["Cannot activate skill - on cooldown: %1", _skill get "path"]) call vgm_g_fnc_logWarning;
     hint "Skill on cooldown!";
+};
+
+if (_slot call vgm_c_fnc_skills_active_isSlotActive) exitWith {
+    (format ["Cannot activate skill - already active: %1", _skill get "path"]) call vgm_g_fnc_logWarning;
+    hint "Skill active!";
 };
 
 if (false isEqualTo call (_skill get "conditionActivate")) exitWith {
@@ -35,10 +40,16 @@ if (false isEqualTo call (_skill get "conditionActivate")) exitWith {
 [player, _skill] call (_skill get "codeActivate");
 [player, _skill get "path"] remoteExecCall ["vgm_c_fnc_skills_active_applyGroupSkill", [] call vgm_c_fnc_missions_getTeamMembers];
 
+private _duration = _skill get "duration";
+private _activeUntil = time + _duration;
+_slot set ["activeTime", _duration];
+_slot set ["activeUntil", _activeUntil];
+
 private _cooldownTime = (_skill get "cooldown") * (player getVariable ["vgm_c_skills_cooldownCoef", 1]);
 // TODO remember cooldowns to prevent resetting by doing a reconnect
 private _cooldownUntil = time + _cooldownTime;
 _slot set ["cooldownTime", _cooldownTime];
+// Ensure cooldown is never faster than the duration so it can't be re-triggered when already active.
 _slot set ["cooldownUntil", _cooldownUntil];
 
 ["vgm_skills_active_activated", [_slot get "name", _skill]] call para_g_fnc_event_triggerLocal;
@@ -57,5 +68,5 @@ private _jobId = format ["skill_%1", _skill get "path" select -1];
     // Single iteration
     1,
     // Delay before running job
-    _skill get "duration"
+    _duration
 ] call para_g_fnc_scheduler_add_job;

@@ -4,7 +4,7 @@
     File: fn_skills_active_preInit.sqf
     Author: Savage Game Design
     Date: 2023-01-28
-    Last Update: 2025-09-10
+    Last Update: 2025-11-29
     Public: No
 
     Description:
@@ -26,6 +26,7 @@ private _fnc_createSlot = {
     [_this, createHashMapFromArray [
         ["name", _this],
         ["cooldownUntil", 0],
+        ["activeUntil", 0],
         ["skill", createHashMap]
     ]]
 };
