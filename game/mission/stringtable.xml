@@ -708,7 +708,7 @@
             <Original>Break contact</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_BREAK_CONTACT_DESC">
-            <Original>Briefly distracts the enemy from all team members.</Original>
+            <Original>Briefly distracts the enemy from all team members, giving them an opportunity to hide and break contact</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ">
             <Original>Get to the LZ</Original>
