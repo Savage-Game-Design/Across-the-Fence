@@ -648,10 +648,10 @@ class vgm_skillTrees {
                 class roll_call: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ROLL_CALL";
                     description = "$STR_VGM_SKILLS_SKILL_ROLL_CALL_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    // Note - make sure duration here matches duration below.
+                    codeActivateGroup = "[player, 'squadUiMapDrawEveryone', 'skill_rollCall', 60, true] call vgm_c_fnc_statusEffect_set;"
                     skillType = 2;
                     cost = 4;
                     cooldown = 240;
@@ -1737,14 +1737,6 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'interact', 'skill_support_nimbleHands', -0.25, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'interact', 'skill_support_nimbleHands'] call vgm_c_fnc_coefficient_remove";
-                };
-
-                class shepherd: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD";
-                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_SHEPHERD_DESC";
-
-                    codeApply = "true call vgm_c_fnc_skill_passives_support_shepherd";
-                    codeUnapply = "false call vgm_c_fnc_skill_passives_support_shepherd";
                 };
             };
 
