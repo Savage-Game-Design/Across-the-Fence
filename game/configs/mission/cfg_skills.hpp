@@ -727,10 +727,9 @@ class vgm_skillTrees {
                 class get_to_the_lz: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ";
                     description = "$STR_VGM_SKILLS_SKILL_GET_TO_THE_LZ_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivateGroup = "_this call vgm_c_fnc_skill_actives_getToTheLz";
                     skillType = 2;
                     cost = 6;
                     cooldown = 600;
@@ -1798,16 +1797,6 @@ class vgm_skillTrees {
             };
 
             class tier_4 {
-                class getToTheLz: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ";
-                    description = "$STR_VGM_SKILLS_SKILL_SUPPORT_GET_TO_THE_LZ_DESC";
-
-                    codeActivate = "call vgm_c_fnc_skill_actives_support_getToTheLz";
-                    skillType = 2;
-                    cost = 2;
-                    cooldown = 480;
-                    duration = 30;
-                };
             };
         };
 
