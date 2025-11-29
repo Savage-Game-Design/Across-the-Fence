@@ -2,7 +2,7 @@
     File: fnc_statusEffect_create.sqf
     Author: Savage Game Design
     Date: 2023-07-02
-    Last Update: 2023-07-12
+    Last Update: 2025-11-29
     Public: Yes
 
     Description:
@@ -12,6 +12,7 @@
     Parameter(s):
         _name - Name of the status effect [STRING]
         _fnc_onChange - Function to be called when status effect state changes [CODE]
+        _reapplyOnRespawn - Should onChange be re-called when the player respawns and the effect is still present? [BOOLEAN]
 
     Returns:
         Nothing
@@ -25,13 +26,16 @@
 
 params [
     ["_name", nil, [""]],
-    ["_fnc_onChange", nil, [{}]]
+    ["_fnc_onChange", nil, [{}]],
+    ["_reapplyOnRespawn", false, [false]]
 ];
 
 if (isNil "vgm_c_statusEffect_allEffects") then {
     vgm_c_statusEffect_allEffects = createHashMap;
+    vgm_c_statusEffect_applyEffectOnRespawn = createHashMap;
 };
 
 vgm_c_statusEffect_allEffects set [_name, _fnc_onChange];
+vgm_c_statusEffect_applyEffectOnRespawn set [_name, _reapplyOnRespawn];
 
 nil
