@@ -762,7 +762,8 @@ class vgm_skillTrees {
                     conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApplyGroup = "[player, 'skillCooldown', 'skill_getItTogether', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapplyGroup = "[player, 'skillCooldown', 'skill_getItTogether', -0.2, true] call vgm_c_fnc_coefficient_set";
                     cost = 6;
                 };
             };
