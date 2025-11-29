@@ -739,10 +739,10 @@ class vgm_skillTrees {
                 class team_awareness: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS";
                     description = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'squadUiMapDrawEveryone', 'skill_teamAwareness', -1, true] call vgm_c_fnc_statusEffect_set;"
+                    codeUnapply = "[player, 'squadUiMapDrawEveryone', 'skill_teamAwareness'] call vgm_c_fnc_statusEffect_remove;"
                     cost = 6;
                 };
 
