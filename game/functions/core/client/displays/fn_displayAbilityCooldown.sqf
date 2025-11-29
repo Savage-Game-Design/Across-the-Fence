@@ -3,7 +3,7 @@
     File: fn_displayAbilityCooldown.sqf
     Author: Savage Game Design
     Date: 2023-06-14
-    Last Update: 2025-06-25
+    Last Update: 2025-11-29
     Public: No
 
     Description:
@@ -98,19 +98,23 @@ switch _mode do {
         _ctrlCooldown progressSetPosition 0;
         _ctrlDuration progressSetPosition 1;
 
-        private _duration = _skill get "duration";
-        private _cooldown = _slot get "cooldownTime";
-
         // start cooldown ticker
         #define TICK_TIME 0.5
         addMissionEventHandler ["EachFrame", {
-            _thisArgs params ["_deltaT", "_ctrlCooldown", "_ctrlSeconds", "_ctrlDuration", "_remainingCooldown", "_totalCooldown", "_remainingDuration", "_totalDuration"];
+            _thisArgs params ["_deltaT", "_ctrlCooldown", "_ctrlSeconds", "_ctrlDuration", "_slot"];
 
             _deltaT = _deltaT + diag_deltaTime;
 
             if (_deltaT >= TICK_TIME) then {
-                _remainingCooldown = _remainingCooldown - _deltaT;
-                _remainingDuration = _remainingDuration - _deltaT;
+                _deltaT = _deltaT mod TICK_TIME;
+
+                private _remainingCooldown = (_slot get "cooldownUntil") - time;
+                private _remainingDuration = (_slot get "activeUntil") - time;
+
+                if (_remainingDuration > 0) exitWith {
+                    _ctrlDuration progressSetPosition ((_remainingDuration / (_slot get "activeTime")) min 1 max 0);
+                    _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingDuration];
+                };
 
                 // stop the loop, reset controls
                 if (_remainingCooldown <= 0) exitWith {
@@ -123,21 +127,12 @@ switch _mode do {
                     removeMissionEventHandler [_thisEvent, _thisEventHandler]
                 };
 
-                if (_remainingDuration > 0) then {
-                    _ctrlDuration progressSetPosition (_remainingDuration / _totalDuration);
-                    _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingDuration];
-                } else {
-                    _ctrlDuration progressSetPosition 0;
-                    _ctrlCooldown progressSetPosition (1 - (_remainingCooldown / _totalCooldown));
-                    _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
-                };
-
-                _deltaT = _deltaT mod TICK_TIME;
-                _thisArgs set [4, _remainingCooldown];
-                _thisArgs set [6, _remainingDuration];
+                _ctrlDuration progressSetPosition 0;
+                _ctrlCooldown progressSetPosition ((1 - (_remainingCooldown / (_slot get "cooldownTime"))) min 1 max 0);
+                _ctrlSeconds ctrlSetText format ["%1 s", ceil _remainingCooldown];
             };
 
             _thisArgs set [0, _deltaT];
-        }, [0, _ctrlCooldown, _ctrlSeconds, _ctrlDuration, _cooldown, (_cooldown - _duration), _duration, _duration]];
+        }, [0, _ctrlCooldown, _ctrlSeconds, _ctrlDuration, _slot]];
     };
 };
