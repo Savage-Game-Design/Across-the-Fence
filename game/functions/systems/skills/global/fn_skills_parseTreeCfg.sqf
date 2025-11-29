@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2025-11-13
+    Last Update: 2025-11-29
     Public: Yes
 
     Description:
@@ -73,6 +73,7 @@ private _fnc_parseSkillTree = {
                 ["codeApplyGroup", compileFinal getText (_x >> "codeApplyGroup")],
                 ["codeUnapplyGroup", compileFinal getText (_x >> "codeUnapplyGroup")],
                 ["codeActivate", compileFinal getText (_x >> "codeActivate")],
+                ["codeActivateGroup", compileFinal getText (_x >> "codeActivateGroup")],
                 ["codeDeactivate", compileFinal getText (_x >> "codeDeactivate")],
                 ["codeUnableToActivate", compileFinal getText (_x >> "codeUnableToActivate")]
             ];

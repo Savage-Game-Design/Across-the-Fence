@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: veteran29
     Date: 2022-12-16
-    Last Update: 2025-11-14
+    Last Update: 2025-11-29
     Public: No
 
     Description:
@@ -39,8 +39,7 @@ vgm_c_skills_appliedGroupSkills = createHashMap;
         _learntGroupSkills pushBackUnique _path;
         player setVariable ["vgm_g_skills_learntGroupSkills", _learntGroupSkills, true];
 
-        private _mission = [] call vgm_c_fnc_missions_getCurrentMission;
-        private _targets = if (isNil "_mission") then { [player] } else { units (_mission get "group") select { isPlayer _x } };
+        private _targets = (call vgm_c_fnc_missions_getTeamMembers) select { isPlayer _x };
 
         // Trigger the effects on current group members.
         ["vgm_skills_codeApplyGroup", [_path, getPlayerID player, player], _targets] call para_g_fnc_event_triggerTargets;

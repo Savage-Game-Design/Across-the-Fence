@@ -2,7 +2,7 @@
     File: fn_skills_active_skillWheelActivate.sqf
     Author:
     Date: 2023-02-01
-    Last Update: 2025-08-24
+    Last Update: 2025-11-29
     Public: No
 
     Description:
@@ -33,6 +33,7 @@ if (false isEqualTo call (_skill get "conditionActivate")) exitWith {
 };
 
 [player, _skill] call (_skill get "codeActivate");
+[player, _skill get "path"] remoteExecCall ["vgm_c_fnc_skills_active_applyGroupSkill", [] call vgm_c_fnc_missions_getTeamMembers];
 
 private _cooldownTime = (_skill get "cooldown") * (player getVariable ["vgm_c_skills_cooldownCoef", 1]);
 // TODO remember cooldowns to prevent resetting by doing a reconnect
