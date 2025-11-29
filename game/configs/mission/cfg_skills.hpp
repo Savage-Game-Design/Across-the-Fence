@@ -658,17 +658,17 @@ class vgm_skillTrees {
                     duration = 60;
                 };
 
-                class mad_minute: vgm_skillTemplate {
-                    displayName = "$STR_VGM_SKILLS_SKILL_MAD_MINUTE";
-                    description = "$STR_VGM_SKILLS_SKILL_MAD_MINUTE_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
+                class emergency_stash: vgm_skillTemplate {
+                    displayName = "$STR_VGM_SKILLS_SKILL_EMERGENCY_STASH";
+                    description = "$STR_VGM_SKILLS_SKILL_EMERGENCY_STASH_DESC";
                     column = 1;
 
-                    // TODO - Implementation
                     skillType = 2;
+                    // Note - make sure duration here matches duration below.
+                    codeActivateGroup = "[player, 'infiniteMagazines', 'skill_emergencyStash', 60] call vgm_c_fnc_statusEffect_set";
                     cost = 4;
-                    cooldown = 240;
-                    duration = 20;
+                    cooldown = 480;
+                    duration = 60;
                 };
 
                 class target_folder_2: vgm_skillTemplate {
