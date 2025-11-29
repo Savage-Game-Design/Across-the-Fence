@@ -716,10 +716,9 @@ class vgm_skillTrees {
                 class break_contact: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BREAK_CONTACT";
                     description = "$STR_VGM_SKILLS_SKILL_BREAK_CONTACT_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+                    codeActivateGroup = "[false] call vgm_c_fnc_stealth_setVisible; [player, 'stealthUndetectable', 'skill_breakContact', 5] call vgm_c_fnc_statusEffect_set;";
                     skillType = 2;
                     cost = 6;
                     cooldown = 560;
