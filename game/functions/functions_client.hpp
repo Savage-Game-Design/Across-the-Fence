@@ -987,12 +987,19 @@ class vgm_c
         class skill_actives_stonesThrow {};
         class skill_actives_tacticalSense {};
     };
+
     class skill_actives_support
     {
         VGM_CLIENT_PATH(\systems\skill\client\actives\support);
 
-        class skill_actives_support_getToTheLz {};
         class skill_actives_support_quickBandage {};
+    };
+
+    class skill_actives_team_leader
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\team_leader);
+
+        class skill_actives_getToTheLz {};
     };
 
     class skill_investigate
