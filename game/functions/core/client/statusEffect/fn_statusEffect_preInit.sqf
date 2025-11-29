@@ -2,7 +2,7 @@
     File: fnc_preInit.sqf
     Author: Savage Game Design
     Date: 2023-07-02
-    Last Update: 2024-12-07
+    Last Update: 2025-11-29
     Public: No
 
     Description:
@@ -14,12 +14,12 @@ if (!hasInterface) exitWith {};
 ["forceWalk", {
     params ["_unit", "_inEffect"];
     _unit forceWalk _inEffect;
-}] call vgm_c_fnc_statusEffect_create;
+}, true] call vgm_c_fnc_statusEffect_create;
 
 ["forceJog", {
     params ["_unit", "_inEffect"];
     _unit allowSprint !_inEffect;
-}] call vgm_c_fnc_statusEffect_create;
+}, true] call vgm_c_fnc_statusEffect_create;
 
 ["forceCrawl", {
     params ["_unit", "_inEffect"];
@@ -67,4 +67,4 @@ if (!hasInterface) exitWith {};
 ["explosiveSpecialist", {
     params ["_unit", "_inEffect"];
     _unit setUnitTrait ["explosiveSpecialist", _inEffect];
-}] call vgm_c_fnc_statusEffect_create;
+}, true] call vgm_c_fnc_statusEffect_create;

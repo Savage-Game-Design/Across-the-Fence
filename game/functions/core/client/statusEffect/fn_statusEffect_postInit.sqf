@@ -11,12 +11,7 @@
 
 if (!hasInterface) exitWith {};
 
-private _fnc_setCoreStatusEffects = {
-    [player, "explosiveSpecialist", "core"] call vgm_c_fnc_statusEffect_set;
-};
-
-call _fnc_setCoreStatusEffects;
-player addEventHandler ["Respawn", _fnc_setCoreStatusEffects];
+[player, "explosiveSpecialist", "core", -1, true] call vgm_c_fnc_statusEffect_set;
 
 vgm_c_statusEffect_eachFrameEH = addMissionEventHandler ["EachFrame", {
     // Queue of end times for status effect reasons, sorted by end time.

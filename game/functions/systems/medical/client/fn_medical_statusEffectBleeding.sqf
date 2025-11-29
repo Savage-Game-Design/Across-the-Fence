@@ -3,7 +3,7 @@
     File: fn_medical_statusEffectBleeding.sqf
     Author: Savage Game Design
     Date: 2023-07-24
-    Last Update: 2025-02-06
+    Last Update: 2025-11-29
     Public: No
 
     Description:
