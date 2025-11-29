@@ -2,7 +2,7 @@
     File: fn_statusEffect_preInit.sqf
     Author: Savage Game Design
     Date: 2024-12-07
-    Last Update: 2025-11-19
+    Last Update: 2025-11-29
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ vgm_c_statusEffect_eachFrameEH = addMissionEventHandler ["EachFrame", {
     // First item in the queue will always be the soonest.
     _endTimesQueue # 0 params ["_nextEndTime", "_effectDetails"];
 
-    if (serverTime < _nextEndTime) exitWith {};
+    if (time < _nextEndTime) exitWith {};
 
     _endTimesQueue deleteAt 0;
     _effectDetails params ["_effect", "_reason"];

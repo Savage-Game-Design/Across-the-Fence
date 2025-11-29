@@ -2,7 +2,7 @@
     File: fnc_statusEffect_set.sqf
     Author: Savage Game Design
     Date: 2023-07-03
-    Last Update: 2025-11-19
+    Last Update: 2025-11-29
     Public: Yes
 
     Description:
@@ -63,15 +63,15 @@ format ["Adding status effect reason: %1 | %2 | %3", _effect, _reason, _duration
 
 private _reasonList = _effectsMap getOrDefault [_effect, [], true];
 
-private _effectsReasonEndTimes = _effectsEndTimes getOrDefault [_effect, createHashMap, true];
+private _effectReasonsEndTimes = _effectsEndTimes getOrDefault [_effect, createHashMap, true];
 if (_duration > 0) then {
-    private _endTime = serverTime + _duration;
-    _effectsReasonEndTimes set [_reason, _endTime];
+    private _endTime = time + _duration;
+    _effectReasonsEndTimes set [_reason, _endTime];
     _effectsEndTimesQueue pushBack [_endTime, [_effect, _reason]];
     _effectsEndTimesQueue sort true;
 } else {
     // No duration - remove any existing duration so this lasts indefinitely.
-    _effectsReasonEndTimes deleteAt _reason;
+    _effectReasonsEndTimes deleteAt _reason;
 };
 
 if (_reason in _reasonList) exitWith {};
