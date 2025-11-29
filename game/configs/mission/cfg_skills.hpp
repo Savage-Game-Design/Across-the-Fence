@@ -772,10 +772,9 @@ class vgm_skillTrees {
                 class one_team: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ONE_TEAM";
                     description = "$STR_VGM_SKILLS_SKILL_ONE_TEAM_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
+					codeActivateGroup = "_this call vgm_c_fnc_skill_actives_oneTeam";
                     skillType = 2;
                     cost = 8;
                     cooldown = 900;

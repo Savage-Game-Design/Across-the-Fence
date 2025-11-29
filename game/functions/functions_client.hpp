@@ -880,6 +880,7 @@ class vgm_c
         class skills_active_applyGroupSkill {};
         class skills_active_assignSkillToSlot {};
         class skills_active_getSlot {};
+        class skills_active_getSlotSkill {};
         class skills_active_init {};
         class skills_active_isSlotActive {};
         class skills_active_isSlotOnCooldown {};
@@ -1002,6 +1003,7 @@ class vgm_c
         VGM_CLIENT_PATH(\systems\skill\client\actives\team_leader);
 
         class skill_actives_getToTheLz {};
+        class skill_actives_oneTeam {};
     };
 
     class skill_investigate
