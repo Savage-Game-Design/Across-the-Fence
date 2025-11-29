@@ -584,6 +584,7 @@ class vgm_c
         class missions_highlightOrHideZone {};
         class missions_getCurrentMission {};
         class missions_getMissions {};
+        class missions_getTeamMembers {};
         class missions_makeMissionGiver {};
         class missions_preInit {
             preInit = 1;
@@ -862,6 +863,7 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\skills\client\active);
 
+        class skills_active_applyGroupSkill {};
         class skills_active_isSlotOnCooldown {};
         class skills_active_getSlot {};
         class skills_active_assignSkillToSlot {};

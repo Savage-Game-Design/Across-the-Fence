@@ -33,6 +33,8 @@ class vgm_skillTemplate {
 
     // Called when an ability is triggered
     codeActivate = "";
+    // Called on all members of the team when an ability is triggered
+    codeActivateGroup = "";
     // Called when an ability has ended
     codeDeactivate = "";
     // Called when  an ability is unable to activate
