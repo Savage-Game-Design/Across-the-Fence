@@ -326,7 +326,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\respawn\global);
 
         class respawn_findSafeSpawnTransformNearTeam {};
-        class respawn_findFallbackSpawnTransform {};
+        class respawn_findSafeSpawnTransform {};
         class respawn_preInit {
             preInit = 1;
         };
