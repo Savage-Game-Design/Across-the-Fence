@@ -23,13 +23,13 @@
         _safeSpawnTransform = [_unit, 300, 500, 100] call vgm_g_fnc_respawn_findSafeSpawnTransformNearTeam;
 */
 
-#define MAX_SEARCH_ATTEMPTS 5
-
 params [
     ["_unit", objNull, [objNull]],
-    ["_minDistanceFromTeam", 300, [300]],
+    ["_minDistanceFromTeam", 200, [200]],
     ["_maxDistanceFromTeam", 500, [500]],
-    ["_enemyAvoidanceDistance", 100, [100]]
+	["_enemyAvoidanceHardBlockDistance", 50, [50]],
+	["_enemySides", [east, independent], [[]]],
+	["_friendlySides", [west], [[]]]
 ];
 
 if (isNull _unit) exitWith {
@@ -47,13 +47,12 @@ if (_maxDistanceFromTeam < 0) exitWith {
 if (_maxDistanceFromTeam <= _minDistanceFromTeam) exitWith {
     ["ERROR", format ["Expected _maxDistanceFromTeam to be greater than or equal to _minDistanceFromTeam. Received _minDistanceFromTeam: %1, _maxDistanceFromTeam: %2", _minDistanceFromTeam, _maxDistanceFromTeam]] call para_g_fnc_log;
 };
-if (_enemyAvoidanceDistance < 0) exitWith {
+if (_enemyAvoidanceHardBlockDistance < 0) exitWith {
     ["ERROR", format ["Expected _enemyAvoidanceDistance to be greater than 0. Received _enemyAvoidanceDistance: %1", _enemyAvoidanceDistance]] call para_g_fnc_log;
 };
 
-private _safeSpawnTransform = [_unit, _minDistanceFromTeam, _maxDistanceFromTeam, _minDistanceFromTeam, _maxDistanceFromTeam] call vgm_g_fnc_respawn_findFallbackSpawnTransform;
 private _unitGroup = group _unit;
-private _groupPositionAGL = [
+private _groupPositionATL = [
     _unitGroup,
     [
         [_unit],
@@ -67,33 +66,15 @@ private _groupPositionAGL = [
 
 // couldn't determine group position. maybe all dead, or no other group members (single player)
 // use player's existing position as basis for starting the search
-if (_groupPositionAGL isEqualTo [0, 0, 0]) then {
-    _groupPositionAGL = getPosASL _unit;
+if (_groupPositionATL isEqualTo [0, 0, 0]) then {
+    _groupPositionATL = getPosATL _unit;
 };
 
-private _enemySides = ([side _unit] call BIS_fnc_enemySides) createHashMapFromArray [];
-private _groupPositionASL = AGLToASL _groupPositionAGL;
-
-// [Distance2D, [PositionASL, Direction]]
-private _bestLocation = [0, _safeSpawnTransform];
-
-for "_searchAttempt" from 1 to MAX_SEARCH_ATTEMPTS do {
-    private _safePosition = [_groupPositionASL, _minDistanceFromTeam, _maxDistanceFromTeam, 5, 0, 30, 0, [], [[0, 0], [0, 0]]] call BIS_fnc_findSafePos;
-    if (!(_safePosition isEqualTo [0, 0])) then {
-
-        private _nearbyEnemies = (_safePosition nearEntities ["CAManBase", _enemyAvoidanceDistance]) select { side _x in _enemySides };
-        private _distanceToNearestEnemy = selectMin (_nearbyEnemies apply {_x distance2D _safePosition});
-
-        private _safePositionASL = AGLToASL [_safePosition#0, _safePosition#1, 0];
-
-        if (count _nearbyEnemies isEqualTo 0) then {
-            _bestLocation = [-1, [_safePositionASL, _safePositionASL getDir _groupPositionASL]];
-            break;
-        };
-        if ((_bestLocation # 0) < _distanceToNearestEnemy) then {
-            _bestLocation = [_distanceToNearestEnemy, [_safePositionASL, _safePositionASL getDir _groupPositionASL]];
-        };
-    };
-};
-
-_bestLocation select 1  // return
+[
+    _groupPositionATL,
+    _minDistanceFromTeam,
+    _maxDistanceFromTeam,
+    _enemyAvoidanceHardBlockDistance,
+    _enemySides,
+    _friendlySides
+] call vgm_g_fnc_respawn_findSafeSpawnTransform
