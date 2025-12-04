@@ -755,6 +755,15 @@
         <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT">
             <Original>Rally point</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT_ACTION">
+            <Original>Set / clear rally point</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT_SET">
+            <Original>Rally point set</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT_CLEARED">
+            <Original>Rally point cleared</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RALLY_POINT_DESC">
             <Original>Enables setting a nearby team rally point on the map. Team members engaging in a desperate escape start within 250m of it.</Original>
         </Key>

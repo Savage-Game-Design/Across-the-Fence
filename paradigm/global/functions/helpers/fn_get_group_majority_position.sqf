@@ -11,7 +11,7 @@
         _groupMemberPredicate - The condition that must be satisfied to count as a nearby group member. [CODE] or [ARRAY (argument array, code)]. Optional.
                                 The predicate will be given called with the following arguments: [_unit, _args], where _args is the argument array passed in.
     Returns:
-        Average position of group or [0, 0, 0] if undetermined [PositionAGL]
+        Average position of group or [0, 0, 0] if undetermined [PositionATL]
 
     Example(s):
         _groupMajorityPosition = [group player] call para_g_fnc_get_group_majority_position;
@@ -54,7 +54,7 @@ private _largestUnitGrouping = [];
 private _totalUnitsInLargestUnitGrouping = 0;
 {
     private _unit = _x;
-    private _nearbyGroupMembers = (_unitsInGroup inAreaArray  [getPos _unit, LONEWOLF_DISTANCE, LONEWOLF_DISTANCE]) select { [_x, _groupMemberPredicate#0] call _groupMemberPredicate#1 };
+    private _nearbyGroupMembers = (_unitsInGroup inAreaArray  [getPosATL _unit, LONEWOLF_DISTANCE, LONEWOLF_DISTANCE]) select { [_x, _groupMemberPredicate#0] call _groupMemberPredicate#1 };
     private _totalNearbyGroupMembers = count _nearbyGroupMembers;
     if (_totalNearbyGroupMembers > _totalUnitsInLargestUnitGrouping) then {
         _largestUnitGrouping = _nearbyGroupMembers;
@@ -69,7 +69,7 @@ if (_totalUnitsInLargestUnitGrouping == 0) exitWith {
 private _positionSum = [0, 0, 0];
 {
     private _unit = _x;
-    private _unitPosition = getPos _unit;
+    private _unitPosition = getPosATL _unit;
     _positionSum = _positionSum vectorAdd [_unitPosition#0, _unitPosition#1];
 } forEach _largestUnitGrouping;
 

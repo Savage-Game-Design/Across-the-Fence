@@ -2,7 +2,7 @@
     File: fn_posIndicators_create.sqf
     Author:
     Date: 2025-11-06
-    Last Update: 2025-11-08
+    Last Update: 2025-12-03
     Public: No
 
     Description:
@@ -31,6 +31,11 @@ params ["_indicator"];
 if !("id" in _indicator) then {
     _indicator set ["id", vgm_c_posIndicators_counter];
     vgm_c_posIndicators_counter = vgm_c_posIndicators_counter + 1;
+};
+
+// Localize the text
+if ("text" in _indicator) then {
+    _indicator set ["text", (_indicator get "text") call para_c_fnc_localize];
 };
 
 _indicator set ["fadeAlpha", (_indicator get "color" select 3) * 0.4];
