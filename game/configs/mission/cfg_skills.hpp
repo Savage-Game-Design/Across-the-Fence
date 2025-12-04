@@ -805,10 +805,10 @@ class vgm_skillTrees {
                 class rally_point: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_RALLY_POINT";
                     description = "$STR_VGM_SKILLS_SKILL_RALLY_POINT_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[true] call vgm_c_fnc_skill_passives_rallyPoint";
+                    codeUnapply = "[false] call vgm_c_fnc_skill_passives_rallyPoint";
                     cost = 8;
                 };
             };

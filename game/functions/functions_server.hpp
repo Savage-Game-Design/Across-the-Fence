@@ -289,6 +289,17 @@ class vgm_s
         class player_save {};
     };
 
+    class respawn
+    {
+        VGM_SERVER_PATH(\systems\respawn\server);
+
+        class respawn_clearMissionRallyPoint {};
+        class respawn_postInit {
+            postInit = 1;
+        };
+        class respawn_setMissionRallyPoint {};
+    };
+
     class leveling
     {
         VGM_SERVER_PATH(\systems\leveling\server);
