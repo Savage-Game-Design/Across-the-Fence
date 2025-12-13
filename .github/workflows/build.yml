@@ -1,0 +1,58 @@
+name: Build and package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number to use for this build, e.g. 0.12.1'
+        required: True
+      version_postfix:
+        description: 'Postfix to add to the end of the version. Allowed characters: A-Z, 0-9, _, -'
+        required: True
+
+  push:
+    tags:
+      - v**
+
+env:
+  GITHUB_INPUT_VERSION: ${{ github.event.inputs.version }}
+  GITHUB_INPUT_VERSION_POSTFIX: ${{ github.event.inputs.version_postfix }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      OUTPUT_DIR: $GITHUB_WORKSPACE/outputs
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Determine version"
+        run: VERSION=$(python3 ./.github/create_version_ci.py) && echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: "Setup config"
+        run: "cp ./build/config.ci.py ./build/config.py"
+
+      - name: "Build standalone missions"
+        env:
+          VERSION: ${{ steps.determine_version.outputs.version }}
+          MISSION_OUTPUT_PATH: $OUTPUT_DIR/missions-standalone/
+        run: python3 ./build/run.py release --confirm --version "$VERSION"
+
+      - name: "Build mods and mod missions"
+        env:
+          VERSION: ${{ steps.determine_version.outputs.version }}
+          MISSION_OUTPUT_PATH: $OUTPUT_DIR/mod/missions/
+          MOD_OUTPUT_PATH: $OUTPUT_DIR/mod/mods/
+        run: python3 ./build/run.py release --confirm --mod --version "$VERSION"
+
+      - name: "Upload unpacked standalone missions"
+        uses: actions/upload-artifact@v4
+        with:
+          name: unpacked-standalone-missions
+          path: $OUTPUT_DIR/missions-standalone
+
+      - name: "Upload unpacked mod content"
+        uses: actions/upload-artifact@v4
+        with:
+          name: unpacked-mod-content
+          path: $OUTPUT_DIR/mods
