@@ -27,7 +27,7 @@ def dev(path: Path, args=[]):
         *args,
     ]
 
-    print(f"Building with HEMTT in development mode: {list(map(str, command))}")
+    print(f"Building with HEMTT in development mode: {list(map(str, command))} at {str(path)}")
 
     return subprocess.run(command, cwd=path)
 
@@ -38,7 +38,7 @@ def build(path: Path, args=[]):
         *args,
     ]
 
-    print(f"Building with HEMTT: {list(map(str, command))}")
+    print(f"Building with HEMTT: {list(map(str, command))} at {str(path)}")
 
     return subprocess.run(command, cwd=path)
 
@@ -49,6 +49,6 @@ def release(path: Path, args=[]):
         *args,
     ]
 
-    print(f"Building with HEMTT in release mode: {list(map(str, command))}")
+    print(f"Building with HEMTT in release mode: {list(map(str, command))} at {str(path)}")
 
     return subprocess.run(command, cwd=path)

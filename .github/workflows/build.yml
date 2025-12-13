@@ -1,0 +1,199 @@
+name: Build and package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number to use for this build, e.g. 0.12.1'
+        required: True
+      version_postfix:
+        description: 'Postfix to add to the end of the version. Allowed characters: A-Z, 0-9, _, -'
+        required: True
+
+  push:
+    tags:
+      - v**
+
+env:
+  GITHUB_INPUT_VERSION: ${{ github.event.inputs.version }}
+  GITHUB_INPUT_VERSION_POSTFIX: ${{ github.event.inputs.version_postfix }}
+
+jobs:
+  build:
+    name: "Build unpacked content"
+    runs-on: ubuntu-latest
+    env:
+      OUTPUT_DIR: "${{ github.workspace }}/outputs"
+    outputs:
+      version: ${{ fromJSON(steps.determine_version.outputs.version).full }}
+      version_sanitized: ${{ fromJSON(steps.determine_version.outputs.version).sanitized }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Determine version"
+        id: determine_version
+        run: |
+          VERSION=$(python3 ./.github/create_version_ci.py) && echo "version=$VERSION" >> "$GITHUB_OUTPUT" && echo $VERSION
+
+      - name: "Setup config"
+        run: "cp ./build/config.ci.py ./build/config.py"
+
+      - name: "Build standalone missions"
+        env:
+          VERSION: ${{ fromJSON(steps.determine_version.outputs.version).full }}
+          MISSION_OUTPUT_PATH: "${{ env.OUTPUT_DIR }}/missions-standalone/"
+        run: |
+          echo $VERSION
+          python3 ./build/run.py release --confirm --version "$VERSION"
+
+      - name: "Build mods and mod missions"
+        env:
+          VERSION: ${{ fromJSON(steps.determine_version.outputs.version).full }}
+          MISSION_OUTPUT_PATH: "${{ env.OUTPUT_DIR }}/mod/missions/"
+          MOD_OUTPUT_PATH: "${{ env.OUTPUT_DIR }}/mod/mods/"
+        run: |
+          echo $VERSION
+          python3 ./build/run.py release --confirm --mod --version "$VERSION"
+
+      - name: "Upload unpacked standalone missions"
+        uses: actions/upload-artifact@v6
+        with:
+          name: unpacked-standalone-missions
+          path: "${{ env.OUTPUT_DIR }}/missions-standalone"
+
+      - name: "Upload unpacked mod content"
+        uses: actions/upload-artifact@v6
+        with:
+          name: unpacked-mod-content
+          path: "${{ env.OUTPUT_DIR }}/mod"
+          # .hemtt folder is needed for the build to run.
+          include-hidden-files: True
+
+  package_standalone_missions:
+    name: "Package standalone missions"
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: unpacked-standalone-missions
+          path: unpacked-missions
+
+      - name: Package missions
+        uses: docker://arwynfr/armake2:alpine
+        with:
+          entrypoint: /bin/ash
+          args: >-
+            -c "
+            ls;
+            mkdir packed;
+            for mission_dir in unpacked-missions/*; do armake2 pack $mission_dir packed/$(basename $mission_dir).pbo; done
+            "
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: standalone-missions
+          path: packed
+
+  package_mod:
+    name: "Package mod and mod missions"
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      MOD_CONTENT_DIR: ${{ github.workspace }}/mod_content
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v7
+        with:
+          name: unpacked-mod-content
+          path: ${{ env.MOD_CONTENT_DIR }}
+
+      - name: Setup config
+        run: "cp ./build/config.ci.py ./build/config.py"
+
+      - name: Setup HEMTT
+        uses: arma-actions/hemtt@v1
+
+      - name: Package missions
+        uses: docker://arwynfr/armake2:alpine
+        with:
+          entrypoint: /bin/ash
+          args: >-
+            -c "
+            cd $MOD_CONTENT_DIR;
+            mkdir packed_missions;
+            for mission_dir in missions/*; do armake2 pack $mission_dir packed_missions/$(basename $mission_dir).pbo; done;
+            ls -R packed_missions;
+            "
+
+      - name: Package mod
+        env:
+          MOD_OUTPUT_PATH: ${{ env.MOD_CONTENT_DIR }}/mods
+        run: python3 ./build/run.py pack-mods --build-target release;
+
+      - name: Organise artifact directory
+        run: |
+          cd $GITHUB_WORKSPACE;
+          mkdir -p artifact/mpmissions;
+          ls -R $MOD_CONTENT_DIR/packed_missions;
+          ls -R $MOD_CONTENT_DIR/mods/@vgm_server/releases;
+          cp $MOD_CONTENT_DIR/packed_missions/*.pbo artifact/mpmissions/;
+          mv $MOD_CONTENT_DIR/mods/@vgm_server/releases/*-latest.zip artifact/;
+          pushd artifact;
+          unzip *.zip;
+          rm *.zip;
+          popd;
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: vgm-server-mod-and-missions
+          path: artifact
+
+  release:
+    name: Create release
+    if: ${{ github.ref_type == 'tag' }}
+    needs:
+      - build
+      - package_standalone_missions
+      - package_mod
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.build.outputs.version }}
+      MISSIONS_OUTPUT_FILE: vgm-standalone-missions-${{ needs.build.outputs.version_sanitized }}.zip
+      SERVER_MOD_OUTPUT_FILE: vgm-server-mod-and-missions-${{ needs.build.outputs.version_sanitized }}.zip
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: standalone-missions
+          path: standalone-missions
+
+      - name: Create standalone missions package
+        run: |
+          echo "Version: $VERSION"
+          echo "Output file: $MISSIONS_OUTPUT_FILE"
+          zip -r "$MISSIONS_OUTPUT_FILE" standalone-missions/
+
+      - uses: actions/download-artifact@v7
+        with:
+          name: vgm-server-mod-and-missions
+          path: vgm-server-mod-and-missions
+
+      - name: Create mod + mod missions package
+        run: |
+          echo "Version: $VERSION"
+          echo "Output file: $SERVER_MOD_OUTPUT_FILE"
+          zip -r "$SERVER_MOD_OUTPUT_FILE" vgm-server-mod-and-missions/
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: True
+          overwrite_files: True
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          fail_on_unmatched_files: True
+          append_body: True
+          files: |
+            ${{ env.MISSIONS_OUTPUT_FILE }}
+            ${{ env.SERVER_MOD_OUTPUT_FILE }}
