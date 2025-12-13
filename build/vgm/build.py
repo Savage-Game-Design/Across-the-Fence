@@ -90,22 +90,16 @@ pack_funcs = {
     PackType.Release: hemtt.release
 }
 
-def pack(source_path: Path, output_paths=Dict[BuildArtifact,Path], pack_type=PackType) -> bool:
+def pack_mods(mod_paths=Dict[BuildArtifact,Path], pack_type=PackType) -> bool:
     hemtt_build_command = pack_funcs[pack_type]
 
     is_success = True
 
-    for (artifact, path) in output_paths.items():
+    for (artifact, path) in mod_paths.items():
         if artifact == BuildArtifact.CLIENT_MOD or artifact == BuildArtifact.SERVER_MOD and path.exists():
             result = hemtt_build_command(path)
             if result.returncode > 0:
                 is_success = False
-
-    missions_output_path = output_paths.get(BuildArtifact.MISSION, None)
-    if missions_output_path:
-        for mission_path in calculate_mission_output_paths(source_path, missions_output_path):
-            # TODO - Build with armake2
-            pass
 
     return is_success
 

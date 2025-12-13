@@ -1,5 +1,6 @@
 import click
 import config
+from enum import StrEnum
 from pathlib import Path
 import sgd.file_tree
 from vgm.artifacts import BuildArtifact, Version
@@ -57,6 +58,11 @@ def perform_build(params: BuildParams = default_build_params()):
         print(f"Output folder '{e.path}' already exists. If you wish to overwrite it, use --overwrite")
         raise
 
+class BuildTarget(StrEnum):
+    DEV = "dev"
+    TEST = "test"
+    RELEASE = "release"
+
 option_interrupt = click.option('--interrupt', default=False, is_flag=True,
                                 help="Interruption of launched Arma client/server processes managed by CLI")
 option_interrupt_polling = click.option('--polling', default=1, is_flag=False, type=int,
@@ -66,6 +72,8 @@ option_clean = click.option('--clean', default=False, is_flag=True)
 option_mod = click.option('--mod', default=False, is_flag=True, help="Builds VGM to run as a client / server mod pair")
 option_version = click.option('--version', default=None,
                               help="Version in the format: 'v1.2.3@hash something', where each part (1.2.3, hash, something) is optional")
+option_build_target = click.option('--build-target', default=BuildTarget.TEST, type=click.Choice(BuildTarget, case_sensitive=False))
+option_pack_mods = click.option('--pack-mods', '--pack', default=False, is_flag=True, help="Packs mods using HEMTT")
 
 
 @click.command("client")
@@ -94,22 +102,37 @@ def command_launch_arma_server(mod, interrupt, polling):
 @option_clean
 @option_mod
 @option_version
-@click.option('--dev', default=False, is_flag=True)
-@click.option('--pack', default=False, is_flag=True,
-              help="Packs mission and mods (if --mod is specified) using Armake2 and HEMTT")
-def build(overwrite, clean, mod, dev, pack, version):
-    perform_build(default_build_params(overwrite=overwrite, clean=clean, as_mod=mod, version=version))
+@option_build_target
+@option_pack_mods
+def build(overwrite, clean, mod, build_target, pack_mods, version, dev=False):
+    if dev:
+        build_target=BuildTarget.DEV
 
-    pack_type = PackType.Dev if dev else PackType.Build
+    output_paths = config.output_paths["default"] if build_target in [BuildTarget.DEV, BuildTarget.TEST] else config.output_paths["release"]
 
-    if pack:
-        # Only pack the mods if --mod is specified
-        pack_paths = {
-            artifact: value
-            for (artifact, value) in config.output_paths["default"].items()
-            if not artifact in [BuildArtifact.CLIENT_MOD, BuildArtifact.SERVER_MOD] or mod
-        }
-        vgm.build.pack(source_root, pack_paths, pack_type=pack_type)
+    perform_build(default_build_params(output_paths=output_paths, overwrite=overwrite, clean=clean, as_mod=mod, version=version))
+
+    if mod and pack_mods:
+        pack_type = {
+            BuildTarget.DEV: PackType.Dev,
+            BuildTarget.TEST: PackType.Build,
+            BuildTarget.RELEASE: PackType.Release,
+        }[build_target]
+
+        vgm.build.pack_mods(mod_paths=output_paths, pack_type=pack_type)
+
+@click.command
+@option_build_target
+def pack_mods(build_target):
+    output_paths = config.output_paths["default"] if build_target in [BuildTarget.DEV, BuildTarget.TEST] else config.output_paths["release"]
+
+    pack_type = {
+        BuildTarget.DEV: PackType.Dev,
+        BuildTarget.TEST: PackType.Build,
+        BuildTarget.RELEASE: PackType.Release,
+    }[build_target]
+
+    vgm.build.pack_mods(mod_paths=output_paths, pack_type=pack_type)
 
 @click.command("dev")
 @option_overwrite
@@ -138,7 +161,8 @@ def command_launch_dev(overwrite, clean, mod, version, no_server, no_client, int
 @click.option('--confirm', default=False, is_flag=True)
 @option_mod
 @option_version
-def release(confirm, mod, version):
+@option_pack_mods
+def release(confirm, mod, version, pack_mods):
     if not confirm:
         confirm = input("WARNING: This will run --clean and remove all output directories. Proceed? Y/N").lower() == "y"
 
@@ -147,9 +171,11 @@ def release(confirm, mod, version):
         return
 
     release_output_paths = config.output_paths["release"]
+    perform_build(default_build_params(output_paths=release_output_paths, overwrite=True, as_mod=mod, clean=True, version=version))
 
-    perform_build(default_build_params(overwrite=True, as_mod=mod, clean=True, version=version, output_paths=release_output_paths))
-    vgm.build.pack(source_root, output_paths=release_output_paths, pack_type=PackType.Release)
+    if mod and pack_mods:
+        vgm.build.pack_mods(mod_paths=release_output_paths, pack_type=PackType.Release)
+
 
 @click.command
 def update_field_manual_entries():
@@ -187,6 +213,7 @@ def launch():
 
 cli.add_command(build)
 cli.add_command(release)
+cli.add_command(pack_mods)
 cli.add_command(print_file_tree)
 launch.add_command(command_launch_arma_client)
 launch.add_command(command_launch_arma_server)
