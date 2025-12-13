@@ -73,10 +73,10 @@ def build(source_path, paradigm_path, params: BuildParams):
             continue
         create_mission_in(mission, output_paths[BuildArtifact.MISSION], overwrite, clean)
 
-    if gamemode.client_mod:
+    if as_mod and gamemode.client_mod:
         create_mod(gamemode.client_mod, output_paths[BuildArtifact.CLIENT_MOD], overwrite, clean)
 
-    if gamemode.server_mod:
+    if as_mod and gamemode.server_mod:
         create_mod(gamemode.server_mod, output_paths[BuildArtifact.SERVER_MOD], overwrite, clean)
 
 class PackType(Enum):
