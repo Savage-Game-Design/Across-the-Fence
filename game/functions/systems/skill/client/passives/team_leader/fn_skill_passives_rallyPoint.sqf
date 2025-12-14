@@ -2,7 +2,7 @@
     File: fn_skill_passives_rallyPoint.sqf
     Author: Savage Game Design
     Date: 2025-11-05
-    Last Update: 2025-12-04
+    Last Update: 2025-12-14
     Public: Yes
 
     Description:
@@ -23,8 +23,9 @@
 params ["_enable"];
 
 private _existingActionId = player getVariable ["vgm_c_skill_passives_rallyPointAction", -1];
+private _isCorrectAction = player actionParams _existingActionId select 0 == localize "STR_VGM_SKILLS_SKILL_RALLY_POINT_ACTION";
 
-if (_enable && _existingActionId < 0) exitWith {
+if (_enable && (_existingActionId < 0 || !_isCorrectAction)) exitWith {
     private _actionId = player addAction [
         localize "STR_VGM_SKILLS_SKILL_RALLY_POINT_ACTION",
         {
