@@ -34,7 +34,7 @@ if not version_number:
     print("Version number not found", file=sys.stderr, flush=True)
     sys.exit(1)
 
-postfix_input = os.environ.get("GITHUB_INPUT_POSTFIX", None)
+postfix_input = os.environ.get("GITHUB_INPUT_VERSION_POSTFIX", None)
 postfix_tag = github_ref_info and github_ref_info["postfix"]
 
 postfix = postfix_input or postfix_tag
