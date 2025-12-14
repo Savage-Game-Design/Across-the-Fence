@@ -113,7 +113,7 @@ dlcs[]=
 randomSeed=14227568;
 class ScenarioData
 {
-	author="Spoffy & Spock";
+	author="Savage Game Design & Spock";
 };
 class Mission
 {
