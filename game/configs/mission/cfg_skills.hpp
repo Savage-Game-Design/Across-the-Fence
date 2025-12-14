@@ -641,6 +641,7 @@ class vgm_skillTrees {
                     codeApply = "true call vgm_c_fnc_skill_passives_kickOffTime";
                     codeUnapply = "false call vgm_c_fnc_skill_passives_kickOffTime";
                     cost = 2;
+                    applyOnRespawn = 1;
                 };
             };
 
@@ -689,6 +690,7 @@ class vgm_skillTrees {
 					codeApply = "true call vgm_c_fnc_skill_passives_sanctuary";
 					codeUnapply = "false call vgm_c_fnc_skill_passives_sanctuary";
                     cost = 4;
+                    applyOnRespawn = 1;
                 };
 
                 class ditch_rucks: vgm_skillTemplate {
@@ -810,6 +812,7 @@ class vgm_skillTrees {
                     codeApply = "[true] call vgm_c_fnc_skill_passives_rallyPoint";
                     codeUnapply = "[false] call vgm_c_fnc_skill_passives_rallyPoint";
                     cost = 8;
+                    applyOnRespawn = 1;
                 };
             };
         };
