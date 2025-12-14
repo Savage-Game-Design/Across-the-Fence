@@ -5,5 +5,7 @@ class MapConfig {
         vn_GrassTallClutter = 0.7;
         vn_RainForestClutter = 0.8;
         vn_RiceClutter = 0.6;
+        jnd_MeadowSurface = 0.7;
+        jnd_ForestSurface = 0.8;
     };
 };
