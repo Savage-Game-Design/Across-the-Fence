@@ -2,7 +2,7 @@
     File: fn_skill_actives_oneOfThem.sqf
     Author: Savage Game Design
     Date: 2025-08-18
-    Last Update: 2025-08-24
+    Last Update: 2025-12-14
     Public: No
 
     Description:
@@ -38,7 +38,7 @@ private _ehId = addMissionEventHandler ["EachFrame", {
     if (_state isEqualTo vgm_c_skill_actives_oneOfThem_lastState) exitWith {};
     vgm_c_skill_actives_oneOfThem_lastState = _state;
 
-    private _wearingEnemyHeadgear = "vn_o_" in _headgear || "vnx_o_" in _headgear;
+    private _wearingEnemyHeadgear = "vn_o_" in _headgear || "vnx_o_" in _headgear || _headgear isEqualTo "vn_b_helmet_sog_01";
 
     if (_isWalking && _wearingEnemyHeadgear) exitWith {
         [player, "stealthUndetectable", "skill_actives_oneOfThem"] call vgm_c_fnc_statusEffect_set;
