@@ -12,6 +12,7 @@ order = 2
 displayName = "Changelog"
 pages = [
     "changelog_0_11_0",
+    "changelog_0_12_0",
 ]
 
 [vgm]

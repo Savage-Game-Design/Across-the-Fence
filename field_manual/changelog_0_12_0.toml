@@ -1,0 +1,15 @@
+displayName = "v0.12.0"
+description = """
+[h]ADDED:[/h]
+- Added support for Rung Sat Special Zone
+- Added team leader skill tree (beta - some skills omitted)
+
+[h]CHANGED:[/h]
+- "One of them" now works with the recon helmet given by "Friend or foe"
+"""
+
+arguments = []
+
+## Change Log Summary
+
+

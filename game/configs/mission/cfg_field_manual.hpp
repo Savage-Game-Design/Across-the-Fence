@@ -37,6 +37,11 @@ class vgm_changelog {
         description = "$STR_VGM_FIELD_MANUAL_CHANGELOG_0_11_0_DESC";
         logicalOrder = 1;
     };
+    class changelog_0_12_0 {
+        displayName = "$STR_VGM_FIELD_MANUAL_CHANGELOG_0_12_0";
+        description = "$STR_VGM_FIELD_MANUAL_CHANGELOG_0_12_0_DESC";
+        logicalOrder = 2;
+    };
 };
 
 class vgm {
