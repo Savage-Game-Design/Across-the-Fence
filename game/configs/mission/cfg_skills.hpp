@@ -1092,7 +1092,7 @@ class vgm_skillTrees {
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['Medic', true]";
                     codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['Medic', false]";
-                    cost = 8;
+                    cost = 2;
                 };
 
                 class find_the_bicycle: vgm_skillTemplate {
