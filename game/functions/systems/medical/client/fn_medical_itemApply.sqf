@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2025-02-06
+    Last Update: 2025-12-24
     Public: No
 
     Description:
@@ -29,7 +29,10 @@ params ["_healer", "_patient", "_bodyPart", "_itemData"];
 
 format ["Applying item: %1 | %2 | %3 | %4", _healer, _patient, _bodyPart, _itemData] call vgm_g_fnc_logDebug;
 
-private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_coefficient_get);
+private _coefInteract = [_healer, "interact"] call vgm_c_fnc_coefficient_get;
+private _coefInteractMedical = [_healer, "interact_medical"] call vgm_c_fnc_coefficient_get;
+
+private _time = (_itemData get "time") * _coefInteract * _coefInteractMedical;
 
 [_healer, _patient, _time] call vgm_c_fnc_medical_itemAnimation;
 
