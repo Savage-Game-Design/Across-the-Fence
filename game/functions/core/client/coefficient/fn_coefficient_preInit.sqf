@@ -66,8 +66,3 @@
     params ["_unit", "_value"];
     _unit setVariable ["vgm_c_coefficient_interact", _value max 0.1 min 5];
 }] call vgm_c_fnc_coefficient_create;
-
-["interact_medical", {
-    params ["_unit", "_value"];
-    _unit setVariable ["vgm_c_coefficient_interact", _value max 0.1 min 5];
-}] call vgm_c_fnc_coefficient_create;

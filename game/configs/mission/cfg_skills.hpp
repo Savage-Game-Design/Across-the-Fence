@@ -1120,10 +1120,10 @@ class vgm_skillTrees {
                 class keep_calm: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_KEEP_CALM";
                     description = "$STR_VGM_SKILLS_SKILL_KEEP_CALM_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'bleedOut', 'skill_passives_keep_calm', -0.20, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'bleedOut', 'skill_passives_keep_calm'] call vgm_c_fnc_coefficient_remove";
                     cost = 2;
                 };
 
