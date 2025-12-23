@@ -52,6 +52,18 @@ class vgm_weaponSpecialisationTemplate: vgm_skillTemplate {
     codeUnapply  = "player setVariable ['vgm_c_skill_hasWeaponSpecialisation', false, true]";
 };
 
+class vgm_skillAdvancedTrainingTemplate: vgm_skillTemplate {
+    conditionsUnlockGlobal[] = {
+        {
+            "!((_this#0) getUnitTrait 'vgm_skills_advancedTraining')",
+            "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT"
+        }
+    };
+    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
+    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
+    applyOnRespawn = 1;
+};
+
 class vgm_skillTrees {
     class combat {
         displayName = "$STR_VGM_SKILLS_TREE_COMBAT";
@@ -335,16 +347,12 @@ class vgm_skillTrees {
 
         class skills {
             class tier_0 {
-                class training_pointman: vgm_skillTemplate {
+                class training_pointman: vgm_skillAdvancedTrainingTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC";
-                    conditionsUnlockGlobal[] = { { "!((_this#0) getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
-                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
                     cost = 2;
-                    applyOnRespawn = 1;
                 };
 
                 class eldest_son: vgm_skillTemplate {
@@ -578,16 +586,12 @@ class vgm_skillTrees {
 
         class skills {
             class tier_0 {
-                class training_team_leader: vgm_skillTemplate {
+                class training_team_leader: vgm_skillAdvancedTrainingTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER_DESC";
-                    conditionsUnlockGlobal[] = { { "!((_this#0) getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
-                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
                     cost = 2;
-                    applyOnRespawn = 1;
                 };
 
                 class ma_bell: vgm_skillTemplate {
@@ -825,16 +829,14 @@ class vgm_skillTrees {
 
         class skills {
             class tier_0 {
-                class training_rto: vgm_skillTemplate {
+                class training_rto: vgm_skillAdvancedTrainingTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
-                    conditionsUnlockGlobal[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]";
                     codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]";
                     cost = 10;
-                    applyOnRespawn = 1;
                 };
 
                 class emergency_radio: vgm_skillTemplate {
@@ -1083,16 +1085,14 @@ class vgm_skillTrees {
 
         class skills {
             class tier_0 {
-                class training_medic: vgm_skillTemplate {
+                class training_medic: vgm_skillAdvancedTrainingTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC";
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC";
-                    conditionsUnlockGlobal[] = { { "!(player getUnitTrait 'vgm_skills_advancedTraining')", "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT" } };
                     column = 0;
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['Medic', true]";
                     codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['Medic', false]";
                     cost = 8;
-                    applyOnRespawn = 1;
                 };
 
                 class find_the_bicycle: vgm_skillTemplate {
