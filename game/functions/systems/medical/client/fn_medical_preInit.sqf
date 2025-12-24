@@ -65,6 +65,7 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
     format ["Received heal: %1 | %2 | %3 | %4", _healer, _patient, str _itemType, str _consumeItem] call vgm_g_fnc_logInfo;
 
     _healer removeItem _consumeItem;
+    ["vgm_medical_itemConsumed", [_healer, _consumeItem], _healer] call para_g_fnc_event_triggerTargets;
 
     [_patient, _bodyPart, vgm_medical_healItemsTreatmentData get _itemType] call vgm_c_fnc_medical_removeWound;
 
