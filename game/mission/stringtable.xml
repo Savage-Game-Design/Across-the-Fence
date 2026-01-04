@@ -926,6 +926,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS">
             <Original>Leg pockets</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_ACTIVATED">
+            <Original>Leg pockets activated</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC">
             <Original>When the last first aid kit is used, gain 2 more.</Original>
         </Key>
