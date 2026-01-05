@@ -1143,7 +1143,8 @@ class vgm_skillTrees {
                     conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'respawn_bonusLives', 'skill_passives_notDeadYet', 1, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'respawn_bonusLives', 'skill_passives_notDeadYet'] call vgm_c_fnc_coefficient_remove";
                     cost = 2;
                 };
             };
