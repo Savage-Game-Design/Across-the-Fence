@@ -9,7 +9,7 @@
         Global pre-init for RTO system
 */
 
-vgm_g_rto_aircraft = createHashMap;
+vgm_g_rto_aircraftTypes = createHashMap;
 
 private _aircraftConfigs = "getNumber (_x >> 'disabled') > 0" configClasses (missionConfigFile >> "vgm_radio_operator" >> "aircraft");
 
@@ -17,7 +17,8 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') > 0" configClasses (mis
     private _aircraftConfig = _x;
     private _aircraftDetails = createHashMapFromArray [
         ["displayName", getText (_aircraftConfig >> "displayName")],
-        ["type", getText (_aircraftConfig >> "type")],
+        ["vehicleType", getText (_aircraftConfig >> "vehicleType")],
+        ["vehicleClass", getText (_aircraftConfig >> "vehicleClass")],
         ["arrivalTimeSecs", getNumber (_aircraftConfig >> "arrivalTimeSecs")],
         ["onStationTimeSecs", getNumber (_aircraftConfig >> "onStationTimeSecs")],
         ["illuminationType", getNumber (_aircraftConfig >> "illuminationType")],
@@ -30,5 +31,5 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') > 0" configClasses (mis
         ]})]
     ];
 
-    vgm_g_rto_aircraft set [configName _aircraftConfig, _aircraftDetails];
+    vgm_g_rto_aircraftTypes set [configName _aircraftConfig, _aircraftDetails];
 } forEach _aircraftConfigs;

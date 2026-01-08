@@ -6,7 +6,7 @@ class vgm_radio_operator {
             // Name of the aircraft, as shown to the player.
             displayName = "Stringtable key goes here";
             // One of "HELICOPTER" or "PLANE" - specifies the strike logic to use.
-            type = "PLANE";
+            vehicleType = "PLANE";
             // Class of aircraft that's created.
             vehicleClass = "vn_b_air_f4c_cas";
             // Time until the aircraft arrives on-station
@@ -27,7 +27,8 @@ class vgm_radio_operator {
 
         class testing_plane {
             displayName = $STR_VN_V_PLANE_F4C_CAS_DN;
-            type = "PLANE";// One of "HELICOPTER" or "PLANE"
+            vehicleType = "PLANE";// One of "HELICOPTER" or "PLANE"
+            vehicleClass = "vn_b_air_f4c_cas";
             arrivalTimeSecs = 15;
             onStationTimeSecs = 180;
             class strikes {
