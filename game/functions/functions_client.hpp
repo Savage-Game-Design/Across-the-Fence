@@ -322,6 +322,15 @@ class vgm_g
         class objGrabber_map {};
     };
 
+    class rto
+    {
+        VGM_GLOBAL_PATH(\systems\rto\global);
+
+        class rto_preInit {
+            preInit = 1;
+        };
+    };
+
     class respawn
     {
         VGM_GLOBAL_PATH(\systems\respawn\global);
