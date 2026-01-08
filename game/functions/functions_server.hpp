@@ -344,6 +344,7 @@ class vgm_s
     class rto {
         VGM_SERVER_PATH(\systems\rto\server);
 
+        class rto_addAvailableAircraft {};
         class rto_clearAvailableAircraft {};
         class rto_preInit
         {
