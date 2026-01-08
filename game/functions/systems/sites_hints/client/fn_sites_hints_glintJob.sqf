@@ -42,6 +42,7 @@ private _fnc_getNearestHint = {
     };
 
     private _sorted = _potentiallyValidObjects apply {[_x distance focusOn, _x]};
+    _sorted sort true;
     private _hintIndex = _sorted findIf {
         private _obj = _x # 1;
         [focusOn, "FIRE", _obj] checkVisibility [eyePos focusOn, getPosWorld _obj] > 0
