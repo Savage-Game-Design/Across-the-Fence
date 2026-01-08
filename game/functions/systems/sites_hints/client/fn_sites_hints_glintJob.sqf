@@ -19,7 +19,7 @@
         call vgm_c_fnc_sites_hints_glintJob;
  */
 
-// How long it takes for a full glint animatio to run its course (roughly).
+// How long it takes for a full glint animation to run its course (roughly).
 #define GLINT_DURATION 8
 #define RADIUS 200
 #define OBJECTS_MAX 50
