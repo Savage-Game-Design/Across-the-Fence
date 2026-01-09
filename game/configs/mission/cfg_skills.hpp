@@ -247,11 +247,11 @@ class vgm_skillTrees {
 
                     codeApply = "\
                         [player, 'load', 'skill_loadedForBear', -0.3, true] call vgm_c_fnc_coefficient_set;\
-                        [player, 'staminaDrain', 'skill_loadedForBear', -0.2, true] call vgm_c_fnc_coefficient_set;\
+                        [player, 'staminaDrainSkills', 'skill_loadedForBear', -0.2, true] call vgm_c_fnc_coefficient_set;\
                     ";
                     codeUnapply = "\
                         [player, 'load', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
-                        [player, 'staminaDrain', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
+                        [player, 'staminaDrainSkills', 'skill_loadedForBear'] call vgm_c_fnc_coefficient_remove;\
                     ";
                     skillType = 0;
                     cost = 3;
