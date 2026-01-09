@@ -1140,7 +1140,6 @@ class vgm_skillTrees {
                 class not_dead_yet: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_NOT_DEAD_YET";
                     description = "$STR_VGM_SKILLS_SKILL_NOT_DEAD_YET_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
                     codeApply = "[player, 'respawn_bonusLives', 'skill_passives_notDeadYet', 1, true] call vgm_c_fnc_coefficient_set";
@@ -1198,10 +1197,10 @@ class vgm_skillTrees {
                 class green_hornet: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET";
                     description = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'staminaDrainSkills', 'skill_passives_greenHornet', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'staminaDrainSkills', 'skill_passives_greenHornet'] call vgm_c_fnc_coefficient_remove";
                     cost = 4;
                 };
             };
