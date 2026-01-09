@@ -1187,10 +1187,10 @@ class vgm_skillTrees {
                 class he_aint_heavy: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY";
                     description = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'carryCanRun', 'skill_passives_HeAintHeavy', -1, true] call vgm_c_fnc_statusEffect_set;"
+                    codeUnapply = "[player, 'carryCanRun', 'skill_passives_HeAintHeavy'] call vgm_c_fnc_statusEffect_remove;"
                     cost = 4;
                 };
 
