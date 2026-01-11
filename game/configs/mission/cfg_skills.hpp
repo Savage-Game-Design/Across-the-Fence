@@ -1261,10 +1261,10 @@ class vgm_skillTrees {
                 class ive_seen_worse: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE";
                     description = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'limbInjuryEffectResistance', 'skill_passives_iveSeenWorse', -1, true] call vgm_c_fnc_statusEffect_set;"
+                    codeUnapply = "[player, 'limbInjuryEffectResistance', 'skill_passives_iveSeenWorse'] call vgm_c_fnc_statusEffect_remove;"
                     cost = 6;
                 };
             };
