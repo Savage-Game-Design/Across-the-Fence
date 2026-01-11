@@ -1230,11 +1230,10 @@ class vgm_skillTrees {
                 class salt_tablets: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SALT_TABLETS";
                     description = "$STR_VGM_SKILLS_SKILL_SALT_TABLETS_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
-                    skillType = 2;
+                    codeActivateGroup = "call vgm_c_fnc_skill_actives_medic_saltTablets";
+                    skillType = 1;
                     cost = 6;
                     cooldown = 300;
                 };
