@@ -67,7 +67,9 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
     _healer removeItem _consumeItem;
     ["vgm_medical_itemConsumed", [_healer, _consumeItem], _healer] call para_g_fnc_event_triggerTargets;
 
-    [_patient, _bodyPart, vgm_medical_healItemsTreatmentData get _itemType] call vgm_c_fnc_medical_removeWound;
+    private _woundsHealed = vgm_medical_healItemsTreatmentData getOrDefault [_itemType, 1];
+    _woundsHealed = _woundsHealed + (_healer getVariable ["vgm_g_medical_healModifier", 0]);
+    [_patient, _bodyPart, _woundsHealed] call vgm_c_fnc_medical_removeWound;
 
 }] call para_g_fnc_event_subscribe;
 
@@ -128,6 +130,11 @@ vgm_c_medical_damageModifiers = [];
     params ["_unit", "_value"];
     _unit setVariable ["vgm_c_coefficient_interact", _value max 0.1 min 5];
 }] call vgm_c_fnc_coefficient_create;
+
+["healModifier", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_g_medical_healModifier", _value max 0, true];
+}, 0] call vgm_c_fnc_coefficient_create;
 
 [{
     params ["_unit"];
