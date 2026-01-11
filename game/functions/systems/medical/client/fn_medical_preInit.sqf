@@ -95,6 +95,14 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
 
 }] call para_g_fnc_event_subscribe;
 
+["vgm_medical_fullHeal", {
+    (_this#0) params ["_unit"];
+
+    format ["Full heal: %1", _unit] call vgm_g_fnc_logInfo;
+    [_unit] call vgm_c_fnc_medical_fullHeal;
+
+}] call para_g_fnc_event_subscribe;
+
 // maps hitpoint to our virtual body parts handled by our medical system
 vgm_c_medical_hitPointBodyPartMap = createHashMapFromArray [
     ["hitface", BODY_PART_HEAD],
