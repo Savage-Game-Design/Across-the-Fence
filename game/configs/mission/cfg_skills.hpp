@@ -1297,7 +1297,7 @@ class vgm_skillTrees {
                     column = 1;
 
                     // TODO - Implementation
-                    skillType = 2;
+                    skillType = 1;
                     cost = 8;
                     cooldown = 180;
                 };
@@ -1308,17 +1308,18 @@ class vgm_skillTrees {
                     conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_4', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'interact_medical', 'skills_passives_combat_doc_4'] call vgm_c_fnc_coefficient_remove";
                     cost = 4;
                 };
 
                 class green_hornet_pack: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK";
                     description = "$STR_VGM_SKILLS_SKILL_GREEN_HORNET_PACK_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
-                    column = 3;
+                    column = 4;
 
-                    // TODO - Implementation
+                    codeApplyGroup = "[player, 'staminaDrainSkills', 'skill_passives_greenHornetPack', -0.2, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapplyGroup = "[player, 'staminaDrainSkills', 'skill_passives_greenHornetPack'] call vgm_c_fnc_coefficient_remove";
                     cost = 8;
                 };
 
@@ -1326,7 +1327,7 @@ class vgm_skillTrees {
                     displayName = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM";
                     description = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC";
                     conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
-                    column = 4;
+                    column = 5;
 
                     // TODO - Implementation
                     cost = 8;
