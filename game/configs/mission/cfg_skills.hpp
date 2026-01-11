@@ -1273,11 +1273,19 @@ class vgm_skillTrees {
                 class its_only_a_flesh_wound: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND";
                     description = "$STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
-                    skillType = 2;
+                    conditionActivate = "\
+                        private _target = cursorTarget;\
+                        _target distance player <= 10\
+                        && {[_target] call vgm_g_fnc_medical_isWounded}\
+                    ";
+                    codeActivate = "call vgm_c_fnc_skill_actives_medic_itsOnlyAFleshWound";
+                    codeUnableToActivate = "\
+                        if (cursorTarget distance player > 10) exitWith {}; \
+                        hint localize 'STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_UNABLE_TO_APPLY'\
+                    ";
+                    skillType = 1;
                     cost = 8;
                     cooldown = 480;
                 };

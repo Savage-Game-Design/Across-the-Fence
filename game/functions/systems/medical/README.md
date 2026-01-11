@@ -6,6 +6,7 @@
 | vgm_medical_woundAdded   | [_unit, _bodyPart, _woundIntensity]       | Client/Local              |
 | vgm_medical_woundRemoved | [_unit, _bodyPart, _removeWoundIntensity] | Client/Local              |
 | vgm_medical_heal         | [_healer, _patient, _itemType, _bodyPart] | Client/Target->`_patient` |
+| vgm_medical_fullHeal     | [_patient]                                | Client/Target->`_patient` |
 
 ## API
 
@@ -13,6 +14,7 @@
 | ----------------------------------------------------- | -------------------------- |
 | [_unit, _state] call vgm_c_fnc_medical_setUnconscious | Set unit unconscious state |
 | [_unit, _bodyPart] call vgm_c_fnc_medical_getWound    | Get amount of wounds       |
+| [_unit] call vgm_g_fnc_medical_isWounded              | Check if unit is wounded   |
 
 ## Status Effects
 
