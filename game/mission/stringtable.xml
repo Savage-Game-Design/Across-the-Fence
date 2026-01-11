@@ -1024,6 +1024,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM">
             <Original>Playing possum</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_ACTIVATED">
+            <Original>Playing possum activated</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC">
             <Original>Immediately get back up when the whole team is downed. Once per mission.</Original>
         </Key>

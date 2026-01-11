@@ -1326,10 +1326,10 @@ class vgm_skillTrees {
                 class playing_possum: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM";
                     description = "$STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "[true] call vgm_c_fnc_skill_passives_playingPossum";
+                    codeUnapply  = "[false] call vgm_c_fnc_skill_passives_playingPossum";
                     cost = 8;
                 };
             };

@@ -937,6 +937,13 @@ class vgm_c
         class skill_passives_friendOrFoe {};
         class skill_passives_senseOfScale {};
     };
+    class skill_passives_medic
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\medic);
+
+        class skill_passives_legPockets {};
+        class skill_passives_playingPossum {};
+    };
     class skill_passives_fireSupport
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);

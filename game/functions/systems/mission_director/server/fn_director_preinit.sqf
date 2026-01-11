@@ -3,7 +3,7 @@
     File: fn_director_preinit.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-10-29
+    Last Update: 2026-01-11
     Public: No
 
     Description:
@@ -178,6 +178,16 @@ vgm_s_director_attack_classes = [
                 "%1 - Mission continues - %2 out of %3 players are alive, %4 out of %3 can respawn",
                 _logPrefix, count _alivePlayers, count _playersOnMission, count _playersAbleToRespawn
             ]] call vgm_g_fnc_logDebug;
+        };
+
+        // handle Playing Possum skill
+        if (_playersOnMission findIf { _x getVariable ["vgm_g_skill_canPlayPossum", false] } > -1) exitWith {
+            [format [
+                "%1 - Mission continues - at least one player is Playing Possum",
+                _logPrefix
+            ]] call vgm_g_fnc_logDebug;
+
+            ["vgm_skill_passives_playingPossum", [], _playersOnMission] call para_g_fnc_event_triggerTargets;
         };
 
         [format ["%1 - No players alive, ending mission", _logPrefix]] call vgm_g_fnc_logDebug;
