@@ -8,6 +8,7 @@
 #define BODY_PART_TORSO "torso"
 #define BODY_PART_LEGS "legs"
 #define BODY_PARTS_ARR [BODY_PART_HEAD, BODY_PART_ARMS, BODY_PART_TORSO, BODY_PART_LEGS]
+#define BODY_PARTS_LIMBS_ARR [BODY_PART_ARMS, BODY_PART_LEGS]
 
 // time to wait until accumulated, below wound threshold, damage is removed from player.
 #define ACCUMULATOR_IGNORE_DAMAGE_TIME 30

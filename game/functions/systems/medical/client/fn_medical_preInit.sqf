@@ -136,6 +136,8 @@ vgm_c_medical_damageModifiers = [];
     _unit setVariable ["vgm_g_medical_healModifier", _value max 0, true];
 }, 0] call vgm_c_fnc_coefficient_create;
 
+["limbInjuryEffectResistance"] call vgm_c_fnc_statusEffect_create;
+
 [{
     params ["_unit"];
 
