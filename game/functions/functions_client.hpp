@@ -992,11 +992,11 @@ class vgm_c
         class skill_actives_tacticalSense {};
     };
 
-    class skill_actives_support
+    class skill_actives_medic
     {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\support);
+        VGM_CLIENT_PATH(\systems\skill\client\actives\tourniquet);
 
-        class skill_actives_support_quickBandage {};
+        class skill_actives_support_tourniquet {};
     };
 
     class skill_actives_team_leader

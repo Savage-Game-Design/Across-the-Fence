@@ -1152,11 +1152,19 @@ class vgm_skillTrees {
                 class tourniquet: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_TOURNIQUET";
                     description = "$STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
-                    skillType = 2;
+                    conditionActivate = "\
+                        private _target = cursorTarget;\
+                        _target getVariable ['vgm_g_medical_bleeding', false]\
+                        && {_target distance player <= 10}\
+                    ";
+                    codeActivate = "call vgm_c_fnc_skill_actives_medic_tourniquet";
+                    codeUnableToActivate = "\
+                        if (cursorTarget distance player > 10) exitWith {}; \
+                        hint localize 'STR_VGM_SKILLS_SKILL_TOURNIQUET_UNABLE_TO_APPLY'\
+                    ";
+                    skillType = 1;
                     cost = 4;
                     cooldown = 60;
                 };
@@ -1168,7 +1176,7 @@ class vgm_skillTrees {
                     column = 1;
 
                     // TODO - Implementation
-                    skillType = 2;
+                    skillType = 1;
                     cost = 4;
                     cooldown = 480;
                     duration = 120;
