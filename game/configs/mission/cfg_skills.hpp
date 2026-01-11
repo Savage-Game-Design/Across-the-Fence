@@ -1217,11 +1217,11 @@ class vgm_skillTrees {
                 class pack_the_wound: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND";
                     description = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 0;
 
-                    // TODO - Implementation
-                    skillType = 2;
+                    codeApply = "[player, 'healModifier', 'skill_passives_packTheWound', 1, true] call vgm_c_fnc_coefficient_set";
+                    codeUnapply = "[player, 'healModifier', 'skill_passives_packTheWound'] call vgm_c_fnc_coefficient_remove";
+                    skillType = 1;
                     cost = 6;
                     cooldown = 300;
                     duration = 30;
