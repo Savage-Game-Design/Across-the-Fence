@@ -5,7 +5,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2025-12-24
+    Last Update: 2026-01-11
     Public: No
 
     Description:
@@ -71,17 +71,25 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
 
 }] call para_g_fnc_event_subscribe;
 
-["vgm_medical_adjustBleedOutAt", {
+["vgm_medical_adjustBleedoutAt", {
     (_this#0) params ["_unit", ["_adjust", nil, [0]]];
 
     if (!(_unit getVariable ["vgm_g_medical_bleeding", false])) exitWith {};
 
     format ["Adjusting bleed out time: %1 | %2", _unit, _adjust] call vgm_g_fnc_logInfo;
 
-    private _bleedOutAt = _unit getVariable "vgm_c_medical_bleedOutAt";
-    _unit setVariable ["vgm_c_medical_bleedOutAt", _bleedOutAt + _adjust];
+    private _bleedoutAt = _unit getVariable "vgm_c_medical_bleedoutAt";
+    _unit setVariable ["vgm_c_medical_bleedoutAt", _bleedoutAt + _adjust];
     // visual bleeding effect, stops when `damage _unit` < 0.1
-    _unit setBleedingRemaining (_bleedOutAt - time);
+    _unit setBleedingRemaining (_bleedoutAt - time);
+
+}] call para_g_fnc_event_subscribe;
+
+["vgm_medical_stopBleeding", {
+    (_this#0) params ["_unit"];
+
+    format ["Stopping bleeding: %1", _unit] call vgm_g_fnc_logInfo;
+    [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 
 }] call para_g_fnc_event_subscribe;
 
