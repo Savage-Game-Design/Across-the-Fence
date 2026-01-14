@@ -2,7 +2,7 @@
     File: fn_carry_attachResponse.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2026-01-09
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -31,6 +31,9 @@ format ["Attached: %1 | %2", _unit, _target] call vgm_g_fnc_logInfo;
 private _canRun = [_unit, "carryCanRun"] call vgm_c_fnc_statusEffect_get;
 if (!_canRun) then {
     [_unit, "forceWalk", "carry"] call vgm_c_fnc_statusEffect_set;
+    [_unit, "animSpeed", "carry", -0.05] call vgm_c_fnc_coefficient_set;
+} else {
+    [_unit, "animSpeed", "carry", 0.3] call vgm_c_fnc_coefficient_set;
 };
 
 private _fnc_detach = {

@@ -947,6 +947,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC">
             <Original>Instantly stops bleeding on a player. Any new injuries will restart the bleeding.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_UNABLE_TO_APPLY">
+            <Original>Target is not bleeding!</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_BLACK_KNIGHT">
             <Original>Black knight</Original>
         </Key>
