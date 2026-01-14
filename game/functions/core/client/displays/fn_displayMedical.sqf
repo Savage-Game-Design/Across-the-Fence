@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2025-02-06
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -255,6 +255,13 @@ switch _mode do {
             ] call _fnc_addRow;
         };
 
+        private _debuffImmune = _target getVariable ["vgm_c_medical_injuryEffectImmune", false];
+        if (_debuffImmune) then {
+            // localize "STR_VGM_MEDICAL_UI_DEBUFF_IMMUNE"
+            private _statusIcon = "#(rgb,1,1,1)color(0,1,0,1)";
+            ["Black Knight", "No wound is able to stop you!", _statusIcon, [COLOR_NONE]] call _fnc_addRow;
+        };
+
         {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
@@ -291,14 +298,16 @@ switch _mode do {
             // render debuff rows
             private _effects = [];
             {
-                if (!_y) then {continue};
+                private _inEffect = [_target, _x] call vgm_c_fnc_statusEffect_get;
+                if (!_inEffect) then {continue};
                 private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 private _statusIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
                 [_title, _statusDescription, _statusIcon, _iconColor] call _fnc_addRow;
             } forEach _statusEffects;
 
             {
-                if (_y == 0) then {continue};
+                private _value = [_target, _x, "medical"] call vgm_c_fnc_coefficient_hasReason;
+                if (!_value) then {continue};
                 private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
                 private _coefIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
