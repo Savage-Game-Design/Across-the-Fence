@@ -1002,7 +1002,7 @@ class vgm_c
 
     class skill_actives_medic
     {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\tourniquet);
+        VGM_CLIENT_PATH(\systems\skill\client\actives\medic);
 
         class skill_actives_medic_itsOnlyAFleshWound {};
         class skill_actives_medic_saltTablets {};
