@@ -30,6 +30,7 @@
 #define COLOR_MAJOR 0.9,0.1,0
 #define COLOR_SEVERE 0.58,0,0
 #define COLOR_ARR [[COLOR_NONE], [COLOR_MINOR], [COLOR_MAJOR], [COLOR_SEVERE]]
+#define COLOR_DISABLED 0.5,0.5,0.5
 // 1 - HUD_ALPHA + HUD_ALPHA_WOUND
 #define HUD_ALPHA 0.8
 #define HUD_ALPHA_WOUND 0.4
@@ -290,7 +291,7 @@ switch _mode do {
             };
 
             private _iconFallback = "#(rgb,1,1,1)color(1,1,1,1)";
-            private _iconColor = COLOR_ARR select _currentWoundLevel;
+            private _iconColor = [COLOR_ARR select _currentWoundLevel, [COLOR_DISABLED]] select _debuffImmune;
             private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
             private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
             private _title = format ["%1 %2 Trauma", _level, _bodyPart];
@@ -298,16 +299,14 @@ switch _mode do {
             // render debuff rows
             private _effects = [];
             {
-                private _inEffect = [_target, _x] call vgm_c_fnc_statusEffect_get;
-                if (!_inEffect) then {continue};
+                if (!_y) then {continue};
                 private _statusDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 private _statusIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
                 [_title, _statusDescription, _statusIcon, _iconColor] call _fnc_addRow;
             } forEach _statusEffects;
 
             {
-                private _value = [_target, _x, "medical"] call vgm_c_fnc_coefficient_hasReason;
-                if (!_value) then {continue};
+                if (_y == 0) then {continue};
                 private _coefDescription = localize format ["STR_VGM_MEDICAL_UI_DEBUFF_%1", _x];
                 _coefDescription = format ["%2%3 %1", _coefDescription, abs _y * 100, "%"];
                 private _coefIcon = vgm_medical_injuryEffectsIcons getOrDefault [_x, _iconFallback];
