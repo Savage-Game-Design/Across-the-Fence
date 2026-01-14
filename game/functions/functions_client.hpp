@@ -821,6 +821,8 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client\injuryEffects);
 
+        class medical_injuryEffects_statusEffectImmunity {};
+
         class medical_injuryEffects_init {};
         class medical_injuryEffectsUpdate {};
     };

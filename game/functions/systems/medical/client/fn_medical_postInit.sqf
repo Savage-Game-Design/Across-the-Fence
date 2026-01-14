@@ -2,7 +2,7 @@
     File: fn_medical_postInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-12-03
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -24,6 +24,13 @@ player call vgm_c_fnc_medical_unitInit;
 
 // bleeding status effect
 ["bleeding", {call vgm_c_fnc_medical_statusEffectBleeding}] call vgm_c_fnc_statusEffect_create;
+
+["injuryEffectImmunity", {call vgm_c_fnc_medical_injuryEffects_statusEffectImmunity}] call vgm_c_fnc_statusEffect_create;
+
+["limbInjuryEffectResistance", {
+    params ["_unit", "_inEffect"];
+    _unit setVariable ["vgm_c_medical_limbInjuryEffectResistant", _inEffect];
+}] call vgm_c_fnc_statusEffect_create;
 
 [] call vgm_c_fnc_medical_feedback_init;
 [] call vgm_c_fnc_medical_injuryEffects_init;

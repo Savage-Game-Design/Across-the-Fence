@@ -5,7 +5,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2026-01-11
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -143,8 +143,6 @@ vgm_c_medical_damageModifiers = [];
     params ["_unit", "_value"];
     _unit setVariable ["vgm_g_medical_healModifier", _value max 0, true];
 }, 0] call vgm_c_fnc_coefficient_create;
-
-["limbInjuryEffectResistance"] call vgm_c_fnc_statusEffect_create;
 
 [{
     params ["_unit"];
