@@ -1305,7 +1305,6 @@ class vgm_skillTrees {
                 class combat_doc_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4";
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
                     codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_4', -0.25, true] call vgm_c_fnc_coefficient_set";
