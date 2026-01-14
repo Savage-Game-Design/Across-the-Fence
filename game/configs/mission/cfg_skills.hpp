@@ -1172,10 +1172,9 @@ class vgm_skillTrees {
                 class black_knight: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT";
                     description = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
+                    codeActivateGroup = "[player, 'injuryEffectImmunity', 'skill_blackKnight', 120, true] call vgm_c_fnc_statusEffect_set"
                     skillType = 1;
                     cost = 4;
                     cooldown = 480;
