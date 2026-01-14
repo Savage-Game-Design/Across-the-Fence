@@ -1220,6 +1220,7 @@ class vgm_skillTrees {
 
                     codeApply = "[player, 'healModifier', 'skill_passives_packTheWound', 1, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'healModifier', 'skill_passives_packTheWound'] call vgm_c_fnc_coefficient_remove";
+                    codeActivate = ""; // make it run for duration
                     skillType = 1;
                     cost = 6;
                     cooldown = 300;
@@ -1279,7 +1280,7 @@ class vgm_skillTrees {
                         _target distance player <= 10\
                         && {[_target] call vgm_g_fnc_medical_isWounded}\
                     ";
-                    codeActivate = "call vgm_c_fnc_skill_actives_medic_itsOnlyAFleshWound";
+                    codeActivate = "[cursorTarget] call vgm_c_fnc_skill_actives_medic_itsOnlyAFleshWound";
                     codeUnableToActivate = "\
                         if (cursorTarget distance player > 10) exitWith {}; \
                         hint localize 'STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_UNABLE_TO_APPLY'\

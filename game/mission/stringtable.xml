@@ -1010,6 +1010,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC">
             <Original>Completely heal the person you're looking at.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_UNABLE_TO_APPLY">
+            <Original>Target is not wounded!</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SWEET_DREAMS">
             <Original>Sweet dreams</Original>
         </Key>
