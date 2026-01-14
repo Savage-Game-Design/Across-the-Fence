@@ -346,10 +346,13 @@ class vgm_s
 
         class rto_addAvailableAircraft {};
         class rto_clearAvailableAircraft {};
+        class rto_dismissAircraft {};
         class rto_preInit
         {
             preInit = 1;
         };
+        class rto_requestAircraft {};
+        class rto_requestStrike {};
     };
 
     class shared_hub

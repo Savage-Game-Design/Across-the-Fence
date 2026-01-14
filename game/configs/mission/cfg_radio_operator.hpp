@@ -18,11 +18,11 @@ class vgm_radio_operator {
                 // A single strike. The name will be based on the magazines.
                 class my_strike {
                     // The weapons to fire or magazines that are fitted to each Pylon on the aircraft during the strike. All listed weapons are fired.
-                    magazines[] = {""}
+                    magazines[] = {""};
                     // Numbeere of uses
                     uses = 1;
-                }
-            }
+                };
+            };
         };
 
         class testing_plane {
@@ -36,7 +36,7 @@ class vgm_radio_operator {
                     magazines[] = {"vn_m61a1"};
                     uses = 2;
                 };
-            }
+            };
         };
     };
 };
