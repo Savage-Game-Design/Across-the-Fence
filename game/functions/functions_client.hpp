@@ -1008,7 +1008,7 @@ class vgm_c
 
         class skill_actives_medic_itsOnlyAFleshWound {};
         class skill_actives_medic_saltTablets {};
-        class skill_actives_support_tourniquet {};
+        class skill_actives_medic_tourniquet {};
     };
 
     class skill_actives_team_leader
