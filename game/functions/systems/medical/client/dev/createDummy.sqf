@@ -22,6 +22,9 @@ if (_wounded) then {
     } forEach BODY_PARTS_ARR
 };
 
+// [_agent, "limbInjuryEffectResistance", "dev"] call vgm_c_fnc_statusEffect_set;
+// [_agent, "injuryEffectImmunity", "dev"] call vgm_c_fnc_statusEffect_set;
+
 [_agent, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
 
 _agent // return

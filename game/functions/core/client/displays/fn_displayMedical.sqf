@@ -256,6 +256,13 @@ switch _mode do {
             ] call _fnc_addRow;
         };
 
+        private _resistantLimbs = _target getVariable ["vgm_c_medical_limbInjuryEffectResistant", false];
+        if (_resistantLimbs) then {
+            // localize "STR_VGM_MEDICAL_UI_DEBUFF_LIMBS_RESISTANT"
+            private _statusIcon = "#(rgb,1,1,1)color(0,0,1,1)";
+            ["I've seen worse", "Your limbs are more resistant", _statusIcon, [COLOR_NONE]] call _fnc_addRow;
+        };
+
         private _debuffImmune = _target getVariable ["vgm_c_medical_injuryEffectImmune", false];
         if (_debuffImmune) then {
             // localize "STR_VGM_MEDICAL_UI_DEBUFF_IMMUNE"
@@ -268,6 +275,10 @@ switch _mode do {
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
 
             private _currentWoundLevel = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
+            if (_resistantLimbs && {_bodyPart in BODY_PARTS_LIMBS_ARR}) then {
+                _currentWoundLevel = (_currentWoundLevel - 1) max WOUND_NONE;
+            };
+
             private _coefficients = createHashMap;
             private _statusEffects = createHashMap;
 
