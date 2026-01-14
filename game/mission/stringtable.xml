@@ -133,6 +133,9 @@
         <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS">
             <Original>Missing required items!</Original>
         </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_CARRYING_OBJECT">
+            <Original>Cannot heal while carrying an object!</Original>
+        </Key>
         <!-- body parts -->
         <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_HEAD">
             <Original>Head</Original>

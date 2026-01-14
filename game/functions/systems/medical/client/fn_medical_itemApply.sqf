@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2025-12-24
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -26,6 +26,11 @@
  */
 
 params ["_healer", "_patient", "_bodyPart", "_itemData"];
+
+if (!isNull (_healer getVariable ["vgm_carry_carriedObject", objNull])) exitWith {
+    format ["Cannot apply medical item while carrying an object: %1", _healer] call vgm_g_fnc_logError;
+    hint localize "STR_VGM_MEDICAL_UI_NOTIFICATION_CARRYING_OBJECT"; // TODO custom notification system?
+};
 
 format ["Applying item: %1 | %2 | %3 | %4", _healer, _patient, _bodyPart, _itemData] call vgm_g_fnc_logDebug;
 
