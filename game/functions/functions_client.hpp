@@ -326,6 +326,9 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\rto\global);
 
+        class rto_isAircraftDeparted {};
+        class rto_isAircraftEnRoute {};
+        class rto_isAircraftOnStation {};
         class rto_preInit {
             preInit = 1;
         };
