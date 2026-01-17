@@ -8,6 +8,7 @@ import RscMapControlEmpty;
 import RscControlsGroupNoScrollbars;
 import RscButtonMenu;
 import RscObject;
+import ctrlCombo;
 import ctrlDefault;
 import ctrlStatic;
 import ctrlStructuredText;

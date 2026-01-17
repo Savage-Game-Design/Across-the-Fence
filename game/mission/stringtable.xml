@@ -1747,4 +1747,9 @@
             <Original>Evening (18:00)</Original>
         </Key>
     </Package>
+    <Package name="RTO">
+        <Key ID="STR_VGM_RTO_NO_AIRCRAFT_ON_STATION">
+            <Original>No aircraft on-station</Original>
+        </Key>
+    </Package>
 </Project>
