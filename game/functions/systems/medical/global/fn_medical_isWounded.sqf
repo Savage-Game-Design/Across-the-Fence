@@ -1,8 +1,9 @@
+#include "script_component.inc"
 /*
     File: fn_medical_isWounded.sqf
     Author: Savage Game Design
     Date: 2026-01-11
-    Last Update: 2026-01-11
+    Last Update: 2026-01-19
     Public: Yes
 
     Description:
