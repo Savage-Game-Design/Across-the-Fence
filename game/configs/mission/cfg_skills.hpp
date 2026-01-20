@@ -1219,7 +1219,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_PACK_THE_WOUND_DESC";
                     column = 0;
 
-                    codeActivate = "[player, 'healModifier', 'skill_passives_packTheWound', 1, true] call vgm_c_fnc_coefficient_set";
+                    codeActivate = "[player, 'healModifier', 'skill_passives_packTheWound', 1, false] call vgm_c_fnc_coefficient_set";
                     codeDeactivate = "[player, 'healModifier', 'skill_passives_packTheWound'] call vgm_c_fnc_coefficient_remove";
                     skillType = 1;
                     cost = 6;

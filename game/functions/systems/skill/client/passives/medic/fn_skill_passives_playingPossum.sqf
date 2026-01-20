@@ -2,7 +2,7 @@
     File: fn_skill_passives_playingPossum.sqf
     Author: Savage Game Design
     Date: 2026-01-11
-    Last Update: 2026-01-11
+    Last Update: 2026-01-20
     Public: No
 
     Description:
@@ -30,6 +30,8 @@ if (!_known) exitWith {
     if (!isNil "_ehActivate") then {
         [_ehActivate] call para_g_fnc_event_unsubscribe;
     };
+
+    player setVariable ["vgm_g_skill_canPlayPossum", false, true];
 };
 
 private _ehMission = ["vgm_mission_deploy_local", {
