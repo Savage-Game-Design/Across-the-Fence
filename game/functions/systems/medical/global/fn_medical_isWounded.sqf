@@ -3,7 +3,7 @@
     File: fn_medical_isWounded.sqf
     Author: Savage Game Design
     Date: 2026-01-11
-    Last Update: 2026-01-19
+    Last Update: 2026-01-20
     Public: Yes
 
     Description:
@@ -22,4 +22,6 @@
 
 params ["_unit"];
 
-BODY_PARTS_ARR findIf (_unit getVariable [format ["vgm_g_medical_wound$%1", _x], WOUND_NONE]) > -1 // return
+BODY_PARTS_ARR findIf {
+    (_unit getVariable [format ["vgm_g_medical_wound$%1", _x], WOUND_NONE]) > WOUND_NONE // return
+} > -1 // return
