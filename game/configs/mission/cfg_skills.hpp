@@ -1112,7 +1112,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_1_DESC";
                     column = 2;
 
-                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_1', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_1', -0.125, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'interact_medical', 'skills_passives_combat_doc_1'] call vgm_c_fnc_coefficient_remove";
                     cost = 4;
                 };
@@ -1187,7 +1187,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_2_DESC";
                     column = 2;
 
-                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_2', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_2', -0.125, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'interact_medical', 'skills_passives_combat_doc_2'] call vgm_c_fnc_coefficient_remove";
                     cost = 4;
                 };
@@ -1243,7 +1243,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_3_DESC";
                     column = 2;
 
-                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_3', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_3', -0.125, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'interact_medical', 'skills_passives_combat_doc_3'] call vgm_c_fnc_coefficient_remove";
                     cost = 4;
                 };
@@ -1307,7 +1307,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_COMBAT_DOC_4_DESC";
                     column = 2;
 
-                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_4', -0.25, true] call vgm_c_fnc_coefficient_set";
+                    codeApply = "[player, 'interact_medical', 'skills_passives_combat_doc_4', -0.125, true] call vgm_c_fnc_coefficient_set";
                     codeUnapply = "[player, 'interact_medical', 'skills_passives_combat_doc_4'] call vgm_c_fnc_coefficient_remove";
                     cost = 4;
                 };
