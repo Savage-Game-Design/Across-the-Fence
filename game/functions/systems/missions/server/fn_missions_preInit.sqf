@@ -27,17 +27,6 @@ localNamespace setVariable ["vgm_missions", createHashMap];
 // Missions that players are assigned to.
 ["vgm_mission_assignments"] call para_s_fnc_netmap_createNamedNetmap;
 
-["vgm_missions_clientReady", {
-    private _originMachineId = param [4];
-    private _missions = localNamespace getVariable "vgm_missions";
-
-    [
-        "vgm_mission_available",
-        [keys _missions],
-        [_originMachineId]
-    ] call para_g_fnc_event_triggerTargets;
-}] call para_g_fnc_event_subscribe;
-
 addMissionEventHandler ["PlayerDisconnected", {
     params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
 
