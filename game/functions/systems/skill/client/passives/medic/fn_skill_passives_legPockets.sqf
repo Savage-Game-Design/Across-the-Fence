@@ -40,7 +40,7 @@ private _eh = ["vgm_medical_itemConsumed", {
     _unit setVariable ["vgm_c_skill_passives_legPocketsMission", _currentMission];
 
     ["Medic/Leg pockets skill triggered"] call vgm_g_fnc_logInfo;
-    hint "STR_VGM_SKILLS_SKILL_LEG_POCKETS_ACTIVATED";
+    hint localize "STR_VGM_SKILLS_SKILL_LEG_POCKETS_ACTIVATED";
 
     _unit addItem _consumedItem;
     _unit addItem _consumedItem;

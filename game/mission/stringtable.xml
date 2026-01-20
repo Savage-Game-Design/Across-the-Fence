@@ -930,7 +930,7 @@
             <Original>Leg pockets</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_ACTIVATED">
-            <Original>Leg pockets activated</Original>
+            <Original>You've found some spare first aid kits in your leg pockets.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC">
             <Original>When the last first aid kit is used, gain 2 more.</Original>
@@ -945,7 +945,7 @@
             <Original>Tourniquet</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC">
-            <Original>Instantly stops bleeding on a player. Any new injuries will restart the bleeding.</Original>
+            <Original>Instantly stops bleeding on a teammate or yourself. Any new injuries will restart the bleeding.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_UNABLE_TO_APPLY">
             <Original>Target is not bleeding!</Original>
