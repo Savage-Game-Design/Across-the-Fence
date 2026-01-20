@@ -1156,6 +1156,7 @@ class vgm_skillTrees {
 
                     conditionActivate = "\
                         private _target = cursorTarget;\
+                        if (isNull _target) exitWith {_target = player}; \
                         _target getVariable ['vgm_g_medical_bleeding', false]\
                         && {_target distance player <= 10}\
                     ";
