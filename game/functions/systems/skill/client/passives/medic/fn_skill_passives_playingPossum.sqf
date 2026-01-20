@@ -36,7 +36,7 @@ if (!_known) exitWith {
 
 private _ehMission = ["vgm_mission_deploy_local", {
     player setVariable ["vgm_g_skill_canPlayPossum", true, true];
-}] call para_g_fnc_event_subscribeGlobal;
+}] call para_g_fnc_event_subscribe;
 
 player setVariable [ "vgm_c_skill_passives_playingPossumMissionEH", _ehMission];
 

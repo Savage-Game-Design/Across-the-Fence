@@ -2,7 +2,7 @@
     File: fn_skill_passives_legPockets.sqf
     Author: Savage Game Design
     Date: 2025-12-24
-    Last Update: 2026-01-05
+    Last Update: 2026-01-20
     Public: No
 
     Description:
@@ -45,6 +45,6 @@ private _eh = ["vgm_medical_itemConsumed", {
     _unit addItem _consumedItem;
     _unit addItem _consumedItem;
 
-}] call para_g_fnc_event_subscribeGlobal;
+}] call para_g_fnc_event_subscribe;
 
 player setVariable [ "vgm_c_skill_passives_legPocketsEH", _eh];
