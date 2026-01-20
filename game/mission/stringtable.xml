@@ -930,7 +930,7 @@
             <Original>Leg pockets</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_ACTIVATED">
-            <Original>You've found some spare first aid kits in your leg pockets.</Original>
+            <Original>2 extra first aid kits have been retrieved from your leg pockets.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC">
             <Original>When the last first aid kit is used, gain 2 more.</Original>

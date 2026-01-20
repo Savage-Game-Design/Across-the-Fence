@@ -12,10 +12,10 @@
         N/A
 
     Returns:
-        Something [BOOL]
+        Nothing
 
     Example(s):
-        [parameter] call vgm_X_fnc_component_myFunction
+        [true] call vgm_c_fnc_skill_passives_legPockets
  */
 
 params ["_known"];
