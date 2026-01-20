@@ -966,7 +966,7 @@
             <Original>He ain't heavy</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC">
-            <Original>Enable sprinting while carrying a downed teammate.</Original>
+            <Original>Increases your movement speed while carrying a downed person.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_GREEN_HORNET">
             <Original>Green hornet</Original>
