@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2026-01-14
+    Last Update: 2026-01-24
     Public: No
 
     Description:
@@ -34,8 +34,8 @@ if (!isNull (_healer getVariable ["vgm_carry_carriedObject", objNull])) exitWith
 
 format ["Applying item: %1 | %2 | %3 | %4", _healer, _patient, _bodyPart, _itemData] call vgm_g_fnc_logDebug;
 
-private _coefInteract = [_healer, "interact"] call vgm_c_fnc_coefficient_get;
-private _coefInteractMedical = [_healer, "interact_medical"] call vgm_c_fnc_coefficient_get;
+private _coefInteract = _healer getVariable ["vgm_c_coefficient_interact", 1];
+private _coefInteractMedical = _healer getVariable ["vgm_c_medical_coefficient_interact", 1];
 
 private _time = (_itemData get "time") * _coefInteract * _coefInteractMedical;
 

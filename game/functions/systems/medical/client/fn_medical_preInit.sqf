@@ -5,7 +5,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2026-01-14
+    Last Update: 2026-01-24
     Public: No
 
     Description:
@@ -136,7 +136,7 @@ vgm_c_medical_damageModifiers = [];
 
 ["interact_medical", {
     params ["_unit", "_value"];
-    _unit setVariable ["vgm_c_coefficient_interact", _value max 0.1 min 5];
+    _unit setVariable ["vgm_c_medical_coefficient_interact", _value max 0.1 min 5];
 }] call vgm_c_fnc_coefficient_create;
 
 ["healModifier", {

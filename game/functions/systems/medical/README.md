@@ -34,7 +34,7 @@
 | ---------------- | ------------------------------------------- | ------- | --------- | ---------------------------------- |
 | bleedOut         | Multiplier for bleed out time (120s base)   | 1.0     | 0.5 - 3.0 | vgm_c_medical_coefficient_bleedout |
 | hitShrug         | Chance to completely ignore incoming damage | 0.0     | 0.0 - 1.0 | vgm_c_medical_coefficient_hitShrug |
-| interact_medical | Multiplier for medical interaction speed    | 1.0     | 0.1 - 5.0 | vgm_c_coefficient_interact         |
+| interact_medical | Multiplier for medical interaction speed    | 1.0     | 0.1 - 5.0 | vgm_c_medical_coefficient_interact |
 | healModifier     | Additional wounds healed per healing action | 0       | 0+        | vgm_g_medical_healModifier         |
 
 ## Bodyparts
