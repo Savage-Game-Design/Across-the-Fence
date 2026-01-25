@@ -285,16 +285,18 @@ switch _mode do
         private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
 
         private _fnc_strikeCommands = {
-            params [["_enRoute", false]];
             private _strikes = _aircraft get "strikes";
             private _strikeIds = keys _strikes;
             _strikeIds sort true;
             private _strikeTypes = _aircraftType get "strikes";
+            private _enRoute = _aircraftStatus == "ENROUTE";
+            private _onAttackRun = [_aircraft] call vgm_g_fnc_rto_isAircraftOnAttackRun;
 
             _strikeIds apply {
                 private _strikesRemaining = _strikes get _x;
-                private _disabled = _strikesRemaining <= 0 || _enRoute;
+                private _disabled = _strikesRemaining <= 0 || _enRoute || _onAttackRun;
                 private _tooltip = ["", localize "STR_VGM_RTO_ENROUTE"] select _enRoute;
+                _tooltip = [_tooltip, localize "STR_VGM_RTO_ON_ATTACK_RUN"] select _onAttackRun;
 
                 createHashMapFromArray [
                     ["text", _strikeTypes get _x get "displayName"],
@@ -305,6 +307,7 @@ switch _mode do
                         params ["_aircraftId", "_strikeId", "_disabled"];
                         if (_disabled || isNil "VGM_DisplayRadioOperator_selecting_start" || isNil "VGM_DisplayRadioOperator_selecting_end") exitWith {};
                         [getPlayerID player, _aircraftId, _strikeId, VGM_DisplayRadioOperator_selecting_start, VGM_DisplayRadioOperator_selecting_end] remoteExecCall ["vgm_s_fnc_rto_requestStrike", 2];
+                        DISPLAY closeDisplay 0;
                     }]]
                 ]
             }
@@ -330,11 +333,11 @@ switch _mode do
         };
 
         if (_aircraftStatus == "ENROUTE") then {
-            vgm_c_displayRadioOperator_commands append ([true] call _fnc_strikeCommands);
+            vgm_c_displayRadioOperator_commands append ([] call _fnc_strikeCommands);
         };
 
         if (_aircraftStatus == "ONSTATION") then {
-            vgm_c_displayRadioOperator_commands append ([false] call _fnc_strikeCommands);
+            vgm_c_displayRadioOperator_commands append ([] call _fnc_strikeCommands);
             vgm_c_displayRadioOperator_commands pushBack createHashMapFromArray [
                 ["text", localize "STR_VGM_RTO_DISMISS"],
                 ["action", [[vgm_c_displayRadioOperator_aircraftId], {

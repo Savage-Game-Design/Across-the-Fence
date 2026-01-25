@@ -330,6 +330,7 @@ class vgm_g
 		class rto_getAircraftStatus {};
         class rto_isAircraftDeparted {};
         class rto_isAircraftEnRoute {};
+        class rto_isAircraftOnAttackRun {};
         class rto_isAircraftOnStation {};
         class rto_isAircraftOnStandby {};
         class rto_isRadioAvailable {};

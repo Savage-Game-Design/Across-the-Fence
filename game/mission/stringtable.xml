@@ -1766,6 +1766,9 @@
         <Key ID="STR_VGM_RTO_ENROUTE">
             <Original>Aircraft en-route</Original>
         </Key>
+        <Key ID="STR_VGM_RTO_ON_ATTACK_RUN">
+            <Original>Aircraft on attack run</Original>
+        </Key>
         <Key ID="STR_VGM_RTO_REMAINING">
             <Original>%1 remaining</Original>
         </Key>
