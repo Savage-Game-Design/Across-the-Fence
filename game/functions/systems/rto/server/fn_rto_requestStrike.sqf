@@ -2,7 +2,7 @@
     File: fn_rto_requestStrike.sqf
     Author: Savage Game Design
     Date: 2026-01-14
-    Last Update: 2026-01-17
+    Last Update: 2026-01-25
     Public: No
 
     Description:
@@ -40,7 +40,6 @@ if (_strikes getOrDefault [_strike, 0] <= 0) exitWith {
     [format ["RTO: Player %1 requested strike from aircraft %2, but strike %3 is not available", _playerId, _aircraftId, _strike]] call vgm_g_fnc_logInfo;
 };
 
-// TODO - Extract this into its own global function. Also need to check the aircraft hasn't left.
 private _onStationAt = _aircraft get "onStationAt";
 private _departAt = _aircraft get "departAt";
 if !( [_aircraft] call vgm_g_fnc_rto_isAircraftOnStation ) exitWith {
@@ -95,8 +94,8 @@ private _illumination = 0;
     _runIndex,
     _vehicleConfig,
     _vehicleClass,
-    _startPos,
-    _endPos,
+    [_startPos # 0, _startPos # 1, 0],
+    [_endPos # 0, _endPos # 1, 0],
     _totalRuns,
     _magazines,
     _playerId call vgm_s_fnc_player_fromId,
