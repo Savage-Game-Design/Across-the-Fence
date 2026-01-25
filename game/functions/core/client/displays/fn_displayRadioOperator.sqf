@@ -332,11 +332,7 @@ switch _mode do
             ];
         };
 
-        if (_aircraftStatus == "ENROUTE") then {
-            vgm_c_displayRadioOperator_commands append ([] call _fnc_strikeCommands);
-        };
-
-        if (_aircraftStatus == "ONSTATION") then {
+        if (_aircraftStatus in ["ENROUTE", "ONSTATION"]) then {
             vgm_c_displayRadioOperator_commands append ([] call _fnc_strikeCommands);
             vgm_c_displayRadioOperator_commands pushBack createHashMapFromArray [
                 ["text", localize "STR_VGM_RTO_DISMISS"],

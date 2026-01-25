@@ -48,11 +48,11 @@ if (isNil "_playerAvailableAircraft") then {
         // ID of the aircraft's type
         ["typeId", _aircraftTypeId],
         // When the aircraft was requested
-        ["requestedAt", 1e99],
+        ["requestedAt", 1e32],
         // When the aircraft will/did arrive on station
-        ["onStationAt", 1e99],
+        ["onStationAt", 1e32],
         // When the aircraft will depart/departed from the AO
-        ["departAt", 1e99],
+        ["departAt", 1e32],
         // When the aircraft's current attack run / last attack run was completed
         ["runCompleteAt", -1],
         // Strikes isn't a netmap as it's pretty small, and at the end of the mission every aircraft netmap is terminated.

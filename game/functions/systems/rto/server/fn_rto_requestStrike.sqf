@@ -67,7 +67,7 @@ if !(_runCompleteAt <= serverTime) exitWith {
 private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
 
 // Approximate time for the run to complete - when testing, it took about 65 seconds for a plane to despawn, which feels like too long between runs.
-_aircraft set ["runCompleteAt", serverTime + 45];
+[_aircraft, "runCompleteAt", serverTime + 45] call para_s_fnc_netmap_set;
 // Remove a charge of the strike
 _strikes set [_strike, (_strikes get _strike) - 1];
 // Refresh the netmap entry (broadcast to all players)
@@ -75,7 +75,7 @@ _strikes set [_strike, (_strikes get _strike) - 1];
 
 private _runIndex = 1;
 // Prevents the dialog for completing an attack run from playing.
-private _totalRuns = 1e99;
+private _totalRuns = 1e32;
 private _vehicleClass = _aircraftType get "vehicleClass";
 private _vehicleConfig = _aircraftType get "vehicleConfig";
 private _magazines = _aircraftType get "strikes" get _strike get "magazines";

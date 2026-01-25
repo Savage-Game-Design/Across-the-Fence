@@ -2,7 +2,7 @@
     File: fn_rto_dismissAircraft.sqf
     Author: Savage Game Design
     Date: 2026-01-08
-    Last Update: 2026-01-17
+    Last Update: 2026-01-25
     Public: No
 
     Description:
@@ -39,9 +39,9 @@ if ([_aircraft] call vgm_g_fnc_rto_isAircraftOnStation) exitWith {
 if ([_aircraft] call vgm_g_fnc_rto_isAircraftEnRoute) exitWith {
     [format ["RTO: Player %1 dismissed aircraft %2 while en-route, aircraft returned to base", _playerId, _aircraftId]] call vgm_g_fnc_logInfo;
     // Reset everything to allow the player to call it again if dismissed while en-route.
-    [_aircraft, "requestedAt", 1e99] call para_s_fnc_netmap_set;
-    [_aircraft, "onStationAt", 1e99] call para_s_fnc_netmap_set;
-    [_aircraft, "departAt", 1e99] call para_s_fnc_netmap_set;
+    [_aircraft, "requestedAt", 1e32] call para_s_fnc_netmap_set;
+    [_aircraft, "onStationAt", 1e32] call para_s_fnc_netmap_set;
+    [_aircraft, "departAt", 1e32] call para_s_fnc_netmap_set;
 };
 
 [format ["RTO: Player %1 tried to dismiss aircraft %2, but it hasn't been dispatched", _playerId, _aircraftId]] call vgm_g_fnc_logInfo;
