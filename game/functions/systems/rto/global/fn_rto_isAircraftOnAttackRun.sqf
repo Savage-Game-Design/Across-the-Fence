@@ -22,4 +22,4 @@
 
 params ["_aircraft"];
 
-(_aircraft get "runCompleteAt") <= serverTime
+(_aircraft get "runCompleteAt") > serverTime
