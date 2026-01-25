@@ -9,6 +9,9 @@
         Global pre-init for RTO system
 */
 
+// Required var for a specific bit of the plane calling logic.
+vn_artillery_captive = true;
+
 vgm_g_rto_aircraftTypes = createHashMap;
 
 private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (missionConfigFile >> "vgm_radio_operator" >> "aircraft");

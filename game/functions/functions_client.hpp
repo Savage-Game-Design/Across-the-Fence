@@ -976,10 +976,14 @@ class vgm_c
         class skill_passives_legPockets {};
         class skill_passives_playingPossum {};
     };
-    class skill_passives_fireSupport
+    class skill_passives_rto
     {
-        VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
+        VGM_CLIENT_PATH(\systems\skill\client\passives\rto);
 
+        class skill_passives_addAircraft_preInit {
+            preInit = 1;
+        };
+        class skill_passives_addAircraft {};
     };
     class skill_passives_support
     {
