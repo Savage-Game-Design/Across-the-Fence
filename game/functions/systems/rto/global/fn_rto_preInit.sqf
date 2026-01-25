@@ -42,3 +42,6 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (mi
 
     vgm_g_rto_aircraftTypes set [configName _aircraftConfig, _aircraftDetails];
 } forEach _aircraftConfigs;
+
+// TODO - Unify this with extraction radios
+vgm_g_rto_radioBackpacks = ["vn_o_pack_t884_01", "vn_o_pack_t884_ish54_01_pl", "vn_o_pack_t884_m1_01_pl", "vn_o_pack_t884_m38_01_pl", "vn_o_pack_t884_ppsh_01_pl", "vn_b_pack_prc77_01_m16_pl", "vn_b_pack_03_m3a1_pl", "vn_b_pack_03_xm177_pl", "vn_b_pack_03_type56_pl", "vn_b_pack_03", "vn_b_pack_prc77_01", "vn_b_pack_trp_04", "vn_b_pack_trp_04_02", "vn_b_pack_03", "vn_b_pack_03_02", "vn_b_pack_lw_06"];

@@ -332,6 +332,7 @@ class vgm_g
         class rto_isAircraftEnRoute {};
         class rto_isAircraftOnStation {};
         class rto_isAircraftOnStandby {};
+        class rto_isRadioAvailable {};
         class rto_preInit {
             preInit = 1;
         };
@@ -737,6 +738,18 @@ class vgm_c
         {
             postInit = 1;
         };
+    };
+
+    class rto
+    {
+        VGM_CLIENT_PATH(\systems\rto\client);
+
+        class rto_addActions {};
+        class rto_postInit
+        {
+            postInit = 1;
+        };
+        class rto_removeActions {};
     };
 
     class shared_hub

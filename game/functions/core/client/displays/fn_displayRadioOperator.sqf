@@ -218,6 +218,7 @@ switch _mode do
 
         ['gui:clear'] call SELF;
         ['gui:setup'] call SELF;
+        ["vgm_rto_displayOpened", [_display]] call para_g_fnc_event_triggerLocal;
     };
     case "onUnload":
     {
