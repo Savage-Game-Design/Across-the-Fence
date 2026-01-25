@@ -834,8 +834,19 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vgm_radio_operator', true, true];";
-                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vgm_radio_operator', false, true];";
+                    codeApply = "\
+                        player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vgm_radio_operator', true, true];\
+                        [true, 'f100d_mk82_1'] call vgm_c_fnc_skill_passives_addAircraft;\
+                        [true, 'f100d_mk82_2'] call vgm_c_fnc_skill_passives_addAircraft;\
+                        [true, 'f100d_mk82_3'] call vgm_c_fnc_skill_passives_addAircraft;\
+                        [true, 'f100d_mk82_4'] call vgm_c_fnc_skill_passives_addAircraft;\
+                    ";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vgm_radio_operator', false, true];\
+                        [false, 'f100d_mk82_1'] call vgm_c_fnc_skill_passives_addAircraft;\
+                        [false, 'f100d_mk82_2'] call vgm_c_fnc_skill_passives_addAircraft;\
+                        [false, 'f100d_mk82_3'] call vgm_c_fnc_skill_passives_addAircraft;\
+                        [false, 'f100d_mk82_4'] call vgm_c_fnc_skill_passives_addAircraft;\
+                    ";
                     cost = 10;
                 };
 

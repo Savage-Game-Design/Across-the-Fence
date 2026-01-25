@@ -26,6 +26,106 @@ class vgm_radio_operator {
             };
         };
 
+        class f100d_mk82_1 {
+            displayName = "F100D MK82";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 30;
+            onStationTimeSecs = 180;
+            class strikes {
+                class cannon {
+                    displayName = "20mm cannon";
+                    magazines[] = {"vn_m39a1_v_twin"};
+                    uses = 2;
+                };
+                class rockets {
+                    displayName = "Rockets";
+                    magazines[] = {"vn_rocket_ffar_f4_lau3_m229_he_x19"};
+                    uses = 2;
+                };
+                class mk82 {
+                    displayName = "Mk82 500lb bomb";
+                    magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
+                    uses = 1;
+                };
+            };
+        };
+
+        class f100d_mk82_2 {
+            displayName = "F100D MK82 2";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 30;
+            onStationTimeSecs = 180;
+            class strikes {
+                class cannon {
+                    displayName = "20mm cannon";
+                    magazines[] = {"vn_m39a1_v_twin"};
+                    uses = 2;
+                };
+                class rockets {
+                    displayName = "Rockets";
+                    magazines[] = {"vn_rocket_ffar_f4_lau3_m229_he_x19"};
+                    uses = 2;
+                };
+                class mk82 {
+                    displayName = "Mk82 500lb bomb";
+                    magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
+                    uses = 1;
+                };
+            };
+        };
+
+        class f100d_mk82_3 {
+            displayName = "F100D MK82 3";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 30;
+            onStationTimeSecs = 180;
+            class strikes {
+                class cannon {
+                    displayName = "20mm cannon";
+                    magazines[] = {"vn_m39a1_v_twin"};
+                    uses = 2;
+                };
+                class rockets {
+                    displayName = "Rockets";
+                    magazines[] = {"vn_rocket_ffar_f4_lau3_m229_he_x19"};
+                    uses = 2;
+                };
+                class mk82 {
+                    displayName = "Mk82 500lb bomb";
+                    magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
+                    uses = 1;
+                };
+            };
+        };
+
+        class f100d_mk82_4 {
+            displayName = "F100D MK82 4";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 30;
+            onStationTimeSecs = 180;
+            class strikes {
+                class cannon {
+                    displayName = "20mm cannon";
+                    magazines[] = {"vn_m39a1_v_twin"};
+                    uses = 2;
+                };
+                class rockets {
+                    displayName = "Rockets";
+                    magazines[] = {"vn_rocket_ffar_f4_lau3_m229_he_x19"};
+                    uses = 2;
+                };
+                class mk82 {
+                    displayName = "Mk82 500lb bomb";
+                    magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
+                    uses = 1;
+                };
+            };
+        };
+
         class testing_plane_2 {
             displayName = $STR_VN_V_PLANE_F4C_CAS_DN;
             vehicleType = "PLANE";// One of "HELICOPTER" or "PLANE"
