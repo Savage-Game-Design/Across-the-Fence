@@ -326,9 +326,12 @@ class vgm_g
     {
         VGM_GLOBAL_PATH(\systems\rto\global);
 
+		class rto_getAircraftInUse {};
+		class rto_getAircraftStatus {};
         class rto_isAircraftDeparted {};
         class rto_isAircraftEnRoute {};
         class rto_isAircraftOnStation {};
+        class rto_isAircraftOnStandby {};
         class rto_preInit {
             preInit = 1;
         };
@@ -508,6 +511,7 @@ class vgm_c
         class displayMenuBase {};
         class displayLoading {};
         class displayLevelIndicator {};
+        class displayRadioOperator {};
     };
 
     class groups

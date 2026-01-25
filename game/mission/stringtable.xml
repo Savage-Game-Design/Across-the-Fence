@@ -1751,5 +1751,29 @@
         <Key ID="STR_VGM_RTO_NO_AIRCRAFT_ON_STATION">
             <Original>No aircraft on-station</Original>
         </Key>
+        <Key ID="STR_VGM_RTO_AIRCRAFT_ENROUTE">
+            <Original>%1 (arrives in %2m)</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIRCRAFT_ON_STATION">
+            <Original>%1 (departs in %2m)</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_CALL">
+            <Original>Call on-station</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_ARRIVES_IN">
+            <Original>Arrives in %1m</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_ENROUTE">
+            <Original>Aircraft en-route</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REMAINING">
+            <Original>%1 remaining</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_DISMISS">
+            <Original>Return to base</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_TOO_MANY_AIRCRAFT_IN_USE">
+            <Original>The maximum number of aircraft are in use</Original>
+        </Key>
     </Package>
 </Project>

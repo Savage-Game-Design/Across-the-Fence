@@ -17,10 +17,26 @@ class vgm_radio_operator {
             class strikes {
                 // A single strike. The name will be based on the magazines.
                 class my_strike {
+                    displayName = "My strike";
                     // The weapons to fire or magazines that are fitted to each Pylon on the aircraft during the strike. All listed weapons are fired.
                     magazines[] = {""};
                     // Numbeere of uses
                     uses = 1;
+                };
+            };
+        };
+
+        class testing_plane_2 {
+            displayName = $STR_VN_V_PLANE_F4C_CAS_DN;
+            vehicleType = "PLANE";// One of "HELICOPTER" or "PLANE"
+            vehicleClass = "vn_b_air_f4c_cas";
+            arrivalTimeSecs = 15;
+            onStationTimeSecs = 180;
+            class strikes {
+                class m61a1 {
+                    displayName = "M61A1";
+                    magazines[] = {"vn_m61a1"};
+                    uses = 2;
                 };
             };
         };
@@ -33,6 +49,7 @@ class vgm_radio_operator {
             onStationTimeSecs = 180;
             class strikes {
                 class m61a1 {
+                    displayName = "M61A1";
                     magazines[] = {"vn_m61a1"};
                     uses = 2;
                 };

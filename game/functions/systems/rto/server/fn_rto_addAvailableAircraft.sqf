@@ -2,7 +2,7 @@
     File: fn_rto_addAvailableAircraft.sqf
     Author: Savage Game Design
     Date: 2026-01-08
-    Last Update: 2026-01-14
+    Last Update: 2026-01-25
     Public: No
 
     Description:
@@ -41,7 +41,11 @@ if (isNil "_playerAvailableAircraft") then {
     } forEach (_aircraftType get "strikes");
 
     // Set up an individual instance of the aircraft.
+    private _id = _aircraftTypeId;
     private _aircraft = [[
+        // ID of this individual aircraft
+        ["id", _id],
+        // ID of the aircraft's type
         ["typeId", _aircraftTypeId],
         // When the aircraft was requested
         ["requestedAt", 1e99],
@@ -56,5 +60,5 @@ if (isNil "_playerAvailableAircraft") then {
         ["strikes", _strikes]
     ]] call para_s_fnc_netmap_createNetmapFromArray;
     [_aircraft, _playerAvailableAircraft] call para_s_fnc_netmap_setOwningNetmap;
-    [_playerAvailableAircraft, _aircraftTypeId, _aircraft] call para_s_fnc_netmap_set;
+    [_playerAvailableAircraft, _id, _aircraft] call para_s_fnc_netmap_set;
 } forEach _aircraftTypeIds;

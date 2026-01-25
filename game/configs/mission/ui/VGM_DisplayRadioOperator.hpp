@@ -4,8 +4,8 @@ class VGM_DisplayRadioOperator
 	idd = -1;
 	enablesimulation = 1;
 	enabledisplay = 1;
-	//onLoad = "['onload',_this] call vn_fnc_artillery_menu;";
-	//onUnload = "['onunload',_this] call vn_fnc_artillery_menu;";
+	onLoad = VGM_UIEH(onLoad,RadioOperator);
+	onUnload = VGM_UIEH(onUnload,RadioOperator);
 	class controlsBackground
 	{
 		class Radio_CA: ctrlStaticPicture
@@ -59,7 +59,7 @@ class VGM_DisplayRadioOperator
 				class PresetLDial: BandDial
 				{
 					text = "\vn\modules_f_vietnam\data\Radio\dial_1_ca.paa";
-					onload = "uiNamespace setVariable ['vn_artillery_display_preser_button',(_this#0)]";
+					onload = "uiNamespace setVariable ['VGM_DisplayRadioOperator_modeDial',(_this#0)]";
 					x = 53.5 * VGM_GRID_W;
 					y = 31 * VGM_GRID_H;
 					w = 14 * VGM_GRID_W;
@@ -72,7 +72,7 @@ class VGM_DisplayRadioOperator
 					y = 31 * VGM_GRID_H;
 					w = 14 * VGM_GRID_W;
 					h = 14 * VGM_GRID_H;
-					onButtonClick = "['radio:type'] call vn_fnc_artillery_menu;";
+					onButtonClick = VGM_UIEH(radio:type,RadioOperator);
 				};
 				class PresetRDial: PresetLDial
 				{
@@ -228,7 +228,6 @@ class VGM_DisplayRadioOperator
 					x = 36 * VGM_GRID_W;
 					w = 38 * VGM_GRID_W;
 					h = 34.5 * VGM_GRID_H;
-					rowHeight = 10 * VGM_GRID_H;
 					sizeEx = 3 * VGM_GRID_H;
 				};
 				class UsesRemaining: ctrlStructuredText

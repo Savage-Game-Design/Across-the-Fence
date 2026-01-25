@@ -2,7 +2,7 @@
     File: fn_rto_preInit.sqf
     Author: Savage Game Design
     Date: 2026-01-04
-    Last Update: 2026-01-14
+    Last Update: 2026-01-25
     Public: No
 
     Description:
@@ -26,7 +26,7 @@ Netmap with:
 Modifiers are handled on the client for arrival times - server doesn't need to know, and would require the server to be running some kind of loop.
 */
 
-vgm_s_rto_availableAircraft = [] call para_s_fnc_netmap_createNetmapFromArray;
+vgm_s_rto_availableAircraft = ["rto_availableAircraft"] call para_s_fnc_netmap_createNamedNetmap;
 
 ["vgm_mission_playerRemoved", {
     _this#0 params ["_playerId", "_missionId", "_playerUnit"];

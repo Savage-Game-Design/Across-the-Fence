@@ -2,7 +2,7 @@
     File: fn_rto_preInit.sqf
     Author: Savage Game Design
     Date: 2026-01-04
-    Last Update: 2026-01-14
+    Last Update: 2026-01-25
     Public: No
 
     Description:
@@ -15,18 +15,25 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (mi
 
 {
     private _aircraftConfig = _x;
+    private _vehicleConfig = configFile >> "CfgVehicles" >> getText (_aircraftConfig >> "vehicleClass");
+
+    private _displayName = getText (_aircraftConfig >> "displayName");
+    if (_displayName isEqualTo "") then {
+        _displayName = getText (_vehicleConfig >> "displayName");
+    };
 
     private _aircraftDetails = createHashMapFromArray [
-        ["displayName", getText (_aircraftConfig >> "displayName")],
+        ["displayName", _displayName],
         ["vehicleType", getText (_aircraftConfig >> "vehicleType")],
         ["vehicleClass", getText (_aircraftConfig >> "vehicleClass")],
-        ["vehicleConfig", configFile >> "CfgVehicles" >> getText (_aircraftConfig >> "vehicleClass")],
+        ["vehicleConfig", _vehicleConfig],
         ["arrivalTimeSecs", getNumber (_aircraftConfig >> "arrivalTimeSecs")],
         ["onStationTimeSecs", getNumber (_aircraftConfig >> "onStationTimeSecs")],
         ["illuminationType", getNumber (_aircraftConfig >> "illuminationType")],
         ["strikes", createHashMapFromArray ("true" configClasses (_x >> "strikes") apply {[
             configName _x,
             createHashMapFromArray [
+                ["displayName", getText (_x >> "displayName")],
                 ["magazines", getArray (_x >> "magazines")],
                 ["uses", getNumber (_x >> "uses")]
             ]
