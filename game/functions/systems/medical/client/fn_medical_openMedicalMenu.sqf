@@ -3,7 +3,7 @@
     File: fn_medical_openMedicalMenu.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2025-02-01
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -29,7 +29,7 @@ if !(isNull _currentMedicalMenu) exitWith {
 };
 
 if (
-    !isPlayer _target
+    !(_target getVariable ["vgm_c_medical_enabled", false])
     || !(_target isKindOf "CAManBase")
     || {player distance _target > 5}
 ) then {

@@ -2,7 +2,7 @@
     File: fn_respawn_remainingRespawns.sqf
     Author: Savage Game Design
     Date: 2025-03-01
-    Last Update: 2025-03-02
+    Last Update: 2026-01-05
     Public: Yes
 
     Description:
@@ -24,7 +24,8 @@ params [["_player", player]];
 // e.g due to skills or being in singleplayer.
 private _respawnsUsed = _player getVariable ["vgm_g_respawn_respawnsUsed", 0];
 
-private _remainingRespawns = (vgm_g_respawn_maximumRespawns - _respawnsUsed) max 0;
+private _bonusRespawns = [_player, "respawn_bonusLives"] call vgm_c_fnc_coefficient_get;
+private _remainingRespawns = (vgm_g_respawn_maximumRespawns + _bonusRespawns - _respawnsUsed) max 0;
 
 // Players not on a mission should have unlimited respawns
 if ([getPlayerID _player] call vgm_g_fnc_missions_getAssignedMissionId < 0) exitWith {

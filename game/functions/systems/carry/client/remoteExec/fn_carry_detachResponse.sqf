@@ -2,7 +2,7 @@
     File: fn_carry_detachResponse.sqf
     Author: Savage Game Design
     Date: 2023-12-01
-    Last Update: 2025-08-21
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -27,3 +27,4 @@ _unit removeAction (_unit getVariable ["vgm_carry_actionDrop", -1]);
 _unit removeAction (_unit getVariable ["vgm_carry_actionLoad", -1]);
 
 [_unit, "forceWalk", "carry"] call vgm_c_fnc_statusEffect_remove;
+[_unit, "animSpeed", "carry"] call vgm_c_fnc_coefficient_remove;

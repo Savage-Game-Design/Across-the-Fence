@@ -3,7 +3,7 @@
     File: fn_medical_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-12-03
-    Last Update: 2025-02-06
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -27,6 +27,7 @@ if (!isNil {_unit getVariable "vgm_c_medical_handleDamageEH"}) exitWith {
 
 format ["Initializing unit medical: %1", _unit] call vgm_g_fnc_logInfo;
 
+_unit setVariable ["vgm_c_medical_enabled", true, true];
 _unit setVariable ["vgm_c_medical_lastHitAt", createHashMapFromArray (BODY_PARTS_ARR apply {[_x, -1]})];
 
 private _handleDamageEH = _unit addEventHandler ["HandleDamage", {call vgm_c_fnc_medical_handleDamage}];

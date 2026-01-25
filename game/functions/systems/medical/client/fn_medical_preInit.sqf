@@ -5,7 +5,7 @@
     File: fn_medical_preInit.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2024-12-06
+    Last Update: 2026-01-24
     Public: No
 
     Description:
@@ -65,22 +65,41 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
     format ["Received heal: %1 | %2 | %3 | %4", _healer, _patient, str _itemType, str _consumeItem] call vgm_g_fnc_logInfo;
 
     _healer removeItem _consumeItem;
+    ["vgm_medical_itemConsumed", [_healer, _consumeItem], _healer] call para_g_fnc_event_triggerTargets;
 
-    [_patient, _bodyPart, vgm_medical_healItemsTreatmentData get _itemType] call vgm_c_fnc_medical_removeWound;
+    private _woundsHealed = vgm_medical_healItemsTreatmentData getOrDefault [_itemType, 1];
+    _woundsHealed = _woundsHealed + (_healer getVariable ["vgm_g_medical_healModifier", 0]);
+    [_patient, _bodyPart, _woundsHealed] call vgm_c_fnc_medical_removeWound;
 
 }] call para_g_fnc_event_subscribe;
 
-["vgm_medical_adjustBleedOutAt", {
+["vgm_medical_adjustBleedoutAt", {
     (_this#0) params ["_unit", ["_adjust", nil, [0]]];
 
     if (!(_unit getVariable ["vgm_g_medical_bleeding", false])) exitWith {};
 
     format ["Adjusting bleed out time: %1 | %2", _unit, _adjust] call vgm_g_fnc_logInfo;
 
-    private _bleedOutAt = _unit getVariable "vgm_c_medical_bleedOutAt";
-    _unit setVariable ["vgm_c_medical_bleedOutAt", _bleedOutAt + _adjust];
+    private _bleedoutAt = _unit getVariable "vgm_c_medical_bleedoutAt";
+    _unit setVariable ["vgm_c_medical_bleedoutAt", _bleedoutAt + _adjust];
     // visual bleeding effect, stops when `damage _unit` < 0.1
-    _unit setBleedingRemaining (_bleedOutAt - time);
+    _unit setBleedingRemaining (_bleedoutAt - time);
+
+}] call para_g_fnc_event_subscribe;
+
+["vgm_medical_stopBleeding", {
+    (_this#0) params ["_unit"];
+
+    format ["Stopping bleeding: %1", _unit] call vgm_g_fnc_logInfo;
+    [_unit, "bleeding", "medical"] call vgm_c_fnc_statusEffect_remove;
+
+}] call para_g_fnc_event_subscribe;
+
+["vgm_medical_fullHeal", {
+    (_this#0) params ["_unit"];
+
+    format ["Full heal: %1", _unit] call vgm_g_fnc_logInfo;
+    [_unit] call vgm_c_fnc_medical_fullHeal;
 
 }] call para_g_fnc_event_subscribe;
 
@@ -113,6 +132,16 @@ vgm_c_medical_damageModifiers = [];
 ["hitShrug", {
     params ["_unit", "_value"];
     _unit setVariable ["vgm_c_medical_coefficient_hitShrug", _value max 0 min 1];
+}, 0] call vgm_c_fnc_coefficient_create;
+
+["interact_medical", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_c_medical_coefficient_interact", _value max 0.1 min 5];
+}] call vgm_c_fnc_coefficient_create;
+
+["healModifier", {
+    params ["_unit", "_value"];
+    _unit setVariable ["vgm_g_medical_healModifier", _value max 0, true];
 }, 0] call vgm_c_fnc_coefficient_create;
 
 [{

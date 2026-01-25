@@ -3,7 +3,7 @@
     File: fn_medical_injuryEffectsUpdate.sqf
     Author: Savage Game Design
     Date: 2023-09-02
-    Last Update: 2023-09-02
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -25,7 +25,22 @@
 
 params ["_unit", "_bodyPart", "_previousWoundLevel", "_currentWoundLevel"];
 
+if (_unit getVariable ["vgm_c_medical_injuryEffectImmune", false]) exitWith {
+    #ifdef DEBUG
+        format ["Unit is immune to injury effects: %1", name _unit] call vgm_g_fnc_logDebug;
+    #endif
+};
+
 private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
+
+if (_bodyPart in BODY_PARTS_LIMBS_ARR) then {
+    if (!(_unit getVariable ["vgm_c_medical_limbInjuryEffectResistant", false])) exitWith {};
+    _currentWoundLevel = (_currentWoundLevel - 1) max 0;
+
+    #ifdef DEBUG
+        format ["Limb wound lowered due to resistance: %1 | %2 | %3", name _unit, _bodyPart, _currentWoundLevel] call vgm_g_fnc_logDebug;
+    #endif
+};
 
 // apply injury effects sequentially
 private _step = [1, -1] select (_previousWoundLevel > _currentWoundLevel);

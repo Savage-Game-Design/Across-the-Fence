@@ -133,6 +133,9 @@
         <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_MISSING_ITEMS">
             <Original>Missing required items!</Original>
         </Key>
+        <Key ID="STR_VGM_MEDICAL_UI_NOTIFICATION_CARRYING_OBJECT">
+            <Original>Cannot heal while carrying an object!</Original>
+        </Key>
         <!-- body parts -->
         <Key ID="STR_VGM_MEDICAL_UI_BODY_PART_HEAD">
             <Original>Head</Original>
@@ -926,6 +929,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS">
             <Original>Leg pockets</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_ACTIVATED">
+            <Original>2 extra first aid kits have been retrieved from your leg pockets.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LEG_POCKETS_DESC">
             <Original>When the last first aid kit is used, gain 2 more.</Original>
         </Key>
@@ -939,7 +945,10 @@
             <Original>Tourniquet</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_DESC">
-            <Original>Instantly stops bleeding on a player. Any new injuries will restart the bleeding.</Original>
+            <Original>Instantly stops bleeding on a teammate or yourself. Any new injuries will restart the bleeding.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOURNIQUET_UNABLE_TO_APPLY">
+            <Original>Target is not bleeding!</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_BLACK_KNIGHT">
             <Original>Black knight</Original>
@@ -957,7 +966,7 @@
             <Original>He ain't heavy</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC">
-            <Original>Enable sprinting while carrying a downed teammate.</Original>
+            <Original>Increases your movement speed while carrying a downed person.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_GREEN_HORNET">
             <Original>Green hornet</Original>
@@ -1001,6 +1010,9 @@
         <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC">
             <Original>Completely heal the person you're looking at.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_UNABLE_TO_APPLY">
+            <Original>Target is not wounded!</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SWEET_DREAMS">
             <Original>Sweet dreams</Original>
         </Key>
@@ -1020,6 +1032,9 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM">
             <Original>Playing possum</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_ACTIVATED">
+            <Original>Playing possum activated</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC">
             <Original>Immediately get back up when the whole team is downed. Once per mission.</Original>

@@ -2,7 +2,7 @@
     File: fn_medical_itemApply.sqf
     Author: Savage Game Design
     Date: 2023-08-20
-    Last Update: 2025-02-06
+    Last Update: 2026-01-24
     Public: No
 
     Description:
@@ -27,9 +27,17 @@
 
 params ["_healer", "_patient", "_bodyPart", "_itemData"];
 
+if (!isNull (_healer getVariable ["vgm_carry_carriedObject", objNull])) exitWith {
+    format ["Cannot apply medical item while carrying an object: %1", _healer] call vgm_g_fnc_logError;
+    hint localize "STR_VGM_MEDICAL_UI_NOTIFICATION_CARRYING_OBJECT"; // TODO custom notification system?
+};
+
 format ["Applying item: %1 | %2 | %3 | %4", _healer, _patient, _bodyPart, _itemData] call vgm_g_fnc_logDebug;
 
-private _time = (_itemData get "time") * ([_healer, "interact"] call vgm_c_fnc_coefficient_get);
+private _coefInteract = _healer getVariable ["vgm_c_coefficient_interact", 1];
+private _coefInteractMedical = _healer getVariable ["vgm_c_medical_coefficient_interact", 1];
+
+private _time = (_itemData get "time") * _coefInteract * _coefInteractMedical;
 
 [_healer, _patient, _time] call vgm_c_fnc_medical_itemAnimation;
 

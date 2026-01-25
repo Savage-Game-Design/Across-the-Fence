@@ -4,7 +4,7 @@
     File: fn_displayMedical.sqf
     Author: Savage Game Design
     Date: 2023-05-18
-    Last Update: 2025-02-06
+    Last Update: 2026-01-14
     Public: No
 
     Description:
@@ -30,6 +30,7 @@
 #define COLOR_MAJOR 0.9,0.1,0
 #define COLOR_SEVERE 0.58,0,0
 #define COLOR_ARR [[COLOR_NONE], [COLOR_MINOR], [COLOR_MAJOR], [COLOR_SEVERE]]
+#define COLOR_DISABLED 0.5,0.5,0.5
 // 1 - HUD_ALPHA + HUD_ALPHA_WOUND
 #define HUD_ALPHA 0.8
 #define HUD_ALPHA_WOUND 0.4
@@ -255,11 +256,29 @@ switch _mode do {
             ] call _fnc_addRow;
         };
 
+        private _resistantLimbs = _target getVariable ["vgm_c_medical_limbInjuryEffectResistant", false];
+        if (_resistantLimbs) then {
+            // localize "STR_VGM_MEDICAL_UI_DEBUFF_LIMBS_RESISTANT"
+            private _statusIcon = "#(rgb,1,1,1)color(0,0,1,1)";
+            ["I've seen worse", "Your limbs are more resistant", _statusIcon, [COLOR_NONE]] call _fnc_addRow;
+        };
+
+        private _debuffImmune = _target getVariable ["vgm_c_medical_injuryEffectImmune", false];
+        if (_debuffImmune) then {
+            // localize "STR_VGM_MEDICAL_UI_DEBUFF_IMMUNE"
+            private _statusIcon = "#(rgb,1,1,1)color(0,1,0,1)";
+            ["Black Knight", "No wound is able to stop you!", _statusIcon, [COLOR_NONE]] call _fnc_addRow;
+        };
+
         {
             private _bodyPart = _x;
             private _bodyPartInjuryEffects = vgm_medical_injuryEffects get _bodyPart;
 
             private _currentWoundLevel = [_target, _bodyPart] call vgm_c_fnc_medical_getWound;
+            if (_resistantLimbs && {_bodyPart in BODY_PARTS_LIMBS_ARR}) then {
+                _currentWoundLevel = (_currentWoundLevel - 1) max WOUND_NONE;
+            };
+
             private _coefficients = createHashMap;
             private _statusEffects = createHashMap;
 
@@ -283,7 +302,7 @@ switch _mode do {
             };
 
             private _iconFallback = "#(rgb,1,1,1)color(1,1,1,1)";
-            private _iconColor = COLOR_ARR select _currentWoundLevel;
+            private _iconColor = [COLOR_ARR select _currentWoundLevel, [COLOR_DISABLED]] select _debuffImmune;
             private _level = localize format ["STR_VGM_MEDICAL_UI_TRAUMA_%1", _currentWoundLeveL];
             private _bodyPart = localize format ["STR_VGM_MEDICAL_UI_BODY_PART_%1", _bodyPart];
             private _title = format ["%1 %2 Trauma", _level, _bodyPart];

@@ -2,7 +2,7 @@
     File: fn_carry_preInit.sqf
     Author: Savage Game Design
     Date: 2023-11-03
-    Last Update: 2023-12-07
+    Last Update: 2026-01-09
     Public: No
 
     Description:
@@ -10,6 +10,8 @@
  */
 
 if (!hasInterface) exitWith {};
+
+["carryCanRun", {}] call vgm_c_fnc_statusEffect_create;
 
 ["vgm_medical_unconscious", {
     (_this#0) params ["_unit", "_state"];

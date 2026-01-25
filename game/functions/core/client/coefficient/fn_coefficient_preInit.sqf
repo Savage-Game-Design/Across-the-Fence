@@ -2,7 +2,7 @@
     File: fn_coefficient_preInit.sqf
     Author: Savage Game Design
     Date: 2023-08-21
-    Last Update: 2025-01-19
+    Last Update: 2025-12-24
     Public: No
 
     Description:

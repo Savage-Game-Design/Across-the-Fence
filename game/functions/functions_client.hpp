@@ -268,6 +268,7 @@ class vgm_g
         VGM_GLOBAL_PATH(\systems\medical\global);
 
         class medical_isUnconscious {};
+        class medical_isWounded {};
         class medical_postInit
         {
             postInit = 1;
@@ -820,6 +821,8 @@ class vgm_c
     {
         VGM_CLIENT_PATH(\systems\medical\client\injuryEffects);
 
+        class medical_injuryEffects_statusEffectImmunity {};
+
         class medical_injuryEffects_init {};
         class medical_injuryEffectsUpdate {};
     };
@@ -936,6 +939,13 @@ class vgm_c
         class skill_passives_friendOrFoe {};
         class skill_passives_senseOfScale {};
     };
+    class skill_passives_medic
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\medic);
+
+        class skill_passives_legPockets {};
+        class skill_passives_playingPossum {};
+    };
     class skill_passives_fireSupport
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
@@ -992,11 +1002,13 @@ class vgm_c
         class skill_actives_tacticalSense {};
     };
 
-    class skill_actives_support
+    class skill_actives_medic
     {
-        VGM_CLIENT_PATH(\systems\skill\client\actives\support);
+        VGM_CLIENT_PATH(\systems\skill\client\actives\medic);
 
-        class skill_actives_support_quickBandage {};
+        class skill_actives_medic_itsOnlyAFleshWound {};
+        class skill_actives_medic_saltTablets {};
+        class skill_actives_medic_tourniquet {};
     };
 
     class skill_actives_team_leader

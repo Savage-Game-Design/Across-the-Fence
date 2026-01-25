@@ -2,7 +2,7 @@
     File: fn_missions_preInit.sqf
     Author: Savage Game Design
     Date: 2023-02-25
-    Last Update: 2024-12-14
+    Last Update: 2026-01-20
     Public: No
 
     Description:
@@ -26,17 +26,6 @@ localNamespace setVariable ["vgm_missions", createHashMap];
 ["vgm_missions_publicMissionInfo"] call para_s_fnc_netmap_createNamedNetmap;
 // Missions that players are assigned to.
 ["vgm_mission_assignments"] call para_s_fnc_netmap_createNamedNetmap;
-
-["vgm_missions_clientReady", {
-    private _originMachineId = param [4];
-    private _missions = localNamespace getVariable "vgm_missions";
-
-    [
-        "vgm_mission_available",
-        [keys _missions],
-        [_originMachineId]
-    ] call para_g_fnc_event_triggerTargets;
-}] call para_g_fnc_event_subscribeGlobal;
 
 addMissionEventHandler ["PlayerDisconnected", {
     params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
