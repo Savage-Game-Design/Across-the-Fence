@@ -836,7 +836,7 @@ class vgm_skillTrees {
 
                     codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vgm_radio_operator', true, true];";
                     codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vgm_radio_operator', false, true];";
-                    cost = 10;
+                    cost = 2;
                 };
 
                 class emergency_radio: vgm_skillTemplate {
@@ -865,7 +865,6 @@ class vgm_skillTrees {
                 class cas_gunship_level_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
                     codeApply = "[true, 'uh1c_gunship'] call vgm_c_fnc_skill_passives_addAircraft;";
