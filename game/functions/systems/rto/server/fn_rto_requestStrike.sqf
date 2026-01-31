@@ -2,7 +2,7 @@
     File: fn_rto_requestStrike.sqf
     Author: Savage Game Design
     Date: 2026-01-14
-    Last Update: 2026-01-25
+    Last Update: 2026-01-31
     Public: No
 
     Description:
@@ -73,12 +73,8 @@ _strikes set [_strike, (_strikes get _strike) - 1];
 // Refresh the netmap entry (broadcast to all players)
 [_aircraft, "strikes", _strikes] call para_s_fnc_netmap_set;
 
-private _runIndex = 1;
-// Prevents the dialog for completing an attack run from playing.
-private _totalRuns = 1e32;
-private _vehicleClass = _aircraftType get "vehicleClass";
 private _vehicleConfig = _aircraftType get "vehicleConfig";
-private _magazines = _aircraftType get "strikes" get _strike get "magazines";
+private _strikeType = _aircraftType get "strikes" get _strike;
 private _illumination = 0;
 
 [format [
@@ -91,13 +87,12 @@ private _illumination = 0;
 ]] call vgm_g_fnc_logInfo;
 
 [
-    _runIndex,
     _vehicleConfig,
-    _vehicleClass,
     [_startPos # 0, _startPos # 1, 0],
     [_endPos # 0, _endPos # 1, 0],
-    _totalRuns,
-    _magazines,
+    _strikeType get "magazines",
+    _strikeType get "fireDurationSecs",
+    _strikeType get "guidedDispersion",
     _playerId call vgm_s_fnc_player_fromId,
     _illumination
-] spawn vn_fnc_artillery_plane;
+] spawn vgm_s_fnc_rto_performStrike;

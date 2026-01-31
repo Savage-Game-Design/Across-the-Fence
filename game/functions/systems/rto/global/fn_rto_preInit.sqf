@@ -2,7 +2,7 @@
     File: fn_rto_preInit.sqf
     Author: Savage Game Design
     Date: 2026-01-04
-    Last Update: 2026-01-29
+    Last Update: 2026-01-31
     Public: No
 
     Description:
@@ -38,7 +38,9 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (mi
             createHashMapFromArray [
                 ["displayName", getText (_x >> "displayName")],
                 ["magazines", getArray (_x >> "magazines")],
-                ["uses", getNumber (_x >> "uses")]
+                ["uses", getNumber (_x >> "uses")],
+                ["fireDurationSecs", getNumber (_x >> "fireDurationSecs")],
+                ["guidedDispersion", getNumber (_x >> "guidedDispersion")]
             ]
         ]})]
     ];

@@ -160,7 +160,6 @@ class vgm_radio_operator {
             class strikes {
                 class minigun {
                     displayName = "Miniguns";
-                    divergence = 20;
                     magazines[] = {"vn_gunpod_xm21"};
                     uses = 3;
                 };
@@ -181,7 +180,7 @@ class vgm_radio_operator {
             class strikes {
                 class grenades {
                     displayName = "40mm grenades (HE)";
-                    divergence = 20;
+                    guidedDispersion = 20;
                     magazines[] = {"vn_m75_v_06"};
                     uses = 3;
                 };
