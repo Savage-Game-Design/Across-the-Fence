@@ -2,7 +2,7 @@
     File: fn_displayRadioOperator.sqf
     Author: Savage Game Design, based on Ethan Johnson's original
     Date: 2026-01-25
-    Last Update: 2026-01-25
+    Last Update: 2026-01-31
     Public: Yes
 
     Description:
@@ -263,7 +263,7 @@ switch _mode do
 
         private _index = _ctrl lbValue _lbIndex;
 
-        if (_index isEqualTo -1 || isNil "vgm_c_displayRadioOperator_aircraftIds") exitWith {
+        if (_lbIndex < 0 || _index < 0 || isNil "vgm_c_displayRadioOperator_aircraftIds") exitWith {
             vgm_c_displayRadioOperator_aircraftId = nil;
             true
         };
@@ -357,11 +357,11 @@ switch _mode do
     };
     case "commandSelected":
     {
-        _params params ["_ctrl", "_lb_index"];
+        _params params ["_ctrl", "_lbIndex"];
 
-        private _commandIndex = _ctrl lbValue _lb_index;
+        private _commandIndex = _ctrl lbValue _lbIndex;
 
-        if (_commandIndex isEqualTo -1 || isNil "vgm_c_displayRadioOperator_commands") exitWith {
+        if (_lbIndex < 0 || _commandIndex < 0 || isNil "vgm_c_displayRadioOperator_commands") exitWith {
             vgm_c_displayRadioOperator_command = nil;
             ["refreshUsesRemaining"] call SELF;
             true
