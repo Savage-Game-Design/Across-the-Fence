@@ -47,13 +47,13 @@ private _speed = 400 / 3.6;
 private _duration = ([0,0] distance [_dis,_alt]) / _speed;
 
 //--- Create plane
-private _planePos = [_pos,_dis,_dir + 180] call bis_fnc_relpos;
+private _planePos = _pos getPos [_dis, _dir + 180];
 _planePos set [2,(_pos select 2) + _alt];
 private _planeSide = (getnumber (_planeCfg >> "side")) call bis_fnc_sideType;
 ([_planePos,_dir,_vehicle_class,_planeSide] call bis_fnc_spawnVehicle) params ["_plane", "_planeCrew", "_planeGroup"];
 _plane setposasl _planePos;
 
-_plane move ([_pos,_dis,_dir] call bis_fnc_relpos);
+_plane move (_pos getPos [_dis, _dir]);
 _plane disableai "move";
 _plane disableai "target";
 _plane disableai "autotarget";
@@ -256,8 +256,13 @@ for "_u" from 0 to 1 do
 
 // prevent AI from engaging on it's own after the fire mission was completed
 _planeGroup setBehaviour "CARELESS";
+_plane enableAI "move";
+_plane flyInHeight 100;
+_plane move (_pos getPos [_dis, _dir]);
 
-waituntil {_plane distance _pos > _dis || !alive _plane};
+private _despawnTime = time + 180;
+
+waituntil {_plane distance _pos > _dis || !alive _plane || time >= _despawnTime};
 
 //--- Delete plane
 if (alive _plane) then
