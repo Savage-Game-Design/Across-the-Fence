@@ -84,37 +84,35 @@ private _allTurrets = [[-1]] + allTurrets _plane;
 } foreach _allTurrets;
 
 {
-    if (_foreachindex < count _magazine && {(_magazine#_foreachindex) != ""}) then
+    if !(_foreachindex < count _magazine && {(_magazine#_foreachindex) != ""}) then
     {
-        if (isClass (configfile >> "CfgMagazines" >> (_magazine#_foreachindex))) then
-        {
-            _plane setPylonLoadout [_foreachindex + 1, _magazine#_foreachindex, true];
-        }
-        else
-        {
-        if (isClass (configfile >> "CfgWeapons" >> (_magazine#_foreachindex))) then
-        {
+        _plane setPylonLoadout [_foreachindex + 1, "", true];
+        continue;
+    };
+
+    if (isClass (configfile >> "CfgMagazines" >> (_magazine#_foreachindex))) then
+    {
+        _plane setPylonLoadout [_foreachindex + 1, _magazine#_foreachindex, true, []];
+        continue;
+    };
+
+    if (isClass (configfile >> "CfgWeapons" >> (_magazine#_foreachindex))) then
+    {
         private _magazines = getArray (configfile >> "CfgWeapons" >> (_magazine#_foreachindex) >> "magazines");
         if (count _magazines >= 1) then
         {
-            _plane setPylonLoadout [_foreachindex + 1, _magazines#0, true];
+            _plane setPylonLoadout [_foreachindex + 1, _magazines#0, true, []];
         }
         else
         {
-            _plane setPylonLoadout [_foreachindex + 1, "", true];
+            _plane setPylonLoadout [_foreachindex + 1, "", true, []];
         };
-        }
-        else
-        {
-        _plane setPylonLoadout [_foreachindex + 1, "", true];
-        };
-        };
-    }
-    else
-    {
-        _plane setPylonLoadout [_foreachindex + 1, "", true];
+        continue;
     };
+
+    _plane setPylonLoadout [_foreachindex + 1, "", true, []];
 } forEach getPylonMagazines _plane;
+
 {
     // Passed through weapons will be added along with ammo
     if (isClass (configfile >> "cfgWeapons" >> _x)) then
@@ -127,6 +125,10 @@ private _allTurrets = [[-1]] + allTurrets _plane;
         };
     };
 } foreach _magazine;
+
+// Forces all pylons to fire in parallel
+private _pylonPriorities = getAllPylonsInfo _plane apply { 0 };
+_plane setPylonsPriority _pylonPriorities;
 
 private _target = createVehicle ["Land_HelipadEmpty_F", _start_pos, [], 0, "CAN_COLLIDE"];
 
