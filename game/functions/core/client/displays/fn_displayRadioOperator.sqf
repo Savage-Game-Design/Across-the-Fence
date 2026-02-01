@@ -2,7 +2,7 @@
     File: fn_displayRadioOperator.sqf
     Author: Savage Game Design, based on Ethan Johnson's original
     Date: 2026-01-25
-    Last Update: 2026-01-31
+    Last Update: 2026-02-01
     Public: Yes
 
     Description:
@@ -263,14 +263,14 @@ switch _mode do
 
         private _index = _ctrl lbValue _lbIndex;
 
-        if (_lbIndex < 0 || _index < 0 || isNil "vgm_c_displayRadioOperator_aircraftIds") exitWith {
+        if (_lbIndex < 0 || _index < 0 || isNil "vgm_c_displayRadioOperator_aircraftIds") then {
             vgm_c_displayRadioOperator_aircraftId = nil;
-            true
+        } else {
+            vgm_c_displayRadioOperator_aircraftId = vgm_c_displayRadioOperator_aircraftIds # _index;
         };
 
-        vgm_c_displayRadioOperator_aircraftId = vgm_c_displayRadioOperator_aircraftIds # _index;
-
         ["refreshCommandList"] call SELF;
+        true
     };
     case "refreshCommandList":
     {
@@ -361,16 +361,15 @@ switch _mode do
 
         private _commandIndex = _ctrl lbValue _lbIndex;
 
-        if (_lbIndex < 0 || _commandIndex < 0 || isNil "vgm_c_displayRadioOperator_commands") exitWith {
+        if (_lbIndex < 0 || _commandIndex < 0 || isNil "vgm_c_displayRadioOperator_commands") then {
             vgm_c_displayRadioOperator_command = nil;
-            ["refreshUsesRemaining"] call SELF;
-            true
+        } else {
+            vgm_c_displayRadioOperator_command = vgm_c_displayRadioOperator_commands # _commandIndex;
         };
-
-        vgm_c_displayRadioOperator_command = vgm_c_displayRadioOperator_commands # _commandIndex;
 
         ["refreshUsesRemaining"] call SELF;
         ["updateButton"] call SELF;
+        true
     };
     case "refreshUsesRemaining":
     {
