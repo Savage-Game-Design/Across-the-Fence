@@ -36,7 +36,9 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
-                    uses = 2;
+                    uses = 4;
+                    // Higher than 5 and the plane tends to crash.
+                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -61,7 +63,9 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
-                    uses = 2;
+                    uses = 4;
+                    // Higher than 5 and the plane tends to crash.
+                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -91,7 +95,9 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"", "vn_gunpod_suu23_v_1200_mag", "vn_gunpod_suu23_v_1200_mag", ""};
-                    uses = 2;
+                    uses = 4;
+                    // Higher than 5 and the plane tends to crash.
+                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -126,7 +132,9 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"", "vn_gunpod_suu23_v_1200_mag", "vn_gunpod_suu23_v_1200_mag", ""};
-                    uses = 2;
+                    uses = 4;
+                    // Higher than 5 and the plane tends to crash.
+                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -228,6 +236,8 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_gunpod_m195_v_2100_mag"};
                     uses = 4;
+                    // Higher than 5 and the plane tends to crash.
+                    fireDurationSecs = 5;
                 };
                 class rockets_10lb {
                     displayName = "Rockets (10lb HE)";
