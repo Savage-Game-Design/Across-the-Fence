@@ -230,6 +230,7 @@ class vgm_radio_operator {
                 class grenades {
                     displayName = "40mm grenades (HE)";
                     magazines[] = {"vn_m129"};
+                    guidedDispersion = 20;
                     uses = 4;
                 };
                 class cannon {
