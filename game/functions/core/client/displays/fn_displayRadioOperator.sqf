@@ -83,14 +83,14 @@ if (_mode isEqualTo "draw") exitwith
 
     VGM_DisplayRadioOperator_selecting_start params ["_x","_y"];
 
-    private _divergence = abs (_aircraftType getOrDefault ["divergence", 50]);
-    private _divergenceShape = _aircraftType getOrDefault ["divergenceShape", "OVAL"];
+    private _hitAreaMarkerSize = abs (_aircraftType getOrDefault ["hitAreaMarkerSize", 50]);
+    private _hitAreaMarkerShape = _aircraftType getOrDefault ["hitAreaMarkerShape", "OVAL"];
 
     private _dir = VGM_DisplayRadioOperator_selecting_end getDir VGM_DisplayRadioOperator_selecting_start;
     if (VGM_DisplayRadioOperator_selecting_end distance2D VGM_DisplayRadioOperator_selecting_start < 1) then {_dir = -180};
 
     private _name = format["vgm_rto_marker_direction_%1_vehicle", 0];
-    private _directionMarker = createMarkerLocal [_name, VGM_DisplayRadioOperator_selecting_start getPos [_divergence + 50, _dir]];
+    private _directionMarker = createMarkerLocal [_name, VGM_DisplayRadioOperator_selecting_start getPos [_hitAreaMarkerSize + 50, _dir]];
     private _markerType = ["loc_plane", "loc_heli"] select (_aircraftType get "vehicleType" == "HELICOPTER");
     _directionMarker setMarkerTypeLocal _markerType;
     _directionMarker setMarkerDirLocal (_dir - 180);
@@ -102,13 +102,13 @@ if (_mode isEqualTo "draw") exitwith
     _markerZone setMarkerBrush "DIAGGRID";
     _markerZone setMarkerColorLocal "ColorRed";
     _markerZone setMarkerDirLocal (_dir - 180);
-    if (_divergenceShape == "CIRCLE") then
+    if (_hitAreaMarkerShape == "CIRCLE") then
     {
-        _markerZone setMarkerSizeLocal [_divergence,_divergence];
+        _markerZone setMarkerSizeLocal [_hitAreaMarkerSize,_hitAreaMarkerSize];
     }
     else
     {
-        _markerZone setMarkerSizeLocal [_divergence*0.5,_divergence];
+        _markerZone setMarkerSizeLocal [_hitAreaMarkerSize*0.5,_hitAreaMarkerSize];
     };
     vgm_c_displayRadioOperator_markers pushBack _markerZone;
 
