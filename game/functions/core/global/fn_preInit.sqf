@@ -2,7 +2,7 @@
     File: fn_preInit.sqf
     Author: Savage Game Design
     Date: 2022-11-13
-    Last Update: 2025-02-24
+    Last Update: 2026-02-14
     Public: No
 
     Description:
@@ -10,6 +10,8 @@
  */
 
 vgm_version = localize "STR_VGM_MISSION_VERSION";
+
+vgm_g_disableMultithreadedLineIntersects = ["disableMultithreadedLineIntersects", 1] call BIS_fnc_getParamValue > 0;
 
 // init WUAE system
 call {

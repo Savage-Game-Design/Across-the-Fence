@@ -116,6 +116,13 @@ class Params {
         texts[] = {"False", "True"};
         default = 0;
     };
+    class disableMultithreadedLineIntersects
+    {
+        title = "Possible crash fix - disable multi-threaded line intersects (default on)";
+        values[] = {1, 0};
+        texts[] = {"True", "False"};
+        default = 1;
+    };
 };
 
 class CfgDebriefing

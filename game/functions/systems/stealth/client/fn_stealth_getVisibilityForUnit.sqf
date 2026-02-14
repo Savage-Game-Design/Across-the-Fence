@@ -3,7 +3,7 @@
     File: fn_stealth_getVisibilityForUnit.sqf
     Author: Savage Game Design
     Date: 2025-01-18
-    Last Update: 2025-10-21
+    Last Update: 2026-02-14
     Public: Yes
 
     Description:
@@ -48,8 +48,15 @@ private _lods = [
     ["GEOM", "NONE"]
 ] select (_distance < 2);
 
-private _intersectResults = lineIntersectsSurfaces [_positions apply {[eyePos _unit, _x, _unit, player, true, 1, _lods # 0, _lods # 1]}];
+private _intersectResults = [];
+if (vgm_g_disableMultithreadedLineIntersects) then {
+    _intersectResults = _positions apply { lineIntersectsSurfaces [eyePos _unit, _x, _unit, player, true, 1, _lods # 0, _lods # 1] };
+} else {
+    _intersectResults = lineIntersectsSurfaces [_positions apply {[eyePos _unit, _x, _unit, player, true, 1, _lods # 0, _lods # 1]}];
+};
+
 private _totalHiddenPoints = ({ _x isNotEqualTo [] } count _intersectResults);
+
 
 // Take the average (efficiently).
 // Convert hidden positions to visible positions for the calculation.
