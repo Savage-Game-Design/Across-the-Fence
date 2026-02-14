@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2025-10-26
+    Last Update: 2026-02-01
     Public: Yes
 
     Description:
@@ -44,10 +44,17 @@ _directorData set ["lastTrackerSent", -9999];
 
 // REINFORCEMENTS SYSTEM
 // Reinforcement type chances
-_directorData set ["reinforcementTypeChances", createHashMapFromArray [
-    ["OPFOR", 1],
-    ["ZOMBIES", 5]
-]];
+
+if (vgm_s_director_areZombiesEnabled) then {
+    _directorData set ["reinforcementTypeChances", createHashMapFromArray [
+        ["OPFOR", 1],
+        ["ZOMBIES", 5]
+    ]];
+} else {
+    _directorData set ["reinforcementTypeChances", createHashMapFromArray [
+        ["OPFOR", 1]
+    ]];
+};
 // Chance that a reinforcement check spawns reinforcements
 _directorData set ["reinforcementChance", 0.75];
 // How often the check runs after the start of an engagement - scales with alertness
