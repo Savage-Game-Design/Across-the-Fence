@@ -2,7 +2,7 @@
     File: fn_rto_addAvailableAircraft.sqf
     Author: Savage Game Design
     Date: 2026-01-08
-    Last Update: 2026-01-25
+    Last Update: 2026-02-16
     Public: No
 
     Description:
@@ -35,11 +35,6 @@ if (isNil "_playerAvailableAircraft") then {
 
     private _aircraftType = vgm_g_rto_aircraftTypes get _aircraftTypeId;
 
-    private _strikes = createHashMap;
-    {
-        _strikes set [_x, _y get "uses"];
-    } forEach (_aircraftType get "strikes");
-
     // Set up an individual instance of the aircraft.
     private _id = _aircraftTypeId;
     private _aircraft = [[
@@ -47,17 +42,21 @@ if (isNil "_playerAvailableAircraft") then {
         ["id", _id],
         // ID of the aircraft's type
         ["typeId", _aircraftTypeId],
+        // When the aircraft will be ready to set off to the AO.
+        ["onStandbyAt", -1],
         // When the aircraft was requested
         ["requestedAt", 1e32],
         // When the aircraft will/did arrive on station
         ["onStationAt", 1e32],
         // When the aircraft will depart/departed from the AO
         ["departAt", 1e32],
+        // When the aircraft will be ready to be called again
+        ["refueledAt", 1e32],
         // When the aircraft's current attack run / last attack run was completed
         ["runCompleteAt", -1],
         // Strikes isn't a netmap as it's pretty small, and at the end of the mission every aircraft netmap is terminated.
         // Avoiding adding more netmaps keeps the performance cost of that end-of-mission spike a little lower (for all players still on missions).
-        ["strikes", _strikes]
+        ["strikes", createHashMap]
     ]] call para_s_fnc_netmap_createNetmapFromArray;
     [_aircraft, _playerAvailableAircraft] call para_s_fnc_netmap_setOwningNetmap;
     [_playerAvailableAircraft, _id, _aircraft] call para_s_fnc_netmap_set;

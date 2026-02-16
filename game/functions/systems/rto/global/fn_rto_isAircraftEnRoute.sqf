@@ -2,7 +2,7 @@
     File: fn_rto_isAircraftEnRoute.sqf
     Author: Savage Game Design
     Date: 2026-01-17
-    Last Update: 2026-01-17
+    Last Update: 2026-02-16
     Public: No
 
     Description:
@@ -22,4 +22,4 @@
 
 params ["_aircraft"];
 
-(_aircraft get "requestedAt") <= serverTime && serverTime < (_aircraft get "onStationAt")
+_this call vgm_g_fnc_rto_getAircraftStatus select 0 == "ENROUTE"

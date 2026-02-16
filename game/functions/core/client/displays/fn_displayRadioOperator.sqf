@@ -2,7 +2,7 @@
     File: fn_displayRadioOperator.sqf
     Author: Savage Game Design, based on Ethan Johnson's original
     Date: 2026-01-25
-    Last Update: 2026-02-01
+    Last Update: 2026-02-16
     Public: Yes
 
     Description:
@@ -58,7 +58,7 @@ if (_mode isEqualTo "draw") exitwith
 {
     if (time - (missionNamespace getVariable ["VGM_DisplayRadioOperator_lastGuiRefresh", 0]) > 1) then {
         private _lastStatusArray = missionNamespace getVariable ["VGM_DisplayRadioOperator_statusArray", []];
-        private _statusArray = [_availableAircraft] call para_g_fnc_netmap_values apply {[_x] call vgm_g_fnc_rto_getAircraftStatus};
+        private _statusArray = [_availableAircraft] call para_g_fnc_netmap_values apply {[_x] call vgm_g_fnc_rto_getAircraftStatus select 0};
         if (_lastStatusArray isNotEqualTo _statusArray) then {
             ["refreshAll"] call SELF;
             VGM_DisplayRadioOperator_statusArray = _statusArray;
@@ -150,13 +150,15 @@ switch _mode do
         private _aircraftId = _aircraftInUse # 0;
         private _aircraft = _availableAircraft get _aircraftId;
         private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
-        private _aircraftStatus = [_aircraft] call vgm_g_fnc_rto_getAircraftStatus;
+        [_aircraft] call vgm_g_fnc_rto_getAircraftStatus params ["_aircraftStatus", "_timeRemainingInStatus"];
+
+        // TODO - Add standby status
 
         if (_aircraftStatus == "ENROUTE") exitWith {
             TITLE ctrlSetText format [
                 localize "STR_VGM_RTO_AIRCRAFT_ENROUTE",
                 _aircraftType get "displayName",
-                ceil ((((_aircraft get "onStationAt") - serverTime) max 0) / 60) toFixed 0
+                ceil (_timeRemainingInStatus / 60) toFixed 0
             ];
         };
 
@@ -164,7 +166,7 @@ switch _mode do
             TITLE ctrlSetText format [
                 localize "STR_VGM_RTO_AIRCRAFT_ON_STATION",
                 _aircraftType get "displayName",
-                ceil ((((_aircraft get "departAt") - serverTime) max 0) / 60) toFixed 0
+                ceil (_timeRemainingInStatus / 60) toFixed 0
             ];
         };
 
@@ -243,6 +245,10 @@ switch _mode do
 
         vgm_c_displayRadioOperator_aircraftIds = _aircraftIds;
 
+        private _fnc_formatDuration = {
+            [ceil (_this / 10) * 10] call vgm_g_fnc_formatDuration
+        };
+
         {
             private _aircraftId = _x;
 
@@ -250,8 +256,37 @@ switch _mode do
             private _aircraft = _availableAircraft get _aircraftId;
             private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
 
-            private _index = ASSET_LIST lbAdd (_aircraftType get "displayName");
-            ASSET_LIST lbSetTooltip [_index, (_aircraftType get "vehicleType")];
+            [_aircraft] call vgm_g_fnc_rto_getAircraftStatus params ["_aircraftStatus", "_timeRemainingInStatus"];
+            private _statusSymbol = "";
+            private _statusText = "";
+
+            call {
+                if (_aircraftStatus isEqualTo "REFUELING") exitWith {
+                    _statusSymbol = "R";
+                    _statusText = format [localize "STR_VGM_RTO_AIR_LIST_STATUS_REFUELING", [_timeRemainingInStatus] call vgm_g_fnc_formatDuration];
+                };
+                if (_aircraftStatus isEqualTo "STANDBY") exitWith {
+                    _statusSymbol = "S";
+                    _statusText = format [localize "STR_VGM_RTO_AIR_LIST_STATUS_STANDBY", [_timeRemainingInStatus] call vgm_g_fnc_formatDuration];
+                };
+                if (_aircraftStatus isEqualTo "ENROUTE") exitWith {
+                    _statusSymbol = "E";
+                    _statusText = format [localize "STR_VGM_RTO_AIR_LIST_STATUS_ENROUTE", [_timeRemainingInStatus] call vgm_g_fnc_formatDuration];
+                };
+                if (_aircraftStatus isEqualTo "ONSTATION") exitWith {
+                    _statusSymbol = "O";
+                    _statusText = format [localize "STR_VGM_RTO_AIR_LIST_STATUS_ONSTATION", [_timeRemainingInStatus] call vgm_g_fnc_formatDuration];
+                };
+
+                _statusSymbol = "D";
+                _statusText = format [localize "STR_VGM_RTO_AIR_LIST_STATUS_DEPARTED", [_timeRemainingInStatus] call vgm_g_fnc_formatDuration];
+            };
+
+            private _entry = format [localize "STR_VGM_RTO_NAME_WITH_STATUS", _aircraftType get "displayName", _statusSymbol];
+            private _tooltip = format ["%1 | %2", _statusText, _aircraftType get "vehicleType"];
+
+            private _index = ASSET_LIST lbAdd _entry;
+            ASSET_LIST lbSetTooltip [_index, _tooltip];
             ASSET_LIST lbSetValue [_index, _forEachIndex];
         } foreach _aircraftIds;
 
@@ -281,7 +316,7 @@ switch _mode do
         private _aircraft = _availableAircraft get vgm_c_displayRadioOperator_aircraftId;
         if (isNil "_aircraft") exitWith {};
 
-        private _aircraftStatus = [_aircraft] call vgm_g_fnc_rto_getAircraftStatus;
+        [_aircraft] call vgm_g_fnc_rto_getAircraftStatus params ["_aircraftStatus", "_timeRemainingInStatus"];
         private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
 
         private _fnc_strikeCommands = {
@@ -336,6 +371,7 @@ switch _mode do
             vgm_c_displayRadioOperator_commands append ([] call _fnc_strikeCommands);
             vgm_c_displayRadioOperator_commands pushBack createHashMapFromArray [
                 ["text", localize "STR_VGM_RTO_DISMISS"],
+                // TODO - Tooltip showing if dismissing will cause a cooldown.
                 ["action", [[vgm_c_displayRadioOperator_aircraftId], {
                     params ["_aircraftId"];
                     [getPlayerID player, _aircraftId] remoteExecCall ["vgm_s_fnc_rto_dismissAircraft", 2];

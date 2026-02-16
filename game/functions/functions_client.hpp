@@ -19,6 +19,7 @@ class vgm_g
         class fastSum {
             headerType = -1;
         };
+        class formatDuration {};
         class itemConfig {};
         class itemType {};
         class manWouldCollideAtPosition {};
@@ -333,6 +334,7 @@ class vgm_g
         class rto_isAircraftOnAttackRun {};
         class rto_isAircraftOnStation {};
         class rto_isAircraftOnStandby {};
+        class rto_isAircraftRefueling {};
         class rto_isRadioAvailable {};
         class rto_preInit {
             preInit = 1;

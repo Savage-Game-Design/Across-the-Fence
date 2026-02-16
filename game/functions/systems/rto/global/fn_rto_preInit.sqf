@@ -2,7 +2,7 @@
     File: fn_rto_preInit.sqf
     Author: Savage Game Design
     Date: 2026-01-04
-    Last Update: 2026-01-31
+    Last Update: 2026-02-16
     Public: No
 
     Description:
@@ -32,6 +32,7 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (mi
         ["vehicleConfig", _vehicleConfig],
         ["arrivalTimeSecs", getNumber (_aircraftConfig >> "arrivalTimeSecs")],
         ["onStationTimeSecs", getNumber (_aircraftConfig >> "onStationTimeSecs")],
+        ["refuelTimeSecs", getNumber (_aircraftConfig >> "refuelTimeSecs")],
         ["illuminationType", getNumber (_aircraftConfig >> "illuminationType")],
         ["strikes", createHashMapFromArray ("true" configClasses (_x >> "strikes") apply {[
             configName _x,

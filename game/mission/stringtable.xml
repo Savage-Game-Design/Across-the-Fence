@@ -1757,6 +1757,24 @@
         <Key ID="STR_VGM_RTO_AIRCRAFT_ON_STATION">
             <Original>%1 (departs in %2m)</Original>
         </Key>
+        <Key ID="STR_VGM_RTO_NAME_WITH_STATUS">
+            <Original>[%2] %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_REFUELING">
+            <Original>[R]EFUELING - %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_STANDBY">
+            <Original>[S]TANDBY</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_ENROUTE">
+            <Original>[E]NROUTE - %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_ONSTATION">
+            <Original>[O]N STATION - %1]</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_DEPARTED">
+            <Original>[D]EPARTED</Original>
+        </Key>
         <Key ID="STR_VGM_RTO_CALL">
             <Original>Call on-station</Original>
         </Key>

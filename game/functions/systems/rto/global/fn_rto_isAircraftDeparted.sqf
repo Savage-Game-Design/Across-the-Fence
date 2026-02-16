@@ -2,7 +2,7 @@
     File: fn_rto_isAircraftDeparted.sqf
     Author: Savage Game Design
     Date: 2026-01-17
-    Last Update: 2026-01-17
+    Last Update: 2026-02-16
     Public: No
 
     Description:
@@ -20,6 +20,4 @@
         [_aircraft] call vgm_g_fnc_rto_isAircraftDeparted;
  */
 
-params ["_aircraft"];
-
-(_aircraft get "departAt") <= serverTime
+_this call vgm_g_fnc_rto_getAircraftStatus select 0 == "DEPARTED"

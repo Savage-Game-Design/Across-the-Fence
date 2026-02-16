@@ -2,7 +2,7 @@
     File: fn_rto_requestStrike.sqf
     Author: Savage Game Design
     Date: 2026-01-14
-    Last Update: 2026-01-31
+    Last Update: 2026-02-16
     Public: No
 
     Description:
@@ -40,27 +40,24 @@ if (_strikes getOrDefault [_strike, 0] <= 0) exitWith {
     [format ["RTO: Player %1 requested strike from aircraft %2, but strike %3 is not available", _playerId, _aircraftId, _strike]] call vgm_g_fnc_logInfo;
 };
 
-private _onStationAt = _aircraft get "onStationAt";
-private _departAt = _aircraft get "departAt";
+[_aircraft] call vgm_g_fnc_rto_getAircraftStatus params ["_aircraftStatus", "_timeRemainingInStatus"];
 if !( [_aircraft] call vgm_g_fnc_rto_isAircraftOnStation ) exitWith {
     [format [
-        "RTO: Player %1 requested strike from aircraft %2, but aircraft is not on station. Time: %3, on station at: %4, depart at: %5",
+        "RTO: Player %1 requested strike from aircraft %2, but aircraft is not on station. Aircraft is %3 for %4.",
         _playerId,
         _aircraftId,
-        serverTime,
-        _onStationAt,
-        _departAt
+        _aircraftStatus,
+        [ _timeRemainingInStatus ] call vgm_g_fnc_formatDuration
     ]] call vgm_g_fnc_logInfo;
 };
 
 private _runCompleteAt = _aircraft get "runCompleteAt";
 if !(_runCompleteAt <= serverTime) exitWith {
     [format [
-        "RTO: Player %1 requested strike from aircraft %2, but aircraft is on an attack run. Time: %3, run complete at: %4",
+        "RTO: Player %1 requested strike from aircraft %2, but aircraft is on an attack run for %3",
         _playerId,
         _aircraftId,
-        serverTime,
-        _runCompleteAt
+        [serverTime - _runCompleteAt] call vgm_g_fnc_formatDuration
     ]] call vgm_g_fnc_logInfo;
 };
 

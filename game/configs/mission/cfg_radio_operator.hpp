@@ -13,6 +13,8 @@ class vgm_radio_operator {
             arrivalTimeSecs = 600;
             // Time the aircraft can remain on-station before returning to base.
             onStationTimeSecs = 600;
+            // Time the aircraft takes to refuel before becoming ready again.
+            refuelTimeSecs = 1200;
             // All strikes available to the aircraft while on-station
             class strikes {
                 // A single strike. The name will be based on the magazines.
@@ -26,7 +28,45 @@ class vgm_radio_operator {
             };
         };
 
-        class f100d_mk82 {
+        class plane: template {
+            arrivalTimeSecs = 30;
+        };
+
+        class helicopter: template {
+            arrivalTimeSecs = 120;
+        };
+
+        class test_plane: plane {
+            disabled = 0;
+            displayName = "Test plane";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 15;
+            onStationTimeSecs = 60;
+            refuelTimeSecs = 30;
+            class strikes {
+                class cannon {
+                    displayName = "20mm cannon";
+                    magazines[] = {"vn_m39a1_v_quad"};
+                    uses = 4;
+                    // Higher than 5 and the plane tends to crash.
+                    fireDurationSecs = 5;
+                };
+                class rockets {
+                    displayName = "Rockets (10lb HE)";
+                    magazines[] = {"vn_rocket_ffar_m151_he_x7"};
+                    uses = 2;
+                };
+                class mk82 {
+                    displayName = "Bomb (Mk82 500lb)";
+                    magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
+                    uses = 1;
+                };
+            };
+        };
+
+        class f100d_mk82: plane {
+            disabled = 0;
             displayName = "F100D MK82";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f100d_cas";
@@ -53,11 +93,11 @@ class vgm_radio_operator {
             };
         };
 
-        class f100d_mk82_napalm {
+        class f100d_mk82_napalm: plane {
+            disabled = 0;
             displayName = "F100D MK82 Napalm";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f100d_cas";
-            arrivalTimeSecs = 30;
             onStationTimeSecs = 240;
             class strikes {
                 class cannon {
@@ -85,11 +125,11 @@ class vgm_radio_operator {
             };
         };
 
-        class f4c {
+        class f4c: plane {
+            disabled = 0;
             displayName = "F-4C";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f4c_cas";
-            arrivalTimeSecs = 30;
             onStationTimeSecs = 300;
             class strikes {
                 class cannon {
@@ -122,11 +162,11 @@ class vgm_radio_operator {
             };
         };
 
-        class f4b {
+        class f4b: plane {
+            disabled = 0;
             displayName = "F-4B";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f4b_navy_cas";
-            arrivalTimeSecs = 30;
             onStationTimeSecs = 360;
             class strikes {
                 class cannon {
@@ -159,11 +199,11 @@ class vgm_radio_operator {
             };
         };
 
-        class uh1c_gunship {
+        class uh1c_gunship: helicopter {
+            disabled = 0;
             displayName = "UH-1C Gunship";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_uh1c_02_01";
-            arrivalTimeSecs = 120;
             onStationTimeSecs = 480;
             class strikes {
                 class minigun {
@@ -179,7 +219,8 @@ class vgm_radio_operator {
             };
         };
 
-        class uh1c_heavy_hog {
+        class uh1c_heavy_hog: helicopter {
+            disabled = 0;
             displayName = "UH-1C Heavy Hog";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_uh1c_05_01";
@@ -200,7 +241,8 @@ class vgm_radio_operator {
             };
         };
 
-        class uh1c_ara {
+        class uh1c_ara: helicopter {
+            disabled = 0;
             displayName = "UH-1C ARA";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_uh1c_06_02";
@@ -220,11 +262,11 @@ class vgm_radio_operator {
             };
         };
 
-        class ah1g {
+        class ah1g: helicopter {
+            disabled = 0;
             displayName = "AH-1G";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_ah1g_09";
-            arrivalTimeSecs = 120;
             onStationTimeSecs = 840;
             class strikes {
                 class grenades {
