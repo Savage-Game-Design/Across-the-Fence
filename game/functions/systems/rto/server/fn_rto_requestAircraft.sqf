@@ -2,7 +2,7 @@
     File: fn_rto_requestAircraft.sqf
     Author: Savage Game Design
     Date: 2026-01-08
-    Last Update: 2026-02-16
+    Last Update: 2026-02-20
     Public: No
 
     Description:
@@ -22,11 +22,6 @@
 params ["_playerId", "_aircraftId"];
 
 private _allAircraft = vgm_s_rto_availableAircraft get _playerId;
-
-if (values _allAircraft findIf {[_x] call vgm_g_fnc_rto_isAircraftEnRoute || [_x] call vgm_g_fnc_rto_isAircraftOnStation} > -1) exitWith {
-    [format ["RTO: Player %1 requested aircraft %2, but an aircraft is already on-station or en-route", _playerId, _aircraftId]] call vgm_g_fnc_logInfo;
-};
-
 private _aircraft = _allAircraft get _aircraftId;
 
 if (isNil "_aircraft") exitWith {

@@ -1751,6 +1751,9 @@
         <Key ID="STR_VGM_RTO_NO_AIRCRAFT_ON_STATION">
             <Original>No aircraft on-station</Original>
         </Key>
+        <Key ID="STR_VGM_RTO_X_AIRCRAFT_ON_STATION">
+            <Original>%1 aircraft on-station</Original>
+        </Key>
         <Key ID="STR_VGM_RTO_AIRCRAFT_ENROUTE">
             <Original>%1 (arrives in %2m)</Original>
         </Key>
