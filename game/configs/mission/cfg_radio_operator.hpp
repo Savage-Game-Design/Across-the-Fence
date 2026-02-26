@@ -29,11 +29,17 @@ class vgm_radio_operator {
         };
 
         class plane: template {
-            arrivalTimeSecs = 30;
+            // 20 seconds
+            arrivalTimeSecs = 20;
+            // 7 minutes
+            onStationTimeSecs = 420;
         };
 
         class helicopter: template {
+            // 2 minutes
             arrivalTimeSecs = 120;
+            // 25 minutes
+            onStationTimeSecs = 1500;
         };
 
         class test_plane: plane {
@@ -70,8 +76,6 @@ class vgm_radio_operator {
             displayName = "F100D MK82";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f100d_cas";
-            arrivalTimeSecs = 30;
-            onStationTimeSecs = 180;
             class strikes {
                 class cannon {
                     displayName = "20mm cannon";
@@ -98,7 +102,6 @@ class vgm_radio_operator {
             displayName = "F100D MK82 Napalm";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f100d_cas";
-            onStationTimeSecs = 240;
             class strikes {
                 class cannon {
                     displayName = "20mm cannon";
@@ -130,7 +133,6 @@ class vgm_radio_operator {
             displayName = "F-4C";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f4c_cas";
-            onStationTimeSecs = 300;
             class strikes {
                 class cannon {
                     displayName = "20mm cannon";
@@ -167,7 +169,6 @@ class vgm_radio_operator {
             displayName = "F-4B";
             vehicleType = "PLANE";
             vehicleClass = "vn_b_air_f4b_navy_cas";
-            onStationTimeSecs = 360;
             class strikes {
                 class cannon {
                     displayName = "20mm cannon";
@@ -204,7 +205,6 @@ class vgm_radio_operator {
             displayName = "UH-1C Gunship";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_uh1c_02_01";
-            onStationTimeSecs = 480;
             class strikes {
                 class minigun {
                     displayName = "Miniguns";
@@ -224,8 +224,6 @@ class vgm_radio_operator {
             displayName = "UH-1C Heavy Hog";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_uh1c_05_01";
-            arrivalTimeSecs = 120;
-            onStationTimeSecs = 600;
             class strikes {
                 class grenades {
                     displayName = "40mm grenades (HE)";
@@ -246,8 +244,6 @@ class vgm_radio_operator {
             displayName = "UH-1C ARA";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_uh1c_06_02";
-            arrivalTimeSecs = 120;
-            onStationTimeSecs = 720;
             class strikes {
                 class rockets_10lb {
                     displayName = "Rockets (10lb HE)";
@@ -267,7 +263,6 @@ class vgm_radio_operator {
             displayName = "AH-1G";
             vehicleType = "HELICOPTER";
             vehicleClass = "vn_b_air_ah1g_09";
-            onStationTimeSecs = 840;
             class strikes {
                 class grenades {
                     displayName = "40mm grenades (HE)";
