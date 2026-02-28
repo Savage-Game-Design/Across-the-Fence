@@ -13,6 +13,8 @@ on:
   push:
     tags:
       - v**
+    branches:
+      - "testing/**"
 
 env:
   GITHUB_INPUT_VERSION: ${{ github.event.inputs.version }}
