@@ -2,7 +2,7 @@
     File: fn_rto_preInit.sqf
     Author: Savage Game Design
     Date: 2026-01-04
-    Last Update: 2026-02-16
+    Last Update: 2026-03-01
     Public: No
 
     Description:
@@ -15,6 +15,12 @@ vn_artillery_captive = true;
 vgm_g_rto_aircraftTypes = createHashMap;
 
 private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (missionConfigFile >> "vgm_radio_operator" >> "aircraft");
+
+private _fnc_withDefault = {
+    params ["_value", "_default"];
+    if (_value isEqualTo 0 || _value isEqualTo "") exitWith { _default };
+    _value
+};
 
 {
     private _aircraftConfig = _x;
@@ -41,7 +47,9 @@ private _aircraftConfigs = "getNumber (_x >> 'disabled') == 0" configClasses (mi
                 ["magazines", getArray (_x >> "magazines")],
                 ["uses", getNumber (_x >> "uses")],
                 ["fireDurationSecs", getNumber (_x >> "fireDurationSecs")],
-                ["guidedDispersion", getNumber (_x >> "guidedDispersion")]
+                ["guidedDispersion", getNumber (_x >> "guidedDispersion")],
+                ["hitAreaMarkerSize", [getNumber (_x >> "hitAreaMarkerSize"), 50] call _fnc_withDefault],
+                ["hitAreaMarkerShape", [getText (_x >> "hitAreaMarkerShape"), "OVAL"] call _fnc_withDefault]
             ]
         ]})]
     ];

@@ -2,7 +2,7 @@
     File: fn_displayRadioOperator.sqf
     Author: Savage Game Design, based on Ethan Johnson's original
     Date: 2026-01-25
-    Last Update: 2026-02-20
+    Last Update: 2026-03-01
     Public: Yes
 
     Description:
@@ -74,7 +74,14 @@ if (_mode isEqualTo "draw") exitwith
     { deleteMarkerLocal _x; } foreach vgm_c_displayRadioOperator_markers;
     vgm_c_displayRadioOperator_markers = [];
 
-    if (isNil "vgm_c_displayRadioOperator_aircraftId") exitWith { true };
+    if (isNil "vgm_c_displayRadioOperator_aircraftId" || isNil "vgm_c_displayRadioOperator_command") exitWith { true };
+
+    private _hitAreaMarkerSize = vgm_c_displayRadioOperator_command get "hitAreaMarkerSize";
+    private _hitAreaMarkerShape = vgm_c_displayRadioOperator_command get "hitAreaMarkerShape";
+
+    if (isNil "_hitAreaMarkerSize" || isNil "_hitAreaMarkerShape") exitWith { true };
+
+    _hitAreaMarkerSize = abs _hitAreaMarkerSize;
 
     private _aircraft = _availableAircraft get vgm_c_displayRadioOperator_aircraftId;
 
@@ -84,8 +91,6 @@ if (_mode isEqualTo "draw") exitwith
 
     VGM_DisplayRadioOperator_selecting_start params ["_x","_y"];
 
-    private _hitAreaMarkerSize = abs (_aircraftType getOrDefault ["hitAreaMarkerSize", 50]);
-    private _hitAreaMarkerShape = _aircraftType getOrDefault ["hitAreaMarkerShape", "OVAL"];
 
     private _dir = VGM_DisplayRadioOperator_selecting_end getDir VGM_DisplayRadioOperator_selecting_start;
     if (VGM_DisplayRadioOperator_selecting_end distance2D VGM_DisplayRadioOperator_selecting_start < 1) then {_dir = -180};
@@ -327,14 +332,17 @@ switch _mode do
 
             _strikeIds apply {
                 private _strikesRemaining = _strikes get _x;
+                private _strikeType = _strikeTypes get _x;
                 private _disabled = _strikesRemaining <= 0 || _enRoute || _onAttackRun;
                 private _tooltip = ["", localize "STR_VGM_RTO_ENROUTE"] select _enRoute;
                 _tooltip = [_tooltip, localize "STR_VGM_RTO_ON_ATTACK_RUN"] select _onAttackRun;
 
                 createHashMapFromArray [
-                    ["text", _strikeTypes get _x get "displayName"],
+                    ["text", _strikeType get "displayName"],
                     ["tooltip", _tooltip],
                     ["disabled", _disabled],
+                    ["hitAreaMarkerSize", _strikeType get "hitAreaMarkerSize"],
+                    ["hitAreaMarkerShape", _strikeType get "hitAreaMarkerShape"],
                     ["extraInfo", format [localize "STR_VGM_RTO_REMAINING", _strikesRemaining]],
                     ["action", [[vgm_c_displayRadioOperator_aircraftId, _x, _disabled], {
                         params ["_aircraftId", "_strikeId", "_disabled"];

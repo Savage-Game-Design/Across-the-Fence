@@ -24,6 +24,10 @@ class vgm_radio_operator {
                     magazines[] = {""};
                     // Numbeere of uses
                     uses = 1;
+                    // How big the hit area marker should be
+                    hitAreaMarkerSize = 50;
+                    // The shape the hit area marker should be. "OVAL" or "CIRCLE"
+                    hitAreaMarkerShape = "OVAL";
                 };
             };
         };
