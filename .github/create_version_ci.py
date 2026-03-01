@@ -11,7 +11,7 @@ def parse_github_ref():
     ref = os.environ.get("GITHUB_REF_NAME", "")
     if not ref.strip():
         return None
-    match = re.fullmatch(r"v(?P<version>[0-9]+.[0-9]+.[0-9]+)-?(?P<postfix>[\w-]+)?", ref)
+    match = re.fullmatch(r".*v(?P<version>[0-9]+.[0-9]+.[0-9]+)-?(?P<postfix>[\w-]+)?", ref)
     if not match:
         return None
     return {
