@@ -2,7 +2,7 @@
     File: fn_rto_performStrike.sqf
     Author: Ethan Johnson and Savage Game Design
     Date: 2026-01-31
-    Last Update: 2026-02-01
+    Last Update: 2026-03-02
     Public: Yes
 
     Description:
@@ -10,10 +10,10 @@
 
     Parameter(s):
         _planeCfg - Plane config [CONFIG]
-        _start_pos - Start position for the run  [ARRAY]
-        _end_pos - End position for the run [ARRAY]
+        _startPos - Start position for the run  [ARRAY]
+        _endPos - End position for the run [ARRAY]
         _magazine - Array of magazines which will be fired from the vehicle [ARRAY]
-        _fireDurationSecs - How long the vehicle should fire for [NUMBER]
+        _startFiringDistance - How far away the vehicle should be before it starts firing [NUMBER]
         _dispersion - How many metres should the shot vary by. Only applies to guided weapons [NUMBER]
         _unit - Unit that called the artillery [OBJECT]
         _illumination - Is the artillery run an illumination run [NUMBER]
@@ -25,26 +25,35 @@
         [configfile >> "cfgvehicles" >> "aircraft_class", "aircraft_class", [0,0,0], [100,100,0], 0, ["rockets"], player, 0] call vgm_fnc_rto_performStrike;
  */
 
-params ["_planeCfg", "_start_pos", "_end_pos", "_magazine", "_fireDurationSecs", "_dispersion" ,"_unit", "_illumination"];
+params ["_planeCfg", "_startPos", "_endPos", "_magazine", "_startFiringDistance", "_dispersion" ,"_unit", "_illumination"];
 
 private _vehicle_class = configName _planeCfg;
 
-// Default to a 3 second fire duration if the given duration is invalid.
-if (_fireDurationSecs <= 0) then {
-    _fireDurationSecs = 3;
+// No magazine - nothing to fire
+private _hasWeapons = count _magazine > 0;
+
+private _dir = _startPos getDir _endPos;
+if (_startPos distance2D _endPos < 1) then {_dir = 0};
+
+// No weapons - illumination only, fly an altered route.
+if (_illumination > 0 && !_hasWeapons) then {
+    // Set target just past the marked target, so the plane goes overhead.
+    _startPos = _startPos getPos [200, _dir];
+    // Set height for a flyover
+    _startPos set [2, 250];
 };
 
-private _posATL = _start_pos;
+private _posATL = _startPos;
 private _pos = +_posATL;
 _pos set [2,(_pos select 2) + getterrainheightasl _pos];
-private _dir = _start_pos getDir _end_pos;
-if (_start_pos distance2D _end_pos < 1) then {_dir = 0};
+
 
 private _dis = 3000;
 private _alt = 1000;
 private _pitch = atan (_alt / _dis);
 private _speed = 400 / 3.6;
 private _duration = ([0,0] distance [_dis,_alt]) / _speed;
+
 
 //--- Create plane
 private _planePos = _pos getPos [_dis, _dir + 180];
@@ -130,7 +139,7 @@ private _allTurrets = [[-1]] + allTurrets _plane;
 private _pylonPriorities = getAllPylonsInfo _plane apply { 0 };
 _plane setPylonsPriority _pylonPriorities;
 
-private _target = createVehicle ["Land_HelipadEmpty_F", _start_pos, [], 0, "CAN_COLLIDE"];
+private _target = createVehicle ["Land_HelipadEmpty_F", _startPos, [], 0, "CAN_COLLIDE"];
 
 //--- Projectile guidance
 _plane addEventHandler ["Fired", {
@@ -150,8 +159,8 @@ _plane addEventHandler ["Fired", {
 }];
 
 //--- Approach
-private _fire = [] spawn {waituntil {false}};
-private _fireNull = true;
+private _fire = scriptNull;
+private _fired = false;
 private _time = time;
 waitUntil {
     private _fireProgress = _plane getvariable ["fireProgress",0];
@@ -171,78 +180,86 @@ waitUntil {
     _plane setVariable ["vgm_l_rto_target", _target];
     _plane setVariable ["vgm_l_rto_dispersion", _dispersion];
 
+    private _goalDistance = [300, 50] select (getPosATL _target # 2 > 150);
+    private _distanceToTarget = getPosASL _plane distance ATLtoASL _pos;
+    private _inRangeOfTarget = _distanceToTarget < _startFiringDistance;
+
     //--- Fire!
-    if ((getposasl _plane) distance _pos < 1000 && {_fireNull && {_illumination <= 0}}) then
+    if (_inRangeOfTarget && !_fired) then
     {
-        _fireNull = false;
-        terminate _fire;
-        _fire = [_plane, _target, _illumination, _fireDurationSecs] spawn
+        _fired = true;
+        _fire = [_plane, _target, _illumination, _startFiringDistance, _goalDistance, _hasWeapons] spawn
         {
-            params ["_plane", "_target", "_illumination", "_fireDurationSecs"];
-            private _time = time + _fireDurationSecs;
+            params ["_plane", "_target", "_illumination", "_startFiringDistance", "_goalDistance", "_hasWeapons"];
+            private _initialDistance = _plane distance _target;
+            // Reduce the abort distance if the target is far enough above the terrain
+            private _nextFlare = time;
             waituntil
             {
-                {
-                    private _weapon = getText (configFile >> "CfgMagazines" >> _x >> "pylonWeapon");
-                    private _type = (_weapon call bis_fnc_itemType)#1;
-                    diag_log format ["Wanting to fire %1 of type %2", _weapon, _type];
-                    if (["bomblauncher","rocketlauncher","grenadelauncher","machinegun","cannon","horn"] findif {_x == _type} > -1) then
-                    {
-                        // Non-aimed weapons use BIS_fnc_fire
-                        [_plane, _weapon] call BIS_fnc_fire;
-                    }
-                    else
-                    {
-                        // Aimed weapons use fireAtTarget
-                        _plane fireAtTarget [_target, _weapon];
-                    };
-                } foreach getPylonMagazines _plane;
+                if (_illumination > 0 && _nextFlare < time) then {
 
-                private _allTurrets = [[-1]] + allTurrets _plane;
-                {
-                    private _turret = _x;
-                    private _weapons = _plane weaponsTurret _turret;
+                    private _flare = createVehicle ["vn_flare_plane_med_w_ammo", getPosATL _plane, [], 0, "CAN_COLLIDE"];
+                    _flare setVelocity [0, 0, -25];
+                    _nextFlare = time + 1;
+                };
+
+                if (_hasWeapons) then {
                     {
-                        private _type = (_x call bis_fnc_itemType)#1;
-                        diag_log format ["Wanting to turret fire %1 of type %2", _x, _type];
+                        private _weapon = getText (configFile >> "CfgMagazines" >> _x >> "pylonWeapon");
+                        private _type = (_weapon call bis_fnc_itemType)#1;
+                        diag_log format ["Wanting to fire %1 of type %2", _weapon, _type];
                         if (["bomblauncher","rocketlauncher","grenadelauncher","machinegun","cannon","horn"] findif {_x == _type} > -1) then
                         {
                             // Non-aimed weapons use BIS_fnc_fire
-                            [_plane, _x, _turret] call BIS_fnc_fire;
+                            [_plane, _weapon] call BIS_fnc_fire;
                         }
                         else
                         {
                             // Aimed weapons use fireAtTarget
-                            _plane selectWeaponTurret [_x, _turret];
-                            _plane fireAtTarget [_target, _x];
+                            _plane fireAtTarget [_target, _weapon];
                         };
-                    } foreach _weapons;
-                } foreach _allTurrets;
+                    } foreach getPylonMagazines _plane;
 
-                _plane setvariable ["fireProgress",(1 - ((_time - time) / _fireDurationSecs)) max 0 min 1];
+                    private _allTurrets = [[-1]] + allTurrets _plane;
+                    {
+                        private _turret = _x;
+                        private _weapons = _plane weaponsTurret _turret;
+                        {
+                            private _type = (_x call bis_fnc_itemType)#1;
+                            diag_log format ["Wanting to turret fire %1 of type %2", _x, _type];
+                            if (["bomblauncher","rocketlauncher","grenadelauncher","machinegun","cannon","horn"] findif {_x == _type} > -1) then
+                            {
+                                // Non-aimed weapons use BIS_fnc_fire
+                                [_plane, _x, _turret] call BIS_fnc_fire;
+                            }
+                            else
+                            {
+                                // Aimed weapons use fireAtTarget
+                                _plane selectWeaponTurret [_x, _turret];
+                                _plane fireAtTarget [_target, _x];
+                            };
+                        } foreach _weapons;
+                    } foreach _allTurrets;
+                };
+
+                private _currentDistance = _plane distance _target;
+                private _fireProgress = linearConversion [_initialDistance, _goalDistance, _currentDistance, 0, 1, true];
+                _plane setvariable ["fireProgress", _fireProgress];
                 sleep 0.1;
-                time > _time || isnull _plane //--- Shoot only for specific period or only one bomb
+                _fireProgress >= 1 || !alive _plane //--- Shoot only for specific period or only one bomb
             };
-            sleep 1;
         };
     };
     sleep 0.01;
-    scriptdone _fire || isnull _plane
+    // Abort at 300m so the plane has time to pull out of the dive.
+    if (_distanceToTarget < _goalDistance) then {
+        _fired = true;
+        terminate _fire;
+    };
+    (_fired && scriptdone _fire) || !alive _plane
 };
 _plane setvelocity velocity _plane;
 _plane flyinheight _alt;
-
-if (_illumination > 0) then
-{
-    [_plane] spawn
-    {
-        params ["_plane"];
-        private _time = time + 10;
-        waituntil {time > _time};
-        private _flare = createVehicle ["vn_flare_plane_med_w_ammo", getPosATL _plane, [], 0, "CAN_COLLIDE"];
-        _flare setVelocity [0, 0, -25];
-    };
-};
 
 deleteVehicle _target;
 

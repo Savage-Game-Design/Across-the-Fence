@@ -46,8 +46,10 @@ private _fnc_withDefault = {
                 ["displayName", getText (_x >> "displayName")],
                 ["magazines", getArray (_x >> "magazines")],
                 ["uses", getNumber (_x >> "uses")],
-                ["fireDurationSecs", getNumber (_x >> "fireDurationSecs")],
+                ["startFiringDistance", [getNumber (_x >> "startFiringDistance"), 1000] call _fnc_withDefault],
                 ["guidedDispersion", getNumber (_x >> "guidedDispersion")],
+                ["illumination", getNumber (_x >> "illumination")],
+                ["function", compile getText (_x >> "function")],
                 ["hitAreaMarkerSize", [getNumber (_x >> "hitAreaMarkerSize"), 50] call _fnc_withDefault],
                 ["hitAreaMarkerShape", [getText (_x >> "hitAreaMarkerShape"), "OVAL"] call _fnc_withDefault]
             ]

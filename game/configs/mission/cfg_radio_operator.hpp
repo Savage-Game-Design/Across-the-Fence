@@ -22,8 +22,14 @@ class vgm_radio_operator {
                     displayName = "My strike";
                     // The weapons to fire or magazines that are fitted to each Pylon on the aircraft during the strike. All listed weapons are fired.
                     magazines[] = {""};
-                    // Numbeere of uses
+                    // Numbere of uses
                     uses = 1;
+                    // Called instead of running a normal strike
+                    function = "";
+                    // How far away the aircraft should be before it starts firing.
+                    startFiringDistance = 1000;
+                    // If the strike should place flares as the aircraft goes over. 1 for flares, 0 for none.
+                    illumination = 0;
                     // How big the hit area marker should be
                     hitAreaMarkerSize = 50;
                     // The shape the hit area marker should be. "OVAL" or "CIRCLE"
@@ -59,8 +65,6 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
                     uses = 4;
-                    // Higher than 5 and the plane tends to crash.
-                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -75,6 +79,46 @@ class vgm_radio_operator {
             };
         };
 
+        class fireship: plane {
+            disabled = 0;
+            displayName = "Fireship";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 20;
+            // 20 minutes on station, 5 minutes refuelling - be generous with the flare plane.
+            onStationTimeSecs = 1200;
+            refuelTimeSecs = 300;
+            class strikes {
+                class flare_run {
+                    displayName = "Flare run";
+                    magazines[] = {};
+                    uses = 100;
+                    illumination = 1;
+                };
+            };
+        };
+
+        class shadow: plane {
+            disabled = 0;
+            displayName = "Shadow";
+            vehicleType = "PLANE";
+            vehicleClass = "vn_b_air_f100d_cas";
+            arrivalTimeSecs = 15;
+            // 7 hours - approximately matches real-world AC-47s
+            onStationTimeSecs = 25200;
+            refuelTimeSecs = 300;
+            class strikes {
+                class flares_until_dawn {
+                    displayName = "Flares until dawn";
+                    magazines[] = {};
+                    uses = 300;
+                    function = "call vgm_s_fnc_rto_flaresUntilDawn";
+                    hitAreaMarkerSize = 50;
+                    hitAreaMarkerShape = "CIRCLE";
+                };
+            };
+        };
+
         class f100d_mk82: plane {
             disabled = 0;
             displayName = "F100D MK82";
@@ -85,8 +129,6 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
                     uses = 4;
-                    // Higher than 5 and the plane tends to crash.
-                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -111,8 +153,6 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
                     uses = 4;
-                    // Higher than 5 and the plane tends to crash.
-                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -142,8 +182,6 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"", "vn_gunpod_suu23_v_1200_mag", "vn_gunpod_suu23_v_1200_mag", ""};
                     uses = 4;
-                    // Higher than 5 and the plane tends to crash.
-                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -178,8 +216,6 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"", "vn_gunpod_suu23_v_1200_mag", "vn_gunpod_suu23_v_1200_mag", ""};
                     uses = 4;
-                    // Higher than 5 and the plane tends to crash.
-                    fireDurationSecs = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
@@ -278,8 +314,6 @@ class vgm_radio_operator {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_gunpod_m195_v_2100_mag"};
                     uses = 4;
-                    // Higher than 5 and the plane tends to crash.
-                    fireDurationSecs = 5;
                 };
                 class rockets_10lb {
                     displayName = "Rockets (10lb HE)";

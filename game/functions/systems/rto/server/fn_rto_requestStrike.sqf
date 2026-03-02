@@ -2,7 +2,7 @@
     File: fn_rto_requestStrike.sqf
     Author: Savage Game Design
     Date: 2026-01-14
-    Last Update: 2026-02-16
+    Last Update: 2026-03-01
     Public: No
 
     Description:
@@ -72,7 +72,6 @@ _strikes set [_strike, (_strikes get _strike) - 1];
 
 private _vehicleConfig = _aircraftType get "vehicleConfig";
 private _strikeType = _aircraftType get "strikes" get _strike;
-private _illumination = 0;
 
 [format [
     "RTO: Player %1 requested strike from aircraft %2 with %3 from position %4 to position %5 - beginning strike",
@@ -83,13 +82,24 @@ private _illumination = 0;
     _endPos
 ]] call vgm_g_fnc_logInfo;
 
+if (_strikeType get "function" isNotEqualTo {}) exitWith {
+    [
+        _aircraft,
+        _aircraftType,
+        _strikeType,
+        [_startPos # 0, _startPos # 1, 0],
+        [_endPos # 0, _endPos # 1, 0],
+        _playerId
+    ] call (_strikeType get "function");
+};
+
 [
     _vehicleConfig,
     [_startPos # 0, _startPos # 1, 0],
     [_endPos # 0, _endPos # 1, 0],
     _strikeType get "magazines",
-    _strikeType get "fireDurationSecs",
+    _strikeType get "startFiringDistance",
     _strikeType get "guidedDispersion",
     _playerId call vgm_s_fnc_player_fromId,
-    _illumination
+    _strikeType get "illumination"
 ] spawn vgm_s_fnc_rto_performStrike;

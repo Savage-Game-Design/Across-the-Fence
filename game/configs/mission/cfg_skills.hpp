@@ -876,10 +876,10 @@ class vgm_skillTrees {
                 class fireship: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRESHIP";
                     description = "$STR_VGM_SKILLS_SKILL_FIRESHIP_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'fireship'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'fireship'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 2;
                 };
 
@@ -947,10 +947,10 @@ class vgm_skillTrees {
                 class shadow: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SHADOW";
                     description = "$STR_VGM_SKILLS_SKILL_SHADOW_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'shadow'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'shadow'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 4;
                 };
 

@@ -347,6 +347,7 @@ class vgm_s
         class rto_addAvailableAircraft {};
         class rto_clearAvailableAircraft {};
         class rto_dismissAircraft {};
+        class rto_flaresUntilDawn {};
         class rto_guideBomb {};
         class rto_performStrike {};
         class rto_preInit
