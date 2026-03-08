@@ -2,7 +2,7 @@
     File: fn_rto_addActions.sqf
     Author: Savage Game Design and Ethan Johnson
     Date: 2024-11-09
-    Last Update: 2026-01-25
+    Last Update: 2026-03-08
     Public: No
 
     Description:
@@ -21,7 +21,7 @@
 if ((player getVariable ["vgm_c_rto_actionId", -1]) > -1) exitWith {};
 [] call vgm_c_fnc_rto_removeActions;
 
-private _callRtoCondition = "call vgm_g_fnc_rto_isRadioAvailable";
+private _callRtoCondition = "call vgm_g_fnc_rto_getUsableRadioType isNotEqualTo ''";
 
 private _callRtoId = player addAction [
     localize "STR_VN_ARTILLERY_ACTION_NAME",

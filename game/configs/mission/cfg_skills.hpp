@@ -842,11 +842,11 @@ class vgm_skillTrees {
                 class emergency_radio: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO";
                     description = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
-                    cost = 8;
+                    codeApply = "player setUnitTrait ['vgm_radio_operator_handheld', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_radio_operator_handheld', false, true];";
+                    cost = 6;
                 };
             };
 

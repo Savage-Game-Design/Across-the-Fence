@@ -2,7 +2,7 @@
     File: fn_rto_preInit.sqf
     Author: Savage Game Design
     Date: 2026-01-04
-    Last Update: 2026-03-01
+    Last Update: 2026-03-08
     Public: No
 
     Description:
@@ -61,3 +61,4 @@ private _fnc_withDefault = {
 
 // TODO - Unify this with extraction radios
 vgm_g_rto_radioBackpacks = ["vn_o_pack_t884_01", "vn_o_pack_t884_ish54_01_pl", "vn_o_pack_t884_m1_01_pl", "vn_o_pack_t884_m38_01_pl", "vn_o_pack_t884_ppsh_01_pl", "vn_b_pack_prc77_01_m16_pl", "vn_b_pack_03_m3a1_pl", "vn_b_pack_03_xm177_pl", "vn_b_pack_03_type56_pl", "vn_b_pack_03", "vn_b_pack_prc77_01", "vn_b_pack_trp_04", "vn_b_pack_trp_04_02", "vn_b_pack_03", "vn_b_pack_03_02", "vn_b_pack_lw_06", "vn_b_pack_m41_05"];
+vgm_g_rto_radioItems = ["vn_b_item_radio_urc10"];

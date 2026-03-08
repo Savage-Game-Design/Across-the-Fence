@@ -335,7 +335,7 @@ class vgm_g
         class rto_isAircraftOnStation {};
         class rto_isAircraftOnStandby {};
         class rto_isAircraftRefueling {};
-        class rto_isRadioAvailable {};
+        class rto_getUsableRadioType {};
         class rto_preInit {
             preInit = 1;
         };
