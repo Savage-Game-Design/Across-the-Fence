@@ -2,7 +2,7 @@
     File: fn_rto_requestAircraft.sqf
     Author: Savage Game Design
     Date: 2026-01-08
-    Last Update: 2026-02-20
+    Last Update: 2026-03-11
     Public: No
 
     Description:
@@ -36,12 +36,17 @@ if (_aircraftStatus isNotEqualTo "STANDBY") exitWith {
 
 private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
 
+private _aircraftTimes = [[_playerId] call vgm_s_fnc_player_fromId, _aircraft] call vgm_g_fnc_rto_getAircraftTimesForPlayer;
+
 [_aircraft, "requestedAt", serverTime] call para_s_fnc_netmap_set;
-private _onStationAt = serverTime + (_aircraftType get "arrivalTimeSecs");
+
+private _onStationAt = serverTime + (_aircraftTimes get "arrivalTimeSecs");
 [_aircraft, "onStationAt", _onStationAt] call para_s_fnc_netmap_set;
-private _departAt = _onStationAt + (_aircraftType get "onStationTimeSecs");
+
+private _departAt = _onStationAt + (_aircraftTimes get "onStationTimeSecs");
 [_aircraft, "departAt", _departAt] call para_s_fnc_netmap_set;
-private _refueledAt = _departAt + (_aircraftType get "refuelTimeSecs");
+
+private _refueledAt = _departAt + (_aircraftTimes get "refuelTimeSecs");
 [_aircraft, "refueledAt", _refueledAt] call para_s_fnc_netmap_set;
 
 // Refresh strikes at this point to allow refueled aircraft needing to be fully reset.

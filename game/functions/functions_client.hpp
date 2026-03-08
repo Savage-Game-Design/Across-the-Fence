@@ -329,6 +329,8 @@ class vgm_g
 
 		class rto_getAircraftInUse {};
 		class rto_getAircraftStatus {};
+        class rto_getAircraftTimesForPlayer {};
+        class rto_getTimeModifiersForPlayer {};
         class rto_isAircraftDeparted {};
         class rto_isAircraftEnRoute {};
         class rto_isAircraftOnAttackRun {};

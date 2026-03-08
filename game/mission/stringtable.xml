@@ -1773,7 +1773,7 @@
             <Original>[E]NROUTE - %1</Original>
         </Key>
         <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_ONSTATION">
-            <Original>[O]N STATION - %1]</Original>
+            <Original>[O]N STATION - %1</Original>
         </Key>
         <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_DEPARTED">
             <Original>[D]EPARTED</Original>

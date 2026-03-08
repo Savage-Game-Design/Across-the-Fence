@@ -2,7 +2,7 @@
     File: fn_rto_requestStrike.sqf
     Author: Savage Game Design
     Date: 2026-01-14
-    Last Update: 2026-03-01
+    Last Update: 2026-03-11
     Public: No
 
     Description:
@@ -26,6 +26,8 @@
             [200, 200]
         ] call vgm_s_fnc_rto_requestStrike
  */
+
+#define STRIKE_DURATION 45
 
 params ["_playerId", "_aircraftId", "_strike", "_startPos", "_endPos"];
 
@@ -63,8 +65,11 @@ if !(_runCompleteAt <= serverTime) exitWith {
 
 private _aircraftType = vgm_g_rto_aircraftTypes get (_aircraft get "typeId");
 
+private _aircraftTimes = [[_playerId] call vgm_s_fnc_player_fromId, _aircraft] call vgm_g_fnc_rto_getAircraftTimesForPlayer;
+private _strikeDelay = _aircraftTimes get "strikeDelaySecs" get "total";
+
 // Approximate time for the run to complete - when testing, it took about 65 seconds for a plane to despawn, which feels like too long between runs.
-[_aircraft, "runCompleteAt", serverTime + 45] call para_s_fnc_netmap_set;
+[_aircraft, "runCompleteAt", serverTime + STRIKE_DURATION + _strikeDelay] call para_s_fnc_netmap_set;
 // Remove a charge of the strike
 _strikes set [_strike, (_strikes get _strike) - 1];
 // Refresh the netmap entry (broadcast to all players)
@@ -72,6 +77,18 @@ _strikes set [_strike, (_strikes get _strike) - 1];
 
 private _vehicleConfig = _aircraftType get "vehicleConfig";
 private _strikeType = _aircraftType get "strikes" get _strike;
+
+if (_strikeDelay > 0) then {
+    [format [
+        "RTO: Player %1 requested strike from aircraft %2 - beginning strike in %3",
+        _playerId,
+        _aircraftId,
+        [_strikeDelay] call vgm_g_fnc_formatDuration
+    ]] call vgm_g_fnc_logInfo;
+};
+
+// Quicker and easier to sleep here than to spawn the actual strike with a delay and have to copy all the variables.
+sleep _strikeDelay;
 
 [format [
     "RTO: Player %1 requested strike from aircraft %2 with %3 from position %4 to position %5 - beginning strike",

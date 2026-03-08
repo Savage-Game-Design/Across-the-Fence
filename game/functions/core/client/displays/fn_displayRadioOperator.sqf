@@ -2,7 +2,7 @@
     File: fn_displayRadioOperator.sqf
     Author: Savage Game Design, based on Ethan Johnson's original
     Date: 2026-01-25
-    Last Update: 2026-03-01
+    Last Update: 2026-03-08
     Public: Yes
 
     Description:
@@ -347,7 +347,7 @@ switch _mode do
                     ["action", [[vgm_c_displayRadioOperator_aircraftId, _x, _disabled], {
                         params ["_aircraftId", "_strikeId", "_disabled"];
                         if (_disabled || isNil "VGM_DisplayRadioOperator_selecting_start" || isNil "VGM_DisplayRadioOperator_selecting_end") exitWith {};
-                        [getPlayerID player, _aircraftId, _strikeId, VGM_DisplayRadioOperator_selecting_start, VGM_DisplayRadioOperator_selecting_end] remoteExecCall ["vgm_s_fnc_rto_requestStrike", 2];
+                        [getPlayerID player, _aircraftId, _strikeId, VGM_DisplayRadioOperator_selecting_start, VGM_DisplayRadioOperator_selecting_end] remoteExec ["vgm_s_fnc_rto_requestStrike", 2];
                         DISPLAY closeDisplay 0;
                     }]]
                 ]
