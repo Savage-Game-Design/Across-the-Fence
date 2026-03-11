@@ -48,19 +48,23 @@ if (_radioType isEqualTo "HANDHELD") then {
 
 // Night penalties apply. These are approximate "dark" hours for the time of year on The Bra.
 if (19 < daytime || dayTime < 5) then {
-    _arrivalTimeMult set ["total", (_arrivalTimeMult get "total") + 0.25];
+    private _multiplier = [1, 0.25] select (_unit getUnitTrait "vgm_rto_reduceNightPenalties");
+
+    _arrivalTimeMult set ["total", (_arrivalTimeMult get "total") + 0.24 * _multiplier];
     _arrivalTimeMult get "reasons" pushBack "STR_VGM_RTO_REASON_NIGHT";
 
-    _strikeDelaySecs set ["total", (_strikeDelaySecs get "total") + 8];
+    _strikeDelaySecs set ["total", (_strikeDelaySecs get "total") + 8 * _multiplier];
     _strikeDelaySecs get "reasons" pushBack "STR_VGM_RTO_REASON_NIGHT";
 };
 
 // Various weather effects - these values are roughly when it becomes noticable to players, and would make sense to impact operations.
 if (fog > 0.7 || overcast > 0.5 || rain > 0.5) then {
-    _arrivalTimeMult set ["total", (_arrivalTimeMult get "total") + 0.25];
+    private _multiplier = [1, 0.25] select (_unit getUnitTrait "vgm_rto_reduceWeatherPenalties");
+
+    _arrivalTimeMult set ["total", (_arrivalTimeMult get "total") + 0.24 * _multiplier];
     _arrivalTimeMult get "reasons" pushBack "STR_VGM_RTO_REASON_WEATHER";
 
-    _strikeDelaySecs set ["total", (_strikeDelaySecs get "total") + 8];
+    _strikeDelaySecs set ["total", (_strikeDelaySecs get "total") + 8 * _multiplier];
     _strikeDelaySecs get "reasons" pushBack "STR_VGM_RTO_REASON_WEATHER";
 };
 

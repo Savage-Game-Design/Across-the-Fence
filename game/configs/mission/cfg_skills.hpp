@@ -887,10 +887,10 @@ class vgm_skillTrees {
                 class strobe_marker: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER";
                     description = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_rto_reduceNightPenalties', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_rto_reduceNightPenalties', false, true];";
                     cost = 2;
                 };
             };
@@ -958,10 +958,10 @@ class vgm_skillTrees {
                 class long_antenna: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA";
                     description = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_rto_reduceWeatherPenalties', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_rto_reduceWeatherPenalties', false, true];";
                     cost = 4;
                 };
             };
