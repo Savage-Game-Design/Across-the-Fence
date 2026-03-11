@@ -1808,6 +1808,12 @@
         <Key ID="STR_VGM_RTO_REASON_HANDHELD">
             <Original>Using survival radio</Original>
         </Key>
+        <Key ID="STR_VGM_RTO_REASON_NIGHT">
+            <Original>Night</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REASON_WEATHER">
+            <Original>Weather</Original>
+        </Key>
         <Key ID="STR_VGM_RTO_STRIKE_DESCRIPTION">
             <Original>&lt;t size='1.2'&gt;%1 extra delay before strike&lt;/t&gt;&lt;br/&gt;Reasons: %2</Original>
         </Key>
