@@ -2,7 +2,7 @@
     File: fn_displayRadioOperator.sqf
     Author: Savage Game Design, based on Ethan Johnson's original
     Date: 2026-01-25
-    Last Update: 2026-03-08
+    Last Update: 2026-03-11
     Public: Yes
 
     Description:
@@ -343,7 +343,26 @@ switch _mode do
                     ["disabled", _disabled],
                     ["hitAreaMarkerSize", _strikeType get "hitAreaMarkerSize"],
                     ["hitAreaMarkerShape", _strikeType get "hitAreaMarkerShape"],
-                    ["extraInfo", format [localize "STR_VGM_RTO_REMAINING", _strikesRemaining]],
+                    ["description", [[_aircraft, _aircraftType], {
+                        params ["_aircraft", "_aircraftType"];
+                        private _timeModifiers = [player] call vgm_g_fnc_rto_getTimeModifiersForPlayer;
+                        private _strikeDelaySecs = _timeModifiers get "strikeDelaySecs" get "total";
+                        private _reasons = _timeModifiers get "strikeDelaySecs" get "reasons" apply { localize _x };
+                        if (_reasons isEqualTo []) exitWith {
+                            localize "STR_VGM_RTO_NO_STRIKE_DELAY"
+                        };
+
+                        format [
+                            localize "STR_VGM_RTO_STRIKE_DESCRIPTION",
+                            [_strikeDelaySecs] call vgm_g_fnc_formatDuration,
+                            _reasons joinString ", "
+                        ]
+                    }]],
+                    ["extraInfo", [[_aircraft, _x], {
+                        params ["_aircraft", "_strikeId"];
+                        if (isNil "_aircraft") exitWith { "" };
+                        format [localize "STR_VGM_RTO_REMAINING", _aircraft get "strikes" getOrDefault [_strikeId, 0]]
+                    }]],
                     ["action", [[vgm_c_displayRadioOperator_aircraftId, _x, _disabled], {
                         params ["_aircraftId", "_strikeId", "_disabled"];
                         if (_disabled || isNil "VGM_DisplayRadioOperator_selecting_start" || isNil "VGM_DisplayRadioOperator_selecting_end") exitWith {};
@@ -359,12 +378,30 @@ switch _mode do
         if (_aircraftStatus == "STANDBY") then {
             private _canCall = count ([getPlayerID player] call vgm_g_fnc_rto_getAircraftInUse) < MAX_AIRCRAFT_IN_USE;
             private _tooltip = [localize "STR_VGM_RTO_TOO_MANY_AIRCRAFT_IN_USE", ""] select _canCall;
-            private _arrivesIn = format [localize "STR_VGM_RTO_ARRIVES_IN", ceil ((_aircraftType get "arrivalTimeSecs") / 60) toFixed 0];
 
             vgm_c_displayRadioOperator_commands pushBack createHashMapFromArray [
                 ["text", localize "STR_VGM_RTO_CALL"],
                 ["tooltip", _tooltip],
-                ["extraInfo", _arrivesIn],
+                ["description", [[_aircraft, _aircraftType], {
+                    params ["_aircraft", "_aircraftType"];
+                    private _timeModifiers = [player] call vgm_g_fnc_rto_getTimeModifiersForPlayer;
+                    private _extraTime = (_aircraftType get "arrivalTimeSecs") * ((_timeModifiers get "arrivalTimeMult" get "total") - 1);
+                    private _reasons = _timeModifiers get "arrivalTimeMult" get "reasons" apply { localize _x };
+                    if (_reasons isEqualTo []) exitWith {
+                        localize "STR_VGM_RTO_NO_EXTRA_ARRIVAL_TIME"
+                    };
+
+                    format [
+                        localize "STR_VGM_RTO_EXTRA_ARRIVAL_TIME",
+                        [_extraTime] call vgm_g_fnc_formatDuration,
+                        _reasons joinString ", "
+                    ]
+                }]],
+                ["extraInfo", [[_aircraft], {
+                    params ["_aircraft"];
+                    private _aircraftTimes = [player, _aircraft] call vgm_g_fnc_rto_getAircraftTimesForPlayer;
+                    format [localize "STR_VGM_RTO_ARRIVES_IN", [_aircraftTimes get "arrivalTimeSecs"] call vgm_g_fnc_formatDuration]
+                }]],
                 ["disabled", !_canCall],
                 ["action", [[vgm_c_displayRadioOperator_aircraftId], {
                     params ["_aircraftId"];
@@ -410,6 +447,7 @@ switch _mode do
         };
 
         ["refreshUsesRemaining"] call SELF;
+        ["refreshDescription"] call SELF;
         ["updateButton"] call SELF;
         true
     };
@@ -419,7 +457,19 @@ switch _mode do
             USES_REMAINING_TEXT ctrlSetStructuredText parseText "";
         };
 
-        USES_REMAINING_TEXT ctrlSetStructuredText parseText (vgm_c_displayRadioOperator_command getOrDefault ["extraInfo", ""]);
+        private _calcFunc = vgm_c_displayRadioOperator_command getOrDefault ["extraInfo", [[], { "" }]];
+
+        USES_REMAINING_TEXT ctrlSetStructuredText parseText (_calcFunc # 0 call _calcFunc # 1);
+    };
+    case "refreshDescription":
+    {
+        if (isNil "vgm_c_displayRadioOperator_command") exitWith {
+            DESCRIPTION ctrlSetStructuredText parseText "";
+        };
+
+        private _calcFunc = vgm_c_displayRadioOperator_command getOrDefault ["description", [[], { "" }]];
+
+        DESCRIPTION ctrlSetStructuredText parseText (_calcFunc # 0 call _calcFunc # 1);
     };
     case "mouseButtonDown":
     {

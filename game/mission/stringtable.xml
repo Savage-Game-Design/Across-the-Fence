@@ -1782,7 +1782,7 @@
             <Original>Call on-station</Original>
         </Key>
         <Key ID="STR_VGM_RTO_ARRIVES_IN">
-            <Original>Arrives in %1m</Original>
+            <Original>Arrives in %1</Original>
         </Key>
         <Key ID="STR_VGM_RTO_ENROUTE">
             <Original>Aircraft en-route</Original>
@@ -1798,6 +1798,24 @@
         </Key>
         <Key ID="STR_VGM_RTO_TOO_MANY_AIRCRAFT_IN_USE">
             <Original>The maximum number of aircraft are in use</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_EXTRA_ARRIVAL_TIME">
+            <Original>&lt;t size='1.2'&gt;%1 modifier to arrival time&lt;/t&gt;&lt;br/&gt;Reasons: %2</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NO_EXTRA_ARRIVAL_TIME">
+            <Original>&lt;t size='1'&gt;No modifier to arrival time&lt;/t&gt;</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REASON_HANDHELD">
+            <Original>Using survival radio</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_STRIKE_DESCRIPTION">
+            <Original>&lt;t size='1.2'&gt;%1 extra delay before strike&lt;/t&gt;&lt;br/&gt;Reasons: %2</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NO_STRIKE_DELAY">
+            <Original>&lt;t size='1'&gt;No extra delay before strike&lt;/t&gt;</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NONE">
+            <Original>None</Original>
         </Key>
     </Package>
 </Project>
