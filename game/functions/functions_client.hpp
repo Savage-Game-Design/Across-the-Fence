@@ -342,7 +342,9 @@ class vgm_g
         class skills_canLearnWithReason {};
         class skills_canSee {};
         class skills_getByPath {};
+        class skills_getSkillCostForPlayer {};
         class skills_getSkillTreeFromSkill {};
+        class skills_getTreeDiscounts {};
         class skills_getTreeSkillPoints {};
         class skills_getTreeSkillPointsBelowTier {};
         class skills_isKnown {};
@@ -352,6 +354,7 @@ class vgm_g
         {
             preInit = 1;
         };
+        class skills_setTreeDiscount {};
         class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
