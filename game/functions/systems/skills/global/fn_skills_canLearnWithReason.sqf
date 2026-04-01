@@ -33,7 +33,7 @@ private _unlockConditions = _skill getOrDefault ["conditionsUnlockGlobal", []];
 
 private _hasEnoughSkillPoints = [
     {
-        ((_skillsData getOrDefault ["skillPoints", 0]) >= (_skill get "cost"))
+        ((_skillsData getOrDefault ["skillPoints", 0]) >= ([_skill, _player] call vgm_g_fnc_skills_getSkillCostForPlayer))
     },
     "STR_VGM_SKILLS_UI_NOT_ENOUGH_SKILLPOINTS"
 ];

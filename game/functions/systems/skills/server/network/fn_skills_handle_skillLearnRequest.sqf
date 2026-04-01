@@ -35,7 +35,7 @@ if (!_canLearn) exitWith {
 (format ["Handling learn request for %1 (%2), %3", name _player, getPlayerUID _player, _skillPath]) call vgm_g_fnc_logInfo;
 
 private _skill = _skillPath call vgm_g_fnc_skills_getByPath;
-private _skillCost = _skill get "cost";
+private _skillCost = [_skill, _player] call vgm_g_fnc_skills_getSkillCostForPlayer;
 
 
 private _skillsData = _player call vgm_s_fnc_skills_dataGetCached;

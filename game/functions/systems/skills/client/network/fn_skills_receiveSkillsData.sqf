@@ -2,7 +2,7 @@
     File: fn_skills_receiveSkillsData.sqf
     Author: veteran29
     Date: 2023-01-27
-    Last Update: 2023-06-02
+    Last Update: 2026-04-01
     Public: No
 
     Description:
@@ -65,3 +65,5 @@ private _knownSkillPathsList = _skillsData get "skillPaths";
     ["vgm_skills_learnt", [_x, _skill]] call para_g_fnc_event_triggerLocal;
 
 } forEach _knownSkillPathsList;
+
+["vgm_skills_dataUpdated", [_skillsData]] call para_g_fnc_event_triggerLocal;
