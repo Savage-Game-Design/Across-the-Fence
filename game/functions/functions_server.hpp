@@ -431,6 +431,7 @@ class vgm_s
             preInit = 1;
         };
 
+        class skills_recalculateSkillPoints {};
         class skills_teachSkill {};
     };
 
@@ -438,6 +439,7 @@ class vgm_s
     {
         VGM_SERVER_PATH(\systems\skills\server\network);
 
+        class skills_handle_recalculateSkillPoints {};
         class skills_handle_skillLearnRequest {};
         class skills_handle_skillRespecRequest {};
         class skills_handle_skillsDataRequest {};

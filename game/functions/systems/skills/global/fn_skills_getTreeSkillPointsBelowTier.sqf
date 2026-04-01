@@ -28,7 +28,7 @@ private _skillPoints = 0;
     private _skillTier = _x;
     {
         if ([_x, _player] call vgm_g_fnc_skills_isKnown) then {
-            _skillPoints = _skillPoints + (_x get "cost");
+            _skillPoints = _skillPoints + ([_x, _player] call vgm_g_fnc_skills_getSkillCostForPlayer);
         };
     } forEach _skillTier;
 } forEach (_skillTree get "skills");
