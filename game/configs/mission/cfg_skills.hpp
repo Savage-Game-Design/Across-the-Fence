@@ -59,8 +59,6 @@ class vgm_skillAdvancedTrainingTemplate: vgm_skillTemplate {
             "STR_VGM_SKILLS_UI_ADVANCED_TRAINING_LIMIT"
         }
     };
-    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true];";
-    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true];";
     applyOnRespawn = 1;
 };
 
@@ -352,6 +350,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN_DESC";
                     column = 0;
 
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; ['pointman'] call vgm_c_fnc_skills_setTreeDiscount;";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; ['pointman', 1] call vgm_c_fnc_skills_setTreeDiscount;";
                     cost = 2;
                 };
 
@@ -591,6 +591,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_TEAM_LEADER_DESC";
                     column = 0;
 
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; ['teamLeader'] call vgm_c_fnc_skills_setTreeDiscount;";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; ['teamLeader', 1] call vgm_c_fnc_skills_setTreeDiscount;";
                     cost = 2;
                 };
 
@@ -834,8 +836,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]";
-                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]";
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]; ['rto'] call vgm_c_fnc_skills_setTreeDiscount;";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]; ['rto', 1] call vgm_c_fnc_skills_setTreeDiscount;";
                     cost = 10;
                 };
 
@@ -1090,8 +1092,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_MEDIC_DESC";
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['Medic', true]";
-                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['Medic', false]";
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['Medic', true]; ['medic'] call vgm_c_fnc_skills_setTreeDiscount;";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['Medic', false]; ['medic', 1] call vgm_c_fnc_skills_setTreeDiscount;";
                     cost = 2;
                 };
 

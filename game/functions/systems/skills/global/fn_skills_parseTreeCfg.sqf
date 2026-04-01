@@ -2,7 +2,7 @@
     File: fn_skills_parseTreeCfg.sqf
     Author:
     Date: 2023-01-15
-    Last Update: 2025-11-29
+    Last Update: 2026-04-01
     Public: Yes
 
     Description:
@@ -39,7 +39,6 @@ private _fnc_parseSkillTree = {
         ["icon", getText (_cfgSkillTree >> "icon")],
         ["description", getText (_cfgSkillTree >> "description")],
         ["skills", []],
-        ["skillPointsMax", 0]
     ];
     private _cfgSkills = _cfgSkillTree >> "skills";
     {
@@ -78,12 +77,6 @@ private _fnc_parseSkillTree = {
                 ["codeUnableToActivate", compileFinal getText (_x >> "codeUnableToActivate")]
             ];
         };
-
-        private _skillPointsMax = _skillTree get "skillPointsMax";
-        {
-            _skillPointsMax = _skillPointsMax + (_x get "cost");
-        } forEach _skills;
-        _skillTree set ["skillPointsMax", _skillPointsMax];
 
         _skillTree get "skills" pushBack _skills;
     } forEach SKILL_TIERS;

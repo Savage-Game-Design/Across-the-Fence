@@ -22,8 +22,7 @@ switch _mode do {
 
             _refreshHandlersIds pushBack _ehId;
         } forEach [
-            "vgm_skills_learnt",
-            "vgm_skills_forgotten"
+            "vgm_skills_dataUpdated"
         ];
 
         ["refreshUI", _display] call vgm_c_fnc_displaySkills;
@@ -64,7 +63,7 @@ switch _mode do {
             _ctrlSkills lbSetPicture [_ind, _skillTree get "icon"];
             _ctrlSkills lbSetData [_ind, str [_x]];
             ["skillSetTooltip", [_ctrlSkills, _ind]] call vgm_c_fnc_displaySkills;
-            _ctrlSkills lbSetTooltip [_ind, format ["%1 (%2/%3)", _displayName, _skillTree call vgm_g_fnc_skills_getTreeSkillPoints, _skillTree get "skillPointsMax"]];
+            _ctrlSkills lbSetTooltip [_ind, format ["%1 (%2/%3)", _displayName, _skillTree call vgm_g_fnc_skills_getTreeSkillPoints, [_skillTree, player] call vgm_g_fnc_skills_getTreeSkillPointsMaxForPlayer]];
         } forEach _skillTreeClasses;
     };
 
@@ -117,7 +116,7 @@ switch _mode do {
                 _ctrlUnlock ctrlEnable false;
             };
 
-            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
+            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", [_currentSkill, player] call vgm_g_fnc_skills_getSkillCostForPlayer];
             _ctrlUnlock ctrlEnable ([player, _currentSkill] call vgm_g_fnc_skills_canLearn);
             _ctrlUnlock setVariable ["vgm_skill", _currentSkill];
         };
@@ -247,7 +246,7 @@ switch _mode do {
                 private _skillText = [
                     parseText (_skill get "displayName"),
                     lineBreak,
-                    format ["%1 SP", _skill get "cost"]
+                    format ["%1 SP", [_skill, player] call vgm_g_fnc_skills_getSkillCostForPlayer]
                 ];
 
                 if (_skill get "isActive") then {
@@ -402,7 +401,7 @@ switch _mode do {
             params ["_display", "_skill"];
             private _learn = [parseText ([
                 "Do you want to learn: <t color='#ff0000'>", _skill get "displayName", "</t><br/>",
-                format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", call vgm_c_fnc_skills_getSkillPoints, _skill get "cost"],
+                format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", call vgm_c_fnc_skills_getSkillPoints, [_skill, player] call vgm_g_fnc_skills_getSkillCostForPlayer],
                 ["<br/>Can't learn!", ""] select ([player, _skill] call vgm_g_fnc_skills_canLearn)
             ] joinString ""), "Confirm", true, true, _display] call BIS_fnc_guiMessage;
             // check if confirmed
@@ -418,7 +417,7 @@ switch _mode do {
         private _skillTree = _skillTreePath call vgm_g_fnc_skills_getByPath;
 
         private _skillTreePoints = _skillTree call vgm_g_fnc_skills_getTreeSkillPoints;
-        private _label = format ["%1 (%2/%3 SP)", _skillTree get "displayName", _skillTreePoints, _skillTree get "skillPointsMax"];
+        private _label = format ["%1 (%2/%3 SP)", _skillTree get "displayName", _skillTreePoints, [_skillTree, player] call vgm_g_fnc_skills_getTreeSkillPointsMaxForPlayer];
 
         _ctrlSkills lbSetTooltip [_i, _label];
     };

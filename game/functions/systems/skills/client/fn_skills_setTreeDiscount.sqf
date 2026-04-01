@@ -2,7 +2,7 @@
     File: fn_skills_setTreeDiscount.sqf
     Author: Savage Game Design
     Date: 2026-03-28
-    Last Update: 2026-03-28
+    Last Update: 2026-04-01
     Public: No
 
     Description:
@@ -23,6 +23,12 @@ params ["_treeName", ["_factor", 0.5]];
 
 private _discounts = player getVariable ["vgm_g_skills_treeDiscounts", createHashMap];
 
-_discounts set [_treeName, _factor];
+if (_factor isEqualTo 1 || _factor <= 0) then {
+    _discounts deleteAt _treeName;
+} else {
+    _discounts set [_treeName, _factor];
+};
 
 player setVariable ["vgm_g_skills_treeDiscounts", _discounts, true];
+
+[player] remoteExecCall ["vgm_s_fnc_skills_handle_recalculateSkillPoints", 2];

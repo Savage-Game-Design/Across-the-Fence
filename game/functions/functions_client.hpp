@@ -345,6 +345,7 @@ class vgm_g
         class skills_getSkillCostForPlayer {};
         class skills_getSkillTreeFromSkill {};
         class skills_getTreeDiscounts {};
+        class skills_getTreeSkillPointsMaxForPlayer {};
         class skills_getTreeSkillPoints {};
         class skills_getTreeSkillPointsBelowTier {};
         class skills_isKnown {};
@@ -354,7 +355,6 @@ class vgm_g
         {
             preInit = 1;
         };
-        class skills_setTreeDiscount {};
         class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
     };
@@ -875,6 +875,7 @@ class vgm_c
         {
             preInit = 1;
         };
+        class skills_setTreeDiscount {};
         class skills_unapplyGroupSkill {};
         class skills_unapplyPlayersGroupSkills {};
     };
