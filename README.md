@@ -8,30 +8,17 @@ Inspired by the namesake book from RT Idaho One-Zero and SOG Prairie Fire advise
 As you gain experience fighting the NVA, you'll develop your skills and abilities while gaining access to new weapons and equipment.
 
 
-## Building
-
-### Overview
-
-In order to streamline building, the project can be built as both a mission, and as a set of mods (client, server, mission)
-
-This is facilitated by having a custom folder structure, which is compiled into the usual Arma folder structure by the build tools.
-
-Currently, the client mod is not used. 
-
-### Project structure
+## Project structure
 
 The top-level folders are:
 
-`build` - Build tooling
+- `build` - Build tooling - compiles the gamemode into the structure Arma 3 is expecting, as either a mission or mission + addon pair.
+- `field_manual` - In-game documentation in .toml format, that's compiled into config entries for the in-game Field Manual by the build tools.
+- `game` - All gamemode files (described in more detail below).
+- `mod` - All mod-specific build files (mod.cpp, etc). These are used when building the server addon.
+- `paradigm` - An integrated copy of the [Paradigm](https://github.com/Savage-Game-Design/Paradigm) shared library. 
 
-`game` - All gamemode files
-
-`mod` - All mod-specific build files (mod.cpp, etc)
-
-Within `game`, we have:
-
-#### `assets` 
-Binary assets, such as textures, models, sounds.
+### `game` folder
 
 #### `configs`
 General-purpose configs. Broken down into `client`, `mission` and `server`.
@@ -47,20 +34,34 @@ The way the build tool *will eventually* work when building as an addon is to se
 When building as a mission, all folders are simply copied into the mission.
 
 #### `maps`
-One folder for each map the gamemode will be on. Each folder includes the `mission.sqm`, as well as `description_map.inc` which is included into `description.ext` and `MapConfig`, which contains map-specific config stored at `missionConfigFile >> "MapConfig"`.
+One folder for each map the gamemode will be on. Each folder includes the `mission.sqm`, as well as `description_map.inc` which is included into `description.ext` and `map_config`, which contains map-specific config stored at `missionConfigFile >> "MapConfig"`.
 
 One PBO is produced per map.
 
 #### `mission`
-The root of the mission PBO. Includes necessary mission skeleton files, as well as placeholders for files the build system will insret.
+The root of the mission PBO. Includes:
 
-Within `mod` we have:
+- Necessary mission skeleton files, as well as placeholders for files the build system will insert.
+- Binary assets (`assets` folder)
+- Stringtable (`stringtable.xml`) for translations
+
+### `mod` folder:
 
 #### `client`
 The client mod build files, including .hemtt config, mod.cpp and the base config.cpp for addons.
 
 #### `server`
 The server mod build files, including .hemtt config mod.cpp and the base config.cpp for addons.
+
+## Building
+
+### Overview
+
+In order to streamline building, the project can be built as both a mission, and as a set of mods (client, server, mission)
+
+This is facilitated by having a custom folder structure, which is compiled into the usual Arma folder structure by the build tools.
+
+Currently, the client mod is not used. 
 
 ### Build Setup
 
@@ -71,7 +72,7 @@ It's recommended to set the mission output folder to your Arma 3 profile's `mpmi
 
 #### Required software
 - Python (3.12 or later, must be windows MSC python[^0])
-- HEMTT (On windows: winget hemtt)
+- HEMTT (On windows: winget hemtt) if using `--pack-mods`
 
 ### Running the build
 
@@ -79,7 +80,13 @@ The build will need running each time you update the gamemode. It will copy the 
 
 #### Mission
 
-To build as a mission, run `python3 build/run.py build`. You likely want to add `--overwrite` to overwrite any existing files in the output folder.
+To build as a mission, run `python3 build/run.py build`. 
+
+Useful options:
+
+- `--overwrite` to overwrite any existing files in the output folder.
+- `--version "MyVersion"` to set the mission version
+- `--mod` to build as a mission / server mod pair
 
 The mission (in the output directory) can then be opened in the Arma editor, e.g using `python3 build/run.py launch client --editor`.
 
@@ -88,6 +95,7 @@ Most build commands accept the following options:
 - `--clean` - Removes the existing folder (e.g mod output folders, mission folder)
 - `--version` - Accepts a version in the format: `v<version>@<hash> <text>`, e.g `v1.2.3@abcd indev`. All components are optional, so `@abcd indev` is valid, as is `v1.2.3` or just `indev`.
 
+For doing release builds, there's `python3 build/run.py release` which runs a build in release mode. 
 
 #### Mod
 
