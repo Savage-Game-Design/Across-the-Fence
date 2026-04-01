@@ -38,7 +38,7 @@ private _fnc_parseSkillTree = {
         ["displayName", getText (_cfgSkillTree >> "displayName")],
         ["icon", getText (_cfgSkillTree >> "icon")],
         ["description", getText (_cfgSkillTree >> "description")],
-        ["skills", []],
+        ["skills", []]
     ];
     private _cfgSkills = _cfgSkillTree >> "skills";
     {
