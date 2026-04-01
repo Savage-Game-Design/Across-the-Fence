@@ -2,7 +2,7 @@
     File: fn_rto_flaresUntilDawn.sqf
     Author: Savage Game Design
     Date: 2026-03-01
-    Last Update: 2026-03-01
+    Last Update: 2026-03-29
     Public: No
 
     Description:
@@ -45,7 +45,7 @@ if (!isNil "_existingLoop") then {
 };
 
 vgm_s_rto_dawnLoops set [_key, [_startPos] spawn {
-	while {daytime >= 18 || daytime <= 6} do
+	while {daytime >= 17 || daytime <= 6} do
 	{
         // Spawn to ensure this script runs to completion and is never terminated accidentally mid-way.
         _this spawn {
