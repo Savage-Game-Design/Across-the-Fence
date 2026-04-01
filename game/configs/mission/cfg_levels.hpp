@@ -60,10 +60,9 @@ class vgm_levels {
         experience = 1268;
         skillPoints = 1;
     };
-    /*
     class level_16 {
         experience = 1305;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_17 {
         experience = 1339;
@@ -71,7 +70,7 @@ class vgm_levels {
     };
     class level_18 {
         experience = 1372;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_19 {
         experience = 1404;
@@ -79,7 +78,7 @@ class vgm_levels {
     };
     class level_20 {
         experience = 1433;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_21 {
         experience = 1462;
@@ -87,12 +86,13 @@ class vgm_levels {
     };
     class level_22 {
         experience = 1489;
-        skillPoints = 1;
+        skillPoints = 2;
     };
     class level_23 {
         experience = 1514;
         skillPoints = 1;
     };
+    /*
     class level_24 {
         experience = 1538;
         skillPoints = 1;
