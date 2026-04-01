@@ -3103,7 +3103,7 @@ class Mission
 									items=1;
 									class Item0
 									{
-										name="vn_b_item_firstaidkit";
+										name="vn_helper_item_firstaidkit";
 										count=1;
 									};
 								};

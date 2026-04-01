@@ -874,6 +874,19 @@ class vgm_c
         };
     };
 
+    class quickstart
+    {
+        VGM_CLIENT_PATH(\systems\quickstart\client);
+
+        class quickstart_becomeHeavy {};
+        class quickstart_becomeMedic {};
+        class quickstart_becomePointman {};
+        class quickstart_becomeRto {};
+        class quickstart_becomeTailgunner {};
+        class quickstart_becomeTeamLeader {};
+        class quickstart_setLoadoutAndSkills {};
+    };
+
     class respawn
     {
         VGM_CLIENT_PATH(\systems\respawn\client);
