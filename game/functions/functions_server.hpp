@@ -341,6 +341,23 @@ class vgm_s
         class loc_setTargetBoxIndex {};
     };
 
+    class rto {
+        VGM_SERVER_PATH(\systems\rto\server);
+
+        class rto_addAvailableAircraft {};
+        class rto_clearAvailableAircraft {};
+        class rto_dismissAircraft {};
+        class rto_flaresUntilDawn {};
+        class rto_guideBomb {};
+        class rto_performStrike {};
+        class rto_preInit
+        {
+            preInit = 1;
+        };
+        class rto_requestAircraft {};
+        class rto_requestStrike {};
+    };
+
     class shared_hub
     {
         VGM_SERVER_PATH(\systems\shared_hub\server);

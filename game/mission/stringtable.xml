@@ -1747,4 +1747,81 @@
             <Original>Evening (18:00)</Original>
         </Key>
     </Package>
+    <Package name="RTO">
+        <Key ID="STR_VGM_RTO_NO_AIRCRAFT_ON_STATION">
+            <Original>No aircraft on-station</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_X_AIRCRAFT_ON_STATION">
+            <Original>%1 aircraft on-station</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIRCRAFT_ENROUTE">
+            <Original>%1 (arrives in %2m)</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIRCRAFT_ON_STATION">
+            <Original>%1 (departs in %2m)</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NAME_WITH_STATUS">
+            <Original>[%2] %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_REFUELING">
+            <Original>[R]EFUELING - %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_STANDBY">
+            <Original>[S]TANDBY</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_ENROUTE">
+            <Original>[E]NROUTE - %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_ONSTATION">
+            <Original>[O]N STATION - %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_AIR_LIST_STATUS_DEPARTED">
+            <Original>[D]EPARTED</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_CALL">
+            <Original>Call on-station</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_ARRIVES_IN">
+            <Original>Arrives in %1</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_ENROUTE">
+            <Original>Aircraft en-route</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_ON_ATTACK_RUN">
+            <Original>Aircraft on attack run</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REMAINING">
+            <Original>%1 remaining</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_DISMISS">
+            <Original>Return to base</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_TOO_MANY_AIRCRAFT_IN_USE">
+            <Original>The maximum number of aircraft are in use</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_EXTRA_ARRIVAL_TIME">
+            <Original>&lt;t size='1.2'&gt;%1 modifier to arrival time&lt;/t&gt;&lt;br/&gt;Reasons: %2</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NO_EXTRA_ARRIVAL_TIME">
+            <Original>&lt;t size='1'&gt;No modifier to arrival time&lt;/t&gt;</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REASON_HANDHELD">
+            <Original>Using survival radio</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REASON_NIGHT">
+            <Original>Night</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_REASON_WEATHER">
+            <Original>Weather</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_STRIKE_DESCRIPTION">
+            <Original>&lt;t size='1.2'&gt;%1 extra delay before strike&lt;/t&gt;&lt;br/&gt;Reasons: %2</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NO_STRIKE_DELAY">
+            <Original>&lt;t size='1'&gt;No extra delay before strike&lt;/t&gt;</Original>
+        </Key>
+        <Key ID="STR_VGM_RTO_NONE">
+            <Original>None</Original>
+        </Key>
+    </Package>
 </Project>

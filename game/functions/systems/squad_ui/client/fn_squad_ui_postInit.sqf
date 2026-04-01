@@ -2,7 +2,7 @@
     File: fn_squad_ui_postInit.sqf
     Author: Savage Game Design
     Date: 2024-07-04
-    Last Update: 2025-02-06
+    Last Update: 2026-01-25
     Public: No
 
     Description:
@@ -102,12 +102,12 @@ call {
         vgm_squad_ui_drawMapEH = CTRL_MAP ctrlAddEventHandler ["Draw", vgm_c_fnc_squad_ui_drawPlayersOnMapEventHandler];
     };
 
-    ["vgm_artillery_displayOpened", {
+    ["vgm_rto_displayOpened", {
         params ["_eventParams"];
-        _eventParams params ["_artilleryDisplay"];
+        _eventParams params ["_rtoDisplay"];
 
-        private _artilleryMap = _artilleryDisplay displayCtrl 7001;
-        private _drawPlayersEH = _artilleryMap ctrlAddEventHandler ["Draw", vgm_c_fnc_squad_ui_drawPlayersOnMapEventHandler];
-        _artilleryDisplay setVariable ["vgm_c_squad_ui_drawPlayersEH", _drawPlayersEH];
+        private _rtoMap = _rtoDisplay displayCtrl 7001;
+        private _drawPlayersEH = _rtoMap ctrlAddEventHandler ["Draw", vgm_c_fnc_squad_ui_drawPlayersOnMapEventHandler];
+        _rtoDisplay setVariable ["vgm_c_squad_ui_drawPlayersEH", _drawPlayersEH];
     }] call para_g_fnc_event_subscribeLocal;
 };

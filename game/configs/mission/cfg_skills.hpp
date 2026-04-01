@@ -836,19 +836,19 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC";
                     column = 0;
 
-                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vn_artillery', true, true]; player setUnitTrait ['vgm_artillery_heavySupport', true, true]; ['rto'] call vgm_c_fnc_skills_setTreeDiscount;";
-                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vn_artillery', false, true]; player setUnitTrait ['vgm_artillery_heavySupport', false, true]; ['rto', 1] call vgm_c_fnc_skills_setTreeDiscount;";
-                    cost = 10;
+                    codeApply = "player setUnitTrait ['vgm_skills_advancedTraining', true, true]; player setUnitTrait ['vgm_radio_operator', true, true]; ['rto'] call vgm_c_fnc_skills_setTreeDiscount;";
+                    codeUnapply = "player setUnitTrait ['vgm_skills_advancedTraining', false, true]; player setUnitTrait ['vgm_radio_operator', false, true]; ['rto', 1] call vgm_c_fnc_skills_setTreeDiscount;";
+                    cost = 2;
                 };
 
                 class emergency_radio: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO";
                     description = "$STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 1;
 
-                    // TODO - Implementation
-                    cost = 8;
+                    codeApply = "player setUnitTrait ['vgm_radio_operator_handheld', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_radio_operator_handheld', false, true];";
+                    cost = 6;
                 };
             };
 
@@ -856,10 +856,10 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'f100d_mk82'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'f100d_mk82'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 2;
                 };
 
@@ -867,10 +867,10 @@ class vgm_skillTrees {
                 class cas_gunship_level_1: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'uh1c_gunship'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'uh1c_gunship'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 2;
                 };
 
@@ -878,10 +878,10 @@ class vgm_skillTrees {
                 class fireship: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_FIRESHIP";
                     description = "$STR_VGM_SKILLS_SKILL_FIRESHIP_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'fireship'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'fireship'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 2;
                 };
 
@@ -889,10 +889,10 @@ class vgm_skillTrees {
                 class strobe_marker: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER";
                     description = "$STR_VGM_SKILLS_SKILL_STROBE_MARKER_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_rto_reduceNightPenalties', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_rto_reduceNightPenalties', false, true];";
                     cost = 2;
                 };
             };
@@ -927,10 +927,10 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'f100d_mk82_napalm'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'f100d_mk82_napalm'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 4;
                 };
 
@@ -938,10 +938,10 @@ class vgm_skillTrees {
                 class cas_gunship_level_2: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'uh1c_heavy_hog'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'uh1c_heavy_hog'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 4;
                 };
 
@@ -949,10 +949,10 @@ class vgm_skillTrees {
                 class shadow: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_SHADOW";
                     description = "$STR_VGM_SKILLS_SKILL_SHADOW_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 4;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'shadow'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'shadow'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 4;
                 };
 
@@ -960,10 +960,10 @@ class vgm_skillTrees {
                 class long_antenna: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA";
                     description = "$STR_VGM_SKILLS_SKILL_LONG_ANTENNA_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 5;
 
-                    // TODO - Implementation
+                    codeApply = "player setUnitTrait ['vgm_rto_reduceWeatherPenalties', true, true];";
+                    codeUnapply = "player setUnitTrait ['vgm_rto_reduceWeatherPenalties', false, true];";
                     cost = 4;
                 };
             };
@@ -998,10 +998,10 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'f4c'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'f4c'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 6;
                 };
 
@@ -1009,10 +1009,10 @@ class vgm_skillTrees {
                 class cas_gunship_level_3: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'uh1c_ara'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'uh1c_ara'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 6;
                 };
 
@@ -1059,10 +1059,10 @@ class vgm_skillTrees {
                 class cas_fast_mover_level_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 2;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'f4b'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'f4b'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 8;
                 };
 
@@ -1070,10 +1070,10 @@ class vgm_skillTrees {
                 class cas_gunship_level_4: vgm_skillTemplate {
                     displayName = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4";
                     description = "$STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4_DESC";
-                    conditionsUnlockGlobal[] = { { "false", "STR_VGM_SKILLS_UI_DISABLED_SKILL" } };
                     column = 3;
 
-                    // TODO - Implementation
+                    codeApply = "[true, 'ah1g'] call vgm_c_fnc_skill_passives_addAircraft;";
+                    codeUnapply = "[false, 'ah1g'] call vgm_c_fnc_skill_passives_addAircraft;";
                     cost = 8;
                 };
             };

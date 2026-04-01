@@ -19,6 +19,7 @@ class vgm_g
         class fastSum {
             headerType = -1;
         };
+        class formatDuration {};
         class itemConfig {};
         class itemType {};
         class manWouldCollideAtPosition {};
@@ -322,6 +323,26 @@ class vgm_g
         class objGrabber_map {};
     };
 
+    class rto
+    {
+        VGM_GLOBAL_PATH(\systems\rto\global);
+
+		class rto_getAircraftInUse {};
+		class rto_getAircraftStatus {};
+        class rto_getAircraftTimesForPlayer {};
+        class rto_getTimeModifiersForPlayer {};
+        class rto_isAircraftDeparted {};
+        class rto_isAircraftEnRoute {};
+        class rto_isAircraftOnAttackRun {};
+        class rto_isAircraftOnStation {};
+        class rto_isAircraftOnStandby {};
+        class rto_isAircraftRefueling {};
+        class rto_getUsableRadioType {};
+        class rto_preInit {
+            preInit = 1;
+        };
+    };
+
     class respawn
     {
         VGM_GLOBAL_PATH(\systems\respawn\global);
@@ -499,6 +520,7 @@ class vgm_c
         class displayMenuBase {};
         class displayLoading {};
         class displayLevelIndicator {};
+        class displayRadioOperator {};
     };
 
     class groups
@@ -726,6 +748,18 @@ class vgm_c
         };
     };
 
+    class rto
+    {
+        VGM_CLIENT_PATH(\systems\rto\client);
+
+        class rto_addActions {};
+        class rto_postInit
+        {
+            postInit = 1;
+        };
+        class rto_removeActions {};
+    };
+
     class shared_hub
     {
         VGM_CLIENT_PATH(\systems\shared_hub\client);
@@ -950,10 +984,14 @@ class vgm_c
         class skill_passives_legPockets {};
         class skill_passives_playingPossum {};
     };
-    class skill_passives_fireSupport
+    class skill_passives_rto
     {
-        VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
+        VGM_CLIENT_PATH(\systems\skill\client\passives\rto);
 
+        class skill_passives_addAircraft_preInit {
+            preInit = 1;
+        };
+        class skill_passives_addAircraft {};
     };
     class skill_passives_support
     {
