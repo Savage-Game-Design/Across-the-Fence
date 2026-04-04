@@ -1108,6 +1108,14 @@ class vgm_c
         class skill_investigate_toggleFocusMode {};
     };
 
+
+    class spectator
+    {
+        VGM_CLIENT_PATH(\systems\spectator\client);
+
+        class spectator_toggle {};
+    };
+
     class squad_ui
     {
         VGM_CLIENT_PATH(\systems\squad_ui\client);
