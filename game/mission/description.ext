@@ -116,6 +116,14 @@ class Params {
         texts[] = {"False", "True"};
         default = 0;
     };
+    class tutorial_disable
+    {
+        title = $STR_VGM_PARAMS_TUTORIAL_DISABLE;
+        values[] = {0, 1};
+        texts[] = {"Enabled", "Disabled"};
+        default = 0;
+
+    };
     class disableMultithreadedLineIntersects
     {
         title = "Possible crash fix - disable multi-threaded line intersects (default on)";
