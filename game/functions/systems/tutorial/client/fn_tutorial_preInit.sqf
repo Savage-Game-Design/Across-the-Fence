@@ -4,7 +4,7 @@
     File: fn_tutorial_preInit.sqf
     Author:
     Date: 2024-11-16
-    Last Update: 2025-01-23
+    Last Update: 2026-04-04
     Public: No
 
     Description:
@@ -14,6 +14,8 @@
 
 if (!hasInterface) exitWith {};
 [] call para_c_fnc_ui_hints_setup;
+
+vgm_g_tutorial_disable = ["tutorial_disable", 0] call BIS_fnc_getParamValue > 0;
 
 [
     createHashMapFromArray [
