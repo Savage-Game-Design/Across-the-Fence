@@ -2,7 +2,7 @@
     File: fn_missions_zones_spawnRandomSites.sqf
     Author: Savage Game Design
     Date: 2024-08-22
-    Last Update: 2025-11-20
+    Last Update: 2026-04-15
     Public: Yes
 
     Description:
@@ -10,61 +10,59 @@
 
     Parameter(s):
         _targetZone - Zone to spawn sites in [STRING]
-        _quantity - Number of sites to spawn [NUMBER]
+        _spawnChance - Percentage change that a location has a site [NUMBER]
 
     Returns:
         All spawned sites [ARRAY]
 
     Example(s):
-        ["oscar8", 10] call vgm_s_fnc_missions_zones_spawnRandomSites;
+        ["oscar8", 0.5] call vgm_s_fnc_missions_zones_spawnRandomSites;
  */
 
-params ["_targetZone", "_quantity"];
+params ["_targetZone", "_spawnChance"];
 
 private _zoneSites = vgm_missions_zones_spawnedSites getOrDefault [_targetZone, [], true];
 
-private _locations = [_targetZone] call vgm_s_fnc_loc_getTargetBoxLocations;
+private _targetBoxLocations = [_targetZone] call vgm_s_fnc_loc_getTargetBoxLocations;
 
-private _siteTypes = [] call vgm_s_fnc_sites_getAllSiteTypes;
-private _siteTypeIds = keys _siteTypes;
-private _siteWeights = _siteTypeIds apply {count (_locations getOrDefault [_x, []])};
+private _positionsToSiteTypes = createHashMap;
+private _allSiteTypes = [] call vgm_s_fnc_sites_getAllSiteTypes;
+
+// Invert the map so it's locations to all sites that can be spawn there, so we can work with density.
+{
+    private _locationType = _x;
+    private _positions = _y;
+
+    // Filters out locations that aren't sites, like "lz"
+    if !(_locationType in _allSiteTypes) then {
+        continue;
+    };
+
+    {
+        _positionsToSiteTypes getOrDefault [_x, [], true] pushBackUnique _locationType;
+    } forEach _positions;
+} forEach _targetBoxLocations;
 
 private _occupiedLocations = createHashMap;
 private _createdSites = [];
 
-for "_i" from 1 to _quantity do {
-    private _chosenSiteId = "";
-    private _siteLocations = [];
-    private _siteSelectionAttempts = 0;
-    while { count _siteLocations isEqualTo 0 && _siteSelectionAttempts < 3 } do {
-        _siteSelectionAttempts = _siteSelectionAttempts + 1;
-        _chosenSiteId = _siteTypeIds selectRandomWeighted _siteWeights;
-        _siteLocations = _locations getOrDefault [_chosenSiteId, []];
-    };
+{
+    private _position = _x;
+    private _possibleSiteTypeIds = _y;
 
-    // If we didn't find a valid site, just continue with the next spawning attempt.
-    if (_siteLocations isEqualTo []) then {
+    if (random 1 > _spawnChance) then {
         continue;
     };
 
-    private _chosenLocation = selectRandom _siteLocations;
-    private _locationAttempts = 0;
-    while { _chosenLocation in _occupiedLocations && _locationAttempts < 3 } do {
-        _locationAttempts = _locationAttempts + 1;
-        _chosenLocation = selectRandom _siteLocations;
-    };
+    private _chosenSiteTypeId = selectRandom _possibleSiteTypeIds;
 
-    if (_chosenLocation in _occupiedLocations) then {
-        continue;
-    };
+    _occupiedLocations set [_position, true];
 
-    _occupiedLocations set [_chosenLocation, true];
-
-    private _createdSite = [_chosenSiteId, _chosenLocation] call vgm_s_fnc_sites_spawn;
+    private _createdSite = [_chosenSiteTypeId, _position] call vgm_s_fnc_sites_spawn;
     // Add to _zoneSites as sites are spawned. That way if a later spawn errors, earlier sites can be cleaned up.
     _zoneSites pushBack _createdSite;
     _createdSites pushBack _createdSite;
-};
+} forEach _positionsToSiteTypes;
 
 // propagate sites to clients
 private _zoneInfoNetmap = ["vgm_missions_zones_zoneInfoById"] call para_g_fnc_netmap_get;
