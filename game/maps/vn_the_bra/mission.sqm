@@ -176,7 +176,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="Across the Fence (indev)";
+		briefingName="Across the Fence (#VERSION#)";
 		resistanceWest=0;
 		timeOfChanges=1800.0002;
 		startWeather=0.2;
