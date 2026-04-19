@@ -2,7 +2,7 @@
     File: spectator_toggle.sqf
     Author: Savage Game Design
     Date: 2026-04-05
-    Last Update: 2026-04-08
+    Last Update: 2026-04-19
     Public: No
 
     Description:
@@ -55,5 +55,7 @@ if (_allowClosing) then {
     // Only allow US and civilian (in case captive messes with it)
     [west, civilian],
     // Disable AI
+    false,
+    // Disable free camera
     false
 ]] call BIS_fnc_EGSpectator;
