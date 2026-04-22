@@ -14,7 +14,7 @@ class vgm_radio_operator {
             // Time the aircraft can remain on-station before returning to base.
             onStationTimeSecs = 600;
             // Time the aircraft takes to refuel before becoming ready again.
-            refuelTimeSecs = 1200;
+            refuelTimeSecs = 720;
             // All strikes available to the aircraft while on-station
             class strikes {
                 // A single strike. The name will be based on the magazines.
