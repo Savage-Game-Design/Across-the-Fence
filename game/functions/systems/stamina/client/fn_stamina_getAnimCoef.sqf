@@ -3,7 +3,7 @@
     File: fn_getAnimCoef.sqf
     Author: Savage Game Design
     Date: 2023-08-19
-    Last Update: 2025-01-17
+    Last Update: 2026-04-22
     Public: No
 
     Description:
@@ -38,7 +38,7 @@ vgm_stamina_animCoefCache getOrDefaultCall [_anim, {
 
             switch (_weaponState) do {
                 case "ras": {_stanceCoef * 1};
-                case "low": {_stanceCoef * 0.67};
+                case "low": {_stanceCoef * 1};
                 default {_stanceCoef * 1};
             } // return
         };
