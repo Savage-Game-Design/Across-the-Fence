@@ -658,7 +658,7 @@ class vgm_skillTrees {
                     column = 0;
 
                     // Note - make sure duration here matches duration below.
-                    codeActivateGroup = "[player, 'squadUiMapDrawEveryone', 'skill_rollCall', 60, true] call vgm_c_fnc_statusEffect_set;"
+                    codeActivateGroup = "[player, 'squadUiMapDrawEveryone', 'skill_rollCall', 60, true] call vgm_c_fnc_statusEffect_set;";
                     skillType = 2;
                     cost = 4;
                     cooldown = 240;
@@ -749,8 +749,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_TEAM_AWARENESS_DESC";
                     column = 2;
 
-                    codeApply = "[player, 'squadUiMapDrawEveryone', 'skill_teamAwareness', -1, true] call vgm_c_fnc_statusEffect_set;"
-                    codeUnapply = "[player, 'squadUiMapDrawEveryone', 'skill_teamAwareness'] call vgm_c_fnc_statusEffect_remove;"
+                    codeApply = "[player, 'squadUiMapDrawEveryone', 'skill_teamAwareness', -1, true] call vgm_c_fnc_statusEffect_set;";
+                    codeUnapply = "[player, 'squadUiMapDrawEveryone', 'skill_teamAwareness'] call vgm_c_fnc_statusEffect_remove;";
                     cost = 6;
                 };
 
@@ -1177,7 +1177,7 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_BLACK_KNIGHT_DESC";
                     column = 1;
 
-                    codeActivateGroup = "[player, 'injuryEffectImmunity', 'skill_blackKnight', 120, true] call vgm_c_fnc_statusEffect_set"
+                    codeActivateGroup = "[player, 'injuryEffectImmunity', 'skill_blackKnight', 120, true] call vgm_c_fnc_statusEffect_set";
                     skillType = 1;
                     cost = 4;
                     cooldown = 480;
@@ -1199,8 +1199,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_HE_AINT_HEAVY_DESC";
                     column = 3;
 
-                    codeApply = "[player, 'carryCanRun', 'skill_passives_HeAintHeavy', -1, true] call vgm_c_fnc_statusEffect_set;"
-                    codeUnapply = "[player, 'carryCanRun', 'skill_passives_HeAintHeavy'] call vgm_c_fnc_statusEffect_remove;"
+                    codeApply = "[player, 'carryCanRun', 'skill_passives_HeAintHeavy', -1, true] call vgm_c_fnc_statusEffect_set;";
+                    codeUnapply = "[player, 'carryCanRun', 'skill_passives_HeAintHeavy'] call vgm_c_fnc_statusEffect_remove;";
                     cost = 4;
                 };
 
@@ -1265,8 +1265,8 @@ class vgm_skillTrees {
                     description = "$STR_VGM_SKILLS_SKILL_IVE_SEEN_WORSE_DESC";
                     column = 4;
 
-                    codeApply = "[player, 'limbInjuryEffectResistance', 'skill_passives_iveSeenWorse', -1, true] call vgm_c_fnc_statusEffect_set;"
-                    codeUnapply = "[player, 'limbInjuryEffectResistance', 'skill_passives_iveSeenWorse'] call vgm_c_fnc_statusEffect_remove;"
+                    codeApply = "[player, 'limbInjuryEffectResistance', 'skill_passives_iveSeenWorse', -1, true] call vgm_c_fnc_statusEffect_set;";
+                    codeUnapply = "[player, 'limbInjuryEffectResistance', 'skill_passives_iveSeenWorse'] call vgm_c_fnc_statusEffect_remove;";
                     cost = 6;
                 };
             };
