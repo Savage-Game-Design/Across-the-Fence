@@ -1368,6 +1368,12 @@
         </Key>
     </Package>
     <Package name="Missions creation">
+        <Key ID="STR_VGM_MISSIONS_CREATION_CREATED">
+            <Original>Mission created</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_CREATION_CREATED_DETAILS">
+            <Original>Created new mission %1</Original>
+        </Key>
         <Key ID="STR_VGM_MISSIONS_CREATION_NO_ZONES_FREE">
             <Original>Couldn't create a new mission: all target boxes are currently in use</Original>
         </Key>
@@ -1376,6 +1382,14 @@
         </Key>
         <Key ID="STR_VGM_MISSIONS_CREATION_UNKNOWN_ERROR">
             <Original>Mission creation failed for unexpected reason %1</Original>
+        </Key>
+    </Package>
+    <Package name="Missions join">
+        <Key ID="STR_VGM_MISSIONS_JOINED">
+            <Original>Mission joined</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_JOINED_DETAILS">
+            <Original>Joined %1's mission</Original>
         </Key>
     </Package>
     <Package name="Missions start">
