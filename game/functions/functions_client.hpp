@@ -1192,7 +1192,7 @@ class vgm_c
         class timeOfDayVote_preInit
         {
             preInit = 1;
-        }
+        };
     };
 
     class tutorial

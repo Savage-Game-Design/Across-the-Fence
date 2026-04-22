@@ -291,7 +291,7 @@ VGM_SET_Y(0.5 * _ICON_W + 2.5 - 5)
                     controlOffsetY = 1 * VGM_GRID_H;
                     columnW = (_W - 4) * VGM_GRID_W;
                     controlH = (_ICON_W + 7) * VGM_GRID_H;
-                }
+                };
                 class Name
                 {
                     controlBaseClassPath[] = {"VGM_ctrlStructuredText"};
