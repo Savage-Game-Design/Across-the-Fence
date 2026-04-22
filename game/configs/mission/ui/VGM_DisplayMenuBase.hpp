@@ -45,6 +45,7 @@ class VGM_DisplayMenuBase
                 class Equipment: VGM_ctrlButton
                 {
                     idc = -1;
+                    enable = 0;
                     text = _STRTABLE(EQUIPMENT);
                     tooltip = _STRTABLE(MANAGE_EQUIPMENT);
                     display = _DISPLAY(Equipment); // The display that is opened when clicking the button
@@ -58,6 +59,7 @@ class VGM_DisplayMenuBase
                 };
                 class Abilities: Equipment
                 {
+                    enable = 1;
                     text = _STRTABLE(ABILITIES);
                     tooltip = "";
                     display = _DISPLAY(Abilities);
@@ -66,6 +68,7 @@ class VGM_DisplayMenuBase
                 };
                 class SkillTree: Equipment
                 {
+                    enable = 1;
                     text = _STRTABLE(SKILLTREE);
                     tooltip = "";
                     display = _DISPLAY(Skills);

@@ -3,7 +3,7 @@
     File: fn_displayMenuBase.sqf
     Author: Savage Game Design
     Date: 2024-04-06
-    Last Update: 2024-11-24
+    Last Update: 2026-04-22
     Public: No
 
     Description:
@@ -46,6 +46,10 @@ switch _mode do {
         };
 
         switch ctrlClassName _ctrl do {
+            case "Equipment": {
+                _ctrl ctrlEnable false;
+                _ctrl ctrlSetTooltip "Disabled for demo";
+            };
             case "Settings";
             case "Squad": {
                 _ctrl ctrlEnable false;
