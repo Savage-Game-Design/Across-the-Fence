@@ -23,7 +23,7 @@ class vgm_radio_operator {
                     // The weapons to fire or magazines that are fitted to each Pylon on the aircraft during the strike. All listed weapons are fired.
                     magazines[] = {""};
                     // Numbere of uses
-                    uses = 1;
+                    uses = 3;
                     // Called instead of running a normal strike
                     function = "";
                     // How far away the aircraft should be before it starts firing.
@@ -64,17 +64,17 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
-                    uses = 4;
+                    uses = 6;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m151_he_x7"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class mk82 {
                     displayName = "Bomb (Mk82 500lb)";
                     magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
-                    uses = 1;
+                    uses = 3;
                 };
             };
         };
@@ -128,17 +128,17 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
-                    uses = 4;
+                    uses = 6;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m151_he_x7"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class mk82 {
                     displayName = "Bomb (Mk82 500lb)";
                     magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
-                    uses = 1;
+                    uses = 3;
                 };
             };
         };
@@ -152,22 +152,22 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_m39a1_v_quad"};
-                    uses = 4;
+                    uses = 6;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m151_he_x7"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class mk82 {
                     displayName = "Bomb (Mk82 500lb)";
                     magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
-                    uses = 1;
+                    uses = 3;
                 };
                 class napalm {
                     displayName = "Bomb (Napalm)";
                     magazines[] = {"vn_bomb_750_blu1b_fb_mag_x1"};
-                    uses = 1;
+                    uses = 3;
                 };
             };
         };
@@ -181,27 +181,27 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"", "vn_gunpod_suu23_v_1200_mag", "vn_gunpod_suu23_v_1200_mag", ""};
-                    uses = 4;
+                    uses = 6;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m151_he_x7"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class mk82 {
                     displayName = "Bomb (Mk82 500lb)";
                     magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
-                    uses = 1;
+                    uses = 3;
                 };
                 class napalm {
                     displayName = "Bomb (Napalm)";
                     magazines[] = {"vn_bomb_750_blu1b_fb_mag_x1"};
-                    uses = 1;
+                    uses = 3;
                 };
                 class cbu {
                     displayName = "Bomb (CBU)";
                     magazines[] = {"vn_rocket_ffar_f4_lau3_m151_he_x57"};
-                    uses = 1;
+                    uses = 3;
                 };
             };
         };
@@ -215,27 +215,27 @@ class vgm_radio_operator {
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"", "vn_gunpod_suu23_v_1200_mag", "vn_gunpod_suu23_v_1200_mag", ""};
-                    uses = 4;
+                    uses = 6;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m151_he_x7"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class mk82 {
                     displayName = "Bomb (Mk82 500lb)";
                     magazines[] = {"vn_bomb_500_mk82_he_mag_x1","vn_bomb_500_mk82_he_mag_x1"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class napalm {
                     displayName = "Bomb (Napalm)";
                     magazines[] = {"vn_bomb_750_blu1b_fb_mag_x1"};
-                    uses = 2;
+                    uses = 4;
                 };
                 class cbu {
                     displayName = "Bomb (CBU)";
                     magazines[] = {"vn_rocket_ffar_f4_lau3_m151_he_x57"};
-                    uses = 1;
+                    uses = 3;
                 };
             };
         };
@@ -249,12 +249,12 @@ class vgm_radio_operator {
                 class minigun {
                     displayName = "Miniguns";
                     magazines[] = {"vn_gunpod_xm21"};
-                    uses = 3;
+                    uses = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m229_he_x7"};
-                    uses = 3;
+                    uses = 5;
                 };
             };
         };
@@ -269,12 +269,12 @@ class vgm_radio_operator {
                     displayName = "40mm grenades (HE)";
                     guidedDispersion = 20;
                     magazines[] = {"vn_m75_v_06"};
-                    uses = 3;
+                    uses = 5;
                 };
                 class rockets {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m229_he_x7"};
-                    uses = 3;
+                    uses = 5;
                 };
             };
         };
@@ -288,12 +288,12 @@ class vgm_radio_operator {
                 class rockets_10lb {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m229_he_x7"};
-                    uses = 3;
+                    uses = 5;
                 };
                 class rockets_17lb {
                     displayName = "Rockets (17lb HE)";
                     magazines[] = {"vn_rocket_ffar_m229_he_x24_01"};
-                    uses = 3;
+                    uses = 5;
                 };
             };
         };
@@ -308,17 +308,17 @@ class vgm_radio_operator {
                     displayName = "40mm grenades (HE)";
                     magazines[] = {"vn_m129"};
                     guidedDispersion = 20;
-                    uses = 4;
+                    uses = 6;
                 };
                 class cannon {
                     displayName = "20mm cannon";
                     magazines[] = {"vn_gunpod_m195_v_2100_mag"};
-                    uses = 4;
+                    uses = 6;
                 };
                 class rockets_10lb {
                     displayName = "Rockets (10lb HE)";
                     magazines[] = {"vn_rocket_ffar_m229_he_x7"};
-                    uses = 4;
+                    uses = 6;
                 };
             };
         };
