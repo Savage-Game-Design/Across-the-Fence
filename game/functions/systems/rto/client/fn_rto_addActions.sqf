@@ -2,7 +2,7 @@
     File: fn_rto_addActions.sqf
     Author: Savage Game Design and Ethan Johnson
     Date: 2024-11-09
-    Last Update: 2026-03-08
+    Last Update: 2026-04-22
     Public: No
 
     Description:
@@ -33,7 +33,7 @@ private _callRtoId = player addAction [
         };
     },
     nil,
-    -99,
+    9500,
     false,
     true,
     "",
