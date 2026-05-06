@@ -1,8 +1,10 @@
+#include "script_component.inc"
+
 /*
     File: fn_skill_investigate_addFiredEh.sqf
     Author: Savage Game Design
     Date: 2024-03-01
-    Last Update: 2024-03-01
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -31,8 +33,9 @@ _ehId = _unit addEventHandler ["Fired", {
 
     [
         _unit,
-        3,
-        (_unit worldToModelVisual getPosATLVisual _projectile) vectorAdd [0, 0.4, 0]
+        2,
+        (_unit worldToModelVisual getPosATLVisual _projectile) vectorAdd [0, 0.4, 0],
+        ICON_COLOR_RED
     ] call vgm_c_fnc_skill_investigate_queueNoise;
 }];
 

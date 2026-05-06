@@ -3,7 +3,7 @@
     File: fn_skill_investigate_drawSoundWaves.sqf
     Author: Savage Game Design
     Date: 2024-01-22
-    Last Update: 2024-02-12
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -14,6 +14,8 @@
         _object - Object making the noise [OBJECT]
         _texRotation - Sound wave texture random rotation array [ARRAY]
         _noiseStrength - Noise strength for icon size coef [NUMBER]
+        _color - Color of the waves [ARRAY]
+
 
     Returns:
         Sound wave was fully drawn/faded out [BOOL]
@@ -22,7 +24,7 @@
         [parameter] call vgm_c_fnc_skill_investigate_drawSoundWaves
  */
 
-params ["_startTime", "_object", "_texRotation", "_noiseStrength", "_drawOffset"];
+params ["_startTime", "_object", "_texRotation", "_noiseStrength", "_drawOffset", ["_color", ICON_COLOR_WHITE]];
 
 private _extern_posAGL = _object modelToWorldVisual _drawOffset;
 private _extern_sizeCoef = _noiseStrength;
@@ -31,8 +33,8 @@ private _extern_dist = getPosATLVisual player vectorDistance _extern_posAGL;
 private _fnc_drawIcon = {
     params ["_elapsed", "_rot"];
 
-    // furher the sound the smaller the wave, stops scaling down past 100m
-    private _iconSize = ICON_BASE_SIZE * ((ICON_BASE_DIST / _extern_dist) max (ICON_BASE_DIST / 100));
+    // Sound wave scales down with distance
+    private _iconSize = ICON_BASE_SIZE * (linearConversion [0, 2 * ICON_HALF_SIZE_DIST, _extern_dist, 1, 0] max ICON_MIN_SIZE_PERCENTAGE);
     _iconSize = _iconSize * _extern_sizeCoef;
     _iconSize = _iconSize * ((_elapsed * WAVE_SPEED));
 
@@ -40,13 +42,13 @@ private _fnc_drawIcon = {
 
     drawIcon3D [
         getMissionPath "SquiglyCircle_ca.paa",
-        [0.9,1,1,ICON_ALPHA] vectorAdd [0,0,0, -_fadeStr],
+        _color vectorAdd [0,0,0, -_fadeStr],
         _extern_posAGL,
         _iconSize, _iconSize,
         _rot, "", 1, 0.05, "TahomaB"
     ];
 
-    (ICON_ALPHA - _fadeStr) < 0 // return, has fully faded out
+    ((_color # 3) - _fadeStr) < 0 // return, has fully faded out
 };
 
 private _elapsed = time - _startTime;
