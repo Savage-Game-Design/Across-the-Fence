@@ -1,10 +1,11 @@
 #include "\a3\ui_f\hpp\defineDIKCodes.inc"
+#include "script_component.inc"
 
 /*
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2025-08-24
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -16,6 +17,11 @@ if (!hasInterface) exitWith {};
 vgm_c_skill_investigate_intensity = 0;
 vgm_c_skill_investigate_isFocusing = false;
 vgm_c_skill_investigate_focusDelay = 3;
+
+vgm_c_skill_investigate_behaviourColors = createHashMapFromArray [
+    ["AWARE", ICON_COLOR_AMBER],
+    ["COMBAT", ICON_COLOR_RED]
+];
 
 [
     createHashMapFromArray [

@@ -1,8 +1,10 @@
+#include "script_component.inc"
+
 /*
     File: fn_skill_investigate_postInit.sqf
     Author: Savage Game Design
     Date: 2024-01-17
-    Last Update: 2025-01-16
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -51,7 +53,8 @@ player addEventHandler ["Respawn", {(_this#0) call vgm_c_fnc_skill_investigate_a
     [
         _unit,
         _voiceType call vgm_c_fnc_skill_investigate_getVoiceDrawCoef,
-        _unit selectionPosition "head"
+        _unit selectionPosition "head",
+        [_unit] call vgm_c_fnc_skill_investigate_getUnitStateWaveColor
     ] call vgm_c_fnc_skill_investigate_queueNoise;
 
 }] call BIS_fnc_addScriptedEventHandler;

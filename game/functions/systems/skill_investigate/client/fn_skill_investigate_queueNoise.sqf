@@ -1,8 +1,10 @@
+#include "script_component.inc"
+
 /*
     File: fn_skill_investigate_queueIcon.sqf
     Author: Savage Game Design
     Date: 2024-02-11
-    Last Update: 2025-08-24
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -21,7 +23,8 @@
 params [
     "_object",
     ["_drawSizeCoef", 1],
-    ["_drawOffset", [0,0,0]]
+    ["_drawOffset", [0,0,0]],
+    ["_color", ICON_COLOR_WHITE]
 ];
 
 vgm_c_skill_investigate_noises pushBack [
@@ -30,5 +33,6 @@ vgm_c_skill_investigate_noises pushBack [
     [random 360, random 360, random 360],
     // Boost draw size to increase visibility of waves at range.
     _drawSizeCoef * (player getVariable ["vgm_c_skill_investigate_rangeMultiplier", 1]),
-    _drawOffset
+    _drawOffset,
+    _color
 ];

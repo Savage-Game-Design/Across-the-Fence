@@ -2,9 +2,9 @@
 #define PING_TICK 3
 
 #define WAVE_SPEED 45
-#define ICON_BASE_SIZE 0.1
-#define ICON_BASE_DIST 10
-#define ICON_ALPHA 0.4
+#define ICON_BASE_SIZE 0.025
+#define ICON_HALF_SIZE_DIST 50
+#define ICON_MIN_SIZE_PERCENTAGE 0.2
 #define FADE_TIME_COEF 5
 
 #define WAVE1_START_TIME 0
@@ -13,3 +13,7 @@
 #define WAVE_FINAL_START_TIME WAVE3_START_TIME
 
 #define FULL_FOCUS_TIME 15
+
+#define ICON_COLOR_WHITE [0.9, 1, 1, 0.9]
+#define ICON_COLOR_AMBER [1, 0.8, 0.15, 0.9]
+#define ICON_COLOR_RED [1, 0, 0, 0.9]

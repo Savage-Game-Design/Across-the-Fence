@@ -2,7 +2,7 @@
     File: fn_skill_investigate_getSpeedDrawCoef.sqf
     Author: Savage Game Design
     Date: 2024-01-22
-    Last Update: 2024-02-10
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -22,7 +22,7 @@ params ["_speed"];
 
 private _progress = linearConversion [0, 18, _speed, 0, 1, true];
 _progress bezierInterpolation [
-    [0.1, 0, 0],
+    [0.25, 0, 0],
     [0.5, 0, 0],
     [0.6, 0, 0],
     [0.8, 0, 0],
