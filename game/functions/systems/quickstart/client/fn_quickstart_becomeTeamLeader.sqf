@@ -2,7 +2,7 @@
     File: fn_quickstart_becomeTeamLeader.sqf
     Author: Savage Game Design
     Date: 2026-04-01
-    Last Update: 2026-04-01
+    Last Update: 2026-05-09
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ private _loadout = [
     ["vn_b_pack_01",[["vn_helper_item_firstaidkit",2],["vn_mine_m18_fuze10_mag",2,1],["vn_m67_grenade_mag",4,1],["vn_mine_m14_mag",14,1],["vn_hp_mag",1,13],["vn_40mm_m381_he_mag",39,1],["vn_m16_20_t_mag",7,18]]],
     "vn_b_bandana_04",
     "",
-    ["vn_m19_binocs_grn","","","",[],[],""],
+    ["vn_camera_01","","","",[],[],""],
     ["vn_b_item_map","","vn_b_item_radio_urc10","vn_b_item_compass_sog","vn_b_item_watch",""]
 ];
 

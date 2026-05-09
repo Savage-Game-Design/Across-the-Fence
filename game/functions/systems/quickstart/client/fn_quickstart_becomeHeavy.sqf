@@ -2,7 +2,7 @@
     File: fn_quickstart_becomeHeavy.sqf
     Author: Savage Game Design
     Date: 2026-04-01
-    Last Update: 2026-04-01
+    Last Update: 2026-05-09
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ private _loadout = [
     ["vn_b_pack_02",[["vn_helper_item_firstaidkit",3],["vn_m61_grenade_mag",4,1],["vn_m1911_mag",8,7],["vn_mine_m14_mag",15,1],["vn_m34_grenade_mag",2,1],["vn_rpd_125_mag",3,125],["vn_mine_m18_wp_mag",1,1]]],
     "vn_b_boonie_09_09",
     "",
-    ["vn_m19_binocs_grn","","","",[],[],""],
+    ["vn_camera_01","","","",[],[],""],
     ["vn_b_item_map","","vn_b_item_radio_urc10","vn_b_item_compass_sog","vn_b_item_watch",""]
 ];
 

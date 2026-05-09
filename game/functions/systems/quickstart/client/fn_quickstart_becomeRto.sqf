@@ -2,7 +2,7 @@
     File: fn_quickstart_becomeRto.sqf
     Author: Savage Game Design
     Date: 2026-04-01
-    Last Update: 2026-04-01
+    Last Update: 2026-05-09
     Public: No
 
     Description:
@@ -27,7 +27,7 @@ private _loadout = [
     ["vn_b_pack_lw_06",[["vn_helper_item_firstaidkit",2],["vn_m61_grenade_mag",5,1],["vn_mine_satchel_remote_02_mag",3,1],["vn_mine_m14_mag",31,1],["vn_m16_20_t_mag",6,18],["vn_hd_mag",2,10],["vn_m34_grenade_mag",2,1]]],
     "vn_b_boonie_04_04",
     "",
-    ["vn_m19_binocs_grn","","","",[],[],""],
+    ["vn_camera_01","","","",[],[],""],
     ["vn_b_item_map","","vn_b_item_radio_urc10","vn_b_item_compass","vn_b_item_watch",""]
 ];
 
