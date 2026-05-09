@@ -2,7 +2,7 @@
     File: fn_director_startMission.sqf
     Author: Savage Game Design
     Date: 2023-09-23
-    Last Update: 2026-02-01
+    Last Update: 2026-05-09
     Public: Yes
 
     Description:
@@ -60,7 +60,7 @@ _directorData set ["reinforcementChance", 0.75];
 // How often the check runs after the start of an engagement - scales with alertness
 _directorData set ["reinforcementCheckFrequencyRangeSecs", [45, 10]];
 // Delay before more reinforcements can be sent - scales with alertness
-_directorData set ["minTimeBetweenReinforcementsRangeSecs", [180, 120]];
+_directorData set ["minTimeBetweenReinforcementsRangeSecs", [240, 150]];
 // When reinforcements were last sent for each player
 _directorData set ["lastReinforcementSentPerPlayer", createHashMap];
 

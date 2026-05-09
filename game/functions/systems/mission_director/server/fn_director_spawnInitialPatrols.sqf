@@ -2,7 +2,7 @@
     File: fn_director_spawnInitialPatrols.sqf
     Author:
     Date: 2023-09-29
-    Last Update: 2025-10-25
+    Last Update: 2026-05-09
     Public: No
 
     Description:
@@ -75,7 +75,7 @@ if (_director getOrDefault ["spawnAmbientZombies", false]) then {
         private _targetSite = _sites select (selectRandom _nearbySiteIndexes);
         _intersitePatrolTemplate set ["pos", _sitePos getPos [_siteRadius + 15, random 360]];
         _intersitePatrolTemplate set ["composition", vgm_s_director_patrol_classes];
-        _intersitePatrolTemplate set ["sizeRange", [2, 4 + ceil random 2]];
+        _intersitePatrolTemplate set ["sizeRange", [2, 3 + ceil random 3]];
         _intersitePatrolTemplate get "groupVars" set ["vgm_g_order", [
             createHashMapFromArray [
                 ["type", "PATROL-ROUTE"],
