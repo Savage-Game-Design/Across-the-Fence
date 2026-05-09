@@ -2,7 +2,7 @@
     File: fn_missions_gameplay_scouting_onMissionStarted.sqf
     Author: Savage Game Design
     Date: 2024-09-29
-    Last Update: 2024-11-29
+    Last Update: 2026-05-09
     Public: No
 
     Description:
@@ -39,9 +39,17 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
     private _sites = +((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites);
 
     private _intelSitePositions = [];
-    for "_" from 1 to (1 + floor random 3) do {
+    for "_" from 1 to 2 do {
         private _intelSite = selectRandom _sites;
-        private _sitePosMarker = (_intelSite get "pos") getPos [50 + random 150, random 360];
+        // Attempt to guarantee a minimum distance between sites
+        for "_attempt" from 1 to 20 do {
+            if (count _intelSitePositions > 0 && {(_intelSite get "pos") distance2D (_intelSitePositions select -1) < 300}) then {
+                _intelSite = selectRandom _sites;
+                continue;
+            };
+            break;
+        };
+        private _sitePosMarker = (_intelSite get "pos") getPos [50, random 360];
         _intelSitePositions pushBack _sitePosMarker;
         _sites = _sites - [_intelSite];
     };
