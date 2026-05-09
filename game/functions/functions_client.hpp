@@ -884,6 +884,7 @@ class vgm_c
         class quickstart_becomeRto {};
         class quickstart_becomeTailgunner {};
         class quickstart_becomeTeamLeader {};
+        class quickstart_postInit { postInit = 1; };
         class quickstart_setLoadoutAndSkills {};
     };
 
