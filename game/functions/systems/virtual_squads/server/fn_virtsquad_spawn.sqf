@@ -2,7 +2,7 @@
     File: fn_virtsquad_spawn.sqf
     Author: Savage Game Design
     Date: 2025-01-11
-    Last Update: 2025-10-22
+    Last Update: 2026-05-09
     Public: No
 
     Description:
@@ -39,7 +39,7 @@ if (!isNil "_mission") then {
 
 private _composition = _squad get "composition";
 private _sizeRange = _squad getOrDefault ["sizeRange", [ count _composition, count _composition ]];
-private _size = round linearConversion [0, 1, _squadScaling, _sizeRange # 0, _sizeRange # 1, true];
+private _size = floor linearConversion [0, 1, _squadScaling, _sizeRange # 0, _sizeRange # 1, true];
 private _unitClasses = [_composition, _size] call vgm_s_fnc_virtsquad_scaleComposition;
 
 private _group = ([_unitClasses, _squad get "side", _squad get "pos"] call para_g_fnc_create_squad) # 1;
