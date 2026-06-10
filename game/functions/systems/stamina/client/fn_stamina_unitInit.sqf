@@ -3,7 +3,7 @@
     File: fn_stamina_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-08-18
-    Last Update: 2026-01-09
+    Last Update: 2026-04-22
     Public: No
 
     Description:
@@ -52,8 +52,12 @@ private _idx = addMissionEventHandler ["EachFrame", {
     private _animCoef = animationState _unit call vgm_c_fnc_stamina_getAnimCoef;
     _speed = (_speed * _animCoef) min 6;
 
+    // Gain when not running
+    private _gainOnly = linearConversion [0, RUNNING_SPEED_LOWER_BOUND, _speed, -3, 0, true];
+    // Lose only if sprinting (exceeding running speed)
     // 100 / 4 = 25s of full speed sprint
-    private _drain = linearConversion [0, MAX_SPEED_STD, _speed, -3, 4, true];
+    private _drainOnly = linearConversion [RUNNING_SPEED_UPPER_BOUND, MAX_SPEED_STD, _speed, 0, 4, true];
+    private _drain = _gainOnly + _drainOnly;
     if (_drain > 0) then {
         private _drainCoef = (_unit getVariable ["vgm_c_staminaDrainCoef", 1]) + (_unit getVariable ["vgm_c_staminaDrainCoefSkills", 0]);
         _drain = _drain * (_drainCoef max 0);
