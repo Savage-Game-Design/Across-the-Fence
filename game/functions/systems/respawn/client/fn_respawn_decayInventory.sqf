@@ -2,7 +2,7 @@
     File: fn_respawn_decayInventory.sqf
     Author: Savage Game Design
     Date: 2024-12-06
-    Last Update: 2025-06-29
+    Last Update: 2026-04-22
     Public: No
 
     Description:
@@ -18,7 +18,7 @@
         player call vgm_c_fnc_respawn_decayInventory
  */
 
-#define MAX_LOSS_PERCENTAGE 0.5
+#define MAX_LOSS_PERCENTAGE 0.33
 
 params ["_unit"];
 
