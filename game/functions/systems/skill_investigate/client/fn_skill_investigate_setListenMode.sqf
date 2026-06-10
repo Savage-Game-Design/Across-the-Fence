@@ -3,7 +3,7 @@
     File: fn_skill_investigate_setListenMode.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2025-08-24
+    Last Update: 2026-05-06
     Public: No
 
     Description:
@@ -52,7 +52,9 @@ vgm_c_skill_investigate_drawEh = addMissionEventHandler ["Draw3D", {
         {
             [
                 _x,
-                (abs speed _x) call vgm_c_fnc_skill_investigate_getSpeedDrawCoef
+                (abs speed _x) call vgm_c_fnc_skill_investigate_getSpeedDrawCoef,
+                nil,
+                [_x] call vgm_c_fnc_skill_investigate_getUnitStateWaveColor
             ] call vgm_c_fnc_skill_investigate_queueNoise;
         } forEach (_noiseSources select {group _x != _ignoredGroup});
 
