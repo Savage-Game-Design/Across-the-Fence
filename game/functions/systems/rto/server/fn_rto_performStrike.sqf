@@ -2,7 +2,7 @@
     File: fn_rto_performStrike.sqf
     Author: Ethan Johnson and Savage Game Design
     Date: 2026-01-31
-    Last Update: 2026-03-02
+    Last Update: 2026-04-19
     Public: Yes
 
     Description:
@@ -51,7 +51,7 @@ _pos set [2,(_pos select 2) + getterrainheightasl _pos];
 private _dis = 3000;
 private _alt = 1000;
 private _pitch = atan (_alt / _dis);
-private _speed = 400 / 3.6;
+private _speed = 400 / 2.2;
 private _duration = ([0,0] distance [_dis,_alt]) / _speed;
 
 
@@ -180,7 +180,7 @@ waitUntil {
     _plane setVariable ["vgm_l_rto_target", _target];
     _plane setVariable ["vgm_l_rto_dispersion", _dispersion];
 
-    private _goalDistance = [300, 50] select (getPosATL _target # 2 > 150);
+    private _goalDistance = [600, 50] select (getPosATL _target # 2 > 150);
     private _distanceToTarget = getPosASL _plane distance ATLtoASL _pos;
     private _inRangeOfTarget = _distanceToTarget < _startFiringDistance;
 
