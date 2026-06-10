@@ -2,7 +2,7 @@
     File: fn_director_spawnReinforcements.sqf
     Author: Savage Game Design
     Date: 2024-11-02
-    Last Update: 2025-10-29
+    Last Update: 2026-05-09
     Public: Yes
 
     Description:
@@ -46,14 +46,10 @@ private _alertness = _director get "alertness";
 private _baseUnits = if (_reinforcementType isEqualTo "ZOMBIES") then {
     linearConversion [0, 90, _alertness, 4, 6, true]
 } else {
-    linearConversion [0, 90, _alertness, 2, 6, true]
+    linearConversion [0, 90, _alertness, 2, 5, true]
 };
 
-private _playerCountScaling = if (_reinforcementType isEqualTo "ZOMBIES") then {
-    linearConversion [1, 6, _missionPlayers, 1, 3]
-} else {
-    linearConversion [1, 6, _missionPlayers, 1, 4]
-};
+private _playerCountScaling = linearConversion [1, 6, _missionPlayers, 1, 3];
 
 private _unitQuantity = floor (_baseUnits * _playerCountScaling);
 private _unitsRemaining = _unitQuantity;
