@@ -14,7 +14,8 @@ input_file = Path(positionals[0])
 output_file = Path(positionals[1]) if len(positionals) >= 2 else None
 no_filter = "--no-filter" in optionals
 overwrite_all = "--overwrite" in optionals
-squelch = "--squelch" in optionals
+squelch = not ("--no-squelch" in optionals)
+plane = not ("--no-plane" in optionals)
 
 suffix = "_with_filter"
 
@@ -32,9 +33,14 @@ def include_if(cond, value):
     return [value] if cond else []
 
 filter_parts = [
+    f"[0:a]volume=1[{ "original_voice" if plane else "input" }];",
+
+    *include_if(plane, "[1:a]volume=0.2[original_plane];"),
+    *include_if(plane, "[original_voice][original_plane]amix=inputs=2:duration=first[input];"),
+
     # Grab the original audio ([0:a]) and standardize it to 48kHz Mono.
     # This is required so FFmpeg can perfectly glue it to the synthesized squelch later.
-    "[0:a]aformat=sample_rates=48000:channel_layouts=mono,",
+    "[input]aformat=sample_rates=48000:channel_layouts=mono,",
 
     # Apply the aggressive military AGC compressor to flatten the volume.
     "acompressor=threshold=-25dB:ratio=20:attack=1:release=50:makeup=15,",
@@ -47,7 +53,7 @@ filter_parts = [
 
     # Overdrive the volume to cause digital clipping.
     # We label this processed voice stream as [voice].
-    "volume=4.0[voice];",
+    f"volume=4.0[{ "voice" if squelch else "full_transmission" }];",
 
     # Generate exactly 0.15 seconds of loud (80% volume) white noise at 48kHz.
     # This is the mic click. We label this short burst as [squelch].
@@ -70,7 +76,9 @@ filter_param = [] if no_filter else ["-filter_complex", "".join(filter_parts)]
 
 overwrite_param = ["-y"] if overwrite_all else []
 
+print(filter_param)
+
 subprocess.run(
-    ["ffmpeg", "-i", str(input_file), *filter_param, *overwrite_param, "-c:a", "libvorbis", "-b:a", "8k", "-ar", "8000", "-ac", "1", output_file],
+    ["ffmpeg", "-i", str(input_file), "-i", current_folder / "OV10.mp3",  *filter_param, *overwrite_param, "-c:a", "libvorbis", "-b:a", "8k", "-ar", "8000", "-ac", "1", output_file],
     check=True,
 )
