@@ -15,7 +15,7 @@
         Nothing
  */
 
-vgm_skills_tierUnlockCosts = [0, 0, 2, 6, 12];
+vgm_skills_tierUnlockCosts = [0, 1, 2, 6, 12];
 
 vgm_skills_treesHashMap = [missionConfigFile >> "vgm_skillTrees"] call vgm_g_fnc_skills_parseTreeCfg;
 vgm_skills_pathsHashMap = [vgm_skills_treesHashMap] call vgm_g_fnc_skills_treesHashToPathsHash;

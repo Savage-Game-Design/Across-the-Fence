@@ -22,16 +22,21 @@
 
 vgm_s_director_max_alertness = 100;
 vgm_s_director_alertness_period_secs = 5;
-vgm_s_director_tracker_spawn_alertness_threshold = 6;
+vgm_s_director_tracker_spawn_alertness_threshold = 10;
 vgm_s_director_min_time_between_trackers_secs = 120;
 vgm_s_director_max_time_between_trackers_secs = 600;
 vgm_s_director_dynamic_max_groups = 8;
+// Alertness natural decay
+vgm_s_director_alertness_decay_rate = 4;             // amount per decay tick
+vgm_s_director_alertness_decay_interval = 60;       // seconds between decay ticks (1 minute)
+vgm_s_director_alertness_decay_cooldown = 45;       // seconds after last alertness event before decay starts
+vgm_s_director_alertness_decay_floor = 0;           // decay all the way to zero
 // Every alertness period will add a fixed amount of alertness based on the most significant event to happen.
 vgm_s_director_noiseEventAlertness = createHashMapFromArray [
-    ["player_explosion", [0, 3]],
-    ["player_flare", 5],
-    ["unsuppressedShots", 1.5],
-    ["suppressedShots", 0.75]
+    ["player_explosion", [0, 6]],
+    ["player_flare", 8],
+    ["unsuppressedShots", 2.1],
+    ["suppressedShots", 1]
 ];
 
 
@@ -58,7 +63,7 @@ vgm_s_director_zombieSiteTypeChances =
         ]
     };
 
-vgm_s_director_zombieAlertAlertness = 3;
+vgm_s_director_zombieAlertAlertness = 5;
 vgm_s_director_staticZombieWeightings = [
     "_zombie_medium_nobrain", 4,
     "_zombie_fast_nobrain", 2,
@@ -224,6 +229,13 @@ vgm_s_director_attack_classes = [
     private _director = [_missionId] call vgm_s_fnc_director_getDirectorForMissionId;
     if (isNil "_director") exitWith {};
     _director get "virtualSquads" deleteAt (_squad get "id");
+
+    // When a tracker is distance-despawned (deleteOnDespawn), reset the
+    // cooldown so the director immediately dispatches a new one on closer tracks.
+    private _groupVars = _squad getOrDefault ["groupVars", createHashMap];
+    if ("vgm_isTrackerTeam" in _groupVars) then {
+        _director set ["lastTrackerSent", 0];
+    };
 
 }] call para_g_fnc_event_subscribeLocal;
 

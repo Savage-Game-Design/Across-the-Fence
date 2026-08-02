@@ -32,7 +32,8 @@ params ["_unit"];
 
 private _distance = _unit distance player;
 // Returns an absolute angle (i.e positive) between the unit's eye direction and position of the player.
-private _angleFromEyeline = acos ((getPosASL _unit vectorFromTo getPosASL player) vectorCos eyeDirection _unit);
+// Clamp the dot product to [-1,1] — floating-point imprecision can push it slightly outside, making acos return NaN.
+private _angleFromEyeline = acos ((-1 max ((getPosASL _unit vectorFromTo getPosASL player) vectorCos eyeDirection _unit)) min 1);
 
 // Player isn't in the unit's cone of vision
 if !(_angleFromEyeline < VISION_CONE_ANGLE) exitWith {[0, _angleFromEyeline]};

@@ -12,6 +12,7 @@
     Parameter(s):
         _object - Effect source [OBJECT]
         _iterations - How many times to loop the effect [NUMBER, defaults to 1]
+        _color - RGBA color array [ARRAY, defaults to [1, 1, 1, 0.5]]
 
     Returns:
         Nothing
@@ -20,21 +21,20 @@
         [cursorTarget] call vgm_c_fnc_sites_hints_glint
  */
 
-#define ICON_COLOR [1, 1, 1, 0.5]
-
 params [
     ["_object", objNull, [objNull]],
-    ["_iterations", 1]
+    ["_iterations", 1],
+    ["_color", [1, 1, 1, 0.5], [[]]]
 ];
 
 addMissionEventHandler ["EachFrame", {
-    _thisArgs params ["_object", "_animTime", "_frame", "_curIteration", "_iterations"];
+    _thisArgs params ["_object", "_animTime", "_frame", "_curIteration", "_iterations", "_color"];
     private _frameTime = 1 / GLINT_FPS;
 
     if (_animTime > 0) then {
         drawIcon3D [
             vgm_sites_hints_glintTextures select _frame,
-            ICON_COLOR,
+            _color,
             ASLtoATL getPosWorld _object,
             1, 1, 0
         ];
@@ -54,6 +54,6 @@ addMissionEventHandler ["EachFrame", {
     _thisArgs set [1, _animTime];
     _thisArgs set [2, _frame];
 
-}, [_object, 0, 1, 1, _iterations]];
+}, [_object, 0, 1, 1, _iterations, _color]];
 
 ["vgm_sites_hints_glint", [_object]] call para_g_fnc_event_triggerLocal;

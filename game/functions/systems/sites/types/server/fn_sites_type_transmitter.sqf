@@ -43,10 +43,38 @@ _site set ["spawnFunction", {
     _part2 setVariable ["vgm_s_sites_transmitter_sibling", _part1];
     _part1 setVariable ["vgm_s_sites_transmitter_sibling", _part2];
 
+    // 35% chance this transmitter is a radio jammer
+    private _isJammer = random 1 < 0.35;
+    if (_isJammer) then {
+        _part1 setVariable ["vgm_radioJammer_isJamming", true, true];
+
+        private _jammerEntry = createHashMapFromArray [
+            ["pos", _pos2D + [0]],
+            ["object", _part1],
+            ["radius", 600]
+        ];
+
+        vgm_s_radioJammer_sites pushBack _jammerEntry;
+        publicVariable "vgm_s_radioJammer_sites";
+
+        format ["Transmitter at %1 is a radio jammer (600m radius)", _pos2D] call vgm_g_fnc_logInfo;
+    };
+
     private _fnc_onKilled = {
         params ["_unit"];
 
         _unit getVariable "vgm_s_sites_transmitter_sibling" setDamage 1;
+
+        // If this was a jammer, remove it from the global array
+        if (_unit getVariable ["vgm_radioJammer_isJamming", false]) then {
+            private _newJammers = vgm_s_radioJammer_sites select {
+                (_x get "object") != _unit
+            };
+            vgm_s_radioJammer_sites = _newJammers;
+            publicVariable "vgm_s_radioJammer_sites";
+
+            format ["Radio jammer at %1 destroyed - jamming removed", getPos _unit] call vgm_g_fnc_logInfo;
+        };
     };
 
 

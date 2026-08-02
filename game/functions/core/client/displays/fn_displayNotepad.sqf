@@ -319,7 +319,7 @@ switch _mode do {
             _lastIndex = _forEachIndex;
         } forEach _guessedSites;
 
-        if (count _guessedSites < (_data get "guessedSitesMax")) then {
+        if (count _guessedSites < (_data getOrDefault ["guessedSitesMax", 0])) then {
             ["adjustAddSiteRow", [_display, _lastIndex]] call SELF;
         };
     };

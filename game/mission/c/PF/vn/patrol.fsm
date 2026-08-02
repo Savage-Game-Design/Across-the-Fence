@@ -1,0 +1,216 @@
+/*%FSM<COMPILE "L:\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, patrol">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"INIT",0,250,652.241211,-2116.196777,680.241211,-2088.196777,0.000000,"INIT"};
+item1[] = {"moveTo",2,250,632.192871,-2432.614258,700.192871,-2400.614258,0.000000,"moveTo"};
+item2[] = {"wpWIP",4,4314,781.813354,-2436.278076,857.813354,-2396.278076,0.000000,"wpWIP"};
+item3[] = {"main",2,250,640.000000,-2252.000000,692.000000,-2212.000000,0.000000,"main"};
+item4[] = {"hasWP",4,218,638.018372,-2335.571777,694.018372,-2295.571777,0.000000,"hasWP"};
+item5[] = {"wpDone",4,218,638.018799,-2541.403320,694.018799,-2501.403320,5.000000,"wpDone"};
+item6[] = {"dead",4,218,718.769714,-2172.973877,774.769714,-2132.973877,9.000000,"dead"};
+item7[] = {"null",1,250,796.164429,-2170.490479,841.271057,-2135.454834,0.000000,"null"};
+item8[] = {"alive",4,218,638.118408,-2172.750000,694.118408,-2132.750000,0.000000,"alive"};
+item9[] = {"EXIT",1,250,496.792053,-2171.484375,541.898682,-2136.448730,0.000000,"EXIT"};
+item10[] = {"__hasWP",4,218,490.950928,-2251.838135,546.950928,-2211.838135,9.000000,"!hasWP"};
+item11[] = {"despawn",4,218,494.606262,-2436.640137,550.606262,-2396.640137,0.000000,"despawn"};
+item12[] = {"EXIT_1",1,250,376.789917,-2433.810791,421.896545,-2398.775146,0.000000,"EXIT"};
+link0[] = {0,6};
+link1[] = {0,8};
+link2[] = {1,2};
+link3[] = {1,5};
+link4[] = {1,11};
+link5[] = {2,1};
+link6[] = {3,4};
+link7[] = {3,10};
+link8[] = {4,1};
+link9[] = {5,3};
+link10[] = {6,7};
+link11[] = {8,3};
+link12[] = {10,9};
+link13[] = {11,12};
+globals[] = {0.000000,0,0,0,0,640,480,3,77,6316128,1,298.710907,838.452026,-2059.435059,-2722.667236,507,623,1};
+window[] = {0,-1,-1,-1,-1,1081,286,1344,286,1,525};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "patrol";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"/* PATROL.fsm" \n
+                         "	Author: Phronk" \n
+                         "	Description: To be used on agents for continuous movements. Agents don't have waypoints," \n
+                         "	so we must use an FSM to handle their movements. Simply tells the agent to move to" \n
+                         "	predetermined positions passed to this FSM so it can be used more broadly." \n
+                         "*/" \n
+                         "params[""_a"",""_wpList""];" \n
+                         "" \n
+                         "_wp = _wpList # 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "dead">*/
+                                class dead
+                                {
+                                        itemno = 6;
+                                        priority = 9.000000;
+                                        to="null";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNull _a || !alive _a"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//systemChat ""dead/null: exiting"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "alive">*/
+                                class alive
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="main";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(!(isNull _a)) && alive _a"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "moveTo">*/
+                class moveTo
+                {
+                        name = "moveTo";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/"_t = time;" \n
+                         "//systemChat ""wpMoveTo"";" \n
+                         "" \n
+                         "_a moveTo _wp;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "wpDone">*/
+                                class wpDone
+                                {
+                                        itemno = 5;
+                                        priority = 5.000000;
+                                        to="main";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t+15 && { speed _a == 0 || { moveToCompleted _a || { moveToFailed _a } } }"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//Push 0 index wp to the rear of array" \n
+                                         "//systemChat ""wpDone"";" \n
+                                         "" \n
+                                         "private _wpList = _wpList - [ _wp ];" \n
+                                         "private _wpList = _wpList + [ _wp ];"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "despawn">*/
+                                class despawn
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="EXIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_wpList isEqualTo [] || { isNull _a || { !alive _a } }"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//systemChat ""despawn"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "wpWIP">*/
+                                class wpWIP
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="moveTo";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time > _t+15 && speed _a > 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_a moveTo _wp;" \n
+                                         "//systemChat ""wpWIP"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "main">*/
+                class main
+                {
+                        name = "main";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/"_t = time;" \n
+                         "" \n
+                         "//systemChat ""main"";" \n
+                         "private _wp = _wpList # 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__hasWP">*/
+                                class __hasWP
+                                {
+                                        itemno = 10;
+                                        priority = 9.000000;
+                                        to="EXIT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_wpList isEqualTo []"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//systemChat ""!hasWP: exiting"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "hasWP">*/
+                                class hasWP
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="moveTo";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_wpList isNotEqualTo []"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//systemChat ""hasWP"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "null">*/
+                class null
+                {
+                        name = "null";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "EXIT">*/
+                class EXIT
+                {
+                        name = "EXIT";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "EXIT_1">*/
+                class EXIT_1
+                {
+                        name = "EXIT_1";
+                        itemno = 12;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+                "null",
+                "EXIT",
+                "EXIT_1",
+        };
+};
+/*%FSM</COMPILE>*/

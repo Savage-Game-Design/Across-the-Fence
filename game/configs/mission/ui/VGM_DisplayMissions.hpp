@@ -138,6 +138,40 @@ class VGM_DisplayMissions
                 };
             };
         };
+        // Mission Type Selector Row
+#define TYPE_BTN_W ((3 * COLUMN_W - 1) / 4)
+        class TypeScouting: VGM_ctrlButton
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_TYPE_SCOUTING;
+            text = "Scouting";
+            x = DISPLAY_X + COLUMN_W * VGM_GRID_W;
+            y = VGM_Y(DISPLAY_Y);
+            w = TYPE_BTN_W * VGM_GRID_W;
+            h = 5 * VGM_GRID_H;
+            colorText[] = {1,0.54,0.18,1};
+            onButtonClick = VGM_UIEH(selectMissionType,Missions);
+        };
+        class TypeSnatch: TypeScouting
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_TYPE_SNATCH;
+            text = "Prisoner Snatch";
+            x = DISPLAY_X + (COLUMN_W + TYPE_BTN_W) * VGM_GRID_W;
+            colorText[] = {1,1,1,0.5};
+        };
+        class TypeBrightLight: TypeScouting
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_TYPE_BRIGHTLIGHT;
+            text = "Bright Light";
+            x = DISPLAY_X + (COLUMN_W + 2 * TYPE_BTN_W) * VGM_GRID_W;
+            colorText[] = {1,1,1,0.5};
+        };
+        class TypeHatchet: TypeScouting
+        {
+            idc = VGM_IDC_DISPLAYMISSIONS_TYPE_HATCHET;
+            text = "Hatchet Force";
+            x = DISPLAY_X + (COLUMN_W + 3 * TYPE_BTN_W) * VGM_GRID_W;
+            colorText[] = {1,1,1,0.5};
+        };
         class Description: VGM_ctrlStructuredText
         {
             idc = VGM_IDC_DISPLAYMISSIONS_DESCRIPTION;

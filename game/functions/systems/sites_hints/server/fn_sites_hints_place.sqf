@@ -42,9 +42,15 @@ private _circleAreaInner = pi * _r2^2;
 private _density = _config get "density";
 
 private _amount = (_circleAreaOuter - _circleAreaInner) / (1000*1000) * _density;
+
+// Jungle Instinct: +1 hint per site if any mission player has the trait
+private _players = [_mission] call vgm_s_fnc_missions_getPlayers;
+if (_players findIf {_x getVariable ["vgm_g_skill_jungleInstinct", false]} > -1) then { _amount = _amount + 1 };
+
 private _objects = vgm_sites_hints_objects getOrDefault [_missionId, [], true];
 
 private _classes = _config get "classes";
+if (_classes isEqualTo []) exitWith {};
 for "_i" from 0 to _amount do {
 
     private _spawnPos = [];

@@ -11,45 +11,8 @@
 
 if (!hasInterface) exitWith {};
 
-["carryCanRun", {}] call vgm_c_fnc_statusEffect_create;
-
-["vgm_medical_unconscious", {
-    (_this#0) params ["_unit", "_state"];
-
-    [["vgm_carry_disable", "vgm_carry_enable"] select _state, _unit] call para_g_fnc_event_triggerGlobal;
-}] call para_g_fnc_event_subscribeLocal;
-
-["vgm_carry_enable", {
-    (_this#0) params ["_unit"];
-
-    private _action = [
-        _unit,
-        format ["<t color='#ed872d'>%1</t>", localize "STR_VN_REVIVE_ACTION_PICKUP"],
-        "\a3\ui_f\data\IGUI\Cfg\holdactions\holdaction_loaddevice_ca.paa",
-        "\a3\ui_f\data\IGUI\Cfg\holdactions\holdaction_loaddevice_ca.paa",
-        toString {[_this, _target] call vgm_c_fnc_carry_canCarry},
-        "true",
-        {},
-        {},
-        {
-            params ["_target", "_unit"];
-            [_unit, _target] call vgm_c_fnc_carry_doCarry;
-        },
-        {},
-        nil,
-        1,
-        100,
-        false
-    ] call BIS_fnc_holdActionAdd;
-    _unit setVariable ["vgm_carry_actionCarry", _action];
-
-}] call para_g_fnc_event_subscribe;
-
-["vgm_carry_disable", {
-    (_this#0) params ["_target"];
-
-    _target removeAction (_target getVariable ["vgm_carry_actionCarry", -1]);
-}] call para_g_fnc_event_subscribe;
+// SOG Advanced Revive now handles carry/pickup/load for both players and AI targets.
+// VGM carry hold actions are no longer needed.
 
 // weapon lower/raise plays "put down" animation
 // force to drop carried target to prevent abuse

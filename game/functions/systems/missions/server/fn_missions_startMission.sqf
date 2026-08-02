@@ -51,8 +51,11 @@ if (_failureIndex > -1) exitWith {
 
 [_missionPublic get "targetZone", 25] call vgm_s_fnc_missions_zones_spawnRandomSites;
 
+// Target Folder: reveal intel markers to qualifying players
+[_mission] call vgm_s_fnc_skill_targetFolder_revealIntel;
+
 [_mission] call vgm_s_fnc_director_startMission;
-[_missionPublic get "startPosASL"] call vgm_s_fnc_missions_gameplay_ambient_departHelicopter; // TODO by what and where should this be fired?
+[_missionId, _mission] call vgm_s_fnc_missions_gameplay_infil_startInfil;
 
 /*
 // Synced local objects example
@@ -97,7 +100,7 @@ if (_failureIndex > -1) exitWith {
 // - Setup extract mechanics
 // - Mark target box as occupied? Or is this a mission selection thing?
 
-[] remoteExecCall ["vgm_c_fnc_missions_finishDeploy", values (_mission get "machineIds")];
+// finishDeploy is now handled by the infil system (finishDeploy_infil)
 
 [
     "vgm_mission_started",

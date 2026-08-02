@@ -24,4 +24,9 @@ terminate (missionNamespace getVariable ["vgm_sharedHub_areaLimiterScript", scri
 
 removeMissionEventHandler ["Draw3D", missionNamespace getVariable ["vgm_sharedHub_iconsDraw3D", -1]];
 
+// Stop nametags
+removeMissionEventHandler ["Draw3D", missionNamespace getVariable ["vgm_sharedHub_nametagsDraw3D", -1]];
+terminate (missionNamespace getVariable ["vgm_sharedHub_nametagRefresh", scriptNull]);
+player setVariable ["vgm_g_nametag", nil, true];
+
 ["vgm_shared_hub_disabled", []] call para_g_fnc_event_triggerLocal;

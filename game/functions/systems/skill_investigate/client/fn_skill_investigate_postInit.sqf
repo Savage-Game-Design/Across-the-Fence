@@ -13,6 +13,14 @@ if (!hasInterface) exitWith {};
 
 // setup desaturation
 call {
+    // Destroy stale ppEffect from previous session to prevent engine-level
+    // heap corruption on non-fresh server restarts (ppEffects persist across missions)
+    private _existingEffect = missionNamespace getVariable ["vgm_c_skill_investigate_ppDesaturate", -1];
+    if (_existingEffect >= 0) then {
+        ppEffectDestroy _existingEffect;
+    };
+    terminate (missionNamespace getVariable ["vgm_c_skill_investigate_ppDisableScript", scriptNull]);
+
     private _effect = -1;
     private _layer = 1500; // ColorCorrections base priority/layer is 1500
     while {_effect < 0} do {

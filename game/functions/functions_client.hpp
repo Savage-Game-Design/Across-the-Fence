@@ -354,7 +354,11 @@ class vgm_g
         };
         class skills_tierUnlocked {};
         class skills_treesHashToPathsHash;
-    };
+
+
+        class skills_getEffectiveCost {};
+
+        class skills_getTierUnlockCost {};};
 
     class suppression
     {
@@ -496,7 +500,11 @@ class vgm_c
         class displayMenuBase {};
         class displayLoading {};
         class displayLevelIndicator {};
-    };
+
+
+        class displayTrackIndicator {};
+
+        class displaySkillPresets {};};
 
     class groups
     {
@@ -514,7 +522,9 @@ class vgm_c
         class artillery_addActions {};
         class artillery_menu {};
         class artillery_removeActions {};
-    };
+
+
+        class artillery_getCooldown {};};
 
     class carry
     {
@@ -546,7 +556,15 @@ class vgm_c
             postInit = 1;
         };
         class dangerReport_sendRecentShotsToServer {};
-    };
+
+
+        class voiceDetection_postInit {
+            postInit = 1;
+        };
+
+        class radioDetection_postInit {
+            postInit = 1;
+        };};
 
     class equipment
     {
@@ -605,7 +623,9 @@ class vgm_c
         class missions_endMission {};
         class missions_finishDeploy {};
         class missions_startDeploy {};
-    };
+
+
+        class missions_finishDeploy_infil {};};
 
     class missions_gameplay
     {
@@ -735,7 +755,9 @@ class vgm_c
             postInit = 1;
         };
         class sharedHub_teleportPlayerToHub {};
-    };
+
+
+        class sharedHub_nametags {};};
 
     class sites_hints
     {
@@ -906,7 +928,11 @@ class vgm_c
         class skills_requestSkillLearn {};
         class skills_requestSkillRespec {};
         class skills_requestSkillsData {};
-    };
+
+
+        class skills_receiveSkillUnlearn {};
+
+        class skills_requestSkillUnlearn {};};
 
     class skill_passives
     {
@@ -925,7 +951,9 @@ class vgm_c
         class skill_passives_noRestraint {};
         class skill_passives_reconByFire {};
         class skill_passives_stablePlatform {};
-    };
+
+
+        class skill_passives_digIn {};};
     class skill_passives_infantryman
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\infantryman);
@@ -938,14 +966,26 @@ class vgm_c
 
         class skill_passives_friendOrFoe {};
         class skill_passives_senseOfScale {};
-    };
+
+
+        class skill_passives_eavesdropping {};
+
+        class skill_passives_secondSight {};
+
+        class skill_passives_trapDetect {};};
     class skill_passives_medic
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\medic);
 
         class skill_passives_legPockets {};
         class skill_passives_playingPossum {};
-    };
+
+
+        class skill_passives_heAintHeavy {};
+
+        class skill_passives_iveSeenWorse {};
+
+        class skill_passives_lastRites {};};
     class skill_passives_fireSupport
     {
         VGM_CLIENT_PATH(\systems\skill\client\passives\fire_support);
@@ -965,7 +1005,21 @@ class vgm_c
         class skill_passives_kickOffTime {};
         class skill_passives_rallyPoint {};
         class skill_passives_sanctuary {};
-    };
+
+
+        class skill_passives_staboExtract {};
+
+        class skill_passives_staboExtract_request {};
+
+        class skill_passives_staboExtract_hookup {};
+
+        class skill_passives_alternateLz {};
+
+        class skill_passives_targetFolder {};
+
+        class skill_targetFolder_showMarkers {};
+
+        class skill_passives_ronCall {};};
 
     class skill_actives
     {
@@ -1000,7 +1054,9 @@ class vgm_c
         class skill_actives_oneOfThem {};
         class skill_actives_stonesThrow {};
         class skill_actives_tacticalSense {};
-    };
+
+
+        class skill_actives_pathfinder {};};
 
     class skill_actives_medic
     {
@@ -1009,7 +1065,19 @@ class vgm_c
         class skill_actives_medic_itsOnlyAFleshWound {};
         class skill_actives_medic_saltTablets {};
         class skill_actives_medic_tourniquet {};
-    };
+
+
+        class skill_actives_tourniquet {};
+
+        class skill_actives_packTheWound {};
+
+        class skill_actives_saltTablets {};
+
+        class skill_actives_blackKnight {};
+
+        class skill_actives_itsOnlyAFleshWound {};
+
+        class skill_actives_fieldTriage {};};
 
     class skill_actives_team_leader
     {
@@ -1147,5 +1215,151 @@ class vgm_c
 
         class tutorial_resetAll {};
         class tutorial_trigger {};
+    };
+
+
+    class missions_gameplay_bright_light_client
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client\bright_light);
+
+        class missions_gameplay_bright_light_timerDisplay {};
+    };
+
+
+    class missions_gameplay_ambient_life_client
+    {
+        VGM_CLIENT_PATH(\systems\missions_gameplay\client\ambient_life);
+
+        class amblife_wireTap_addActions { postInit = 1; };
+    };
+
+
+    class skill_presets
+    {
+        VGM_CLIENT_PATH(\systems\skill_presets\client);
+
+        class skillPresets_preInit
+        {
+            preInit = 1;
+        };
+        class skillPresets_addAction {};
+        class skillPresets_removeAction {};
+        class skillPresets_openMenu {};
+        class skillPresets_requestSave {};
+        class skillPresets_requestLoad {};
+        class skillPresets_requestDelete {};
+        class skillPresets_receivePresets {};
+    };
+
+
+    class prestige
+    {
+        VGM_CLIENT_PATH(\systems\prestige\client);
+
+        class prestige_requestPrestige {};
+        class prestige_receivePrestige {};
+    };
+
+
+    class wheel_menu
+    {
+        VGM_CLIENT_PATH(\systems\wheel_menu\client);
+
+        class wheelMenu_preInit
+        {
+            preInit = 1;
+        };
+        class wheelMenu_postInit
+        {
+            postInit = 1;
+        };
+        class wheelMenu_requestExtract {};
+        class wheelMenu_evacTimer {};
+        class wheelMenu_evacNow {};
+    };
+
+
+    class skill_passives_tail
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\passives\tail);
+
+        class skill_passives_trapDisarm {};
+        class skill_passives_slam {};
+        class skill_passives_eyesDown {};
+        class skill_passives_toepopper {};
+        class skill_passives_rocketman2 {};
+        class skill_passives_jungleEyes {};
+        class skill_passives_fuzemaster {};
+        class skill_passives_heartOfDarkness {};
+        class skill_passives_saboteur {};
+    };
+
+
+    class ron_client
+    {
+        VGM_CLIENT_PATH(\systems\ron\client);
+
+        class ron_cinematic {};
+        class ron_fadeScreen {};
+        class ron_prepTimer {};
+        class ron_trigger {};
+    };
+
+
+    class skill_actives_support
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\support);
+
+        class skill_actives_support_quickBandage {};
+    };
+
+
+    class skill_actives_tail
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\tail);
+
+        class skill_actives_slamTime2 {};
+        class skill_actives_lethalGifts {};
+        class skill_actives_rocketman3 {};
+        class skill_actives_dynamite {};
+        class skill_actives_cleanSweep {};
+        class skill_actives_lethalGifts2 {};
+    };
+
+
+    class skill_actives_rto
+    {
+        VGM_CLIENT_PATH(\systems\skill\client\actives\rto);
+
+        class skill_actives_sitrep {};
+        class skill_actives_sitrep_display {};
+        class skill_actives_guardianAngel {};
+        class skill_actives_arclight {};
+        class skill_actives_bigBlue {};
+    };
+
+
+    class radiocheckin
+    {
+        VGM_CLIENT_PATH(\systems\radiocheckin\client);
+
+        class radiocheckin_postInit {
+            postInit = 1;
+        };
+        class radiocheckin_doCheckin {};
+    };
+
+
+    class radio_jamming_client
+    {
+        VGM_CLIENT_PATH(\systems\radio_jamming\client);
+
+        class radioJamming_isPlayerJammed {};
+        class radioJamming_postInit {
+            postInit = 1;
+        };
+        class radioJamming_addSatchelAction {
+            postInit = 1;
+        };
     };
 };

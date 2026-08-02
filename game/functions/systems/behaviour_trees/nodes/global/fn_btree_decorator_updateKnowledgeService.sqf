@@ -45,7 +45,19 @@ _decorator set ["onTreeAssigned", {
 
     private _firedManHandler = [_group, "FiredMan", {
         params ["_unit"];
-        group _unit setVariable ["vgm_l_btree_lastFired", time];
+        private _grp = group _unit;
+        _grp setVariable ["vgm_l_btree_lastFired", time];
+
+        // Propagate gunfire to nearby friendly AI groups (throttled to once per 5s)
+        private _targets = _grp getVariable ["vgm_g_ai_targets", []];
+        if (_targets isNotEqualTo []) then {
+            private _lastEvent = _grp getVariable ["vgm_l_btree_lastAiGunshotEvent", -5];
+            if (time - _lastEvent >= 5) then {
+                _grp setVariable ["vgm_l_btree_lastAiGunshotEvent", time];
+                private _eventGroup = _grp getVariable ["vgm_g_missionId", vgm_g_dangerReport_defaultLocEventGroup];
+                [_eventGroup, getPosASL _unit, 175, "ai_gunshots", _grp] call vgm_g_fnc_locEvents_triggerEvent;
+            };
+        };
     }] call vgm_g_fnc_greh_addEventHandlerToAllUnitsInGroup;
     _group setVariable ["vgm_l_btree_updateKnowledge_firedManHandler", _firedManHandler];
 }];
@@ -126,7 +138,9 @@ _decorator set ["onTick", {
         ] call para_g_fnc_event_triggerServer;
     };
 
-    _extern_group setVariable ["vgm_g_ai_targets", _targets, true];
+    if !(_targets isEqualTo _lastTargets) then {
+        _extern_group setVariable ["vgm_g_ai_targets", _targets, true];
+    };
 }];
 
 _decorator

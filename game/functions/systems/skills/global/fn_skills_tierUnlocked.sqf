@@ -27,6 +27,6 @@ params [
 ];
 
 private _spentPointsInTreeBelowTier = [_skillTree, _player, _tier] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
-private _requiredPoints = vgm_skills_tierUnlockCosts # _tier;
+private _requiredPoints = [_skillTree, _player, _tier] call vgm_g_fnc_skills_getTierUnlockCost;
 
 _requiredPoints <= _spentPointsInTreeBelowTier

@@ -2,11 +2,12 @@
     File: fn_virtsquad_perFrame.sqf
     Author: Savage Game Design
     Date: 2025-01-11
-    Last Update: 2025-03-01
+    Last Update: 2026-03-03
     Public: No
 
     Description:
         Schedules virtual squads to be spawed or despawned based on the presence of players.
+        Throttled to run at most every 0.25s to reduce server-side per-frame overhead.
 
     Parameter(s):
         N/A
@@ -17,6 +18,10 @@
     Example(s):
         addMissionEventHandler ["EachFrame", vgm_c_fnc_virtsquad_perFrame]
  */
+
+private _now = diag_tickTime;
+if (_now - (missionNamespace getVariable ["vgm_s_virtsquad_lastTick", 0]) < 0.25) exitWith {};
+vgm_s_virtsquad_lastTick = _now;
 
 if (vgm_s_virtsquad_playerQueue isEqualTo []) then {
     vgm_s_virtsquad_playerQueue = allPlayers;

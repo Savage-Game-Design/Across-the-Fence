@@ -3,11 +3,14 @@
     File: fn_medical_handleDamage.sqf
     Author: Savage Game Design
     Date: 2023-06-11
-    Last Update: 2023-12-03
+    Last Update: 2026-03-05
     Public: No
 
     Description:
-        Handle unit damage.
+        Handle unit damage — VGM wound tracker.
+        Processes incoming damage into VGM wounds/debuffs as side effects,
+        then passes damage through to SOG's HandleDamage (next in chain)
+        which handles incapacitation at >= 0.95.
 
     Parameter(s):
         See: https://community.bistudio.com/wiki/Arma_3:_Event_Handlers#HandleDamage
@@ -36,9 +39,8 @@ private _hitDamage = _damage - _currentDamage;
 // god mode
 if (!isDamageAllowed _unit) exitWith {_currentDamage};
 
-// prevent unit from being killed when downed
-private _downed = lifeState _unit == "INCAPACITATED";
-if (_downed) exitWith {_currentDamage};
+// SOG handles incapacitated state — skip wound processing but pass damage through
+if (_unit getVariable ["vn_revive_incapacitated", false]) exitWith {_damage};
 
 // NAPALM / WILLY PETE DAMAGE
 // ----
@@ -102,7 +104,7 @@ if (
         };
     }, [_unit, _hitDamage, _hitPoint, _projectile]] call vgm_g_fnc_execNextFrame;
 
-    0 // prevent engine damage handling
+    _damage // pass through to SOG
 };
 
 // validate other damage types
@@ -110,12 +112,12 @@ if (_projectile isEqualTo "" && {isNull _source}) exitWith {
     #ifdef DEBUG
     format ["(%2) Invalid damage: %1", _hitPoint, diag_frameNo] call vgm_g_fnc_logDebug;
     #endif
-    _currentDamage
+    _damage
 };
 
 // filter out tiny amounts of damage
 private _ignoreThreshold = [0.3, 0.001] select _directHit;
-if (_hitDamage < _ignoreThreshold) exitWith {_currentDamage};
+if (_hitDamage < _ignoreThreshold) exitWith {_damage};
 
 // ignore problematic hitpoints for hitpoint handling
 // #structural - we do not want to handle it for hits
@@ -125,7 +127,7 @@ if (_hitPoint in ["#structural", "incapacitated", "hitbody"]) exitWith {
     #ifdef DEBUG
     format ["(%6) Skipped Damage: %1 | %2 | %3 | %4 | %5", _hitPoint, _hitDamage, _projectile, _source, _selection, diag_frameNo] call vgm_g_fnc_logDebug;
     #endif
-    _currentDamage
+    _damage
 };
 
 // calculate approximated amount of damage the unit received before armor calculations
@@ -152,21 +154,26 @@ if (isNil "_hitsData") then {
         ["DEBUG", format ["(%2) HitsArray: %1", _hitsArray, diag_frameNo]] call vgm_g_fnc_log;
         #endif
 
-        // sort the hits by damage
+        // sort the hits by damage (highest first)
         _hitsArray sort false;
 
-        // apply damage
+        // apply damage — deduplicate by body part so a single bullet
+        // doesn't wound the same part twice, but DO wound every distinct
+        // body part that received damage (fixes leg damage being ignored
+        // when torso passthrough had higher raw damage)
+        private _processedBodyParts = [];
         {
             _x params ["_realDamage", "_hitPoint", "_hitDamage"];
+
+            private _bodyPart = vgm_c_medical_hitPointBodyPartMap getOrDefault [_hitPoint, ""];
+            if (_bodyPart == "" || {_bodyPart in _processedBodyParts}) then {continue};
+            _processedBodyParts pushBack _bodyPart;
 
             #ifdef DEBUG
             format ["(%4) Applying damage: %1 | %2 | %3", _realDamage, _hitPoint, _hitDamage, diag_frameNo] call vgm_g_fnc_logDebug;
             #endif
 
             [_unit, _hitDamage, _hitPoint, _source, _projectile, _directHit] call vgm_c_fnc_medical_receiveDamage;
-
-            // hitpoint with most damage is one that (most likely) directly received the hit in case of direct hit
-            if (_directHit) exitWith {};
         } forEach _hitsArray;
 
     }, [_unit, _hitsData, [_source, _instigator] select isNull _source, _projectile, _directHit]] call vgm_g_fnc_execNextFrame;
@@ -174,8 +181,5 @@ if (isNil "_hitsData") then {
 
 _hitsData set [_hitPoint, [_realDamage, _hitPoint, _hitDamage]];
 
-// damage of these hitpoint controls visuals or engine features like limping sway etc.
-// retain the values set by our other functionalities
-if (_hitPoint in ["hithead", "hitbody", "hithands", "hitlegs"]) exitWith {_currentDamage};
-
-0 // prevent engine damage handling for all other hitpoints
+// Pass all damage through to SOG's handler (next in chain)
+_damage

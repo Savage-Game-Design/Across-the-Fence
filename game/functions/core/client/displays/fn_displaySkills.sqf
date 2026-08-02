@@ -47,6 +47,7 @@ switch _mode do {
         ["updateSkillTreeListLabels", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTreeHeader", _display] call vgm_c_fnc_displaySkills;
         ["updateSkillTree", _display] call vgm_c_fnc_displaySkills;
+        ["updatePrestigeButton", _display] call vgm_c_fnc_displaySkills;
     };
 
     // fill left panel with skill trees
@@ -117,7 +118,7 @@ switch _mode do {
                 _ctrlUnlock ctrlEnable false;
             };
 
-            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", _skill get "cost"];
+            _ctrlUnlock ctrlSetText format [localize "STR_VGM_SKILLS_UI_UNLOCK", [_currentSkill, player] call vgm_g_fnc_skills_getEffectiveCost];
             _ctrlUnlock ctrlEnable ([player, _currentSkill] call vgm_g_fnc_skills_canLearn);
             _ctrlUnlock setVariable ["vgm_skill", _currentSkill];
         };
@@ -244,10 +245,12 @@ switch _mode do {
                 _ctrlSkill setVariable ["vgm_skill", _skill];
                 if (!(_skill call vgm_g_fnc_skills_canSee)) then {_ctrlSkill ctrlShow false};
 
+                private _effectiveCost = [_skill, player] call vgm_g_fnc_skills_getEffectiveCost;
+                private _costText = format ["%1 SP", _effectiveCost];
                 private _skillText = [
                     parseText (_skill get "displayName"),
                     lineBreak,
-                    format ["%1 SP", _skill get "cost"]
+                    parseText _costText
                 ];
 
                 if (_skill get "isActive") then {
@@ -263,9 +266,15 @@ switch _mode do {
                 private _tooltip = _skill get "description";
 
                 if (_skill call vgm_g_fnc_skills_isKnown) then {
-                    _ctrlSkill ctrlEnable false;
                     _ctrlSkill ctrlSetBackgroundColor [VGM_UI_COLOR_GREY,1];
-                    _ctrlSkill ctrlSetDisabledColor [1,1,1,1];
+                    // Click to unlearn
+                    _ctrlSkill ctrlAddEventHandler ["ButtonClick", {
+                        params ["_ctrl"];
+                        private _skill = _ctrl getVariable "vgm_skill";
+                        private _display = ctrlParent (ctrlParentControlsGroup _ctrl);
+                        ["unlearnSkill", [_display, _skill]] call vgm_c_fnc_displaySkills;
+                    }];
+                    _tooltip = _tooltip + endl + "(Click to unlearn)";
                 } else {
                     _ctrlSkill ctrlAddEventHandler ["ButtonClick", {["unlockSkill", _this] call vgm_c_fnc_displaySkills}];
                     _ctrlSkill setVariable ["vgm_skill", _skill];
@@ -311,7 +320,7 @@ switch _mode do {
             private _currentTier = (count _skillTiers - _forEachIndex - 1);
             private _currentTierUnlocked = _tierUnlockStatuses # _currentTier;
             private _currentSkillPointsSpent = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTreeSkillPointsBelowTier;
-            private _requiredSkillPointsToUnlock = vgm_skills_tierUnlockCosts # _currentTier;
+            private _requiredSkillPointsToUnlock = [_skillTree, player, _currentTier] call vgm_g_fnc_skills_getTierUnlockCost;
             ((_skillTreeLayout get "tiersYAndHeight") # _forEachIndex) params ["_tierY", "_tierH"];
 
             // Horizontal separators
@@ -397,18 +406,82 @@ switch _mode do {
         ctrlSetFocus (ctrlParent _ctrlUnlock getVariable "vgm_currentSkillTreeRootCtrl");
 
         // confirm skill selection
-        // TODO this would need some sort of fitting UI design
         [ctrlParent _ctrlUnlock, _skill] spawn {
             params ["_display", "_skill"];
+            private _effectiveCost = [_skill, player] call vgm_g_fnc_skills_getEffectiveCost;
             private _learn = [parseText ([
                 "Do you want to learn: <t color='#ff0000'>", _skill get "displayName", "</t><br/>",
-                format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", call vgm_c_fnc_skills_getSkillPoints, _skill get "cost"],
+                format ["You have <t color='#ff0000'>%1</t> out of <t color='#ff0000'>%2</t> needed skillpoints", call vgm_c_fnc_skills_getSkillPoints, _effectiveCost],
                 ["<br/>Can't learn!", ""] select ([player, _skill] call vgm_g_fnc_skills_canLearn)
             ] joinString ""), "Confirm", true, true, _display] call BIS_fnc_guiMessage;
             // check if confirmed
             if (!_learn) exitWith {};
 
             [_skill, _display] call vgm_c_fnc_skills_requestSkillLearn;
+        };
+    };
+
+    case "unlearnSkill": {
+        params ["_display", "_skill"];
+
+        [_display, _skill] spawn {
+            params ["_display", "_skill"];
+
+            private _effectiveCost = [_skill, player] call vgm_g_fnc_skills_getEffectiveCost;
+
+            // Check if unlearning would cascade (break tier thresholds)
+            private _skillTree = _skill call vgm_g_fnc_skills_getSkillTreeFromSkill;
+            private _tiers = _skillTree get "skills";
+            private _targetTier = _skill get "tier";
+            private _skillPath = _skill get "path";
+
+            // Simulate removal to find cascaded skills
+            private _skillsData = player getVariable "vgm_g_skillsData";
+            private _knownPaths = +(_skillsData get "skillPaths");
+            _knownPaths deleteAt (_knownPaths find _skillPath);
+
+            private _cascadeNames = [];
+            for "_tierIdx" from (_targetTier + 1) to (count _tiers - 1) do {
+                private _spentBelow = 0;
+                for "_t" from 0 to (_tierIdx - 1) do {
+                    {
+                        if ((_x get "path") in _knownPaths) then {
+                            _spentBelow = _spentBelow + (_x get "cost");
+                        };
+                    } forEach (_tiers # _t);
+                };
+                private _requiredPoints = [_skillTree, player, _tierIdx] call vgm_g_fnc_skills_getTierUnlockCost;
+                if (_spentBelow < _requiredPoints) then {
+                    {
+                        private _path = _x get "path";
+                        if (_path in _knownPaths) then {
+                            _cascadeNames pushBack (_x get "displayName");
+                            _knownPaths deleteAt (_knownPaths find _path);
+                        };
+                    } forEach (_tiers # _tierIdx);
+                };
+            };
+
+            // Build confirmation message
+            private _msg = format [
+                "Do you want to unlearn: <t color='#ff0000'>%1</t><br/>You will regain <t color='#00ff00'>%2</t> skill points.",
+                _skill get "displayName",
+                _effectiveCost
+            ];
+
+            if (count _cascadeNames > 0) then {
+                private _cascadeList = _cascadeNames joinString ", ";
+                _msg = _msg + format [
+                    "<br/><br/><t color='#ffaa00'>WARNING: This will also unlearn %1 skill(s) in higher tiers:</t><br/>%2",
+                    count _cascadeNames,
+                    _cascadeList
+                ];
+            };
+
+            private _confirm = [parseText _msg, "Confirm Unlearn", true, true, _display] call BIS_fnc_guiMessage;
+            if (!_confirm) exitWith {};
+
+            [_skill, _display] call vgm_c_fnc_skills_requestSkillUnlearn;
         };
     };
 
@@ -426,6 +499,58 @@ switch _mode do {
     case "respec": {
         params ["_ctrlRespec"];
         [ctrlParent _ctrlRespec] call vgm_c_fnc_skills_requestSkillRespec;
+    };
+
+    case "initPrestige": {
+        params ["_ctrlPrestige"];
+        ["updatePrestigeButton", ctrlParent _ctrlPrestige] call vgm_c_fnc_displaySkills;
+    };
+
+    case "updatePrestigeButton": {
+        params ["_display"];
+        private _ctrlPrestige = _display displayCtrl VGM_IDC_DISPLAYSKILLS_PRESTIGE;
+        private _level = player getVariable ["vgm_g_levelingData", createHashMap] getOrDefault ["level", 0];
+        private _canPrestige = _level >= vgm_g_leveling_maxLvl;
+        _ctrlPrestige ctrlEnable _canPrestige;
+        if (_canPrestige) then {
+            _ctrlPrestige ctrlSetTooltip localize "STR_VGM_PRESTIGE_BUTTON_TOOLTIP";
+        } else {
+            _ctrlPrestige ctrlSetTooltip localize "STR_VGM_PRESTIGE_LOCKED";
+        };
+    };
+
+    case "prestige": {
+        params ["_ctrlPrestige"];
+        private _display = ctrlParent _ctrlPrestige;
+
+        [_display] spawn {
+            params ["_display"];
+
+            private _levelingData = player getVariable ["vgm_g_levelingData", createHashMap];
+            private _prestige = _levelingData getOrDefault ["prestige", 0];
+            private _displayLevel = _prestige * 30 + (_levelingData getOrDefault ["level", 0]);
+
+            private _msg = format [
+                "<t size='1.2' color='#ffcc00'>PRESTIGE</t><br/><br/>" +
+                "Current display level: <t color='#00ff00'>%1</t><br/>" +
+                "Current prestige: <t color='#00ff00'>%2</t><br/><br/>" +
+                "Prestiging will:<br/>" +
+                "- Reset your level back to 1<br/>" +
+                "- Reset all skill points<br/>" +
+                "- <t color='#00ff00'>Keep your arsenal cosmetics</t><br/><br/>" +
+                "Your nametag level will continue from <t color='#ffcc00'>%3</t>.<br/><br/>" +
+                "Are you sure?",
+                _displayLevel,
+                _prestige,
+                _displayLevel + 1
+            ];
+
+            private _confirm = [parseText _msg, "Confirm Prestige", true, true, _display] call BIS_fnc_guiMessage;
+            if (!_confirm) exitWith {};
+
+            _display closeDisplay 1;
+            [] call vgm_c_fnc_prestige_requestPrestige;
+        };
     };
 
     default {

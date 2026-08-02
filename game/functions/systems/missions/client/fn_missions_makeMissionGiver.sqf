@@ -28,23 +28,36 @@ params ["_object"];
 vgm_mission_givers pushBack _object;
 _object setVariable ["vgm_c_missions_joinActions", createHashMap];
 
-// Add action to create mission
-_object addAction [
-    "Create mission",
-    {
-        private _targetZone = selectRandom ([] call vgm_g_fnc_missions_zones_getUnreservedZones);
-        if (isNil "_targetZone") exitWith {
-            hint localize "STR_VGM_MISSIONS_CREATION_NO_ZONES_FREE";
-        };
-        [getPlayerID player, _targetZone] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
-    },
-    [],
-    100,
-    false,
-    true,
-    "",
-    "isNil { call vgm_c_fnc_missions_getCurrentMission }",
-    10
+// Add actions to create each mission type
+{
+    _x params ["_label", "_type"];
+
+    _object addAction [
+        format ["Create Mission: %1", _label],
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+            _arguments params ["_missionType"];
+
+            private _targetZone = selectRandom ([] call vgm_g_fnc_missions_zones_getUnreservedZones);
+            if (isNil "_targetZone") exitWith {
+                hint localize "STR_VGM_MISSIONS_CREATION_NO_ZONES_FREE";
+            };
+
+            [getPlayerID player, _targetZone, _missionType] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
+        },
+        [_type],
+        100,
+        false,
+        true,
+        "",
+        "isNil { call vgm_c_fnc_missions_getCurrentMission }",
+        10
+    ];
+} forEach [
+    ["Scouting", "scouting"],
+    ["Prisoner Snatch", "prisoner_snatch"],
+    ["Bright Light Rescue", "bright_light"],
+    ["Hatchet Force", "hatchet_force"]
 ];
 
 vgm_c_fnc_addJoinMissionAction = {

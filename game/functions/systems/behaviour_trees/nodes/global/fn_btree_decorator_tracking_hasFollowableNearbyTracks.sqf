@@ -32,6 +32,9 @@ _decorator set ["name", "has followable nearby tracks?"];
 _decorator set ["condition", {
     params ["_node", "_state"];
 
+    // Only tracker teams spawned by the mission director can follow footprint trails
+    if !(_extern_group getVariable ["vgm_isTrackerTeam", false]) exitWith { false };
+
     // Allows the AI to resume tracking, and also optimises if this node is used multiple times in the same tree.
     private _currentTrack = _extern_blackboard getOrDefault ["tracking_currentTrack", createHashMap];
     private _groupLeader = leader _extern_group;

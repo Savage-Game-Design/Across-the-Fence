@@ -99,3 +99,6 @@ vgm_c_skills_active_slots = createHashMapFromArray [
 }] call para_g_fnc_event_subscribeLocal;
 
 [] spawn VGM_C_fnc_skills_active_toggleHud;
+
+// Show track indicator HUD above the ability cooldown bar
+"vgm_tracking_hud" cutRsc ["VGM_RscTrackIndicator", "PLAIN", 0, false];

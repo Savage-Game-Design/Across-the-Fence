@@ -18,6 +18,13 @@
         ["init"] call vgm_c_fnc_artillery_menu;
  */
 
+// Block if player is inside a radio jammer's radius
+private _jamDist = call vgm_c_fnc_radioJamming_isPlayerJammed;
+if (_jamDist >= 0) exitWith {
+    hint format [localize "STR_VGM_RADIO_JAMMED", (round (_jamDist / 100)) * 100];
+    playSoundUI ["3DEN_notificationWarning", 0.5];
+};
+
 [] spawn {
     private _artilleryDisplay = displayNull;
     waitUntil {

@@ -2,7 +2,7 @@
     File: fn_equipment_filterLoadout.sqf
     Author: Savage Game Design
     Date: 2023-11-17
-    Last Update: 2025-10-25
+    Last Update: 2026-03-05
     Public: Yes
 
     Description:
@@ -33,13 +33,19 @@ private _allowedItems = createHashMapFromArray [["", nil]];
     _allowedItems insert [true, _baseWeapons, []];
 } forEach ("true" configClasses (missionConfigFile >> "vgm_equipment"));
 
+// TFAR manages its own radios with unique IDs.
+// Never filter these — let TFAR handle them.
+private _fnc_isTfarItem = {
+    (toLower _this) select [0, 5] == "tfar_"
+};
+
 private _removedItems = createHashMap;
 
 private _fnc_filterWeapon = {
     params ["_weaponData"];
     {
         private _className = _x param [0, ""];
-        if (!(toLower _className in _allowedItems)) then {
+        if (!(_className call _fnc_isTfarItem) && {!(toLower _className in _allowedItems)}) then {
             private _replacement = ["", []] select (_x isEqualType []);
             _weaponData set [_forEachIndex, _replacement];
             _removedItems set [_className, []];
@@ -50,7 +56,7 @@ private _fnc_filterWeapon = {
 private _fnc_filterContainer = {
     params [["_container", ""], ["_items", []]];
 
-    if (!(toLower _container in _allowedItems)) exitWith {
+    if (!(_container call _fnc_isTfarItem) && {!(toLower _container in _allowedItems)}) exitWith {
         // remove the container from parent array
         _this resize 0;
     };
@@ -73,7 +79,7 @@ private _fnc_filterContainer = {
         };
 
         private _itemClass = _x select 0;
-        if (!(toLower _itemClass in _allowedItems)) then {
+        if (!(_itemClass call _fnc_isTfarItem) && {!(toLower _itemClass in _allowedItems)}) then {
             _items set [_forEachIndex, []];
             _removedItems set [_itemClass, []];
         };
@@ -112,7 +118,7 @@ _loadout = +_loadout;
 // items
 {
     private _itemClass = _loadout select _x;
-    if (!(toLower _itemClass in _allowedItems)) then {
+    if (!(_itemClass call _fnc_isTfarItem) && {!(toLower _itemClass in _allowedItems)}) then {
         _loadout set [_x, ""];
         _removedItems set [_itemClass, []];
     };
@@ -120,11 +126,13 @@ _loadout = +_loadout;
 
 private _assignedItems = _loadout select IDX_ASSIGNED_ITEMS;
 {
+    if (_x call _fnc_isTfarItem) then {continue};
+
     private _isAllowed = toLower _x in _allowedItems;
 
     if (_forEachIndex == IDX_ASSIGNED_ITEMS_RADIO) then {
         private _parentConfig = inheritsFrom (configFile >> "CfgWeapons" >> _x);
-        _isAllowed = _isAllowed || (configName _parentConfig in _allowedItems)
+        _isAllowed = _isAllowed || (toLower configName _parentConfig in _allowedItems)
     };
 
     if (!_isAllowed) then {

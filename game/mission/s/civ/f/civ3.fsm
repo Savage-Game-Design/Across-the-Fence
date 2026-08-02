@@ -1,0 +1,150 @@
+/*%FSM<COMPILE "O:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, civ3">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"INIT",0,250,652.000000,-2164.000000,680.000000,-2136.000000,0.000000,"INIT"};
+item1[] = {"Check_Weather",2,250,812.000000,-2248.000000,880.000000,-2216.000000,0.000000,"Check" \n "Weather"};
+item2[] = {"__min_30sec",4,218,808.000000,-2192.000000,884.000000,-2152.000000,0.000000,"2min" \n "30sec"};
+item3[] = {"INIT_1",2,250,640.000000,-2252.000000,692.000000,-2212.000000,0.000000,"INIT"};
+item4[] = {"",7,210,756.000000,-2176.000000,764.000000,-2168.000000,0.000000,""};
+item5[] = {"noCivs",4,4314,472.000000,-2252.000000,540.000000,-2212.000000,0.000000,"noCivs"};
+item6[] = {"Civs",4,218,740.000000,-2252.000000,796.000000,-2212.000000,0.000000,"Civs"};
+item7[] = {"__0s",4,218,552.000000,-2200.000000,600.000000,-2168.000000,0.000000,"20s"};
+item8[] = {"WAIT",2,250,480.000000,-2200.000000,532.000000,-2172.000000,0.000000,"WAIT"};
+item9[] = {"_",8,218,640.000000,-2208.000000,692.000000,-2168.000000,0.000000,""};
+link0[] = {0,9};
+link1[] = {1,2};
+link2[] = {2,4};
+link3[] = {3,5};
+link4[] = {3,6};
+link5[] = {4,3};
+link6[] = {5,8};
+link7[] = {6,1};
+link8[] = {7,3};
+link9[] = {8,7};
+link10[] = {9,3};
+globals[] = {0.000000,0,0,0,0,640,480,3,60,6316128,1,420.684723,1005.138672,-2011.619629,-2474.853516,1829,1244,1};
+window[] = {2,-1,-1,-1,-1,951,156,1243,156,3,1847};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "civ3";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"//params[""_a"",""_b""];" \n
+                         "//civs=[];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 9;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Check_Weather">*/
+                class Check_Weather
+                {
+                        name = "Check_Weather";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/"_t=time;" \n
+                         "" \n
+                         "if(rain<=0.2)then{" \n
+                         "{_x forceWalk true}forEach(server getVariable""civs"")" \n
+                         "" \n
+                         "}else{" \n
+                         "" \n
+                         "{_x forceWalk false;_x forceSpeed 13}forEach(server getVariable""civs"")};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__min_30sec">*/
+                                class __min_30sec
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time>_t+150"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "INIT_1">*/
+                class INIT_1
+                {
+                        name = "INIT_1";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/"_t=time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Civs">*/
+                                class Civs
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="Check_Weather";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!((server getVariable""civs"")isEqualTo[])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "noCivs">*/
+                                class noCivs
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="WAIT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(server getVariable""civs"")isEqualTo[]"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_t=time;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "WAIT">*/
+                class WAIT
+                {
+                        name = "WAIT";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__0s">*/
+                                class __0s
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time>_t+20"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

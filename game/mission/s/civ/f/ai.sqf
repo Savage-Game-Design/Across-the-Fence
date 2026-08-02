@@ -1,0 +1,11 @@
+//params["_a","_b"];
+_a=_this#0;_b=_this#1;
+sleep 3;
+_a enableSimulation true;_a enableAI"teamSwitch";_a enableStamina false;
+sleep 3;
+if!(_a getVariable"FSM"isEqualTo"anim")then{_a enableAI"anim"};
+{_a enableAI _x}forEach["move","path"];
+//(server getVariable"civs")pushBack _a;
+if!(vest _a isEqualTo"vn_o_vest_08")then{_a forceWalk true};
+sleep 1;
+_a hideObjectGlobal false;_a allowDamage true;

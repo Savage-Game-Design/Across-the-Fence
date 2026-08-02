@@ -36,6 +36,9 @@ if (_machineIds isNotEqualTo []) then {
 private _directorData = _mission get "director";
 if (isNil "_directorData") exitWith {}; // mission was not started, no data
 
+// Stop mortar barrage if active
+[_mission] call vgm_s_fnc_mortar_stop;
+
 {
     [_x] call vgm_s_fnc_virtsquad_delete;
 } forEach values (_directorData getOrDefault ["virtualSquads", createHashMap]);

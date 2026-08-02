@@ -111,4 +111,17 @@ class vgm_site_types {
 
         class hints: vgm_site_hints_default {};
     };
+
+    // Virtual site types (display-only, no generator — disabled so server doesn't try to load them)
+    class vgm_convoy {
+        disabled = 1;
+        displayNameKey = "STR_VGM_SITES_CONVOY";
+        locationClass = "o_motor_inf";
+    };
+
+    class vgm_bda {
+        disabled = 1;
+        displayNameKey = "STR_VGM_SITES_BDA";
+        locationClass = "o_unknown";
+    };
 };

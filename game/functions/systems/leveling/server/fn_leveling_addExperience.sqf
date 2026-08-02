@@ -25,7 +25,7 @@ params ["_player", "_experience"];
 
 private _levelingData = _player call vgm_s_fnc_leveling_dataGetCached;
 private _currentLevel = _levelingData get "level";
-// early exit if already at max level (ignore if adding 0 xp as that's used for data broadcast)
+// early exit if already at max level (ignore if adding 0 xp as that's used for data broadcast, and allow negative xp for penalties)
 if (_currentLevel >= vgm_g_leveling_maxLvl && {_experience > 0}) exitWith {
     (format ["Player at max level %1 (%2)", name _player, getPlayerUID _player]) call vgm_g_fnc_logInfo;
     false
@@ -37,6 +37,13 @@ private _currentExperience = _levelingData get "experience";
 _currentExperience = _currentExperience + _experience;
 // clamp XP to the amount needed to reach max level
 _currentExperience = _currentExperience min vgm_g_leveling_maxExperience;
+// XP floor: never go below 0
+_currentExperience = _currentExperience max 0;
+// no-delevel guard: never drop below current level's base threshold
+if (_currentLevel > 0) then {
+    private _currentLevelThreshold = (vgm_g_leveling_levelsHashMap get (_currentLevel - 1)) get "experienceThreshold";
+    _currentExperience = _currentExperience max _currentLevelThreshold;
+};
 
 _levelingData set ["experience", _currentExperience];
 

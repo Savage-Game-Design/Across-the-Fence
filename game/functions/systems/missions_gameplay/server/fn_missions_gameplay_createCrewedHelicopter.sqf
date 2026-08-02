@@ -15,7 +15,7 @@
         Helicopter [OBJECT]
 
     Example(s):
-        ["vn_b_air_uh1d_02_06"] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter
+        ["vn_b_air_uh1d_02_07"] call vgm_s_fnc_missions_gameplay_createCrewedHelicopter
  */
 
 #define PILOT_TURRET [-1]
@@ -42,5 +42,41 @@ _helicopter setEffectiveCommander driver _helicopter;
 // prevent players from taking the seats from AI
 [_helicopter, true] remoteExec ["lockDriver", _helicopter];
 [_helicopter, [COPILOT_TURRET, true]] remoteExec ["lockTurret", _helicopter];
+
+// Lights off — covert ops
+_helicopter setPilotLight false;
+_helicopter setCollisionLight false;
+{_x disableAI "LIGHTS"} forEach units _group;
+
+// --- Door Gunner Seat Reclaim ---
+// Record AI door gunners so they reclaim their turret when a player vacates it
+private _gunnerData = [];
+{
+    _x params ["_unit", "_role", "_cargoIdx", "_turretPath", "_isPersonTurret"];
+    if (_turretPath isNotEqualTo [-1] && {_turretPath isNotEqualTo [0]} && {!isNull _unit} && {!isPlayer _unit}) then {
+        _gunnerData pushBack [_unit, _turretPath];
+    };
+} forEach fullCrew _helicopter;
+
+if (count _gunnerData > 0) then {
+    _helicopter setVariable ["vgm_doorGunnerData", _gunnerData, true];
+
+    // GetOut fires when any unit leaves the vehicle
+    _helicopter addEventHandler ["GetOut", {
+        params ["_vehicle", "_role", "_unit"];
+        if (!isPlayer _unit) exitWith {};
+        [_vehicle] spawn {
+            params ["_vehicle"];
+            sleep 2;
+            private _gunnerData = _vehicle getVariable ["vgm_doorGunnerData", []];
+            {
+                _x params ["_ai", "_turretPath"];
+                if (alive _ai && {_vehicle unitTurret _ai isNotEqualTo _turretPath}) then {
+                    _ai moveInTurret [_vehicle, _turretPath];
+                };
+            } forEach _gunnerData;
+        };
+    }];
+};
 
 _helicopter // return

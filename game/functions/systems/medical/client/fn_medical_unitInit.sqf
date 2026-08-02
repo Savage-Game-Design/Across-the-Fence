@@ -3,11 +3,13 @@
     File: fn_medical_unitInit.sqf
     Author: Savage Game Design
     Date: 2023-12-03
-    Last Update: 2026-01-14
+    Last Update: 2026-03-05
     Public: No
 
     Description:
-        Enable custom medical system on an unit.
+        Enable VGM wound/debuff system on a unit.
+        HandleDamage EH tracks wounds as side effects and passes damage
+        through to SOG's handler (added later, higher index).
 
     Parameter(s):
         _unit - Unit to enable the medical system on [OBJECT]
@@ -48,5 +50,3 @@ private _respawnActionsEH = _unit addEventHandler ["Respawn", {
 }];
 
 _unit setVariable ["vgm_c_medical_respawnActionsEH", _respawnActionsEH];
-
-_unit setVariable ["vgm_g_medical_isUnconscious", false, true];

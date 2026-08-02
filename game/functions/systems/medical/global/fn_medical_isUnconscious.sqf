@@ -2,11 +2,13 @@
     File: fn_medical_isUnconscious.sqf
     Author: Savage Game Design
     Date: 2025-02-06
-    Last Update: 2025-02-06
+    Last Update: 2026-03-05
     Public: Yes
 
     Description:
-        Check unconsciousness state of an unit.
+        Check unconsciousness state of a unit.
+        Bridges SOG Advanced Revive (players) and VGM medical (AI targets
+        in snatch/bright light missions).
 
     Parameter(s):
         _unit - Unit to check
@@ -20,5 +22,7 @@
 
 params ["_unit"];
 
-// lifeState can't be used due to an engine bug, which results in the server's `lifeState` being rarely being out of sync with the client's, if they take damage just before being set unconscious. This results in  `INCAPACITATED` on the client, but `INJURED` instead of `INCAPACITATED` on the server. This only lasts for a few frames, but is enough to cause issues.
-_unit getVariable "vgm_g_medical_isUnconscious" // return
+// SOG revive sets vn_revive_incapacitated on players
+// VGM sets vgm_g_medical_isUnconscious on AI mission targets (snatch, bright light)
+(_unit getVariable ["vn_revive_incapacitated", false])
+|| {_unit getVariable ["vgm_g_medical_isUnconscious", false]} // return

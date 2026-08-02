@@ -53,6 +53,12 @@ if (_type isEqualTo "player_explosion") then {
        _explosionAlertnessValueRange # 0,
        _explosionAlertnessValueRange # 1
     ]);
+
+    // Deep Placement: 60% less explosion alertness
+    private _nearbyWithSkill = _pos nearEntities ["CAManBase", 50];
+    if ((_nearbyWithSkill findIf { _x getVariable ["vgm_g_skill_deepPlacement", false] }) >= 0) then {
+        _highestAlertnessThisEvent = _highestAlertnessThisEvent * 0.4;
+    };
 };
 
 if (_type isEqualTo "player_gunshots_aggregate") then {

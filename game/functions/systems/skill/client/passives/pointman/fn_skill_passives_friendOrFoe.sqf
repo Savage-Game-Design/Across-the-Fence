@@ -21,7 +21,9 @@
 params ["_known"];
 
 if (!_known) exitWith {
-    removeMissionEventHandler ["EachFrame", vgm_c_skill_passives_friendOrFoeEh];
+    if (!isNil "vgm_c_skill_passives_friendOrFoeEh") then {
+        removeMissionEventHandler ["EachFrame", vgm_c_skill_passives_friendOrFoeEh];
+    };
     [player, "stealthSpotTimeMultiplier", "skill_passives_friendOrFoe"] call vgm_c_fnc_coefficient_remove;
 };
 

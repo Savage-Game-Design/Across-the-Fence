@@ -50,6 +50,12 @@ private _missionMemberMachineIds = values (_mission get "machineIds");
     [_missionPublic get "id", _endType]
 ] call para_g_fnc_event_triggerGlobal;
 
+// Clean up LZ marker if one was placed
+private _lzMarkerName = _mission getOrDefault ["vgm_s_lzMarker", ""];
+if (_lzMarkerName != "") then {
+    deleteMarker _lzMarkerName;
+};
+
 private _marker = _missionPublic call vgm_g_fnc_missions_getZoneMarker;
 {deleteVehicle _x} forEach (allMines inAreaArray _marker);
 [_missionPublic get "targetZone"] call vgm_s_fnc_missions_zones_clearSites;

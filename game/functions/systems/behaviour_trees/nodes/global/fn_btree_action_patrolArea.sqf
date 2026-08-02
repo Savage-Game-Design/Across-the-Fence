@@ -37,8 +37,12 @@ _action set ["getNextPoint", {
     private _desiredSpeedMode =
         [_state get "speedMode", "FULL"] select (leader _extern_group distance2D _patrolCenter > _patrolRadius * 1.25);
 
-    private _nextDistance = _patrolRadius * (0.8 + random 0.2);
-    private _nextAngle = (_patrolCenter getDir getPos leader _extern_group) + _patrolAngleChange;
+    // Wider radius variation: 50-100% of patrol radius
+    private _nextDistance = _patrolRadius * (0.5 + random 0.5);
+    // Vary angle each step: 50-150% of base angle, 15% chance to reverse direction
+    private _stepAngle = _patrolAngleChange * (0.5 + random 1.0);
+    if (random 1 < 0.15) then { _stepAngle = _stepAngle * -1 };
+    private _nextAngle = (_patrolCenter getDir getPos leader _extern_group) + _stepAngle;
     private _nextPosition = _patrolCenter getPos [_nextDistance, _nextAngle];
 
     [_nextPosition, _desiredSpeedMode]
@@ -56,10 +60,11 @@ _action set ["onEnter", {
     _state set ["angleChange", _nodeParams getOrDefaultCall ["angleChange", { 30 * (selectRandom [1, -1]) }, true]];
     _state set ["speedMode", _nodeParams getOrDefault ["speedMode", "LIMITED"]];
     private _behaviour = _nodeParams getOrDefault ["behaviour", "SAFE"];
+    _state set ["behaviour", _behaviour];
 
     _extern_group setCombatMode "RED";
     _extern_group setBehaviourStrong _behaviour;
-    _extern_group setFormation "COLUMN";
+    _extern_group setFormation (selectRandom ["COLUMN", "STAG COLUMN", "FILE", "LINE", "WEDGE"]);
     [_extern_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 
     private _nextPoint = [_node, _state] call (_node get "getNextPoint");
@@ -71,12 +76,39 @@ _action set ["onEnter", {
 _action set ["onTick", {
     params ["_node", "_state"];
 
+    // Handle halt-and-observe: group is stopped, listening/looking
+    if (_state getOrDefault ["halting", false]) exitWith {
+        if (time > (_state get "haltEndTime")) then {
+            _state set ["halting", false];
+            // Restore original behaviour
+            _extern_group setBehaviourStrong (_state getOrDefault ["behaviour", "SAFE"]);
+            [_extern_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
+            // 40% chance to change formation after halt
+            if (random 1 < 0.4) then {
+                _extern_group setFormation (selectRandom ["COLUMN", "STAG COLUMN", "FILE", "LINE", "WEDGE"]);
+            };
+            // Pick next waypoint
+            private _nextPoint = [_node, _state] call (_node get "getNextPoint");
+            [_extern_group, _nextPoint # 0, _nextPoint # 1, 15] call vgm_g_fnc_btree_moveTo_start;
+            [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
+        };
+        [ RESULT_RUNNING ]
+    };
+
     private _isAtDestination = [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
 
     if (_isAtDestination) then {
-        private _nextPoint = [_node, _state] call (_node get "getNextPoint");
-        [_extern_group, _nextPoint # 0, _nextPoint # 1, 15] call vgm_g_fnc_btree_moveTo_start;
-        [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
+        // 30% chance to halt and observe at each waypoint
+        if (random 1 < 0.3) then {
+            _state set ["halting", true];
+            _state set ["haltEndTime", time + 15 + random 30];
+            _extern_group setBehaviourStrong "SAFE";
+            [_extern_group, selectRandom ["MIDDLE", "AUTO"]] call vgm_g_fnc_btree_setGroupStance;
+        } else {
+            private _nextPoint = [_node, _state] call (_node get "getNextPoint");
+            [_extern_group, _nextPoint # 0, _nextPoint # 1, 15] call vgm_g_fnc_btree_moveTo_start;
+            [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
+        };
     };
 
     [ RESULT_RUNNING ]

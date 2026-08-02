@@ -18,10 +18,10 @@
         N/A
  */
 
-vgm_c_dangerReport_suppressedShotsNotifyDistance = 100;
-vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 175;
+vgm_c_dangerReport_suppressedShotsNotifyDistance = 50;
+vgm_c_dangerReport_unsuppressedShotsNotifyDistance = 300;
 
-vgm_c_dangerReport_explosionNoiseRadiusRange = [0, 150];
+vgm_c_dangerReport_explosionNoiseRadiusRange = [150, 300];
 
 // Multiplier to convert flare brightness to range.
 vgm_c_dangerReport_brightnessToRangeMultiplier = 2 / 3;

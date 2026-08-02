@@ -59,6 +59,19 @@ vgm_c_skill_investigate_isFocusing = true;
     // Code executed on timeout
     {
         if (!vgm_c_skill_investigate_isFocusing) exitWith {};
+        // Re-check condition to prevent race with On the Prowl
+        if (call vgm_c_fnc_skill_investigate_canFocus) exitWith {
+            [true] call vgm_c_fnc_skill_investigate_setDesaturation;
+            [true] call vgm_c_fnc_skill_investigate_setListenMode;
+            [{
+                !vgm_c_skill_investigate_isFocusing
+                || !(call vgm_c_fnc_skill_investigate_canFocus)
+            }, {
+                vgm_c_skill_investigate_isFocusing = false;
+                [false] call vgm_c_fnc_skill_investigate_setDesaturation;
+                [false] call vgm_c_fnc_skill_investigate_setListenMode;
+            }, _this] call vgm_g_fnc_waitUntilAndExecute;
+        };
         vgm_c_skill_investigate_isFocusing = false;
         hint localize "STR_VGM_SKILL_INVESTIGATE_NOTIFICATION_STATIONARY";
         playSoundUI ["\a3\ui_f_curator\Data\Sound\CfgSound\error02.wss", 0.1];

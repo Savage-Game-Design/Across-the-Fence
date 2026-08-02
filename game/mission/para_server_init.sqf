@@ -22,17 +22,42 @@ private _gamemode_config = (missionConfigFile >> "gamemode");
 //Set whether the building system needs vehicles (fuel/repair/rearm, etc) nearby to build certain structures.
 para_l_buildables_require_vehicles = [false, true] select (["buildables_require_vehicles", 1] call BIS_fnc_getParamValue);
 publicVariable "para_l_buildables_require_vehicles";
-vn_mf_dawnLength = ["dawn_length", 1200] call BIS_fnc_getParamValue;
-vn_mf_dayLength = ["day_length", 9000] call BIS_fnc_getParamValue;
-vn_mf_duskLength = ["dusk_length", 1200] call BIS_fnc_getParamValue;
-vn_mf_nightLength = ["night_length", 1800] call BIS_fnc_getParamValue;
+vn_mf_dawnLength = ["dawn_length", 450] call BIS_fnc_getParamValue;
+vn_mf_dayLength = ["day_length", 2531] call BIS_fnc_getParamValue;
+vn_mf_duskLength = ["dusk_length", 450] call BIS_fnc_getParamValue;
+vn_mf_nightLength = ["night_length", 2531] call BIS_fnc_getParamValue;
 
-//Set whether withstand is always available.
-vn_revive_withstand_allow = (["always_allow_withstand", 1] call BIS_fnc_getParamValue) > 0;
-publicVariable "vn_revive_withstand_allow";
-//Set number of bandages needed to withstand.
+// --- SOG Advanced Revive: Script-based configuration (no editor module) ---
+vn_revive_bleedout_time = 300;
+vn_revive_headshot_kill = true;
+vn_revive_incapacitated_damage = true;
+vn_revive_respawn_action_time = 25;          // SOG respawn + grenade appear at 25% bleedout remaining
+vn_revive_withstand_percentage = 80;
+vn_revive_icon_distance = 50;
+vn_revive_bleeding_effects = true;
+vn_revive_stabilize_items = ["FirstAidKit","vn_o_item_firstaidkit","vn_b_item_firstaidkit","vn_helper_item_firstaidkit","vn_b_item_medikit_01","vn_helper_item_medikit","Medikit"];
+vn_revive_remove_stabilize_item = false;
+vn_revive_resuscitate_items = ["FirstAidKit","vn_o_item_firstaidkit","vn_b_item_firstaidkit","vn_helper_item_firstaidkit","vn_b_item_medikit_01","vn_helper_item_medikit","Medikit"];
+vn_revive_remove_resuscitate_item = true;
+vn_revive_required_trait = 0;                // 0 = All (no medic requirement)
+vn_revive_revive_delay = 10;
+vn_revive_medic_skill = true;
+vn_revive_casualty_crawl = 75;
+vn_revive_casualty_explosives = 75;
+vn_revive_withstand_allow = true;
 vn_revive_withstand_amount = 4;
-publicVariable "vn_revive_withstand_amount";
+// DLC action conditions use these variables (distinct from stabilize/resuscitate lists)
+vn_revive_bandage_item = ["FirstAidKit","vn_o_item_firstaidkit","vn_b_item_firstaidkit","vn_helper_item_firstaidkit","vn_b_item_medikit_01","vn_helper_item_medikit","Medikit"];
+vn_revive_revive_item = ["FirstAidKit","vn_o_item_firstaidkit","vn_b_item_firstaidkit","vn_helper_item_firstaidkit","vn_b_item_medikit_01","vn_helper_item_medikit","Medikit"];
+{publicVariable _x} forEach [
+    "vn_revive_bleedout_time","vn_revive_headshot_kill","vn_revive_incapacitated_damage",
+    "vn_revive_respawn_action_time","vn_revive_withstand_percentage","vn_revive_icon_distance",
+    "vn_revive_bleeding_effects","vn_revive_stabilize_items","vn_revive_remove_stabilize_item",
+    "vn_revive_resuscitate_items","vn_revive_remove_resuscitate_item","vn_revive_required_trait",
+    "vn_revive_revive_delay","vn_revive_medic_skill","vn_revive_casualty_crawl",
+    "vn_revive_casualty_explosives","vn_revive_withstand_allow","vn_revive_withstand_amount",
+    "vn_revive_bandage_item","vn_revive_revive_item"
+];
 
 // Set number of enemies per player.
 para_g_enemiesPerPlayer = 2;
@@ -85,6 +110,20 @@ if !(_chopped_trees isEqualType "") then {
 diag_log "VN MikeForce: Initialising Performance Logging";
 [] call vn_mf_fnc_init_performance_logging;
 */
+
+diag_log "VGM: Initialising Voice Lines System";
+call vgm_s_fnc_voicelines_init;
+
+// Deferred server init — these systems were removed from CBA postInit to avoid
+// scheduler congestion that caused the loading screen to time out.
+// They only need to be ready before missions start.
+call vgm_s_fnc_amblife_preInit;
+call vgm_s_fnc_amblife_postInit;
+call vgm_s_fnc_compromisedLz_preInit;
+call vgm_s_fnc_compromisedLz_postInit;
+call vgm_s_fnc_bda_preInit;
+call vgm_s_fnc_bda_postInit;
+call vgm_s_fnc_radiocheckin_postInit;
 
 diag_log "VN MikeForce: Initialising Dynamic Groups";
 ["Initialize"] call para_c_fnc_dynamicGroups;

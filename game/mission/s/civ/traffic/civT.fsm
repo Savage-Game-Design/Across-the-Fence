@@ -1,0 +1,193 @@
+/*%FSM<COMPILE "O:\SteamLibrary\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, civT">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"INIT",0,4346,627.872620,-2367.763916,717.872620,-2317.763916,0.000000,"INIT"};
+item1[] = {"TRUE",8,218,627.884094,-2472.000244,717.884094,-2422.000244,1.000000,"TRUE"};
+item2[] = {"START",2,250,627.637085,-2569.808594,717.637085,-2519.808594,0.000000,"START"};
+item3[] = {"DEAD_NULL",4,218,508.000000,-2568.000000,596.000000,-2516.000000,1.000000,"DEAD" \n "NULL"};
+item4[] = {"DEAD",1,250,508.000000,-2480.000000,596.000000,-2428.000000,0.000000,"DEAD"};
+item5[] = {"ALIVE_",4,218,624.000000,-2660.000000,716.000000,-2608.000000,2.000000,"ALIVE?"};
+item6[] = {"GET_ROAD",2,250,624.000000,-2740.000000,716.000000,-2688.000000,0.000000,"GET ROAD"};
+item7[] = {"MoveToLoop",2,250,764.000000,-2836.000000,856.000000,-2784.000000,0.000000,"MoveToLoop"};
+item8[] = {"FAILED",4,218,624.000000,-2836.000000,716.000000,-2784.000000,0.000000,"FAILED"};
+item9[] = {"INVALID",4,218,484.000000,-2740.000000,576.000000,-2688.000000,0.000000,"INVALID"};
+item10[] = {"VALID",4,218,764.000000,-2736.000000,856.000000,-2684.000000,2.000000,"VALID"};
+item11[] = {"COMPLETED",4,218,900.000000,-2836.000000,992.000000,-2784.000000,2.000000,"COMPLETED"};
+item12[] = {"",7,210,942.000000,-2548.000000,950.000000,-2540.000000,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,5};
+link4[] = {3,4};
+link5[] = {5,6};
+link6[] = {6,9};
+link7[] = {6,10};
+link8[] = {7,8};
+link9[] = {7,11};
+link10[] = {8,6};
+link11[] = {9,6};
+link12[] = {10,7};
+link13[] = {11,12};
+link14[] = {12,2};
+globals[] = {0.000000,0,0,0,0,640,480,3,19,6316128,1,325.660278,1103.830322,-2292.092285,-2963.878174,1441,1244,1};
+window[] = {2,-1,-1,-32000,-32000,1029,234,1864,234,3,1459};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "civT";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"params[""_a"",""_c""];" \n
+                         "//_c=objectParent _a;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 1;
+                                        priority = 1.000000;
+                                        to="START";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "START">*/
+                class START
+                {
+                        name = "START";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"_t=diag_tickTime;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "ALIVE_">*/
+                                class ALIVE_
+                                {
+                                        itemno = 5;
+                                        priority = 2.000000;
+                                        to="GET_ROAD";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull _a && !isNull _c && alive _a && alive _c"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "DEAD_NULL">*/
+                                class DEAD_NULL
+                                {
+                                        itemno = 3;
+                                        priority = 1.000000;
+                                        to="DEAD";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNull _a || isNull _c || !alive _a || !alive _c"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "DEAD">*/
+                class DEAD
+                {
+                        name = "DEAD";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "GET_ROAD">*/
+                class GET_ROAD
+                {
+                        name = "GET_ROAD";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"private _nearR=_a nearRoads PT_MaxD+200;" \n
+                         "private _r=selectRandom _nearR;" \n
+                         "//private _rPos=getPos _r;" \n
+                         "private _rPos=_r modelToWorld[0,0,0];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "VALID">*/
+                                class VALID
+                                {
+                                        itemno = 10;
+                                        priority = 2.000000;
+                                        to="MoveToLoop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNil""_r"" && !isNull _r && !(_rPos isEqualTo [0,0,0])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "INVALID">*/
+                                class INVALID
+                                {
+                                        itemno = 9;
+                                        priority = 0.000000;
+                                        to="GET_ROAD";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNil""_r"" || isNull _r || (str _rPos isEqualTo str [0,0,0])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "MoveToLoop">*/
+                class MoveToLoop
+                {
+                        name = "MoveToLoop";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/"_a setDestination[_rPos,""LEADER PLANNED"",true];_a moveTo _rPos;" \n
+                         "" \n
+                         "" \n
+                         "if(isNil{_a getVariable""PT_Panic""})then{_a forceSpeed PT_Speed;}else{" \n
+                         "if(_a getVariable""PT_Panic"")then{_a forceSpeed 120;}else{_a forceSpeed PT_Speed;};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "COMPLETED">*/
+                                class COMPLETED
+                                {
+                                        itemno = 11;
+                                        priority = 2.000000;
+                                        to="START";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"moveToCompleted _a || (expectedDestination _a#0)distance _a<=9"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "FAILED">*/
+                                class FAILED
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="GET_ROAD";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"moveToFailed _a"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+                "DEAD",
+        };
+};
+/*%FSM</COMPILE>*/

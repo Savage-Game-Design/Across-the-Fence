@@ -27,5 +27,6 @@ private _uid = getPlayerUID _player;
 private _playerLevelingData = ["leveling", _uid] call vgm_s_fnc_persistence_dbGet;
 _playerLevelingData set ["level", 0, true];
 _playerLevelingData set ["experience", 0, true];
+_playerLevelingData set ["prestige", 0, true];
 
 _playerLevelingData // return

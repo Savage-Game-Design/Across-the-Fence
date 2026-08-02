@@ -29,6 +29,21 @@ private _missionPlayers = [_mission] call vgm_s_fnc_missions_getPlayers;
 
 private _alertness = _directorData get "alertness";
 
+// Alertness decay: 0.5 every 2 minutes, after a cooldown period since the last alertness event
+private _lastAlertnessEvent = _directorData get "lastAlertnessEventTime";
+private _lastDecayTime = _directorData getOrDefault ["lastDecayTime", 0];
+private _timeSinceLastEvent = serverTime - _lastAlertnessEvent;
+private _timeSinceLastDecay = serverTime - _lastDecayTime;
+
+if (_alertness > vgm_s_director_alertness_decay_floor
+    && {_timeSinceLastEvent > vgm_s_director_alertness_decay_cooldown}
+    && {_timeSinceLastDecay >= vgm_s_director_alertness_decay_interval}
+) then {
+    _alertness = (_alertness - vgm_s_director_alertness_decay_rate) max vgm_s_director_alertness_decay_floor;
+    _directorData set ["alertness", _alertness];
+    _directorData set ["lastDecayTime", serverTime];
+};
+
 [format ["Mission=%1, Alertness=%2", _publicMission get "id", _alertness]] call vgm_g_fnc_logInfo;
 
 //////////////
@@ -57,6 +72,18 @@ if (
     };
 
     _directorData set ["lastTrackerSent", serverTime];
+};
+
+/////////////////////
+// Mortar Barrage  //
+/////////////////////
+
+// At high alertness (85+), the NVA calls in off-map 81mm mortar fire
+if (_alertness >= 85) then {
+    private _mortarData = _directorData getOrDefault ["mortarData", createHashMap];
+    if (_mortarData isEqualTo createHashMap) then {
+        [_mission] call vgm_s_fnc_mortar_start;
+    };
 };
 
 ////////////////////

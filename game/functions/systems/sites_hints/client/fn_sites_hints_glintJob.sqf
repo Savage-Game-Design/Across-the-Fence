@@ -22,7 +22,10 @@
 // How long it takes for a full glint animation to run its course (roughly).
 #define GLINT_DURATION 8
 #define RADIUS 200
-#define OBJECTS_MAX 50
+#define CANDIDATES_MAX 15
+
+// Glints only appear when player is actively focusing (key T), unless they have the ground_sign trait
+if (!vgm_c_skill_investigate_isFocusing && {!(player getUnitTrait "vgm_skill_alwaysSeeGlints")}) exitWith {};
 
 private _radius = RADIUS;
 
@@ -34,28 +37,25 @@ private _fnc_isOnScreenCenter = {
     (_x >= 0 && _x <= 1) && (_y >= 0 && _y <= 1)
 };
 
-private _fnc_getNearestHint = {
-    private _objects = (vgm_sites_hints_objectsList inAreaArray [focusOn, _radius, _radius]) select [0, OBJECTS_MAX];
-    private _potentiallyValidObjects = _objects select {
-        _x call _fnc_isOnScreenCenter
-        && !(_x getVariable ["vgm_sites_hints_inspected", false])
+// Get nearby uninspected objects, sorted by distance (cheapest checks first)
+private _candidates = (vgm_sites_hints_objectsList inAreaArray [focusOn, _radius, _radius])
+    select {!(_x getVariable ["vgm_sites_hints_inspected", false])};
+_candidates = _candidates apply {[_x distance focusOn, _x]};
+_candidates sort true;
+_candidates = _candidates select [0, CANDIDATES_MAX];
+
+// Find the nearest on-screen, visible object (expensive checkVisibility only as needed)
+private _glintObject = objNull;
+private _eyePos = eyePos focusOn;
+{
+    private _obj = _x # 1;
+    if (_obj call _fnc_isOnScreenCenter
+        && {[focusOn, "FIRE", _obj] checkVisibility [_eyePos, getPosWorld _obj] > 0}) exitWith {
+        _glintObject = _obj;
     };
+} forEach _candidates;
 
-    private _sorted = _potentiallyValidObjects apply {[_x distance focusOn, _x]};
-    _sorted sort true;
-    private _hintIndex = _sorted findIf {
-        private _obj = _x # 1;
-        [focusOn, "FIRE", _obj] checkVisibility [eyePos focusOn, getPosWorld _obj] > 0
-    };
-
-    if (_hintIndex < 0) exitWith { nil };
-    _sorted # _hintIndex # 1;
-};
-
-private _glintObject = call _fnc_getNearestHint;
-if (isNil "_glintObject") exitWith {
-    ["No glint objects around"] call vgm_g_fnc_logDebug;
-};
+if (isNull _glintObject) exitWith {};
 
 private _glintObjectDistance = focusOn distance _glintObject;
 private _intervalMax = linearConversion [0, 75, _glintObjectDistance, GLINT_JOB_NEARBY_INTERVAL_MAX, GLINT_JOB_INTERVAL_MAX];
@@ -69,5 +69,7 @@ if ((time - vgm_c_sites_hints_lastGlint) < _interval) exitWith {};
 
 vgm_c_sites_hints_lastGlint = time;
 
-["Playing glint animation"] call vgm_g_fnc_logDebug;
-[_glintObject, 3] call vgm_c_fnc_sites_hints_glint;
+private _color = _glintObject getVariable ["vgm_sites_hints_glintColor", [1, 1, 1, 0.5]];
+private _dist = _glintObject distance focusOn;
+private _iters = if (_dist < 15) then {5} else {if (_dist < 50) then {3} else {2}};
+[_glintObject, _iters, _color] call vgm_c_fnc_sites_hints_glint;

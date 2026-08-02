@@ -21,8 +21,39 @@
 
 params ["_director", "_alertnessGain"];
 
-private _newAlertness = ((_director get "alertness") + _alertnessGain) min vgm_s_director_max_alertness max 0;
+// Wire tap gain modifier: halves positive alertness gains while active
+private _wireTapMod = _director getOrDefault ["wireTapGainModifier", 1];
+private _wireTapExp = _director getOrDefault ["wireTapGainModifierExpiry", 0];
+if (_wireTapMod < 1 && {serverTime < _wireTapExp}) then {
+	if (_alertnessGain > 0) then {
+		_alertnessGain = _alertnessGain * _wireTapMod;
+	};
+} else {
+	_director deleteAt "wireTapGainModifier";
+	_director deleteAt "wireTapGainModifierExpiry";
+};
+
+private _oldAlertness = _director get "alertness";
+private _newAlertness = (_oldAlertness + _alertnessGain) min vgm_s_director_max_alertness max 0;
 
 _director set ["alertness", _newAlertness];
+
+// Reset decay cooldown on positive alertness gains
+if (_alertnessGain > 0) then {
+    _director set ["lastAlertnessEventTime", serverTime];
+};
+
+// Voice lines: combat radio chatter on threshold crossings (RTO required)
+if (_alertnessGain > 0) then {
+    // Prairie Fire at 70+ (priority - bypasses category cooldown)
+    if (_oldAlertness < 70 && {_newAlertness >= 70}) then {
+        ["combat", "prairie_fire", true, objNull, true] call vgm_s_fnc_voicelines_play;
+    } else {
+        // Heavy contact at 40+
+        if (_oldAlertness < 40 && {_newAlertness >= 40}) then {
+            ["combat", "heavy_contact", true] call vgm_s_fnc_voicelines_play;
+        };
+    };
+};
 
 _newAlertness

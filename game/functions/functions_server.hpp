@@ -1,5 +1,3 @@
-// common_includes.hpp will be automagically included.
-
 #define VGM_SERVER_PATH(PATH) file=QUOTE(CONCAT_3(VGM_PATH,functions,PATH))
 
 class vgm_s
@@ -67,6 +65,7 @@ class vgm_s
         VGM_SERVER_PATH(\systems\ai\server);
 
     };
+;
 
     class behaviour_trees_trees
     {
@@ -108,6 +107,7 @@ class vgm_s
         class director_getEnemySquadTemplate {};
         class director_getZombieSquadTemplate {};
         class director_onPlayerNoiseEvent {};
+        class director_onRadioTransmission {};
         class director_processMission {};
         class director_spawnAmbientZombies {};
         class director_spawnInitialPatrols {};
@@ -210,12 +210,59 @@ class vgm_s
         class missions_gameplay_ambient_departHelicopter {};
     };
 
+    class missions_gameplay_infil
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\infil);
+
+        class missions_gameplay_infil_startInfil {};
+    };
+
+    class missions_gameplay_ambient_life
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\ambient_life);
+
+        class amblife_preInit {};
+        class amblife_postInit {};
+        class amblife_spawnForMission {};
+        class amblife_cleanupForMission {};
+        class amblife_findWaterPositions {};
+        class amblife_findRoadPositions {};
+        class amblife_findBuildingPositions {};
+        class amblife_spawnCivilians {};
+        class amblife_spawnRiverTraffic {};
+        class amblife_spawnRoadTraffic {};
+        class amblife_spawnBicycleCouriers {};
+        class amblife_spawnBicycleConvoys {};
+        class amblife_spawnWorkParties {};
+        class amblife_spawnCheckpoints {};
+        class amblife_spawnWireTaps {};
+        class amblife_wireTap_tapWire {};
+        class amblife_wireTap_cutWire {};
+        class amblife_spawnLivestock {};
+        class amblife_civilianReporting {};
+        class amblife_walkRoadNetwork {};
+        class amblife_findRoadNearPlayer {};
+        class amblife_respawnMonitor {};
+    };
+
     class missions_gameplay_extraction
     {
         VGM_SERVER_PATH(\systems\missions_gameplay\server\extraction);
 
         class missions_gameplay_extraction_scriptedLand {};
         class missions_gameplay_extraction_startExtract {};
+    };
+
+    class missions_gameplay_compromised_lz
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\compromised_lz);
+
+        class compromisedLz_preInit {};
+        class compromisedLz_postInit {};
+        class compromisedLz_spawnDefenders {};
+        class compromisedLz_triggerAmbush {};
+        class compromisedLz_occupyLzs {};
+        class compromisedLz_cleanup {};
     };
 
     class missions_gameplay_scouting
@@ -235,6 +282,68 @@ class vgm_s
         };
         class missions_gameplay_scouting_registerMission {};
         class missions_gameplay_scouting_setSpottable {};
+        class missions_gameplay_scouting_registerVirtualSite {};
+        class missions_gameplay_scouting_spawnOfficer {};
+        class missions_gameplay_scouting_monitorOfficer {};
+    };
+
+    class missions_gameplay_bda
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\bda);
+
+        class bda_preInit {};
+        class bda_postInit {};
+        class bda_buildScene {};
+        class bda_spawnForMission {};
+        class bda_cleanupForMission {};
+    };
+
+    class missions_gameplay_snatch
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\snatch);
+
+        class missions_gameplay_snatch_calculateMilestones {};
+        class missions_gameplay_snatch_monitorTarget {};
+        class missions_gameplay_snatch_onMissionEnded {};
+        class missions_gameplay_snatch_onMissionStarted {};
+        class missions_gameplay_snatch_postInit
+        {
+            postInit = 1;
+        };
+        class missions_gameplay_snatch_registerMission {};
+        class missions_gameplay_snatch_setupTarget {};
+    };
+
+    class missions_gameplay_bright_light
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\bright_light);
+
+        class missions_gameplay_bright_light_calculateMilestones {};
+        class missions_gameplay_bright_light_monitorTarget {};
+        class missions_gameplay_bright_light_onMissionEnded {};
+        class missions_gameplay_bright_light_onMissionStarted {};
+        class missions_gameplay_bright_light_postInit
+        {
+            postInit = 1;
+        };
+        class missions_gameplay_bright_light_registerMission {};
+        class bright_light_createCrashScene {};
+    };
+
+    class missions_gameplay_hatchet
+    {
+        VGM_SERVER_PATH(\systems\missions_gameplay\server\hatchet);
+
+        class missions_gameplay_hatchet_calculateMilestones {};
+        class missions_gameplay_hatchet_monitorTeam {};
+        class missions_gameplay_hatchet_onMissionEnded {};
+        class missions_gameplay_hatchet_onMissionStarted {};
+        class missions_gameplay_hatchet_postInit
+        {
+            postInit = 1;
+        };
+        class missions_gameplay_hatchet_registerMission {};
+        class missions_gameplay_hatchet_spawnCounterattack {};
     };
 
     class missions_zones
@@ -373,7 +482,9 @@ class vgm_s
         class sites_isInMission {};
         class sites_loadSiteTypesFromConfig {};
         class sites_spawn {};
+        class sites_spawnPunjiTraps {};
         class sites_spawnRandomFortifications {};
+        class sites_onObjectDestroyed {};
     };
 
     class sites_hints
@@ -413,6 +524,37 @@ class vgm_s
         {
             preInit = 1;
         };
+
+        class skill_trapDisarm_process {};
+        class skill_slam_destroyHvt {};
+        class skill_saboteur_process {};
+        class skill_dynamite_spawnClaymores {};
+        class skill_lethalGifts_placeMine {};
+        class skill_lethalGifts2_placeClaymore {};
+        class skill_alternateLz_requestNewLz {};
+        class skill_cutthroat_suppressAlert {};
+        class skill_eldestSon_plantBoobyTrap {};
+        class skill_maBell_wiretap {};
+        class skill_pileOfLeaves_hideBody {};
+        class skill_prairieFire_spawnCAS {};
+        class skill_prairieFire_shootdown {};
+        class skill_staboExtract_startExtract {};
+        class skill_targetFolder_revealIntel {};
+    };
+
+    class ron_server
+    {
+        VGM_SERVER_PATH(\systems\ron\server);
+
+        class ron_execute {};
+        class ron_spawnProbe {};
+    };
+
+    class skill_server_rto
+    {
+        VGM_SERVER_PATH(\systems\skill\server\rto);
+
+        class skill_actives_sitrep_server {};
     };
 
     class skills
@@ -440,7 +582,31 @@ class vgm_s
 
         class skills_handle_skillLearnRequest {};
         class skills_handle_skillRespecRequest {};
+        class skills_handle_skillUnlearnRequest {};
         class skills_handle_skillsDataRequest {};
+    };
+
+    class skill_presets
+    {
+        VGM_SERVER_PATH(\systems\skill_presets\server);
+
+        class skillPresets_preInit
+        {
+            preInit = 1;
+        };
+        class skillPresets_dbGet {};
+        class skillPresets_dbSave {};
+        class skillPresets_handle_fetchRequest {};
+        class skillPresets_handle_saveRequest {};
+        class skillPresets_handle_loadRequest {};
+        class skillPresets_handle_deleteRequest {};
+    };
+
+    class prestige
+    {
+        VGM_SERVER_PATH(\systems\prestige\server);
+
+        class prestige_handle_request {};
     };
 
     class time_of_day_voting
@@ -475,4 +641,48 @@ class vgm_s
         class virtsquad_spawn {};
         class virtsquad_spawnLoop {};
     };
+
+    class radiocheckin
+    {
+        VGM_SERVER_PATH(\systems\radiocheckin\server);
+
+        class radiocheckin_postInit {};
+        class radiocheckin_onCheckin {};
+    };
+
+    class radio_jamming_server
+    {
+        VGM_SERVER_PATH(\systems\radio_jamming\server);
+
+        class radioJamming_preInit {
+            preInit = 1;
+        };
+        class radioJamming_detonateSatchel {};
+    };
+
+    class voicelines
+    {
+        VGM_SERVER_PATH(\systems\voicelines\server);
+
+        class voicelines_init {
+            postInit = 1;
+        };
+        class voicelines_play {};
+        class voicelines_playDelayed {};
+    };
+
+    class mortar_barrage
+    {
+        VGM_SERVER_PATH(\systems\mortar_barrage\server);
+
+        class mortar_preinit {
+            preInit = 1;
+        };
+        class mortar_start {};
+        class mortar_stop {};
+        class mortar_processState {};
+        class mortar_fireRound {};
+        class mortar_getTeamCentroid {};
+    };
+;
 };

@@ -56,4 +56,13 @@ class CfgNotifications
         color[] = {0.8,0,0,1};
     };
 
+    class VGM_LzWatcher: VGM_Default
+    {
+        title = "";
+        iconPicture = "\a3\ui_f\data\Map\Markers\Military\warning_ca.paa";
+        description = "$STR_VGM_MISSIONS_INFIL_LZ_WATCHER";
+        color[] = {0.7,0.5,0,1};
+        duration = 8;
+    };
+
 };

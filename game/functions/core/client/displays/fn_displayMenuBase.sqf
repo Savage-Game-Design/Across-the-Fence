@@ -46,8 +46,7 @@ switch _mode do {
         };
 
         switch ctrlClassName _ctrl do {
-            case "Settings";
-            case "Squad": {
+            case "Settings": {
                 _ctrl ctrlEnable false;
                 _ctrl ctrlSetTooltip "Work in Progress";
             };
@@ -71,6 +70,12 @@ switch _mode do {
     case "onClickSkillTree": {
         params ["_ctrl"];
         ["switchMenu", [_ctrl]] call SELF;
+    };
+
+    case "onClickSquad": {
+        params ["_ctrl"];
+        ctrlParent _ctrl closeDisplay IDC_OK;
+        [] call vgm_c_fnc_skillPresets_openMenu;
     };
 
     case "onClickHelp": {

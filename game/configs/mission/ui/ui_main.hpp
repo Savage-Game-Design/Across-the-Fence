@@ -13,15 +13,18 @@
 #include "VGM_DisplayMedical.hpp"
 #include "VGM_DisplayLoading.hpp"
 #include "VGM_DisplayEndOfMission.hpp"
+#include "VGM_DisplaySkillPresets.hpp"
 
 import RscHealthTextures from RscTitles;
 class RscTitles : ParadigmRscTitles
 {
     #include "VGM_RscAbilityCooldown.hpp"
+    #include "VGM_RscTrackIndicator.hpp"
     #include "VGM_RscLevelIndicator.hpp"
     #include "VGM_RscMedicalStatus.hpp"
     #include "VGM_RscProgressBar.hpp"
     #include "VGM_RscStaminaBar.hpp"
+    #include "VGM_RscMissionTimer.hpp"
     class VGM_RscHealthTextures: RscHealthTextures
     {
         onLoad = "uiNamespace setVariable ['vgm_RscHealthTextures', _this select 0]";

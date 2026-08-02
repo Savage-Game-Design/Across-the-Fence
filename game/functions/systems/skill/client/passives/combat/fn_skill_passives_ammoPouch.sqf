@@ -21,7 +21,10 @@
 params ["_known"];
 
 if (!_known) exitWith {
-    player removeEventHandler ["Fired", player getVariable "vgm_c_skill_passives_ammoPouchEH"];
+    private _ehId = player getVariable ["vgm_c_skill_passives_ammoPouchEH", -1];
+    if (_ehId != -1) then {
+        player removeEventHandler ["Fired", _ehId];
+    };
 };
 
 private _eh = player addEventHandler ["Fired", {
@@ -34,11 +37,12 @@ private _eh = player addEventHandler ["Fired", {
         }}
     ) exitWith {};
 
-    // fire only once per mission
-    private _usedInMission = _unit getVariable ["vgm_c_skill_passives_ammoPouchMission", createHashMap];
-    private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
-    if (_usedInMission isEqualTo _currentMission) exitWith {};
-    _unit setVariable ["vgm_c_skill_passives_ammoPouchMission", _currentMission];
+    // fire only once per mission — compare stable mission IDs, not full HashMaps
+    private _assignments = ["vgm_mission_assignments", createHashMap] call para_g_fnc_netmap_getOrDefault;
+    private _currentMissionId = _assignments getOrDefault [getPlayerID _unit, ""];
+    private _usedInMission = _unit getVariable ["vgm_c_skill_passives_ammoPouchMission", ""];
+    if (_usedInMission isEqualTo _currentMissionId && {_currentMissionId isNotEqualTo ""}) exitWith {};
+    _unit setVariable ["vgm_c_skill_passives_ammoPouchMission", _currentMissionId];
 
     ["Combat/Ammo pouch skill triggered"] call vgm_g_fnc_logInfo;
     hint localize "STR_VGM_SKILLS_SKILL_AMMOPOUCH_ACTIVATED";

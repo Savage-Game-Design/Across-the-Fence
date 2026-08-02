@@ -27,11 +27,11 @@ private _scoutingData = [_mission get "public" get "id", "scouting"] call vgm_s_
 
 private _missionSites = +((_mission get "public" get "targetZone") call vgm_s_fnc_missions_zones_getSites);
 private _guessedSites = _scoutingData get "guessedSites";
-// scoring
-// 0-100 for position
-// 0-100 for photos
+// scoring (reduced values)
+// 0-125 for position
+// 0-125 for photos
 // 0-25 for type
-// up to 225 XP total
+// up to 275 XP total per site
 private _milestones = [];
 {
     _x params ["", "_guessedClass", "", "_guessedPos", "_guessId", "_guessPhoto"];
@@ -69,13 +69,13 @@ private _milestones = [];
 
     _siteMilestone set ["position", call {
         if (_closestSiteDistance <= 12.5) exitWith {
-            ["spot_on", 100]
+            ["spot_on", 125]
         };
         if (_closestSiteDistance <= 20) exitWith {
-            ["very_close", 75]
+            ["very_close", 100]
         };
         if (_closestSiteDistance <= 45) exitWith {
-            ["close", 50]
+            ["close", 75]
         };
 
         ["far", 25]
@@ -118,13 +118,13 @@ private _milestones = [];
                 ["blurry", 25]
             };
             if (_photoQuality <= 55) exitWith {
-                ["grainy", 50]
+                ["grainy", 75]
             };
             if (_photoQuality <= 85) exitWith {
-                ["detailed", 75]
+                ["detailed", 100]
             };
 
-            ["perfect", 100]
+            ["perfect", 125]
         };
     }];
 

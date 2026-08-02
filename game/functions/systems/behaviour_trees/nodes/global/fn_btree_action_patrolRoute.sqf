@@ -115,7 +115,7 @@ _action set ["onEnter", {
 
     _extern_group setCombatMode "RED";
     _extern_group setBehaviourStrong "SAFE";
-    _extern_group setFormation "COLUMN";
+    _extern_group setFormation (selectRandom ["COLUMN", "STAG COLUMN", "FILE"]);
     [_extern_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
 
 
@@ -127,6 +127,23 @@ _action set ["onEnter", {
 
 _action set ["onTick", {
     params ["_node", "_state"];
+
+    // Handle halt-and-observe: group is stopped, listening/looking
+    if (_state getOrDefault ["halting", false]) exitWith {
+        if (time > (_state get "haltEndTime")) then {
+            _state set ["halting", false];
+            // Restore SAFE behaviour
+            _extern_group setBehaviourStrong "SAFE";
+            [_extern_group, "AUTO"] call vgm_g_fnc_btree_setGroupStance;
+            // Resume movement to current waypoint
+            private _route = _state get "routePositions";
+            private _currentIndex = _state get "currentRouteIndex";
+            private _nextPosition = _route select _currentIndex;
+            [_extern_group, _nextPosition, _state get "speedMode", 15] call vgm_g_fnc_btree_moveTo_start;
+            [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
+        };
+        [ RESULT_RUNNING ]
+    };
 
     private _isAtDestination = [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
 
@@ -156,8 +173,16 @@ _action set ["onTick", {
         _state set ["currentRouteIndex", _nextIndex];
         private _nextPosition = _route select _nextIndex;
 
-        [_extern_group, _nextPosition, _state get "speedMode", 15] call vgm_g_fnc_btree_moveTo_start;
-        [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
+        // 25% chance to halt and observe at each route waypoint
+        if (random 1 < 0.25) then {
+            _state set ["halting", true];
+            _state set ["haltEndTime", time + 10 + random 25];
+            _extern_group setBehaviourStrong "AWARE";
+            [_extern_group, selectRandom ["MIDDLE", "AUTO"]] call vgm_g_fnc_btree_setGroupStance;
+        } else {
+            [_extern_group, _nextPosition, _state get "speedMode", 15] call vgm_g_fnc_btree_moveTo_start;
+            [_extern_group] call vgm_g_fnc_btree_moveTo_execute;
+        };
     };
 
     _result

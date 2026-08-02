@@ -29,6 +29,32 @@ switch _mode do {
         private _ctrlTargets = _display displayCtrl VGM_IDC_DISPLAYMISSIONS_TARGET;
         _ctrlTargets lbSetCurSel 0;
         _display setVariable ["_difficulty", 0];
+        _display setVariable ["_missionType", "scouting"];
+    };
+    case "selectMissionType": {
+        _params params ["_ctrlButton"];
+        private _display = ctrlParent _ctrlButton;
+        private _type = [
+            [VGM_IDC_DISPLAYMISSIONS_TYPE_SCOUTING, "scouting"],
+            [VGM_IDC_DISPLAYMISSIONS_TYPE_SNATCH, "prisoner_snatch"],
+            [VGM_IDC_DISPLAYMISSIONS_TYPE_BRIGHTLIGHT, "bright_light"],
+            [VGM_IDC_DISPLAYMISSIONS_TYPE_HATCHET, "hatchet_force"]
+        ];
+        private _selectedType = "scouting";
+        private _btnIdc = ctrlIDC _ctrlButton;
+        {
+            _x params ["_idc", "_typeName"];
+            if (_idc == _btnIdc) exitWith {_selectedType = _typeName};
+        } forEach _type;
+        _display setVariable ["_missionType", _selectedType];
+
+        // Visual feedback: highlight selected button
+        {
+            _x params ["_idc"];
+            private _ctrl = _display displayCtrl _idc;
+            _ctrl ctrlSetTextColor [1, 1, 1, 0.5];
+        } forEach _type;
+        _ctrlButton ctrlSetTextColor [1, 0.54, 0.18, 1];
     };
     case "selectDifficulty": {
         _params params ["_ctrlImage"];
@@ -135,6 +161,9 @@ switch _mode do {
     case "confirmMission": {
         _params params ["_ctrlBriefingConfirmMission"];
         private _display = ctrlParent _ctrlBriefingConfirmMission;
+        // Store selected mission type so the mission creation system can read it
+        private _missionType = _display getVariable ["_missionType", "scouting"];
+        missionNamespace setVariable ["vgm_c_selectedMissionType", _missionType];
         _display closeDisplay IDC_OK;
     };
     case "discardMission": {

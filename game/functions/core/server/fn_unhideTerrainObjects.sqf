@@ -19,14 +19,15 @@
         [_hideResult] call vgm_s_fnc_unhideTerrainObjects;
  */
 
-params [["_hideObjectResult", [], [createHashMap]]];
+params ["_hideObjectResult"];
 
-if (_hideObjectResult isEqualType [] or {!("objects" in _hideObjectResult)}) exitWith {
-    ["Invalid parameter passed to unhideTerrainObjects"] call vgm_g_fnc_log_error;
-    ["ERROR"] call vgm_g_fnc_logStackTrace;
+private _objects = if (_hideObjectResult isEqualType []) then {
+    _hideObjectResult
+} else {
+    _hideObjectResult getOrDefault ["objects", []]
 };
 
 {
     _x hideObjectGlobal false;
-} forEach (_hideObjectResult get "objects");
+} forEach _objects;
 

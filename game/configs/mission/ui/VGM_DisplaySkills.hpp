@@ -31,7 +31,7 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             x = _DISPLAY_X + 1 * VGM_GRID_W;
             y = _DISPLAY_Y + 1 * VGM_GRID_H;
             w = (_ICON_H + 3) * VGM_GRID_W;
-            h = (_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H);
+            h = (_DISPLAY_H - 2) * VGM_GRID_H - (2 * _ICON_H * VGM_GRID_H);
             rowHeight = _ICON_H * VGM_GRID_H;
             style = ST_PICTURE;
         };
@@ -42,7 +42,19 @@ class VGM_DisplaySkills: VGM_DisplayMenuBase
             tooltip = "$STR_VGM_SKILLS_UI_RESPEC";
             onButtonClick = VGM_UIEH(respec,Skills);
             x = _DISPLAY_X + 1 * VGM_GRID_W;
-            y =  (_DISPLAY_Y + 1 * VGM_GRID_H) + ((_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H));
+            y =  (_DISPLAY_Y + 1 * VGM_GRID_H) + ((_DISPLAY_H - 2) * VGM_GRID_H - (2 * _ICON_H * VGM_GRID_H));
+            w = (_ICON_H + 3) * VGM_GRID_W;
+            h = _ICON_H * VGM_GRID_H;
+        };
+        class Prestige: VGM_ctrlButton
+        {
+            idc = VGM_IDC_DISPLAYSKILLS_PRESTIGE;
+            text = "$STR_VGM_PRESTIGE_BUTTON";
+            tooltip = "$STR_VGM_PRESTIGE_BUTTON_TOOLTIP";
+            onLoad = VGM_UIEH(initPrestige,Skills);
+            onButtonClick = VGM_UIEH(prestige,Skills);
+            x = _DISPLAY_X + 1 * VGM_GRID_W;
+            y = (_DISPLAY_Y + 1 * VGM_GRID_H) + ((_DISPLAY_H - 2) * VGM_GRID_H - (_ICON_H * VGM_GRID_H));
             w = (_ICON_H + 3) * VGM_GRID_W;
             h = _ICON_H * VGM_GRID_H;
         };

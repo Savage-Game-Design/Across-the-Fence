@@ -18,7 +18,7 @@
         [getPlayerID player, "vgm_targetBox_1"] remoteExec ["vgm_s_fnc_missions_remoteExec_createMission", 2];
  */
 
-params ["_playerId", "_targetZone"];
+params ["_playerId", "_targetZone", ["_missionType", "scouting"]];
 
 if !([_playerId] call para_s_fnc_remoteExec_validateDirectPlayIdIsRemoteExecOwner) exitWith {};
 
@@ -31,7 +31,7 @@ if (!([_playerId, _targetZone] call vgm_s_fnc_missions_zones_reserveZone)) exitW
 };
 
 [
-    createHashMap,
+    createHashMapFromArray [["missionType", _missionType]],
     _playerId,
     _targetZone
 ] call vgm_s_fnc_missions_createMission;

@@ -24,7 +24,8 @@
     {BIS_fnc_arsenal_data select 24 pushBackUnique _x} forEach [
         "vn_helper_item_firstaidkit",
         "vn_helper_item_medikit",
-        "vn_b_item_toolkit_weightless"
+        "vn_b_item_toolkit_weightless",
+        "vn_prop_drink_04"
     ];
 }] call BIS_fnc_addScriptedEventHandler;
 

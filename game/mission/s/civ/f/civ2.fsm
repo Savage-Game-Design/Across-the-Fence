@@ -1,0 +1,475 @@
+/*%FSM<COMPILE "L:\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, civ2">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"INIT",0,250,588.364136,-2153.453857,646.595703,-2120.936523,0.000000,"INIT"};
+item1[] = {"main",2,250,591.685669,-2252.000000,643.685669,-2212.000000,0.000000,"main"};
+item2[] = {"",7,210,697.837769,-2236.146729,705.837769,-2228.146729,0.000000,""};
+item3[] = {"wave",4,218,591.784302,-2435.731934,643.784302,-2395.731934,1.000000,"wave"};
+item4[] = {"__duplicate",4,218,592.489380,-2203.365723,642.922546,-2165.184326,0.000000,"!duplicate"};
+item5[] = {"face",4,218,591.685669,-2324.000000,643.685669,-2284.000000,1.000000,"face"};
+item6[] = {"_",2,250,600.754333,-2372.621094,634.006958,-2343.331787,0.000000,""};
+item7[] = {"break",4,218,675.851135,-2378.152588,727.851135,-2338.152588,9.000000,"break"};
+item8[] = {"__1",2,250,601.198608,-2487.076660,634.451233,-2457.787354,0.000000,""};
+item9[] = {"animate",4,218,591.784241,-2554.456787,643.784241,-2514.456787,1.000000,"animate"};
+item10[] = {"__2",2,250,685.036865,-2549.206543,718.289490,-2519.917236,0.000000,""};
+item11[] = {"__0s",4,218,759.000793,-2554.541992,811.000793,-2514.541992,1.000000,"60s"};
+item12[] = {"__3",2,250,768.392395,-2487.103271,801.645020,-2457.813965,0.000000,""};
+item13[] = {"CYCLE",4,218,675.506714,-2492.397949,727.506714,-2452.397949,0.000000,"CYCLE"};
+item14[] = {"END",4,4314,759.182495,-2439.813232,811.182495,-2399.813232,1.000000,"END"};
+item15[] = {"exit",1,250,762.555115,-2378.360840,807.840027,-2338.100830,0.000000,"exit"};
+item16[] = {"duplicate",4,218,678.324585,-2157.451172,730.324585,-2117.451172,9.000000,"duplicate"};
+item17[] = {"EXIT_1",1,250,751.501648,-2147.072754,784.715637,-2127.204590,0.000000,"EXIT"};
+link0[] = {0,4};
+link1[] = {0,16};
+link2[] = {1,2};
+link3[] = {1,5};
+link4[] = {2,7};
+link5[] = {3,8};
+link6[] = {4,1};
+link7[] = {5,6};
+link8[] = {6,3};
+link9[] = {6,7};
+link10[] = {7,15};
+link11[] = {8,7};
+link12[] = {8,9};
+link13[] = {9,10};
+link14[] = {10,7};
+link15[] = {10,11};
+link16[] = {11,12};
+link17[] = {12,7};
+link18[] = {12,13};
+link19[] = {12,14};
+link20[] = {13,8};
+link21[] = {14,15};
+link22[] = {16,17};
+globals[] = {0.000000,0,0,0,0,640,480,3,100,6316128,1,498.733917,906.609924,-2094.833252,-2570.566895,559,652,1};
+window[] = {0,-1,-1,-1,-1,980,156,1449,156,1,577};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "civ2";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"/*	civ2.fsm" \n
+                         "	Author: Phronk" \n
+                         "	Description: FSM executed on individual civilian interacting with" \n
+                         "	another civilian." \n
+                         "" \n
+                         "	TODO:" \n
+                         "		1. Better spacing/distance of civilians" \n
+                         "		2. Looping animations" \n
+                         "		3. Sound FX" \n
+                         "		4. Better breakout of FSM during combat/death checks" \n
+                         "		5. Incorporate w/ civs interacting w/ objects" \n
+                         "" \n
+                         "*/" \n
+                         "params [ ""_a"" , ""_o"" ];" \n
+                         "" \n
+                         "_t = diag_tickTime;" \n
+                         "" \n
+                         "//systemChat ""civ2.fsm: init"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "duplicate">*/
+                                class duplicate
+                                {
+                                        itemno = 16;
+                                        priority = 9.000000;
+                                        to="EXIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"//Force exit if another instance of this FSM is running" \n
+                                         """ItemWatch"" in assignedItems _a || ""ItemWatch"" in assignedItems _o"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: duplicate, exiting!"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "__duplicate">*/
+                                class __duplicate
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="main";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(""ItemWatch"" in assignedItems _a || ""ItemWatch"" in assignedItems _o)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//Easy way to track if FSM is running" \n
+                                         "_a linkItem ""ItemWatch"";" \n
+                                         "_o linkItem ""ItemWatch"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "main">*/
+                class main
+                {
+                        name = "main";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/"_t = diag_tickTime;" \n
+                         "" \n
+                         "//systemChat ""civ2.fsm: main"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "break">*/
+                                class break
+                                {
+                                        itemno = 7;
+                                        priority = 9.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( [ _a , _o ] findIf { !alive _x || { isNull _x || { ( _x getVariable ""FSM"" isNotEqualTo ""ia"" ) } } } ) > -1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if ( alive _a && { !isNull _a && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_a setVariable[""FSM"",""""];" \n
+                                         "	_a setVariable[""ia"",nil];" \n
+                                         "	[ _a ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "	_a stop false;" \n
+                                         "	_a moveTo ( _a getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "if ( alive _o && { !isNull _o && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_o setVariable[""FSM"",""""];" \n
+                                         "	_o setVariable[""ia"",nil];" \n
+                                         "	[ _o ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "	_o stop false;" \n
+                                         "	_o moveTo ( _o getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: break"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "face">*/
+                                class face
+                                {
+                                        itemno = 5;
+                                        priority = 1.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"face _o isNotEqualTo """""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//Begin greeting by facing eachother" \n
+                                         "_a setDir ( _a getDir _o );" \n
+                                         "_o setDir ( _o getDir _a );" \n
+                                         "" \n
+                                         "_t = diag_tickTime;" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: face"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "break">*/
+                                class break
+                                {
+                                        itemno = 7;
+                                        priority = 9.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( [ _a , _o ] findIf { !alive _x || { isNull _x || { ( _x getVariable ""FSM"" isNotEqualTo ""ia"" ) } } } ) > -1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if ( alive _a && { !isNull _a && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_a setVariable[""FSM"",""""];" \n
+                                         "	_a setVariable[""ia"",nil];" \n
+                                         "	[ _a ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "	_a stop false;" \n
+                                         "	_a moveTo ( _a getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "if ( alive _o && { !isNull _o && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_o setVariable[""FSM"",""""];" \n
+                                         "	_o setVariable[""ia"",nil];" \n
+                                         "	[ _o ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "	_o stop false;" \n
+                                         "	_o moveTo ( _o getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: break"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "wave">*/
+                                class wave
+                                {
+                                        itemno = 3;
+                                        priority = 1.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+3"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_o playAction ""GestureHi"";" \n
+                                         "_t = diag_tickTime;" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: wave"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__1">*/
+                class __1
+                {
+                        name = "__1";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "break">*/
+                                class break
+                                {
+                                        itemno = 7;
+                                        priority = 9.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( [ _a , _o ] findIf { !alive _x || { isNull _x || { ( _x getVariable ""FSM"" isNotEqualTo ""ia"" ) } } } ) > -1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if ( alive _a && { !isNull _a && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_a setVariable[""FSM"",""""];" \n
+                                         "	_a setVariable[""ia"",nil];" \n
+                                         "	[ _a ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "	_a stop false;" \n
+                                         "	_a moveTo ( _a getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "if ( alive _o && { !isNull _o && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_o setVariable[""FSM"",""""];" \n
+                                         "	_o setVariable[""ia"",nil];" \n
+                                         "	[ _o ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "	_o stop false;" \n
+                                         "	_o moveTo ( _o getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: break"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "animate">*/
+                                class animate
+                                {
+                                        itemno = 9;
+                                        priority = 1.000000;
+                                        to="__2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//TODO: setRandomLip" \n
+                                         "private _anim =" \n
+                                         "[" \n
+                                         "	selectRandom[" \n
+                                         "		//Speaker" \n
+                                         "		""Act_Alien_Gesture"" ," \n
+                                         "		""Acts_CivilTalking_1"" ," \n
+                                         "		""Acts_CivilTalking_2"" ," \n
+                                         "		""Acts_C_in1_briefing"" ," \n
+                                         "		""Acts_PointingLeftUnarmed""" \n
+                                         "	] ," \n
+                                         "	selectRandom[" \n
+                                         "		//Listener" \n
+                                         "		""Acts_CivilListening_1"" ," \n
+                                         "		""Acts_CivilListening_2"" ," \n
+                                         "		""Acts_CivilIdle_1"" ," \n
+                                         "		""Acts_CivilIdle_2""" \n
+                                         "	]" \n
+                                         "];" \n
+                                         "[ _a , _anim#0 ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "[ _o , _anim#1 ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "" \n
+                                         "_t = diag_tickTime;" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: animate"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__2">*/
+                class __2
+                {
+                        name = "__2";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "break">*/
+                                class break
+                                {
+                                        itemno = 7;
+                                        priority = 9.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( [ _a , _o ] findIf { !alive _x || { isNull _x || { ( _x getVariable ""FSM"" isNotEqualTo ""ia"" ) } } } ) > -1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if ( alive _a && { !isNull _a && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_a setVariable[""FSM"",""""];" \n
+                                         "	_a setVariable[""ia"",nil];" \n
+                                         "	[ _a ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "	_a stop false;" \n
+                                         "	_a moveTo ( _a getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "if ( alive _o && { !isNull _o && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_o setVariable[""FSM"",""""];" \n
+                                         "	_o setVariable[""ia"",nil];" \n
+                                         "	[ _o ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "	_o stop false;" \n
+                                         "	_o moveTo ( _o getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: break"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "__0s">*/
+                                class __0s
+                                {
+                                        itemno = 11;
+                                        priority = 1.000000;
+                                        to="__3";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+60"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_t = diag_tickTime;" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: 60s"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__3">*/
+                class __3
+                {
+                        name = "__3";
+                        itemno = 12;
+                        init = /*%FSM<STATEINIT""">*/"private _r = floor random 2;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "break">*/
+                                class break
+                                {
+                                        itemno = 7;
+                                        priority = 9.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( [ _a , _o ] findIf { !alive _x || { isNull _x || { ( _x getVariable ""FSM"" isNotEqualTo ""ia"" ) } } } ) > -1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if ( alive _a && { !isNull _a && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_a setVariable[""FSM"",""""];" \n
+                                         "	_a setVariable[""ia"",nil];" \n
+                                         "	[ _a ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "	_a stop false;" \n
+                                         "	_a moveTo ( _a getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "if ( alive _o && { !isNull _o && { ( _a getVariable ""FSM"" isNotEqualTo ""ia"" ) } } ) then" \n
+                                         "{" \n
+                                         "	_o setVariable[""FSM"",""""];" \n
+                                         "	_o setVariable[""ia"",nil];" \n
+                                         "	[ _o ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "	_o stop false;" \n
+                                         "	_o moveTo ( _o getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: break"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "END">*/
+                                class END
+                                {
+                                        itemno = 14;
+                                        priority = 1.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_r == 1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if ( alive _a && { !isNull _a } ) then" \n
+                                         "{" \n
+                                         "	_a setVariable[""FSM"",""""];" \n
+                                         "	_a setVariable[""ia"",nil];" \n
+                                         "	[ _a ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _a ];" \n
+                                         "	_a stop false;" \n
+                                         "	_a moveTo ( _a getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "if ( alive _o && { !isNull _o } ) then" \n
+                                         "{" \n
+                                         "	_o setVariable[""FSM"",""""];" \n
+                                         "	_o setVariable[""ia"",nil];" \n
+                                         "	[ _o ,""AidlPercMstpSnonWnonDnon_AI"" ] remoteExec [ ""switchMove"" , 0 , _o ];" \n
+                                         "	_o stop false;" \n
+                                         "	_o moveTo ( _o getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "};" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: end"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "CYCLE">*/
+                                class CYCLE
+                                {
+                                        itemno = 13;
+                                        priority = 0.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_r == 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_t = diag_tickTime;" \n
+                                         "" \n
+                                         "//systemChat ""civ2.fsm: cycle"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "exit">*/
+                class exit
+                {
+                        name = "exit";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/"//systemChat ""civ2.fsm: exit"";" \n
+                         "_a unlinkItem""ItemWatch"";" \n
+                         "_o unlinkItem""ItemWatch"";" \n
+                         "_a setVariable[""FSM"",""""];" \n
+                         "_a setVariable[""ia"",nil];" \n
+                         "_o setVariable[""FSM"",""""];" \n
+                         "_o setVariable[""ia"",nil];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "EXIT_1">*/
+                class EXIT_1
+                {
+                        name = "EXIT_1";
+                        itemno = 17;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+                "exit",
+                "EXIT_1",
+        };
+};
+/*%FSM</COMPILE>*/

@@ -67,6 +67,19 @@ vgm_medical_healItemsTreatmentData = createHashMapFromArray [
     _healer removeItem _consumeItem;
     ["vgm_medical_itemConsumed", [_healer, _consumeItem], _healer] call para_g_fnc_event_triggerTargets;
 
+    // Leg pockets: when the last FAK is used, grant 2 more (once per life)
+    if (_consumeItem != "" && {_itemType == HEAL_FAK}) then {
+        private _remainingFAKs = {_x in (vgm_medical_healItems get HEAL_FAK)} count (items _healer);
+        if (_remainingFAKs == 0
+            && {_healer getVariable ["vgm_c_skill_legPockets", false]}
+            && {!(_healer getVariable ["vgm_c_skill_legPockets_used", false])}
+        ) then {
+            _healer setVariable ["vgm_c_skill_legPockets_used", true];
+            {_healer addItem "vn_helper_item_firstaidkit"} forEach [1, 2];
+            format ["Leg pockets triggered for %1", name _healer] call vgm_g_fnc_logInfo;
+        };
+    };
+
     private _woundsHealed = vgm_medical_healItemsTreatmentData getOrDefault [_itemType, 1];
     _woundsHealed = _woundsHealed + (_healer getVariable ["vgm_g_medical_healModifier", 0]);
     [_patient, _bodyPart, _woundsHealed] call vgm_c_fnc_medical_removeWound;

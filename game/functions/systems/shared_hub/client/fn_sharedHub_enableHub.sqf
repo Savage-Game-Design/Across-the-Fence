@@ -87,4 +87,7 @@ vgm_sharedHub_iconsDraw3D = addMissionEventHandler ["Draw3D", {
     } forEach (vgm_skills_managers select {player distance _x < 5});
 }];
 
+// Start nametags above players in the hub
+vgm_sharedHub_nametagsDraw3D = [] call vgm_c_fnc_sharedHub_nametags;
+
 ["vgm_shared_hub_enabled", []] call para_g_fnc_event_triggerLocal;

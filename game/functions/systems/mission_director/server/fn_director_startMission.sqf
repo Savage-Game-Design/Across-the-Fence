@@ -41,6 +41,10 @@ _directorData set ["virtualSquads", createHashMap];
 _directorData set ["virtualSquadGroups", createHashMap];
 // Tracks when the last tracker squad was sent at the players
 _directorData set ["lastTrackerSent", -9999];
+// Timestamp of last alertness-raising event (for decay cooldown)
+_directorData set ["lastAlertnessEventTime", serverTime];
+// Timestamp of last decay tick
+_directorData set ["lastDecayTime", serverTime];
 
 // REINFORCEMENTS SYSTEM
 // Reinforcement type chances

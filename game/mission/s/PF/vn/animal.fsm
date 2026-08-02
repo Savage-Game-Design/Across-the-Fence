@@ -1,0 +1,224 @@
+/*%FSM<COMPILE "L:\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, animal">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"INIT",0,250,652.000000,-2164.000000,680.000000,-2136.000000,0.000000,"INIT"};
+item1[] = {"wander",2,250,812.000000,-2248.000000,880.000000,-2216.000000,0.000000,"wander"};
+item2[] = {"INIT_1",2,250,640.000000,-2252.000000,692.000000,-2212.000000,0.000000,"INIT"};
+item3[] = {"noAI",4,218,472.000000,-2252.000000,540.000000,-2212.000000,7.000000,"noAI"};
+item4[] = {"Animals",4,218,740.000000,-2252.000000,796.000000,-2212.000000,5.000000,"Animals"};
+item5[] = {"__0s",4,218,552.000000,-2200.000000,600.000000,-2168.000000,0.000000,"10s"};
+item6[] = {"WAIT",2,250,480.000000,-2200.000000,532.000000,-2172.000000,0.000000,"WAIT"};
+item7[] = {"_",8,218,640.000000,-2208.000000,692.000000,-2168.000000,0.000000,""};
+item8[] = {"move",4,218,816.000000,-2324.000000,876.000000,-2288.000000,0.000000,"move"};
+item9[] = {"delay",2,250,729.025146,-2316.719727,771.004822,-2295.034180,0.000000,"delay"};
+item10[] = {"__0s",4,218,640.000000,-2325.902832,692.000000,-2285.902832,1.000000,"20s"};
+link0[] = {0,7};
+link1[] = {1,8};
+link2[] = {2,3};
+link3[] = {2,4};
+link4[] = {3,6};
+link5[] = {4,1};
+link6[] = {5,2};
+link7[] = {6,5};
+link8[] = {7,2};
+link9[] = {8,9};
+link10[] = {9,10};
+link11[] = {10,2};
+globals[] = {0.000000,0,0,0,0,640,480,3,75,6316128,1,352.263367,1001.218384,-2070.176270,-2420.218994,1155,623,1};
+window[] = {0,-1,-1,-1,-1,925,130,1931,130,1,1173};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "animal";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"//params[""_b"",""_f""];" \n
+                         "//private _pos = getPosATL _b;" \n
+                         "" \n
+                         "" \n
+                         "private _t = diag_tickTime;" \n
+                         "" \n
+                         "if ( isNil ""PF_Ambient"" ) then" \n
+                         "{" \n
+                         "	PF_Ambient = [];" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "wander">*/
+                class wander
+                {
+                        name = "wander";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/"//Instruct AI to wander"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "move">*/
+                                class move
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="delay";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+3"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//Animals wander within 3m of _pos (For each object w/ AI)" \n
+                                         "" \n
+                                         "PF_Ambient select { ( { !isNull _x && { alive _x } } count (_x#2) ) > 0 };" \n
+                                         "" \n
+                                         "{" \n
+                                         "	//Object" \n
+                                         "//	private _o = _x#0;" \n
+                                         "" \n
+                                         "	private _id = (_x#1);" \n
+                                         "" \n
+                                         "	private _ai = (_x#2) select{ ( !isNull _x && { alive _x } ) };" \n
+                                         "" \n
+                                         "	//Obtain index of correct object w/ animals" \n
+                                         "	private _i = PF_MapObjs findIf { _id isEqualTo (_x#1) };" \n
+                                         "" \n
+                                         "" \n
+                                         "	//Obtain correct object w/ animals" \n
+                                         "	private _o = ( PF_MapObjs # _i ) # 0;" \n
+                                         "" \n
+                                         "" \n
+                                         "	//Center position of object" \n
+                                         "	private _pos = getPosATL _o;" \n
+                                         "" \n
+                                         "	//Gather animals" \n
+                                         "	systemChat format [""_animals = %1"",_ai];" \n
+                                         "	{" \n
+                                         "		private _xyz = _pos getPos [ 2.5 , random 359 ];" \n
+                                         "		_x setDestination [ _xyz , ""LEADER PLANNED"" , true ];" \n
+                                         "	}forEach _ai" \n
+                                         "}forEach PF_Ambient;" \n
+                                         "" \n
+                                         "//_arr"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "INIT_1">*/
+                class INIT_1
+                {
+                        name = "INIT_1";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"private _t = diag_tickTime;" \n
+                         "" \n
+                         "//Refresh array of objects w/ animals, eliminating objNull or !alive" \n
+                         "private _delete = PF_Ambient select { ( { isNull _x && { !alive _x } } count (_x#2) ) > 0 };" \n
+                         "" \n
+                         "{" \n
+                         "	if ( ( { ( isNull _x && { !alive _x } ) } count (_x#2) ) == (count(_x#2))) then" \n
+                         "	{" \n
+                         "		PF_Ambient = PF_Ambient - [ _x ];" \n
+                         "	};" \n
+                         "}forEach PF_Ambient;" \n
+                         "" \n
+                         "//private _arr = PF_Ambient select { ( { alive _x } count (_x#2) ) > 0 };"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "noAI">*/
+                                class noAI
+                                {
+                                        itemno = 3;
+                                        priority = 7.000000;
+                                        to="WAIT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"//_arr isEqualTo []" \n
+                                         "" \n
+                                         "PF_Ambient isEqualTo []"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"private _t = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Animals">*/
+                                class Animals
+                                {
+                                        itemno = 4;
+                                        priority = 5.000000;
+                                        to="wander";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"//If objects w/ animals exist, proceed..." \n
+                                         "//_arr isNotEqualTo []" \n
+                                         "" \n
+                                         "PF_Ambient isNotEqualTo []"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "WAIT">*/
+                class WAIT
+                {
+                        name = "WAIT";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__0s">*/
+                                class __0s
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+10"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "delay">*/
+                class delay
+                {
+                        name = "delay";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"//Do nothing"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__0s">*/
+                                class __0s
+                                {
+                                        itemno = 10;
+                                        priority = 1.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+20"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

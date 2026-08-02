@@ -1,0 +1,66 @@
+private["_V"];_V=[];
+if(isTalib && side _this==civilian)exitWith{};
+switch(true)do{
+case isCUPU :{
+if(side _this==civilian)then{_V=[
+"CUP_V_OI_TKI_Jacket5_04",
+"CUP_V_OI_TKI_Jacket5_05",
+"CUP_V_OI_TKI_Jacket5_06",
+"CUP_V_OI_TKI_Jacket6_04",
+"CUP_V_OI_TKI_Jacket6_05",
+"CUP_V_OI_TKI_Jacket6_06"]}else{_V=[
+"CUP_V_OI_TKI_Jacket1_01",
+"CUP_V_OI_TKI_Jacket1_02",
+"CUP_V_OI_TKI_Jacket1_03",
+"CUP_V_OI_TKI_Jacket1_04",
+"CUP_V_OI_TKI_Jacket1_05",
+"CUP_V_OI_TKI_Jacket1_06",
+"CUP_V_OI_TKI_Jacket2_01",
+"CUP_V_OI_TKI_Jacket2_02",
+"CUP_V_OI_TKI_Jacket2_03",
+"CUP_V_OI_TKI_Jacket2_04",
+"CUP_V_OI_TKI_Jacket2_05",
+"CUP_V_OI_TKI_Jacket2_06",
+"CUP_V_OI_TKI_Jacket3_01",
+"CUP_V_OI_TKI_Jacket3_02",
+"CUP_V_OI_TKI_Jacket3_03",
+"CUP_V_OI_TKI_Jacket3_04",
+"CUP_V_OI_TKI_Jacket3_05",
+"CUP_V_OI_TKI_Jacket3_06",
+"CUP_V_OI_TKI_Jacket4_01",
+"CUP_V_OI_TKI_Jacket4_02",
+"CUP_V_OI_TKI_Jacket4_03",
+"CUP_V_OI_TKI_Jacket4_04",
+"CUP_V_OI_TKI_Jacket4_05",
+"CUP_V_OI_TKI_Jacket4_06",
+"CUP_V_OI_TKI_Jacket5_01",
+"CUP_V_OI_TKI_Jacket5_02",
+"CUP_V_OI_TKI_Jacket5_03",
+"CUP_V_OI_TKI_Jacket5_04",
+"CUP_V_OI_TKI_Jacket5_05",
+"CUP_V_OI_TKI_Jacket5_06",
+"CUP_V_OI_TKI_Jacket6_01",
+"CUP_V_OI_TKI_Jacket6_02",
+"CUP_V_OI_TKI_Jacket6_03",
+"CUP_V_OI_TKI_Jacket6_04",
+"CUP_V_OI_TKI_Jacket6_05",
+"CUP_V_OI_TKI_Jacket6_06"]}};
+default{if(side _this==civilian)then{_V=[
+"V_LegStrapBag_black_F",
+"V_LegStrapBag_coyote_F",
+"V_Pocketed_black_F",
+"V_Pocketed_coyote_F",
+"V_Pocketed_olive_F"]}else{_V=[
+"V_TacChestrig_cbr_F",
+"V_TacChestrig_grn_F",
+"V_TacChestrig_oli_F",
+"V_BandollierB_khk",
+"V_BandollierB_cbr",
+"V_LegStrapBag_black_F",
+"V_LegStrapBag_coyote_F",
+"V_Chestrig_khk",
+"V_Chestrig_oli",
+"V_HarnessO_brn",
+"V_LegStrapBag_coyote_F"]}}};
+if(side _this==civilian)exitWith{if(floor(random 2)==1)then{_this addVest(selectRandom _V)}};
+_this addVest(selectRandom _V);

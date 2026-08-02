@@ -21,9 +21,15 @@
 params ["_known"];
 
 if (!_known) exitWith {
-    player removeEventHandler ["Fired", vgm_c_skill_passives_noRestraint_firedEh];
-    player removeEventHandler ["Reloaded", vgm_c_skill_passives_noRestraint_reloadedEh];
-    removeUserActionEventHandler ["defaultAction", "Deactivate", vgm_c_skill_passives_noRestraint_actionEh];
+    if (!isNil "vgm_c_skill_passives_noRestraint_firedEh") then {
+        player removeEventHandler ["Fired", vgm_c_skill_passives_noRestraint_firedEh];
+    };
+    if (!isNil "vgm_c_skill_passives_noRestraint_reloadedEh") then {
+        player removeEventHandler ["Reloaded", vgm_c_skill_passives_noRestraint_reloadedEh];
+    };
+    if (!isNil "vgm_c_skill_passives_noRestraint_actionEh") then {
+        removeUserActionEventHandler ["defaultAction", "Deactivate", vgm_c_skill_passives_noRestraint_actionEh];
+    };
 };
 
 vgm_c_skill_passives_noRestraint_recoilCoef = 0;

@@ -75,6 +75,18 @@ private _fnc_getSpottableObjects = {
     params ["_site"];
 
     private _siteObjects = _site get "objects";
+
+    // Virtual sites (BDA, convoy): object references may not survive netmap sync.
+    // Fall back to proximity search if all references are null.
+    private _valid = _siteObjects select {!isNull _x};
+    if (_valid isEqualTo [] && {_site getOrDefault ["virtual", false]}) then {
+        private _pos = +(_site get "pos");
+        _pos set [2, getTerrainHeightASL _pos];
+        _siteObjects = (_pos nearObjects 50) select {
+            _x getVariable ["vgm_missions_gameplay_scouting_spottable", false]
+        };
+    };
+
     _siteObjects select {_x getVariable ["vgm_missions_gameplay_scouting_spottable", false]} // return;
 };
 
@@ -193,10 +205,7 @@ private _photoData = createHashMap;
 
     private _site = _x;
     private _spottableObjects = _site call _fnc_getSpottableObjects;
-
     private _foregroundObjects = [_spottableObjects] call _fnc_getForegroundObjects;
-    // TODO in separate PR, check for "background" objects (objects which intersect one of the "foreground" ones)
-    // and count them too, also add photo quality scoring
     if (count _foregroundObjects < 1) then {continue};
 
     private _backgroundObjects = [_spottableObjects, _foregroundObjects, _x get "objects"] call _fnc_getBackgroundObjects;
@@ -221,6 +230,62 @@ private _photoData = createHashMap;
         [_photoData] call vgm_g_fnc_logDebug;
     };
 #endif
+
+// --- Vehicle photo intel ---
+// Scan for OPFOR vehicles in frame (scouting missions only)
+// Photographed vehicles are registered as virtual sites for notepad scoring
+private _missionType = ((_mission get "parameters") getOrDefault ["missionType", "scouting"]);
+if (_missionType == "scouting") then {
+    private _posBeg = eyePos _extern_player;
+    private _nearVehicles = (_extern_player nearObjects (_photoRange * _zoom)) select {
+        _x getVariable ["vgm_missions_gameplay_scouting_spottable", false]
+    };
+    private _photodVehicles = [];
+    {
+        private _vehicle = _x;
+
+        // cooldown check
+        private _lastPhotoTime = _vehicle getVariable ["vgm_scouting_photoTime", -9999];
+        if (time - _lastPhotoTime < vgm_c_scouting_vehiclePhotoCooldown) then {continue};
+
+        // in-frame check (use vehicle center ASL)
+        private _vehPosASL = getPosASL _vehicle;
+        _vehPosASL set [2, (_vehPosASL select 2) + 1.5];
+        if !(_vehPosASL call _fnc_isInFrame) then {continue};
+
+        // visibility check
+        private _vis = [_extern_player, "VIEW", _vehicle] checkVisibility [_posBeg, _vehPosASL];
+        if (_vis < VIS_THRESHOLD) then {continue};
+
+        // valid vehicle photo
+        _vehicle setVariable ["vgm_scouting_photoTime", time];
+        _photodVehicles pushBack _vehicle;
+    } forEach _nearVehicles;
+
+    if (_photodVehicles isNotEqualTo []) then {
+        // Register as virtual site via server (creates notepad entry + zone site)
+        private _vehiclePos = getPosATL (_photodVehicles # 0);
+        private _siteId = format ["vehicle_%1_%2", floor (_vehiclePos # 0), floor (_vehiclePos # 1)];
+
+        // Compute actual photo quality — only vehicles clearly visible count
+        private _foregroundVehicles = [_photodVehicles] call _fnc_getForegroundObjects;
+        private _vehiclePhotoData = createHashMapFromArray [
+            [_siteId, [_foregroundVehicles, [], _photodVehicles, "vgm_convoy"]]
+        ];
+
+        // Store pending photo data — the server hasn't created the guessed entry yet.
+        // When addedSiteClient fires, the entry exists and we can enter photo mode.
+        vgm_c_scouting_pendingVehiclePhoto = _vehiclePhotoData;
+
+        [player, _siteId, _vehiclePos, "vgm_convoy", _photodVehicles] remoteExecCall ["vgm_s_fnc_missions_gameplay_scouting_registerVirtualSite", 2];
+
+        private _label = ["Enemy vehicle", "Enemy vehicles"] select (count _photodVehicles > 1);
+        hint parseText format [
+            "<t size='1.2' color='#82E0AA'>Intel Gathered</t><br/>%1 %2 photographed<br/><t size='0.9' color='#D4AC0D'>Mark on scouting report</t>",
+            count _photodVehicles, _label
+        ];
+    };
+};
 
 if (_photoData isEqualTo createHashMap) exitWith {};
 

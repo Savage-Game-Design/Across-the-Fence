@@ -2,33 +2,23 @@
     File: fn_skill_investigate_addAction.sqf
     Author: Savage Game Design
     Date: 2024-01-21
-    Last Update: 2025-01-16
+    Last Update: 2026-03-04
     Public: No
 
     Description:
-        Adds "Stop, Listen" action to the player.
+        Previously added the "Stop, Listen" scrollwheel action to the player.
+        This has been moved to the wheel menu (cfg_wheel_menu.hpp).
+        The keybind (T) still works independently via skill_investigate_postInit.
+        This function is kept as a no-op for backwards compatibility with callers.
 
     Parameter(s):
         _player - Player unit [OBJECT]
 
     Returns:
-        Action ID [NUMBER]
+        Nothing
 
     Example(s):
         player call vgm_c_fnc_skill_investigate_addAction
  */
 
-params ["_player"];
-
-_player addAction [
-    localize "STR_VGM_SKILL_INVESTIGATE_ACTION",
-    vgm_c_fnc_skill_investigate_toggleFocusMode,
-    [],
-    10000,
-    false,
-    true,
-    "",
-    "true",
-    -1,
-    true
-]
+// Action moved to wheel menu. Keybind T still works independently.

@@ -9,5 +9,5 @@
         Coefficient client postInit.
  */
 
-[player, "camouflage", "core", -1, true] call vgm_c_fnc_coefficient_set;
+[player, "camouflage", "core", -0.7, true] call vgm_c_fnc_coefficient_set;
 [player, "audible", "core", -0.8, true] call vgm_c_fnc_coefficient_set;

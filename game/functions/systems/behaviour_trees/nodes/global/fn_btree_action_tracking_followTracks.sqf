@@ -35,9 +35,19 @@ _action set ["getNextTrack", {
 
     if !(isNil "_nextTrack") exitWith {
         // Find the furthest valid track we can path to.
-        while {"nextTrack" in _nextTrack && ((_nextTrack get "nextTrack" get "pos") distance2D _currentTrackPos) < 100} do {
+        while {"nextTrack" in _nextTrack && ((_nextTrack get "nextTrack" get "pos") distance2D _currentTrackPos) < 20} do {
             _nextTrack = _nextTrack get "nextTrack";
         };
+
+        // Loss-chance roll: tracker may lose the trail based on age, gap distance, and darkness
+        private _nextTrackPos = _nextTrack get "pos";
+        private _ageFactor = linearConversion [0, vgm_g_tracking_lossFactor_ageTimeMax, serverTime - (_nextTrack get "time"), 0, vgm_g_tracking_lossFactor_ageMax, true];
+        private _gapDist = _currentTrackPos distance2D _nextTrackPos;
+        private _distFactor = linearConversion [vgm_g_tracking_lossFactor_distMin, vgm_g_tracking_lossFactor_distMaxDist, _gapDist, 0, vgm_g_tracking_lossFactor_distMax, true];
+        private _nightFactor = linearConversion [1, 0, sunOrMoon, 0, vgm_g_tracking_lossFactor_nightMax, true];
+        private _lossChance = _ageFactor + _distFactor + _nightFactor;
+        if (random 1 < _lossChance) exitWith { nil };
+
         _nextTrack
     };
 

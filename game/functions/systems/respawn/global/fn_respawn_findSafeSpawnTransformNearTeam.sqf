@@ -25,8 +25,8 @@
 
 params [
     ["_unit", objNull, [objNull]],
-    ["_minDistanceFromTeam", 200, [200]],
-    ["_maxDistanceFromTeam", 500, [500]],
+    ["_minDistanceFromTeam", 100, [100]],
+    ["_maxDistanceFromTeam", 300, [300]],
 	["_enemyAvoidanceHardBlockDistance", 50, [50]],
 	["_enemySides", [east, independent], [[]]],
 	["_friendlySides", [west], [[]]]

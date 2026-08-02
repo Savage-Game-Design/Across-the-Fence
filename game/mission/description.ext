@@ -17,19 +17,14 @@ class Header
 
 onPauseScript = "";
 
-onLoadName = "$STR_VGM_MISSION_NAME";
-onLoadMission = "$STR_VGM_MISSION_VERSION";
-onLoadIntro = "$STR_VGM_MISSION_INTRO";
-briefingName = "$STR_VGM_MISSION_NAME_VERSION";
 // name of the vars file that holds mission specific data
 // uses missionName if not specified (file name)
 missionGroup = "vgm";
 
-loadScreen = "";
+onLoadName = "Beyond The Fence";
 OnLoadIntroTime = 0;
 OnLoadMissionTime = 0;
 
-overviewPicture = "";
 
 disabledAI = 1;
 scriptedPlayer = 0;

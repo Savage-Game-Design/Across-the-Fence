@@ -1,0 +1,393 @@
+/*%FSM<COMPILE "L:\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, civ1">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"INIT",0,250,652.000000,-2164.000000,680.000000,-2136.000000,0.000000,"INIT"};
+item1[] = {"moveTo",2,250,812.000000,-2248.000000,880.000000,-2216.000000,0.000000,"moveTo"};
+item2[] = {"INIT_1",2,250,640.000000,-2252.000000,692.000000,-2212.000000,0.000000,"INIT"};
+item3[] = {"noCivs",4,218,472.000000,-2252.000000,540.000000,-2212.000000,0.000000,"noCivs"};
+item4[] = {"Civs",4,218,726.350952,-2252.110352,782.350952,-2212.110352,0.000000,"Civs"};
+item5[] = {"__0s",4,218,560.106750,-2201.801270,608.106750,-2169.801270,0.000000,"10s"};
+item6[] = {"WAIT",2,250,480.000000,-2200.000000,532.000000,-2172.000000,0.000000,"WAIT"};
+item7[] = {"_",8,218,640.000000,-2208.000000,692.000000,-2168.000000,0.000000,""};
+item8[] = {"Day",4,4314,816.000000,-2324.000000,876.000000,-2288.000000,0.000000,"Day"};
+item9[] = {"Night",4,218,783.907959,-2304.092285,843.907959,-2268.092285,0.000000,"Night"};
+item10[] = {"",7,210,750.000000,-2310.000000,758.000000,-2302.000000,0.000000,""};
+item11[] = {"_",2,250,708.000000,-2316.000000,732.000000,-2296.000000,0.000000,""};
+item12[] = {"__0s",4,218,640.000000,-2326.133301,692.000000,-2286.133301,1.000000,"20s"};
+item13[] = {"",7,210,749.967224,-2290.154053,757.967224,-2282.154053,0.000000,""};
+item14[] = {"",7,210,580.083191,-2229.516602,588.083191,-2221.516602,0.000000,""};
+item15[] = {"",7,210,629.014709,-2229.561768,637.014709,-2221.561768,0.000000,""};
+link0[] = {0,7};
+link1[] = {1,8};
+link2[] = {1,9};
+link3[] = {2,3};
+link4[] = {2,4};
+link5[] = {3,6};
+link6[] = {4,1};
+link7[] = {5,14};
+link8[] = {6,5};
+link9[] = {7,2};
+link10[] = {8,10};
+link11[] = {9,13};
+link12[] = {10,11};
+link13[] = {11,12};
+link14[] = {12,2};
+link15[] = {13,10};
+link16[] = {14,15};
+link17[] = {15,2};
+globals[] = {0.000000,0,0,0,0,640,480,3,74,6316128,1,343.141998,1011.828186,-1937.343384,-2575.346436,632,603,1};
+window[] = {0,-1,-1,-1,-1,827,52,1732,52,1,650};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "civ1";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"/*	civ1.fsm" \n
+                         "	Author: Phronk" \n
+                         "	Description: A general FSM which handles generic civilian behavior, such as:" \n
+                         "		- wandering" \n
+                         "		- finding & moving to a civilian to interact with" \n
+                         "		- going to bed" \n
+                         "		- sleeping" \n
+                         "" \n
+                         "	TODO:" \n
+                         "		1. Civilians finding objects to move to and interact with" \n
+                         "		2. Civilians finding players to interact with" \n
+                         "		3. Civilian crowds and other actions" \n
+                         "" \n
+                         "*/" \n
+                         "_civs = [];" \n
+                         "_iaCivs = [];" \n
+                         "" \n
+                         "systemChat ""civ1.fsm: initialized"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "moveTo">*/
+                class moveTo
+                {
+                        name = "moveTo";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Night">*/
+                                class Night
+                                {
+                                        itemno = 9;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"dayTime < 5.4 || { dayTime > 18 }"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"{" \n
+                                         "	if ( !( _x getVariable ""FSM"" in [ ""bed"" , ""zzz"" ] ) )then" \n
+                                         "	{" \n
+                                         "		_x setVariable[""FSM"",""bed""];" \n
+                                         "		//_x moveTo(selectRandom((nearestBuilding _x)buildingPos -1));" \n
+                                         "" \n
+                                         "		_x moveTo ( selectRandom ( ( selectRandom ( nearestObjects [ _x , [ ""House_F"" ] , 99 ] select { ( toLowerANSI typeOf _x ) in PF_Civ_Houses } ) ) buildingPos -1 ) );" \n
+                                         "		selectRandom[" \n
+                                         "			_x playAction""SitDown""," \n
+                                         "			[ _x , ""passenger_injured_medevac_truck03"" ] remoteExec [ ""switchAction"" ,0 , _x ]" \n
+                                         "		];" \n
+                                         "		_x disableAI""ALL"";" \n
+                                         "	};" \n
+                                         "}forEach _civs;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Day">*/
+                                class Day
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"dayTime >= 5.4 && { dayTime <= 18 }"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"{" \n
+                                         "	private _var = _x getVariable ""FSM"";" \n
+                                         "	private _isIA = !( isNil { _x getVariable ""ia"" } );" \n
+                                         "	if !( _var isEqualTo ""ia"" && { !stopped _x } ) then" \n
+                                         "	{" \n
+                                         "		//Wakey wakey" \n
+                                         "		if ( _var isEqualTo ""bed"" ) then" \n
+                                         "		{" \n
+                                         "			_x setVariable [ ""FSM"" , """" ];" \n
+                                         "			[ _x , """" ] remoteExec [ ""switchMove"" , 0 , _x ];" \n
+                                         "		};" \n
+                                         "	" \n
+                                         "		if ( _isIA ) then" \n
+                                         "		{" \n
+                                         "			private _ia = _x getVariable ""ia"";" \n
+                                         "			if ( alive _ia && { speed _x == 0 && { _x distance _ia > 3.5 && { moveToFailed _x || moveToCompleted _x } } } ) then" \n
+                                         "			{" \n
+                                         "				_ia setVariable[""FSM"",""""];" \n
+                                         "				_ia stop false;" \n
+                                         "				_x setVariable [""FSM"",""""];" \n
+                                         "				_x stop false;" \n
+                                         "				_x moveTo ( _x getPos [ 5 + random 75 , random 359 ] );" \n
+                                         "			};" \n
+                                         "		};" \n
+                                         "" \n
+                                         "	switch ( floor random 4 ) do" \n
+                                         "	{" \n
+                                         "		case 0 ://WANDER TO A NEARBY HOUSE" \n
+                                         "		{" \n
+                                         "			_x moveTo ( selectRandom ( ( selectRandom ( nearestObjects [ _x , [ ""House_F"" ] , 99 ] select { ( toLowerANSI typeOf _x ) in PF_Civ_Houses } ) ) buildingPos -1 ) );" \n
+                                         "		};" \n
+                                         "" \n
+                                         "		case 1 ://WANDER AROUND GENERAL AREA" \n
+                                         "		{" \n
+                                         "			_x moveTo ( _x getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "		};" \n
+                                         "		case 2 ://INTERACT WITH PERSON" \n
+                                         "		{" \n
+                                         "			private _o = ( ( _x nearEntities [ ""C_Soldier_VR_F"" , 74 ] ) select { ( _x getVariable""FSM"" ) isEqualTo """" } ) - [ _x ];" \n
+                                         "			if ( _o isNotEqualTo [] ) then" \n
+                                         "			{" \n
+                                         "					private _o = selectRandom _o;" \n
+                                         "//					if ( _o getVariable ""FSM"" isEqualTo ""ia"" ) then {systemChat""BROKEN""};" \n
+                                         "					_o setVariable [ ""FSM"" , ""ia"" ];" \n
+                                         "					_o setVariable [ ""ia"" , _x ];" \n
+                                         "					_x setVariable [ ""FSM"" , ""ia"" ];" \n
+                                         "					_x setVariable [ ""ia"" , _o ];" \n
+                                         "					_o stop true;" \n
+                                         "					//_x moveTo ( getPosATL _o );" \n
+                                         "					_x moveTo ( _o modelToWorld[0,1,0] );" \n
+                                         "					//systemChat ""civ1: moveTo"";" \n
+                                         "			} else {" \n
+                                         "				_x moveTo ( _x getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "			};" \n
+                                         "		};" \n
+                                         "		case 3 ://INTERACT WITH OBJECT" \n
+                                         "		{" \n
+                                         "			private _o = ( nearestTerrainObjects [ _x , [""HIDE""] , 25 , false , false ] ) select { ( ( getModelInfo _x ) # 0 ) in PF_ObjectMdlCiv };" \n
+                                         "			private _o = [];" \n
+                                         "			if ( _o isNotEqualTo [] ) then" \n
+                                         "			{" \n
+                                         "				private _o = selectRandom _o;" \n
+                                         "				private _id = getObjectID _o;" \n
+                                         "				private _i = ( PF_MapObjs findIf { _id isEqualTo (_x#1) } );" \n
+                                         "				private _i = if ( _i > -1 ) then { _i } else {  };" \n
+                                         "				if ( _i#2 isEqualTo [] ) then" \n
+                                         "				{" \n
+                                         "					//PF_MapObjs pushBackUnique [ _o , _id , [_x] ];" \n
+                                         "					( ( PF_MapObjs # _i ) # 3 ) pushBackUnique _x;//may not work? update " \n
+                                         "					_x setVariable [ ""FSM"" , ""ia"" ];" \n
+                                         "					_x setVariable [ ""ia"" , _o ];" \n
+                                         "					_x moveTo ( getPosATL _o );" \n
+                                         "					_x moveTo ( _x getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "				};" \n
+                                         "			} else {" \n
+                                         "			_x moveTo ( _x getPos [ 25 + random 75 , random 359 ] );" \n
+                                         "			};" \n
+                                         "		};" \n
+                                         "	};" \n
+                                         "	}else{" \n
+                                         "		if ( !stopped _x ) then" \n
+                                         "		{" \n
+                                         "			_x moveTo ( getPosATL _ia );" \n
+                                         "		};" \n
+                                         "	};" \n
+                                         "}forEach _civs;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "INIT_1">*/
+                class INIT_1
+                {
+                        name = "INIT_1";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"_t = diag_tickTime;" \n
+                         "_iaCivs = [];" \n
+                         "_civs = [];" \n
+                         "_tiredCivs = [];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Civs">*/
+                                class Civs
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="moveTo";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!( (server getVariable""civs"") isEqualTo [] )"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//Gather all civilians who are in a freeroam or bed state" \n
+                                         "" \n
+                                         "private _civz = (server getVariable""civs"") select" \n
+                                         "{" \n
+                                         "//	( !isNull _x ) && { alive _x && { speed _x == 0 && { _x getVariable ""FSM"" in [ """" , ""bed"" ] ||{ _x getVariable ""FSM"" isEqualType objNull} } } }" \n
+                                         "	( !isNull _x ) && { alive _x && { speed _x == 0 && { _x getVariable ""FSM"" in [ """" , ""bed"" ] } } }" \n
+                                         "" \n
+                                         "};" \n
+                                         "" \n
+                                         "//Interacting Civs" \n
+                                         "{_civs pushBackUnique _x}forEach _civz;" \n
+                                         "" \n
+                                         "private _civz = [];"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "noCivs">*/
+                                class noCivs
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="WAIT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(server getVariable""civs"")isEqualTo[]"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_t=diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "WAIT">*/
+                class WAIT
+                {
+                        name = "WAIT";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__0s">*/
+                                class __0s
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime>_t+10"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"//Bedtime Civs" \n
+                         "_tiredCivs = _civs select { _x getVariable ""FSM"" isEqualTo ""bed"" };" \n
+                         "" \n
+                         "" \n
+                         "private _iCivs = (( server getVariable ""civs"" ) select" \n
+                         "{" \n
+                         "	!isNull _x && { alive _x && { _x getVariable ""FSM"" isEqualTo ""ia"" && { !stopped _x } } }" \n
+                         "});" \n
+                         "" \n
+                         "" \n
+                         "//Interacting Civs, update array to only have unique elements to avoid duplicates" \n
+                         "{if(!isNull _x)then{_iaCivs pushBackUnique _x};}forEach _iCivs;" \n
+                         "" \n
+                         "private _iCivs = [];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "__0s">*/
+                                class __0s
+                                {
+                                        itemno = 12;
+                                        priority = 1.000000;
+                                        to="INIT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"diag_tickTime > _t+20"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//ForEach civilian ready for bed" \n
+                                         "{" \n
+                                         "	if ( ( expectedDestination _x#0 ) distance _x <= 3 && { speed _x == 0 } ) then" \n
+                                         "	{" \n
+                                         "		_x setVariable [ ""FSM"" , ""zzz"" ];" \n
+                                         "		selectRandom[" \n
+                                         "		_x playAction ""SitDown""," \n
+                                         "		[ _x , ""passenger_injured_medevac_truck03"" ] remoteExec [ ""switchAction"" , 0 , _x ]" \n
+                                         "		];" \n
+                                         "		[ _x , ""unconscious"" ] remoteExec [ ""setMimic"" , 0 , _x ];" \n
+                                         "		_x disableAI ""ALL""" \n
+                                         "	} else {" \n
+                                         "		_x moveTo ( expectedDestination _x#0 );" \n
+                                         "	};" \n
+                                         "}forEach _tiredCivs;" \n
+                                         "" \n
+                                         "" \n
+                                         "" \n
+                                         "" \n
+                                         "//ForEach interactingCivilians" \n
+                                         "{" \n
+                                         "	if !( isNull _x || { isNil{_x getVariable""FSM""} } ) then" \n
+                                         "	{" \n
+                                         "		private _var = _x getVariable ""FSM"";" \n
+                                         "		private _isIA = !( isNil { _x getVariable ""ia"" } );" \n
+                                         "" \n
+                                         "		if ( _isIA ) then" \n
+                                         "		{" \n
+                                         "			private _ia = _x getVariable ""ia"";" \n
+                                         "" \n
+                                         "			//If AI gets stuck, reset state" \n
+                                         "			if ( _x distance _ia > 3.5 && { moveToFailed _x || moveToCompleted _x } ) then" \n
+                                         "			{" \n
+                                         "				//_x moveTo ( _o modelToWorld[0,1,0] );" \n
+                                         "				_ia setVariable[""FSM"",""""];" \n
+                                         "				_ia stop false;" \n
+                                         "				_x setVariable[""FSM"",""""];" \n
+                                         "				_x stop false;" \n
+                                         "				_x moveTo ( _x getPos [ 5 + random 75 , random 359 ] );" \n
+                                         "				_ia moveTo ( _x getPos [ 5 + random 75 , random 359 ] );" \n
+                                         "			};" \n
+                                         "" \n
+                                         "			if ( _ia distance _x <= 3 ) then" \n
+                                         "			{" \n
+                                         "				if !( ""ItemWatch"" in assignedItems _x || ""ItemWatch"" in assignedItems _ia ) then" \n
+                                         "				{" \n
+                                         "					if ( face _ia isEqualTo """" ) then" \n
+                                         "					{" \n
+                                         "						[ _x , _ia ] spawn { [ _this#0 , _this#1 ] execFSM ""s\civ\f\civ4.fsm""; };" \n
+                                         "					} else {" \n
+                                         "						_x playAction ""GestureHi"";" \n
+                                         "						[ _x , _ia ] spawn { [ _this#0 , _this#1 ] execFSM ""s\civ\f\civ2.fsm""; };" \n
+                                         "					};" \n
+                                         "				};" \n
+                                         "			} else {" \n
+                                         "				_x moveTo ( _ia modelToWorld[0,1,0] );" \n
+                                         "			};" \n
+                                         "		} else {" \n
+                                         "			_x moveTo ( _x getPos [ 5 + random 75 , random 359 ] );" \n
+                                         "		};" \n
+                                         "	};" \n
+                                         "}forEach _iaCivs;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

@@ -2,13 +2,13 @@
 <Project name="VGM">
     <Package name="General">
         <Key ID="STR_VGM_MISSION_NAME_VERSION">
-            <Original>Across the Fence (#VERSION#)</Original>
+            <Original>Across the Fence (v0.12.0@b24b559a beta)</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_NAME">
             <Original>Across the Fence</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_VERSION">
-            <Original>#VERSION#</Original>
+            <Original>v0.12.0@b24b559a beta</Original>
         </Key>
         <Key ID="STR_VGM_MISSION_INTRO">
             <Original>Welcome to Vietnam [Placeholder]</Original>
@@ -91,6 +91,9 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_HUD_ACTIVES">
             <Original>Active abilities</Original>
+        </Key>
+        <Key ID="STR_VGM_TRACKING_HUD_LABEL">
+            <Original>TRACKS</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_UI_STDEMPTY_TOPTEXT_TEXT">
             <Original>No ability selected</Original>
@@ -294,6 +297,171 @@
         <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_SITE_TYPE_CORRECT">
             <Original>Correct site type</Original>
         </Key>
+        <!-- Prisoner Snatch milestones -->
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_snatch_target_captured">
+            <Original>Target Captured Alive</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_snatch_target_extracted">
+            <Original>Target Extracted</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_snatch_no_casualties">
+            <Original>Zero Friendly Casualties</Original>
+        </Key>
+        <!-- Bright Light milestones -->
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_bright_light_target_found">
+            <Original>Survivor Located</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_bright_light_target_rescued">
+            <Original>Survivor Rescued</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_bright_light_target_extracted">
+            <Original>Survivor Extracted</Original>
+        </Key>
+        <!-- Hatchet Force milestones -->
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_hatchet_team_alive">
+            <Original>Team Members Alive on Arrival (%1)</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_hatchet_team_extracted">
+            <Original>Team Members Extracted (%1)</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_hatchet_full_team_bonus">
+            <Original>Full Team Rescued</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_hatchet_hot_lz_bonus">
+            <Original>Hot LZ Completion</Original>
+        </Key>
+        <!-- Enemy kills milestone -->
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_enemy_kills">
+            <Original>Enemy Kills (%1)</Original>
+        </Key>
+        <!-- Vehicle intel milestone -->
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_vehicle_intel">
+            <Original>Vehicles Photographed (%1)</Original>
+        </Key>
+        <!-- Officer snatch milestones -->
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_officer_killed">
+            <Original>PAVN Officer Eliminated</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_officer_extracted">
+            <Original>PAVN Officer Extracted</Original>
+        </Key>
+    </Package>
+    <!-- Radio Check-In System -->
+    <Package name="Radio Check-In">
+        <Key ID="STR_VGM_RADIOCHECKIN_ACTION">
+            <Original>Radio Check-In</Original>
+        </Key>
+        <Key ID="STR_VGM_RADIOCHECKIN_HINT_REMINDER">
+            <Original>Remember to check in with COVEY periodically.</Original>
+        </Key>
+        <Key ID="STR_VGM_RADIOCHECKIN_HINT_SENT">
+            <Original>Radio check-in sent.</Original>
+        </Key>
+        <Key ID="STR_VGM_RADIO_JAMMED">
+            <Original>Comms jammed — no response. Jamming source estimated %1m away. Locate and destroy the transmitter.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSION_END_UI_MILESTONE_missed_radio_checkin">
+            <Original>Missed Radio Check-In (x%1)</Original>
+        </Key>
+    </Package>
+    <!-- Mission Type: Prisoner Snatch -->
+    <Package name="Missions - Prisoner Snatch">
+        <Key ID="STR_VGM_MISSIONS_SNATCH_TASK_TITLE">
+            <Original>Prisoner Snatch</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_TASK_DESCRIPTION">
+            <Original>Intel has identified a senior NVA officer operating near grid %1. Locate and capture him alive. He must be brought back for interrogation.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_SUBTASK_LOCATE_TITLE">
+            <Original>Locate the Officer</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_SUBTASK_LOCATE_DESC">
+            <Original>The officer was last reported near grid %1. Move to the area and locate him.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_SUBTASK_CAPTURE_TITLE">
+            <Original>Incapacitate the Officer</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_SUBTASK_CAPTURE_DESC">
+            <Original>Knock the officer unconscious. Do not kill him — he is needed alive for interrogation.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_SUBTASK_EXTRACT_TITLE">
+            <Original>Extract with the Prisoner</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_SNATCH_SUBTASK_EXTRACT_DESC">
+            <Original>Carry the officer to the extraction helicopter and load him on board.</Original>
+        </Key>
+    </Package>
+    <!-- Mission Type: Bright Light -->
+    <Package name="Missions - Bright Light">
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_TASK_TITLE">
+            <Original>Bright Light — Locate %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_TASK_DESCRIPTION">
+            <Original>We've lost contact with %1. Last known position near grid %2. Find them and bring them home.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_LOCATE_TITLE">
+            <Original>Locate %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_LOCATE_DESC">
+            <Original>%1 was last reported near grid %2. Move to the area and search for them. Enemy patrols may be searching the same area.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_SECURE_TITLE">
+            <Original>Secure and Stabilize</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_SECURE_DESC">
+            <Original>Get to the survivor and carry them. They are wounded and unconscious — time is critical.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_EXTRACT_TITLE">
+            <Original>Extract with the Survivor</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_EXTRACT_DESC">
+            <Original>Carry the survivor to the extraction helicopter and load them on board.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_GATHERINTEL_TITLE">
+            <Original>Search the Crash Site</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_GATHERINTEL_DESC">
+            <Original>The pilot is gone. Search the area around the wreckage for signs of what happened.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_FOLLOWTRAIL_TITLE">
+            <Original>Follow the Blood Trail</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_FOLLOWTRAIL_DESC">
+            <Original>A blood trail leads away from the crash site. Use focus mode to spot the trail and follow it to where the NVA took the pilot.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_RESCUE_TITLE">
+            <Original>Rescue the Pilot</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_BRIGHT_LIGHT_SUBTASK_RESCUE_DESC">
+            <Original>The pilot is being held at the end of the trail. Neutralize the guards and recover the pilot.</Original>
+        </Key>
+    </Package>
+    <!-- Mission Type: Hatchet Force -->
+    <Package name="Missions - Hatchet Force">
+        <Key ID="STR_VGM_MISSIONS_HATCHET_TASK_TITLE">
+            <Original>Hatchet Force — Reinforce RT %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_TASK_DESCRIPTION">
+            <Original>RT %1 is in heavy contact at grid %2. They are taking casualties and won't last long. Reinforce them and extract all survivors.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_SUBTASK_REACH_TITLE">
+            <Original>Reach RT %1</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_SUBTASK_REACH_DESC">
+            <Original>RT %1 is broadcasting their position at grid %2. Move to them as fast as possible — they are under heavy fire.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_SUBTASK_SECURE_TITLE">
+            <Original>Secure the Team</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_SUBTASK_SECURE_DESC">
+            <Original>Neutralize enemy forces around the recon team and secure any wounded members.</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_SUBTASK_EXTRACT_TITLE">
+            <Original>Extract All Survivors</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_HATCHET_SUBTASK_EXTRACT_DESC">
+            <Original>Load all surviving recon team members onto the extraction helicopter. Carry any unconscious members.</Original>
+        </Key>
     </Package>
     <Package name="Skills Tree">
         <Key ID="STR_VGM_SKILLS_TREE_COMBAT">
@@ -370,11 +538,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_FIELD_MODIFICATION_4_DESC">
             <Original>Unlocks enemy sidearms and melee weapons</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES">
-            <Original>Chemical grenades</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SCORCHED_EARTH">
+            <Original>Scorched Earth</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_CHEMICAL_GRENADES_DESC">
-            <Original>Unlocks WP, CS gas and incendiary grenades.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SCORCHED_EARTH_DESC">
+            <Original>Unlocks WP and incendiary grenades.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_AMMOPOUCH">
             <Original>Ammo pouch</Original>
@@ -404,10 +572,13 @@
             <Original>For the next 60 seconds, your weapon sway is reduced by 100%</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR">
-            <Original>Jungle warrior [Disabled]</Original>
+            <Original>Jungle Warrior</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_DESC">
-            <Original>Canteens restore stamina. Machetes clear brush.</Original>
+            <Original>Canteens restore stamina. Unlocks machetes for clearing brush.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_JUNGLE_WARRIOR_ACTION_CANTEEN">
+            <Original>Drink Canteen</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_STABLE_PLATFORM">
             <Original>Stable platform</Original>
@@ -458,16 +629,16 @@
             <Original>Gain temporary hit shrug.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE">
-            <Original>War-face [Disabled]</Original>
+            <Original>War Face</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_WAR_FACE_DESC">
             <Original>When you are detected, stamina consumption is reduced by 30% for the next 30 seconds.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT">
-            <Original>Knockout [Disabled]</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_DIG_IN">
+            <Original>Dig In</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_KNOCKOUT_DESC">
-            <Original>Use concussion grenades to stun enemies outside lethal range and capture POWs for bonus rewards.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_DIG_IN_DESC">
+            <Original>When prone for 2+ seconds, recoil is reduced by 30% and you have a 20% chance to shrug off hits. Removed when standing or crouching.</Original>
         </Key>
         <!-- Pointman -->
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_POINTMAN">
@@ -482,11 +653,17 @@
         <Key ID="STR_VGM_SKILLS_SKILL_ELDEST_SON_DESC">
             <Original>Enables encountering an ammo dump where booby-trapped ammo can be planted for bonus rewards.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAP_DISARM_ACTION">
+            <Original>Disarm Trap</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TRAP_DISARM_DONE">
+            <Original>Trap disarmed.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_GROUND_SIGN">
             <Original>Ground sign</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_GROUND_SIGN_DESC">
-            <Original>Intel glints appear 30% more frequently.</Original>
+            <Original>Intel glints appear 30% more frequently and are visible without focus mode.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_IN_THE_ZONE">
             <Original>In the zone</Original>
@@ -510,7 +687,7 @@
             <Original>Cutthroat</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_CUTTHROAT_DESC">
-            <Original>Melee kills will not raise alertness</Original>
+            <Original>Melee kills will not raise alertness. Also reduces your noise footprint by 15%.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SENSE_OF_SCALE">
             <Original>Sense of scale</Original>
@@ -530,11 +707,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_HANDRAIL_DESC">
             <Original>Inspecting a trail reveals the direction to the nearest site within 300m</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_STONES_THROW">
-            <Original>Stone's throw</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_PATHFINDER">
+            <Original>Pathfinder</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_STONES_THROW_DESC">
-            <Original>Attracts enemies to a position 20m in the direction you’re facing</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_PATHFINDER_DESC">
+            <Original>For 30 seconds, enemies within 50m are highlighted with ground-level icons and you become harder to spot visually.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_KEEN_EYE">
             <Original>Keen eye</Original>
@@ -578,6 +755,18 @@
         <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_DESC">
             <Original>Hiding bodies delays enemy alert</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_ACTION">
+            <Original>Hide Body</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_TRAP_ACTION">
+            <Original>Booby Trap Body</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_TRAP_NEED_GRENADE">
+            <Original>You need a hand grenade to booby trap a body.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PILE_OF_LEAVES_TRAP_DONE">
+            <Original>Body booby-trapped.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_ON_THE_PROWL">
             <Original>On the prowl</Original>
         </Key>
@@ -590,11 +779,11 @@
         <Key ID="STR_VGM_SKILLS_SKILL_TACTICAL_SENSE_DESC">
             <Original>Briefly mark all enemies within 150m in 3D and on the map</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_THROWING_KNIFE">
-            <Original>Throwing knife</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SECOND_SIGHT">
+            <Original>Second Sight</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_THROWING_KNIFE_DESC">
-            <Original>Throw knives for a silent ranged kill</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SECOND_SIGHT_DESC">
+            <Original>While crouched or prone and stationary for 3+ seconds, enemies within 100m are highlighted. Icons disappear when moving. Also grants +50 scouting photo range.</Original>
         </Key>
     </Package>
     <Package name="Skills - Team leader skills">
@@ -615,7 +804,16 @@
             <Original>Target folder 1</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_1_DESC">
-            <Original>The map reveals some potential sources of water.</Original>
+            <Original>The map reveals trail signs near enemy sites.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_TRAIL">
+            <Original>Trail sign</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_AREA">
+            <Original>Activity area</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TARGET_FOLDER_SITE">
+            <Original>Site</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRE_DIRECTION">
             <Original>Fire direction</Original>
@@ -705,7 +903,22 @@
             <Original>RON call</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_RON_CALL_DESC">
-            <Original>Call other Team Leaders for a limited Remain Overnight vote.</Original>
+            <Original>Initiate a Remain Overnight vote. If passed, the team hunkers down for the night — but the jungle doesn't always cooperate.</Original>
+        </Key>
+        <Key ID="STR_VGM_RON_ACTION">
+            <Original>Remain Overnight (RON)</Original>
+        </Key>
+        <Key ID="STR_VGM_RON_VOTE_TITLE">
+            <Original>Remain Overnight</Original>
+        </Key>
+        <Key ID="STR_VGM_RON_VOTE_CONTENT">
+            <Original>The team leader wants to hunker down for the night. Agree?</Original>
+        </Key>
+        <Key ID="STR_VGM_RON_VOTE_YES">
+            <Original>Dig in</Original>
+        </Key>
+        <Key ID="STR_VGM_RON_VOTE_NO">
+            <Original>Keep moving</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_BREAK_CONTACT">
             <Original>Break contact</Original>
@@ -772,12 +985,12 @@
         </Key>
     </Package>
     <Package name="Skills - RTO skills">
-        <!-- Radio operator (RTO) -->
+        <!-- Radio operator (RTO) - Tier 0 -->
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO">
             <Original>&lt;t size='0.8'&gt;[Training]&lt;/t&gt;&lt;br /&gt;Radio operator</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_TRAINING_RTO_DESC">
-            <Original>Gain advanced training as a radio telephone operator.\nYou can only have one advanced training.\nUnlocks radio backpacks and the ability to call in air support.\nReduced skill costs in the RTO tree.</Original>
+            <Original>Gain advanced training as a radio telephone operator.\nYou can only have one advanced training.\nUnlocks radio backpacks and the ability to call in air support.\nBase jets: Fox, Sundowner, Hobo.\nBase gunships: Maverick, Condor.\nReduced skill costs in the RTO tree.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO">
             <Original>Emergency radio</Original>
@@ -785,17 +998,12 @@
         <Key ID="STR_VGM_SKILLS_SKILL_EMERGENCY_RADIO_DESC">
             <Original>Unlocks limited air support using the handheld radio with 50% longer arrival time, 50% slower strike time.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1">
-            <Original>CAS: Fast mover (Level 1)</Original>
+        <!-- Tier 1 -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SITREP">
+            <Original>Sitrep</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_1_DESC">
-            <Original>F100D with Mk82.</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1">
-            <Original>CAS: Gunship (Level 1)</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_1_DESC">
-            <Original>UH-1C Gunship.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SITREP_DESC">
+            <Original>Covey advises the team on enemy intensity and location of nearest forces.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_FIRESHIP">
             <Original>Fireship</Original>
@@ -803,41 +1011,60 @@
         <Key ID="STR_VGM_SKILLS_SKILL_FIRESHIP_DESC">
             <Original>Fireship illumination.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PRECISION_STRIKE">
+            <Original>Precision Strike</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PRECISION_STRIKE_DESC">
+            <Original>Reduces divergence on function-based strikes (Arclight, Big Blue) to 120m.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_COORDINATION">
+            <Original>Fire Coordination</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_COORDINATION_DESC">
+            <Original>Fox and Maverick gain double run capability.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_QUICK_RELAY">
+            <Original>Quick Relay</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_QUICK_RELAY_DESC">
+            <Original>All CAS cooldowns reduced by 15%.</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_STROBE_MARKER">
             <Original>Strobe marker</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_STROBE_MARKER_DESC">
             <Original>Reduces air support penalties from night by 75%.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SITREP">
-            <Original>Sitrep</Original>
+        <!-- Tier 2 -->
+        <Key ID="STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL">
+            <Original>Guardian angel</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SITREP_DESC">
-            <Original>Covey advises the team on enemy intensity and location of nearest forces.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL_DESC">
+            <Original>The current aircraft arrives immediately, and has its loiter time extended by 50%.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_STINGER">
-            <Original>Stinger</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_AC119_ORBIT">
+            <Original>AC-119 Orbit</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_STINGER_DESC">
-            <Original>While active, an AC-119K works your perimeter (1 use).</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_AC119_ORBIT_DESC">
+            <Original>Unlocks AC-119K Stinger gunship orbit pattern via Nickel Steel.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2">
-            <Original>CAS: Fast mover (Level 2)</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_PRECISION_STRIKE_2">
+            <Original>Precision Strike II</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_2_DESC">
-            <Original>F100D with Napalm.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_PRECISION_STRIKE_2_DESC">
+            <Original>Reduces divergence on function-based strikes (Arclight, Big Blue) to 80m.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2">
-            <Original>CAS: Gunship (Level 2)</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_COORDINATION_2">
+            <Original>Fire Coordination II</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_2_DESC">
-            <Original>UH-1C Heavy Hog.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIRE_COORDINATION_2_DESC">
+            <Original>Sundowner and Condor also gain double run capability.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SHADOW">
-            <Original>Shadow</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_QUICK_RELAY_2">
+            <Original>Quick Relay II</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SHADOW_DESC">
-            <Original>Illumination continues until dawn.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_QUICK_RELAY_2_DESC">
+            <Original>All CAS cooldowns reduced by 30%.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_LONG_ANTENNA">
             <Original>Long Antenna</Original>
@@ -845,59 +1072,147 @@
         <Key ID="STR_VGM_SKILLS_SKILL_LONG_ANTENNA_DESC">
             <Original>Reduces air support penalties from bad weather by 75%.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL">
-            <Original>Guardian angel</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_GUARDIAN_ANGEL_DESC">
-            <Original>The current aircraft arrives immediately, and has its loiter time extended by 50%.</Original>
-        </Key>
+        <!-- Tier 3 -->
         <Key ID="STR_VGM_SKILLS_SKILL_ARCLIGHT">
             <Original>Arclight</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_ARCLIGHT_DESC">
             <Original>While active an Arclight is available (1 use).</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3">
-            <Original>CAS: Fast mover (Level 3)</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_AC119_BOMB">
+            <Original>AC-119 Bomb Run</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_3_DESC">
-            <Original>F-4C with CBUs.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_AC119_BOMB_DESC">
+            <Original>Unlocks AC-119K Stinger bomb run via Nickel Steel.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3">
-            <Original>CAS: Gunship (Level 3)</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHADOW">
+            <Original>Shadow</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_3_DESC">
-            <Original>UH-1C ARA.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_SHADOW_DESC">
+            <Original>Illumination continues until dawn.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_COVEY">
-            <Original>CAS: Covey</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_COVEY_DESC">
-            <Original>OV-10.</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_REPEAT_LAST">
-            <Original>Repeat last</Original>
-        </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_REPEAT_LAST_DESC">
-            <Original>Covey repeats your last airstrike automatically after 30 secs.</Original>
-        </Key>
+        <!-- Tier 4 -->
         <Key ID="STR_VGM_SKILLS_SKILL_BIG_BLUE">
             <Original>Big blue</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_BIG_BLUE_DESC">
             <Original>While active a BLU-82 is available, which will add an LZ where it lands. (1 use).</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4">
-            <Original>CAS: Fast mover (Level 4)</Original>
+    </Package>
+    <Package name="Artillery - RTO CAS Callsigns">
+        <!-- HE (Jets) -->
+        <Key ID="STR_VGM_ARTILLERY_FOX">
+            <Original>Fox</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_FAST_MOVER_LEVEL_4_DESC">
-            <Original>F-4B Heavy.</Original>
+        <Key ID="STR_VGM_ARTILLERY_FOX_DESC">
+            <Original>F-100D Super Sabre, Mk82 HE bombs x2.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4">
-            <Original>CAS: Gunship (Level 4)</Original>
+        <Key ID="STR_VGM_ARTILLERY_FOX_FC_DESC">
+            <Original>F-100D Super Sabre, Mk82 HE bombs x2. Double run enabled.</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_CAS_GUNSHIP_LEVEL_4_DESC">
-            <Original>AH-1G.</Original>
+        <Key ID="STR_VGM_ARTILLERY_SUNDOWNER">
+            <Original>Sundowner</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_SUNDOWNER_DESC">
+            <Original>F-4C Phantom, napalm strike.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_SUNDOWNER_FC_DESC">
+            <Original>F-4C Phantom, napalm strike. Double run enabled.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_HOBO">
+            <Original>Hobo</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_HOBO_DESC">
+            <Original>F-4C Phantom, M61 Vulcan gun run.</Original>
+        </Key>
+        <!-- Gunships -->
+        <Key ID="STR_VGM_ARTILLERY_CAT_GUNSHIP">
+            <Original>Gunship</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_MAVERICK">
+            <Original>Maverick</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_MAVERICK_DESC">
+            <Original>UH-1C Gunship, FFAR rockets x2.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_MAVERICK_FC_DESC">
+            <Original>UH-1C Gunship, FFAR rockets x2. Double run enabled.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_CONDOR">
+            <Original>Condor</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_CONDOR_DESC">
+            <Original>AH-1G Cobra, FFAR rockets x4.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_CONDOR_FC_DESC">
+            <Original>AH-1G Cobra, FFAR rockets x4. Double run enabled.</Original>
+        </Key>
+        <!-- Nickel Steel -->
+        <Key ID="STR_VGM_ARTILLERY_CAT_NICKEL_STEEL">
+            <Original>Nickel Steel</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_AC119_ORBIT">
+            <Original>AC-119 Orbit</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_AC119_ORBIT_DESC">
+            <Original>AC-119K Stinger gunship orbit pattern.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_AC119_BOMB">
+            <Original>AC-119 Bomb Run</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_AC119_BOMB_DESC">
+            <Original>AC-119K Stinger bomb run.</Original>
+        </Key>
+        <!-- Illumination -->
+        <Key ID="STR_VGM_ARTILLERY_SHADOW">
+            <Original>Shadow</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_SHADOW_DESC">
+            <Original>UH-1D illumination ship, available at night only.</Original>
+        </Key>
+        <!-- Special -->
+        <Key ID="STR_VGM_ARTILLERY_CAT_SPECIAL">
+            <Original>Special</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_ARCLIGHT">
+            <Original>Arclight</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_ARCLIGHT_DESC">
+            <Original>B-52 carpet bombing strike. Divergence: 200m.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_ARCLIGHT_PS1_DESC">
+            <Original>B-52 carpet bombing strike. Divergence: 120m (Precision Strike).</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_ARCLIGHT_PS2_DESC">
+            <Original>B-52 carpet bombing strike. Divergence: 80m (Precision Strike II).</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_BIG_BLUE">
+            <Original>Big Blue</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_BIG_BLUE_DESC">
+            <Original>BLU-82 Daisy Cutter. Creates an LZ on impact.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_BIG_BLUE_PS1_DESC">
+            <Original>BLU-82 Daisy Cutter. Tighter drop (Precision Strike). Creates an LZ on impact.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_BIG_BLUE_PS2_DESC">
+            <Original>BLU-82 Daisy Cutter. Tightest drop (Precision Strike II). Creates an LZ on impact.</Original>
+        </Key>
+        <!-- Emergency -->
+        <Key ID="STR_VGM_ARTILLERY_CAT_EMERGENCY">
+            <Original>Emergency</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_EMERGENCY_HE">
+            <Original>Emergency HE</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_EMERGENCY_HE_DESC">
+            <Original>Emergency F-100D strike, Mk82 HE x1. No radio backpack required.</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_EMERGENCY_ILLUM">
+            <Original>Emergency Illum</Original>
+        </Key>
+        <Key ID="STR_VGM_ARTILLERY_EMERGENCY_ILLUM_DESC">
+            <Original>Emergency UH-1D illumination. No radio backpack required.</Original>
         </Key>
     </Package>
     <Package name="Skills - Medic">
@@ -1010,14 +1325,17 @@
         <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_DESC">
             <Original>Completely heal the person you're looking at.</Original>
         </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIELD_TRIAGE">
+            <Original>Field Triage</Original>
+        </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_UNABLE_TO_APPLY">
             <Original>Target is not wounded!</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SWEET_DREAMS">
             <Original>Sweet dreams</Original>
         </Key>
-        <Key ID="STR_VGM_SKILLS_SKILL_SWEET_DREAMS_DESC">
-            <Original>Instantly take down an enemy soldier in melee range. They are then a POW and can be carried to the helicopter for bonus rewards.</Original>
+        <Key ID="STR_VGM_SKILLS_SKILL_FIELD_TRIAGE_DESC">
+            <Original>For 30 seconds, all group members bleed out 50% slower and heal 50% faster.</Original>
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_COMBAT_DOC_4">
             <Original>Combat doc 4</Original>
@@ -1038,6 +1356,24 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_DESC">
             <Original>Immediately get back up when the whole team is downed. Once per mission.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LAST_RITES_ACTION">
+            <Original>Last Rites</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LAST_RITES_SUCCESS">
+            <Original>The dying soldier reveals some intel...</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_LAST_RITES_FAIL">
+            <Original>Nothing useful could be learned.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ITS_ONLY_A_FLESH_WOUND_ACTIVATED">
+            <Original>%1 fully healed!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_PLAYING_POSSUM_ACTIVATED">
+            <Original>You refuse to stay down!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SALT_TABLETS_ACTIVATED">
+            <Original>Stamina restored!</Original>
         </Key>
     </Package>
     <Package name="Skills - Tail">
@@ -1167,6 +1503,46 @@
         </Key>
         <Key ID="STR_VGM_SKILLS_SKILL_SABOTEUR_DESC">
             <Original>Use silent sabotage actions on enemy infrastructure for reduced alertness and bonus rewards.</Original>
+        </Key>
+        <!-- Tail Skill Actions -->
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_ACTION">
+            <Original>Plant demolition charges</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_DONE">
+            <Original>Charges placed. Target destroyed!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SABOTEUR_ACTION">
+            <Original>Sabotage</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SABOTEUR_DONE">
+            <Original>Target sabotaged silently.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS_ACTION">
+            <Original>Craft trap</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS_PUNJI">
+            <Original>Crafted a punji trap.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_HEART_OF_DARKNESS_TRIPWIRE">
+            <Original>Crafted a tripwire trap.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FUZEMASTER_ACTION">
+            <Original>Cycle mine fuze</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FUZEMASTER_PROXIMITY">
+            <Original>Mine set to proximity detonation.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_FUZEMASTER_REMOTE">
+            <Original>Mine set to remote detonation.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_TOEPOPPER_ACTIVATED">
+            <Original>Toe-popper: 6 M14 mines replenished!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_ROCKETMAN2_ACTIVATED">
+            <Original>Rocketman: Rocket restored!</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_SLAM_TIME_2_ACTIVATED">
+            <Original>Recoilless rifle rearmed!</Original>
         </Key>
     </Package>
     <Package name="Skills - Deprecated">
@@ -1324,7 +1700,7 @@
             <Original>Skill Tree</Original>
         </Key>
         <Key ID="STR_VGM_HEADERBAR_SQUAD">
-            <Original>Squad</Original>
+            <Original>Presets</Original>
         </Key>
         <Key ID="STR_VGM_HEADERBAR_SETTINGS">
             <Original>Settings</Original>
@@ -1365,6 +1741,12 @@
         </Key>
         <Key ID="STR_VGM_SITES_WAYSTATION">
             <Original>Waystation</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_CONVOY">
+            <Original>Convoy</Original>
+        </Key>
+        <Key ID="STR_VGM_SITES_BDA">
+            <Original>BDA</Original>
         </Key>
     </Package>
     <Package name="Missions creation">
@@ -1489,7 +1871,7 @@
             <Original>Welcome</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_DESC">
-            <Original>Welcome to the %3beta%4 version of %3%11%4, a dynamic recon experience for individuals and teams of up to 6 players.%1%1Inspired by the namesake book from RT Idaho One-Zero and SOG Prairie Fire adviser John “Tilt” Stryker Meyer, in %3%11%4 you'll explore hostile NVA territory to investigate and locate enemy sites, before you try to extract safely and prepare for the next mission.%1%1As you gain experience fighting the NVA, you'll develop your skills and abilities while gaining access to new weapons and equipment.%1%1Before playing, %3it's strongly recommended you read 'Getting started'%4 in the field manual.%1%1The mission is currently in %3open beta%4 and not fully complete, with both bugs and unreleased features.%1%1However, based on the feedback from our Patrons and regular playtesters, we feel it's ready to share with the community, to get your feedback and give you the opportunity to enjoy what we've developed so far.%1%1As we progress from onwards to a full release, we'd love for you to %3share your thoughts in Discord%4, and help us collaboratively develop the game mode.%1%1The %3beta%4 version of %3%11%4 has most of the game mode's core mission gameplay in place, but other aspects of the game mode are still in development. Our immediate feature roadmap includes:%1%2 Releasing the Team Leader, Medic, RTO and Tail skill trees%1%2 Adding a new RTO system better suited to the game%1%2 Expanding points of interest with new interactions%1%2 Many quality of life improvements (e.g. improved mission UIs)%1%1%3%11%4 is currently designed for 1 to 6 players per mission, with up to 4 simultaneous missions running on a server.%1Please try playing solo, duo and in larger groups, so we can build a game mode everyone can enjoy!%1%1Thanks for reading, and enjoy the game!%1&gt; The team at Savage Game Design%1%1%3Important links:%4%1%2 &lt;a href="https://link.sogpf.com/discord"&gt;Discord&lt;/a&gt;%1%2 &lt;a href="https://link.sogpf.com/atf-guide"&gt;Online guide&lt;/a&gt;%1%2 &lt;a href="https://link.sogpf.com/atf-steam"&gt;%11 on the Steam Workshop&lt;/a&gt;%1%2 &lt;a href="https://link.sogpf.com/atf-source"&gt;Source code&lt;/a&gt;</Original>
+            <Original>Welcome to the %3beta%4 version of %3%11%4, a dynamic recon experience for individuals and teams of up to 6 players.%1%1Inspired by the namesake book from RT Idaho One-Zero and SOG Prairie Fire adviser John “Tilt” Stryker Meyer, in %3%11%4 you'll explore hostile NVA territory to investigate and locate enemy sites, before you try to extract safely and prepare for the next mission.%1%1As you gain experience fighting the NVA, you'll develop your skills and abilities while gaining access to new weapons and equipment.%1%1Before playing, %3it's strongly recommended you read 'Getting started'%4 in the field manual.%1%1The mission is currently in %3open beta%4 and not fully complete, with both bugs and unreleased features.%1%1However, based on the feedback from our Patrons and regular playtesters, we feel it's ready to share with the community, to get your feedback and give you the opportunity to enjoy what we've developed so far.%1%1As we progress from onwards to a full release, we'd love for you to %3share your thoughts in Discord%4, and help us collaboratively develop the game mode.%1%1The %3beta%4 version of %3%11%4 has most of the game mode's core mission gameplay in place, but other aspects of the game mode are still in development. Our immediate feature roadmap includes:%1%2 Expanding points of interest with new interactions%1%2 Many quality of life improvements (e.g. improved mission UIs)%1%1%3%11%4 is currently designed for 1 to 6 players per mission, with up to 4 simultaneous missions running on a server.%1Please try playing solo, duo and in larger groups, so we can build a game mode everyone can enjoy!%1%1Thanks for reading, and enjoy the game!%1&gt; The team at Savage Game Design%1%1%3Important links:%4%1%2 &lt;a href="https://link.sogpf.com/discord"&gt;Discord&lt;/a&gt;%1%2 &lt;a href="https://link.sogpf.com/atf-guide"&gt;Online guide&lt;/a&gt;%1%2 &lt;a href="https://link.sogpf.com/atf-steam"&gt;%11 on the Steam Workshop&lt;/a&gt;%1%2 &lt;a href="https://link.sogpf.com/atf-source"&gt;Source code&lt;/a&gt;</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_WELCOME_TIP">
             <Original>Thanks for helping us preserve S.O.G history through your Patreon support!</Original>
@@ -1510,7 +1892,7 @@
             <Original>Missions</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_DESC">
-            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.%1%1%3If nobody on your team survives, you will not receive any experience or rewards for your mission.%4</Original>
+            <Original>Running recon missions is the core element of the %3%11%4 gamemode.%1%1Once you and your team is ready to go on a mission, go to the %3tactical map%4, %3create a new mission%4 and select your area of operations (WIP).%1When the team has %3joined the mission%4, geared up and mentally prepared themselves, %3start the mission%4.%1%1You'll be inserted deep behind enemy lines, tasked with performing recon and %3scouting%4 multiple enemy sites.%1%1You can call for extraction at any time. If you make it out alive, the whole team will be awarded experience based on your team's performance and scouted sites.%1%1%3If nobody on your team survives, you will not receive any experience or rewards for your mission.%4%1%1&lt;t size="1.1"&gt;Comms jamming&lt;/t&gt;%1Some enemy %3transmitter sites%4 jam friendly communications within 2km, blocking extraction calls and RTO abilities. Locate and destroy the antenna (satchel charge or Saboteur skill) to restore comms.%1%1&lt;t size="1.1"&gt;Compromised LZ&lt;/t&gt;%1Landing zones can be compromised by the enemy, creating hot insertions or contested extractions. See the %3Compromised LZ%4 section for details.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MISSIONS_HINT_AFTER_ARSENAL_DESCRIPTION">
             <Original>Now you've customised your gear, create or join a mission using the %3tactical map board%4.</Original>
@@ -1537,7 +1919,7 @@
             <Original>Skills</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_DESC">
-            <Original>Skills are grouped into four main archetypes, %3Rifleman%4, %3Recon%4, %3Fire Support%4 and %3Support%4.%1You can mix skills from all archetypes, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, which are gained by leveling up. To level up, you need to gather experience by running missions.%1%1There's two types of skills:%1%2 Passives - have passive effect on your character, affecting you all the time, do not need an activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There's two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1&lt;t size="1.25"&gt;Skill wheel&lt;/t&gt;%1To use one of the skills assigned in the %3Abilities%4 menu, press %3`%4 (Grave / Backtick / Backquote) and select it from the %3Skill wheel%4</Original>
+            <Original>Skills are grouped into six specialisation trees:%1%2 %3Combat%4 - Direct combat abilities (War Face, Knockout, Jungle Warrior, etc.)%1%2 %3Pointman%4 - Stealth, tracking and reconnaissance (Pile of Leaves, Cutthroat, Eavesdropping, etc.)%1%2 %3Team Leader%4 - Command and support abilities (Target Folder intel, RON Call, Prairie Fire CAS, etc.)%1%2 %3Medic%4 - Healing, injury mitigation and team stamina (Combat Doc, Tourniquet, Green Hornet, etc.)%1%2 %3Tail%4 - Demolitions, mines, AT rockets and field crafting (SLAM, Rocketman, Heart of Darkness, etc.)%1%2 %3RTO%4 - Close air support, illumination and special strikes (Fast Movers, Gunships, Arclight B-52, etc.)%1%1You can mix skills from all trees, creating your own specialized MACV-SOG character.%1%1You can access %3Skills menu%4 at the %3Radio%4. To learn skills you need %3Skill Points (SP)%4, which are gained by leveling up. To level up, you need to gather experience by running missions.%1%1&lt;t size="1.25"&gt;Skill tiers&lt;/t&gt;%1Skills are organised into tiers. You must purchase at least one %3Tier 0%4 skill in a tree before you can access %3Tier 1%4 and above.%1%1&lt;t size="1.25"&gt;Training skills&lt;/t&gt;%1Each tree (except Combat) has a %3Training%4 skill at Tier 0. Purchasing a Training skill gives you a %31 SP discount%4 on all other skills in that tree (minimum cost: 1 SP). Discounted costs are shown with a strikethrough in the skill UI.%1%1&lt;t size="1.25"&gt;Skill types&lt;/t&gt;%1There are two types of skills:%1%2 Passives - have a passive effect on your character, affecting you all the time, do not need activation%1%2 Abilities - need to be equipped in %3Abilities%4 menu at the %3Radio%4, they have short term effects once activated via %3Skill Wheel%4. There are two subtypes of abilities:%1    %2 Standard Abilities - offer a small benefit and are intended to be used frequently throughout the mission%1    %2 Ultimate Abilities - offer a large benefit and are intended to be used at critical moments during the mission%1%1&lt;t size="1.25"&gt;Skill wheel&lt;/t&gt;%1To use one of the skills assigned in the %3Abilities%4 menu, press %3`%4 (Grave / Backtick / Backquote) and select it from the %3Skill wheel%4%1%1&lt;t size="1.25"&gt;Skill presets&lt;/t&gt;%1You can save your current skill build into one of %35 named preset slots%4 and restore them later with a single click. Presets are persistent across server sessions.%1Access presets via the %3"Skill Presets"%4 scroll-menu action when at the FOB and not on a mission. Loading a preset performs a full respec and re-learns all skills automatically.%1%1&lt;t size="1.25"&gt;Unlearning skills&lt;/t&gt;%1You can unlearn individual skills by selecting them and clicking %3Unlearn%4. The skill points are refunded. If removing a skill would drop your spent points below a higher tier's unlock threshold, all skills in that tier and above are automatically unlearned and refunded. A confirmation dialog warns you before cascading.%1%1&lt;t size="1.25"&gt;Prestige&lt;/t&gt;%1When you reach %3level 30%4, you can %3prestige%4 from the skills menu. Prestiging resets your level and skill points, but you %3keep all unlocked cosmetics%4 (uniforms, vests, headgear) permanently. Your nametag level continues upward (31, 32, etc.) and you can prestige again every 30 levels.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SKILLS_TIP">
             <Original>Recon teams were skilled warriors, training for the next mission.</Original>
@@ -1552,7 +1934,7 @@
             <Original>Medical system</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_DESC">
-            <Original>%3%11%4 introduces simple yet impactful medical system featuring:%1%2 Increased player durability%1%2 Location-aware injuries that impact gameplay%1%2 Slow bleed-out, if left untreated%1%1&lt;t size="1.25"&gt;Medical menu&lt;/t&gt;%1%3Medical menu%4 allows treatment of the injuries suffered by player characters.%1To treat an injury you need to select an injured body part from the character %3silhouette%4 and apply %3medication%4 on it.%1Press %3H%4 to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.%1Alternatively press %3Shift + H%4 to open the medical menu of your character.%1%1&lt;t size="1.1"&gt;Medication&lt;/t&gt;%1Available medication items:%1%2 First Aid Kit - Heals single wound level, single use, can be used by anybody%1%2 Medikit - Heals single wound level, infinite uses, can be used by players with "%14" skill from the %3Support%4 tree%1%1&lt;t size="1.1"&gt;Debuffs&lt;/t&gt;%1Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts.%1Here are some example debuffs:%1%2 Head - increasingly blurred vision%1%2 Torso - reduced stamina%1%2 Arms - reduced accuracy and recoil control%1%2 Legs - reduced movement speed%1Multiple untreaded wounds will cause %3bleeding%4 which if not stopped will cause the character to fall %3unconscious%4.%1%1&lt;t size="1.1"&gt;Unconsciousnes&lt;/t&gt;%1After receiving critical amount of damage to vital body parts (head, torso) or bleeding out, the player character will fall %3unconscious%4, characters in this state need help of other players to wake up.%1If the player will be abandoned and left alone by other players, he'll %3respawn%4.%1Once all players in the mission are %3unconscious%4, the mission fails.</Original>
+            <Original>%3%11%4 introduces simple yet impactful medical system featuring:%1%2 Increased player durability%1%2 Location-aware injuries that impact gameplay%1%2 Slow bleed-out, if left untreated%1%1&lt;t size="1.25"&gt;Medical menu&lt;/t&gt;%1%3Medical menu%4 allows treatment of the injuries suffered by player characters.%1To treat an injury you need to select an injured body part from the character %3silhouette%4 and apply %3medication%4 on it.%1Press %3H%4 to open medical menu of the person you're looking at, if there's no person under your cursor the menu of your character will open.%1Alternatively press %3Shift + H%4 to open the medical menu of your character.%1%1&lt;t size="1.1"&gt;Medication&lt;/t&gt;%1Available medication items:%1%2 First Aid Kit - Heals single wound level, single use, can be used by anybody%1%2 Medikit - Heals single wound level, infinite uses, can be used by players with "%14" skill from the %3Support%4 tree%1%1&lt;t size="1.1"&gt;Debuffs&lt;/t&gt;%1Character injuries will affect your performance, the more severe injuries the stronger debuffs will be applied. Type of debuffs depend on the injured body parts.%1Here are some example debuffs:%1%2 Head - increasingly blurred vision%1%2 Torso - reduced stamina%1%2 Arms - reduced accuracy and recoil control%1%2 Legs - reduced movement speed%1Multiple untreated wounds will cause %3bleeding%4 which if not stopped will cause the character to fall %3incapacitated%4.%1%1&lt;t size="1.1"&gt;Incapacitation (SOG Advanced Revive)&lt;/t&gt;%1After receiving critical damage or bleeding out, you'll be %3incapacitated%4. While down:%1%2 A teammate can %3bandage you%4 to revive you back into the fight%1%2 You can attempt a %3Desperate Escape%4 (respawn) if you have charges remaining%1%2 If not revived within %3120 seconds%4, you die and consume a respawn charge%1%1Hatchet Force AI recon team members can also be revived by bandaging them.%1%1If all players are incapacitated or out of respawn charges, the mission fails.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_MEDICAL_TIP">
             <Original>Bullets. Shrapnel. Recon teams rarely made it out unscathed.</Original>
@@ -1561,25 +1943,25 @@
             <Original>Equipment</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT_DESC">
-            <Original>Having the right equipment is essential to both surviving and succeeding as a recon team member.%1%1Currently, %3%11%4 uses the standard Arma 3 Arsenal to manage your gear. You can find these in the TOC building, at the main base.%1%1You'll also start the game with a typical recon team loadout, suitable for running a mission straight away.%1%1&lt;t size="1.1"&gt;Key equipment&lt;/t&gt;%1%1Certain pieces of equipment are particularly helpful in %3%11%4:%1%2 %3Cameras%4 can be used to photograph enemy sites. See %3Scouting%4 for more information.%1%2 %3Silenced weapons%4 make it easier to eliminate NVA forces without being noticed. However, they will still attract some attention!%1%2 %3Radio backpacks%4 can be used to call in air support, if you have the right %3Skills%4.%1%1&lt;t size="1.1"&gt;Unlocking equipment&lt;/t&gt;%1%1New equipment can be unlocked by unlocking the right %3Skills%4. All skills that unlock equipment have %3Equipment%4 in their name.</Original>
+            <Original>Having the right equipment is essential to both surviving and succeeding as a recon team member.%1%1Currently, %3%11%4 uses the standard Arma 3 Arsenal to manage your gear. You can find these in the TOC building, at the main base.%1%1You'll also start the game with a typical recon team loadout, suitable for running a mission straight away.%1%1&lt;t size="1.1"&gt;Key equipment&lt;/t&gt;%1%1Certain pieces of equipment are particularly helpful in %3%11%4:%1%2 %3Cameras%4 can be used to photograph enemy sites. See %3Scouting%4 for more information.%1%2 %3Silenced weapons%4 make it easier to eliminate NVA forces without being noticed. However, they will still attract some attention!%1%2 %3Radio backpacks%4 can be used to call in air support, if you have the right %3Skills%4.%1%1&lt;t size="1.1"&gt;Unlocking equipment&lt;/t&gt;%1%1Equipment is unlocked in two ways:%1%2 %3Skills%4 — Many skills unlock specific gear when learned (pistols, melee weapons, grenades, mines, radio backpacks, etc.)%1%2 %3Specialisation + Level%4 — Choosing a weapon specialisation (Rifleman, Scout, Marksman, Grenadier, or Machinegunner) in the Combat tree unlocks new weapons as you level up, starting at level 3 and adding new gear every other level%1%1Your arsenal only shows equipment you have unlocked. As you learn skills and gain levels, more options become available.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_EQUIPMENT_HINT_GEARING_UP_DESCRIPTION">
             <Original>You can change your equipment using the nearby ammo boxes. See the field manual for recommended key equipment.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_VGM_MISSIONS">
-            <Original>%1 - Missions</Original>
+            <Original>%1</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING">
             <Original>Scouting</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_DESC">
-            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1%1&lt;t size="1.25"&gt;Mission overview&lt;/t&gt;%1You'll be inserted deep behind enemy lines, where you'll be outnumbered. You should avoid enemy contact as much as possible to avoid being overwhelmed.%1Move slowly, %3Stop and Focus%4 frequently to spot any threats before they spot you, gather as much intel as you can and extract alive.%1If the whole team is killed or incapacitated, all intel will be lost and no experience will be awarded.%1%1&lt;t size="1.1"&gt;Scouting report&lt;/t&gt;%1%3Scouting report%4 is available in your map view, it is shared between your whole team.%1%1Filling in a new report entry:%1%2 Click %3Add item%4 button: a new row will be added%1%2 Select site type with &lt;img size='1' %5 image='%11' /&gt; button%1%2 Mark the site position with %3Mark site%4 button%1%1&lt;t size="1.1"&gt;Photo camera&lt;/t&gt;%1You can photograph a site to gain experience for its data. After photographing a site, the map screen with the report will be shown.%1Assign the photo to a site with the &lt;img size='1' %5 image='%12' /&gt; button.</Original>
+            <Original>Scouting missions require players to survey the AO for enemy installations, mark them in their %3Scouting report%4 and extract.%1%1&lt;t size="1.25"&gt;Mission overview&lt;/t&gt;%1You'll be inserted deep behind enemy lines, where you'll be outnumbered. You should avoid enemy contact as much as possible to avoid being overwhelmed.%1Move slowly, %3Stop and Focus%4 frequently to spot any threats before they spot you, gather as much intel as you can and extract alive.%1If the whole team is killed or incapacitated, all intel will be lost and no experience will be awarded.%1%1&lt;t size="1.1"&gt;Scouting report&lt;/t&gt;%1%3Scouting report%4 is available in your map view, it is shared between your whole team.%1%1Filling in a new report entry:%1%2 Click %3Add item%4 button: a new row will be added%1%2 Select site type with &lt;img size='1' %5 image='%11' /&gt; button%1%2 Mark the site position with %3Mark site%4 button%1%1&lt;t size="1.1"&gt;Photo camera&lt;/t&gt;%1You can photograph a site to gain experience for its data. After photographing a site, the map screen with the report will be shown.%1Assign the photo to a site with the &lt;img size='1' %5 image='%12' /&gt; button.%1%1&lt;t size="1.1"&gt;Vehicle and BDA photography&lt;/t&gt;%1You can also photograph %3enemy vehicles%4 (supply trucks, bicycles) and %3BDA wreckage%4 (Battle Damage Assessment sites) you encounter in the field. When you photograph these targets, a new entry is automatically created in your scouting report.%1%1Like regular sites, you should:%1%2 Assign the photo to the entry%1%2 Select the correct type (%3Convoy%4 or %3BDA%4)%1%2 Mark the location on the map%1%1All three factors — photo quality, type correctness, and position accuracy — are scored for XP at the end-of-mission debrief.%1%1&lt;t size="1.1"&gt;PAVN Officers&lt;/t&gt;%1Enemy officers may be present at some sites. They are high-value targets:%1%2 %3Eliminate%4 an officer for bonus XP%1%2 %3Capture alive%4 (knock unconscious with gunfire) and %3extract%4 him for significantly more XP%1%1Note: explosives will kill an officer outright. Use restraint if you want the bigger reward.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_TIP">
             <Original>Area recon was a common task, with recon teams hunting for enemy fortifications or units.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_SCOUTING_HINT_SCOUTING_DESCRIPTION">
-            <Original>The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to capture photos of the sites.</Original>
+            <Original>The main goal of a recon mission is to locate enemy sites, and mark them in this notebook. Use a camera to capture photos of sites, enemy vehicles, and BDA wreckage.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_HINTS">
             <Original>Clues</Original>
@@ -1609,16 +1991,16 @@
             <Original>Alertness</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_DESC">
-            <Original>When you're running a mission, many actions you take will alert the enemy that there's a S.O.G recon team operating in their area.%1%1As the enemy forces become more aware of your presence, they'll start %3actively hunting your team%4, and %3respond quicker to your activities%4.%1%1This means you should be careful when doing anything loud, or that might draw attention to you. %3Gunshots and explosions are a surefire way to compromise your mission%4.%1%1And remember, %3a suppressed weapon is not a silent weapon%4.</Original>
+            <Original>When you're running a mission, many actions you take will alert the enemy that there's a S.O.G recon team operating in their area.%1%1As the enemy forces become more aware of your presence, they'll start %3actively hunting your team%4, and %3respond quicker to your activities%4.%1%1This means you should be careful when doing anything loud, or that might draw attention to you. %3Gunshots and explosions are a surefire way to compromise your mission%4.%1%1And remember, %3a suppressed weapon is not a silent weapon%4.%1%1Stepping on a %3punji trap%4 will also raise alertness, equivalent to an unsuppressed gunshot — the defenders hear the commotion.%1%1&lt;t size="1.25"&gt;Radio interception (TFAR)&lt;/t&gt;%1When TFAR is loaded, %3radio transmissions%4 (SW or LR push-to-talk) held for more than %35 seconds%4 can be intercepted by PAVN signals intelligence, raising alertness by %36 points%4. Intercepts are throttled to once every 30 seconds. Keep transmissions brief.%1%1&lt;t size="1.25"&gt;Alertness decay&lt;/t&gt;%1Alertness is not permanent. After %330 seconds of silence%4 (no alertness-raising events), the enemy's awareness will naturally decay over time. This rewards stealthy play — if you stay quiet after a brief contact, the enemy will gradually lower their guard.%1%1However, once alertness reaches %3level 6%4, the enemy begins actively sending %3tracker teams%4 after you. At that point, %3decay stops%4 and the enemy will keep tracking you until you exfil. Avoid reaching this threshold if possible.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION">
-            <Original>Gunshots, explosions and other actions you take on a mission will alert the enemy to your presence, increasing the threat to your team.</Original>
+            <Original>Gunshots, explosions, traps and long radio transmissions will alert the enemy to your presence. Stay quiet for 30 seconds and alertness will start to decay — but once trackers are sent, there's no going back.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH">
             <Original>Stealth</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_DESC">
-            <Original>When deployed on a mission, you and your team will be outnumbered and likely outgunned.%1%1%3%11%4 adds a unique stealth system to help you avoid enemies and break contact if neccessary.%1%1Enemies will notice you based on:%1%2 How much of you they can see (consider your stance and cover)%1%2 How fast you're moving%1%2 How directly they're looking at you%1%2 How illuminated you are%1%2 How often you're engaging with the enemy (gunshots, grenades, etc)%1%1Here are some tips that will help you move around the jungle effectively and quietly:%1%2 Use cover as much as possible%1%2 If you need to sneak a look at the enemy, show as little of yourself as possible%1%2 Avoid moving when enemies are looking directly at you%1%2 Avoid flares, fires or any sources of man-made light at night%1%2 Avoid shooting or grenades until you're ready to be detected%1%2 If the enemy engages you, evade them for a while to break contact. Be aware that trackers may still hunt you!</Original>
+            <Original>When deployed on a mission, you and your team will be outnumbered and likely outgunned.%1%1%3%11%4 adds a unique stealth system to help you avoid enemies and break contact if neccessary.%1%1Enemies will notice you based on:%1%2 How much of you they can see (consider your stance and cover)%1%2 How fast you're moving%1%2 How directly they're looking at you%1%2 How illuminated you are%1%2 How often you're engaging with the enemy (gunshots, grenades, etc)%1%1&lt;t size="1.25"&gt;Movement and tracking&lt;/t&gt;%1Your movement leaves tracks that enemy trackers can follow. How you move determines how easy you are to track:%1%2 %3Sprinting%4 leaves dense tracks (15m spacing) — easiest to follow%1%2 %3Jogging%4 leaves normal tracks (25m spacing)%1%2 %3Walking%4 leaves sparse tracks (35m spacing)%1%2 %3Crouching%4 leaves very sparse tracks (50m spacing)%1%2 %3Prone%4 leaves minimal tracks (75m spacing) — hardest to follow%1%1The %3Lightfooted%4 skill (Tail tree) doubles your track spacing, making you significantly harder to track. Prone movement with Lightfooted makes you nearly untrackable.%1%1See %3Tracking%4 for more detail on how enemy trackers operate.%1%1&lt;t size="1.25"&gt;Voice detection (TFAR)&lt;/t&gt;%1When TFAR is loaded, speaking via %3direct speech%4 alerts nearby AI based on your volume:%1%2 %3Whisper%4 — 15m detection range%1%2 %3Normal%4 — 50m detection range%1%2 %3Loud%4 — 120m detection range%1%1Use whisper mode when near enemy positions. Radio transmissions (SW/LR) do not produce local sound but can be intercepted — see %3Alertness%4.%1%1&lt;t size="1.25"&gt;Tips&lt;/t&gt;%1%2 Use cover as much as possible%1%2 If you need to sneak a look at the enemy, show as little of yourself as possible%1%2 Avoid moving when enemies are looking directly at you%1%2 Avoid flares, fires or any sources of man-made light at night%1%2 Avoid shooting or grenades until you're ready to be detected%1%2 If the enemy engages you, evade them for a while to break contact. Be aware that trackers may still hunt you!%1%2 Avoid villages and roads where possible — enemy logistics can compromise your position%1%2 The NVA maintain up to %34 road checkpoints%4 per AO at key intersections. Find an alternate route through the jungle</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_STEALTH_TIP">
             <Original>Recon teams were heavily outnumbered by the NVA, and tried to avoid contact when possible.</Original>
@@ -1630,13 +2012,49 @@
             <Original>Desperate Escape</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC">
-            <Original>When you're incapacitated due to your injuries, you've got two options available to you:%1%2 Wait for help from your team%1%2 Perform a desperate escape%1%1You can only make a desperate escape %3once per mission%4, or %3twice if you're playing alone%4.%1%1If you attempt a desperate escape, you'll scramble to get away from the enemy and %3reappear at a safe area nearby fully recovered%4.%1%1In your haste, you'll %3lose your backpack and several consumable items%4 in the process.</Original>
+            <Original>When you're incapacitated due to your injuries, you have several options:%1%2 Wait for a teammate to %3bandage and revive%4 you%1%2 Perform a %3desperate escape%4 (respawn)%1%1You have %32 respawn charges%4 per mission. Solo players get %3+1 bonus charge%4 (3 total). The %3Not Dead Yet%4 perk grants an additional +1.%1%1If you perform a desperate escape, you'll scramble to get away from the enemy and %3reappear near your alive squad members%4. If no squad members are alive, you spawn near your death position.%1%1In your haste, you'll %3lose your rucksack%4 — it's dropped at your death location as a %3lootable ground container%4 with all its contents intact. All other gear is kept.%1%1&lt;t size="1.25"&gt;Out of charges&lt;/t&gt;%1When all your respawn charges are exhausted, you enter %3spectator mode%4 for the remainder of the mission.%1%1If all team members are incapacitated or in spectator, the mission fails.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP">
             <Original>Recon teams would ditch their rucks in desperate circumstances so they could move faster.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION">
-            <Original>When downed, once per mission you can conduct a desperate escape to get to safety. You'll lose your backback and some other items.</Original>
+            <Original>When downed, use a respawn charge to escape to safety. You have 2 charges per mission (3 solo). You'll lose your rucksack but keep everything else. When charges run out, you enter spectator mode.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY">
+            <Original>Ambient Activity</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY_DESC">
+            <Original>The area of operations is not empty. The NVA maintain a constant presence across the jungle, and local civilians go about their daily lives.%1%1&lt;t size="1.25"&gt;Civilian population&lt;/t&gt;%1Villages and settlements are home to %3local civilians%4 who go about their daily routines near buildings and homes. Civilians are not hostile, but they %3are not your allies%4 — their presence indicates populated areas where you're more likely to be noticed.%1%1&lt;t size="1.25"&gt;Enemy logistics&lt;/t&gt;%1The NVA operate a busy network of %3supply routes%4 throughout the AO:%1%2 %3Supply trucks%4 patrol the main roads, delivering ammunition and supplies between sites%1%2 %3Road vehicles%4 move along roads throughout the area%1%2 %3Bicycle couriers%4 solo couriers cycling between enemy positions%1%2 %3Bicycle convoys%4 columns of 2-4 cargo bikes transporting heavy supplies along roads%1%2 %3Work parties%4 of NVA soldiers can be found at various locations, performing manual labour%1%1These logistics units are fully combat-capable and %3will engage your team if they detect you%4. An ambushed supply truck or courier will alert the enemy just like any other combat. %3Photographing%4 enemy vehicles creates a scouting report entry scored at mission end.%1%1&lt;t size="1.25"&gt;Checkpoints&lt;/t&gt;%1The NVA establish %3road checkpoints%4, primarily at %3road intersections%4. Each checkpoint consists of two shelters facing opposite directions along the road, garrisoned by NVA soldiers. When intersections run out, additional checkpoints are spread along road segments with at least 150m spacing.%1%1Checkpoints are dangerous choke points. If possible, %3avoid roads and find an alternate route%4 through the jungle.%1%1&lt;t size="1.25"&gt;Wire taps&lt;/t&gt;%1NVA field telephone lines run along jungle trails, connecting enemy positions. You may encounter %3wire installations%4, each marked by fence posts with a junction box.%1%2 Players with the %3Ma Bell%4 skill (Pointman tree) can %3tap the wire%4 (45 seconds) for %3150 XP%4 and intelligence reveals%1%2 All players can %3cut the wire%4 (5 seconds) for %350 XP%4 and %3halved enemy alertness gain%4 for 10 minutes%1%1&lt;t size="1.25"&gt;Battle Damage Assessment (BDA)&lt;/t&gt;%1American bombing has left its mark on the Ho Chi Minh trail. A bombed supply route may be present in the AO, featuring bomb craters, destroyed trucks with varying damage, scattered NVA casualties, and %3live mines%4.%1%2 Destroyed trucks can be %3searched for XP%4 (hold action)%1%2 A small NVA %3patrol guards%4 the area%1%2 Mines are real and %3will detonate%4 if you step on them%1%2 %3Photograph the scene%4 and log it in your scouting report for end-of-mission XP%1%1&lt;t size="1.25"&gt;River traffic&lt;/t&gt;%1Near waterways, you may encounter %3civilian sampan boats%4, both fishing and patrolling the rivers.%1%1&lt;t size="1.25"&gt;Wildlife&lt;/t&gt;%1Chickens, roosters, and goats can be found near villages and settlements. While they pose no direct threat, their presence can indicate that a village is nearby.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY_TIP">
+            <Original>SOG teams had to contend with not just NVA patrols, but the entire ecosystem of the Ho Chi Minh trail - supply trucks, porters, and local villagers who might give away their position.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY_HINT_AMBIENT_ACTIVITY_DESCRIPTION">
+            <Original>The AO is busy with enemy logistics, checkpoints, wire installations, BDA sites and civilians. Avoid roads and populated areas to stay undetected.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRAPS">
+            <Original>Traps</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRAPS_DESC">
+            <Original>Enemy sites are defended by %33-5 concealed punji traps%4 placed along their %3perimeter ring%4 (the jungle area surrounding the site). Traps do not spawn on roads. Without training, these traps are invisible and will injure anyone who steps on them.%1%1Triggering a punji trap also %3raises alertness%4, equivalent to an unsuppressed gunshot — the site defenders hear the commotion.%1%1&lt;t size="1.25"&gt;Detection&lt;/t&gt;%1%3Pointman Training%4 unlocks the trapkit, which passively reveals punji traps within 4m. The trap will appear on your HUD once detected. Keep the trapkit in your inventory at all times when on approach.%1%1&lt;t size="1.25"&gt;Disarming&lt;/t&gt;%1%3Tail Training%4 grants both detection and the ability to disarm revealed traps. Move within 2m of a detected trap and use the "Disarm Trap" hold action (4 seconds). Disarming awards 25 XP.%1%1&lt;t size="1.25"&gt;Booby trapping bodies&lt;/t&gt;%1Pointmen with the %3Pile of Leaves%4 skill can choose how to handle enemy bodies:%1%2 %3Hide body%4 (stealth) — the body vanishes and alertness is reduced by 3%1%2 %3Booby-trap body%4 (offensive) — the body stays as bait, consuming one of your hand grenades. When OPFOR approach to investigate, the trap detonates as a grenade explosion at 3m. Awards 25 XP for setting and 50 XP on detonation.%1%1Traps are automatically cleared when enemy sites are destroyed.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRAPS_TIP">
+            <Original>MACV-SOG teams operating on the Ho Chi Minh trail quickly learned to watch their step. The NVA and Viet Cong concealed bamboo punji stakes along likely approaches, trails, and camp perimeters - a low-tech but brutally effective defense.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRAPS_HINT_TRAPS_DESCRIPTION">
+            <Original>Enemy camps are ringed with hidden punji traps. Pointman training reveals them, Tail training lets you disarm them. Without either, watch your step.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRACKING">
+            <Original>Tracking</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRACKING_DESC">
+            <Original>When the enemy becomes aware of your presence, they will dispatch %3tracker teams%4 to hunt you down. Trackers follow the trail of footprints your team leaves behind as you move through the jungle.%1%1&lt;t size="1.25"&gt;How tracking works&lt;/t&gt;%1As you move, you leave tracks on the ground. Enemy trackers pick up these tracks and follow them toward your position. How dense your trail is depends on your %3stance and speed%4:%1%2 %3Sprinting%4 — tracks every 15m (very easy to follow)%1%2 %3Jogging%4 — tracks every 25m (normal)%1%2 %3Walking%4 — tracks every 35m (harder to follow)%1%2 %3Crouching%4 — tracks every 50m (difficult to follow)%1%2 %3Prone%4 — tracks every 75m (very difficult to follow)%1%1&lt;t size="1.25"&gt;Losing the trail&lt;/t&gt;%1Trackers are not infallible. Several factors can cause them to %3lose your trail%4:%1%2 %3Track age%4 — old tracks fade, giving up to a 20% chance of trail loss%1%2 %3Gap distance%4 — large gaps between tracks (from slow movement) add up to 25% loss chance%1%2 %3Darkness%4 — nighttime tracking is much harder, adding up to 35% loss chance%1%1Fresh daytime trails left by sprinting players are reliably followed. Old nighttime trails left by slow, careful movement are nearly impossible to track.%1%1When trackers lose a trail, they will extrapolate your direction briefly, patrol the area, and then give up.%1%1&lt;t size="1.25"&gt;Counter-tracking skills&lt;/t&gt;%1%2 %3Lightfooted%4 (Tail tree) doubles your track spacing, making every stance twice as hard to follow%1%2 %3Clean Sweep%4 (Tail tree) suppresses tracks for your entire group%1%1Prone movement combined with Lightfooted makes you nearly untrackable, even during the day.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRACKING_TIP">
+            <Original>NVA trackers were legendary jungle scouts who could follow a trail through dense canopy by reading broken twigs, displaced leaves, and boot impressions in the mud. SOG teams learned to move slowly, vary their routes, and use streams to break their trail.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_TRACKING_HINT_TRACKING_DESCRIPTION">
+            <Original>Enemy trackers follow your footprints. Move slowly and use prone to leave fewer tracks. At night, trackers are more likely to lose your trail.</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_VGM_CHANGELOG">
             <Original>Changelog</Original>
@@ -1651,7 +2069,7 @@
             <Original>v0.12.0</Original>
         </Key>
         <Key ID="STR_VGM_FIELD_MANUAL_CHANGELOG_0_12_0_DESC">
-            <Original>%3ADDED:%4%1%2 Added support for Rung Sat Special Zone%1%2 Added team leader skill tree (beta - some skills omitted)%1%1%3CHANGED:%4%1%2 "One of them" now works with the recon helmet given by "Friend or foe"</Original>
+            <Original>%3ADDED:%4%1%2 Added Tail skill tree (20 skills) - demolitions, mine warfare, AT rockets, stealth and field crafting%1%2 Added RTO skill tree (20 skills) - fast mover CAS, gunship CAS, illumination, special strikes and field support%1%2 Added Medic skill tree (20 skills) - healing, injury mitigation, stamina, wound management, survival and utility%1%2 Added Team Leader skill tree - command, intel and support abilities%1%2 Added Skill Presets - save and restore skill builds from 5 named slots at the FOB%1%2 Added training skill cost reduction - Training skills give 1 SP discount on all other skills in that tree%1%2 Added punji trap system - concealed traps around enemy site perimeters, detectable and disarmable with training%1%2 Added "Booby Trap Body" option to Pile of Leaves - hide a body for stealth or rig it with a grenade as bait%1%2 Added combat XP for destroying site infrastructure (AA guns, emplacements, towers, trucks, caches, radios)%1%2 Added natural alertness decay - alertness fades after 30s of silence, stops at level 6 (tracker threshold)%1%2 Added ambient life system - civilian villagers, NVA supply trucks, bicycle couriers and convoys, checkpoints, river traffic and livestock%1%2 Added support for Rung Sat Special Zone%1%2 Added prestige system - prestige at level 30 to reset SP while keeping cosmetics%1%2 Added individual skill unlearning with cascading tier refunds%1%2 Added Compromised LZ - NVA can ambush insertions or contest extractions (scales with alertness)%1%2 Added CAS shootdown chance - downed aircraft creates a timed rescue side objective%1%2 Added Wire Tap encounters - tap or cut NVA field telephone lines for XP and intel%1%2 Added BDA encounters - bombed supply routes with searchable wreckage and mines%1%2 Added vehicle and BDA photography scored like regular sites in the scouting notepad%1%2 Added STABO extraction for Team Leaders (tier 4 skill)%1%2 Added radio jamming from transmitter sites and satchel charge demolition%1%2 Added TFAR integration - radio interception, voice detection, AN/PRC-152 and RT-1523G radios%1%2 Added spectator mode when respawn charges are exhausted%1%2 Added SOG Advanced Revive with 120s death timer and revivable Hatchet Force AI%1%2 Added Bright Light blood trail tracking in Variant B%1%1%3IMPROVED:%4%1%2 Improved AI patrol unpredictability - varied turn angles, random formations, halt-and-observe behaviour%1%2 Improved DEFEND patrol coverage - radius now scales with site size%1%2 Improved intersite patrol routes - zig-zag paths with intermediate waypoints%1%2 Improved patrol variety - 30% chance to split into 2 smaller patrols%1%2 Improved ambient road traffic density - more supply trucks, vehicles and couriers%1%2 Improved checkpoint density (4 per AO) with shelters at road intersections%1%2 Improved tracking realism - stance-based track density and loss-chance rolls based on age, gap and darkness%1%2 Improved helicopter approaches with 50m NOE transit and tree-safe landings%1%2 Improved respawn - only rucksack is lost, dropped as lootable container at death location%1%2 Improved Bright Light crash scenes with better positioning and terrain clearing%1%2 Improved glint hints with focus-mode activation and contextual colors%1%2 Multiple server and client performance improvements%1%1%3FIXED:%4%1%2 Fixed tier gate - tier 1 skills now require at least 1 SP spent in the tree%1%2 Fixed "On the Prowl" focus mode breaking when moving%1%2 Fixed Ammo Pouch triggering every time instead of once per mission%1%2 Fixed Training: Tail not unlocking claymores%1%2 Fixed "Get It Together" cooldown reduction not removing properly%1%2 Fixed Jungle Warrior showing as [Disabled]%1%2 Fixed punji traps spawning on roads and being triggered by OPFOR/civilians%1%2 Fixed 19 skills appearing permanently locked despite having implementations%1%2 Fixed 12 skill functions missing from CfgFunctions registration%1%2 Fixed a client crash (ACCESS_VIOLATION) caused by stale post-process effects%1%2 Fixed respawn button being incorrectly disabled for initial players%1%2 Fixed ambient vehicles spawning inside map objects%1%2 Fixed bicycle couriers and convoys not moving%1%2 Fixed Bright Light crash sites spawning outside AO or in rocks%1%2 Fixed 3rd player not boarding infil helicopter%1%2 Fixed players permanently stuck in unconscious state%1%2 Fixed prestige HUD level display and cosmetic unlocks%1%1%3CHANGED:%4%1%2 "One of them" now works with the recon helmet given by "Friend or foe"%1%2 Switched revive system from custom to SOG Advanced Revive%1%2 Switched radio mod integration from ACRE2 to TFAR</Original>
         </Key>
     </Package>
     <Package name="Tutorial">
@@ -1745,6 +2163,133 @@
         </Key>
         <Key ID="STR_VGM_TIME_OF_DAY_VOTING_PREMISSION_VOTE_OPTION_2">
             <Original>Evening (18:00)</Original>
+        </Key>
+    </Package>
+    <Package name="Skill Presets UI">
+        <Key ID="STR_VGM_SKILL_PRESETS_TITLE">
+            <Original>Skill Presets</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_ACTION">
+            <Original>Skill Presets</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_SAVE">
+            <Original>Save</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_SAVE_TOOLTIP">
+            <Original>Save your current skill build to the selected slot</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_LOAD">
+            <Original>Load</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_LOAD_TOOLTIP">
+            <Original>Respec and apply the selected preset</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_DELETE">
+            <Original>Delete</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_DELETE_TOOLTIP">
+            <Original>Delete the selected preset</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_EMPTY">
+            <Original>[Empty]</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_NO_PRESET">
+            <Original>No preset in this slot.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_SAVED">
+            <Original>Preset saved.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_LOADED">
+            <Original>Preset loaded: %1 skills applied (%2 SP).</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_LOADED_PARTIAL">
+            <Original>Preset loaded: %1 of %2 skills applied. %3 could not be learned.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_DELETED">
+            <Original>Preset deleted.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_NAME_REQUIRED">
+            <Original>Enter a name for the preset.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_NO_SKILLS">
+            <Original>You have no skills to save.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_SUMMARY_HEADER">
+            <Original>Preset: %1</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_SUMMARY_TREE">
+            <Original>%1: %2 skills (%3 SP)</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILL_PRESETS_SUMMARY_TOTAL">
+            <Original>Total: %1 skills / %2 SP</Original>
+        </Key>
+    </Package>
+    <Package name="Field Manual - STABO">
+        <Key ID="STR_VGM_FIELD_MANUAL_STABO_EXTRACTION">
+            <Original>STABO Extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STABO_EXTRACTION_DESC">
+            <Original>STABO (Stabilized Tactical Airborne Body Operations) extraction allows teams to be extracted from dense jungle without the helicopter needing to land. The Team Leader must learn the STABO Rig skill (tier 4) to unlock this capability.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_STABO_EXTRACTION_HINT_DESCRIPTION">
+            <Original>When the Team Leader requests a STABO extraction, a helicopter arrives and hovers above the tree canopy. A rope is lowered and all team members get a "HOOK UP" action. Once hooked up, the helicopter lifts off and flies the team out. You must be within 15m of the helicopter to hook up. The Evac Now action can also force departure if not all team members are hooked.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_COMPROMISED_LZ">
+            <Original>Compromised LZ</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_COMPROMISED_LZ_DESC">
+            <Original>Landing zones are not always safe. NVA forces may occupy known LZs, creating dangerous situations for your team.%1%1&lt;t size="1.25"&gt;Hot insertion&lt;/t&gt;%1During insertion, a compromised LZ means your team could be landing in hostile territory. %3Stay alert%4 after touching down — things may not be as quiet as they seem.%1%1&lt;t size="1.25"&gt;Contested extraction&lt;/t&gt;%1During extraction, a compromised LZ means enemy forces are occupying the landing zone. The extraction helicopter will %3orbit overhead%4 until the LZ is cleared or you select an alternate landing zone.%1%1Clear the area of hostiles before the helicopter will land, or use the %3Alternate LZ%4 skill to redirect to a safer location.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_COMPROMISED_LZ_TIP">
+            <Original>SOG teams frequently arrived at extraction LZs to find NVA forces already waiting. Prairie Fire support and quick thinking were often the difference between life and death.</Original>
+        </Key>
+        <Key ID="STR_VGM_FIELD_MANUAL_COMPROMISED_LZ_HINT_COMPROMISED_LZ_DESCRIPTION">
+            <Original>Your LZ may be compromised! NVA forces could be hidden nearby. Stay alert after the helicopter departs and be ready for an ambush.</Original>
+        </Key>
+    </Package>
+    <Package name="Helicopter Infil">
+        <Key ID="STR_VGM_MISSIONS_INFIL_LZ_REACHED">
+            <Original>LZ reached -- prepare to disembark!</Original>
+        </Key>
+        <Key ID="STR_VGM_MISSIONS_INFIL_LZ_WATCHER">
+            <Original>You have a bad feeling about this LZ...</Original>
+        </Key>
+    </Package>
+    <Package name="STABO Extraction Skill">
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_EXTRACT">
+            <Original>STABO Rig</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_EXTRACT_DESC">
+            <Original>Enables requesting a STABO rope extraction instead of a normal helicopter landing. The helicopter hovers above the tree canopy and drops a rope. All team members can hook up and be lifted out without the helicopter needing to land. Requires a radio to call in the extraction.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_EXTRACT_ACTION">
+            <Original>Request STABO Extraction</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_EXTRACT_CONFIRM">
+            <Original>Request STABO rope extraction? The helicopter will hover above the canopy and drop a rope for the team to hook up to.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_EXTRACT_REQUESTED">
+            <Original>STABO extraction requested. Helicopter inbound.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_EXTRACT_ALREADY_REQUESTED">
+            <Original>An extraction has already been requested.</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_HOOKUP_ACTION">
+            <Original>HOOK UP</Original>
+        </Key>
+        <Key ID="STR_VGM_SKILLS_SKILL_STABO_HOOKED">
+            <Original>Hooked up to STABO rig. Hold on tight.</Original>
+        </Key>
+    </Package>
+    <Package name="Prestige">
+        <Key ID="STR_VGM_PRESTIGE_BUTTON">
+            <Original>PSTG</Original>
+        </Key>
+        <Key ID="STR_VGM_PRESTIGE_BUTTON_TOOLTIP">
+            <Original>Reset your level and skills to start a new prestige cycle. Your cosmetics are kept.</Original>
+        </Key>
+        <Key ID="STR_VGM_PRESTIGE_LOCKED">
+            <Original>Reach level 30 to prestige</Original>
         </Key>
     </Package>
 </Project>

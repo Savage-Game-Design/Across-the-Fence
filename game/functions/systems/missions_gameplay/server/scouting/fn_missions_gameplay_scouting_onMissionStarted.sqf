@@ -64,7 +64,7 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
                 "STR_VGM_MISSIONS_SCOUTING_TASK_DESCRIPTION",
                 _intelSitesStr,
                 format [
-                    "<execute expression='[""vgm_missions"", ""scouting""] call vgm_c_fnc_openFieldManual'>%1</execute>",
+                    "<execute expression='[""vgm"", ""scouting""] call vgm_c_fnc_openFieldManual'>%1</execute>",
                     localize "str_a3_rscdisplayinterrupt_buttontutorialhints"
                 ]
             ],
@@ -93,3 +93,6 @@ private _data = [_missionId, "scouting"] call vgm_s_fnc_missions_getSystemNetmap
         ] call BIS_fnc_taskCreate;
     } forEach _intelSitePositions;
 };
+
+// Chance to spawn a PAVN officer at a random site (bonus XP opportunity)
+[_missionId] call vgm_s_fnc_missions_gameplay_scouting_spawnOfficer;

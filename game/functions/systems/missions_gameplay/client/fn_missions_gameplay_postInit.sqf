@@ -2,24 +2,17 @@
     File: fn_missions_gameplay_postInit.sqf
     Author: Savage Game Design
     Date: 2024-05-23
-    Last Update: 2024-06-09
+    Last Update: 2026-03-04
     Public: No
 
     Description:
         Client Postinit for missions_gameplay component.
+        Extraction holdActions have been moved to the wheel menu
+        (fn_wheelMenu_postInit.sqf). No respawn handler needed for
+        extraction actions since the wheel menu evaluates conditions live.
  */
 
 if (!hasInterface) exitWith {};
-
-player call vgm_c_fnc_missions_gameplay_extraction_addAction_requestExtract;
-player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacNow;
-player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacAt;
-player addEventHandler ["Respawn", {
-    params ["_player"];
-    _player call vgm_c_fnc_missions_gameplay_extraction_addAction_requestExtract;
-    _player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacNow;
-    _player call vgm_c_fnc_missions_gameplay_extraction_addAction_evacAt;
-}];
 
 vgm_missions_gameplay_extraction_radioBackpacks = [
     // backpacks

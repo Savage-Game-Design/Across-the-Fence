@@ -44,13 +44,35 @@ private _totalUnits = 0;
     _totalUnits = _totalUnits + count _units;
 
     {
+        // Clean Sweep: skip recording entirely
+        if (_x getVariable ["vgm_g_skill_cleanSweep_active", false]) then { continue };
+
         private _pos = getPosATL _x;
         private _lastTrack = _lastTrackByUnit getOrDefault [hashValue _x, createHashMap];
 
         private _distanceBetweenTracks = _pos distance2D (_lastTrack getOrDefault ["pos", [-1000, -1000, 0]]);
 
+        // Stance/speed-based track density
+        private _effectiveMinDist = switch (stance _x) do {
+            case "DOWN": { vgm_g_tracking_minDist_prone };
+            case "MIDDLE": { vgm_g_tracking_minDist_crouch };
+            default {
+                private _spd = abs speed _x;
+                if (_spd > 5) then { vgm_g_tracking_minDist_sprint }
+                else { if (_spd > 2) then { vgm_g_tracking_minDist_jog }
+                else { vgm_g_tracking_minDist_walk } };
+            };
+        };
+
+        // Lightfooted: double spacing when player is alone
+        if (_x getVariable ["vgm_g_skill_lightfooted", false]) then {
+            private _unit = _x;
+            private _nearbyFriendlies = (units group _unit) select { _x != _unit && alive _x && _x distance _unit < 100 };
+            if (count _nearbyFriendlies == 0) then { _effectiveMinDist = _effectiveMinDist * 2 };
+        };
+
         // Enforce a minimum distance between tracks, so we don't end up with a pile of tracks in one location.
-        if (_distanceBetweenTracks < vgm_g_tracking_minDistanceBetweenTracks) then {
+        if (_distanceBetweenTracks < _effectiveMinDist) then {
             continue;
         };
 

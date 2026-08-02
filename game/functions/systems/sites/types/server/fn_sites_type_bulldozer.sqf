@@ -33,7 +33,7 @@ _site set ["locRequirements", ["near_road"]];
 _site set ["spawnFunction", {
     params ["_pos2D"];
 
-    private _composition = [["Land_vn_bulldozer_01_abandoned_f",[0,0],1.55249,1.55249,[-0.0345758,-0.999402,0],[0,0,1],1,0,"",true,true,false]];
+    private _composition = [["Land_vn_bulldozer_01_wreck_f",[0,0],1.55249,1.55249,[-0.0345758,-0.999402,0],[0,0,1],1,0,"",true,true,false]];
     private _objects = [_pos2D + [0], 0, _composition] call vgm_g_fnc_objGrabber_map;
 
     createHashMapFromArray [

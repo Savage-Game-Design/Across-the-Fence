@@ -60,8 +60,8 @@ private _actionId = [
             private _helicopter = (group _target) getVariable ["vgm_missions_extraction_helicopter", objNull];
             // extraction helicopter exists
             !isNull _helicopter
-            // helicopter landed
-            && _helicopter getVariable ["vgm_missions_extractionLanded", false]
+            // helicopter landed or STABO hookup ready
+            && (_helicopter getVariable ["vgm_missions_extractionLanded", false] || _helicopter getVariable ["vgm_missions_stabo_hookupReady", false])
             // forced extract action not run yet
             && {!(_helicopter getVariable ["vgm_missions_extraction_evacNow", false])}
         }

@@ -21,7 +21,9 @@
 params ["_known"];
 
 if (!_known) exitWith {
-    removeUserActionEventHandler ["revealTarget", "Activate", vgm_c_skill_passives_senseOfScaleEh];
+    if (!isNil "vgm_c_skill_passives_senseOfScaleEh") then {
+        removeUserActionEventHandler ["revealTarget", "Activate", vgm_c_skill_passives_senseOfScaleEh];
+    };
 };
 
 private _ehId = addUserActionEventHandler ["revealTarget", "Activate", {

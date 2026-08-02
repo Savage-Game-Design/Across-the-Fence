@@ -2,205 +2,93 @@
     File: fn_missions_gameplay_extraction_scriptedLand.sqf
     Author: Savage Game Design
     Date: 2025-01-03
-    Last Update: 2025-10-19
+    Last Update: 2026-03-05
     Public: No
 
     Description:
-        Scripted helicopter land.
+        Vanilla helicopter landing using landAt "GetIn" mode. The AI handles
+        the full flight, approach, and touchdown natively. Engines stay
+        running on the ground. An EachFrame handler monitors for touchdown
+        and provides post-landing stability. Automatically cancels the
+        landing hold when vgm_missions_extractionBoarded is set, allowing
+        departure.
+
+        Safe to call multiple times on the same helicopter (e.g. alternate
+        LZ redirect) — previous monitors are cleaned up first.
 
     Parameter(s):
-        _helicopter - Helicopter that will be guided to the helipad [OBJECT]
+        _helicopter - Helicopter to land [OBJECT]
 
     Returns:
         Nothing
 
     Example(s):
-        private _landWp = _group addWaypoint [_wpPos, 0];
         _helicopter setVariable ["vgm_mission_extraction_helipad", _helipad];
-        _landWp setWaypointStatements ["true", toString {
-            if (!isServer) exitWith {};
-            [vehicle this] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
-        }];
+        [_helicopter] call vgm_s_fnc_missions_gameplay_extraction_scriptedLand;
  */
 
 params ["_helicopter"];
 
 private _helipad = _helicopter getVariable ["vgm_mission_extraction_helipad", objNull];
+private _group = group _helicopter;
 
-private _fnc_surfaceVectorDir = {
-	params ["_pos"];
-	private _pos2d = _pos select [0, 2];
-
-	private _normal = surfaceNormal _pos2d select [0, 2];
-	_pos2d vectorFromTo (_pos2d vectorAdd _normal) // return
+// Remove any existing landing monitor from a previous call (e.g. alternate LZ redirect)
+private _existingPFH = _helicopter getVariable ["vgm_scriptedLand_pfh", -1];
+if (_existingPFH > -1) then {
+	removeMissionEventHandler ["EachFrame", _existingPFH];
 };
 
-private _fnc_slopeSteepness = {
-    params ["_pos"];
-    private _up = [0, 0, 1];
-	private _surf = surfaceNormal _pos;
-	private _dot = _up vectorDotProduct _surf;
-	acos _dot // return
+// Reset landing state
+_helicopter setVariable ["vgm_missions_extractionLanded", false, true];
+
+// Clear waypoints
+while {count waypoints _group > 0} do {
+	deleteWaypoint [_group, 0];
 };
 
-/*
-Pretty ASCII "picture" to visualize the positions
-(start)🚁0 ----.
-                \
-                 1 (midpoint, 15m below pos0, min 25m above terrain)
-                 |
-                 |
-                 2 (landpos)
-*/
-private _pos0 = getPosASL _helicopter;
-private _pos1 = getPosASL _helipad;
-private _pos2 = getPosASL _helipad;
-_pos1 set [2, (_pos0#2 - 15) max (getTerrainHeightASL _pos1 + 25)];
-_pos2 = _pos2 vectorAdd [0,0,10];
-
-// TODO, in future we could figure needed forwards velocity for smoother movement
-private _v0 = [0,0,0];
-
-private _dir0 = vectorDir _helicopter;
-private _dir1 = _pos0 vectorFromTo _pos1;
-private _dir2 = +_dir1;
-
-// compute if heli should land on the ground or hover (on steep slopes)
-private _landZ = -1;
-if (([_pos2] call _fnc_slopeSteepness) > 20) then {
-    private _surfDir = [_pos2] call _fnc_surfaceVectorDir;
-    private _slopeExtremes = [1, 2, 4, 6] apply {
-        private _slopeTop = _pos2 vectorAdd (_surfDir vectorMultiply (_x * -1));
-        getTerrainHeightASL _slopeTop // return
-    };
-    private _slopeHeight = selectMax _slopeExtremes;
-    // landpos hovering
-    _landZ = (_slopeHeight - (getPosASL _helipad#2)) + 1.5;
-    _pos2 set [2, _slopeHeight+10];
-    // landpos direction sideways to slope
-    private _dir2_0 = [_surfDir, 90] call BIS_fnc_rotateVector2D;
-    private _dir2_1 = [_surfDir, -90] call BIS_fnc_rotateVector2D;
-    // determine which direction is closer to current helo direction
-    _dir2 = selectMax ([_dir2_0, _dir2_1] apply {[_x vectorDotProduct _dir2, _x]}) select 1;
+// Vanilla AI landing — fly to helipad and land, engines stay running
+private _result = _helicopter landAt [_helipad, "GetIn", 600];
+if (!_result) then {
+	format ["scriptedLand: landAt failed for %1 at %2", _helicopter, getPosATL _helipad] call vgm_g_fnc_logWarning;
 };
 
-_helicopter flyInHeight [_landZ, true];
+// EachFrame: detect touchdown, post-landing stability
+private _pfhId = addMissionEventHandler ["EachFrame", {
+	if (isGamePaused) exitWith {};
+	_thisArgs params ["_helicopter", "_helipad"];
 
-#ifdef __A3_DEBUG__
-    if (is3DENPreview) then {
-        private _posLand = +_pos2;
-        _posLand set [2, getTerrainHeightASL _posLand + _landZ];
+	// On departure: cancel landAt so the helicopter follows its departure waypoint
+	if (isNull _helicopter || {_helicopter getVariable ["vgm_missions_extractionBoarded", false]}) exitWith {
+		if (!isNull _helicopter) then {
+			_helicopter landAt [getPosWorld _helicopter, "None"];
+		};
+		removeMissionEventHandler ["EachFrame", _thisEventHandler];
+	};
 
-        vgm_debug_scriptedLandLines = [
-            [_pos0, _pos1] apply {ASLToAGL _x},
-            [_pos1, _pos2] apply {ASLToAGL _x},
-            [_pos2, _posLand] apply {ASLToAGL _x}
-        ];
-        vgm_debug_scriptedLandIcons = [
-            [ASLToAGL _posLand, "", format ["Land Z: %1", _landZ]]
-        ];
-    };
-#endif
+	// Detect touchdown
+	if !(_helicopter getVariable ["vgm_missions_extractionLanded", false]) exitWith {
+		private _state = landAt _helicopter;
+		private _autopilot = _state # 4;
+		if (_autopilot isEqualTo "REACHED" || {isTouchingGround _helicopter && speed _helicopter < 3}) then {
+			_helicopter setVariable ["vgm_missions_extractionLanded", true, true];
+		};
+	};
 
-private _pfhArgs = [_helicopter, time, _v0, [_dir0, _dir1, _dir2], [_pos0, _pos1, _pos2], _landZ, time, time];
+	// Post-landing: prevent drift on slopes
+	if (diag_frameNo % 2 == 0) then {
+		private _v = velocity _helicopter;
+		_v set [0, 0];
+		_v set [1, 0];
+		_helicopter setVelocity _v;
+	};
 
-// "jail" the helicopter and guide it towards the landing position
-addMissionEventHandler ["EachFrame", {
-    if (isGamePaused) exitWith {};
-    _thisArgs params ["_helicopter", "_t0", "_v0", "_dirs", "_positions", "_landZ", "_nextZUpdateUpwardsTime", "_nextZUpdateDownwardsTime"];
+	// Unflip protection
+	if (diag_frameNo % 30 == 0) then {
+		private _pitchBank = _helicopter call BIS_fnc_getPitchBank;
+		if (count (_pitchBank select {abs _x > 15}) > 0) then {
+			_helicopter setVectorUp [0, 0, 1];
+		};
+	};
+}, [_helicopter, _helipad]];
 
-    if (isNull _helicopter || {_helicopter getVariable ["vgm_missions_extractionBoarded", false]}) exitWith {
-        removeMissionEventHandler ["EachFrame", _thisEventHandler]
-    };
-#ifdef __A3_DEBUG__
-    {
-        private _color = [[1,0,0,1], [0,1,0,1], [0,0,1,1]] select (_forEachIndex % 3);
-        drawLine3D [_x#0, _x#1, _color];
-    } forEach vgm_debug_scriptedLandLines;
-    {
-        drawIcon3D [_x#1, [1,1,1,1], _x#0, 1, 1, 0, _x#2];
-    } forEach vgm_debug_scriptedLandIcons;
-#endif
-
-    _dirs params ["_dir0", "_dir1", "_dir2"];
-    _positions params ["_pos0", "_pos1", "_pos2"];
-
-    private _t = linearConversion [_t0, _t0 + 12, time, 0, 1, true];
-    if (_t < 1) exitWith {
-        _helicopter setVelocityTransformation [
-            _pos0,
-            _pos1,
-            _v0,
-            [0,0,0],
-            _dir0,
-            _dir1,
-            [0,0,1],
-            [0,0,1],
-            _t
-        ];
-    };
-
-    private _t = linearConversion [_t0 + 13.5, _t0 + 19.5, time, 0, 1, true];
-    if (_t < 1) exitWith {
-        _helicopter setVelocityTransformation [
-            _pos1,
-            _pos2,
-            [0,0,-2],
-            [0,0,0],
-            _dir1,
-            _dir2,
-            [0,0,1],
-            [0,0,1],
-            _t
-        ];
-    };
-
-    if !(_helicopter getVariable ["vgm_missions_extractionLanded", false]) exitWith {
-        _helicopter setVariable ["vgm_missions_extractionLanded", true, true];
-        _thisArgs set [7, time + 15]; // schedule first lowering attempt
-    };
-
-    if (diag_frameNo % 2 == 0) then {
-        private _v1 = velocity _helicopter;
-        _v1 set [0, 0];
-        _v1 set [1, 0];
-        _helicopter setVelocity _v1;
-        _helicopter flyInHeight [_landZ + (time % 5 / 10), true];
-    };
-
-    // hover height adjustments
-    if (_landZ > 0) then {
-        private _landZStart = _landZ;
-        // slowly adjust landZ upwards to prevent tipping over on ground contact when landing sideways to slope
-        if (time > _nextZUpdateUpwardsTime && {isTouchingGround _helicopter}) then {
-            _thisArgs set [6, time + 0.5]; // delay next upwards attempt
-
-            _nextZUpdateDownwardsTime = 1e10; // prevent any lowering attempts
-            _thisArgs set [7, _nextZUpdateDownwardsTime];
-
-            _landZ = _landZ + 0.1;
-            _thisArgs set [5, _landZ];
-        };
-
-        if (time > _nextZUpdateDownwardsTime) then {
-            _thisArgs set [7, time + 2]; // delay next lowering attempt
-
-            _landZ = _landZ - 0.05;
-            _thisArgs set [5, _landZ];
-        };
-
-#ifdef __A3_DEBUG__
-        if (_landZStart != _landZ) then {
-            vgm_debug_scriptedLandIcons#0 set [2, format ["Land Z (adjusted): %1", _landZ]];
-        };
-#endif
-    };
-
-    // unflip the heli if it somehow got flipped
-    if (diag_frameNo % 30 == 0) then {
-        private _pitchBank = _helicopter call BIS_fnc_getPitchBank;
-        if (count (_pitchBank select {abs _x > 15}) > 0) then {
-            _helicopter setVectorUp [0,0,1];
-        };
-    };
-}, _pfhArgs];
+_helicopter setVariable ["vgm_scriptedLand_pfh", _pfhId];

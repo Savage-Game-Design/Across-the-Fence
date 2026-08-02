@@ -57,4 +57,13 @@ vgm_missions_enableHubScript = [] spawn {
     private _timeout = time + 30;
     waitUntil {time > _timeout || {player inArea "vgm_shared_hub"}};
     [] call vgm_c_fnc_sharedHub_enableHub;
+
+    // Safety net: wait for mission assignment netmap to clear, then
+    // force-refresh mission giver actions in case event handlers missed it
+    waitUntil {sleep 1; isNil {[] call vgm_c_fnc_missions_getCurrentMission}};
+    {
+        [_x] call vgm_c_fnc_addAllJoinMissionActions;
+        [_x] call vgm_c_fnc_removeStartMissionAction;
+        [_x] call vgm_c_fnc_removeLeaveMissionAction;
+    } forEach vgm_mission_givers;
 };

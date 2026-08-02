@@ -76,7 +76,7 @@ class VGM_DisplayMenuBase
                 {
                     text = _STRTABLE(SQUAD);
                     tooltip = "";
-                    display = _DISPLAY(Squad);
+                    display = _DISPLAY(SkillPresets);
                     onButtonClick = VGM_UIEH(onClickSquad,MenuBase);
                     x = _BTN_X(3);
                 };

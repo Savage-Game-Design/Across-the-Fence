@@ -80,6 +80,14 @@ call {
 
 // setup blur post processing effect
 call {
+    // Destroy stale ppEffect from previous session to prevent engine-level
+    // heap corruption on non-fresh server restarts (ppEffects persist across missions)
+    private _existingEffect = missionNamespace getVariable ["vgm_c_medical_feedback_ppBlur", -1];
+    if (_existingEffect >= 0) then {
+        ppEffectDestroy _existingEffect;
+    };
+    terminate (missionNamespace getVariable ["vgm_c_medical_feedback_blurScript", scriptNull]);
+
     private _effect = -1;
     private _layer = 400; // DynamicBlur base priority/layer is 400
     while {_effect < 0} do {

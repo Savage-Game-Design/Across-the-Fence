@@ -21,6 +21,8 @@
  */
 params ["_unit"];
 
+if (_unit getVariable ["vgm_l_suppression_value", 0] == 0) exitWith {};
+
 // Decay rate should be a variable for easy changes during testing.
 private _decayRatePerSecond = missionNamespace getVariable ["vgm_g_suppression_decayRatePerSecond", 0.025];
 

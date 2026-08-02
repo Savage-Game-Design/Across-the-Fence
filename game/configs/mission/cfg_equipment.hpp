@@ -1,6 +1,6 @@
 class vgm_equipment {
-    startingUniform = "vn_b_uniform_sog_02_05";
-    startingVest = "vn_b_vest_sog_04";
+    startingUniform = "vn_b_uniform_sog_01_01";
+    startingVest = "vn_b_vest_sog_01";
     startingBackpack = "vn_b_pack_01";
 
     startingItems[] = {"vn_b_item_map", "vn_b_item_compass", "vn_b_item_watch", "vn_b_item_radio_urc10"};

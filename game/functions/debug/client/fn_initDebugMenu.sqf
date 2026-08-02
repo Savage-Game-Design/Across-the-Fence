@@ -321,12 +321,38 @@ vgm_c_debugMenuEH = [true, "OnGameInterrupt", {
         _ctrlTree tvSortAll [_pPublic];
     };
 
+    private _fnc_tabActions = {
+        params ["_display", "_ctrlContainer", "_containerPosition"];
+        _containerPosition params ["", "", "_w", "_h"];
+
+        private _btnEndMission = _display ctrlCreate ["RscButton", -1, _ctrlContainer];
+        _btnEndMission ctrlSetText "END MISSION";
+        _btnEndMission ctrlSetBackgroundColor [0.6, 0.1, 0.1, 1];
+        _btnEndMission ctrlSetPosition [0, 0, _w, GUI_GRID_H * 2];
+        _btnEndMission ctrlCommit 0;
+
+        _btnEndMission ctrlAddEventHandler ["ButtonClick", {
+            private _currentMission = [] call vgm_c_fnc_missions_getCurrentMission;
+            if (isNil "_currentMission") exitWith {
+                systemChat "DEBUG: No active mission to end.";
+            };
+
+            private _missionId = _currentMission get "id";
+            [_missionId, "SUCCESS"] remoteExecCall ["vgm_s_fnc_missions_endMission", 2];
+            systemChat format ["DEBUG: Ending mission %1 (SUCCESS)", _missionId];
+
+            // Close pause menu
+            (findDisplay 49) closeDisplay 2;
+        }];
+    };
+
     //----- add tabs
     private _tabs = [
         ["Player state", _fnc_tabPlayer],
         ["Persistence", _fnc_tabPersistence],
         ["Medical state", _fnc_tabMedical],
-        ["Mission", _fnc_tabMission]
+        ["Mission", _fnc_tabMission],
+        ["Actions", _fnc_tabActions]
     ];
 
     {

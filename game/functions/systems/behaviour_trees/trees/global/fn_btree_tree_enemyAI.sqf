@@ -32,10 +32,15 @@
 [DECORATOR(loopInfinitely), [], [
     [SELECTOR, [], [
         [DECORATOR(fetchNearbyDangerReportAsInvestigationPoint), [["abortLowerPriority", true]], [
-            [ACTION(moveTo), [["dest", BLACKBOARD("investigationPoint")]]]
+            [SEQUENCE, [], [
+                [ACTION(moveTo), [["dest", BLACKBOARD("investigationPoint")]]],
+                [DECORATOR(timeLimit), [["maxDuration", 45]], [
+                    [ACTION(patrolArea), [["center", BLACKBOARD("investigationCenter")], ["radius", 35], ["angleChange", 60], ["speedMode", "LIMITED"], ["behaviour", "AWARE"]]]
+                ]]
+            ]]
         ]],
         [DECORATOR(hasOrders), [["order", "DEFEND"], ["abortLowerPriority", true]], [
-            [ACTION(patrolArea), [["center", { CURRENT_ORDER get "pos" }], ["radius", 10]]]
+            [ACTION(patrolArea), [["center", { CURRENT_ORDER get "pos" }], ["radius", { CURRENT_ORDER getOrDefault ["radius", 20] }]]]
         ]],
         [DECORATOR(tracking_hasFollowableNearbyTracks), [["abortLowerPriority", true]], [
             [SEQUENCE, [], [

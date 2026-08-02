@@ -62,11 +62,22 @@ if (_director getOrDefault ["spawnAmbientZombies", false]) then {
             _squads pushBack _zombieSquad;
         };
     } else {
-        _patrolTemplate set ["pos", _spawnPos];
-        _patrolTemplate set ["composition", vgm_s_director_patrol_classes];
-        _patrolTemplate set ["sizeRange", [2, 3 + ceil random 3]];
-        private _patrolSquad = [_patrolTemplate] call vgm_s_fnc_virtsquad_create;
-        _squads pushBack _patrolSquad;
+        // 30% chance to split into 2 smaller patrols instead of 1 larger one
+        if (random 1 < 0.3) then {
+            for "_i" from 1 to 2 do {
+                _patrolTemplate set ["pos", _sitePos getPos [_siteRadius + random 30, random 360]];
+                _patrolTemplate set ["composition", vgm_s_director_patrol_classes];
+                _patrolTemplate set ["sizeRange", [2, 3]];
+                private _splitPatrol = [_patrolTemplate] call vgm_s_fnc_virtsquad_create;
+                _squads pushBack _splitPatrol;
+            };
+        } else {
+            _patrolTemplate set ["pos", _spawnPos];
+            _patrolTemplate set ["composition", vgm_s_director_patrol_classes];
+            _patrolTemplate set ["sizeRange", [2, 3 + ceil random 3]];
+            private _patrolSquad = [_patrolTemplate] call vgm_s_fnc_virtsquad_create;
+            _squads pushBack _patrolSquad;
+        };
     };
 
     private _nearbySiteIndexes = (_sitePositions inAreaArrayIndexes [_sitePos, INTERSITE_PATROL_MAX_DIST, INTERSITE_PATROL_MAX_DIST]) - [_forEachIndex];
@@ -76,10 +87,28 @@ if (_director getOrDefault ["spawnAmbientZombies", false]) then {
         _intersitePatrolTemplate set ["pos", _sitePos getPos [_siteRadius + 15, random 360]];
         _intersitePatrolTemplate set ["composition", vgm_s_director_patrol_classes];
         _intersitePatrolTemplate set ["sizeRange", [2, 4 + ceil random 2]];
+
+        // Generate zig-zag route with 1-3 intermediate waypoints offset from the direct path
+        private _targetPos = _targetSite get "pos";
+        private _routeDir = _sitePos getDir _targetPos;
+        private _routeDist = _sitePos distance2D _targetPos;
+        private _numWaypoints = 1 + floor random 3;
+        private _route = [_sitePos];
+        private _lateralSign = selectRandom [1, -1];
+        for "_wp" from 1 to _numWaypoints do {
+            private _alongDist = _routeDist * (_wp / (_numWaypoints + 1));
+            private _basePos = _sitePos getPos [_alongDist, _routeDir];
+            private _lateralOffset = 30 + random 50;
+            private _waypointPos = _basePos getPos [_lateralOffset, _routeDir + (90 * _lateralSign)];
+            _lateralSign = _lateralSign * -1;
+            _route pushBack _waypointPos;
+        };
+        _route pushBack _targetPos;
+
         _intersitePatrolTemplate get "groupVars" set ["vgm_g_order", [
             createHashMapFromArray [
                 ["type", "PATROL-ROUTE"],
-                ["route", [_sitePos, _targetSite get "pos"]]
+                ["route", _route]
             ]
         ]];
         private _intersitePatrolSquad = [_intersitePatrolTemplate] call vgm_s_fnc_virtsquad_create;
@@ -99,10 +128,13 @@ if (_director getOrDefault ["spawnAmbientZombies", false]) then {
         _defenseTemplate set ["pos", _x get "pos"];
         _defenseTemplate set ["composition", vgm_s_director_defense_classes];
         _defenseTemplate set ["sizeRange", _defenseUnitSizeRange];
+        // DEFEND radius scales with site size (SMALL ~10-15m, MEDIUM ~20-30m, LARGE ~50-75m)
+        private _defendRadius = _siteRadius * 2 + random _siteRadius;
         _defenseTemplate get "groupVars" set ["vgm_g_order", [
             createHashMapFromArray [
                 ["type", "DEFEND"],
-                ["pos", _x get "pos"]
+                ["pos", _x get "pos"],
+                ["radius", _defendRadius]
             ]
         ]];
 

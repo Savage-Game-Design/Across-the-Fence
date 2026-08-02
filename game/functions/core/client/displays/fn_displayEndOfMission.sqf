@@ -158,6 +158,71 @@ switch _mode do {
                         _text pushBack _milestoneText;
                     };
 
+                    if (_milestoneType == "snatch") then {
+                        if (_forEachIndex == 0) then {
+                            _text pushBack LINE_SEPARATOR;
+                            _text pushBack '<t size="1.2">Prisoner Snatch</t>';
+                        };
+                        _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                        _milestoneAnimXp = _milestoneXp;
+                        _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
+                        private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
+                        _milestoneText = format ([_milestoneText] + _formatData);
+                        _text pushBack format ["%1: %2XP", _milestoneText, _milestoneXp];
+                    };
+
+                    if (_milestoneType == "bright_light") then {
+                        if (_forEachIndex == 0) then {
+                            _text pushBack LINE_SEPARATOR;
+                            _text pushBack '<t size="1.2">Bright Light</t>';
+                        };
+                        _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                        _milestoneAnimXp = _milestoneXp;
+                        _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
+                        private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
+                        _milestoneText = format ([_milestoneText] + _formatData);
+                        _text pushBack format ["%1: %2XP", _milestoneText, _milestoneXp];
+                    };
+
+                    if (_milestoneType == "hatchet") then {
+                        if (_forEachIndex == 0) then {
+                            _text pushBack LINE_SEPARATOR;
+                            _text pushBack '<t size="1.2">Hatchet Force</t>';
+                        };
+                        _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                        _milestoneAnimXp = _milestoneXp;
+                        _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
+                        private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
+                        _milestoneText = format ([_milestoneText] + _formatData);
+                        _text pushBack format ["%1: %2XP", _milestoneText, _milestoneXp];
+                    };
+
+                    if (_milestoneType == "combat") then {
+                        if (_forEachIndex == 0) then {
+                            _text pushBack LINE_SEPARATOR;
+                            _text pushBack '<t size="1.2">Combat</t>';
+                        };
+                        _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                        _milestoneAnimXp = _milestoneXp;
+                        _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
+                        private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
+                        _milestoneText = format ([_milestoneText] + _formatData);
+                        _text pushBack format ["%1: %2XP", _milestoneText, _milestoneXp];
+                    };
+
+                    if (_milestoneType == "intel") then {
+                        if (_forEachIndex == 0) then {
+                            _text pushBack LINE_SEPARATOR;
+                            _text pushBack '<t size="1.2">Intel</t>';
+                        };
+                        _x params ["_milestoneName", "_milestoneXp", ["_formatData", []]];
+                        _milestoneAnimXp = _milestoneXp;
+                        _formatData = if (_formatData isEqualType []) then {_formatData} else {[_formatData]};
+                        private _milestoneText = localize format ["STR_VGM_MISSION_END_UI_MILESTONE_%1", _milestoneName];
+                        _milestoneText = format ([_milestoneText] + _formatData);
+                        _text pushBack format ["%1: %2XP", _milestoneText, _milestoneXp];
+                    };
+
                     _ctrlBreakdown ctrlSetStructuredText parseText (_text joinString "<br/>");
                     _ctrlBreakdown ctrlSetPositionH (ctrlTextHeight _ctrlBreakdown);
                     _ctrlBreakdown ctrlCommit 0;

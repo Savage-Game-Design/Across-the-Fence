@@ -42,7 +42,13 @@ if (_enable && !_isEnabled) exitWith {
 
 if (!_enable) exitWith {
     false call vgm_c_fnc_skill_passives_kickOffTime_enableAction;
-    [vgm_c_skill_passives_kickOffTime_missionDeployLocalId] call para_g_fnc_event_unsubscribe;
-    [vgm_c_skill_passives_kickOffTime_missionEndLocalId] call para_g_fnc_event_unsubscribe;
-    player removeEventHandler ["Respawn", vgm_c_skill_passives_kickOffTime_respawnHandlerId];
+    if (!isNil "vgm_c_skill_passives_kickOffTime_missionDeployLocalId") then {
+        [vgm_c_skill_passives_kickOffTime_missionDeployLocalId] call para_g_fnc_event_unsubscribe;
+    };
+    if (!isNil "vgm_c_skill_passives_kickOffTime_missionEndLocalId") then {
+        [vgm_c_skill_passives_kickOffTime_missionEndLocalId] call para_g_fnc_event_unsubscribe;
+    };
+    if (!isNil "vgm_c_skill_passives_kickOffTime_respawnHandlerId") then {
+        player removeEventHandler ["Respawn", vgm_c_skill_passives_kickOffTime_respawnHandlerId];
+    };
 };
