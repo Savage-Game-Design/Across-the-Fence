@@ -5,7 +5,7 @@ class vgm_welcome {
         displayName = "$STR_VGM_FIELD_MANUAL_WELCOME";
         description = "$STR_VGM_FIELD_MANUAL_WELCOME_DESC";
         image = "assets\atf_logo.paa";
-        arguments[] =
+        arguments[] = 
             {
                 "localize 'STR_VGM_MISSION_NAME'",
             };
@@ -16,7 +16,7 @@ class vgm_welcome {
         description = "$STR_VGM_FIELD_MANUAL_GETTING_STARTED_DESC";
         tip = __EVAL(format [localize 'STR_VGM_FIELD_MANUAL_GETTING_STARTED_TIP', selectRandom getArray (configFile >> 'CfgWorlds' >> 'cam_lao_nam' >> 'loadingTexts')]);
         image = "\a3\ui_f\data\gui\cfg\hints\miss_icon_ca.paa";
-        arguments[] =
+        arguments[] = 
             {
                 "localize 'STR_VGM_MISSION_NAME'",
             };
@@ -51,7 +51,7 @@ class vgm {
         displayName = "$STR_VGM_FIELD_MANUAL_MISSIONS";
         description = "$STR_VGM_FIELD_MANUAL_MISSIONS_DESC";
         image = "\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa";
-        arguments[] =
+        arguments[] = 
             {
                 "localize 'STR_VGM_MISSION_NAME'",
             };
@@ -77,150 +77,12 @@ class vgm {
         };
         logicalOrder = 1;
     };
-    class scouting {
-        displayName = "$STR_VGM_FIELD_MANUAL_SCOUTING";
-        description = "$STR_VGM_FIELD_MANUAL_SCOUTING_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_SCOUTING_TIP";
-        image = "\a3\ui_f\data\gui\cfg\hints\head_ca.paa";
-        arguments[] =
-            {
-                """a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa""",
-                """a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\free.paa""",
-            };
-        class Hints {
-            class scouting {
-                description = "$STR_VGM_FIELD_MANUAL_SCOUTING_HINT_SCOUTING_DESCRIPTION";
-            };
-        };
-        logicalOrder = 2;
-    };
-    class stealth {
-        displayName = "$STR_VGM_FIELD_MANUAL_STEALTH";
-        description = "$STR_VGM_FIELD_MANUAL_STEALTH_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_STEALTH_TIP";
-        image = "\a3\ui_f\data\gui\cfg\hints\Pheripheal_vision_ca.paa";
-        arguments[] =
-            {
-                "localize 'STR_VGM_MISSION_NAME'",
-            };
-        class Hints {
-            class stealth {
-                description = "$STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION";
-            };
-        };
-        logicalOrder = 3;
-    };
-    class alertness {
-        displayName = "$STR_VGM_FIELD_MANUAL_ALERTNESS";
-        description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_DESC";
-        image = "\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa";
-        class Hints {
-            class alertness {
-                description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION";
-            };
-        };
-        logicalOrder = 4;
-    };
-    class hints {
-        displayName = "$STR_VGM_FIELD_MANUAL_HINTS";
-        description = "$STR_VGM_FIELD_MANUAL_HINTS_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_HINTS_TIP";
-        image = "assets\glint\vnx_atf_glint_03_ca.paa";
-        class Hints {
-            class glint_seen {
-                description = "$STR_VGM_FIELD_MANUAL_HINTS_HINT_GLINT_SEEN_DESCRIPTION";
-            };
-        };
-        logicalOrder = 5;
-    };
-    class stop_and_focus {
-        displayName = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS";
-        description = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_DESC";
-        image = "assets\atf_logo.paa";
-        class Hints {
-            class stop_and_focus {
-                description = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_HINT_STOP_AND_FOCUS_DESCRIPTION";
-            };
-        };
-        logicalOrder = 6;
-    };
-    class tracking {
-        displayName = "$STR_VGM_FIELD_MANUAL_TRACKING";
-        description = "$STR_VGM_FIELD_MANUAL_TRACKING_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_TRACKING_TIP";
-        image = "\a3\ui_f\data\gui\cfg\hints\head_ca.paa";
-        class Hints {
-            class tracking {
-                description = "$STR_VGM_FIELD_MANUAL_TRACKING_HINT_TRACKING_DESCRIPTION";
-            };
-        };
-        logicalOrder = 7;
-    };
-    class traps {
-        displayName = "$STR_VGM_FIELD_MANUAL_TRAPS";
-        description = "$STR_VGM_FIELD_MANUAL_TRAPS_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_TRAPS_TIP";
-        image = "\a3\ui_f\data\gui\cfg\hints\injury_ca.paa";
-        class Hints {
-            class traps {
-                description = "$STR_VGM_FIELD_MANUAL_TRAPS_HINT_TRAPS_DESCRIPTION";
-            };
-        };
-        logicalOrder = 8;
-    };
-    class ambient_activity {
-        displayName = "$STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY";
-        description = "$STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY_TIP";
-        image = "\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa";
-        class Hints {
-            class ambient_activity {
-                description = "$STR_VGM_FIELD_MANUAL_AMBIENT_ACTIVITY_HINT_AMBIENT_ACTIVITY_DESCRIPTION";
-            };
-        };
-        logicalOrder = 9;
-    };
-    class compromised_lz {
-        displayName = "$STR_VGM_FIELD_MANUAL_COMPROMISED_LZ";
-        description = "$STR_VGM_FIELD_MANUAL_COMPROMISED_LZ_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_COMPROMISED_LZ_TIP";
-        image = "\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa";
-        class Hints {
-            class compromised_lz {
-                description = "$STR_VGM_FIELD_MANUAL_COMPROMISED_LZ_HINT_COMPROMISED_LZ_DESCRIPTION";
-            };
-        };
-        logicalOrder = 10;
-    };
-    class desperate_escape {
-        displayName = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE";
-        description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC";
-        tip = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP";
-        image = "assets\atf_logo.paa";
-        class Hints {
-            class desperate_escape {
-                description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION";
-            };
-        };
-        logicalOrder = 11;
-    };
-    class stabo_extraction {
-        displayName = "$STR_VGM_FIELD_MANUAL_STABO_EXTRACTION";
-        description = "$STR_VGM_FIELD_MANUAL_STABO_EXTRACTION_DESC";
-        image = "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa";
-        class Hints {
-            class stabo_extraction {
-                description = "$STR_VGM_FIELD_MANUAL_STABO_EXTRACTION_HINT_DESCRIPTION";
-            };
-        };
-        logicalOrder = 12;
-    };
     class skills {
         displayName = "$STR_VGM_FIELD_MANUAL_SKILLS";
         description = "$STR_VGM_FIELD_MANUAL_SKILLS_DESC";
         tip = "$STR_VGM_FIELD_MANUAL_SKILLS_TIP";
         image = "\a3\ui_f\data\gui\cfg\hints\rules_ca.paa";
-        arguments[] =
+        arguments[] = 
             {
                 "[\
                     ['OpenActiveSkillWheel'] call (missionNamespace getVariable 'para_c_fnc_keyhandler_getKeyBind'),\
@@ -235,14 +97,14 @@ class vgm {
                 description = "$STR_VGM_FIELD_MANUAL_SKILLS_HINT_EQUIPPING_SKILLS_DESCRIPTION";
             };
         };
-        logicalOrder = 13;
+        logicalOrder = 2;
     };
     class medical {
         displayName = "$STR_VGM_FIELD_MANUAL_MEDICAL";
         description = "$STR_VGM_FIELD_MANUAL_MEDICAL_DESC";
         tip = "$STR_VGM_FIELD_MANUAL_MEDICAL_TIP";
         image = "\a3\ui_f\data\gui\cfg\hints\injury_ca.paa";
-        arguments[] =
+        arguments[] = 
             {
                 "localize 'STR_VGM_MISSION_NAME'",
                 "[\
@@ -255,13 +117,13 @@ class vgm {
                 ] call (missionNamespace getVariable 'para_c_fnc_keyhandler_stringifyKeybind')",
                 "localize 'STR_VGM_SKILLS_SKILL_SUPPORT_LOADOUT_MEDICAL'",
             };
-        logicalOrder = 14;
+        logicalOrder = 3;
     };
     class equipment {
         displayName = "$STR_VGM_FIELD_MANUAL_EQUIPMENT";
         description = "$STR_VGM_FIELD_MANUAL_EQUIPMENT_DESC";
         image = "assets\atf_logo.paa";
-        arguments[] =
+        arguments[] = 
             {
                 "localize 'STR_VGM_MISSION_NAME'",
             };
@@ -270,6 +132,90 @@ class vgm {
                 description = "$STR_VGM_FIELD_MANUAL_EQUIPMENT_HINT_GEARING_UP_DESCRIPTION";
             };
         };
-        logicalOrder = 15;
+        logicalOrder = 4;
+    };
+};
+
+class vgm_missions {
+    logicalOrder = 4;
+    displayName = __EVAL(format [localize 'STR_VGM_FIELD_MANUAL_VGM_MISSIONS', localize 'STR_VGM_MISSION_NAME']);
+    class stealth {
+        displayName = "$STR_VGM_FIELD_MANUAL_STEALTH";
+        description = "$STR_VGM_FIELD_MANUAL_STEALTH_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_STEALTH_TIP";
+        image = "\a3\ui_f\data\gui\cfg\hints\Pheripheal_vision_ca.paa";
+        arguments[] = 
+            {
+                "localize 'STR_VGM_MISSION_NAME'",
+            };
+        class Hints {
+            class stealth {
+                description = "$STR_VGM_FIELD_MANUAL_STEALTH_HINT_STEALTH_DESCRIPTION";
+            };
+        };
+        logicalOrder = 1;
+    };
+    class scouting {
+        displayName = "$STR_VGM_FIELD_MANUAL_SCOUTING";
+        description = "$STR_VGM_FIELD_MANUAL_SCOUTING_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_SCOUTING_TIP";
+        image = "\a3\ui_f\data\gui\cfg\hints\head_ca.paa";
+        arguments[] = 
+            {
+                """a3\ui_f\data\GUI\RscCommon\RscButtonSearch\search_start_ca.paa""",
+                """a3\ui_f\data\GUI\Rsc\RscDisplayEGSpectator\free.paa""",
+            };
+        class Hints {
+            class scouting {
+                description = "$STR_VGM_FIELD_MANUAL_SCOUTING_HINT_SCOUTING_DESCRIPTION";
+            };
+        };
+        logicalOrder = 2;
+    };
+    class hints {
+        displayName = "$STR_VGM_FIELD_MANUAL_HINTS";
+        description = "$STR_VGM_FIELD_MANUAL_HINTS_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_HINTS_TIP";
+        image = "assets\glint\vnx_atf_glint_03_ca.paa";
+        class Hints {
+            class glint_seen {
+                description = "$STR_VGM_FIELD_MANUAL_HINTS_HINT_GLINT_SEEN_DESCRIPTION";
+            };
+        };
+        logicalOrder = 3;
+    };
+    class stop_and_focus {
+        displayName = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS";
+        description = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_DESC";
+        image = "assets\atf_logo.paa";
+        class Hints {
+            class stop_and_focus {
+                description = "$STR_VGM_FIELD_MANUAL_STOP_AND_FOCUS_HINT_STOP_AND_FOCUS_DESCRIPTION";
+            };
+        };
+        logicalOrder = 4;
+    };
+    class alertness {
+        displayName = "$STR_VGM_FIELD_MANUAL_ALERTNESS";
+        description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_DESC";
+        image = "\a3\ui_f\data\gui\cfg\hints\tactical_view_ca.paa";
+        class Hints {
+            class alertness {
+                description = "$STR_VGM_FIELD_MANUAL_ALERTNESS_HINT_ALERTNESS_DESCRIPTION";
+            };
+        };
+        logicalOrder = 5;
+    };
+    class desperate_escape {
+        displayName = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE";
+        description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_DESC";
+        tip = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_TIP";
+        image = "assets\atf_logo.paa";
+        class Hints {
+            class desperate_escape {
+                description = "$STR_VGM_FIELD_MANUAL_DESPERATE_ESCAPE_HINT_DESPERATE_ESCAPE_DESCRIPTION";
+            };
+        };
+        logicalOrder = 6;
     };
 };
